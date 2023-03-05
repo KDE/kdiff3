@@ -1,13 +1,16 @@
 # Translation of kdiff3 into esperanto.
+# Copyright (C) 2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdiff3 package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 00:49+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-04 08:22+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,83 +22,77 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau,Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
 
 #: DefaultFileAccessJobHandler.cpp:49
 #, kde-format
 msgid "Getting file status: %1"
-msgstr ""
+msgstr "Akiro de dosierstatuso: %1"
 
 #: DefaultFileAccessJobHandler.cpp:101
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr "Dosierujo"
+msgstr "Legante dosieron: %1"
 
 #: DefaultFileAccessJobHandler.cpp:141
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr "Dosierujo"
+msgstr "Skribanta dosieron: %1"
 
 #: DefaultFileAccessJobHandler.cpp:175
 #, kde-format
 msgid "Out of memory"
-msgstr ""
+msgstr "Sen memoro"
 
 #: DefaultFileAccessJobHandler.cpp:212
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr "Dosierujo"
+msgstr "Farante dosierujon: %1"
 
 #: DefaultFileAccessJobHandler.cpp:234
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr "Dosierujo"
+msgstr "Forigante dosierujon: %1"
 
 #: DefaultFileAccessJobHandler.cpp:250
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr "Dosierujo"
+msgstr "Forigante dosieron: %1"
 
 #: DefaultFileAccessJobHandler.cpp:267
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
-msgstr ""
+msgstr "Kreante simbolan ligilon: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:292
 #, kde-format
 msgid "Renaming file: %1 -> %2"
-msgstr ""
+msgstr "Alinomado de dosiero: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:335
 #, kde-format
 msgid "Copying file: %1 -> %2"
-msgstr ""
+msgstr "Kopiante dosieron: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:357
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgid "Reading folder: %1"
-msgstr "Dosierujo"
+msgstr "Leganta dosierujo: %1"
 
 #: DefaultFileAccessJobHandler.cpp:415
 #, kde-format
 msgid "Listing directory: %1"
-msgstr ""
+msgstr "Listo dosierujo: %1"
 
 #: diff.cpp:1584 diff.cpp:1600
 #, kde-format
@@ -103,22 +100,23 @@ msgid ""
 "Data loss error:\n"
 "If it is reproducible please contact the author.\n"
 msgstr ""
+"Eraro pri perdo de datumoj:\n"
+"Se ĝi estas reproduktebla bonvolu kontakti la aŭtoron.\n"
 
 #: diff.cpp:1586 diff.cpp:1602
 #, kde-format
 msgid "Severe Internal Error"
-msgstr ""
+msgstr "Severa Interna Eraro"
 
 #: difftextwindow.cpp:561
 #, kde-format
 msgid "File %1: Line %2"
-msgstr ""
+msgstr "Dosiero %1: Linio %2"
 
 #: difftextwindow.cpp:563
-#, fuzzy, kde-format
-#| msgid "not available"
+#, kde-format
 msgid "File %1: Line not available"
-msgstr "Ne disponebla"
+msgstr "Dosiero %1: Linio ne havebla"
 
 #: difftextwindow.cpp:1903
 #, kde-format
@@ -128,18 +126,17 @@ msgstr "Kodigo:"
 #: difftextwindow.cpp:1907 mergeresultwindow.cpp:2799 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
-msgstr ""
+msgstr "Linia fina stilo:"
 
 #: difftextwindow.cpp:1932
 #, kde-format
 msgid "A (Base)"
-msgstr ""
+msgstr "A (bazo)"
 
 #: difftextwindow.cpp:1934
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgid "Encoding: %1"
-msgstr "Kodigo:"
+msgstr "Kodigado: %1"
 
 #: difftextwindow.cpp:1935 mergeresultwindow.cpp:2845
 #, kde-format
@@ -154,17 +151,17 @@ msgstr "Unix"
 #: difftextwindow.cpp:1935
 #, kde-format
 msgid "Line end style: %1"
-msgstr ""
+msgstr "Stilo de linio fino: %1"
 
 #: difftextwindow.cpp:1936
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Nekonata"
 
 #: difftextwindow.cpp:1964 kdiff3.cpp:913
 #, kde-format
 msgid "Top line"
-msgstr ""
+msgstr "Supra linio"
 
 #: difftextwindow.cpp:1973
 #, kde-format
@@ -172,80 +169,76 @@ msgid "End"
 msgstr "Fino"
 
 #: difftextwindow.cpp:2031 smalldialogs.cpp:164
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgid "Open File"
-msgstr "Dosiero"
+msgstr "Malfermi Dosieron"
 
 #: difftextwindow.cpp:2079 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
-msgstr ""
+msgstr "Unikodo, 8 bitoj"
 
 #: difftextwindow.cpp:2095
 #, kde-format
 msgid "Other"
-msgstr ""
+msgstr "Alia"
 
 #: directorymergewindow.cpp:417
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
-msgstr ""
+msgstr "Kopii A al B"
 
 #: directorymergewindow.cpp:420
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
-msgstr ""
+msgstr "Kopii B al A"
 
 #: directorymergewindow.cpp:423
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
-msgstr ""
+msgstr "Forigi A"
 
 #: directorymergewindow.cpp:426
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
-msgstr ""
+msgstr "Forigi B"
 
 #: directorymergewindow.cpp:429
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A & B"
-msgstr ""
+msgstr "Forigi A & B"
 
 #: directorymergewindow.cpp:432
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
-msgstr "Mergi"
+msgstr "Kunfandi al A"
 
 #: directorymergewindow.cpp:435
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
-msgstr "Mergi"
+msgstr "Kunfandi al B"
 
 #: directorymergewindow.cpp:438
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A & B"
-msgstr ""
+msgstr "Kunfandi al A & B"
 
 #: directorymergewindow.cpp:450
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
-msgstr ""
+msgstr "Forigi (se ekzistas)"
 
 #: directorymergewindow.cpp:454
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
 msgstr "Mergi"
@@ -254,36 +247,34 @@ msgstr "Mergi"
 #, kde-format
 msgctxt "Operation column message (File merge)"
 msgid "Merge (manual)"
-msgstr ""
+msgstr "Kunfandi (manlibro)"
 
 #: directorymergewindow.cpp:457
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Conflicting File Types"
-msgstr ""
+msgstr "Eraro: Konfliktantaj Dosierspecoj"
 
 #: directorymergewindow.cpp:460
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Changed and Deleted"
-msgstr ""
+msgstr "Eraro: Ŝanĝita kaj Forigita"
 
 #: directorymergewindow.cpp:463
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Dates are equal but files are not."
-msgstr ""
+msgstr "Eraro: Datoj estas egalaj sed dosieroj ne."
 
 #: directorymergewindow.cpp:477
-#, fuzzy, kde-format
-#| msgid "Done."
+#, kde-format
 msgctxt "Status column message"
 msgid "Done"
-msgstr "Farita."
+msgstr "Farita"
 
 #: directorymergewindow.cpp:479
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgctxt "Status column message"
 msgid "Error"
 msgstr "Eraro"
@@ -292,43 +283,40 @@ msgstr "Eraro"
 #, kde-format
 msgctxt "Status column message"
 msgid "Skipped."
-msgstr ""
+msgstr "Saltis."
 
 #: directorymergewindow.cpp:483
 #, kde-format
 msgctxt "Status column message"
 msgid "Not saved."
-msgstr ""
+msgstr "Ne konservita."
 
 #: directorymergewindow.cpp:485
 #, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
-msgstr ""
+msgstr "En progreso..."
 
 #: directorymergewindow.cpp:487
 #, kde-format
 msgctxt "Status column message"
 msgid "To do."
-msgstr ""
+msgstr "Fari."
 
 #: directorymergewindow.cpp:527
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "Column title"
 msgid "Name"
 msgstr "Nomo"
 
 #: directorymergewindow.cpp:535
-#, fuzzy, kde-format
-#| msgid "Operation"
+#, kde-format
 msgctxt "Column title"
 msgid "Operation"
 msgstr "Operacio"
 
 #: directorymergewindow.cpp:537
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "Column title"
 msgid "Status"
 msgstr "Stato"
@@ -337,25 +325,25 @@ msgstr "Stato"
 #, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
-msgstr ""
+msgstr "Nesolvita"
 
 #: directorymergewindow.cpp:541
 #, kde-format
 msgctxt "Column title"
 msgid "Solved"
-msgstr ""
+msgstr "Solvita"
 
 #: directorymergewindow.cpp:543
 #, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr ""
+msgstr "Neblanka"
 
 #: directorymergewindow.cpp:545
 #, kde-format
 msgctxt "Column title"
 msgid "White"
-msgstr ""
+msgstr "Blanka"
 
 #: directorymergewindow.cpp:696
 #, kde-format
@@ -363,54 +351,53 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort the "
 "merge and rescan the folder?"
 msgstr ""
+"Vi nun faras dosierujon kunfandi. Ĉu vi certas, ke vi volas ĉesigi la "
+"kunfandiĝon kaj resanigi la dosierujon?"
 
 #: directorymergewindow.cpp:697 kdiff3.cpp:767 kdiff3.cpp:777 kdiff3.cpp:789
 #: mergeresultwindow.cpp:329 pdiff.cpp:861 pdiff.cpp:1726 pdiff.cpp:1736
-#, fuzzy, kde-format
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Averto"
 
 #: directorymergewindow.cpp:698
-#, fuzzy, kde-format
-#| msgid "Rescan"
+#, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Reserĉi"
 
 #: directorymergewindow.cpp:699
-#, fuzzy, kde-format
-#| msgid "Continue"
+#, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
-msgstr "Daŭrigi"
+msgstr "Daŭre Kunfandi"
 
 #: directorymergewindow.cpp:848
 #, kde-format
 msgid "Opening of folders failed:"
-msgstr ""
+msgstr "Malfermo de dosierujoj malsukcesis:"
 
 #: directorymergewindow.cpp:852
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "Dosierujo A \"%1\" ne ekzistas aŭ ne estas dosierujo.\n"
 
 #: directorymergewindow.cpp:857
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "Dosierujo B \"%1\" ne ekzistas aŭ ne estas dosierujo.\n"
 
 #: directorymergewindow.cpp:862
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "Dosierujo C \"%1\" ne ekzistas aŭ ne estas dosierujo.\n"
 
 #: directorymergewindow.cpp:865
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
-msgstr ""
+msgstr "Eraro de Malfermo de Dosierujo"
 
 #: directorymergewindow.cpp:873
 #, kde-format
@@ -419,52 +406,50 @@ msgid ""
 "merged.\n"
 "Check again before continuing."
 msgstr ""
+"La celdosierujo ne devas esti la sama kiel A aŭ B kiam tri dosierujoj estas "
+"kunfanditaj.\n"
+"Rekontrolu antaŭ ol daŭrigi."
 
 #: directorymergewindow.cpp:875
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
-msgstr ""
+msgstr "Parametra Averto"
 
 #: directorymergewindow.cpp:880
-#, fuzzy, kde-format
-#| msgid "Saving file..."
+#, kde-format
 msgid "Scanning folders..."
-msgstr "Konservante dosieron..."
+msgstr "Skanante dosierujojn..."
 
 #: directorymergewindow.cpp:906
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgid "Reading Folder A"
-msgstr "Dosierujo"
+msgstr "Legante Dosierujon A"
 
 #: directorymergewindow.cpp:915
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgid "Reading Folder B"
-msgstr "Dosierujo"
+msgstr "Legante Dosierujon B"
 
 #: directorymergewindow.cpp:925
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgid "Reading Folder C"
-msgstr "Dosierujo"
+msgstr "Legante Dosierujon C"
 
 #: directorymergewindow.cpp:941
 #, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
-msgstr ""
+msgstr "Kelkaj subdosierujoj ne estis legeblaj en"
 
 #: directorymergewindow.cpp:946
 #, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
-msgstr ""
+msgstr "Kontrolu la permesojn de la subdosierujoj."
 
 #: directorymergewindow.cpp:969
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Preta."
@@ -478,21 +463,26 @@ msgid ""
 "Number of equal files: %2\n"
 "Number of different files: %3"
 msgstr ""
+"Dosierujo-Kompara Statuso\n"
+"\n"
+"ombro da subdosierujoj: %1\n"
+"ombro da egalaj dosieroj: %2\n"
+"Nombro da malsamaj dosieroj: %3"
 
 #: directorymergewindow.cpp:991
 #, kde-format
 msgid "Number of manual merges: %1"
-msgstr ""
+msgstr "Nombro de manaj kuniĝoj: %1"
 
 #: directorymergewindow.cpp:1263
 #, kde-format
 msgid "This affects all merge operations."
-msgstr ""
+msgstr "Ĉi tio influas ĉiujn kunfandajn operaciojn."
 
 #: directorymergewindow.cpp:1264
 #, kde-format
 msgid "Changing All Merge Operations"
-msgstr ""
+msgstr "Ŝanĝante Ĉiuj Kunfandi Operacioj"
 
 #: directorymergewindow.cpp:1341
 #, kde-format
@@ -500,48 +490,50 @@ msgid ""
 "Processing %1 / %2\n"
 "%3"
 msgstr ""
+"Prilaborado %1 / %2\n"
+"%3"
 
 #: directorymergewindow.cpp:1387 directorymergewindow.cpp:1391
 #, kde-format
 msgid "Some files could not be processed."
-msgstr ""
+msgstr "Kelkaj dosieroj ne povis esti prilaboritaj."
 
 #: directorymergewindow.cpp:1394
 #, kde-format
 msgid "Aborting due to too many errors."
-msgstr ""
+msgstr "Ĉesigo pro tro da eraroj."
 
 #: directorymergewindow.cpp:1881 directorymergewindow.cpp:1906
 #: directorymergewindow.cpp:1931
 #, kde-format
 msgid "This operation is currently not possible."
-msgstr ""
+msgstr "Ĉi tiu operacio nuntempe ne eblas."
 
 #: directorymergewindow.cpp:1881 directorymergewindow.cpp:1906
 #: directorymergewindow.cpp:1931 directorymergewindow.cpp:2212
 #, kde-format
 msgid "Operation Not Possible"
-msgstr ""
+msgstr "Operacio Ne Eblas"
 
 #: directorymergewindow.cpp:1978
 #, kde-format
 msgid "An error occurred while copying."
-msgstr ""
+msgstr "Eraro okazis dum kopiado."
 
 #: directorymergewindow.cpp:1979 directorymergewindow.cpp:2417
 #, kde-format
 msgid "Merge Error"
-msgstr ""
+msgstr "Kunfandi Eraro"
 
 #: directorymergewindow.cpp:2057
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
-msgstr ""
+msgstr "Nekonata kunfandoperacio. (Ĉi tio neniam devas okazi!)"
 
 #: directorymergewindow.cpp:2102
 #, kde-format
 msgid "Unknown merge operation."
-msgstr ""
+msgstr "Nekonata kunfandoperacio."
 
 #: directorymergewindow.cpp:2115
 #, kde-format
@@ -555,24 +547,31 @@ msgid ""
 "Be aware that this program still has beta status and there is NO WARRANTY "
 "whatsoever! Make backups of your vital data!"
 msgstr ""
+"La kunfandiĝo estas komenconta.\n"
+"\n"
+"Elektu \"Fari ĝin\" se vi legis la instrukciojn kaj scias kion vi faras.\n"
+"Elektante \"Simuli ĝin\" diros al vi kio okazus.\n"
+"\n"
+"Estu konscia. ke ĉi tiu programo ankoraŭ havas beta-statuson kaj ekzistas "
+"NENIA GARANTIO! Faru sekurkopiojn de viaj esencaj datumoj!"
 
 #: directorymergewindow.cpp:2120
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
-msgstr ""
+msgstr "Komencante Merge"
 
 #: directorymergewindow.cpp:2121
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
-msgstr ""
+msgstr "Fari tion"
 
 #: directorymergewindow.cpp:2122
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
-msgstr ""
+msgstr "Simuli Ĝin"
 
 #: directorymergewindow.cpp:2148
 #, kde-format
@@ -580,6 +579,8 @@ msgid ""
 "The highlighted item has a different type in the different folders. Select "
 "what to do."
 msgstr ""
+"La elstarigita elemento havas malsaman tipon en la malsamaj dosierujoj. "
+"Elektu kion fari."
 
 #: directorymergewindow.cpp:2152
 #, kde-format
@@ -587,6 +588,8 @@ msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr ""
+"La modifdatoj de la dosiero estas egalaj sed la dosieroj ne. Elektu kion "
+"fari."
 
 #: directorymergewindow.cpp:2156
 #, kde-format
@@ -594,6 +597,8 @@ msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
 "Select what to do."
 msgstr ""
+"La elstarigita elemento estis ŝanĝita en unu dosierujo kaj forigita en la "
+"alia. Elektu kion fari."
 
 #: directorymergewindow.cpp:2212
 #, kde-format
@@ -601,6 +606,7 @@ msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr ""
+"Ĉi tiu operacio estas nuntempe ne ebla ĉar dosierujo kunfandiĝas nuntempe."
 
 #: directorymergewindow.cpp:2269
 #, kde-format
@@ -609,154 +615,159 @@ msgid ""
 "Do you want to continue with the item that caused the error or do you want "
 "to skip this item?"
 msgstr ""
+"Okazis eraro en la lasta paŝo.\n"
+"Ĉu vi volas daŭrigi kun la ero kiu kaŭzis la eraron aŭ ĉu vi volas "
+"preterlasi ĉi tiun objekton?"
 
 #: directorymergewindow.cpp:2271
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
-msgstr ""
+msgstr "Daŭrigi kunfandon post eraro"
 
 #: directorymergewindow.cpp:2272
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
-msgstr ""
+msgstr "Daŭrigi Kun Lasta Ero"
 
 #: directorymergewindow.cpp:2273
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
-msgstr ""
+msgstr "Preterpasi Eron"
 
 #: directorymergewindow.cpp:2367
 #, kde-format
 msgid "Merge operation complete."
-msgstr ""
+msgstr "Kunfanda operacio finiĝis."
 
 #: directorymergewindow.cpp:2367 directorymergewindow.cpp:2370
 #, kde-format
 msgid "Merge Complete"
-msgstr ""
+msgstr "Kunfando Kompleta"
 
 #: directorymergewindow.cpp:2380
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
 msgstr ""
+"Simulita kunfandiĝo kompleta: Kontrolu ĉu vi konsentas kun la proponitaj "
+"operacioj."
 
 #: directorymergewindow.cpp:2416
-#, fuzzy, kde-format
-#| msgid "An error occurred. Press OK to see detailed information.\n"
+#, kde-format
 msgid "An error occurred. Press OK to see detailed information."
-msgstr "Okazis eraro. Press OK to see detailed information.\n"
+msgstr "Eraro okazis. Premu OK por vidi detalajn informojn."
 
 #: directorymergewindow.cpp:2449
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
-msgstr ""
+msgstr "Eraro: Dum forigo de %1: Kreado de sekurkopio malsukcesis."
 
 #: directorymergewindow.cpp:2456
 #, kde-format
 msgid "delete folder recursively( %1 )"
-msgstr ""
+msgstr "forigi dosierujon rekursie( %1 )"
 
 #: directorymergewindow.cpp:2458
 #, kde-format
 msgid "delete( %1 )"
-msgstr ""
+msgstr "forigi( %1 )"
 
 #: directorymergewindow.cpp:2474
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
-msgstr ""
+msgstr "Eraro: forigo de dosierujo malsukcesis provante legi la dosierujon."
 
 #: directorymergewindow.cpp:2490
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
-msgstr ""
+msgstr "Eraro: rmdir(%1) operacio malsukcesis."
 
 #: directorymergewindow.cpp:2500
 #, kde-format
 msgid "Error: delete operation failed."
-msgstr ""
+msgstr "Eraro: foriga operacio malsukcesis."
 
 #: directorymergewindow.cpp:2527
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr ""
+msgstr "mana kunfandado( %1, %2, %3 -> %4)"
 
 #: directorymergewindow.cpp:2530
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
-msgstr ""
+msgstr "     Noto: Post mana kunfandado la uzanto devas daŭrigi premante F7."
 
 #: directorymergewindow.cpp:2557
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
+"Eraro: kopio( %1 -> %2 ) malsukcesis. Forigo de ekzistanta celo malsukcesis."
 
 #: directorymergewindow.cpp:2566
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
-msgstr ""
+msgstr "kopiiLigilon ( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2575
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
+"Eraro: copyLink malsukcesis: Foraj ligiloj ankoraŭ ne estas subtenataj."
 
 #: directorymergewindow.cpp:2585
 #, kde-format
 msgid "Error: copyLink failed."
-msgstr ""
+msgstr "Eraro: copyLink malsukcesis."
 
 #: directorymergewindow.cpp:2608
 #, kde-format
 msgid "copy( %1 -> %2 )"
-msgstr ""
+msgstr "kopii ( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2634
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
-msgstr ""
+msgstr "Eraro dum renomo(%1 -> %2): Ne povas forigi ekzistantan celon."
 
 #: directorymergewindow.cpp:2641
 #, kde-format
 msgid "rename( %1 -> %2 )"
-msgstr ""
+msgstr "renomi( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2650
 #, kde-format
 msgid "Error: Rename failed."
-msgstr ""
+msgstr "Eraro: Renomi malsukcesis."
 
 #: directorymergewindow.cpp:2668
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
-msgstr ""
+msgstr "Eraro dum makeDir de %1. Ne povas forigi ekzistantan dosieron."
 
 #: directorymergewindow.cpp:2685
 #, kde-format
 msgid "makeDir( %1 )"
-msgstr ""
+msgstr "makeDir(%1)"
 
 #: directorymergewindow.cpp:2695
-#, fuzzy, kde-format
-#| msgid "Error reading from %1"
+#, kde-format
 msgid "Error while creating folder."
-msgstr "Eraro okazis dum legado de %1"
+msgstr "Eraro dum kreado de dosierujo."
 
 #: directorymergewindow.cpp:2731 directorymergewindow.cpp:2845
 #, kde-format
 msgid "Dest"
-msgstr ""
+msgstr "Dest"
 
 #: directorymergewindow.cpp:2739 directorymergewindow.cpp:2767
 #: optiondialog.cpp:1099 optiondialog.cpp:1100
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Dosierujo"
 
 #: directorymergewindow.cpp:2739
 #, kde-format
@@ -771,17 +782,17 @@ msgstr "Grandeco"
 #: directorymergewindow.cpp:2740
 #, kde-format
 msgid "Attr"
-msgstr ""
+msgstr "Atr"
 
 #: directorymergewindow.cpp:2740
 #, kde-format
 msgid "Last Modification"
-msgstr ""
+msgstr "Lasta Modifo"
 
 #: directorymergewindow.cpp:2740
 #, kde-format
 msgid "Link-Destination"
-msgstr ""
+msgstr "Ligo-Celo"
 
 #: directorymergewindow.cpp:2767
 #, kde-format
@@ -791,7 +802,7 @@ msgstr "Dosiero"
 #: directorymergewindow.cpp:2767
 #, kde-format
 msgid "-Link"
-msgstr ""
+msgstr "-Ligilo"
 
 #: directorymergewindow.cpp:2773
 #, kde-format
@@ -801,68 +812,68 @@ msgstr "Ne disponebla"
 #: directorymergewindow.cpp:2787
 #, kde-format
 msgid "A (Dest): "
-msgstr ""
+msgstr "A (desto):"
 
 #: directorymergewindow.cpp:2791
 #, kde-format
 msgid "A:    "
-msgstr ""
+msgstr "A:"
 
 #: directorymergewindow.cpp:2791
 #, kde-format
 msgid "A (Base): "
-msgstr ""
+msgstr "A (Bazo):"
 
 #: directorymergewindow.cpp:2797
 #, kde-format
 msgid "B (Dest): "
-msgstr ""
+msgstr "B (desto):"
 
 #: directorymergewindow.cpp:2801
 #, kde-format
 msgid "B:    "
-msgstr ""
+msgstr "B:"
 
 #: directorymergewindow.cpp:2806
 #, kde-format
 msgid "C (Dest): "
-msgstr ""
+msgstr "C (Destino):"
 
 #: directorymergewindow.cpp:2810
 #, kde-format
 msgid "C:    "
-msgstr ""
+msgstr "C:"
 
 #: directorymergewindow.cpp:2813
 #, kde-format
 msgid "Dest: "
-msgstr ""
+msgstr "Desto:"
 
 #. i18n("Saving Directory Merge State ..."));
 #: directorymergewindow.cpp:2855
 #, kde-format
 msgid "Save Folder Merge State As..."
-msgstr ""
+msgstr "Konservi dosierujon Kunfandi ŝtaton kiel..."
 
 #: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Start/Continue Folder Merge"
-msgstr ""
+msgstr "Komenci/Daŭrigi Dosierujon Kunfandi"
 
 #: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Run Operation for Current Item"
-msgstr ""
+msgstr "Ruli Operacion por Aktuala Ero"
 
 #: directorymergewindow.cpp:2964
 #, kde-format
 msgid "Compare Selected File"
-msgstr ""
+msgstr "Kompari Elektitan Dosieron"
 
 #: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Merge Current File"
-msgstr ""
+msgstr "Kunfandi Aktualan Dosieron"
 
 #: directorymergewindow.cpp:2965
 #, kde-format
@@ -870,16 +881,18 @@ msgid ""
 "Merge\n"
 "File"
 msgstr ""
+"Kunfandi\n"
+"Dosieron"
 
 #: directorymergewindow.cpp:2966
 #, kde-format
 msgid "Fold All Subfolders"
-msgstr ""
+msgstr "Faldi Ĉiuj Subdosierujoj"
 
 #: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Unfold All Subfolders"
-msgstr ""
+msgstr "Malfaldi Ĉiuj Subdosierujoj"
 
 #: directorymergewindow.cpp:2968
 #, kde-format
@@ -891,34 +904,34 @@ msgstr "Reserĉi"
 #: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Choose A for All Items"
-msgstr ""
+msgstr "Elekti A por Ĉiuj Eroj"
 
 #: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Choose B for All Items"
-msgstr ""
+msgstr "Elekti B por Ĉiuj Eroj"
 
 #: directorymergewindow.cpp:2973
 #, kde-format
 msgid "Choose C for All Items"
-msgstr ""
+msgstr "Elekti C por Ĉiuj Eroj"
 
 #: directorymergewindow.cpp:2974
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
-msgstr ""
+msgstr "Aŭtomate Elekti Operacion por Ĉiuj Eroj"
 
 #: directorymergewindow.cpp:2975
 #, kde-format
 msgid "No Operation for All Items"
-msgstr ""
+msgstr "Neniu Operacio por Ĉiuj Eroj"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
 #: directorymergewindow.cpp:2980
 #, kde-format
 msgid "Show Identical Files"
-msgstr ""
+msgstr "Montri identajn dosierojn"
 
 #: directorymergewindow.cpp:2980
 #, kde-format
@@ -926,16 +939,18 @@ msgid ""
 "Identical\n"
 "Files"
 msgstr ""
+"Identaj\n"
+"Dosieroj"
 
 #: directorymergewindow.cpp:2981
 #, kde-format
 msgid "Show Different Files"
-msgstr ""
+msgstr "Montri Malsamajn Dosieroj"
 
 #: directorymergewindow.cpp:2982
 #, kde-format
 msgid "Show Files only in A"
-msgstr ""
+msgstr "Montri dosierojn nur en A"
 
 #: directorymergewindow.cpp:2982
 #, kde-format
@@ -943,11 +958,13 @@ msgid ""
 "Files\n"
 "only in A"
 msgstr ""
+"Dosieroj\n"
+"nur en A"
 
 #: directorymergewindow.cpp:2983
 #, kde-format
 msgid "Show Files only in B"
-msgstr ""
+msgstr "Montri dosierojn nur en B"
 
 #: directorymergewindow.cpp:2983
 #, kde-format
@@ -955,11 +972,13 @@ msgid ""
 "Files\n"
 "only in B"
 msgstr ""
+"Dosieroj\n"
+"nur en B"
 
 #: directorymergewindow.cpp:2984
 #, kde-format
 msgid "Show Files only in C"
-msgstr ""
+msgstr "Montri dosierojn nur en C"
 
 #: directorymergewindow.cpp:2984
 #, kde-format
@@ -967,16 +986,18 @@ msgid ""
 "Files\n"
 "only in C"
 msgstr ""
+"Dosieroj\n"
+"nur en C"
 
 #: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Compare Explicitly Selected Files"
-msgstr ""
+msgstr "Kompari eksplicite elektitajn dosierojn"
 
 #: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Merge Explicitly Selected Files"
-msgstr ""
+msgstr "Kunfandi eksplicite elektitajn dosierojn"
 
 #: directorymergewindow.cpp:2991 directorymergewindow.cpp:2998
 #, kde-format
@@ -992,103 +1013,96 @@ msgstr "Mergi"
 #: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Delete (if exists)"
-msgstr ""
+msgstr "Forigi (se ekzistas)"
 
 #: directorymergewindow.cpp:2999
 #, kde-format
 msgid "Copy A to B"
-msgstr ""
+msgstr "Kopii A al B"
 
 #: directorymergewindow.cpp:3000
 #, kde-format
 msgid "Copy B to A"
-msgstr ""
+msgstr "Kopii B al A"
 
 #: directorymergewindow.cpp:3001
 #, kde-format
 msgid "Delete A"
-msgstr ""
+msgstr "Forigi A"
 
 #: directorymergewindow.cpp:3002
 #, kde-format
 msgid "Delete B"
-msgstr ""
+msgstr "Forigi B"
 
 #: directorymergewindow.cpp:3003
 #, kde-format
 msgid "Delete A && B"
-msgstr ""
+msgstr "Forigi A && B"
 
 #: directorymergewindow.cpp:3004
 #, kde-format
 msgid "Merge to A"
-msgstr ""
+msgstr "Kunfandi al A"
 
 #: directorymergewindow.cpp:3005
 #, kde-format
 msgid "Merge to B"
-msgstr ""
+msgstr "Kunfandi al B"
 
 #: directorymergewindow.cpp:3006
 #, kde-format
 msgid "Merge to A && B"
-msgstr ""
+msgstr "Kunfandi al A && B"
 
 #: fileaccess.cpp:515
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
-msgstr ""
+msgstr "Ne eblas determini plenan URL. Neniu gepatro specifita."
 
 #: fileaccess.cpp:789
 #, kde-format
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "Malsukcesis legi dosieron: %1"
 
 #: fileaccess.cpp:929
 #, kde-format
 msgid "Creating temp copy of %1 failed."
-msgstr ""
+msgstr "Kreado de provizora kopio de %1 malsukcesis."
 
 #: fileaccess.cpp:937 fileaccess.cpp:942
 #, kde-format
 msgid "Opening %1 failed. %2"
-msgstr ""
+msgstr "Malfermo de %1 malsukcesis. %2"
 
 #: fileaccess.cpp:961 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Error reading from %1"
+#, kde-format
 msgid "Error reading from %1. %2"
-msgstr "Eraro okazis dum legado de %1"
+msgstr "Eraro legante de %1. %2"
 
 #: fileaccess.cpp:1098
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed. \n"
-#| "Filename: "
+#, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"While trying to make a backup, deleting an older backup failed. \n"
-"Dosiernomo: "
+"Dum provado fari sekurkopion, forigo de pli malnova sekurkopio malsukcesis.\n"
+"Dosiernomo: %1"
 
 #: fileaccess.cpp:1105
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed. \n"
-#| "Filename: "
+#, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"While trying to make a backup, deleting an older backup failed. \n"
-"Dosiernomo: "
+"Dum provado fari sekurkopion, renomado malsukcesis.\n"
+"Dosiernomoj: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:17
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "TextLabel"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:30
@@ -1098,65 +1112,66 @@ msgid ""
 "but the little red hen escapes with a shiver\n"
 ":-)\n"
 msgstr ""
+"La rapida bruna vulpo saltas super la rivero\n"
+"sed la ruĝkokineto eskapas kun tremo\n"
+":-)\n"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:43
 #, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
-msgstr ""
+msgstr "Ŝanĝi tiparon"
 
 #: kdiff3.cpp:179
 #, kde-format
 msgid "Current Configuration:"
-msgstr ""
+msgstr "Nuna Agordo:"
 
 #: kdiff3.cpp:184
 #, kde-format
 msgid "Config Option Error:"
-msgstr ""
+msgstr "Agorda Opcio Eraro:"
 
 #: kdiff3.cpp:243
 #, kde-format
 msgid "Option --auto used, but no output file specified."
-msgstr ""
+msgstr "Opcio --aŭto uzata, sed neniu eligdosiero specifita."
 
 #: kdiff3.cpp:351
-#, fuzzy, kde-format
-#| msgid "Directory"
+#, kde-format
 msgid "Directory merge"
-msgstr "Dosierujo"
+msgstr "Dosierujo kunfandi"
 
 #: kdiff3.cpp:355
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgid "Merge info"
-msgstr "Mergi"
+msgstr "Kunfandi informojn"
 
 #: kdiff3.cpp:439
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
-msgstr ""
+msgstr "Opcio --aŭto ignorita por komparo de dosierujoj."
 
 #: kdiff3.cpp:520
 #, kde-format
 msgid "Saving failed."
-msgstr ""
+msgstr "Konservado malsukcesis."
 
 #: kdiff3.cpp:545 pdiff.cpp:927
 #, kde-format
 msgid "Opening of these files failed:"
-msgstr ""
+msgstr "Malfermo de ĉi tiuj dosieroj malsukcesis:"
 
 #: kdiff3.cpp:554 pdiff.cpp:936
 #, kde-format
 msgid "File open error"
-msgstr ""
+msgstr "Dosiero-malferma eraro"
 
 #: kdiff3.cpp:586
 #, kde-format
 msgid "Opens documents for comparison..."
-msgstr ""
+msgstr "Malfermas dokumentojn por komparo..."
 
 #: kdiff3.cpp:588
 #, kde-format
@@ -1166,17 +1181,17 @@ msgstr "Reŝargi"
 #: kdiff3.cpp:591
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
-msgstr ""
+msgstr "Konservas la kunfandan rezulton. Ĉiuj konfliktoj devas esti solvitaj!"
 
 #: kdiff3.cpp:593
 #, kde-format
 msgid "Saves the current document as..."
-msgstr ""
+msgstr "Konservas la nunan dokumenton kiel..."
 
 #: kdiff3.cpp:596
 #, kde-format
 msgid "Print the differences"
-msgstr ""
+msgstr "Presi la diferencojn"
 
 #: kdiff3.cpp:599
 #, kde-format
@@ -1186,7 +1201,7 @@ msgstr "Finas la programon"
 #: kdiff3.cpp:603
 #, kde-format
 msgid "Undo last action."
-msgstr ""
+msgstr "Malfari lastan agon."
 
 #: kdiff3.cpp:607
 #, kde-format
@@ -1199,25 +1214,24 @@ msgid "Copies the selected section to the clipboard"
 msgstr "Kopios la apartigatan regionon poŝen"
 
 #: kdiff3.cpp:612
-#, fuzzy, kde-format
-#| msgid "Pastes the clipboard contents to actual position"
+#, kde-format
 msgid "Pastes the clipboard contents to current position"
-msgstr "Elpoŝigos la poŝan enhavon al la aktuala pozicio"
+msgstr "Algluas la enhavon de la tondujo al la nuna pozicio"
 
 #: kdiff3.cpp:615
 #, kde-format
 msgid "Select everything in current window"
-msgstr ""
+msgstr "Elekti ĉion en la aktuala fenestro"
 
 #: kdiff3.cpp:618
 #, kde-format
 msgid "Search for a string"
-msgstr ""
+msgstr "Serĉi ĉenon"
 
 #: kdiff3.cpp:620
 #, kde-format
 msgid "Search again for the string"
-msgstr ""
+msgstr "Serĉi denove la ĉenon"
 
 #: kdiff3.cpp:625
 #, kde-format
@@ -1227,12 +1241,12 @@ msgstr "(Mal)ŝaltos la statbreton"
 #: kdiff3.cpp:629
 #, kde-format
 msgid "Configure KDiff3..."
-msgstr ""
+msgstr "Agordi KDiff3..."
 
 #: kdiff3.cpp:649
 #, kde-format
 msgid "Go to Current Delta"
-msgstr ""
+msgstr "Iri al Nuna Delta"
 
 #: kdiff3.cpp:649
 #, kde-format
@@ -1240,11 +1254,13 @@ msgid ""
 "Current\n"
 "Delta"
 msgstr ""
+"Nuna\n"
+"Delta"
 
 #: kdiff3.cpp:651
 #, kde-format
 msgid "Go to First Delta"
-msgstr ""
+msgstr "Iri al Unua Delta"
 
 #: kdiff3.cpp:651
 #, kde-format
@@ -1252,11 +1268,13 @@ msgid ""
 "First\n"
 "Delta"
 msgstr ""
+"Unue\n"
+"Delta"
 
 #: kdiff3.cpp:653
 #, kde-format
 msgid "Go to Last Delta"
-msgstr ""
+msgstr "Iri al Lasta Delta"
 
 #: kdiff3.cpp:653
 #, kde-format
@@ -1264,11 +1282,15 @@ msgid ""
 "Last\n"
 "Delta"
 msgstr ""
+"Lasta\n"
+"Delta"
 
 #: kdiff3.cpp:655
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
+"(Saltas diferencojn de blanka spaco kiam \"Montri Blankan spacon\" estas "
+"malŝaltita.)"
 
 #: kdiff3.cpp:656
 #, kde-format
@@ -1276,11 +1298,13 @@ msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
+"(Ne preterlasas blankspacojn eĉ kiam \"Montri Blankan spacon\" estas "
+"malŝaltita.)"
 
 #: kdiff3.cpp:657
 #, kde-format
 msgid "Go to Previous Delta"
-msgstr ""
+msgstr "Iri al Antaŭa Delta"
 
 #: kdiff3.cpp:657
 #, kde-format
@@ -1288,11 +1312,13 @@ msgid ""
 "Prev\n"
 "Delta"
 msgstr ""
+"Antaŭa\n"
+"Delta"
 
 #: kdiff3.cpp:659
 #, kde-format
 msgid "Go to Next Delta"
-msgstr ""
+msgstr "Iri al Sekva Delta"
 
 #: kdiff3.cpp:659
 #, kde-format
@@ -1300,11 +1326,13 @@ msgid ""
 "Next\n"
 "Delta"
 msgstr ""
+"Sekva\n"
+"Delta"
 
 #: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Previous Conflict"
-msgstr ""
+msgstr "Iri al Antaŭa Konflikto"
 
 #: kdiff3.cpp:661
 #, kde-format
@@ -1312,11 +1340,13 @@ msgid ""
 "Prev\n"
 "Conflict"
 msgstr ""
+"Antaŭa\n"
+"Konflikto"
 
 #: kdiff3.cpp:663
 #, kde-format
 msgid "Go to Next Conflict"
-msgstr ""
+msgstr "Iri al Sekva Konflikto"
 
 #: kdiff3.cpp:663
 #, kde-format
@@ -1324,11 +1354,13 @@ msgid ""
 "Next\n"
 "Conflict"
 msgstr ""
+"Sekva\n"
+"Konflikto"
 
 #: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
-msgstr ""
+msgstr "Iri al Antaŭa Nesolvita Konflikto"
 
 #: kdiff3.cpp:665
 #, kde-format
@@ -1336,11 +1368,13 @@ msgid ""
 "Prev\n"
 "Unsolved"
 msgstr ""
+"Antaŭa\n"
+"Nesolvita"
 
 #: kdiff3.cpp:667
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
-msgstr ""
+msgstr "Iri al Sekva Nesolvita Konflikto"
 
 #: kdiff3.cpp:667
 #, kde-format
@@ -1348,22 +1382,24 @@ msgid ""
 "Next\n"
 "Unsolved"
 msgstr ""
+"Sekva\n"
+"Nesolvita"
 
 #: kdiff3.cpp:669
-#, fuzzy, kde-format
-#| msgid "Line"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr "Linio"
+msgstr "Iru al Linio"
 
 #: kdiff3.cpp:669
-#, fuzzy, kde-format
-#| msgid "Line"
+#, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
 "Go\n"
 "Line"
-msgstr "Linio"
+msgstr ""
+"Iri\n"
+"Linien"
 
 #: kdiff3.cpp:670
 #, kde-format
@@ -1371,12 +1407,14 @@ msgid ""
 ".\n"
 " Goto specified line."
 msgstr ""
+".\n"
+" Iri al specifita linio."
 
 #: kdiff3.cpp:671
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
-msgstr ""
+msgstr "Elekti Linio(j)n De A"
 
 #: kdiff3.cpp:671
 #, kde-format
@@ -1385,12 +1423,14 @@ msgid ""
 "Choose\n"
 "A"
 msgstr ""
+"Elekti\n"
+"A"
 
 #: kdiff3.cpp:672
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
-msgstr ""
+msgstr "Elekti Linion(j)n De B"
 
 #: kdiff3.cpp:672
 #, kde-format
@@ -1399,12 +1439,14 @@ msgid ""
 "Choose\n"
 "B"
 msgstr ""
+"Elekti\n"
+"B"
 
 #: kdiff3.cpp:673
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
-msgstr ""
+msgstr "Elekti Linio(j)n De C"
 
 #: kdiff3.cpp:673
 #, kde-format
@@ -1413,12 +1455,14 @@ msgid ""
 "Choose\n"
 "C"
 msgstr ""
+"Elekti\n"
+"C"
 
 #: kdiff3.cpp:674
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr ""
+msgstr "Aŭtomate Iru al Sekva Nesolvita Konflikto Post Fonta Elekto"
 
 #: kdiff3.cpp:674
 #, kde-format
@@ -1427,11 +1471,13 @@ msgid ""
 "Auto\n"
 "Next"
 msgstr ""
+"Aŭtomata\n"
+"Sekva"
 
 #: kdiff3.cpp:676
 #, kde-format
 msgid "Show Space && Tabulator Characters"
-msgstr ""
+msgstr "Montri Spacajn && Tabelajn Signojn"
 
 #: kdiff3.cpp:676
 #, kde-format
@@ -1440,11 +1486,13 @@ msgid ""
 "White\n"
 "Characters"
 msgstr ""
+"Blankaj\n"
+"Signoj"
 
 #: kdiff3.cpp:677
 #, kde-format
 msgid "Show White Space"
-msgstr ""
+msgstr "Montri Blankan Spacon"
 
 #: kdiff3.cpp:677
 #, kde-format
@@ -1453,11 +1501,13 @@ msgid ""
 "White\n"
 "Deltas"
 msgstr ""
+"Blanka\n"
+"Deltoj"
 
 #: kdiff3.cpp:679
 #, kde-format
 msgid "Show Line Numbers"
-msgstr ""
+msgstr "Montri Linajn Nombrojn"
 
 #: kdiff3.cpp:679
 #, kde-format
@@ -1466,111 +1516,113 @@ msgid ""
 "Line\n"
 "Numbers"
 msgstr ""
+"Linio\n"
+"ombroj"
 
 #: kdiff3.cpp:681
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
-msgstr ""
+msgstr "Aŭtomate Solvi Simplajn Konfliktojn"
 
 #: kdiff3.cpp:682
 #, kde-format
 msgid "Set Deltas to Conflicts"
-msgstr ""
+msgstr "Agordi Deltojn al Konfliktoj"
 
 #: kdiff3.cpp:683
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
-msgstr ""
+msgstr "Lanĉi Regul-Espriman Aŭtomatan Kunfandadon"
 
 #: kdiff3.cpp:684
 #, kde-format
 msgid "Automatically Solve History Conflicts"
-msgstr ""
+msgstr "Aŭtomate Solvi Historiajn Konfliktojn"
 
 #: kdiff3.cpp:685
 #, kde-format
 msgid "Split Diff At Selection"
-msgstr ""
+msgstr "Split Diferenco Ĉe Elekto"
 
 #: kdiff3.cpp:686
 #, kde-format
 msgid "Join Selected Diffs"
-msgstr ""
+msgstr "Kunigi Elektitajn Dif-ojn"
 
 #: kdiff3.cpp:688
 #, kde-format
 msgid "Show Window A"
-msgstr ""
+msgstr "Montri Fenestron A"
 
 #: kdiff3.cpp:689
 #, kde-format
 msgid "Show Window B"
-msgstr ""
+msgstr "Montri Fenestron B"
 
 #: kdiff3.cpp:690
 #, kde-format
 msgid "Show Window C"
-msgstr ""
+msgstr "Montri Fenestron C"
 
 #: kdiff3.cpp:692
 #, kde-format
 msgid "Normal Overview"
-msgstr ""
+msgstr "Normala Superrigardo"
 
 #: kdiff3.cpp:693
 #, kde-format
 msgid "A vs. B Overview"
-msgstr ""
+msgstr "A vs. B Superrigardo"
 
 #: kdiff3.cpp:694
 #, kde-format
 msgid "A vs. C Overview"
-msgstr ""
+msgstr "A vs C Superrigardo"
 
 #: kdiff3.cpp:695
 #, kde-format
 msgid "B vs. C Overview"
-msgstr ""
+msgstr "B vs C Superrigardo"
 
 #: kdiff3.cpp:696
 #, kde-format
 msgid "Word Wrap Diff Windows"
-msgstr ""
+msgstr "Word Wrap Diff Windows"
 
 #: kdiff3.cpp:697
 #, kde-format
 msgid "Add Manual Diff Alignment"
-msgstr ""
+msgstr "Aldoni Manan Dif-alĝustigon"
 
 #: kdiff3.cpp:698
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
-msgstr ""
+msgstr "Forigi Ĉiujn Permanajn Diferenc-Alĝustigojn"
 
 #: kdiff3.cpp:700
 #, kde-format
 msgid "Focus Next Window"
-msgstr ""
+msgstr "Fokuso Sekva Fenestro"
 
 #: kdiff3.cpp:701
 #, kde-format
 msgid "Focus Prev Window"
-msgstr ""
+msgstr "Fokuso Antaŭa Fenestro"
 
 #: kdiff3.cpp:702
 #, kde-format
 msgid "Toggle Split Orientation"
-msgstr ""
+msgstr "Baskuligi Split Orientiĝon"
 
 #: kdiff3.cpp:704
 #, kde-format
 msgid "Folder && Text Split Screen View"
-msgstr ""
+msgstr "Dosierujo && Teksto Split Ekrano Vido"
 
 #: kdiff3.cpp:706
 #, kde-format
 msgid "Toggle Between Folder && Text View"
-msgstr ""
+msgstr "Baskuligi Inter Dosieruja && Teksta Vido"
 
 #: kdiff3.cpp:727 kdiff3.cpp:822 kdiff3.cpp:847 kdiff3.cpp:1127 kdiff3.cpp:1148
 #: pdiff.cpp:946 pdiff.cpp:1013 pdiff.cpp:1049 pdiff.cpp:1058 pdiff.cpp:1116
@@ -1582,28 +1634,28 @@ msgstr "Preta."
 #: kdiff3.cpp:766 pdiff.cpp:1725
 #, kde-format
 msgid "The merge result has not been saved."
-msgstr ""
+msgstr "La kunfandrezulto ne estas konservita."
 
 #: kdiff3.cpp:768
 #, kde-format
 msgid "Save && Quit"
-msgstr ""
+msgstr "Konservi && Eliri"
 
 #: kdiff3.cpp:769
 #, kde-format
 msgid "Quit Without Saving"
-msgstr ""
+msgstr "Forlasi Sen Konservado"
 
 #: kdiff3.cpp:777 pdiff.cpp:1736
 #, kde-format
 msgid "Saving the merge result failed."
-msgstr ""
+msgstr "Konservado de la kunfandrezulto malsukcesis."
 
 #: kdiff3.cpp:788 pdiff.cpp:860
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
-msgstr ""
+msgstr "Vi nun faras dosierujon kunfandi. Ĉu vi certas, ke vi volas aborti?"
 
 #: kdiff3.cpp:811
 #, kde-format
@@ -1623,7 +1675,7 @@ msgstr "Konservi kiel..."
 #: kdiff3.cpp:855
 #, kde-format
 msgid "Printing not implemented."
-msgstr ""
+msgstr "Presado ne efektivigita."
 
 #: kdiff3.cpp:896
 #, kde-format
@@ -1633,23 +1685,22 @@ msgstr "Presante..."
 #: kdiff3.cpp:1001
 #, kde-format
 msgid "Printing page %1 of %2"
-msgstr ""
+msgstr "Presanta paĝon %1 de %2"
 
 #: kdiff3.cpp:1060
-#, fuzzy, kde-format
-#| msgid "Selection"
+#, kde-format
 msgid " (Selection)"
-msgstr "Elektaĵo"
+msgstr "(Selektado)"
 
 #: kdiff3.cpp:1089
 #, kde-format
 msgid "Printing completed."
-msgstr ""
+msgstr "Presado finiĝis."
 
 #: kdiff3.cpp:1093
 #, kde-format
 msgid "Printing aborted."
-msgstr ""
+msgstr "Presado ĉesigita."
 
 #: kdiff3.cpp:1100
 #, kde-format
@@ -1669,17 +1720,17 @@ msgstr "Inversigante la statobreton..."
 #: kdiff3_part.cpp:38
 #, kde-format
 msgid "KDiff3 Part"
-msgstr ""
+msgstr "KDiff3 Parto"
 
 #: kdiff3_part.cpp:39
 #, kde-format
 msgid "A KPart for displaying diffs"
-msgstr ""
+msgstr "KPart por montri diferencojn"
 
 #: kdiff3_part.cpp:41
 #, kde-format
 msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-msgstr ""
+msgstr "Kopirajto 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
 
 #: kdiff3_part.cpp:42
 #, kde-format
@@ -1689,26 +1740,25 @@ msgstr "Joachim Eibl"
 #: kdiff3_part.cpp:184 kdiff3_part.cpp:270
 #, kde-format
 msgid "Could not find files for comparison."
-msgstr ""
+msgstr "Ne eblis trovi dosierojn por komparo."
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_part.rc:9
 #, kde-format
 msgid "&KDiff3"
-msgstr ""
+msgstr "&KDiff3"
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_part.rc:18
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgid "Configure KDiff3"
-msgstr "Agordi"
+msgstr "Agordu KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kdiff3_part.rc:21 main.cpp:106
 #, kde-format
 msgid "KDiff3"
-msgstr ""
+msgstr "KDiff3"
 
 #: kdiff3_shell.cpp:58
 #, kde-format
@@ -1717,6 +1767,9 @@ msgid ""
 "This usually happens due to an installation problem. Please read the README-"
 "file in the source package for details."
 msgstr ""
+"Ne eblis pravalorigi la parton KDiff3.\n"
+"Tio kutime okazas pro instala problemo. Bonvolu legi la README-dosieron en "
+"la fontpakaĵo por detaloj."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -1728,38 +1781,37 @@ msgstr "&Dosiero"
 #: kdiff3_shell.rc:7
 #, kde-format
 msgid "F&older"
-msgstr ""
+msgstr "D&osierujo"
 
 #. i18n: ectx: Menu (dir_current_merge_menu)
 #: kdiff3_shell.rc:30
 #, kde-format
 msgid "Current Item Merge Operation"
-msgstr ""
+msgstr "Aktualaa Er-Kunfanda Operacio"
 
 #. i18n: ectx: Menu (dir_current_sync_menu)
 #: kdiff3_shell.rc:38
 #, kde-format
 msgid "Current Item Sync Operation"
-msgstr ""
+msgstr "Aktuala Er-Sinkroniga Operacio"
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_shell.rc:50
 #, kde-format
 msgid "M&ovement"
-msgstr ""
+msgstr "M&ovado"
 
 #. i18n: ectx: Menu (diff)
 #: kdiff3_shell.rc:61
 #, kde-format
 msgid "D&iffview"
-msgstr ""
+msgstr "D&iff-vido"
 
 #. i18n: ectx: Menu (merge)
 #: kdiff3_shell.rc:73
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgid "M&erge"
-msgstr "Mergi"
+msgstr "K&unfandi"
 
 #. i18n: ectx: Menu (window)
 #: kdiff3_shell.rc:95
@@ -1776,79 +1828,80 @@ msgstr "Ĉefa ilobreto"
 #: main.cpp:73 main.cpp:77
 #, kde-format
 msgid "Ignored. (User defined.)"
-msgstr ""
+msgstr "Ignorita. (Uzantodifinita.)"
 
 #: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
-msgstr ""
+msgstr " (64 bitoj)"
 
 #: main.cpp:111
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
-msgstr ""
+msgstr "Ilo por Komparo kaj Kunfandado de Dosieroj kaj Dosierujoj"
 
 #: main.cpp:112
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
-msgstr ""
+msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5-haveno"
 
 #: main.cpp:132
 #, kde-format
 msgid "Merge the input."
-msgstr ""
+msgstr "Kunfandi la enigon."
 
 #: main.cpp:133
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
-msgstr ""
+msgstr "Eksplicita baza dosiero. Por kongruo kun certaj iloj."
 
 #: main.cpp:134
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
-msgstr ""
+msgstr "Eligo dosiero. Implicas -m. Ekz.: -o nova dosiero.txt"
 
 #: main.cpp:135
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
-msgstr ""
+msgstr "Eligo dosiero, denove. (Por kongruo kun certaj iloj.)"
 
 #: main.cpp:137
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
+"Neniu GUI se ĉiuj konfliktoj estas aŭtomate solveblaj. (Bezonas -o dosieron)"
 
 #: main.cpp:138
 #, kde-format
 msgid "Ignore --auto and always show GUI."
-msgstr ""
+msgstr "Ignori --auto kaj ĉiam montri GUI."
 
 #: main.cpp:140 main.cpp:141
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgid "Ignored."
-msgstr "Ignori"
+msgstr "Ignorita."
 
 #: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
-msgstr ""
+msgstr "Videbla nomo anstataŭaĵo por eniga dosiero 1 (bazo)."
 
 #: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 2."
-msgstr ""
+msgstr "Videbla nomo anstataŭaĵo por eniga dosiero 2."
 
 #: main.cpp:145
 #, kde-format
 msgid "Visible name replacement for input file 3."
-msgstr ""
+msgstr "Videbla nomo anstataŭaĵo por eniga dosiero 3."
 
 #: main.cpp:146
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
+"Alternativa videbla nomo anstataŭaĵo. Provizu ĉi tion unufoje por ĉiu enigo."
 
 #: main.cpp:147
 #, kde-format
@@ -1856,116 +1909,118 @@ msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
+"Anstataŭigi agordon. Uzu unufoje por ĉiu agordo. Ekz.: --cs \"AutoAdvance=1\""
 
 #: main.cpp:148
 #, kde-format
 msgid "Show list of config settings and current values."
-msgstr ""
+msgstr "Montru liston de agordaj agordoj kaj aktualaj valoroj."
 
 #: main.cpp:149
 #, kde-format
 msgid "Use a different config file."
-msgstr ""
+msgstr "Uzu malsaman agordosieron."
 
 #: main.cpp:152
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
-msgstr ""
+msgstr "dosiero1 por malfermi (bazo, se ne specifita per --base)"
 
 #: main.cpp:153
 #, kde-format
 msgid "file2 to open"
-msgstr ""
+msgstr "dosiero2 por malfermi"
 
 #: main.cpp:154
 #, kde-format
 msgid "file3 to open"
-msgstr ""
+msgstr "dosiero3 por malfermi"
 
 #: main.cpp:178
 #, kde-format
 msgid "See kdiff3 --help for supported options."
-msgstr ""
+msgstr "Vidu kdiff3 --help por subtenataj opcioj."
 
 #: MergeFileInfos.cpp:392
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
-msgstr ""
+msgstr "Ne eblas kompari nenormalan dosieron kun normala dosiero."
 
 #: MergeFileInfos.cpp:415
 #, kde-format
 msgid "Mix of links and normal files."
-msgstr ""
+msgstr "Miksaĵo de ligiloj kaj normalaj dosieroj."
 
 #: MergeFileInfos.cpp:423
 #, kde-format
 msgid "Link: "
-msgstr ""
+msgstr "Ligo:"
 
 #: MergeFileInfos.cpp:433
 #, kde-format
 msgid "Size. "
-msgstr ""
+msgstr "Grandeco."
 
 #: MergeFileInfos.cpp:449 MergeFileInfos.cpp:459
 #, kde-format
 msgid "Date & Size: "
-msgstr ""
+msgstr "Dato & Grandeco:"
 
 #: MergeFileInfos.cpp:480
 #, kde-format
 msgid "Comparing file..."
-msgstr ""
+msgstr "Komparante dosieron..."
 
 #: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose A Everywhere"
-msgstr ""
+msgstr "Elekti A Ĉie"
 
 #: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose B Everywhere"
-msgstr ""
+msgstr "Elekti B Ĉie"
 
 #: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose C Everywhere"
-msgstr ""
+msgstr "Elekti C Ĉie"
 
 #: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
-msgstr ""
+msgstr "Elekti A por Ĉiuj Nesolvitaj Konfliktoj"
 
 #: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
-msgstr ""
+msgstr "Elekti B por Ĉiuj Nesolvitaj Konfliktoj"
 
 #: mergeresultwindow.cpp:153
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
-msgstr ""
+msgstr "Elekti C por Ĉiuj Nesolvitaj Konfliktoj"
 
 #: mergeresultwindow.cpp:154
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
-msgstr ""
+msgstr "Elekti A por Ĉiuj Nesolvitaj Blankspacaj Konfliktoj"
 
 #: mergeresultwindow.cpp:155
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
-msgstr ""
+msgstr "Elekti B por Ĉiuj Nesolvitaj Blankspacaj Konfliktoj"
 
 #: mergeresultwindow.cpp:156
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
-msgstr ""
+msgstr "Elekti C por Ĉiuj Nesolvitaj Blankspacaj Konfliktoj"
 
 #: mergeresultwindow.cpp:265
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
+"Nombro de ceteraj nesolvitaj konfliktoj: %1 (el kiuj %2 estas blankspaco)"
 
 #: mergeresultwindow.cpp:327
 #, kde-format
@@ -1973,28 +2028,30 @@ msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
 msgstr ""
+"La eligo estas modifita.\n"
+"Se vi daŭrigas, viaj ŝanĝoj estos perditaj."
 
 #: mergeresultwindow.cpp:769 pdiff.cpp:730
 #, kde-format
 msgid "All input files are binary equal."
-msgstr ""
+msgstr "Ĉiuj enigdosieroj estas binaraj egalaj."
 
 #: mergeresultwindow.cpp:771
 #, kde-format
 msgid "All input files contain the same text."
-msgstr ""
+msgstr "Ĉiuj enigdosieroj enhavas la saman tekston."
 
 #: mergeresultwindow.cpp:775 mergeresultwindow.cpp:779
 #: mergeresultwindow.cpp:783 pdiff.cpp:736 pdiff.cpp:740 pdiff.cpp:744
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
-msgstr ""
+msgstr "Dosieroj %1 kaj %2 estas binaraj egalaj.\n"
 
 #: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
 #: mergeresultwindow.cpp:785
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
-msgstr ""
+msgstr "Dosieroj %1 kaj %2 havas egalan tekston.\n"
 
 #: mergeresultwindow.cpp:791
 #, kde-format
@@ -2004,43 +2061,44 @@ msgid ""
 "Number of unsolved conflicts: %3\n"
 "%4"
 msgstr ""
+"Suma nombro da konfliktoj: %1\n"
+"ombro da aŭtomate solvaj konfliktoj: %2\n"
+"ombro da nesolvitaj konfliktoj: %3\n"
+"%4"
 
 #: mergeresultwindow.cpp:797
 #, kde-format
 msgid "Conflicts"
-msgstr ""
+msgstr "Konfliktoj"
 
 #: mergeresultwindow.cpp:1522
 #, kde-format
 msgid "<No src line>"
-msgstr ""
+msgstr "<Neniu src linio>"
 
 #: mergeresultwindow.cpp:1530
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
-msgstr ""
+msgstr "<Kunfandi Konflikton (nur Blankspaco)>"
 
 #: mergeresultwindow.cpp:1532 mergeresultwindow.cpp:2403
 #, kde-format
 msgid "<Merge Conflict>"
-msgstr ""
+msgstr "<Kunfandi Konflikton>"
 
 #: mergeresultwindow.cpp:2623
-#, fuzzy, kde-format
-#| msgid ""
-#| "Not all conflicts are solved yet.\n"
-#| "File not saved.\n"
+#, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
-"Not all conflicts are solved yet.\n"
-"Dosiero ne konservita.\n"
+"Ankoraŭ ne ĉiuj konfliktoj estas solvitaj.\n"
+"Dosiero ne konservita."
 
 #: mergeresultwindow.cpp:2625 mergeresultwindow.cpp:2634
 #, kde-format
 msgid "Conflicts Left"
-msgstr ""
+msgstr "Konfliktoj Maldekstre"
 
 #: mergeresultwindow.cpp:2632
 #, kde-format
@@ -2049,6 +2107,9 @@ msgid ""
 "manually.\n"
 "File not saved."
 msgstr ""
+"Estas linio-fina stilkonflikto. Bonvolu elekti la stilon de linio-fino "
+"permane.\n"
+"Dosiero ne konservita."
 
 #: mergeresultwindow.cpp:2646
 #, kde-format
@@ -2057,33 +2118,34 @@ msgid ""
 "\n"
 "Creating backup failed. File not saved."
 msgstr ""
+"\n"
+"\n"
+"Kreado de sekurkopio malsukcesis. Dosiero ne konservita."
 
 #: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2688
 #, kde-format
 msgid "File Save Error"
-msgstr ""
+msgstr "Dosiera Konservi Eraro"
 
 #: mergeresultwindow.cpp:2688
 #, kde-format
 msgid "Error while writing."
-msgstr ""
+msgstr "Eraro dum skribado."
 
 #: mergeresultwindow.cpp:2771
-#, fuzzy, kde-format
-#| msgid "Output"
+#, kde-format
 msgid "Output:"
-msgstr "Eligo"
+msgstr "Eligo:"
 
 #: mergeresultwindow.cpp:2784 mergeresultwindow.cpp:2974
 #, kde-format
 msgid "[Modified]"
-msgstr ""
+msgstr "[Modifita]"
 
 #: mergeresultwindow.cpp:2791
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgid "Encoding for saving:"
-msgstr "Kodigo:"
+msgstr "Kodigado por konservado:"
 
 #: mergeresultwindow.cpp:2891
 #, kde-format
@@ -2093,43 +2155,42 @@ msgstr "Konflikto"
 #: mergeresultwindow.cpp:2923
 #, kde-format
 msgid "Codec from A: %1"
-msgstr ""
+msgstr "Kodeko de A: %1"
 
 #: mergeresultwindow.cpp:2925
 #, kde-format
 msgid "Codec from B: %1"
-msgstr ""
+msgstr "Kodeko el B: %1"
 
 #: mergeresultwindow.cpp:2927
 #, kde-format
 msgid "Codec from C: %1"
-msgstr ""
+msgstr "Kodeko el C: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
 #: opendialog.ui:24 progressdialog.ui:17
 #, kde-format
 msgid "Dialog"
-msgstr ""
+msgstr "Dialogo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: opendialog.ui:47
-#, fuzzy, kde-format
-#| msgid "B"
+#, kde-format
 msgid "B:"
-msgstr "B"
+msgstr "B:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: opendialog.ui:54
 #, kde-format
 msgid "A (Base):"
-msgstr ""
+msgstr "A (Bazo):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: opendialog.ui:61
 #, kde-format
 msgid "Output (Optional):"
-msgstr ""
+msgstr "Eligo (Laŭvola):"
 
 #. i18n: ectx: property (text), widget (QPushButton, fileSelectC)
 #. i18n: ectx: property (text), widget (QPushButton, fileSelectB)
@@ -2144,29 +2205,28 @@ msgstr "Dosiero..."
 #: opendialog.ui:107
 #, kde-format
 msgid "Swap/Copy Names..."
-msgstr ""
+msgstr "Interŝanĝi/Kopii Nomojn..."
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: opendialog.ui:129
 #, kde-format
 msgid "C (Optional):"
-msgstr ""
+msgstr "C (laŭvola):"
 
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectB)
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectC)
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectA)
 #. i18n: ectx: property (text), widget (QPushButton, selectOutputFolder)
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgid "Folder..."
-msgstr "Dosiero"
+msgstr "Dosierujo..."
 
 #: optiondialog.cpp:106 optiondialog.cpp:118
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "neniu"
 
 #: optiondialog.cpp:108 optiondialog.cpp:120
 #, kde-format
@@ -2176,6 +2236,9 @@ msgid ""
 "\n"
 "Example:"
 msgstr ""
+"Tiparo: %1, %2, %3\n"
+"\n"
+"Ekzemplo:"
 
 #: optiondialog.cpp:389
 #, kde-format
@@ -2190,7 +2253,7 @@ msgstr "Latin1"
 #: optiondialog.cpp:409
 #, kde-format
 msgid "Change this if non-ASCII characters are not displayed correctly."
-msgstr ""
+msgstr "Ŝanĝu ĉi tion se ne-ASCII-signoj ne estas montritaj ĝuste."
 
 #: optiondialog.cpp:498
 #, kde-format
@@ -2205,21 +2268,20 @@ msgstr "Tiparo"
 #: optiondialog.cpp:539
 #, kde-format
 msgid "Editor & Diff Output Font"
-msgstr ""
+msgstr "Redaktilo & Diff-Eliga Tiparo"
 
 #: optiondialog.cpp:557
 #, kde-format
 msgid "Application font"
-msgstr ""
+msgstr "Aplika tiparo"
 
 #: optiondialog.cpp:562
 #, kde-format
 msgid "File view font"
-msgstr ""
+msgstr "Dosiera vido tiparo"
 
 #: optiondialog.cpp:581
-#, fuzzy, kde-format
-#| msgid "Color"
+#, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Koloro"
@@ -2227,12 +2289,12 @@ msgstr "Koloro"
 #: optiondialog.cpp:582
 #, kde-format
 msgid "Colors Settings"
-msgstr ""
+msgstr "Koloroj Agordoj"
 
 #: optiondialog.cpp:607
 #, kde-format
 msgid "Editor and Diff Views:"
-msgstr ""
+msgstr "Redaktilo kaj Diferencaj Vidoj:"
 
 #: optiondialog.cpp:615
 #, kde-format
@@ -2247,52 +2309,52 @@ msgstr "Fona koloro:"
 #: optiondialog.cpp:633
 #, kde-format
 msgid "Diff background color:"
-msgstr ""
+msgstr "Malsama fonkoloro:"
 
 #: optiondialog.cpp:642
 #, kde-format
 msgid "Color A:"
-msgstr ""
+msgstr "Koloro A:"
 
 #: optiondialog.cpp:651
 #, kde-format
 msgid "Color B:"
-msgstr ""
+msgstr "Koloro B:"
 
 #: optiondialog.cpp:660
 #, kde-format
 msgid "Color C:"
-msgstr ""
+msgstr "Koloro C:"
 
 #: optiondialog.cpp:668
 #, kde-format
 msgid "Conflict color:"
-msgstr ""
+msgstr "Konflikta koloro:"
 
 #: optiondialog.cpp:677
 #, kde-format
 msgid "Current range background color:"
-msgstr ""
+msgstr "Nuna gamo de fonkoloro:"
 
 #: optiondialog.cpp:686
 #, kde-format
 msgid "Current range diff background color:"
-msgstr ""
+msgstr "Fonkoloro de aktuala diferenco:"
 
 #: optiondialog.cpp:694
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
-msgstr ""
+msgstr "Koloro por mane vicigitaj diferencoj:"
 
 #: optiondialog.cpp:701
 #, kde-format
 msgid "Folder Comparison View:"
-msgstr ""
+msgstr "Dosierujo Kompara Vido:"
 
 #: optiondialog.cpp:707
 #, kde-format
 msgid "Newest file color:"
-msgstr ""
+msgstr "Plej nova dosierkoloro:"
 
 #: optiondialog.cpp:712
 #, kde-format
@@ -2300,21 +2362,23 @@ msgid ""
 "Changing this color will only be effective when starting the next folder "
 "comparison."
 msgstr ""
+"Ŝanĝi ĉi tiun koloron estos efika nur kiam oni komencos la sekvan dosierujan "
+"komparon."
 
 #: optiondialog.cpp:717
 #, kde-format
 msgid "Oldest file color:"
-msgstr ""
+msgstr "Plej malnova dosierkoloro:"
 
 #: optiondialog.cpp:726
 #, kde-format
 msgid "Middle age file color:"
-msgstr ""
+msgstr "Mezaĝa dosierkoloro:"
 
 #: optiondialog.cpp:735
 #, kde-format
 msgid "Color for missing files:"
-msgstr ""
+msgstr "Koloro por mankantaj dosieroj:"
 
 #: optiondialog.cpp:749
 #, kde-format
@@ -2324,12 +2388,12 @@ msgstr "Redaktilo"
 #: optiondialog.cpp:750
 #, kde-format
 msgid "Editor Behavior"
-msgstr ""
+msgstr "Redaktila Konduto"
 
 #: optiondialog.cpp:772
 #, kde-format
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "Tab enmetas spacojn"
 
 #: optiondialog.cpp:776
 #, kde-format
@@ -2337,26 +2401,28 @@ msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
 "Off: A tab character will be inserted."
 msgstr ""
+"Enŝaltita: Premante tabuladon generas la taŭgan nombron da spacoj.\n"
+"Malŝaltita: Tabula signo estos enmetita."
 
 #: optiondialog.cpp:781
 #, kde-format
 msgid "Tab size:"
-msgstr ""
+msgstr "Grandeco de langeto:"
 
 #: optiondialog.cpp:788
 #, kde-format
 msgid "Auto indentation"
-msgstr ""
+msgstr "Aŭtomata indentaĵo"
 
 #: optiondialog.cpp:792
 #, kde-format
 msgid "On: The indentation of the previous line is used for a new line.\n"
-msgstr ""
+msgstr "On: La indentaĵo de la antaŭa linio estas uzata por nova linio.\n"
 
 #: optiondialog.cpp:795
 #, kde-format
 msgid "Auto copy selection"
-msgstr ""
+msgstr "Elekto de aŭtomata kopio"
 
 #: optiondialog.cpp:799
 #, kde-format
@@ -2364,26 +2430,26 @@ msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitly copy e.g. via Ctrl-C."
 msgstr ""
+"On: Ĉiu elekto estas tuj skribita en la tondujo.\n"
+"Malŝaltita: Vi devas eksplicite kopii ekz. per Ctrl-C."
 
 #: optiondialog.cpp:809
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
 #: optiondialog.cpp:810
-#, fuzzy, kde-format
-#| msgid "&Window"
+#, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
-msgstr "Fe&nestro"
+msgstr "Dos/Vindozo"
 
 #: optiondialog.cpp:811
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
-msgstr ""
+msgstr "Aŭtodetekti"
 
 #: optiondialog.cpp:814
 #, kde-format
@@ -2391,21 +2457,23 @@ msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
 msgstr ""
+"Agordas la liniofinojn por kiam redaktita dosiero estas konservita.\n"
+"DOS/Vindozo: CR+LF; UNIKSO: LF; kun CR=0D, LF=0A"
 
 #: optiondialog.cpp:824
 #, kde-format
 msgid "Diff"
-msgstr ""
+msgstr "Diferenco"
 
 #: optiondialog.cpp:825
 #, kde-format
 msgid "Diff Settings"
-msgstr ""
+msgstr "Diferaj Agordoj"
 
 #: optiondialog.cpp:848
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
-msgstr ""
+msgstr "Ignori nombrojn (trakti kiel blankan spacon)"
 
 #: optiondialog.cpp:852
 #, kde-format
@@ -2414,41 +2482,44 @@ msgid ""
 "white space.)\n"
 "Might help to compare files with numeric data."
 msgstr ""
+"Ignori nombro-signojn dum linio-kongrua fazo. (Simile al Ignori blankan "
+"spacon.)\n"
+"Povas helpi kompari dosierojn kun nombraj datumoj."
 
 #: optiondialog.cpp:856
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
-msgstr ""
+msgstr "Ignori C/C++ komentojn (trakti kiel blankan spacon)"
 
 #: optiondialog.cpp:859
 #, kde-format
 msgid "Treat C/C++ comments like white space."
-msgstr ""
+msgstr "Trakti C/C++ komentojn kiel blankan spacon."
 
 #: optiondialog.cpp:862
 #, kde-format
 msgid "Ignore case (treat as white space)"
-msgstr ""
+msgstr "Ignori minusklecon (trakti kiel blankan spacon)"
 
 #: optiondialog.cpp:866
 #, kde-format
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
-msgstr ""
+msgstr "Trakti majusklajn diferencojn kiel blankspacŝanĝojn. ('a'<=>'A')"
 
 #: optiondialog.cpp:869
 #, kde-format
 msgid "Preprocessor command:"
-msgstr ""
+msgstr "Antaŭprocesora komando:"
 
 #: optiondialog.cpp:874
 #, kde-format
 msgid "User defined pre-processing. (See the docs for details.)"
-msgstr ""
+msgstr "Uzantodifinita antaŭ-prilaborado. (Vidu la dokumentojn por detaloj.)"
 
 #: optiondialog.cpp:877
 #, kde-format
 msgid "Line-matching preprocessor command:"
-msgstr ""
+msgstr "Linia kongrua antaŭprocesora komando:"
 
 #: optiondialog.cpp:882
 #, kde-format
@@ -2456,11 +2527,13 @@ msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
 msgstr ""
+"Ĉi tiu antaŭprocesoro estas uzata nur dum linio-kongruo.\n"
+"(Vidu la dokumentojn por detaloj.)"
 
 #: optiondialog.cpp:885
 #, kde-format
 msgid "Try hard (slower)"
-msgstr ""
+msgstr "Peni forte (pli malrapide)"
 
 #: optiondialog.cpp:889
 #, kde-format
@@ -2468,11 +2541,13 @@ msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
 msgstr ""
+"Ebligas la opcion --minimal por la ekstera diferenco.\n"
+"La analizo de grandaj dosieroj estos multe pli malrapida."
 
 #: optiondialog.cpp:893
 #, kde-format
 msgid "Align B and C for 3 input files"
-msgstr ""
+msgstr "Vicigi B kaj C por 3 enigdosieroj"
 
 #: optiondialog.cpp:897
 #, kde-format
@@ -2481,10 +2556,12 @@ msgid ""
 "Not recommended for merging because merge might get more complicated.\n"
 "(Default is off.)"
 msgstr ""
+"Provi vicigi B kaj C dum komparado aŭ kunfandado de tri enigdosieroj.\n"
+"Ne rekomendita por kunfandi ĉar kunfandi eble pli komplikas.\n"
+"(Defaŭlte estas malŝaltita.)"
 
 #: optiondialog.cpp:908
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Mergi"
@@ -2492,12 +2569,12 @@ msgstr "Mergi"
 #: optiondialog.cpp:909
 #, kde-format
 msgid "Merge Settings"
-msgstr ""
+msgstr "Kunfandi Agordojn"
 
 #: optiondialog.cpp:932
 #, kde-format
 msgid "Auto advance delay (ms):"
-msgstr ""
+msgstr "Aŭtomata antaŭprokrasto (ms):"
 
 #: optiondialog.cpp:938
 #, kde-format
@@ -2505,26 +2582,28 @@ msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
 msgstr ""
+"Kiam en Aŭtomata Antaŭenigo la rezulto de la nuna elekto estas montrata \n"
+"por la specifita tempo, antaŭ ol salti al la sekva konflikto. Gamo: 0-2000 ms"
 
 #: optiondialog.cpp:942
 #, kde-format
 msgid "Show info dialogs"
-msgstr ""
+msgstr "Montri info dialogojn"
 
 #: optiondialog.cpp:945
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
-msgstr ""
+msgstr "Montri dialogon kun informoj pri la nombro da konfliktoj."
 
 #: optiondialog.cpp:948
 #, kde-format
 msgid "White space 2-file merge default:"
-msgstr ""
+msgstr "Blanka spaco 2-dosiera kunfandado defaŭlte:"
 
 #: optiondialog.cpp:953 optiondialog.cpp:966
 #, kde-format
 msgid "Manual Choice"
-msgstr ""
+msgstr "Mana Elekto"
 
 #: optiondialog.cpp:957 optiondialog.cpp:971
 #, kde-format
@@ -2532,26 +2611,28 @@ msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
 "only changes."
 msgstr ""
+"Permesi al la kunfanda algoritmo aŭtomate elekti enigaĵon por blankspacaj "
+"ŝanĝoj."
 
 #: optiondialog.cpp:961
 #, kde-format
 msgid "White space 3-file merge default:"
-msgstr ""
+msgstr "Blanka spaco 3-dosiera kunfandado defaŭlte:"
 
 #: optiondialog.cpp:975
 #, kde-format
 msgid "Automatic Merge Regular Expression"
-msgstr ""
+msgstr "Aŭtomata Kunfandi Regula Esprimo"
 
 #: optiondialog.cpp:983 smalldialogs.cpp:373
 #, kde-format
 msgid "Auto merge regular expression:"
-msgstr ""
+msgstr "Aŭtomate kunfandi regula esprimo:"
 
 #: optiondialog.cpp:991
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
-msgstr ""
+msgstr "Ruli regul-espriman aŭtomatan kunfandadon ĉe kunfanda komenco"
 
 #: optiondialog.cpp:994
 #, kde-format
@@ -2559,66 +2640,69 @@ msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
+"Ruli la kunfandiĝon por aŭtomat-kunfandaj regulaj esprimoj\n"
+"tuj kiam kunfandiĝo komenciĝas.\n"
 
 #: optiondialog.cpp:999
 #, kde-format
 msgid "Version Control History Merging"
-msgstr ""
+msgstr "Versia Kontrolo Historio Kunfandado"
 
 #: optiondialog.cpp:1007 smalldialogs.cpp:400
 #, kde-format
 msgid "History start regular expression:"
-msgstr ""
+msgstr "Historio komencas regulan esprimon:"
 
 #: optiondialog.cpp:1015 smalldialogs.cpp:428
 #, kde-format
 msgid "History entry start regular expression:"
-msgstr ""
+msgstr "Historia eniro komenci regula esprimo:"
 
 #: optiondialog.cpp:1031
 #, kde-format
 msgid "History merge sorting"
-msgstr ""
+msgstr "Historia kunfanda ordigo"
 
 #: optiondialog.cpp:1034
 #, kde-format
 msgid "Sort version control history by a key."
-msgstr ""
+msgstr "Ordigi la historion de kontrolo de versioj per klavo."
 
 #: optiondialog.cpp:1044
 #, kde-format
 msgid "History entry start sort key order:"
-msgstr ""
+msgstr "Historia eniro komenca ordo de klavoj:"
 
 #: optiondialog.cpp:1054
 #, kde-format
 msgid "Merge version control history on merge start"
-msgstr ""
+msgstr "Kunfandi versio-kontrolhistorion ĉe kunfanda komenco"
 
 #: optiondialog.cpp:1057
 #, kde-format
 msgid "Run version control history automerge on merge start."
-msgstr ""
+msgstr "Ruli versio-kontrolhistorian aŭtomatan kunfandon je kunfandostarto."
 
 #: optiondialog.cpp:1061
 #, kde-format
 msgid "Max number of history entries:"
-msgstr ""
+msgstr "Maksimuma nombro da historiaj enskriboj:"
 
 #: optiondialog.cpp:1065
 #, kde-format
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
+"Detranĉi post specifita nombro. Uzi -1 por senfina nombro da enskriboj."
 
 #: optiondialog.cpp:1069
 #, kde-format
 msgid "Test your regular expressions"
-msgstr ""
+msgstr "Testu viajn regulajn esprimojn"
 
 #: optiondialog.cpp:1074
 #, kde-format
 msgid "Irrelevant merge command:"
-msgstr ""
+msgstr "Sensignifa kunfanda komando:"
 
 #: optiondialog.cpp:1079
 #, kde-format
@@ -2627,11 +2711,14 @@ msgid ""
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
+"Se specifite ĉi tiu skripto ruliĝas post aŭtomata kunigo\n"
+"kiam neniuj aliaj koncernaj ŝanĝoj estis detektitaj.\n"
+"Vokita kun la parametroj: dosiernomo1 dosiernomo2 dosiernomo3"
 
 #: optiondialog.cpp:1084
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
-msgstr ""
+msgstr "Aŭtomata konservado kaj ĉesigo dum kunfando sen konfliktoj"
 
 #: optiondialog.cpp:1088
 #, kde-format
@@ -2641,21 +2728,25 @@ msgid ""
 "quit.\n"
 "(Similar to command line option \"--auto\".)"
 msgstr ""
+"Se KDiff3 estis komencita por dosierkunfandiĝo de la komandlinio kaj ĉiuj\n"
+"konfliktoj estas solveblaj sen uzantinterago, tiam aŭtomate konservu kaj "
+"foriru.\n"
+"(Simile al komandlinia opcio \"--auto\".)"
 
 #: optiondialog.cpp:1120
 #, kde-format
 msgid "Recursive folders"
-msgstr ""
+msgstr "Rekursivaj dosierujoj"
 
 #: optiondialog.cpp:1123
 #, kde-format
 msgid "Whether to analyze subfolders or not."
-msgstr ""
+msgstr "Ĉu analizi subdosierujojn aŭ ne."
 
 #: optiondialog.cpp:1125
 #, kde-format
 msgid "File pattern(s):"
-msgstr ""
+msgstr "Dosierŝablono(j):"
 
 #: optiondialog.cpp:1131
 #, kde-format
@@ -2664,11 +2755,14 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
+"Ŝablono(j) de analizotaj dosieroj. \n"
+"Voltkartoj: '*' kaj '?'\n"
+"Pluraj Ŝablonoj povas esti specifitaj uzante la apartigilon: ';'"
 
 #: optiondialog.cpp:1136
 #, kde-format
 msgid "File-anti-pattern(s):"
-msgstr ""
+msgstr "Dosiero-kontraŭ-ŝablono(j):"
 
 #: optiondialog.cpp:1142
 #, kde-format
@@ -2677,11 +2771,14 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
+"Ŝablono(j) de dosieroj por esti ekskludita de analizo. \n"
+"Voltkartoj: '*' kaj '?'\n"
+"Pluraj Ŝablonoj povas esti specifitaj uzante la apartigilon: ';'"
 
 #: optiondialog.cpp:1147
 #, kde-format
 msgid "Folder-anti-pattern(s):"
-msgstr ""
+msgstr "Dosierujo-kontraŭ-ŝablono(j):"
 
 #: optiondialog.cpp:1153
 #, kde-format
@@ -2690,11 +2787,14 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
+"Ŝablono(j) de dosierujoj esti ekskludita de analizo. \n"
+"Voltkartoj: '*' kaj '?'\n"
+"Pluraj Ŝablonoj povas esti specifitaj uzante la apartigilon: ';'"
 
 #: optiondialog.cpp:1158
 #, kde-format
 msgid "Use Ignore File"
-msgstr ""
+msgstr "Uzi Ignor-Dosieron"
 
 #: optiondialog.cpp:1162
 #, kde-format
@@ -2703,21 +2803,23 @@ msgid ""
 "control.\n"
 "Via local ignore files this can be folder-specific."
 msgstr ""
+"Etendas la kontraŭŝablon al ĉio, kio estus ignorita per fontkontrolo.\n"
+"Per lokaj ignordosieroj tio povas esti dosierujo-specifa."
 
 #: optiondialog.cpp:1166
 #, kde-format
 msgid "Find hidden files and folders"
-msgstr ""
+msgstr "Trovi kaŝitajn dosierojn kaj dosierujojn"
 
 #: optiondialog.cpp:1169
 #, kde-format
 msgid "Finds hidden files and folders."
-msgstr ""
+msgstr "Trovas kaŝitajn dosierojn kaj dosierujojn."
 
 #: optiondialog.cpp:1172
 #, kde-format
 msgid "Follow file links"
-msgstr ""
+msgstr "Sekvi dosierligojn"
 
 #: optiondialog.cpp:1176
 #, kde-format
@@ -2725,11 +2827,13 @@ msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
 msgstr ""
+"Ŝaltita: Kompari la dosieron al kiu montras la ligilo.\n"
+"Malŝaltita: Kompari la ligilojn."
 
 #: optiondialog.cpp:1180
 #, kde-format
 msgid "Follow folder links"
-msgstr ""
+msgstr "Sekvi dosierujajn ligilojn"
 
 #: optiondialog.cpp:1184
 #, kde-format
@@ -2737,11 +2841,13 @@ msgid ""
 "On: Compare the folder the link points to.\n"
 "Off: Compare the links."
 msgstr ""
+"On: Kompari la dosierujon al kiu indikas la ligo.\n"
+"Malŝaltita: Kompari la ligilojn."
 
 #: optiondialog.cpp:1193
 #, kde-format
 msgid "Case sensitive filename comparison"
-msgstr ""
+msgstr "Komparo de dosiernomaj uskuloj"
 
 #: optiondialog.cpp:1197
 #, kde-format
@@ -2750,11 +2856,15 @@ msgid ""
 "Set this option if the case of the names must match. (Default for Windows is "
 "off, otherwise on.)"
 msgstr ""
+"La dosieruja komparo komparos dosierojn aŭ dosierujojn kiam iliaj nomoj "
+"kongruas.\n"
+"Agordu ĉi tiun opcion se la majuskloj de la nomoj devas kongrui. (Defaŭlte "
+"por Vindozo estas malŝaltita, alie ŝaltita.)"
 
 #: optiondialog.cpp:1201
 #, kde-format
 msgid "Unfold all subfolders on load"
-msgstr ""
+msgstr "Malfaldi ĉiujn subdosierujojn sur ŝarĝo"
 
 #: optiondialog.cpp:1205
 #, kde-format
@@ -2762,11 +2872,13 @@ msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
 "Off: Leave subfolders folded."
 msgstr ""
+"Enŝaltita: Malfaldi ĉiujn subdosierujojn kiam oni komencas dosierujon.\n"
+"Malŝaltita: Lasi subdosierujojn falditaj."
 
 #: optiondialog.cpp:1209
 #, kde-format
 msgid "Skip folder status report"
-msgstr ""
+msgstr "Preterpasi dosierujan statoraporton"
 
 #: optiondialog.cpp:1213
 #, kde-format
@@ -2774,26 +2886,28 @@ msgid ""
 "On: Do not show the Folder Comparison Status.\n"
 "Off: Show the status dialog on start."
 msgstr ""
+"On: Ne montri la Dosierujon Komparan Statuson.\n"
+"Malŝaltita: Montri la statusan dialogon ĉe la komenco."
 
 #: optiondialog.cpp:1217
 #, kde-format
 msgid "File Comparison Mode"
-msgstr ""
+msgstr "Dosiera Kompara Reĝimo"
 
 #: optiondialog.cpp:1222
 #, kde-format
 msgid "Binary comparison"
-msgstr ""
+msgstr "Binara komparo"
 
 #: optiondialog.cpp:1224
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
-msgstr ""
+msgstr "Binara komparo de ĉiu dosiero. (Defaŭlte)"
 
 #: optiondialog.cpp:1227
 #, kde-format
 msgid "Full analysis"
-msgstr ""
+msgstr "Plena analizo"
 
 #: optiondialog.cpp:1229
 #, kde-format
@@ -2801,11 +2915,13 @@ msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
+"Fari plenan analizon kaj montri statistikajn informojn en kromaj kolumnoj.\n"
+"(Pli malrapida ol binara komparo, multe pli malrapida por binaraj dosieroj.)"
 
 #: optiondialog.cpp:1233
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
-msgstr ""
+msgstr "Fidi la grandecon kaj modifdaton (nesekura)"
 
 #: optiondialog.cpp:1235
 #, kde-format
@@ -2816,6 +2932,10 @@ msgid ""
 "different.\n"
 "Useful for big folders or slow networks."
 msgstr ""
+"Supozi ke dosieroj estas egalaj se la modifdato kaj dosierlongo estas "
+"egalaj.\n"
+"Dosieroj kun egala enhavo sed malsamaj modifdatoj aperos kiel malsamaj.\n"
+"Utilaj por grandaj dosierujoj aŭ malrapidaj retoj."
 
 #: optiondialog.cpp:1240
 #, kde-format
@@ -2823,6 +2943,8 @@ msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
 "(unsafe)"
 msgstr ""
+"Fidi la grandecon kaj daton, sed uzi binaran komparon se dato ne kongruas "
+"(nesekura)"
 
 #: optiondialog.cpp:1242
 #, kde-format
@@ -2832,11 +2954,15 @@ msgid ""
 "If the dates are not equal but the sizes are, use binary comparison.\n"
 "Useful for big folders or slow networks."
 msgstr ""
+"Supozi ke dosieroj estas egalaj se la modifdato kaj dosierlongo estas "
+"egalaj.\n"
+"Se la datoj ne estas egalaj sed la grandecoj estas, uzi binaran komparon.\n"
+"Utile por grandaj dosierujoj aŭ malrapidaj retoj."
 
 #: optiondialog.cpp:1247
 #, kde-format
 msgid "Trust the size (unsafe)"
-msgstr ""
+msgstr "Fidi la grandecon (nesekura)"
 
 #: optiondialog.cpp:1249
 #, kde-format
@@ -2845,11 +2971,14 @@ msgid ""
 "Useful for big folders or slow networks when the date is modified during "
 "download."
 msgstr ""
+"Supoiu, ke dosieroj estas egalaj se iliaj dosierlongoj estas egalaj.\n"
+"Utile por grandaj dosierujoj aŭ malrapidaj retoj kiam la dato estas modifita "
+"dum elŝuto."
 
 #: optiondialog.cpp:1256
 #, kde-format
 msgid "Synchronize folders"
-msgstr ""
+msgstr "Sinkronigi dosierujojn"
 
 #: optiondialog.cpp:1260
 #, kde-format
@@ -2858,11 +2987,14 @@ msgid ""
 "both folders are the same afterwards.\n"
 "Works only when comparing two folders without specifying a destination."
 msgstr ""
+"Proponas konservi dosierojn en ambaŭ dosierujoj tiel ke\n"
+"ambaŭ dosierujoj estu la samaj poste.\n"
+"Funkcias nur kiam oni komparas du dosierujojn sen specifi celon."
 
 #: optiondialog.cpp:1266
 #, kde-format
 msgid "White space differences considered equal"
-msgstr ""
+msgstr "Blankspacaj diferencoj konsiderataj egalaj"
 
 #: optiondialog.cpp:1270
 #, kde-format
@@ -2870,11 +3002,13 @@ msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
 msgstr ""
+"Se dosieroj malsamas nur per blanka spaco, konsideri ilin egalaj.\n"
+"Ĉi tio estas aktiva nur kiam plena analizo estas elektita."
 
 #: optiondialog.cpp:1276
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
-msgstr ""
+msgstr "Kopii pli novan anstataŭ kunfandi (nesekura)"
 
 #: optiondialog.cpp:1280
 #, kde-format
@@ -2883,11 +3017,14 @@ msgid ""
 "(Use this only if you know what you are doing!)\n"
 "Only effective when comparing two folders."
 msgstr ""
+"Ne rigardi enen, nur preni la pli novan dosieron.\n"
+"kaj (Uzu ĉi tion nur se vi scias, kion vi faras!)\n"
+"Nur efika kiam oni komparas du dosierujojn."
 
 #: optiondialog.cpp:1285
 #, kde-format
 msgid "Backup files (.orig)"
-msgstr ""
+msgstr "Rezervaj dosieroj (.orig)"
 
 #: optiondialog.cpp:1289
 #, kde-format
@@ -2895,16 +3032,18 @@ msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
 msgstr ""
+"Se dosiero estus konservita super malnova dosiero, tiam la malnova dosiero\n"
+"estos renomita per '.orig' etendo anstataŭ esti forigita."
 
 #: optiondialog.cpp:1298 optiondialog.cpp:1299
 #, kde-format
 msgid "Regional Settings"
-msgstr ""
+msgstr "Regionaj Agordoj"
 
 #: optiondialog.cpp:1322
 #, kde-format
 msgid "Use the same encoding for everything:"
-msgstr ""
+msgstr "Uzi la saman kodigon por ĉio:"
 
 #: optiondialog.cpp:1326
 #, kde-format
@@ -2912,16 +3051,18 @@ msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
+"Ebligi ĉi tion ebligas ŝanĝi ĉiujn kodigojn ŝanĝante nur la unuan.\n"
+"Malŝaltu ĉi tion se necesas malsamaj individuaj agordoj."
 
 #: optiondialog.cpp:1330
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
-msgstr ""
+msgstr "Noto: Loka Kodado estas \"%1\""
 
 #: optiondialog.cpp:1334
 #, kde-format
 msgid "File Encoding for A:"
-msgstr ""
+msgstr "Dosiera Kodado por A:"
 
 #: optiondialog.cpp:1341
 #, kde-format
@@ -2931,31 +3072,35 @@ msgid ""
 "fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
+"Se enŝaltite, tiam Unikoda (UTF-16 aŭ UTF-8) kodigo estos detektita.\n"
+"Se la dosiero ne estas Unikodo, tiam la elektita kodado estos uzata kiel "
+"rezerva.\n"
+"(Unikoda detekto dependas de la unuaj bajtoj de dosiero.)"
 
 #: optiondialog.cpp:1344 optiondialog.cpp:1355 optiondialog.cpp:1366
 #, kde-format
 msgid "Auto Detect Unicode"
-msgstr ""
+msgstr "Aŭtomate Detekti Unikodon"
 
 #: optiondialog.cpp:1350
 #, kde-format
 msgid "File Encoding for B:"
-msgstr ""
+msgstr "Dosiera Kodado por B:"
 
 #: optiondialog.cpp:1361
 #, kde-format
 msgid "File Encoding for C:"
-msgstr ""
+msgstr "Dosiera Kodado por C:"
 
 #: optiondialog.cpp:1372
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
-msgstr ""
+msgstr "Dosiera Kodado por Kunfandi Eligo kaj Konservado:"
 
 #: optiondialog.cpp:1377
 #, kde-format
 msgid "Auto Select"
-msgstr ""
+msgstr "Aŭtomata Elekto"
 
 #: optiondialog.cpp:1381
 #, kde-format
@@ -2964,16 +3109,18 @@ msgid ""
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
+"Se ebligita, tiam la kodado de la enigdosieroj estas uzata.\n"
+"En ambiguaj kazoj dialogo petos la uzanton elekti la kodigon por konservi."
 
 #: optiondialog.cpp:1384
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
-msgstr ""
+msgstr "Dosiera Kodado por Antaŭprocesoraj Dosieroj:"
 
 #: optiondialog.cpp:1396
 #, kde-format
 msgid "Right To Left Language"
-msgstr ""
+msgstr "Dekstre Al Maldekstre Lingvo"
 
 #: optiondialog.cpp:1400
 #, kde-format
@@ -2981,21 +3128,23 @@ msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
+"Kelkaj lingvoj estas legitaj de dekstre al maldekstre.\n"
+"Ĉi tiu agordo ŝanĝos la spektilon kaj redaktilon laŭe."
 
 #: optiondialog.cpp:1410
 #, kde-format
 msgid "Integration"
-msgstr ""
+msgstr "Integriĝo"
 
 #: optiondialog.cpp:1411
 #, kde-format
 msgid "Integration Settings"
-msgstr ""
+msgstr "Integrigaj Agordoj"
 
 #: optiondialog.cpp:1432
 #, kde-format
 msgid "Command line options to ignore:"
-msgstr ""
+msgstr "Ebloj de komandlinio por ignori:"
 
 #: optiondialog.cpp:1438
 #, kde-format
@@ -3005,11 +3154,15 @@ msgid ""
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\" error."
 msgstr ""
+"Listo de komandliniaj opcioj kiuj devus esti ignoritaj kiam KDiff3 estas "
+"uzata de aliaj iloj.\n"
+"Pluraj valoroj povas esti specifitaj se apartigitaj per ';'\n"
+"Tio subpremos la eraron \"Nekonata opcio\"."
 
 #: optiondialog.cpp:1443
 #, kde-format
 msgid "Quit also via Escape key"
-msgstr ""
+msgstr "Forlasi ankaŭ per Eskapklavo"
 
 #: optiondialog.cpp:1447
 #, kde-format
@@ -3017,21 +3170,23 @@ msgid ""
 "Fast method to exit.\n"
 "For those who are used to using the Escape key."
 msgstr ""
+"Rapida metodo por eliri.\n"
+"Por tiuj, kiuj kutimas uzi la Eskapon."
 
 #: optiondialog.cpp:1505
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
-msgstr ""
+msgstr "Ĉi tio restarigas ĉiujn opciojn. Ne nur tiuj de la aktuala temo."
 
 #: pdiff.cpp:96
 #, kde-format
 msgid "PreprocessorCmd: "
-msgstr ""
+msgstr "PreprocesorCmd:"
 
 #: pdiff.cpp:98
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
-msgstr ""
+msgstr "La sekva(j) opcio(j) kiun vi elektis povus ŝanĝi datumojn:\n"
 
 #: pdiff.cpp:99
 #, kde-format
@@ -3040,94 +3195,96 @@ msgid ""
 "Most likely this is not wanted during a merge.\n"
 "Do you want to disable these settings or continue with these settings active?"
 msgstr ""
+"\n"
+"Plej verŝajne ĉi tio ne estas dezirata dum kunfando.\n"
+"Ĉu vi volas malŝalti ĉi tiujn agordojn aŭ daŭrigi kun ĉi agordoj aktivaj?"
 
 #: pdiff.cpp:101
 #, kde-format
 msgid "Option Unsafe for Merging"
-msgstr ""
+msgstr "Opcio Nesekura por Kunfandado"
 
 #: pdiff.cpp:102
 #, kde-format
 msgid "Use These Options During Merge"
-msgstr ""
+msgstr "Uzi Ĉi tiujn Opciojn Dum Kunfandado"
 
 #: pdiff.cpp:103
 #, kde-format
 msgid "Disable Unsafe Options"
-msgstr ""
+msgstr "Malebligi Nesekurajn Opciojn"
 
 #: pdiff.cpp:135
 #, kde-format
 msgid "Loading A"
-msgstr ""
+msgstr "Ŝargante A"
 
 #: pdiff.cpp:136
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgid "Loading A: %1"
-msgstr "Kodigo:"
+msgstr "Ŝargante A: %1"
 
 #: pdiff.cpp:145
 #, kde-format
 msgid "Loading B"
-msgstr ""
+msgstr "Ŝargante B"
 
 #: pdiff.cpp:146
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgid "Loading B: %1"
-msgstr "Kodigo:"
+msgstr "Ŝargante B: %1"
 
 #: pdiff.cpp:176 pdiff.cpp:177 pdiff.cpp:217 pdiff.cpp:218
 #, kde-format
 msgid "Diff: A <-> B"
-msgstr ""
+msgstr "Diferenco: A <-> B"
 
 #: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:263 pdiff.cpp:264 pdiff.cpp:282
 #, kde-format
 msgid "Linediff: A <-> B"
-msgstr ""
+msgstr "Linediff: A <-> B"
 
 #: pdiff.cpp:202
 #, kde-format
 msgid "Loading C"
-msgstr ""
+msgstr "Ŝargante C"
 
 #: pdiff.cpp:203
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgid "Loading C: %1"
-msgstr "Kodigo:"
+msgstr "Ŝargante C: %1"
 
 #: pdiff.cpp:229 pdiff.cpp:230
 #, kde-format
 msgid "Diff: A <-> C"
-msgstr ""
+msgstr "Diferenco: A <-> C"
 
 #: pdiff.cpp:243 pdiff.cpp:244
 #, kde-format
 msgid "Diff: B <-> C"
-msgstr ""
+msgstr "Diferenco: B <-> C"
 
 #: pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:287
 #, kde-format
 msgid "Linediff: B <-> C"
-msgstr ""
+msgstr "Liniodifo: B <-> C"
 
 #: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:292
 #, kde-format
 msgid "Linediff: A <-> C"
-msgstr ""
+msgstr "Liniodifo: A <-> C"
 
 #: pdiff.cpp:732
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
+"Ĉiuj enigdosieroj enhavas la saman tekston, sed ne estas binaraj egalaj."
 
 #: pdiff.cpp:738 pdiff.cpp:742 pdiff.cpp:746
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
+"Dosieroj %1 kaj %2 havas egalan tekston, sed ne estas binaraj egalaj. \n"
 
 #: pdiff.cpp:756
 #, kde-format
@@ -3136,16 +3293,19 @@ msgid ""
 "Note that the KDiff3 merge was not meant for binary data.\n"
 "Continue at your own risk."
 msgstr ""
+"Iuj enigdosieroj ŝajnas ne esti puraj tekstaj dosieroj.\n"
+"Rimarku, ke la kunfandiĝo de KDiff3 ne estis destinita por binaraj datumoj.\n"
+"Daŭrigu je via propra risko."
 
 #: pdiff.cpp:766
 #, kde-format
 msgid ", B"
-msgstr ""
+msgstr ", B"
 
 #: pdiff.cpp:768
 #, kde-format
 msgid ", C"
-msgstr ""
+msgstr ", C"
 
 #: pdiff.cpp:770
 #, kde-format
@@ -3155,6 +3315,10 @@ msgid ""
 "Do not save the result if unsure. Continue at your own risk.\n"
 "Affected input files are in %1."
 msgstr ""
+"Kelkaj enigasignoj ne povus esti konvertitaj al valida unikodo.\n"
+"Vi eble uzas malĝustan kodekon. (ekz. UTF-8 por ne UTF-8 dosieroj).\n"
+"Ne konservu la rezulton se ne certas. Daŭrigu je via propra risko.\n"
+"Trafitaj enigdosieroj estas en %1."
 
 #: pdiff.cpp:862
 #, kde-format
@@ -3164,12 +3328,12 @@ msgstr "Ĉesigi"
 #: pdiff.cpp:863
 #, kde-format
 msgid "Continue Merging"
-msgstr ""
+msgstr "Daŭre Kunfandi"
 
 #: pdiff.cpp:868 pdiff.cpp:960
 #, kde-format
 msgid "Opening files..."
-msgstr ""
+msgstr "Malfermante dosierojn..."
 
 #: pdiff.cpp:1047
 #, kde-format
@@ -3194,47 +3358,47 @@ msgstr "Bone"
 #: pdiff.cpp:1191
 #, kde-format
 msgid "Go to Line"
-msgstr ""
+msgstr "Iri al Linio"
 
 #: pdiff.cpp:1505
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
-msgstr ""
+msgstr "Vortŝanĝo (Nuligi malŝaltas vortŝanĝon)"
 
 #: pdiff.cpp:1506
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
-msgstr ""
+msgstr "Kalkulado de maksimuma larĝo por horizontala rulumbreto"
 
 #: pdiff.cpp:1727
 #, kde-format
 msgid "Save && Continue"
-msgstr ""
+msgstr "Konservi && Daŭriiu"
 
 #: pdiff.cpp:1728
 #, kde-format
 msgid "Continue Without Saving"
-msgstr ""
+msgstr "Daŭrigi Sen Konservado"
 
 #: pdiff.cpp:1926
 #, kde-format
 msgid "Search complete."
-msgstr ""
+msgstr "Serĉo kompleta."
 
 #: pdiff.cpp:1926
 #, kde-format
 msgid "Search Complete"
-msgstr ""
+msgstr "Serĉo Kompleta"
 
 #: pdiff.cpp:2107
 #, kde-format
 msgid "Nothing is selected in either diff input window."
-msgstr ""
+msgstr "Nenio estas elektita en ambaŭ malsamaj enigofenestroj."
 
 #: pdiff.cpp:2107
 #, kde-format
 msgid "Error while adding manual diff range"
-msgstr ""
+msgstr "Eraro dum aldono de manlibro de diferenco"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
 #: progress.cpp:54 progressdialog.ui:94
@@ -3245,38 +3409,37 @@ msgstr "&Rezigni"
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:84
 #, kde-format
 msgid "Swap %1<->%2"
-msgstr ""
+msgstr "Interŝanĝi %1<->%2"
 
 #: smalldialogs.cpp:85 smalldialogs.cpp:86 smalldialogs.cpp:87
 #, kde-format
 msgid "Copy %1->Output"
-msgstr ""
+msgstr "Kopii %1->Eligo"
 
 #: smalldialogs.cpp:88 smalldialogs.cpp:89 smalldialogs.cpp:90
 #, kde-format
 msgid "Swap %1<->Output"
-msgstr ""
+msgstr "Interŝanĝi %1<->Eligo"
 
 #: smalldialogs.cpp:109
 #, kde-format
 msgid "Configure..."
-msgstr "Agordu..."
+msgstr "Agordi..."
 
 #: smalldialogs.cpp:162
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgid "Open Folder"
-msgstr "Dosiero"
+msgstr "Malfermi Dosierujon"
 
 #: smalldialogs.cpp:163
 #, kde-format
 msgid "Select Output File"
-msgstr ""
+msgstr "Elekti Eligo-Dosiero"
 
 #: smalldialogs.cpp:310
 #, kde-format
 msgid "Search text:"
-msgstr ""
+msgstr "Serĉi tekston:"
 
 #: smalldialogs.cpp:317
 #, kde-format
@@ -3286,22 +3449,22 @@ msgstr "Usklecodistinga"
 #: smalldialogs.cpp:320
 #, kde-format
 msgid "Search A"
-msgstr ""
+msgstr "Serĉi A"
 
 #: smalldialogs.cpp:325
 #, kde-format
 msgid "Search B"
-msgstr ""
+msgstr "Serĉi B"
 
 #: smalldialogs.cpp:330
 #, kde-format
 msgid "Search C"
-msgstr ""
+msgstr "Serĉi C"
 
 #: smalldialogs.cpp:335
 #, kde-format
 msgid "Search output"
-msgstr ""
+msgstr "Serĉ-eligo"
 
 #: smalldialogs.cpp:342
 #, kde-format
@@ -3311,27 +3474,28 @@ msgstr "&Serĉi"
 #: smalldialogs.cpp:368
 #, kde-format
 msgid "Regular Expression Tester"
-msgstr ""
+msgstr "Testilo de Regula Esprimo"
 
 #: smalldialogs.cpp:381
 #, kde-format
 msgid "Example auto merge line:"
-msgstr ""
+msgstr "Ekzemplo de aŭtomata kunfanda linio:"
 
 #: smalldialogs.cpp:383
 #, kde-format
 msgid "To test auto merge, copy a line as used in your files."
 msgstr ""
+"Por testi aŭtomatan kunfandiĝon, kopiu linion kiel uzatan en viaj dosieroj."
 
 #: smalldialogs.cpp:389 smalldialogs.cpp:417 smalldialogs.cpp:453
 #, kde-format
 msgid "Match result:"
-msgstr ""
+msgstr "Matĉa rezulto:"
 
 #: smalldialogs.cpp:408
 #, kde-format
 msgid "Example history start line (with leading comment):"
-msgstr ""
+msgstr "Ekzempla historia komenca linio (kun gvida komento):"
 
 #: smalldialogs.cpp:410
 #, kde-format
@@ -3339,16 +3503,18 @@ msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
 msgstr ""
+"Kopii historiokomencan linion kiel uzatan en viaj dosieroj,\n"
+"inkluzive de la ĉefa komento."
 
 #: smalldialogs.cpp:436
 #, kde-format
 msgid "History sort key order:"
-msgstr ""
+msgstr "Historio-ordiga ŝlosilordo:"
 
 #: smalldialogs.cpp:444
 #, kde-format
 msgid "Example history entry start line (without leading comment):"
-msgstr ""
+msgstr "Ekzempla historia eniro komenca linio (sen gvida komento):"
 
 #: smalldialogs.cpp:446
 #, kde-format
@@ -3356,46 +3522,48 @@ msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
+"Kopii historieran komenclinion kiel uzatan en viaj dosieroj,\n"
+"sed preterlasi la gvidan komenton."
 
 #: smalldialogs.cpp:460
 #, kde-format
 msgid "Sort key result:"
-msgstr ""
+msgstr "Ordigi ŝlosilan rezulton:"
 
 #: smalldialogs.cpp:510 smalldialogs.cpp:522 smalldialogs.cpp:543
 #, kde-format
 msgid "Match success."
-msgstr ""
+msgstr "Matĉa sukceso."
 
 #: smalldialogs.cpp:514 smalldialogs.cpp:526 smalldialogs.cpp:549
 #, kde-format
 msgid "Match failed."
-msgstr ""
+msgstr "Matĉo malsukcesis."
 
 #: smalldialogs.cpp:533
 #, kde-format
 msgid "Opening and closing parentheses do not match in regular expression."
-msgstr ""
+msgstr "Malfermaj kaj fermaj krampoj ne kongruas en regula esprimo."
 
 #: SourceData.cpp:154
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
-msgstr ""
+msgstr "Malsukcesis skribado de la tondujo al tempdosiero."
 
 #: SourceData.cpp:159
 #, kde-format
 msgid "From Clipboard"
-msgstr ""
+msgstr "El Clipboard"
 
 #: SourceData.cpp:358
 #, kde-format
 msgid "%1 is not a normal file."
-msgstr ""
+msgstr "%1 ne estas normala dosiero."
 
 #: SourceData.cpp:452
 #, kde-format
 msgid "    Temp file is: %1"
-msgstr ""
+msgstr "Tempdosiero estas: %1"
 
 #: SourceData.cpp:456
 #, kde-format
@@ -3406,11 +3574,16 @@ msgid ""
 "\n"
 "The preprocessing command will be disabled now."
 msgstr ""
+"Antaŭprocesado eble malsukcesis. Kontrolu ĉi tiun komandon:\n"
+"\n"
+"  %1\n"
+"\n"
+"La antaŭprilabora komando estos malŝaltita nun."
 
 #: SourceData.cpp:467
 #, kde-format
 msgid "File %1 too large to process. Skipping."
-msgstr ""
+msgstr "Dosiero %1 tro granda por procesi. Salti."
 
 #: SourceData.cpp:511
 #, kde-format
@@ -3421,186 +3594,41 @@ msgid ""
 "\n"
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
+"La linio-kongrua-antaŭprocesado eble malsukcesis. Kontrolu ĉi tiun "
+"komandon:\n"
+"\n"
+"  %1\n"
+"\n"
+"La linio-kongrua-antaŭprocesa komando estos malŝaltita nun."
 
 #: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "Malsukcesis legi dosieron: %1"
 
 #: SourceData.cpp:536
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr ""
+msgstr "Dosiero %1 tro granda por procesi. Salti."
 
 #: Utils.cpp:70
 #, kde-format
 msgid "Expecting space after closing quote."
-msgstr ""
+msgstr "Atendante spacon post ferma citaĵo."
 
 #: Utils.cpp:73
 #, kde-format
 msgid "Unmatched quote."
-msgstr ""
+msgstr "Nekomparebla citaĵo."
 
 #: Utils.cpp:82
 #, kde-format
 msgid "Unexpected quote character within argument."
-msgstr ""
+msgstr "Neatendita citaĵo en argumento."
 
 #: Utils.cpp:89
 #, kde-format
 msgid "No program specified."
-msgstr ""
-
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#, fuzzy
-#~| msgid "Directory"
-#~ msgid "Open Directory"
-#~ msgstr "Dosierujo"
-
-#~ msgid "&Directory"
-#~ msgstr "&Dosierujo"
-
-#~ msgid "Cancel"
-#~ msgstr "Rezigni"
-
-#~ msgid "Help"
-#~ msgstr "Helpo"
-
-#~ msgid "Defaults"
-#~ msgstr "Aprioraĵoj"
-
-#~ msgid "&Edit"
-#~ msgstr "&Redakti"
-
-#~ msgid "&Settings"
-#~ msgstr "A&gordo"
-
-#~ msgid "&Help"
-#~ msgstr "&Helpo"
-
-#~ msgid "&About"
-#~ msgstr "&Pri"
-
-#~ msgid "A&uthor"
-#~ msgstr "&Aŭtoro"
-
-#~ msgid "&Thanks To"
-#~ msgstr "&Dankon al"
-
-#~ msgid "Open"
-#~ msgstr "Malfermi"
-
-#~ msgid "Save"
-#~ msgstr "Konservi"
-
-#~ msgid "Print..."
-#~ msgstr "Presi..."
-
-#~ msgid "Quit"
-#~ msgstr "Forlasi"
-
-#~ msgid "Cut"
-#~ msgstr "Eltondi"
-
-#~ msgid "Copy"
-#~ msgstr "Kopii"
-
-#~ msgid "Paste"
-#~ msgstr "Alglui"
-
-#~ msgid "Select All"
-#~ msgstr "Elekti ĉion"
-
-#~ msgid "Show Toolbar"
-#~ msgstr "Montri ilobreton"
-
-#~ msgid "&Configure %1..."
-#~ msgstr "&Agordi %1..."
-
-#~ msgid "About"
-#~ msgstr "Pri"
-
-#~ msgid "Find"
-#~ msgstr "Trovi"
-
-#~ msgid "Find Next"
-#~ msgstr "Trovi sekvan"
-
-#~ msgid "Exit"
-#~ msgstr "Finu"
-
-#~ msgid "&OK"
-#~ msgstr "&Bone"
-
-#~ msgid "OK"
-#~ msgstr "Bone"
-
-#, fuzzy
-#~| msgid "Joachim Eibl"
-#~ msgid "(c) 2002-2014 Joachim Eibl"
-#~ msgstr "Joachim Eibl"
-
-#~ msgid "Error."
-#~ msgstr "Eraro."
-
-#~ msgid "Select Font"
-#~ msgstr "Elekti tiparon"
-
-#~ msgid "Eike Sauer"
-#~ msgstr "Eike Sauer"
-
-#~ msgid "Sebastien Fricker"
-#~ msgstr "Sebastien Fricker"
-
-#~ msgid "Stephan Binner"
-#~ msgstr "Stephan Binner"
-
-#~ msgid "Stefan Partheymueller"
-#~ msgstr "Stefan Partheymueller"
-
-#~ msgid "David Faure"
-#~ msgstr "David FAURE"
-
-#~ msgid "Bernd Gehrmann"
-#~ msgstr "Bernd Gehrmann"
-
-#~ msgid "Andre Woebbeking"
-#~ msgstr "Andre Woebbeking"
-
-#~ msgid "Michael Denio"
-#~ msgstr "Michael Denio"
-
-#~ msgid "Manfred Koehler"
-#~ msgstr "Manfred Koehler"
-
-#~ msgid "Sergey Zorin"
-#~ msgstr "Sergey Zorin"
-
-#~ msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
-#~ msgstr "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
-
-#~ msgid "GNU-Diffutils"
-#~ msgstr "GNU-Diffutils"
-
-#~ msgid "Tino Boellsterling, Timothy Mee"
-#~ msgstr "Tino Boellsterling, Timothy Mee"
-
-#~ msgid "Michael Schmidt"
-#~ msgstr "Michael Schmidt"
-
-#~ msgid "Valentin Rusu"
-#~ msgstr "Valentin Rusu"
-
-#~ msgid "Albert Astals Cid"
-#~ msgstr "Albert Astals Cid"
+msgstr "Neniu programo specifita."
