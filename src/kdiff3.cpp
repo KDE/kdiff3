@@ -344,9 +344,11 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     m_pDirectoryMergeDock = new QDockWidget(i18n("Directory merge"), this);
     m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeDock, m_pOptions, *this);
+    m_pDirectoryMergeDock->setObjectName("DirectoryMergeDock");
     m_pDirectoryMergeDock->setWidget(m_pDirectoryMergeWindow);
     m_pDirectoryMergeDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     m_pDirectoryMergeInfoDock = new QDockWidget(i18n("Merge info"), this);
+    m_pDirectoryMergeInfoDock->setObjectName("MergeInfoDock");
     m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeInfoDock);
     m_pDirectoryMergeInfoDock->setWidget(m_pDirectoryMergeInfo);
     m_pDirectoryMergeInfoDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
@@ -715,17 +717,28 @@ void KDiff3App::initStatusBar()
 void KDiff3App::saveWindow(const KSharedConfigPtr config)
 {
     KConfigGroup group = config->group(KDIFF3_CONFIG_GROUP);
-
-    group.writeEntry("mainWindow-geometry", m_pKDiff3Shell->saveGeometry());
-    group.writeEntry("mainWindow-state", m_pKDiff3Shell->saveState());
+    group.writeEntry("mainWindow-geometry", saveGeometry());
+    group.writeEntry("mainWindow-state", saveState(1));
+    group.writeEntry("shell-geometry", m_pKDiff3Shell->saveGeometry());
+    group.writeEntry("shell-state", m_pKDiff3Shell->saveState());
 }
 
 bool KDiff3App::restoreWindow(const KSharedConfigPtr config)
 {
     KConfigGroup group = config->group(KDIFF3_CONFIG_GROUP);
+    if(m_pKDiff3Shell->restoreState(group.readEntry("mainWindow-state", QVariant(QByteArray())).toByteArray()))
+    {
+        bool r = m_pKDiff3Shell->restoreGeometry(group.readEntry("mainWindow-geometry", QVariant(QByteArray())).toByteArray());
+        group.deleteEntry("mainWindow-state");
+        group.deleteEntry("mainWindow-geometry");
+        saveWindow(config);
+        return r;
+    }
 
-    return (m_pKDiff3Shell->restoreGeometry(group.readEntry("mainWindow-geometry", QVariant(QByteArray())).toByteArray()) &&
-            m_pKDiff3Shell->restoreState(group.readEntry("mainWindow-state", QVariant(QByteArray())).toByteArray()));
+    return (restoreGeometry(group.readEntry("mainWindow-geometry", QVariant(QByteArray())).toByteArray()) &&
+            restoreState(group.readEntry("mainWindow-state", QVariant(QByteArray())).toByteArray(), 1)) &&
+           (m_pKDiff3Shell->restoreGeometry(group.readEntry("shell-geometry", QVariant(QByteArray())).toByteArray()) &&
+            m_pKDiff3Shell->restoreState(group.readEntry("shell-state", QVariant(QByteArray())).toByteArray()));
 }
 
 void KDiff3App::saveOptions(KSharedConfigPtr config)
