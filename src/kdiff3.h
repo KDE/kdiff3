@@ -414,7 +414,6 @@ public Q_SLOTS:
 
     QWidget* m_pMainWidget = nullptr; // Contains vertical splitter and horiz scrollbar
     QWidget* m_pCentralWidget = nullptr;
-    QDockWidget* m_pMergeWindowDock = nullptr;
     QWidget* m_pMergeWindowFrame = nullptr;
     ReversibleScrollBar* m_pHScrollBar = nullptr;
 
