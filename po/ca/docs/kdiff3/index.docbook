@@ -3717,7 +3717,7 @@ Please at least include KDE, the KDE package it is in, the name
         path = &lt;camí cap al binari kdiff3 al vostre sistema&gt;
 </programlisting>
 <para
->Després, per a veure les diferències entre dos «commits», utilitzeu <userinput
+>Després, per a veure les diferències entre dues comissions, utilitzeu <userinput
 >git difftool <replaceable
 >primera_suma</replaceable
 > <replaceable
@@ -3735,7 +3735,7 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >Una vegada resolts els conflictes de fusió de la <link linkend="synchronise_views"
 >forma habitual</link
->, n'hi haurà prou amb confirmar els canvis per a fer la tasca. </para>
+>, n'hi haurà prou amb cometre els canvis per a fer la tasca. </para>
 </sect1>
 </chapter>
 
@@ -3843,7 +3843,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->Aquest és un efecte secundari del funcionament intern de git. Si voleu comparar una revisió anterior amb l'arbre de treball actual, el git compararà els fitxers que representen la confirmació anterior amb els enllaços simbòlics que apuntin a l'arbre de treball. A partir de la versió 1.9, el &kdiff3; té activat de manera predeterminada <guilabel
+>Aquest és un efecte secundari del funcionament intern de git. Si voleu comparar una revisió anterior amb l'arbre de treball actual, el git compararà els fitxers que representen la comissió anterior amb els enllaços simbòlics que apuntin a l'arbre de treball. A partir de la versió 1.9, el &kdiff3; té activat de manera predeterminada <guilabel
 >Segueix els enllaços de fitxer</guilabel
 > i <guilabel
 >Segueix els enllaços de carpeta</guilabel
