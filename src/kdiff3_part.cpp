@@ -29,31 +29,13 @@
 //A bit of a hack but I don't have control over the constructor for KDiff3Part since its a KPart plugin.
 bool KDiff3Part::bNeedInit = true;
 
-#if KF_VERSION < KF_VERSION_CHECK(5, 77, 0)
-KAboutData KDiff3Part::createAboutData()
-{
-    QString appVersion = QString(KDIFF3_VERSION_STRING);
-    appVersion += " (64 bit)";
-
-    KAboutData aboutData(u8"kdiff3part", i18n("KDiff3 Part"),
-                         appVersion, i18n("A KPart for displaying diffs"),
-                         KAboutLicense::GPL_V2,
-                         i18n("Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"));
-    aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QString("joachim.eibl at gmx.de"));
-    return aboutData;
-}
-#endif
-
 K_PLUGIN_FACTORY(KDiff3PartFactory, registerPlugin<KDiff3Part>();)
 
 KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantList& args)
     : KParts::ReadWritePart(parent)
 {
     assert(parentWidget);
-    //set AboutData
-#if KF_VERSION < KF_VERSION_CHECK(5, 77, 0)
-    setComponentData(createAboutData());
-#endif
+
     if(!args.isEmpty())
     {
         const QString widgetName = args[0].toString();
