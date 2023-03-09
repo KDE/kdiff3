@@ -28,7 +28,7 @@ if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
     message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
 endif()
 
-find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(
     CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
