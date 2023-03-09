@@ -8,6 +8,7 @@
 */
 // clang-format on
 
+#include "compat.h"
 #include "defmac.h"
 #include "difftextwindow.h"
 #include "DirectoryInfo.h"
@@ -94,15 +95,15 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         if(bVisibleMergeResultWindow && !m_pOptions->m_PreProcessorCmd.isEmpty())
         {
             QString msg = "- " + i18n("PreprocessorCmd: ") + m_pOptions->m_PreProcessorCmd + '\n';
-            int result = KMessageBox::warningYesNo(this,
-                i18n("The following option(s) you selected might change data:\n") + msg +
-                    i18n("\nMost likely this is not wanted during a merge.\n"
-                         "Do you want to disable these settings or continue with these settings active?"),
-                i18n("Option Unsafe for Merging"),
-                KGuiItem(i18n("Use These Options During Merge")),
-                KGuiItem(i18n("Disable Unsafe Options")));
+            KMessageBox::ButtonCode result = Compat::warningTwoActions(this,
+                                                                       i18n("The following option(s) you selected might change data:\n") + msg +
+                                                                           i18n("\nMost likely this is not wanted during a merge.\n"
+                                                                                "Do you want to disable these settings or continue with these settings active?"),
+                                                                       i18n("Option Unsafe for Merging"),
+                                                                       KGuiItem(i18n("Use These Options During Merge")),
+                                                                       KGuiItem(i18n("Disable Unsafe Options")));
 
-            if(result == KMessageBox::No)
+            if(result == Compat::SecondaryAction)
             {
                 m_pOptions->m_PreProcessorCmd = "";
             }
@@ -856,12 +857,12 @@ void KDiff3App::slotFileOpen()
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
-        int result = KMessageBox::warningYesNo(this,
+        int result = Compat::warningTwoActions(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18nc("Error dialog title", "Warning"),
                                                KGuiItem(i18n("Abort")),
                                                KGuiItem(i18n("Continue Merging")));
-        if(result != KMessageBox::Yes)
+        if(result != Compat::PrimaryAction)
             return;
     }
 
@@ -1721,14 +1722,14 @@ bool KDiff3App::canContinue()
     // First test if anything must be saved.
     if(m_bOutputModified)
     {
-        int result = KMessageBox::warningYesNoCancel(this,
+        int result = Compat::warningTwoActionsCancel(this,
                                                      i18n("The merge result has not been saved."),
                                                      i18nc("Error dialog title", "Warning"),
                                                      KGuiItem(i18n("Save && Continue")),
                                                      KGuiItem(i18n("Continue Without Saving")));
         if(result == KMessageBox::Cancel)
             return false;
-        else if(result == KMessageBox::Yes)
+        else if(result == Compat::PrimaryAction)
         {
             slotFileSave();
             if(m_bOutputModified)

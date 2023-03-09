@@ -11,6 +11,7 @@
 // application specific includes
 #include "kdiff3.h"
 
+#include "compat.h"
 #include "defmac.h"
 #include "difftextwindow.h"
 #include "directorymergewindow.h"
@@ -775,14 +776,14 @@ bool KDiff3App::queryClose()
 
     if(m_bOutputModified)
     {
-        int result = KMessageBox::warningYesNoCancel(this,
-                                                     i18n("The merge result has not been saved."),
-                                                     i18nc("Error dialog title", "Warning"),
-                                                     KGuiItem(i18n("Save && Quit")),
-                                                     KGuiItem(i18n("Quit Without Saving")));
+        KMessageBox::ButtonCode result = Compat::warningTwoActionsCancel(this,
+                                                                         i18n("The merge result has not been saved."),
+                                                                         i18nc("Error dialog title", "Warning"),
+                                                                         KGuiItem(i18n("Save && Quit")),
+                                                                         KGuiItem(i18n("Quit Without Saving")));
         if(result == KMessageBox::Cancel)
             return false;
-        else if(result == KMessageBox::Yes)
+        else if(result == Compat::PrimaryAction)
         {
             slotFileSave();
             if(m_bOutputModified)
@@ -797,12 +798,12 @@ bool KDiff3App::queryClose()
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
-        int result = KMessageBox::warningYesNo(this,
+        int result = Compat::warningTwoActions(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18nc("Error dialog title", "Warning"),
                                                KStandardGuiItem::quit(),
                                                KStandardGuiItem::cont() /* i18n("Continue Merging") */);
-        if(result != KMessageBox::Yes)
+        if(result != Compat::PrimaryAction)
             return false;
     }
 

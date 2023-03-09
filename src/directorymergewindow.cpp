@@ -10,6 +10,7 @@
 
 #include "directorymergewindow.h"
 
+#include "compat.h"
 #include "CompositeIgnoreList.h"
 #include "defmac.h"
 #include "DirectoryInfo.h"
@@ -692,12 +693,12 @@ void DirectoryMergeWindow::reload()
 {
     if(isDirectoryMergeInProgress())
     {
-        int result = KMessageBox::warningYesNo(this,
-                                               i18n("You are currently doing a folder merge. Are you sure, you want to abort the merge and rescan the folder?"),
-                                               i18nc("Error dialog title", "Warning"),
-                                               KGuiItem(i18nc("Title for rescan button", "Rescan")),
-                                               KGuiItem(i18nc("Title for continue button", "Continue Merging")));
-        if(result != KMessageBox::Yes)
+        KMessageBox::ButtonCode result = Compat::warningTwoActions(this,
+                                                                   i18n("You are currently doing a folder merge. Are you sure, you want to abort the merge and rescan the folder?"),
+                                                                   i18nc("Error dialog title", "Warning"),
+                                                                   KGuiItem(i18nc("Title for rescan button", "Rescan")),
+                                                                   KGuiItem(i18nc("Title for continue button", "Continue Merging")));
+        if(result != Compat::PrimaryAction)
             return;
     }
 
@@ -1259,11 +1260,11 @@ void DirectoryMergeWindow::focusOutEvent(QFocusEvent*)
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_MergeOperation eDefaultOperation)
 {
-    if(KMessageBox::Yes == KMessageBox::warningYesNo(mWindow,
-                                                     i18n("This affects all merge operations."),
-                                                     i18n("Changing All Merge Operations"),
-                                                     KStandardGuiItem::cont(),
-                                                     KStandardGuiItem::cancel()))
+    if(Compat::PrimaryAction == Compat::warningTwoActions(mWindow,
+                                                          i18n("This affects all merge operations."),
+                                                          i18n("Changing All Merge Operations"),
+                                                          KStandardGuiItem::cont(),
+                                                          KStandardGuiItem::cancel()))
     {
         for(int i = 0; i < rowCount(); ++i)
         {
@@ -2111,18 +2112,18 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
 {
     if(bVerbose)
     {
-        int status = KMessageBox::warningYesNoCancel(mWindow,
-                                                     i18n("The merge is about to begin.\n\n"
-                                                          "Choose \"Do it\" if you have read the instructions and know what you are doing.\n"
-                                                          "Choosing \"Simulate it\" will tell you what would happen.\n\n"
-                                                          "Be aware that this program still has beta status "
-                                                          "and there is NO WARRANTY whatsoever! Make backups of your vital data!"),
-                                                     i18nc("Caption", "Starting Merge"),
-                                                     KGuiItem(i18nc("Button title to confirm merge", "Do It")),
-                                                     KGuiItem(i18nc("Button title to simulate merge", "Simulate It")));
-        if(status == KMessageBox::Yes)
+        KMessageBox::ButtonCode status = Compat::warningTwoActionsCancel(mWindow,
+                                                                         i18n("The merge is about to begin.\n\n"
+                                                                              "Choose \"Do it\" if you have read the instructions and know what you are doing.\n"
+                                                                              "Choosing \"Simulate it\" will tell you what would happen.\n\n"
+                                                                              "Be aware that this program still has beta status "
+                                                                              "and there is NO WARRANTY whatsoever! Make backups of your vital data!"),
+                                                                         i18nc("Caption", "Starting Merge"),
+                                                                         KGuiItem(i18nc("Button title to confirm merge", "Do It")),
+                                                                         KGuiItem(i18nc("Button title to simulate merge", "Simulate It")));
+        if(status == Compat::PrimaryAction)
             m_bRealMergeStarted = true;
-        else if(status == KMessageBox::No)
+        else if(status == Compat::SecondaryAction)
             m_bSimulatedMergeStarted = true;
         else
             return;
@@ -2265,15 +2266,15 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     bool bSkipItem = false;
     if(!bStart && m_bError && miCurrent.isValid())
     {
-        int status = KMessageBox::warningYesNoCancel(mWindow,
-                                                     i18n("There was an error in the last step.\n"
-                                                          "Do you want to continue with the item that caused the error or do you want to skip this item?"),
-                                                     i18nc("Caption for message dialog", "Continue merge after an error"),
-                                                     KGuiItem(i18nc("Continue button title", "Continue With Last Item")),
-                                                     KGuiItem(i18nc("Skip button title", "Skip Item")));
-        if(status == KMessageBox::Yes)
+        KMessageBox::ButtonCode status = Compat::warningTwoActionsCancel(mWindow,
+                                                                         i18n("There was an error in the last step.\n"
+                                                                              "Do you want to continue with the item that caused the error or do you want to skip this item?"),
+                                                                         i18nc("Caption for message dialog", "Continue merge after an error"),
+                                                                         KGuiItem(i18nc("Continue button title", "Continue With Last Item")),
+                                                                         KGuiItem(i18nc("Skip button title", "Skip Item")));
+        if(status == Compat::PrimaryAction)
             bContinueWithCurrentItem = true;
-        else if(status == KMessageBox::No)
+        else if(status == Compat::SecondaryAction)
             bSkipItem = true;
         else
             return;

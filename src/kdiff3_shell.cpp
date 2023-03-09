@@ -9,6 +9,7 @@
 // clang-format on
 
 #include "kdiff3_shell.h"
+#include "compat.h"
 #include "kdiff3.h"
 #include "kdiff3_part.h"
 

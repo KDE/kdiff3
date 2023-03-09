@@ -17,9 +17,6 @@
 #include <QAtomicInt>
 #include <QString>
 
-#define KF_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
-#define KF_VERSION KF_VERSION_CHECK(KF_VERSION_MAJOR, KF_VERSION_MINOR, KF_VERSION_PATCH)
-
 class QFont;
 class QColor;
 class QSize;

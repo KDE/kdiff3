@@ -10,6 +10,7 @@
 
 #include "mergeresultwindow.h"
 
+#include "compat.h"
 #include "defmac.h"
 #include "guiutils.h"
 #include "kdiff3.h"
@@ -323,13 +324,13 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     {
         if(m_bModified)
         {
-            int result = KMessageBox::warningYesNo(this,
-                                                   i18n("The output has been modified.\n"
-                                                        "If you continue your changes will be lost."),
-                                                   i18nc("Error dialog title", "Warning"),
-                                                   KStandardGuiItem::cont(),
-                                                   KStandardGuiItem::cancel());
-            if(result == KMessageBox::No)
+            KMessageBox::ButtonCode result = Compat::warningTwoActions(this,
+                                                                       i18n("The output has been modified.\n"
+                                                                            "If you continue your changes will be lost."),
+                                                                       i18nc("Error dialog title", "Warning"),
+                                                                       KStandardGuiItem::cont(),
+                                                                       KStandardGuiItem::cancel());
+            if(result == Compat::SecondaryAction)
                 return;
         }
 
