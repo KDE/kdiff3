@@ -7,14 +7,21 @@
  */
 // clang-format on
 
-#ifndef KF5COMPAT_H
-#define KF5COMPAT_H
+#ifndef COMPAT_H
+#define COMPAT_H
 
+#ifndef AUTOTEST
+
+#include <KLocalizedString>
 #include <KMessageBox>
-
+#else
+#define i18n(expr, ...) expr
+#define i18nc(c, expr, ...) expr
+#endif
 #define KF_VERSION_CHECK(major, minor, patch) ((major << 16) | (minor << 8) | (patch))
 #define KF_VERSION KF_VERSION_CHECK(KF_VERSION_MAJOR, KF_VERSION_MINOR, KF_VERSION_PATCH)
 
+#ifndef AUTOTEST
 namespace Compat {
 
 inline KMessageBox::ButtonCode warningTwoActionsCancel(QWidget *parent,
@@ -81,5 +88,8 @@ constexpr KMessageBox::ButtonCode SecondaryAction = KMessageBox::No;
 constexpr KMessageBox::ButtonCode PrimaryAction = KMessageBox::PrimaryAction;
 constexpr KMessageBox::ButtonCode SecondaryAction = KMessageBox::SecondaryAction;
 #endif
+
 } //namespace Compat
-#endif /* KF5COMPAT_H */
+#endif // ndef AUTOTEST
+
+#endif /* COMPAT_H */

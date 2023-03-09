@@ -9,10 +9,9 @@
 // clang-format on
 #include "Utils.h"
 
+#include "compat.h"
 #include "fileaccess.h"
 #include "TypeUtils.h"
-
-#include <KLocalizedString>
 
 #include <QString>
 #include <QStringList>

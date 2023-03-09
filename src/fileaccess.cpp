@@ -10,6 +10,7 @@
 #include "fileaccess.h"
 
 #include "common.h"
+#include "compat.h"
 
 #ifndef AUTOTEST
 #include "DefaultFileAccessJobHandler.h"
@@ -34,9 +35,6 @@
 #include <QTemporaryFile>
 #include <QtMath>
 
-#include <KLocalizedString>
-
-//This triggers template instantiation even if set to default.
 #ifndef AUTOTEST
 FileAccess::FileAccess()
 {
