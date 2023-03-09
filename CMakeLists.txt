@@ -6,7 +6,7 @@
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
-project(kdiff3 VERSION 1.10.0)
+project(kdiff3 VERSION 1.10.70)
 
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
@@ -24,8 +24,8 @@ else()
     set(QT_MIN_VERSION "5.15.2")
 endif()
 
-if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.2)
-    message(WARNING "gcc < 8.2 is not recomended support is best effort-only.")
+if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
+    message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
 endif()
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
@@ -37,10 +37,9 @@ set(
 
 if(BUILD_WITH_QT6)
     include(QtVersionOption)
-    include(KDEInstallDirs5)
 else()
-    include(KDEInstallDirs)
 endif()
+include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)

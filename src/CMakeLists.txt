@@ -52,7 +52,7 @@ ki18n_wrap_ui(kdiff3part_PART_SRCS
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
-target_link_libraries(kdiff3part ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Parts KF5::Crash)
+target_link_libraries(kdiff3part Qt::PrintSupport KF5::I18n KF5::CoreAddons KF5::Parts KF5::Crash)
 target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
 
 install(TARGETS kdiff3part DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts )
@@ -71,7 +71,7 @@ ecm_optional_add_subdirectory( autotests )
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons )
+target_link_libraries(kdiff3 Qt::PrintSupport KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash KF5::I18n KF5::CoreAddons )
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)
@@ -97,8 +97,8 @@ install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
-install( FILES  kdiff3part.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
-install( FILES  kdiff3_part.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3part )
-install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3 )
-install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES  kdiff3part.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR} )
+install( FILES  kdiff3_part.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdiff3part )
+install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdiff3 )
+install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${KDE_INSTALL_APPDIR} )
 install( FILES org.kde.kdiff3.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
