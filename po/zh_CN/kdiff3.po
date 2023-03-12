@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-10 00:50+0000\n"
-"PO-Revision-Date: 2023-02-24 12:43\n"
+"PO-Revision-Date: 2023-03-11 04:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -154,7 +154,7 @@ msgstr "行尾格式：%1"
 #: difftextwindow.cpp:1936
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: difftextwindow.cpp:1964 kdiff3.cpp:927
 #, kde-format
@@ -185,25 +185,25 @@ msgstr "其他"
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
-msgstr ""
+msgstr "复制 A 到 B"
 
 #: directorymergewindow.cpp:421
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
-msgstr ""
+msgstr "复制 B 到 A"
 
 #: directorymergewindow.cpp:424
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
-msgstr ""
+msgstr "删除 A"
 
 #: directorymergewindow.cpp:427
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
-msgstr ""
+msgstr "删除 B"
 
 #: directorymergewindow.cpp:430
 #, kde-format
@@ -215,13 +215,13 @@ msgstr "删除 A 和 B"
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
-msgstr ""
+msgstr "合并到 A"
 
 #: directorymergewindow.cpp:436
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
-msgstr ""
+msgstr "合并到 B"
 
 #: directorymergewindow.cpp:439
 #, kde-format
@@ -233,13 +233,13 @@ msgstr "合并到 A 和 B"
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
-msgstr ""
+msgstr "删除 (如果存在)"
 
 #: directorymergewindow.cpp:455
 #, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
-msgstr ""
+msgstr "合并"
 
 #: directorymergewindow.cpp:455
 #, kde-format
@@ -361,13 +361,13 @@ msgstr "警告"
 #, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
-msgstr ""
+msgstr "重新扫描"
 
 #: directorymergewindow.cpp:700
 #, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
-msgstr ""
+msgstr "继续合并"
 
 #: directorymergewindow.cpp:849
 #, kde-format
@@ -447,7 +447,7 @@ msgstr "请检查子文件夹的权限。"
 #, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
-msgstr ""
+msgstr "准备就绪。"
 
 #: directorymergewindow.cpp:985
 #, kde-format
@@ -1083,7 +1083,7 @@ msgstr ""
 #: FontChooser.ui:17
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "文本标签"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:30
@@ -1093,6 +1093,9 @@ msgid ""
 "but the little red hen escapes with a shiver\n"
 ":-)\n"
 msgstr ""
+"The quick brown fox jumps over the river\n"
+"but the little red hen escapes with a shiver\n"
+":-)\n"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:43
@@ -1119,12 +1122,12 @@ msgstr "已使用选项 --auto ，但没有指定输出文件。"
 #: kdiff3.cpp:352
 #, kde-format
 msgid "Directory merge"
-msgstr ""
+msgstr "目录合并"
 
 #: kdiff3.cpp:357
 #, kde-format
 msgid "Merge info"
-msgstr ""
+msgstr "合并信息"
 
 #: kdiff3.cpp:442
 #, kde-format
@@ -1179,7 +1182,7 @@ msgstr "退出应用程序"
 #: kdiff3.cpp:606
 #, kde-format
 msgid "Undo last action."
-msgstr ""
+msgstr "撤销上一次操作。"
 
 #: kdiff3.cpp:610
 #, kde-format
@@ -1363,7 +1366,7 @@ msgstr ""
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr ""
+msgstr "跳转到行"
 
 #: kdiff3.cpp:672
 #, kde-format
@@ -1372,6 +1375,8 @@ msgid ""
 "Go\n"
 "Line"
 msgstr ""
+"转到\n"
+"行"
 
 #: kdiff3.cpp:673
 #, kde-format
@@ -1379,6 +1384,8 @@ msgid ""
 ".\n"
 " Goto specified line."
 msgstr ""
+".\n"
+" 跳转到指定的行。"
 
 #: kdiff3.cpp:674
 #, kde-format
@@ -2170,7 +2177,7 @@ msgstr "文件夹..."
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "无"
 
 #: optiondialog.cpp:108 optiondialog.cpp:120
 #, kde-format
@@ -3273,12 +3280,12 @@ msgstr "正在插入剪贴板内容..."
 #: pdiff.cpp:1176
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
 #: pdiff.cpp:1192
 #, kde-format
 msgid "Go to Line"
-msgstr ""
+msgstr "跳转到行"
 
 #: pdiff.cpp:1506
 #, kde-format
@@ -3522,13 +3529,13 @@ msgstr ""
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "读取文件失败：%1"
 
 #: SourceData.cpp:536
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr ""
+msgstr "文件 %1 太大，无法处理。跳过。"
 
 #: Utils.cpp:70
 #, kde-format
@@ -3549,12 +3556,3 @@ msgstr "参数中有未预期的引号字符。"
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
-
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3 Part"
-
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "版权 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
