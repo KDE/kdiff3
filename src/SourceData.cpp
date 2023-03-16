@@ -78,8 +78,7 @@ void SourceData::setFilename(const QString& filename)
     }
     else
     {
-        FileAccess fa(filename);
-        setFileAccess(fa);
+        setFileAccess(FileAccess(filename));
     }
 }
 
