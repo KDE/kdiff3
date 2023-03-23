@@ -138,7 +138,7 @@ class FileAccess
     qint64 read(char* data, const qint64 maxlen);
     void close();
 
-    const QString& errorString() const;
+    [[nodiscard]] const QString& errorString() const;
 
     //These should be exposed for auto tests
   protected:
