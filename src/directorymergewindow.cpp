@@ -1161,9 +1161,9 @@ void DirectoryMergeWindow::slotCurrentMergeToAAndB()
     d->setMergeOperation(currentIndex(), eMergeToAB);
 }
 
-void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
+void DirectoryMergeWindow::keyPressEvent(QKeyEvent* keyEvent)
 {
-    if((e->modifiers() & Qt::ControlModifier) != 0)
+    if((keyEvent->modifiers() & Qt::ControlModifier) != 0)
     {
         MergeFileInfos* pMFI = d->getMFI(currentIndex());
         if(pMFI == nullptr)
@@ -1173,7 +1173,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
         bool bFTConflict = pMFI->conflictingFileTypes();
 
-        switch(e->key())
+        switch(keyEvent->key())
         {
             case Qt::Key_1:
                 if(pMFI->existsInA())
@@ -1194,7 +1194,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 
         if(bMergeMode)
         {
-            switch(e->key())
+            switch(keyEvent->key())
             {
                 case Qt::Key_3:
                     if(pMFI->existsInC())
@@ -1212,13 +1212,11 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
                 case Qt::Key_Delete:
                     slotCurrentDelete();
                     return;
-                default:
-                    break;
             }
         }
         else
         {
-            switch(e->key())
+            switch(keyEvent->key())
             {
                 case Qt::Key_4:
                     if(!bFTConflict)
@@ -1234,19 +1232,17 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
                     else if(pMFI->existsInB())
                         slotCurrentDeleteB();
                     return;
-                default:
-                    break;
             }
         }
     }
     //Override Qt's default behavior for this key.
-    else if(e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
+    else if(keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
     {
         onDoubleClick(currentIndex());
         return;
     }
 
-    QTreeView::keyPressEvent(e);
+    QTreeView::keyPressEvent(keyEvent);
 }
 
 void DirectoryMergeWindow::focusInEvent(QFocusEvent*)

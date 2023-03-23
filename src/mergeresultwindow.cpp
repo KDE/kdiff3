@@ -1938,18 +1938,18 @@ bool MergeResultWindow::event(QEvent* e)
 {
     if(e->type() == QEvent::KeyPress)
     {
-        QKeyEvent* ke = static_cast<QKeyEvent*>(e);
-        if(ke->key() == Qt::Key_Tab)
+        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
+        if(keyEvent->key() == Qt::Key_Tab)
         {
             // special tab handling here to avoid moving focus
-            keyPressEvent(ke);
+            keyPressEvent(keyEvent);
             return true;
         }
     }
     return QWidget::event(e);
 }
 
-void MergeResultWindow::keyPressEvent(QKeyEvent* e)
+void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
 {
     QtNumberType y = m_cursorYPos;
     MergeBlockListImp::iterator mbIt;
@@ -1957,7 +1957,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     if(!calcIteratorFromLineNr(y, mbIt, melIt))
     {
         // no data loaded or y out of bounds
-        e->ignore();
+        keyEvent->ignore();
         return;
     }
 
@@ -1967,8 +1967,8 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     QTextLayout textLayoutOrig(str, font(), this);
     getTextLayoutForLine(y, str, textLayoutOrig);
 
-    bool bCtrl = (e->modifiers() & Qt::ControlModifier) != 0;
-    bool bShift = (e->modifiers() & Qt::ShiftModifier) != 0;
+    bool bCtrl = (keyEvent->modifiers() & Qt::ControlModifier) != 0;
+    bool bShift = (keyEvent->modifiers() & Qt::ShiftModifier) != 0;
 #ifdef Q_OS_WIN
     bool bAlt = (e->modifiers() & Qt::AltModifier) != 0;
     if(bCtrl && bAlt)
@@ -1980,8 +1980,11 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 
     bool bYMoveKey = false;
     // Special keys
-    switch(e->key())
+    switch(keyEvent->key())
     {
+        case Qt::Key_Pause:
+        case Qt::Key_Print:
+        case Qt::Key_SysReq:
         case Qt::Key_Escape:
         case Qt::Key_Backtab:
             break;
@@ -2110,10 +2113,6 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         case Qt::Key_Insert:
             m_bInsertMode = !m_bInsertMode;
             break;
-        case Qt::Key_Pause:
-        case Qt::Key_Print:
-        case Qt::Key_SysReq:
-            break;
         case Qt::Key_Home:
             x = 0;
             if(bCtrl)
@@ -2131,7 +2130,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 
         case Qt::Key_Left:
         case Qt::Key_Right:
-            if((e->key() == Qt::Key_Left) != m_pOptions->m_bRightToLeftLanguage)
+            if((keyEvent->key() == Qt::Key_Left) != m_pOptions->m_bRightToLeftLanguage)
             {
                 if(!bCtrl)
                 {
@@ -2224,10 +2223,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             }
             break;
         default: {
-            QString t = e->text();
+            QString t = keyEvent->text();
             if(t.isEmpty() || bCtrl)
             {
-                e->ignore();
+                keyEvent->ignore();
                 return;
             }
             if(!melIt->isEditableText()) break;

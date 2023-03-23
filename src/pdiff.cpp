@@ -826,7 +826,7 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
             if(m_pHScrollBar != nullptr)
                 QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
 
-            break;
+            return;
         case Qt::Key_End:
         case Qt::Key_Home:
             if(bCtrl)
@@ -839,10 +839,10 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
                 if(m_pHScrollBar != nullptr)
                     QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
             }
-            break;
-        default:
-            break;
+            return;
     }
+
+    QMainWindow::keyPressEvent(keyEvent);
 }
 
 void KDiff3App::slotFinishDrop()
