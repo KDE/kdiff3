@@ -10,6 +10,10 @@
 #ifndef COMPAT_H
 #define COMPAT_H
 
+/*
+    KF5I18n rightfully complains if included in the auto-test builds as they aren't actually setup
+    for translations.
+*/
 #ifndef AUTOTEST
 
 #include <KLocalizedString>
