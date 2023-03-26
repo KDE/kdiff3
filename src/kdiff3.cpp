@@ -693,9 +693,6 @@ void KDiff3App::initActions(KActionCollection* ac)
     dirViewToggle = GuiUtils::createAction<QAction>(i18n("Toggle Between Folder && Text View"), this, &KDiff3App::slotDirViewToggle, ac, "win_dir_view_toggle");
 
     m_pMergeEditorPopupMenu = new QMenu(this);
-    /*   chooseA->plug( m_pMergeEditorPopupMenu );
-       chooseB->plug( m_pMergeEditorPopupMenu );
-       chooseC->plug( m_pMergeEditorPopupMenu );*/
     m_pMergeEditorPopupMenu->addAction(chooseA);
     m_pMergeEditorPopupMenu->addAction(chooseB);
     m_pMergeEditorPopupMenu->addAction(chooseC);
