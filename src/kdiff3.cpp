@@ -51,6 +51,7 @@
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QPushButton>
+#include <QShortcut>
 #include <QSplitter>
 #include <QStatusBar>
 #include <QTextEdit>
@@ -319,6 +320,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pFindDialog = new FindDialog(this);
     chk_connect(m_pFindDialog, &FindDialog::findNext, this, &KDiff3App::slotEditFindNext);
 
+    mEscapeAction->setEnabled(m_pOptions->m_bEscapeKeyQuits);
     autoAdvance->setChecked(m_pOptions->m_bAutoAdvance);
     showWhiteSpaceCharacters->setChecked(m_pOptions->m_bShowWhiteSpaceCharacters);
     showWhiteSpace->setChecked(m_pOptions->m_bShowWhiteSpace);
@@ -696,6 +698,8 @@ void KDiff3App::initActions(KActionCollection* ac)
     m_pMergeEditorPopupMenu->addAction(chooseA);
     m_pMergeEditorPopupMenu->addAction(chooseB);
     m_pMergeEditorPopupMenu->addAction(chooseC);
+
+    mEscapeAction = new QShortcut(Qt::Key_Escape, this, this, &KDiff3App::slotFileQuit);
 }
 
 void KDiff3App::showPopupMenu(const QPoint& point)

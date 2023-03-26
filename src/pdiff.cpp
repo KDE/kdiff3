@@ -804,12 +804,6 @@ void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 
 void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
 {
-    if(keyEvent->key() == Qt::Key_Escape && m_pKDiff3Shell && m_pOptions->m_bEscapeKeyQuits)
-    {
-        m_pKDiff3Shell->close();
-        return;
-    }
-
     bool bCtrl = (keyEvent->modifiers() & Qt::ControlModifier) != 0;
 
     switch(keyEvent->key())
@@ -1305,6 +1299,7 @@ void KDiff3App::slotConfigure()
     m_pOptionDialog->setState();
     m_pOptionDialog->setMinimumHeight(m_pOptionDialog->minimumHeight() + 40);
     m_pOptionDialog->exec();
+    mEscapeAction->setEnabled(m_pOptions->m_bEscapeKeyQuits);
     slotRefresh();
 }
 

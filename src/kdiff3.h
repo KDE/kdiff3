@@ -32,6 +32,7 @@
 #include <KMainWindow>
 #include <KSharedConfig>
 #include <KToggleAction>
+#include <QShortcut>
 
 // forward declaration of the KDiff3 classes
 class Options;
@@ -365,6 +366,7 @@ public Q_SLOTS:
     KToggleAction* viewToolBar = nullptr;
     KToggleAction* viewStatusBar;
 
+    QPointer<QShortcut> mEscapeAction;
     ////////////////////////////////////////////////////////////////////////
     // Special KDiff3 specific stuff starts here
     QPointer<QAction> editFind;
