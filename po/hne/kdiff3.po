@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 02:50+0000\n"
+"POT-Creation-Date: 2023-03-27 04:22+0000\n"
 "PO-Revision-Date: 2009-03-20 10:56+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -204,7 +204,7 @@ msgstr "लकीर खतम होए के सैलीः"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1957 kdiff3.cpp:906
+#: difftextwindow.cpp:1957 kdiff3.cpp:907
 #, kde-format
 msgid "Top line"
 msgstr "सबसे ऊपर के लाइन"
@@ -425,8 +425,8 @@ msgid ""
 "merge and rescan the folder?"
 msgstr ""
 
-#: directorymergewindow.cpp:695 kdiff3.cpp:765 kdiff3.cpp:775 kdiff3.cpp:787
-#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1711 pdiff.cpp:1721
+#: directorymergewindow.cpp:695 kdiff3.cpp:766 kdiff3.cpp:776 kdiff3.cpp:788
+#: mergeresultwindow.cpp:328 pdiff.cpp:856 pdiff.cpp:1706 pdiff.cpp:1716
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog caption"
@@ -526,9 +526,9 @@ msgstr "कुछ सबडिरेक्टरीज ये मां पढ�
 msgid "Check the permissions of the subfolders."
 msgstr "सबडिरेक्टरीज के अनुमति जांचव."
 
-#: directorymergewindow.cpp:968 kdiff3.cpp:714 kdiff3.cpp:820 kdiff3.cpp:844
-#: kdiff3.cpp:1116 kdiff3.cpp:1137 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
-#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
+#: directorymergewindow.cpp:968 kdiff3.cpp:715 kdiff3.cpp:821 kdiff3.cpp:845
+#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044
+#: pdiff.cpp:1053 pdiff.cpp:1099 pdiff.cpp:1107
 #, kde-format
 msgid "Ready."
 msgstr "तैयार."
@@ -1159,136 +1159,136 @@ msgid ""
 "Filenames: %1 -> %2"
 msgstr ""
 
-#: kdiff3.cpp:178
+#: kdiff3.cpp:179
 #, kde-format
 msgid "Current Configuration:"
 msgstr "अभी हाल के कान्फिगरेसन:"
 
-#: kdiff3.cpp:183
+#: kdiff3.cpp:184
 #, kde-format
 msgid "Config Option Error:"
 msgstr ""
 
-#: kdiff3.cpp:241
+#: kdiff3.cpp:242
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "विकल्प --auto के उपयोग करिस, तिर कोनो आउटपुट फाइल निरधारित नइ."
 
-#: kdiff3.cpp:345
+#: kdiff3.cpp:347
 #, fuzzy, kde-format
 #| msgid "Directory Merge"
 msgid "Directory merge"
 msgstr "डिरेक्टरी सम्मिलित करव"
 
-#: kdiff3.cpp:350
+#: kdiff3.cpp:352
 #, fuzzy, kde-format
 #| msgid "Merge to A"
 msgid "Merge info"
 msgstr "अ मं सम्मिलित करव"
 
-#: kdiff3.cpp:429
+#: kdiff3.cpp:431
 #, fuzzy, kde-format
 #| msgid "Option --auto ignored for directory comparison."
 msgid "Option --auto ignored for folder comparison."
 msgstr "विकल्प --auto ल डिरेक्टरी तुलना करे मं छोड़ दे गिस."
 
-#: kdiff3.cpp:508
+#: kdiff3.cpp:510
 #, kde-format
 msgid "Saving failed."
 msgstr "सहेजे मं फेल."
 
-#: kdiff3.cpp:533 pdiff.cpp:928
+#: kdiff3.cpp:535 pdiff.cpp:922
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "ए फाइल मन ल खोलना फेल:"
 
-#: kdiff3.cpp:542 pdiff.cpp:937
+#: kdiff3.cpp:544 pdiff.cpp:931
 #, kde-format
 msgid "File open error"
 msgstr "फाइल खोले मं गलती"
 
-#: kdiff3.cpp:573
+#: kdiff3.cpp:575
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "कागद मन ल तुलना बर खोलथे ..."
 
-#: kdiff3.cpp:575
+#: kdiff3.cpp:577
 #, kde-format
 msgid "Reload"
 msgstr "री-लोड"
 
-#: kdiff3.cpp:578
+#: kdiff3.cpp:580
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr ""
 
-#: kdiff3.cpp:580
+#: kdiff3.cpp:582
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "अभी हाल के कागद अइसन सहेजथे ..."
 
-#: kdiff3.cpp:583
+#: kdiff3.cpp:585
 #, kde-format
 msgid "Print the differences"
 msgstr ""
 
-#: kdiff3.cpp:586
+#: kdiff3.cpp:588
 #, kde-format
 msgid "Quits the application"
 msgstr "अनुपरयोग से बाहिर होथे "
 
-#: kdiff3.cpp:590
+#: kdiff3.cpp:592
 #, fuzzy, kde-format
 msgid "Undo last action."
 msgstr "अपने अपन नकल चयन"
 
-#: kdiff3.cpp:594
+#: kdiff3.cpp:596
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr ""
 
-#: kdiff3.cpp:597
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "चुने हुए अंस ल क्लिपबोर्ड मं नकल करथे "
 
-#: kdiff3.cpp:599
+#: kdiff3.cpp:601
 #, fuzzy, kde-format
 #| msgid "Pastes the clipboard contents to actual position"
 msgid "Pastes the clipboard contents to current position"
 msgstr "क्लिपबोर्ड अवयव मन ल सही जगह मं चिपकाथे "
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Select everything in current window"
 msgstr ""
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Search for a string"
 msgstr "स्ट्रिंग बर खोजव"
 
-#: kdiff3.cpp:607
+#: kdiff3.cpp:609
 #, kde-format
 msgid "Search again for the string"
 msgstr "स्ट्रिंग बर फिर से खोजव"
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:614
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "स्थिति-पट्टी सक्छम/अक्छम करव"
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "के-डिफ3 ल कान्फिगर करव..."
 
-#: kdiff3.cpp:636
+#: kdiff3.cpp:638
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "अभी हाल के डेल्टा मं जाव"
 
-#: kdiff3.cpp:636
+#: kdiff3.cpp:638
 #, kde-format
 msgid ""
 "Current\n"
@@ -1297,12 +1297,12 @@ msgstr ""
 "अभी हाल के\n"
 "  डेल्टा"
 
-#: kdiff3.cpp:638
+#: kdiff3.cpp:640
 #, kde-format
 msgid "Go to First Delta"
 msgstr "पहिली डेल्टा मं जाव"
 
-#: kdiff3.cpp:638
+#: kdiff3.cpp:640
 #, kde-format
 msgid ""
 "First\n"
@@ -1311,12 +1311,12 @@ msgstr ""
 "पहिली \n"
 "डेल्टा"
 
-#: kdiff3.cpp:640
+#: kdiff3.cpp:642
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "आखरी डेल्टा मं जाव"
 
-#: kdiff3.cpp:640
+#: kdiff3.cpp:642
 #, kde-format
 msgid ""
 "Last\n"
@@ -1325,24 +1325,24 @@ msgstr ""
 "आखरी\n"
 "डेल्टा"
 
-#: kdiff3.cpp:642
+#: kdiff3.cpp:644
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:643
+#: kdiff3.cpp:645
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:644
+#: kdiff3.cpp:646
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "पिछला डेल्टा मं जाव"
 
-#: kdiff3.cpp:644
+#: kdiff3.cpp:646
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1351,12 +1351,12 @@ msgstr ""
 "पिछला \n"
 "डेल्टा"
 
-#: kdiff3.cpp:646
+#: kdiff3.cpp:648
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "अगला डेल्टा मं जाव"
 
-#: kdiff3.cpp:646
+#: kdiff3.cpp:648
 #, kde-format
 msgid ""
 "Next\n"
@@ -1365,12 +1365,12 @@ msgstr ""
 "अगला \n"
 "डेल्टा"
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:650
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "पिछले आपसी विरोधों मं जाव"
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:650
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1379,12 +1379,12 @@ msgstr ""
 "पिछला\n"
 "आपसी विरोध"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:652
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "अगले आपसी विरोधों मं जाव"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:652
 #, kde-format
 msgid ""
 "Next\n"
@@ -1393,12 +1393,12 @@ msgstr ""
 "अगले \n"
 "आपसी विरोध"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:654
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "पिछले समाधान-रहित आपसी विरोधों मं जाव"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:654
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1407,12 +1407,12 @@ msgstr ""
 "पिछला\n"
 "हल नइ"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:656
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "अगले समाधान-रहित आपसी विरोधों मं जाव"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:656
 #, kde-format
 msgid ""
 "Next\n"
@@ -1421,14 +1421,14 @@ msgstr ""
 "अगला\n"
 "हल नइ"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:658
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "आखरी डेल्टा मं जाव"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:658
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1437,21 +1437,21 @@ msgid ""
 "Line"
 msgstr "पंक्ति"
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:659
 #, kde-format
 msgid ""
 ".\n"
 " Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:660
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "अ से लाइन चुनव"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:660
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1459,14 +1459,14 @@ msgid ""
 "A"
 msgstr ""
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:661
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "ब से लाइन चुनव"
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:661
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1474,14 +1474,14 @@ msgid ""
 "B"
 msgstr ""
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:662
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "स से लाइन चुनव"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:662
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1489,14 +1489,14 @@ msgid ""
 "C"
 msgstr ""
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:663
 #, fuzzy, kde-format
 #| msgid "Go to Next Unsolved Conflict"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "अगले समाधान-रहित आपसी विरोधों मं जाव"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:663
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1509,13 +1509,13 @@ msgstr ""
 "अपने अपन \n"
 "अगला"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:665
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "भिन्नताओं बर टेबुलेटर अक्छर अउ जगह देखाव "
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:665
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1523,12 +1523,12 @@ msgid ""
 "Characters"
 msgstr ""
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:666
 #, kde-format
 msgid "Show White Space"
 msgstr "सफेद जगह देखाव"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:666
 #, fuzzy, kde-format
 #| msgid ""
 #| "First\n"
@@ -1541,12 +1541,12 @@ msgstr ""
 "पहिली \n"
 "डेल्टा"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:668
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "लकीर नंबर देखाव"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:668
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1559,196 +1559,196 @@ msgstr ""
 "लकीर \n"
 "नंबर"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:670
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "सादा आपसी विरोधों के अपने अपन समाधान करव"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "डेल्टा ल आपसी विरोधों मं सेट करव"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:672
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "इतिहास आपसी विरोधों के अपने अपन समाधान करव"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr ""
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "चुने गे डिफ मिलाव"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Show Window A"
 msgstr "विंडो अ देखाव"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:678
 #, kde-format
 msgid "Show Window B"
 msgstr "विंडो ब देखाव"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Show Window C"
 msgstr "विंडो स देखाव"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Normal Overview"
 msgstr "सामान्य ओवरव्यू"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:682
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "अ वि. ब ओवरव्यू"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:683
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "अ वि. स ओवरव्यू"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:684
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "ब वि. स ओवरव्यू"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "वर्ड व्रेप डिफ विंडोज"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:687
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Focus Next Window"
 msgstr "अगले विंडो मं फोकस"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "पिछले विंडो मं फोकस"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "अलग करे के दिसा टागल करव"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "डिरेक्टरी अउ पाठ स्प्लिट स्क्रीन दृस्य"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "डिरेक्टरी अउ पाठ दृस्य के बीच टागल करव"
 
-#: kdiff3.cpp:764 pdiff.cpp:1710
+#: kdiff3.cpp:765 pdiff.cpp:1705
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "सम्मिलित करे के परिनाम अभी सहेजे नइ गिस."
 
-#: kdiff3.cpp:766
+#: kdiff3.cpp:767
 #, kde-format
 msgid "Save && Quit"
 msgstr "सहेजव अउ बाहिर हों"
 
-#: kdiff3.cpp:767
+#: kdiff3.cpp:768
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "सहेजे बिना बाहिर हों"
 
-#: kdiff3.cpp:775 pdiff.cpp:1721
+#: kdiff3.cpp:776 pdiff.cpp:1716
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "सम्मिलित करे जाय के परिनाम सहेजना फेल."
 
-#: kdiff3.cpp:786 pdiff.cpp:861
+#: kdiff3.cpp:787 pdiff.cpp:855
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
 
-#: kdiff3.cpp:809
+#: kdiff3.cpp:810
 #, kde-format
 msgid "Saving file..."
 msgstr "फाइल सहेजत हे..."
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:827
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "फाइल नवा फाइलनाम के साथ सहेजत हे..."
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:829
 #, kde-format
 msgid "Save As..."
 msgstr "अइसन सहेजव..."
 
-#: kdiff3.cpp:852
+#: kdiff3.cpp:853
 #, fuzzy, kde-format
 msgid "Printing not implemented."
 msgstr "सम्मिलित करे के काम पूरा होइस."
 
-#: kdiff3.cpp:890
+#: kdiff3.cpp:891
 #, fuzzy, kde-format
 msgid "Printing..."
 msgstr "छापव..."
 
-#: kdiff3.cpp:992
+#: kdiff3.cpp:993
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1049
+#: kdiff3.cpp:1050
 #, fuzzy, kde-format
 msgid " (Selection)"
 msgstr "फोंट चुनव"
 
-#: kdiff3.cpp:1078
+#: kdiff3.cpp:1079
 #, fuzzy, kde-format
 msgid "Printing completed."
 msgstr "सम्मिलित करे के काम पूरा होइस."
 
-#: kdiff3.cpp:1082
+#: kdiff3.cpp:1083
 #, fuzzy, kde-format
 msgid "Printing aborted."
 msgstr "सम्मिलित करे के काम पूरा होइस."
 
-#: kdiff3.cpp:1089
+#: kdiff3.cpp:1090
 #, kde-format
 msgid "Exiting..."
 msgstr "बाहिर होवत हे..."
 
-#: kdiff3.cpp:1100
+#: kdiff3.cpp:1101
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "टूलबार टागल करत हे..."
 
-#: kdiff3.cpp:1121
+#: kdiff3.cpp:1122
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "स्थिति पट्टी टागल करव..."
@@ -3275,83 +3275,83 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 
-#: pdiff.cpp:863
+#: pdiff.cpp:857
 #, kde-format
 msgid "Abort"
 msgstr "छोड़व"
 
-#: pdiff.cpp:864
+#: pdiff.cpp:858
 #, kde-format
 msgid "Continue Merging"
 msgstr "मिलाय जाना जारी रखव"
 
-#: pdiff.cpp:869 pdiff.cpp:961
+#: pdiff.cpp:863 pdiff.cpp:955
 #, kde-format
 msgid "Opening files..."
 msgstr "फाइल मन ल खोलत हे..."
 
-#: pdiff.cpp:1048
+#: pdiff.cpp:1042
 #, kde-format
 msgid "Cutting selection..."
 msgstr "चयन ल काटत हे..."
 
-#: pdiff.cpp:1055
+#: pdiff.cpp:1049
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "चुने हुए के नकल क्लिपबोर्ड मं बनात हे..."
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1058
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "क्लिपबोर्ड के चीज मन ल घुसात हे..."
 
-#: pdiff.cpp:1164
+#: pdiff.cpp:1158
 #, kde-format
 msgid "Ok"
 msgstr "ठीक"
 
-#: pdiff.cpp:1180
+#: pdiff.cpp:1174
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "आखरी डेल्टा मं जाव"
 
-#: pdiff.cpp:1490
+#: pdiff.cpp:1485
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1491
+#: pdiff.cpp:1486
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1712
+#: pdiff.cpp:1707
 #, kde-format
 msgid "Save && Continue"
 msgstr "सहेजव अउ जारी रखव"
 
-#: pdiff.cpp:1713
+#: pdiff.cpp:1708
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "सहेजे बिना जारी रखव"
 
-#: pdiff.cpp:1911
+#: pdiff.cpp:1906
 #, kde-format
 msgid "Search complete."
 msgstr "ढूंढना पूरा"
 
-#: pdiff.cpp:1911
+#: pdiff.cpp:1906
 #, kde-format
 msgid "Search Complete"
 msgstr "ढूंढना पूरा"
 
-#: pdiff.cpp:2092
+#: pdiff.cpp:2087
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2092
+#: pdiff.cpp:2087
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr ""
