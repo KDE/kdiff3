@@ -74,7 +74,7 @@ class MergeResultWindow: public QWidget
     int getNofVisibleLines() const;
     QString getSelection() const;
     void resetSelection();
-    void showNumberOfConflicts();
+    void showNumberOfConflicts(bool showIfNone = false);
     bool isDeltaAboveCurrent() const;
     bool isDeltaBelowCurrent() const;
     bool isConflictAboveCurrent() const;

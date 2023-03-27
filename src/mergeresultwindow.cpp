@@ -752,17 +752,21 @@ int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflict
     return nrOfUnsolvedConflicts;
 }
 
-void MergeResultWindow::showNumberOfConflicts()
+void MergeResultWindow::showNumberOfConflicts(bool showIfNone)
 {
     if(!m_pOptions->m_bShowInfoDialogs)
         return;
     int nrOfConflicts = 0;
+    int nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
 
     for(const MergeLine& entry: m_mergeLineList.list())
     {
         if(entry.isConflict() || entry.isDelta())
             ++nrOfConflicts;
     }
+
+    if(!showIfNone && nrOfUnsolvedConflicts == 0)
+        return;
 
     QString totalInfo;
     if(m_pTotalDiffStatus->isBinaryEqualAB() && m_pTotalDiffStatus->isBinaryEqualAC())
@@ -784,8 +788,6 @@ void MergeResultWindow::showNumberOfConflicts()
         else if(m_pTotalDiffStatus->isTextEqualBC())
             totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("B"), i18n("C"));
     }
-
-    int nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
 
     KMessageBox::information(this,
                              i18n("Total number of conflicts: %1\n"

@@ -720,7 +720,7 @@ void KDiff3App::slotFinishMainInit()
     if(m_bLoadFiles)
     {
         if(bVisibleMergeResultWindow)
-            m_pMergeResultWindow->showNumberOfConflicts();
+            m_pMergeResultWindow->showNumberOfConflicts(!m_bAutoFlag);
         else if(
             // Avoid showing this message during startup without parameters.
             !(m_sd1->getAliasName().isEmpty() && m_sd2->getAliasName().isEmpty() && m_sd3->getAliasName().isEmpty()) &&
