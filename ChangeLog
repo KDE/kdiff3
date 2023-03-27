@@ -1,9 +1,18 @@
-Version 1.10 - 2023-
+Version 1.10.1 - 2023
+===========================
+*467652 - "Escape" shortcut ignored if merge output in focus
+*466522 - save and restore dock states
+*439148 - Show UI before comparison start
+*466241 - Don't crash on broken links
+*466524 - Fix memory safety issues during reload.
+*Fix mishandling line count for files containing '0x0b'
+
+Version 1.10 - 2023
 ===========================
 *Make DirectoryMergeWindow and DirecoryMergeInfo QDockWidgets.
 *Use Qt native saveState/restoreState
 
-Version 1.9 - 2021-23
+Version 1.9 - 2021
 ===========================
 *Rewrite of SourceData::FileData::preprocess now only loops through file contents once.
 *Major rework of event handling
