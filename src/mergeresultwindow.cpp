@@ -1970,7 +1970,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
     bool bCtrl = (keyEvent->modifiers() & Qt::ControlModifier) != 0;
     bool bShift = (keyEvent->modifiers() & Qt::ShiftModifier) != 0;
 #ifdef Q_OS_WIN
-    bool bAlt = (e->modifiers() & Qt::AltModifier) != 0;
+    bool bAlt = (keyEvent->modifiers() & Qt::AltModifier) != 0;
     if(bCtrl && bAlt)
     {
         bCtrl = false;
