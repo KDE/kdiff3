@@ -218,11 +218,7 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
             ++lineC;
         }
 
-        while(d.diff1() > 0)
-        {
-            d.adjustDiff1(-1);
-            ++lineA;
-        }
+        lineA += (LineRef)d.diff1();
 
         while(d.diff2() > 0)
         {
@@ -481,11 +477,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
             }
         }
 
-        while(d.diff2() > 0)
-        {
-            d.adjustDiff2(-1);
-            ++lineC;
-        }
+        lineC += (LineRef)d.diff2();
     }
     /*
    Diff3LineList::iterator it = d3ll.begin();
