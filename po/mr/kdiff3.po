@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-27 00:51+0000\n"
+"POT-Creation-Date: 2023-03-28 00:49+0000\n"
 "PO-Revision-Date: 2013-03-06 18:02+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -125,7 +125,7 @@ msgstr "उपलब्ध नाही"
 msgid "Encoding:"
 msgstr "एन्कोडिंग :"
 
-#: difftextwindow.cpp:1907 mergeresultwindow.cpp:2799 optiondialog.cpp:803
+#: difftextwindow.cpp:1907 mergeresultwindow.cpp:2801 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr ""
@@ -141,12 +141,12 @@ msgstr ""
 msgid "Encoding: %1"
 msgstr "एन्कोडिंग :"
 
-#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2845
+#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2847
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2844
+#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2846
 #, kde-format
 msgid "Unix"
 msgstr ""
@@ -1930,29 +1930,29 @@ msgid ""
 "If you continue your changes will be lost."
 msgstr ""
 
-#: mergeresultwindow.cpp:770 pdiff.cpp:731
+#: mergeresultwindow.cpp:774 pdiff.cpp:731
 #, kde-format
 msgid "All input files are binary equal."
 msgstr ""
 
-#: mergeresultwindow.cpp:772
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid "All input files contain the same text."
 msgstr ""
 
-#: mergeresultwindow.cpp:776 mergeresultwindow.cpp:780
-#: mergeresultwindow.cpp:784 pdiff.cpp:737 pdiff.cpp:741 pdiff.cpp:745
+#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
+#: mergeresultwindow.cpp:788 pdiff.cpp:737 pdiff.cpp:741 pdiff.cpp:745
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:778 mergeresultwindow.cpp:782
-#: mergeresultwindow.cpp:786
+#: mergeresultwindow.cpp:782 mergeresultwindow.cpp:786
+#: mergeresultwindow.cpp:790
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:792
+#: mergeresultwindow.cpp:794
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1961,39 +1961,39 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:800
 #, kde-format
 msgid "Conflicts"
 msgstr ""
 
-#: mergeresultwindow.cpp:1523
+#: mergeresultwindow.cpp:1525
 #, kde-format
 msgid "<No src line>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1533
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2403
+#: mergeresultwindow.cpp:1535 mergeresultwindow.cpp:2405
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr ""
 
-#: mergeresultwindow.cpp:2623
+#: mergeresultwindow.cpp:2625
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2625 mergeresultwindow.cpp:2634
+#: mergeresultwindow.cpp:2627 mergeresultwindow.cpp:2636
 #, kde-format
 msgid "Conflicts Left"
 msgstr ""
 
-#: mergeresultwindow.cpp:2632
+#: mergeresultwindow.cpp:2634
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2001,7 +2001,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2646
+#: mergeresultwindow.cpp:2648
 #, kde-format
 msgid ""
 "\n"
@@ -2009,48 +2009,48 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2688
+#: mergeresultwindow.cpp:2648 mergeresultwindow.cpp:2690
 #, kde-format
 msgid "File Save Error"
 msgstr ""
 
-#: mergeresultwindow.cpp:2688
+#: mergeresultwindow.cpp:2690
 #, kde-format
 msgid "Error while writing."
 msgstr ""
 
-#: mergeresultwindow.cpp:2771
+#: mergeresultwindow.cpp:2773
 #, fuzzy, kde-format
 msgid "Output:"
 msgstr "आउटपुट"
 
-#: mergeresultwindow.cpp:2784 mergeresultwindow.cpp:2974
+#: mergeresultwindow.cpp:2786 mergeresultwindow.cpp:2976
 #, fuzzy, kde-format
 msgid "[Modified]"
 msgstr "सुधारले"
 
-#: mergeresultwindow.cpp:2791
+#: mergeresultwindow.cpp:2793
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding for saving:"
 msgstr "एन्कोडिंग :"
 
-#: mergeresultwindow.cpp:2891
+#: mergeresultwindow.cpp:2893
 #, kde-format
 msgid "Conflict"
 msgstr ""
 
-#: mergeresultwindow.cpp:2923
+#: mergeresultwindow.cpp:2925
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2925
+#: mergeresultwindow.cpp:2927
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2927
+#: mergeresultwindow.cpp:2929
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
