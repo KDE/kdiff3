@@ -325,7 +325,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     }
 
     // Calc needed lines for display
-    if(m_diff3LineList.size() <= TYPE_MAX(QtNumberType))
+    if(m_diff3LineList.size() <= limits<QtNumberType>::max())
         m_neededLines = (QtNumberType)m_diff3LineList.size();
     else
     {

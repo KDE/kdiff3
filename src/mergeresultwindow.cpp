@@ -2123,10 +2123,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             }
             break; // cursor movement
         case Qt::Key_End:
-            x = TYPE_MAX(int);
+            x = limits<int>::max();
             if(bCtrl)
             {
-                y = TYPE_MAX(int);
+                y = limits<int>::max();
             }
             break;
 
@@ -2140,7 +2140,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                     if(newX == x && y > 0)
                     {
                         --y;
-                        x = TYPE_MAX(int);
+                        x = limits<int>::max();
                     }
                     else
                     {
@@ -2723,7 +2723,7 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeTyp
             QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
             //TODO: Provide error message when failsafe is triggered.
-            if(Q_UNLIKELY(pos > TYPE_MAX(int)))
+            if(Q_UNLIKELY(pos > limits<int>::max()))
             {
                 qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
                 continue;

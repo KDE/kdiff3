@@ -1418,7 +1418,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& 
         {
             QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
             //TODO: Provide error message when failsafe is triggered.
-            if(Q_UNLIKELY(pos > TYPE_MAX(int)))
+            if(Q_UNLIKELY(pos > limits<int>::max()))
             {
                 qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
                 continue;

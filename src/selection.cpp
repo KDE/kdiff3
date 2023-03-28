@@ -62,7 +62,7 @@ qint32 Selection::lastPosInLine(LineRef l) const
     if(l == l2)
         return p2;
 
-    return TYPE_MAX(qint32);
+    return limits<qint32>::max();
 }
 
 bool Selection::within(LineRef l, qint32 p) const

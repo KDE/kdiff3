@@ -38,8 +38,8 @@ using KDiff3_exception_policy = boost::safe_numerics::exception_policy<
 template <typename T>
 using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, KDiff3_exception_policy>;
 
-#define TYPE_MAX(x) std::numeric_limits<x>::max()
-#define TYPE_MIN(x) std::numeric_limits<x>::min()
+template <typename T>
+using limits = std::numeric_limits<T>;
 
 static_assert(sizeof(int) >= sizeof(qint32), "Legacy LP32 systems/compilers not supported"); // e.g. Windows 16-bit
 static_assert(sizeof(FileOffset) >= sizeof(QtSizeType), "Size mis-match this configuration is not supported."); //Assumed in SourceData.

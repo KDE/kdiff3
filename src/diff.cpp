@@ -184,7 +184,7 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
         d = *i;
         ++i;
 
-        assert(d.diff1() <= TYPE_MAX(LineRef::LineType) && d.diff2() <= TYPE_MAX(LineRef::LineType));
+        assert(d.diff1() <= limits<LineRef::LineType>::max() && d.diff2() <= limits<LineRef::LineType>::max());
 
         while(d.numberOfEquals() > 0)
         {
@@ -702,7 +702,7 @@ void DiffList::verify(const LineRef size1, const LineRef size2)
     for(const Diff& curDiff: *this)
     {
         assert(curDiff.numberOfEquals() >= 0);
-        assert(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
+        assert(curDiff.diff1() <= limits<LineRef::LineType>::max() && curDiff.diff2() <= limits<LineRef::LineType>::max());
         l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
         l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
     }
@@ -1279,7 +1279,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
                 }
             }
             //Bail this should never happen. Not a nice exit but acts as a back stop against harder to detect infine looping.
-            if(i1 == TYPE_MAX(int))
+            if(i1 == limits<int>::max())
             {
                 assert(false);
                 abort();

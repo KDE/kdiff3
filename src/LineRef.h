@@ -28,7 +28,7 @@ class LineRef
     //cppcheck-suppress noExplicitConstructor
     constexpr inline LineRef(const quint64 i) noexcept
     {
-        if(i <= TYPE_MAX(LineType))
+        if(i <= limits<LineType>::max())
             mLineNumber = (LineType)i;
         else
             mLineNumber = invalid;
@@ -36,7 +36,7 @@ class LineRef
     //cppcheck-suppress noExplicitConstructor
     constexpr inline LineRef(const qint64 i) noexcept
     {
-        if(i <= TYPE_MAX(LineType) && i >= 0)
+        if(i <= limits<LineType>::max() && i >= 0)
             mLineNumber = (LineType)i;
         else
             mLineNumber = invalid;

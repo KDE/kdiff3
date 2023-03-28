@@ -553,7 +553,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     if(m_pOptions->ignoreComments() && hasData())
     {
         qint64 vSize = std::min(m_normalData.lineCount(), m_lmppData.lineCount());
-        assert(vSize < TYPE_MAX(qint32));
+        assert(vSize < limits<qint32>::max());
         //Perform explcit cast to insure well defined behavior comparing 32-bit to a 64-bit value
         for(qint32 i = 0; (qint64)i < vSize; ++i)
         {
@@ -588,7 +588,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(pCodec != pEncoding)
         skipBytes = 0;
 
-    if(mDataSize - skipBytes > TYPE_MAX(QtNumberType))
+    if(mDataSize - skipBytes > limits<QtNumberType>::max())
         return false;
 
     const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
@@ -606,7 +606,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     while(!ts.atEnd())
     {
         line.clear();
-        if(lines >= TYPE_MAX(LineType) - 5)
+        if(lines >= limits<LineType>::max() - 5)
         {
             m_v->clear();
             return false;
