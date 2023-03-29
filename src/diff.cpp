@@ -99,17 +99,12 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
 {
     // First make d3ll for AB (from pDiffListAB)
 
-    DiffList::const_iterator i = pDiffListAB->begin();
     LineRef lineA = 0;
     LineRef lineB = 0;
-    Diff d;
 
     qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB";
-    while(i != pDiffListAB->end())
+    for(Diff d: *pDiffListAB)
     {
-        d = *i;
-        ++i;
-
         while(d.numberOfEquals() > 0)
         {
             Diff3Line d3l;
@@ -173,17 +168,12 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
     ////////////////
     // Now insert data from C using pDiffListAC
 
-    DiffList::const_iterator i = pDiffListAC->begin();
     Diff3LineList::iterator i3 = begin();
     LineRef lineA = 0;
     LineRef lineC = 0;
-    Diff d;
 
-    while(i != pDiffListAC->end())
+    for(Diff d: *pDiffListAC)
     {
-        d = *i;
-        ++i;
-
         assert(d.diff1() <= limits<LineRef::LineType>::max() && d.diff2() <= limits<LineRef::LineType>::max());
 
         while(d.numberOfEquals() > 0)
@@ -242,18 +232,13 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
     // If a line from C equals a line from B but not A, this
     // information will be used here.
 
-    DiffList::const_iterator i = pDiffListBC->begin();
     Diff3LineList::iterator i3b = begin();
     Diff3LineList::iterator i3c = begin();
     LineRef lineB = 0;
     LineRef lineC = 0;
-    Diff d;
 
-    while(i == pDiffListBC->end())
+    for(Diff d: *pDiffListBC)
     {
-        d = *i;
-        ++i;
-
         while(d.numberOfEquals() > 0)
         {
             Diff3Line d3l;
