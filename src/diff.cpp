@@ -283,7 +283,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         ++i3;
                     }
 
-                    if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
+                    if(nofDisturbingLines > 0)
                     {
                         Diff3LineList::iterator i3_last_equal_A = end();
 
@@ -356,7 +356,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         ++i3;
                     }
 
-                    if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
+                    if(nofDisturbingLines > 0)
                     {
                         Diff3LineList::iterator i3_last_equal_A = end();
 
