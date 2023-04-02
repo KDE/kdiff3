@@ -275,7 +275,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                 if(i3c1 == i3b && !i3b->isEqualAB()) // i3c before i3b
                 {
                     Diff3LineList::iterator i3 = i3c;
-                    int nofDisturbingLines = 0;
+                    quint32 nofDisturbingLines = 0;
                     while(i3 != i3b && i3 != end())
                     {
                         if(i3->getLineB().isValid())
@@ -337,21 +337,18 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         nofDisturbingLines = 0;
                     }
 
-                    if(nofDisturbingLines == 0)
-                    {
-                        // Yes, the line from B can be moved.
-                        i3b->setLineB(LineRef::invalid); // This might leave an empty line: removed later.
-                        i3b->bAEqB = false;
-                        i3b->bBEqC = false;
-                        i3c->setLineB(lineB);
-                        i3c->bBEqC = true;
-                        i3c->bAEqB = i3c->isEqualAC();
-                    }
+                    // Yes, the line from B can be moved.
+                    i3b->setLineB(LineRef::invalid); // This might leave an empty line: removed later.
+                    i3b->bAEqB = false;
+                    i3b->bBEqC = false;
+                    i3c->setLineB(lineB);
+                    i3c->bBEqC = true;
+                    i3c->bAEqB = i3c->isEqualAC();
                 }
                 else if(i3b1 == i3c && !i3c->isEqualAC())
                 {
                     Diff3LineList::iterator i3 = i3b;
-                    int nofDisturbingLines = 0;
+                    quint32 nofDisturbingLines = 0;
                     while(i3 != i3c && i3 != end())
                     {
                         if(i3->getLineC().isValid())
@@ -413,16 +410,13 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         nofDisturbingLines = 0;
                     }
 
-                    if(nofDisturbingLines == 0)
-                    {
-                        // Yes, the line from C can be moved.
-                        i3c->setLineC(LineRef::invalid); // This might leave an empty line: removed later.
-                        i3c->bAEqC = false;
-                        i3c->bBEqC = false;
-                        i3b->setLineC(lineC);
-                        i3b->bBEqC = true;
-                        i3b->bAEqC = i3b->isEqualAB();
-                    }
+                    // Yes, the line from C can be moved.
+                    i3c->setLineC(LineRef::invalid); // This might leave an empty line: removed later.
+                    i3c->bAEqC = false;
+                    i3c->bBEqC = false;
+                    i3b->setLineC(lineC);
+                    i3b->bBEqC = true;
+                    i3b->bAEqC = i3b->isEqualAB();
                 }
             }
 
