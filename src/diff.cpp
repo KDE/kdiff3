@@ -334,9 +334,11 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 
                             ++i3;
                         }
-                        nofDisturbingLines = 0;
+                        //Not currently needed as we get here everytime nofDisturbingLines > 0
+                        //nofDisturbingLines = 0;
                     }
 
+                    // Only do this if nofDisturbingLines == 0 currently always true
                     // Yes, the line from B can be moved.
                     i3b->setLineB(LineRef::invalid); // This might leave an empty line: removed later.
                     i3b->bAEqB = false;
@@ -407,9 +409,11 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 
                             ++i3;
                         }
-                        nofDisturbingLines = 0;
+                        //Not currently needed as we get here everytime nofDisturbingLines > 0
+                        //nofDisturbingLines = 0;
                     }
 
+                    // Only do this if nofDisturbingLines == 0 currently always true
                     // Yes, the line from C can be moved.
                     i3c->setLineC(LineRef::invalid); // This might leave an empty line: removed later.
                     i3c->bAEqC = false;
