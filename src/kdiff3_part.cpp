@@ -20,6 +20,7 @@
 #include <QTextStream>
 
 #include <KAboutData>
+#include <KCrash>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KParts/MainWindow>
@@ -34,6 +35,7 @@ K_PLUGIN_FACTORY(KDiff3PartFactory, registerPlugin<KDiff3Part>();)
 KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantList& args)
     : KParts::ReadWritePart(parent)
 {
+    KCrash::initialize();
     assert(parentWidget);
 
     if(!args.isEmpty())

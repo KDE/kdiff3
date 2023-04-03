@@ -143,7 +143,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     setWindowTitle("KDiff3");
     setUpdatesEnabled(false);
-    KCrash::initialize();
 
     // set Disabled to same color as enabled to prevent flicker in DirectoryMergeWindow
     QPalette pal;
