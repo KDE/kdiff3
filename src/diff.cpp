@@ -697,12 +697,9 @@ void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector>& p1, Line
 
     int l1begin = 0;
     int l2begin = 0;
-    ManualDiffHelpList::const_iterator i;
 
-    for(i = begin(); i != end(); ++i)
+    for(const ManualDiffHelpEntry& mdhe: *this)
     {
-        const ManualDiffHelpEntry& mdhe = *i;
-
         LineRef l1end = mdhe.getLine1(winIdx1);
         LineRef l2end = mdhe.getLine1(winIdx2);
 
