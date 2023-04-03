@@ -688,9 +688,9 @@ void DiffList::verify(const LineRef size1, const LineRef size2)
 #endif
 }
 
-void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector> &p1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, LineRef size2, DiffList& diffList,
+void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector>& p1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, LineRef size2, DiffList& diffList,
                                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-                                 const QSharedPointer<Options> &pOptions)
+                                 const QSharedPointer<Options>& pOptions)
 {
     diffList.clear();
     DiffList diffList2;

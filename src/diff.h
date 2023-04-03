@@ -598,7 +598,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
     [[nodiscard]] bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
     void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
-    void runDiff(const std::shared_ptr<LineDataVector> &p1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, LineRef size2, DiffList& diffList,
+    void runDiff(const std::shared_ptr<LineDataVector>& p1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, LineRef size2, DiffList& diffList,
                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                  const QSharedPointer<Options>& pOptions);
 };
