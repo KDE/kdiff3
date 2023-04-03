@@ -455,7 +455,6 @@ public Q_SLOTS:
     DiffList m_diffList13;
     Diff3LineList m_diff3LineList;
     Diff3LineVector mDiff3LineVector;
-    //ManualDiffHelpDialog* m_pManualDiffHelpDialog;
     ManualDiffHelpList m_manualDiffHelpList;
 
     QtNumberType m_neededLines = 0;
