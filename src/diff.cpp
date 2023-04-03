@@ -527,17 +527,17 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     for(e_SrcSelector wIdx = e_SrcSelector::A; wIdx != e_SrcSelector::Invalid; wIdx = nextSelector(wIdx))
     {
         ManualDiffHelpList::iterator iEmpty = begin();
-        for(i = begin(); i != end(); ++i)
+        for(ManualDiffHelpEntry& manualDiff: *this)
         {
             if(iEmpty->firstLine(wIdx).isValid())
             {
                 ++iEmpty;
                 continue;
             }
-            if(i->firstLine(wIdx).isValid()) // Current item is not empty -> move it to the empty place
+            if(manualDiff.firstLine(wIdx).isValid()) // Current item is not empty -> move it to the empty place
             {
-                std::swap(iEmpty->firstLine(wIdx), i->firstLine(wIdx));
-                std::swap(iEmpty->lastLine(wIdx), i->lastLine(wIdx));
+                std::swap(iEmpty->firstLine(wIdx), manualDiff.firstLine(wIdx));
+                std::swap(iEmpty->lastLine(wIdx), manualDiff.lastLine(wIdx));
                 ++iEmpty;
             }
         }
