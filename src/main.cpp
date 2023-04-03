@@ -20,9 +20,7 @@
 #endif
 
 #include <KAboutData>
-#if HAS_KFCRASH
 #include <KCrash/KCrash>
-#endif
 #include <KLocalizedString>
 #include <KMessageBox>
 
@@ -100,9 +98,8 @@ int main(int argc, char* argv[])
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
     KLocalizedString::setApplicationDomain(appName.data());
 
-#if HAS_KFCRASH
     KCrash::initialize();
-#endif
+
     const QString i18nName = i18n("KDiff3");
     QString appVersion(KDIFF3_VERSION_STRING);
 
