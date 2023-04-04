@@ -510,7 +510,7 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
                 l1.invalidate();
                 l2.invalidate();
             }
-            if(firstLine < l1 && lastLine < l1)
+            else if(firstLine < l1 && lastLine < l1)
             {
                 // insert before this position
                 insert(i, mdhe);
