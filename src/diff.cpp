@@ -524,25 +524,23 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     }
 
     // Now make the list compact
-    for(e_SrcSelector wIdx = e_SrcSelector::A; wIdx != e_SrcSelector::Invalid; wIdx = nextSelector(wIdx))
+    for(i = begin(); i != end();)
     {
-        ManualDiffHelpList::iterator iEmpty = begin();
-        for(ManualDiffHelpEntry& manualDiff: *this)
+        ManualDiffHelpList::iterator next = std::next(i);
+
+        for(e_SrcSelector wIdx = e_SrcSelector::A; wIdx != e_SrcSelector::Invalid; wIdx = nextSelector(wIdx))
         {
-            if(iEmpty->firstLine(wIdx).isValid())
+            if(!i->firstLine(wIdx).isValid() && next->firstLine(wIdx).isValid())
             {
-                ++iEmpty;
-                continue;
-            }
-            if(manualDiff.firstLine(wIdx).isValid()) // Current item is not empty -> move it to the empty place
-            {
-                std::swap(iEmpty->firstLine(wIdx), manualDiff.firstLine(wIdx));
-                std::swap(iEmpty->lastLine(wIdx), manualDiff.lastLine(wIdx));
-                ++iEmpty;
+                std::swap(i->firstLine(wIdx), next->firstLine(wIdx));
+                std::swap(i->lastLine(wIdx), next->lastLine(wIdx));
             }
         }
+        //Delete completely empty entries
+        if(*i == ManualDiffHelpEntry())
+            erase(i);
+        i = next;
     }
-    remove(ManualDiffHelpEntry()); // Remove all completely empty items.
 }
 
 bool ManualDiffHelpEntry::isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
