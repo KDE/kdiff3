@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-03 00:48+0000\n"
+"POT-Creation-Date: 2023-04-04 00:49+0000\n"
 "PO-Revision-Date: 2022-10-03 16:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr "폴더 읽는 중: %1"
 msgid "Listing directory: %1"
 msgstr "디렉터리 항목 가져오는 중: %1"
 
-#: diff.cpp:1559 diff.cpp:1575
+#: diff.cpp:1556 diff.cpp:1572
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -102,7 +102,7 @@ msgstr ""
 "데이터 손실 오류:\n"
 "재현 가능한 경우 작성자에게 연락해 주십시오.\n"
 
-#: diff.cpp:1561 diff.cpp:1577
+#: diff.cpp:1558 diff.cpp:1574
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "심각한 내부 오류"
@@ -157,7 +157,7 @@ msgstr "줄 끝 스타일: %1"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: difftextwindow.cpp:1964 kdiff3.cpp:928
+#: difftextwindow.cpp:1964 kdiff3.cpp:927
 #, kde-format
 msgid "Top line"
 msgstr "맨 첫 줄"
@@ -352,7 +352,7 @@ msgid ""
 msgstr ""
 "폴더를 합치고 있습니다. 합치기 작업을 중단하고 폴더를 다시 탐색하시겠습니까?"
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:782 kdiff3.cpp:792 kdiff3.cpp:804
+#: directorymergewindow.cpp:698 kdiff3.cpp:781 kdiff3.cpp:791 kdiff3.cpp:803
 #: mergeresultwindow.cpp:330 pdiff.cpp:856 pdiff.cpp:1722 pdiff.cpp:1732
 #, kde-format
 msgctxt "Error dialog title"
@@ -1118,132 +1118,132 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr "글꼴 바꾸기"
 
-#: kdiff3.cpp:181
+#: kdiff3.cpp:180
 #, kde-format
 msgid "Current Configuration:"
 msgstr "현재 설정:"
 
-#: kdiff3.cpp:186
+#: kdiff3.cpp:185
 #, kde-format
 msgid "Config Option Error:"
 msgstr "설정 옵션 오류:"
 
-#: kdiff3.cpp:245
+#: kdiff3.cpp:244
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "--auto 옵션을 지정했지만 출력 파일을 지정하지 않았습니다."
 
-#: kdiff3.cpp:354
+#: kdiff3.cpp:353
 #, kde-format
 msgid "Directory merge"
 msgstr "디렉터리 합치기"
 
-#: kdiff3.cpp:359
+#: kdiff3.cpp:358
 #, kde-format
 msgid "Merge info"
 msgstr "합치기 정보"
 
-#: kdiff3.cpp:444
+#: kdiff3.cpp:443
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "폴더 비교 시 --auto 옵션을 무시합니다."
 
-#: kdiff3.cpp:525
+#: kdiff3.cpp:524
 #, kde-format
 msgid "Saving failed."
 msgstr "저장 실패."
 
-#: kdiff3.cpp:550 pdiff.cpp:922
+#: kdiff3.cpp:549 pdiff.cpp:922
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "다음 파일을 여는 데 실패했습니다:"
 
-#: kdiff3.cpp:559 pdiff.cpp:931
+#: kdiff3.cpp:558 pdiff.cpp:931
 #, kde-format
 msgid "File open error"
 msgstr "파일 열기 오류"
 
-#: kdiff3.cpp:591
+#: kdiff3.cpp:590
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "비교할 문서 열기..."
 
-#: kdiff3.cpp:593
+#: kdiff3.cpp:592
 #, kde-format
 msgid "Reload"
 msgstr "새로 고침"
 
-#: kdiff3.cpp:596
+#: kdiff3.cpp:595
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "합친 결과를 저장합니다. 모든 충돌 사항을 해결해야 합니다!"
 
-#: kdiff3.cpp:598
+#: kdiff3.cpp:597
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "현재 문서를 다른 이름으로 저장..."
 
-#: kdiff3.cpp:601
+#: kdiff3.cpp:600
 #, kde-format
 msgid "Print the differences"
 msgstr "차이점 인쇄"
 
-#: kdiff3.cpp:604
+#: kdiff3.cpp:603
 #, kde-format
 msgid "Quits the application"
 msgstr "프로그램 종료"
 
-#: kdiff3.cpp:608
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Undo last action."
 msgstr "마지막 동작의 실행을 취소합니다."
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:611
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "선택한 부분을 잘라내고 클립보드에 저장"
 
-#: kdiff3.cpp:615
+#: kdiff3.cpp:614
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "선택한 부분을 클립보드에 복사"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:616
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "현재 위치에 클립보드 내용 붙여넣기"
 
-#: kdiff3.cpp:620
+#: kdiff3.cpp:619
 #, kde-format
 msgid "Select everything in current window"
 msgstr "현재 창의 모든 내용 선택"
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:622
 #, kde-format
 msgid "Search for a string"
 msgstr "문자열 찾기"
 
-#: kdiff3.cpp:625
+#: kdiff3.cpp:624
 #, kde-format
 msgid "Search again for the string"
 msgstr "문자열 다시 찾기"
 
-#: kdiff3.cpp:630
+#: kdiff3.cpp:629
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "상태 표시줄 표시/숨기기"
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3 설정..."
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:653
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "현재 차이점으로 이동"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:653
 #, kde-format
 msgid ""
 "Current\n"
@@ -1252,12 +1252,12 @@ msgstr ""
 "현재\n"
 "차이점"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:655
 #, kde-format
 msgid "Go to First Delta"
 msgstr "첫 차이점으로 이동"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:655
 #, kde-format
 msgid ""
 "First\n"
@@ -1266,12 +1266,12 @@ msgstr ""
 "첫\n"
 "차이점"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:657
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "마지막 차이점으로 이동"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:657
 #, kde-format
 msgid ""
 "Last\n"
@@ -1280,24 +1280,24 @@ msgstr ""
 "마지막\n"
 "차이점"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:659
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(\"공백 문자 표시\" 설정을 사용하지 않으면 공백을 건너뜁니다.)"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:660
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr "(\"공백 문자 표시\" 설정을 사용하지 않아도 공백을 건너뛰지 않습니다.)"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "이전 차이점으로 이동"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1306,12 +1306,12 @@ msgstr ""
 "이전\n"
 "차이점"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "다음 차이점으로 이동"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "Next\n"
@@ -1320,12 +1320,12 @@ msgstr ""
 "다음\n"
 "차이점"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "이전 충돌 항목으로 이동"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1334,12 +1334,12 @@ msgstr ""
 "이전\n"
 "충돌"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:667
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "다음 충돌 항목으로 이동"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:667
 #, kde-format
 msgid ""
 "Next\n"
@@ -1348,12 +1348,12 @@ msgstr ""
 "다음\n"
 "충돌"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:669
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "이전 해결하지 않은 충돌 항목으로 이동"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:669
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1362,12 +1362,12 @@ msgstr ""
 "이전\n"
 "미해결"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "다음 해결하지 않은 충돌 항목으로 이동"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:671
 #, kde-format
 msgid ""
 "Next\n"
@@ -1376,13 +1376,13 @@ msgstr ""
 "다음\n"
 "미해결"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "줄로 이동"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1392,7 +1392,7 @@ msgstr ""
 "줄로\n"
 "이동"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:674
 #, kde-format
 msgid ""
 ".\n"
@@ -1401,13 +1401,13 @@ msgstr ""
 ".\n"
 " 지정한 줄로 이동합니다."
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "A에서 줄 선택"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1417,13 +1417,13 @@ msgstr ""
 "A\n"
 "선택"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:676
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "B에서 줄 선택"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:676
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1433,13 +1433,13 @@ msgstr ""
 "B\n"
 "선택"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "C에서 줄 선택"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1449,13 +1449,13 @@ msgstr ""
 "C\n"
 "선택"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:678
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "원본 선택 후 자동으로 다음 해결되지 않은 충돌 항목으로 이동"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:678
 #, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
@@ -1465,12 +1465,12 @@ msgstr ""
 "자동\n"
 "다음"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:680
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "공백 및 탭 문자 표시"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:680
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1480,12 +1480,12 @@ msgstr ""
 "공백\n"
 "문자"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Show White Space"
 msgstr "공백 문자 표시"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1495,12 +1495,12 @@ msgstr ""
 "공백\n"
 "차이"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "줄 번호 표시"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1510,205 +1510,205 @@ msgstr ""
 "줄\n"
 "번호"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "간단한 충돌 자동으로 해결"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "충돌 항목의 차이점 설정"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:687
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "정규 표현식 자동 합치기 실행"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "과거에 해결했던 충돌 자동으로 해결"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "선택 항목에서 차이점 나누기"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "선택한 변경 사항 합치기"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:692
 #, kde-format
 msgid "Show Window A"
 msgstr "창 A 표시"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Show Window B"
 msgstr "창 B 표시"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:694
 #, kde-format
 msgid "Show Window C"
 msgstr "창 C 표시"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Normal Overview"
 msgstr "일반 요약 보기"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:697
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A 대 B 요약 보기"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:698
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A 대 C 요약 보기"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:699
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B 대 C 요약 보기"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "차이점 창 자동 줄 바꿈 사용"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "수동 Diff 정렬 추가"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "모든 수동 Diff 정렬 삭제"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Focus Next Window"
 msgstr "다음 창에 초점 맞추기"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "이전 창에 초점 맞추기"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "나누기 방향 전환"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "폴더와 텍스트로 화면 나누어 보기"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "폴더와 텍스트 보기 간 전환"
 
-#: kdiff3.cpp:731 kdiff3.cpp:837 kdiff3.cpp:862 kdiff3.cpp:1142 kdiff3.cpp:1163
+#: kdiff3.cpp:730 kdiff3.cpp:836 kdiff3.cpp:861 kdiff3.cpp:1141 kdiff3.cpp:1162
 #: pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044 pdiff.cpp:1053 pdiff.cpp:1111
 #: pdiff.cpp:1119
 #, kde-format
 msgid "Ready."
 msgstr "준비."
 
-#: kdiff3.cpp:781 pdiff.cpp:1721
+#: kdiff3.cpp:780 pdiff.cpp:1721
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "합친 결과가 저장되지 않았습니다."
 
-#: kdiff3.cpp:783
+#: kdiff3.cpp:782
 #, kde-format
 msgid "Save && Quit"
 msgstr "저장하고 끝내기"
 
-#: kdiff3.cpp:784
+#: kdiff3.cpp:783
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "저장하지 않고 끝내기"
 
-#: kdiff3.cpp:792 pdiff.cpp:1732
+#: kdiff3.cpp:791 pdiff.cpp:1732
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "합친 결과를 저장할 수 없습니다."
 
-#: kdiff3.cpp:803 pdiff.cpp:855
+#: kdiff3.cpp:802 pdiff.cpp:855
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "폴더를 합치고 있습니다. 이대로 중단하시겠습니까?"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:825
 #, kde-format
 msgid "Saving file..."
 msgstr "파일 저장하는 중..."
 
-#: kdiff3.cpp:843
+#: kdiff3.cpp:842
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "새 이름으로 파일 저장하는 중..."
 
-#: kdiff3.cpp:845
+#: kdiff3.cpp:844
 #, kde-format
 msgid "Save As..."
 msgstr "다른 이름으로 저장..."
 
-#: kdiff3.cpp:870
+#: kdiff3.cpp:869
 #, kde-format
 msgid "Printing not implemented."
 msgstr "인쇄는 구현되지 않았습니다."
 
-#: kdiff3.cpp:911
+#: kdiff3.cpp:910
 #, kde-format
 msgid "Printing..."
 msgstr "인쇄 중..."
 
-#: kdiff3.cpp:1016
+#: kdiff3.cpp:1015
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "%2 중 %1쪽 인쇄 중"
 
-#: kdiff3.cpp:1075
+#: kdiff3.cpp:1074
 #, kde-format
 msgid " (Selection)"
 msgstr " (선택)"
 
-#: kdiff3.cpp:1104
+#: kdiff3.cpp:1103
 #, kde-format
 msgid "Printing completed."
 msgstr "인쇄가 완료되었습니다."
 
-#: kdiff3.cpp:1108
+#: kdiff3.cpp:1107
 #, kde-format
 msgid "Printing aborted."
 msgstr "인쇄가 중단되었습니다."
 
-#: kdiff3.cpp:1115
+#: kdiff3.cpp:1114
 #, kde-format
 msgid "Exiting..."
 msgstr "종료 중..."
 
-#: kdiff3.cpp:1126
+#: kdiff3.cpp:1125
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "도구 모음 전환 중..."
 
-#: kdiff3.cpp:1147
+#: kdiff3.cpp:1146
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "상태 표시줄 전환 중..."
 
-#: kdiff3_part.cpp:166 kdiff3_part.cpp:252
+#: kdiff3_part.cpp:168 kdiff3_part.cpp:254
 #, kde-format
 msgid "Could not find files for comparison."
 msgstr "비교할 파일을 찾을 수 없습니다."
@@ -1726,7 +1726,7 @@ msgid "Configure KDiff3"
 msgstr "KDiff3 설정"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:106
+#: kdiff3_part.rc:21 main.cpp:103
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1795,84 +1795,84 @@ msgstr "창(&W)"
 msgid "Main Toolbar"
 msgstr "주 도구 모음"
 
-#: main.cpp:73 main.cpp:77
+#: main.cpp:71 main.cpp:75
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "무시함.(사용자 정의)"
 
-#: main.cpp:109
+#: main.cpp:106
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64비트)"
 
-#: main.cpp:111
+#: main.cpp:108
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "파일과 폴더를 비교하고 합치는 도구"
 
-#: main.cpp:112
+#: main.cpp:109
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
-#: main.cpp:132
+#: main.cpp:129
 #, kde-format
 msgid "Merge the input."
 msgstr "입력을 합칩니다."
 
-#: main.cpp:133
+#: main.cpp:130
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "명시적인 기반 파일. 일부 도구와 호환성 때문에 사용합니다."
 
-#: main.cpp:134
+#: main.cpp:131
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "출력 파일. -m을 암시합니다. 예: -o newfile.txt"
 
-#: main.cpp:135
+#: main.cpp:132
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "출력 파일, 또 다시.(일부 도구와 호환성 때문에 사용합니다.)"
 
-#: main.cpp:137
+#: main.cpp:134
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "모든 충돌 사항을 자동적으로 해결할 수 있는 경우 GUI 사용 안 함(-o file 필요)"
 
-#: main.cpp:138
+#: main.cpp:135
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "--auto 옵션을 무시하고 항상 GUI를 표시합니다."
 
-#: main.cpp:140 main.cpp:141
+#: main.cpp:137 main.cpp:138
 #, kde-format
 msgid "Ignored."
 msgstr "무시됨."
 
-#: main.cpp:143
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "입력 파일 1(기반)에 대한 표시 이름 대체입니다."
 
-#: main.cpp:144
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "입력 파일 2에 대한 표시 이름 대체입니다."
 
-#: main.cpp:145
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "입력 파일 3에 대한 표시 이름 대체입니다."
 
-#: main.cpp:146
+#: main.cpp:143
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "대안 표시 이름 대체입니다. 입력 파일마다 하나씩 지정하십시오."
 
-#: main.cpp:147
+#: main.cpp:144
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1881,32 +1881,32 @@ msgstr ""
 "설정 옵션을 재정의합니다. 설정마다 하나씩 사용하십시오. 예: --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:148
+#: main.cpp:145
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "설정 옵션과 현재 값을 표시합니다."
 
-#: main.cpp:149
+#: main.cpp:146
 #, kde-format
 msgid "Use a different config file."
 msgstr "다른 설정 파일을 사용합니다."
 
-#: main.cpp:152
+#: main.cpp:149
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "열 파일 1(--base로 지정하지 않은 경우의 기반)"
 
-#: main.cpp:153
+#: main.cpp:150
 #, kde-format
 msgid "file2 to open"
 msgstr "열 파일 2"
 
-#: main.cpp:154
+#: main.cpp:151
 #, kde-format
 msgid "file3 to open"
 msgstr "열 파일 3"
 
-#: main.cpp:178
+#: main.cpp:175
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "지원되는 옵션은 kdiff3 --help 명령을 참조하십시오."
