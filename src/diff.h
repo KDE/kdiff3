@@ -549,14 +549,17 @@ class ManualDiffHelpEntry
     {
         return winIdx == e_SrcSelector::A ? lineA1 : (winIdx == e_SrcSelector::B ? lineB1 : lineC1);
     }
+
     LineRef& lastLine(e_SrcSelector winIdx)
     {
         return winIdx == e_SrcSelector::A ? lineA2 : (winIdx == e_SrcSelector::B ? lineB2 : lineC2);
     }
+
     bool isLineInRange(LineRef line, e_SrcSelector winIdx)
     {
         return line.isValid() && line >= firstLine(winIdx) && line <= lastLine(winIdx);
     }
+
     bool operator==(const ManualDiffHelpEntry& r) const
     {
         return lineA1 == r.lineA1 && lineB1 == r.lineB1 && lineC1 == r.lineC1 &&
