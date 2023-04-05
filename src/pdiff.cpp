@@ -167,145 +167,153 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     if(errors.isEmpty())
     {
-        // Run the diff.
-        if(m_sd3->isEmpty())
+        try
         {
-            pTotalDiffStatus->setBinaryEqualAB(m_sd1->isBinaryEqualWith(m_sd2));
-
-            if(m_sd1->isText() && m_sd2->isText())
+            // Run the diff.
+            if(m_sd3->isEmpty())
             {
-                pp.setInformation(i18n("Diff: A <-> B"));
-                qCInfo(kdiffMain) << i18n("Diff: A <-> B");
-                m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
-                                             m_pOptionDialog->getOptions());
+                pTotalDiffStatus->setBinaryEqualAB(m_sd1->isBinaryEqualWith(m_sd2));
 
-                pp.step();
+                if(m_sd1->isText() && m_sd2->isText())
+                {
+                    pp.setInformation(i18n("Diff: A <-> B"));
+                    qCInfo(kdiffMain) << i18n("Diff: A <-> B");
+                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
+                                                 m_pOptionDialog->getOptions());
 
-                pp.setInformation(i18n("Linediff: A <-> B"));
-                qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
-                m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
+                    pp.step();
 
-                pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
-                if(m_sd1->getSizeBytes() == 0) pTotalDiffStatus->setTextEqualAB(false);
+                    pp.setInformation(i18n("Linediff: A <-> B"));
+                    qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
+                    m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
 
-                pp.step();
+                    pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
+                    if(m_sd1->getSizeBytes() == 0) pTotalDiffStatus->setTextEqualAB(false);
+
+                    pp.step();
+                }
+                else
+                {
+                    pp.step();
+                    pp.step();
+                }
             }
             else
             {
-                pp.step();
-                pp.step();
-            }
-        }
-        else
-        {
-            if(bLoadFiles)
-            {
-                pp.setInformation(i18n("Loading C"));
-                qCInfo(kdiffMain) << i18n("Loading C: %1", m_sd3->getFilename());
-
-                if(bUseCurrentEncoding)
-                    m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
-                else
-                    m_sd3->readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
-
-                pp.step();
-            }
-
-            pTotalDiffStatus->setBinaryEqualAB(m_sd1->isBinaryEqualWith(m_sd2));
-            pTotalDiffStatus->setBinaryEqualAC(m_sd1->isBinaryEqualWith(m_sd3));
-            pTotalDiffStatus->setBinaryEqualBC(m_sd3->isBinaryEqualWith(m_sd2));
-
-            pp.setInformation(i18n("Diff: A <-> B"));
-            qCInfo(kdiffMain) << i18n("Diff: A <-> B");
-
-            if(m_sd1->isText() && m_sd2->isText())
-            {
-                m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
-                                             m_pOptionDialog->getOptions());
-
-                m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
-            }
-            pp.step();
-
-            pp.setInformation(i18n("Diff: A <-> C"));
-            qCInfo(kdiffMain) << i18n("Diff: A <-> C");
-
-            if(m_sd1->isText() && m_sd3->isText())
-            {
-                m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C,
-                                             m_pOptionDialog->getOptions());
-
-                m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
-                m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
-                m_diff3LineList.calcDiff3LineListTrim(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), &m_manualDiffHelpList);
-            }
-            pp.step();
-
-            pp.setInformation(i18n("Diff: B <-> C"));
-            qCInfo(kdiffMain) << i18n("Diff: B <-> C");
-
-            if(m_sd2->isText() && m_sd3->isText())
-            {
-                m_manualDiffHelpList.runDiff(m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C,
-                                             m_pOptionDialog->getOptions());
-                if(m_pOptions->m_bDiff3AlignBC)
+                if(bLoadFiles)
                 {
-                    m_diff3LineList.calcDiff3LineListUsingBC(&m_diffList23);
+                    pp.setInformation(i18n("Loading C"));
+                    qCInfo(kdiffMain) << i18n("Loading C: %1", m_sd3->getFilename());
+
+                    if(bUseCurrentEncoding)
+                        m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
+                    else
+                        m_sd3->readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
+
+                    pp.step();
+                }
+
+                pTotalDiffStatus->setBinaryEqualAB(m_sd1->isBinaryEqualWith(m_sd2));
+                pTotalDiffStatus->setBinaryEqualAC(m_sd1->isBinaryEqualWith(m_sd3));
+                pTotalDiffStatus->setBinaryEqualBC(m_sd3->isBinaryEqualWith(m_sd2));
+
+                pp.setInformation(i18n("Diff: A <-> B"));
+                qCInfo(kdiffMain) << i18n("Diff: A <-> B");
+
+                if(m_sd1->isText() && m_sd2->isText())
+                {
+                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
+                                                 m_pOptionDialog->getOptions());
+
+                    m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
+                }
+                pp.step();
+
+                pp.setInformation(i18n("Diff: A <-> C"));
+                qCInfo(kdiffMain) << i18n("Diff: A <-> C");
+
+                if(m_sd1->isText() && m_sd3->isText())
+                {
+                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C,
+                                                 m_pOptionDialog->getOptions());
+
+                    m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
                     m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
                     m_diff3LineList.calcDiff3LineListTrim(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), &m_manualDiffHelpList);
                 }
+                pp.step();
+
+                pp.setInformation(i18n("Diff: B <-> C"));
+                qCInfo(kdiffMain) << i18n("Diff: B <-> C");
+
+                if(m_sd2->isText() && m_sd3->isText())
+                {
+                    m_manualDiffHelpList.runDiff(m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C,
+                                                 m_pOptionDialog->getOptions());
+                    if(m_pOptions->m_bDiff3AlignBC)
+                    {
+                        m_diff3LineList.calcDiff3LineListUsingBC(&m_diffList23);
+                        m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
+                        m_diff3LineList.calcDiff3LineListTrim(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), &m_manualDiffHelpList);
+                    }
+                }
+                pp.step();
+
+                m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
+                m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
+                m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+
+                pp.setInformation(i18n("Linediff: A <-> B"));
+                qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
+                if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
+                    pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
+                pp.step();
+
+                pp.setInformation(i18n("Linediff: B <-> C"));
+                qCInfo(kdiffMain) << i18n("Linediff: B <-> C");
+                if(m_sd2->hasData() && m_sd3->hasData() && m_sd2->isText() && m_sd3->isText())
+                    pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay(), eIgnoreFlags));
+                pp.step();
+
+                pp.setInformation(i18n("Linediff: A <-> C"));
+                qCInfo(kdiffMain) << i18n("Linediff: A <-> C");
+                if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
+                    pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay(), eIgnoreFlags));
+                m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
+                m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+
+                pp.setInformation(i18n("Linediff: A <-> B"));
+                if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
+                    pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
+                pp.step();
+
+                pp.setInformation(i18n("Linediff: B <-> C"));
+                if(m_sd3->hasData() && m_sd2->hasData() && m_sd3->isText() && m_sd2->isText())
+                    pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay(), eIgnoreFlags));
+                pp.step();
+
+                pp.setInformation(i18n("Linediff: A <-> C"));
+                if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
+                    pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay(), eIgnoreFlags));
+                pp.step();
+                if(m_sd1->getSizeBytes() == 0)
+                {
+                    pTotalDiffStatus->setTextEqualAB(false);
+                    pTotalDiffStatus->setTextEqualAC(false);
+                }
+                if(m_sd2->getSizeBytes() == 0)
+                {
+                    pTotalDiffStatus->setTextEqualAB(false);
+                    pTotalDiffStatus->setTextEqualBC(false);
+                }
+
+                errors.append(m_sd3->getErrors());
             }
-            pp.step();
-
-            m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
-            m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
-            m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
-
-            pp.setInformation(i18n("Linediff: A <-> B"));
-            qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
-            if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
-                pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
-            pp.step();
-
-            pp.setInformation(i18n("Linediff: B <-> C"));
-            qCInfo(kdiffMain) << i18n("Linediff: B <-> C");
-            if(m_sd2->hasData() && m_sd3->hasData() && m_sd2->isText() && m_sd3->isText())
-                pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay(), eIgnoreFlags));
-            pp.step();
-
-            pp.setInformation(i18n("Linediff: A <-> C"));
-            qCInfo(kdiffMain) << i18n("Linediff: A <-> C");
-            if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
-                pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay(), eIgnoreFlags));
-            m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
-            m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
-
-            pp.setInformation(i18n("Linediff: A <-> B"));
-            if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
-                pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
-            pp.step();
-
-            pp.setInformation(i18n("Linediff: B <-> C"));
-            if(m_sd3->hasData() && m_sd2->hasData() && m_sd3->isText() && m_sd2->isText())
-                pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay(), eIgnoreFlags));
-            pp.step();
-
-            pp.setInformation(i18n("Linediff: A <-> C"));
-            if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
-                pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay(), eIgnoreFlags));
-            pp.step();
-            if(m_sd1->getSizeBytes() == 0)
-            {
-                pTotalDiffStatus->setTextEqualAB(false);
-                pTotalDiffStatus->setTextEqualAC(false);
-            }
-            if(m_sd2->getSizeBytes() == 0)
-            {
-                pTotalDiffStatus->setTextEqualAB(false);
-                pTotalDiffStatus->setTextEqualBC(false);
-            }
-
-            errors.append(m_sd3->getErrors());
+        }
+        catch(std::exception& e)
+        {
+            errors.append(i18n("An internal error occured: %1", QString::fromStdString(e.what())));
+            pp.clear();
         }
     }
     else
