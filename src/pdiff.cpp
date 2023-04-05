@@ -65,7 +65,7 @@ void addWidget(L* layout, W* widget)
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
     ProgressProxy pp;
-    QStringList errors;
+    mErrors.clear();
     // When doing a full analysis in the directory-comparison, then the statistics-results
     // will be stored in the given TotalDiffStatus. Otherwise pTotalDiffStatus will
     // point to m_totalDiffStatus.
@@ -152,8 +152,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             m_sd2->readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
 
         pp.step();
-        errors.append(m_sd1->getErrors());
-        errors.append(m_sd2->getErrors());
+        mErrors.append(m_sd1->getErrors());
+        mErrors.append(m_sd2->getErrors());
     }
     else
     {
@@ -165,7 +165,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     pTotalDiffStatus->reset();
 
-    if(errors.isEmpty())
+    if(mErrors.isEmpty())
     {
         try
         {
@@ -307,12 +307,12 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                     pTotalDiffStatus->setTextEqualBC(false);
                 }
 
-                errors.append(m_sd3->getErrors());
+                mErrors.append(m_sd3->getErrors());
             }
         }
         catch(std::exception& e)
         {
-            errors.append(i18n("An internal error occured: %1", QString::fromStdString(e.what())));
+            mErrors.append(i18n("An internal error occured: %1", QString::fromStdString(e.what())));
             pp.clear();
         }
     }
@@ -321,7 +321,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         pp.clear();
     }
 
-    if(errors.isEmpty() && m_sd1->isText() && m_sd2->isText())
+    if(mErrors.isEmpty() && m_sd1->isText() && m_sd2->isText())
     {
         Diff3Line::m_pDiffBufferInfo->init(&m_diff3LineList,
                                m_sd1->getLineDataForDiff(),
@@ -337,7 +337,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         m_neededLines = (QtNumberType)m_diff3LineList.size();
     else
     {
-        errors.append(i18n("Too many lines in diff. Skiping file."));
+        mErrors.append(i18n("Too many lines in diff. Skiping file."));
     }
 
     //initView does first time setup for ui. Why is called it here?
@@ -396,7 +396,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             m_pMergeWindowFrame->show();
 
         // Try to create a meaningful but not too long caption
-        if(!isPart() && errors.isEmpty())
+        if(!isPart() && mErrors.isEmpty())
         {
             createCaption();
         }
@@ -992,6 +992,8 @@ void KDiff3App::slotFileOpen2(QStringList& errors, const QString& fn1, const QSt
             mainInit(m_totalDiffStatus);
         else
             mainInit(pTotalDiffStatus, InitFlag::loadFiles | InitFlag::autoSolve);
+
+        errors.append(mErrors);
 
         if(m_bDirCompare)
         {

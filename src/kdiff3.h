@@ -481,6 +481,7 @@ public Q_SLOTS:
 
     bool mRunnablesStarted = false;
 
+    QStringList mErrors;
     /*
       This list exists solely to auto disconnect boost signals.
     */
