@@ -337,7 +337,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         m_neededLines = (QtNumberType)m_diff3LineList.size();
     else
     {
-        errors.append("Too many lines in diff. Skiping file.");
+        errors.append(i18n("Too many lines in diff. Skiping file."));
     }
 
     //initView does first time setup for ui. Why is called it here?
