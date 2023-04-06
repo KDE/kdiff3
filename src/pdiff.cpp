@@ -312,7 +312,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         }
         catch(std::exception& e)
         {
-            mErrors.append(i18n("An internal error occured: %1", QString::fromStdString(e.what())));
+            mErrors.append(i18n("An internal error occurred: %1", QString::fromStdString(e.what())));
             pp.clear();
         }
     }
