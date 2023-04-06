@@ -1253,7 +1253,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
                 Bail this should never happen.
                 Acts back stop against harder to detect overfollow issues.
             */
-            if(i1 == limits<decltype(i1)>::max())
+            if(Q_UNLIKELY(i1 == limits<decltype(i1)>::max()))
             {
                 assert(false);
                 throw std::range_error("Too many diffs");

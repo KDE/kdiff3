@@ -581,7 +581,7 @@ KDiff3App::~KDiff3App()
 
 void KDiff3App::initActions(KActionCollection* ac)
 {
-    if(ac == nullptr)
+    if(Q_UNLIKELY(ac == nullptr))
     {
         KMessageBox::error(nullptr, "actionCollection==0");
         exit(-1); //we cannot recover from this.
