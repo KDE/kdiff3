@@ -656,8 +656,8 @@ void KDiff3App::initActions(KActionCollection* ac)
 
     mGoBottom = GuiUtils::createAction<QAction>(i18n("Go to Last Delta"), QIcon(QPixmap(downend)), i18n("Last\nDelta"), this, &KDiff3App::slotGoBottom, ac, "go_bottom");
 
-    QString omitsWhitespace = ".\n" + i18n("(Skips white space differences when \"Show White Space\" is disabled.)");
-    QString includeWhitespace = ".\n" + i18n("(Does not skip white space differences even when \"Show White Space\" is disabled.)");
+    QString omitsWhitespace = ".\n" + i18nc("Tooltip explaination text", "(Skips white space differences when \"Show White Space\" is disabled.)");
+    QString includeWhitespace = ".\n" + i18nc("Tooltip explaination text", "(Does not skip white space differences even when \"Show White Space\" is disabled.)");
     mGoPrevDelta = GuiUtils::createAction<QAction>(i18n("Go to Previous Delta"), QIcon(QPixmap(up1arrow)), i18n("Prev\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Up), this, &KDiff3App::slotGoPrevDelta, ac, "go_prev_delta");
     mGoPrevDelta->setToolTip(mGoPrevDelta->text() + omitsWhitespace);
     mGoNextDelta = GuiUtils::createAction<QAction>(i18n("Go to Next Delta"), QIcon(QPixmap(down1arrow)), i18n("Next\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Down), this, &KDiff3App::slotGoNextDelta, ac, "go_next_delta");
