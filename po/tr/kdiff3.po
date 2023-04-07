@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-06 00:49+0000\n"
-"PO-Revision-Date: 2023-03-09 13:33+0300\n"
+"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"PO-Revision-Date: 2023-04-06 13:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -143,7 +143,7 @@ msgstr "A (Temel)"
 #: difftextwindow.cpp:1934
 #, kde-format
 msgid "Encoding: %1"
-msgstr "Kodlanıyor: %1"
+msgstr "Kodlama: %1"
 
 #: difftextwindow.cpp:1935 mergeresultwindow.cpp:2847
 #, kde-format
@@ -163,7 +163,7 @@ msgstr "Satır sonu biçemi: %1"
 #: difftextwindow.cpp:1936
 #, kde-format
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "Bilinmiyor"
 
 #: difftextwindow.cpp:1964 kdiff3.cpp:927
 #, kde-format
@@ -3153,8 +3153,8 @@ msgid ""
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\" error."
 msgstr ""
-"KDiff3 diğer araçlar tarafından kullanıldığında göz ardı edilmesi gereken "
-"komut satırı seçeneklerinin listesi.\n"
+"KDiff3 diğer araçlar tarafından kullanıldığında yok sayılması gereken komut "
+"satırı seçeneklerinin listesi.\n"
 "';' ile ayrılmışsa çeşitli değerler belirtilebilir\n"
 "Bu, \"Bilinmeyen seçenek\" hatasını bastırır."
 
@@ -3275,14 +3275,15 @@ msgid "Linediff: A <-> C"
 msgstr "Satır farkı: A<-> C"
 
 #: pdiff.cpp:315
-#, kde-format
-msgid "An internal error occured: %1"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "An internal error occured: %1"
+msgid "An internal error occurred: %1"
+msgstr "Bir iç hata oluştu: %1"
 
 #: pdiff.cpp:340
 #, kde-format
 msgid "Too many lines in diff. Skiping file."
-msgstr ""
+msgstr "Diff'te çok fazla satır var. Dosya atlanıyor."
 
 #: pdiff.cpp:741
 #, kde-format
