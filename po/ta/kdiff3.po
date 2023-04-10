@@ -6,13 +6,13 @@
 #
 # Ambalam <tamilpc@ambalam.com>, 2004.
 # root <root@localhost.localdomain>, 2004.
-# Kishore G <kishore96@gmail.com>, 2022.
+# Kishore G <kishore96@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-28 03:33+0000\n"
-"PO-Revision-Date: 2022-08-07 11:28+0530\n"
+"PO-Revision-Date: 2023-04-09 13:00+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.07.90\n"
+"X-Generator: Lokalize 23.03.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -103,6 +103,8 @@ msgid ""
 "Data loss error:\n"
 "If it is reproducible please contact the author.\n"
 msgstr ""
+"தரவிழப்பு சிக்கல்:\n"
+"இச்சிக்கலைத் தூண்டும் முறை உங்களுக்கு தெரிந்தால் நிரலாளரை தொடர்புகொள்ளவும்.\n"
 
 #: diff.cpp:1578 diff.cpp:1594
 #, kde-format
@@ -172,10 +174,9 @@ msgid "C"
 msgstr "C"
 
 #: difftextwindow.cpp:1925
-#, fuzzy, kde-format
-#| msgid "A (Base):"
+#, kde-format
 msgid "A (Base)"
-msgstr "A (அடிப்படை)"
+msgstr "A (மூலம்)"
 
 #: difftextwindow.cpp:1927
 #, kde-format
@@ -203,9 +204,9 @@ msgid "Unknown"
 msgstr "தெரியாதது"
 
 #: difftextwindow.cpp:1957 kdiff3.cpp:907
-#, fuzzy, kde-format
+#, kde-format
 msgid "Top line"
-msgstr "மேல் வரி %1."
+msgstr "முதல் வரி"
 
 #: difftextwindow.cpp:1966
 #, kde-format
@@ -367,18 +368,16 @@ msgid "Status"
 msgstr "நிலை"
 
 #: directorymergewindow.cpp:537
-#, fuzzy, kde-format
-#| msgid "Unsolved"
+#, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
-msgstr "Unsolved"
+msgstr "தீர்கப்படாத‍து"
 
 #: directorymergewindow.cpp:539
-#, fuzzy, kde-format
-#| msgid "Solved"
+#, kde-format
 msgctxt "Column title"
 msgid "Solved"
-msgstr "Solved"
+msgstr "தீர்க்கப்பட்டது"
 
 #: directorymergewindow.cpp:541
 #, fuzzy, kde-format
