@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-12 00:51+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -1261,11 +1261,13 @@ msgstr "Kuri "
 
 #: kdiff3.cpp:659
 #, fuzzy, kde-format
+msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "( Umweru Umwanya Ibinyuranyo Ryari: \" \" ni Yahagaritswe . ) "
 
 #: kdiff3.cpp:660
 #, fuzzy, kde-format
+msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
@@ -1361,9 +1363,8 @@ msgstr "Ihuza..."
 
 #: kdiff3.cpp:674
 #, kde-format
-msgid ""
-".\n"
-" Goto specified line."
+msgctxt "Tooltip Text"
+msgid "Goto specified line."
 msgstr ""
 
 #: kdiff3.cpp:675

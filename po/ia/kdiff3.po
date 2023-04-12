@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-12 00:51+0000\n"
 "PO-Revision-Date: 2023-01-10 16:01+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -1233,11 +1233,13 @@ msgstr ""
 
 #: kdiff3.cpp:659
 #, kde-format
+msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
 #: kdiff3.cpp:660
 #, kde-format
+msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
@@ -1332,11 +1334,11 @@ msgstr ""
 "Linea"
 
 #: kdiff3.cpp:674
-#, kde-format
-msgid ""
-".\n"
-" Goto specified line."
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "No program specified."
+msgctxt "Tooltip Text"
+msgid "Goto specified line."
+msgstr "Nulle programma specificate."
 
 #: kdiff3.cpp:675
 #, kde-format

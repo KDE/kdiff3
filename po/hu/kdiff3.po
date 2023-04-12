@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-12 00:51+0000\n"
 "PO-Revision-Date: 2013-07-13 11:52+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1392,11 +1392,13 @@ msgstr ""
 
 #: kdiff3.cpp:659
 #, kde-format
+msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
 #: kdiff3.cpp:660
 #, kde-format
+msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
@@ -1503,11 +1505,11 @@ msgid ""
 msgstr "Sor"
 
 #: kdiff3.cpp:674
-#, kde-format
-msgid ""
-".\n"
-" Goto specified line."
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "No program specified."
+msgctxt "Tooltip Text"
+msgid "Goto specified line."
+msgstr "Nincs program megadva."
 
 #: kdiff3.cpp:675
 #, fuzzy, kde-format

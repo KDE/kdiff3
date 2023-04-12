@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-12 00:51+0000\n"
 "PO-Revision-Date: 2022-10-03 16:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-i18n-doc@kde.org>\n"
@@ -1281,12 +1281,19 @@ msgstr ""
 "차이점"
 
 #: kdiff3.cpp:659
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(\"공백 문자 표시\" 설정을 사용하지 않으면 공백을 건너뜁니다.)"
 
 #: kdiff3.cpp:660
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "(Does not skip white space differences even when \"Show White Space\" is "
+#| "disabled.)"
+msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
@@ -1393,10 +1400,12 @@ msgstr ""
 "이동"
 
 #: kdiff3.cpp:674
-#, kde-format
-msgid ""
-".\n"
-" Goto specified line."
+#, fuzzy, kde-format
+#| msgid ""
+#| ".\n"
+#| " Goto specified line."
+msgctxt "Tooltip Text"
+msgid "Goto specified line."
 msgstr ""
 ".\n"
 " 지정한 줄로 이동합니다."

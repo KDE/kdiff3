@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-07 00:49+0000\n"
+"POT-Creation-Date: 2023-04-12 00:51+0000\n"
 "PO-Revision-Date: 2023-04-10 14:10\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1267,12 +1267,19 @@ msgstr ""
 "增补"
 
 #: kdiff3.cpp:659
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(禁用“显示空白字符”时跳过空白字符差异。)"
 
 #: kdiff3.cpp:660
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "(Does not skip white space differences even when \"Show White Space\" is "
+#| "disabled.)"
+msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
@@ -1379,10 +1386,12 @@ msgstr ""
 "行"
 
 #: kdiff3.cpp:674
-#, kde-format
-msgid ""
-".\n"
-" Goto specified line."
+#, fuzzy, kde-format
+#| msgid ""
+#| ".\n"
+#| " Goto specified line."
+msgctxt "Tooltip Text"
+msgid "Goto specified line."
 msgstr ""
 ".\n"
 " 跳转到指定的行。"
