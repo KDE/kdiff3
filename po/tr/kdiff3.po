@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-12 00:51+0000\n"
-"PO-Revision-Date: 2023-04-07 11:30+0300\n"
+"PO-Revision-Date: 2023-04-12 12:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1292,27 +1292,21 @@ msgstr ""
 "Delta"
 
 #: kdiff3.cpp:659
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
-"(\"Boşluk Karakterini Göster\" seçeneği kapalı iken boşluk farklarını göz "
-"ardı eder.)"
+"(\"Boşluk Karakterini Göster\" seçeneği kapalı iken boşluk farklarını atlar.)"
 
 #: kdiff3.cpp:660
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
-"(\"Boşluk Karakterini Göster\" seçeneği kapalı iken boşluk farklarını göz "
-"ardı etmez.)"
+"(\"Boşluk Karakterini Göster\" seçeneği kapalı iken boşluk farklarını "
+"atlamaz.)"
 
 #: kdiff3.cpp:661
 #, kde-format
@@ -1415,15 +1409,10 @@ msgstr ""
 "Satır"
 
 #: kdiff3.cpp:674
-#, fuzzy, kde-format
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
-".\n"
-"Belirtilen satıra git."
+msgstr "Belirtilen satıra gidin."
 
 #: kdiff3.cpp:675
 #, kde-format
