@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-12 02:49+0000\n"
-"PO-Revision-Date: 2023-02-18 07:49+0100\n"
+"PO-Revision-Date: 2023-04-13 06:13+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -418,17 +418,17 @@ msgstr "საქაღალდეების გახსნის შეც�
 #: directorymergewindow.cpp:851
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "საქაღალდე A \"%1\" არ არსებობს ან საქაღალდე არაა.\n"
 
 #: directorymergewindow.cpp:856
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "საქაღალდე B \"%1\" არ არსებობს ან საქაღალდე არაა.\n"
 
 #: directorymergewindow.cpp:861
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "საქაღალდე C \"%1\" არ არსებობს ან საქაღალდე არაა.\n"
 
 #: directorymergewindow.cpp:864
 #, kde-format
@@ -471,12 +471,12 @@ msgstr "C საქაღალდის კითხვა"
 #: directorymergewindow.cpp:940
 #, kde-format
 msgid "Some subfolders were not readable in"
-msgstr ""
+msgstr "ზოგიერთი ქვესაქაღალდე წაკითხვადი არაა"
 
 #: directorymergewindow.cpp:945
 #, kde-format
 msgid "Check the permissions of the subfolders."
-msgstr ""
+msgstr "შეამოწმეთ თქვენი წვდომები ქვესაქაღალდეებზე."
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:715 kdiff3.cpp:821 kdiff3.cpp:845
 #: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044
@@ -665,12 +665,12 @@ msgstr ""
 #: directorymergewindow.cpp:2401
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
-msgstr ""
+msgstr "შეცდომა. მეტი ინფორმაციის სანახავად დააწექით დიახს."
 
 #: directorymergewindow.cpp:2434
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
-msgstr ""
+msgstr "შეცდომა %1-ის წაშლისას: მარქაფის ოპერაციის შეცდომა."
 
 #: directorymergewindow.cpp:2441
 #, kde-format
@@ -690,17 +690,17 @@ msgstr ""
 #: directorymergewindow.cpp:2475
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
-msgstr ""
+msgstr "შეცდომა: ოპერაცია rmdir( %1 ) შეუძლებელია."
 
 #: directorymergewindow.cpp:2485
 #, kde-format
 msgid "Error: delete operation failed."
-msgstr ""
+msgstr "შეცდომა: წაშლის ოპერაციის შეცდომა."
 
 #: directorymergewindow.cpp:2512
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr ""
+msgstr "ხელით შერწყმა( %1, %2, %3 -> %4)"
 
 #: directorymergewindow.cpp:2515
 #, kde-format
@@ -782,7 +782,7 @@ msgstr "ტიპით"
 #: directorymergewindow.cpp:2724
 #, kde-format
 msgid "Size"
-msgstr ""
+msgstr "ზომა"
 
 #: directorymergewindow.cpp:2725
 #, kde-format
@@ -802,12 +802,12 @@ msgstr "ბმულის სამიზნე"
 #: directorymergewindow.cpp:2752
 #, kde-format
 msgid "File"
-msgstr ""
+msgstr "ფაილი"
 
 #: directorymergewindow.cpp:2752
 #, kde-format
 msgid "-Link"
-msgstr ""
+msgstr "-ბმული"
 
 #: directorymergewindow.cpp:2758
 #, kde-format
@@ -873,7 +873,7 @@ msgstr ""
 #: directorymergewindow.cpp:2949
 #, kde-format
 msgid "Compare Selected File"
-msgstr ""
+msgstr "მონიშნული ფაილის შედარება"
 
 #: directorymergewindow.cpp:2950
 #, kde-format
@@ -934,7 +934,7 @@ msgstr ""
 #: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Show Identical Files"
-msgstr ""
+msgstr "ერთნაირი ფაილების ჩვენება"
 
 #: directorymergewindow.cpp:2965
 #, kde-format
@@ -948,7 +948,7 @@ msgstr ""
 #: directorymergewindow.cpp:2966
 #, kde-format
 msgid "Show Different Files"
-msgstr ""
+msgstr "განსხვავებული ფაილების ჩვენება"
 
 #: directorymergewindow.cpp:2967
 #, kde-format
@@ -1366,10 +1366,7 @@ msgstr ""
 "გადასვლა"
 
 #: kdiff3.cpp:659
-#, fuzzy, kde-format
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Additional text intooltip"
 msgid ""
 ".\n"
@@ -1459,6 +1456,8 @@ msgid ""
 "White\n"
 "Deltas"
 msgstr ""
+"თეთრი\n"
+"დელტები"
 
 #: kdiff3.cpp:668
 #, kde-format
@@ -1472,6 +1471,8 @@ msgid ""
 "Line\n"
 "Numbers"
 msgstr ""
+"ხაზის\n"
+"ნომრები"
 
 #: kdiff3.cpp:670
 #, kde-format
@@ -1637,17 +1638,17 @@ msgstr ""
 #: kdiff3.cpp:1050
 #, kde-format
 msgid " (Selection)"
-msgstr ""
+msgstr " (მონიშნული)"
 
 #: kdiff3.cpp:1079
 #, kde-format
 msgid "Printing completed."
-msgstr ""
+msgstr "დაბეჭდვა დასრულდა."
 
 #: kdiff3.cpp:1083
 #, kde-format
 msgid "Printing aborted."
-msgstr ""
+msgstr "დაბეჭდვა გაუქმდა."
 
 #: kdiff3.cpp:1090
 #, kde-format
@@ -1687,7 +1688,7 @@ msgstr "Joachim Eibl"
 #: kdiff3_part.cpp:182 kdiff3_part.cpp:268
 #, kde-format
 msgid "Could not find files for comparison."
-msgstr ""
+msgstr "შესადარებელი ფაილები ვერ ვიპოვე."
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_part.rc:9
@@ -1911,12 +1912,12 @@ msgstr "ზომა. "
 #: MergeFileInfos.cpp:446 MergeFileInfos.cpp:456
 #, kde-format
 msgid "Date & Size: "
-msgstr ""
+msgstr "თარიღი და ზომა: "
 
 #: MergeFileInfos.cpp:477
 #, kde-format
 msgid "Comparing file..."
-msgstr ""
+msgstr "ფაილის სედარება..."
 
 #: mergeresultwindow.cpp:147
 #, kde-format
@@ -2143,7 +2144,7 @@ msgstr ""
 #: opendialog.ui:129
 #, kde-format
 msgid "C (Optional):"
-msgstr ""
+msgstr "C (არასავალდებულო):"
 
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectB)
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectC)
@@ -2218,7 +2219,7 @@ msgstr "აპლიკაციის ფონტი"
 #: optiondialog.cpp:557
 #, kde-format
 msgid "File view font"
-msgstr ""
+msgstr "ფაილის ხედის ფონტი"
 
 #: optiondialog.cpp:576
 #, kde-format
@@ -2289,7 +2290,7 @@ msgstr ""
 #: optiondialog.cpp:696
 #, kde-format
 msgid "Folder Comparison View:"
-msgstr ""
+msgstr "საქაღალდის შედარების ხედი:"
 
 #: optiondialog.cpp:702
 #, kde-format
@@ -2306,17 +2307,17 @@ msgstr ""
 #: optiondialog.cpp:712
 #, kde-format
 msgid "Oldest file color:"
-msgstr ""
+msgstr "უძველესი ფაილის ფერი:"
 
 #: optiondialog.cpp:721
 #, kde-format
 msgid "Middle age file color:"
-msgstr ""
+msgstr "საშუალო ასაკის ფერი:"
 
 #: optiondialog.cpp:730
 #, kde-format
 msgid "Color for missing files:"
-msgstr ""
+msgstr "ნაკლული ფაილების ფერი:"
 
 #: optiondialog.cpp:744
 #, kde-format
@@ -2331,7 +2332,7 @@ msgstr "რედაქტორის ქცევა"
 #: optiondialog.cpp:767
 #, kde-format
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "ტაბულაცია გამოტოვებას ჩასვამს"
 
 #: optiondialog.cpp:771
 #, kde-format
@@ -2358,7 +2359,7 @@ msgstr ""
 #: optiondialog.cpp:790
 #, kde-format
 msgid "Auto copy selection"
-msgstr ""
+msgstr "მონიშნულის ავტომატური კოპირება"
 
 #: optiondialog.cpp:794
 #, kde-format
@@ -2438,7 +2439,7 @@ msgstr ""
 #: optiondialog.cpp:864
 #, kde-format
 msgid "Preprocessor command:"
-msgstr ""
+msgstr "პრეპროცესორის ბრძანება:"
 
 #: optiondialog.cpp:869
 #, kde-format
@@ -2508,7 +2509,7 @@ msgstr ""
 #: optiondialog.cpp:937
 #, kde-format
 msgid "Show info dialogs"
-msgstr ""
+msgstr "საინფორმაციო ფანჯრების ჩვენება"
 
 #: optiondialog.cpp:940
 #, kde-format
@@ -2523,7 +2524,7 @@ msgstr ""
 #: optiondialog.cpp:948 optiondialog.cpp:961
 #, kde-format
 msgid "Manual Choice"
-msgstr ""
+msgstr "ხელით არჩევა"
 
 #: optiondialog.cpp:952 optiondialog.cpp:966
 #, kde-format
@@ -2644,7 +2645,7 @@ msgstr ""
 #: optiondialog.cpp:1115
 #, kde-format
 msgid "Recursive folders"
-msgstr ""
+msgstr "საქაღალდეების რეკურსია"
 
 #: optiondialog.cpp:1118
 #, kde-format
@@ -2654,7 +2655,7 @@ msgstr ""
 #: optiondialog.cpp:1120
 #, kde-format
 msgid "File pattern(s):"
-msgstr ""
+msgstr "ფაილის ნიმუშები:"
 
 #: optiondialog.cpp:1126
 #, kde-format
@@ -2667,7 +2668,7 @@ msgstr ""
 #: optiondialog.cpp:1131
 #, kde-format
 msgid "File-anti-pattern(s):"
-msgstr ""
+msgstr "ფაილის-ანტი-ნიმუშები:"
 
 #: optiondialog.cpp:1137
 #, kde-format
@@ -2680,7 +2681,7 @@ msgstr ""
 #: optiondialog.cpp:1142
 #, kde-format
 msgid "Folder-anti-pattern(s):"
-msgstr ""
+msgstr "საქაღალდის-ანტი-ნიმუშები:"
 
 #: optiondialog.cpp:1148
 #, kde-format
@@ -2777,12 +2778,12 @@ msgstr ""
 #: optiondialog.cpp:1212
 #, kde-format
 msgid "File Comparison Mode"
-msgstr ""
+msgstr "ფაილის შედარების რეჟიმი"
 
 #: optiondialog.cpp:1217
 #, kde-format
 msgid "Binary comparison"
-msgstr ""
+msgstr "ბინარული შედარება"
 
 #: optiondialog.cpp:1219
 #, kde-format
@@ -3025,7 +3026,7 @@ msgstr ""
 #: pdiff.cpp:96
 #, kde-format
 msgid "PreprocessorCmd: "
-msgstr ""
+msgstr "პრეპროცესორისბრძნბ: "
 
 #: pdiff.cpp:98
 #, kde-format
@@ -3205,12 +3206,12 @@ msgstr ""
 #: pdiff.cpp:1707
 #, kde-format
 msgid "Save && Continue"
-msgstr ""
+msgstr "შენახვა და გაგრძელება"
 
 #: pdiff.cpp:1708
 #, kde-format
 msgid "Continue Without Saving"
-msgstr ""
+msgstr "შენახვის გარეშე გაგრძელება"
 
 #: pdiff.cpp:1906
 #, kde-format
@@ -3220,7 +3221,7 @@ msgstr "ძებნა დასრულდა."
 #: pdiff.cpp:1906
 #, kde-format
 msgid "Search Complete"
-msgstr ""
+msgstr "ძებნა დასრულდა"
 
 #: pdiff.cpp:2087
 #, kde-format
@@ -3266,7 +3267,7 @@ msgstr "საქაღალდის გახსნა"
 #: smalldialogs.cpp:162
 #, kde-format
 msgid "Select Output File"
-msgstr ""
+msgstr "აირჩიეთ გამოტანის ფაილი"
 
 #: smalldialogs.cpp:162 smalldialogs.cpp:163
 #, kde-format
@@ -3276,7 +3277,7 @@ msgstr ""
 #: smalldialogs.cpp:324
 #, kde-format
 msgid "Search text:"
-msgstr ""
+msgstr "მოძებნე ტექსტი:"
 
 #: smalldialogs.cpp:331
 #, kde-format
@@ -3306,7 +3307,7 @@ msgstr "გამოტანაში ძებნა"
 #: smalldialogs.cpp:356
 #, kde-format
 msgid "&Search"
-msgstr ""
+msgstr "&ძებნა"
 
 #: smalldialogs.cpp:382
 #, kde-format
@@ -3390,12 +3391,12 @@ msgstr "გაცვლის ბუფერიდან"
 #: SourceData.cpp:359
 #, kde-format
 msgid "%1 is not a normal file."
-msgstr ""
+msgstr "%1 ნორმალური ფაილი არაა."
 
 #: SourceData.cpp:453
 #, kde-format
 msgid "    Temp file is: %1"
-msgstr ""
+msgstr "    დროებითი ფაილია: %1"
 
 #: SourceData.cpp:457
 #, kde-format
