@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-12 00:51+0000\n"
-"PO-Revision-Date: 2023-04-06 18:09+0200\n"
+"PO-Revision-Date: 2023-04-13 17:33+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -1299,9 +1299,7 @@ msgstr ""
 "разлика"
 
 #: kdiff3.cpp:659
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
@@ -1309,16 +1307,13 @@ msgstr ""
 "интервалите\" е изключена.)"
 
 #: kdiff3.cpp:660
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
-"(Прескача разликата в интервалите, дори когато настройката \"Показване на "
+"(Не прескача разликата в интервалите, дори когато настройката \"Показване на "
 "интервалите\" е изключена.)"
 
 #: kdiff3.cpp:661
@@ -1422,15 +1417,10 @@ msgstr ""
 "Ред"
 
 #: kdiff3.cpp:674
-#, fuzzy, kde-format
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
-".\n"
-" Отиване на посочения ред."
+msgstr "Отиване на посочения ред."
 
 #: kdiff3.cpp:675
 #, kde-format
@@ -3296,8 +3286,7 @@ msgid "Linediff: A <-> C"
 msgstr "Разлика на ред: A <-> B"
 
 #: pdiff.cpp:315
-#, fuzzy, kde-format
-#| msgid "An internal error occured: %1"
+#, kde-format
 msgid "An internal error occurred: %1"
 msgstr "Възникна вътрешна грешка: %1"
 
