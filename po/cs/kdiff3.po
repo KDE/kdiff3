@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-12 00:51+0000\n"
-"PO-Revision-Date: 2023-02-24 11:07+0100\n"
+"PO-Revision-Date: 2023-04-14 21:53+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1279,19 +1279,14 @@ msgstr ""
 "rozdíl"
 
 #: kdiff3.cpp:659
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(Přeskočí rozdíly v mezerách pokud je vypnuta volba \"Zobrazit mezery\".)"
 
 #: kdiff3.cpp:660
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1401,15 +1396,10 @@ msgstr ""
 "na řádek"
 
 #: kdiff3.cpp:674
-#, fuzzy, kde-format
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
-".\n"
-" Jít na vybraný řádek."
+msgstr "Jít na vybraný řádek."
 
 #: kdiff3.cpp:675
 #, kde-format
@@ -3269,7 +3259,7 @@ msgstr "Rozdíly řádků: A <-> C"
 #: pdiff.cpp:315
 #, kde-format
 msgid "An internal error occurred: %1"
-msgstr ""
+msgstr "Nastala vnitřní chyba: %1"
 
 #: pdiff.cpp:340
 #, kde-format
