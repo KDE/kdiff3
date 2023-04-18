@@ -1679,7 +1679,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         QtSizeType cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
 
-        for(i = firstD3LineIdx; i < endIdx; ++i)
+        for(i = firstD3LineIdx; wrapLineIdx < d->m_diff3WrapLineVector.size() && i < endIdx; ++i)
         {
             if(g_pProgressDialog->wasCancelled())
                 return;
@@ -1707,7 +1707,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                 QtSizeType curCount = d->m_wrapLineCacheList[cacheListIdx2].count() - 1;
                 LineCount l = 0;
 
-                while((cacheListIdx2 < clc || (cacheListIdx2 == clc && cacheIdx < cllc)) && pWrapLineCache->d3LineIdx() <= i)
+                while(wrapLineIdx + l < d->m_diff3WrapLineVector.size() && (cacheListIdx2 < clc || (cacheListIdx2 == clc && cacheIdx < cllc)) && pWrapLineCache->d3LineIdx() <= i)
                 {
                     if(pWrapLineCache->d3LineIdx() == i)
                     {
@@ -1744,7 +1744,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
             if(wrapLineVectorSize > 0)
             {
                 int j;
-                for(j = 0; j < d3l.linesNeededForDisplay(); ++j, ++wrapLineIdx)
+                for(j = 0; wrapLineIdx < d->m_diff3WrapLineVector.size() && j < d3l.linesNeededForDisplay(); ++j, ++wrapLineIdx)
                 {
                     Diff3WrapLine& d3wl = d->m_diff3WrapLineVector[wrapLineIdx];
                     d3wl.diff3LineIndex = i;
