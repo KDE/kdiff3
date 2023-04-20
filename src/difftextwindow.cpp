@@ -51,14 +51,14 @@
 #include <QTextCodec>
 #include <QTextLayout>
 #include <QThreadPool>
+#include <QtMath>
 #include <QToolTip>
 #include <QUrl>
-#include <QtMath>
 
 QScrollBar* DiffTextWindow::mVScrollBar = nullptr;
 QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
 
-class RecalcWordWrapRunnable : public QRunnable
+class RecalcWordWrapRunnable: public QRunnable
 {
   private:
     static QAtomicInt s_runnableCount;
@@ -68,8 +68,8 @@ class RecalcWordWrapRunnable : public QRunnable
 
   public:
     static QAtomicInt s_maxNofRunnables;
-    RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, QtSizeType cacheIdx)
-        : m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
+    RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, QtSizeType cacheIdx):
+        m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
         setAutoDelete(true);
         s_runnableCount.fetchAndAddOrdered(1);
@@ -93,8 +93,8 @@ class WrapLineCacheData
 {
   public:
     WrapLineCacheData() = default;
-    WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
-        : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
+    WrapLineCacheData(int d3LineIdx, int textStart, int textLength):
+        m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
     [[nodiscard]] qint32 d3LineIdx() const { return m_d3LineIdx; }
     [[nodiscard]] qint32 textStart() const { return m_textStart; }
     [[nodiscard]] qint32 textLength() const { return m_textLength; }
@@ -190,25 +190,49 @@ class DiffTextWindowData
     QSharedPointer<SourceData> sourceData;
 };
 
-void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData) { d->sourceData = inData; }
-bool DiffTextWindow::isThreeWay() const { return d->isThreeWay(); };
-const QString& DiffTextWindow::getFileName() const { return d->getFileName(); }
+void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData)
+{
+    d->sourceData = inData;
+}
+bool DiffTextWindow::isThreeWay() const
+{
+    return d->isThreeWay();
+};
+const QString& DiffTextWindow::getFileName() const
+{
+    return d->getFileName();
+}
 
-e_SrcSelector DiffTextWindow::getWindowIndex() const { return d->m_winIdx; };
+e_SrcSelector DiffTextWindow::getWindowIndex() const
+{
+    return d->m_winIdx;
+};
 
-const QString DiffTextWindow::getEncodingDisplayString() const { return d->m_pTextCodec != nullptr ? QLatin1String(d->m_pTextCodec->name()) : QString(); }
-e_LineEndStyle DiffTextWindow::getLineEndStyle() const { return d->m_eLineEndStyle; }
+const QString DiffTextWindow::getEncodingDisplayString() const
+{
+    return d->m_pTextCodec != nullptr ? QLatin1String(d->m_pTextCodec->name()) : QString();
+}
+e_LineEndStyle DiffTextWindow::getLineEndStyle() const
+{
+    return d->m_eLineEndStyle;
+}
 
-const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const { return d->getDiff3LineVector(); }
+const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
+{
+    return d->getDiff3LineVector();
+}
 
-qint32 DiffTextWindow::getLineNumberWidth() const { return (int)floor(log10((double)std::max(d->m_size, 1))) + 1; }
+qint32 DiffTextWindow::getLineNumberWidth() const
+{
+    return (int)floor(log10((double)std::max(d->m_size, 1))) + 1;
+}
 
 DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
-    const QSharedPointer<Options>& pOptions,
-    e_SrcSelector winIdx,
-    KDiff3App &app)
-    : QWidget(pParent)
-    , m_app(app)
+                               const QSharedPointer<Options>& pOptions,
+                               e_SrcSelector winIdx,
+                               KDiff3App& app):
+    QWidget(pParent),
+    m_app(app)
 {
     setObjectName(QString("DiffTextWindow%1").arg((int)winIdx));
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -570,7 +594,7 @@ void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
 
 void DiffTextWindow::scrollVertically(QtNumberType deltaY)
 {
-    mVScrollBar->setValue(mVScrollBar->value()  + deltaY);
+    mVScrollBar->setValue(mVScrollBar->value() + deltaY);
 }
 
 void DiffTextWindow::focusInEvent(QFocusEvent* e)
@@ -667,7 +691,6 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
     d->m_bSelectionInProgress = false;
     d->m_lastKnownMousePos = e->pos();
 
-
     if(d->m_delayedDrawTimer)
         killTimer(d->m_delayedDrawTimer);
     d->m_delayedDrawTimer = 0;
@@ -682,7 +705,7 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
 }
 
 void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
-{//Handles selection highlighting.
+{ //Handles selection highlighting.
     LineRef line;
     int pos;
 
@@ -1026,7 +1049,7 @@ void DiffTextWindowData::writeLine(
                 case '\r':
                     lineString[lineString.length() - 1] = 0x00A4;
                     break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
-                //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
+                           //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
             }
         }
         QVector<ChangeFlags> charChanged(pld->size());
@@ -1223,8 +1246,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
         m_cDiff1 = m_pOptions->cColor();
         m_cDiff2 = m_pOptions->aColor();
     }
-    else
-        if(m_winIdx == e_SrcSelector::C)
+    else if(m_winIdx == e_SrcSelector::C)
     {
         m_cThis = m_pOptions->cColor();
         m_cDiff1 = m_pOptions->aColor();
@@ -1814,11 +1836,11 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 
         // convert the d->m_selection to unwrapped coordinates.
         LineRef firstLine;
-        qint32  firstPos;
+        qint32 firstPos;
         convertD3LCoordsToLineCoords(d->m_selection.beginLine(), d->m_selection.beginPos(), firstLine, firstPos);
 
         LineRef lastLine;
-        qint32  lastPos;
+        qint32 lastPos;
         convertD3LCoordsToLineCoords(d->m_selection.endLine(), d->m_selection.endPos(), lastLine, lastPos);
 
         d->m_selection.start(firstLine, firstPos);
@@ -1868,8 +1890,8 @@ class DiffTextWindowFrameData
     QSharedPointer<SourceData> mSourceData;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App &app)
-    : QWidget(pParent)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app):
+    QWidget(pParent)
 {
     d = std::make_unique<DiffTextWindowFrameData>(this, pOptions, winIdx);
     d->mSourceData = psd;
@@ -2042,8 +2064,8 @@ void DiffTextWindowFrame::slotEncodingChanged(QTextCodec* c)
     d->mSourceData->setEncoding(c);
 }
 
-EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD, const QSharedPointer<Options>& pOptions)
-    : QLabel(text)
+EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD, const QSharedPointer<Options>& pOptions):
+    QLabel(text)
 {
     m_pOptions = pOptions;
     m_pSourceData = pSD;
@@ -2086,14 +2108,14 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         if(m_pOptions != nullptr)
         {
             const QStringList& recentEncodings = m_pOptions->m_recentEncodings;
-            for(const QString& s : recentEncodings)
+            for(const QString& s: recentEncodings)
             {
                 insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
             }
         }
         // Submenu to add the rest of available encodings
         pContextEncodingSubMenu->setTitle(i18n("Other"));
-        for(int i : mibs)
+        for(int i: mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)
