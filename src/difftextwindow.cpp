@@ -1209,7 +1209,7 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const Line
 void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int beginLine, const LineRef& endLine)
 {
     if(m_pLineData == nullptr || m_pLineData->empty()) return;
-    m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
+    m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
     if(m_winIdx == e_SrcSelector::A)
     {
@@ -1620,7 +1620,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
 
     if(bWordWrap)
     {
-        d->m_lineNumberWidth = d->getOptions()->m_bShowLineNumbers ? (int)log10((double)std::max(d->m_size, 1)) + 1 : 0;
+        d->m_lineNumberWidth = d->getOptions()->m_bShowLineNumbers ? getLineNumberWidth() : 0;
 
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
 
