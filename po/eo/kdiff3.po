@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-20 00:50+0000\n"
-"PO-Revision-Date: 2023-03-04 08:22+0100\n"
+"PO-Revision-Date: 2023-04-20 23:30+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -853,12 +853,12 @@ msgstr "Desto:"
 #: directorymergewindow.cpp:2852
 #, kde-format
 msgid "Save Folder Merge State As..."
-msgstr "Konservi dosierujon Kunfandi ŝtaton kiel..."
+msgstr "Konservi dosierujan kunfandostaton kiel..."
 
 #: directorymergewindow.cpp:2959
 #, kde-format
 msgid "Start/Continue Folder Merge"
-msgstr "Komenci/Daŭrigi Dosierujon Kunfandi"
+msgstr "Komenci/Daŭrigi Dosierujan Kunfandon"
 
 #: directorymergewindow.cpp:2960
 #, kde-format
@@ -1286,27 +1286,22 @@ msgstr ""
 "Delta"
 
 #: kdiff3.cpp:659
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
-"(Saltas diferencojn de blanka spaco kiam \"Montri Blankan spacon\" estas "
-"malŝaltita.)"
+"(Preterlasas diferencojn de blanka spaco kiam \"Montri Blankan spacon\" "
+"estas malŝaltita.)"
 
 #: kdiff3.cpp:660
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explaination text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
-"(Ne preterlasas blankspacojn eĉ kiam \"Montri Blankan spacon\" estas "
-"malŝaltita.)"
+"(Ne preterlasas blankspacajn diferencojn eĉ kiam \"Montri Blankan spacon\" "
+"estas malŝaltita.)"
 
 #: kdiff3.cpp:661
 #, kde-format
@@ -1409,15 +1404,10 @@ msgstr ""
 "Linien"
 
 #: kdiff3.cpp:674
-#, fuzzy, kde-format
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
-".\n"
-" Iri al specifita linio."
+msgstr "Iri al specifita linio."
 
 #: kdiff3.cpp:675
 #, kde-format
@@ -1833,7 +1823,7 @@ msgstr "Ilo por Komparo kaj Kunfandado de Dosieroj kaj Dosierujoj"
 #: main.cpp:109
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
-msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5-haveno"
+msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5-portado"
 
 #: main.cpp:129
 #, kde-format
@@ -3489,7 +3479,7 @@ msgstr ""
 #: smalldialogs.cpp:389 smalldialogs.cpp:417 smalldialogs.cpp:453
 #, kde-format
 msgid "Match result:"
-msgstr "Matĉa rezulto:"
+msgstr "Rezulto de kongruo:"
 
 #: smalldialogs.cpp:408
 #, kde-format
@@ -3532,12 +3522,12 @@ msgstr "Ordigi ŝlosilan rezulton:"
 #: smalldialogs.cpp:510 smalldialogs.cpp:522 smalldialogs.cpp:543
 #, kde-format
 msgid "Match success."
-msgstr "Matĉa sukceso."
+msgstr "Sukceso de kongruo."
 
 #: smalldialogs.cpp:514 smalldialogs.cpp:526 smalldialogs.cpp:549
 #, kde-format
 msgid "Match failed."
-msgstr "Matĉo malsukcesis."
+msgstr "Kongruo malsukcesis."
 
 #: smalldialogs.cpp:533
 #, kde-format
@@ -3631,15 +3621,3 @@ msgstr "Neatendita citaĵo en argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Neniu programo specifita."
-
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3 Parto"
-
-#~ msgid "A KPart for displaying diffs"
-#~ msgstr "KPart por montri diferencojn"
-
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "Kopirajto 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
