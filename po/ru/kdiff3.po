@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-12 02:49+0000\n"
+"POT-Creation-Date: 2023-04-22 03:08+0000\n"
 "PO-Revision-Date: 2023-02-19 17:32+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -101,7 +101,7 @@ msgstr "Чтение файла: %1"
 msgid "Listing directory: %1"
 msgstr "Вывод содержимого папки: %1"
 
-#: diff.cpp:1576 diff.cpp:1592
+#: diff.cpp:1577 diff.cpp:1593
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -110,7 +110,7 @@ msgstr ""
 "Ошибка с потерей данных:\n"
 "Если ошибка постоянно повторяется свяжитесь с автором.\n"
 
-#: diff.cpp:1578 diff.cpp:1594
+#: diff.cpp:1579 diff.cpp:1595
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Серьёзная внутренняя ошибка"
@@ -143,8 +143,8 @@ msgstr "Тип перевода строки:"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
 #: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:741 pdiff.cpp:743
-#: pdiff.cpp:765 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: optiondialog.cpp:962 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:749
+#: pdiff.cpp:771 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -157,8 +157,8 @@ msgstr "A"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1487
 #: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:745 pdiff.cpp:747
-#: pdiff.cpp:767 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: optiondialog.cpp:963 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:751 pdiff.cpp:753
+#: pdiff.cpp:773 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -171,7 +171,7 @@ msgstr "B"
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1489
 #: mergeresultwindow.cpp:2850 mergeresultwindow.cpp:2857 optiondialog.cpp:964
-#: pdiff.cpp:741 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:769
+#: pdiff.cpp:747 pdiff.cpp:749 pdiff.cpp:751 pdiff.cpp:753 pdiff.cpp:775
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -421,7 +421,7 @@ msgstr ""
 "хотите отменить все изменения и обновить содержание папок?"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:766 kdiff3.cpp:776 kdiff3.cpp:788
-#: mergeresultwindow.cpp:328 pdiff.cpp:856 pdiff.cpp:1706 pdiff.cpp:1716
+#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
@@ -528,8 +528,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "Проверьте права доступа к этим подпапкам."
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:715 kdiff3.cpp:821 kdiff3.cpp:845
-#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044
-#: pdiff.cpp:1053 pdiff.cpp:1099 pdiff.cpp:1107
+#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
+#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
 #, kde-format
 msgid "Ready."
 msgstr "Готово."
@@ -1244,12 +1244,12 @@ msgstr "Ключ --auto игнорируется при сравнении па�
 msgid "Saving failed."
 msgstr "Не удалось произвести сохранение."
 
-#: kdiff3.cpp:535 pdiff.cpp:922
+#: kdiff3.cpp:535 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Не удалось открыть файлы:"
 
-#: kdiff3.cpp:544 pdiff.cpp:931
+#: kdiff3.cpp:544 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
 msgstr "Ошибка открытия файла"
@@ -1729,7 +1729,7 @@ msgstr "Режим папки/текст"
 msgid "Toggle Between Folder && Text View"
 msgstr "Папки/текст"
 
-#: kdiff3.cpp:765 pdiff.cpp:1705
+#: kdiff3.cpp:765 pdiff.cpp:1711
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1745,12 +1745,12 @@ msgstr "Сохранить и выйти"
 msgid "Quit Without Saving"
 msgstr "Выйти без сохранения"
 
-#: kdiff3.cpp:776 pdiff.cpp:1716
+#: kdiff3.cpp:776 pdiff.cpp:1722
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Не удалось сохранить результат объединения"
 
-#: kdiff3.cpp:787 pdiff.cpp:855
+#: kdiff3.cpp:787 pdiff.cpp:861
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -2154,7 +2154,7 @@ msgstr ""
 "Вывод был изменён.\n"
 "Если вы продолжите, изменения будут утеряны."
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:731
+#: mergeresultwindow.cpp:773 pdiff.cpp:737
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Все входные файлы одинаковы на двоичном уровне."
@@ -2165,7 +2165,7 @@ msgid "All input files contain the same text."
 msgstr "Все входные файлы содержат одинаковый текст."
 
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:737 pdiff.cpp:741 pdiff.cpp:745
+#: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Файлы %1 и %2 одинаковы на двоичном уровне.\n"
@@ -3452,7 +3452,7 @@ msgstr "Загрузка A"
 msgid "Diff: A <-> B"
 msgstr "Различие: A <-> B"
 
-#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:263 pdiff.cpp:264 pdiff.cpp:282
+#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:288
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "Построчное сравнение: A <-> B"
@@ -3478,27 +3478,27 @@ msgstr "Различие: A <-> C"
 msgid "Diff: B <-> C"
 msgstr "Различие: B <-> C"
 
-#: pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:287
+#: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:293
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "Построчное сравнение: B <-> C"
 
-#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:292
+#: pdiff.cpp:278 pdiff.cpp:279 pdiff.cpp:298
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "Построчное сравнение: A <-> C"
 
-#: pdiff.cpp:733
+#: pdiff.cpp:739
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "Все входные файлы содержат одинаковый текст, но двоично не совпадают."
 
-#: pdiff.cpp:739 pdiff.cpp:743 pdiff.cpp:747
+#: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "Файлы %1 и %2 имеют одинаковый текст, но двоично не совпадают.\n"
 
-#: pdiff.cpp:757
+#: pdiff.cpp:763
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some inputfiles don't seem to be pure textfiles.\n"
@@ -3513,17 +3513,17 @@ msgstr ""
 "Заметим, что объединение в KDiff3 не предназначено для двоичных данных.\n"
 "Продолжайте на свой страх и риск."
 
-#: pdiff.cpp:767
+#: pdiff.cpp:773
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:769
+#: pdiff.cpp:775
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:771
+#: pdiff.cpp:777
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some input characters could not be converted to valid unicode.\n"
@@ -3543,83 +3543,83 @@ msgstr ""
 "Не сохраняйте результат, если не уверены. Продолжайте на свой страх и риск.\n"
 "Сообщение касается файлов в %1."
 
-#: pdiff.cpp:857
+#: pdiff.cpp:863
 #, kde-format
 msgid "Abort"
 msgstr "Стоп"
 
-#: pdiff.cpp:858
+#: pdiff.cpp:864
 #, kde-format
 msgid "Continue Merging"
 msgstr "Продолжить"
 
-#: pdiff.cpp:863 pdiff.cpp:955
+#: pdiff.cpp:869 pdiff.cpp:961
 #, kde-format
 msgid "Opening files..."
 msgstr "Открытие файлов..."
 
-#: pdiff.cpp:1042
+#: pdiff.cpp:1048
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Вырезание в буфер обмена..."
 
-#: pdiff.cpp:1049
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Копирование в буфер обмена..."
 
-#: pdiff.cpp:1058
+#: pdiff.cpp:1064
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Вставка из буфера обмена..."
 
-#: pdiff.cpp:1158
+#: pdiff.cpp:1164
 #, kde-format
 msgid "Ok"
 msgstr "Ok"
 
-#: pdiff.cpp:1174
+#: pdiff.cpp:1180
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Перейти к последнему различию"
 
-#: pdiff.cpp:1485
+#: pdiff.cpp:1491
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1486
+#: pdiff.cpp:1492
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1713
 #, kde-format
 msgid "Save && Continue"
 msgstr "Сохранить и продолжить"
 
-#: pdiff.cpp:1708
+#: pdiff.cpp:1714
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Продолжить без сохранения"
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1912
 #, kde-format
 msgid "Search complete."
 msgstr "Поиск завершён."
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1912
 #, kde-format
 msgid "Search Complete"
 msgstr "Поиск завершён"
 
-#: pdiff.cpp:2087
+#: pdiff.cpp:2093
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ничего не выбрано ни в одном из входных окон diff."
 
-#: pdiff.cpp:2087
+#: pdiff.cpp:2093
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Ошибка при добавлении вручную заданной области diff"

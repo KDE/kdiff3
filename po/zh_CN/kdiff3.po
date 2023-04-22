@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-12 02:49+0000\n"
+"POT-Creation-Date: 2023-04-22 03:08+0000\n"
 "PO-Revision-Date: 2023-04-16 12:33\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -92,7 +92,7 @@ msgstr "正在读取文件夹：%1"
 msgid "Listing directory: %1"
 msgstr "正在列出目录：%1"
 
-#: diff.cpp:1576 diff.cpp:1592
+#: diff.cpp:1577 diff.cpp:1593
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -101,7 +101,7 @@ msgstr ""
 "数据丢失错误：\n"
 "如果您可以复现该错误，请联系软件作者。\n"
 
-#: diff.cpp:1578 diff.cpp:1594
+#: diff.cpp:1579 diff.cpp:1595
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "严重内部错误"
@@ -133,8 +133,8 @@ msgstr "行尾格式："
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
 #: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:741 pdiff.cpp:743
-#: pdiff.cpp:765 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: optiondialog.cpp:962 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:749
+#: pdiff.cpp:771 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -147,8 +147,8 @@ msgstr "A"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1487
 #: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:745 pdiff.cpp:747
-#: pdiff.cpp:767 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: optiondialog.cpp:963 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:751 pdiff.cpp:753
+#: pdiff.cpp:773 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -161,7 +161,7 @@ msgstr "B"
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1489
 #: mergeresultwindow.cpp:2850 mergeresultwindow.cpp:2857 optiondialog.cpp:964
-#: pdiff.cpp:741 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:769
+#: pdiff.cpp:747 pdiff.cpp:749 pdiff.cpp:751 pdiff.cpp:753 pdiff.cpp:775
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -393,7 +393,7 @@ msgid ""
 msgstr "您正在合并文件夹，确定要放弃合并并重新扫描文件夹吗？"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:766 kdiff3.cpp:776 kdiff3.cpp:788
-#: mergeresultwindow.cpp:328 pdiff.cpp:856 pdiff.cpp:1706 pdiff.cpp:1716
+#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
@@ -482,8 +482,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "请检查子文件夹的权限。"
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:715 kdiff3.cpp:821 kdiff3.cpp:845
-#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044
-#: pdiff.cpp:1053 pdiff.cpp:1099 pdiff.cpp:1107
+#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
+#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
 #, kde-format
 msgid "Ready."
 msgstr "就绪。"
@@ -1153,12 +1153,12 @@ msgstr "执行文件夹比较时会忽略选项 --auto。"
 msgid "Saving failed."
 msgstr "保存失败。"
 
-#: kdiff3.cpp:535 pdiff.cpp:922
+#: kdiff3.cpp:535 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "打开文件失败:"
 
-#: kdiff3.cpp:544 pdiff.cpp:931
+#: kdiff3.cpp:544 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
 msgstr "打开文件出错"
@@ -1614,7 +1614,7 @@ msgstr "文件夹和文本分割视图"
 msgid "Toggle Between Folder && Text View"
 msgstr "切换文件夹和文本视图"
 
-#: kdiff3.cpp:765 pdiff.cpp:1705
+#: kdiff3.cpp:765 pdiff.cpp:1711
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "合并结果未保存。"
@@ -1629,12 +1629,12 @@ msgstr "保存并退出"
 msgid "Quit Without Saving"
 msgstr "退出且不保存"
 
-#: kdiff3.cpp:776 pdiff.cpp:1716
+#: kdiff3.cpp:776 pdiff.cpp:1722
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "保存合并结果失败。"
 
-#: kdiff3.cpp:787 pdiff.cpp:855
+#: kdiff3.cpp:787 pdiff.cpp:861
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2017,7 +2017,7 @@ msgstr ""
 "已修改输出。\n"
 "如果您继续您的更改将丢失。"
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:731
+#: mergeresultwindow.cpp:773 pdiff.cpp:737
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "全部输入文件二进制数据相同。"
@@ -2028,7 +2028,7 @@ msgid "All input files contain the same text."
 msgstr "全部输入文件包含相同文本。"
 
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:737 pdiff.cpp:741 pdiff.cpp:745
+#: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "文件 %1 和 %2 二进制数据相同。\n"
@@ -3213,7 +3213,7 @@ msgstr "正在加载B：%1"
 msgid "Diff: A <-> B"
 msgstr "比较：A <-> B"
 
-#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:263 pdiff.cpp:264 pdiff.cpp:282
+#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:288
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "行比较：A <-> B"
@@ -3238,27 +3238,27 @@ msgstr "比较：A <-> C"
 msgid "Diff: B <-> C"
 msgstr "比较：B <-> C"
 
-#: pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:287
+#: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:293
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "行比较：B <-> C"
 
-#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:292
+#: pdiff.cpp:278 pdiff.cpp:279 pdiff.cpp:298
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "行比较：A <-> C"
 
-#: pdiff.cpp:733
+#: pdiff.cpp:739
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "全部输入文件包含相同文本，但二进制不相同。"
 
-#: pdiff.cpp:739 pdiff.cpp:743 pdiff.cpp:747
+#: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "文件%1和%2文本相同，但二进制数据不相同。\n"
 
-#: pdiff.cpp:757
+#: pdiff.cpp:763
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3269,17 +3269,17 @@ msgstr ""
 "注意 KDiff3 的合并功能不适用于二进制数据。\n"
 "继续则需您自己承担风险。"
 
-#: pdiff.cpp:767
+#: pdiff.cpp:773
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:769
+#: pdiff.cpp:775
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:771
+#: pdiff.cpp:777
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3292,82 +3292,82 @@ msgstr ""
 "如果不确定，请不要保存。继续则需您自己承担风险。\n"
 "受影响的输入文件在 %1。"
 
-#: pdiff.cpp:857
+#: pdiff.cpp:863
 #, kde-format
 msgid "Abort"
 msgstr "中止"
 
-#: pdiff.cpp:858
+#: pdiff.cpp:864
 #, kde-format
 msgid "Continue Merging"
 msgstr "继续合并"
 
-#: pdiff.cpp:863 pdiff.cpp:955
+#: pdiff.cpp:869 pdiff.cpp:961
 #, kde-format
 msgid "Opening files..."
 msgstr "打开文件..."
 
-#: pdiff.cpp:1042
+#: pdiff.cpp:1048
 #, kde-format
 msgid "Cutting selection..."
 msgstr "剪切选中内容..."
 
-#: pdiff.cpp:1049
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "复制选中内容到剪贴板..."
 
-#: pdiff.cpp:1058
+#: pdiff.cpp:1064
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "正在插入剪贴板内容..."
 
-#: pdiff.cpp:1158
+#: pdiff.cpp:1164
 #, kde-format
 msgid "Ok"
 msgstr "确定"
 
-#: pdiff.cpp:1174
+#: pdiff.cpp:1180
 #, kde-format
 msgid "Go to Line"
 msgstr "跳转到行"
 
-#: pdiff.cpp:1485
+#: pdiff.cpp:1491
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "文本换行"
 
-#: pdiff.cpp:1486
+#: pdiff.cpp:1492
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "计算水平滚动条的最大宽度"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1713
 #, kde-format
 msgid "Save && Continue"
 msgstr "保存并继续"
 
-#: pdiff.cpp:1708
+#: pdiff.cpp:1714
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "继续并不保存"
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1912
 #, kde-format
 msgid "Search complete."
 msgstr "搜索完成。"
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1912
 #, kde-format
 msgid "Search Complete"
 msgstr "搜索完成"
 
-#: pdiff.cpp:2087
+#: pdiff.cpp:2093
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "比较输入窗口没有选择内容。"
 
-#: pdiff.cpp:2087
+#: pdiff.cpp:2093
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "添加手动比较区域时出错"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-12 02:49+0000\n"
+"POT-Creation-Date: 2023-04-22 03:08+0000\n"
 "PO-Revision-Date: 2021-09-17 20:34+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -97,14 +97,14 @@ msgstr "फ़ाइल पढ़ा जा रहा है: %1"
 msgid "Listing directory: %1"
 msgstr "डिरेक्ट्री सूचीबद्ध की जा रही है: %1"
 
-#: diff.cpp:1576 diff.cpp:1592
+#: diff.cpp:1577 diff.cpp:1593
 #, kde-format
 msgid ""
 "Data loss error:\n"
 "If it is reproducible please contact the author.\n"
 msgstr ""
 
-#: diff.cpp:1578 diff.cpp:1594
+#: diff.cpp:1579 diff.cpp:1595
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "गंभीर आंतरिक त्रुटि"
@@ -136,8 +136,8 @@ msgstr "पंक्ति ख़त्म होने की शैलीः"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
 #: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:741 pdiff.cpp:743
-#: pdiff.cpp:765 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: optiondialog.cpp:962 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:749
+#: pdiff.cpp:771 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -150,8 +150,8 @@ msgstr "अ"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1487
 #: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:745 pdiff.cpp:747
-#: pdiff.cpp:767 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: optiondialog.cpp:963 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:751 pdiff.cpp:753
+#: pdiff.cpp:773 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -164,7 +164,7 @@ msgstr "ब"
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1489
 #: mergeresultwindow.cpp:2850 mergeresultwindow.cpp:2857 optiondialog.cpp:964
-#: pdiff.cpp:741 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:769
+#: pdiff.cpp:747 pdiff.cpp:749 pdiff.cpp:751 pdiff.cpp:753 pdiff.cpp:775
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -424,7 +424,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:766 kdiff3.cpp:776 kdiff3.cpp:788
-#: mergeresultwindow.cpp:328 pdiff.cpp:856 pdiff.cpp:1706 pdiff.cpp:1716
+#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
@@ -524,8 +524,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "सबडिरेक्ट्रीज़ की अनुमतियाँ जाँचें."
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:715 kdiff3.cpp:821 kdiff3.cpp:845
-#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044
-#: pdiff.cpp:1053 pdiff.cpp:1099 pdiff.cpp:1107
+#: kdiff3.cpp:1117 kdiff3.cpp:1138 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
+#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
 #, kde-format
 msgid "Ready."
 msgstr "तैयार."
@@ -1193,12 +1193,12 @@ msgstr "विकल्प --auto को डिरेक्ट्री तु�
 msgid "Saving failed."
 msgstr "सहेजने में असफल."
 
-#: kdiff3.cpp:535 pdiff.cpp:922
+#: kdiff3.cpp:535 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "इन फ़ाइलों को खोलना असफल:"
 
-#: kdiff3.cpp:544 pdiff.cpp:931
+#: kdiff3.cpp:544 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
 msgstr "फ़ाइल खोलने में त्रुटि"
@@ -1629,7 +1629,7 @@ msgstr "डिरेक्ट्री तथा पाठ स्प्लिट
 msgid "Toggle Between Folder && Text View"
 msgstr "डिरेक्ट्री तथा पाठ दृश्य के बीच टॉगल करें"
 
-#: kdiff3.cpp:765 pdiff.cpp:1705
+#: kdiff3.cpp:765 pdiff.cpp:1711
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1645,12 +1645,12 @@ msgstr "सहेजें तथा बाहर हों"
 msgid "Quit Without Saving"
 msgstr "सहेजे बगैर बाहर हों"
 
-#: kdiff3.cpp:776 pdiff.cpp:1716
+#: kdiff3.cpp:776 pdiff.cpp:1722
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "सम्मिलित किया जाने का परिणाम सहेजना असफल."
 
-#: kdiff3.cpp:787 pdiff.cpp:855
+#: kdiff3.cpp:787 pdiff.cpp:861
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2033,7 +2033,7 @@ msgstr ""
 "आउटपुट परिवर्धित किया जा चुका है.\n"
 "यदि आप जारी रखते हैं तो आपके परिवर्तन खो जाएँगे."
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:731
+#: mergeresultwindow.cpp:773 pdiff.cpp:737
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "सभी इनपुट फ़ाइलें बाइनरी समान हैं."
@@ -2044,7 +2044,7 @@ msgid "All input files contain the same text."
 msgstr "सभी इनपुट फ़ाइलें एक ही पाठ रखे हैं."
 
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:737 pdiff.cpp:741 pdiff.cpp:745
+#: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "फ़ाइलें ब तथा स बाइनरी समान हैं.\n"
@@ -3161,7 +3161,7 @@ msgstr "अ लोड किया जा रहा है"
 msgid "Diff: A <-> B"
 msgstr "डिफ: अ <-> ब"
 
-#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:263 pdiff.cpp:264 pdiff.cpp:282
+#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:288
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "लाइनडिफ: अ <-> ब"
@@ -3187,27 +3187,27 @@ msgstr "डिफ: अ <-> स"
 msgid "Diff: B <-> C"
 msgstr "डिफ: ब <-> स"
 
-#: pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:287
+#: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:293
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "लाइनडिफ: ब <-> स"
 
-#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:292
+#: pdiff.cpp:278 pdiff.cpp:279 pdiff.cpp:298
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "लाइनडिफ: अ <-> स"
 
-#: pdiff.cpp:733
+#: pdiff.cpp:739
 #, fuzzy, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "सभी इनपुट फ़ाइलें एक ही पाठ रखे हैं."
 
-#: pdiff.cpp:739 pdiff.cpp:743 pdiff.cpp:747
+#: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "फ़ाइलें अ तथा ब बाइनरी समान हैं.\n"
 
-#: pdiff.cpp:757
+#: pdiff.cpp:763
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3215,17 +3215,17 @@ msgid ""
 "Continue at your own risk."
 msgstr ""
 
-#: pdiff.cpp:767
+#: pdiff.cpp:773
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:769
+#: pdiff.cpp:775
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:771
+#: pdiff.cpp:777
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3234,83 +3234,83 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 
-#: pdiff.cpp:857
+#: pdiff.cpp:863
 #, kde-format
 msgid "Abort"
 msgstr "छोड़ें"
 
-#: pdiff.cpp:858
+#: pdiff.cpp:864
 #, kde-format
 msgid "Continue Merging"
 msgstr "मिलाया जाना जारी रखें"
 
-#: pdiff.cpp:863 pdiff.cpp:955
+#: pdiff.cpp:869 pdiff.cpp:961
 #, kde-format
 msgid "Opening files..."
 msgstr "फ़ाइलें खोली जा रही हैं..."
 
-#: pdiff.cpp:1042
+#: pdiff.cpp:1048
 #, kde-format
 msgid "Cutting selection..."
 msgstr "चयन को काटा जा रहा है..."
 
-#: pdiff.cpp:1049
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "चुने हुए की नकल क्लिपबोर्ड पर बनाया जा रहा है..."
 
-#: pdiff.cpp:1058
+#: pdiff.cpp:1064
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "क्लिपबोर्ड के वस्तुओं को प्रविष्ट किया जा रहा है..."
 
-#: pdiff.cpp:1158
+#: pdiff.cpp:1164
 #, kde-format
 msgid "Ok"
 msgstr ""
 
-#: pdiff.cpp:1174
+#: pdiff.cpp:1180
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "अंतिम डेल्टा में जाएँ"
 
-#: pdiff.cpp:1485
+#: pdiff.cpp:1491
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1486
+#: pdiff.cpp:1492
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1713
 #, kde-format
 msgid "Save && Continue"
 msgstr "सहेजें तथा जारी रखें"
 
-#: pdiff.cpp:1708
+#: pdiff.cpp:1714
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "सहेजे बगैर जारी रखें"
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1912
 #, kde-format
 msgid "Search complete."
 msgstr "ढूंढना सम्पन्न"
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1912
 #, kde-format
 msgid "Search Complete"
 msgstr "ढूंढना सम्पन्न"
 
-#: pdiff.cpp:2087
+#: pdiff.cpp:2093
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2087
+#: pdiff.cpp:2093
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "डिरेक्ट्री बनाने के दौरान त्रुटि."
