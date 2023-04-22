@@ -1535,6 +1535,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 // Just make sure that all input lines are in the output too, exactly once.
 void Diff3LineList::debugLineCheck(const LineType size, const e_SrcSelector srcSelector) const
 {
+    //FIXME:Does not work m_pOptions->m_bDiff3AlignBC is set.
     LineType i = 0;
 
     for(const Diff3Line &entry: *this)
