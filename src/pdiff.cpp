@@ -256,9 +256,12 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             }
             pp.step();
 
-            m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
-            m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
-            m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+            if(!m_pOptions->m_bDiff3AlignBC)
+            {
+                m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
+                m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
+                m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+            }
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
@@ -276,8 +279,11 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             qCInfo(kdiffMain) << i18n("Linediff: A <-> C");
             if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
                 pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay(), eIgnoreFlags));
-            m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
-            m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+            if(!m_pOptions->m_bDiff3AlignBC)
+            {
+                m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
+                m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+            }
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
