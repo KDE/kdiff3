@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:50+0000\n"
+"POT-Creation-Date: 2023-04-23 00:50+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -96,7 +96,7 @@ msgstr "Čitam datoteku: %1"
 msgid "Listing directory: %1"
 msgstr "Listam direktorij: %1"
 
-#: diff.cpp:1557 diff.cpp:1573
+#: diff.cpp:1558 diff.cpp:1574
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -105,87 +105,87 @@ msgstr ""
 "Gubitak podataka greška:\n"
 "Ako se ponavlja kontaktirajte autora.\n"
 
-#: diff.cpp:1559 diff.cpp:1575
+#: diff.cpp:1560 diff.cpp:1576
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Ozbiljna unutrašnja greška"
 
-#: difftextwindow.cpp:561
+#: difftextwindow.cpp:585
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:563
+#: difftextwindow.cpp:587
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "Linija nije na raspolaganju"
 
-#: difftextwindow.cpp:1903
+#: difftextwindow.cpp:1925
 #, kde-format
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1907 mergeresultwindow.cpp:2801 optiondialog.cpp:803
+#: difftextwindow.cpp:1929 mergeresultwindow.cpp:2801 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Stil završetka linije:"
 
-#: difftextwindow.cpp:1932
+#: difftextwindow.cpp:1954
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (baza):"
 
-#: difftextwindow.cpp:1934
+#: difftextwindow.cpp:1956
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2847
+#: difftextwindow.cpp:1957 mergeresultwindow.cpp:2847
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2846
+#: difftextwindow.cpp:1957 mergeresultwindow.cpp:2846
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1935
+#: difftextwindow.cpp:1957
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "Stil završetka linije:"
 
-#: difftextwindow.cpp:1936
+#: difftextwindow.cpp:1958
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1964 kdiff3.cpp:927
+#: difftextwindow.cpp:1986 kdiff3.cpp:927
 #, kde-format
 msgid "Top line"
 msgstr "Gornja linija"
 
-#: difftextwindow.cpp:1973
+#: difftextwindow.cpp:1995
 #, kde-format
 msgid "End"
 msgstr "Kraj"
 
-#: difftextwindow.cpp:2031 smalldialogs.cpp:164
+#: difftextwindow.cpp:2053 smalldialogs.cpp:164
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Otvaram datoteke..."
 
-#: difftextwindow.cpp:2079 optiondialog.cpp:388
+#: difftextwindow.cpp:2101 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8-bitni"
 
-#: difftextwindow.cpp:2095
+#: difftextwindow.cpp:2117
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -392,7 +392,7 @@ msgstr ""
 "i ponovo skenirati direktorij?"
 
 #: directorymergewindow.cpp:698 kdiff3.cpp:781 kdiff3.cpp:791 kdiff3.cpp:803
-#: mergeresultwindow.cpp:330 pdiff.cpp:864 pdiff.cpp:1732 pdiff.cpp:1742
+#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1739 pdiff.cpp:1749
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1256,12 +1256,12 @@ msgstr "Opcija --auto se ignoriše za poređenje direktorija."
 msgid "Saving failed."
 msgstr "Snimanje nije uspjelo."
 
-#: kdiff3.cpp:549 pdiff.cpp:930
+#: kdiff3.cpp:549 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Otvaranje ovih datoteka nije uspjelo:"
 
-#: kdiff3.cpp:558 pdiff.cpp:939
+#: kdiff3.cpp:558 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "Greška pri otvaranju datoteke"
@@ -1756,13 +1756,13 @@ msgid "Toggle Between Folder && Text View"
 msgstr "Prebaci između dir. i tekst. prikaza"
 
 #: kdiff3.cpp:730 kdiff3.cpp:836 kdiff3.cpp:861 kdiff3.cpp:1141 kdiff3.cpp:1162
-#: pdiff.cpp:949 pdiff.cpp:1018 pdiff.cpp:1054 pdiff.cpp:1063 pdiff.cpp:1121
-#: pdiff.cpp:1129
+#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
+#: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Spreman."
 
-#: kdiff3.cpp:780 pdiff.cpp:1731
+#: kdiff3.cpp:780 pdiff.cpp:1738
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1778,12 +1778,12 @@ msgstr "Snimi i izađi"
 msgid "Quit Without Saving"
 msgstr "Izađi bez snimanja"
 
-#: kdiff3.cpp:791 pdiff.cpp:1742
+#: kdiff3.cpp:791 pdiff.cpp:1749
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Snimanje rezultata stapanja nije uspjelo."
 
-#: kdiff3.cpp:802 pdiff.cpp:863
+#: kdiff3.cpp:802 pdiff.cpp:870
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -2151,7 +2151,7 @@ msgstr ""
 "Izlaz je izmijenjen.\n"
 "Ako nastavite, vaše izmjene će biti izgubljene."
 
-#: mergeresultwindow.cpp:774 pdiff.cpp:739
+#: mergeresultwindow.cpp:774 pdiff.cpp:746
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Sve ulazne datoteke su binarno jednake."
@@ -2162,7 +2162,7 @@ msgid "All input files contain the same text."
 msgstr "Sve ulazne datoteke sadrže isti tekst."
 
 #: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788 pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
+#: mergeresultwindow.cpp:788 pdiff.cpp:752 pdiff.cpp:756 pdiff.cpp:760
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Datoteke %1 i %2 su binarno jednake.\n"
@@ -3436,7 +3436,7 @@ msgstr "Učitavam B"
 msgid "Diff: A <-> B"
 msgstr "Raz.: A <-> B"
 
-#: pdiff.cpp:186 pdiff.cpp:187 pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:285
+#: pdiff.cpp:186 pdiff.cpp:187 pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:292
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "Raz.lin.: A <-> B"
@@ -3462,37 +3462,37 @@ msgstr "Raz.: A <-> C"
 msgid "Diff: B <-> C"
 msgstr "Raz.: B <-> C"
 
-#: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:290
+#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:297
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "Raz.lin.: B <-> C"
 
-#: pdiff.cpp:278 pdiff.cpp:279 pdiff.cpp:295
+#: pdiff.cpp:281 pdiff.cpp:282 pdiff.cpp:302
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "Raz.lin.: A <-> C"
 
-#: pdiff.cpp:315
+#: pdiff.cpp:322
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr ""
 
-#: pdiff.cpp:340
+#: pdiff.cpp:347
 #, kde-format
 msgid "Too many lines in diff. Skiping file."
 msgstr ""
 
-#: pdiff.cpp:741
+#: pdiff.cpp:748
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "Sve ulazne datoteke sadrže isti tekst, ali nisu binarno jednake."
 
-#: pdiff.cpp:747 pdiff.cpp:751 pdiff.cpp:755
+#: pdiff.cpp:754 pdiff.cpp:758 pdiff.cpp:762
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "Datoteke %1 i %2 imaju jednak tekst, ali nisu binarno jednake. \n"
 
-#: pdiff.cpp:765
+#: pdiff.cpp:772
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some inputfiles don't seem to be pure textfiles.\n"
@@ -3507,17 +3507,17 @@ msgstr ""
 "Imajte na umu da KDiff3-stapanje nije namijenjeno binarnim podacima.\n"
 "Nastavite na sopstveni rizik."
 
-#: pdiff.cpp:775
+#: pdiff.cpp:782
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:777
+#: pdiff.cpp:784
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:779
+#: pdiff.cpp:786
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some input characters could not be converted to valid unicode.\n"
@@ -3535,83 +3535,83 @@ msgstr ""
 "Ne snimajte rezltat ako niste sigurni. Nastavite na svoj rizik.\n"
 "Zahvaćeni ulazni dokumenti su u %1."
 
-#: pdiff.cpp:865
+#: pdiff.cpp:872
 #, kde-format
 msgid "Abort"
 msgstr "Prekini"
 
-#: pdiff.cpp:866
+#: pdiff.cpp:873
 #, kde-format
 msgid "Continue Merging"
 msgstr "Nastavi stapanje"
 
-#: pdiff.cpp:871 pdiff.cpp:963
+#: pdiff.cpp:878 pdiff.cpp:970
 #, kde-format
 msgid "Opening files..."
 msgstr "Otvaram datoteke..."
 
-#: pdiff.cpp:1052
+#: pdiff.cpp:1059
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Isjecam odabrano..."
 
-#: pdiff.cpp:1059
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Kopiram odabrano u clipboard..."
 
-#: pdiff.cpp:1068
+#: pdiff.cpp:1075
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Ubacujem sadržaje clipboarda..."
 
-#: pdiff.cpp:1180
+#: pdiff.cpp:1187
 #, kde-format
 msgid "Ok"
 msgstr ""
 
-#: pdiff.cpp:1196
+#: pdiff.cpp:1203
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Idi na posljednju deltu"
 
-#: pdiff.cpp:1511
+#: pdiff.cpp:1518
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1512
+#: pdiff.cpp:1519
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1733
+#: pdiff.cpp:1740
 #, kde-format
 msgid "Save && Continue"
 msgstr "Snimi i nastavi"
 
-#: pdiff.cpp:1734
+#: pdiff.cpp:1741
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Nastavi bez snimanja"
 
-#: pdiff.cpp:1932
+#: pdiff.cpp:1939
 #, kde-format
 msgid "Search complete."
 msgstr "Pretraga je završena."
 
-#: pdiff.cpp:1932
+#: pdiff.cpp:1939
 #, kde-format
 msgid "Search Complete"
 msgstr "Pretraga je gotova"
 
-#: pdiff.cpp:2113
+#: pdiff.cpp:2120
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ništa nije odabrano niti u jednom ulaznom prozoru razlika."
 
-#: pdiff.cpp:2113
+#: pdiff.cpp:2120
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Greška u toku dodavanja ručnog opsega razlika"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:50+0000\n"
+"POT-Creation-Date: 2023-04-23 00:50+0000\n"
 "PO-Revision-Date: 2011-10-09 21:25+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -99,7 +99,7 @@ msgstr "Datei warrt leest: %1"
 msgid "Listing directory: %1"
 msgstr "Orner warrt oplist: %1"
 
-#: diff.cpp:1557 diff.cpp:1573
+#: diff.cpp:1558 diff.cpp:1574
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -108,87 +108,87 @@ msgstr ""
 "Daten sünd wegkamen:\n"
 "Lett sik dit wedderhalen, snack dor bitte den Autor op an.\n"
 
-#: diff.cpp:1559 diff.cpp:1575
+#: diff.cpp:1560 diff.cpp:1576
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Swoor intern Fehler"
 
-#: difftextwindow.cpp:561
+#: difftextwindow.cpp:585
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:563
+#: difftextwindow.cpp:587
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "Reeg nich verföögbor"
 
-#: difftextwindow.cpp:1903
+#: difftextwindow.cpp:1925
 #, kde-format
 msgid "Encoding:"
 msgstr "Koderen:"
 
-#: difftextwindow.cpp:1907 mergeresultwindow.cpp:2801 optiondialog.cpp:803
+#: difftextwindow.cpp:1929 mergeresultwindow.cpp:2801 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Reegenn-Stil:"
 
-#: difftextwindow.cpp:1932
+#: difftextwindow.cpp:1954
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (Basis):"
 
-#: difftextwindow.cpp:1934
+#: difftextwindow.cpp:1956
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "Koderen:"
 
-#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2847
+#: difftextwindow.cpp:1957 mergeresultwindow.cpp:2847
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2846
+#: difftextwindow.cpp:1957 mergeresultwindow.cpp:2846
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1935
+#: difftextwindow.cpp:1957
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "Reegenn-Stil:"
 
-#: difftextwindow.cpp:1936
+#: difftextwindow.cpp:1958
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1964 kdiff3.cpp:927
+#: difftextwindow.cpp:1986 kdiff3.cpp:927
 #, kde-format
 msgid "Top line"
 msgstr "Böverst Reeg"
 
-#: difftextwindow.cpp:1973
+#: difftextwindow.cpp:1995
 #, kde-format
 msgid "End"
 msgstr "Enn"
 
-#: difftextwindow.cpp:2031 smalldialogs.cpp:164
+#: difftextwindow.cpp:2053 smalldialogs.cpp:164
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Dateien warrt opmaakt..."
 
-#: difftextwindow.cpp:2079 optiondialog.cpp:388
+#: difftextwindow.cpp:2101 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 Bit"
 
-#: difftextwindow.cpp:2095
+#: difftextwindow.cpp:2117
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -395,7 +395,7 @@ msgstr ""
 "redig afbreken un den Orner nieg dörkieken?"
 
 #: directorymergewindow.cpp:698 kdiff3.cpp:781 kdiff3.cpp:791 kdiff3.cpp:803
-#: mergeresultwindow.cpp:330 pdiff.cpp:864 pdiff.cpp:1732 pdiff.cpp:1742
+#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1739 pdiff.cpp:1749
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1259,12 +1259,12 @@ msgstr "Optschoon \"--auto\" warrt bi't Verglieken vun Ornern övergahn."
 msgid "Saving failed."
 msgstr "Sekern fehlslaan."
 
-#: kdiff3.cpp:549 pdiff.cpp:930
+#: kdiff3.cpp:549 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Disse Dateien laat sik nich opmaken:"
 
-#: kdiff3.cpp:558 pdiff.cpp:939
+#: kdiff3.cpp:558 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "Fehler bi't Datei-Opmaken"
@@ -1755,13 +1755,13 @@ msgid "Toggle Between Folder && Text View"
 msgstr "Orner- un Text-Ansicht wesseln"
 
 #: kdiff3.cpp:730 kdiff3.cpp:836 kdiff3.cpp:861 kdiff3.cpp:1141 kdiff3.cpp:1162
-#: pdiff.cpp:949 pdiff.cpp:1018 pdiff.cpp:1054 pdiff.cpp:1063 pdiff.cpp:1121
-#: pdiff.cpp:1129
+#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
+#: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Praat."
 
-#: kdiff3.cpp:780 pdiff.cpp:1731
+#: kdiff3.cpp:780 pdiff.cpp:1738
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1777,12 +1777,12 @@ msgstr "Sekern && Utmaken"
 msgid "Quit Without Saving"
 msgstr "Utmaken un nich Sekern"
 
-#: kdiff3.cpp:791 pdiff.cpp:1742
+#: kdiff3.cpp:791 pdiff.cpp:1749
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Tosamenföhr-Resultaat lett sik nich sekern"
 
-#: kdiff3.cpp:802 pdiff.cpp:863
+#: kdiff3.cpp:802 pdiff.cpp:870
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -2155,7 +2155,7 @@ msgstr ""
 "Du hest de Utgaav ännert.\n"
 "Maakst Du wieder, kaamt Dien Ännern weg."
 
-#: mergeresultwindow.cpp:774 pdiff.cpp:739
+#: mergeresultwindow.cpp:774 pdiff.cpp:746
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "All Ingaavdateien sünd bineer liek."
@@ -2166,7 +2166,7 @@ msgid "All input files contain the same text."
 msgstr "All Ingaavdateien bargt den sülven Text."
 
 #: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788 pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
+#: mergeresultwindow.cpp:788 pdiff.cpp:752 pdiff.cpp:756 pdiff.cpp:760
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "De Dateien %1 un %2 sünd bineer liek.\n"
@@ -3444,7 +3444,7 @@ msgstr "B warrt laadt"
 msgid "Diff: A <-> B"
 msgstr "Verscheel: A <-> B"
 
-#: pdiff.cpp:186 pdiff.cpp:187 pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:285
+#: pdiff.cpp:186 pdiff.cpp:187 pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:292
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "Reegverscheel: A <-> B"
@@ -3470,38 +3470,38 @@ msgstr "Verscheel: A <-> C"
 msgid "Diff: B <-> C"
 msgstr "Verscheel: B <-> C"
 
-#: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:290
+#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:297
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "Reegverscheel: B <-> C"
 
-#: pdiff.cpp:278 pdiff.cpp:279 pdiff.cpp:295
+#: pdiff.cpp:281 pdiff.cpp:282 pdiff.cpp:302
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "Reegverscheel: A <-> C"
 
-#: pdiff.cpp:315
+#: pdiff.cpp:322
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr ""
 
-#: pdiff.cpp:340
+#: pdiff.cpp:347
 #, kde-format
 msgid "Too many lines in diff. Skiping file."
 msgstr ""
 
-#: pdiff.cpp:741
+#: pdiff.cpp:748
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "All Ingaavdateien bargt den sülven Text, man sünd bineer nich liek."
 
-#: pdiff.cpp:747 pdiff.cpp:751 pdiff.cpp:755
+#: pdiff.cpp:754 pdiff.cpp:758 pdiff.cpp:762
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "De Dateien %1 un %2 bargt den sülven Text, man sünd bineer nich liek.\n"
 
-#: pdiff.cpp:765
+#: pdiff.cpp:772
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some inputfiles don't seem to be pure textfiles.\n"
@@ -3516,17 +3516,17 @@ msgstr ""
 "Beacht, KDiff3 is nich för't Tosamenföhren vun Bineerdaten maakt.\n"
 "Maak man op Dien egen Riskanz wieder."
 
-#: pdiff.cpp:775
+#: pdiff.cpp:782
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:777
+#: pdiff.cpp:784
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:779
+#: pdiff.cpp:786
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some input characters could not be converted to valid unicode.\n"
@@ -3546,83 +3546,83 @@ msgstr ""
 "Dien egen Riskanz wiedermaken.\n"
 "De bedrapen Ingaavdateien liggt in %1."
 
-#: pdiff.cpp:865
+#: pdiff.cpp:872
 #, kde-format
 msgid "Abort"
 msgstr "Afbreken"
 
-#: pdiff.cpp:866
+#: pdiff.cpp:873
 #, kde-format
 msgid "Continue Merging"
 msgstr "Tosamenföhren wiedermaken"
 
-#: pdiff.cpp:871 pdiff.cpp:963
+#: pdiff.cpp:878 pdiff.cpp:970
 #, kde-format
 msgid "Opening files..."
 msgstr "Dateien warrt opmaakt..."
 
-#: pdiff.cpp:1052
+#: pdiff.cpp:1059
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Köör warrt knippt..."
 
-#: pdiff.cpp:1059
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Köör warrt na de Twischenaflaag kopeert..."
 
-#: pdiff.cpp:1068
+#: pdiff.cpp:1075
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Twischenaflaag-Inholt warrt inföögt..."
 
-#: pdiff.cpp:1180
+#: pdiff.cpp:1187
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1196
+#: pdiff.cpp:1203
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Na lesten Verscheel gahn"
 
-#: pdiff.cpp:1511
+#: pdiff.cpp:1518
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1512
+#: pdiff.cpp:1519
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1733
+#: pdiff.cpp:1740
 #, kde-format
 msgid "Save && Continue"
 msgstr "Sekern un wiedermaken"
 
-#: pdiff.cpp:1734
+#: pdiff.cpp:1741
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Ahn Sekern wiedermaken"
 
-#: pdiff.cpp:1932
+#: pdiff.cpp:1939
 #, kde-format
 msgid "Search complete."
 msgstr "Söök afslaten."
 
-#: pdiff.cpp:1932
+#: pdiff.cpp:1939
 #, kde-format
 msgid "Search Complete"
 msgstr "Söök afslaten"
 
-#: pdiff.cpp:2113
+#: pdiff.cpp:2120
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Binnen keen Verscheel-Ingaavfinster is wat utsöcht."
 
-#: pdiff.cpp:2113
+#: pdiff.cpp:2120
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Fehler bi't Tofögen vun en Verscheelrebeet vun Hand"
