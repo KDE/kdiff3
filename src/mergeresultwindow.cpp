@@ -1742,7 +1742,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 
     const int xOffset = getTextXOffset();
 
-    const LineRef line = std::max<LineRef::LineType>(convertToLine(e->y()), 0);
+    const LineRef line = std::max<LineType>(convertToLine(e->y()), 0);
     const QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
@@ -2346,7 +2346,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
  *              when true, @p mbIt and @p melIt are set to valid iterators
  */
 bool MergeResultWindow::calcIteratorFromLineNr(
-    LineRef::LineType line,
+    LineType line,
     MergeBlockListImp::iterator& mbIt,
     MergeEditLineList::iterator& melIt)
 {
