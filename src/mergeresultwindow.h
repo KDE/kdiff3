@@ -220,9 +220,9 @@ class MergeResultWindow: public QWidget
     };
     void go(e_Direction eDir, e_EndPoint eEndPoint);
     bool calcIteratorFromLineNr(
-        LineRef::LineType line,
-        MergeBlockListImp::iterator& mbIt,
-        MergeEditLineList::iterator& melIt);
+        : LineType line,
+          MergeBlockListImp::iterator& mbIt,
+          MergeEditLineList::iterator& melIt);
 
     void paintEvent(QPaintEvent* e) override;
 

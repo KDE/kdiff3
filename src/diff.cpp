@@ -175,7 +175,7 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
 
     for(Diff d: *pDiffListAC)
     {
-        assert(d.diff1() <= limits<LineRef::LineType>::max() && d.diff2() <= limits<LineRef::LineType>::max());
+        assert(d.diff1() <= limits<:LineType>::max() && d.diff2() <= limits<:LineType>::max());
 
         while(d.numberOfEquals() > 0)
         {
@@ -676,7 +676,7 @@ void DiffList::verify(const LineRef size1, const LineRef size2)
     for(const Diff& curDiff: *this)
     {
         assert(curDiff.numberOfEquals() >= 0);
-        assert(curDiff.diff1() <= limits<LineRef::LineType>::max() && curDiff.diff2() <= limits<LineRef::LineType>::max());
+        assert(curDiff.diff1() <= limits<:LineType>::max() && curDiff.diff2() <= limits<:LineType>::max());
         l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
         l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
     }
