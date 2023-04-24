@@ -175,7 +175,7 @@ class LineData
         mFirstNonWhiteChar = inFirstNonWhiteChar;
     }
     [[nodiscard]] inline QtSizeType size() const { return mSize; }
-    [[nodiscard]] inline qint32 getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
+    [[nodiscard]] inline QtSizeType getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
     /*
         QString::fromRawData allows us to create a light weight QString backed by the buffer memmory.

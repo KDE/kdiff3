@@ -1437,15 +1437,17 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     textLayout.beginLayout();
     if(m_selection.lineWithin(line))
     {
-        int firstPosInText = m_selection.firstPosInLine(line);
-        int lastPosInText = m_selection.lastPosInLine(line);
-        int lengthInText = std::max(0, lastPosInText - firstPosInText);
+        QtSizeType firstPosInText = m_selection.firstPosInLine(line);
+        QtSizeType lastPosInText = m_selection.lastPosInLine(line);
+
+        QtSizeType lengthInText = std::max(0, lastPosInText - firstPosInText);
+        assert(lengthInText <= limits<int>::max());
         if(lengthInText > 0)
             m_selection.bSelectionContainsData = true;
 
         QTextLayout::FormatRange selection;
         selection.start = firstPosInText;
-        selection.length = lengthInText;
+        selection.length = (decltype(selection.length))lengthInText;
         selection.format.setBackground(palette().highlight());
         selection.format.setForeground(palette().highlightedText().color());
         selectionFormat.push_back(selection);
@@ -2500,21 +2502,21 @@ void MergeResultWindow::deleteSelection()
             {
                 const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
 
-                int firstPosInLine = m_selection.firstPosInLine(line);
-                int lastPosInLine = m_selection.lastPosInLine(line);
+                QtSizeType firstPosInLine = m_selection.firstPosInLine(line);
+                QtSizeType lastPosInLine = m_selection.lastPosInLine(line);
 
                 if(line == firstLine)
                 {
                     mbItFirst = mbIt;
                     melItFirst = melIt;
-                    int pos = firstPosInLine;
+                    QtSizeType pos = firstPosInLine;
                     firstLineString = lineString.left(pos);
                 }
 
                 if(line == lastLine)
                 {
                     // This is the last line in the selection
-                    int pos = lastPosInLine;
+                    QtSizeType pos = lastPosInLine;
                     firstLineString += lineString.midRef(pos); // rest of line
                     melItFirst->setString(firstLineString);
                 }
@@ -2535,7 +2537,7 @@ void MergeResultWindow::deleteSelection()
     }
 
     m_cursorYPos = m_selection.beginLine();
-    m_cursorXPos = m_selection.beginPos();
+    m_cursorXPos = (QtNumberType)m_selection.beginPos();
     m_cursorOldXPixelPos = m_cursorXPixelPos;
 
     m_selection.reset();
@@ -2713,7 +2715,7 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeTyp
     int it = d3vLine;
     int endIt = bDirDown ? getNofLines() : -1;
     int step = bDirDown ? 1 : -1;
-    int startPos = posInLine;
+    QtSizeType startPos = posInLine;
 
     for(; it != endIt; it += step)
     {

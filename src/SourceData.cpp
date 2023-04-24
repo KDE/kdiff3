@@ -675,6 +675,12 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         parser->processLine(line);
         if(removeComments)
             parser->removeComment(line);
+        //Qt6 intrudes 64bit sizes
+        if(line.size() >= limits<LineType>::max())
+        {
+            m_v->clear();
+            return false;
+        }
 
         ++lines;
         m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
