@@ -2724,13 +2724,6 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeTyp
         {
             QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
-            //TODO: Provide error message when failsafe is triggered.
-            if(Q_UNLIKELY(pos > limits<int>::max()))
-            {
-                qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
-                continue;
-            }
-
             if(pos != -1)
             {
                 d3vLine = it;
