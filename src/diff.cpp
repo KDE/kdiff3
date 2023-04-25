@@ -1422,7 +1422,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
         k2 = getLineA();
     }
 
-    qDebug(kdiffCore) << "k1 = " << k1 << ", k2 = " << k2;
+    qCDebug(kdiffCore) << "k1 = " << k1 << ", k2 = " << k2;
     if((!k1.isValid() && k2.isValid()) || (k1.isValid() && !k2.isValid())) bTextsTotalEqual = false;
     if(k1.isValid() && k2.isValid())
     {

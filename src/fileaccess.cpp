@@ -522,7 +522,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
         if(Q_UNLIKELY(m_url == parent->url()))
         {
             m_url.clear();
-            qCritical() << "Parent and child could not be distinguished.";
+            qCCritical(kdiffFileAccess) << "Parent and child could not be distinguished.";
             return;
         }
 
