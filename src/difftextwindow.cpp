@@ -1815,11 +1815,10 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                 maxTextWidth = qCeil(textLayout.maximumWidth());
         }
 
-        for(;;)
+        for(int prevMaxTextWidth = d->m_maxTextWidth.fetchAndStoreOrdered(maxTextWidth);
+            prevMaxTextWidth > maxTextWidth;
+            prevMaxTextWidth = d->m_maxTextWidth.fetchAndStoreOrdered(maxTextWidth))
         {
-            int prevMaxTextWidth = d->m_maxTextWidth.fetchAndStoreOrdered(maxTextWidth);
-            if(prevMaxTextWidth <= maxTextWidth)
-                break;
             maxTextWidth = prevMaxTextWidth;
         }
     }
