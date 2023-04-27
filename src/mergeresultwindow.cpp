@@ -456,7 +456,7 @@ int MergeResultWindow::getMaxTextWidth()
     return m_maxTextWidth;
 }
 
-int MergeResultWindow::getNofLines() const
+LineType MergeResultWindow::getNofLines() const
 {
     return m_nofLines;
 }
@@ -2737,7 +2737,7 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeTyp
     return false;
 }
 
-void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, int endPos)
+void MergeResultWindow::setSelection(LineType firstLine, QtSizeType startPos, LineType lastLine, QtSizeType endPos)
 {
     if(lastLine >= getNofLines())
     {

@@ -69,7 +69,7 @@ class MergeResultWindow: public QWidget
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
     int getMaxTextWidth();         // width of longest text line
-    [[nodiscard]] int getNofLines() const;
+    [[nodiscard]] LineType getNofLines() const;
     [[nodiscard]] int getVisibleTextAreaWidth() const; // text area width without the border
     [[nodiscard]] int getNofVisibleLines() const;
     [[nodiscard]] QString getSelection() const;
@@ -83,7 +83,7 @@ class MergeResultWindow: public QWidget
     [[nodiscard]] bool isUnsolvedConflictAboveCurrent() const;
     [[nodiscard]] bool isUnsolvedConflictBelowCurrent() const;
     bool findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(int firstLine, int startPos, int lastLine, int endPos);
+    void setSelection(LineType firstLine, QtSizeType startPos, LineType lastLine, QtSizeType endPos);
     [[nodiscard]] e_OverviewMode getOverviewMode() const;
 
     void slotUpdateAvailabilities();
