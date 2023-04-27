@@ -14,6 +14,7 @@
 #include <memory>
 
 #include <QCommandLineParser>
+#include <QPointer>
 #include <QString>
 
 #include <KParts/MainWindow>
@@ -69,7 +70,7 @@ class KDiff3Shell: public KParts::MainWindow
 
   private:
     KParts::ReadWritePart* m_part;
-    KDiff3App* m_widget;
+    QPointer<KDiff3App> m_widget;
 
     KToggleAction* m_toolbarAction;
     KToggleAction* m_statusbarAction;

@@ -68,7 +68,7 @@ private:
     void getNameAndVersion(const QString& str, const QString& lineStart, QString& fileName, QString& version);
     KAboutData createAboutData();
 
-    KDiff3App* m_widget;
+    QPointer<KDiff3App> m_widget;
 };
 
 #endif // _KDIFF3PART_H_
