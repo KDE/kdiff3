@@ -444,7 +444,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         m_bAutoMode = false;
     }
 
-    if(!isPart())
+    if(!m_bAutoMode && !isPart())
     {
         if(!m_pKDiff3Shell->isVisible() && !restoreWindow(KSharedConfig::openConfig()))
         {
