@@ -504,15 +504,17 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
                 }
 
                 bSuccess = pSD->saveNormalDataAs(m_outputFilename);
-                if(bSuccess)
-                    ::exit(0);
-                else
+                if(!bSuccess)
                     KMessageBox::error(this, i18n("Saving failed."));
             }
             else if(m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0)
             {
                 bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
-                if(bSuccess) ::exit(0);
+            }
+            if(bSuccess)
+            {
+                QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
+                return;
             }
         }
     }
