@@ -365,7 +365,7 @@ public Q_SLOTS:
     QPointer<QAction> editPaste;
     QPointer<QAction> editSelectAll;
     KToggleAction* viewToolBar = nullptr;
-    KToggleAction* viewStatusBar;
+    KToggleAction* viewStatusBar = nullptr;
 
     QPointer<QShortcut> mEscapeAction;
     ////////////////////////////////////////////////////////////////////////
@@ -383,36 +383,36 @@ public Q_SLOTS:
     QPointer<QAction> mGoPrevDelta;
     QPointer<QAction> mGoNextDelta;
     QPointer<QAction> mGotoLine;
-    KToggleAction* chooseA;
-    KToggleAction* chooseB;
-    KToggleAction* chooseC;
-    KToggleAction* autoAdvance;
-    KToggleAction* wordWrap;
+    KToggleAction* chooseA = nullptr;
+    KToggleAction* chooseB = nullptr;
+    KToggleAction* chooseC = nullptr;
+    KToggleAction* autoAdvance = nullptr;
+    KToggleAction* wordWrap = nullptr;
     QPointer<QAction> splitDiff;
     QPointer<QAction> joinDiffs;
     QPointer<QAction> addManualDiffHelp;
     QPointer<QAction> clearManualDiffHelpList;
-    KToggleAction* showWhiteSpaceCharacters;
-    KToggleAction* showWhiteSpace;
-    KToggleAction* showLineNumbers;
+    KToggleAction* showWhiteSpaceCharacters = nullptr;
+    KToggleAction* showWhiteSpace = nullptr;
+    KToggleAction* showLineNumbers = nullptr;
     QPointer<QAction> mAutoSolve;
     QPointer<QAction> mUnsolve;
     QPointer<QAction> mMergeHistory;
     QPointer<QAction> mergeRegExp;
-    KToggleAction* showWindowA;
-    KToggleAction* showWindowB;
-    KToggleAction* showWindowC;
+    KToggleAction* showWindowA = nullptr;
+    KToggleAction* showWindowB = nullptr;
+    KToggleAction* showWindowC = nullptr;
     QPointer<QAction> winFocusNext;
     QPointer<QAction> winFocusPrev;
     QPointer<QAction> winToggleSplitOrientation;
-    KToggleAction* dirShowBoth;
+    KToggleAction* dirShowBoth = nullptr;
     QPointer<QAction> dirViewToggle;
-    KToggleAction* overviewModeNormal;
-    KToggleAction* overviewModeAB;
-    KToggleAction* overviewModeAC;
-    KToggleAction* overviewModeBC;
+    KToggleAction* overviewModeNormal = nullptr;
+    KToggleAction* overviewModeAB = nullptr;
+    KToggleAction* overviewModeAC = nullptr;
+    KToggleAction* overviewModeBC = nullptr;
 
-    QMenu* m_pMergeEditorPopupMenu;
+    QMenu* m_pMergeEditorPopupMenu = nullptr;
 
     QWidget* m_pMainWidget = nullptr; // Contains vertical splitter and horiz scrollbar
     QWidget* m_pCentralWidget = nullptr;
@@ -428,13 +428,13 @@ public Q_SLOTS:
     QSplitter* m_pDiffWindowSplitter = nullptr;
 
     MergeResultWindow* m_pMergeResultWindow = nullptr;
-    WindowTitleWidget* m_pMergeResultWindowTitle;
+    WindowTitleWidget* m_pMergeResultWindowTitle = nullptr;
     static bool m_bTripleDiff;
 
     QDockWidget* m_pDirectoryMergeDock = nullptr;
     DirectoryMergeWindow* m_pDirectoryMergeWindow = nullptr;
     QDockWidget* m_pDirectoryMergeInfoDock = nullptr;
-    DirectoryMergeInfo* m_pDirectoryMergeInfo;
+    DirectoryMergeInfo* m_pDirectoryMergeInfo = nullptr;
     bool m_bDirCompare = false;
 
     Overview* m_pOverview = nullptr;
@@ -448,7 +448,7 @@ public Q_SLOTS:
     QSharedPointer<SourceData> m_sd3 = QSharedPointer<SourceData>::create();
 
     QString m_outputFilename;
-    bool m_bDefaultFilename;
+    bool m_bDefaultFilename = true;
 
     DiffList m_diffList12;
     DiffList m_diffList23;
@@ -458,7 +458,7 @@ public Q_SLOTS:
     ManualDiffHelpList m_manualDiffHelpList;
 
     QtNumberType m_neededLines = 0;
-    int m_DTWHeight;
+    int m_DTWHeight = 0;
     bool m_bOutputModified = false;
     bool m_bFileSaved = false;
     bool m_bTimerBlock = false; // Synchronization
@@ -476,7 +476,7 @@ public Q_SLOTS:
     bool m_bAutoMode = false;
     bool m_bRecalcWordWrapPosted = false;
 
-    int m_firstD3LIdx;                 // only needed during recalcWordWrap
+    int m_firstD3LIdx = 0; // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
 
     bool mRunnablesStarted = false;
