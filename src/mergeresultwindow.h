@@ -175,7 +175,7 @@ class MergeResultWindow: public QWidget
     TotalDiffStatus* m_pTotalDiffStatus = nullptr;
 
     int m_delayedDrawTimer = 0;
-    e_OverviewMode mOverviewMode;
+    e_OverviewMode mOverviewMode = e_OverviewMode::eOMNormal;
     QString m_persistentStatusMessage;
 
   private:

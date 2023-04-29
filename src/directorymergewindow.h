@@ -149,17 +149,17 @@ Q_SIGNALS:
 private:
    void addListViewItem(const QString& dir, const QString& basePath, FileAccess* fi);
 
-   QLabel* m_pInfoA;
-   QLabel* m_pInfoB;
-   QLabel* m_pInfoC;
-   QLabel* m_pInfoDest;
+   QLabel* m_pInfoA = nullptr;
+   QLabel* m_pInfoB = nullptr;
+   QLabel* m_pInfoC = nullptr;
+   QLabel* m_pInfoDest = nullptr;
 
-   QLabel* m_pA;
-   QLabel* m_pB;
-   QLabel* m_pC;
-   QLabel* m_pDest;
+   QLabel* m_pA = nullptr;
+   QLabel* m_pB = nullptr;
+   QLabel* m_pC = nullptr;
+   QLabel* m_pDest = nullptr;
 
-   QTreeWidget* m_pInfoList;
+   QTreeWidget* m_pInfoList = nullptr;
 };
 
 #endif
