@@ -531,8 +531,13 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     else
         bSuccess = doFileCompare();
 
-    if(m_bAutoMode && bSuccess)
-        return;
+    if(bSuccess)
+    {
+        if(m_bAutoMode)
+            return;
+
+        showMainWindow();
+    }
 
     m_bAutoMode = false;
 
