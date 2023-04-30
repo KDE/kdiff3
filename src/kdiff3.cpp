@@ -418,6 +418,37 @@ void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
     Q_EMIT updateAvailabilities();
 }
 
+// Restore and show mainWindow.
+void KDiff3App::showMainWindow()
+{
+    if(!m_pKDiff3Shell->isVisible() && !restoreWindow(KSharedConfig::openConfig()))
+    {
+        /*
+            Set default state/geometry from config file.
+            This will no longer be updated but serves as a fallback.
+            Qt's restoreState/saveState can handle multiple screens this won't.
+        */
+        if(m_pOptions->isFullScreen())
+            m_pKDiff3Shell->showFullScreen();
+        else if(m_pOptions->isMaximised())
+            m_pKDiff3Shell->showMaximized();
+
+        QSize size = m_pOptions->getGeometry();
+        QPoint pos = m_pOptions->getPosition();
+
+        if(!size.isEmpty())
+        {
+            m_pKDiff3Shell->resize(size);
+
+            QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
+            if(visibleRect.width() > 100 && visibleRect.height() > 100)
+                m_pKDiff3Shell->move(pos);
+        }
+    }
+
+    m_pKDiff3Shell->show();
+}
+
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
     //This code may execute before QApplication::exec
@@ -445,34 +476,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
 
     if(!m_bAutoMode && !isPart())
-    {
-        if(!m_pKDiff3Shell->isVisible() && !restoreWindow(KSharedConfig::openConfig()))
-        {
-            /*
-                Set default state/geometry from config file.
-                This will no longer be updated but serves as a fallback.
-                Qt's restoreState/saveState can handle multiple screens this won't.
-            */
-            if(m_pOptions->isFullScreen())
-                m_pKDiff3Shell->showFullScreen();
-            else if(m_pOptions->isMaximised())
-                m_pKDiff3Shell->showMaximized();
+        showMainWindow();
 
-            QSize size = m_pOptions->getGeometry();
-            QPoint pos = m_pOptions->getPosition();
-
-            if(!size.isEmpty())
-            {
-                m_pKDiff3Shell->resize(size);
-
-                QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
-                if(visibleRect.width() > 100 && visibleRect.height() > 100)
-                    m_pKDiff3Shell->move(pos);
-            }
-        }
-
-        m_pKDiff3Shell->show();
-    }
     g_pProgressDialog->setStayHidden(false);
 
     bool bSuccess = true;
