@@ -452,7 +452,7 @@ void KDiff3App::showMainWindow()
 // Do file comparision.
 bool KDiff3App::doFileCompare()
 {
-    bool bSuccess = false;
+    bool bSuccess = true;
 
     improveFilenames();
     m_pDirectoryMergeDock->hide();
@@ -544,8 +544,13 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     else
         bSuccess = doFileCompare();
 
-    if(m_bAutoMode && bSuccess)
-        return;
+    if(bSuccess)
+    {
+        if(m_bAutoMode)
+            return;
+
+        showMainWindow();
+    }
 
     m_bAutoMode = false;
 
