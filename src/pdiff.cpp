@@ -1439,6 +1439,8 @@ void KDiff3App::mainWindowEnable(bool bEnable)
 
 void KDiff3App::postRecalcWordWrap()
 {
+    if(m_bAutoMode) return;
+
     if(!m_bRecalcWordWrapPosted)
     {
         m_bRecalcWordWrapPosted = true;
@@ -1453,6 +1455,7 @@ void KDiff3App::postRecalcWordWrap()
 
 void KDiff3App::slotRecalcWordWrap()
 {
+    Q_ASSERT(!m_bAutoMode);
     recalcWordWrap();
 }
 
