@@ -1,19 +1,16 @@
-Version 1.9 - 2021-
+Version 1.10 - 2023
 ===========================
-*Rewrite of SourceData::FileData::preprocess now only loops through file contents once.
-*Major rework of event handling
-  -Move away from event filters where feasible, drop code for events now handled by qt.
-  -decentralize handlers
-*take advantage of Qt and boost signal/slot pattern to avoid needless nullptr checks.
-  -decentralize cut/paste handling
-*Introduce LineRef wrapper class
-*Add enum types and use existing ones.
-  -improves readability of code.
-*split out doDirectoryCompare from improveFilenames
-  -Principle of least surprise
-*Stop mis-using c style [] pointer access there is no documented reason to assume QVector<T> has a
-  c-style memory layout. Much less that this will remain so.
+*Prevent false error due to faulty check when m_pOptions->m_bDiff3AlignBC = true
+*468492 fix crash when word wrap enabled
+*Rework KDiff3App::completeInit to avoid crash on exit in auto mode
+*467652 - "Escape" shortcut ignored if merge output in focus
+*466522 - save and restore dock states
+*439148 - Show UI before comparison start
+*466241 - Don't crash on broken links
+*466524 - Fix memory safety issues during reload.
+*Fix mishandling line count for files containing '0x0b'
+*Make DirectoryMergeWindow and DirecoryMergeInfo QDockWidgets.
+*Use Qt native saveState/restoreState
 
-Not even going to try to list everything here.
 
 See git history for complete log.
