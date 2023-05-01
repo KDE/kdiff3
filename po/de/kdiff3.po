@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-30 00:50+0000\n"
+"POT-Creation-Date: 2023-05-01 00:55+0000\n"
 "PO-Revision-Date: 2023-04-20 19:49+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -159,7 +159,7 @@ msgstr "Zeilenende-Kodierung: %1"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: difftextwindow.cpp:1983 kdiff3.cpp:929
+#: difftextwindow.cpp:1983 kdiff3.cpp:949
 #, kde-format
 msgid "Top line"
 msgstr "Oberste Zeile"
@@ -355,8 +355,8 @@ msgstr ""
 "Sie sind dabei, Ordner zusammenzuführen. Sind Sie sicher, dass Sie diese "
 "Operation abbrechen und den Ordner erneut einlesen möchten?"
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:783 kdiff3.cpp:793 kdiff3.cpp:805
-#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1739 pdiff.cpp:1749
+#: directorymergewindow.cpp:698 kdiff3.cpp:803 kdiff3.cpp:813 kdiff3.cpp:825
+#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1742 pdiff.cpp:1752
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1163,109 +1163,109 @@ msgstr "Ordner-Zusammenführung"
 msgid "Merge info"
 msgstr "Informationen zur Zusammenführung"
 
-#: kdiff3.cpp:443
-#, kde-format
-msgid "Option --auto ignored for folder comparison."
-msgstr "Option --auto wird beim Vergleich von Ordnern ignoriert."
-
-#: kdiff3.cpp:522
+#: kdiff3.cpp:496
 #, kde-format
 msgid "Saving failed."
 msgstr "Speichern fehlgeschlagen."
 
-#: kdiff3.cpp:551 pdiff.cpp:937
+#: kdiff3.cpp:533
+#, kde-format
+msgid "Option --auto ignored for folder comparison."
+msgstr "Option --auto wird beim Vergleich von Ordnern ignoriert."
+
+#: kdiff3.cpp:571 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Öffnen dieser Dateien ist fehlgeschlagen:"
 
-#: kdiff3.cpp:560 pdiff.cpp:946
+#: kdiff3.cpp:580 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "Fehler beim Öffnen der Datei"
 
-#: kdiff3.cpp:592
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Dateien für Vergleich öffnen ..."
 
-#: kdiff3.cpp:594
+#: kdiff3.cpp:614
 #, kde-format
 msgid "Reload"
 msgstr "Neu laden"
 
-#: kdiff3.cpp:597
+#: kdiff3.cpp:617
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr ""
 "Speichert das Ergebnis der Zusammenführung. Alle Konflikte müssen aufgelöst "
 "sein."
 
-#: kdiff3.cpp:599
+#: kdiff3.cpp:619
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Speichert das aktuelle Dokument als ..."
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:622
 #, kde-format
 msgid "Print the differences"
 msgstr "Unterschiede drucken"
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:625
 #, kde-format
 msgid "Quits the application"
 msgstr "Beendet das Programm"
 
-#: kdiff3.cpp:609
+#: kdiff3.cpp:629
 #, kde-format
 msgid "Undo last action."
 msgstr "Letzte Aktion zurücknehmen."
 
-#: kdiff3.cpp:613
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Schneidet die Auswahl aus und kopiert sie in die Zwischenablage"
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Kopiert den ausgewählten Bereich in die Zwischenablage"
 
-#: kdiff3.cpp:618
+#: kdiff3.cpp:638
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Fügt den Inhalt der Zwischenablage an der aktuellen Position ein"
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Alles in aktuellem Fenster auswählen"
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:644
 #, kde-format
 msgid "Search for a string"
 msgstr "Nach Text suchen"
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:646
 #, kde-format
 msgid "Search again for the string"
 msgstr "Weitersuchen"
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:651
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Blendet die Statusleiste ein/aus"
 
-#: kdiff3.cpp:635
+#: kdiff3.cpp:655
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3 einrichten ..."
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Zu aktuellem Unterschied springen"
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "Current\n"
@@ -1274,12 +1274,12 @@ msgstr ""
 "Aktueller\n"
 "Unterschied"
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Zum ersten Unterschied springen"
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "First\n"
@@ -1288,12 +1288,12 @@ msgstr ""
 "Erster\n"
 "Unterschied"
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Zum letzten Unterschied springen"
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:679
 #, kde-format
 msgid ""
 "Last\n"
@@ -1302,7 +1302,7 @@ msgstr ""
 "Letzter\n"
 "Unterschied"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1310,7 +1310,7 @@ msgstr ""
 "(Unterschiede in Leerräumen werden übersprungen, wenn „Leerräume anzeigen“ "
 "ausgeschaltet ist.)"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:682
 #, kde-format
 msgctxt "Tooltip explaination text"
 msgid ""
@@ -1320,12 +1320,12 @@ msgstr ""
 "(Unterschiede in Leerräumen werden nicht übersprungen, auch wenn „Leerräume "
 "anzeigen“ ausgeschaltet ist.)"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Zu vorherigem Unterschied springen"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:683
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1334,12 +1334,12 @@ msgstr ""
 "Vorheriger\n"
 "Unterschied"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Zu nächstem Unterschied springen"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:685
 #, kde-format
 msgid ""
 "Next\n"
@@ -1348,12 +1348,12 @@ msgstr ""
 "Nächster\n"
 "Unterschied"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:687
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Zu vorherigem Konflikt springen"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:687
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1362,12 +1362,12 @@ msgstr ""
 "Vorheriger\n"
 "Konflikt"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Zu nächstem Konflikt springen"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:689
 #, kde-format
 msgid ""
 "Next\n"
@@ -1376,12 +1376,12 @@ msgstr ""
 "Nächster\n"
 "Konflikt"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Zu vorherigem ungelösten Konflikt springen"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:691
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1390,12 +1390,12 @@ msgstr ""
 "Vorheriger\n"
 "Ungelöster"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Zu nächstem ungelösten Konflikt springen"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:693
 #, kde-format
 msgid ""
 "Next\n"
@@ -1404,13 +1404,13 @@ msgstr ""
 "Nächster\n"
 "Ungelöster"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Gehe zu Zeile"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1420,19 +1420,19 @@ msgstr ""
 "Gehe\n"
 "Zeile"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Zu bestimmter Zeile springen."
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Zeile(n) von A wählen"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1442,13 +1442,13 @@ msgstr ""
 "Wähle\n"
 "A"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Zeile(n) von B wählen"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1458,13 +1458,13 @@ msgstr ""
 "Wähle\n"
 "B"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:699
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Zeile(n) von C wählen"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:699
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1474,13 +1474,13 @@ msgstr ""
 "Wähle\n"
 "C"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:700
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Automatisch zu nächstem ungelösten Konflikt weiterspringen"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:700
 #, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
@@ -1490,12 +1490,12 @@ msgstr ""
 "Automatisch\n"
 "zum nächsten"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Leer- und Tabulator-Zeichen anzeigen"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:702
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1505,12 +1505,12 @@ msgstr ""
 "Leer-\n"
 "räume"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Show White Space"
 msgstr "Leerräume anzeigen"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:703
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1520,12 +1520,12 @@ msgstr ""
 "Leerraum-\n"
 "Unterschiede"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Zeilennummern anzeigen"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:705
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1535,139 +1535,139 @@ msgstr ""
 "Zeilen-\n"
 "nummern"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Einfache Konflikte automatisch lösen"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Alle Unterschiede zu Konflikten machen"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Zusammenführung über regulären Ausdruck starten"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Verlauf-Konflikte automatisch auflösen"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Unterschied bei der Auswahlmarkierung trennen"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Markierte Unterschiede verbinden"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Show Window A"
 msgstr "Fenster A anzeigen"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:715
 #, kde-format
 msgid "Show Window B"
 msgstr "Fenster B anzeigen"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:716
 #, kde-format
 msgid "Show Window C"
 msgstr "Fenster C anzeigen"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:718
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normale Übersicht"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:719
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A/B-Übersicht"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:720
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A/C-Übersicht"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:721
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B/C-Übersicht"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Zeilenumbruch für Vergleichsanzeige"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:723
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Manuelle Ausrichtung hinzufügen"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:724
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Alle manuellen Ausrichtungen entfernen"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:726
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Nächstes Fenster aktivieren"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:727
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Vorheriges Fenster aktivieren"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:728
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Ausrichtung der Fensterteilung umschalten"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:730
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Ordner- && Textansicht teilen sich Hauptfenster"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:732
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Zwischen Ordner- && Textansicht umschalten"
 
-#: kdiff3.cpp:732 kdiff3.cpp:838 kdiff3.cpp:863 kdiff3.cpp:1143 kdiff3.cpp:1164
+#: kdiff3.cpp:752 kdiff3.cpp:858 kdiff3.cpp:883 kdiff3.cpp:1163 kdiff3.cpp:1184
 #: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
 #: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Bereit."
 
-#: kdiff3.cpp:782 pdiff.cpp:1738
+#: kdiff3.cpp:802 pdiff.cpp:1741
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Das Ergebnis der Zusammenführung wurde nicht gespeichert."
 
-#: kdiff3.cpp:784
+#: kdiff3.cpp:804
 #, kde-format
 msgid "Save && Quit"
 msgstr "Speichern && Beenden"
 
-#: kdiff3.cpp:785
+#: kdiff3.cpp:805
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Ohne zu speichern beenden"
 
-#: kdiff3.cpp:793 pdiff.cpp:1749
+#: kdiff3.cpp:813 pdiff.cpp:1752
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Speichern des Ergebnisses der Zusammenführung ist fehlgeschlagen."
 
-#: kdiff3.cpp:804 pdiff.cpp:870
+#: kdiff3.cpp:824 pdiff.cpp:870
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1675,62 +1675,62 @@ msgstr ""
 "Sie führen eine Ordnerzusammenführung durch. Sind Sie sicher, dass Sie diese "
 "beenden möchten?"
 
-#: kdiff3.cpp:827
+#: kdiff3.cpp:847
 #, kde-format
 msgid "Saving file..."
 msgstr "Datei wird gespeichert ..."
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:864
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Datei wird unter neuem Namen gespeichert ..."
 
-#: kdiff3.cpp:846
+#: kdiff3.cpp:866
 #, kde-format
 msgid "Save As..."
 msgstr "Speichern unter ..."
 
-#: kdiff3.cpp:871
+#: kdiff3.cpp:891
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Eine Druckfunktion ist zurzeit noch nicht verfügbar."
 
-#: kdiff3.cpp:912
+#: kdiff3.cpp:932
 #, kde-format
 msgid "Printing..."
 msgstr "Druckvorgang läuft ..."
 
-#: kdiff3.cpp:1017
+#: kdiff3.cpp:1037
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "Seite %1 von %2 wird gedruckt"
 
-#: kdiff3.cpp:1076
+#: kdiff3.cpp:1096
 #, kde-format
 msgid " (Selection)"
 msgstr " (Auswahl)"
 
-#: kdiff3.cpp:1105
+#: kdiff3.cpp:1125
 #, kde-format
 msgid "Printing completed."
 msgstr "Drucken beendet."
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1129
 #, kde-format
 msgid "Printing aborted."
 msgstr "Drucken abgebrochen."
 
-#: kdiff3.cpp:1116
+#: kdiff3.cpp:1136
 #, kde-format
 msgid "Exiting..."
 msgstr "Wird beendet ..."
 
-#: kdiff3.cpp:1127
+#: kdiff3.cpp:1147
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Werkzeugleiste anzeigen/ausblenden ..."
 
-#: kdiff3.cpp:1148
+#: kdiff3.cpp:1168
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Statusleiste anzeigen/ausblenden ..."
@@ -3415,42 +3415,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Gehe zu Zeile"
 
-#: pdiff.cpp:1518
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Zeilenumbruch (Abbrechen deaktiviert den Zeilenumbruch)"
 
-#: pdiff.cpp:1519
+#: pdiff.cpp:1522
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Maximale Breite wird für horizontale Bildlaufleiste berechnet"
 
-#: pdiff.cpp:1740
+#: pdiff.cpp:1743
 #, kde-format
 msgid "Save && Continue"
 msgstr "Speichern && Fortsetzen"
 
-#: pdiff.cpp:1741
+#: pdiff.cpp:1744
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Fortsetzen ohne zu speichern"
 
-#: pdiff.cpp:1939
+#: pdiff.cpp:1942
 #, kde-format
 msgid "Search complete."
 msgstr "Suche abgeschlossen."
 
-#: pdiff.cpp:1939
+#: pdiff.cpp:1942
 #, kde-format
 msgid "Search Complete"
 msgstr "Suche abgeschlossen"
 
-#: pdiff.cpp:2120
+#: pdiff.cpp:2123
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "In keinem der Unterschiedsfenster ist eine Auswahl markiert."
 
-#: pdiff.cpp:2120
+#: pdiff.cpp:2123
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Fehler beim Hinzufügen einer manuellen Ausrichtung."

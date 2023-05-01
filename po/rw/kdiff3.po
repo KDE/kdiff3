@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-30 00:50+0000\n"
+"POT-Creation-Date: 2023-05-01 00:55+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -164,7 +164,7 @@ msgstr "Impera Imisusire : "
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1983 kdiff3.cpp:929
+#: difftextwindow.cpp:1983 kdiff3.cpp:949
 #, fuzzy, kde-format
 msgid "Top line"
 msgstr "Umurongo: %1 "
@@ -365,8 +365,8 @@ msgid ""
 "merge and rescan the folder?"
 msgstr "A Ububiko Gukomatanya . , Kuri Kureka i Gukomatanya na i Ububiko ? "
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:783 kdiff3.cpp:793 kdiff3.cpp:805
-#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1739 pdiff.cpp:1749
+#: directorymergewindow.cpp:698 kdiff3.cpp:803 kdiff3.cpp:813 kdiff3.cpp:825
+#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1742 pdiff.cpp:1752
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1127,145 +1127,145 @@ msgstr "Seriveri y'ububiko:"
 msgid "Merge info"
 msgstr "Kuri A "
 
-#: kdiff3.cpp:443
-#, fuzzy, kde-format
-msgid "Option --auto ignored for folder comparison."
-msgstr "- - Ikiyega ya:  Ububiko . "
-
-#: kdiff3.cpp:522
+#: kdiff3.cpp:496
 #, fuzzy, kde-format
 msgid "Saving failed."
 msgstr "Byanze . "
 
-#: kdiff3.cpp:551 pdiff.cpp:937
+#: kdiff3.cpp:533
+#, fuzzy, kde-format
+msgid "Option --auto ignored for folder comparison."
+msgstr "- - Ikiyega ya:  Ububiko . "
+
+#: kdiff3.cpp:571 pdiff.cpp:937
 #, fuzzy, kde-format
 msgid "Opening of these files failed:"
 msgstr "Bya Idosiye Byanze : "
 
-#: kdiff3.cpp:560 pdiff.cpp:946
+#: kdiff3.cpp:580 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "Ikosa gufungura idosiye"
 
-#: kdiff3.cpp:592
+#: kdiff3.cpp:612
 #, fuzzy, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Inyandiko ya:  ... "
 
-#: kdiff3.cpp:594
+#: kdiff3.cpp:614
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgid "Reload"
 msgstr "Cyiteguye."
 
-#: kdiff3.cpp:597
+#: kdiff3.cpp:617
 #, fuzzy, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "i Gukomatanya Igisubizo . ! "
 
-#: kdiff3.cpp:599
+#: kdiff3.cpp:619
 #, fuzzy, kde-format
 msgid "Saves the current document as..."
 msgstr "i KIGEZWEHO Inyandiko Nka ... "
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:622
 #, kde-format
 msgid "Print the differences"
 msgstr ""
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:625
 #, fuzzy, kde-format
 msgid "Quits the application"
 msgstr "i Porogaramu "
 
-#: kdiff3.cpp:609
+#: kdiff3.cpp:629
 #, fuzzy, kde-format
 msgid "Undo last action."
 msgstr "Gukoporora Ihitamo "
 
-#: kdiff3.cpp:613
+#: kdiff3.cpp:633
 #, fuzzy, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "i Byahiswemo Icyiciro na Kuri i Ububikokoporora "
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:636
 #, fuzzy, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "i Byahiswemo Icyiciro Kuri i Ububikokoporora "
 
-#: kdiff3.cpp:618
+#: kdiff3.cpp:638
 #, fuzzy, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "i Ububikokoporora Ibigize Kuri Ibirindiro: "
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Select everything in current window"
 msgstr ""
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:644
 #, fuzzy, kde-format
 msgid "Search for a string"
 msgstr "ya:  A Ikurikiranyanyuguti "
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:646
 #, fuzzy, kde-format
 msgid "Search again for the string"
 msgstr "Nanone ya:  i Ikurikiranyanyuguti "
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:651
 #, fuzzy, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "/i Umurongomiterere "
 
-#: kdiff3.cpp:635
+#: kdiff3.cpp:655
 #, fuzzy, kde-format
 msgid "Configure KDiff3..."
 msgstr "Kugena imiterere..."
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:675
 #, fuzzy, kde-format
 msgid "Go to Current Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:675
 #, fuzzy, kde-format
 msgid ""
 "Current\n"
 "Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:677
 #, fuzzy, kde-format
 msgid "Go to First Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:677
 #, fuzzy, kde-format
 msgid ""
 "First\n"
 "Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:679
 #, fuzzy, kde-format
 msgid "Go to Last Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:679
 #, fuzzy, kde-format
 msgid ""
 "Last\n"
 "Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 msgctxt "Tooltip explaination text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "( Umweru Umwanya Ibinyuranyo Ryari: \" \" ni Yahagaritswe . ) "
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:682
 #, fuzzy, kde-format
 msgctxt "Tooltip explaination text"
 msgid ""
@@ -1275,85 +1275,85 @@ msgstr ""
 "( OYA Gusimbuka Umweru Umwanya Ibinyuranyo ATARIIGIHARWE Ryari: \" \" ni "
 "Yahagaritswe . ) "
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 msgid "Go to Previous Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 msgid ""
 "Prev\n"
 "Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 msgid "Go to Next Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 msgid ""
 "Next\n"
 "Delta"
 msgstr "Kuri "
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:687
 #, fuzzy, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Kuri "
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:687
 #, fuzzy, kde-format
 msgid ""
 "Prev\n"
 "Conflict"
 msgstr "Ishyamirana ry'ingenzi"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:689
 #, fuzzy, kde-format
 msgid "Go to Next Conflict"
 msgstr "Kuri "
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:689
 #, fuzzy, kde-format
 msgid ""
 "Next\n"
 "Conflict"
 msgstr "Kuri "
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Kuri "
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 msgid ""
 "Prev\n"
 "Unsolved"
 msgstr "Kidakoreshwa"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Kuri "
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 msgid ""
 "Next\n"
 "Unsolved"
 msgstr "Kidakoreshwa"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Kuri "
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1361,19 +1361,19 @@ msgid ""
 "Line"
 msgstr "Ihuza..."
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:697
 #, fuzzy, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "( S ) A "
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1381,13 +1381,13 @@ msgid ""
 "A"
 msgstr ""
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:698
 #, fuzzy, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "( S ) "
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1395,13 +1395,13 @@ msgid ""
 "B"
 msgstr ""
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:699
 #, fuzzy, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "( S ) "
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:699
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1409,13 +1409,13 @@ msgid ""
 "C"
 msgstr ""
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:700
 #, fuzzy, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Kuri "
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:700
 #, fuzzy, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
@@ -1423,12 +1423,12 @@ msgid ""
 "Next"
 msgstr "Gukoporora Ihitamo "
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:702
 #, fuzzy, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "& & ya:  "
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:702
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1436,12 +1436,12 @@ msgid ""
 "Characters"
 msgstr ""
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:703
 #, fuzzy, kde-format
 msgid "Show White Space"
 msgstr "Umwanya w'Umweru"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:703
 #, fuzzy, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1449,12 +1449,12 @@ msgid ""
 "Deltas"
 msgstr "Kuri "
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:705
 #, fuzzy, kde-format
 msgid "Show Line Numbers"
 msgstr "Kwerekana nomero z'umurongo"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:705
 #, fuzzy, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1462,200 +1462,200 @@ msgid ""
 "Numbers"
 msgstr "Kwerekana nomero z'umurongo"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:707
 #, fuzzy, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Gufunga mu buryo bwikoresha impago zidakoreshwa"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:708
 #, fuzzy, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Kuri "
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:710
 #, fuzzy, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Gufunga mu buryo bwikoresha impago zidakoreshwa"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr ""
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:712
 #, fuzzy, kde-format
 msgid "Join Selected Diffs"
 msgstr "Idosiye "
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:714
 #, fuzzy, kde-format
 msgid "Show Window A"
 msgstr "A "
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:715
 #, fuzzy, kde-format
 msgid "Show Window B"
 msgstr "Kwerekana Ilisiti y'Amadirishya"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:716
 #, fuzzy, kde-format
 msgid "Show Window C"
 msgstr "Kwerekana Ilisiti y'Amadirishya"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:718
 #, fuzzy, kde-format
 msgid "Normal Overview"
 msgstr "Gahunda-Nyamwaka"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:719
 #, fuzzy, kde-format
 msgid "A vs. B Overview"
 msgstr "A . "
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:720
 #, fuzzy, kde-format
 msgid "A vs. C Overview"
 msgstr "A . "
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:721
 #, fuzzy, kde-format
 msgid "B vs. C Overview"
 msgstr "Incamake"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr ""
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:723
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:724
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:726
 #, fuzzy, kde-format
 msgid "Focus Next Window"
 msgstr "idirishya rikurikira"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:727
 #, fuzzy, kde-format
 msgid "Focus Prev Window"
 msgstr "Kwerekeza ku idirishya: "
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:728
 #, fuzzy, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Icyerekezo mwandiko"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:730
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr ""
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:732
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr ""
 
-#: kdiff3.cpp:732 kdiff3.cpp:838 kdiff3.cpp:863 kdiff3.cpp:1143 kdiff3.cpp:1164
+#: kdiff3.cpp:752 kdiff3.cpp:858 kdiff3.cpp:883 kdiff3.cpp:1163 kdiff3.cpp:1184
 #: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
 #: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Cyiteguye."
 
-#: kdiff3.cpp:782 pdiff.cpp:1738
+#: kdiff3.cpp:802 pdiff.cpp:1741
 #, fuzzy, kde-format
 msgid "The merge result has not been saved."
 msgstr "Gukomatanya Igisubizo . "
 
-#: kdiff3.cpp:784
+#: kdiff3.cpp:804
 #, fuzzy, kde-format
 msgid "Save && Quit"
 msgstr "Kubika & & "
 
-#: kdiff3.cpp:785
+#: kdiff3.cpp:805
 #, fuzzy, kde-format
 msgid "Quit Without Saving"
 msgstr "Komeka utahinduye imiterere"
 
-#: kdiff3.cpp:793 pdiff.cpp:1749
+#: kdiff3.cpp:813 pdiff.cpp:1752
 #, fuzzy, kde-format
 msgid "Saving the merge result failed."
 msgstr "i Gukomatanya Igisubizo Byanze . "
 
-#: kdiff3.cpp:804 pdiff.cpp:870
+#: kdiff3.cpp:824 pdiff.cpp:870
 #, fuzzy, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "A Ububiko Gukomatanya . , Kuri Kureka ? "
 
-#: kdiff3.cpp:827
+#: kdiff3.cpp:847
 #, fuzzy, kde-format
 msgid "Saving file..."
 msgstr "Idosiye ... "
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:864
 #, fuzzy, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Idosiye Na: A Gishya Izina ry'idosiye: ... "
 
-#: kdiff3.cpp:846
+#: kdiff3.cpp:866
 #, kde-format
 msgid "Save As..."
 msgstr ""
 
-#: kdiff3.cpp:871
+#: kdiff3.cpp:891
 #, fuzzy, kde-format
 msgid "Printing not implemented."
 msgstr "Igikorwa Byuzuye . "
 
-#: kdiff3.cpp:912
+#: kdiff3.cpp:932
 #, fuzzy, kde-format
 msgid "Printing..."
 msgstr "Tegereza..."
 
-#: kdiff3.cpp:1017
+#: kdiff3.cpp:1037
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1076
+#: kdiff3.cpp:1096
 #, fuzzy, kde-format
 msgid " (Selection)"
 msgstr "Gutoranya imyandikire"
 
-#: kdiff3.cpp:1105
+#: kdiff3.cpp:1125
 #, fuzzy, kde-format
 msgid "Printing completed."
 msgstr "Igikorwa Byuzuye . "
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1129
 #, fuzzy, kde-format
 msgid "Printing aborted."
 msgstr "Igikorwa Byuzuye . "
 
-#: kdiff3.cpp:1116
+#: kdiff3.cpp:1136
 #, fuzzy, kde-format
 msgid "Exiting..."
 msgstr "Tegereza..."
 
-#: kdiff3.cpp:1127
+#: kdiff3.cpp:1147
 #, fuzzy, kde-format
 msgid "Toggling toolbar..."
 msgstr "Umwanyabikoresho ... "
 
-#: kdiff3.cpp:1148
+#: kdiff3.cpp:1168
 #, fuzzy, kde-format
 msgid "Toggle the statusbar..."
 msgstr "i Umurongomiterere ... "
@@ -3237,42 +3237,42 @@ msgstr ""
 msgid "Go to Line"
 msgstr "Kuri "
 
-#: pdiff.cpp:1518
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1519
+#: pdiff.cpp:1522
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1740
+#: pdiff.cpp:1743
 #, fuzzy, kde-format
 msgid "Save && Continue"
 msgstr "Kubika & & Gukomeza "
 
-#: pdiff.cpp:1741
+#: pdiff.cpp:1744
 #, fuzzy, kde-format
 msgid "Continue Without Saving"
 msgstr "Gukomeza "
 
-#: pdiff.cpp:1939
+#: pdiff.cpp:1942
 #, fuzzy, kde-format
 msgid "Search complete."
 msgstr "Byuzuye . "
 
-#: pdiff.cpp:1939
+#: pdiff.cpp:1942
 #, fuzzy, kde-format
 msgid "Search Complete"
 msgstr "Igishushanyombonera cy'Ishakisha"
 
-#: pdiff.cpp:2120
+#: pdiff.cpp:2123
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2120
+#: pdiff.cpp:2123
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Ikosa Kurema Ububiko . "
