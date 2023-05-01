@@ -1,3 +1,9 @@
+Version 1.10.2 - 2023
+===========================
+*Prevent false error due to faulty check when m_pOptions->m_bDiff3AlignBC = true
+*468492 fix crash when word wrap enabled
+*Rework KDiff3App::completeInit to avoid crash on exit in auto mode
+
 Version 1.10.1 - 2023
 ===========================
 *467652 - "Escape" shortcut ignored if merge output in focus
