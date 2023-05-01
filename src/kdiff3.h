@@ -144,10 +144,10 @@ class KDiff3App: public QMainWindow
     /** read general Options again and initialize all variables like the recent file list */
     void readOptions(KSharedConfigPtr);
 
-    // Finish initialisation (virtual, so that it can be called from the shell too.)
-    virtual void completeInit(const QString& fn1 = QString(), const QString& fn2 = QString(), const QString& fn3 = QString());
+    // Finish initialisation
+    void completeInit(const QString& fn1 = QString(), const QString& fn2 = QString(), const QString& fn3 = QString());
     //Restore goementry and showMainWindow
-    virtual void showMainWindow();
+    void showMainWindow();
 
     /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
      * default implementation (only returns true), this calles saveModified() on the document object to ask if the document shall
