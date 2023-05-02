@@ -41,7 +41,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     //Abort if verticalLayout is not the immediate child of the dialog. This interferes with re-sizing.
     assert(dialogUi.layout->parent() == this);
 
-    chk_connect(dialogUi.abortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
+    chk_connect_a(dialogUi.abortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
     if(m_pStatusBar != nullptr)
     {
         m_pStatusBarWidget = new QWidget;
@@ -52,7 +52,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
         m_pStatusProgressBar->setRange(0, 1000);
         m_pStatusProgressBar->setTextVisible(false);
         m_pStatusAbortButton = new QPushButton(i18n("&Cancel"));
-        chk_connect(m_pStatusAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
+        chk_connect_a(m_pStatusAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
         pStatusBarLayout->addWidget(m_pStatusProgressBar);
         pStatusBarLayout->addWidget(m_pStatusAbortButton);
         m_pStatusBar->addPermanentWidget(m_pStatusBarWidget, 0);

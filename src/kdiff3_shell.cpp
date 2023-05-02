@@ -46,7 +46,7 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
         setCentralWidget(m_widget);
 
         m_widget->completeInit(fn1, fn2, fn3);
-        chk_connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
+        chk_connect_a(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
 
         // apply the saved mainwindow settings, if any, and ask the mainwindow
         // to automatically save settings if changed: window size, toolbar
@@ -132,7 +132,7 @@ void KDiff3Shell::optionsConfigureToolbars()
 
     // use the standard toolbar editor
     KEditToolBar dlg(factory());
-    chk_connect(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
+    chk_connect_a(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
     dlg.exec();
 }
 

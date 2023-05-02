@@ -70,7 +70,7 @@ class ReversibleScrollBar : public QScrollBar
     {
         m_pbRightToLeftLanguage = pbRightToLeftLanguage;
         m_realVal = 0;
-        chk_connect(this, &ReversibleScrollBar::valueChanged, this, &ReversibleScrollBar::slotValueChanged);
+        chk_connect_a(this, &ReversibleScrollBar::valueChanged, this, &ReversibleScrollBar::slotValueChanged);
     }
     void setAgain() { setValue(m_realVal); }
 

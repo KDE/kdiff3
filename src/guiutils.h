@@ -34,7 +34,7 @@ inline typename std::enable_if<std::is_same<T, QAction>::value, QAction>::type* 
 
     theAction = ac->addAction(actionName);
     theAction->setText(text);
-    chk_connect(theAction, &QAction::triggered, receiver, slot);
+    chk_connect_a(theAction, &QAction::triggered, receiver, slot);
     return theAction;
 }
 
@@ -50,7 +50,7 @@ inline typename std::enable_if<std::is_same<T, KToggleAction>::value, KToggleAct
     KToggleAction* theAction = new KToggleAction(ac);
     ac->addAction(actionName, theAction);
     theAction->setText(text);
-    chk_connect(theAction, &KToggleAction::triggered, receiver, slot);
+    chk_connect_a(theAction, &KToggleAction::triggered, receiver, slot);
     return theAction;
 }
 

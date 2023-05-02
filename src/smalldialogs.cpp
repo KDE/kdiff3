@@ -340,8 +340,8 @@ FindDialog::FindDialog(QWidget* pParent)
     QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Cancel, this);
     layout->addWidget(box, line, 0, 1, 2);
     box->addButton(i18n("&Search"), QDialogButtonBox::AcceptRole);
-    chk_connect(box, &QDialogButtonBox::accepted, this, &FindDialog::accept);
-    chk_connect(box, &QDialogButtonBox::rejected, this, &FindDialog::reject);
+    chk_connect_a(box, &QDialogButtonBox::accepted, this, &FindDialog::accept);
+    chk_connect_a(box, &QDialogButtonBox::rejected, this, &FindDialog::reject);
 
     hide();
 }
@@ -375,7 +375,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     l->setToolTip(autoMergeRegExpToolTip);
     m_pAutoMergeRegExpEdit = new QLineEdit(this);
     pGrid->addWidget(m_pAutoMergeRegExpEdit, line, 1);
-    chk_connect(m_pAutoMergeRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pAutoMergeRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("Example auto merge line:"), this);
@@ -383,7 +383,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     l->setToolTip(i18n("To test auto merge, copy a line as used in your files."));
     m_pAutoMergeExampleEdit = new QLineEdit(this);
     pGrid->addWidget(m_pAutoMergeExampleEdit, line, 1);
-    chk_connect(m_pAutoMergeExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pAutoMergeExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("Match result:"), this);
@@ -402,7 +402,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     l->setToolTip(historyStartRegExpToolTip);
     m_pHistoryStartRegExpEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistoryStartRegExpEdit, line, 1);
-    chk_connect(m_pHistoryStartRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pHistoryStartRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("Example history start line (with leading comment):"), this);
@@ -411,7 +411,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
                        "including the leading comment."));
     m_pHistoryStartExampleEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistoryStartExampleEdit, line, 1);
-    chk_connect(m_pHistoryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pHistoryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("Match result:"), this);
@@ -430,7 +430,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     l->setToolTip(historyEntryStartRegExpToolTip);
     m_pHistoryEntryStartRegExpEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistoryEntryStartRegExpEdit, line, 1);
-    chk_connect(m_pHistoryEntryStartRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pHistoryEntryStartRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("History sort key order:"), this);
@@ -438,7 +438,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     l->setToolTip(historySortKeyOrderToolTip);
     m_pHistorySortKeyOrderEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistorySortKeyOrderEdit, line, 1);
-    chk_connect(m_pHistorySortKeyOrderEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pHistorySortKeyOrderEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("Example history entry start line (without leading comment):"), this);
@@ -447,7 +447,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
                        "but omit the leading comment."));
     m_pHistoryEntryStartExampleEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistoryEntryStartExampleEdit, line, 1);
-    chk_connect(m_pHistoryEntryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
+    chk_connect_a(m_pHistoryEntryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
     ++line;
 
     l = new QLabel(i18n("Match result:"), this);
@@ -466,8 +466,8 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
 
     QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     pGrid->addWidget(box, line, 0, 1, 2);
-    chk_connect(box, &QDialogButtonBox::accepted, this, &RegExpTester::accept);
-    chk_connect(box, &QDialogButtonBox::rejected, this, &RegExpTester::reject);
+    chk_connect_a(box, &QDialogButtonBox::accepted, this, &RegExpTester::accept);
+    chk_connect_a(box, &QDialogButtonBox::rejected, this, &RegExpTester::reject);
 
     resize(800, sizeHint().height());
 }
