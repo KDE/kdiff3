@@ -6,7 +6,6 @@
 
 
 set(kdiff3part_PART_SRCS
-   kdiff3_part.cpp
    kdiff3.cpp
    directorymergewindow.cpp
    merger.cpp
@@ -55,8 +54,6 @@ set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 target_link_libraries(kdiff3part Qt::PrintSupport KF5::I18n KF5::CoreAddons KF5::Parts KF5::Crash)
 target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
 
-install(TARGETS kdiff3part DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts )
-
 ########### kdiff3 executable ###############
 
 set(kdiff3_SRCS
@@ -98,7 +95,6 @@ install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 ########### install files ###############
 
 install( FILES  kdiff3part.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR} )
-install( FILES  kdiff3_part.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdiff3part )
 install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdiff3 )
 install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${KDE_INSTALL_APPDIR} )
 install( FILES org.kde.kdiff3.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )

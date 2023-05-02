@@ -17,7 +17,6 @@
 #include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "guiutils.h"
-#include "kdiff3_part.h"
 #include "kdiff3_shell.h"
 #include "mergeresultwindow.h"
 #include "optiondialog.h"
@@ -82,31 +81,22 @@ constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar", sizeof(
 
 KActionCollection* KDiff3App::actionCollection() const
 {
-    if(m_pKDiff3Shell == nullptr)
-        return m_pKDiff3Part->actionCollection();
+    assert(m_pKDiff3Shell != nullptr);
 
     return m_pKDiff3Shell->actionCollection();
 }
 
 QStatusBar* KDiff3App::statusBar() const
 {
-    if(m_pKDiff3Shell == nullptr)
-        return nullptr;
+    assert(m_pKDiff3Shell != nullptr);
 
     return m_pKDiff3Shell->statusBar();
 }
 
 KToolBar* KDiff3App::toolBar(const QLatin1String& toolBarId) const
 {
-    if(m_pKDiff3Shell == nullptr)
-        return nullptr;
-
+    assert(m_pKDiff3Shell != nullptr);
     return m_pKDiff3Shell->toolBar(toolBarId);
-}
-
-bool KDiff3App::isPart() const
-{
-    return m_pKDiff3Shell == nullptr;
 }
 
 bool KDiff3App::isFileSaved() const
@@ -122,13 +112,12 @@ bool KDiff3App::isDirComparison() const
 /*
     Don't call completeInit from here it will be called in KDiff3Shell as needed.
 */
-KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3Part):
-    QMainWindow(pParent) //previously KMainWindow
+KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3Shell):
+    QMainWindow(pParent)
 {
     setWindowFlags(Qt::Widget);
     setObjectName(name);
-    m_pKDiff3Part = pKDiff3Part;
-    m_pKDiff3Shell = qobject_cast<KParts::MainWindow*>(pParent);
+    m_pKDiff3Shell = pKDiff3Shell;
 
     m_pCentralWidget = new QWidget(this);
     QVBoxLayout* pCentralLayout = new QVBoxLayout(m_pCentralWidget);
@@ -169,7 +158,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     // Option handling: Only when pParent==0 (no parent)
     int argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
-    bool hasArgs = !isPart() && argCount > 0;
+    bool hasArgs = argCount > 0;
     if(hasArgs)
     {
         QString s;
@@ -317,7 +306,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
-    //Warning: Call this before connecting KDiff3App::slotUpdateAvailabilities or calling KXMLGUIClient::setXMLFile
+    // Warning: Call this before connecting KDiff3App::slotUpdateAvailabilities or
+    //  calling KXMLGUIClient::setXMLFile or KXMLGUIClient::createGUI
     initActions(actionCollection());
 
     initStatusBar();
@@ -332,21 +322,20 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     showWhiteSpaceCharacters->setEnabled(m_pOptions->m_bShowWhiteSpace);
     showLineNumbers->setChecked(m_pOptions->m_bShowLineNumbers);
     wordWrap->setChecked(m_pOptions->wordWrapOn());
-    if(!isPart())
-    {
-        /*
-            No need to restore window size and position here that is done later.
-                See KDiff3App::completeInit
-        */
-        viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
-        slotViewStatusBar();
 
-        KToolBar* mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
-        if(mainToolBar != nullptr)
-        {
-            mainToolBar->mainWindow()->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        }
+    /*
+        No need to restore window size and position here that is done later.
+            See KDiff3App::completeInit
+    */
+    viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
+    slotViewStatusBar();
+
+    KToolBar* mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
+    if(mainToolBar != nullptr)
+    {
+        mainToolBar->mainWindow()->addToolBar(Qt::TopToolBarArea, mainToolBar);
     }
+
     slotRefresh();
 
     m_pDirectoryMergeDock = new QDockWidget(i18n("Directory merge"), this);
@@ -533,7 +522,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         m_bAutoMode = false;
     }
 
-    if(!m_bAutoMode && !isPart())
+    if(!m_bAutoMode)
         showMainWindow();
 
     g_pProgressDialog->setStayHidden(false);
@@ -650,8 +639,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     viewStatusBar->setStatusTip(i18n("Enables/disables the statusbar"));
     KStandardAction::keyBindings(this, &KDiff3App::slotConfigureKeys, ac);
     QAction* pAction = KStandardAction::preferences(this, &KDiff3App::slotConfigure, ac);
-    if(isPart())
-        pAction->setText(i18n("Configure KDiff3..."));
+    pAction->setText(i18n("Configure KDiff3..."));
 
 #include "xpm/autoadvance.xpm"
 #include "xpm/currentpos.xpm"
@@ -784,11 +772,7 @@ void KDiff3App::saveOptions(KSharedConfigPtr config)
 {
     if(!m_bAutoMode)
     {
-        if(!isPart())
-        {
-            saveWindow(config);
-        }
-
+        saveWindow(config);
         m_pOptionDialog->saveOptions(std::move(config));
     }
 }

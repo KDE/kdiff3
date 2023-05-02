@@ -54,11 +54,7 @@ class QMenu;
 class KToolBar;
 class KActionCollection;
 
-namespace KParts {
-class MainWindow;
-}
-
-class KDiff3Part;
+class KDiff3Shell;
 class DirectoryMergeWindow;
 class DirectoryMergeInfo;
 
@@ -126,10 +122,8 @@ class KDiff3App: public QMainWindow
   public:
     /** constructor of KDiff3App, calls all init functions to create the application.
      */
-    KDiff3App(QWidget* parent, const QString& name, KDiff3Part* pKDiff3Part);
+    KDiff3App(QWidget* parent, const QString& name, KDiff3Shell* pKDiff3Shell);
     ~KDiff3App() override;
-
-    [[nodiscard]] bool isPart() const;
 
     /** initializes the KActions of the application */
     void initActions(KActionCollection*);
@@ -473,8 +467,7 @@ public Q_SLOTS:
     bool m_bFinishMainInit = false;
     bool m_bLoadFiles = false;
 
-    KDiff3Part* m_pKDiff3Part = nullptr;
-    KParts::MainWindow* m_pKDiff3Shell = nullptr;
+    KDiff3Shell* m_pKDiff3Shell = nullptr;
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
     bool m_bRecalcWordWrapPosted = false;

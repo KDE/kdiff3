@@ -11,7 +11,6 @@
 #include "kdiff3_shell.h"
 #include "compat.h"
 #include "kdiff3.h"
-#include "kdiff3_part.h"
 
 #include <QApplication>
 #include <QCloseEvent>
@@ -28,22 +27,19 @@
 KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& fn3)
 {
     m_bUnderConstruction = true;
-    // set the shell's ui resource file
-    setXMLFile("kdiff3_shell.rc");
 
-    // and a status bar
-    statusBar()->show();
+    m_widget = new KDiff3App(this, u8"KDiff3Part", this);
 
-    //Avoid redudant init call.
-    KDiff3Part::noInit();
-
-    m_part = new KDiff3Part(this, this, {QVariant(u8"KDiff3Part")});
-
-    if(m_part)
+    if(m_widget)
     {
-        m_widget = qobject_cast<KDiff3App*>(m_part->widget());
+        // set the shell's ui resource file
+        //setXMLFile("kdiff3_shell.rc");
+
+        setupGUI(Default, "kdiff3_shell.rc");
+        // and a status bar
+        statusBar()->show();
         // and integrate the part's GUI with the shell's
-        createGUI(m_part);
+        //createGUI(m_part);
         //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
         // tell the KParts::MainWindow that this is indeed the main widget
@@ -51,6 +47,12 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
 
         m_widget->completeInit(fn1, fn2, fn3);
         chk_connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
+
+        // apply the saved mainwindow settings, if any, and ask the mainwindow
+        // to automatically save settings if changed: window size, toolbar
+        // position, icon size, etc.
+        setAutoSaveSettings();
+        m_bUnderConstruction = false;
     }
     else
     {
@@ -64,12 +66,6 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
 
         return;
     }
-
-    // apply the saved mainwindow settings, if any, and ask the mainwindow
-    // to automatically save settings if changed: window size, toolbar
-    // position, icon size, etc.
-    setAutoSaveSettings();
-    m_bUnderConstruction = false;
 }
 
 KDiff3Shell::~KDiff3Shell() = default;

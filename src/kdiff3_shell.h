@@ -17,16 +17,9 @@
 #include <QPointer>
 #include <QString>
 
-#include <KParts/MainWindow>
+#include <KXmlGuiWindow>
 
 class KToggleAction;
-
-// clang-format off
-namespace KParts {
-    class ReadWritePart;
-}
-// clang-format on
-
 class KDiff3App;
 
 /**
@@ -36,7 +29,7 @@ class KDiff3App;
  * @short Application Shell
  * @author Joachim Eibl <joachim.eibl at gmx.de>
  */
-class KDiff3Shell: public KParts::MainWindow
+class KDiff3Shell: public KXmlGuiWindow
 {
     Q_OBJECT
   public:
@@ -69,7 +62,6 @@ class KDiff3Shell: public KParts::MainWindow
     void slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
 
   private:
-    KParts::ReadWritePart* m_part;
     QPointer<KDiff3App> m_widget;
 
     KToggleAction* m_toolbarAction;

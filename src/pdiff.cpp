@@ -15,6 +15,7 @@
 #include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "kdiff3.h"
+#include "kdiff3_shell.h"
 #include "Logging.h"
 #include "optiondialog.h"
 #include "progress.h"
@@ -403,7 +404,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             m_pMergeWindowFrame->show();
 
         // Try to create a meaningful but not too long caption
-        if(!isPart() && mErrors.isEmpty())
+        if(mErrors.isEmpty())
         {
             createCaption();
         }

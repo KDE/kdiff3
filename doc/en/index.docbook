@@ -1842,31 +1842,6 @@ Other things that are possible, but probably less useful are:
 </sect2>
 </sect1>
 
-<sect1 id="kpart">
-<title>Using &kdiff3; as a KPart</title>
-<para>
-&kdiff3; is a KPart. Currently it implements the KParts::ReadOnlyPart interface.
-</para><para>
-It's main use is as difference-viewer in &kdevelop;. &kdevelop; always starts the
-internal difference viewer first. To invoke &kdiff3; press the &RMB;
-on the difference viewer window and select <guimenuitem>Show in KDiff3Part</guimenuitem> from the context menu.
-</para><para>
-&kdiff3; normally requires two complete files as input. When used as part &kdiff3;
-will assume that the input file is a patch-file in the unified format. &kdiff3;
-then retrieves the original filenames from the patch-file. At least one of
-the two files must be available. &kdiff3; will then invoke <command>patch</command> to
-recreate the second file.
-</para><para>
-In &dolphin; you can select a patch-file and select <menuchoice><guimenuitem>Preview
-in</guimenuitem><guisubmenu>KDiff3Part</guisubmenu></menuchoice> item from the context
-menu. Be aware that this won't work if none of the original files are available, and it
-is not reliable if the original file(s) have changed since the patch-file was generated.
-</para><para>
-When run as a part &kdiff3; only provides the a two-file-diff, a very small toolbar
-and menu. Merging or folder comparison are not supported then.
-</para>
-</sect1>
-
 <sect1 id="git">
 <title>Using &kdiff3; as a &git; Diff and Merging Tool</title>
 <para>
