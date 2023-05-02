@@ -317,9 +317,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
-    initActions(actionCollection());
     //Warning: Call this before connecting KDiff3App::slotUpdateAvailabilities or calling KXMLGUIClient::setXMLFile
-    MergeResultWindow::initActions(actionCollection());
+    initActions(actionCollection());
 
     initStatusBar();
 
@@ -737,6 +736,8 @@ void KDiff3App::initActions(KActionCollection* ac)
     m_pMergeEditorPopupMenu->addAction(chooseC);
 
     mEscapeAction = new QShortcut(Qt::Key_Escape, this, this, &KDiff3App::slotFileQuit);
+
+    MergeResultWindow::initActions(actionCollection());
 }
 
 void KDiff3App::showPopupMenu(const QPoint& point)
