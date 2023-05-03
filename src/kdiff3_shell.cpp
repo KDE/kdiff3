@@ -32,17 +32,11 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
 
     if(m_widget)
     {
-        // set the shell's ui resource file
-        //setXMLFile("kdiff3_shell.rc");
-
         setupGUI(Default, "kdiff3_shell.rc");
         // and a status bar
         statusBar()->show();
-        // and integrate the part's GUI with the shell's
-        //createGUI(m_part);
         //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
-        // tell the KParts::MainWindow that this is indeed the main widget
         setCentralWidget(m_widget);
 
         m_widget->completeInit(fn1, fn2, fn3);

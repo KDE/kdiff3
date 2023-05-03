@@ -33,6 +33,7 @@ Optimizations: Skip unneeded steps.
 #include "SourceData.h"
 
 #include "CommentParser.h"
+#include "compat.h"
 #include "diff.h"
 #include "LineRef.h"
 #include "Logging.h"
@@ -51,8 +52,6 @@ Optimizations: Skip unneeded steps.
 #include <QTextCodec>
 #include <QTextStream>
 #include <QVector>
-
-#include <KLocalizedString>
 
 void SourceData::reset()
 {

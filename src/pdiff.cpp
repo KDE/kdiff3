@@ -50,7 +50,6 @@
 
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KParts/MainWindow>
 #include <KShortcutsDialog>
 
 // Function uses setMinSize( sizeHint ) before adding the widget.

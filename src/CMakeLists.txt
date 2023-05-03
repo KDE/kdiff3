@@ -51,7 +51,7 @@ ki18n_wrap_ui(kdiff3part_PART_SRCS
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
-target_link_libraries(kdiff3part Qt::PrintSupport KF5::I18n KF5::CoreAddons KF5::Parts KF5::Crash)
+target_link_libraries(kdiff3part Qt::PrintSupport KF5::I18n KF5::CoreAddons KF5::XmlGui KF5::KIOWidgets KF5::Crash)
 target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
 
 ########### kdiff3 executable ###############
@@ -68,7 +68,7 @@ ecm_optional_add_subdirectory( autotests )
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 Qt::PrintSupport KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash KF5::I18n KF5::CoreAddons )
+target_link_libraries(kdiff3 Qt::PrintSupport KF5::ConfigCore KF5::ConfigGui KF5::XmlGui KF5::KIOWidgets KF5::Crash KF5::I18n KF5::CoreAddons )
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)

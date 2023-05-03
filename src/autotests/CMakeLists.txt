@@ -1,7 +1,5 @@
 # SPDX-FileCopyrightText: 2018-2021 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
-#find_package(QT NAMES Qt5 Qt6  REQUIRED Test)
-#set(BUILD_WITH_QT6 OFF)
 
 if(NOT BUILD_WITH_QT6)
     find_package(
@@ -57,12 +55,12 @@ ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Uti
 
 ecm_add_test(datareadtest.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "datareadtest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF5::Parts KF5::ConfigCore
+    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF5::ConfigCore
 )
 
 ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
     TEST_NAME "difftest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF5::ConfigCore KF5::Parts
+    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF5::ConfigCore
 )
 
 ecm_add_test(Diff3LineTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp

@@ -82,7 +82,8 @@ find_package(
     COMPONENTS
     I18n
     CoreAddons
-    Parts
+    XmlGui
+    KIO
     WidgetsAddons
     Config
     Crash
