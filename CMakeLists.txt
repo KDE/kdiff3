@@ -15,7 +15,7 @@ option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(KF5_MIN_VERSION "5.82.0")
+set(KF_MIN_VERSION "5.82.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
     set(QT_MIN_VERSION "6.0.0")
@@ -28,7 +28,7 @@ if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
     message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
 endif()
 
-find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(
     CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
@@ -37,8 +37,11 @@ set(
 
 if(BUILD_WITH_QT6)
     include(QtVersionOption)
+    set(KF_MAJOR_VERSION "6")
 else()
+    set(KF_MAJOR_VERSION "5")
 endif()
+
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings NO_POLICY_SCOPE)
@@ -77,7 +80,7 @@ if (QT_MAJOR_VERSION STREQUAL "6")
 endif()
 
 find_package(
-    KF5 ${KF5_MIN_VERSION}
+    KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION}
     REQUIRED
     COMPONENTS
     I18n
@@ -91,9 +94,9 @@ find_package(
     DocTools
 )
 
-set_package_properties(KF5DocTools PROPERTIES PURPOSE "Allows generating and installing docs.")
+set_package_properties(KF${KF_MAJOR_VERSION}DocTools PROPERTIES PURPOSE "Allows generating and installing docs.")
 
-string(REPLACE "." ";" VERSION_LIST "${KF5_VERSION}")
+string(REPLACE "." ";" VERSION_LIST "${KF${KF_MAJOR_VERSION}_VERSION}")
 list(GET VERSION_LIST 0 KF_VERSION_MAJOR)
 list(GET VERSION_LIST 1 KF_VERSION_MINOR)
 list(GET VERSION_LIST 2 KF_VERSION_PATCH)
