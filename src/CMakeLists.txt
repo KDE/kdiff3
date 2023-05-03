@@ -94,7 +94,6 @@ install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
-install( FILES  kdiff3part.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR} )
 install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdiff3 )
 install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${KDE_INSTALL_APPDIR} )
 install( FILES org.kde.kdiff3.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
