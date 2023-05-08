@@ -3780,33 +3780,6 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
-<sect1 id="kpart">
-<title
->Usare &kdiff3; come un componente KPart</title>
-<para
->&kdiff3; è un componente KPart. Attualmente implementa l'interfaccia <classname
->KParts::ReadOnlyPart</classname
->. </para
-><para
->Il suo impiego principale è come visore di differenze in &kdevelop;. &kdevelop; fa sempre partire prima il visore delle differenze interno. Per richiamare &kdiff3; premi il &RMB; nella finestra del visore e seleziona <guimenuitem
->Mostra in KDiff3Part</guimenuitem
-> dal menu contestuale. </para
-><para
->&kdiff3; richiede normalmente due file completi in ingresso. Quando viene usato come componente, &kdiff3; presupporrà che il file di ingresso sia una patch nel formato unificato. &kdiff3; recupererà i nome originali dei file dalla patch. Deve essere disponibile almeno uno dei due file. &kdiff3; chiamerà quindi <command
->patch</command
-> per ricreare il secondo file. </para
-><para
->In &dolphin; puoi selezionare una patch e selezionare dal menu contestuale <menuchoice
-><guimenuitem
->Anteprima in</guimenuitem
-><guisubmenu
->KDiff3Part</guisubmenu
-></menuchoice
->. Nota che questa opzione non funzionerà se nessuno dei file originali è disponibile, e non è affidabile se i file originali sono stati modificati prima della generazione della patch. </para
-><para
->Quando avviato come componente, &kdiff3; include solo la differenza tra due file, e una barra degli strumenti e un menu ridotti. La fusione o il confronto tra cartelle non sono supportati. </para>
-</sect1>
-
 <sect1 id="git">
 <title
 >Usare &kdiff3; come strumento Diff e Merge di &git;</title>
