@@ -68,7 +68,7 @@ void Options::init()
     addOptionItem(std::make_unique<OptionSize>(QSize(600, 400), "Geometry", &m_geometry));
     addOptionItem(std::make_unique<OptionPoint>(QPoint(0, 22), "Position", &m_position));
     addOptionItem(std::make_unique<OptionToggleAction>(false, "WindowStateFullScreen", &m_bFullScreen));
-    addOptionItem(std::make_unique<OptionToggleAction>(false, "WindowStateMaximised", &m_bMaximised));
+    addOptionItem(std::make_unique<OptionToggleAction>(false, "WindowStateMaximised", &m_bMaximized));
 
     addOptionItem(std::make_unique<OptionToggleAction>(true, "Show Toolbar", &m_bShowToolBar));
     addOptionItem(std::make_unique<OptionToggleAction>(true, "Show Statusbar", &m_bShowStatusBar));

@@ -69,13 +69,13 @@ class Options
     [[nodiscard]] bool isFullScreen() const { return m_bFullScreen; };
     void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen; };
 
-    [[nodiscard]] bool isMaximised() const { return m_bMaximised; };
-    void setMaximised(const bool maximised) { m_bMaximised = maximised; };
+    [[nodiscard]] bool isMaximized() const { return m_bMaximized; };
+    void setMaximized(const bool maximized) { m_bMaximized = maximized; };
 
-    [[nodiscard]] bool isToolBarVisable() const { return m_bShowToolBar; }
+    [[nodiscard]] bool isToolBarVisible() const { return m_bShowToolBar; }
     void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
 
-    [[nodiscard]] bool isStatusBarVisable() const { return m_bShowStatusBar; }
+    [[nodiscard]] bool isStatusBarVisible() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
     [[nodiscard]] inline const QFont& defaultFont() { return mFont; };
@@ -88,7 +88,7 @@ class Options
 
     [[nodiscard]] bool whiteSpaceIsEqual() const { return m_bDmWhiteSpaceEqual; }
 
-    [[nodiscard]] const QColor& forgroundColor() const { return m_fgColor; };
+    [[nodiscard]] const QColor& foregroundColor() const { return m_fgColor; };
     [[nodiscard]] const QColor& backgroundColor() const
     {
         if(mPrintMode) return mPrintBackground;
@@ -128,13 +128,15 @@ class Options
 
     const QColor mPrintBackground = Qt::white;
 
+    // clang-format off
     // Some settings that are not available in the option dialog:
     QSize  m_geometry = QSize(600, 400);
     QPoint m_position = QPoint(0, 22);
     bool   m_bFullScreen = false;
-    bool   m_bMaximised = false;
+    bool   m_bMaximized = false;
     bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;
+    // clang-format on
 
     // These are the results of the option dialog.
     QFont mFont;

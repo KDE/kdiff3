@@ -327,7 +327,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
         No need to restore window size and position here that is done later.
             See KDiff3App::completeInit
     */
-    viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
+    viewStatusBar->setChecked(m_pOptions->isStatusBarVisible());
     slotViewStatusBar();
 
     KToolBar* mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
@@ -418,7 +418,7 @@ void KDiff3App::showMainWindow()
         */
         if(m_pOptions->isFullScreen())
             m_pKDiff3Shell->showFullScreen();
-        else if(m_pOptions->isMaximised())
+        else if(m_pOptions->isMaximized())
             m_pKDiff3Shell->showMaximized();
 
         QSize size = m_pOptions->getGeometry();
@@ -1060,21 +1060,21 @@ void KDiff3App::slotFilePrint()
 
                 painter.setPen(m_pOptions->aColor());
                 QString headerText1 = m_sd1->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow1->calcTopLineInFile(line) + 1);
-                m_pDiffTextWindow1->printWindow(painter, view1, headerText1, line, linesPerPage, m_pOptions->forgroundColor());
+                m_pDiffTextWindow1->printWindow(painter, view1, headerText1, line, linesPerPage, m_pOptions->foregroundColor());
 
                 painter.setPen(m_pOptions->bColor());
                 QString headerText2 = m_sd2->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line) + 1);
-                m_pDiffTextWindow2->printWindow(painter, view2, headerText2, line, linesPerPage, m_pOptions->forgroundColor());
+                m_pDiffTextWindow2->printWindow(painter, view2, headerText2, line, linesPerPage, m_pOptions->foregroundColor());
 
                 if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
                 {
                     painter.setPen(m_pOptions->cColor());
                     QString headerText3 = m_sd3->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line) + 1);
-                    m_pDiffTextWindow3->printWindow(painter, view3, headerText3, line, linesPerPage, m_pOptions->forgroundColor());
+                    m_pDiffTextWindow3->printWindow(painter, view3, headerText3, line, linesPerPage, m_pOptions->foregroundColor());
                 }
                 painter.setClipping(false);
 
-                painter.setPen(m_pOptions->forgroundColor());
+                painter.setPen(m_pOptions->foregroundColor());
                 painter.drawLine(0, view.bottom() + 3, view.width(), view.bottom() + 3);
                 QString s = bPrintCurrentPage ? QString("")
                                               : QString::number(page) + '/' + QString::number(totalNofPages);
@@ -1135,7 +1135,7 @@ void KDiff3App::slotViewToolBar()
     // turn Toolbar on or off
     if(toolBar(MAIN_TOOLBAR_NAME) != nullptr)
     {
-        if(!m_pOptions->isToolBarVisable())
+        if(!m_pOptions->isToolBarVisible())
         {
             toolBar(MAIN_TOOLBAR_NAME)->hide();
         }

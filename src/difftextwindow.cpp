@@ -1018,7 +1018,7 @@ void DiffTextWindowData::writeLine(
     if(pLineDiff1 != nullptr) changed |= AChanged;
     if(pLineDiff2 != nullptr) changed |= BChanged;
 
-    QColor penColor = m_pOptions->forgroundColor();
+    QColor penColor = m_pOptions->foregroundColor();
     p.setPen(penColor);
     if(changed == BChanged)
     {
@@ -1071,7 +1071,7 @@ void DiffTextWindowData::writeLine(
 
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
-            penColor = m_pOptions->forgroundColor();
+            penColor = m_pOptions->foregroundColor();
             ChangeFlags cchanged = charChanged[i] | whatChanged;
 
             if(cchanged == BChanged)
@@ -1087,16 +1087,16 @@ void DiffTextWindowData::writeLine(
                 penColor = m_cDiffBoth;
             }
 
-            if(penColor != m_pOptions->forgroundColor() && whatChanged2 == NoChange && !m_pOptions->m_bShowWhiteSpace)
+            if(penColor != m_pOptions->foregroundColor() && whatChanged2 == NoChange && !m_pOptions->m_bShowWhiteSpace)
             {
                 // The user doesn't want to see highlighted white space.
-                penColor = m_pOptions->forgroundColor();
+                penColor = m_pOptions->foregroundColor();
             }
 
             frh.setBackground(bgColor);
             if(!m_selection.within(line, outPos))
             {
-                if(penColor != m_pOptions->forgroundColor())
+                if(penColor != m_pOptions->foregroundColor())
                 {
                     frh.setBackground(diffBgColor);
                     // Setting italic font here doesn't work: Changing the font only when drawing is too late
@@ -1127,7 +1127,7 @@ void DiffTextWindowData::writeLine(
 
     xOffset = (m_lineNumberWidth + 2) * fontWidth;
     int xLeft = m_lineNumberWidth * fontWidth;
-    p.setPen(m_pOptions->forgroundColor());
+    p.setPen(m_pOptions->foregroundColor());
     if(pld != nullptr)
     {
         if(m_pOptions->m_bShowLineNumbers && !bWrapLine)
@@ -1140,12 +1140,12 @@ void DiffTextWindowData::writeLine(
         {
             Qt::PenStyle wrapLinePenStyle = Qt::DotLine;
 
-            p.setPen(QPen(m_pOptions->forgroundColor(), 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
+            p.setPen(QPen(m_pOptions->foregroundColor(), 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
             p.drawLine(xOffset + 1, yOffset, xOffset + 1, yOffset + fontHeight - 1);
-            p.setPen(QPen(m_pOptions->forgroundColor(), 0, Qt::SolidLine));
+            p.setPen(QPen(m_pOptions->foregroundColor(), 0, Qt::SolidLine));
         }
     }
-    if(penColor != m_pOptions->forgroundColor() && whatChanged2 == NoChange)
+    if(penColor != m_pOptions->foregroundColor() && whatChanged2 == NoChange)
     {
         if(m_pOptions->m_bShowWhiteSpace)
         {
@@ -1155,12 +1155,12 @@ void DiffTextWindowData::writeLine(
     }
     else
     {
-        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == m_pOptions->forgroundColor() ? bgColor : penColor);
+        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == m_pOptions->foregroundColor() ? bgColor : penColor);
     }
 
     if(bFastSelectionRange)
     {
-        p.fillRect(xOffset + fontWidth - 1, yOffset, 3, fontHeight, m_pOptions->forgroundColor());
+        p.fillRect(xOffset + fontWidth - 1, yOffset, 3, fontHeight, m_pOptions->foregroundColor());
     }
 
     // Check if line needs a manual diff help mark

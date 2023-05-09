@@ -1498,7 +1498,7 @@ void MergeResultWindow::writeLine(
         else
             p.setClipRect(QRectF(0, 0, width() - xOffset, height()));
 
-        p.setPen(m_pOptions->forgroundColor());
+        p.setPen(m_pOptions->foregroundColor());
 
         QTextLayout textLayout(str, font(), this);
         QVector<QTextLayout::FormatRange> selectionFormat = getTextLayoutForLine(line, str, textLayout);
@@ -1513,7 +1513,7 @@ void MergeResultWindow::writeLine(
 
         p.setClipping(false);
 
-        p.setPen(m_pOptions->forgroundColor());
+        p.setPen(m_pOptions->foregroundColor());
 
         p.drawText(1, yOffset + fontAscent, srcName, true);
     }
@@ -1538,7 +1538,7 @@ void MergeResultWindow::writeLine(
         assert(false);
 
     xOffset -= Utils::getHorizontalAdvance(fm, '0');
-    p.setPen(m_pOptions->forgroundColor());
+    p.setPen(m_pOptions->foregroundColor());
     if(rangeMark & 1) // begin mark
     {
         p.drawLine(xOffset, yOffset + 1, xOffset, yOffset + fontHeight / 2);
@@ -1561,7 +1561,7 @@ void MergeResultWindow::writeLine(
 
     if(rangeMark & 4)
     {
-        p.fillRect(xOffset + 3, yOffset, 3, fontHeight, m_pOptions->forgroundColor());
+        p.fillRect(xOffset + 3, yOffset, 3, fontHeight, m_pOptions->foregroundColor());
         /*      p.setPen( blue );
       p.drawLine( xOffset+2, yOffset, xOffset+2, yOffset+fontHeight-1 );
       p.drawLine( xOffset+3, yOffset, xOffset+3, yOffset+fontHeight-1 );*/
@@ -1664,7 +1664,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
     if(m_bCursorOn && hasFocus() && m_cursorYPos >= m_firstLine)
     {
-        painter.setPen(m_pOptions->forgroundColor());
+        painter.setPen(m_pOptions->foregroundColor());
 
         QString str = getString(m_cursorYPos);
         QTextLayout textLayout(str, font(), this);
@@ -2974,7 +2974,7 @@ bool WindowTitleWidget::eventFilter(QObject* o, QEvent* e)
     {
         QPalette p = m_pLabel->palette();
 
-        QColor c1 = m_pOptions->forgroundColor();
+        QColor c1 = m_pOptions->foregroundColor();
         QColor c2 = Qt::lightGray;
         if(e->type() == QEvent::FocusOut)
             c2 = m_pOptions->backgroundColor();

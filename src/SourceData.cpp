@@ -836,10 +836,10 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset&
         }
     }
     //Attempt to detect non-bom UTF8. This is a very common encoding.
-    return dectectUTF8(s);
+    return detectUTF8(s);
 }
 
-QTextCodec* SourceData::dectectUTF8(const QByteArray& data)
+QTextCodec* SourceData::detectUTF8(const QByteArray& data)
 {
     QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
 
