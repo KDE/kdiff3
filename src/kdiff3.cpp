@@ -383,7 +383,7 @@ bool KDiff3App::canCut()
 }
 
 /*
-    Please do not add logic for MerdgeResultWindow or DiffTextWindow here they have their own handlers.
+    Please do not add logic for MergeResultWindow or DiffTextWindow here they have their own handlers.
     This function is only concerned with qt objects that don't support canCopy.
     allowCopy() or's the results from all canCopy signals sent via boost.
 
@@ -581,7 +581,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
 KDiff3App::~KDiff3App()
 {
-    // Prevent spurious focus change signals from Qt from being picked up by KDiff3App during distruction.
+    // Prevent spurious focus change signals from Qt from being picked up by KDiff3App during destruction.
     QObject::disconnect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
 };
 
@@ -665,8 +665,8 @@ void KDiff3App::initActions(KActionCollection* ac)
 
     mGoBottom = GuiUtils::createAction<QAction>(i18n("Go to Last Delta"), QIcon(QPixmap(downend)), i18n("Last\nDelta"), this, &KDiff3App::slotGoBottom, ac, "go_bottom");
 
-    QString omitsWhitespace = ".\n" + i18nc("Tooltip explaination text", "(Skips white space differences when \"Show White Space\" is disabled.)");
-    QString includeWhitespace = ".\n" + i18nc("Tooltip explaination text", "(Does not skip white space differences even when \"Show White Space\" is disabled.)");
+    QString omitsWhitespace = ".\n" + i18nc("Tooltip explanation text", "(Skips white space differences when \"Show White Space\" is disabled.)");
+    QString includeWhitespace = ".\n" + i18nc("Tooltip explanation text", "(Does not skip white space differences even when \"Show White Space\" is disabled.)");
     mGoPrevDelta = GuiUtils::createAction<QAction>(i18n("Go to Previous Delta"), QIcon(QPixmap(up1arrow)), i18n("Prev\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Up), this, &KDiff3App::slotGoPrevDelta, ac, "go_prev_delta");
     mGoPrevDelta->setToolTip(mGoPrevDelta->text() + omitsWhitespace);
     mGoNextDelta = GuiUtils::createAction<QAction>(i18n("Go to Next Delta"), QIcon(QPixmap(down1arrow)), i18n("Next\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Down), this, &KDiff3App::slotGoNextDelta, ac, "go_next_delta");
@@ -684,7 +684,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     chooseA = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From A"), QIcon(QPixmap(iconA)), i18nc("Text used for select A toolbar button.", "Choose\nA"), QKeySequence(Qt::CTRL + Qt::Key_1), this, &KDiff3App::slotChooseA, ac, "merge_choose_a");
     chooseB = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From B"), QIcon(QPixmap(iconB)), i18nc("Text used for select B when toolbar button.", "Choose\nB"), QKeySequence(Qt::CTRL + Qt::Key_2), this, &KDiff3App::slotChooseB, ac, "merge_choose_b");
     chooseC = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From C"), QIcon(QPixmap(iconC)), i18nc("Text used for select C toolbar button.", "Choose\nC"), QKeySequence(Qt::CTRL + Qt::Key_3), this, &KDiff3App::slotChooseC, ac, "merge_choose_c");
-    autoAdvance = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Automatically Go to Next Unsolved Conflict After Source Selection"), QIcon(QPixmap(autoadvance)), i18nc("Auto goto next unsolced toolbar text.", "Auto\nNext"), this, &KDiff3App::slotAutoAdvanceToggled, ac, "merge_autoadvance");
+    autoAdvance = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Automatically Go to Next Unsolved Conflict After Source Selection"), QIcon(QPixmap(autoadvance)), i18nc("Auto goto next unsolved toolbar text.", "Auto\nNext"), this, &KDiff3App::slotAutoAdvanceToggled, ac, "merge_autoadvance");
 
     showWhiteSpaceCharacters = GuiUtils::createAction<KToggleAction>(i18n("Show Space && Tabulator Characters"), QIcon(QPixmap(showwhitespacechars)), i18nc("Show whitespace toolbar text.", "White\nCharacters"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace_characters");
     showWhiteSpace = GuiUtils::createAction<KToggleAction>(i18n("Show White Space"), QIcon(QPixmap(showwhitespace)), i18nc("Show whitespace changes toolbar text.", "White\nDeltas"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace");

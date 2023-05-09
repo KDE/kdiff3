@@ -1054,7 +1054,7 @@ void OptionDialog::setupMergePage()
         m_pHistoryAutoMerge = new OptionCheckBox(i18n("Merge version control history on merge start"), false, "RunHistoryAutoMergeOnMergeStart", &m_options->m_bRunHistoryAutoMergeOnMergeStart, page);
 
         gbox->addWidget(m_pHistoryAutoMerge, line, 0, 1, 2);
-        m_pHistoryAutoMerge->setToolTip(i18nc("Tool Tip", "Run version control history automerge on merge start."));
+        m_pHistoryAutoMerge->setToolTip(i18nc("Tool Tip", "Run version control history auto-merge on merge start."));
         ++line;
 
         OptionIntEdit* pMaxNofHistoryEntries = new OptionIntEdit(-1, "MaxNofHistoryEntries", &m_options->m_maxNofHistoryEntries, -1, 1000, page);
@@ -1076,9 +1076,9 @@ void OptionDialog::setupMergePage()
     OptionLineEdit* pLE = new OptionLineEdit("", "IrrelevantMergeCmd", &m_options->m_IrrelevantMergeCmd, page);
     gbox->addWidget(pLE, line, 1);
 
-    label->setToolTip(i18nc("Tool Tip", "If specified this script is run after automerge\n"
-                           "when no other relevant changes were detected.\n"
-                           "Called with the parameters: filename1 filename2 filename3"));
+    label->setToolTip(i18nc("Tool Tip", "If specified this script is run after auto-merge\n"
+                                        "when no other relevant changes were detected.\n"
+                                        "Called with the parameters: filename1 filename2 filename3"));
     ++line;
 
     OptionCheckBox* pAutoSaveAndQuit = new OptionCheckBox(i18n("Auto save and quit on merge without conflicts"), false,
@@ -1159,8 +1159,8 @@ void OptionDialog::setupDirectoryMergePage()
     gbox->addWidget(pUseCvsIgnore, line, 0, 1, 2);
 
     pUseCvsIgnore->setToolTip(i18nc("Tool Tip",
-        "Extends the antipattern to anything that would be ignored by source control.\n"
-        "Via local ignore files this can be folder-specific."));
+                                    "Extends the anti-pattern to anything that would be ignored by source control.\n"
+                                    "Via local ignore files this can be folder-specific."));
     ++line;
 
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and folders"), true, "FindHidden", &m_options->m_bDmFindHidden, page);
@@ -1516,7 +1516,7 @@ void OptionDialog::resetToDefaults()
     slotEncodingChanged();
 }
 
-/** Initialise the widgets using the values in the public varibles. */
+/** Initialise the widgets using the values in the public variables. */
 void OptionDialog::setState()
 {
     Options::setToCurrent();

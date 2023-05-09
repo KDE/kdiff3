@@ -109,12 +109,12 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             }
         }
 
-        // Because of the progressdialog paintevents can occur, but data is invalid,
+        // Because of the progress dialog paint events can occur, but data is invalid,
         // so painting must be suppressed
         setLockPainting(true);
     }
 
-    //insure merge result window never has stale iterators/[poiners.
+    //insure merge result window never has stale iterators/pointers.
     if(m_pMergeResultWindow) m_pMergeResultWindow->reset();
     //Clear stale pointers in DiffTextWindow.
     if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
@@ -344,7 +344,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         m_neededLines = (QtNumberType)m_diff3LineList.size();
     else
     {
-        mErrors.append(i18n("Too many lines in diff. Skiping file."));
+        mErrors.append(i18n("Too many lines in diff. Skipping file."));
     }
 
     //initView does first time setup for ui. Why is called it here?
@@ -1181,7 +1181,7 @@ void KDiff3App::slotGoToLine()
     QVBoxLayout* l = new QVBoxLayout(&pDialog);
 
     QLineEdit* pLineNumEdit = new QLineEdit();
-    //Limit imput to valid 1 based line numbers
+    //Limit input to valid 1 based line numbers
     pLineNumEdit->setValidator(new QIntValidator(1, DiffTextWindow::mVScrollBar->maximum(), pLineNumEdit));
 
     QPushButton* pOkButton = new QPushButton(i18n("Ok"));
@@ -1525,7 +1525,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     }
     else
     {
-        //don't leave proccessing incomplete if m_diff3LineList isEmpty as when an error occurs during reading.
+        //don't leave processing incomplete if m_diff3LineList isEmpty as when an error occurs during reading.
         slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
     }
 }
@@ -1692,7 +1692,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
     return true;
 }
 /*
-    If A is targetted to an existing file and the paths point to directories attempt to find that file in the corrisponding
+    If A is targetted to an existing file and the paths point to directories attempt to find that file in the corresponding
     directory. If it exists then the filename from A will be appended to the path.
 */
 void KDiff3App::improveFilenames()

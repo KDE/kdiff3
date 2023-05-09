@@ -92,11 +92,11 @@ class LineRef
 
 /*
     This is here because its easy to unknowingly break these conditions. The resulting
-    compiler errors are numerous and may be a bit cryptic if you aren't famialar with the C++ language.
+    compiler errors are numerous and may be a bit cryptic if you aren't familiar with the C++ language.
     Also some IDEs with clangd or ccls integration can automatically check static_asserts
     without doing a full compile.
 */
-static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy constuctible.");
+static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy constructible.");
 static_assert(std::is_copy_assignable<LineRef>::value, "LineRef must copy assignable.");
 static_assert(std::is_move_constructible<LineRef>::value, "LineRef must be move constructible.");
 static_assert(std::is_move_assignable<LineRef>::value, "LineRef must be move assignable.");
@@ -105,6 +105,6 @@ static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to 
 
 using LineType = LineRef::LineType;
 
-//Break in an obvious way if way cann't get LineCounts from Qt supplied ints without overflow issues.
+//Break in an obvious way if way can't get LineCounts from Qt supplied ints without overflow issues.
 static_assert(sizeof(LineType) >= sizeof(QtNumberType)); //Generally assumed by KDiff3
 #endif

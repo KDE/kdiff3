@@ -1309,7 +1309,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
 // This doesn't detect user modifications and should only be called after automatic merge
 // This will only do something for three file merge.
 // Irrelevant changes are those where all contributions from B are already contained in C.
-// Also irrelevant are conflicts automatically solved (automerge regexp and history automerge)
+// Also irrelevant are conflicts automatically solved (auto-merge regexp and history auto-merge)
 // Precondition: The VCS-keyword would also be C.
 bool MergeResultWindow::doRelevantChangesExist()
 {
