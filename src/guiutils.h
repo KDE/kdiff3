@@ -167,6 +167,7 @@ T* createAction(
     ac->setDefaultShortcut(theAction, shortcut);
     return theAction;
 }
+
 template <class T>
 T* createAction(
     const QString& text,
@@ -178,6 +179,7 @@ T* createAction(
     theAction->setIcon(icon);
     return theAction;
 }
+
 template <class T>
 T* createAction(
     const QString& text,
@@ -191,6 +193,7 @@ T* createAction(
     theAction->setIconText(iconText);
     return theAction;
 }
+
 template <class T>
 T* createAction(
     const QString& text,
@@ -203,6 +206,7 @@ T* createAction(
     theAction->setIcon(icon);
     return theAction;
 }
+
 template <class T>
 T* createAction(
     const QString& text,
@@ -217,6 +221,7 @@ T* createAction(
     theAction->setIconText(iconText);
     return theAction;
 }
+
 } //namespace GuiUtils
 
 #endif
