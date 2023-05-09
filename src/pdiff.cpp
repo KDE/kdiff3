@@ -133,8 +133,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             pp.setMaxNofSteps(9); // Read 3 files, 3 comparisons, 3 finediffs
 
         // First get all input data.
-        pp.setInformation(i18n("Loading A"));
-        qCInfo(kdiffMain) << i18n("Loading A: %1", m_sd1->getFilename());
+        pp.setInformation(i18n("Loading A: %1", m_sd1->getFilename()));
+        qCInfo(kdiffMain) << "Loading A: " << m_sd1->getFilename();
 
         if(bUseCurrentEncoding)
             m_sd1->readAndPreprocess(m_sd1->getEncoding(), false);
@@ -143,8 +143,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
         pp.step();
 
-        pp.setInformation(i18n("Loading B"));
-        qCInfo(kdiffMain) << i18n("Loading B: %1", m_sd2->getFilename());
+        pp.setInformation(i18n("Loading B: %1", m_sd2->getFilename()));
+        qCInfo(kdiffMain) << "Loading B: " << m_sd2->getFilename();
 
         if(bUseCurrentEncoding)
             m_sd2->readAndPreprocess(m_sd2->getEncoding(), false);
@@ -177,14 +177,14 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 if(m_sd1->isText() && m_sd2->isText())
                 {
                     pp.setInformation(i18n("Diff: A <-> B"));
-                    qCInfo(kdiffMain) << i18n("Diff: A <-> B");
+                    qCInfo(kdiffMain) << "Diff: A <-> B";
                     m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
                                                  m_pOptionDialog->getOptions());
 
                     pp.step();
 
                     pp.setInformation(i18n("Linediff: A <-> B"));
-                    qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
+                    qCInfo(kdiffMain) << "Linediff: A <-> B";
                     m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
 
                     pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
@@ -202,8 +202,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             {
                 if(bLoadFiles)
                 {
-                    pp.setInformation(i18n("Loading C"));
-                    qCInfo(kdiffMain) << i18n("Loading C: %1", m_sd3->getFilename());
+                    pp.setInformation(i18n("Loading C: %1", m_sd3->getFilename()));
+                    qCInfo(kdiffMain) << "Loading C: " << m_sd3->getFilename();
 
                     if(bUseCurrentEncoding)
                         m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
@@ -218,7 +218,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 pTotalDiffStatus->setBinaryEqualBC(m_sd3->isBinaryEqualWith(m_sd2));
 
                 pp.setInformation(i18n("Diff: A <-> B"));
-                qCInfo(kdiffMain) << i18n("Diff: A <-> B");
+                qCInfo(kdiffMain) << "Diff: A <-> B";
 
                 if(m_sd1->isText() && m_sd2->isText())
                 {
@@ -230,7 +230,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 pp.step();
 
                 pp.setInformation(i18n("Diff: A <-> C"));
-                qCInfo(kdiffMain) << i18n("Diff: A <-> C");
+                qCInfo(kdiffMain) << "Diff: A <-> C";
 
                 if(m_sd1->isText() && m_sd3->isText())
                 {
@@ -244,7 +244,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 pp.step();
 
                 pp.setInformation(i18n("Diff: B <-> C"));
-                qCInfo(kdiffMain) << i18n("Diff: B <-> C");
+                qCInfo(kdiffMain) << "Diff: B <-> C";
 
                 if(m_sd2->isText() && m_sd3->isText())
                 {
@@ -267,19 +267,19 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 }
 
                 pp.setInformation(i18n("Linediff: A <-> B"));
-                qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
+                qCInfo(kdiffMain) << "Linediff: A <-> B";
                 if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
                     pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay(), eIgnoreFlags));
                 pp.step();
 
                 pp.setInformation(i18n("Linediff: B <-> C"));
-                qCInfo(kdiffMain) << i18n("Linediff: B <-> C");
+                qCInfo(kdiffMain) << "Linediff: B <-> C";
                 if(m_sd2->hasData() && m_sd3->hasData() && m_sd2->isText() && m_sd3->isText())
                     pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay(), eIgnoreFlags));
                 pp.step();
 
                 pp.setInformation(i18n("Linediff: A <-> C"));
-                qCInfo(kdiffMain) << i18n("Linediff: A <-> C");
+                qCInfo(kdiffMain) << "Linediff: A <-> C";
                 if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
                     pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay(), eIgnoreFlags));
 
