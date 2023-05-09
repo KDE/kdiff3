@@ -725,7 +725,7 @@ void KDiff3App::initActions(KActionCollection* ac)
 
     mEscapeAction = new QShortcut(Qt::Key_Escape, this, this, &KDiff3App::slotFileQuit);
 
-    MergeResultWindow::initActions(actionCollection());
+    MergeResultWindow::initActions(ac);
 }
 
 void KDiff3App::showPopupMenu(const QPoint& point)

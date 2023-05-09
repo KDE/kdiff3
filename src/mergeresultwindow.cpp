@@ -140,11 +140,7 @@ void MergeResultWindow::init(
 //At that point in startup we don't have a MergeResultWindow object so we cannot connect the signals yet.
 void MergeResultWindow::initActions(KActionCollection* ac)
 {
-    if(ac == nullptr)
-    {
-        KMessageBox::error(nullptr, "actionCollection==0");
-        exit(-1);//we cannot recover from this.
-    }
+    assert(ac != nullptr);
 
     chooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_1), ac, "merge_choose_a_everywhere");
     chooseBEverywhere = GuiUtils::createAction<QAction>(i18n("Choose B Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_2), ac, "merge_choose_b_everywhere");
