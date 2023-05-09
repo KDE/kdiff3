@@ -1019,7 +1019,7 @@ void KDiff3App::slotFilePrint()
         QList<quint32>::iterator pageListIt = pageList.begin();
         for(;;)
         {
-            pp.setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);
+            pp.setInformation(i18nc("Status message", "Printing page %1 of %2", page, totalNofPages), false);
             pp.setCurrent(page - 1);
             if(pp.wasCancelled())
             {

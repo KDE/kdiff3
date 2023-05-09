@@ -380,7 +380,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
 
     l = new QLabel(i18n("Example auto merge line:"), this);
     pGrid->addWidget(l, line, 0);
-    l->setToolTip(i18n("To test auto merge, copy a line as used in your files."));
+    l->setToolTip(i18nc("Tool Tip", "To test auto merge, copy a line as used in your files."));
     m_pAutoMergeExampleEdit = new QLineEdit(this);
     pGrid->addWidget(m_pAutoMergeExampleEdit, line, 1);
     chk_connect_a(m_pAutoMergeExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
@@ -407,8 +407,8 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
 
     l = new QLabel(i18n("Example history start line (with leading comment):"), this);
     pGrid->addWidget(l, line, 0);
-    l->setToolTip(i18n("Copy a history start line as used in your files,\n"
-                       "including the leading comment."));
+    l->setToolTip(i18nc("Tool Tip", "Copy a history start line as used in your files,\n"
+                                    "including the leading comment."));
     m_pHistoryStartExampleEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistoryStartExampleEdit, line, 1);
     chk_connect_a(m_pHistoryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
@@ -443,8 +443,8 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
 
     l = new QLabel(i18n("Example history entry start line (without leading comment):"), this);
     pGrid->addWidget(l, line, 0);
-    l->setToolTip(i18n("Copy a history entry start line as used in your files,\n"
-                       "but omit the leading comment."));
+    l->setToolTip(i18nc("Tool Tip", "Copy a history entry start line as used in your files,\n"
+                                    "but omit the leading comment."));
     m_pHistoryEntryStartExampleEdit = new QLineEdit(this);
     pGrid->addWidget(m_pHistoryEntryStartExampleEdit, line, 1);
     chk_connect_a(m_pHistoryEntryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);

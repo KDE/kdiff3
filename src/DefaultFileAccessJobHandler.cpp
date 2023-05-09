@@ -354,7 +354,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
     if(pp.wasCancelled())
         return true; // Cancelled is not an error.
 
-    pp.setInformation(i18n("Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
+    pp.setInformation(i18nc("Status message", "Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
     qCInfo(kdiffFileAccess) << "Reading folder: " << mFileAccess->absoluteFilePath();
 
     if(mFileAccess->isLocal())

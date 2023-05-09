@@ -904,7 +904,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(dirA.isValid())
     {
-        pp.setInformation(i18n("Reading Folder A"));
+        pp.setInformation(i18nc("Status message", "Reading Folder A"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
@@ -913,7 +913,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(dirB.isValid())
     {
-        pp.setInformation(i18n("Reading Folder B"));
+        pp.setInformation(i18nc("Status message", "Reading Folder B"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
@@ -923,7 +923,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     e_MergeOperation eDefaultMergeOp;
     if(dirC.isValid())
     {
-        pp.setInformation(i18n("Reading Folder C"));
+        pp.setInformation(i18nc("Status message", "Reading Folder C"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
@@ -2733,8 +2733,8 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent):
 
     m_pInfoList = new QTreeWidget(this);
     topLayout->addWidget(m_pInfoList);
-    m_pInfoList->setHeaderLabels({i18n("Folder"), i18n("Type"), i18n("Size"),
-                                  i18n("Attr"), i18n("Last Modification"), i18n("Link-Destination")});
+    m_pInfoList->setHeaderLabels({i18nc("Header label", "Folder"), i18nc("Header label", "Type"), i18nc("Header label", "Size"),
+                                  i18nc("Header label", "Attr"), i18nc("Header label", "Last Modification"), i18nc("Header label", "Link-Destination")});
     setMinimumSize(100, 100);
 
     m_pInfoList->installEventFilter(this);
@@ -2761,13 +2761,13 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
 
         m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
             m_pInfoList,
-            {dir, QString(fi->isDir() ? i18n("Folder") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : ""), QString::number(fi->size()), QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")), dateString, QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))}));
+            {dir, QString(fi->isDir() ? i18nc("Header label", "Folder") : i18nc("Header label", "File")) + (fi->isSymLink() ? i18nc("Header label ending", "-Link") : ""), QString::number(fi->size()), QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")), dateString, QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))}));
     }
     else
     {
         m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
             m_pInfoList,
-            {dir, i18n("not available"), "", "", "", ""}));
+            {dir, i18nc("Header label", "not available"), "", "", "", ""}));
     }
 }
 

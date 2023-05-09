@@ -477,7 +477,7 @@ bool MergeFileInfos::fastFileComparison(
         return bEqual;
     }
     qCInfo(kdiffMergeFileInfo) << "Comparing files...";
-    pp.setInformation(i18n("Comparing file..."), 0, false);
+    pp.setInformation(i18nc("Status message", "Comparing file..."), 0, false);
     typedef qint64 t_FileSize;
     t_FileSize fullSize = fi1.size();
     t_FileSize sizeLeft = fullSize;
