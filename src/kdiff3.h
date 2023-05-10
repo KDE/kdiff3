@@ -346,8 +346,6 @@ public Q_SLOTS:
     bool canCopy();
 
     bool mInitCalled = false;
-    /** the configuration object of the application */
-    //KConfig *config;
 
     // QAction pointers to enable/disable actions
     QPointer<QAction> fileOpen;
