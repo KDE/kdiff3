@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-04 00:49+0000\n"
+"POT-Creation-Date: 2023-05-10 00:48+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -92,6 +92,7 @@ msgstr "Idosiye : %1 - > %2 "
 
 #: DefaultFileAccessJobHandler.cpp:357
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Idosiye : %1 "
 
@@ -129,7 +130,7 @@ msgstr "Ntibonetse"
 msgid "Encoding:"
 msgstr "Idosiye ya:  A : "
 
-#: difftextwindow.cpp:1926 mergeresultwindow.cpp:2796 optiondialog.cpp:803
+#: difftextwindow.cpp:1926 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, fuzzy, kde-format
 msgid "Line end style:"
 msgstr "Impera Imisusire : "
@@ -144,12 +145,12 @@ msgstr "A ( Base ) : "
 msgid "Encoding: %1"
 msgstr "Idosiye ya:  A : "
 
-#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2842
+#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2841
+#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr ""
@@ -366,7 +367,7 @@ msgid ""
 msgstr "A Ububiko Gukomatanya . , Kuri Kureka i Gukomatanya na i Ububiko ? "
 
 #: directorymergewindow.cpp:698 kdiff3.cpp:788 kdiff3.cpp:798 kdiff3.cpp:810
-#: mergeresultwindow.cpp:330 pdiff.cpp:871 pdiff.cpp:1742 pdiff.cpp:1752
+#: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1742 pdiff.cpp:1752
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -433,16 +434,19 @@ msgstr "ububiko bw'amaderese ... "
 
 #: directorymergewindow.cpp:907
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "Idosiye : %1 "
 
 #: directorymergewindow.cpp:916
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "Idosiye : %1 "
 
 #: directorymergewindow.cpp:926
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "Idosiye : %1 "
 
@@ -755,48 +759,58 @@ msgid "Dest"
 msgstr "Kugogora"
 
 #: directorymergewindow.cpp:2736 directorymergewindow.cpp:2764
-#: optiondialog.cpp:1099 optiondialog.cpp:1100
-#, kde-format
+#, fuzzy, kde-format
+msgctxt "Header label"
 msgid "Folder"
-msgstr ""
+msgstr "Mu Gufungura dosiye"
 
 #: directorymergewindow.cpp:2736
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
+msgctxt "Header label"
 msgid "Type"
 msgstr "Ubwoko"
 
 #: directorymergewindow.cpp:2736
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Size"
+msgctxt "Header label"
 msgid "Size"
 msgstr "Ingano"
 
 #: directorymergewindow.cpp:2737
 #, fuzzy, kde-format
+msgctxt "Header label"
 msgid "Attr"
 msgstr "Nyuma"
 
 #: directorymergewindow.cpp:2737
 #, fuzzy, kde-format
+msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Iherutse guhindurwa"
 
 #: directorymergewindow.cpp:2737
 #, fuzzy, kde-format
+msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Ishyika"
 
 #: directorymergewindow.cpp:2764
 #, fuzzy, kde-format
+msgctxt "Header label"
 msgid "File"
 msgstr "Idosiye..."
 
 #: directorymergewindow.cpp:2764
 #, fuzzy, kde-format
+msgctxt "Header label ending"
 msgid "-Link"
 msgstr "Ihuza..."
 
 #: directorymergewindow.cpp:2770
 #, fuzzy, kde-format
+msgctxt "Header label"
 msgid "not available"
 msgstr "Ntibonetse"
 
@@ -1261,13 +1275,13 @@ msgstr "Kuri "
 
 #: kdiff3.cpp:668
 #, fuzzy, kde-format
-msgctxt "Tooltip explaination text"
+msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "( Umweru Umwanya Ibinyuranyo Ryari: \" \" ni Yahagaritswe . ) "
 
 #: kdiff3.cpp:669
 #, fuzzy, kde-format
-msgctxt "Tooltip explaination text"
+msgctxt "Tooltip explanation text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
@@ -1417,7 +1431,7 @@ msgstr "Kuri "
 
 #: kdiff3.cpp:687
 #, fuzzy, kde-format
-msgctxt "Auto goto next unsolced toolbar text."
+msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
 "Next"
@@ -1627,6 +1641,7 @@ msgstr "Tegereza..."
 
 #: kdiff3.cpp:1022
 #, kde-format
+msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
@@ -1871,60 +1886,61 @@ msgstr "Itariki & Igihe"
 
 #: MergeFileInfos.cpp:480
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Idosiye ... "
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:145
 #, fuzzy, kde-format
 msgid "Choose A Everywhere"
 msgstr "A "
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:146
 #, fuzzy, kde-format
 msgid "Choose B Everywhere"
 msgstr "Hitamo darayiva"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:147
 #, fuzzy, kde-format
 msgid "Choose C Everywhere"
 msgstr "Hitamo darayiva"
 
-#: mergeresultwindow.cpp:152
+#: mergeresultwindow.cpp:148
 #, fuzzy, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "A ya:  "
 
-#: mergeresultwindow.cpp:153
+#: mergeresultwindow.cpp:149
 #, fuzzy, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "ya:  "
 
-#: mergeresultwindow.cpp:154
+#: mergeresultwindow.cpp:150
 #, fuzzy, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "ya:  "
 
-#: mergeresultwindow.cpp:155
+#: mergeresultwindow.cpp:151
 #, fuzzy, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "A ya:  "
 
-#: mergeresultwindow.cpp:156
+#: mergeresultwindow.cpp:152
 #, fuzzy, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "ya:  "
 
-#: mergeresultwindow.cpp:157
+#: mergeresultwindow.cpp:153
 #, fuzzy, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "ya:  "
 
-#: mergeresultwindow.cpp:266
+#: mergeresultwindow.cpp:262
 #, fuzzy, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Bya : %1 ( Bya %2 ) "
 
-#: mergeresultwindow.cpp:328
+#: mergeresultwindow.cpp:324
 #, fuzzy, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -1933,29 +1949,29 @@ msgstr ""
 "Ibisohoka Byahinduwe: . \n"
 "Gukomeza Amahinduka . "
 
-#: mergeresultwindow.cpp:774 pdiff.cpp:746
+#: mergeresultwindow.cpp:770 pdiff.cpp:746
 #, fuzzy, kde-format
 msgid "All input files are binary equal."
 msgstr "Iyinjiza Idosiye Nyabibiri bingana . "
 
-#: mergeresultwindow.cpp:776
+#: mergeresultwindow.cpp:772
 #, fuzzy, kde-format
 msgid "All input files contain the same text."
 msgstr "Iyinjiza Idosiye i Umwandiko . "
 
-#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788 pdiff.cpp:752 pdiff.cpp:756 pdiff.cpp:760
+#: mergeresultwindow.cpp:776 mergeresultwindow.cpp:780
+#: mergeresultwindow.cpp:784 pdiff.cpp:752 pdiff.cpp:756 pdiff.cpp:760
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "na Nyabibiri bingana . \n"
 
-#: mergeresultwindow.cpp:782 mergeresultwindow.cpp:786
-#: mergeresultwindow.cpp:790
+#: mergeresultwindow.cpp:778 mergeresultwindow.cpp:782
+#: mergeresultwindow.cpp:786
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "A na bingana Umwandiko . \n"
 
-#: mergeresultwindow.cpp:794
+#: mergeresultwindow.cpp:790
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1964,27 +1980,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:796
 #, fuzzy, kde-format
 msgid "Conflicts"
 msgstr "Ishyamirana ry'ingenzi"
 
-#: mergeresultwindow.cpp:1527
+#: mergeresultwindow.cpp:1523
 #, fuzzy, kde-format
 msgid "<No src line>"
 msgstr "< Umurongo: > "
 
-#: mergeresultwindow.cpp:1535
+#: mergeresultwindow.cpp:1531
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1537 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2403
 #, fuzzy, kde-format
 msgid "<Merge Conflict>"
 msgstr "Ishyamirana ry'ingenzi"
 
-#: mergeresultwindow.cpp:2627
+#: mergeresultwindow.cpp:2623
 #, fuzzy, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -1993,12 +2009,12 @@ msgstr ""
 "Byose . \n"
 "Idosiye OYA . \n"
 
-#: mergeresultwindow.cpp:2629 mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2625 mergeresultwindow.cpp:2634
 #, fuzzy, kde-format
 msgid "Conflicts Left"
 msgstr "Guhitamo Ibumoso"
 
-#: mergeresultwindow.cpp:2636
+#: mergeresultwindow.cpp:2632
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2006,7 +2022,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2650
+#: mergeresultwindow.cpp:2646
 #, fuzzy, kde-format
 msgid ""
 "\n"
@@ -2017,48 +2033,48 @@ msgstr ""
 "\n"
 "Inyibutsa Byanze . Idosiye OYA . "
 
-#: mergeresultwindow.cpp:2650 mergeresultwindow.cpp:2692
+#: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2688
 #, fuzzy, kde-format
 msgid "File Save Error"
 msgstr "Idosiye Kubika Ikosa "
 
-#: mergeresultwindow.cpp:2692
+#: mergeresultwindow.cpp:2688
 #, fuzzy, kde-format
 msgid "Error while writing."
 msgstr "Ikosa . "
 
-#: mergeresultwindow.cpp:2768
+#: mergeresultwindow.cpp:2764
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Ibisohoka"
 
-#: mergeresultwindow.cpp:2781 mergeresultwindow.cpp:2971
+#: mergeresultwindow.cpp:2777 mergeresultwindow.cpp:2967
 #, fuzzy, kde-format
 msgid "[Modified]"
 msgstr "Byahinduwe"
 
-#: mergeresultwindow.cpp:2788
+#: mergeresultwindow.cpp:2784
 #, fuzzy, kde-format
 msgid "Encoding for saving:"
 msgstr "Idosiye ya:  : "
 
-#: mergeresultwindow.cpp:2888
+#: mergeresultwindow.cpp:2884
 #, fuzzy, kde-format
 msgid "Conflict"
 msgstr "Ishyamirana ry'ingenzi"
 
-#: mergeresultwindow.cpp:2920
+#: mergeresultwindow.cpp:2916
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2922
+#: mergeresultwindow.cpp:2918
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2924
+#: mergeresultwindow.cpp:2920
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
@@ -2146,6 +2162,7 @@ msgstr "Ikilatini-1"
 
 #: optiondialog.cpp:409
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "iyi NIBA - Inyuguti OYA . "
 
@@ -2291,6 +2308,7 @@ msgstr "Imyanya "
 
 #: optiondialog.cpp:776
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
 "Off: A tab character will be inserted."
@@ -2310,6 +2328,7 @@ msgstr "Isunika "
 
 #: optiondialog.cpp:792
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
 ": Isunika Bya i Ibanjirije Umurongo: ni Byakoreshejwe ya:  A Gishya "
@@ -2322,6 +2341,7 @@ msgstr "Gukoporora Ihitamo "
 
 #: optiondialog.cpp:799
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitly copy e.g. via Ctrl-C."
@@ -2348,6 +2368,7 @@ msgstr "Gukoporora Ihitamo "
 
 #: optiondialog.cpp:814
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
@@ -2372,6 +2393,7 @@ msgstr "/+ + Ibisobanuro nka Umweru Umwanya . "
 
 #: optiondialog.cpp:852
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
 "white space.)\n"
@@ -2387,6 +2409,7 @@ msgstr "/+ + Ibisobanuro nka Umweru Umwanya . "
 
 #: optiondialog.cpp:859
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "/+ + Ibisobanuro nka Umweru Umwanya . "
 
@@ -2397,6 +2420,7 @@ msgstr "/+ + Ibisobanuro nka Umweru Umwanya . "
 
 #: optiondialog.cpp:866
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "Ibinyuranyo nka Umweru Umwanya Amahinduka . ( ' < = > ' ) "
 
@@ -2407,6 +2431,7 @@ msgstr "command : "
 
 #: optiondialog.cpp:874
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "Byahawe imiterere mbere - Inonosora . ( i ya:  Birambuye . ) "
 
@@ -2417,6 +2442,7 @@ msgstr "- command : "
 
 #: optiondialog.cpp:882
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
@@ -2431,6 +2457,7 @@ msgstr "Ikomeye ( ) "
 
 #: optiondialog.cpp:889
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
@@ -2445,6 +2472,7 @@ msgstr ""
 
 #: optiondialog.cpp:897
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
 "Not recommended for merging because merge might get more complicated.\n"
@@ -2470,6 +2498,7 @@ msgstr "Gutinda ( Madamu ) : "
 
 #: optiondialog.cpp:938
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
@@ -2484,6 +2513,7 @@ msgstr "A "
 
 #: optiondialog.cpp:945
 #, kde-format
+msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr ""
 
@@ -2499,6 +2529,7 @@ msgstr "Ibishushanyo by'Intoki"
 
 #: optiondialog.cpp:957 optiondialog.cpp:971
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
 "only changes."
@@ -2528,6 +2559,7 @@ msgstr ""
 
 #: optiondialog.cpp:994
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
@@ -2555,6 +2587,7 @@ msgstr ""
 
 #: optiondialog.cpp:1034
 #, kde-format
+msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr ""
 
@@ -2570,7 +2603,8 @@ msgstr ""
 
 #: optiondialog.cpp:1057
 #, kde-format
-msgid "Run version control history automerge on merge start."
+msgctxt "Tool Tip"
+msgid "Run version control history auto-merge on merge start."
 msgstr ""
 
 #: optiondialog.cpp:1061
@@ -2580,6 +2614,7 @@ msgstr "Bya Ububiko bwungirije : "
 
 #: optiondialog.cpp:1065
 #, kde-format
+msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
 
@@ -2595,8 +2630,9 @@ msgstr ""
 
 #: optiondialog.cpp:1079
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
-"If specified this script is run after automerge\n"
+"If specified this script is run after auto-merge\n"
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
@@ -2608,12 +2644,19 @@ msgstr ""
 
 #: optiondialog.cpp:1088
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
 "conflicts are solvable without user interaction then automatically save and "
 "quit.\n"
 "(Similar to command line option \"--auto\".)"
 msgstr ""
+
+#: optiondialog.cpp:1099 optiondialog.cpp:1100
+#, fuzzy, kde-format
+msgctxt "Tab title label"
+msgid "Folder"
+msgstr "Mu Gufungura dosiye"
 
 #: optiondialog.cpp:1120
 #, fuzzy, kde-format
@@ -2622,6 +2665,7 @@ msgstr "ububiko bw'amaderese "
 
 #: optiondialog.cpp:1123
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "Kuri Ububiko bwungirije Cyangwa OYA . "
 
@@ -2632,6 +2676,7 @@ msgstr "Idosiye Ishusho ( S ) : "
 
 #: optiondialog.cpp:1131
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
 "Wildcards: '*' and '?'\n"
@@ -2648,6 +2693,7 @@ msgstr "Idosiye - - Ishusho ( S ) : "
 
 #: optiondialog.cpp:1142
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -2664,6 +2710,7 @@ msgstr "Idosiye - - Ishusho ( S ) : "
 
 #: optiondialog.cpp:1153
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -2680,8 +2727,9 @@ msgstr "Kwirengagiza Inshuro Imwe"
 
 #: optiondialog.cpp:1162
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
-"Extends the antipattern to anything that would be ignored by source "
+"Extends the anti-pattern to anything that would be ignored by source "
 "control.\n"
 "Via local ignore files this can be folder-specific."
 msgstr ""
@@ -2695,6 +2743,7 @@ msgstr "Birahishe Idosiye na ububiko bw'amaderese "
 
 #: optiondialog.cpp:1169
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "Birahishe Idosiye na ububiko bw'amaderese "
 
@@ -2705,6 +2754,7 @@ msgstr "Idosiye amahuza "
 
 #: optiondialog.cpp:1176
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
@@ -2719,6 +2769,7 @@ msgstr "Idosiye amahuza "
 
 #: optiondialog.cpp:1184
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "On: Compare the folder the link points to.\n"
 "Off: Compare the links."
@@ -2733,6 +2784,7 @@ msgstr ""
 
 #: optiondialog.cpp:1197
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
 "Set this option if the case of the names must match. (Default for Windows is "
@@ -2746,6 +2798,7 @@ msgstr "Kuri Ububiko bwungirije Cyangwa OYA . "
 
 #: optiondialog.cpp:1205
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
 "Off: Leave subfolders folded."
@@ -2758,6 +2811,7 @@ msgstr ""
 
 #: optiondialog.cpp:1213
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
 "Off: Show the status dialog on start."
@@ -2775,6 +2829,7 @@ msgstr ""
 
 #: optiondialog.cpp:1224
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "Bya Idosiye . ( ) "
 
@@ -2785,6 +2840,7 @@ msgstr "Kwikaraga hose"
 
 #: optiondialog.cpp:1229
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
@@ -2799,6 +2855,7 @@ msgstr "i Itariki: ( ) "
 
 #: optiondialog.cpp:1235
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
 "equal.\n"
@@ -2818,6 +2875,7 @@ msgstr "i Itariki: ( ) "
 
 #: optiondialog.cpp:1242
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
 "equal.\n"
@@ -2834,6 +2892,7 @@ msgstr "i Ingano: ( ) "
 
 #: optiondialog.cpp:1249
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big folders or slow networks when the date is modified during "
@@ -2850,6 +2909,7 @@ msgstr "ububiko bw'amaderese "
 
 #: optiondialog.cpp:1260
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Offers to store files in both folders so that\n"
 "both folders are the same afterwards.\n"
@@ -2865,6 +2925,7 @@ msgstr "Umwanya Ibinyuranyo bingana "
 
 #: optiondialog.cpp:1270
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
@@ -2879,6 +2940,7 @@ msgstr "Bya ( ) "
 
 #: optiondialog.cpp:1280
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Do not look inside, just take the newer file.\n"
 "(Use this only if you know what you are doing!)\n"
@@ -2895,6 +2957,7 @@ msgstr "Idosiye ( . ) "
 
 #: optiondialog.cpp:1289
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
@@ -2914,6 +2977,7 @@ msgstr "i Imisobekere: ya:  : "
 
 #: optiondialog.cpp:1326
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2967,6 +3031,7 @@ msgstr "Gukoporora Ihitamo "
 
 #: optiondialog.cpp:1381
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
@@ -2985,6 +3050,7 @@ msgstr "Iburyo ku ibumoso"
 
 #: optiondialog.cpp:1400
 #, fuzzy, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -3009,6 +3075,7 @@ msgstr ""
 
 #: optiondialog.cpp:1438
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -3023,6 +3090,7 @@ msgstr ""
 
 #: optiondialog.cpp:1447
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Fast method to exit.\n"
 "For those who are used to using the Escape key."
@@ -3071,61 +3139,55 @@ msgstr "Anga amahitamo y'ishakisha y'urwego rwo hejuru"
 
 #: pdiff.cpp:136
 #, fuzzy, kde-format
-msgid "Loading A"
-msgstr "A "
-
-#: pdiff.cpp:137
-#, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "A "
 
 #: pdiff.cpp:146
 #, fuzzy, kde-format
-msgid "Loading B"
-msgstr "Ifungura"
-
-#: pdiff.cpp:147
-#, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Ifungura"
 
-#: pdiff.cpp:179 pdiff.cpp:180 pdiff.cpp:220 pdiff.cpp:221
+#: pdiff.cpp:179 pdiff.cpp:220
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr ": A < - > "
 
-#: pdiff.cpp:186 pdiff.cpp:187 pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:292
+#: pdiff.cpp:186 pdiff.cpp:269 pdiff.cpp:292
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr ": A < - > "
 
 #: pdiff.cpp:205
 #, fuzzy, kde-format
-msgid "Loading C"
-msgstr "Ifungura"
-
-#: pdiff.cpp:206
-#, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "A "
 
-#: pdiff.cpp:232 pdiff.cpp:233
+#: pdiff.cpp:232
 #, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr ": A < - > "
 
-#: pdiff.cpp:246 pdiff.cpp:247
-#, kde-format
-msgid "Diff: B <-> C"
-msgstr ""
-
-#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:297
-#, kde-format
-msgid "Linediff: B <-> C"
-msgstr ""
-
-#: pdiff.cpp:281 pdiff.cpp:282 pdiff.cpp:302
+#: pdiff.cpp:246
 #, fuzzy, kde-format
+msgctxt "Status message"
+msgid "Diff: B <-> C"
+msgstr ": A < - > "
+
+#: pdiff.cpp:275 pdiff.cpp:297
+#, fuzzy, kde-format
+msgctxt "Status message"
+msgid "Linediff: B <-> C"
+msgstr ": A < - > "
+
+#: pdiff.cpp:281 pdiff.cpp:302
+#, fuzzy, kde-format
+msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr ": A < - > "
 
@@ -3136,7 +3198,7 @@ msgstr ""
 
 #: pdiff.cpp:347
 #, kde-format
-msgid "Too many lines in diff. Skiping file."
+msgid "Too many lines in diff. Skipping file."
 msgstr ""
 
 #: pdiff.cpp:748
@@ -3342,6 +3404,7 @@ msgstr ""
 
 #: smalldialogs.cpp:383
 #, kde-format
+msgctxt "Tool Tip"
 msgid "To test auto merge, copy a line as used in your files."
 msgstr ""
 
@@ -3357,6 +3420,7 @@ msgstr ""
 
 #: smalldialogs.cpp:410
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
@@ -3374,6 +3438,7 @@ msgstr ""
 
 #: smalldialogs.cpp:446
 #, kde-format
+msgctxt "Tool Tip"
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
@@ -3485,6 +3550,18 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Loading A"
+#~ msgstr "A "
+
+#, fuzzy
+#~ msgid "Loading B"
+#~ msgstr "Ifungura"
+
+#, fuzzy
+#~ msgid "Loading C"
+#~ msgstr "Ifungura"
 
 #, fuzzy
 #~ msgid "Could not find files for comparison."
