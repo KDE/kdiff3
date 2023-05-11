@@ -438,61 +438,13 @@ void KDiff3App::showMainWindow()
 }
 
 // Do file comparision.
-bool KDiff3App::doFileCompare()
+void KDiff3App::doFileCompare()
 {
-    bool bSuccess = true;
-
     improveFilenames();
     m_pDirectoryMergeDock->hide();
     m_pDirectoryMergeInfoDock->hide();
 
     mainInit(m_totalDiffStatus);
-    if(m_bAutoMode)
-    {
-        QSharedPointer<SourceData> pSD = nullptr;
-        if(m_sd3->isEmpty())
-        {
-            if(m_totalDiffStatus->isBinaryEqualAB())
-            {
-                pSD = m_sd1;
-            }
-        }
-        else
-        {
-            if(m_totalDiffStatus->isBinaryEqualBC() || m_totalDiffStatus->isBinaryEqualAB())
-            {
-                //if B==C (assume A is old), if A==B then C has changed
-                pSD = m_sd3;
-            }
-            else if(m_totalDiffStatus->isBinaryEqualAC())
-            {
-                pSD = m_sd2; // assuming B has changed
-            }
-        }
-
-        if(pSD != nullptr)
-        {
-            // Save this file directly, not via the merge result window.
-            FileAccess fa(m_outputFilename);
-            if(m_pOptions->m_bDmCreateBakFiles && fa.exists())
-            {
-                fa.createBackup(".orig");
-            }
-
-            bSuccess = pSD->saveNormalDataAs(m_outputFilename);
-            if(!bSuccess)
-                KMessageBox::error(this, i18n("Saving failed."));
-        }
-        else if(m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0)
-        {
-            bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
-        }
-        if(bSuccess)
-        {
-            QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
-        }
-    }
-    return bSuccess;
 }
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
@@ -530,7 +482,54 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     if(m_bDirCompare)
         bSuccess = doDirectoryCompare(false);
     else
-        bSuccess = doFileCompare();
+    {
+        doFileCompare();
+        if(m_bAutoMode)
+        {
+            QSharedPointer<SourceData> pSD = nullptr;
+            if(m_sd3->isEmpty())
+            {
+                if(m_totalDiffStatus->isBinaryEqualAB())
+                {
+                    pSD = m_sd1;
+                }
+            }
+            else
+            {
+                if(m_totalDiffStatus->isBinaryEqualBC() || m_totalDiffStatus->isBinaryEqualAB())
+                {
+                    //if B==C (assume A is old), if A==B then C has changed
+                    pSD = m_sd3;
+                }
+                else if(m_totalDiffStatus->isBinaryEqualAC())
+                {
+                    pSD = m_sd2; // assuming B has changed
+                }
+            }
+
+            if(pSD != nullptr)
+            {
+                // Save this file directly, not via the merge result window.
+                FileAccess fa(m_outputFilename);
+                if(m_pOptions->m_bDmCreateBakFiles && fa.exists())
+                {
+                    fa.createBackup(".orig");
+                }
+
+                bSuccess = pSD->saveNormalDataAs(m_outputFilename);
+                if(!bSuccess)
+                    KMessageBox::error(this, i18n("Saving failed."));
+            }
+            else if(m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0)
+            {
+                bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
+            }
+            if(bSuccess)
+            {
+                QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
+            }
+        }
+    }
 
     if(bSuccess)
     {

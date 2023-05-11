@@ -332,7 +332,7 @@ public Q_SLOTS:
     void keyPressEvent(QKeyEvent* event) override;
     void resizeEvent(QResizeEvent*) override;
 
-    bool doFileCompare();
+    void doFileCompare();
     bool doDirectoryCompare(const bool bCreateNewInstance);
     void improveFilenames();
 
