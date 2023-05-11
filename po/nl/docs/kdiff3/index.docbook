@@ -918,7 +918,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></menuchoice
 >. </para
 ><para
->Ook het automatisch samenvoegen van de geschiedenis van versiebeheer (ook "log" genoemd) is ondersteund. De geschiedenis samenvoegen kunt u naar keuze onmiddellijk na het starten van het samenvoegen uitvoeren door het inschakelen van de keuze <guilabel
+>Ook het automatisch samenvoegen van de geschiedenis van versiebeheer (ook "log" genoemd) is ondersteund. De geschiedenis samenvoegen kunt u, naar keuze, onmiddellijk na het starten van het samenvoegen uitvoeren door het inschakelen van de keuze <guilabel
 >Geschiedenis versiebeheer samenvoegen bij aanvang van samenvoegen</guilabel
 > in het item <guilabel
 >Samenvoegen</guilabel
@@ -3640,31 +3640,6 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
 </itemizedlist>
 </sect2>
-</sect1>
-
-<sect1 id="kpart">
-<title
->&kdiff3; als een KPart gebruiken</title>
-<para
->&kdiff3; is een KPart. Het implementeert momenteel de interface KParts::ReadOnlyPart. </para
-><para
->Het belangrijkste gebruik is als een weergever van verschillen in &kdevelop;. &kdevelop; start altijd eerst de interne weergever van verschillen. Om &kdiff3; op te starten klikt u met de &RMB; op het verschilvenster en kiest u <guimenuitem
->In KDiff3Part tonen</guimenuitem
-> uit het contextmenu. </para
-><para
->&kdiff3; vereist normaal gesproken twee complete bestanden als invoer. Als het als een KPart gebruikt wordt, neemt &kdiff3; aan dat het invoerbestand een patch-bestand in het standaard formaat is. &kdiff3; haalt dan de twee bestandsnamen op uit het patch-bestand. Minstens één van de twee bestanden moet beschikbaar zijn. &kdiff3; roept dan <command
->patch</command
-> aan om het andere bestand opnieuw te maken. </para
-><para
->In &dolphin; kunt u een patch-bestand selecteren en item <menuchoice
-><guimenuitem
->Tonen in</guimenuitem
-><guisubmenu
->KDiff3Part</guisubmenu
-></menuchoice
-> uit het contextmenu kiezen. Merk op dat dit niet werkt als geen van de originele bestanden beschikbaar is en dat het niet betrouwbaar is als een origineel bestand gewijzigd is sinds het patch-bestand gegenereerd is. </para
-><para
->Als het als een KPart gestart wordt, biedt &kdiff3; alleen een verschillenmodus voor twee bestanden, een kleine werkbalk en een menu. Samenvoegen of mappen vergelijken worden dan niet ondersteund. </para>
 </sect1>
 
 <sect1 id="git">

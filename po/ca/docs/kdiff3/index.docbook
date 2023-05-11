@@ -3662,31 +3662,6 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
-<sect1 id="kpart">
-<title
->Emprar el &kdiff3; com a una KPart</title>
-<para
->El &kdiff3; és una KPart. Actualment implementa la interfície «KParts::ReadOnlyPart». </para
-><para
->El seu ús principal és com a visualitzador de diferències en el &kdevelop;. El &kdevelop; sempre inicia primer el visualitzador de diferències intern. Per a invocar el &kdiff3;, premeu el &BDR; a la finestra de la vista de diferències i seleccioneu <guimenuitem
->Mostra a la part del &kdiff3;</guimenuitem
-> des del menú contextual. </para
-><para
->El &kdiff3; normalment requereix dos fitxers complets com a entrada. Quan s'utilitza com a part, el &kdiff3; assumirà que el fitxer d'entrada és un fitxer de pedaç en el format unificat. Llavors el &kdiff3; recuperarà els noms de fitxer originals des del fitxer de pedaç. Almenys un dels dos fitxers haurà d'estar disponible. Llavors el &kdiff3; invocarà l'ordre <command
->patch</command
-> per a recrear el segon fitxer. </para
-><para
->En el &dolphin; podreu seleccionar un fitxer de pedaç i seleccionar l'element <menuchoice
-><guimenuitem
->Vista prèvia a</guimenuitem
-><guisubmenu
->Part del &kdiff3;</guisubmenu
-></menuchoice
-> des del menú contextual. Cal tenir en compte que això no funcionarà si cap dels fitxers originals està disponible, i no és fiable si els fitxers originals han canviat des que es va generar el fitxer de pedaç. </para
-><para
->Quan s'executa com a part, el &kdiff3; només proporciona una diferència de dos fitxers amb una barra d'eines i un menú molt petits. De manera que la fusió o la comparació de carpetes no s'admeten. </para>
-</sect1>
-
 <sect1 id="git">
 <title
 >Usar el &kdiff3; com a una eina de «diff» i fusió de &git;</title>
