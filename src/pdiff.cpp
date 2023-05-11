@@ -924,11 +924,7 @@ void KDiff3App::slotFileOpen()
             }
             else
             {
-                improveFilenames();
-
-                m_pDirectoryMergeDock->hide();
-                m_pDirectoryMergeInfoDock->hide();
-                mainInit(m_totalDiffStatus);
+                doFileCompare();
 
                 if((!m_sd1->getErrors().isEmpty()) ||
                    (!m_sd2->getErrors().isEmpty()) ||
