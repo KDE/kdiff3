@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 03:13+0000\n"
-"PO-Revision-Date: 2023-04-06 13:06+0300\n"
+"PO-Revision-Date: 2023-05-10 07:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -79,7 +79,7 @@ msgstr "Dosya kaldırılıyor: %1"
 #: DefaultFileAccessJobHandler.cpp:272
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
-msgstr "Sembolik bağ oluşturuluyor: %1 -> %2"
+msgstr "Sembolik bağlantı oluşturuluyor: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:297
 #, kde-format
@@ -643,7 +643,7 @@ msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr ""
-"Dosyaların değiştirilme tarihleri aynı fakat dosyalar aynı değil. Ne "
+"Dosyaların değiştirilme tarihleri aynı; ancak dosyalar aynı değil. Ne "
 "yapılacağını seçin."
 
 #: directorymergewindow.cpp:2141
@@ -765,17 +765,19 @@ msgstr ""
 #: directorymergewindow.cpp:2551
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
-msgstr "BağıKopyala( %1 -> %2 )"
+msgstr "Bağlantıyı Kopyala( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2560
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
-msgstr "Hata: BağıKopyala başarısız oldu: Uzak bağlar henüz desteklenmiyor."
+msgstr ""
+"Hata: Bağlantıyı Kopyala başarısız oldu: Uzak bağlantılar henüz "
+"desteklenmiyor."
 
 #: directorymergewindow.cpp:2570
 #, kde-format
 msgid "Error: copyLink failed."
-msgstr "Hata: BağıKopyala başarısız oldu."
+msgstr "Hata: Bağlantıyı Kopyala başarısız oldu."
 
 #: directorymergewindow.cpp:2593
 #, kde-format
@@ -1987,12 +1989,12 @@ msgstr "Normal olmayan dosya, normal dosya ile karşılaştırılamıyor."
 #: MergeFileInfos.cpp:412
 #, kde-format
 msgid "Mix of links and normal files."
-msgstr "Bağların ve normal dosyaların karışımı."
+msgstr "Bağlantıların ve normal dosyaların karışımı."
 
 #: MergeFileInfos.cpp:420
 #, kde-format
 msgid "Link: "
-msgstr "Bağ: "
+msgstr "Bağlantı: "
 
 #: MergeFileInfos.cpp:430
 #, kde-format
@@ -2758,7 +2760,7 @@ msgstr "Belirlenen sayıdan sonra kesin. Sonsuz sayıda giriş için -1 kullanı
 #: optiondialog.cpp:1064
 #, kde-format
 msgid "Test your regular expressions"
-msgstr "Düzenli ifadenizi test edin"
+msgstr "Düzenli ifadenizi sınayın"
 
 #: optiondialog.cpp:1069
 #, kde-format
@@ -2881,7 +2883,7 @@ msgstr "Gizli dosya ve klasörleri bulur."
 #: optiondialog.cpp:1167
 #, kde-format
 msgid "Follow file links"
-msgstr "Dosya bağlarını takip et"
+msgstr "Dosya bağlantılarını takip et"
 
 #: optiondialog.cpp:1171
 #, kde-format
@@ -2895,7 +2897,7 @@ msgstr ""
 #: optiondialog.cpp:1175
 #, kde-format
 msgid "Follow folder links"
-msgstr "Klasör bağlarını takip et"
+msgstr "Klasör bağlantılarını takip et"
 
 #: optiondialog.cpp:1179
 #, kde-format
@@ -3548,7 +3550,7 @@ msgstr "&Ara"
 #: smalldialogs.cpp:382
 #, kde-format
 msgid "Regular Expression Tester"
-msgstr "Düzenli İfade Deneyici"
+msgstr "Düzenli İfade Sınayıcı"
 
 #: smalldialogs.cpp:395
 #, kde-format
