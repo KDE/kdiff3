@@ -1043,10 +1043,17 @@ void DiffTextWindowData::writeLine(
         QString lineString = pld->getLine();
         if(!lineString.isEmpty())
         {
-            assert(lineString[lineString.length() - 1].unicode() == '\n');
-            lineString[lineString.length() - 1] = 0x00B6; // "Pilcrow", "paragraph mark"
+            switch(lineString[lineString.length() - 1].unicode())
+            {
+                case '\n':
+                    lineString[lineString.length() - 1] = 0x00B6;
+                    break; // "Pilcrow", "paragraph mark"
+                case '\r':
+                    lineString[lineString.length() - 1] = 0x00A4;
+                    break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
+                           //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
+            }
         }
-
         QVector<ChangeFlags> charChanged(pld->size());
         Merger merger(pLineDiff1, pLineDiff2);
         while(!merger.isEndReached() && i < pld->size())
