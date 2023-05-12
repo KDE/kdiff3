@@ -613,6 +613,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
+        //TODO: Fix after line number area is converted to a QWidget.
         int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
         int xOffset = d->leftInfoWidth() * fontWidth;
 
@@ -728,6 +729,8 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         int fontWidth = Utils::getHorizontalAdvance(fm, '0');
         int deltaX = 0;
         int deltaY = 0;
+        //TODO: Fix after line number area is converted to a QWidget.
+        //FIXME: Why are we manually doing Layout adjustments?
         if(!d->getOptions()->m_bRightToLeftLanguage)
         {
             if(e->x() < d->leftInfoWidth() * fontWidth) deltaX = -1 - abs(e->x() - d->leftInfoWidth() * fontWidth) / fontWidth;
@@ -935,7 +938,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 
     int leading = m_pDiffTextWindow->fontMetrics().leading();
     int height = 0;
-
+    //TODO: Fix after line number area is converted to a QWidget.
     int fontWidth = Utils::getHorizontalAdvance(m_pDiffTextWindow->fontMetrics(), '0');
     int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
     int textWidth = visibleTextWidth;
@@ -1125,6 +1128,7 @@ void DiffTextWindowData::writeLine(
 
     p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, m_pOptions->backgroundColor());
 
+    //TODO: Fix after line number area is converted to a QWidget.
     xOffset = (m_lineNumberWidth + 2) * fontWidth;
     int xLeft = m_lineNumberWidth * fontWidth;
     p.setPen(m_pOptions->foregroundColor());
@@ -1231,6 +1235,7 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const Line
 void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int beginLine, const LineRef& endLine)
 {
     if(m_pLineData == nullptr || m_pLineData->empty()) return;
+    //TODO: Fix after line number area is converted to a QWidget.
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
     if(m_winIdx == e_SrcSelector::A)
@@ -1336,6 +1341,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
     QSize newSize = e->size();
     QFontMetrics fm = fontMetrics();
     int visibleLines = newSize.height() / fm.lineSpacing() - 2;
+    //TODO: Fix after line number area is converted to a QWidget.
     int visibleColumns = newSize.width() / Utils::getHorizontalAdvance(fm, '0') - d->leftInfoWidth();
 
     if(e->size().height() != e->oldSize().height())
@@ -1354,6 +1360,7 @@ LineType DiffTextWindow::getNofVisibleLines() const
 
 int DiffTextWindow::getVisibleTextAreaWidth() const
 {
+    //TODO: Check after line number area is converted to a QWidget.
     QFontMetrics fm = fontMetrics();
 
     return width() - d->leftInfoWidth() * Utils::getHorizontalAdvance(fm, '0');
@@ -1648,6 +1655,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
 
     if(bWordWrap)
     {
+        //TODO: Fix after line number area is converted to a QWidget.
         d->m_lineNumberWidth = d->getOptions()->m_bShowLineNumbers ? getLineNumberWidth() : 0;
 
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
@@ -1695,7 +1703,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
             return;
         if(visibleTextWidth < 0)
             visibleTextWidth = getVisibleTextAreaWidth();
-        else
+        else //TODO: Drop after line number area is converted to a QWidget.
             visibleTextWidth -= d->leftInfoWidth() * Utils::getHorizontalAdvance(fontMetrics(), '0');
         LineType i;
         QtSizeType wrapLineIdx = 0;
