@@ -144,7 +144,6 @@ class DiffTextWindowData
     const QSharedPointer<Options>& getOptions() { return m_pOptions; }
 
   private:
-    //TODO: Remove friend classes after creating accessors. Please don't add new classes here
     friend DiffTextWindow;
     DiffTextWindow* m_pDiffTextWindow;
     QTextCodec* m_pTextCodec = nullptr;

@@ -17,7 +17,7 @@
 /*
     This class assists with changing KDiff3 between RTL and LTR layout.
 */
-class RLPainter : public QPainter
+class RLPainter: public QPainter
 {
   private:
     int m_xOffset;
@@ -25,9 +25,8 @@ class RLPainter : public QPainter
     bool bRightToLeft = false;
 
   public:
-    //TODO: Drop RLPainter. How?
-    RLPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth)
-        : QPainter(pd)
+    RLPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth):
+        QPainter(pd)
     {
         bRightToLeft = bRTL;
         if(bRTL)
