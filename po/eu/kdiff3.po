@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-10 00:48+0000\n"
+"POT-Creation-Date: 2023-05-13 00:49+0000\n"
 "PO-Revision-Date: 2023-04-13 21:40+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -121,67 +121,67 @@ msgstr "%1 fitxategia: %2 lerroa"
 msgid "File %1: Line not available"
 msgstr "%1 fitxategia: Lerro ez erabilgarri"
 
-#: difftextwindow.cpp:1922
+#: difftextwindow.cpp:1930
 #, kde-format
 msgid "Encoding:"
 msgstr "Kodeketa:"
 
-#: difftextwindow.cpp:1926 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1934 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Lerro amaiera estiloa:"
 
-#: difftextwindow.cpp:1951
+#: difftextwindow.cpp:1959
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Oinarria)"
 
-#: difftextwindow.cpp:1953
+#: difftextwindow.cpp:1961
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kodeketa: %1"
 
-#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "UNIX"
 
-#: difftextwindow.cpp:1954
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Lerro amaiera estiloa: %1"
 
-#: difftextwindow.cpp:1955
+#: difftextwindow.cpp:1963
 #, kde-format
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: difftextwindow.cpp:1983 kdiff3.cpp:934
+#: difftextwindow.cpp:1991 kdiff3.cpp:933
 #, kde-format
 msgid "Top line"
 msgstr "Goiko lerroa"
 
-#: difftextwindow.cpp:1992
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "End"
 msgstr "Amaiera"
 
-#: difftextwindow.cpp:2050 smalldialogs.cpp:164
+#: difftextwindow.cpp:2058 smalldialogs.cpp:164
 #, kde-format
 msgid "Open File"
 msgstr "Ireki fitxategia"
 
-#: difftextwindow.cpp:2098 optiondialog.cpp:388
+#: difftextwindow.cpp:2106 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2114
+#: difftextwindow.cpp:2122
 #, kde-format
 msgid "Other"
 msgstr "Bestelakoak"
@@ -357,8 +357,8 @@ msgstr ""
 "Une honetan karpeten arteko bateratze bat egiten ari zara. Ziur zaude, "
 "bateratzea galarazi eta karpeta berriz aztertu nahi duzula?"
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:788 kdiff3.cpp:798 kdiff3.cpp:810
-#: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1742 pdiff.cpp:1752
+#: directorymergewindow.cpp:698 kdiff3.cpp:787 kdiff3.cpp:797 kdiff3.cpp:809
+#: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1738 pdiff.cpp:1748
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1183,107 +1183,107 @@ msgstr "Direktorio bateratzea"
 msgid "Merge info"
 msgstr "Bateratze informazioa"
 
-#: kdiff3.cpp:484
-#, kde-format
-msgid "Saving failed."
-msgstr "Gordetzea huts egin du."
-
-#: kdiff3.cpp:521
+#: kdiff3.cpp:473
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "--auto  aukera karpetak alderatzeko ezikusia."
 
-#: kdiff3.cpp:559 pdiff.cpp:937
+#: kdiff3.cpp:521
+#, kde-format
+msgid "Saving failed."
+msgstr "Gordetzea huts egin du."
+
+#: kdiff3.cpp:558 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Fitxategi hauek irekitzea huts egin du:"
 
-#: kdiff3.cpp:568 pdiff.cpp:946
+#: kdiff3.cpp:567 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "Fitxategi irekitze errorea"
 
-#: kdiff3.cpp:600
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Dokumentuak irekitzen ditu alderatzeko..."
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:601
 #, kde-format
 msgid "Reload"
 msgstr "Birzamatu"
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "Bateratze emaitza gordetzen du. Gatazka guztiak ebatzi behar dira!"
 
-#: kdiff3.cpp:607
+#: kdiff3.cpp:606
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Uneko dokumentua honela gordetzen du..."
 
-#: kdiff3.cpp:610
+#: kdiff3.cpp:609
 #, kde-format
 msgid "Print the differences"
 msgstr "Inprimatu ezberdintasunak"
 
-#: kdiff3.cpp:613
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Quits the application"
 msgstr "Aplikazioa ixten du"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:616
 #, kde-format
 msgid "Undo last action."
 msgstr "Desegin azken ekintza."
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Hautatutako atala moztu eta arbelean itsasten du"
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:623
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Hautatutako atala arbelean kopiatzen du"
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:625
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Arbelaren edukia itsasten du uneko kokalekuan"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Hautatu uneko leihoko guztia"
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:631
 #, kde-format
 msgid "Search for a string"
 msgstr "Bilatu kate bat"
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Search again for the string"
 msgstr "Bilatu berriz katea"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:638
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Egoera-barra gaitzen/ezgaitzen du"
 
-#: kdiff3.cpp:642
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Konfiguratu KDiff3..."
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Joan uneko Deltara"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Current\n"
@@ -1292,12 +1292,12 @@ msgstr ""
 "Uneko\n"
 "Delta"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Joan lehen Deltara"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "First\n"
@@ -1306,12 +1306,12 @@ msgstr ""
 "Lehen\n"
 "Delta"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Joan azken Deltara"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Last\n"
@@ -1320,7 +1320,7 @@ msgstr ""
 "Azken\n"
 "Delta"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:667
 #, fuzzy, kde-format
 #| msgctxt "Tooltip explaination text"
 #| msgid ""
@@ -1331,7 +1331,7 @@ msgstr ""
 "(zuriuneen ezberdintasunak alboratzen ditu \"Erakutsi zuriuneak\" ezgaitua "
 "dagoenean)"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:668
 #, fuzzy, kde-format
 #| msgctxt "Tooltip explaination text"
 #| msgid ""
@@ -1345,12 +1345,12 @@ msgstr ""
 "(ez ditu zuriuneen ezberdintasunak alboratzen \"Erakutsi zuriuneak\" "
 "ezgaitua dagoenean ere)"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:669
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Joan aurreko Deltara"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:669
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1359,12 +1359,12 @@ msgstr ""
 "Aurreko\n"
 "Delta"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Joan hurrengo Deltara"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:671
 #, kde-format
 msgid ""
 "Next\n"
@@ -1373,12 +1373,12 @@ msgstr ""
 "Hurrengo\n"
 "Delta"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Joan aurreko gatazkara"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1387,12 +1387,12 @@ msgstr ""
 "Aurreko\n"
 "gatazka"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Joan hurrengo gatazkara"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "Next\n"
@@ -1401,12 +1401,12 @@ msgstr ""
 "Hurrengo\n"
 "gatazka"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Joan hurrengo ebatzi gabeko gatazkara"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1415,12 +1415,12 @@ msgstr ""
 "Aurreko\n"
 "ebatzi gabea"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Joan hurrengo ebatzi gabeko gatazkara"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:679
 #, kde-format
 msgid ""
 "Next\n"
@@ -1429,13 +1429,13 @@ msgstr ""
 "Hurrengo\n"
 "ebatzi gabea"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Joan lerrora"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1445,7 +1445,7 @@ msgstr ""
 "Joan\n"
 "Lerrora"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:682
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
@@ -1453,13 +1453,13 @@ msgstr ""
 ".\n"
 " Joan adierazitako lerrora."
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Hautatu Ako lerroa(k)"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1469,13 +1469,13 @@ msgstr ""
 "Hautatu\n"
 "A"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:684
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Hautatu Bko lerroa(k)"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:684
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1485,13 +1485,13 @@ msgstr ""
 "Hautatu\n"
 "B"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Hautatu Cko lerroa(k)"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1501,14 +1501,14 @@ msgstr ""
 "Hautatu\n"
 "C"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:686
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 "Automatikoki joan ebatzi gabeko hurrengo gatazkara, sorburua hautatu ondoren"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgctxt "Auto goto next unsolced toolbar text."
 #| msgid ""
@@ -1522,12 +1522,12 @@ msgstr ""
 "Auto\n"
 "Hurrengoa"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Erakutsi zuriune eta tabulatze karaktereak"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:688
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1537,12 +1537,12 @@ msgstr ""
 "Zuriune\n"
 "karaktereak"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Show White Space"
 msgstr "Erakutsi zuriuneak"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1552,12 +1552,12 @@ msgstr ""
 "Zuriune\n"
 "Deltak"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Erakutsi lerro zenbakiak"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:691
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1567,139 +1567,139 @@ msgstr ""
 "Lerro\n"
 "Zenbakiak"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Automatikoki ebatzi gatazka erraz guztiak"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:694
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Ezarri Deltak gatazkei"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Exekutatu adierazpen erregularren bateratze automatikoa"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Automatikoki ebatzi historiako gatazkak"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Zatitu ezberdintasuna hautapenean"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Bildu hautatutako ezberdintasunak"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Window A"
 msgstr "Erakutsi A leihoa"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show Window B"
 msgstr "Erakutsi B leihoa"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Window C"
 msgstr "Erakutsi C leihoa"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Normal Overview"
 msgstr "Ikuspegi orokor arrunta"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:705
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A vs. B ikuspegi orokorra"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:706
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A vs. C ikuspegi orokorra"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:707
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B vs. C ikuspegi orokorra"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Itzulbiratu ezberdintasun leihoak"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Gehitu ezberdintasunak eskuz lerrokatzea"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Garbitu ezberdintasunak eskuz lerrokatze guztiak"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Fokua hurrengo leihora"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Fokua aurreko leihora"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Txandakatu zatitze orientazioa"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:716
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Karpeta eta testu pantaila-ikuspegi zatitua"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:718
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Txandakatu karpeta eta testu ikuspegien artean"
 
-#: kdiff3.cpp:741 kdiff3.cpp:843 kdiff3.cpp:868 kdiff3.cpp:1148 kdiff3.cpp:1169
-#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
-#: pdiff.cpp:1136
+#: kdiff3.cpp:740 kdiff3.cpp:842 kdiff3.cpp:867 kdiff3.cpp:1147 kdiff3.cpp:1168
+#: pdiff.cpp:952 pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124
+#: pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "Prest."
 
-#: kdiff3.cpp:787 pdiff.cpp:1741
+#: kdiff3.cpp:786 pdiff.cpp:1737
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Bateratzearen emaitza ez da gorde."
 
-#: kdiff3.cpp:789
+#: kdiff3.cpp:788
 #, kde-format
 msgid "Save && Quit"
 msgstr "Gorde eta irten"
 
-#: kdiff3.cpp:790
+#: kdiff3.cpp:789
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Irten gorde gabe"
 
-#: kdiff3.cpp:798 pdiff.cpp:1752
+#: kdiff3.cpp:797 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Bateratzearen emaitza gordetzea huts egin du."
 
-#: kdiff3.cpp:809 pdiff.cpp:870
+#: kdiff3.cpp:808 pdiff.cpp:870
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1707,64 +1707,64 @@ msgstr ""
 "Une honetan karpeten bateratzea egiten ari zara. Ziur zaude galarazi nahi "
 "duzula?"
 
-#: kdiff3.cpp:832
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Saving file..."
 msgstr "Fitxategia gordetzen..."
 
-#: kdiff3.cpp:849
+#: kdiff3.cpp:848
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Fitxategia beste fitxategi-izen batekin gordetzen..."
 
-#: kdiff3.cpp:851
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Save As..."
 msgstr "Gorde honela..."
 
-#: kdiff3.cpp:876
+#: kdiff3.cpp:875
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Inprimatzea ez da inplementatu."
 
-#: kdiff3.cpp:917
+#: kdiff3.cpp:916
 #, kde-format
 msgid "Printing..."
 msgstr "Inprimatzen..."
 
-#: kdiff3.cpp:1022
+#: kdiff3.cpp:1021
 #, fuzzy, kde-format
 #| msgid "Printing page %1 of %2"
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "%2(e)tik %1. orrialdea inprimatzen"
 
-#: kdiff3.cpp:1081
+#: kdiff3.cpp:1080
 #, kde-format
 msgid " (Selection)"
 msgstr " (Hautapean)"
 
-#: kdiff3.cpp:1110
+#: kdiff3.cpp:1109
 #, kde-format
 msgid "Printing completed."
 msgstr "Inprimatzea osatu da."
 
-#: kdiff3.cpp:1114
+#: kdiff3.cpp:1113
 #, kde-format
 msgid "Printing aborted."
 msgstr "Inprimatzea galarazi da."
 
-#: kdiff3.cpp:1121
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Exiting..."
 msgstr "Irteten..."
 
-#: kdiff3.cpp:1132
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Tresna-barra txandakatzen..."
 
-#: kdiff3.cpp:1153
+#: kdiff3.cpp:1152
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Txandakatu egoera-barra..."
@@ -3571,72 +3571,72 @@ msgstr "Galarazi"
 msgid "Continue Merging"
 msgstr "Jarraitu bateratzea"
 
-#: pdiff.cpp:878 pdiff.cpp:970
+#: pdiff.cpp:878 pdiff.cpp:966
 #, kde-format
 msgid "Opening files..."
 msgstr "Fitxategiak irekitzen..."
 
-#: pdiff.cpp:1059
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Hautapena mozten..."
 
-#: pdiff.cpp:1066
+#: pdiff.cpp:1062
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Hautapena arbelera kopiatzen..."
 
-#: pdiff.cpp:1075
+#: pdiff.cpp:1071
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Arbelaren edukiak txertatzen..."
 
-#: pdiff.cpp:1187
+#: pdiff.cpp:1183
 #, kde-format
 msgid "Ok"
 msgstr "Ados"
 
-#: pdiff.cpp:1203
+#: pdiff.cpp:1199
 #, kde-format
 msgid "Go to Line"
 msgstr "Joan lerrora"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1517
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Itzulbira («Utzi»k itzulbiratzea desgaitzen du)"
 
-#: pdiff.cpp:1522
+#: pdiff.cpp:1518
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Labaintze-barra horizontalaren gehieneko zabalera kalkulatzen"
 
-#: pdiff.cpp:1743
+#: pdiff.cpp:1739
 #, kde-format
 msgid "Save && Continue"
 msgstr "Gorde eta jarraitu"
 
-#: pdiff.cpp:1744
+#: pdiff.cpp:1740
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Jarraitu gorde gabe"
 
-#: pdiff.cpp:1942
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search complete."
 msgstr "Bilaketa osatu da."
 
-#: pdiff.cpp:1942
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search Complete"
 msgstr "Bilaketa osatua"
 
-#: pdiff.cpp:2123
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ez dago ezer hautatuta diff sarrerako leihoetan."
 
-#: pdiff.cpp:2123
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Errorea eskuz «diff» barrutia gehitzean"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-10 00:48+0000\n"
+"POT-Creation-Date: 2023-05-13 00:49+0000\n"
 "PO-Revision-Date: 2010-10-03 21:09-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -125,71 +125,71 @@ msgstr ""
 msgid "File %1: Line not available"
 msgstr "行がありません"
 
-#: difftextwindow.cpp:1922
+#: difftextwindow.cpp:1930
 #, kde-format
 msgid "Encoding:"
 msgstr "エンコーディング:"
 
-#: difftextwindow.cpp:1926 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1934 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "改行コード:"
 
-#: difftextwindow.cpp:1951
+#: difftextwindow.cpp:1959
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (ベース):"
 
-#: difftextwindow.cpp:1953
+#: difftextwindow.cpp:1961
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "エンコーディング:"
 
-#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1954
+#: difftextwindow.cpp:1962
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "改行コード:"
 
-#: difftextwindow.cpp:1955
+#: difftextwindow.cpp:1963
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1983 kdiff3.cpp:934
+#: difftextwindow.cpp:1991 kdiff3.cpp:933
 #, kde-format
 msgid "Top line"
 msgstr "上部行"
 
-#: difftextwindow.cpp:1992
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "End"
 msgstr "最後"
 
-#: difftextwindow.cpp:2050 smalldialogs.cpp:164
+#: difftextwindow.cpp:2058 smalldialogs.cpp:164
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "ファイルを開いています..."
 
-#: difftextwindow.cpp:2098 optiondialog.cpp:388
+#: difftextwindow.cpp:2106 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 ビット"
 
-#: difftextwindow.cpp:2114
+#: difftextwindow.cpp:2122
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -393,8 +393,8 @@ msgstr ""
 "ディレクトリマージを実行中です。本当にマージを中止し、ディレクトリを再スキャ"
 "ンしますか？"
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:788 kdiff3.cpp:798 kdiff3.cpp:810
-#: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1742 pdiff.cpp:1752
+#: directorymergewindow.cpp:698 kdiff3.cpp:787 kdiff3.cpp:797 kdiff3.cpp:809
+#: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1738 pdiff.cpp:1748
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1257,110 +1257,110 @@ msgstr "履歴マージのソート"
 msgid "Merge info"
 msgstr "A にマージ"
 
-#: kdiff3.cpp:484
-#, kde-format
-msgid "Saving failed."
-msgstr "保存に失敗しました。"
-
-#: kdiff3.cpp:521
+#: kdiff3.cpp:473
 #, fuzzy, kde-format
 #| msgid "Option --auto ignored for directory comparison."
 msgid "Option --auto ignored for folder comparison."
 msgstr "オプション --auto はディレクトリ比較時には無視されます。"
 
-#: kdiff3.cpp:559 pdiff.cpp:937
+#: kdiff3.cpp:521
+#, kde-format
+msgid "Saving failed."
+msgstr "保存に失敗しました。"
+
+#: kdiff3.cpp:558 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "以下のファイルを開けませんでした:"
 
-#: kdiff3.cpp:568 pdiff.cpp:946
+#: kdiff3.cpp:567 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "ファイルのオープンエラー"
 
-#: kdiff3.cpp:600
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "比較のために文書を開きます..."
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:601
 #, kde-format
 msgid "Reload"
 msgstr "再読み込み"
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "マージ結果を保存します。すべての衝突を解決しなければなりません。"
 
-#: kdiff3.cpp:607
+#: kdiff3.cpp:606
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "現在の文書を別名で保存します..."
 
-#: kdiff3.cpp:610
+#: kdiff3.cpp:609
 #, kde-format
 msgid "Print the differences"
 msgstr "差異を印刷します"
 
-#: kdiff3.cpp:613
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Quits the application"
 msgstr "アプリケーションを終了します"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:616
 #, kde-format
 msgid "Undo last action."
 msgstr ""
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "選択範囲を切り取り、クリップボードに格納します"
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:623
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "選択範囲をコピーし、クリップボードに格納します"
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:625
 #, fuzzy, kde-format
 #| msgid "Pastes the clipboard contents to actual position"
 msgid "Pastes the clipboard contents to current position"
 msgstr "クリップボードの内容を現在の位置に貼り付けます"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Select everything in current window"
 msgstr "現在のウィンドウのすべてを選択します"
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:631
 #, kde-format
 msgid "Search for a string"
 msgstr "文字列を検索します"
 
 # StatusTip for FindNext
-#: kdiff3.cpp:634
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Search again for the string"
 msgstr "文字列の次のマッチを検索します"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:638
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "ステータスバーの表示/非表示を切り替えます"
 
-#: kdiff3.cpp:642
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3 を設定..."
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "現在の異なる部分に移動"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Current\n"
@@ -1369,12 +1369,12 @@ msgstr ""
 "現在の\n"
 "異なる部分"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to First Delta"
 msgstr "最初の異なる部分に移動"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "First\n"
@@ -1383,12 +1383,12 @@ msgstr ""
 "最初の\n"
 "異なる部分"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "最後の異なる部分に移動"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Last\n"
@@ -1397,7 +1397,7 @@ msgstr ""
 "最後の\n"
 "異なる部分"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:667
 #, fuzzy, kde-format
 #| msgid ""
 #| "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1406,7 +1406,7 @@ msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(ホワイトスペースの表示が無効なときはホワイトスペースの差異をスキップする)"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:668
 #, fuzzy, kde-format
 #| msgid ""
 #| "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1418,12 +1418,12 @@ msgid ""
 msgstr ""
 "(ホワイトスペースの表示が無効なときもホワイトスペースの差異をスキップしない)"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:669
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "前の異なる部分に移動"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:669
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1432,12 +1432,12 @@ msgstr ""
 "前の\n"
 "異なる部分"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "次の異なる部分に移動"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:671
 #, kde-format
 msgid ""
 "Next\n"
@@ -1446,12 +1446,12 @@ msgstr ""
 "次の\n"
 "異なる部分"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "前の衝突に移動"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1460,12 +1460,12 @@ msgstr ""
 "前の\n"
 "衝突"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "次の衝突に移動"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "Next\n"
@@ -1474,12 +1474,12 @@ msgstr ""
 "次の\n"
 "衝突"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "前の未解決の衝突に移動"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1488,12 +1488,12 @@ msgstr ""
 "前の\n"
 "未解決"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "次の未解決の衝突に移動"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:679
 #, kde-format
 msgid ""
 "Next\n"
@@ -1502,14 +1502,14 @@ msgstr ""
 "次の\n"
 "未解決"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "最後の異なる部分に移動"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Text used for toolbar button."
@@ -1518,20 +1518,20 @@ msgid ""
 "Line"
 msgstr "最後の異なる部分に移動"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:682
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "A からの選択行"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1544,14 +1544,14 @@ msgstr ""
 "選択\n"
 "A"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "B からの選択行"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1564,14 +1564,14 @@ msgstr ""
 "選択\n"
 "B"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "C からの選択行"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1584,14 +1584,14 @@ msgstr ""
 "選択\n"
 "C"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "ソース選択後に自動的に次の未解決の衝突に移動"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1602,13 +1602,13 @@ msgid ""
 "Next"
 msgstr "自動"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "スペースとタブ文字を表示"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1621,12 +1621,12 @@ msgstr ""
 "ホワイト\n"
 "スペース文字"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Show White Space"
 msgstr "ホワイトスペースを表示"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1639,12 +1639,12 @@ msgstr ""
 "ホワイト\n"
 "スペース"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "行番号を表示"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1655,142 +1655,142 @@ msgid ""
 "Numbers"
 msgstr "行番号"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "単純な衝突を自動的に解決"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:694
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "異なる部分を衝突として設定"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "正規表現による自動マージを実行"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "履歴の衝突を自動的に解決"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "選択した差異を分離"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "選択した差異を結合"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Window A"
 msgstr "ウィンドウ A を表示"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show Window B"
 msgstr "ウィンドウ B を表示"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Window C"
 msgstr "ウィンドウ C を表示"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Normal Overview"
 msgstr "すべて比較 (標準)"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:705
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A と B を比較"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:706
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A と C を比較"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:707
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B と C を比較"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Diff ウィンドウで行を折り返す"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Focus Next Window"
 msgstr "次のウィンドウにフォーカス"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "前のウィンドウにフォーカス"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "分割方向を切り替え"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:716
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "ディレクトリ/テキスト分割画面表示"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:718
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "ディレクトリ表示/テキスト表示を切り替え"
 
-#: kdiff3.cpp:741 kdiff3.cpp:843 kdiff3.cpp:868 kdiff3.cpp:1148 kdiff3.cpp:1169
-#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
-#: pdiff.cpp:1136
+#: kdiff3.cpp:740 kdiff3.cpp:842 kdiff3.cpp:867 kdiff3.cpp:1147 kdiff3.cpp:1168
+#: pdiff.cpp:952 pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124
+#: pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "準備完了。"
 
-#: kdiff3.cpp:787 pdiff.cpp:1741
+#: kdiff3.cpp:786 pdiff.cpp:1737
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "マージ結果は保存されていません。"
 
-#: kdiff3.cpp:789
+#: kdiff3.cpp:788
 #, kde-format
 msgid "Save && Quit"
 msgstr "保存/終了"
 
-#: kdiff3.cpp:790
+#: kdiff3.cpp:789
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "保存せずに終了"
 
-#: kdiff3.cpp:798 pdiff.cpp:1752
+#: kdiff3.cpp:797 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "マージ結果の保存に失敗しました。"
 
-#: kdiff3.cpp:809 pdiff.cpp:870
+#: kdiff3.cpp:808 pdiff.cpp:870
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1799,65 +1799,65 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "ディレクトリマージを実行中です。本当に中止しますか？"
 
-#: kdiff3.cpp:832
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Saving file..."
 msgstr "ファイルを保存中..."
 
-#: kdiff3.cpp:849
+#: kdiff3.cpp:848
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "名前を付けてファイルを保存中..."
 
-#: kdiff3.cpp:851
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Save As..."
 msgstr "名前を付けて保存..."
 
-#: kdiff3.cpp:876
+#: kdiff3.cpp:875
 #, fuzzy, kde-format
 #| msgid "Printing completed."
 msgid "Printing not implemented."
 msgstr "印刷完了。"
 
-#: kdiff3.cpp:917
+#: kdiff3.cpp:916
 #, kde-format
 msgid "Printing..."
 msgstr "印刷中..."
 
-#: kdiff3.cpp:1022
+#: kdiff3.cpp:1021
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1081
+#: kdiff3.cpp:1080
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "選択"
 
-#: kdiff3.cpp:1110
+#: kdiff3.cpp:1109
 #, kde-format
 msgid "Printing completed."
 msgstr "印刷完了。"
 
-#: kdiff3.cpp:1114
+#: kdiff3.cpp:1113
 #, kde-format
 msgid "Printing aborted."
 msgstr "印刷中止。"
 
-#: kdiff3.cpp:1121
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Exiting..."
 msgstr "終了中..."
 
-#: kdiff3.cpp:1132
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "ツールバーの表示/非表示を切り替え中..."
 
-#: kdiff3.cpp:1153
+#: kdiff3.cpp:1152
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "ステータスバーの表示/非表示を切り替え中..."
@@ -3631,73 +3631,73 @@ msgstr "中止"
 msgid "Continue Merging"
 msgstr "マージを続行"
 
-#: pdiff.cpp:878 pdiff.cpp:970
+#: pdiff.cpp:878 pdiff.cpp:966
 #, kde-format
 msgid "Opening files..."
 msgstr "ファイルを開いています..."
 
-#: pdiff.cpp:1059
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Cutting selection..."
 msgstr "選択範囲を切り取り..."
 
-#: pdiff.cpp:1066
+#: pdiff.cpp:1062
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "選択範囲をクリップボードにコピー..."
 
-#: pdiff.cpp:1075
+#: pdiff.cpp:1071
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "クリップボードの内容を挿入..."
 
-#: pdiff.cpp:1187
+#: pdiff.cpp:1183
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1203
+#: pdiff.cpp:1199
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "最後の異なる部分に移動"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1517
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1522
+#: pdiff.cpp:1518
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1743
+#: pdiff.cpp:1739
 #, kde-format
 msgid "Save && Continue"
 msgstr "保存/続行"
 
-#: pdiff.cpp:1744
+#: pdiff.cpp:1740
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "保存せずに続行"
 
-#: pdiff.cpp:1942
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search complete."
 msgstr "検索が完了しました。"
 
-#: pdiff.cpp:1942
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search Complete"
 msgstr "検索完了"
 
-#: pdiff.cpp:2123
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2123
+#: pdiff.cpp:2119
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "ディレクトリ作成中にエラー"
