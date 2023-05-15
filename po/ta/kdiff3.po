@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:49+0000\n"
-"PO-Revision-Date: 2023-04-09 13:00+0530\n"
+"PO-Revision-Date: 2023-05-14 15:28+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.90\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -88,8 +88,7 @@ msgid "Copying file: %1 -> %2"
 msgstr "கோப்பு நகலெடுக்கப்படுகிறது: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:357
-#, fuzzy, kde-format
-#| msgid "Reading folder: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "அடைவு படிக்கப்படுகிறது: %1"
@@ -174,10 +173,9 @@ msgid "End"
 msgstr "முடிவு"
 
 #: difftextwindow.cpp:2058 smalldialogs.cpp:164
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgid "Open File"
-msgstr "திறந்த கோப்புகள்"
+msgstr "கோப்பை திற"
 
 #: difftextwindow.cpp:2106 optiondialog.cpp:388
 #, kde-format
@@ -340,18 +338,16 @@ msgid "Solved"
 msgstr "தீர்க்கப்பட்டது"
 
 #: directorymergewindow.cpp:544
-#, fuzzy, kde-format
-#| msgid "Nonwhite"
+#, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr "Nonwhite"
+msgstr ""
 
 #: directorymergewindow.cpp:546
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "Column title"
 msgid "White"
-msgstr "White"
+msgstr ""
 
 #: directorymergewindow.cpp:697
 #, fuzzy, kde-format
@@ -370,14 +366,13 @@ msgstr ""
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
-msgstr ""
+msgstr "எச்சரிக்கை"
 
 #: directorymergewindow.cpp:699
-#, fuzzy, kde-format
-#| msgid "Rescan"
+#, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
-msgstr "மறுவருடல்"
+msgstr "மீள ஆராய்"
 
 #: directorymergewindow.cpp:700
 #, fuzzy, kde-format
@@ -411,11 +406,10 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "அடைவு C \"%1\" உபயோகத்தில் இல்லை (அ) அது ஒரு அடைவே அல்ல.\n"
 
 #: directorymergewindow.cpp:866
-#, fuzzy, kde-format
-#| msgid "File Open Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
-msgstr "கோப்பு திறப்பில் பிழை"
+msgstr "அடைவு திறப்பில் சிக்கல்"
 
 #: directorymergewindow.cpp:874
 #, fuzzy, kde-format
@@ -439,9 +433,9 @@ msgid "Parameter Warning"
 msgstr "அளவுருக்கள் எச்சிரிகை."
 
 #: directorymergewindow.cpp:881
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scanning folders..."
-msgstr "Scanning directories ..."
+msgstr ""
 
 #: directorymergewindow.cpp:907
 #, fuzzy, kde-format
@@ -479,8 +473,7 @@ msgid "Check the permissions of the subfolders."
 msgstr "துணை அடைவுகளின் அனுமதிகளை சரிபார்க்கவும்."
 
 #: directorymergewindow.cpp:970
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "தயார்."
@@ -592,18 +585,16 @@ msgid "Starting Merge"
 msgstr "ஒன்று சேர்ப்பைத் துவக்குதல்"
 
 #: directorymergewindow.cpp:2118
-#, fuzzy, kde-format
-#| msgid "Do It"
+#, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
-msgstr "இதை செய்க"
+msgstr "உறுதியாக செய்"
 
 #: directorymergewindow.cpp:2119
-#, fuzzy, kde-format
-#| msgid "Simulate It"
+#, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
-msgstr "இதை போன்று நட"
+msgstr "முன்னோட்டம் காட்டு"
 
 #: directorymergewindow.cpp:2145
 #, fuzzy, kde-format
@@ -680,7 +671,7 @@ msgstr "கடைசி விவரத்துடன் தொடர்க"
 #| msgid "Skip Item"
 msgctxt "Skip button title"
 msgid "Skip Item"
-msgstr "விவரத்தை தவிர்க்க"
+msgstr "உருப்படியை தவிர்"
 
 #: directorymergewindow.cpp:2364
 #, kde-format
