@@ -528,16 +528,12 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     bool bSuccess = true;
     if(m_bDirCompare)
         bSuccess = doDirectoryCompare(false);
-    else
+    else{
         bSuccess = doFileCompare();
-
-    if(bSuccess)
-    {
-        if(m_bAutoMode)
-            return;
-
-        showMainWindow();
     }
+
+    if(bSuccess && m_bAutoMode) return;
+    if(m_bAutoMode && !isPart()) showMainWindow();
 
     m_bAutoMode = false;
 
