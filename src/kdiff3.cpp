@@ -528,8 +528,6 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             {
                 QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
             }
-            else
-                showMainWindow();
         }
     }
 
