@@ -1713,7 +1713,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         QtSizeType cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
 
-        for(i = firstD3LineIdx; wrapLineIdx < d->m_diff3WrapLineVector.size() && i < endIdx; ++i)
+        for(i = firstD3LineIdx; i < endIdx; ++i)
         {
             if(g_pProgressDialog->wasCancelled())
                 return;
@@ -1789,6 +1789,9 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                         d3wl.wrapLineLength = 0;
                     }
                 }
+
+                if(wrapLineIdx >= d->m_diff3WrapLineVector.size())
+                    break;
             }
         }
 
