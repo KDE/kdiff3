@@ -29,15 +29,17 @@
 #include <memory>
 
 class QMenu;
-class RecalcWordWrapRunnable;
+class QPushButton;
 class QScrollBar;
 class QStatusBar;
+class RecalcWordWrapRunnable;
 class Options;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
 class EncodingLabel;
 class RLPainter;
 class SourceData;
+class FileNameLineEdit;
 
 class KDiff3App;
 
@@ -169,8 +171,6 @@ class DiffTextWindow : public QWidget
     bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
 };
 
-class DiffTextWindowFrameData;
-
 class DiffTextWindowFrame : public QWidget
 {
     Q_OBJECT
@@ -181,6 +181,7 @@ class DiffTextWindowFrame : public QWidget
     void init();
 
     void setupConnections(const KDiff3App *app);
+    const QSharedPointer<Options> getOptions() const;
 
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);
@@ -199,7 +200,19 @@ class DiffTextWindowFrame : public QWidget
     void slotEncodingChanged(QTextCodec* c);
 
   private:
-    std::unique_ptr<DiffTextWindowFrameData> d;
+    QLabel* m_pLabel;
+    QLabel* m_pTopLine;
+    QLabel* m_pEncoding;
+    QLabel* m_pLineEndStyle;
+    QWidget* m_pTopLineWidget;
+    FileNameLineEdit* m_pFileSelection;
+    QPushButton* m_pBrowseButton;
+
+    DiffTextWindow* m_pDiffTextWindow;
+    QSharedPointer<Options> m_pOptions;
+    e_SrcSelector m_winIdx;
+
+    QSharedPointer<SourceData> mSourceData;
 };
 
 class EncodingLabel : public QLabel

@@ -1855,60 +1855,32 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
     }
 }
 
-class DiffTextWindowFrameData
+const QSharedPointer<Options> DiffTextWindowFrame::getOptions() const
 {
-  public:
-    DiffTextWindowFrameData(DiffTextWindowFrame* frame, const QSharedPointer<Options>& pOptions, const e_SrcSelector winIdx)
-    {
-        m_winIdx = winIdx;
-
-        m_pOptions = pOptions;
-        m_pTopLineWidget = new QWidget(frame);
-        m_pFileSelection = new FileNameLineEdit(m_pTopLineWidget);
-        m_pBrowseButton = new QPushButton("...", m_pTopLineWidget);
-        m_pBrowseButton->setFixedWidth(30);
-
-        m_pFileSelection->setAcceptDrops(true);
-
-        m_pLabel = new QLabel("A:", m_pTopLineWidget);
-        m_pTopLine = new QLabel(m_pTopLineWidget);
-    }
-
-    [[nodiscard]] const QPushButton* getBrowseButton() const { return m_pBrowseButton; }
-    [[nodiscard]] const FileNameLineEdit* getFileSelectionField() const { return m_pFileSelection; }
-    [[nodiscard]] const QWidget* getTopLineWidget() const { return m_pTopLineWidget; }
-    [[nodiscard]] const QLabel* getLabel() const { return m_pLabel; }
-
-    const QSharedPointer<Options> getOptions() { return m_pOptions; }
-
-  private:
-    friend DiffTextWindowFrame;
-    DiffTextWindow* m_pDiffTextWindow;
-    FileNameLineEdit* m_pFileSelection;
-    QPushButton* m_pBrowseButton;
-    QSharedPointer<Options> m_pOptions;
-    QLabel* m_pLabel;
-    QLabel* m_pTopLine;
-    QLabel* m_pEncoding;
-    QLabel* m_pLineEndStyle;
-    QWidget* m_pTopLineWidget;
-    e_SrcSelector m_winIdx;
-
-    QSharedPointer<SourceData> mSourceData;
-};
+    return m_pOptions;
+}
 
 DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app):
     QWidget(pParent)
 {
-    d = std::make_unique<DiffTextWindowFrameData>(this, pOptions, winIdx);
-    d->mSourceData = psd;
-    setAutoFillBackground(true);
-    chk_connect_a(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
-    chk_connect_a(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
+    m_pTopLineWidget = new QWidget(this);
+    m_pFileSelection = new FileNameLineEdit(m_pTopLineWidget);
+    m_pBrowseButton = new QPushButton("...", m_pTopLineWidget);
+    m_pBrowseButton->setFixedWidth(30);
 
-    d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx, app);
-    d->m_pDiffTextWindow->setSourceData(psd);
-    QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
+    m_pFileSelection->setAcceptDrops(true);
+
+    m_pLabel = new QLabel("A:", m_pTopLineWidget);
+    m_pTopLine = new QLabel(m_pTopLineWidget);
+
+    mSourceData = psd;
+    setAutoFillBackground(true);
+    chk_connect_a(m_pBrowseButton, &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
+    chk_connect_a(m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
+
+    m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx, app);
+    m_pDiffTextWindow->setSourceData(psd);
+    QVBoxLayout* pVTopLayout = new QVBoxLayout(m_pTopLineWidget);
     pVTopLayout->setContentsMargins(2, 2, 2, 2);
     pVTopLayout->setSpacing(0);
     QHBoxLayout* pHL = new QHBoxLayout();
@@ -1920,32 +1892,32 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     pHL->setContentsMargins(0, 0, 0, 0);
     pHL->setSpacing(2);
 
-    pHL->addWidget(const_cast<QLabel*>(d->getLabel()), 0);
-    pHL->addWidget(const_cast<FileNameLineEdit*>(d->getFileSelectionField()), 1);
-    pHL->addWidget(const_cast<QPushButton*>(d->getBrowseButton()), 0);
-    pHL->addWidget(d->m_pTopLine, 0);
+    pHL->addWidget(m_pLabel, 0);
+    pHL->addWidget(m_pFileSelection, 1);
+    pHL->addWidget(m_pBrowseButton, 0);
+    pHL->addWidget(m_pTopLine, 0);
 
     // Lower line
     pHL2->setContentsMargins(0, 0, 0, 0);
     pHL2->setSpacing(2);
-    pHL2->addWidget(d->m_pTopLine, 0);
-    d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
+    pHL2->addWidget(m_pTopLine, 0);
+    m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
     //EncodeLabel::EncodingChanged should be handled asyncroniously.
-    chk_connect_q((EncodingLabel*)d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged);
+    chk_connect_q((EncodingLabel*)m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged);
 
-    d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
-    pHL2->addWidget(d->m_pEncoding);
-    pHL2->addWidget(d->m_pLineEndStyle);
+    m_pLineEndStyle = new QLabel(i18n("Line end style:"));
+    pHL2->addWidget(m_pEncoding);
+    pHL2->addWidget(m_pLineEndStyle);
 
     QVBoxLayout* pVL = new QVBoxLayout(this);
     pVL->setContentsMargins(0, 0, 0, 0);
     pVL->setSpacing(0);
-    pVL->addWidget(const_cast<QWidget*>(d->getTopLineWidget()), 0);
-    pVL->addWidget(d->m_pDiffTextWindow, 1);
+    pVL->addWidget(m_pTopLineWidget, 0);
+    pVL->addWidget(m_pDiffTextWindow, 1);
 
-    d->m_pDiffTextWindow->installEventFilter(this);
-    d->m_pFileSelection->installEventFilter(this);
-    d->m_pBrowseButton->installEventFilter(this);
+    m_pDiffTextWindow->installEventFilter(this);
+    m_pFileSelection->installEventFilter(this);
+    m_pBrowseButton->installEventFilter(this);
     init();
 }
 
@@ -1953,16 +1925,16 @@ DiffTextWindowFrame::~DiffTextWindowFrame() = default;
 
 void DiffTextWindowFrame::init()
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+    DiffTextWindow* pDTW = m_pDiffTextWindow;
     if(pDTW)
     {
         QString s = QDir::toNativeSeparators(pDTW->getFileName());
-        d->m_pFileSelection->setText(s);
+        m_pFileSelection->setText(s);
         QString winId = pDTW->getWindowIndex() == e_SrcSelector::A ? (pDTW->isThreeWay() ? i18n("A (Base)") : QStringLiteral("A")) : (pDTW->getWindowIndex() == e_SrcSelector::B ? QStringLiteral("B") : QStringLiteral("C"));
-        d->m_pLabel->setText(winId + ':');
-        d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->getEncodingDisplayString()));
-        d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18n("Unix") :
-                                                                                                                                                                          i18n("Unknown")));
+        m_pLabel->setText(winId + ':');
+        m_pEncoding->setText(i18n("Encoding: %1", pDTW->getEncodingDisplayString()));
+        m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18n("Unix") :
+                                                                                                                                                                       i18n("Unknown")));
     }
 }
 
@@ -1987,7 +1959,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
 
 void DiffTextWindowFrame::setFirstLine(QtNumberType firstLine)
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+    DiffTextWindow* pDTW = m_pDiffTextWindow;
     if(pDTW && pDTW->getDiff3LineVector())
     {
         QString s = i18n("Top line");
@@ -1995,22 +1967,22 @@ void DiffTextWindowFrame::setFirstLine(QtNumberType firstLine)
 
         LineRef topVisiableLine = pDTW->calcTopLineInFile(firstLine);
 
-        int w = Utils::getHorizontalAdvance(d->m_pTopLine->fontMetrics(), s + ' ' + QString().fill('0', lineNumberWidth));
-        d->m_pTopLine->setMinimumWidth(w);
+        int w = Utils::getHorizontalAdvance(m_pTopLine->fontMetrics(), s + ' ' + QString().fill('0', lineNumberWidth));
+        m_pTopLine->setMinimumWidth(w);
 
         if(!topVisiableLine.isValid())
             s = i18n("End");
         else
             s += ' ' + QString::number(topVisiableLine + 1);
 
-        d->m_pTopLine->setText(s);
-        d->m_pTopLine->repaint();
+        m_pTopLine->setText(s);
+        m_pTopLine->repaint();
     }
 }
 
 DiffTextWindow* DiffTextWindowFrame::getDiffTextWindow()
 {
-    return d->m_pDiffTextWindow;
+    return m_pDiffTextWindow;
 }
 
 bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
@@ -2018,16 +1990,16 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
-        QColor c1 = d->getOptions()->backgroundColor();
+        QColor c1 = getOptions()->backgroundColor();
         QColor c2;
-        if(d->m_winIdx == e_SrcSelector::A)
-            c2 = d->getOptions()->aColor();
-        else if(d->m_winIdx == e_SrcSelector::B)
-            c2 = d->getOptions()->bColor();
-        else if(d->m_winIdx == e_SrcSelector::C)
-            c2 = d->getOptions()->cColor();
+        if(m_winIdx == e_SrcSelector::A)
+            c2 = getOptions()->aColor();
+        else if(m_winIdx == e_SrcSelector::B)
+            c2 = getOptions()->bColor();
+        else if(m_winIdx == e_SrcSelector::C)
+            c2 = getOptions()->cColor();
 
-        QPalette p = d->m_pTopLineWidget->palette();
+        QPalette p = m_pTopLineWidget->palette();
         if(e->type() == QEvent::FocusOut)
             std::swap(c1, c2);
 
@@ -2035,10 +2007,10 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
         setPalette(p);
 
         p.setColor(QPalette::WindowText, c1);
-        d->m_pLabel->setPalette(p);
-        d->m_pTopLine->setPalette(p);
-        d->m_pEncoding->setPalette(p);
-        d->m_pLineEndStyle->setPalette(p);
+        m_pLabel->setPalette(p);
+        m_pTopLine->setPalette(p);
+        m_pEncoding->setPalette(p);
+        m_pLineEndStyle->setPalette(p);
     }
 
     return false;
@@ -2046,29 +2018,28 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
 
 void DiffTextWindowFrame::slotReturnPressed()
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
-    if(pDTW->getFileName() != d->m_pFileSelection->text())
+    DiffTextWindow* pDTW = m_pDiffTextWindow;
+    if(pDTW->getFileName() != m_pFileSelection->text())
     {
-        Q_EMIT fileNameChanged(d->m_pFileSelection->text(), pDTW->getWindowIndex());
+        Q_EMIT fileNameChanged(m_pFileSelection->text(), pDTW->getWindowIndex());
     }
 }
 
 void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
-    QString current = d->m_pFileSelection->text();
+    QString current = m_pFileSelection->text();
 
     QUrl newURL = QFileDialog::getOpenFileUrl(this, i18n("Open File"), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile));
     if(!newURL.isEmpty())
     {
-        DiffTextWindow* pDTW = d->m_pDiffTextWindow;
-        Q_EMIT fileNameChanged(newURL.url(), pDTW->getWindowIndex());
+        Q_EMIT fileNameChanged(newURL.url(), m_pDiffTextWindow->getWindowIndex());
     }
 }
 
 void DiffTextWindowFrame::slotEncodingChanged(QTextCodec* c)
 {
     Q_EMIT encodingChanged(c); //relay signal from encoding label
-    d->mSourceData->setEncoding(c);
+    mSourceData->setEncoding(c);
 }
 
 EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD, const QSharedPointer<Options>& pOptions):
