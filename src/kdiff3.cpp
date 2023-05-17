@@ -484,7 +484,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     else
     {
         doFileCompare();
-        if(m_bAutoMode)
+        if(m_totalDiffStatus->getUnsolvedConflicts() != 0)
+            bSuccess = false;
+
+        if(m_bAutoMode && m_totalDiffStatus->getUnsolvedConflicts() == 0)
         {
             QSharedPointer<SourceData> pSD = nullptr;
             if(m_sd3->isEmpty())
@@ -538,7 +541,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         //Fire wordwrap recalc signal bypassed during auto-merge pass.
         QMetaObject::invokeMethod(this, &KDiff3App::postRecalcWordWrap, Qt::QueuedConnection);
     }
-    
+
     m_bAutoMode = false;
 
     if(statusBar() != nullptr)
