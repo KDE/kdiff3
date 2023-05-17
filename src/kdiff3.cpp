@@ -419,7 +419,10 @@ bool KDiff3App::doFileCompare()
     m_pDirectoryMergeInfoDock->hide();
 
     mainInit(m_totalDiffStatus);
-    if(m_bAutoMode)
+    if(m_totalDiffStatus->getUnsolvedConflicts() != 0)
+        bSuccess = false;
+
+    if(m_bAutoMode && m_totalDiffStatus->getUnsolvedConflicts() == 0)
     {
         QSharedPointer<SourceData> pSD = nullptr;
         if(m_sd3->isEmpty())
