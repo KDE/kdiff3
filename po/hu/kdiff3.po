@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:49+0000\n"
 "PO-Revision-Date: 2013-07-13 11:52+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -113,82 +113,82 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Súlyos belső hiba történt"
 
-#: difftextwindow.cpp:584
+#: difftextwindow.cpp:583
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:586
+#: difftextwindow.cpp:585
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "A sor nem elérhető"
 
-#: difftextwindow.cpp:1930
+#: difftextwindow.cpp:1932
 #, kde-format
 msgid "Encoding:"
 msgstr "Kódolás:"
 
-#: difftextwindow.cpp:1934 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1936 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Sorvég stílus:"
 
-#: difftextwindow.cpp:1959
+#: difftextwindow.cpp:1961
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (alap):"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1963
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "Kódolás:"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1964 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1964 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1962
+#: difftextwindow.cpp:1964
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "Sorvég stílus:"
 
-#: difftextwindow.cpp:1963
+#: difftextwindow.cpp:1965
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1991 kdiff3.cpp:933
+#: difftextwindow.cpp:1993 kdiff3.cpp:928
 #, kde-format
 msgid "Top line"
 msgstr "Felső sor"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:2002
 #, kde-format
 msgid "End"
 msgstr "Vég"
 
-#: difftextwindow.cpp:2058 smalldialogs.cpp:164
+#: difftextwindow.cpp:2060 smalldialogs.cpp:164
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Fájlok megnyitása..."
 
-#: difftextwindow.cpp:2106 optiondialog.cpp:388
+#: difftextwindow.cpp:2108 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2122
+#: difftextwindow.cpp:2124
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -394,7 +394,7 @@ msgstr ""
 "Egy könyvtár összeolvasztás még nem fejeződött be. Biztosan félbe szeretné "
 "szakítani a műveletet és újra be szeretné olvasni a könyvtár tartalmát?"
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:787 kdiff3.cpp:797 kdiff3.cpp:809
+#: directorymergewindow.cpp:698 kdiff3.cpp:782 kdiff3.cpp:792 kdiff3.cpp:804
 #: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1738 pdiff.cpp:1748
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -1282,98 +1282,98 @@ msgstr ""
 msgid "Saving failed."
 msgstr "A mentés nem sikerült."
 
-#: kdiff3.cpp:558 pdiff.cpp:933
+#: kdiff3.cpp:553 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Nem sikerült megnyitni a következő fájlokat:"
 
-#: kdiff3.cpp:567 pdiff.cpp:942
+#: kdiff3.cpp:562 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "Fájlmegnyitási hiba"
 
-#: kdiff3.cpp:599
+#: kdiff3.cpp:594
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Dokumentumok megnyitása összehasonlításhoz..."
 
-#: kdiff3.cpp:601
+#: kdiff3.cpp:596
 #, kde-format
 msgid "Reload"
 msgstr "Újratöltés"
 
-#: kdiff3.cpp:604
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr ""
 "Az összeolvasztás eredményének elmentése. Minden ütközést fel kell oldani."
 
-#: kdiff3.cpp:606
+#: kdiff3.cpp:601
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Az aktuális dokumentum mentése mint..."
 
-#: kdiff3.cpp:609
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Print the differences"
 msgstr "Eltérések nyomtatása"
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Quits the application"
 msgstr "Kilépés az alkalmazásból"
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:611
 #, fuzzy, kde-format
 msgid "Undo last action."
 msgstr "A kijelölt adatok automatikus kimásolása a vágólapra"
 
-#: kdiff3.cpp:620
+#: kdiff3.cpp:615
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Kivágja a kijelölt részt és a vágólapra helyezi"
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Kimásolja a kijelölt részt és a vágólapra helyezi"
 
-#: kdiff3.cpp:625
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "A vágólap tartalmának beillesztése a jelenlegi pozíciónál"
 
-#: kdiff3.cpp:628
+#: kdiff3.cpp:623
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Minden kijelölése a jelenlegi ablakban"
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:626
 #, kde-format
 msgid "Search for a string"
 msgstr "Karakterlánc keresése"
 
-#: kdiff3.cpp:633
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Search again for the string"
 msgstr "A karakterlánc keresése újból"
 
-#: kdiff3.cpp:638
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Az állapotsor ki-be kapcsolása"
 
-#: kdiff3.cpp:641
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "A KDiff3 beállításai…"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:656
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Ugrás a jelenlegi deltára"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:656
 #, kde-format
 msgid ""
 "Current\n"
@@ -1382,12 +1382,12 @@ msgstr ""
 "Jelenlegi\n"
 "delta"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:658
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Ugrás az első deltára"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:658
 #, kde-format
 msgid ""
 "First\n"
@@ -1396,12 +1396,12 @@ msgstr ""
 "Első\n"
 "delta"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:660
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Ugrás az utolsó deltára"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:660
 #, kde-format
 msgid ""
 "Last\n"
@@ -1410,13 +1410,13 @@ msgstr ""
 "Utolsó\n"
 "delta"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:662
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:663
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1424,12 +1424,12 @@ msgid ""
 "disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:664
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Ugrás az előző deltára"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:664
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1438,12 +1438,12 @@ msgstr ""
 "Előző\n"
 "delta"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:666
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Ugrás a következő deltára"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:666
 #, kde-format
 msgid ""
 "Next\n"
@@ -1452,12 +1452,12 @@ msgstr ""
 "Következő\n"
 "delta"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:668
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Ugrás az előző ütközésre"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:668
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1466,12 +1466,12 @@ msgstr ""
 "Előző\n"
 "ütközés"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:670
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Ugrás a következő ütközésre"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 "Next\n"
@@ -1480,12 +1480,12 @@ msgstr ""
 "Következő\n"
 "ütközés"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:672
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Ugrás az előző feloldatlan ütközésre"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:672
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1494,12 +1494,12 @@ msgstr ""
 "Előző\n"
 "Megoldatlan"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Ugrás a következő feloldatlan ütközésre"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:674
 #, kde-format
 msgid ""
 "Next\n"
@@ -1508,14 +1508,14 @@ msgstr ""
 "Következő\n"
 "Megoldatlan"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:676
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Ugrás az utolsó deltára"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:676
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1524,21 +1524,21 @@ msgid ""
 "Line"
 msgstr "Sor"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:677
 #, fuzzy, kde-format
 #| msgid "No program specified."
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Nincs program megadva."
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:678
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Sor(ok) kiválasztása A-ból"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:678
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1551,14 +1551,14 @@ msgstr ""
 "Választás:\n"
 "A"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:679
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Sor(ok) kiválasztása B-ből"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:679
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1571,14 +1571,14 @@ msgstr ""
 "Választás:\n"
 "B"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:680
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Sor(ok) kiválasztása C-ből"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:680
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1591,7 +1591,7 @@ msgstr ""
 "Választás:\n"
 "C"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
@@ -1600,7 +1600,7 @@ msgstr ""
 "A forrás kiválasztása után automatikus ugrás a következő feloldatlan "
 "ütközésre"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1613,13 +1613,13 @@ msgstr ""
 "Automatikus\n"
 "Következő"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "A szóközök és tabulátorok megjelenítése eltéréseknél"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:683
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1627,12 +1627,12 @@ msgid ""
 "Characters"
 msgstr ""
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Show White Space"
 msgstr "Az üres karakterek megjelenítése"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid ""
 #| "First\n"
@@ -1645,12 +1645,12 @@ msgstr ""
 "Első\n"
 "delta"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "A sorszámok megjelenítése"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1663,142 +1663,142 @@ msgstr ""
 "Sor\n"
 "számok"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Az egyszerű ütközések automatikus feloldása"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Delták beállítása az ütközésekhez"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Az egyszerű ütközések automatikus feloldása"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:692
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr ""
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 msgid "Join Selected Diffs"
 msgstr "A kiválasztott fájl összehasonlítása"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Show Window A"
 msgstr "Az A ablak megjelenítése"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Show Window B"
 msgstr "A B ablak megjelenítése"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Show Window C"
 msgstr "A C ablak megjelenítése"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:699
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normál áttekintés"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:700
 #, kde-format
 msgid "A vs. B Overview"
 msgstr ""
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:701
 #, kde-format
 msgid "A vs. C Overview"
 msgstr ""
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:702
 #, kde-format
 msgid "B vs. C Overview"
 msgstr ""
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr ""
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Fókusz a következő ablakra"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Fókusz az előző ablakra"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "A megosztás irányának megváltoztatása"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:711
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "Osztott nézet (könyvtár és szöveg)"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:713
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "Váltás a könyvtár- és szöveges nézet között"
 
-#: kdiff3.cpp:740 kdiff3.cpp:842 kdiff3.cpp:867 kdiff3.cpp:1147 kdiff3.cpp:1168
+#: kdiff3.cpp:735 kdiff3.cpp:837 kdiff3.cpp:862 kdiff3.cpp:1142 kdiff3.cpp:1163
 #: pdiff.cpp:952 pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124
 #: pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "Kész."
 
-#: kdiff3.cpp:786 pdiff.cpp:1737
+#: kdiff3.cpp:781 pdiff.cpp:1737
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "Az összeolvasztás eredménye még nincs elmentve."
 
-#: kdiff3.cpp:788
+#: kdiff3.cpp:783
 #, kde-format
 msgid "Save && Quit"
 msgstr "Mentés és kilépés"
 
-#: kdiff3.cpp:789
+#: kdiff3.cpp:784
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Kilépés mentés nélkül"
 
-#: kdiff3.cpp:797 pdiff.cpp:1748
+#: kdiff3.cpp:792 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Az összeolvasztás eredményét nem sikerült elmenteni."
 
-#: kdiff3.cpp:808 pdiff.cpp:870
+#: kdiff3.cpp:803 pdiff.cpp:870
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1809,64 +1809,64 @@ msgstr ""
 "Éppen folyamatban van egy könyvtárösszeolvasztás. Biztosan félbe szeretné "
 "szakítani a műveletet?"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:826
 #, kde-format
 msgid "Saving file..."
 msgstr "A fájl mentése..."
 
-#: kdiff3.cpp:848
+#: kdiff3.cpp:843
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "A fájl elmentése más néven..."
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:845
 #, kde-format
 msgid "Save As..."
 msgstr "Mentés másként…"
 
-#: kdiff3.cpp:875
+#: kdiff3.cpp:870
 #, kde-format
 msgid "Printing not implemented."
 msgstr "A nyomtatás nincs megvalósítva."
 
-#: kdiff3.cpp:916
+#: kdiff3.cpp:911
 #, kde-format
 msgid "Printing..."
 msgstr "Nyomtatás…"
 
-#: kdiff3.cpp:1021
+#: kdiff3.cpp:1016
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1080
+#: kdiff3.cpp:1075
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "Kijelölés"
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1104
 #, kde-format
 msgid "Printing completed."
 msgstr "Nyomtatás kész."
 
-#: kdiff3.cpp:1113
+#: kdiff3.cpp:1108
 #, kde-format
 msgid "Printing aborted."
 msgstr "Nyomtatás félbeszakítva."
 
-#: kdiff3.cpp:1120
+#: kdiff3.cpp:1115
 #, kde-format
 msgid "Exiting..."
 msgstr "Kilépés..."
 
-#: kdiff3.cpp:1131
+#: kdiff3.cpp:1126
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Az eszköztár átkapcsolása..."
 
-#: kdiff3.cpp:1152
+#: kdiff3.cpp:1147
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Az állapotsor átkapcsolása..."

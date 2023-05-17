@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:49+0000\n"
+"POT-Creation-Date: 2023-05-17 00:49+0000\n"
 "PO-Revision-Date: 2023-05-10 09:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -111,77 +111,77 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Критична внутрішня помилка"
 
-#: difftextwindow.cpp:584
+#: difftextwindow.cpp:583
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Файл %1: рядок %2"
 
-#: difftextwindow.cpp:586
+#: difftextwindow.cpp:585
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Файл %1: рядок недоступний"
 
-#: difftextwindow.cpp:1930
+#: difftextwindow.cpp:1932
 #, kde-format
 msgid "Encoding:"
 msgstr "Кодування:"
 
-#: difftextwindow.cpp:1934 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1936 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Стиль кінців рядка:"
 
-#: difftextwindow.cpp:1959
+#: difftextwindow.cpp:1961
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Основний)"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1963
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Кодування: %1"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1964 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1964 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1962
+#: difftextwindow.cpp:1964
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Стиль кінців рядка: %1"
 
-#: difftextwindow.cpp:1963
+#: difftextwindow.cpp:1965
 #, kde-format
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: difftextwindow.cpp:1991 kdiff3.cpp:933
+#: difftextwindow.cpp:1993 kdiff3.cpp:928
 #, kde-format
 msgid "Top line"
 msgstr "Верхній рядок"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:2002
 #, kde-format
 msgid "End"
 msgstr "Кінець"
 
-#: difftextwindow.cpp:2058 smalldialogs.cpp:164
+#: difftextwindow.cpp:2060 smalldialogs.cpp:164
 #, kde-format
 msgid "Open File"
 msgstr "Відкрити файл"
 
-#: difftextwindow.cpp:2106 optiondialog.cpp:388
+#: difftextwindow.cpp:2108 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Юнікод, 8 бітів"
 
-#: difftextwindow.cpp:2122
+#: difftextwindow.cpp:2124
 #, kde-format
 msgid "Other"
 msgstr "Інше"
@@ -357,7 +357,7 @@ msgstr ""
 "Зараз ви виконуєте об'єднання тек. Ви впевнені, що бажаєте перервати "
 "об'єднання і пересканувати теку?"
 
-#: directorymergewindow.cpp:698 kdiff3.cpp:787 kdiff3.cpp:797 kdiff3.cpp:809
+#: directorymergewindow.cpp:698 kdiff3.cpp:782 kdiff3.cpp:792 kdiff3.cpp:804
 #: mergeresultwindow.cpp:326 pdiff.cpp:871 pdiff.cpp:1738 pdiff.cpp:1748
 #, kde-format
 msgctxt "Error dialog title"
@@ -1178,97 +1178,97 @@ msgstr "Під час порівняння тек параметр --auto про
 msgid "Saving failed."
 msgstr "Помилка збереження."
 
-#: kdiff3.cpp:558 pdiff.cpp:933
+#: kdiff3.cpp:553 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Під час спроби відкриття цих файлів сталася помилка:"
 
-#: kdiff3.cpp:567 pdiff.cpp:942
+#: kdiff3.cpp:562 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "Помилка відкриття файла"
 
-#: kdiff3.cpp:599
+#: kdiff3.cpp:594
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Відкриває документи для порівняння…"
 
-#: kdiff3.cpp:601
+#: kdiff3.cpp:596
 #, kde-format
 msgid "Reload"
 msgstr "Перезавантажити"
 
-#: kdiff3.cpp:604
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "Зберігає результат об'єднання. Всі конфлікти слід розв'язати!"
 
-#: kdiff3.cpp:606
+#: kdiff3.cpp:601
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Зберігає поточний документ як…"
 
-#: kdiff3.cpp:609
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Print the differences"
 msgstr "Показати розбіжності"
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Quits the application"
 msgstr "Закриває програму"
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:611
 #, kde-format
 msgid "Undo last action."
 msgstr "Скасувати останню дію."
 
-#: kdiff3.cpp:620
+#: kdiff3.cpp:615
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Вирізує вибране та кладе його у кишеню"
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Копіює вибране до кишені"
 
-#: kdiff3.cpp:625
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Вставляє вміст кишені в поточну позицію"
 
-#: kdiff3.cpp:628
+#: kdiff3.cpp:623
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Вибрати все у поточному вікні"
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:626
 #, kde-format
 msgid "Search for a string"
 msgstr "Шукати рядок"
 
-#: kdiff3.cpp:633
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Search again for the string"
 msgstr "Шукати знову рядок"
 
-#: kdiff3.cpp:638
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Вмикає/вимикає рядок стану"
 
-#: kdiff3.cpp:641
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Налаштувати KDiff3…"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:656
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Перейти до поточної дельти"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:656
 #, kde-format
 msgid ""
 "Current\n"
@@ -1277,12 +1277,12 @@ msgstr ""
 "Поточна\n"
 "дельта"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:658
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Перейти до першої дельти"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:658
 #, kde-format
 msgid ""
 "First\n"
@@ -1291,12 +1291,12 @@ msgstr ""
 "Перша\n"
 "дельта"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:660
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Перейти до останньої дельти"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:660
 #, kde-format
 msgid ""
 "Last\n"
@@ -1305,13 +1305,13 @@ msgstr ""
 "Остання\n"
 "дельта"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:662
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(Пропускає різниці у пробілах, якщо вимкнено «Показувати пробіли».)"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:663
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1321,12 +1321,12 @@ msgstr ""
 "(Не пропускати різниці у пробілах, навіть якщо вимкнено параметр «Показувати "
 "пробіли».)"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:664
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Перейти до попередньої дельти"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:664
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1335,12 +1335,12 @@ msgstr ""
 "Попередня\n"
 "дельта"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:666
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Перейти до наступної дельти"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:666
 #, kde-format
 msgid ""
 "Next\n"
@@ -1349,12 +1349,12 @@ msgstr ""
 "Наступна\n"
 "дельта"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:668
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Перейти до попереднього конфлікту"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:668
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1363,12 +1363,12 @@ msgstr ""
 "Попередній\n"
 "конфлікт"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:670
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Перейти до наступного конфлікту"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 "Next\n"
@@ -1377,12 +1377,12 @@ msgstr ""
 "Наступний\n"
 "конфлікт"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:672
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Перейти до попереднього нерозв'язаного конфлікту"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:672
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1391,12 +1391,12 @@ msgstr ""
 "Попередній\n"
 "нерозв'язаний"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Перейти до наступного нерозв'язаного конфлікту"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:674
 #, kde-format
 msgid ""
 "Next\n"
@@ -1405,13 +1405,13 @@ msgstr ""
 "Наступний\n"
 "нерозв'язаний"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:676
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Перейти до рядка"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:676
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1421,19 +1421,19 @@ msgstr ""
 "Перейти\n"
 "до рядка"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:677
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Перейти до вказаного рядка."
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:678
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Виберіть рядки з A"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:678
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1443,13 +1443,13 @@ msgstr ""
 "Вибрати\n"
 "A"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:679
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Вибрати рядки з B"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:679
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1459,13 +1459,13 @@ msgstr ""
 "Вибрати\n"
 "B"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:680
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Вибрати рядки з C"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:680
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1475,13 +1475,13 @@ msgstr ""
 "Вибрати\n"
 "C"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Автоматично перейти до наступного конфлікту за визначення джерела"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1491,12 +1491,12 @@ msgstr ""
 "Автоматично\n"
 "наступний"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Показувати символи пробілів і табуляцій"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:683
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1506,12 +1506,12 @@ msgstr ""
 "Символи-\n"
 "пробіли"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Show White Space"
 msgstr "Показувати пробіли"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:684
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1521,12 +1521,12 @@ msgstr ""
 "Пробіли-\n"
 "дельти"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Показувати номери рядків"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:686
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1536,202 +1536,202 @@ msgstr ""
 "Номери\n"
 "рядків"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Автоматично розв'язувати прості конфлікти"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Застосувати різницю до конфліктів"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Запустити автооб'єднання за формальними виразами"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Автоматично розв'язувати конфлікти у журналі"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:692
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Розділити різницю на вибраному"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Об'єднати вибрані різниці"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Show Window A"
 msgstr "Показати вікно A"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Show Window B"
 msgstr "Показати вікно B"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Show Window C"
 msgstr "Показати вікно C"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:699
 #, kde-format
 msgid "Normal Overview"
 msgstr "Звичайний огляд"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:700
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Перегляд A з B"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:701
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Перегляд A з C Overview"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:702
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Перегляд B з C"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Перенесення рядків у вікнах різниці"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Додати вирівнювання різниці вручну"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Очистити всі вирівнювання різниці вручну"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Фокус до наступного вікна"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Фокус на попереднє вікно"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Перемкнути орієнтацію відокремлення"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Розділений перегляд тексту і тек"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Перемкнутися між переглядом тексту і тек"
 
-#: kdiff3.cpp:740 kdiff3.cpp:842 kdiff3.cpp:867 kdiff3.cpp:1147 kdiff3.cpp:1168
+#: kdiff3.cpp:735 kdiff3.cpp:837 kdiff3.cpp:862 kdiff3.cpp:1142 kdiff3.cpp:1163
 #: pdiff.cpp:952 pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124
 #: pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "Готово."
 
-#: kdiff3.cpp:786 pdiff.cpp:1737
+#: kdiff3.cpp:781 pdiff.cpp:1737
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Результат об'єднання не збережено."
 
-#: kdiff3.cpp:788
+#: kdiff3.cpp:783
 #, kde-format
 msgid "Save && Quit"
 msgstr "Зберегти і вийти"
 
-#: kdiff3.cpp:789
+#: kdiff3.cpp:784
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Вийти без збереження"
 
-#: kdiff3.cpp:797 pdiff.cpp:1748
+#: kdiff3.cpp:792 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Помилка під час збереження результатів об'єднання."
 
-#: kdiff3.cpp:808 pdiff.cpp:870
+#: kdiff3.cpp:803 pdiff.cpp:870
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
 "Зараз ви виконуєте об'єднання тек. Ви впевнені, що бажаєте перервати його?"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:826
 #, kde-format
 msgid "Saving file..."
 msgstr "Збереження файла…"
 
-#: kdiff3.cpp:848
+#: kdiff3.cpp:843
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Файл зберігається з новою назвою…"
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:845
 #, kde-format
 msgid "Save As..."
 msgstr "Зберегти як…"
 
-#: kdiff3.cpp:875
+#: kdiff3.cpp:870
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Можливість друку не реалізовано."
 
-#: kdiff3.cpp:916
+#: kdiff3.cpp:911
 #, kde-format
 msgid "Printing..."
 msgstr "Друк…"
 
-#: kdiff3.cpp:1021
+#: kdiff3.cpp:1016
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Друкуємо сторінку %1 з %2"
 
-#: kdiff3.cpp:1080
+#: kdiff3.cpp:1075
 #, kde-format
 msgid " (Selection)"
 msgstr " (Вибір)"
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1104
 #, kde-format
 msgid "Printing completed."
 msgstr "Друк завершено."
 
-#: kdiff3.cpp:1113
+#: kdiff3.cpp:1108
 #, kde-format
 msgid "Printing aborted."
 msgstr "Друк перервано."
 
-#: kdiff3.cpp:1120
+#: kdiff3.cpp:1115
 #, kde-format
 msgid "Exiting..."
 msgstr "Вихід…"
 
-#: kdiff3.cpp:1131
+#: kdiff3.cpp:1126
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Перемикання пенала…"
 
-#: kdiff3.cpp:1152
+#: kdiff3.cpp:1147
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Перемикання рядка стану…"
