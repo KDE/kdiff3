@@ -532,8 +532,13 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
 
     if(bSuccess && m_bAutoMode) return;
-    if(m_bAutoMode) showMainWindow();
-
+    if(m_bAutoMode)
+    {
+        showMainWindow();
+        //Fire wordwrap recalc signal bypassed during auto-merge pass.
+        QMetaObject::invokeMethod(this, &KDiff3App::postRecalcWordWrap, Qt::QueuedConnection);
+    }
+    
     m_bAutoMode = false;
 
     if(statusBar() != nullptr)
