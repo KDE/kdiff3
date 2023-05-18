@@ -347,11 +347,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         mErrors.append(i18n("Too many lines in diff. Skipping file."));
     }
 
-    //initView does first time setup for ui. Why is called it here?
-    initView();
     m_pMergeResultWindow->connectActions();
 
-    m_pMainWidget->setVisible(bGUI);
+    m_pMainWidget->setVisible(bGUI); //sets off multiple resize events internally.
 
     m_bTripleDiff = !m_sd3->isEmpty();
 

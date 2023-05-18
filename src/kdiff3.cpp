@@ -478,6 +478,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         showMainWindow();
 
     g_pProgressDialog->setStayHidden(false);
+    //initView does first time setup for ui.
+    initView();
 
     if(m_bDirCompare)
         bSuccess = doDirectoryCompare(false);
