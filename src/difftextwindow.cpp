@@ -1857,12 +1857,16 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 
 const QSharedPointer<Options> DiffTextWindowFrame::getOptions() const
 {
+    assert(m_pOptions != nullptr);
     return m_pOptions;
 }
 
 DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app):
     QWidget(pParent)
 {
+    m_pOptions = pOptions;
+    m_winIdx = winIdx;
+
     m_pTopLineWidget = new QWidget(this);
     m_pFileSelection = new FileNameLineEdit(m_pTopLineWidget);
     m_pBrowseButton = new QPushButton("...", m_pTopLineWidget);
