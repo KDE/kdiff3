@@ -11,8 +11,8 @@
 #ifndef DIFFTEXTWINDOW_H
 #define DIFFTEXTWINDOW_H
 
-#include "SourceData.h"
 #include "diff.h"
+#include "SourceData.h"
 
 #include "LineRef.h"
 #include "TypeUtils.h"
@@ -43,14 +43,14 @@ class FileNameLineEdit;
 
 class KDiff3App;
 
-class DiffTextWindow : public QWidget
+class DiffTextWindow: public QWidget
 {
     Q_OBJECT
   public:
     //Using this as a scoped global
     static QScrollBar* mVScrollBar;
 
-    DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, KDiff3App &app);
+    DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, KDiff3App& app);
     ~DiffTextWindow() override;
     void init(
         const QString& fileName,
@@ -61,7 +61,7 @@ class DiffTextWindow : public QWidget
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList);
 
-    void setupConnections(const KDiff3App *app);
+    void setupConnections(const KDiff3App* app);
 
     void reset();
     void convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos);
@@ -163,7 +163,7 @@ class DiffTextWindow : public QWidget
     */
     std::list<boost::signals2::scoped_connection> connections;
 
-    KDiff3App &m_app;
+    KDiff3App& m_app;
     std::unique_ptr<DiffTextWindowData> d;
 
     void showStatusLine(const LineRef lineFromPos);
@@ -171,16 +171,16 @@ class DiffTextWindow : public QWidget
     bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
 };
 
-class DiffTextWindowFrame : public QWidget
+class DiffTextWindowFrame: public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData> &psd, KDiff3App &app);
+    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
 
-    void setupConnections(const KDiff3App *app);
+    void setupConnections(const KDiff3App* app);
     const QSharedPointer<Options> getOptions() const;
 
   Q_SIGNALS:
@@ -215,11 +215,11 @@ class DiffTextWindowFrame : public QWidget
     QSharedPointer<SourceData> mSourceData;
 };
 
-class EncodingLabel : public QLabel
+class EncodingLabel: public QLabel
 {
     Q_OBJECT
   public:
-    EncodingLabel(const QString& text, const QSharedPointer<SourceData> &psd, const QSharedPointer<Options> &pOptions);
+    EncodingLabel(const QString& text, const QSharedPointer<SourceData>& psd, const QSharedPointer<Options>& pOptions);
 
   protected:
     void mouseMoveEvent(QMouseEvent* ev) override;
