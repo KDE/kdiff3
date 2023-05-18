@@ -768,7 +768,6 @@ QString FileAccess::prettyAbsPath() const
 
 const QDateTime& FileAccess::lastModified() const
 {
-    assert(!m_modificationTime.isNull());
     return m_modificationTime;
 }
 
