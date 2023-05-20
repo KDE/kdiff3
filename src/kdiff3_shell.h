@@ -66,7 +66,6 @@ class KDiff3Shell: public KXmlGuiWindow
 
     KToggleAction* m_toolbarAction;
     KToggleAction* m_statusbarAction;
-    bool m_bUnderConstruction;
 };
 
 #endif // _KDIFF3_H_

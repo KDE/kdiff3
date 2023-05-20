@@ -26,8 +26,6 @@
 
 KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    m_bUnderConstruction = true;
-
     m_widget = new KDiff3App(this, u8"KDiff3Part", this);
 
     if(m_widget)
@@ -46,7 +44,6 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
         // to automatically save settings if changed: window size, toolbar
         // position, icon size, etc.
         setAutoSaveSettings();
-        m_bUnderConstruction = false;
     }
     else
     {
