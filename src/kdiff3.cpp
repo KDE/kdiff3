@@ -450,7 +450,7 @@ void KDiff3App::doFileCompare()
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
     bool bSuccess = true;
-    //This code may execute before QApplication::exec
+
     if(!fn1.isEmpty())
     {
         m_sd1->setFilename(fn1);

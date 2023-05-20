@@ -55,8 +55,8 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
         KMessageBox::error(this, i18n("Could not initialize the KDiff3 part.\n"
                                       "This usually happens due to an installation problem. "
                                       "Please read the README-file in the source package for details."));
-
-        ::exit(-1); //QApplication::quit() doesn't work here yet.
+        //Leave the event loop
+        QApplication::exit(-1);
 
         return;
     }

@@ -193,12 +193,20 @@ int main(int argc, char* argv[])
     aboutData.processCommandLine(cmdLineParser);
 
     /*
-      Do not attempt to call show here that will be done later.
-      This variable exists solely to insure the KDiff3Shell is deleted on exit.
+        This short segment is wrapped in a lambda to delay KDiff3Shell construction until
+        after the main event loop starts. Thus allowing us to avoid std::exit as much as
+        possiable. Makes for a cleaner exit.
     */
-    const QPointer<KDiff3Shell> p(new KDiff3Shell());//QPointer will take it from here.
-    Q_UNUSED(p);
-
+    QMetaObject::invokeMethod(
+        qApp, [] {
+            /*
+              Do not attempt to call show here that will be done later.
+              This variable exists solely to insure the KDiff3Shell is deleted on exit.
+            */
+            const QPointer<KDiff3Shell> p(new KDiff3Shell()); //QPointer will take it from here.
+            Q_UNUSED(p);
+        },
+        Qt::QueuedConnection);
     int retVal = QApplication::exec();
     return retVal;
 }
