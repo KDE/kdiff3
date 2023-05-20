@@ -52,7 +52,7 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not initialize the KDiff3 part.\n"
+        KMessageBox::error(this, i18n("Could not initialize KDiff3.\n"
                                       "This usually happens due to an installation problem. "
                                       "Please read the README-file in the source package for details."));
         //Leave the event loop
