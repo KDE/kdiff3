@@ -28,7 +28,7 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>
-#include <QPointer>
+#include <QScopedPointer>
 #include <QStandardPaths>
 #include <QStringList>
 #include <QTextStream>
@@ -197,14 +197,14 @@ int main(int argc, char* argv[])
         after the main event loop starts. Thus allowing us to avoid std::exit as much as
         possiable. Makes for a cleaner exit.
     */
+    QScopedPointer<KDiff3Shell> p;
     QMetaObject::invokeMethod(
-        qApp, [] {
+        qApp, [&p] {
             /*
               Do not attempt to call show here that will be done later.
               This variable exists solely to insure the KDiff3Shell is deleted on exit.
             */
-            const QPointer<KDiff3Shell> p(new KDiff3Shell()); //QPointer will take it from here.
-            Q_UNUSED(p);
+            p.reset(new KDiff3Shell()); //QScopedPointer will take it from here.
         },
         Qt::QueuedConnection);
     int retVal = QApplication::exec();
