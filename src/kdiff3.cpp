@@ -1030,20 +1030,14 @@ void KDiff3App::slotFilePrint()
                 printer.abort();
                 break;
             }
-            if(!bPrintSelection)
+            if(!bPrintSelection && !bPrintCurrentPage)
             {
                 if(pageListIt == pageList.end())
                     break;
                 page = *pageListIt;
                 line = (page - 1) * linesPerPage;
-
-                if(bPrintCurrentPage)
-                {
-                    // Detect the first visible line in the window.
-                    line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx);
-                }
             }
-            else
+            else if(bPrintSelection)
             {
                 if(line >= selectionEndLine)
                 {
