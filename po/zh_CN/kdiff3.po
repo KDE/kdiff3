@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-20 02:34+0000\n"
-"PO-Revision-Date: 2023-04-29 08:36\n"
+"PO-Revision-Date: 2023-05-22 14:03\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -809,7 +809,7 @@ msgstr "属性"
 #: directorymergewindow.cpp:2725
 #, kde-format
 msgid "Last Modification"
-msgstr "最后修改时间"
+msgstr "最后修改"
 
 #: directorymergewindow.cpp:2725
 #, kde-format
@@ -1956,7 +1956,7 @@ msgstr "日期和大小： "
 #: MergeFileInfos.cpp:477
 #, kde-format
 msgid "Comparing file..."
-msgstr "正在比较文件..."
+msgstr "正在比较文件"
 
 #: mergeresultwindow.cpp:147
 #, kde-format
@@ -2424,8 +2424,8 @@ msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitly copy e.g. via Ctrl-C."
 msgstr ""
-"开：选择的内容会复制到剪贴板。\n"
-"关：执行明确复制操作例如 Ctrl-C 才会复制到剪贴板。"
+"启用：选择的内容会复制到剪贴板。\n"
+"禁用：执行明确复制操作例如 Ctrl-C 才会复制到剪贴板。"
 
 #: optiondialog.cpp:804
 #, kde-format
@@ -2520,8 +2520,8 @@ msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
 msgstr ""
-"此预处理仅在行匹配时使用。\n"
-"(详情参见文档)"
+"此预处理器只在行匹配时使用。\n"
+"(详细信息见文档)"
 
 #: optiondialog.cpp:880
 #, kde-format
@@ -2586,7 +2586,7 @@ msgstr "显示信息对话框"
 #: optiondialog.cpp:940
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
-msgstr "显示关于冲突数量信息的对话框"
+msgstr "显示冲突数量对话框"
 
 #: optiondialog.cpp:943
 #, kde-format
@@ -2715,8 +2715,8 @@ msgid ""
 "quit.\n"
 "(Similar to command line option \"--auto\".)"
 msgstr ""
-"如果从命令行调用 KDiff3 合并文件并且所有\n"
-"冲突都可以自动解决，那么自动保存文件并退出。\n"
+"如果从命令行调用 KDiff3 合并文件并且所有冲突都可以自动解决，那么自动保存文件"
+"并退出。\n"
 "(类似命令行选项\"--auto\")"
 
 #: optiondialog.cpp:1115
@@ -2886,7 +2886,7 @@ msgstr "二进制比较"
 #: optiondialog.cpp:1219
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
-msgstr "用二进制模式比较每个文件。(默认)"
+msgstr ""
 
 #: optiondialog.cpp:1222
 #, kde-format
@@ -2899,8 +2899,6 @@ msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
-"进行完全分析并且在额外的列里显示统计信息。\n"
-"(比二进制模式慢，对于二进制文件该模式更慢。)"
 
 #: optiondialog.cpp:1228
 #, kde-format
@@ -2916,9 +2914,6 @@ msgid ""
 "different.\n"
 "Useful for big folders or slow networks."
 msgstr ""
-"修改日期和文件长度相同的文件会被视为同一文件。\n"
-"相同内容但修改日期不同的文件会被视为不同文件。\n"
-"对大文件夹或慢速网络很有帮助。"
 
 #: optiondialog.cpp:1235
 #, kde-format
@@ -2935,9 +2930,6 @@ msgid ""
 "If the dates are not equal but the sizes are, use binary comparison.\n"
 "Useful for big folders or slow networks."
 msgstr ""
-"修改日期和文件长度相同的文件会被视为同一文件。\n"
-"相同内容但日期不同时，则比较它们的二进制文件。\n"
-"对大文件夹或慢速网络很有帮助。"
 
 #: optiondialog.cpp:1242
 #, kde-format
@@ -2951,8 +2943,6 @@ msgid ""
 "Useful for big folders or slow networks when the date is modified during "
 "download."
 msgstr ""
-"文件长度相同的文件会被视为同一文件。\n"
-"对大文件夹或慢速网络 (下载时会改变日期) 很有帮助。"
 
 #: optiondialog.cpp:1251
 #, kde-format
@@ -2966,9 +2956,6 @@ msgid ""
 "both folders are the same afterwards.\n"
 "Works only when comparing two folders without specifying a destination."
 msgstr ""
-"将文件同时储存在两个文件夹中，\n"
-"以使两个文件夹保持一致。\n"
-"仅用于未指定目标的双文件夹比较中。"
 
 #: optiondialog.cpp:1261
 #, kde-format
@@ -2981,8 +2968,6 @@ msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
 msgstr ""
-"如果文件只在空白字符上有差异，则认为它们相同。\n"
-"仅当选择完全分析时此选项才激活。"
 
 #: optiondialog.cpp:1271
 #, kde-format
@@ -2996,9 +2981,6 @@ msgid ""
 "(Use this only if you know what you are doing!)\n"
 "Only effective when comparing two folders."
 msgstr ""
-"不比较文件内容，仅选择较新的文件。\n"
-"(请在深思熟虑后使用此选项！)\n"
-"只在比较两个文件夹时有效。"
 
 #: optiondialog.cpp:1280
 #, kde-format
@@ -3010,7 +2992,7 @@ msgstr "备份文件 (.orig)"
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
-msgstr "保存文件会覆盖旧文件时，旧文件将被附加“.orig”扩展名而不是被删除。"
+msgstr ""
 
 #: optiondialog.cpp:1293 optiondialog.cpp:1294
 #, kde-format
@@ -3028,8 +3010,6 @@ msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
-"启用此选项将使得只更改第一个编码设置即可更改全部文件的编码。\n"
-"如果需要为每个文件设置不同的编码，请禁用此选项。"
 
 #: optiondialog.cpp:1325
 #, kde-format
@@ -3085,8 +3065,6 @@ msgid ""
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
-"如果启用，使用输入文件的文字编码。\n"
-"在模棱两可的情况下，对话框将询问用户文件保存编码。"
 
 #: optiondialog.cpp:1379
 #, kde-format
@@ -3104,8 +3082,6 @@ msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
-"一些语言是从右到左书写的。\n"
-"查看器和编辑器的显示方向将据此更改。"
 
 #: optiondialog.cpp:1405
 #, kde-format
@@ -3130,8 +3106,6 @@ msgid ""
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\" error."
 msgstr ""
-"当 KDiff3 被其他工具调用时忽略的命令行选项。\n"
-"多个选项请用分号“;\"分隔，以避免出现“未知参数”错误。"
 
 #: optiondialog.cpp:1438
 #, kde-format
@@ -3144,8 +3118,6 @@ msgid ""
 "Fast method to exit.\n"
 "For those who are used to using the Escape key."
 msgstr ""
-"快速退出方法。\n"
-"给那些习惯使用 Esc 键退出的人使用。"
 
 #: optiondialog.cpp:1500
 #, kde-format
@@ -3206,17 +3178,17 @@ msgstr "正在加载B"
 #: pdiff.cpp:146
 #, kde-format
 msgid "Loading B: %1"
-msgstr "正在加载B：%1"
+msgstr ""
 
 #: pdiff.cpp:176 pdiff.cpp:177 pdiff.cpp:217 pdiff.cpp:218
 #, kde-format
 msgid "Diff: A <-> B"
-msgstr "比较：A <-> B"
+msgstr ""
 
 #: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:288
 #, kde-format
 msgid "Linediff: A <-> B"
-msgstr "行比较：A <-> B"
+msgstr ""
 
 #: pdiff.cpp:202
 #, kde-format
@@ -3226,27 +3198,27 @@ msgstr "正在加载C"
 #: pdiff.cpp:203
 #, kde-format
 msgid "Loading C: %1"
-msgstr "正在加载 C：%1"
+msgstr ""
 
 #: pdiff.cpp:229 pdiff.cpp:230
 #, kde-format
 msgid "Diff: A <-> C"
-msgstr "比较：A <-> C"
+msgstr ""
 
 #: pdiff.cpp:243 pdiff.cpp:244
 #, kde-format
 msgid "Diff: B <-> C"
-msgstr "比较：B <-> C"
+msgstr ""
 
 #: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:293
 #, kde-format
 msgid "Linediff: B <-> C"
-msgstr "行比较：B <-> C"
+msgstr ""
 
 #: pdiff.cpp:278 pdiff.cpp:279 pdiff.cpp:298
 #, kde-format
 msgid "Linediff: A <-> C"
-msgstr "行比较：A <-> C"
+msgstr ""
 
 #: pdiff.cpp:739
 #, kde-format
@@ -3461,7 +3433,7 @@ msgstr "示例自动合并行："
 #: smalldialogs.cpp:397
 #, kde-format
 msgid "To test auto merge, copy a line as used in your files."
-msgstr "要测试自动合并，复制文件中使用的行。"
+msgstr ""
 
 #: smalldialogs.cpp:403 smalldialogs.cpp:431 smalldialogs.cpp:467
 #, kde-format
@@ -3479,8 +3451,6 @@ msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
 msgstr ""
-"复制一段您文件里使用过的历史记录起始行，\n"
-"包括开头的注释。"
 
 #: smalldialogs.cpp:450
 #, kde-format
@@ -3498,8 +3468,6 @@ msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
-"复制一段您文件里使用过的历史记录起始行，\n"
-"但不要包括开头的注释。"
 
 #: smalldialogs.cpp:474
 #, kde-format
