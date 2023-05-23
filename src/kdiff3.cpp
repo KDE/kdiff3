@@ -976,9 +976,9 @@ void KDiff3App::slotFilePrint()
         if(printer.printRange() == QPrinter::AllPages)
         {
             pageList.clear();
-            for(quint32 i = 0; i < totalNofPages; ++i)
+            for(quint32 i = 1; i <= totalNofPages; ++i)
             {
-                pageList.push_back(i + 1);
+                pageList.push_back(i);
             }
         }
         else if(printer.printRange() == QPrinter::PageRange)
@@ -1004,6 +1004,8 @@ void KDiff3App::slotFilePrint()
         {
             bPrintCurrentPage = true;
             totalNofPages = 1;
+            // Detect the first visible line in the window.
+            line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx);
         }
         else if(printer.printRange() == QPrinter::Selection)
         {
@@ -1021,7 +1023,10 @@ void KDiff3App::slotFilePrint()
         ProgressProxy pp;
         pp.setMaxNofSteps(totalNofPages);
         QList<quint32>::iterator pageListIt = pageList.begin();
-        for(;;)
+
+        while(bPrintCurrentPage ||
+              (!bPrintSelection && pageListIt != pageList.end()) ||
+              (bPrintSelection && line < selectionEndLine))
         {
             pp.setInformation(i18nc("Status message", "Printing page %1 of %2", page, totalNofPages), false);
             pp.setCurrent(page - 1);
@@ -1030,25 +1035,21 @@ void KDiff3App::slotFilePrint()
                 printer.abort();
                 break;
             }
+
             if(!bPrintSelection && !bPrintCurrentPage)
             {
-                if(pageListIt == pageList.end())
-                    break;
+                assert(pageListIt != pageList.end());
                 page = *pageListIt;
                 line = (page - 1) * linesPerPage;
             }
             else if(bPrintSelection)
             {
-                if(line >= selectionEndLine)
-                {
-                    break;
-                }
-                else
-                {
-                    if(selectionEndLine - line < linesPerPage)
-                        linesPerPage = selectionEndLine - line;
-                }
+                assert(line < selectionEndLine);
+
+                if(selectionEndLine - line < linesPerPage)
+                    linesPerPage = selectionEndLine - line;
             }
+
             if(line.isValid() && line < totalNofLines)
             {
                 if(bFirstPrintedPage)
