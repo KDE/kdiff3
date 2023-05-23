@@ -1134,36 +1134,44 @@ void KDiff3App::slotGoCurrent()
 {
     Q_EMIT goCurrent();
 }
+
 void KDiff3App::slotGoTop()
 {
     Q_EMIT goTop();
 }
+
 void KDiff3App::slotGoBottom()
 {
     Q_EMIT goBottom();
 }
+
 void KDiff3App::slotGoPrevUnsolvedConflict()
 {
     Q_EMIT goPrevUnsolvedConflict();
 }
+
 void KDiff3App::slotGoNextUnsolvedConflict()
 {
     m_bTimerBlock = false;
     Q_EMIT goNextUnsolvedConflict();
 }
+
 void KDiff3App::slotGoPrevConflict()
 {
     Q_EMIT goPrevConflict();
 }
+
 void KDiff3App::slotGoNextConflict()
 {
     m_bTimerBlock = false;
     Q_EMIT goNextConflict();
 }
+
 void KDiff3App::slotGoPrevDelta()
 {
     Q_EMIT goPrevDelta();
 }
+
 void KDiff3App::slotGoNextDelta()
 {
     Q_EMIT goNextDelta();
