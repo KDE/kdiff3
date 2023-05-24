@@ -118,8 +118,8 @@ class DiffTextWindowData
 #endif
     }
 
-    QString getString(LineType d3lIdx);
-    QString getLineString(int line);
+    [[nodiscard]] QString getString(const LineType d3lIdx) const;
+    [[nodiscard]] QString getLineString(const int line) const;
 
     void writeLine(
         RLPainter& p, const LineData* pld,
@@ -132,16 +132,16 @@ class DiffTextWindowData
     void myUpdate(int afterMilliSecs);
 
     [[nodiscard]] int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
-    int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
+    [[nodiscard]] LineRef convertLineOnScreenToLineInSource(const int lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const;
 
     void prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth = -1);
 
     [[nodiscard]] bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
-    const QString& getFileName() { return m_filename; }
+    [[nodiscard]] const QString& getFileName() const { return m_filename; }
 
-    const Diff3LineVector* getDiff3LineVector() { return mDiff3LineVector; }
+    [[nodiscard]] const Diff3LineVector* getDiff3LineVector() const { return mDiff3LineVector; }
 
-    const QSharedPointer<Options>& getOptions() { return m_pOptions; }
+    [[nodiscard]] const QSharedPointer<Options>& getOptions() const { return m_pOptions; }
 
   private:
     friend DiffTextWindow;
@@ -193,10 +193,12 @@ void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData)
 {
     d->sourceData = inData;
 }
+
 bool DiffTextWindow::isThreeWay() const
 {
     return d->isThreeWay();
 };
+
 const QString& DiffTextWindow::getFileName() const
 {
     return d->getFileName();
@@ -569,7 +571,7 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
 */
 void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
 {
-    int d3lIdx = convertLineToDiff3LineIdx(lineFromPos);
+    LineType d3lIdx = convertLineToDiff3LineIdx(lineFromPos);
 
     if(d->getDiff3LineVector() != nullptr && d3lIdx >= 0 && d3lIdx < (int)d->getDiff3LineVector()->size())
     {
@@ -1301,7 +1303,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
     }
 }
 
-QString DiffTextWindowData::getString(LineType d3lIdx)
+QString DiffTextWindowData::getString(const LineType d3lIdx) const
 {
     assert(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
 
@@ -1309,21 +1311,21 @@ QString DiffTextWindowData::getString(LineType d3lIdx)
         return QString();
 
     std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
-    const LineRef lineIdx = d3l->getLineIndex(m_winIdx);
+    const LineType lineIdx = d3l->getLineIndex(m_winIdx);
 
-    if(!lineIdx.isValid())
+    if(lineIdx != LineRef::invalid)
         return QString();
 
     return (*m_pLineData)[lineIdx].getLine();
 }
 
-QString DiffTextWindowData::getLineString(int line)
+QString DiffTextWindowData::getLineString(const LineType line) const
 {
     if(m_bWordWrap)
     {
         if(line < m_diff3WrapLineVector.count())
         {
-            int d3LIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(line);
+            LineType d3LIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(line);
             return getString(d3LIdx).mid(m_diff3WrapLineVector[line].wrapLineOffset, m_diff3WrapLineVector[line].wrapLineLength);
         }
         else
@@ -1561,7 +1563,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
     update();
 }
 
-int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine)
+LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const
 {
     LineRef line;
     if(lineOnScreen >= 0)

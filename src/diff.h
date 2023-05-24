@@ -271,7 +271,7 @@ class Diff3Line
     [[nodiscard]] inline bool hasFineDiffBC() const { return pFineBC != nullptr; }
     [[nodiscard]] inline bool hasFineDiffCA() const { return pFineCA != nullptr; }
 
-    [[nodiscard]] inline LineRef getLineIndex(e_SrcSelector src) const
+    [[nodiscard]] inline LineType getLineIndex(e_SrcSelector src) const
     {
         switch(src)
         {

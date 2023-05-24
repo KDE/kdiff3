@@ -38,7 +38,7 @@ public:
   [[nodiscard]] inline QtSizeType getFirstPos() const { return firstPos; };
   [[nodiscard]] inline QtSizeType getLastPos() const { return lastPos; };
 
-  inline bool isValidFirstLine() { return firstLine.isValid(); }
+  [[nodiscard]] inline bool isValidFirstLine() const { return firstLine.isValid(); }
   inline void clearOldSelection() { oldLastLine.invalidate(), oldFirstLine.invalidate(); };
 
   [[nodiscard]] inline LineRef getOldLastLine() const { return oldLastLine; };
