@@ -1202,7 +1202,6 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     d->m_selection.bSelectionContainsData = false;
 
     LineRef endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
-    //TODO: Drop RLPainter. How?
     RLPainter p(this, d->getOptions()->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
     p.setFont(font());

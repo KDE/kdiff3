@@ -182,7 +182,7 @@ void MergeResultWindow::setupConnections(const KDiff3App* app)
     chk_connect_a(this, &MergeResultWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
     chk_connect_a(this, &MergeResultWindow::newSelection, app, &KDiff3App::slotSelectionStart);
     chk_connect_a(this, &MergeResultWindow::modifiedChanged, app, &KDiff3App::slotOutputModified);
-    //TODO: Why two signals?
+    //TODO: Why two slots?
     chk_connect_a(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
     chk_connect_a(this, &MergeResultWindow::updateAvailabilities, this, &MergeResultWindow::slotUpdateAvailabilities);
     chk_connect_a(app, &KDiff3App::updateAvailabilities, this, &MergeResultWindow::slotUpdateAvailabilities);

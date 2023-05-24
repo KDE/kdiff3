@@ -48,6 +48,7 @@ class Selection
     [[nodiscard]] inline LineRef getOldFirstLine() const { return oldFirstLine; };
     [[nodiscard]] inline bool selectionContainsData() const { return bSelectionContainsData; };
     [[nodiscard]] bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
+
     void reset()
     {
         oldLastLine = lastLine;
@@ -56,19 +57,21 @@ class Selection
         lastLine.invalidate();
         bSelectionContainsData = false;
     }
+
     void start(LineRef l, QtSizeType p)
     {
         firstLine = l;
         firstPos = p;
     }
+
     void end(LineRef l, QtSizeType p)
     {
         if(!oldLastLine.isValid())
             oldLastLine = lastLine;
         lastLine = l;
         lastPos = p;
-        //bSelectionContainsData = (firstLine == lastLine && firstPos == lastPos);
     }
+
     [[nodiscard]] bool within(LineRef l, QtSizeType p) const;
 
     [[nodiscard]] bool lineWithin(LineRef l) const;
