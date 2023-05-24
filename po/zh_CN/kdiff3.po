@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-20 00:48+0000\n"
+"POT-Creation-Date: 2023-05-24 00:49+0000\n"
 "PO-Revision-Date: 2023-05-22 14:00\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1610,7 +1610,7 @@ msgstr "文件夹和文本分割视图"
 msgid "Toggle Between Folder && Text View"
 msgstr "切换文件夹和文本视图"
 
-#: kdiff3.cpp:745 kdiff3.cpp:847 kdiff3.cpp:872 kdiff3.cpp:1152 kdiff3.cpp:1173
+#: kdiff3.cpp:745 kdiff3.cpp:847 kdiff3.cpp:872 kdiff3.cpp:1147 kdiff3.cpp:1168
 #: pdiff.cpp:950 pdiff.cpp:1019 pdiff.cpp:1055 pdiff.cpp:1064 pdiff.cpp:1122
 #: pdiff.cpp:1130
 #, kde-format
@@ -1668,46 +1668,50 @@ msgstr "打印功能尚未实现"
 msgid "Printing..."
 msgstr "正在打印..."
 
-#: kdiff3.cpp:1026
+#: kdiff3.cpp:1031
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "正在打印第 %1 页，共 %2 页"
 
-#: kdiff3.cpp:1085
+#: kdiff3.cpp:1080
 #, kde-format
 msgid " (Selection)"
 msgstr " (选择)"
 
-#: kdiff3.cpp:1114
+#: kdiff3.cpp:1109
 #, kde-format
 msgid "Printing completed."
 msgstr "打印完成。"
 
-#: kdiff3.cpp:1118
+#: kdiff3.cpp:1113
 #, kde-format
 msgid "Printing aborted."
 msgstr "打印中止。"
 
-#: kdiff3.cpp:1125
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Exiting..."
 msgstr "正在退出..."
 
-#: kdiff3.cpp:1136
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "正在切换工具栏..."
 
-#: kdiff3.cpp:1157
+#: kdiff3.cpp:1152
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "切换状态栏..."
 
-#: kdiff3_shell.cpp:55
-#, kde-format
+#: kdiff3_shell.cpp:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Could not initialize the KDiff3 part.\n"
+#| "This usually happens due to an installation problem. Please read the "
+#| "README-file in the source package for details."
 msgid ""
-"Could not initialize the KDiff3 part.\n"
+"Could not initialize KDiff3.\n"
 "This usually happens due to an installation problem. Please read the README-"
 "file in the source package for details."
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-20 00:48+0000\n"
+"POT-Creation-Date: 2023-05-24 00:49+0000\n"
 "PO-Revision-Date: 2023-05-10 10:50+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1643,7 +1643,7 @@ msgstr "Razdeljeni pogled map in besedila"
 msgid "Toggle Between Folder && Text View"
 msgstr "Preklopi med pogledom map in besedila"
 
-#: kdiff3.cpp:745 kdiff3.cpp:847 kdiff3.cpp:872 kdiff3.cpp:1152 kdiff3.cpp:1173
+#: kdiff3.cpp:745 kdiff3.cpp:847 kdiff3.cpp:872 kdiff3.cpp:1147 kdiff3.cpp:1168
 #: pdiff.cpp:950 pdiff.cpp:1019 pdiff.cpp:1055 pdiff.cpp:1064 pdiff.cpp:1122
 #: pdiff.cpp:1130
 #, kde-format
@@ -1701,46 +1701,50 @@ msgstr "Tiskanje ni podprto."
 msgid "Printing..."
 msgstr "Tiskanje ..."
 
-#: kdiff3.cpp:1026
+#: kdiff3.cpp:1031
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Tiskanje strani %1 od %2"
 
-#: kdiff3.cpp:1085
+#: kdiff3.cpp:1080
 #, kde-format
 msgid " (Selection)"
 msgstr " (Izbira)"
 
-#: kdiff3.cpp:1114
+#: kdiff3.cpp:1109
 #, kde-format
 msgid "Printing completed."
 msgstr "Tiskanje je končano.."
 
-#: kdiff3.cpp:1118
+#: kdiff3.cpp:1113
 #, kde-format
 msgid "Printing aborted."
 msgstr "Tiskanje je prekinjeno.."
 
-#: kdiff3.cpp:1125
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Exiting..."
 msgstr "Končujem ..."
 
-#: kdiff3.cpp:1136
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Preklapljanje orodne vrstice ..."
 
-#: kdiff3.cpp:1157
+#: kdiff3.cpp:1152
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Preklopi vrstico stanja ..."
 
-#: kdiff3_shell.cpp:55
-#, kde-format
+#: kdiff3_shell.cpp:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Could not initialize the KDiff3 part.\n"
+#| "This usually happens due to an installation problem. Please read the "
+#| "README-file in the source package for details."
 msgid ""
-"Could not initialize the KDiff3 part.\n"
+"Could not initialize KDiff3.\n"
 "This usually happens due to an installation problem. Please read the README-"
 "file in the source package for details."
 msgstr ""
