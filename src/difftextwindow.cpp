@@ -1198,7 +1198,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
         return;
     }
 
-    bool bOldSelectionContainsData = d->m_selection.bSelectionContainsData;
+    const bool bOldSelectionContainsData = d->m_selection.selectionContainsData();
     d->m_selection.bSelectionContainsData = false;
 
     LineRef endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
