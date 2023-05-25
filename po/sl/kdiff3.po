@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-24 00:49+0000\n"
-"PO-Revision-Date: 2023-05-10 10:50+0200\n"
+"PO-Revision-Date: 2023-05-24 08:56+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -1738,19 +1738,15 @@ msgid "Toggle the statusbar..."
 msgstr "Preklopi vrstico stanja ..."
 
 #: kdiff3_shell.cpp:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not initialize the KDiff3 part.\n"
-#| "This usually happens due to an installation problem. Please read the "
-#| "README-file in the source package for details."
+#, kde-format
 msgid ""
 "Could not initialize KDiff3.\n"
 "This usually happens due to an installation problem. Please read the README-"
 "file in the source package for details."
 msgstr ""
-"Ni bilo mogoče nastaviti začetnih vrednosti za del KDiff3.\n"
-"To se običajno zgodi, če je prisotna težava z namestitvijo. Preberite si "
-"datoteko README v paketu z izvorno kodo za več podrobnosti."
+"Ni bilo mogoče postaviti začetnih vrednosti za KDiff3.\n"
+"To se običajno zgodi zaradi težav ob namestitvi. Preberite si datoteko "
+"README v paketu z izvorno kodo za več podrobnosti."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
