@@ -31,7 +31,34 @@ class Selection
     LineRef oldLastLine;
 
   public:
-    //private:
+    /* bSelectionContainsData -- behavior
+    --ignore cursor only updates.
+    default to false
+
+    DiffSelection
+        default to false
+        for(int line = beginLine; line < endLine; ++line)
+            if any line on screeen
+                .... wrapline offset loop
+                .... running 0 based tally outPos
+                if m_selection.within(line, outPos) set to true
+
+                send newSelection on changed state
+                    --triggers reset via resetSelection on all but sender
+                    --flag set to false after reset
+
+    MergeSelection
+
+        --embeded in getTextLayoutForLine
+            ..mouseEvent/keyEvent triggers
+            ..result blindly changed -- no back checking
+
+        --only checked durring paintEvent
+        for all visable lines
+            QtSizeType lengthInText = std::max(0, lastPosInLine(line) - firstPosInLine(line));
+            if(lengthInText > 0) if(lengthInText > 0)
+                bSelectionContainsData = true
+    */
     bool bSelectionContainsData = false;
 
   public:
