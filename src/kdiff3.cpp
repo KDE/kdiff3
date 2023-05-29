@@ -156,7 +156,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
 
     m_pOptionDialog->readOptions(KSharedConfig::openConfig());
 
-    // Option handling: Only when pParent==0 (no parent)
+    // Option handling.
     int argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
     bool hasArgs = argCount > 0;
     if(hasArgs)
