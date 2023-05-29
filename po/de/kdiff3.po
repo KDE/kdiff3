@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-24 00:49+0000\n"
-"PO-Revision-Date: 2023-05-10 20:31+0200\n"
+"PO-Revision-Date: 2023-05-28 10:42+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1749,17 +1749,13 @@ msgid "Toggle the statusbar..."
 msgstr "Statusleiste anzeigen/ausblenden ..."
 
 #: kdiff3_shell.cpp:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not initialize the KDiff3 part.\n"
-#| "This usually happens due to an installation problem. Please read the "
-#| "README-file in the source package for details."
+#, kde-format
 msgid ""
 "Could not initialize KDiff3.\n"
 "This usually happens due to an installation problem. Please read the README-"
 "file in the source package for details."
 msgstr ""
-"Die KDiff3-Komponente kann nicht gestartet werden.\n"
+"KDiff3 kann nicht gestartet werden.\n"
 "Das ist normalerweise ein Installationsproblem. Bitte lesen Sie die README-"
 "Datei, die den Quelltexten beiliegt."
 
