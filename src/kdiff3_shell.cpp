@@ -27,36 +27,22 @@
 KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& fn3)
 {
     m_widget = new KDiff3App(this, u8"KDiff3Part", this);
+    assert(m_widget);
 
-    if(m_widget)
-    {
-        setupGUI(Default, "kdiff3_shell.rc");
-        // and a status bar
-        statusBar()->show();
-        //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    setupGUI(Default, "kdiff3_shell.rc");
+    // and a status bar
+    statusBar()->show();
+    //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
-        setCentralWidget(m_widget);
+    setCentralWidget(m_widget);
 
-        m_widget->completeInit(fn1, fn2, fn3);
-        chk_connect_a(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
+    m_widget->completeInit(fn1, fn2, fn3);
+    chk_connect_a(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
 
-        // apply the saved mainwindow settings, if any, and ask the mainwindow
-        // to automatically save settings if changed: window size, toolbar
-        // position, icon size, etc.
-        setAutoSaveSettings();
-    }
-    else
-    {
-        // if we couldn't find our Part, we exit since the Shell by
-        // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not initialize KDiff3.\n"
-                                      "This usually happens due to an installation problem. "
-                                      "Please read the README-file in the source package for details."));
-        //Leave the event loop
-        QApplication::exit(-1);
-
-        return;
-    }
+    // apply the saved mainwindow settings, if any, and ask the mainwindow
+    // to automatically save settings if changed: window size, toolbar
+    // position, icon size, etc.
+    setAutoSaveSettings();
 }
 
 KDiff3Shell::~KDiff3Shell() = default;
