@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-24 00:49+0000\n"
+"POT-Creation-Date: 2023-05-30 00:48+0000\n"
 "PO-Revision-Date: 2023-05-24 13:04+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -111,77 +111,77 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "S'ha produït un error intern sever"
 
-#: difftextwindow.cpp:583
+#: difftextwindow.cpp:585
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Fitxer %1: Línia %2"
 
-#: difftextwindow.cpp:585
+#: difftextwindow.cpp:587
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Fitxer %1: Línia no disponible"
 
-#: difftextwindow.cpp:1908
+#: difftextwindow.cpp:1909
 #, kde-format
 msgid "Encoding:"
 msgstr "Codificació:"
 
-#: difftextwindow.cpp:1912 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1913 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Estil del salt de línia:"
 
-#: difftextwindow.cpp:1937
+#: difftextwindow.cpp:1938
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Base)"
 
-#: difftextwindow.cpp:1939
+#: difftextwindow.cpp:1940
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Codificació: %1"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1940
+#: difftextwindow.cpp:1941
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Estil del salt de línia: %1"
 
-#: difftextwindow.cpp:1941
+#: difftextwindow.cpp:1942
 #, kde-format
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: difftextwindow.cpp:1969 kdiff3.cpp:938
+#: difftextwindow.cpp:1970 kdiff3.cpp:938
 #, kde-format
 msgid "Top line"
 msgstr "Línia superior"
 
-#: difftextwindow.cpp:1978
+#: difftextwindow.cpp:1979
 #, kde-format
 msgid "End"
 msgstr "Final"
 
-#: difftextwindow.cpp:2036 smalldialogs.cpp:164
+#: difftextwindow.cpp:2037 smalldialogs.cpp:164
 #, kde-format
 msgid "Open File"
 msgstr "Obri un fitxer"
 
-#: difftextwindow.cpp:2083 optiondialog.cpp:388
+#: difftextwindow.cpp:2084 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
 
-#: difftextwindow.cpp:2099
+#: difftextwindow.cpp:2100
 #, kde-format
 msgid "Other"
 msgstr "Altres"
@@ -358,7 +358,7 @@ msgstr ""
 "fusió i tornar a explorar la carpeta?"
 
 #: directorymergewindow.cpp:698 kdiff3.cpp:792 kdiff3.cpp:802 kdiff3.cpp:814
-#: mergeresultwindow.cpp:326 pdiff.cpp:869 pdiff.cpp:1736 pdiff.cpp:1746
+#: mergeresultwindow.cpp:326 pdiff.cpp:869 pdiff.cpp:1744 pdiff.cpp:1754
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1663,7 +1663,7 @@ msgstr "Canvia entre la vista de carpetes i text"
 msgid "Ready."
 msgstr "Preparat."
 
-#: kdiff3.cpp:791 pdiff.cpp:1735
+#: kdiff3.cpp:791 pdiff.cpp:1743
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultat de la fusió no s'ha guardat."
@@ -1678,7 +1678,7 @@ msgstr "Guarda i ix"
 msgid "Quit Without Saving"
 msgstr "Ix sense guardar"
 
-#: kdiff3.cpp:802 pdiff.cpp:1746
+#: kdiff3.cpp:802 pdiff.cpp:1754
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "No s'ha pogut guardar el resultat de la fusió."
@@ -1750,17 +1750,6 @@ msgstr "S'està canviant la barra d'eines..."
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Canvia la barra d'estat..."
-
-#: kdiff3_shell.cpp:52
-#, kde-format
-msgid ""
-"Could not initialize KDiff3.\n"
-"This usually happens due to an installation problem. Please read the README-"
-"file in the source package for details."
-msgstr ""
-"No s'ha pogut restablir KDiff3.\n"
-"Açò sol ser degut a problemes d'instal·lació. Per a més detalls, llegiu el "
-"fitxer README del paquet de codi."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -3439,53 +3428,53 @@ msgstr "S'està copiant la selecció al porta-retalls..."
 msgid "Inserting clipboard contents..."
 msgstr "S'està inserint el contingut del porta-retalls..."
 
-#: pdiff.cpp:1181
+#: pdiff.cpp:1189
 #, kde-format
 msgid "Ok"
 msgstr "D'acord"
 
-#: pdiff.cpp:1197
+#: pdiff.cpp:1205
 #, kde-format
 msgid "Go to Line"
 msgstr "Ves a la línia"
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1523
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajust de paraula (Cancel·la desactiva l'ajust de paraula)"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "S'està calculant l'amplària màxima per a la barra de desplaçament horitzontal"
 
-#: pdiff.cpp:1737
+#: pdiff.cpp:1745
 #, kde-format
 msgid "Save && Continue"
 msgstr "Guarda i continua"
 
-#: pdiff.cpp:1738
+#: pdiff.cpp:1746
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continua sense guardar"
 
-#: pdiff.cpp:1936
+#: pdiff.cpp:1944
 #, kde-format
 msgid "Search complete."
 msgstr "S'ha finalitzat la busca."
 
-#: pdiff.cpp:1936
+#: pdiff.cpp:1944
 #, kde-format
 msgid "Search Complete"
 msgstr "Busca completa"
 
-#: pdiff.cpp:2117
+#: pdiff.cpp:2125
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "No hi ha res seleccionat en cap de les finestres de diferències."
 
-#: pdiff.cpp:2117
+#: pdiff.cpp:2125
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "S'ha produït un error en afegir un interval manual de diferències"
@@ -3734,3 +3723,12 @@ msgstr "Caràcter inesperat de cometa en l'argument."
 #, kde-format
 msgid "No program specified."
 msgstr "No s'ha especificat cap programa."
+
+#~ msgid ""
+#~ "Could not initialize KDiff3.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "No s'ha pogut restablir KDiff3.\n"
+#~ "Açò sol ser degut a problemes d'instal·lació. Per a més detalls, llegiu "
+#~ "el fitxer README del paquet de codi."

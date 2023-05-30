@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-24 00:49+0000\n"
+"POT-Creation-Date: 2023-05-30 00:48+0000\n"
 "PO-Revision-Date: 2011-09-03 19:27+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -116,82 +116,82 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Alvorlig intern fejl"
 
-#: difftextwindow.cpp:583
+#: difftextwindow.cpp:585
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:585
+#: difftextwindow.cpp:587
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "Linjen er ikke tilgængelig"
 
-#: difftextwindow.cpp:1908
+#: difftextwindow.cpp:1909
 #, kde-format
 msgid "Encoding:"
 msgstr "Tegnsæt:"
 
-#: difftextwindow.cpp:1912 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1913 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Linjeslut-stil:"
 
-#: difftextwindow.cpp:1937
+#: difftextwindow.cpp:1938
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (Basis):"
 
-#: difftextwindow.cpp:1939
+#: difftextwindow.cpp:1940
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "Tegnsæt:"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1940
+#: difftextwindow.cpp:1941
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "Linjeslut-stil:"
 
-#: difftextwindow.cpp:1941
+#: difftextwindow.cpp:1942
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1969 kdiff3.cpp:938
+#: difftextwindow.cpp:1970 kdiff3.cpp:938
 #, kde-format
 msgid "Top line"
 msgstr "Toplinje"
 
-#: difftextwindow.cpp:1978
+#: difftextwindow.cpp:1979
 #, kde-format
 msgid "End"
 msgstr "Slut"
 
-#: difftextwindow.cpp:2036 smalldialogs.cpp:164
+#: difftextwindow.cpp:2037 smalldialogs.cpp:164
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Åbner filer..."
 
-#: difftextwindow.cpp:2083 optiondialog.cpp:388
+#: difftextwindow.cpp:2084 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2099
+#: difftextwindow.cpp:2100
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -398,7 +398,7 @@ msgstr ""
 "afbryde indfletningen og scanne mappen igen?"
 
 #: directorymergewindow.cpp:698 kdiff3.cpp:792 kdiff3.cpp:802 kdiff3.cpp:814
-#: mergeresultwindow.cpp:326 pdiff.cpp:869 pdiff.cpp:1736 pdiff.cpp:1746
+#: mergeresultwindow.cpp:326 pdiff.cpp:869 pdiff.cpp:1744 pdiff.cpp:1754
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1778,7 +1778,7 @@ msgstr "Skift mellem Mappe && tekstvisning"
 msgid "Ready."
 msgstr "Klar."
 
-#: kdiff3.cpp:791 pdiff.cpp:1735
+#: kdiff3.cpp:791 pdiff.cpp:1743
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1794,7 +1794,7 @@ msgstr "Gem && afslut"
 msgid "Quit Without Saving"
 msgstr "Afslut uden at gemme"
 
-#: kdiff3.cpp:802 pdiff.cpp:1746
+#: kdiff3.cpp:802 pdiff.cpp:1754
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Det mislykkedes at gemme indfletningsresultatet."
@@ -1871,21 +1871,6 @@ msgstr "Slår værktøjslinje til/fra"
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Slå statuslinje til/fra..."
-
-#: kdiff3_shell.cpp:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not initialize the KDiff3 part.\n"
-#| "This usually happens due to an installation problem. Please read the "
-#| "README-file in the source package for details."
-msgid ""
-"Could not initialize KDiff3.\n"
-"This usually happens due to an installation problem. Please read the README-"
-"file in the source package for details."
-msgstr ""
-"Kunne ikke initialisere KDiff3 Part.\n"
-"Dette sker sædvanligvis på grund af et installationsproblem. Læs venligst "
-"README-filen i kildekodepakken for detaljer."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -3715,53 +3700,53 @@ msgstr "Kopierer markering til udklipsholderen..."
 msgid "Inserting clipboard contents..."
 msgstr "Indsætter udklipsholderens indhold..."
 
-#: pdiff.cpp:1181
+#: pdiff.cpp:1189
 #, kde-format
 msgid "Ok"
 msgstr "Ok"
 
-#: pdiff.cpp:1197
+#: pdiff.cpp:1205
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Gå til sidste delta"
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1523
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1737
+#: pdiff.cpp:1745
 #, kde-format
 msgid "Save && Continue"
 msgstr "Gem && Fortsæt"
 
-#: pdiff.cpp:1738
+#: pdiff.cpp:1746
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Fortsæt uden at gemme"
 
-#: pdiff.cpp:1936
+#: pdiff.cpp:1944
 #, kde-format
 msgid "Search complete."
 msgstr "Søgning færdig."
 
-#: pdiff.cpp:1936
+#: pdiff.cpp:1944
 #, kde-format
 msgid "Search Complete"
 msgstr "Søgning færdig"
 
-#: pdiff.cpp:2117
+#: pdiff.cpp:2125
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ingenting er markeret i inddatavindue med sammenligning."
 
-#: pdiff.cpp:2117
+#: pdiff.cpp:2125
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Fejl ved tilføjelse manuelt sammenligningsområde"
@@ -4015,6 +4000,20 @@ msgstr "Uventet apostrof i argument."
 #, kde-format
 msgid "No program specified."
 msgstr "Intet program angivet."
+
+#, fuzzy
+#~| msgid ""
+#~| "Could not initialize the KDiff3 part.\n"
+#~| "This usually happens due to an installation problem. Please read the "
+#~| "README-file in the source package for details."
+#~ msgid ""
+#~ "Could not initialize KDiff3.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "Kunne ikke initialisere KDiff3 Part.\n"
+#~ "Dette sker sædvanligvis på grund af et installationsproblem. Læs venligst "
+#~ "README-filen i kildekodepakken for detaljer."
 
 #~ msgid "Loading A"
 #~ msgstr "Indlæser A"

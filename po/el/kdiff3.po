@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-24 00:49+0000\n"
+"POT-Creation-Date: 2023-05-30 00:48+0000\n"
 "PO-Revision-Date: 2021-06-14 16:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -115,77 +115,77 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Σοβαρό εσωτερικό σφάλμα"
 
-#: difftextwindow.cpp:583
+#: difftextwindow.cpp:585
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Αρχείο %1: Γραμμή %2"
 
-#: difftextwindow.cpp:585
+#: difftextwindow.cpp:587
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Αρχείο %1: Μη διαθέσιμη γραμμή"
 
-#: difftextwindow.cpp:1908
+#: difftextwindow.cpp:1909
 #, kde-format
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
-#: difftextwindow.cpp:1912 mergeresultwindow.cpp:2792 optiondialog.cpp:803
+#: difftextwindow.cpp:1913 mergeresultwindow.cpp:2792 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Στιλ τέλους γραμμής:"
 
-#: difftextwindow.cpp:1937
+#: difftextwindow.cpp:1938
 #, kde-format
 msgid "A (Base)"
 msgstr "Α (Βάση)"
 
-#: difftextwindow.cpp:1939
+#: difftextwindow.cpp:1940
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Κωδικοποίηση %1"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1940
+#: difftextwindow.cpp:1941
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Στιλ τέλους γραμμής: %1"
 
-#: difftextwindow.cpp:1941
+#: difftextwindow.cpp:1942
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1969 kdiff3.cpp:938
+#: difftextwindow.cpp:1970 kdiff3.cpp:938
 #, kde-format
 msgid "Top line"
 msgstr "Πρώτη γραμμή"
 
-#: difftextwindow.cpp:1978
+#: difftextwindow.cpp:1979
 #, kde-format
 msgid "End"
 msgstr "Τέλος"
 
-#: difftextwindow.cpp:2036 smalldialogs.cpp:164
+#: difftextwindow.cpp:2037 smalldialogs.cpp:164
 #, kde-format
 msgid "Open File"
 msgstr "Άνοιγμα αρχείων"
 
-#: difftextwindow.cpp:2083 optiondialog.cpp:388
+#: difftextwindow.cpp:2084 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2099
+#: difftextwindow.cpp:2100
 #, kde-format
 msgid "Other"
 msgstr "Άλλο"
@@ -389,7 +389,7 @@ msgstr ""
 "την εγκατάλειψη της συγχώνευσης και την επανασάρωση του φακέλου;"
 
 #: directorymergewindow.cpp:698 kdiff3.cpp:792 kdiff3.cpp:802 kdiff3.cpp:814
-#: mergeresultwindow.cpp:326 pdiff.cpp:869 pdiff.cpp:1736 pdiff.cpp:1746
+#: mergeresultwindow.cpp:326 pdiff.cpp:869 pdiff.cpp:1744 pdiff.cpp:1754
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1758,7 +1758,7 @@ msgstr "Εναλλαγή μεταξύ προβολής φακέλου && κει�
 msgid "Ready."
 msgstr "Έτοιμο."
 
-#: kdiff3.cpp:791 pdiff.cpp:1735
+#: kdiff3.cpp:791 pdiff.cpp:1743
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Το αποτέλεσμα της συγχώνευσης δεν έχει αποθηκευτεί."
@@ -1773,7 +1773,7 @@ msgstr "Αποθήκευση && έξοδος"
 msgid "Quit Without Saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-#: kdiff3.cpp:802 pdiff.cpp:1746
+#: kdiff3.cpp:802 pdiff.cpp:1754
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Αποτυχία αποθήκευσης του αποτελέσματος συγχώνευσης."
@@ -1847,21 +1847,6 @@ msgstr "Εναλλαγή γραμμής εργαλείων..."
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Εναλλαγή της γραμμής κατάστασης..."
-
-#: kdiff3_shell.cpp:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not initialize the KDiff3 part.\n"
-#| "This usually happens due to an installation problem. Please read the "
-#| "README-file in the source package for details."
-msgid ""
-"Could not initialize KDiff3.\n"
-"This usually happens due to an installation problem. Please read the README-"
-"file in the source package for details."
-msgstr ""
-"Αδυναμία αρχικοποίησης του τμήματος του KDiff3\n"
-"Αυτό συνήθως συμβαίνει εξαιτίας ενός προβλήματος εγκατάστασης. Παρακαλώ "
-"διαβάστε το αρχείο README στο πακέτο του πηγαίου κώδικα για λεπτομέρειες."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -3688,53 +3673,53 @@ msgstr "Αντιγραφή της επιλογής στο πρόχειρο..."
 msgid "Inserting clipboard contents..."
 msgstr "Εισαγωγή των περιεχομένων του προχείρου..."
 
-#: pdiff.cpp:1181
+#: pdiff.cpp:1189
 #, kde-format
 msgid "Ok"
 msgstr "Εντάξει"
 
-#: pdiff.cpp:1197
+#: pdiff.cpp:1205
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1523
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Αναδίπλωση λέξεων (Η ακύρωση απενεργοποιεί την αναδίπλωση λέξεων)"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Υπολογισμός μέγιστου πλάτους για την οριζόντια γραμμήκύλισης"
 
-#: pdiff.cpp:1737
+#: pdiff.cpp:1745
 #, kde-format
 msgid "Save && Continue"
 msgstr "Αποθήκευση && συνέχεια"
 
-#: pdiff.cpp:1738
+#: pdiff.cpp:1746
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Συνέχεια χωρίς αποθήκευση"
 
-#: pdiff.cpp:1936
+#: pdiff.cpp:1944
 #, kde-format
 msgid "Search complete."
 msgstr "Η αναζήτηση ολοκληρώθηκε."
 
-#: pdiff.cpp:1936
+#: pdiff.cpp:1944
 #, kde-format
 msgid "Search Complete"
 msgstr "Η αναζήτηση ολοκληρώθηκε"
 
-#: pdiff.cpp:2117
+#: pdiff.cpp:2125
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Δεν έχει επιλεγεί τίποτα σε κανένα παράθυρο εισαγωγής διαφορών."
 
-#: pdiff.cpp:2117
+#: pdiff.cpp:2125
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Σφάλμα κατά την προσθήκη χειροκίνητου εύρους διαφορών"
@@ -3990,6 +3975,20 @@ msgstr "Μη αναμενόμενος χαρακτήρας εισαγωγικο�
 #, kde-format
 msgid "No program specified."
 msgstr "Δεν έχει προσδιοριστεί πρόγραμμα."
+
+#, fuzzy
+#~| msgid ""
+#~| "Could not initialize the KDiff3 part.\n"
+#~| "This usually happens due to an installation problem. Please read the "
+#~| "README-file in the source package for details."
+#~ msgid ""
+#~ "Could not initialize KDiff3.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "Αδυναμία αρχικοποίησης του τμήματος του KDiff3\n"
+#~ "Αυτό συνήθως συμβαίνει εξαιτίας ενός προβλήματος εγκατάστασης. Παρακαλώ "
+#~ "διαβάστε το αρχείο README στο πακέτο του πηγαίου κώδικα για λεπτομέρειες."
 
 #~ msgid "Loading A"
 #~ msgstr "Φόρτωση του Α"
