@@ -41,9 +41,6 @@ class OptionDialog: public KPageDialog
     void readOptions(KSharedConfigPtr config);
 
     void setState(); // Must be called before calling exec();
-
-    QSharedPointer<Options> getOptions() { return m_options; }
-
   protected Q_SLOTS:
     virtual void slotDefault();
     virtual void slotOk();
@@ -67,7 +64,6 @@ class OptionDialog: public KPageDialog
     void setupIntegrationPage();
     void resetToDefaults();
 
-    QSharedPointer<Options> m_options = QSharedPointer<Options>::create();
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
     OptionCheckBox* m_pAutoDetectUnicodeA;

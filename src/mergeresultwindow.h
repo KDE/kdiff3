@@ -45,7 +45,7 @@ class MergeResultWindow: public QWidget
   public:
     static QScrollBar* mVScrollBar;
 
-    MergeResultWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, QStatusBar* pStatusBar);
+    MergeResultWindow(QWidget* pParent, QStatusBar* pStatusBar);
 
     void init(
         const std::shared_ptr<LineDataVector> &pLineDataA, LineRef sizeA,
@@ -164,8 +164,6 @@ class MergeResultWindow: public QWidget
     static QPointer<QAction> chooseAForUnsolvedWhiteSpaceConflicts;
     static QPointer<QAction> chooseBForUnsolvedWhiteSpaceConflicts;
     static QPointer<QAction> chooseCForUnsolvedWhiteSpaceConflicts;
-
-    QSharedPointer<Options> m_pOptions = nullptr;
 
     std::shared_ptr<LineDataVector> m_pldA = nullptr;
     std::shared_ptr<LineDataVector> m_pldB = nullptr;
@@ -303,11 +301,10 @@ class WindowTitleWidget: public QWidget
     QLabel*      m_pLineEndStyleLabel;
     QComboBox*   m_pLineEndStyleSelector;
     QLabel*      m_pEncodingLabel;
-    QComboBox*   m_pEncodingSelector;
-    QSharedPointer<Options> m_pOptions;
+    QComboBox* m_pEncodingSelector;
 
   public:
-    explicit WindowTitleWidget(const QSharedPointer<Options>& pOptions);
+    WindowTitleWidget();
     QTextCodec* getEncoding();
     void setFileName(const QString& fileName);
     QString getFileName();

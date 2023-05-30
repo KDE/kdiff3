@@ -11,6 +11,7 @@
 #include "SourceData.h"
 
 #include <iostream>
+#include <memory>
 #include <stdio.h>
 
 #include <QDirIterator>
@@ -22,7 +23,7 @@
 #define i18n(s) s
 
 bool verbose = false;
-QSharedPointer<Options> m_pOptions;
+std::unique_ptr<Options> gOptions = nullptr;
 ManualDiffHelpList m_manualDiffHelpList;
 
 void printDiffList(const QString caption, const DiffList &diffList)
@@ -119,16 +120,15 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
    // Run the diff.
    if ( m_sd3.isEmpty() )
    {
-      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,e_SrcSelector::A,e_SrcSelector::B,
-               m_pOptions);
+      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
       m_diff3LineList.calcDiff3LineListUsingAB( &m_diffList12);
       m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), IgnoreFlag::none);
    }
    else
    {
-      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,e_SrcSelector::A,e_SrcSelector::B, m_pOptions);
-      m_manualDiffHelpList.runDiff( m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23,e_SrcSelector::B,e_SrcSelector::C, m_pOptions);
-      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13,e_SrcSelector::A,e_SrcSelector::C, m_pOptions);
+      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
+      m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C);
+      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C);
 
       if (verbose)
       {
@@ -147,7 +147,7 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
       m_diff3LineList.calcDiff3LineListTrim(m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
       if (verbose) printDiff3List("after 1st calcDiff3LineListTrim", m_diff3LineList, m_sd1, m_sd2, m_sd3);
 
-      if ( m_pOptions->m_bDiff3AlignBC )
+      if(gOptions->m_bDiff3AlignBC)
       {
          m_diff3LineList.calcDiff3LineListUsingBC( &m_diffList23);
          if (verbose) printDiff3List("after calcDiff3LineListUsingBC", m_diff3LineList, m_sd1, m_sd2, m_sd3);
@@ -254,13 +254,13 @@ bool dataIsConsistent(LineRef line1, QString &line1Text, LineRef line2, QString 
 
 bool runTest(QString file1, QString file2, QString file3, QString expectedResultFile, QString actualResultFile, int maxLength)
 {
-   m_pOptions = QSharedPointer<Options>::create();
+   gOptions = std::make_unique < Options();
    Diff3LineList actualDiff3LineList, expectedDiff3LineList;
    QTextCodec *p_codec = QTextCodec::codecForName("UTF-8");
    QTextStream out(stdout);
 
-   m_pOptions->m_bIgnoreCase = false;
-   m_pOptions->m_bDiff3AlignBC = true;
+   gOptions->m_bIgnoreCase = false;
+   gOptions->m_bDiff3AlignBC = true;
 
    SourceData m_sd1, m_sd2, m_sd3;
 
@@ -274,15 +274,12 @@ bool runTest(QString file1, QString file2, QString file3, QString expectedResult
    }
    out.flush();
 
-   m_sd1.setOptions(m_pOptions);
    m_sd1.setFilename(file1);
    m_sd1.readAndPreprocess(p_codec, false);
 
-   m_sd2.setOptions(m_pOptions);
    m_sd2.setFilename(file2);
    m_sd2.readAndPreprocess(p_codec, false);
 
-   m_sd3.setOptions(m_pOptions);
    m_sd3.setFilename(file3);
    m_sd3.readAndPreprocess(p_codec, false);
 

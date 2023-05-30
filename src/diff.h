@@ -148,7 +148,7 @@ class DiffList: public std::list<Diff>
   public:
     using std::list<Diff>::list;
     void calcDiff(const QString& line1, const QString& line2, const int maxSearchRange);
-    void runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2, const QSharedPointer<Options>& pOptions);
+    void runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, const size_t index2, LineRef size2);
     void verify(const LineRef size1, const LineRef size2);
     void optimize();
 };
@@ -602,8 +602,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
     void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
     void runDiff(const std::shared_ptr<LineDataVector>& p1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, LineRef size2, DiffList& diffList,
-                 e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-                 const QSharedPointer<Options>& pOptions);
+                 e_SrcSelector winIdx1, e_SrcSelector winIdx2);
 };
 
 /** Returns the number of equivalent spaces at position outPos.

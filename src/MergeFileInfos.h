@@ -130,7 +130,7 @@ class MergeFileInfos
     [[nodiscard]] inline bool isEqualAB() const { return m_bEqualAB; }
     [[nodiscard]] inline bool isEqualAC() const { return m_bEqualAC; }
     [[nodiscard]] inline bool isEqualBC() const { return m_bEqualBC; }
-    bool compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const& pOptions, DirectoryMergeWindow* pDMW);
+    bool compareFilesAndCalcAges(QStringList& errors, DirectoryMergeWindow* pDMW);
 
     void updateAge();
 
@@ -179,7 +179,7 @@ class MergeFileInfos
         return age;
     }
 
-    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, const QSharedPointer<const Options>& pOptions);
+    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
     inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
     inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }

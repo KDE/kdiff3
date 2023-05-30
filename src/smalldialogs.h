@@ -15,10 +15,11 @@
 
 #include "Logging.h"
 
+#include <memory>
+
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialog>
-#include <QSharedPointer>
 
 class Options;
 class QLineEdit;
@@ -40,7 +41,7 @@ class OpenDialog: public QDialog
   public:
     OpenDialog( // krazy:exclude=explicit
         KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
-        bool bMerge, const QString& outputName, const QSharedPointer<Options>& pOptions);
+        bool bMerge, const QString& outputName);
 
     [[nodiscard]] const QString getFileA() const { return dialogUi.lineA->currentText(); }
     [[nodiscard]] const QString getFileB() const { return dialogUi.lineB->currentText(); }
@@ -55,7 +56,6 @@ class OpenDialog: public QDialog
     void selectURL(QComboBox* pLine, bool bDir, int i, bool bSave);
 
     void fixCurrentText(QComboBox* pCB);
-    QSharedPointer<Options> m_pOptions;
     bool m_bInputFileNameChanged;
 
     Ui::OpenDialog dialogUi;

@@ -13,18 +13,17 @@
 
 #include "../SourceData.h"
 
+#include <memory>
+
 class SourceDataMoc: public SourceData
 {
   private:
-    QSharedPointer<Options> defualtOptions = QSharedPointer<Options>::create();
+    std::unique_ptr<Options> defualtOptions = std::make_unique<Options>();
 
   public:
-    SourceDataMoc()
-    {
-        setOptions(defualtOptions);
-    }
+    SourceDataMoc() = default;
 
-    [[nodiscard]] const QSharedPointer<Options>& options() { return defualtOptions; }
+    [[nodiscard]] const std::unique_ptr<Options>& options() { return defualtOptions; }
 };
 
 #endif /* SOURCEDATAMOC_H */

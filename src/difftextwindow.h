@@ -50,7 +50,7 @@ class DiffTextWindow: public QWidget
     //Using this as a scoped global
     static QScrollBar* mVScrollBar;
 
-    DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, KDiff3App& app);
+    DiffTextWindow(DiffTextWindowFrame* pParent, e_SrcSelector winIdx, KDiff3App& app);
     ~DiffTextWindow() override;
     void init(
         const QString& fileName,
@@ -175,13 +175,12 @@ class DiffTextWindowFrame: public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
+    DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
 
     void setupConnections(const KDiff3App* app);
-    const QSharedPointer<Options> getOptions() const;
 
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);
@@ -209,7 +208,6 @@ class DiffTextWindowFrame: public QWidget
     QPushButton* m_pBrowseButton;
 
     DiffTextWindow* m_pDiffTextWindow;
-    QSharedPointer<Options> m_pOptions;
     e_SrcSelector m_winIdx;
 
     QSharedPointer<SourceData> mSourceData;
@@ -219,7 +217,7 @@ class EncodingLabel: public QLabel
 {
     Q_OBJECT
   public:
-    EncodingLabel(const QString& text, const QSharedPointer<SourceData>& psd, const QSharedPointer<Options>& pOptions);
+    EncodingLabel(const QString& text, const QSharedPointer<SourceData>& psd);
 
   protected:
     void mouseMoveEvent(QMouseEvent* ev) override;
@@ -235,7 +233,6 @@ class EncodingLabel: public QLabel
     QMenu* m_pContextEncodingMenu;
     QSharedPointer<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
     static const int m_maxRecentEncodings = 5;
-    QSharedPointer<Options> m_pOptions;
 
     void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum) const;
 };

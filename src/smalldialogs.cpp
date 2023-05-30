@@ -37,16 +37,15 @@
 
 OpenDialog::OpenDialog(
     KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
-    bool bMerge, const QString& outputName,  const QSharedPointer<Options> &pOptions)
+    bool bMerge, const QString& outputName)
     : QDialog(pParent)
 {
     dialogUi.setupUi(this);
     setModal(true);
-    m_pOptions = pOptions;
     //Abort if verticalLayout is not the immediate child of the dialog. This interferes with re-sizing.
     assert(dialogUi.virticalLayout->parent() == this);
 
-    dialogUi.lineA->insertItems(0, m_pOptions->getRecentFilesA());
+    dialogUi.lineA->insertItems(0, gOptions->getRecentFilesA());
     dialogUi.lineA->setEditText(n1);
 
     QPushButton* button = dialogUi.fileSelectA;
@@ -56,7 +55,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(dialogUi.lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     dialogUi.lineB->setEditable(true);
-    dialogUi.lineB->insertItems(0, m_pOptions->getRecentFilesB());
+    dialogUi.lineB->insertItems(0, gOptions->getRecentFilesB());
     dialogUi.lineB->setEditText(n2);
 
     dialogUi.lineB->setMinimumWidth(200);
@@ -67,7 +66,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(dialogUi.lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     dialogUi.lineC->setEditable(true);
-    dialogUi.lineC->insertItems(0, m_pOptions->getRecentFilesC());
+    dialogUi.lineC->insertItems(0, gOptions->getRecentFilesC());
     dialogUi.lineC->setEditText(n3);
     dialogUi.lineC->setMinimumWidth(200);
     button = dialogUi.fileSelectC;
@@ -91,7 +90,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
     button->setMenu(m);
 
-    dialogUi.lineOut->insertItems(0, m_pOptions->getRecentOutputFiles());
+    dialogUi.lineOut->insertItems(0, gOptions->getRecentOutputFiles());
     dialogUi.lineOut->setEditText(outputName);
 
     button = dialogUi.selectOutputFile;
@@ -219,22 +218,22 @@ void OpenDialog::accept()
     fixCurrentText(dialogUi.lineA);
     QString s = dialogUi.lineA->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    m_pOptions->getRecentFilesA().addFile(s);
+    gOptions->getRecentFilesA().addFile(s);
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    m_pOptions->getRecentFilesB().addFile(s);
+    gOptions->getRecentFilesB().addFile(s);
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    m_pOptions->getRecentFilesC().addFile(s);
+    gOptions->getRecentFilesC().addFile(s);
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    m_pOptions->getRecentOutputFiles().addFile(s);
+    gOptions->getRecentOutputFiles().addFile(s);
 
     QDialog::accept();
 }

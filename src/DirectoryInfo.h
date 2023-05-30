@@ -42,15 +42,15 @@ class DirectoryInfo
 
     inline bool allowSyncMode() { return !m_dirC.isValid() && !m_dirDest.isValid(); }
 
-    bool listDirA(const QSharedPointer<const Options>& options);
-    bool listDirB(const QSharedPointer<const Options>& options);
-    bool listDirC(const QSharedPointer<const Options>& options);
+    bool listDirA();
+    bool listDirB();
+    bool listDirC();
     DirectoryList& getDirListA() { return m_dirListA; }
     DirectoryList& getDirListB() { return m_dirListB; }
     DirectoryList& getDirListC() { return m_dirListC; }
 
   private:
-    bool listDir(FileAccess& fileAccess, DirectoryList& dirList, const QSharedPointer<const Options>& options);
+    bool listDir(FileAccess& fileAccess, DirectoryList& dirList);
 
     FileAccess m_dirA, m_dirB, m_dirC;
 

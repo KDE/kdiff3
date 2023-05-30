@@ -11,9 +11,9 @@
 #define OVERVIEW_H
 
 #include "LineRef.h"       // for LineRef
-#include "TypeUtils.h"     // for QtNumberType
 
-#include <QSharedPointer>
+#include <memory>
+
 #include <QString>         // for QString
 #include <QPixmap>
 #include <QWidget>
@@ -33,7 +33,7 @@ class Overview : public QWidget
 {
     Q_OBJECT
   public:
-    explicit Overview(const QSharedPointer<Options> &pOptions);
+    Overview();
 
     void init(Diff3LineList* pDiff3LineList);
     void reset();
@@ -51,7 +51,6 @@ class Overview : public QWidget
 
   private:
     const Diff3LineList* m_pDiff3LineList;
-    QSharedPointer<Options> m_pOptions;
     LineRef m_firstLine;
     int m_pageHeight;
     QPixmap m_pixmap;

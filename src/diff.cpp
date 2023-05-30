@@ -33,6 +33,8 @@
 #include <QSharedPointer>
 #include <QTextStream>
 
+extern std::unique_ptr<Options> gOptions;
+
 constexpr bool g_bIgnoreWhiteSpace = true;
 
 QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create();
@@ -579,8 +581,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     return -1;
 }
 
-void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2,
-                    const QSharedPointer<Options> &pOptions)
+void DiffList::runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, const size_t index2, LineRef size2)
 {
     ProgressProxy pp;
     static GnuDiff gnuDiff; // All values are initialized with zeros.
@@ -611,8 +612,8 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
         gnuDiff.bIgnoreWhiteSpace = true;
-        gnuDiff.bIgnoreNumbers = pOptions->m_bIgnoreNumbers;
-        gnuDiff.minimal = pOptions->m_bTryHard;
+        gnuDiff.bIgnoreNumbers = gOptions->m_bIgnoreNumbers;
+        gnuDiff.minimal = gOptions->m_bTryHard;
         gnuDiff.ignore_case = false;
         GnuDiff::change* script = gnuDiff.diff_2_files(&comparisonInput);
 
@@ -688,8 +689,7 @@ void DiffList::verify(const LineRef size1, const LineRef size2)
 }
 
 void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector>& p1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, LineRef size2, DiffList& diffList,
-                                 e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-                                 const QSharedPointer<Options>& pOptions)
+                                 e_SrcSelector winIdx1, e_SrcSelector winIdx2)
 {
     diffList.clear();
     DiffList diffList2;
@@ -704,7 +704,7 @@ void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector>& p1, Line
 
         if(l1end.isValid() && l2end.isValid())
         {
-            diffList2.runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, pOptions);
+            diffList2.runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin);
             diffList.splice(diffList.end(), diffList2);
             l1begin = l1end;
             l2begin = l2end;
@@ -716,14 +716,14 @@ void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector>& p1, Line
             {
                 ++l1end; // point to line after last selected line
                 ++l2end;
-                diffList2.runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, pOptions);
+                diffList2.runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin);
                 diffList.splice(diffList.end(), diffList2);
                 l1begin = l1end;
                 l2begin = l2end;
             }
         }
     }
-    diffList2.runDiff(p1, l1begin, size1 - l1begin, p2, l2begin, size2 - l2begin, pOptions);
+    diffList2.runDiff(p1, l1begin, size1 - l1begin, p2, l2begin, size2 - l2begin);
     diffList.splice(diffList.end(), diffList2);
 }
 

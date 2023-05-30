@@ -19,6 +19,8 @@
 
 #include <boost/signals2.hpp>
 
+#include <memory>
+
 // include files for Qt
 #include <QAction>
 #include <QApplication>
@@ -459,7 +461,6 @@ public Q_SLOTS:
     bool m_bTimerBlock = false; // Synchronization
 
     OptionDialog* m_pOptionDialog = nullptr;
-    QSharedPointer<Options> m_pOptions = nullptr;
     FindDialog* m_pFindDialog = nullptr;
 
     bool m_bFinishMainInit = false;
@@ -481,5 +482,7 @@ public Q_SLOTS:
     */
     std::list<boost::signals2::scoped_connection> connections;
 };
+
+extern std::unique_ptr<Options> gOptions;
 
 #endif // KDIFF3_H

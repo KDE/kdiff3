@@ -27,8 +27,6 @@
 class SourceData
 {
   public:
-    void setOptions(const QSharedPointer<Options> &pOptions);
-
     [[nodiscard]] LineType getSizeLines() const;
     [[nodiscard]] qint64 getSizeBytes() const;
     [[nodiscard]] const char* getBuf() const;
@@ -78,7 +76,6 @@ class SourceData
     QTextCodec* detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec);
     QString m_aliasName;
     FileAccess m_fileAccess;
-    QSharedPointer<Options> m_pOptions;
     QString m_tempInputFileName;
     QTemporaryFile m_tempFile; //Created from clipboard content.
 

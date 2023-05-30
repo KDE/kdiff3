@@ -140,9 +140,6 @@ class DiffTextWindowData
     [[nodiscard]] const QString& getFileName() const { return m_filename; }
 
     [[nodiscard]] const Diff3LineVector* getDiff3LineVector() const { return mDiff3LineVector; }
-
-    [[nodiscard]] const QSharedPointer<Options>& getOptions() const { return m_pOptions; }
-
   private:
     friend DiffTextWindow;
     DiffTextWindow* m_pDiffTextWindow;
@@ -160,7 +157,6 @@ class DiffTextWindowData
     const ManualDiffHelpList* m_pManualDiffHelpList = nullptr;
     QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
 
-    QSharedPointer<Options> m_pOptions;
     QColor m_cThis;
     QColor m_cDiff1;
     QColor m_cDiff2;
@@ -229,7 +225,6 @@ qint32 DiffTextWindow::getLineNumberWidth() const
 }
 
 DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
-                               const QSharedPointer<Options>& pOptions,
                                e_SrcSelector winIdx,
                                KDiff3App& app):
     QWidget(pParent),
@@ -243,7 +238,6 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     setFocusPolicy(Qt::ClickFocus);
     setAcceptDrops(true);
 
-    d->m_pOptions = pOptions;
     init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr);
 
     setMinimumSize(QSize(20, 20));
@@ -252,7 +246,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     d->m_bWordWrap = false;
     d->m_winIdx = winIdx;
 
-    setFont(d->getOptions()->defaultFont());
+    setFont(gOptions->defaultFont());
 }
 
 DiffTextWindow::~DiffTextWindow() = default;
@@ -327,7 +321,7 @@ void DiffTextWindow::reset()
 
 void DiffTextWindow::slotRefresh()
 {
-    setFont(d->getOptions()->defaultFont());
+    setFont(gOptions->defaultFont());
     update();
 }
 
@@ -618,7 +612,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
         int xOffset = d->leftInfoWidth() * fontWidth;
 
-        if((!d->getOptions()->m_bRightToLeftLanguage && e->x() < xOffset) || (d->getOptions()->m_bRightToLeftLanguage && e->x() > width() - xOffset))
+        if((!gOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (gOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
         {
             Q_EMIT setFastSelectorLine(convertLineToDiff3LineIdx(line));
             d->m_selection.reset(); // Disable current d->m_selection
@@ -732,7 +726,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         int deltaY = 0;
         //TODO: Fix after line number area is converted to a QWidget.
         //FIXME: Why are we manually doing Layout adjustments?
-        if(!d->getOptions()->m_bRightToLeftLanguage)
+        if(!gOptions->m_bRightToLeftLanguage)
         {
             if(e->x() < d->leftInfoWidth() * fontWidth) deltaX = -1 - abs(e->x() - d->leftInfoWidth() * fontWidth) / fontWidth;
             if(e->x() > width()) deltaX = +1 + abs(e->x() - width()) / fontWidth;
@@ -842,7 +836,7 @@ void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, QtNumberType&
     int yOffset = -d->m_firstLine * fontHeight;
 
     line = (y - yOffset) / fontHeight;
-    if(line.isValid() && (!d->getOptions()->wordWrapOn() || line < d->m_diff3WrapLineVector.count()))
+    if(line.isValid() && (!gOptions->wordWrapOn() || line < d->m_diff3WrapLineVector.count()))
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
@@ -910,11 +904,11 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 {
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * m_pOptions->m_tabSize);
+    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * gOptions->m_tabSize);
 
-    if(m_pOptions->m_bShowWhiteSpaceCharacters)
+    if(gOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
-    if(m_pOptions->m_bRightToLeftLanguage)
+    if(gOptions->m_bRightToLeftLanguage)
 
     {
         textOption.setAlignment(Qt::AlignRight); // only relevant for multi line text layout
@@ -924,7 +918,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 
     textLayout.setTextOption(textOption);
 
-    if(m_pOptions->m_bShowWhiteSpaceCharacters)
+    if(gOptions->m_bShowWhiteSpaceCharacters)
     {
         // This additional format is only necessary for the tab arrow
         QVector<QTextLayout::FormatRange> formats;
@@ -968,7 +962,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
     }
 
     textLayout.endLayout();
-    if(m_pOptions->m_bRightToLeftLanguage)
+    if(gOptions->m_bRightToLeftLanguage)
         textLayout.setPosition(QPointF(textWidth - textLayout.maximumWidth(), 0));
     else
         textLayout.setPosition(QPointF(xOffset, 0));
@@ -1006,13 +1000,13 @@ void DiffTextWindowData::writeLine(
     int fastSelectorLine2 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1 + m_fastSelectorNofLines) - 1;
 
     bool bFastSelectionRange = (line >= fastSelectorLine1 && line <= fastSelectorLine2);
-    QColor bgColor = m_pOptions->backgroundColor();
-    QColor diffBgColor = m_pOptions->diffBackgroundColor();
+    QColor bgColor = gOptions->backgroundColor();
+    QColor diffBgColor = gOptions->diffBackgroundColor();
 
     if(bFastSelectionRange)
     {
-        bgColor = m_pOptions->getCurrentRangeBgColor();
-        diffBgColor = m_pOptions->getCurrentRangeDiffBgColor();
+        bgColor = gOptions->getCurrentRangeBgColor();
+        diffBgColor = gOptions->getCurrentRangeDiffBgColor();
     }
 
     if(yOffset + fontHeight < invalidRect.top() || invalidRect.bottom() < yOffset - fontHeight)
@@ -1022,7 +1016,7 @@ void DiffTextWindowData::writeLine(
     if(pLineDiff1 != nullptr) changed |= AChanged;
     if(pLineDiff2 != nullptr) changed |= BChanged;
 
-    QColor penColor = m_pOptions->foregroundColor();
+    QColor penColor = gOptions->foregroundColor();
     p.setPen(penColor);
     if(changed == BChanged)
     {
@@ -1075,7 +1069,7 @@ void DiffTextWindowData::writeLine(
 
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
-            penColor = m_pOptions->foregroundColor();
+            penColor = gOptions->foregroundColor();
             ChangeFlags cchanged = charChanged[i] | whatChanged;
 
             if(cchanged == BChanged)
@@ -1091,16 +1085,16 @@ void DiffTextWindowData::writeLine(
                 penColor = m_cDiffBoth;
             }
 
-            if(penColor != m_pOptions->foregroundColor() && whatChanged2 == NoChange && !m_pOptions->m_bShowWhiteSpace)
+            if(penColor != gOptions->foregroundColor() && whatChanged2 == NoChange && !gOptions->m_bShowWhiteSpace)
             {
                 // The user doesn't want to see highlighted white space.
-                penColor = m_pOptions->foregroundColor();
+                penColor = gOptions->foregroundColor();
             }
 
             frh.setBackground(bgColor);
             if(!m_selection.within(line, outPos))
             {
-                if(penColor != m_pOptions->foregroundColor())
+                if(penColor != gOptions->foregroundColor())
                 {
                     frh.setBackground(diffBgColor);
                     // Setting italic font here doesn't work: Changing the font only when drawing is too late
@@ -1127,15 +1121,15 @@ void DiffTextWindowData::writeLine(
         textLayout.draw(&p, QPoint(0, yOffset), frh /*, const QRectF & clip = QRectF() */);
     }
 
-    p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, m_pOptions->backgroundColor());
+    p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, gOptions->backgroundColor());
 
     //TODO: Fix after line number area is converted to a QWidget.
     xOffset = (m_lineNumberWidth + 2) * fontWidth;
     int xLeft = m_lineNumberWidth * fontWidth;
-    p.setPen(m_pOptions->foregroundColor());
+    p.setPen(gOptions->foregroundColor());
     if(pld != nullptr)
     {
-        if(m_pOptions->m_bShowLineNumbers && !bWrapLine)
+        if(gOptions->m_bShowLineNumbers && !bWrapLine)
         {
             QString num = QString::number(srcLineIdx + 1);
             assert(!num.isEmpty());
@@ -1145,14 +1139,14 @@ void DiffTextWindowData::writeLine(
         {
             Qt::PenStyle wrapLinePenStyle = Qt::DotLine;
 
-            p.setPen(QPen(m_pOptions->foregroundColor(), 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
+            p.setPen(QPen(gOptions->foregroundColor(), 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
             p.drawLine(xOffset + 1, yOffset, xOffset + 1, yOffset + fontHeight - 1);
-            p.setPen(QPen(m_pOptions->foregroundColor(), 0, Qt::SolidLine));
+            p.setPen(QPen(gOptions->foregroundColor(), 0, Qt::SolidLine));
         }
     }
-    if(penColor != m_pOptions->foregroundColor() && whatChanged2 == NoChange)
+    if(penColor != gOptions->foregroundColor() && whatChanged2 == NoChange)
     {
-        if(m_pOptions->m_bShowWhiteSpace)
+        if(gOptions->m_bShowWhiteSpace)
         {
             p.setBrushOrigin(0, 0);
             p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, QBrush(penColor, Qt::Dense5Pattern));
@@ -1160,12 +1154,12 @@ void DiffTextWindowData::writeLine(
     }
     else
     {
-        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == m_pOptions->foregroundColor() ? bgColor : penColor);
+        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == gOptions->foregroundColor() ? bgColor : penColor);
     }
 
     if(bFastSelectionRange)
     {
-        p.fillRect(xOffset + fontWidth - 1, yOffset, 3, fontHeight, m_pOptions->foregroundColor());
+        p.fillRect(xOffset + fontWidth - 1, yOffset, 3, fontHeight, gOptions->foregroundColor());
     }
 
     // Check if line needs a manual diff help mark
@@ -1179,7 +1173,7 @@ void DiffTextWindowData::writeLine(
         mdhe.getRangeForUI(m_winIdx, &rangeLine1, &rangeLine2);
         if(rangeLine1.isValid() && rangeLine2.isValid() && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
         {
-            p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, m_pOptions->manualHelpRangeColor());
+            p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, gOptions->manualHelpRangeColor());
             break;
         }
     }
@@ -1194,7 +1188,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     if(d->getDiff3LineVector() == nullptr || (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
     {
         QPainter p(this);
-        p.fillRect(invalidRect, d->getOptions()->backgroundColor());
+        p.fillRect(invalidRect, gOptions->backgroundColor());
         return;
     }
 
@@ -1202,10 +1196,10 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     d->m_selection.bSelectionContainsData = false;
 
     LineRef endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
-    RLPainter p(this, d->getOptions()->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
+    RLPainter p(this, gOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
     p.setFont(font());
-    p.QPainter::fillRect(invalidRect, d->getOptions()->backgroundColor());
+    p.QPainter::fillRect(invalidRect, gOptions->backgroundColor());
 
     d->draw(p, invalidRect, d->m_firstLine, endLine);
     p.end();
@@ -1226,9 +1220,9 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const Line
     int oldFirstLine = d->m_firstLine;
     d->m_firstLine = firstLine;
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
-    d->getOptions()->beginPrint();
+    gOptions->beginPrint();
     d->draw(p, invalidRect, firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
-    d->getOptions()->endPrint();
+    gOptions->endPrint();
     d->m_firstLine = oldFirstLine;
 }
 
@@ -1236,27 +1230,27 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
 {
     if(m_pLineData == nullptr || m_pLineData->empty()) return;
     //TODO: Fix after line number area is converted to a QWidget.
-    m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
+    m_lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
     if(m_winIdx == e_SrcSelector::A)
     {
-        m_cThis = m_pOptions->aColor();
-        m_cDiff1 = m_pOptions->bColor();
-        m_cDiff2 = m_pOptions->cColor();
+        m_cThis = gOptions->aColor();
+        m_cDiff1 = gOptions->bColor();
+        m_cDiff2 = gOptions->cColor();
     }
     else if(m_winIdx == e_SrcSelector::B)
     {
-        m_cThis = m_pOptions->bColor();
-        m_cDiff1 = m_pOptions->cColor();
-        m_cDiff2 = m_pOptions->aColor();
+        m_cThis = gOptions->bColor();
+        m_cDiff1 = gOptions->cColor();
+        m_cDiff2 = gOptions->aColor();
     }
     else if(m_winIdx == e_SrcSelector::C)
     {
-        m_cThis = m_pOptions->cColor();
-        m_cDiff1 = m_pOptions->aColor();
-        m_cDiff2 = m_pOptions->bColor();
+        m_cThis = gOptions->cColor();
+        m_cDiff1 = gOptions->aColor();
+        m_cDiff2 = gOptions->bColor();
     }
-    m_cDiffBoth = m_pOptions->conflictColor(); // Conflict color
+    m_cDiffBoth = gOptions->conflictColor(); // Conflict color
 
     p.setPen(m_cThis);
 
@@ -1519,7 +1513,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
         if(d->m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
         if(d->m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
         if(line.isValid())
-            endPos = (*d->m_pLineData)[line].width(d->getOptions()->m_tabSize);
+            endPos = (*d->m_pLineData)[line].width(gOptions->m_tabSize);
     }
 
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr)
@@ -1656,7 +1650,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
     if(bWordWrap)
     {
         //TODO: Fix after line number area is converted to a QWidget.
-        d->m_lineNumberWidth = d->getOptions()->m_bShowLineNumbers ? getLineNumberWidth() : 0;
+        d->m_lineNumberWidth = gOptions->m_bShowLineNumbers ? getLineNumberWidth() : 0;
 
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
 
@@ -1856,16 +1850,9 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
     }
 }
 
-const QSharedPointer<Options> DiffTextWindowFrame::getOptions() const
-{
-    assert(m_pOptions != nullptr);
-    return m_pOptions;
-}
-
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app):
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app):
     QWidget(pParent)
 {
-    m_pOptions = pOptions;
     m_winIdx = winIdx;
 
     m_pTopLineWidget = new QWidget(this);
@@ -1883,7 +1870,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     chk_connect_a(m_pBrowseButton, &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     chk_connect_a(m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
-    m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx, app);
+    m_pDiffTextWindow = new DiffTextWindow(this, winIdx, app);
     m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(m_pTopLineWidget);
     pVTopLayout->setContentsMargins(2, 2, 2, 2);
@@ -1906,7 +1893,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     pHL2->setContentsMargins(0, 0, 0, 0);
     pHL2->setSpacing(2);
     pHL2->addWidget(m_pTopLine, 0);
-    m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
+    m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd);
     //EncodeLabel::EncodingChanged should be handled asyncroniously.
     chk_connect_q((EncodingLabel*)m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged);
 
@@ -1995,14 +1982,14 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
-        QColor c1 = getOptions()->backgroundColor();
+        QColor c1 = gOptions->backgroundColor();
         QColor c2;
         if(m_winIdx == e_SrcSelector::A)
-            c2 = getOptions()->aColor();
+            c2 = gOptions->aColor();
         else if(m_winIdx == e_SrcSelector::B)
-            c2 = getOptions()->bColor();
+            c2 = gOptions->bColor();
         else if(m_winIdx == e_SrcSelector::C)
-            c2 = getOptions()->cColor();
+            c2 = gOptions->cColor();
 
         QPalette p = m_pTopLineWidget->palette();
         if(e->type() == QEvent::FocusOut)
@@ -2047,10 +2034,9 @@ void DiffTextWindowFrame::slotEncodingChanged(QTextCodec* c)
     mSourceData->setEncoding(c);
 }
 
-EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD, const QSharedPointer<Options>& pOptions):
+EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD):
     QLabel(text)
 {
-    m_pOptions = pOptions;
     m_pSourceData = pSD;
     m_pContextEncodingMenu = nullptr;
     setMouseTracking(true);
@@ -2088,9 +2074,9 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         }
 
         // Adding recent encodings
-        if(m_pOptions != nullptr)
+        if(gOptions != nullptr)
         {
-            const QStringList& recentEncodings = m_pOptions->m_recentEncodings;
+            const QStringList& recentEncodings = gOptions->m_recentEncodings;
             for(const QString& s: recentEncodings)
             {
                 insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
@@ -2143,7 +2129,7 @@ void EncodingLabel::slotSelectEncoding()
         if(pCodec != nullptr)
         {
             QString s(QLatin1String(pCodec->name()));
-            QStringList& recentEncodings = m_pOptions->m_recentEncodings;
+            QStringList& recentEncodings = gOptions->m_recentEncodings;
             if(!recentEncodings.contains(s) && s != "UTF-8" && s != "System")
             {
                 int itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;

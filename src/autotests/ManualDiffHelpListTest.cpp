@@ -1,8 +1,11 @@
+#include "../diff.h"
+#include "../Logging.h"
+#include "../options.h"
+
 #include <QObject>
 #include <QTest>
 
-#include "../diff.h"
-#include "../Logging.h"
+std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 class ManualDiffHelpListTest: public QObject
 {

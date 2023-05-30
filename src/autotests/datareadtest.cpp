@@ -16,6 +16,8 @@
 #include <QTemporaryFile>
 #include <QTest>
 
+std::unique_ptr<Options> gOptions = std::make_unique<Options>();
+
 class DataReadTest: public QObject
 {
     Q_OBJECT;

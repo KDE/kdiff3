@@ -23,6 +23,8 @@
 
 #include <KLocalizedString>
 
+extern std::unique_ptr<Options> gOptions;
+
 MergeFileInfos::MergeFileInfos() = default;
 
 MergeFileInfos::~MergeFileInfos()
@@ -177,7 +179,7 @@ QString MergeFileInfos::fullNameDest() const
         return gDirInfo->destDir().absoluteFilePath() + '/' + subPath();
 }
 
-bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const &pOptions, DirectoryMergeWindow* pDMW)
+bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, DirectoryMergeWindow* pDMW)
 {
     enum class FileIndex
     {
@@ -201,7 +203,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
         dateMap[getFileInfoC()->lastModified()] = FileIndex::c;
     }
 
-    if(pOptions->m_bDmFullAnalysis)
+    if(gOptions->m_bDmFullAnalysis)
     {
         if((existsInA() && isDirA()) || (existsInB() && isDirB()) || (existsInC() && isDirC()))
         {
@@ -220,7 +222,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 "", "", "", &diffStatus());
             int nofNonwhiteConflicts = diffStatus().getNonWhitespaceConflicts();
 
-            if(pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
+            if(gOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
             {
                 m_bEqualAB = existsInA() && existsInB();
                 m_bEqualAC = existsInA() && existsInC();
@@ -250,14 +252,14 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
             if(isDirA())
                 m_bEqualAB = true;
             else
-                m_bEqualAB = fastFileComparison(*getFileInfoA(), *getFileInfoB(), bError, eqStatus, pOptions);
+                m_bEqualAB = fastFileComparison(*getFileInfoA(), *getFileInfoB(), bError, eqStatus);
         }
         if(existsInA() && existsInC())
         {
             if(isDirA())
                 m_bEqualAC = true;
             else
-                m_bEqualAC = fastFileComparison(*getFileInfoA(), *getFileInfoC(), bError, eqStatus, pOptions);
+                m_bEqualAC = fastFileComparison(*getFileInfoA(), *getFileInfoC(), bError, eqStatus);
         }
         if(existsInB() && existsInC())
         {
@@ -265,7 +267,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 m_bEqualBC = true;
             else
             {
-                m_bEqualBC = fastFileComparison(*getFileInfoB(), *getFileInfoC(), bError, eqStatus, pOptions);
+                m_bEqualBC = fastFileComparison(*getFileInfoB(), *getFileInfoC(), bError, eqStatus);
             }
         }
         if(bError)
@@ -376,7 +378,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
 
 bool MergeFileInfos::fastFileComparison(
     FileAccess& fi1, FileAccess& fi2,
-    bool& bError, QString& status, const QSharedPointer<const Options> &pOptions)
+    bool& bError, QString& status)
 {
     ProgressProxy pp;
     bool bEqual = false;
@@ -400,7 +402,7 @@ bool MergeFileInfos::fastFileComparison(
         return false;
     }
 
-    if(!pOptions->m_bDmFollowFileLinks)
+    if(!gOptions->m_bDmFollowFileLinks)
     {
         qCInfo(kdiffMergeFileInfo) << "Have: \'" << fi2.fileName() << "\' , isSymLink = " << fi2.isSymLink();
         /*
@@ -433,7 +435,7 @@ bool MergeFileInfos::fastFileComparison(
         status = i18n("Size. ");
         return bEqual;
     }
-    else if(pOptions->m_bDmTrustSize)
+    else if(gOptions->m_bDmTrustSize)
     {
         qCInfo(kdiffMergeFileInfo) << "Same size. Trusting result.";
 
@@ -442,7 +444,7 @@ bool MergeFileInfos::fastFileComparison(
         return bEqual;
     }
 
-    if(pOptions->m_bDmTrustDate)
+    if(gOptions->m_bDmTrustDate)
     {
         bEqual = (fi1.lastModified() == fi2.lastModified() && fi1.size() == fi2.size());
         bError = false;
@@ -450,7 +452,7 @@ bool MergeFileInfos::fastFileComparison(
         return bEqual;
     }
 
-    if(pOptions->m_bDmTrustDateFallbackToBinary)
+    if(gOptions->m_bDmTrustDateFallbackToBinary)
     {
         bEqual = (fi1.lastModified() == fi2.lastModified() && fi1.size() == fi2.size());
         if(bEqual)

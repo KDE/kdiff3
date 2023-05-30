@@ -9,9 +9,14 @@
 // clang-format on
 
 #include "../diff.h"
+#include "../options.h"
 
-#include <QTest>
+#include <memory>
+
 #include <QObject>
+#include <QTest>
+
+std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 class Diff3LineTest: public QObject
 {

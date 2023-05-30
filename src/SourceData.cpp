@@ -53,6 +53,8 @@ Optimizations: Skip unneeded steps.
 #include <QTextStream>
 #include <QVector>
 
+extern std::unique_ptr<Options> gOptions;
+
 void SourceData::reset()
 {
     mFromClipBoard = false;
@@ -94,11 +96,6 @@ bool SourceData::hasData() const
 bool SourceData::isValid() const
 {
     return isEmpty() || hasData();
-}
-
-void SourceData::setOptions(const QSharedPointer<Options>& pOptions)
-{
-    m_pOptions = pOptions;
 }
 
 QString SourceData::getFilename() const
@@ -399,7 +396,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     if(faIn.exists() && !faIn.isBrokenLink())
     {
         // Run the first preprocessor
-        if(m_pOptions->m_PreProcessorCmd.isEmpty())
+        if(gOptions->m_PreProcessorCmd.isEmpty())
         {
             // No preprocessing: Read the file directly:
             if(!m_normalData.readFile(faIn))
@@ -413,16 +410,16 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             QTemporaryFile tmpInPPFile;
             QString fileNameInPP = fileNameIn1;
 
-            if(pEncoding1 != m_pOptions->m_pEncodingPP)
+            if(pEncoding1 != gOptions->m_pEncodingPP)
             {
                 // Before running the preprocessor convert to the format that the preprocessor expects.
                 FileAccess::createTempFile(tmpInPPFile);
                 fileNameInPP = tmpInPPFile.fileName();
-                pEncoding1 = m_pOptions->m_pEncodingPP;
+                pEncoding1 = gOptions->m_pEncodingPP;
                 convertFileEncoding(fileNameIn1, pEncoding, fileNameInPP, pEncoding1);
             }
 
-            QString ppCmd = m_pOptions->m_PreProcessorCmd;
+            QString ppCmd = gOptions->m_PreProcessorCmd;
             FileAccess::createTempFile(fileOut1);
             fileNameOut1 = fileOut1.fileName();
 
@@ -454,7 +451,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
-                m_pOptions->m_PreProcessorCmd = "";
+                gOptions->m_PreProcessorCmd = "";
 
                 pEncoding1 = m_pEncoding;
             }
@@ -470,22 +467,22 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             return;
 
         // LineMatching Preprocessor
-        if(!m_pOptions->m_LineMatchingPreProcessorCmd.isEmpty())
+        if(!gOptions->m_LineMatchingPreProcessorCmd.isEmpty())
         {
             QTemporaryFile tempOut2, fileInPP;
             fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
             QString fileNameInPP = fileNameIn2;
             pEncoding2 = pEncoding1;
-            if(pEncoding2 != m_pOptions->m_pEncodingPP)
+            if(pEncoding2 != gOptions->m_pEncodingPP)
             {
                 // Before running the preprocessor convert to the format that the preprocessor expects.
                 FileAccess::createTempFile(fileInPP);
                 fileNameInPP = fileInPP.fileName();
-                pEncoding2 = m_pOptions->m_pEncodingPP;
+                pEncoding2 = gOptions->m_pEncodingPP;
                 convertFileEncoding(fileNameIn2, pEncoding1, fileNameInPP, pEncoding2);
             }
 
-            QString ppCmd = m_pOptions->m_LineMatchingPreProcessorCmd;
+            QString ppCmd = gOptions->m_LineMatchingPreProcessorCmd;
             FileAccess::createTempFile(tempOut2);
             fileNameOut2 = tempOut2.fileName();
             QProcess ppProcess;
@@ -509,7 +506,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
                     i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe line-matching-preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
-                m_pOptions->m_LineMatchingPreProcessorCmd = "";
+                gOptions->m_LineMatchingPreProcessorCmd = "";
                 if(!m_lmppData.readFile(fileNameIn2))
                 {
                     mErrors.append(i18nc("Read error message. %1 = filepath", "Failed to read file: %1", fileNameIn2));
@@ -517,7 +514,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
                 }
             }
         }
-        else if(m_pOptions->ignoreComments() || m_pOptions->m_bIgnoreCase)
+        else if(gOptions->ignoreComments() || gOptions->m_bIgnoreCase)
         {
             // We need a copy of the normal data.
             m_lmppData.copyBufFrom(m_normalData);
@@ -549,7 +546,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     }
 
     // Ignore comments
-    if(m_pOptions->ignoreComments() && hasData())
+    if(gOptions->ignoreComments() && hasData())
     {
         qint64 vSize = std::min(m_normalData.lineCount(), m_lmppData.lineCount());
         assert(vSize < limits<qint32>::max());

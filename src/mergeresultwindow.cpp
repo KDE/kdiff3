@@ -70,9 +70,8 @@ QPointer<QAction> MergeResultWindow::chooseCForUnsolvedWhiteSpaceConflicts;
 
 MergeResultWindow::MergeResultWindow(
     QWidget* pParent,
-    const QSharedPointer<Options>& pOptions,
-    QStatusBar* pStatusBar)
-    : QWidget(pParent)
+    QStatusBar* pStatusBar):
+    QWidget(pParent)
 {
     setObjectName("MergeResultWindow");
     setFocusPolicy(Qt::ClickFocus);
@@ -83,7 +82,6 @@ MergeResultWindow::MergeResultWindow(
     if(m_pStatusBar != nullptr)
         chk_connect_a(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
 
-    m_pOptions = pOptions;
     setUpdatesEnabled(false);
 
     chk_connect_a(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
@@ -92,7 +90,7 @@ MergeResultWindow::MergeResultWindow(
     m_selection.reset();
 
     setMinimumSize(QSize(20, 20));
-    setFont(m_pOptions->defaultFont());
+    setFont(gOptions->defaultFont());
 }
 
 void MergeResultWindow::init(
@@ -267,7 +265,7 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
 
 void MergeResultWindow::slotRefresh()
 {
-    setFont(m_pOptions->defaultFont());
+    setFont(gOptions->defaultFont());
     update();
 }
 
@@ -338,17 +336,17 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     bool bSolveWhiteSpaceConflicts = false;
     if(bAutoSolve) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
     {
-        if(!lIsThreeWay && m_pOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
+        if(!lIsThreeWay && gOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
         {
-            assert(m_pOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
-            defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace2FileMergeDefault;
+            assert(gOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && gOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
+            defaultSelector = (e_SrcSelector)gOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
-        else if(lIsThreeWay && m_pOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
+        else if(lIsThreeWay && gOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
         {
-            assert(m_pOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
-            defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace3FileMergeDefault;
+            assert(gOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && gOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
+            defaultSelector = (e_SrcSelector)gOptions->m_whiteSpace3FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
@@ -369,9 +367,9 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
     if(bAutoSolve && !bConflictsOnly)
     {
-        if(m_pOptions->m_bRunHistoryAutoMergeOnMergeStart)
+        if(gOptions->m_bRunHistoryAutoMergeOnMergeStart)
             slotMergeHistory();
-        if(m_pOptions->m_bRunRegExpAutoMergeOnMergeStart)
+        if(gOptions->m_bRunRegExpAutoMergeOnMergeStart)
             slotRegExpAutoMerge();
         if(m_pldC != nullptr && !doRelevantChangesExist())
             Q_EMIT noRelevantChangesDetected();
@@ -508,7 +506,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
 {
     assert(eDir == eUp || eDir == eDown);
     MergeBlockListImp::iterator i = m_currentMergeBlockIt;
-    bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
+    bool bSkipWhiteConflicts = !gOptions->m_bShowWhiteSpace;
     if(eEndPoint == eEnd)
     {
         if(eDir == eUp)
@@ -563,7 +561,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
 
 bool MergeResultWindow::isDeltaAboveCurrent() const
 {
-    bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
+    bool bSkipWhiteConflicts = !gOptions->m_bShowWhiteSpace;
     if(m_mergeBlockList.list().empty()) return false;
     MergeBlockListImp::const_iterator i = m_currentMergeBlockIt;
     if(i == m_mergeBlockList.list().begin()) return false;
@@ -578,7 +576,7 @@ bool MergeResultWindow::isDeltaAboveCurrent() const
 
 bool MergeResultWindow::isDeltaBelowCurrent() const
 {
-    const bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
+    const bool bSkipWhiteConflicts = !gOptions->m_bShowWhiteSpace;
     if(m_mergeBlockList.list().empty()) return false;
 
     MergeBlockListImp::const_iterator i = m_currentMergeBlockIt;
@@ -599,7 +597,7 @@ bool MergeResultWindow::isConflictAboveCurrent() const
     MergeBlockListImp::const_iterator i = m_currentMergeBlockIt;
     if(i == m_mergeBlockList.list().cbegin()) return false;
 
-    bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
+    bool bSkipWhiteConflicts = !gOptions->m_bShowWhiteSpace;
 
     do
     {
@@ -615,7 +613,7 @@ bool MergeResultWindow::isConflictBelowCurrent() const
     MergeBlockListImp::const_iterator i = m_currentMergeBlockIt;
     if(m_mergeBlockList.list().empty()) return false;
 
-    bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
+    bool bSkipWhiteConflicts = !gOptions->m_bShowWhiteSpace;
 
     if(i != m_mergeBlockList.list().cend())
     {
@@ -751,7 +749,7 @@ int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflict
 
 void MergeResultWindow::showNumberOfConflicts(bool showIfNone)
 {
-    if(!m_pOptions->m_bShowInfoDialogs)
+    if(!gOptions->m_bShowInfoDialogs)
         return;
     int nrOfConflicts = 0;
     int nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
@@ -1039,19 +1037,19 @@ void MergeResultWindow::collectHistoryInformation(
 
     historyLead = Utils::calcHistoryLead(id3l->getLineData(src).getLine());
 
-    QRegularExpression historyStart(m_pOptions->m_historyStartRegExp);
+    QRegularExpression historyStart(gOptions->m_historyStartRegExp);
     if(id3l == historyRange.end)
         return;
     //TODO: Where is this assumption coming from?
     ++id3l; // Skip line with "$Log ... $"
-    QRegularExpression newHistoryEntry(m_pOptions->m_historyEntryStartRegExp);
+    QRegularExpression newHistoryEntry(gOptions->m_historyEntryStartRegExp);
     QRegularExpressionMatch match;
     QStringList parenthesesGroups;
-    findParenthesesGroups(m_pOptions->m_historyEntryStartRegExp, parenthesesGroups);
+    findParenthesesGroups(gOptions->m_historyEntryStartRegExp, parenthesesGroups);
     QString key;
     MergeEditLineList melList;
     bool bPrevLineIsEmpty = true;
-    bool bUseRegExp = !m_pOptions->m_historyEntryStartRegExp.isEmpty();
+    bool bUseRegExp = !gOptions->m_historyEntryStartRegExp.isEmpty();
 
     for(; id3l != historyRange.end; ++id3l)
     {
@@ -1079,7 +1077,7 @@ void MergeResultWindow::collectHistoryInformation(
             if(!bUseRegExp)
                 key = sLine;
             else
-                key = calcHistorySortKey(m_pOptions->m_historyEntryStartSortKeyOrder, match, parenthesesGroups);
+                key = calcHistorySortKey(gOptions->m_historyEntryStartSortKeyOrder, match, parenthesesGroups);
 
             melList.clear();
             melList.push_back(MergeEditLine(id3l, src));
@@ -1161,7 +1159,7 @@ void MergeResultWindow::slotMergeHistory()
     HistoryRange        historyRange;
 
     // Search for history start, history end in the diff3LineList
-    m_pDiff3LineList->findHistoryRange(QRegularExpression(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, historyRange);
+    m_pDiff3LineList->findHistoryRange(QRegularExpression(gOptions->m_historyStartRegExp), m_pldC != nullptr, historyRange);
     if(historyRange.start != m_pDiff3LineList->end())
     {
         // Now collect the historyMap information
@@ -1181,10 +1179,10 @@ void MergeResultWindow::slotMergeHistory()
 
         Diff3LineList::const_iterator iD3LHistoryOrigEnd = historyRange.end;
 
-        bool bHistoryMergeSorting = m_pOptions->m_bHistoryMergeSorting && !m_pOptions->m_historyEntryStartSortKeyOrder.isEmpty() &&
-                                    !m_pOptions->m_historyEntryStartRegExp.isEmpty();
+        bool bHistoryMergeSorting = gOptions->m_bHistoryMergeSorting && !gOptions->m_historyEntryStartSortKeyOrder.isEmpty() &&
+                                    !gOptions->m_historyEntryStartRegExp.isEmpty();
 
-        if(m_pOptions->m_maxNofHistoryEntries == -1)
+        if(gOptions->m_maxNofHistoryEntries == -1)
         {
             // Remove parts from the historyMap and hitList that stay in place
             if(bHistoryMergeSorting)
@@ -1244,7 +1242,7 @@ void MergeResultWindow::slotMergeHistory()
             HistoryMap::reverse_iterator hmit;
             for(hmit = historyMap.rbegin(); hmit != historyMap.rend(); ++hmit)
             {
-                if(historyCount == m_pOptions->m_maxNofHistoryEntries)
+                if(historyCount == gOptions->m_maxNofHistoryEntries)
                     break;
                 ++historyCount;
                 HistoryMapEntry& hme = hmit->second;
@@ -1259,7 +1257,7 @@ void MergeResultWindow::slotMergeHistory()
             std::list<HistoryMap::iterator>::const_iterator hlit;
             for(hlit = hitList.begin(); hlit != hitList.end(); ++hlit)
             {
-                if(historyCount == m_pOptions->m_maxNofHistoryEntries)
+                if(historyCount == gOptions->m_maxNofHistoryEntries)
                     break;
                 ++historyCount;
                 HistoryMapEntry& hme = (*hlit)->second;
@@ -1283,10 +1281,10 @@ void MergeResultWindow::slotMergeHistory()
 
 void MergeResultWindow::slotRegExpAutoMerge()
 {
-    if(m_pOptions->m_autoMergeRegExp.isEmpty())
+    if(gOptions->m_autoMergeRegExp.isEmpty())
         return;
 
-    QRegularExpression vcsKeywords(m_pOptions->m_autoMergeRegExp);
+    QRegularExpression vcsKeywords(gOptions->m_autoMergeRegExp);
     MergeBlockListImp::iterator i;
     for(i = m_mergeBlockList.list().begin(); i != m_mergeBlockList.list().end(); ++i)
     {
@@ -1410,15 +1408,15 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     // tabs
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(font()).horizontalAdvance(' ') * m_pOptions->m_tabSize);
+    textOption.setTabStopDistance(QFontMetricsF(font()).horizontalAdvance(' ') * gOptions->m_tabSize);
 
-    if(m_pOptions->m_bShowWhiteSpaceCharacters)
+    if(gOptions->m_bShowWhiteSpaceCharacters)
     {
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
     }
     textLayout.setTextOption(textOption);
 
-    if(m_pOptions->m_bShowWhiteSpaceCharacters)
+    if(gOptions->m_bShowWhiteSpaceCharacters)
     {
         // This additional format is only necessary for the tab arrow
         QVector<QTextLayout::FormatRange> formats;
@@ -1452,7 +1450,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     textLine.setPosition(QPointF(0, fontMetrics().leading()));
     textLayout.endLayout();
     int cursorWidth = 5;
-    if(m_pOptions->m_bRightToLeftLanguage)
+    if(gOptions->m_bRightToLeftLanguage)
         textLayout.setPosition(QPointF(width() - textLayout.maximumWidth() - getTextXOffset() + m_horizScrollOffset - cursorWidth, 0));
     else
         textLayout.setPosition(QPointF(getTextXOffset() - m_horizScrollOffset, 0));
@@ -1488,17 +1486,17 @@ void MergeResultWindow::writeLine(
 
     if(rangeMark & 4)
     {
-        p.fillRect(xOffset, yOffset, width(), fontHeight, m_pOptions->getCurrentRangeBgColor());
+        p.fillRect(xOffset, yOffset, width(), fontHeight, gOptions->getCurrentRangeBgColor());
     }
 
     if((srcSelect > e_SrcSelector::None || bUserModified) && !bLineRemoved)
     {
-        if(!m_pOptions->m_bRightToLeftLanguage)
+        if(!gOptions->m_bRightToLeftLanguage)
             p.setClipRect(QRectF(xOffset, 0, width() - xOffset, height()));
         else
             p.setClipRect(QRectF(0, 0, width() - xOffset, height()));
 
-        p.setPen(m_pOptions->foregroundColor());
+        p.setPen(gOptions->foregroundColor());
 
         QTextLayout textLayout(str, font(), this);
         QVector<QTextLayout::FormatRange> selectionFormat = getTextLayoutForLine(line, str, textLayout);
@@ -1507,26 +1505,26 @@ void MergeResultWindow::writeLine(
         if(line == m_cursorYPos)
         {
             m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(m_cursorXPos));
-            if(m_pOptions->m_bRightToLeftLanguage)
+            if(gOptions->m_bRightToLeftLanguage)
                 m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         }
 
         p.setClipping(false);
 
-        p.setPen(m_pOptions->foregroundColor());
+        p.setPen(gOptions->foregroundColor());
 
         p.drawText(1, yOffset + fontAscent, srcName, true);
     }
     else if(bLineRemoved)
     {
-        p.setPen(m_pOptions->conflictColor());
+        p.setPen(gOptions->conflictColor());
         p.drawText(xOffset, yOffset + fontAscent, i18n("<No src line>"));
         p.drawText(1, yOffset + fontAscent, srcName);
         if(m_cursorYPos == line) m_cursorXPos = 0;
     }
     else if(srcSelect == e_SrcSelector::None)
     {
-        p.setPen(m_pOptions->conflictColor());
+        p.setPen(gOptions->conflictColor());
         if(bWhiteSpaceConflict)
             p.drawText(xOffset, yOffset + fontAscent, i18n("<Merge Conflict (Whitespace only)>"));
         else
@@ -1538,7 +1536,7 @@ void MergeResultWindow::writeLine(
         assert(false);
 
     xOffset -= Utils::getHorizontalAdvance(fm, '0');
-    p.setPen(m_pOptions->foregroundColor());
+    p.setPen(gOptions->foregroundColor());
     if(rangeMark & 1) // begin mark
     {
         p.drawLine(xOffset, yOffset + 1, xOffset, yOffset + fontHeight / 2);
@@ -1561,7 +1559,7 @@ void MergeResultWindow::writeLine(
 
     if(rangeMark & 4)
     {
-        p.fillRect(xOffset + 3, yOffset, 3, fontHeight, m_pOptions->foregroundColor());
+        p.fillRect(xOffset + 3, yOffset, 3, fontHeight, gOptions->foregroundColor());
         /*      p.setPen( blue );
       p.drawLine( xOffset+2, yOffset, xOffset+2, yOffset+fontHeight-1 );
       p.drawLine( xOffset+3, yOffset, xOffset+3, yOffset+fontHeight-1 );*/
@@ -1599,9 +1597,9 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
             m_pixmap.setDevicePixelRatio(dpr);
         }
 
-        RLPainter p(&m_pixmap, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
+        RLPainter p(&m_pixmap, gOptions->m_bRightToLeftLanguage, width(), fontWidth);
         p.setFont(font());
-        p.QPainter::fillRect(rect(), m_pOptions->backgroundColor());
+        p.QPainter::fillRect(rect(), gOptions->backgroundColor());
 
         //int visibleLines = height() / fontHeight;
 
@@ -1664,7 +1662,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
     if(m_bCursorOn && hasFocus() && m_cursorYPos >= m_firstLine)
     {
-        painter.setPen(m_pOptions->foregroundColor());
+        painter.setPen(gOptions->foregroundColor());
 
         QString str = getString(m_cursorYPos);
         QTextLayout textLayout(str, font(), this);
@@ -1792,7 +1790,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         }
         m_cursorXPos = pos;
         m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(pos));
-        if(m_pOptions->m_bRightToLeftLanguage)
+        if(gOptions->m_bRightToLeftLanguage)
             m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         m_cursorOldXPixelPos = m_cursorXPixelPos;
         m_cursorYPos = line;
@@ -1881,7 +1879,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
         constexpr int topLineYOffset = 0;
         int deltaX = 0;
         int deltaY = 0;
-        if(!m_pOptions->m_bRightToLeftLanguage)
+        if(!gOptions->m_bRightToLeftLanguage)
         {
             if(e->x() < getTextXOffset()) deltaX = -1;
             if(e->x() > width()) deltaX = +1;
@@ -2062,7 +2060,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             deleteSelection2(str, x, y, mbIt, melIt);
             setModified();
             QString indentation;
-            if(m_pOptions->m_bAutoIndentation)
+            if(gOptions->m_bAutoIndentation)
             { // calc last indentation
                 MergeBlockListImp::iterator mbIt1 = mbIt;
                 MergeEditLineList::iterator melIt1 = melIt;
@@ -2130,7 +2128,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
 
         case Qt::Key_Left:
         case Qt::Key_Right:
-            if((keyEvent->key() == Qt::Key_Left) != m_pOptions->m_bRightToLeftLanguage)
+            if((keyEvent->key() == Qt::Key_Left) != gOptions->m_bRightToLeftLanguage)
             {
                 if(!bCtrl)
                 {
@@ -2235,9 +2233,9 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             setModified();
             // Characters to insert
             QString s = str;
-            if(t[0] == '\t' && m_pOptions->m_bReplaceTabs)
+            if(t[0] == '\t' && gOptions->m_bReplaceTabs)
             {
-                int spaces = (m_cursorXPos / m_pOptions->m_tabSize + 1) * m_pOptions->m_tabSize - m_cursorXPos;
+                int spaces = (m_cursorXPos / gOptions->m_tabSize + 1) * gOptions->m_tabSize - m_cursorXPos;
                 t.fill(' ', spaces);
             }
             if(m_bInsertMode)
@@ -2272,7 +2270,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
     // try to preserve cursor x pixel position when moving to another line
     if(bYMoveKey)
     {
-        if(m_pOptions->m_bRightToLeftLanguage)
+        if(gOptions->m_bRightToLeftLanguage)
             x = textLayout.lineAt(0).xToCursor(m_cursorOldXPixelPos - (textLayout.position().x() - m_horizScrollOffset));
         else
             x = textLayout.lineAt(0).xToCursor(m_cursorOldXPixelPos);
@@ -2280,7 +2278,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
 
     m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(x));
     int hF = 1; // horizontal factor
-    if(m_pOptions->m_bRightToLeftLanguage)
+    if(gOptions->m_bRightToLeftLanguage)
     {
         m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         hF = -1;
@@ -2387,7 +2385,7 @@ QString MergeResultWindow::getSelection() const
                         int spaces = 1;
                         if(str[i] == '\t')
                         {
-                            spaces = tabber(outPos, m_pOptions->m_tabSize);
+                            spaces = tabber(outPos, gOptions->m_tabSize);
                         }
 
                         if(m_selection.within(line, outPos))
@@ -2638,7 +2636,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     update();
 
     FileAccess file(fileName, true /*bWantToWrite*/);
-    if(m_pOptions->m_bDmCreateBakFiles && file.exists())
+    if(gOptions->m_bDmCreateBakFiles && file.exists())
     {
         bool bSuccess = file.createBackup(".orig");
         if(!bSuccess)
@@ -2752,9 +2750,8 @@ void MergeResultWindow::scrollVertically(QtNumberType deltaY)
     mVScrollBar->setValue(mVScrollBar->value()  + deltaY);
 }
 
-WindowTitleWidget::WindowTitleWidget(const QSharedPointer<Options>& pOptions)
+WindowTitleWidget::WindowTitleWidget()
 {
-    m_pOptions = pOptions;
     setAutoFillBackground(true);
 
     QHBoxLayout* pHLayout = new QHBoxLayout(this);
@@ -2837,9 +2834,9 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
     m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : u8" (" + unxUsers + u8")"));
     m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : u8" (" + dosUsers + u8")"));
 
-    e_LineEndStyle autoChoice = (e_LineEndStyle)m_pOptions->m_lineEndStyle;
+    e_LineEndStyle autoChoice = (e_LineEndStyle)gOptions->m_lineEndStyle;
 
-    if(m_pOptions->m_lineEndStyle == eLineEndStyleAutoDetect)
+    if(gOptions->m_lineEndStyle == eLineEndStyleAutoDetect)
     {
         if(eLineEndStyleA != eLineEndStyleUndefined && eLineEndStyleB != eLineEndStyleUndefined && eLineEndStyleC != eLineEndStyleUndefined)
         {
@@ -2974,10 +2971,10 @@ bool WindowTitleWidget::eventFilter(QObject* o, QEvent* e)
     {
         QPalette p = m_pLabel->palette();
 
-        QColor c1 = m_pOptions->foregroundColor();
+        QColor c1 = gOptions->foregroundColor();
         QColor c2 = Qt::lightGray;
         if(e->type() == QEvent::FocusOut)
-            c2 = m_pOptions->backgroundColor();
+            c2 = gOptions->backgroundColor();
 
         p.setColor(QPalette::Window, c2);
         setPalette(p);

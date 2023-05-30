@@ -36,7 +36,7 @@ class DirectoryMergeWindow : public QTreeView
  public:
    struct ItemInfo;
 
-   DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App &app);
+   DirectoryMergeWindow(QWidget* pParent, KDiff3App& app);
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
@@ -126,7 +126,6 @@ private:
   class DirectoryMergeWindowPrivate;
   class DirMergeItemDelegate;
   [[nodiscard]] int getIntFromIndex(const QModelIndex& index) const;
-  [[nodiscard]] const QSharedPointer<Options>& getOptions() const;
 
   std::unique_ptr<DirectoryMergeWindowPrivate> d;
 };

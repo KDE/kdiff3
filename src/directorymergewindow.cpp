@@ -304,7 +304,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
 
   public:
     DirectoryMergeWindow* mWindow;
-    QSharedPointer<Options> m_pOptions = nullptr;
     KDiff3App& m_app;
 
     bool m_bFollowDirLinks = false;
@@ -556,17 +555,11 @@ int DirectoryMergeWindow::getIntFromIndex(const QModelIndex& index) const
     return index == d->m_selection1Index ? 1 : index == d->m_selection2Index ? 2 : index == d->m_selection3Index ? 3 : 0;
 }
 
-const QSharedPointer<Options>& DirectoryMergeWindow::getOptions() const
-{
-    return d->m_pOptions;
-}
-
 // Previously  Q3ListViewItem::paintCell(p,cg,column,width,align);
 class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
 {
   private:
     DirectoryMergeWindow* m_pDMW;
-    [[nodiscard]] const QSharedPointer<Options>& getOptions() const { return m_pDMW->getOptions(); }
 
   public:
     explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent):
@@ -610,8 +603,8 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
                 int i = m_pDMW->getIntFromIndex(index);
                 if(i != 0)
                 {
-                    QColor c(i == 1 ? getOptions()->aColor() : i == 2 ? getOptions()->bColor() :
-                                                                        getOptions()->cColor());
+                    QColor c(i == 1 ? gOptions->aColor() : i == 2 ? gOptions->bColor() :
+                                                                    gOptions->cColor());
                     thePainter->setPen(c); // highlight() );
                     thePainter->drawRect(x + 2, y + yOffset, w, h);
                     thePainter->setPen(QPen(c, 0, Qt::DotLine));
@@ -646,7 +639,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App& app):
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, KDiff3App& app):
     QTreeView(pParent)
 {
     d = std::make_unique<DirectoryMergeWindowPrivate>(this, app);
@@ -654,8 +647,6 @@ DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointe
     setItemDelegate(new DirMergeItemDelegate(this));
     chk_connect_a(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
     chk_connect_a(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
-
-    d->m_pOptions = pOptions;
 
     setSortingEnabled(true);
 }
@@ -776,7 +767,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bDirectoryMerge,
     bool bReload)
 {
-    if(m_pOptions->m_bDmFullAnalysis)
+    if(gOptions->m_bDmFullAnalysis)
     {
         QStringList errors;
         // A full analysis uses the same resources that a normal text-diff/merge uses.
@@ -808,8 +799,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     ProgressProxy pp;
-    m_bFollowDirLinks = m_pOptions->m_bDmFollowDirLinks;
-    m_bFollowFileLinks = m_pOptions->m_bDmFollowFileLinks;
+    m_bFollowDirLinks = gOptions->m_bDmFollowDirLinks;
+    m_bFollowFileLinks = gOptions->m_bDmFollowFileLinks;
     m_bSimulatedMergeStarted = false;
     m_bRealMergeStarted = false;
     m_bError = false;
@@ -817,9 +808,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     m_selection1Index = QModelIndex();
     m_selection2Index = QModelIndex();
     m_selection3Index = QModelIndex();
-    m_bCaseSensitive = m_pOptions->m_bDmCaseSensitiveFilenameComparison;
-    m_bUnfoldSubdirs = m_pOptions->m_bDmUnfoldSubdirs;
-    m_bSkipDirStatus = m_pOptions->m_bDmSkipDirStatus;
+    m_bCaseSensitive = gOptions->m_bDmCaseSensitiveFilenameComparison;
+    m_bUnfoldSubdirs = gOptions->m_bDmUnfoldSubdirs;
+    m_bSkipDirStatus = gOptions->m_bDmSkipDirStatus;
 
     beginResetModel();
     m_pRoot->clear();
@@ -880,7 +871,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     m_bScanning = true;
     Q_EMIT mWindow->statusBarMessage(i18n("Scanning folders..."));
 
-    m_bSyncMode = m_pOptions->m_bDmSyncMode && gDirInfo->allowSyncMode();
+    m_bSyncMode = gOptions->m_bDmSyncMode && gDirInfo->allowSyncMode();
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
@@ -893,10 +884,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     //   setColumnWidthMode(s_WhiteCol,    Q3ListView::Manual);
     //   setColumnWidthMode(s_NonWhiteCol, Q3ListView::Manual);
     mWindow->setColumnHidden(s_CCol, !dirC.isValid());
-    mWindow->setColumnHidden(s_WhiteCol, !m_pOptions->m_bDmFullAnalysis);
-    mWindow->setColumnHidden(s_NonWhiteCol, !m_pOptions->m_bDmFullAnalysis);
-    mWindow->setColumnHidden(s_UnsolvedCol, !m_pOptions->m_bDmFullAnalysis);
-    mWindow->setColumnHidden(s_SolvedCol, !(m_pOptions->m_bDmFullAnalysis && dirC.isValid()));
+    mWindow->setColumnHidden(s_WhiteCol, !gOptions->m_bDmFullAnalysis);
+    mWindow->setColumnHidden(s_NonWhiteCol, !gOptions->m_bDmFullAnalysis);
+    mWindow->setColumnHidden(s_UnsolvedCol, !gOptions->m_bDmFullAnalysis);
+    mWindow->setColumnHidden(s_SolvedCol, !(gOptions->m_bDmFullAnalysis && dirC.isValid()));
 
     bool bListDirSuccessA = true;
     bool bListDirSuccessB = true;
@@ -908,7 +899,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessA = gDirInfo->listDirA(m_pOptions);
+        bListDirSuccessA = gDirInfo->listDirA();
     }
 
     if(dirB.isValid())
@@ -917,7 +908,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessB = gDirInfo->listDirB(m_pOptions);
+        bListDirSuccessB = gDirInfo->listDirB();
     }
 
     e_MergeOperation eDefaultMergeOp;
@@ -927,7 +918,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessC = gDirInfo->listDirC(m_pOptions);
+        bListDirSuccessC = gDirInfo->listDirC();
 
         eDefaultMergeOp = eMergeABCToDest;
     }
@@ -1319,8 +1310,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 {
     QStringList errors;
     //TODO   clear();
-    PixMapUtils::initPixmaps(m_pOptions->newestFileColor(), m_pOptions->oldestFileColor(),
-                             m_pOptions->midAgeFileColor(), m_pOptions->missingFileColor());
+    PixMapUtils::initPixmaps(gOptions->newestFileColor(), gOptions->oldestFileColor(),
+                             gOptions->midAgeFileColor(), gOptions->missingFileColor());
 
     mWindow->setRootIsDecorated(true);
 
@@ -1340,7 +1331,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         ++currentIdx;
 
         // The comparisons and calculations for each file take place here.
-        if(!mfi.compareFilesAndCalcAges(errors, m_pOptions, mWindow) && errors.size() >= 30)
+        if(!mfi.compareFilesAndCalcAges(errors, mWindow) && errors.size() >= 30)
             break;
 
         // Get dirname from fileName: Search for "/" from end:
@@ -1402,7 +1393,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
         return;
 
     bool bCheckC = pMFI->isThreeWay();
-    bool bCopyNewer = m_pOptions->m_bDmCopyNewer;
+    bool bCopyNewer = gOptions->m_bDmCopyNewer;
     bool bOtherDest = !((gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirA().absoluteFilePath()) ||
                         (gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirB().absoluteFilePath()) ||
                         (bCheckC && gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirC().absoluteFilePath()));
@@ -2019,7 +2010,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(const MergeFileInfos& mfi, bool& bSingleFileMerge)
 {
-    bool bCreateBackups = m_pOptions->m_bDmCreateBakFiles;
+    bool bCreateBackups = gOptions->m_bDmCreateBakFiles;
     // First decide destname
     QString destName;
     switch(mfi.getOperation())
@@ -2548,7 +2539,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& s
     FileAccess faDest(destName, true);
     if(faDest.exists() && !(fi.isDir() && faDest.isDir() && (fi.isSymLink() == faDest.isSymLink())))
     {
-        bSuccess = deleteFLD(destName, m_pOptions->m_bDmCreateBakFiles);
+        bSuccess = deleteFLD(destName, gOptions->m_bDmCreateBakFiles);
         if(!bSuccess)
         {
             m_pStatusInfo->addText(i18n("Error: copy( %1 -> %2 ) failed."
@@ -2908,7 +2899,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                 (bShowOnlyInA && pMFI->onlyInA()) || (bShowOnlyInB && pMFI->onlyInB()) || (bShowOnlyInC && pMFI->onlyInC());
 
             QString fileName = pMFI->fileName();
-            bVisible = bVisible && ((bDir && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (Utils::wildcardMultiMatch(d->m_pOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
+            bVisible = bVisible && ((bDir && !Utils::wildcardMultiMatch(gOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (Utils::wildcardMultiMatch(gOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !Utils::wildcardMultiMatch(gOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
 
             if(loop != 0)
                 setRowHidden(mi.row(), mi.parent(), !bVisible);
@@ -2925,7 +2916,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
 
 void DirectoryMergeWindow::slotShowIdenticalFiles()
 {
-    d->m_pOptions->m_bDmShowIdenticalFiles = d->m_pDirShowIdenticalFiles->isChecked();
+    gOptions->m_bDmShowIdenticalFiles = d->m_pDirShowIdenticalFiles->isChecked();
     updateFileVisibilities();
 }
 void DirectoryMergeWindow::slotShowDifferentFiles()
@@ -2980,7 +2971,7 @@ void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KAct
     d->m_pDirShowFilesOnlyInB = GuiUtils::createAction<KToggleAction>(i18n("Show Files only in B"), QIcon(QPixmap(showfilesonlyinb)), i18n("Files\nonly in B"), this, &DirectoryMergeWindow::slotShowFilesOnlyInB, ac, "dir_show_files_only_in_b");
     d->m_pDirShowFilesOnlyInC = GuiUtils::createAction<KToggleAction>(i18n("Show Files only in C"), QIcon(QPixmap(showfilesonlyinc)), i18n("Files\nonly in C"), this, &DirectoryMergeWindow::slotShowFilesOnlyInC, ac, "dir_show_files_only_in_c");
 
-    d->m_pDirShowIdenticalFiles->setChecked(d->m_pOptions->m_bDmShowIdenticalFiles);
+    d->m_pDirShowIdenticalFiles->setChecked(gOptions->m_bDmShowIdenticalFiles);
 
     d->m_pDirCompareExplicit = GuiUtils::createAction<QAction>(i18n("Compare Explicitly Selected Files"), this, &DirectoryMergeWindow::slotCompareExplicitlySelectedFiles, ac, "dir_compare_explicitly_selected_files");
     d->m_pDirMergeExplicit = GuiUtils::createAction<QAction>(i18n("Merge Explicitly Selected Files"), this, &DirectoryMergeWindow::slotMergeExplicitlySelectedFiles, ac, "dir_merge_explicitly_selected_files");
