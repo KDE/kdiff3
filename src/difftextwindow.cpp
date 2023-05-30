@@ -1312,7 +1312,7 @@ QString DiffTextWindowData::getString(const LineType d3lIdx) const
     std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
     const LineType lineIdx = d3l->getLineIndex(m_winIdx);
 
-    if(lineIdx != LineRef::invalid)
+    if(lineIdx == LineRef::invalid)
         return QString();
 
     return (*m_pLineData)[lineIdx].getLine();
