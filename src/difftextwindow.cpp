@@ -1368,7 +1368,7 @@ QString DiffTextWindow::getSelection() const
     QString selectionString;
 
     int line = 0;
-    int lineIdx = 0;
+    LineType lineIdx = 0;
 
     int it;
     int vectorSize = d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
@@ -1391,7 +1391,7 @@ QString DiffTextWindow::getSelection() const
             lineIdx = d3l->getLineC();
         }
 
-        if(lineIdx != -1)
+        if(lineIdx != LineRef::invalid)
         {
             QtSizeType size = (*d->m_pLineData)[lineIdx].size();
             QString lineString = (*d->m_pLineData)[lineIdx].getLine();
