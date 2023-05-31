@@ -900,7 +900,6 @@ void KDiff3App::slotFilePrint()
 
     if(!firstSelectionD3LIdx.isValid())
         printDialog->setPrintRange(QAbstractPrintDialog::AllPages);
-    //printDialog.setMinMax(0,0);
     printDialog->setFromTo(0, 0);
 
     int currentFirstLine = m_pDiffTextWindow1->getFirstLine();
@@ -913,7 +912,6 @@ void KDiff3App::slotFilePrint()
     if(printDialog->exec() == QDialog::Accepted)
     {
         slotStatusMsg(i18n("Printing..."));
-        //TODO: Drop RLPainter. How?
         // create a painter to paint on the printer object
         RLPainter painter(&printer, gOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), 'W'));
 
@@ -957,8 +955,6 @@ void KDiff3App::slotFilePrint()
         if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
             totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
-        QList<quint32> pageList; // = printer.pageList();
-
         bool bPrintCurrentPage = false;
         bool bFirstPrintedPage = false;
 
@@ -966,20 +962,16 @@ void KDiff3App::slotFilePrint()
         quint32 totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
         LineRef line;
         LineRef selectionEndLine;
+        quint32 from = 0, to = 0;
 
         if(printer.printRange() == QPrinter::AllPages)
         {
-            pageList.clear();
-            for(quint32 i = 1; i <= totalNofPages; ++i)
-            {
-                pageList.push_back(i);
-            }
+            to = totalNofPages;
+            from = 1;
         }
         else if(printer.printRange() == QPrinter::PageRange)
         {
-            pageList.clear();
-
-            quint32 from = printer.fromPage(), to = printer.toPage();
+            from = printer.fromPage(), to = printer.toPage();
             /*
                 Per Qt docs QPrinter::fromPage and QPrinter::toPage return 0 to indicate they are not set.
                 Account for this and other invalid settings the user may try.
@@ -988,18 +980,12 @@ void KDiff3App::slotFilePrint()
             if(from > totalNofPages) from = totalNofPages;
             if(to == 0 || to > totalNofPages) to = totalNofPages;
             if(from > to) to = from;
-
-            for(quint32 i = from; i <= to; ++i)
-            {
-                pageList.push_back(i);
-            }
         }
         else if(printer.printRange() == QPrinter::CurrentPage)
         {
             bPrintCurrentPage = true;
-            totalNofPages = 1;
             // Detect the first visible line in the window.
-            line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx);
+            to = from = line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx);
         }
         else if(printer.printRange() == QPrinter::Selection)
         {
@@ -1016,12 +1002,13 @@ void KDiff3App::slotFilePrint()
 
         ProgressProxy pp;
         pp.setMaxNofSteps(totalNofPages);
-        QList<quint32>::iterator pageListIt = pageList.begin();
+        quint32 i = from;
 
         while(bPrintCurrentPage ||
-              (!bPrintSelection && pageListIt != pageList.end()) ||
+              (!bPrintSelection && i <= to) ||
               (bPrintSelection && line < selectionEndLine))
         {
+            assert(!(bPrintCurrentPage && i > from));
             pp.setInformation(i18nc("Status message", "Printing page %1 of %2", page, totalNofPages), false);
             pp.setCurrent(page - 1);
             if(pp.wasCancelled())
@@ -1032,8 +1019,7 @@ void KDiff3App::slotFilePrint()
 
             if(!bPrintSelection && !bPrintCurrentPage)
             {
-                assert(pageListIt != pageList.end());
-                page = *pageListIt;
+                page = i;
                 line = (page - 1) * linesPerPage;
             }
             else if(bPrintSelection)
@@ -1086,7 +1072,7 @@ void KDiff3App::slotFilePrint()
             }
             else
             {
-                ++pageListIt;
+                ++i;
             }
         }
 
