@@ -74,7 +74,7 @@ class Selection
     [[nodiscard]] inline LineRef getOldLastLine() const { return oldLastLine; };
     [[nodiscard]] inline LineRef getOldFirstLine() const { return oldFirstLine; };
     [[nodiscard]] inline bool selectionContainsData() const { return bSelectionContainsData; };
-    [[nodiscard]] bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
+    [[nodiscard]] inline bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
 
     void reset()
     {

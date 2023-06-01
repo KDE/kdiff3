@@ -69,9 +69,9 @@ class SourceData
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
                                 const QString& fileNameOut, QTextCodec* pCodecOut);
 
-    static QTextCodec* detectUTF8(const QByteArray& data);
-    static QTextCodec* detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
-    static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
+    [[nodiscard]] static QTextCodec* detectUTF8(const QByteArray& data);
+    [[nodiscard]] static QTextCodec* detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
+    [[nodiscard]] static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
     QTextCodec* detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec);
     QString m_aliasName;

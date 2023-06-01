@@ -151,10 +151,10 @@ class RegExpTester: public QDialog
     RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolTip, const QString& historyStartRegExpToolTip,
         const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip);
     void init(const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString& sortKeyOrder);
-    QString autoMergeRegExp();
-    QString historyStartRegExp();
-    QString historyEntryStartRegExp();
-    QString historySortKeyOrder();
+    [[nodiscard]] QString autoMergeRegExp() const;
+    [[nodiscard]] QString historyStartRegExp() const;
+    [[nodiscard]] QString historyEntryStartRegExp() const;
+    [[nodiscard]] QString historySortKeyOrder() const;
   public Q_SLOTS:
     void slotRecalc();
 };

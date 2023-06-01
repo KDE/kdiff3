@@ -240,7 +240,7 @@ void OpenDialog::accept()
 
 void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the popup menu
 {
-    QtNumberType id = pAction->parentWidget()->actions().indexOf(pAction);
+    const QtNumberType id = pAction->parentWidget()->actions().indexOf(pAction);
     QComboBox* cb1 = nullptr;
     QComboBox* cb2 = nullptr;
 
@@ -479,29 +479,29 @@ void RegExpTester::init(const QString& autoMergeRegExp, const QString& historySt
     m_pHistorySortKeyOrderEdit->setText(historySortKeyOrder);
 }
 
-QString RegExpTester::autoMergeRegExp()
+QString RegExpTester::autoMergeRegExp() const
 {
     return m_pAutoMergeRegExpEdit->text();
 }
 
-QString RegExpTester::historyStartRegExp()
+QString RegExpTester::historyStartRegExp() const
 {
     return m_pHistoryStartRegExpEdit->text();
 }
 
-QString RegExpTester::historyEntryStartRegExp()
+QString RegExpTester::historyEntryStartRegExp() const
 {
     return m_pHistoryEntryStartRegExpEdit->text();
 }
 
-QString RegExpTester::historySortKeyOrder()
+QString RegExpTester::historySortKeyOrder() const
 {
     return m_pHistorySortKeyOrderEdit->text();
 }
 
 void RegExpTester::slotRecalc()
 {
-    QRegularExpression autoMergeRegExp(m_pAutoMergeRegExpEdit->text());
+    const QRegularExpression autoMergeRegExp(m_pAutoMergeRegExpEdit->text());
     QRegularExpressionMatch match = autoMergeRegExp.match(m_pAutoMergeExampleEdit->text());
 
     if(match.hasMatch())
@@ -513,7 +513,7 @@ void RegExpTester::slotRecalc()
         m_pAutoMergeMatchResult->setText(i18n("Match failed."));
     }
 
-    QRegularExpression historyStartRegExp(m_pHistoryStartRegExpEdit->text());
+    const QRegularExpression historyStartRegExp(m_pHistoryStartRegExpEdit->text());
     match = historyStartRegExp.match(m_pHistoryStartExampleEdit->text());
 
     if(match.hasMatch())
@@ -533,8 +533,8 @@ void RegExpTester::slotRecalc()
         m_pHistorySortKeyResult->setText("");
         return;
     }
-    QRegularExpression historyEntryStartRegExp(m_pHistoryEntryStartRegExpEdit->text());
-    QString s = m_pHistoryEntryStartExampleEdit->text();
+    const QRegularExpression historyEntryStartRegExp(m_pHistoryEntryStartRegExpEdit->text());
+    const QString s = m_pHistoryEntryStartExampleEdit->text();
     match = historyEntryStartRegExp.match(s);
 
     if(match.hasMatch())
