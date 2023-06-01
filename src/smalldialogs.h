@@ -58,6 +58,19 @@ class OpenDialog: public QDialog
     void fixCurrentText(QComboBox* pCB);
     bool m_bInputFileNameChanged;
 
+    enum SwapCopyActions
+    {
+        swapAB,
+        swapBC,
+        swapCA,
+        copyAToOut,
+        copyBToOut,
+        copyCToOut,
+        swapAOut,
+        swapBOut,
+        swapCOut,
+    };
+
     Ui::OpenDialog dialogUi;
   private Q_SLOTS:
     void selectFileA();

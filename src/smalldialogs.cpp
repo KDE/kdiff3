@@ -246,39 +246,39 @@ void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the
 
     switch(id)
     {
-        case 0:
+        case swapAB:
             cb1 = dialogUi.lineA;
             cb2 = dialogUi.lineB;
             break;
-        case 1:
+        case swapBC:
             cb1 = dialogUi.lineB;
             cb2 = dialogUi.lineC;
             break;
-        case 2:
+        case swapCA:
             cb1 = dialogUi.lineC;
             cb2 = dialogUi.lineA;
             break;
-        case 3:
+        case copyAToOut:
             cb1 = dialogUi.lineA;
             cb2 = dialogUi.lineOut;
             break;
-        case 4:
+        case copyBToOut:
             cb1 = dialogUi.lineB;
             cb2 = dialogUi.lineOut;
             break;
-        case 5:
+        case copyCToOut:
             cb1 = dialogUi.lineC;
             cb2 = dialogUi.lineOut;
             break;
-        case 6:
+        case swapAOut:
             cb1 = dialogUi.lineA;
             cb2 = dialogUi.lineOut;
             break;
-        case 7:
+        case swapBOut:
             cb1 = dialogUi.lineB;
             cb2 = dialogUi.lineOut;
             break;
-        case 8:
+        case swapCOut:
             cb1 = dialogUi.lineC;
             cb2 = dialogUi.lineOut;
             break;
@@ -289,7 +289,7 @@ void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the
         QString t1 = cb1->currentText();
         QString t2 = cb2->currentText();
         cb2->setEditText(t1);
-        if(id <= 2 || id >= 6)
+        if(id <= swapCA || id >= swapAOut)
         {
             cb1->setEditText(t2);
         }
