@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <list>
+#include <typeinfo>
 
 #include <QCheckBox>
 #include <QClipboard>
@@ -313,8 +314,12 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 mErrors.append(m_sd3->getErrors());
             }
         }
-        catch(std::exception& e)
+        catch(const std::exception& e)
         {
+            if(typeid(e) == typeid(std::bad_alloc))
+                throw;
+            qCCritical(kdiffMain) << "An internal error occurred:" << e.what();
+
             mErrors.append(i18n("An internal error occurred: %1", QString::fromStdString(e.what())));
             pp.clear();
         }
@@ -829,7 +834,6 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
         case Qt::Key_Right:
             if(m_pHScrollBar != nullptr)
                 QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
-
             return;
         case Qt::Key_End:
         case Qt::Key_Home:
