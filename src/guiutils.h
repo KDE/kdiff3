@@ -12,7 +12,10 @@
 #define GUIUTILS_H
 
 #include "defmac.h"
-#include <kactioncollection.h>
+
+#include <type_traits>
+
+#include <KActionCollection>
 #include <QObject>
 
 namespace GuiUtils {
@@ -22,7 +25,7 @@ namespace GuiUtils {
     ambiguous even as a parameter.
 */
 template <class T, class Receiver, class Func>
-inline typename std::enable_if<std::is_same<T, QAction>::value, QAction>::type* createAction(
+inline typename std::enable_if_t<std::is_same_v<T, QAction>, QAction>* createAction(
     const QString& text,
     const Receiver receiver,
     const Func slot,
@@ -39,7 +42,7 @@ inline typename std::enable_if<std::is_same<T, QAction>::value, QAction>::type* 
 }
 
 template <class T, class Receiver, class Func>
-inline typename std::enable_if<std::is_same<T, KToggleAction>::value, KToggleAction>::type* createAction(
+inline typename std::enable_if_t<std::is_same_v<T, KToggleAction>, KToggleAction>* createAction(
     const QString& text,
     const Receiver receiver,
     const Func slot,
