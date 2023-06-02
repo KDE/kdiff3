@@ -68,7 +68,7 @@ class MergeResultWindow: public QWidget
     void choose(e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
-    int getMaxTextWidth();         // width of longest text line
+    [[nodiscard]] int getMaxTextWidth(); // width of longest text line
     [[nodiscard]] LineType getNofLines() const;
     [[nodiscard]] int getVisibleTextAreaWidth() const; // text area width without the border
     [[nodiscard]] int getNofVisibleLines() const;
