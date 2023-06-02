@@ -15,7 +15,6 @@
 
 #include <utility>   // for swap
 
-
 qint32 Selection::firstPosInLine(LineRef l) const
 {
     assert(firstLine.isValid());

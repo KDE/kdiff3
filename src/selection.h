@@ -31,37 +31,6 @@ class Selection
     LineRef oldLastLine;
 
   public:
-    /* bSelectionContainsData -- behavior
-    --ignore cursor only updates.
-    default to false
-
-    DiffSelection
-        default to false
-        for(int line = beginLine; line < endLine; ++line)
-            if any line on screeen
-                .... wrapline offset loop
-                .... running 0 based tally outPos
-                if m_selection.within(line, outPos) set to true
-
-                send newSelection on changed state
-                    --triggers reset via resetSelection on all but sender
-                    --flag set to false after reset
-
-    MergeSelection
-
-        --embeded in getTextLayoutForLine
-            ..mouseEvent/keyEvent triggers
-            ..result blindly changed -- no back checking
-
-        --only checked durring paintEvent
-        for all visable lines
-            QtSizeType lengthInText = std::max(0, lastPosInLine(line) - firstPosInLine(line));
-            if(lengthInText > 0) if(lengthInText > 0)
-                bSelectionContainsData = true
-    */
-    bool bSelectionContainsData = false;
-
-  public:
     [[nodiscard]] inline LineRef getFirstLine() const { return firstLine; };
     [[nodiscard]] inline LineRef getLastLine() const { return lastLine; };
 
@@ -73,8 +42,7 @@ class Selection
 
     [[nodiscard]] inline LineRef getOldLastLine() const { return oldLastLine; };
     [[nodiscard]] inline LineRef getOldFirstLine() const { return oldFirstLine; };
-    [[nodiscard]] inline bool selectionContainsData() const { return bSelectionContainsData; };
-    [[nodiscard]] inline bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
+    [[nodiscard]] inline bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos); }
 
     void reset()
     {
@@ -82,7 +50,6 @@ class Selection
         oldFirstLine = firstLine;
         firstLine.invalidate();
         lastLine.invalidate();
-        bSelectionContainsData = false;
     }
 
     void start(LineRef l, QtSizeType p)
@@ -100,8 +67,8 @@ class Selection
     }
 
     [[nodiscard]] bool within(LineRef l, QtSizeType p) const;
-
     [[nodiscard]] bool lineWithin(LineRef l) const;
+
     [[nodiscard]] QtSizeType firstPosInLine(LineRef l) const;
     [[nodiscard]] QtSizeType lastPosInLine(LineRef l) const;
 

@@ -715,7 +715,10 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
     if(d->m_selection.isValidFirstLine())
     {
         qCDebug(kdiffDiffTextWindow) << "d->m_selection.isValidFirstLine() = " << d->m_selection.isValidFirstLine();
+        const bool selectionWasEmpty = d->m_selection.isEmpty();
         d->m_selection.end(line, pos);
+        if(!d->m_selection.isEmpty() && selectionWasEmpty)
+            Q_EMIT newSelection();
 
         showStatusLine(line);
 
@@ -1109,8 +1112,6 @@ void DiffTextWindowData::writeLine(
                 frh.setBackground(m_pDiffTextWindow->palette().highlight().color());
                 frh.setPen(m_pDiffTextWindow->palette().highlightedText().color());
                 frh.next();
-
-                m_selection.bSelectionContainsData = true;
             }
 
             ++outPos;
@@ -1192,9 +1193,6 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
         return;
     }
 
-    const bool bOldSelectionContainsData = d->m_selection.selectionContainsData();
-    d->m_selection.bSelectionContainsData = false;
-
     LineRef endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
     RLPainter p(this, gOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
@@ -1206,9 +1204,6 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
 
     d->m_oldFirstLine = d->m_firstLine;
     d->m_selection.clearOldSelection();
-
-    if(!bOldSelectionContainsData && d->m_selection.selectionContainsData())
-        Q_EMIT newSelection();
 }
 
 void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const LineType nofLinesPerPage)

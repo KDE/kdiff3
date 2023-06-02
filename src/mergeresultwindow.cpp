@@ -1436,8 +1436,6 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
 
         QtSizeType lengthInText = std::max(0, lastPosInText - firstPosInText);
         assert(lengthInText <= limits<int>::max());
-        if(lengthInText > 0)
-            m_selection.bSelectionContainsData = true;
 
         QTextLayout::FormatRange selection;
         selection.start = firstPosInText;
@@ -1583,13 +1581,11 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
     if(m_pDiff3LineList == nullptr)
         return;
 
-    bool bOldSelectionContainsData = m_selection.selectionContainsData();
     const QFontMetrics& fm = fontMetrics();
     int fontWidth = Utils::getHorizontalAdvance(fm, '0');
 
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
-        m_selection.bSelectionContainsData = false;
         const auto dpr = devicePixelRatioF();
         if(size() * dpr != m_pixmap.size())
         {
@@ -1671,9 +1667,6 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
     }
 
     painter.end();
-
-    if(!bOldSelectionContainsData && m_selection.selectionContainsData())
-        Q_EMIT newSelection();
 }
 
 void MergeResultWindow::updateSourceMask()
@@ -1870,7 +1863,11 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
     m_cursorYPos = line;
     if(m_selection.isValidFirstLine())
     {
+        const bool selectionWasEmpty = m_selection.isEmpty();
         m_selection.end(line, pos);
+        if(!m_selection.isEmpty() && selectionWasEmpty)
+            Q_EMIT newSelection();
+
         myUpdate(0);
 
         // Scroll because mouse moved out of the window
@@ -2420,7 +2417,7 @@ QString MergeResultWindow::getSelection() const
 bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
                                          MergeBlockListImp::iterator& mbIt, MergeEditLineList::iterator& melIt)
 {
-    if(m_selection.selectionContainsData())
+    if(!m_selection.isEmpty())
     {
         assert(m_selection.isValidFirstLine());
         deleteSelection();
@@ -2444,7 +2441,7 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
 
 void MergeResultWindow::deleteSelection()
 {
-    if(!m_selection.selectionContainsData())
+    if(m_selection.isEmpty())
     {
         return;
     }
