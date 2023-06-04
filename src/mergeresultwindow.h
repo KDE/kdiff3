@@ -203,12 +203,13 @@ class MergeResultWindow: public QWidget
     int m_currentPos;
     bool checkOverviewIgnore(const MergeBlockListImp::const_iterator i) const;
 
-    enum e_Direction
+    enum class Direction
     {
         eUp,
         eDown
     };
-    enum e_EndPoint
+
+    enum class EndPoint
     {
         eDelta,
         eConflict,
@@ -216,7 +217,7 @@ class MergeResultWindow: public QWidget
         eLine,
         eEnd
     };
-    void go(e_Direction eDir, e_EndPoint eEndPoint);
+    void go(Direction eDir, EndPoint eEndPoint);
     bool calcIteratorFromLineNr(
         LineType line,
         MergeBlockListImp::iterator& mbIt,

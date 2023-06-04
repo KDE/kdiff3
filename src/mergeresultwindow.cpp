@@ -502,55 +502,55 @@ bool MergeResultWindow::checkOverviewIgnore(const MergeBlockListImp::const_itera
 }
 
 // Go to prev/next delta/conflict or first/last delta.
-void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
+void MergeResultWindow::go(Direction eDir, EndPoint eEndPoint)
 {
-    assert(eDir == eUp || eDir == eDown);
+    assert(eDir == Direction::eUp || eDir == Direction::eDown);
     MergeBlockListImp::iterator i = m_currentMergeBlockIt;
     bool bSkipWhiteConflicts = !gOptions->m_bShowWhiteSpace;
-    if(eEndPoint == eEnd)
+    if(eEndPoint == EndPoint::eEnd)
     {
-        if(eDir == eUp)
+        if(eDir == Direction::eUp)
             i = m_mergeBlockList.list().begin(); // first mergeline
         else
             i = --m_mergeBlockList.list().end(); // last mergeline
 
-        while(isItAtEnd(eDir == eUp, i) && !i->isDelta())
+        while(isItAtEnd(eDir == Direction::eUp, i) && !i->isDelta())
         {
-            if(eDir == eUp)
+            if(eDir == Direction::eUp)
                 ++i; // search downwards
             else
                 --i; // search upwards
         }
     }
-    else if(eEndPoint == eDelta && isItAtEnd(eDir != eUp, i))
+    else if(eEndPoint == EndPoint::eDelta && isItAtEnd(eDir != Direction::eUp, i))
     {
         do
         {
-            if(eDir == eUp)
+            if(eDir == Direction::eUp)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && (!i->isDelta() || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->isWhiteSpaceConflict())));
+        } while(isItAtEnd(eDir != Direction::eUp, i) && (!i->isDelta() || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->isWhiteSpaceConflict())));
     }
-    else if(eEndPoint == eConflict && isItAtEnd(eDir != eUp, i))
+    else if(eEndPoint == EndPoint::eConflict && isItAtEnd(eDir != Direction::eUp, i))
     {
         do
         {
-            if(eDir == eUp)
+            if(eDir == Direction::eUp)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && (!i->isConflict() || (bSkipWhiteConflicts && i->isWhiteSpaceConflict())));
+        } while(isItAtEnd(eDir != Direction::eUp, i) && (!i->isConflict() || (bSkipWhiteConflicts && i->isWhiteSpaceConflict())));
     }
-    else if(isItAtEnd(eDir != eUp, i) && eEndPoint == eUnsolvedConflict)
+    else if(isItAtEnd(eDir != Direction::eUp, i) && eEndPoint == EndPoint::eUnsolvedConflict)
     {
         do
         {
-            if(eDir == eUp)
+            if(eDir == Direction::eUp)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && !i->list().begin()->isConflict());
+        } while(isItAtEnd(eDir != Direction::eUp, i) && !i->list().begin()->isConflict());
     }
 
     if(isVisible())
@@ -666,7 +666,7 @@ bool MergeResultWindow::isUnsolvedConflictBelowCurrent() const
 
 void MergeResultWindow::slotGoTop()
 {
-    go(eUp, eEnd);
+    go(Direction::eUp, EndPoint::eEnd);
 }
 
 void MergeResultWindow::slotGoCurrent()
@@ -676,37 +676,37 @@ void MergeResultWindow::slotGoCurrent()
 
 void MergeResultWindow::slotGoBottom()
 {
-    go(eDown, eEnd);
+    go(Direction::eDown, EndPoint::eEnd);
 }
 
 void MergeResultWindow::slotGoPrevDelta()
 {
-    go(eUp, eDelta);
+    go(Direction::eUp, EndPoint::eDelta);
 }
 
 void MergeResultWindow::slotGoNextDelta()
 {
-    go(eDown, eDelta);
+    go(Direction::eDown, EndPoint::eDelta);
 }
 
 void MergeResultWindow::slotGoPrevConflict()
 {
-    go(eUp, eConflict);
+    go(Direction::eUp, EndPoint::eConflict);
 }
 
 void MergeResultWindow::slotGoNextConflict()
 {
-    go(eDown, eConflict);
+    go(Direction::eDown, EndPoint::eConflict);
 }
 
 void MergeResultWindow::slotGoPrevUnsolvedConflict()
 {
-    go(eUp, eUnsolvedConflict);
+    go(Direction::eUp, EndPoint::eUnsolvedConflict);
 }
 
 void MergeResultWindow::slotGoNextUnsolvedConflict()
 {
-    go(eDown, eUnsolvedConflict);
+    go(Direction::eDown, EndPoint::eUnsolvedConflict);
 }
 
 /** The line is given as a index in the Diff3LineList.
