@@ -88,6 +88,137 @@ class MergeResultWindow: public QWidget
 
     void slotUpdateAvailabilities();
 
+  private:
+    static QPointer<QAction> chooseAEverywhere;
+    static QPointer<QAction> chooseBEverywhere;
+    static QPointer<QAction> chooseCEverywhere;
+    static QPointer<QAction> chooseAForUnsolvedConflicts;
+    static QPointer<QAction> chooseBForUnsolvedConflicts;
+    static QPointer<QAction> chooseCForUnsolvedConflicts;
+    static QPointer<QAction> chooseAForUnsolvedWhiteSpaceConflicts;
+    static QPointer<QAction> chooseBForUnsolvedWhiteSpaceConflicts;
+    static QPointer<QAction> chooseCForUnsolvedWhiteSpaceConflicts;
+
+    struct HistoryMapEntry {
+        MergeEditLineList mellA;
+        MergeEditLineList mellB;
+        MergeEditLineList mellC;
+        MergeEditLineList& choice(bool bThreeInputs);
+        bool staysInPlace(bool bThreeInputs, Diff3LineList::const_iterator& iHistoryEnd);
+    };
+    typedef std::map<QString, HistoryMapEntry> HistoryMap;
+
+    enum class Direction
+    {
+        eUp,
+        eDown
+    };
+
+    enum class EndPoint
+    {
+        eDelta,
+        eConflict,
+        eUnsolvedConflict,
+        eLine,
+        eEnd
+    };
+
+    std::shared_ptr<LineDataVector> m_pldA = nullptr;
+    std::shared_ptr<LineDataVector> m_pldB = nullptr;
+    std::shared_ptr<LineDataVector> m_pldC = nullptr;
+    LineRef m_sizeA = 0;
+    LineRef m_sizeB = 0;
+    LineRef m_sizeC = 0;
+
+    const Diff3LineList* m_pDiff3LineList = nullptr;
+    TotalDiffStatus* m_pTotalDiffStatus = nullptr;
+
+    int m_delayedDrawTimer = 0;
+    e_OverviewMode mOverviewMode = e_OverviewMode::eOMNormal;
+    QString m_persistentStatusMessage;
+
+    MergeBlockList m_mergeBlockList;
+    MergeBlockListImp::iterator m_currentMergeBlockIt;
+
+    int m_currentPos;
+
+    QPixmap m_pixmap;
+    LineRef m_firstLine = 0;
+    int m_horizScrollOffset = 0;
+    LineType m_nofLines = 0;
+    int m_maxTextWidth = -1;
+    bool m_bMyUpdate = false;
+    bool m_bInsertMode = true;
+    bool m_bModified = false;
+    void setModified(bool bModified = true);
+
+    int m_scrollDeltaX = 0;
+    int m_scrollDeltaY = 0;
+    QtNumberType m_cursorXPos = 0;
+    int m_cursorXPixelPos;
+    int m_cursorYPos = 0;
+    int m_cursorOldXPixelPos = 0;
+    bool m_bCursorOn = true; // blinking on and off each second
+    QTimer m_cursorTimer;
+    bool m_bCursorUpdate = false;
+    QStatusBar* m_pStatusBar;
+
+    Selection m_selection;
+    /*
+      This list exists solely to auto disconnect boost signals.
+    */
+    std::list<boost::signals2::scoped_connection> connections;
+    // Overrides
+    void paintEvent(QPaintEvent* e) override;
+    void timerEvent(QTimerEvent*) override;
+    bool event(QEvent*) override;
+    void mousePressEvent(QMouseEvent* e) override;
+    void mouseDoubleClickEvent(QMouseEvent* e) override;
+    void mouseReleaseEvent(QMouseEvent*) override;
+    void mouseMoveEvent(QMouseEvent*) override;
+    void resizeEvent(QResizeEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
+    void wheelEvent(QWheelEvent* pWheelEvent) override;
+    void focusInEvent(QFocusEvent* e) override;
+    //Costum functions
+    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
+    QString getString(int lineIdx);
+    void showUnsolvedConflictsStatusMessage();
+
+    void collectHistoryInformation(e_SrcSelector src, const HistoryRange& historyRange, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
+
+    bool isItAtEnd(bool bIncrement, const MergeBlockListImp::const_iterator i) const
+    {
+        if(bIncrement)
+            return i != m_mergeBlockList.list().end();
+        else
+            return i != m_mergeBlockList.list().begin();
+    }
+
+    bool checkOverviewIgnore(const MergeBlockListImp::const_iterator i) const;
+
+    void go(Direction eDir, EndPoint eEndPoint);
+    bool calcIteratorFromLineNr(
+        LineType line,
+        MergeBlockListImp::iterator& mbIt,
+        MergeEditLineList::iterator& melIt);
+
+    int getTextXOffset() const;
+    QVector<QTextLayout::FormatRange> getTextLayoutForLine(LineRef line, const QString& s, QTextLayout& textLayout);
+    void myUpdate(int afterMilliSecs);
+    void writeLine(
+        RLPainter& p, int line, const QString& str,
+        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict);
+    void setFastSelector(MergeBlockListImp::iterator i);
+    LineRef convertToLine(QtNumberType y);
+
+    bool canCut() { return hasFocus() && !getSelection().isEmpty(); }
+    bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
+
+    bool deleteSelection2(QString& str, int& x, int& y,
+                          MergeBlockListImp::iterator& mbIt, MergeEditLineList::iterator& melIt);
+    bool doRelevantChangesExist();
+
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
     void setFirstLine(QtNumberType firstLine);
@@ -130,12 +261,15 @@ class MergeResultWindow: public QWidget
     void slotResize();
 
     void slotCut();
-
     void slotCopy();
-
     void slotSelectAll();
 
     void scrollVertically(QtNumberType deltaY);
+
+    void deleteSelection();
+    void pasteClipboard(bool bFromSelection);
+  private Q_SLOTS:
+    void slotCursorUpdate();
 
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
@@ -149,141 +283,6 @@ class MergeResultWindow: public QWidget
     void updateAvailabilities();
     void showPopupMenu(const QPoint& point);
     void noRelevantChangesDetected();
-
-  private:
-    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
-    QString getString(int lineIdx);
-    void showUnsolvedConflictsStatusMessage();
-
-    static QPointer<QAction> chooseAEverywhere;
-    static QPointer<QAction> chooseBEverywhere;
-    static QPointer<QAction> chooseCEverywhere;
-    static QPointer<QAction> chooseAForUnsolvedConflicts;
-    static QPointer<QAction> chooseBForUnsolvedConflicts;
-    static QPointer<QAction> chooseCForUnsolvedConflicts;
-    static QPointer<QAction> chooseAForUnsolvedWhiteSpaceConflicts;
-    static QPointer<QAction> chooseBForUnsolvedWhiteSpaceConflicts;
-    static QPointer<QAction> chooseCForUnsolvedWhiteSpaceConflicts;
-
-    std::shared_ptr<LineDataVector> m_pldA = nullptr;
-    std::shared_ptr<LineDataVector> m_pldB = nullptr;
-    std::shared_ptr<LineDataVector> m_pldC = nullptr;
-    LineRef m_sizeA = 0;
-    LineRef m_sizeB = 0;
-    LineRef m_sizeC = 0;
-
-    const Diff3LineList* m_pDiff3LineList = nullptr;
-    TotalDiffStatus* m_pTotalDiffStatus = nullptr;
-
-    int m_delayedDrawTimer = 0;
-    e_OverviewMode mOverviewMode = e_OverviewMode::eOMNormal;
-    QString m_persistentStatusMessage;
-
-  private:
-    struct HistoryMapEntry {
-        MergeEditLineList mellA;
-        MergeEditLineList mellB;
-        MergeEditLineList mellC;
-        MergeEditLineList& choice(bool bThreeInputs);
-        bool staysInPlace(bool bThreeInputs, Diff3LineList::const_iterator& iHistoryEnd);
-    };
-    typedef std::map<QString, HistoryMapEntry> HistoryMap;
-    void collectHistoryInformation(e_SrcSelector src, const HistoryRange& historyRange, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
-
-    MergeBlockList m_mergeBlockList;
-    MergeBlockListImp::iterator m_currentMergeBlockIt;
-    bool isItAtEnd(bool bIncrement, const MergeBlockListImp::const_iterator i) const
-    {
-        if(bIncrement)
-            return i != m_mergeBlockList.list().end();
-        else
-            return i != m_mergeBlockList.list().begin();
-    }
-
-    int m_currentPos;
-    bool checkOverviewIgnore(const MergeBlockListImp::const_iterator i) const;
-
-    enum class Direction
-    {
-        eUp,
-        eDown
-    };
-
-    enum class EndPoint
-    {
-        eDelta,
-        eConflict,
-        eUnsolvedConflict,
-        eLine,
-        eEnd
-    };
-    void go(Direction eDir, EndPoint eEndPoint);
-    bool calcIteratorFromLineNr(
-        LineType line,
-        MergeBlockListImp::iterator& mbIt,
-        MergeEditLineList::iterator& melIt);
-
-    void paintEvent(QPaintEvent* e) override;
-
-    int getTextXOffset() const;
-    QVector<QTextLayout::FormatRange> getTextLayoutForLine(LineRef line, const QString& s, QTextLayout& textLayout);
-    void myUpdate(int afterMilliSecs);
-    void timerEvent(QTimerEvent*) override;
-    void writeLine(
-        RLPainter& p, int line, const QString& str,
-        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
-    );
-    void setFastSelector(MergeBlockListImp::iterator i);
-    LineRef convertToLine(QtNumberType y);
-    bool event(QEvent*) override;
-    void mousePressEvent(QMouseEvent* e) override;
-    void mouseDoubleClickEvent(QMouseEvent* e) override;
-    void mouseReleaseEvent(QMouseEvent*) override;
-    void mouseMoveEvent(QMouseEvent*) override;
-    void resizeEvent(QResizeEvent* e) override;
-    void keyPressEvent(QKeyEvent* e) override;
-    void wheelEvent(QWheelEvent* pWheelEvent) override;
-    void focusInEvent(QFocusEvent* e) override;
-
-    bool canCut() { return hasFocus() && !getSelection().isEmpty(); }
-    bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
-
-    QPixmap m_pixmap;
-    LineRef m_firstLine = 0;
-    int m_horizScrollOffset = 0;
-    LineType m_nofLines = 0;
-    int m_maxTextWidth = -1;
-    bool m_bMyUpdate = false;
-    bool m_bInsertMode = true;
-    bool m_bModified = false;
-    void setModified(bool bModified = true);
-
-    int m_scrollDeltaX = 0;
-    int m_scrollDeltaY = 0;
-    QtNumberType m_cursorXPos = 0;
-    int m_cursorXPixelPos;
-    int m_cursorYPos = 0;
-    int m_cursorOldXPixelPos = 0;
-    bool m_bCursorOn = true; // blinking on and off each second
-    QTimer m_cursorTimer;
-    bool m_bCursorUpdate = false;
-    QStatusBar* m_pStatusBar;
-
-    Selection m_selection;
-
-    bool deleteSelection2(QString& str, int& x, int& y,
-                          MergeBlockListImp::iterator& mbIt, MergeEditLineList::iterator& melIt);
-    bool doRelevantChangesExist();
-
-    /*
-      This list exists solely to auto disconnect boost signals.
-    */
-    std::list<boost::signals2::scoped_connection> connections;
-  public Q_SLOTS:
-    void deleteSelection();
-    void pasteClipboard(bool bFromSelection);
-  private Q_SLOTS:
-    void slotCursorUpdate();
 };
 
 class QLineEdit;
