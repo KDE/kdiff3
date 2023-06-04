@@ -2,10 +2,12 @@
 # SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-########### kdiff3 KPart ###############
+########### kdiff3 executable ###############
 
 
-set(kdiff3part_PART_SRCS
+set(kdiff3_SRCS
+   main.cpp
+   kdiff3_shell.cpp
    kdiff3.cpp
    directorymergewindow.cpp
    merger.cpp
@@ -41,26 +43,12 @@ set(kdiff3part_PART_SRCS
    GitIgnoreList.cpp
 )
 
-ki18n_wrap_ui(kdiff3part_PART_SRCS
+ki18n_wrap_ui(kdiff3_SRCS
     scroller.ui
     opendialog.ui
     progressdialog.ui
     FontChooser.ui
 )
-
-add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
-
-set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
-target_link_libraries(kdiff3part Qt::PrintSupport KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::XmlGui KF${KF_MAJOR_VERSION}::KIOWidgets KF${KF_MAJOR_VERSION}::Crash)
-target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
-
-########### kdiff3 executable ###############
-
-set(kdiff3_SRCS
-   main.cpp
-   kdiff3_shell.cpp
-   ${kdiff3part_PART_SRCS}
-    )
 
 ecm_optional_add_subdirectory( autotests )
 
