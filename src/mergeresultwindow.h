@@ -156,7 +156,7 @@ class MergeResultWindow: public QWidget
     int m_scrollDeltaY = 0;
     QtNumberType m_cursorXPos = 0;
     int m_cursorXPixelPos;
-    int m_cursorYPos = 0;
+    LineRef m_cursorYPos = 0;
     int m_cursorOldXPixelPos = 0;
     bool m_bCursorOn = true; // blinking on and off each second
     QTimer m_cursorTimer;
@@ -207,7 +207,7 @@ class MergeResultWindow: public QWidget
     QVector<QTextLayout::FormatRange> getTextLayoutForLine(LineRef line, const QString& s, QTextLayout& textLayout);
     void myUpdate(int afterMilliSecs);
     void writeLine(
-        RLPainter& p, int line, const QString& str,
+        RLPainter& p, LineRef line, const QString& str,
         enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict);
     void setFastSelector(MergeBlockListImp::iterator i);
     LineRef convertToLine(QtNumberType y);

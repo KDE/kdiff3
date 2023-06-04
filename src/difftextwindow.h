@@ -67,7 +67,7 @@ class DiffTextWindow: public QWidget
     void convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos);
 
     [[nodiscard]] QString getSelection() const;
-    [[nodiscard]] int getFirstLine() const;
+    [[nodiscard]] LineRef getFirstLine() const;
     LineRef calcTopLineInFile(const LineRef firstLine);
 
     [[nodiscard]] int getMaxTextWidth() const;
@@ -125,9 +125,9 @@ class DiffTextWindow: public QWidget
 
     void finishDrop();
 
-    void firstLineChanged(QtNumberType firstLine);
+    void firstLineChanged(LineRef firstLine);
   public Q_SLOTS:
-    void setFirstLine(QtNumberType line);
+    void setFirstLine(LineRef line);
     void setHorizScrollOffset(int horizScrollOffset);
     void resetSelection();
     void setFastSelectorRange(int line1, int nofLines);

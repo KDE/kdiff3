@@ -162,12 +162,12 @@ class DiffTextWindowData
     QColor m_cDiff2;
     QColor m_cDiffBoth;
 
-    int m_fastSelectorLine1 = 0;
-    int m_fastSelectorNofLines = 0;
+    LineRef m_fastSelectorLine1 = 0;
+    LineType m_fastSelectorNofLines = 0;
 
     e_SrcSelector m_winIdx = e_SrcSelector::None;
-    int m_firstLine = 0;
-    int m_oldFirstLine = -1;
+    LineRef m_firstLine = 0;
+    LineRef m_oldFirstLine = -1;
     int m_horizScrollOffset = 0;
     int m_lineNumberWidth = 0;
     QAtomicInt m_maxTextWidth = -1;
@@ -431,11 +431,11 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
     painter.resetTransform();
 }
 
-void DiffTextWindow::setFirstLine(QtNumberType firstLine)
+void DiffTextWindow::setFirstLine(LineRef firstLine)
 {
     int fontHeight = fontMetrics().lineSpacing();
 
-    LineRef newFirstLine = std::max(0, firstLine);
+    LineRef newFirstLine = std::max<LineRef>(0, firstLine);
 
     int deltaY = fontHeight * (d->m_firstLine - newFirstLine);
 
@@ -457,7 +457,7 @@ void DiffTextWindow::setFirstLine(QtNumberType firstLine)
     Q_EMIT firstLineChanged(d->m_firstLine);
 }
 
-int DiffTextWindow::getFirstLine() const
+LineRef DiffTextWindow::getFirstLine() const
 {
     return d->m_firstLine;
 }
@@ -524,9 +524,9 @@ LineRef DiffTextWindow::convertDiff3LineIdxToLine(LineType d3lIdx)
     be displayed best. If it fits into the currently visible range then
     the returned value is the current firstLine.
 */
-int getBestFirstLine(int line, int nofLines, int firstLine, int visibleLines)
+LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, LineType visibleLines)
 {
-    int newFirstLine = firstLine;
+    LineRef newFirstLine = firstLine;
     if(line < firstLine || line + nofLines + 2 > firstLine + visibleLines)
     {
         if(nofLines > visibleLines || nofLines <= (2 * visibleLines / 3 - 1))
@@ -544,7 +544,7 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
     d->m_fastSelectorNofLines = nofLines;
     if(isVisible())
     {
-        int newFirstLine = getBestFirstLine(
+        LineRef newFirstLine = getBestFirstLine(
             convertDiff3LineIdxToLine(d->m_fastSelectorLine1),
             convertDiff3LineIdxToLine(d->m_fastSelectorLine1 + d->m_fastSelectorNofLines) - convertDiff3LineIdxToLine(d->m_fastSelectorLine1),
             d->m_firstLine,
@@ -790,8 +790,8 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
         if(d->m_selection.getOldLastLine().isValid())
         {
-            int lastLine;
-            int firstLine;
+            LineRef lastLine;
+            LineRef firstLine;
             if(d->m_selection.getOldFirstLine().isValid())
             {
                 firstLine = std::min({d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine()});
@@ -1212,7 +1212,7 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const Line
        (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
         return;
     resetSelection();
-    int oldFirstLine = d->m_firstLine;
+    LineRef oldFirstLine = d->m_firstLine;
     d->m_firstLine = firstLine;
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
     gOptions->beginPrint();
@@ -1787,7 +1787,8 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 
         if(wrapLineVectorSize > 0)
         {
-            d->m_firstLine = std::min(d->m_firstLine, wrapLineVectorSize - 1);
+            assert(wrapLineVectorSize <= limits<LineType>::max()); //Posiable but unlikely starting in Qt6
+            d->m_firstLine = std::min<LineType>(d->m_firstLine, wrapLineVectorSize - 1);
             d->m_horizScrollOffset = 0;
 
             Q_EMIT firstLineChanged(d->m_firstLine);

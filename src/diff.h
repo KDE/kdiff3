@@ -616,7 +616,7 @@ inline int tabber(int outPos, int tabSize)
     be displayed best. If it fits into the currently visible range then
     the returned value is the current firstLine.
 */
-int getBestFirstLine(int line, int nofLines, int firstLine, int visibleLines);
+LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, LineType visibleLines);
 
 enum e_CoordType
 {

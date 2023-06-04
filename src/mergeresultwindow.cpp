@@ -801,7 +801,7 @@ void MergeResultWindow::setFastSelector(MergeBlockListImp::iterator i)
     m_currentMergeBlockIt = i;
     Q_EMIT setFastSelectorRange(i->getIndex(), i->sourceRangeLength());
 
-    int line1 = 0;
+    LineRef line1 = 0;
 
     MergeBlockListImp::const_iterator mbIt = m_mergeBlockList.list().cbegin();
     for(; mbIt != m_mergeBlockList.list().cend(); ++mbIt)
@@ -811,8 +811,8 @@ void MergeResultWindow::setFastSelector(MergeBlockListImp::iterator i)
         line1 += mbIt->lineCount();
     }
 
-    int nofLines = m_currentMergeBlockIt->lineCount();
-    int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
+    LineType nofLines = m_currentMergeBlockIt->lineCount();
+    LineRef newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
         scrollVertically(newFirstLine - m_firstLine);
@@ -1456,7 +1456,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
 }
 
 void MergeResultWindow::writeLine(
-    RLPainter& p, int line, const QString& str,
+    RLPainter& p, LineRef line, const QString& str,
     e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
 {
     const QFontMetrics& fm = fontMetrics();
@@ -1582,7 +1582,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         return;
 
     const QFontMetrics& fm = fontMetrics();
-    int fontWidth = Utils::getHorizontalAdvance(fm, '0');
+    const int fontWidth = Utils::getHorizontalAdvance(fm, '0');
 
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
@@ -1599,7 +1599,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
         //int visibleLines = height() / fontHeight;
 
-        int lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
+        const LineRef lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
         LineRef line = 0;
         MergeBlockListImp::const_iterator mbIt = m_mergeBlockList.list().cbegin();
         for(; mbIt != m_mergeBlockList.list().cend(); ++mbIt)
@@ -2541,7 +2541,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
 
     setModified();
 
-    int y = m_cursorYPos;
+    LineRef y = m_cursorYPos;
     MergeBlockListImp::iterator mbIt;
     MergeEditLineList::iterator melIt, melItAfter;
     if (!calcIteratorFromLineNr(y, mbIt, melIt))
