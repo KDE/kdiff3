@@ -37,14 +37,14 @@ class Overview : public QWidget
 
     void init(Diff3LineList* pDiff3LineList);
     void reset();
-    void setRange(QtNumberType firstLine, QtNumberType pageHeight);
+    void setRange(LineRef firstLine, QtNumberType pageHeight);
     void setPaintingAllowed(bool bAllowPainting);
 
     e_OverviewMode getOverviewMode();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
-    void setFirstLine(QtNumberType firstLine);
+    void setFirstLine(LineRef firstLine);
     void slotRedraw();
   Q_SIGNALS:
     void setLine(LineRef);

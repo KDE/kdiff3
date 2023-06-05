@@ -454,7 +454,7 @@ public Q_SLOTS:
     Diff3LineVector mDiff3LineVector;
     ManualDiffHelpList m_manualDiffHelpList;
 
-    QtNumberType m_neededLines = 0;
+    LineType m_neededLines = 0;
     int m_DTWHeight = 0;
     bool m_bOutputModified = false;
     bool m_bFileSaved = false;

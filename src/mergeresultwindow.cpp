@@ -411,9 +411,9 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     update();
 }
 
-void MergeResultWindow::setFirstLine(QtNumberType firstLine)
+void MergeResultWindow::setFirstLine(LineRef firstLine) //connected to qt controled signal
 {
-    m_firstLine = std::max(0, firstLine);
+    m_firstLine = std::max<LineRef>(0, firstLine);
     update();
 }
 
@@ -1502,7 +1502,7 @@ void MergeResultWindow::writeLine(
 
         if(line == m_cursorYPos)
         {
-            m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(m_cursorXPos));
+            m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX((int)m_cursorXPos));
             if(gOptions->m_bRightToLeftLanguage)
                 m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         }
@@ -1957,7 +1957,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
     }
 
     QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
-    QtNumberType x = m_cursorXPos;
+    SafeInt<int> x = m_cursorXPos;
 
     QTextLayout textLayoutOrig(str, font(), this);
     getTextLayoutForLine(y, str, textLayoutOrig);
@@ -2142,13 +2142,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 }
                 else
                 {
-                    while(x > 0 && (str[x - 1] == ' ' || str[x - 1] == '\t'))
+                    while(x > 0 && (str[(QtSizeType)x - 1] == ' ' || str[(QtSizeType)x - 1] == '\t'))
                     {
                         int newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
-                    while(x > 0 && (str[x - 1] != ' ' && str[x - 1] != '\t'))
+                    while(x > 0 && (str[(QtSizeType)x - 1] != ' ' && str[(QtSizeType)x - 1] != '\t'))
                     {
                         int newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
@@ -2173,13 +2173,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 }
                 else
                 {
-                    while(x < str.length() && (str[x] == ' ' || str[x] == '\t'))
+                    while(x < str.length() && (str[(QtSizeType)x] == ' ' || str[(QtSizeType)x] == '\t'))
                     {
                         int newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
-                    while(x < str.length() && (str[x] != ' ' && str[x] != '\t'))
+                    while(x < str.length() && (str[(QtSizeType)x] != ' ' && str[(QtSizeType)x] != '\t'))
                     {
                         int newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
@@ -2251,7 +2251,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
 
     str = calcIteratorFromLineNr(y, mbIt, melIt) ? melIt->getString(m_pldA, m_pldB, m_pldC) : QString();
 
-    x = qBound(0, x, (int)str.length());
+    x = qBound<int>(0, x, SafeInt<int>(str.length()));
 
     int newFirstLine = m_firstLine;
     int newHorizScrollOffset = m_horizScrollOffset;
@@ -2273,7 +2273,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             x = textLayout.lineAt(0).xToCursor(m_cursorOldXPixelPos);
     }
 
-    m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(x));
+    m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX((int)x));
     int hF = 1; // horizontal factor
     if(gOptions->m_bRightToLeftLanguage)
     {
@@ -2377,7 +2377,7 @@ QString MergeResultWindow::getSelection() const
                     const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
 
                     // Consider tabs
-                    for(int i = 0; i < str.length(); ++i)
+                    for(QtSizeType i = 0; i < str.length(); ++i)
                     {
                         int spaces = 1;
                         if(str[i] == '\t')
@@ -2414,7 +2414,7 @@ QString MergeResultWindow::getSelection() const
     return selectionString;
 }
 
-bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
+bool MergeResultWindow::deleteSelection2(QString& s, SafeInt<int>& x, int& y,
                                          MergeBlockListImp::iterator& mbIt, MergeEditLineList::iterator& melIt)
 {
     if(!m_selection.isEmpty())
@@ -2528,7 +2528,7 @@ void MergeResultWindow::deleteSelection()
     }
 
     m_cursorYPos = m_selection.beginLine();
-    m_cursorXPos = (QtNumberType)m_selection.beginPos();
+    m_cursorXPos = m_selection.beginPos();
     m_cursorOldXPixelPos = m_cursorXPixelPos;
 
     m_selection.reset();

@@ -154,8 +154,8 @@ class MergeResultWindow: public QWidget
 
     int m_scrollDeltaX = 0;
     int m_scrollDeltaY = 0;
-    QtNumberType m_cursorXPos = 0;
-    int m_cursorXPixelPos;
+    SafeInt<int> m_cursorXPos = 0;
+    SafeInt<int> m_cursorXPixelPos = 0;
     LineRef m_cursorYPos = 0;
     int m_cursorOldXPixelPos = 0;
     bool m_bCursorOn = true; // blinking on and off each second
@@ -215,13 +215,13 @@ class MergeResultWindow: public QWidget
     bool canCut() { return hasFocus() && !getSelection().isEmpty(); }
     bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
 
-    bool deleteSelection2(QString& str, int& x, int& y,
+    bool deleteSelection2(QString& str, SafeInt<int>& x, int& y,
                           MergeBlockListImp::iterator& mbIt, MergeEditLineList::iterator& melIt);
     bool doRelevantChangesExist();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
-    void setFirstLine(QtNumberType firstLine);
+    void setFirstLine(LineRef firstLine);
     void setHorizScrollOffset(const int horizScrollOffset);
 
     void slotGoCurrent();

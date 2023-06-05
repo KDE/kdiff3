@@ -33,7 +33,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
 {
     program = QString();
     args.clear();
-    for(int i = 0; i < cmd.length(); ++i)
+    for(QtSizeType i = 0; i < cmd.length(); ++i)
     {
         while(i < cmd.length() && cmd[i].isSpace())
         {

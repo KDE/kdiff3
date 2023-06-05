@@ -54,15 +54,18 @@ void Overview::slotRedraw()
     update();
 }
 
-void Overview::setRange(QtNumberType firstLine, QtNumberType pageHeight)
+void Overview::setRange(LineRef firstLine, QtNumberType pageHeight)
 {
+    assert(firstLine.isValid());
     m_firstLine = firstLine;
     m_pageHeight = pageHeight;
     update();
 }
-void Overview::setFirstLine(QtNumberType firstLine)
+
+void Overview::setFirstLine(LineRef firstLine)
 {
     QScrollBar* scrollBar = qobject_cast<QScrollBar*>(sender());
+    assert(firstLine.isValid());
 
     if(Q_UNLIKELY(scrollBar == nullptr))
     {

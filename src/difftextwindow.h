@@ -187,7 +187,7 @@ class DiffTextWindowFrame: public QWidget
     void encodingChanged(QTextCodec*);
 
   public Q_SLOTS:
-    void setFirstLine(QtNumberType firstLine);
+    void setFirstLine(LineRef firstLine);
 
   protected:
     bool eventFilter(QObject*, QEvent*) override;

@@ -927,7 +927,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
         QVector<QTextLayout::FormatRange> formats;
         QTextLayout::FormatRange formatRange;
         formatRange.start = 0;
-        formatRange.length = textLayout.text().length();
+        formatRange.length = SafeInt<int>(textLayout.text().length());
         formatRange.format.setFont(m_pDiffTextWindow->font());
         formats.append(formatRange);
         textLayout.setFormats(formats);
@@ -1945,7 +1945,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
     return currentLine;
 }
 
-void DiffTextWindowFrame::setFirstLine(QtNumberType firstLine)
+void DiffTextWindowFrame::setFirstLine(LineRef firstLine)
 {
     DiffTextWindow* pDTW = m_pDiffTextWindow;
     if(pDTW && pDTW->getDiff3LineVector())

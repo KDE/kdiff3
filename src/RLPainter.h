@@ -11,6 +11,8 @@
 #ifndef RLPAINTER_H
 #define RLPAINTER_H
 
+#include "TypeUtils.h"
+
 #include <QPainter>
 // Helper class that swaps left and right for some commands.
 
@@ -51,15 +53,17 @@ class RLPainter: public QPainter
 
     void drawText(int x, int y, const QString& s, bool bAdapt = false)
     {
+        int len = SafeInt<int>(s.length());
         Qt::LayoutDirection ld = (!bRightToLeft || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
         // Qt will automaticly reverse the text as needed just set the layout direction
         QPainter::setLayoutDirection(ld);
         if(ld == Qt::RightToLeft)
         {
-            QPainter::drawText(m_xOffset - m_fontWidth * s.length() - x, y, s);
+
+            QPainter::drawText(m_xOffset - m_fontWidth * len - x, y, s);
             return;
         }
-        QPainter::drawText(m_xOffset - m_fontWidth * s.length() + x, y, s);
+        QPainter::drawText(m_xOffset - m_fontWidth * len + x, y, s);
     }
 
     void drawLine(int x1, int y1, int x2, int y2)

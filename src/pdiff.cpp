@@ -341,9 +341,11 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     }
 
     // Calc needed lines for display
-    if(m_diff3LineList.size() <= limits<QtNumberType>::max())
-        m_neededLines = (QtNumberType)m_diff3LineList.size();
-    else
+    try
+    {
+        m_neededLines = SafeInt<LineType>(m_diff3LineList.size());
+    }
+    catch(std::exception)
     {
         mErrors.append(i18n("Too many lines in diff. Skipping file."));
     }
@@ -1511,7 +1513,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
         }
         else
         {
-            m_neededLines = (QtNumberType)m_diff3LineList.size();
+            m_neededLines = SafeInt<LineType>(m_diff3LineList.size());
             if(m_pDiffTextWindow1)
                 m_pDiffTextWindow1->recalcWordWrap(false, 0, 0);
             if(m_pDiffTextWindow2)
@@ -1596,7 +1598,7 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
         if(m_pOverview)
             m_pOverview->slotRedraw();
         if(DiffTextWindow::mVScrollBar)
-            DiffTextWindow::mVScrollBar->setRange(0, std::max(0, QtNumberType(m_neededLines + 1 - m_DTWHeight)));
+            DiffTextWindow::mVScrollBar->setRange(0, std::max<qint32>(0, SafeInt<qint32>(m_neededLines + 1 - m_DTWHeight)));
         if(m_pDiffTextWindow1)
         {
             if(DiffTextWindow::mVScrollBar)
