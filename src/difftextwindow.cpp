@@ -62,13 +62,19 @@ class RecalcWordWrapRunnable : public QRunnable
 {
   private:
     static QAtomicInt s_runnableCount;
-    DiffTextWindow* m_pDTW;
+    std::shared_ptr<DiffTextWindow> m_pDTW = nullptr;
     int m_visibleTextWidth;
     QtSizeType m_cacheIdx;
+    /*
+        Globals are not thread-safe due unpredictable distruction order and timing issues.
+        The local shared_ptr in each Runnable prevents pre-mature distuction.
+        Note the global itself must also be a shared_ptr.
+    */
+    std::shared_ptr<ProgressDialog> progressDialog = g_pProgressDialog;
 
   public:
     static QAtomicInt s_maxNofRunnables;
-    RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, QtSizeType cacheIdx)
+    RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx)
         : m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
         setAutoDelete(true);
@@ -76,9 +82,11 @@ class RecalcWordWrapRunnable : public QRunnable
     }
     void run() override
     {
+        assert(m_pDTW != nullptr && progressDialog != nullptr);
+
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
-        g_pProgressDialog->setCurrent(s_maxNofRunnables - getAtomic(s_runnableCount));
+        progressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
             Q_EMIT m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
@@ -1631,7 +1639,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             for(QtSizeType i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
                 d->m_wrapLineCacheList.append(QVector<WrapLineCacheData>());
-                s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
             }
         }
         else
@@ -1649,7 +1657,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
-                s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
             }
         }
         else
@@ -1850,7 +1858,7 @@ class DiffTextWindowFrameData
 
   private:
     friend DiffTextWindowFrame;
-    DiffTextWindow* m_pDiffTextWindow;
+    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow;
     FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
     QSharedPointer<Options> m_pOptions;
@@ -1873,7 +1881,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     chk_connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     chk_connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
-    d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx, app);
+    d->m_pDiffTextWindow = std::make_shared<DiffTextWindow>(this, pOptions, winIdx, app);
     d->m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
     pVTopLayout->setContentsMargins(2, 2, 2, 2);
@@ -1908,7 +1916,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     pVL->setContentsMargins(0, 0, 0, 0);
     pVL->setSpacing(0);
     pVL->addWidget(const_cast<QWidget*>(d->getTopLineWidget()), 0);
-    pVL->addWidget(d->m_pDiffTextWindow, 1);
+    pVL->addWidget(d->m_pDiffTextWindow.get(), 1);
 
     d->m_pDiffTextWindow->installEventFilter(this);
     d->m_pFileSelection->installEventFilter(this);
@@ -1920,7 +1928,7 @@ DiffTextWindowFrame::~DiffTextWindowFrame() = default;
 
 void DiffTextWindowFrame::init()
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+    DiffTextWindow* pDTW = d->m_pDiffTextWindow.get();
     if(pDTW)
     {
         QString s = QDir::toNativeSeparators(pDTW->getFileName());
@@ -1954,7 +1962,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
 
 void DiffTextWindowFrame::setFirstLine(QtNumberType firstLine)
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+    DiffTextWindow* pDTW = d->m_pDiffTextWindow.get();
     if(pDTW && pDTW->getDiff3LineVector())
     {
         QString s = i18n("Top line");
@@ -1975,7 +1983,7 @@ void DiffTextWindowFrame::setFirstLine(QtNumberType firstLine)
     }
 }
 
-DiffTextWindow* DiffTextWindowFrame::getDiffTextWindow()
+std::shared_ptr<DiffTextWindow> DiffTextWindowFrame::getDiffTextWindow()
 {
     return d->m_pDiffTextWindow;
 }
@@ -2013,7 +2021,7 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
 
 void DiffTextWindowFrame::slotReturnPressed()
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+    DiffTextWindow* pDTW = d->m_pDiffTextWindow.get();
     if(pDTW->getFileName() != d->m_pFileSelection->text())
     {
         Q_EMIT fileNameChanged(d->m_pFileSelection->text(), pDTW->getWindowIndex());
@@ -2027,7 +2035,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     QUrl newURL = QFileDialog::getOpenFileUrl(this, i18n("Open File"), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile));
     if(!newURL.isEmpty())
     {
-        DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+        DiffTextWindow* pDTW = d->m_pDiffTextWindow.get();
         Q_EMIT fileNameChanged(newURL.url(), pDTW->getWindowIndex());
     }
 }

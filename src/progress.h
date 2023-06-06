@@ -125,6 +125,6 @@ class ProgressDialog: public QDialog
     std::list<boost::signals2::scoped_connection> connections;
 };
 
-extern ProgressDialog* g_pProgressDialog;
+extern std::shared_ptr<ProgressDialog> g_pProgressDialog;
 
 #endif
