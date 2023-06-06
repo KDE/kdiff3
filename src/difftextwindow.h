@@ -68,24 +68,24 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
 
     [[nodiscard]] QString getSelection() const;
     [[nodiscard]] LineRef getFirstLine() const;
-    LineRef calcTopLineInFile(const LineRef firstLine);
+    LineRef calcTopLineInFile(const LineRef firstLine) const;
 
     [[nodiscard]] int getMaxTextWidth() const;
     [[nodiscard]] LineType getNofLines() const;
     [[nodiscard]] LineType getNofVisibleLines() const;
     [[nodiscard]] int getVisibleTextAreaWidth() const;
 
-    LineType convertLineToDiff3LineIdx(LineRef line);
-    LineRef convertDiff3LineIdxToLine(LineType d3lIdx);
+    LineType convertLineToDiff3LineIdx(const LineRef line) const;
+    LineRef convertDiff3LineIdxToLine(const LineType d3lIdx) const;
 
-    void convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos);
-    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos);
+    void convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos) const;
+    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos) const;
 
-    void convertSelectionToD3LCoords();
+    void convertSelectionToD3LCoords() const;
 
     bool findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive);
     void setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, int endPos, LineRef& l, int& p);
-    void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType);
+    void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType) const;
 
     void setPaintingAllowed(bool bAllowPainting);
     void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
@@ -125,7 +125,7 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
 
     void finishDrop();
 
-    void firstLineChanged(LineRef firstLine);
+    void firstLineChanged(const LineRef firstLine);
   public Q_SLOTS:
     void setFirstLine(LineRef line);
     void setHorizScrollOffset(int horizScrollOffset);

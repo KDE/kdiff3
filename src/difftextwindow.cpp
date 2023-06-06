@@ -512,7 +512,7 @@ LineType DiffTextWindow::getNofLines() const
     return static_cast<LineType>(d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size());
 }
 
-LineType DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
+LineType DiffTextWindow::convertLineToDiff3LineIdx(const LineRef line) const
 {
     if(line.isValid() && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
         return d->m_diff3WrapLineVector[std::min((LineType)line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
@@ -520,7 +520,7 @@ LineType DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
         return line;
 }
 
-LineRef DiffTextWindow::convertDiff3LineIdxToLine(LineType d3lIdx)
+LineRef DiffTextWindow::convertDiff3LineIdxToLine(const LineType d3lIdx) const
 {
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
         return (*d->getDiff3LineVector())[std::min((QtSizeType)d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
@@ -1462,7 +1462,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& 
     return false;
 }
 
-void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos)
+void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos) const
 {
     if(d->m_bWordWrap)
     {
@@ -1483,7 +1483,7 @@ void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, L
     }
 }
 
-void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos)
+void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos) const
 {
     if(d->m_bWordWrap)
     {
@@ -1585,7 +1585,7 @@ LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnSc
     return line;
 }
 
-void DiffTextWindow::getSelectionRange(LineRef* pFirstLine, LineRef* pLastLine, e_CoordType coordType)
+void DiffTextWindow::getSelectionRange(LineRef* pFirstLine, LineRef* pLastLine, e_CoordType coordType) const
 {
     if(pFirstLine)
         *pFirstLine = d->convertLineOnScreenToLineInSource(d->m_selection.beginLine(), coordType, true);
@@ -1593,7 +1593,7 @@ void DiffTextWindow::getSelectionRange(LineRef* pFirstLine, LineRef* pLastLine, 
         *pLastLine = d->convertLineOnScreenToLineInSource(d->m_selection.endLine(), coordType, false);
 }
 
-void DiffTextWindow::convertSelectionToD3LCoords()
+void DiffTextWindow::convertSelectionToD3LCoords() const
 {
     if(d->getDiff3LineVector() == nullptr || !updatesEnabled() || !isVisible() || d->m_selection.isEmpty())
     {
@@ -1941,7 +1941,7 @@ void DiffTextWindowFrame::setupConnections(const KDiff3App* app)
 }
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
-LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
+LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine) const
 {
     LineRef currentLine;
     for(QtSizeType i = convertLineToDiff3LineIdx(firstLine); i < d->getDiff3LineVector()->size(); ++i)
@@ -1953,7 +1953,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
     return currentLine;
 }
 
-void DiffTextWindowFrame::setFirstLine(LineRef firstLine)
+void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
 {
     DiffTextWindow* pDTW = m_pDiffTextWindow.get();
     if(pDTW && pDTW->getDiff3LineVector())
