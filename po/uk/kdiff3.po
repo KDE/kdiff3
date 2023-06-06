@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 00:49+0000\n"
+"POT-Creation-Date: 2023-06-06 00:48+0000\n"
 "PO-Revision-Date: 2023-05-24 08:21+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -121,67 +121,67 @@ msgstr "Файл %1: рядок %2"
 msgid "File %1: Line not available"
 msgstr "Файл %1: рядок недоступний"
 
-#: difftextwindow.cpp:1891
+#: difftextwindow.cpp:1892
 #, kde-format
 msgid "Encoding:"
 msgstr "Кодування:"
 
-#: difftextwindow.cpp:1895 mergeresultwindow.cpp:2786 optiondialog.cpp:805
+#: difftextwindow.cpp:1896 mergeresultwindow.cpp:2786 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Стиль кінців рядка:"
 
-#: difftextwindow.cpp:1920
+#: difftextwindow.cpp:1921
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Основний)"
 
-#: difftextwindow.cpp:1922
+#: difftextwindow.cpp:1923
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Кодування: %1"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2832
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2832
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2831
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2831
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1923
+#: difftextwindow.cpp:1924
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Стиль кінців рядка: %1"
 
-#: difftextwindow.cpp:1924
+#: difftextwindow.cpp:1925
 #, kde-format
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: difftextwindow.cpp:1952 kdiff3.cpp:930
+#: difftextwindow.cpp:1953 kdiff3.cpp:930
 #, kde-format
 msgid "Top line"
 msgstr "Верхній рядок"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "End"
 msgstr "Кінець"
 
-#: difftextwindow.cpp:2019 smalldialogs.cpp:163
+#: difftextwindow.cpp:2020 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Відкрити файл"
 
-#: difftextwindow.cpp:2065 optiondialog.cpp:390
+#: difftextwindow.cpp:2066 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Юнікод, 8 бітів"
 
-#: difftextwindow.cpp:2081
+#: difftextwindow.cpp:2082
 #, kde-format
 msgid "Other"
 msgstr "Інше"
@@ -358,7 +358,7 @@ msgstr ""
 "об'єднання і пересканувати теку?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:786 kdiff3.cpp:796 kdiff3.cpp:808
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1747 pdiff.cpp:1757
+#: mergeresultwindow.cpp:324 pdiff.cpp:872 pdiff.cpp:1749 pdiff.cpp:1759
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1178,12 +1178,12 @@ msgstr "Під час порівняння тек параметр --auto про
 msgid "Saving failed."
 msgstr "Помилка збереження."
 
-#: kdiff3.cpp:557 pdiff.cpp:935
+#: kdiff3.cpp:557 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Під час спроби відкриття цих файлів сталася помилка:"
 
-#: kdiff3.cpp:566 pdiff.cpp:944
+#: kdiff3.cpp:566 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "Помилка відкриття файла"
@@ -1642,13 +1642,13 @@ msgid "Toggle Between Folder && Text View"
 msgstr "Перемкнутися між переглядом тексту і тек"
 
 #: kdiff3.cpp:739 kdiff3.cpp:841 kdiff3.cpp:866 kdiff3.cpp:1127 kdiff3.cpp:1148
-#: pdiff.cpp:954 pdiff.cpp:1023 pdiff.cpp:1059 pdiff.cpp:1068 pdiff.cpp:1126
-#: pdiff.cpp:1134
+#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
+#: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Готово."
 
-#: kdiff3.cpp:785 pdiff.cpp:1746
+#: kdiff3.cpp:785 pdiff.cpp:1748
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Результат об'єднання не збережено."
@@ -1663,12 +1663,12 @@ msgstr "Зберегти і вийти"
 msgid "Quit Without Saving"
 msgstr "Вийти без збереження"
 
-#: kdiff3.cpp:796 pdiff.cpp:1757
+#: kdiff3.cpp:796 pdiff.cpp:1759
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Помилка під час збереження результатів об'єднання."
 
-#: kdiff3.cpp:807 pdiff.cpp:869
+#: kdiff3.cpp:807 pdiff.cpp:871
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2005,7 +2005,7 @@ msgstr ""
 "Вивід було змінено.\n"
 "Якщо ви продовжите, зміни буде втрачено."
 
-#: mergeresultwindow.cpp:768 pdiff.cpp:745
+#: mergeresultwindow.cpp:768 pdiff.cpp:747
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Всі вхідні файли однакові."
@@ -2016,7 +2016,7 @@ msgid "All input files contain the same text."
 msgstr "Всі вхідні файли містять однаковий текст."
 
 #: mergeresultwindow.cpp:774 mergeresultwindow.cpp:778
-#: mergeresultwindow.cpp:782 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: mergeresultwindow.cpp:782 pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Файли %1 і %2 двійково однакові.\n"
@@ -3309,24 +3309,24 @@ msgstr "Linediff: A <-> C"
 msgid "An internal error occurred: %1"
 msgstr "Сталася внутрішня помилка: %1"
 
-#: pdiff.cpp:348
+#: pdiff.cpp:350
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Забагато рядків у різниці. Пропускаємо файл."
 
-#: pdiff.cpp:747
+#: pdiff.cpp:749
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Всі вхідні файли містять однаковий текст, але не є двійково однаковими."
 
-#: pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
+#: pdiff.cpp:755 pdiff.cpp:759 pdiff.cpp:763
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Файли %1 і %2 містять однаковий текст, але не є двійково однаковими. \n"
 
-#: pdiff.cpp:771
+#: pdiff.cpp:773
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3338,17 +3338,17 @@ msgstr ""
 "файлів.\n"
 "Продовжуйте, але можливі помилки."
 
-#: pdiff.cpp:781
+#: pdiff.cpp:783
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:783
+#: pdiff.cpp:785
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:785
+#: pdiff.cpp:787
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3363,82 +3363,82 @@ msgstr ""
 "лежить лише на вас.\n"
 "Файли вхідних даних, яких стосується це зауваження, зберігаються у %1."
 
-#: pdiff.cpp:871
+#: pdiff.cpp:873
 #, kde-format
 msgid "Abort"
 msgstr "Перервати"
 
-#: pdiff.cpp:872
+#: pdiff.cpp:874
 #, kde-format
 msgid "Continue Merging"
 msgstr "Продовжити об'єднання"
 
-#: pdiff.cpp:877 pdiff.cpp:968
+#: pdiff.cpp:879 pdiff.cpp:970
 #, kde-format
 msgid "Opening files..."
 msgstr "Відкриття файлів…"
 
-#: pdiff.cpp:1057
+#: pdiff.cpp:1059
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Вирізання вибраного…"
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Копіювання вибраного до кишені…"
 
-#: pdiff.cpp:1073
+#: pdiff.cpp:1075
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Вставлення вмісту кишені…"
 
-#: pdiff.cpp:1193
+#: pdiff.cpp:1195
 #, kde-format
 msgid "Ok"
 msgstr "Гаразд"
 
-#: pdiff.cpp:1209
+#: pdiff.cpp:1211
 #, kde-format
 msgid "Go to Line"
 msgstr "Перейти до рядка"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Перенесення рядків («Скасувати» вимикає перенесення)"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Обчислюємо максимальну ширину для горизонтальної смужки гортання"
 
-#: pdiff.cpp:1748
+#: pdiff.cpp:1750
 #, kde-format
 msgid "Save && Continue"
 msgstr "Зберегти й продовжити"
 
-#: pdiff.cpp:1749
+#: pdiff.cpp:1751
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Продовжити без збереження"
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search complete."
 msgstr "Пошук завершено."
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search Complete"
 msgstr "Пошук завершено"
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Нічого не позначено у жодному з вхідних вікон різниці."
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Помилка під час додавання вручну діапазону diff"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 00:49+0000\n"
+"POT-Creation-Date: 2023-06-06 00:48+0000\n"
 "PO-Revision-Date: 2023-05-24 13:04+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -121,67 +121,67 @@ msgstr "Fitxer %1: Línia %2"
 msgid "File %1: Line not available"
 msgstr "Fitxer %1: Línia no disponible"
 
-#: difftextwindow.cpp:1891
+#: difftextwindow.cpp:1892
 #, kde-format
 msgid "Encoding:"
 msgstr "Codificació:"
 
-#: difftextwindow.cpp:1895 mergeresultwindow.cpp:2786 optiondialog.cpp:805
+#: difftextwindow.cpp:1896 mergeresultwindow.cpp:2786 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Estil del salt de línia:"
 
-#: difftextwindow.cpp:1920
+#: difftextwindow.cpp:1921
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Base)"
 
-#: difftextwindow.cpp:1922
+#: difftextwindow.cpp:1923
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Codificació: %1"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2832
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2832
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2831
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2831
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1923
+#: difftextwindow.cpp:1924
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Estil del salt de línia: %1"
 
-#: difftextwindow.cpp:1924
+#: difftextwindow.cpp:1925
 #, kde-format
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: difftextwindow.cpp:1952 kdiff3.cpp:930
+#: difftextwindow.cpp:1953 kdiff3.cpp:930
 #, kde-format
 msgid "Top line"
 msgstr "Línia superior"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "End"
 msgstr "Final"
 
-#: difftextwindow.cpp:2019 smalldialogs.cpp:163
+#: difftextwindow.cpp:2020 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Obri un fitxer"
 
-#: difftextwindow.cpp:2065 optiondialog.cpp:390
+#: difftextwindow.cpp:2066 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
 
-#: difftextwindow.cpp:2081
+#: difftextwindow.cpp:2082
 #, kde-format
 msgid "Other"
 msgstr "Altres"
@@ -358,7 +358,7 @@ msgstr ""
 "fusió i tornar a explorar la carpeta?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:786 kdiff3.cpp:796 kdiff3.cpp:808
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1747 pdiff.cpp:1757
+#: mergeresultwindow.cpp:324 pdiff.cpp:872 pdiff.cpp:1749 pdiff.cpp:1759
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1189,12 +1189,12 @@ msgstr "L'opció --auto s'ignora en comparar carpetes."
 msgid "Saving failed."
 msgstr "La guardada ha fallat."
 
-#: kdiff3.cpp:557 pdiff.cpp:935
+#: kdiff3.cpp:557 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "No s'ha pogut obrir estos fitxers:"
 
-#: kdiff3.cpp:566 pdiff.cpp:944
+#: kdiff3.cpp:566 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "S'ha produït un error en obrir el fitxer"
@@ -1657,13 +1657,13 @@ msgid "Toggle Between Folder && Text View"
 msgstr "Canvia entre la vista de carpetes i text"
 
 #: kdiff3.cpp:739 kdiff3.cpp:841 kdiff3.cpp:866 kdiff3.cpp:1127 kdiff3.cpp:1148
-#: pdiff.cpp:954 pdiff.cpp:1023 pdiff.cpp:1059 pdiff.cpp:1068 pdiff.cpp:1126
-#: pdiff.cpp:1134
+#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
+#: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Preparat."
 
-#: kdiff3.cpp:785 pdiff.cpp:1746
+#: kdiff3.cpp:785 pdiff.cpp:1748
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultat de la fusió no s'ha guardat."
@@ -1678,12 +1678,12 @@ msgstr "Guarda i ix"
 msgid "Quit Without Saving"
 msgstr "Ix sense guardar"
 
-#: kdiff3.cpp:796 pdiff.cpp:1757
+#: kdiff3.cpp:796 pdiff.cpp:1759
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "No s'ha pogut guardar el resultat de la fusió."
 
-#: kdiff3.cpp:807 pdiff.cpp:869
+#: kdiff3.cpp:807 pdiff.cpp:871
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2022,7 +2022,7 @@ msgstr ""
 "S'ha modificat l'eixida.\n"
 "Si continueu, es perdran els canvis."
 
-#: mergeresultwindow.cpp:768 pdiff.cpp:745
+#: mergeresultwindow.cpp:768 pdiff.cpp:747
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Tots els fitxers d'entrada són binàriament iguals."
@@ -2033,7 +2033,7 @@ msgid "All input files contain the same text."
 msgstr "Tots els fitxers d'entrada contenen el mateix text."
 
 #: mergeresultwindow.cpp:774 mergeresultwindow.cpp:778
-#: mergeresultwindow.cpp:782 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: mergeresultwindow.cpp:782 pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Els fitxers %1 i %2 són binàriament iguals.\n"
@@ -3342,25 +3342,25 @@ msgstr "Diferència de línia: A <-> C"
 msgid "An internal error occurred: %1"
 msgstr "S'ha produït un error intern: %1"
 
-#: pdiff.cpp:348
+#: pdiff.cpp:350
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Hi ha massa línies en les diferències. S'omet el fitxer.."
 
-#: pdiff.cpp:747
+#: pdiff.cpp:749
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Tots els fitxers d'entrada contenen el mateix text però no són binàriament "
 "iguals."
 
-#: pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
+#: pdiff.cpp:755 pdiff.cpp:759 pdiff.cpp:763
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Els fitxers %1 i %2 tenen el mateix text, però binàriament no són iguals. \n"
 
-#: pdiff.cpp:771
+#: pdiff.cpp:773
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3372,17 +3372,17 @@ msgstr ""
 "binàries.\n"
 "Continueu davall la vostra responsabilitat."
 
-#: pdiff.cpp:781
+#: pdiff.cpp:783
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:783
+#: pdiff.cpp:785
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:785
+#: pdiff.cpp:787
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3398,83 +3398,83 @@ msgstr ""
 "responsabilitat.\n"
 "Els fitxers d'entrada afectats són a %1."
 
-#: pdiff.cpp:871
+#: pdiff.cpp:873
 #, kde-format
 msgid "Abort"
 msgstr "Interromp"
 
-#: pdiff.cpp:872
+#: pdiff.cpp:874
 #, kde-format
 msgid "Continue Merging"
 msgstr "Continua fusionant"
 
-#: pdiff.cpp:877 pdiff.cpp:968
+#: pdiff.cpp:879 pdiff.cpp:970
 #, kde-format
 msgid "Opening files..."
 msgstr "S'estan obrint els fitxers..."
 
-#: pdiff.cpp:1057
+#: pdiff.cpp:1059
 #, kde-format
 msgid "Cutting selection..."
 msgstr "S'està tallant la selecció..."
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "S'està copiant la selecció al porta-retalls..."
 
-#: pdiff.cpp:1073
+#: pdiff.cpp:1075
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "S'està inserint el contingut del porta-retalls..."
 
-#: pdiff.cpp:1193
+#: pdiff.cpp:1195
 #, kde-format
 msgid "Ok"
 msgstr "D'acord"
 
-#: pdiff.cpp:1209
+#: pdiff.cpp:1211
 #, kde-format
 msgid "Go to Line"
 msgstr "Ves a la línia"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajust de paraula (Cancel·la desactiva l'ajust de paraula)"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "S'està calculant l'amplària màxima per a la barra de desplaçament horitzontal"
 
-#: pdiff.cpp:1748
+#: pdiff.cpp:1750
 #, kde-format
 msgid "Save && Continue"
 msgstr "Guarda i continua"
 
-#: pdiff.cpp:1749
+#: pdiff.cpp:1751
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continua sense guardar"
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search complete."
 msgstr "S'ha finalitzat la busca."
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search Complete"
 msgstr "Busca completa"
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "No hi ha res seleccionat en cap de les finestres de diferències."
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "S'ha produït un error en afegir un interval manual de diferències"

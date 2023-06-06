@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 00:49+0000\n"
+"POT-Creation-Date: 2023-06-06 00:48+0000\n"
 "PO-Revision-Date: 2023-04-14 21:53+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -120,67 +120,67 @@ msgstr "Soubor %1: Řádek %2"
 msgid "File %1: Line not available"
 msgstr "Soubor %1: Řádek není dostupný"
 
-#: difftextwindow.cpp:1891
+#: difftextwindow.cpp:1892
 #, kde-format
 msgid "Encoding:"
 msgstr "Kódování:"
 
-#: difftextwindow.cpp:1895 mergeresultwindow.cpp:2786 optiondialog.cpp:805
+#: difftextwindow.cpp:1896 mergeresultwindow.cpp:2786 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Styl konce řádku:"
 
-#: difftextwindow.cpp:1920
+#: difftextwindow.cpp:1921
 #, kde-format
 msgid "A (Base)"
 msgstr "A (základní)"
 
-#: difftextwindow.cpp:1922
+#: difftextwindow.cpp:1923
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kódování: %1"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2832
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2832
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2831
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2831
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1923
+#: difftextwindow.cpp:1924
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Styl konce řádku: %1"
 
-#: difftextwindow.cpp:1924
+#: difftextwindow.cpp:1925
 #, kde-format
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: difftextwindow.cpp:1952 kdiff3.cpp:930
+#: difftextwindow.cpp:1953 kdiff3.cpp:930
 #, kde-format
 msgid "Top line"
 msgstr "Horní řádek"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "End"
 msgstr "Konec"
 
-#: difftextwindow.cpp:2019 smalldialogs.cpp:163
+#: difftextwindow.cpp:2020 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Otevřít soubor"
 
-#: difftextwindow.cpp:2065 optiondialog.cpp:390
+#: difftextwindow.cpp:2066 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2081
+#: difftextwindow.cpp:2082
 #, kde-format
 msgid "Other"
 msgstr "Jiné"
@@ -357,7 +357,7 @@ msgstr ""
 "prohledat složku?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:786 kdiff3.cpp:796 kdiff3.cpp:808
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1747 pdiff.cpp:1757
+#: mergeresultwindow.cpp:324 pdiff.cpp:872 pdiff.cpp:1749 pdiff.cpp:1759
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1176,12 +1176,12 @@ msgstr "Volba --auto je při porovnávání složek ignorována."
 msgid "Saving failed."
 msgstr "Ukládání selhalo."
 
-#: kdiff3.cpp:557 pdiff.cpp:935
+#: kdiff3.cpp:557 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Otevření těchto souborů selhalo:"
 
-#: kdiff3.cpp:566 pdiff.cpp:944
+#: kdiff3.cpp:566 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "Chyba otevírání souboru"
@@ -1652,13 +1652,13 @@ msgid "Toggle Between Folder && Text View"
 msgstr "Přepnout mezi zobrazením složek a textu"
 
 #: kdiff3.cpp:739 kdiff3.cpp:841 kdiff3.cpp:866 kdiff3.cpp:1127 kdiff3.cpp:1148
-#: pdiff.cpp:954 pdiff.cpp:1023 pdiff.cpp:1059 pdiff.cpp:1068 pdiff.cpp:1126
-#: pdiff.cpp:1134
+#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
+#: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "Připraven."
 
-#: kdiff3.cpp:785 pdiff.cpp:1746
+#: kdiff3.cpp:785 pdiff.cpp:1748
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Výsledek sloučení nebyl uložen."
@@ -1673,12 +1673,12 @@ msgstr "Uložit a ukončit"
 msgid "Quit Without Saving"
 msgstr "Ukončit bez uložení"
 
-#: kdiff3.cpp:796 pdiff.cpp:1757
+#: kdiff3.cpp:796 pdiff.cpp:1759
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Uložení výsledku sloučení selhalo."
 
-#: kdiff3.cpp:807 pdiff.cpp:869
+#: kdiff3.cpp:807 pdiff.cpp:871
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2014,7 +2014,7 @@ msgstr ""
 "Výstup byl pozměněn.\n"
 "Pokud budete pokračovat, vaše změny budou ztraceny."
 
-#: mergeresultwindow.cpp:768 pdiff.cpp:745
+#: mergeresultwindow.cpp:768 pdiff.cpp:747
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Všechny vstupní soubory jsou binárně shodné."
@@ -2025,7 +2025,7 @@ msgid "All input files contain the same text."
 msgstr "Všechny vstupní soubory obsahují shodný text."
 
 #: mergeresultwindow.cpp:774 mergeresultwindow.cpp:778
-#: mergeresultwindow.cpp:782 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: mergeresultwindow.cpp:782 pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Soubor %1 a %2 je binárně shodný.\n"
@@ -3466,23 +3466,23 @@ msgstr "Rozdíly řádků: A <-> C"
 msgid "An internal error occurred: %1"
 msgstr "Nastala vnitřní chyba: %1"
 
-#: pdiff.cpp:348
+#: pdiff.cpp:350
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr ""
 
-#: pdiff.cpp:747
+#: pdiff.cpp:749
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Všechny vstupní soubory obsahují stejný text, ale nejsou binárně shodné."
 
-#: pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
+#: pdiff.cpp:755 pdiff.cpp:759 pdiff.cpp:763
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "Soubor %1 a %2 obsahuje stejný text, ale není binárně shodný. \n"
 
-#: pdiff.cpp:771
+#: pdiff.cpp:773
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3493,17 +3493,17 @@ msgstr ""
 "Vezměte na vědomí, že slučování v KDiff3 nebylo myšleno pro binární data.\n"
 "Pokračování na vlastní riziko."
 
-#: pdiff.cpp:781
+#: pdiff.cpp:783
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:783
+#: pdiff.cpp:785
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:785
+#: pdiff.cpp:787
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3516,82 +3516,82 @@ msgstr ""
 "Neukládejte výsledek, pokud si nejste jisti. Pokračujte na vlastní riziko.\n"
 "Dotčené vstupní soubory jsou v %1."
 
-#: pdiff.cpp:871
+#: pdiff.cpp:873
 #, kde-format
 msgid "Abort"
 msgstr "Přerušit"
 
-#: pdiff.cpp:872
+#: pdiff.cpp:874
 #, kde-format
 msgid "Continue Merging"
 msgstr "Pokračovat se slučováním"
 
-#: pdiff.cpp:877 pdiff.cpp:968
+#: pdiff.cpp:879 pdiff.cpp:970
 #, kde-format
 msgid "Opening files..."
 msgstr "Otevírám soubory..."
 
-#: pdiff.cpp:1057
+#: pdiff.cpp:1059
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Vyjímám výběr..."
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Kopíruji výběr do schránky..."
 
-#: pdiff.cpp:1073
+#: pdiff.cpp:1075
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Vkládám obsah schránky..."
 
-#: pdiff.cpp:1193
+#: pdiff.cpp:1195
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1209
+#: pdiff.cpp:1211
 #, kde-format
 msgid "Go to Line"
 msgstr "Přejít na řádek"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Zalamování slov (Zručit vypne zalamování slov)"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Počítám maximální šířku pro vodorovný posuvník"
 
-#: pdiff.cpp:1748
+#: pdiff.cpp:1750
 #, kde-format
 msgid "Save && Continue"
 msgstr "Uložit a pokračovat"
 
-#: pdiff.cpp:1749
+#: pdiff.cpp:1751
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Pokračovat bez ukládání"
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search complete."
 msgstr "Vyhledávání dokončeno."
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search Complete"
 msgstr "Vyhledávání dokončeno"
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Není nic vybráno v žádném vstupním okně rozdílů."
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Chyba ručního přidávání rozsahu k porovnání"

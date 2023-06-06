@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-03 00:49+0000\n"
+"POT-Creation-Date: 2023-06-06 00:48+0000\n"
 "PO-Revision-Date: 2023-04-22 00:51+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -119,67 +119,67 @@ msgstr "파일 %1: 줄 %2"
 msgid "File %1: Line not available"
 msgstr "파일 %1: 줄을 사용할 수 없음"
 
-#: difftextwindow.cpp:1891
+#: difftextwindow.cpp:1892
 #, kde-format
 msgid "Encoding:"
 msgstr "인코딩:"
 
-#: difftextwindow.cpp:1895 mergeresultwindow.cpp:2786 optiondialog.cpp:805
+#: difftextwindow.cpp:1896 mergeresultwindow.cpp:2786 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "줄 끝 스타일:"
 
-#: difftextwindow.cpp:1920
+#: difftextwindow.cpp:1921
 #, kde-format
 msgid "A (Base)"
 msgstr "A(기반)"
 
-#: difftextwindow.cpp:1922
+#: difftextwindow.cpp:1923
 #, kde-format
 msgid "Encoding: %1"
 msgstr "인코딩: %1"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2832
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2832
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1923 mergeresultwindow.cpp:2831
+#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2831
 #, kde-format
 msgid "Unix"
 msgstr "유닉스"
 
-#: difftextwindow.cpp:1923
+#: difftextwindow.cpp:1924
 #, kde-format
 msgid "Line end style: %1"
 msgstr "줄 끝 스타일: %1"
 
-#: difftextwindow.cpp:1924
+#: difftextwindow.cpp:1925
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: difftextwindow.cpp:1952 kdiff3.cpp:930
+#: difftextwindow.cpp:1953 kdiff3.cpp:930
 #, kde-format
 msgid "Top line"
 msgstr "맨 첫 줄"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "End"
 msgstr "끝"
 
-#: difftextwindow.cpp:2019 smalldialogs.cpp:163
+#: difftextwindow.cpp:2020 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "파일 열기"
 
-#: difftextwindow.cpp:2065 optiondialog.cpp:390
+#: difftextwindow.cpp:2066 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "유니코드, 8비트"
 
-#: difftextwindow.cpp:2081
+#: difftextwindow.cpp:2082
 #, kde-format
 msgid "Other"
 msgstr "기타"
@@ -355,7 +355,7 @@ msgstr ""
 "폴더를 합치고 있습니다. 합치기 작업을 중단하고 폴더를 다시 탐색하시겠습니까?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:786 kdiff3.cpp:796 kdiff3.cpp:808
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1747 pdiff.cpp:1757
+#: mergeresultwindow.cpp:324 pdiff.cpp:872 pdiff.cpp:1749 pdiff.cpp:1759
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1178,12 +1178,12 @@ msgstr "폴더 비교 시 --auto 옵션을 무시합니다."
 msgid "Saving failed."
 msgstr "저장 실패."
 
-#: kdiff3.cpp:557 pdiff.cpp:935
+#: kdiff3.cpp:557 pdiff.cpp:937
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "다음 파일을 여는 데 실패했습니다:"
 
-#: kdiff3.cpp:566 pdiff.cpp:944
+#: kdiff3.cpp:566 pdiff.cpp:946
 #, kde-format
 msgid "File open error"
 msgstr "파일 열기 오류"
@@ -1651,13 +1651,13 @@ msgid "Toggle Between Folder && Text View"
 msgstr "폴더와 텍스트 보기 간 전환"
 
 #: kdiff3.cpp:739 kdiff3.cpp:841 kdiff3.cpp:866 kdiff3.cpp:1127 kdiff3.cpp:1148
-#: pdiff.cpp:954 pdiff.cpp:1023 pdiff.cpp:1059 pdiff.cpp:1068 pdiff.cpp:1126
-#: pdiff.cpp:1134
+#: pdiff.cpp:956 pdiff.cpp:1025 pdiff.cpp:1061 pdiff.cpp:1070 pdiff.cpp:1128
+#: pdiff.cpp:1136
 #, kde-format
 msgid "Ready."
 msgstr "준비."
 
-#: kdiff3.cpp:785 pdiff.cpp:1746
+#: kdiff3.cpp:785 pdiff.cpp:1748
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "합친 결과가 저장되지 않았습니다."
@@ -1672,12 +1672,12 @@ msgstr "저장하고 끝내기"
 msgid "Quit Without Saving"
 msgstr "저장하지 않고 끝내기"
 
-#: kdiff3.cpp:796 pdiff.cpp:1757
+#: kdiff3.cpp:796 pdiff.cpp:1759
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "합친 결과를 저장할 수 없습니다."
 
-#: kdiff3.cpp:807 pdiff.cpp:869
+#: kdiff3.cpp:807 pdiff.cpp:871
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2011,7 +2011,7 @@ msgstr ""
 "출력 파일이 수정되었습니다.\n"
 "계속 진행하면 변경 사항을 저장하지 않습니다."
 
-#: mergeresultwindow.cpp:768 pdiff.cpp:745
+#: mergeresultwindow.cpp:768 pdiff.cpp:747
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "모든 입력 파일의 바이너리가 같습니다."
@@ -2022,7 +2022,7 @@ msgid "All input files contain the same text."
 msgstr "모든 입력 파일의 텍스트가 같습니다."
 
 #: mergeresultwindow.cpp:774 mergeresultwindow.cpp:778
-#: mergeresultwindow.cpp:782 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: mergeresultwindow.cpp:782 pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "파일 %1와(과) %2의 바이너리가 동일합니다.\n"
@@ -3441,23 +3441,23 @@ msgstr "줄 Diff: A <-> C"
 msgid "An internal error occurred: %1"
 msgstr "내부 오류: %1"
 
-#: pdiff.cpp:348
+#: pdiff.cpp:350
 #, fuzzy, kde-format
 #| msgid "Too many lines in diff. Skiping file."
 msgid "Too many lines in diff. Skipping file."
 msgstr "Diff에 줄이 너무 많습니다. 파일을 건너뜁니다."
 
-#: pdiff.cpp:747
+#: pdiff.cpp:749
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "모든 입력 파일의 텍스트가 같지만 바이너리는 같지 않습니다."
 
-#: pdiff.cpp:753 pdiff.cpp:757 pdiff.cpp:761
+#: pdiff.cpp:755 pdiff.cpp:759 pdiff.cpp:763
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "파일 %1와(과) %2의 텍스트가 같지만 바이너리는 같지 않습니다.\n"
 
-#: pdiff.cpp:771
+#: pdiff.cpp:773
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3468,17 +3468,17 @@ msgstr ""
 "KDiff3의 합치기 기능은 바이너리 데이터에 적합하지 않습니다.\n"
 "본인 책임 하에 계속 진행하십시오."
 
-#: pdiff.cpp:781
+#: pdiff.cpp:783
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:783
+#: pdiff.cpp:785
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:785
+#: pdiff.cpp:787
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3492,82 +3492,82 @@ msgstr ""
 "오.\n"
 "영향 받는 입력 파일은 %1에 있습니다."
 
-#: pdiff.cpp:871
+#: pdiff.cpp:873
 #, kde-format
 msgid "Abort"
 msgstr "중단"
 
-#: pdiff.cpp:872
+#: pdiff.cpp:874
 #, kde-format
 msgid "Continue Merging"
 msgstr "계속 합치기"
 
-#: pdiff.cpp:877 pdiff.cpp:968
+#: pdiff.cpp:879 pdiff.cpp:970
 #, kde-format
 msgid "Opening files..."
 msgstr "파일 여는 중..."
 
-#: pdiff.cpp:1057
+#: pdiff.cpp:1059
 #, kde-format
 msgid "Cutting selection..."
 msgstr "선택 영역 잘라내는 중..."
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "선택 영역 클립보드에 복사하는 중..."
 
-#: pdiff.cpp:1073
+#: pdiff.cpp:1075
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "클립보드 내용 삽입 중..."
 
-#: pdiff.cpp:1193
+#: pdiff.cpp:1195
 #, kde-format
 msgid "Ok"
 msgstr "확인"
 
-#: pdiff.cpp:1209
+#: pdiff.cpp:1211
 #, kde-format
 msgid "Go to Line"
 msgstr "줄로 이동"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "자동 줄 바꿈(취소하면 자동으로 줄 바꾸지 않음)"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1529
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "가로 스크롤 막대의 최대 너비 계산"
 
-#: pdiff.cpp:1748
+#: pdiff.cpp:1750
 #, kde-format
 msgid "Save && Continue"
 msgstr "저장하고 계속"
 
-#: pdiff.cpp:1749
+#: pdiff.cpp:1751
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "저장하지 않고 계속"
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search complete."
 msgstr "검색이 완료되었습니다."
 
-#: pdiff.cpp:1947
+#: pdiff.cpp:1949
 #, kde-format
 msgid "Search Complete"
 msgstr "검색 완료"
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Diff 입력 창에서 아무것도 선택하지 않았습니다."
 
-#: pdiff.cpp:2128
+#: pdiff.cpp:2130
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "수동 Diff 범위 추가 중 오류 발생"
