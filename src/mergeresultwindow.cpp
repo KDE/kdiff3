@@ -469,7 +469,7 @@ int MergeResultWindow::getNofVisibleLines() const
 int MergeResultWindow::getTextXOffset() const
 {
     QFontMetrics fm = fontMetrics();
-    return 3 * Utils::getHorizontalAdvance(fm, '0');
+    return 3 * fm.horizontalAdvance('0');
 }
 
 void MergeResultWindow::resizeEvent(QResizeEvent* e)
@@ -1533,7 +1533,7 @@ void MergeResultWindow::writeLine(
     else
         assert(false);
 
-    xOffset -= Utils::getHorizontalAdvance(fm, '0');
+    xOffset -= fm.horizontalAdvance('0');
     p.setPen(gOptions->foregroundColor());
     if(rangeMark & 1) // begin mark
     {
@@ -1582,7 +1582,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         return;
 
     const QFontMetrics& fm = fontMetrics();
-    const int fontWidth = Utils::getHorizontalAdvance(fm, '0');
+    const int fontWidth = fm.horizontalAdvance('0');
 
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
@@ -1872,7 +1872,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        const int fontWidth = Utils::getHorizontalAdvance(fm, '0');
+        const int fontWidth = fm.horizontalAdvance('0');
         constexpr int topLineYOffset = 0;
         int deltaX = 0;
         int deltaY = 0;

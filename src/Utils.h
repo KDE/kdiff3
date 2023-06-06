@@ -29,19 +29,6 @@ class Utils{
       static QString getArguments(QString cmd, QString& program, QStringList& args);
       inline static bool isEndOfLine(QChar c) { return c == '\n'; } //interally all line endings are converted to '\n'
 
-      //Where possible use QTextLayout in place of these functions especially when dealing with non-latin scripts.
-      inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QString& s, int len = -1)
-      {
-        //Warning: The Qt API used here is not accurate for some non-latin characters.
-        return metrics.horizontalAdvance(s, len);
-      }
-
-      inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QChar& c)
-      {
-        //Warning: The Qt API used here is not accurate for some non-latin characters.
-        return metrics.horizontalAdvance(c);
-      }
-
       static void calcTokenPos(const QString& s, int posOnScreen, QtSizeType& pos1, QtSizeType& pos2);
       static QString calcHistoryLead(const QString& s);
 

@@ -612,7 +612,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
                     thePainter->setPen(Qt::white);
                     QString s(QChar('A' + i - 1));
 
-                    thePainter->drawText(x + 2 + (w - Utils::getHorizontalAdvance(thePainter->fontMetrics(), s)) / 2,
+                    thePainter->drawText(x + 2 + (w - thePainter->fontMetrics().horizontalAdvance(s)) / 2,
                                          y + yOffset + (h + thePainter->fontMetrics().ascent()) / 2 - 1,
                                          s);
                 }
