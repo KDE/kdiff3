@@ -43,7 +43,7 @@ class FileNameLineEdit;
 
 class KDiff3App;
 
-class DiffTextWindow: public QWidget
+class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTextWindow>
 {
     Q_OBJECT
   public:
@@ -177,7 +177,7 @@ class DiffTextWindowFrame: public QWidget
   public:
     DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
     ~DiffTextWindowFrame() override;
-    DiffTextWindow* getDiffTextWindow();
+    std::shared_ptr<DiffTextWindow> getDiffTextWindow();
     void init();
 
     void setupConnections(const KDiff3App* app);
@@ -207,7 +207,7 @@ class DiffTextWindowFrame: public QWidget
     FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
 
-    DiffTextWindow* m_pDiffTextWindow;
+    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow;
     e_SrcSelector m_winIdx;
 
     QSharedPointer<SourceData> mSourceData;
