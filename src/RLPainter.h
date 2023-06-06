@@ -59,7 +59,6 @@ class RLPainter: public QPainter
         QPainter::setLayoutDirection(ld);
         if(ld == Qt::RightToLeft)
         {
-
             QPainter::drawText(m_xOffset - m_fontWidth * len - x, y, s);
             return;
         }

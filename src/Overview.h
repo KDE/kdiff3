@@ -55,7 +55,7 @@ class Overview : public QWidget
     int m_pageHeight;
     QPixmap m_pixmap;
     e_OverviewMode mOverviewMode;
-    int m_nofLines;
+    LineType m_nofLines;
 
     void paintEvent(QPaintEvent* e) override;
     void mousePressEvent(QMouseEvent* e) override;
