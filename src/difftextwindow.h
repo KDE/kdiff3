@@ -165,6 +165,7 @@ class DiffTextWindow: public QWidget
     std::list<boost::signals2::scoped_connection> connections;
 
     KDiff3App& m_app;
+    e_SrcSelector mWinIdx = e_SrcSelector::None;
     std::unique_ptr<DiffTextWindowData> d;
 
     void showStatusLine(const LineRef lineFromPos);

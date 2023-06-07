@@ -183,6 +183,8 @@ class DiffTextWindowData
     [[nodiscard]] const Diff3LineVector* getDiff3LineVector() const { return mDiff3LineVector; }
   private:
     friend DiffTextWindow;
+    e_SrcSelector getWindowIndex() const { return m_pDiffTextWindow->getWindowIndex(); }
+
     DiffTextWindow* m_pDiffTextWindow;
     QTextCodec* m_pTextCodec = nullptr;
     e_LineEndStyle m_eLineEndStyle;
@@ -206,7 +208,6 @@ class DiffTextWindowData
     LineRef m_fastSelectorLine1 = 0;
     LineType m_fastSelectorNofLines = 0;
 
-    e_SrcSelector mWinIdx = e_SrcSelector::None;
     LineRef m_firstLine = 0;
     LineRef m_oldFirstLine = -1;
     int m_horizScrollOffset = 0;
@@ -243,7 +244,7 @@ const QString& DiffTextWindow::getFileName() const
 
 e_SrcSelector DiffTextWindow::getWindowIndex() const
 {
-    return d->mWinIdx;
+    return mWinIdx;
 };
 
 const QString DiffTextWindow::getEncodingDisplayString() const
@@ -279,7 +280,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     d = std::make_unique<DiffTextWindowData>(this);
     setFocusPolicy(Qt::ClickFocus);
     setAcceptDrops(true);
-    d->mWinIdx = winIdx;
+    mWinIdx = winIdx;
 
     init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr);
 
@@ -1187,7 +1188,7 @@ void DiffTextWindowData::writeLine(
         LineRef rangeLine1;
         LineRef rangeLine2;
 
-        mdhe.getRangeForUI(mWinIdx, &rangeLine1, &rangeLine2);
+        mdhe.getRangeForUI(getWindowIndex(), &rangeLine1, &rangeLine2);
         if(rangeLine1.isValid() && rangeLine2.isValid() && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
         {
             p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, gOptions->manualHelpRangeColor());
@@ -1243,19 +1244,19 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
     //TODO: Fix after line number area is converted to a QWidget.
     m_lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
-    if(mWinIdx == e_SrcSelector::A)
+    if(getWindowIndex() == e_SrcSelector::A)
     {
         m_cThis = gOptions->aColor();
         m_cDiff1 = gOptions->bColor();
         m_cDiff2 = gOptions->cColor();
     }
-    else if(mWinIdx == e_SrcSelector::B)
+    else if(getWindowIndex() == e_SrcSelector::B)
     {
         m_cThis = gOptions->bColor();
         m_cDiff1 = gOptions->cColor();
         m_cDiff2 = gOptions->aColor();
     }
-    else if(mWinIdx == e_SrcSelector::C)
+    else if(getWindowIndex() == e_SrcSelector::C)
     {
         m_cThis = gOptions->cColor();
         m_cDiff1 = gOptions->aColor();
@@ -1289,7 +1290,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
         ChangeFlags changed2 = NoChange;
 
         LineRef srcLineIdx;
-        d3l->getLineInfo(mWinIdx, KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+        d3l->getLineInfo(getWindowIndex(), KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
         writeLine(
             p,                                                             // QPainter
@@ -1315,7 +1316,7 @@ QString DiffTextWindowData::getString(const LineType d3lIdx) const
         return QString();
 
     std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
-    const LineType lineIdx = d3l->getLineIndex(mWinIdx);
+    const LineType lineIdx = d3l->getLineIndex(getWindowIndex());
 
     if(lineIdx == LineRef::invalid)
         return QString();
@@ -1580,9 +1581,9 @@ LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnSc
         while(!line.isValid() && d3lIdx < mDiff3LineVector->size() && d3lIdx >= 0)
         {
             std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
-            if(mWinIdx == e_SrcSelector::A) line = d3l->getLineA();
-            if(mWinIdx == e_SrcSelector::B) line = d3l->getLineB();
-            if(mWinIdx == e_SrcSelector::C) line = d3l->getLineC();
+            if(getWindowIndex() == e_SrcSelector::A) line = d3l->getLineA();
+            if(getWindowIndex() == e_SrcSelector::B) line = d3l->getLineB();
+            if(getWindowIndex() == e_SrcSelector::C) line = d3l->getLineC();
             if(bFirstLine)
                 ++d3lIdx;
             else
