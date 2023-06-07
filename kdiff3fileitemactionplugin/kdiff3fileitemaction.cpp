@@ -17,6 +17,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QProcess>
 #include <QUrl>
 
 #include <KConfig>
@@ -26,7 +27,6 @@
 #include <KMessageBox>
 #include <KPluginFactory>
 #include <KPluginLoader>
-#include <KProcess>
 
 std::unique_ptr<QStringList> s_pHistory;
 
@@ -181,7 +181,7 @@ void KDiff3FileItemAction::slotCompareWith()
             s_pHistory->first(),
             Utils::urlToString(m_list.first())
         };
-        KProcess::startDetached("kdiff3", args);
+        QProcess::startDetached("kdiff3", args);
     }
 }
 
@@ -194,7 +194,7 @@ void KDiff3FileItemAction::slotCompareWithHistoryItem()
             pAction->data().toString(),
             Utils::urlToString(m_list.first())
         };
-        KProcess::startDetached("kdiff3", args);
+        QProcess::startDetached("kdiff3", args);
     }
 }
 
@@ -206,7 +206,7 @@ void KDiff3FileItemAction::slotCompareTwoFiles()
             Utils::urlToString(m_list.first()),
             Utils::urlToString(m_list.last())
         };
-        KProcess::startDetached("kdiff3", args);
+        QProcess::startDetached("kdiff3", args);
     }
 }
 
@@ -219,7 +219,7 @@ void KDiff3FileItemAction::slotCompareThreeFiles()
             Utils::urlToString(m_list.at(1)),
             Utils::urlToString(m_list.at(2))
         };
-        KProcess::startDetached("kdiff3", args);
+        QProcess::startDetached("kdiff3", args);
     }
 }
 
@@ -232,7 +232,7 @@ void KDiff3FileItemAction::slotMergeWith()
             Utils::urlToString(m_list.first()),
             ("-o" + Utils::urlToString(m_list.first()))
         };
-        KProcess::startDetached("kdiff3", args);
+        QProcess::startDetached("kdiff3", args);
     }
 }
 
@@ -246,7 +246,7 @@ void KDiff3FileItemAction::slotMergeThreeWay()
             Utils::urlToString(m_list.first()),
             ("-o" + Utils::urlToString(m_list.first()))
         };
-        KProcess::startDetached("kdiff3", args);
+        QProcess::startDetached("kdiff3", args);
     }
 }
 
