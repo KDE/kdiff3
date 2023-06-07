@@ -119,6 +119,46 @@ class DiffTextWindowData
 #endif
     }
 
+    void init(
+        const QString& filename,
+        QTextCodec* pTextCodec,
+        e_LineEndStyle eLineEndStyle,
+        const std::shared_ptr<LineDataVector>& pLineData,
+        LineType size,
+        const Diff3LineVector* pDiff3LineVector,
+        const ManualDiffHelpList* pManualDiffHelpList)
+    {
+        m_filename = filename;
+        m_pLineData = pLineData;
+        m_size = size;
+        mDiff3LineVector = pDiff3LineVector;
+        m_diff3WrapLineVector.clear();
+        m_pManualDiffHelpList = pManualDiffHelpList;
+
+        m_pTextCodec = pTextCodec;
+        m_eLineEndStyle = eLineEndStyle;
+    }
+
+    void reset()
+    {
+        m_firstLine = 0;
+        m_oldFirstLine = -1;
+        m_horizScrollOffset = 0;
+        m_scrollDeltaX = 0;
+        m_scrollDeltaY = 0;
+        m_bMyUpdate = false;
+        m_fastSelectorLine1 = 0;
+        m_fastSelectorNofLines = 0;
+        m_lineNumberWidth = 0;
+        m_maxTextWidth = -1;
+
+        m_pLineData = nullptr;
+        m_size = 0;
+        mDiff3LineVector = nullptr;
+        m_filename = "";
+        m_diff3WrapLineVector.clear();
+    }
+
     [[nodiscard]] QString getString(const LineType d3lIdx) const;
     [[nodiscard]] QString getLineString(const int line) const;
 
@@ -166,7 +206,7 @@ class DiffTextWindowData
     LineRef m_fastSelectorLine1 = 0;
     LineType m_fastSelectorNofLines = 0;
 
-    e_SrcSelector m_winIdx = e_SrcSelector::None;
+    e_SrcSelector mWinIdx = e_SrcSelector::None;
     LineRef m_firstLine = 0;
     LineRef m_oldFirstLine = -1;
     int m_horizScrollOffset = 0;
@@ -203,13 +243,14 @@ const QString& DiffTextWindow::getFileName() const
 
 e_SrcSelector DiffTextWindow::getWindowIndex() const
 {
-    return d->m_winIdx;
+    return d->mWinIdx;
 };
 
 const QString DiffTextWindow::getEncodingDisplayString() const
 {
     return d->m_pTextCodec != nullptr ? QLatin1String(d->m_pTextCodec->name()) : QString();
 }
+
 e_LineEndStyle DiffTextWindow::getLineEndStyle() const
 {
     return d->m_eLineEndStyle;
@@ -238,14 +279,13 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     d = std::make_unique<DiffTextWindowData>(this);
     setFocusPolicy(Qt::ClickFocus);
     setAcceptDrops(true);
+    d->mWinIdx = winIdx;
 
     init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr);
 
     setMinimumSize(QSize(20, 20));
 
     setUpdatesEnabled(true);
-    d->m_bWordWrap = false;
-    d->m_winIdx = winIdx;
 
     setFont(gOptions->defaultFont());
 }
@@ -261,30 +301,14 @@ void DiffTextWindow::init(
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList)
 {
-    reset();
-
-    d->m_filename = filename;
-    d->m_pLineData = pLineData;
-    d->m_size = size;
-    d->mDiff3LineVector = pDiff3LineVector;
-    d->m_diff3WrapLineVector.clear();
-    d->m_pManualDiffHelpList = pManualDiffHelpList;
-
-    d->m_firstLine = 0;
-    d->m_oldFirstLine = -1;
-    d->m_horizScrollOffset = 0;
-    d->m_scrollDeltaX = 0;
-    d->m_scrollDeltaY = 0;
-    d->m_bMyUpdate = false;
-    d->m_fastSelectorLine1 = 0;
-    d->m_fastSelectorNofLines = 0;
-    d->m_lineNumberWidth = 0;
-    d->m_maxTextWidth = -1;
-
-    d->m_pTextCodec = pTextCodec;
-    d->m_eLineEndStyle = eLineEndStyle;
+    d->init(filename, pTextCodec, eLineEndStyle, pLineData, size, pDiff3LineVector, pManualDiffHelpList);
 
     update();
+}
+
+void DiffTextWindow::reset()
+{
+    d->reset();
 }
 
 void DiffTextWindow::setupConnections(const KDiff3App* app)
@@ -309,15 +333,6 @@ void DiffTextWindow::setupConnections(const KDiff3App* app)
 
     connections.push_back(KDiff3App::allowCopy.connect(boost::bind(&DiffTextWindow::canCopy, this)));
     connections.push_back(KDiff3App::getSelection.connect(boost::bind(&DiffTextWindow::getSelection, this)));
-}
-
-void DiffTextWindow::reset()
-{
-    d->m_pLineData = nullptr;
-    d->m_size = 0;
-    d->mDiff3LineVector = nullptr;
-    d->m_filename = "";
-    d->m_diff3WrapLineVector.clear();
 }
 
 void DiffTextWindow::slotRefresh()
@@ -573,16 +588,16 @@ void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
         std::shared_ptr<const Diff3Line> pD3l = (*d->getDiff3LineVector())[d3lIdx];
         if(pD3l != nullptr)
         {
-            LineRef actualLine = pD3l->getLineInFile(d->m_winIdx);
+            LineRef actualLine = pD3l->getLineInFile(getWindowIndex());
 
             QString message;
             if(actualLine.isValid())
-                message = i18n("File %1: Line %2", d->m_filename, actualLine + 1);
+                message = i18n("File %1: Line %2", getFileName(), actualLine + 1);
             else
-                message = i18n("File %1: Line not available", d->m_filename);
+                message = i18n("File %1: Line not available", getFileName());
             Q_EMIT statusBarMessage(message);
 
-            Q_EMIT lineClicked(d->m_winIdx, actualLine);
+            Q_EMIT lineClicked(getWindowIndex(), actualLine);
         }
     }
 }
@@ -1172,7 +1187,7 @@ void DiffTextWindowData::writeLine(
         LineRef rangeLine1;
         LineRef rangeLine2;
 
-        mdhe.getRangeForUI(m_winIdx, &rangeLine1, &rangeLine2);
+        mdhe.getRangeForUI(mWinIdx, &rangeLine1, &rangeLine2);
         if(rangeLine1.isValid() && rangeLine2.isValid() && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
         {
             p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, gOptions->manualHelpRangeColor());
@@ -1228,19 +1243,19 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
     //TODO: Fix after line number area is converted to a QWidget.
     m_lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
-    if(m_winIdx == e_SrcSelector::A)
+    if(mWinIdx == e_SrcSelector::A)
     {
         m_cThis = gOptions->aColor();
         m_cDiff1 = gOptions->bColor();
         m_cDiff2 = gOptions->cColor();
     }
-    else if(m_winIdx == e_SrcSelector::B)
+    else if(mWinIdx == e_SrcSelector::B)
     {
         m_cThis = gOptions->bColor();
         m_cDiff1 = gOptions->cColor();
         m_cDiff2 = gOptions->aColor();
     }
-    else if(m_winIdx == e_SrcSelector::C)
+    else if(mWinIdx == e_SrcSelector::C)
     {
         m_cThis = gOptions->cColor();
         m_cDiff1 = gOptions->aColor();
@@ -1274,7 +1289,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
         ChangeFlags changed2 = NoChange;
 
         LineRef srcLineIdx;
-        d3l->getLineInfo(m_winIdx, KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+        d3l->getLineInfo(mWinIdx, KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
         writeLine(
             p,                                                             // QPainter
@@ -1300,7 +1315,7 @@ QString DiffTextWindowData::getString(const LineType d3lIdx) const
         return QString();
 
     std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
-    const LineType lineIdx = d3l->getLineIndex(m_winIdx);
+    const LineType lineIdx = d3l->getLineIndex(mWinIdx);
 
     if(lineIdx == LineRef::invalid)
         return QString();
@@ -1372,17 +1387,17 @@ QString DiffTextWindow::getSelection() const
     {
         std::shared_ptr<const Diff3Line> d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->getDiff3LineVector())[it];
 
-        assert(d->m_winIdx >= e_SrcSelector::A && d->m_winIdx <= e_SrcSelector::C);
+        assert(getWindowIndex() >= e_SrcSelector::A && getWindowIndex() <= e_SrcSelector::C);
 
-        if(d->m_winIdx == e_SrcSelector::A)
+        if(getWindowIndex() == e_SrcSelector::A)
         {
             lineIdx = d3l->getLineA();
         }
-        else if(d->m_winIdx == e_SrcSelector::B)
+        else if(getWindowIndex() == e_SrcSelector::B)
         {
             lineIdx = d3l->getLineB();
         }
-        else if(d->m_winIdx == e_SrcSelector::C)
+        else if(getWindowIndex() == e_SrcSelector::C)
         {
             lineIdx = d3l->getLineC();
         }
@@ -1505,9 +1520,9 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
 
         std::shared_ptr<const Diff3Line> d3l = (*d->getDiff3LineVector())[convertLineToDiff3LineIdx(lastLine)];
         LineRef line;
-        if(d->m_winIdx == e_SrcSelector::A) line = d3l->getLineA();
-        if(d->m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
-        if(d->m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
+        if(getWindowIndex() == e_SrcSelector::A) line = d3l->getLineA();
+        if(getWindowIndex() == e_SrcSelector::B) line = d3l->getLineB();
+        if(getWindowIndex() == e_SrcSelector::C) line = d3l->getLineC();
         if(line.isValid())
             endPos = (*d->m_pLineData)[line].width(gOptions->m_tabSize);
     }
@@ -1565,9 +1580,9 @@ LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnSc
         while(!line.isValid() && d3lIdx < mDiff3LineVector->size() && d3lIdx >= 0)
         {
             std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
-            if(m_winIdx == e_SrcSelector::A) line = d3l->getLineA();
-            if(m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
-            if(m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
+            if(mWinIdx == e_SrcSelector::A) line = d3l->getLineA();
+            if(mWinIdx == e_SrcSelector::B) line = d3l->getLineB();
+            if(mWinIdx == e_SrcSelector::C) line = d3l->getLineC();
             if(bFirstLine)
                 ++d3lIdx;
             else
@@ -1940,7 +1955,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine) const
     for(QtSizeType i = convertLineToDiff3LineIdx(firstLine); i < d->getDiff3LineVector()->size(); ++i)
     {
         std::shared_ptr<const Diff3Line> d3l = (*d->getDiff3LineVector())[i];
-        currentLine = d3l->getLineInFile(d->m_winIdx);
+        currentLine = d3l->getLineInFile(getWindowIndex());
         if(currentLine.isValid()) break;
     }
     return currentLine;
