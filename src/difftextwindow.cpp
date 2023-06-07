@@ -65,12 +65,6 @@ class RecalcWordWrapRunnable: public QRunnable
     QPointer<DiffTextWindow> m_pDTW = nullptr;
     int m_visibleTextWidth;
     QtSizeType m_cacheIdx;
-    /*
-        Globals are not thread-safe due unpredictable distruction order and timing issues.
-        The local shared_ptr in each Runnable prevents pre-mature distuction.
-        Note the global itself must also be a shared_ptr.
-    */
-
   public:
     static QAtomicInt s_maxNofRunnables;
     RecalcWordWrapRunnable(QPointer<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx):
@@ -81,8 +75,7 @@ class RecalcWordWrapRunnable: public QRunnable
     }
     void run() override
     {
-        if(g_pProgressDialog == nullptr) return;
-        assert(m_pDTW != nullptr);
+        if(g_pProgressDialog == nullptr || m_pDTW == nullptr) return;
 
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
