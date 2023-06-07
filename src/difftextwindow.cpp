@@ -1664,7 +1664,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             for(QtSizeType i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
                 d->m_wrapLineCacheList.append(QVector<WrapLineCacheData>());
-                s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
             }
         }
         else
@@ -1682,7 +1682,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
-                s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
             }
         }
         else
@@ -1874,7 +1874,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     chk_connect_a(m_pBrowseButton, &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     chk_connect_a(m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
-    m_pDiffTextWindow = std::make_shared<DiffTextWindow>(this, winIdx, app);
+    m_pDiffTextWindow = new DiffTextWindow(this, winIdx, app);
     m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(m_pTopLineWidget);
     pVTopLayout->setContentsMargins(2, 2, 2, 2);

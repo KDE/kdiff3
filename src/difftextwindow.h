@@ -20,6 +20,7 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QPaintEvent>
+#include <QPointer>
 #include <QSharedPointer>
 #include <QString>
 #include <QWheelEvent>
@@ -43,7 +44,7 @@ class FileNameLineEdit;
 
 class KDiff3App;
 
-class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTextWindow>
+class DiffTextWindow: public QWidget
 {
     Q_OBJECT
   public:
