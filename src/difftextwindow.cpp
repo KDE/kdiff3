@@ -62,7 +62,7 @@ class RecalcWordWrapRunnable: public QRunnable
 {
   private:
     static QAtomicInt s_runnableCount;
-    std::shared_ptr<DiffTextWindow> m_pDTW = nullptr;
+    QPointer<DiffTextWindow> m_pDTW = nullptr;
     int m_visibleTextWidth;
     QtSizeType m_cacheIdx;
     /*
@@ -70,11 +70,10 @@ class RecalcWordWrapRunnable: public QRunnable
         The local shared_ptr in each Runnable prevents pre-mature distuction.
         Note the global itself must also be a shared_ptr.
     */
-    std::shared_ptr<ProgressDialog> progressDialog = g_pProgressDialog;
 
   public:
     static QAtomicInt s_maxNofRunnables;
-    RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx):
+    RecalcWordWrapRunnable(QPointer<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx):
         m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
         setAutoDelete(true);
@@ -82,11 +81,12 @@ class RecalcWordWrapRunnable: public QRunnable
     }
     void run() override
     {
-        assert(m_pDTW != nullptr && progressDialog != nullptr);
+        if(g_pProgressDialog == nullptr) return;
+        assert(m_pDTW != nullptr);
 
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
-        progressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
+        g_pProgressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
             Q_EMIT m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
@@ -1909,7 +1909,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     pVL->setContentsMargins(0, 0, 0, 0);
     pVL->setSpacing(0);
     pVL->addWidget(m_pTopLineWidget, 0);
-    pVL->addWidget(m_pDiffTextWindow.get(), 1);
+    pVL->addWidget(m_pDiffTextWindow, 1);
 
     m_pDiffTextWindow->installEventFilter(this);
     m_pFileSelection->installEventFilter(this);
@@ -1921,7 +1921,7 @@ DiffTextWindowFrame::~DiffTextWindowFrame() = default;
 
 void DiffTextWindowFrame::init()
 {
-    DiffTextWindow* pDTW = m_pDiffTextWindow.get();
+    DiffTextWindow* pDTW = m_pDiffTextWindow;
     if(pDTW)
     {
         QString s = QDir::toNativeSeparators(pDTW->getFileName());
@@ -1955,7 +1955,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine) const
 
 void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
 {
-    DiffTextWindow* pDTW = m_pDiffTextWindow.get();
+    DiffTextWindow* pDTW = m_pDiffTextWindow;
     if(pDTW && pDTW->getDiff3LineVector())
     {
         QString s = i18n("Top line");
@@ -1976,7 +1976,7 @@ void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
     }
 }
 
-std::shared_ptr<DiffTextWindow> DiffTextWindowFrame::getDiffTextWindow()
+QPointer<DiffTextWindow> DiffTextWindowFrame::getDiffTextWindow()
 {
     return m_pDiffTextWindow;
 }

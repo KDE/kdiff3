@@ -177,7 +177,7 @@ class DiffTextWindowFrame: public QWidget
   public:
     DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
     ~DiffTextWindowFrame() override;
-    std::shared_ptr<DiffTextWindow> getDiffTextWindow();
+    QPointer<DiffTextWindow> getDiffTextWindow();
     void init();
 
     void setupConnections(const KDiff3App* app);
@@ -207,7 +207,7 @@ class DiffTextWindowFrame: public QWidget
     FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
 
-    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow;
+    QPointer<DiffTextWindow> m_pDiffTextWindow;
     e_SrcSelector m_winIdx;
 
     QSharedPointer<SourceData> mSourceData;
