@@ -31,7 +31,7 @@
 
 namespace placeholders = boost::placeholders;
 
-std::shared_ptr<ProgressDialog> g_pProgressDialog = nullptr;
+QPointer<ProgressDialog> g_pProgressDialog = nullptr;
 
 ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     : QDialog(pParent), m_pStatusBar(pStatusBar)

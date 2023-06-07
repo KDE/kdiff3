@@ -177,7 +177,7 @@ void DefaultFileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
         }
         else
         {
-            KMessageBox::error(g_pProgressDialog.get(), i18n("Out of memory"));
+            KMessageBox::error(g_pProgressDialog, i18n("Out of memory"));
             data.resize(0);
             m_bSuccess = false;
         }

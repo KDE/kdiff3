@@ -40,7 +40,7 @@ class SourceData;
 
 class KDiff3App;
 
-class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTextWindow>
+class DiffTextWindow: public QWidget
 {
     Q_OBJECT
   public:
@@ -177,7 +177,7 @@ class DiffTextWindowFrame : public QWidget
   public:
     DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData> &psd, KDiff3App &app);
     ~DiffTextWindowFrame() override;
-    std::shared_ptr<DiffTextWindow> getDiffTextWindow();
+    QPointer<DiffTextWindow> getDiffTextWindow();
     void init();
 
     void setupConnections(const KDiff3App *app);

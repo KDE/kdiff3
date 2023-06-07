@@ -421,9 +421,9 @@ public Q_SLOTS:
     QWidget* m_pMergeWindowFrame = nullptr;
     ReversibleScrollBar* m_pHScrollBar = nullptr;
 
-    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow1 = nullptr;
-    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow2 = nullptr;
-    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow3 = nullptr;
+    QPointer<DiffTextWindow> m_pDiffTextWindow1;
+    QPointer<DiffTextWindow> m_pDiffTextWindow2;
+    QPointer<DiffTextWindow> m_pDiffTextWindow3;
     DiffTextWindowFrame* m_pDiffTextWindowFrame1 = nullptr;
     DiffTextWindowFrame* m_pDiffTextWindowFrame2 = nullptr;
     DiffTextWindowFrame* m_pDiffTextWindowFrame3 = nullptr;
