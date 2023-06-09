@@ -78,7 +78,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     //m_fileItemInfos = fileItemInfos;
     m_pParentWidget = pParentWidget;
 
-    QAction* pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3..."), this);
+    QAction* pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18nc("Contexualmenu title", "KDiff3..."), this);
     QMenu* pActionMenu = new QMenu();
     pMenuAction->setMenu(pActionMenu);
 
@@ -103,32 +103,32 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     {
         QtSizeType historyCount = s_pHistory ? s_pHistory->count() : 0;
 
-        actionText = i18n("Compare with %1", (historyCount > 0 ? s_pHistory->first() : QString()));
+        actionText = i18nc("Contexualmenu option", "Compare with %1", (historyCount > 0 ? s_pHistory->first() : QString()));
         pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWith);
         pAction->setEnabled(m_list.count() > 0 && historyCount > 0);
         pActionMenu->addAction(pAction);
 
-        actionText = i18n("Merge with %1", historyCount > 0 ? s_pHistory->first() : QString());
+        actionText = i18nc("Contexualmenu option", "Merge with %1", historyCount > 0 ? s_pHistory->first() : QString());
         pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotMergeWith);
         pAction->setEnabled(m_list.count() > 0 && historyCount > 0);
         pActionMenu->addAction(pAction);
 
-        actionText = i18n("Save '%1' for later", m_list.first().fileName());
+        actionText = i18nc("Contexualmenu option", "Save '%1' for later", m_list.first().fileName());
         pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotSaveForLater);
         pAction->setEnabled(m_list.count() > 0);
         pActionMenu->addAction(pAction);
 
-        pAction = new QAction(i18n("3-way merge with base"), this);
+        pAction = new QAction(i18nc("Contexualmenu option", "3-way merge with base"), this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotMergeThreeWay);
         pAction->setEnabled(m_list.count() > 0 && historyCount >= 2);
         pActionMenu->addAction(pAction);
 
         if(s_pHistory && !s_pHistory->empty())
         {
-            QAction* pHistoryMenuAction = new QAction(i18n("Compare with..."), this);
+            QAction* pHistoryMenuAction = new QAction(i18nc("Contexualmenu option", "Compare with..."), this);
             QMenu* pHistoryMenu = new QMenu();
             pHistoryMenuAction->setMenu(pHistoryMenu);
             pHistoryMenu->setEnabled(m_list.count() > 0 && historyCount > 0);
@@ -149,17 +149,17 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     }
     else if(m_list.count() == 2)
     {
-        pAction = new QAction(i18nc("Contexualmenu option ", "Compare"), this);
+        pAction = new QAction(i18nc("Contexualmenu option", "Compare"), this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareTwoFiles);
         pActionMenu->addAction(pAction);
     }
     else if(m_list.count() == 3)
     {
-        pAction = new QAction(i18n("3 way comparison"), this);
+        pAction = new QAction(i18nc("Contexualmenu option", "3 way comparison"), this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareThreeFiles);
         pActionMenu->addAction(pAction);
     }
-    pAction = new QAction(i18n("About KDiff3 menu plugin..."), this);
+    pAction = new QAction(i18nc("Contexualmenu option", "About KDiff3 menu plugin..."), this);
     connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotAbout);
     pActionMenu->addAction(pAction);
 
