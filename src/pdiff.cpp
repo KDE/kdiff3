@@ -67,9 +67,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 {
     ProgressProxy pp;
     mErrors.clear();
-    // When doing a full analysis in the directory-comparison, then the statistics-results
-    // will be stored in the given TotalDiffStatus. Otherwise pTotalDiffStatus will
-    // point to m_totalDiffStatus.
     bool bLoadFiles = inFlags & InitFlag::loadFiles;
     bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;
     bool bAutoSolve = inFlags & InitFlag::autoSolve;
