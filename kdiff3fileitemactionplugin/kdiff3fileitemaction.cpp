@@ -164,10 +164,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotAbout);
     pActionMenu->addAction(pAction);
 
-    //pMenu->addSeparator();
-    //pMenu->addAction( pActionMenu );
-    //pMenu->addSeparator();
-    actions << pMenuAction;
+    actions.append(pMenuAction);
     return actions;
 }
 
