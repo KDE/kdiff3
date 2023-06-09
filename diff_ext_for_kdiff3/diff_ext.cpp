@@ -203,8 +203,8 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
          }
 
-         menuStringCompare = fromQString(i18n("Compare with %1", toQString(firstFileName)));
-         menuStringMerge   = fromQString(i18n("Merge with %1", toQString(firstFileName)));
+         menuStringCompare = fromQString(i18nc("Contexualmenu option", "Compare with %1", toQString(firstFileName)));
+         menuStringMerge = fromQString(i18nc("Contexualmenu option", "Merge with %1", toQString(firstFileName)));
 
          m_id_DiffWith  = insertMenuItemHelper( subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
          m_id_MergeWith = insertMenuItemHelper( subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
@@ -214,10 +214,10 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          //   tstring firstFileName = cut_to_length( m_recentFiles.front() );
          //   tstring secondFileName = cut_to_length( *(++m_recentFiles.begin()) );
          //}
-         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3-way merge with base")),
-            nrOfRecentFiles >=2 ? MFS_ENABLED : MFS_DISABLED );
+         m_id_Merge3 = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "3-way merge with base")),
+                                            nrOfRecentFiles >= 2 ? MFS_ENABLED : MFS_DISABLED);
 
-         menuString = fromQString(i18n("Save '%1' for later", toQString(_file_name1)));
+         menuString = fromQString(i18nc("Contexualmenu option", "Save '%1' for later", toQString(_file_name1)));
          m_id_DiffLater = insertMenuItemHelper( subMenu, id++, pos2++, menuString );
 
          HMENU file_list = CreateMenu();
@@ -231,25 +231,25 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             ++n;
          }
 
-         insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Compare with ...")),
-            nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list );
+         insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "Compare with ...")),
+                              nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list);
 
-         m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Clear list")), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
+         m_id_ClearList = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "Clear list")), nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
       }
       else if(m_nrOfSelectedFiles == 2)
       {
          //= "Diff " + cut_to_length(_file_name1, 20)+" and "+cut_to_length(_file_name2, 20);
-         m_id_Diff = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Compare")) );
+         m_id_Diff = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "Compare")));
       }
       else if ( m_nrOfSelectedFiles == 3 )
       {
-         m_id_Diff3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3 way comparison")) );
+         m_id_Diff3 = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "3 way comparison")));
       }
       else
       {
          // More than 3 files selected?
       }
-      m_id_About = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("About Diff-Ext ...")) );
+      m_id_About = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "About Diff-Ext ...")));
 
       insertMenuItemHelper( menu, id++, position++, TEXT("KDiff3"), MFS_ENABLED, subMenu );
 
@@ -355,18 +355,18 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
       QString helpString;
       if( idCmd == m_id_Diff )
       {
-         helpString = i18n("Compare selected files");
+         helpString = i18nc("Contexualmenu option", "Compare selected files");
       }
       else if( idCmd == m_id_DiffWith )
       {
          if(!m_recentFiles.empty())
          {
-            helpString = i18n("Compare '%1' with '%2'", toQString(_file_name1), toQString(m_recentFiles.front()));
+            helpString = i18nc("Contexualmenu option", "Compare '%1' with '%2'", toQString(_file_name1), toQString(m_recentFiles.front()));
          }
       }
       else if(idCmd == m_id_DiffLater)
       {
-         helpString = i18n("Save '%1' for later operation", toQString(_file_name1));
+         helpString = i18nc("Contexualmenu option", "Save '%1' for later operation", toQString(_file_name1));
       }
       else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size()))
       {
@@ -379,7 +379,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 
             if ( i!=m_recentFiles.end() )
             {
-               helpString = i18n("Compare '%1' with '%2'", toQString(_file_name1), toQString(*i));
+               helpString = i18nc("Contexualmenu option", "Compare '%1' with '%2'", toQString(_file_name1), toQString(*i));
             }
          }
       }
