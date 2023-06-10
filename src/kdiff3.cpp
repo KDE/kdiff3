@@ -461,6 +461,15 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     //Should not fail ever.
     assert(m_bDirCompare == m_sd1->isDir());
+    if((m_bDirCompare && (!m_sd2->isDir() || !m_sd3->isDir())) ||
+       (!m_bDirCompare && (m_sd2->isDir() || m_sd3->isDir())))
+    {
+        KMessageBox::error(this, i18nc("Error message", "Cann't compare file with folder."),
+                           i18nc("Title error message box", "Bad comparision attempt"));
+
+        bSuccess = false;
+        m_bDirCompare = false;
+    }
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
     {
@@ -475,57 +484,60 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     //initView does first time setup for ui.
     initView();
 
-    if(m_bDirCompare)
-        bSuccess = doDirectoryCompare(false);
-    else
+    if(bSuccess)
     {
-        doFileCompare();
-        if(m_totalDiffStatus->getUnsolvedConflicts() != 0)
-            bSuccess = false;
-
-        if(m_bAutoMode && m_totalDiffStatus->getUnsolvedConflicts() == 0)
+        if(m_bDirCompare)
+            bSuccess = doDirectoryCompare(false);
+        else
         {
-            QSharedPointer<SourceData> pSD = nullptr;
-            if(m_sd3->isEmpty())
-            {
-                if(m_totalDiffStatus->isBinaryEqualAB())
-                {
-                    pSD = m_sd1;
-                }
-            }
-            else
-            {
-                if(m_totalDiffStatus->isBinaryEqualBC() || m_totalDiffStatus->isBinaryEqualAB())
-                {
-                    //if B==C (assume A is old), if A==B then C has changed
-                    pSD = m_sd3;
-                }
-                else if(m_totalDiffStatus->isBinaryEqualAC())
-                {
-                    pSD = m_sd2; // assuming B has changed
-                }
-            }
+            doFileCompare();
+            if(m_totalDiffStatus->getUnsolvedConflicts() != 0)
+                bSuccess = false;
 
-            if(pSD != nullptr)
+            if(m_bAutoMode && m_totalDiffStatus->getUnsolvedConflicts() == 0)
             {
-                // Save this file directly, not via the merge result window.
-                FileAccess fa(m_outputFilename);
-                if(gOptions->m_bDmCreateBakFiles && fa.exists())
+                QSharedPointer<SourceData> pSD = nullptr;
+                if(m_sd3->isEmpty())
                 {
-                    fa.createBackup(".orig");
+                    if(m_totalDiffStatus->isBinaryEqualAB())
+                    {
+                        pSD = m_sd1;
+                    }
+                }
+                else
+                {
+                    if(m_totalDiffStatus->isBinaryEqualBC() || m_totalDiffStatus->isBinaryEqualAB())
+                    {
+                        //if B==C (assume A is old), if A==B then C has changed
+                        pSD = m_sd3;
+                    }
+                    else if(m_totalDiffStatus->isBinaryEqualAC())
+                    {
+                        pSD = m_sd2; // assuming B has changed
+                    }
                 }
 
-                bSuccess = pSD->saveNormalDataAs(m_outputFilename);
-                if(!bSuccess)
-                    KMessageBox::error(this, i18n("Saving failed."));
-            }
-            else if(m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0)
-            {
-                bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
-            }
-            if(bSuccess)
-            {
-                QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
+                if(pSD != nullptr)
+                {
+                    // Save this file directly, not via the merge result window.
+                    FileAccess fa(m_outputFilename);
+                    if(gOptions->m_bDmCreateBakFiles && fa.exists())
+                    {
+                        fa.createBackup(".orig");
+                    }
+
+                    bSuccess = pSD->saveNormalDataAs(m_outputFilename);
+                    if(!bSuccess)
+                        KMessageBox::error(this, i18n("Saving failed."));
+                }
+                else if(m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0)
+                {
+                    bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
+                }
+                if(bSuccess)
+                {
+                    QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
+                }
             }
         }
     }
@@ -549,7 +561,6 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     if(!m_bDirCompare)
     {
-        bool bFileOpenError = false;
         if((!m_sd1->getErrors().isEmpty()) ||
            (!m_sd2->getErrors().isEmpty()) ||
            (!m_sd3->getErrors().isEmpty()))
@@ -565,10 +576,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
             KMessageBox::error(this, text, i18n("File open error"));
 
-            bFileOpenError = true;
+            bSuccess = false;
         }
 
-        if(m_sd1->isEmpty() || m_sd2->isEmpty() || bFileOpenError)
+        if(m_sd1->isEmpty() || m_sd2->isEmpty() || !bSuccess)
             slotFileOpen();
     }
     else if(!bSuccess) // Directory open failed
