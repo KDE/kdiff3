@@ -135,7 +135,7 @@ class FileAccessTest: public QObject
 #endif // !Q_OS_WIN
 
         mocFile.setFile(url);
-        QCOMPARE(mocFile.prettyAbsPath(url), url.toDisplayString());
+        QCOMPARE(mocFile.prettyAbsPath(), url.toDisplayString());
 
         mocFile.setFile(QUrl("file:///dds/root"));
         QCOMPARE(mocFile.prettyAbsPath().toLower(), expected);
