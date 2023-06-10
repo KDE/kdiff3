@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -350,7 +351,7 @@ void FileAccess::loadData()
         m_linkTarget = m_fileInfo.symLinkTarget();
 
 #ifndef Q_OS_WIN
-        // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
+        // Unfortunately Qt5 symLinkTarget/readLink always return an absolute path, even if the link is relative
         char* s = (char*)malloc(PATH_MAX + 1);
         ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s, PATH_MAX);
         if(len > 0)
@@ -584,7 +585,7 @@ bool FileAccess::isNormal() const
     {
         /*
             wierd psudo-name created from commandline input redirection from output of another command.
-            KIO/Qt does not handle as a normal file but presents it as such.
+            KIO/Qt does not handle it as a normal file but presents it as such.
         */
         if(m_linkTarget.startsWith("pipe:"))
         {
