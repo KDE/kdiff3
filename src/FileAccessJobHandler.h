@@ -16,7 +16,7 @@
 #include <QObject>
 #include <QString>
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
 #include <KIO/UDSEntry>
 #endif
 

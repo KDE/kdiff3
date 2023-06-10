@@ -12,7 +12,7 @@
 #include "common.h"
 #include "compat.h"
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
 #include "DefaultFileAccessJobHandler.h"
 #endif
 #include "FileAccessJobHandler.h"
@@ -35,7 +35,7 @@
 #include <QTemporaryFile>
 #include <QtMath>
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
 FileAccess::FileAccess()
 {
     mJobHandler.reset(new DefaultFileAccessJobHandler(this));
@@ -258,7 +258,7 @@ void FileAccess::reset()
 void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
     assert(pParent != this);
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
     if(mJobHandler == nullptr) mJobHandler.reset(new DefaultFileAccessJobHandler(this));
 #endif
     reset();
@@ -284,7 +284,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     if(url.isEmpty())
         return;
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
     if(mJobHandler == nullptr) mJobHandler.reset(new DefaultFileAccessJobHandler(this));
 #endif
     reset();
@@ -390,7 +390,7 @@ void FileAccess::addPath(const QString& txt, bool reinit)
     }
 }
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
 /*     Filetype:
        S_IFMT     0170000   bitmask for the file type bitfields
        S_IFSOCK   0140000   socket
@@ -1001,7 +1001,7 @@ void FileAccess::createTempFile(QTemporaryFile& tmpFile)
     tmpFile.close();
 }
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
 bool FileAccess::makeDir(const QString& dirName)
 {
     return DefaultFileAccessJobHandler::mkDir(dirName);

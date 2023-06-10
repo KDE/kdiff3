@@ -24,7 +24,7 @@
 #include <QTemporaryFile>
 #include <QUrl>
 
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
 #include <KIO/UDSEntry>
 #endif
 
@@ -142,7 +142,7 @@ class FileAccess
 
     //These should be exposed for auto tests
   protected:
-#ifndef AUTOTEST
+#if HAS_KFKIO && !defined AUTOTEST
     friend DefaultFileAccessJobHandler;
     void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent);
 #endif
