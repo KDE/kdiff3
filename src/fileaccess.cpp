@@ -349,7 +349,7 @@ void FileAccess::loadData()
         m_linkTarget = m_fileInfo.symLinkTarget();
 
 #ifndef Q_OS_WIN
-        // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
+        // Unfortunately Qt5 symLinkTarget/readLink always return an absolute path, even if the link is relative
         std::unique_ptr<char[]> s = std::make_unique<char[]>(PATH_MAX + 1);
         size_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s.get(), PATH_MAX);
         if(len > 0)
@@ -582,7 +582,7 @@ bool FileAccess::isNormal() const
     {
         /*
             wierd psudo-name created from commandline input redirection from output of another command.
-            KIO/Qt does not handle as a normal file but presents it as such.
+            KIO/Qt does not handle it as a normal file but presents it as such.
         */
         if(m_linkTarget.startsWith("pipe:"))
         {
