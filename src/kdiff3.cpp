@@ -547,7 +547,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     Q_EMIT updateAvailabilities();
 
-    if(!m_bDirCompare && m_pKDiff3Shell != nullptr)
+    if(!m_bDirCompare)
     {
         bool bFileOpenError = false;
         if((!m_sd1->getErrors().isEmpty()) ||
