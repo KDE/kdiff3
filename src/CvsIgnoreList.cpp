@@ -71,7 +71,7 @@ void CvsIgnoreList::addEntriesFromString(const QString& dir, const QString& str)
     We don't have a real file in AUTOTEST mode
 */
 void CvsIgnoreList::addEntriesFromFile(const QString& dir, const QString& name)
-{
+{ //want unused warning when not building autotest
 #ifdef AUTOTEST
     Q_UNUSED(name);
     Q_UNUSED(dir);

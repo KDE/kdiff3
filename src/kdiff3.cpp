@@ -392,11 +392,8 @@ bool KDiff3App::canCopy()
 /*
     Make sure Edit menu tracks focus correctly.
 */
-void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
+void KDiff3App::slotFocusChanged([[maybe_unused]] QWidget* old, [[maybe_unused]] QWidget* now)
 {
-    Q_UNUSED(now);
-    Q_UNUSED(old);
-
     Q_EMIT updateAvailabilities();
 }
 

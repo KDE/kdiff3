@@ -17,10 +17,8 @@ public:
     mutable unsigned callCount = 0;
     bool match = false;
     void enterDir(const QString&, const DirectoryList&) final {}
-    [[nodiscard]] bool matches(const QString& dir, const QString& text, bool bCaseSensitive) const final {
-        Q_UNUSED(dir);
-        Q_UNUSED(text);
-        Q_UNUSED(bCaseSensitive);
+    [[nodiscard]] bool matches([[maybe_unused]] const QString& dir, [[maybe_unused]] const QString& text, [[maybe_unused]] bool bCaseSensitive) const final
+    {
         ++callCount;
         return match;
     }

@@ -1827,9 +1827,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(cons
 //   setSizeHint( s_CCol, QSize(17,17) ); // Iconsize
 //}
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::sort(int column, Qt::SortOrder order)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::sort([[maybe_unused]] int column, Qt::SortOrder order)
 {
-    Q_UNUSED(column);
     beginResetModel();
     m_pRoot->sort(order);
     endResetModel();

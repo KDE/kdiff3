@@ -44,7 +44,7 @@ class MocIgnoreFile: public FileAccess
         m_name = ".cvsignore";
         setUrl(QUrl("/test/ui/.cvsignore"));
     }
-    void addPath(const QString& txt, bool /*reinit*/=true) override { Q_UNUSED(txt); }
+    void addPath([[maybe_unused]] const QString& txt, bool /*reinit*/ = true) override {}
     bool createLocalCopy() override { return true; }
 
     [[nodiscard]] qint64 size() const override { return 0; };

@@ -2961,9 +2961,8 @@ void WindowTitleWidget::slotSetModified(bool bModified)
     m_pModifiedLabel->setText(bModified ? i18n("[Modified]") : "");
 }
 
-bool WindowTitleWidget::eventFilter(QObject* o, QEvent* e)
+bool WindowTitleWidget::eventFilter([[maybe_unused]] QObject* o, QEvent* e)
 {
-    Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
         QPalette p = m_pLabel->palette();

@@ -1990,9 +1990,8 @@ QPointer<DiffTextWindow> DiffTextWindowFrame::getDiffTextWindow()
     return m_pDiffTextWindow;
 }
 
-bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
+bool DiffTextWindowFrame::eventFilter([[maybe_unused]] QObject* o, QEvent* e)
 {
-    Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
         QColor c1 = gOptions->backgroundColor();

@@ -661,16 +661,16 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t i
             }
         }
     }
-
+#ifndef NDEBUG
     verify(size1, size2);
-
+#endif
     pp.setCurrent(1);
 }
 
+#ifndef NDEBUG
 // Verify difflist
 void DiffList::verify(const LineRef size1, const LineRef size2)
 {
-#ifndef NDEBUG
     LineRef l1 = 0;
     LineRef l2 = 0;
 
@@ -683,10 +683,8 @@ void DiffList::verify(const LineRef size1, const LineRef size2)
     }
 
     assert(l1 == size1 && l2 == size2);
-#else
-    Q_UNUSED(size1); Q_UNUSED(size2);
-#endif
 }
+#endif
 
 void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector>& p1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, LineRef size2, DiffList& diffList,
                                  e_SrcSelector winIdx1, e_SrcSelector winIdx2)

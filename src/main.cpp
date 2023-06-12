@@ -87,8 +87,7 @@ int main(int argc, char* argv[])
         Do this now because we only need one codec object.
         This object is Qt's domain once created and must be on the heap.
     */
-    const UTF8BOMCodec *textCodec = new UTF8BOMCodec();
-    Q_UNUSED(textCodec);
+    [[maybe_unused]] const UTF8BOMCodec* textCodec = new UTF8BOMCodec();
 
     //Syncronize qt HDPI behavoir on all versions/platforms
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);

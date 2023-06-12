@@ -294,10 +294,8 @@ bool DefaultFileAccessJobHandler::rename(const FileAccess& destFile)
     }
 }
 
-void DefaultFileAccessJobHandler::slotJobEnded(KJob* pJob)
+void DefaultFileAccessJobHandler::slotJobEnded([[maybe_unused]] KJob* pJob)
 {
-    Q_UNUSED(pJob);
-
     ProgressProxy::exitEventLoop(); // Close the dialog, return from exec()
 }
 

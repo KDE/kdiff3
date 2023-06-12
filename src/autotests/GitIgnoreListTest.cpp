@@ -17,9 +17,8 @@ class GitIgnoreListStub final : public GitIgnoreList
 {
   public:
     QString m_fileContents;
-    [[nodiscard]] QString readFile(const QString& fileName) const final
+    [[nodiscard]] QString readFile([[maybe_unused]] const QString& fileName) const final
     {
-        Q_UNUSED(fileName);
         return m_fileContents;
     }
 };

@@ -121,8 +121,7 @@ void KDiff3Shell::applyNewToolbarConfig()
 
 void KDiff3Shell::slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    static KDiff3Shell* pKDiff3Shell = new KDiff3Shell(fn1, fn2, fn3);
-    Q_UNUSED(pKDiff3Shell);
+    [[maybe_unused]] static KDiff3Shell* pKDiff3Shell = new KDiff3Shell(fn1, fn2, fn3);
 }
 
 //#include "kdiff3_shell.moc"
