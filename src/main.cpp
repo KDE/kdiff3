@@ -197,16 +197,17 @@ int main(int argc, char* argv[])
         after the main event loop starts. Thus allowing us to avoid std::exit as much as
         possiable. Makes for a cleaner exit.
     */
-    QScopedPointer<KDiff3Shell> p;
+    QPointer<KDiff3Shell> p;
     QMetaObject::invokeMethod(
         qApp, [&p] {
             /*
               Do not attempt to call show here that will be done later.
               This variable exists solely to insure the KDiff3Shell is deleted on exit.
             */
-            p.reset(new KDiff3Shell()); //QScopedPointer will take it from here.
+            p = new KDiff3Shell();
         },
         Qt::QueuedConnection);
     int retVal = QApplication::exec();
+    delete p;
     return retVal;
 }
