@@ -718,10 +718,7 @@ void MergeResultWindow::slotSetFastSelectorLine(LineType line)
     {
         if(line >= i->getIndex() && line < i->getIndex() + i->sourceRangeLength())
         {
-            //if ( i->isDelta() )
-            {
-                setFastSelector(i);
-            }
+            setFastSelector(i);
             break;
         }
     }
