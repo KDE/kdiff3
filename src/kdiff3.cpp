@@ -440,6 +440,7 @@ void KDiff3App::doFileCompare()
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
+    bool openError = false;
     bool bSuccess = true;
 
     if(!fn1.isEmpty())
@@ -466,6 +467,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
         bSuccess = false;
         m_bDirCompare = false;
+        openError = true;
     }
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
@@ -570,10 +572,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
             KMessageBox::error(this, text, i18n("File open error"));
 
-            bSuccess = false;
+            openError = true;
         }
 
-        if(m_sd1->isEmpty() || m_sd2->isEmpty() || !bSuccess)
+        if(m_sd1->isEmpty() || m_sd2->isEmpty() || openError)
             slotFileOpen();
     }
     else if(!bSuccess) // Directory open failed
