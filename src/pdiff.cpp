@@ -710,6 +710,9 @@ void KDiff3App::slotFinishMainInit()
     int d3l = -1;
     if(!m_manualDiffHelpList.empty())
         d3l = m_manualDiffHelpList.front().calcManualDiffFirstDiff3LineIdx(mDiff3LineVector);
+
+    setUpdatesEnabled(true);
+
     if(d3l >= 0)
     {
         int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
@@ -726,8 +729,6 @@ void KDiff3App::slotFinishMainInit()
         m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
 
     Q_EMIT updateAvailabilities();
-    setUpdatesEnabled(true);
-
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
 
     if(m_bLoadFiles)
