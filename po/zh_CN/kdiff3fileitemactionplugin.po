@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-25 00:52+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2023-05-22 14:00\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,32 +18,44 @@ msgstr ""
 "X-Crowdin-File-ID: 9596\n"
 
 #: kdiff3fileitemaction.cpp:82
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "KDiff3..."
+msgctxt "Contexualmenu title"
 msgid "KDiff3..."
 msgstr "KDiff3..."
 
 #: kdiff3fileitemaction.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "与 %1 比较"
 
 #: kdiff3fileitemaction.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "与 %1 合并"
 
 #: kdiff3fileitemaction.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "保存“%1”以供日后使用"
 
 #: kdiff3fileitemaction.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "以被比较文件为基础进行三路合并"
 
 #: kdiff3fileitemaction.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with..."
+msgctxt "Contexualmenu option"
 msgid "Compare with..."
 msgstr "比较..."
 
@@ -54,27 +66,33 @@ msgid "Clear list"
 msgstr "清除列表"
 
 #: kdiff3fileitemaction.cpp:153
-#, kde-format
-msgctxt "Contexualmenu option "
+#, fuzzy, kde-format
+#| msgctxt "Contexualmenu option "
+#| msgid "Compare"
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "比较"
 
 #: kdiff3fileitemaction.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "三路比较"
 
 #: kdiff3fileitemaction.cpp:163
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About KDiff3 menu plugin..."
+msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
 msgstr "关于 KDiff3 菜单插件..."
 
-#: kdiff3fileitemaction.cpp:277
+#: kdiff3fileitemaction.cpp:274
 #, kde-format
 msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
 msgstr "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
 
-#: kdiff3fileitemaction.cpp:278
+#: kdiff3fileitemaction.cpp:275
 #, kde-format
 msgid ""
 "Using the context menu extension:\n"
@@ -95,7 +113,7 @@ msgstr ""
 "路合并”中选择用作目标分支的另一个分支。\n"
 "以上同样适用于文件夹比较和文件夹合并。"
 
-#: kdiff3fileitemaction.cpp:286
+#: kdiff3fileitemaction.cpp:283
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
 msgstr "关于 KDiff3 文件项目操作插件"

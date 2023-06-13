@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3fileitemactionplugin.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-25 00:52+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2015-02-15 22:44+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -23,32 +23,42 @@ msgstr ""
 #: kdiff3fileitemaction.cpp:82
 #, fuzzy, kde-format
 #| msgid "KDiff3 ..."
+msgctxt "Contexualmenu title"
 msgid "KDiff3..."
 msgstr "KDiff3 ..."
 
 #: kdiff3fileitemaction.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Poredi sa %1"
 
 #: kdiff3fileitemaction.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Spoji sa %1"
 
 #: kdiff3fileitemaction.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Snimi '%1' za kasnije"
 
 #: kdiff3fileitemaction.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "trostrano spajanje s osnovom"
 
 #: kdiff3fileitemaction.cpp:132
 #, fuzzy, kde-format
 #| msgid "Compare with ..."
+msgctxt "Contexualmenu option"
 msgid "Compare with..."
 msgstr "Poredi sa..."
 
@@ -62,22 +72,25 @@ msgstr "Očisti spisak"
 #: kdiff3fileitemaction.cpp:153
 #, fuzzy, kde-format
 #| msgid "Compare"
-msgctxt "Contexualmenu option "
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Uporedi"
 
 #: kdiff3fileitemaction.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "Trostrano poređenje"
 
 #: kdiff3fileitemaction.cpp:163
 #, fuzzy, kde-format
 #| msgid "About KDiff3 menu plugin ..."
+msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
 msgstr "O KDiff3 meni priključku ..."
 
-#: kdiff3fileitemaction.cpp:277
+#: kdiff3fileitemaction.cpp:274
 #, fuzzy, kde-format
 #| msgid ""
 #| "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
@@ -89,7 +102,7 @@ msgstr ""
 "KDiff3 homepage: http://kdiff3.sourceforge.net\n"
 "\n"
 
-#: kdiff3fileitemaction.cpp:278
+#: kdiff3fileitemaction.cpp:275
 #, fuzzy, kde-format
 #| msgid ""
 #| "Using the contextmenu extension:\n"
@@ -122,7 +135,7 @@ msgstr ""
 "odredište.\n"
 "Isto se odnosi i na direktorijum poređenja i stapanja."
 
-#: kdiff3fileitemaction.cpp:286
+#: kdiff3fileitemaction.cpp:283
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
 msgstr "O KDiff3 priključku za datotečne akcije"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-04-28 00:21+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2022-05-15 22:22+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,48 +17,66 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: diff_ext.cpp:206
-#, kde-format
+#: diff_ext.cpp:211
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "%1와(과) 비교하기"
 
-#: diff_ext.cpp:207
-#, kde-format
+#: diff_ext.cpp:212
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "%1와(과) 합치기"
 
 #: diff_ext.cpp:217
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "기반이 있는 3중 결합"
 
 #: diff_ext.cpp:220
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "나중에 사용할 수 있도록 '%1' 저장"
 
 #: diff_ext.cpp:234
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with ..."
+msgctxt "Contexualmenu option"
 msgid "Compare with ..."
 msgstr "다음과 비교..."
 
 #: diff_ext.cpp:237
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Clear list"
+msgctxt "Contexualmenu option"
 msgid "Clear list"
 msgstr "목록 비우기"
 
 #: diff_ext.cpp:242
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare"
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "비교"
 
 #: diff_ext.cpp:246
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "3중 비교"
 
 #: diff_ext.cpp:252
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About Diff-Ext ..."
+msgctxt "Contexualmenu option"
 msgid "About Diff-Ext ..."
 msgstr "Diff-Ext 정보..."
 
@@ -67,62 +85,68 @@ msgstr "Diff-Ext 정보..."
 msgid "Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n"
 msgstr "Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n"
 
-#: diff_ext.cpp:325
+#: diff_ext.cpp:324
 #, kde-format
 msgid "This software is distributable under the BSD-2-Clause license.\n"
 msgstr "This software is distributable under the BSD-2-Clause license.\n"
 
-#: diff_ext.cpp:326
+#: diff_ext.cpp:324
 #, kde-format
 msgid "Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n"
 msgstr "Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n"
 
-#: diff_ext.cpp:327
+#: diff_ext.cpp:324
 #, kde-format
 msgid "Ported to Qt5/Kf5 by Michael Reeves\n"
 msgstr "Ported to Qt5/Kf5 by Michael Reeves\n"
 
-#: diff_ext.cpp:328
+#: diff_ext.cpp:324
 #, kde-format
 msgid "Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"
 msgstr "Diff-Ext 홈페이지: http://diff-ext.sourceforge.net\n"
 
-#: diff_ext.cpp:329
+#: diff_ext.cpp:324
 #, kde-format
 msgid "About Diff-Ext for KDiff3 (64 Bit)"
 msgstr "KDiff3 Diff-Ext 정보(64비트)"
 
-#: diff_ext.cpp:358
-#, kde-format
+#: diff_ext.cpp:353
+#, fuzzy, kde-format
+#| msgid "Compare selected files"
+msgctxt "Contexualmenu option"
 msgid "Compare selected files"
 msgstr "선택한 파일 비교"
 
-#: diff_ext.cpp:364 diff_ext.cpp:382
-#, kde-format
+#: diff_ext.cpp:359 diff_ext.cpp:377
+#, fuzzy, kde-format
+#| msgid "Compare '%1' with '%2'"
+msgctxt "Contexualmenu option"
 msgid "Compare '%1' with '%2'"
 msgstr "'%1'과(와) '%2' 비교하기"
 
-#: diff_ext.cpp:369
-#, kde-format
+#: diff_ext.cpp:364
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later operation"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later operation"
 msgstr "나중에 사용할 수 있도록 '%1' 저장"
 
-#: diff_ext.cpp:423
+#: diff_ext.cpp:417
 #, kde-format
 msgid "Could not start KDiff3. Please rerun KDiff3 installation."
 msgstr "KDiff3을 시작할 수 없습니다. KDiff3을 다시 설치하십시오."
 
-#: diff_ext.cpp:424
+#: diff_ext.cpp:418
 #, kde-format
 msgid "Command"
 msgstr "명령"
 
-#: diff_ext.cpp:425
+#: diff_ext.cpp:419
 #, kde-format
 msgid "CommandLine"
 msgstr "명령행"
 
-#: diff_ext.cpp:426
+#: diff_ext.cpp:420
 #, kde-format
 msgid "Diff-Ext For KDiff3"
 msgstr "KDiff3용 Diff-Ext"

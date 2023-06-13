@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3fileitemactionplugin\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-25 00:52+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2019-08-13 10:52+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -21,32 +21,44 @@ msgstr ""
 "X-Generator: Lokalize 18.12.3\n"
 
 #: kdiff3fileitemaction.cpp:82
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "KDiff3..."
+msgctxt "Contexualmenu title"
 msgid "KDiff3..."
 msgstr "KDaff3..."
 
 #: kdiff3fileitemaction.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Σύγκριση με %1"
 
 #: kdiff3fileitemaction.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Συγχώνευση με %1"
 
 #: kdiff3fileitemaction.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Αποθήκευση του '%1' για αργότερα"
 
 #: kdiff3fileitemaction.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "Τριπλή συγχώνευση με τη βάση"
 
 #: kdiff3fileitemaction.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with..."
+msgctxt "Contexualmenu option"
 msgid "Compare with..."
 msgstr "Σύγκριση με..."
 
@@ -60,28 +72,32 @@ msgstr "Καθαρισμός λίστας"
 #: kdiff3fileitemaction.cpp:153
 #, fuzzy, kde-format
 #| msgid "Compare"
-msgctxt "Contexualmenu option "
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Σύγκριση"
 
 #: kdiff3fileitemaction.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "Τριπλή σύγκριση"
 
 #: kdiff3fileitemaction.cpp:163
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About KDiff3 menu plugin..."
+msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
 msgstr "Σχετικά με το πρόσθετο για το μενού του KDiff3..."
 
-#: kdiff3fileitemaction.cpp:277
+#: kdiff3fileitemaction.cpp:274
 #, kde-format
 msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
 msgstr ""
 "Πρόσθετο ενέργειας αντικειμένου αρχείου KDiff3: Copyright (C) 2011 Joachim "
 "Eibl\n"
 
-#: kdiff3fileitemaction.cpp:278
+#: kdiff3fileitemaction.cpp:275
 #, kde-format
 msgid ""
 "Using the context menu extension:\n"
@@ -104,7 +120,7 @@ msgstr ""
 "ο οποίος θα χρησιμεύσει ως προορισμός.\n"
 "Το ίδιο ισχύει και για τη σύγκριση και συγχώνευση φακέλων."
 
-#: kdiff3fileitemaction.cpp:286
+#: kdiff3fileitemaction.cpp:283
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
 msgstr "Σχετικά με το πρόσθετο ενέργειας αντικειμένου αρχείου του KDiff3"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-25 00:52+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2017-08-04 00:36+0200\n"
 "Last-Translator: Ovidiu-Florin Bogdan <ovidiu.b13@gmail.com>\n"
 "Language-Team: Romanian <kde-i18n-doc@kde.org>\n"
@@ -21,32 +21,42 @@ msgstr ""
 #: kdiff3fileitemaction.cpp:82
 #, fuzzy, kde-format
 #| msgid "KDiff3 ..."
+msgctxt "Contexualmenu title"
 msgid "KDiff3..."
 msgstr "KDiff3 ..."
 
 #: kdiff3fileitemaction.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Compară cu %1"
 
 #: kdiff3fileitemaction.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Îmbină cu %1"
 
 #: kdiff3fileitemaction.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Salvează „%1” pentru mai târziu"
 
 #: kdiff3fileitemaction.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "Combină în 3 cu bază"
 
 #: kdiff3fileitemaction.cpp:132
 #, fuzzy, kde-format
 #| msgid "Compare with ..."
+msgctxt "Contexualmenu option"
 msgid "Compare with..."
 msgstr "Compară cu ..."
 
@@ -60,22 +70,25 @@ msgstr "Curăță lista"
 #: kdiff3fileitemaction.cpp:153
 #, fuzzy, kde-format
 #| msgid "Compare"
-msgctxt "Contexualmenu option "
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Compară"
 
 #: kdiff3fileitemaction.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "Compară în 3"
 
 #: kdiff3fileitemaction.cpp:163
 #, fuzzy, kde-format
 #| msgid "About KDiff3 menu plugin ..."
+msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
 msgstr "Despre extensia de meniu KDiff3 ..."
 
-#: kdiff3fileitemaction.cpp:277
+#: kdiff3fileitemaction.cpp:274
 #, fuzzy, kde-format
 #| msgid ""
 #| "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
@@ -87,7 +100,7 @@ msgstr ""
 "Pagina web KDiff3: http://kdiff3.sourceforge.net\n"
 "\n"
 
-#: kdiff3fileitemaction.cpp:278
+#: kdiff3fileitemaction.cpp:275
 #, fuzzy, kde-format
 #| msgid ""
 #| "Using the contextmenu extension:\n"
@@ -119,7 +132,7 @@ msgstr ""
 "de îmbinat, iar apoi pe ramura destinație alegeți „Îmbinare în 3 cu baza”.\n"
 "La fel se procerează și cu comparații sau îmbinări de directoare."
 
-#: kdiff3fileitemaction.cpp:286
+#: kdiff3fileitemaction.cpp:283
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
 msgstr "Despre Extensia de acțiune pe fișier KDiff3"

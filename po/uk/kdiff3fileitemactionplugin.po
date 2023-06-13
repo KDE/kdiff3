@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3fileitemactionplugin\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-25 00:52+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2022-08-03 08:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -21,32 +21,44 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: kdiff3fileitemaction.cpp:82
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "KDiff3..."
+msgctxt "Contexualmenu title"
 msgid "KDiff3..."
 msgstr "KDiff3…"
 
 #: kdiff3fileitemaction.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Порівняти з %1"
 
 #: kdiff3fileitemaction.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Об’єднати з %1"
 
 #: kdiff3fileitemaction.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Зберегти «%1» на потім"
 
 #: kdiff3fileitemaction.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "3-рівневе об’єднання за основою"
 
 #: kdiff3fileitemaction.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with..."
+msgctxt "Contexualmenu option"
 msgid "Compare with..."
 msgstr "Порівняти з…"
 
@@ -57,27 +69,33 @@ msgid "Clear list"
 msgstr "Спорожнити список"
 
 #: kdiff3fileitemaction.cpp:153
-#, kde-format
-msgctxt "Contexualmenu option "
+#, fuzzy, kde-format
+#| msgctxt "Contexualmenu option "
+#| msgid "Compare"
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Порівняти"
 
 #: kdiff3fileitemaction.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "3-рівневе порівняння"
 
 #: kdiff3fileitemaction.cpp:163
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About KDiff3 menu plugin..."
+msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
 msgstr "Про додаток меню KDiff3…"
 
-#: kdiff3fileitemaction.cpp:277
+#: kdiff3fileitemaction.cpp:274
 #, kde-format
 msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
 msgstr "Додаток дій з пунктами файлів KDiff3: ©Joachim Eibl, 2011\n"
 
-#: kdiff3fileitemaction.cpp:278
+#: kdiff3fileitemaction.cpp:275
 #, kde-format
 msgid ""
 "Using the context menu extension:\n"
@@ -100,7 +118,7 @@ msgstr ""
 "варіанті файла, який буде використано як файл призначення об’єднання.\n"
 "Те саме стосується і порівняння з об’єднанням тек."
 
-#: kdiff3fileitemaction.cpp:286
+#: kdiff3fileitemaction.cpp:283
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
 msgstr "Про додаток дій з пунктами файлів KDiff3"

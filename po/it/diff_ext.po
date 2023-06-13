@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-04-28 00:21+0000\n"
+"POT-Creation-Date: 2023-06-13 00:49+0000\n"
 "PO-Revision-Date: 2021-05-03 08:17+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -17,48 +17,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 21.04.0\n"
 
-#: diff_ext.cpp:206
-#, kde-format
+#: diff_ext.cpp:211
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
+msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Confronta con %1"
 
-#: diff_ext.cpp:207
-#, kde-format
+#: diff_ext.cpp:212
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
+msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Fondi con %1"
 
 #: diff_ext.cpp:217
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
+msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "Fusione a tre con base"
 
 #: diff_ext.cpp:220
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Salva «%1» per dopo"
 
 #: diff_ext.cpp:234
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with ..."
+msgctxt "Contexualmenu option"
 msgid "Compare with ..."
 msgstr "Confronta con ..."
 
 #: diff_ext.cpp:237
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Clear list"
+msgctxt "Contexualmenu option"
 msgid "Clear list"
 msgstr "Svuota l'elenco"
 
 #: diff_ext.cpp:242
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare"
+msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Confronta"
 
 #: diff_ext.cpp:246
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
+msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "Confronto a 3"
 
 #: diff_ext.cpp:252
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About Diff-Ext ..."
+msgctxt "Contexualmenu option"
 msgid "About Diff-Ext ..."
 msgstr "Informazioni su Diff-Ext ..."
 
@@ -69,62 +87,68 @@ msgstr ""
 "Copyright (c) di Diff-Ext 2003-2006, Sergey Zorin. Tutti i diritti "
 "riservati.\n"
 
-#: diff_ext.cpp:325
+#: diff_ext.cpp:324
 #, kde-format
 msgid "This software is distributable under the BSD-2-Clause license.\n"
 msgstr "Questo software è distribuibile con licenza BSD-2-Clause.\n"
 
-#: diff_ext.cpp:326
+#: diff_ext.cpp:324
 #, kde-format
 msgid "Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n"
 msgstr "Alcune estensioni per KDiff3 (c) 2006-2013 create da Joachim Eibl.\n"
 
-#: diff_ext.cpp:327
+#: diff_ext.cpp:324
 #, kde-format
 msgid "Ported to Qt5/Kf5 by Michael Reeves\n"
 msgstr "Conversione a Qt5/Kf5 a cura di Michael Reeves\n"
 
-#: diff_ext.cpp:328
+#: diff_ext.cpp:324
 #, kde-format
 msgid "Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"
 msgstr "Pagina home di Diff-Ext: http://diff-ext.sourceforge.net\n"
 
-#: diff_ext.cpp:329
+#: diff_ext.cpp:324
 #, kde-format
 msgid "About Diff-Ext for KDiff3 (64 Bit)"
 msgstr "Informazioni su Diff-Ext per KDiff3 (64 Bit)"
 
-#: diff_ext.cpp:358
-#, kde-format
+#: diff_ext.cpp:353
+#, fuzzy, kde-format
+#| msgid "Compare selected files"
+msgctxt "Contexualmenu option"
 msgid "Compare selected files"
 msgstr "Confronta i file selezionati"
 
-#: diff_ext.cpp:364 diff_ext.cpp:382
-#, kde-format
+#: diff_ext.cpp:359 diff_ext.cpp:377
+#, fuzzy, kde-format
+#| msgid "Compare '%1' with '%2'"
+msgctxt "Contexualmenu option"
 msgid "Compare '%1' with '%2'"
 msgstr "Confronta «%1» con «%2»"
 
-#: diff_ext.cpp:369
-#, kde-format
+#: diff_ext.cpp:364
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later operation"
+msgctxt "Contexualmenu option"
 msgid "Save '%1' for later operation"
 msgstr "Salva «%1» per operazioni successive"
 
-#: diff_ext.cpp:423
+#: diff_ext.cpp:417
 #, kde-format
 msgid "Could not start KDiff3. Please rerun KDiff3 installation."
 msgstr "Impossibile avviare KDiff3. Riavvia l'installazione di KDiff3."
 
-#: diff_ext.cpp:424
+#: diff_ext.cpp:418
 #, kde-format
 msgid "Command"
 msgstr "Comando"
 
-#: diff_ext.cpp:425
+#: diff_ext.cpp:419
 #, kde-format
 msgid "CommandLine"
 msgstr "Riga di comando"
 
-#: diff_ext.cpp:426
+#: diff_ext.cpp:420
 #, kde-format
 msgid "Diff-Ext For KDiff3"
 msgstr "Diff-Ext per KDiff3"
