@@ -57,7 +57,7 @@
 #include <KMessageBox>
 #include <KToggleAction>
 
-QScrollBar* MergeResultWindow::mVScrollBar = nullptr;
+QPointer<QScrollBar> MergeResultWindow::mVScrollBar = nullptr;
 QPointer<QAction> MergeResultWindow::chooseAEverywhere;
 QPointer<QAction> MergeResultWindow::chooseBEverywhere;
 QPointer<QAction> MergeResultWindow::chooseCEverywhere;

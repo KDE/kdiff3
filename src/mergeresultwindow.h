@@ -43,7 +43,7 @@ class MergeResultWindow: public QWidget
 {
     Q_OBJECT
   public:
-    static QScrollBar* mVScrollBar;
+    static QPointer<QScrollBar> mVScrollBar;
 
     MergeResultWindow(QWidget* pParent, QStatusBar* pStatusBar);
 

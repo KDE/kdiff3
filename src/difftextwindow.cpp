@@ -55,7 +55,7 @@
 #include <QToolTip>
 #include <QUrl>
 
-QScrollBar* DiffTextWindow::mVScrollBar = nullptr;
+QPointer<QScrollBar> DiffTextWindow::mVScrollBar = nullptr;
 QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
 
 class RecalcWordWrapRunnable: public QRunnable
