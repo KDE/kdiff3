@@ -23,12 +23,11 @@ class KJob;
 
 namespace signals2 = boost::signals2;
 // When using the ProgressProxy you need not take care of the push and pop, except when explicit.
-class ProgressProxy: public QObject
+class ProgressProxy
 {
-    Q_OBJECT
   public:
     ProgressProxy();
-    ~ProgressProxy() override;
+    ~ProgressProxy();
 
     void setInformation(const QString& info, bool bRedrawUpdate = true);
     void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
