@@ -36,7 +36,7 @@ class FileAccessJobHandler: public QObject
 
     virtual FileAccessJobHandler* copy(FileAccess* fileAccess) = 0;
     //This exists soley to allow FileAccess to be no-except movable
-    void setFileAccess(FileAccess* pFileAccess) {  mFileAccess = pFileAccess; }
+    void setFileAccess(FileAccess* pFileAccess) noexcept {  mFileAccess = pFileAccess; }
     virtual bool get(void* pDestBuffer, long maxLength) = 0;
     virtual bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1) = 0;
     virtual bool stat(bool bWantToWrite = false) = 0;
