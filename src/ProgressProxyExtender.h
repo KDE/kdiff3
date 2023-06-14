@@ -15,11 +15,12 @@
 
 class KJob;
 
-class ProgressProxyExtender: public ProgressProxy
+class ProgressProxyExtender: public QObject, public ProgressProxy
 {
   Q_OBJECT
 public:
-   ProgressProxyExtender() { setMaxNofSteps(100); }
+  ProgressProxyExtender() { setMaxNofSteps(100); }
+  ~ProgressProxyExtender() override = default;
 public Q_SLOTS:
   void slotListDirInfoMessage( KJob*, const QString& msg );
   void slotPercent( KJob*, unsigned long percent );
