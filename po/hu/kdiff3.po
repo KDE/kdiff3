@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:43+0000\n"
+"POT-Creation-Date: 2023-06-14 02:38+0000\n"
 "PO-Revision-Date: 2013-07-13 11:52+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -140,8 +140,8 @@ msgstr "Sorvég stílus:"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
 #: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:749
-#: pdiff.cpp:771 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: optiondialog.cpp:962 pdiff.cpp:744 pdiff.cpp:746 pdiff.cpp:748 pdiff.cpp:750
+#: pdiff.cpp:772 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -154,8 +154,8 @@ msgstr "A"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1487
 #: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:751 pdiff.cpp:753
-#: pdiff.cpp:773 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: optiondialog.cpp:963 pdiff.cpp:744 pdiff.cpp:746 pdiff.cpp:752 pdiff.cpp:754
+#: pdiff.cpp:774 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -168,7 +168,7 @@ msgstr "B"
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1489
 #: mergeresultwindow.cpp:2850 mergeresultwindow.cpp:2857 optiondialog.cpp:964
-#: pdiff.cpp:747 pdiff.cpp:749 pdiff.cpp:751 pdiff.cpp:753 pdiff.cpp:775
+#: pdiff.cpp:748 pdiff.cpp:750 pdiff.cpp:752 pdiff.cpp:754 pdiff.cpp:776
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -436,7 +436,7 @@ msgstr ""
 "szakítani a műveletet és újra be szeretné olvasni a könyvtár tartalmát?"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:789 kdiff3.cpp:799 kdiff3.cpp:811
-#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
+#: mergeresultwindow.cpp:328 pdiff.cpp:863 pdiff.cpp:1713 pdiff.cpp:1723
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog caption"
@@ -544,8 +544,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "Ellenőrizze az alkönyvtárak jogosultságait."
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:738 kdiff3.cpp:844 kdiff3.cpp:868
-#: kdiff3.cpp:1137 kdiff3.cpp:1158 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
-#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
+#: kdiff3.cpp:1137 kdiff3.cpp:1158 pdiff.cpp:948 pdiff.cpp:1015 pdiff.cpp:1051
+#: pdiff.cpp:1060 pdiff.cpp:1106 pdiff.cpp:1114
 #, kde-format
 msgid "Ready."
 msgstr "Kész."
@@ -1277,12 +1277,12 @@ msgid "Option --auto ignored for folder comparison."
 msgstr ""
 "Az --auto opció figyelmen kívül lesz hagyva könyvtárak összehasonlításánál."
 
-#: kdiff3.cpp:558 pdiff.cpp:928
+#: kdiff3.cpp:558 pdiff.cpp:929
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Nem sikerült megnyitni a következő fájlokat:"
 
-#: kdiff3.cpp:567 pdiff.cpp:937
+#: kdiff3.cpp:567 pdiff.cpp:938
 #, kde-format
 msgid "File open error"
 msgstr "Fájlmegnyitási hiba"
@@ -1764,7 +1764,7 @@ msgstr "Osztott nézet (könyvtár és szöveg)"
 msgid "Toggle Between Folder && Text View"
 msgstr "Váltás a könyvtár- és szöveges nézet között"
 
-#: kdiff3.cpp:788 pdiff.cpp:1711
+#: kdiff3.cpp:788 pdiff.cpp:1712
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1780,12 +1780,12 @@ msgstr "Mentés és kilépés"
 msgid "Quit Without Saving"
 msgstr "Kilépés mentés nélkül"
 
-#: kdiff3.cpp:799 pdiff.cpp:1722
+#: kdiff3.cpp:799 pdiff.cpp:1723
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Az összeolvasztás eredményét nem sikerült elmenteni."
 
-#: kdiff3.cpp:810 pdiff.cpp:861
+#: kdiff3.cpp:810 pdiff.cpp:862
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -2192,7 +2192,7 @@ msgstr ""
 "A kimenet megváltozott.\n"
 "Ha továbblép, a módosítások elvesznek."
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:737
+#: mergeresultwindow.cpp:773 pdiff.cpp:738
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Az összes bemeneti fájl megegyezik (bináris módban)."
@@ -2203,7 +2203,7 @@ msgid "All input files contain the same text."
 msgstr "Az összes bemeneti fájl megegyezik (szöveges módban)."
 
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
+#: mergeresultwindow.cpp:787 pdiff.cpp:744 pdiff.cpp:748 pdiff.cpp:752
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "B és C binárisan megegyezik.\n"
@@ -3454,17 +3454,17 @@ msgstr "Linediff: B <-> C"
 msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
-#: pdiff.cpp:739
+#: pdiff.cpp:740
 #, fuzzy, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "Az összes bemeneti fájl megegyezik (szöveges módban)."
 
-#: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
+#: pdiff.cpp:746 pdiff.cpp:750 pdiff.cpp:754
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "A és B fájl binárisan megegyezik.\n"
 
-#: pdiff.cpp:763
+#: pdiff.cpp:764
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some inputfiles don't seem to be pure textfiles.\n"
@@ -3479,17 +3479,17 @@ msgstr ""
 "A KDiff3-féle összeolvasztás szöveges fájlok kezelésére való.\n"
 "Csak akkor lépjen tovább, ha valóban ezt szeretne."
 
-#: pdiff.cpp:773
+#: pdiff.cpp:774
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:775
+#: pdiff.cpp:776
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:777
+#: pdiff.cpp:778
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3498,83 +3498,83 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 
-#: pdiff.cpp:863
+#: pdiff.cpp:864
 #, kde-format
 msgid "Abort"
 msgstr "Félbeszakítás"
 
-#: pdiff.cpp:864
+#: pdiff.cpp:865
 #, kde-format
 msgid "Continue Merging"
 msgstr "A művelet folytatása"
 
-#: pdiff.cpp:869 pdiff.cpp:961
+#: pdiff.cpp:870 pdiff.cpp:962
 #, kde-format
 msgid "Opening files..."
 msgstr "Fájlok megnyitása..."
 
-#: pdiff.cpp:1048
+#: pdiff.cpp:1049
 #, kde-format
 msgid "Cutting selection..."
 msgstr "A kijelölt adatok kivágása..."
 
-#: pdiff.cpp:1055
+#: pdiff.cpp:1056
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "A kijelölt adatok másolása a vágólapra..."
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1065
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "A vágólap tartalmának beillesztése..."
 
-#: pdiff.cpp:1164
+#: pdiff.cpp:1165
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1180
+#: pdiff.cpp:1181
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Ugrás az utolsó deltára"
 
-#: pdiff.cpp:1491
+#: pdiff.cpp:1492
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1492
+#: pdiff.cpp:1493
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1713
+#: pdiff.cpp:1714
 #, kde-format
 msgid "Save && Continue"
 msgstr "Mentés és folytatás"
 
-#: pdiff.cpp:1714
+#: pdiff.cpp:1715
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Folytatás mentés nélkül"
 
-#: pdiff.cpp:1912
+#: pdiff.cpp:1913
 #, kde-format
 msgid "Search complete."
 msgstr "A keresés befejeződött."
 
-#: pdiff.cpp:1912
+#: pdiff.cpp:1913
 #, kde-format
 msgid "Search Complete"
 msgstr "A keresés befejeződött"
 
-#: pdiff.cpp:2093
+#: pdiff.cpp:2094
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2093
+#: pdiff.cpp:2094
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Hiba történt egy könyvtár létrehozása közben."

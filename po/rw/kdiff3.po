@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:43+0000\n"
+"POT-Creation-Date: 2023-06-14 02:38+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -141,8 +141,8 @@ msgstr "Impera Imisusire : "
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
 #: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:749
-#: pdiff.cpp:771 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: optiondialog.cpp:962 pdiff.cpp:744 pdiff.cpp:746 pdiff.cpp:748 pdiff.cpp:750
+#: pdiff.cpp:772 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -155,8 +155,8 @@ msgstr "A"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1487
 #: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:751 pdiff.cpp:753
-#: pdiff.cpp:773 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: optiondialog.cpp:963 pdiff.cpp:744 pdiff.cpp:746 pdiff.cpp:752 pdiff.cpp:754
+#: pdiff.cpp:774 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -169,7 +169,7 @@ msgstr "B"
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1489
 #: mergeresultwindow.cpp:2850 mergeresultwindow.cpp:2857 optiondialog.cpp:964
-#: pdiff.cpp:747 pdiff.cpp:749 pdiff.cpp:751 pdiff.cpp:753 pdiff.cpp:775
+#: pdiff.cpp:748 pdiff.cpp:750 pdiff.cpp:752 pdiff.cpp:754 pdiff.cpp:776
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -408,7 +408,7 @@ msgid ""
 msgstr "A Ububiko Gukomatanya . , Kuri Kureka i Gukomatanya na i Ububiko ? "
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:789 kdiff3.cpp:799 kdiff3.cpp:811
-#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
+#: mergeresultwindow.cpp:328 pdiff.cpp:863 pdiff.cpp:1713 pdiff.cpp:1723
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
@@ -497,8 +497,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "i Uruhushya Bya i Ububiko bwungirije . "
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:738 kdiff3.cpp:844 kdiff3.cpp:868
-#: kdiff3.cpp:1137 kdiff3.cpp:1158 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
-#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
+#: kdiff3.cpp:1137 kdiff3.cpp:1158 pdiff.cpp:948 pdiff.cpp:1015 pdiff.cpp:1051
+#: pdiff.cpp:1060 pdiff.cpp:1106 pdiff.cpp:1114
 #, kde-format
 msgid "Ready."
 msgstr "Cyiteguye."
@@ -1153,12 +1153,12 @@ msgstr "Byanze . "
 msgid "Option --auto ignored for folder comparison."
 msgstr "- - Ikiyega ya:  Ububiko . "
 
-#: kdiff3.cpp:558 pdiff.cpp:928
+#: kdiff3.cpp:558 pdiff.cpp:929
 #, fuzzy, kde-format
 msgid "Opening of these files failed:"
 msgstr "Bya Idosiye Byanze : "
 
-#: kdiff3.cpp:567 pdiff.cpp:937
+#: kdiff3.cpp:567 pdiff.cpp:938
 #, kde-format
 msgid "File open error"
 msgstr "Ikosa gufungura idosiye"
@@ -1583,7 +1583,7 @@ msgstr ""
 msgid "Toggle Between Folder && Text View"
 msgstr ""
 
-#: kdiff3.cpp:788 pdiff.cpp:1711
+#: kdiff3.cpp:788 pdiff.cpp:1712
 #, fuzzy, kde-format
 msgid "The merge result has not been saved."
 msgstr "Gukomatanya Igisubizo . "
@@ -1598,12 +1598,12 @@ msgstr "Kubika & & "
 msgid "Quit Without Saving"
 msgstr "Komeka utahinduye imiterere"
 
-#: kdiff3.cpp:799 pdiff.cpp:1722
+#: kdiff3.cpp:799 pdiff.cpp:1723
 #, fuzzy, kde-format
 msgid "Saving the merge result failed."
 msgstr "i Gukomatanya Igisubizo Byanze . "
 
-#: kdiff3.cpp:810 pdiff.cpp:861
+#: kdiff3.cpp:810 pdiff.cpp:862
 #, fuzzy, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1986,7 +1986,7 @@ msgstr ""
 "Ibisohoka Byahinduwe: . \n"
 "Gukomeza Amahinduka . "
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:737
+#: mergeresultwindow.cpp:773 pdiff.cpp:738
 #, fuzzy, kde-format
 msgid "All input files are binary equal."
 msgstr "Iyinjiza Idosiye Nyabibiri bingana . "
@@ -1997,7 +1997,7 @@ msgid "All input files contain the same text."
 msgstr "Iyinjiza Idosiye i Umwandiko . "
 
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
+#: mergeresultwindow.cpp:787 pdiff.cpp:744 pdiff.cpp:748 pdiff.cpp:752
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "na Nyabibiri bingana . \n"
@@ -3190,17 +3190,17 @@ msgstr ""
 msgid "Linediff: A <-> C"
 msgstr ": A < - > "
 
-#: pdiff.cpp:739
+#: pdiff.cpp:740
 #, fuzzy, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "Iyinjiza Idosiye i Umwandiko . "
 
-#: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
+#: pdiff.cpp:746 pdiff.cpp:750 pdiff.cpp:754
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "A na Nyabibiri bingana . \n"
 
-#: pdiff.cpp:763
+#: pdiff.cpp:764
 #, fuzzy, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3211,17 +3211,17 @@ msgstr ""
 "icyitonderwa i - Gukomatanya OYA ya:  Nyabibiri Ibyatanzwe . \n"
 "Gukomeza Ku . "
 
-#: pdiff.cpp:773
+#: pdiff.cpp:774
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:775
+#: pdiff.cpp:776
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:777
+#: pdiff.cpp:778
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3230,82 +3230,82 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 
-#: pdiff.cpp:863
+#: pdiff.cpp:864
 #, kde-format
 msgid "Abort"
 msgstr "Ntibyakunze"
 
-#: pdiff.cpp:864
+#: pdiff.cpp:865
 #, fuzzy, kde-format
 msgid "Continue Merging"
 msgstr "Gukomeza "
 
-#: pdiff.cpp:869 pdiff.cpp:961
+#: pdiff.cpp:870 pdiff.cpp:962
 #, fuzzy, kde-format
 msgid "Opening files..."
 msgstr "Mu Gufungura dosiye"
 
-#: pdiff.cpp:1048
+#: pdiff.cpp:1049
 #, fuzzy, kde-format
 msgid "Cutting selection..."
 msgstr "Ihitamo ... "
 
-#: pdiff.cpp:1055
+#: pdiff.cpp:1056
 #, fuzzy, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Ihitamo Kuri Ububikokoporora ... "
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1065
 #, fuzzy, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Ububikokoporora Ibigize ... "
 
-#: pdiff.cpp:1164
+#: pdiff.cpp:1165
 #, kde-format
 msgid "Ok"
 msgstr ""
 
-#: pdiff.cpp:1180
+#: pdiff.cpp:1181
 #, fuzzy, kde-format
 msgid "Go to Line"
 msgstr "Kuri "
 
-#: pdiff.cpp:1491
+#: pdiff.cpp:1492
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1492
+#: pdiff.cpp:1493
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1713
+#: pdiff.cpp:1714
 #, fuzzy, kde-format
 msgid "Save && Continue"
 msgstr "Kubika & & Gukomeza "
 
-#: pdiff.cpp:1714
+#: pdiff.cpp:1715
 #, fuzzy, kde-format
 msgid "Continue Without Saving"
 msgstr "Gukomeza "
 
-#: pdiff.cpp:1912
+#: pdiff.cpp:1913
 #, fuzzy, kde-format
 msgid "Search complete."
 msgstr "Byuzuye . "
 
-#: pdiff.cpp:1912
+#: pdiff.cpp:1913
 #, fuzzy, kde-format
 msgid "Search Complete"
 msgstr "Igishushanyombonera cy'Ishakisha"
 
-#: pdiff.cpp:2093
+#: pdiff.cpp:2094
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2093
+#: pdiff.cpp:2094
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Ikosa Kurema Ububiko . "

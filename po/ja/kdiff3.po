@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-13 02:43+0000\n"
+"POT-Creation-Date: 2023-06-14 02:38+0000\n"
 "PO-Revision-Date: 2010-10-03 21:09-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -141,8 +141,8 @@ msgstr "改行コード:"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
 #: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:749
-#: pdiff.cpp:771 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: optiondialog.cpp:962 pdiff.cpp:744 pdiff.cpp:746 pdiff.cpp:748 pdiff.cpp:750
+#: pdiff.cpp:772 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -155,8 +155,8 @@ msgstr "A"
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1487
 #: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:751 pdiff.cpp:753
-#: pdiff.cpp:773 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: optiondialog.cpp:963 pdiff.cpp:744 pdiff.cpp:746 pdiff.cpp:752 pdiff.cpp:754
+#: pdiff.cpp:774 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -169,7 +169,7 @@ msgstr "B"
 #: mergeresultwindow.cpp:785 mergeresultwindow.cpp:787
 #: mergeresultwindow.cpp:789 mergeresultwindow.cpp:1489
 #: mergeresultwindow.cpp:2850 mergeresultwindow.cpp:2857 optiondialog.cpp:964
-#: pdiff.cpp:747 pdiff.cpp:749 pdiff.cpp:751 pdiff.cpp:753 pdiff.cpp:775
+#: pdiff.cpp:748 pdiff.cpp:750 pdiff.cpp:752 pdiff.cpp:754 pdiff.cpp:776
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -435,7 +435,7 @@ msgstr ""
 "ンしますか？"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:789 kdiff3.cpp:799 kdiff3.cpp:811
-#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
+#: mergeresultwindow.cpp:328 pdiff.cpp:863 pdiff.cpp:1713 pdiff.cpp:1723
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog caption"
@@ -543,8 +543,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "サブディレクトリのパーミッションを確認してください。"
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:738 kdiff3.cpp:844 kdiff3.cpp:868
-#: kdiff3.cpp:1137 kdiff3.cpp:1158 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
-#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
+#: kdiff3.cpp:1137 kdiff3.cpp:1158 pdiff.cpp:948 pdiff.cpp:1015 pdiff.cpp:1051
+#: pdiff.cpp:1060 pdiff.cpp:1106 pdiff.cpp:1114
 #, kde-format
 msgid "Ready."
 msgstr "準備完了。"
@@ -1263,12 +1263,12 @@ msgstr "保存に失敗しました。"
 msgid "Option --auto ignored for folder comparison."
 msgstr "オプション --auto はディレクトリ比較時には無視されます。"
 
-#: kdiff3.cpp:558 pdiff.cpp:928
+#: kdiff3.cpp:558 pdiff.cpp:929
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "以下のファイルを開けませんでした:"
 
-#: kdiff3.cpp:567 pdiff.cpp:937
+#: kdiff3.cpp:567 pdiff.cpp:938
 #, kde-format
 msgid "File open error"
 msgstr "ファイルのオープンエラー"
@@ -1752,7 +1752,7 @@ msgstr "ディレクトリ/テキスト分割画面表示"
 msgid "Toggle Between Folder && Text View"
 msgstr "ディレクトリ表示/テキスト表示を切り替え"
 
-#: kdiff3.cpp:788 pdiff.cpp:1711
+#: kdiff3.cpp:788 pdiff.cpp:1712
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1768,12 +1768,12 @@ msgstr "保存/終了"
 msgid "Quit Without Saving"
 msgstr "保存せずに終了"
 
-#: kdiff3.cpp:799 pdiff.cpp:1722
+#: kdiff3.cpp:799 pdiff.cpp:1723
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "マージ結果の保存に失敗しました。"
 
-#: kdiff3.cpp:810 pdiff.cpp:861
+#: kdiff3.cpp:810 pdiff.cpp:862
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -2169,7 +2169,7 @@ msgstr ""
 "出力が更新されました。\n"
 "続行すると更新内容は失われます。"
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:737
+#: mergeresultwindow.cpp:773 pdiff.cpp:738
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "すべての入力ファイルはバイナリ的に同じです。"
@@ -2180,7 +2180,7 @@ msgid "All input files contain the same text."
 msgstr "すべての入力ファイルのテキストは同じです。"
 
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
+#: mergeresultwindow.cpp:787 pdiff.cpp:744 pdiff.cpp:748 pdiff.cpp:752
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "ファイル %1 と %2 はバイナリ的に同じです。\n"
@@ -3469,19 +3469,19 @@ msgstr "Linediff: B <-> C"
 msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
-#: pdiff.cpp:739
+#: pdiff.cpp:740
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "すべての入力ファイルのテキストは同じですが、バイナリ的に等しくありません。"
 
-#: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
+#: pdiff.cpp:746 pdiff.cpp:750 pdiff.cpp:754
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "ファイル %1 と %2 のテキストは同じですが、バイナリ的に等しくありません。\n"
 
-#: pdiff.cpp:763
+#: pdiff.cpp:764
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some inputfiles don't seem to be pure textfiles.\n"
@@ -3496,17 +3496,17 @@ msgstr ""
 "KDiff3 のマージはバイナリデータでの使用を想定していません。\n"
 "自己責任で続行してください。"
 
-#: pdiff.cpp:773
+#: pdiff.cpp:774
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:775
+#: pdiff.cpp:776
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:777
+#: pdiff.cpp:778
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3515,83 +3515,83 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 
-#: pdiff.cpp:863
+#: pdiff.cpp:864
 #, kde-format
 msgid "Abort"
 msgstr "中止"
 
-#: pdiff.cpp:864
+#: pdiff.cpp:865
 #, kde-format
 msgid "Continue Merging"
 msgstr "マージを続行"
 
-#: pdiff.cpp:869 pdiff.cpp:961
+#: pdiff.cpp:870 pdiff.cpp:962
 #, kde-format
 msgid "Opening files..."
 msgstr "ファイルを開いています..."
 
-#: pdiff.cpp:1048
+#: pdiff.cpp:1049
 #, kde-format
 msgid "Cutting selection..."
 msgstr "選択範囲を切り取り..."
 
-#: pdiff.cpp:1055
+#: pdiff.cpp:1056
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "選択範囲をクリップボードにコピー..."
 
-#: pdiff.cpp:1064
+#: pdiff.cpp:1065
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "クリップボードの内容を挿入..."
 
-#: pdiff.cpp:1164
+#: pdiff.cpp:1165
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1180
+#: pdiff.cpp:1181
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "最後の異なる部分に移動"
 
-#: pdiff.cpp:1491
+#: pdiff.cpp:1492
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1492
+#: pdiff.cpp:1493
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1713
+#: pdiff.cpp:1714
 #, kde-format
 msgid "Save && Continue"
 msgstr "保存/続行"
 
-#: pdiff.cpp:1714
+#: pdiff.cpp:1715
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "保存せずに続行"
 
-#: pdiff.cpp:1912
+#: pdiff.cpp:1913
 #, kde-format
 msgid "Search complete."
 msgstr "検索が完了しました。"
 
-#: pdiff.cpp:1912
+#: pdiff.cpp:1913
 #, kde-format
 msgid "Search Complete"
 msgstr "検索完了"
 
-#: pdiff.cpp:2093
+#: pdiff.cpp:2094
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2093
+#: pdiff.cpp:2094
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "ディレクトリ作成中にエラー"
