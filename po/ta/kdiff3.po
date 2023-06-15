@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 00:49+0000\n"
+"POT-Creation-Date: 2023-06-15 00:48+0000\n"
 "PO-Revision-Date: 2023-05-14 15:28+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -112,77 +112,77 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "கடுமையான உள்ளக சிக்கல்."
 
-#: difftextwindow.cpp:596
+#: difftextwindow.cpp:599
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "கோப்பு %1: வரி %2"
 
-#: difftextwindow.cpp:598
+#: difftextwindow.cpp:601
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "கோப்பு %1: வரி கிடைக்கவில்லை"
 
-#: difftextwindow.cpp:1909
+#: difftextwindow.cpp:1912
 #, kde-format
 msgid "Encoding:"
 msgstr "குறியாக்கம்"
 
-#: difftextwindow.cpp:1913 mergeresultwindow.cpp:2786 optiondialog.cpp:805
+#: difftextwindow.cpp:1916 mergeresultwindow.cpp:2783 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "வரிமுடிவுகளின் முறை:"
 
-#: difftextwindow.cpp:1938
+#: difftextwindow.cpp:1949
 #, kde-format
 msgid "A (Base)"
 msgstr "A (மூலம்)"
 
-#: difftextwindow.cpp:1940
+#: difftextwindow.cpp:1951
 #, kde-format
 msgid "Encoding: %1"
 msgstr "குறியாக்கம் %1"
 
-#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2832
+#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2829
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1941 mergeresultwindow.cpp:2831
+#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2828
 #, kde-format
 msgid "Unix"
 msgstr "யுனிக்ஸ்"
 
-#: difftextwindow.cpp:1941
+#: difftextwindow.cpp:1952
 #, kde-format
 msgid "Line end style: %1"
 msgstr "வரிமுடிவுகளின் முறை: %1"
 
-#: difftextwindow.cpp:1942
+#: difftextwindow.cpp:1953
 #, kde-format
 msgid "Unknown"
 msgstr "தெரியாதது"
 
-#: difftextwindow.cpp:1970 kdiff3.cpp:937
+#: difftextwindow.cpp:1981 kdiff3.cpp:943
 #, kde-format
 msgid "Top line"
 msgstr "முதல் வரி"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1990
 #, kde-format
 msgid "End"
 msgstr "முடிவு"
 
-#: difftextwindow.cpp:2035 smalldialogs.cpp:163
+#: difftextwindow.cpp:2046 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "கோப்பை திற"
 
-#: difftextwindow.cpp:2081 optiondialog.cpp:390
+#: difftextwindow.cpp:2092 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "8 பிட்டு யூனிகோடு"
 
-#: difftextwindow.cpp:2097
+#: difftextwindow.cpp:2108
 #, kde-format
 msgid "Other"
 msgstr "வேறு"
@@ -361,7 +361,7 @@ msgstr ""
 "நீங்கள் தற்பொழுது ஒன்றாக சேர்க்கப்பட்ட அடைவை பயன்படுத்திக் கொண்டிருக்கிறீர்கள். நீங்கள் நிச்சயமாக "
 "ஒன்று சேர்ப்பதை நிறுத்திவிட்டு அடைவை மறுவருடலை விரும்புகிறீர்களா?"
 
-#: directorymergewindow.cpp:689 kdiff3.cpp:793 kdiff3.cpp:803 kdiff3.cpp:815
+#: directorymergewindow.cpp:689 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
 #: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1744 pdiff.cpp:1754
 #, kde-format
 msgctxt "Error dialog title"
@@ -1239,89 +1239,89 @@ msgstr "இந்த கோப்புகளின் திறப்பு த
 msgid "File open error"
 msgstr "கோப்பு திறப்பு பிழை"
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:611
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "ஒப்பிடுதலுக்கு ஆவணங்களைத் திறக்க..."
 
-#: kdiff3.cpp:607
+#: kdiff3.cpp:613
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgid "Reload"
 msgstr "தயார்."
 
-#: kdiff3.cpp:610
+#: kdiff3.cpp:616
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "ஒன்றுசேர் முடிவை சேகரி. அனைத்து குழப்பங்களும் தீர வேண்டும்."
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "தற்போதைய ஆவணத்தை ....வாக சேமி "
 
-#: kdiff3.cpp:615
+#: kdiff3.cpp:621
 #, kde-format
 msgid "Print the differences"
 msgstr ""
 
-#: kdiff3.cpp:618
+#: kdiff3.cpp:624
 #, kde-format
 msgid "Quits the application"
 msgstr "பயன்பாட்டை முறிக்க"
 
-#: kdiff3.cpp:622
+#: kdiff3.cpp:628
 #, fuzzy, kde-format
 msgid "Undo last action."
 msgstr "தானாகவே தேர்ந்தெடுக்கப்பட்ட படிவு"
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:632
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "தேர்வு செய்த பகுதியை எடுத்து  கிளிப்போர்டில் செலுத்துகிறது"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:635
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "தேர்வு செய்த பகுதியை கிளிப் போர்டை படி செய்கிறது."
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:637
 #, fuzzy, kde-format
 #| msgid "Pastes the clipboard contents to actual position"
 msgid "Pastes the clipboard contents to current position"
 msgstr "கிளிப்போர்டின் உள்ளடக்கங்களை உரிய இடத்தில் சேர்க்கிறது"
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:640
 #, kde-format
 msgid "Select everything in current window"
 msgstr ""
 
-#: kdiff3.cpp:637
+#: kdiff3.cpp:643
 #, kde-format
 msgid "Search for a string"
 msgstr "தொடர்ச்சிகளை தேடு"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:645
 #, kde-format
 msgid "Search again for the string"
 msgstr "சரத்தை மீண்டும் தேடு"
 
-#: kdiff3.cpp:644
+#: kdiff3.cpp:650
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "நிலைப்பட்டியை செயல்படுத்து/நீக்கு "
 
-#: kdiff3.cpp:647
+#: kdiff3.cpp:653
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3யை அமை"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "தற்போதைய டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:673
 #, fuzzy, kde-format
 #| msgid "Go to Current Delta"
 msgid ""
@@ -1329,12 +1329,12 @@ msgid ""
 "Delta"
 msgstr "தற்போதைய டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to First Delta"
 msgstr "முதல் டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:675
 #, fuzzy, kde-format
 #| msgid "Go to First Delta"
 msgid ""
@@ -1342,12 +1342,12 @@ msgid ""
 "Delta"
 msgstr "முதல் டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "கடைசி டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:677
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid ""
@@ -1355,13 +1355,13 @@ msgid ""
 "Delta"
 msgstr "கடைசி டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:679
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:680
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1369,12 +1369,12 @@ msgid ""
 "disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "முந்தைய டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Go to Previous Delta"
 msgid ""
@@ -1382,12 +1382,12 @@ msgid ""
 "Delta"
 msgstr "முந்தைய டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "அடுத்த டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Go to Next Delta"
 msgid ""
@@ -1395,12 +1395,12 @@ msgid ""
 "Delta"
 msgstr "அடுத்த டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "முந்தைய குழப்பத்திற்குச் செல்க"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid "Conflicts"
 msgid ""
@@ -1408,12 +1408,12 @@ msgid ""
 "Conflict"
 msgstr "குழப்பங்கள்"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:687
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "அடுத்த குழப்பத்திற்குச் செல்க"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:687
 #, fuzzy, kde-format
 #| msgid "Go to Next Conflict"
 msgid ""
@@ -1421,12 +1421,12 @@ msgid ""
 "Conflict"
 msgstr "அடுத்த குழப்பத்திற்குச் செல்க"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "முந்தைய தீர்க்காத குழப்பத்திற்குச் செல்க"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:689
 #, fuzzy, kde-format
 #| msgid "Unsolved"
 msgid ""
@@ -1434,12 +1434,12 @@ msgid ""
 "Unsolved"
 msgstr "Unsolved"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "அடுத்த தீர்க்காத குழப்பத்திற்குச் செல்க"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 #| msgid "Unsolved"
 msgid ""
@@ -1447,14 +1447,14 @@ msgid ""
 "Unsolved"
 msgstr "Unsolved"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "கடைசி டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 #| msgid "Link: "
 msgctxt "Text used for toolbar button."
@@ -1463,20 +1463,20 @@ msgid ""
 "Line"
 msgstr "இணைப்பு."
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Aவிலிருந்து வரி(களை) தேர்ந்தெடு"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1484,14 +1484,14 @@ msgid ""
 "A"
 msgstr ""
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:696
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Bவிலிருந்து வரி(களை) தேர்ந்தெடு"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1499,14 +1499,14 @@ msgid ""
 "B"
 msgstr ""
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:697
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Cவிலிருந்து வரி(களை) தேர்ந்தெடு"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1514,14 +1514,14 @@ msgid ""
 "C"
 msgstr ""
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:698
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "மூலத்தை தேர்வு செய்த பிறகு தானாகவே அடுத்த தீர்க்கப்படாத குழப்பதற்கு செல் "
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:698
 #, fuzzy, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1529,13 +1529,13 @@ msgid ""
 "Next"
 msgstr "தானாகவே தேர்ந்தெடுக்கப்பட்ட படிவு"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:700
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "இடைவெளியை காட்டி மற்றும் வேறுபாட்டிற்காக பட்டியலிடுவான் எழுத்துக்கள்"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:700
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1543,12 +1543,12 @@ msgid ""
 "Characters"
 msgstr ""
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show White Space"
 msgstr "வெள்ளை இடத்தை காட்டும்"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:701
 #, fuzzy, kde-format
 #| msgid "Go to First Delta"
 msgctxt "Show whitespace changes toolbar text."
@@ -1557,12 +1557,12 @@ msgid ""
 "Deltas"
 msgstr "முதல் டெல்டாவிற்குச் செல்க"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "வரி எண்களை காட்டு"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:703
 #, fuzzy, kde-format
 #| msgid "Show Line Numbers"
 msgctxt "Show line numbers toolbar text"
@@ -1571,142 +1571,142 @@ msgid ""
 "Numbers"
 msgstr "வரி எண்களை காட்டு"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "தானாகவே எளிய குழப்பங்களை தீர்க்க."
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr " Delta வை குழப்பத்திற்கு அமை"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:708
 #, fuzzy, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "தானாகவே எளிய குழப்பங்களை தீர்க்க."
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr ""
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:710
 #, fuzzy, kde-format
 msgid "Join Selected Diffs"
 msgstr "தேர்ந்தெடுத்த கோப்பினை ஒப்பிடு"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Show Window A"
 msgstr "A சாளரத்தைக் காட்டு"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Show Window B"
 msgstr "B சாளரத்தைக் காட்டு"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Show Window C"
 msgstr "C சாளரத்தைக் காட்டு"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:716
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normal Overview"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:717
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A vs. B Overview"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:718
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A vs. C Overview"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:719
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B vs. C Overview"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:720
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Word Wrap Diff Windows"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:721
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:724
 #, kde-format
 msgid "Focus Next Window"
 msgstr "அடுத்த சாளரத்தை நோக்கு"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:725
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "முந்தைய சாளரத்தை நோக்கு"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:726
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "பிரிப்பு திசையை மாற்று"
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:728
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "அடைவு மற்றும் உரையின் பிளவின் திரைப்பார்வை"
 
-#: kdiff3.cpp:724
+#: kdiff3.cpp:730
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "அடைவுக்கும் உரை பார்வைக்கும் இடையே மாற்றுக"
 
-#: kdiff3.cpp:746 kdiff3.cpp:848 kdiff3.cpp:873 kdiff3.cpp:1134 kdiff3.cpp:1155
+#: kdiff3.cpp:752 kdiff3.cpp:854 kdiff3.cpp:879 kdiff3.cpp:1140 kdiff3.cpp:1161
 #: pdiff.cpp:954 pdiff.cpp:1023 pdiff.cpp:1059 pdiff.cpp:1068 pdiff.cpp:1126
 #: pdiff.cpp:1134
 #, kde-format
 msgid "Ready."
 msgstr "தயார்."
 
-#: kdiff3.cpp:792 pdiff.cpp:1743
+#: kdiff3.cpp:798 pdiff.cpp:1743
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "ஒன்று சேர் முடிவு சேகரிக்கப்படவில்லை."
 
-#: kdiff3.cpp:794
+#: kdiff3.cpp:800
 #, kde-format
 msgid "Save && Quit"
 msgstr "சேகரித்து முடி"
 
-#: kdiff3.cpp:795
+#: kdiff3.cpp:801
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "சேகரிக்காமல் மூடு"
 
-#: kdiff3.cpp:803 pdiff.cpp:1754
+#: kdiff3.cpp:809 pdiff.cpp:1754
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "ஒன்றுசேர் முடிவை சேகரித்தல் தோல்வியடைந்தது."
 
-#: kdiff3.cpp:814 pdiff.cpp:869
+#: kdiff3.cpp:820 pdiff.cpp:869
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1715,64 +1715,64 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "நீங்கள் தற்போது அடைவுகளை சேர்த்துக் கொண்டிருக்கிறீர்கள். நிறுத்த விரும்புகிறீர்களா?"
 
-#: kdiff3.cpp:837
+#: kdiff3.cpp:843
 #, kde-format
 msgid "Saving file..."
 msgstr "கோப்பு சேகரித்தல்..."
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:860
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "புதிய கோப்புப்பெயருடன் கோப்பினை சேகரித்தல்..."
 
-#: kdiff3.cpp:856
+#: kdiff3.cpp:862
 #, kde-format
 msgid "Save As..."
 msgstr ""
 
-#: kdiff3.cpp:881
+#: kdiff3.cpp:887
 #, fuzzy, kde-format
 msgid "Printing not implemented."
 msgstr "ஒன்றுசேர் இயக்கம் முடிந்தது"
 
-#: kdiff3.cpp:921
+#: kdiff3.cpp:927
 #, fuzzy, kde-format
 msgid "Printing..."
 msgstr "வெளியேறுதல்..."
 
-#: kdiff3.cpp:1019
+#: kdiff3.cpp:1025
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1067
+#: kdiff3.cpp:1073
 #, fuzzy, kde-format
 #| msgid "Select Another Font"
 msgid " (Selection)"
 msgstr "மற்றொரு எழுத்துருவை  தேர்தெடு"
 
-#: kdiff3.cpp:1096
+#: kdiff3.cpp:1102
 #, fuzzy, kde-format
 msgid "Printing completed."
 msgstr "ஒன்றுசேர் இயக்கம் முடிந்தது"
 
-#: kdiff3.cpp:1100
+#: kdiff3.cpp:1106
 #, fuzzy, kde-format
 msgid "Printing aborted."
 msgstr "ஒன்றுசேர் இயக்கம் முடிந்தது"
 
-#: kdiff3.cpp:1107
+#: kdiff3.cpp:1113
 #, kde-format
 msgid "Exiting..."
 msgstr "வெளியேறுதல்..."
 
-#: kdiff3.cpp:1118
+#: kdiff3.cpp:1124
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "கருவிப்பட்டி மாற்றப்படுகறது"
 
-#: kdiff3.cpp:1139
+#: kdiff3.cpp:1145
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "நிலைப்பட்டியை மாற்று"
@@ -2042,29 +2042,29 @@ msgid ""
 "If you continue your changes will be lost."
 msgstr "வெளீயிடு மாற்றப்பட்டுள்ளது. நீங்கள் தொடர்ந்தால் மாற்றங்களை இழந்து விடுவீர்கள்"
 
-#: mergeresultwindow.cpp:768 pdiff.cpp:745
+#: mergeresultwindow.cpp:765 pdiff.cpp:745
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "அனைத்து உள்ளிடு கோப்புகளும் இருநிலை சமம்"
 
-#: mergeresultwindow.cpp:770
+#: mergeresultwindow.cpp:767
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "அனைத்து உள்ளீட்டுக் கோப்புகளும் ஒரே உரையைக் கொண்டன."
 
-#: mergeresultwindow.cpp:774 mergeresultwindow.cpp:778
-#: mergeresultwindow.cpp:782 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: mergeresultwindow.cpp:771 mergeresultwindow.cpp:775
+#: mergeresultwindow.cpp:779 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "கோப்புகள் B மற்றும் C இருநிலை சமம் உடையன.\n"
 
-#: mergeresultwindow.cpp:776 mergeresultwindow.cpp:780
-#: mergeresultwindow.cpp:784
+#: mergeresultwindow.cpp:773 mergeresultwindow.cpp:777
+#: mergeresultwindow.cpp:781
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "கோப்புகள் A மற்றும் B சம உரை உடையன.\n"
 
-#: mergeresultwindow.cpp:788
+#: mergeresultwindow.cpp:785
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2073,27 +2073,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:794
+#: mergeresultwindow.cpp:791
 #, kde-format
 msgid "Conflicts"
 msgstr "குழப்பங்கள்"
 
-#: mergeresultwindow.cpp:1519
+#: mergeresultwindow.cpp:1516
 #, kde-format
 msgid "<No src line>"
 msgstr "<No src line>"
 
-#: mergeresultwindow.cpp:1527
+#: mergeresultwindow.cpp:1524
 #, fuzzy, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<ஒன்றுசேர் குழப்பம்>"
 
-#: mergeresultwindow.cpp:1529 mergeresultwindow.cpp:2398
+#: mergeresultwindow.cpp:1526 mergeresultwindow.cpp:2395
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<ஒன்றுசேர் குழப்பம்>"
 
-#: mergeresultwindow.cpp:2618
+#: mergeresultwindow.cpp:2615
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2105,12 +2105,12 @@ msgstr ""
 "அனைத்து குழப்பங்களும் இன்னும் தீரவில்லை.\n"
 "கோப்பினை சேமிக்கவில்லை \n"
 
-#: mergeresultwindow.cpp:2620 mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2617 mergeresultwindow.cpp:2626
 #, kde-format
 msgid "Conflicts Left"
 msgstr "குழப்பமான இடது"
 
-#: mergeresultwindow.cpp:2627
+#: mergeresultwindow.cpp:2624
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2118,7 +2118,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2641
+#: mergeresultwindow.cpp:2638
 #, kde-format
 msgid ""
 "\n"
@@ -2126,49 +2126,49 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2641 mergeresultwindow.cpp:2683
+#: mergeresultwindow.cpp:2638 mergeresultwindow.cpp:2680
 #, kde-format
 msgid "File Save Error"
 msgstr "கோப்பின சேமிப்பு பிழை"
 
-#: mergeresultwindow.cpp:2683
+#: mergeresultwindow.cpp:2680
 #, kde-format
 msgid "Error while writing."
 msgstr "எழுதும் பொழுது பிழை"
 
-#: mergeresultwindow.cpp:2758
+#: mergeresultwindow.cpp:2755
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr " வெளியீடு"
 
-#: mergeresultwindow.cpp:2771 mergeresultwindow.cpp:2961
+#: mergeresultwindow.cpp:2768 mergeresultwindow.cpp:2958
 #, kde-format
 msgid "[Modified]"
 msgstr "[திருத்தப்பட்டது]"
 
-#: mergeresultwindow.cpp:2778
+#: mergeresultwindow.cpp:2775
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2878
+#: mergeresultwindow.cpp:2875
 #, fuzzy, kde-format
 #| msgid "Conflicts"
 msgid "Conflict"
 msgstr "குழப்பங்கள்"
 
-#: mergeresultwindow.cpp:2910
+#: mergeresultwindow.cpp:2907
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2914
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
