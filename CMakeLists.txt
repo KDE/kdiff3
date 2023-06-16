@@ -89,8 +89,8 @@ find_package(
     WidgetsAddons
     Config
     Crash
+    KIO #Not fully ready for to build without KIO
     OPTIONAL_COMPONENTS
-    KIO
     DocTools
 )
 
