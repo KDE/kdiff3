@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-15 00:48+0000\n"
-"PO-Revision-Date: 2023-05-28 10:42+0200\n"
+"PO-Revision-Date: 2023-06-15 13:59+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -1176,18 +1176,16 @@ msgid "Merge info"
 msgstr "Informationen zur Zusammenführung"
 
 #: kdiff3.cpp:465
-#, fuzzy, kde-format
-#| msgid "Unable to compare non-normal file with normal file."
+#, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
-msgstr "Vergleich von spezieller und normaler Datei ist nicht möglich."
+msgstr "Vergleich von Datei und Ordner ist nicht möglich."
 
 #: kdiff3.cpp:466
-#, fuzzy, kde-format
-#| msgid "Binary comparison"
+#, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
-msgstr "Binärvergleich"
+msgstr "Ungültiger Vergleich"
 
 #: kdiff3.cpp:475
 #, kde-format
