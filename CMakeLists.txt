@@ -177,7 +177,7 @@ if(KF${KF_MAJOR_VERSION}KIO_FOUND)
 endif()
 
 add_subdirectory(src)
-if(KF5DocTools_FOUND)
+if(KF${KF_MAJOR_VERSION}DocTools_FOUND)
     ecm_optional_add_subdirectory(doc)
     kdoctools_install(po)
 else()
