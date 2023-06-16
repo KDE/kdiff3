@@ -95,11 +95,7 @@ void KDiff3Shell::optionsShowStatusbar()
 
 void KDiff3Shell::optionsConfigureKeys()
 {
-#if KF_VERSION < KF_VERSION_CHECK(5, 84, 0)
-    KShortcutsDialog::configure(actionCollection() /*, "kdiff3_shell.rc" */);
-#else
     KShortcutsDialog::showDialog(actionCollection());
-#endif
 }
 
 void KDiff3Shell::optionsConfigureToolbars()

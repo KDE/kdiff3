@@ -15,7 +15,7 @@ option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(KF_MIN_VERSION "5.82.0")
+set(KF_MIN_VERSION "5.84.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
     set(QT_MIN_VERSION "6.0.0")
@@ -160,10 +160,10 @@ add_definitions(
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.99.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x056300
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x056300
-    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x056300
+    #Don't warn for API depreciated after 5.104.0 (below as hex.hex.hex number)
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x056800
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x056800
+    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x056800
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
