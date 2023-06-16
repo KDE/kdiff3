@@ -95,7 +95,7 @@ void KDiff3Shell::optionsShowStatusbar()
 
 void KDiff3Shell::optionsConfigureKeys()
 {
-    KShortcutsDialog::showDialog(actionCollection());
+    KShortcutsDialog::showDialog(actionCollection(), KShortcutsEditor::LetterShortcutsDisallowed);
 }
 
 void KDiff3Shell::optionsConfigureToolbars()

@@ -1340,7 +1340,7 @@ void KDiff3App::slotConfigure()
 
 void KDiff3App::slotConfigureKeys()
 {
-    KShortcutsDialog::showDialog(actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this);
+    KShortcutsDialog::showDialog(actionCollection(), KShortcutsEditor::LetterShortcutsDisallowed, this);
 }
 
 void KDiff3App::slotRefresh()
