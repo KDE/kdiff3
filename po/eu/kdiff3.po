@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:50+0000\n"
 "PO-Revision-Date: 2023-04-13 21:40+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -30,69 +30,69 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xalba@ni.eus"
 
-#: DefaultFileAccessJobHandler.cpp:49
+#: DefaultFileAccessJobHandler.cpp:50
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "Fitxategiaren egoera lortzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:101
+#: DefaultFileAccessJobHandler.cpp:105
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Fitxategia irakurtzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:141
+#: DefaultFileAccessJobHandler.cpp:149
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Fitxategia idazten: %1"
 
-#: DefaultFileAccessJobHandler.cpp:175
+#: DefaultFileAccessJobHandler.cpp:185
 #, kde-format
 msgid "Out of memory"
 msgstr "Memoria beteta"
 
-#: DefaultFileAccessJobHandler.cpp:212
+#: DefaultFileAccessJobHandler.cpp:224
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Karpeta sortzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:234
+#: DefaultFileAccessJobHandler.cpp:248
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Karpeta kentzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:250
+#: DefaultFileAccessJobHandler.cpp:266
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Fitxategia kentzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:267
+#: DefaultFileAccessJobHandler.cpp:288
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Esteka sinbolikoa kentzea: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:292
+#: DefaultFileAccessJobHandler.cpp:318
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Fitxategi berrizendatzea: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:333
+#: DefaultFileAccessJobHandler.cpp:359
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Fitxategi kopiatzea: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:355
+#: DefaultFileAccessJobHandler.cpp:381
 #, fuzzy, kde-format
 #| msgid "Reading folder: %1"
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Karpeta irakurtzea: %1"
 
-#: DefaultFileAccessJobHandler.cpp:413
+#: DefaultFileAccessJobHandler.cpp:439
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Direktorioa zerrendatzea: %1"
@@ -358,7 +358,7 @@ msgstr ""
 "bateratzea galarazi eta karpeta berriz aztertu nahi duzula?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1744 pdiff.cpp:1754
+#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1693,7 +1693,7 @@ msgstr "Txandakatu karpeta eta testu ikuspegien artean"
 msgid "Ready."
 msgstr "Prest."
 
-#: kdiff3.cpp:798 pdiff.cpp:1743
+#: kdiff3.cpp:798 pdiff.cpp:1739
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Bateratzearen emaitza ez da gorde."
@@ -1708,7 +1708,7 @@ msgstr "Gorde eta irten"
 msgid "Quit Without Saving"
 msgstr "Irten gorde gabe"
 
-#: kdiff3.cpp:809 pdiff.cpp:1754
+#: kdiff3.cpp:809 pdiff.cpp:1750
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Bateratzearen emaitza gordetzea huts egin du."
@@ -3604,42 +3604,42 @@ msgstr "Ados"
 msgid "Go to Line"
 msgstr "Joan lerrora"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Itzulbira («Utzi»k itzulbiratzea desgaitzen du)"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Labaintze-barra horizontalaren gehieneko zabalera kalkulatzen"
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1741
 #, kde-format
 msgid "Save && Continue"
 msgstr "Gorde eta jarraitu"
 
-#: pdiff.cpp:1746
+#: pdiff.cpp:1742
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Jarraitu gorde gabe"
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search complete."
 msgstr "Bilaketa osatu da."
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search Complete"
 msgstr "Bilaketa osatua"
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ez dago ezer hautatuta diff sarrerako leihoetan."
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Errorea eskuz «diff» barrutia gehitzean"

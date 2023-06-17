@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:50+0000\n"
 "PO-Revision-Date: 2023-06-10 09:34+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -40,68 +40,68 @@ msgstr ""
 "tom@w.pl, mrudolf@kdewebdev.org, mboksz@bcig.pl, lichota@mimuw.edu.pl, "
 "rgom@o2.pl, msmoczyk@wp.pl, lukasz.wojnilowicz@gmail.com"
 
-#: DefaultFileAccessJobHandler.cpp:49
+#: DefaultFileAccessJobHandler.cpp:50
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "Pobranie stanu pliku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:101
+#: DefaultFileAccessJobHandler.cpp:105
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Czytanie pliku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:141
+#: DefaultFileAccessJobHandler.cpp:149
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Zapisywanie pliku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:175
+#: DefaultFileAccessJobHandler.cpp:185
 #, kde-format
 msgid "Out of memory"
 msgstr "Brak pamięci"
 
-#: DefaultFileAccessJobHandler.cpp:212
+#: DefaultFileAccessJobHandler.cpp:224
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Tworzenie katalogu: %1"
 
-#: DefaultFileAccessJobHandler.cpp:234
+#: DefaultFileAccessJobHandler.cpp:248
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Usuwanie katalogu: %1"
 
-#: DefaultFileAccessJobHandler.cpp:250
+#: DefaultFileAccessJobHandler.cpp:266
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Usuwanie pliku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:267
+#: DefaultFileAccessJobHandler.cpp:288
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Tworzenie dowiązania symbolicznego:%1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:292
+#: DefaultFileAccessJobHandler.cpp:318
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Zmiana nazwy pliku: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:333
+#: DefaultFileAccessJobHandler.cpp:359
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Kopiowanie pliku: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:355
+#: DefaultFileAccessJobHandler.cpp:381
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Czytanie katalogu: %1"
 
-#: DefaultFileAccessJobHandler.cpp:413
+#: DefaultFileAccessJobHandler.cpp:439
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Wyświetlenie zawartości katalogu: %1"
@@ -367,7 +367,7 @@ msgstr ""
 "to działanie i ponownie przeszukać katalog?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1744 pdiff.cpp:1754
+#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1671,7 +1671,7 @@ msgstr "Przełącz pomiędzy widokiem katalogu i tekstu"
 msgid "Ready."
 msgstr "Gotowe."
 
-#: kdiff3.cpp:798 pdiff.cpp:1743
+#: kdiff3.cpp:798 pdiff.cpp:1739
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Wynik scalania nie został zapisany."
@@ -1686,7 +1686,7 @@ msgstr "Zapisz i wyjdź"
 msgid "Quit Without Saving"
 msgstr "Zakończ bez zapisywania"
 
-#: kdiff3.cpp:809 pdiff.cpp:1754
+#: kdiff3.cpp:809 pdiff.cpp:1750
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Nieudany zapis wyniku scalania."
@@ -3434,42 +3434,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Przejdź do wiersza"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Zawijanie słów (Anulowanie wyłącza zawijanie słów)"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Obliczanie największej szerokości dla poziomego paska przewijania"
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1741
 #, kde-format
 msgid "Save && Continue"
 msgstr "Zapisz i Kontynuuj"
 
-#: pdiff.cpp:1746
+#: pdiff.cpp:1742
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Zakończ bez zapisywania"
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search complete."
 msgstr "Wynik szukania."
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search Complete"
 msgstr "Wyszukiwanie zakończone"
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Nic nie wybrano w żadnym oknie wejściowym różnicy."
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Błąd podczas dodawania ręcznego zakresu różnic"

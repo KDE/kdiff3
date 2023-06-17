@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:50+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -35,68 +35,68 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: DefaultFileAccessJobHandler.cpp:49
+#: DefaultFileAccessJobHandler.cpp:50
 #, fuzzy, kde-format
 msgid "Getting file status: %1"
 msgstr "Idosiye Imimerere : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:101
+#: DefaultFileAccessJobHandler.cpp:105
 #, fuzzy, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Idosiye : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:141
+#: DefaultFileAccessJobHandler.cpp:149
 #, fuzzy, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Idosiye : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:175
+#: DefaultFileAccessJobHandler.cpp:185
 #, kde-format
 msgid "Out of memory"
 msgstr "Ububiko bwarenzwe"
 
-#: DefaultFileAccessJobHandler.cpp:212
+#: DefaultFileAccessJobHandler.cpp:224
 #, fuzzy, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Ububiko : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:234
+#: DefaultFileAccessJobHandler.cpp:248
 #, fuzzy, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Idosiye : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:250
+#: DefaultFileAccessJobHandler.cpp:266
 #, fuzzy, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Idosiye : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:267
+#: DefaultFileAccessJobHandler.cpp:288
 #, fuzzy, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Ihuza : %1 - > %2 "
 
-#: DefaultFileAccessJobHandler.cpp:292
+#: DefaultFileAccessJobHandler.cpp:318
 #, fuzzy, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Idosiye : %1 - > %2 "
 
-#: DefaultFileAccessJobHandler.cpp:333
+#: DefaultFileAccessJobHandler.cpp:359
 #, fuzzy, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Idosiye : %1 - > %2 "
 
-#: DefaultFileAccessJobHandler.cpp:355
+#: DefaultFileAccessJobHandler.cpp:381
 #, fuzzy, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Idosiye : %1 "
 
-#: DefaultFileAccessJobHandler.cpp:413
+#: DefaultFileAccessJobHandler.cpp:439
 #, fuzzy, kde-format
 msgid "Listing directory: %1"
 msgstr "Ububiko : %1 "
@@ -367,7 +367,7 @@ msgid ""
 msgstr "A Ububiko Gukomatanya . , Kuri Kureka i Gukomatanya na i Ububiko ? "
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1744 pdiff.cpp:1754
+#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1600,7 +1600,7 @@ msgstr ""
 msgid "Ready."
 msgstr "Cyiteguye."
 
-#: kdiff3.cpp:798 pdiff.cpp:1743
+#: kdiff3.cpp:798 pdiff.cpp:1739
 #, fuzzy, kde-format
 msgid "The merge result has not been saved."
 msgstr "Gukomatanya Igisubizo . "
@@ -1615,7 +1615,7 @@ msgstr "Kubika & & "
 msgid "Quit Without Saving"
 msgstr "Komeka utahinduye imiterere"
 
-#: kdiff3.cpp:809 pdiff.cpp:1754
+#: kdiff3.cpp:809 pdiff.cpp:1750
 #, fuzzy, kde-format
 msgid "Saving the merge result failed."
 msgstr "i Gukomatanya Igisubizo Byanze . "
@@ -3282,42 +3282,42 @@ msgstr ""
 msgid "Go to Line"
 msgstr "Kuri "
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1741
 #, fuzzy, kde-format
 msgid "Save && Continue"
 msgstr "Kubika & & Gukomeza "
 
-#: pdiff.cpp:1746
+#: pdiff.cpp:1742
 #, fuzzy, kde-format
 msgid "Continue Without Saving"
 msgstr "Gukomeza "
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, fuzzy, kde-format
 msgid "Search complete."
 msgstr "Byuzuye . "
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, fuzzy, kde-format
 msgid "Search Complete"
 msgstr "Igishushanyombonera cy'Ishakisha"
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Ikosa Kurema Ububiko . "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:50+0000\n"
 "PO-Revision-Date: 2023-06-14 14:12+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -29,68 +29,68 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "dom.toretto@seznam.cz"
 
-#: DefaultFileAccessJobHandler.cpp:49
+#: DefaultFileAccessJobHandler.cpp:50
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "Získávám stav souboru: %1"
 
-#: DefaultFileAccessJobHandler.cpp:101
+#: DefaultFileAccessJobHandler.cpp:105
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Čtu soubor: %1"
 
-#: DefaultFileAccessJobHandler.cpp:141
+#: DefaultFileAccessJobHandler.cpp:149
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Zapisuji soubor: %1"
 
-#: DefaultFileAccessJobHandler.cpp:175
+#: DefaultFileAccessJobHandler.cpp:185
 #, kde-format
 msgid "Out of memory"
 msgstr "Nedostatek paměti"
 
-#: DefaultFileAccessJobHandler.cpp:212
+#: DefaultFileAccessJobHandler.cpp:224
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Vytvářím složku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:234
+#: DefaultFileAccessJobHandler.cpp:248
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Odstraňuji složku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:250
+#: DefaultFileAccessJobHandler.cpp:266
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Odstraňuji soubor: %1"
 
-#: DefaultFileAccessJobHandler.cpp:267
+#: DefaultFileAccessJobHandler.cpp:288
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Vytvářím symbolický odkaz: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:292
+#: DefaultFileAccessJobHandler.cpp:318
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Přejmenovávám soubor: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:333
+#: DefaultFileAccessJobHandler.cpp:359
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Kopíruji soubor: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:355
+#: DefaultFileAccessJobHandler.cpp:381
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Čtu složku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:413
+#: DefaultFileAccessJobHandler.cpp:439
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Výpis adresáře: %1"
@@ -356,7 +356,7 @@ msgstr ""
 "prohledat složku?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1744 pdiff.cpp:1754
+#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1646,7 +1646,7 @@ msgstr "Přepnout mezi zobrazením složek a textu"
 msgid "Ready."
 msgstr "Připraven."
 
-#: kdiff3.cpp:798 pdiff.cpp:1743
+#: kdiff3.cpp:798 pdiff.cpp:1739
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Výsledek sloučení nebyl uložen."
@@ -1661,7 +1661,7 @@ msgstr "Uložit a ukončit"
 msgid "Quit Without Saving"
 msgstr "Ukončit bez uložení"
 
-#: kdiff3.cpp:809 pdiff.cpp:1754
+#: kdiff3.cpp:809 pdiff.cpp:1750
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Uložení výsledku sloučení selhalo."
@@ -3394,42 +3394,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Přejít na řádek"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Zalamování slov (Zručit vypne zalamování slov)"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Počítám maximální šířku pro vodorovný posuvník"
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1741
 #, kde-format
 msgid "Save && Continue"
 msgstr "Uložit a pokračovat"
 
-#: pdiff.cpp:1746
+#: pdiff.cpp:1742
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Pokračovat bez ukládání"
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search complete."
 msgstr "Vyhledávání dokončeno."
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search Complete"
 msgstr "Vyhledávání dokončeno"
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Není nic vybráno v žádném vstupním okně rozdílů."
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Chyba ručního přidávání rozsahu k porovnání"

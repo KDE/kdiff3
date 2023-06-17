@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-15 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:50+0000\n"
 "PO-Revision-Date: 2023-06-14 08:03+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -31,68 +31,68 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "joanmaspons@gmail.com,antonibella5@yahoo.com"
 
-#: DefaultFileAccessJobHandler.cpp:49
+#: DefaultFileAccessJobHandler.cpp:50
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "S'està obtenint l'estat del fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:101
+#: DefaultFileAccessJobHandler.cpp:105
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "S'està llegint el fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:141
+#: DefaultFileAccessJobHandler.cpp:149
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "S'està escrivint el fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:175
+#: DefaultFileAccessJobHandler.cpp:185
 #, kde-format
 msgid "Out of memory"
 msgstr "Memòria exhaurida"
 
-#: DefaultFileAccessJobHandler.cpp:212
+#: DefaultFileAccessJobHandler.cpp:224
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "S'està creant la carpeta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:234
+#: DefaultFileAccessJobHandler.cpp:248
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "S'està eliminant la carpeta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:250
+#: DefaultFileAccessJobHandler.cpp:266
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "S'està eliminant el fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:267
+#: DefaultFileAccessJobHandler.cpp:288
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "S'està creant l'enllaç simbòlic: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:292
+#: DefaultFileAccessJobHandler.cpp:318
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "S'està reanomenant el fitxer: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:333
+#: DefaultFileAccessJobHandler.cpp:359
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "S'està copiant el fitxer: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:355
+#: DefaultFileAccessJobHandler.cpp:381
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "S'està llegint la carpeta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:413
+#: DefaultFileAccessJobHandler.cpp:439
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "S'està llistant la carpeta: %1"
@@ -358,7 +358,7 @@ msgstr ""
 "fusió i tornar a explorar la carpeta?"
 
 #: directorymergewindow.cpp:689 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1744 pdiff.cpp:1754
+#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1668,7 +1668,7 @@ msgstr "Commuta entre la vista de carpetes i text"
 msgid "Ready."
 msgstr "Preparat."
 
-#: kdiff3.cpp:798 pdiff.cpp:1743
+#: kdiff3.cpp:798 pdiff.cpp:1739
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultat de la fusió no s'ha desat."
@@ -1683,7 +1683,7 @@ msgstr "Desa i surt"
 msgid "Quit Without Saving"
 msgstr "Surt sense desar"
 
-#: kdiff3.cpp:809 pdiff.cpp:1754
+#: kdiff3.cpp:809 pdiff.cpp:1750
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Ha fallat en desar el resultat de la fusió."
@@ -3440,43 +3440,43 @@ msgstr "D'acord"
 msgid "Go to Line"
 msgstr "Ves a la línia"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajust de paraula (Cancel·la desactiva l'ajust de paraula)"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1520
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "S'està calculant l'amplada màxima per a la barra de desplaçament horitzontal"
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1741
 #, kde-format
 msgid "Save && Continue"
 msgstr "Desa i continua"
 
-#: pdiff.cpp:1746
+#: pdiff.cpp:1742
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continua sense desar"
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search complete."
 msgstr "S'ha finalitzat la cerca."
 
-#: pdiff.cpp:1944
+#: pdiff.cpp:1940
 #, kde-format
 msgid "Search Complete"
 msgstr "Cerca completa"
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "No hi ha res seleccionat en cap de les finestres de diferències."
 
-#: pdiff.cpp:2125
+#: pdiff.cpp:2121
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Error en afegir un interval manual de diferències"
