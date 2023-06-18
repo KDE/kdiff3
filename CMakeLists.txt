@@ -42,10 +42,23 @@ else()
     set(KF_MAJOR_VERSION "5")
 endif()
 
+# project uses settings default as of KDECompilerSettings in ECM 5.85.0
+set(KDE_QT_MODERNCODE_DEFINITIONS_LEVEL 5.85.0)
+set(KDE_COMPILERSETTINGS_LEVEL 5.85.0)
+# pedantic compilers are not supported at this time.
+set(KDE_SKIP_PEDANTIC_WARNINGS_SETTINGS TRUE)
+
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
+
+#Full QT_NO_CAST_FROM_ASCII is not compatiable with kdiff3 code and not worth inforcing
+#we use the slightly less strict QT_RESTRICTED_CAST_FROM_ASCII
+#Disallowing implict cast from QByteArray doesn't make sense for this projec
+remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
+#Causes multiple build errors related to the use QLatin1String
+remove_definitions(-DQT_USE_QSTRINGBUILDER)
 
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
