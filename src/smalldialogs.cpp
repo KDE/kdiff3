@@ -202,7 +202,7 @@ void OpenDialog::inputFilenameChanged()
 void OpenDialog::fixCurrentText(QComboBox* pCB)
 {
     QString s = pCB->currentText();
-    QtNumberType pos = s.indexOf('\n');
+    QtSizeType pos = s.indexOf('\n');
 
     if(pos >= 0)
         s = s.left(pos);
@@ -240,7 +240,7 @@ void OpenDialog::accept()
 
 void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the popup menu
 {
-    const QtNumberType id = pAction->parentWidget()->actions().indexOf(pAction);
+    const QtSizeType id = pAction->parentWidget()->actions().indexOf(pAction);
     QComboBox* cb1 = nullptr;
     QComboBox* cb2 = nullptr;
 

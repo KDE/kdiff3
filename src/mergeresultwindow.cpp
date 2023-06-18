@@ -945,9 +945,9 @@ void MergeResultWindow::slotUnsolve()
 bool findParenthesesGroups(const QString& s, QStringList& sl)
 {
     sl.clear();
-    int i = 0;
-    std::list<int> startPosStack;
-    int length = s.length();
+    QtSizeType i = 0;
+    std::list<QtSizeType> startPosStack;
+    QtSizeType length = s.length();
     for(i = 0; i < length; ++i)
     {
         if(s[i] == '\\' && i + 1 < length && (s[i + 1] == '\\' || s[i + 1] == '(' || s[i + 1] == ')'))
@@ -963,7 +963,7 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
         {
             if(startPosStack.empty())
                 return false; // Parentheses don't match
-            int startPos = startPosStack.back();
+            QtSizeType startPos = startPosStack.back();
             startPosStack.pop_back();
             sl.push_back(s.mid(startPos + 1, i - startPos - 1));
         }
@@ -1008,7 +1008,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
             // s is the string that managed to match.
             // Now we want to know at which position it occurred. e.g. Jan=0, Feb=1, Mar=2, etc.
             QStringList sl = groupRegExp.split('|');
-            int idx = sl.indexOf(s);
+            QtSizeType idx = sl.indexOf(s);
             if(idx >= 0)
             {
                 QString sIdx;
@@ -1419,7 +1419,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
         QVector<QTextLayout::FormatRange> formats;
         QTextLayout::FormatRange formatRange;
         formatRange.start = 0;
-        formatRange.length = str.length();
+        formatRange.length = SafeInt<int>(str.length());
         formatRange.format.setFont(font());
         formats.append(formatRange);
         textLayout.setFormats(formats);
@@ -1431,12 +1431,12 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
         QtSizeType firstPosInText = m_selection.firstPosInLine(line);
         QtSizeType lastPosInText = m_selection.lastPosInLine(line);
 
-        QtSizeType lengthInText = std::max(0, lastPosInText - firstPosInText);
+        QtSizeType lengthInText = std::max<QtSizeType>(0, lastPosInText - firstPosInText);
         assert(lengthInText <= limits<int>::max());
 
         QTextLayout::FormatRange selection;
-        selection.start = firstPosInText;
-        selection.length = (decltype(selection.length))lengthInText;
+        selection.start = SafeInt<int>(firstPosInText);
+        selection.length = SafeInt<int>(lengthInText);
         selection.format.setBackground(palette().highlight());
         selection.format.setForeground(palette().highlightedText().color());
         selectionFormat.push_back(selection);

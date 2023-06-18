@@ -79,13 +79,13 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
     LineType convertLineToDiff3LineIdx(const LineRef line) const;
     LineRef convertDiff3LineIdxToLine(const LineType d3lIdx) const;
 
-    void convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos) const;
-    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos) const;
+    void convertD3LCoordsToLineCoords(LineType d3LIdx, QtSizeType d3LPos, LineRef& line, QtSizeType& pos) const;
+    void convertLineCoordsToD3LCoords(LineRef line, QtSizeType pos, LineType& d3LIdx, QtSizeType& d3LPos) const;
 
     void convertSelectionToD3LCoords() const;
 
     bool findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, int endPos, LineRef& l, int& p);
+    void setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, QtSizeType endPos, LineRef& l, QtSizeType& p);
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType) const;
 
     void setPaintingAllowed(bool bAllowPainting);

@@ -841,7 +841,7 @@ QTextCodec* SourceData::detectUTF8(const QByteArray& data)
     QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
 
     QTextCodec::ConverterState state;
-    utf8->toUnicode(data.constData(), data.size(), &state);
+    utf8->toUnicode(data.constData(), SafeInt<int>(data.size()), &state);
 
     if(state.invalidChars == 0)
         for (int i = 0; i < data.size()-state.remainingChars; i++)

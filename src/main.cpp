@@ -9,6 +9,7 @@
 // clang-format on
 
 #include "kdiff3_shell.h"
+#include "TypeUtils.h"
 #include "UTF8BOMCodec.h"
 #include "version.h"
 
@@ -46,7 +47,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             const QString line = ts.readLine();
             if(line.startsWith(u8"IgnorableCmdLineOptions="))
             {
-                const int pos = line.indexOf('=');
+                const QtSizeType pos = line.indexOf('=');
                 if(pos >= 0)
                 {
                     ignorableOptionsLine = line.mid(pos + 1);

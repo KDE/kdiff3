@@ -428,7 +428,7 @@ void KDiff3App::createCaption()
     QString f1 = m_sd1->getAliasName();
     QString f2 = m_sd2->getAliasName();
     QString f3 = m_sd3->getAliasName();
-    int p;
+    QtSizeType p;
 
     if((p = f1.lastIndexOf('/')) >= 0 || (p = f1.lastIndexOf('\\')) >= 0)
         f1 = f1.mid(p + 1);
@@ -1865,9 +1865,9 @@ void KDiff3App::slotEditFindNext()
     bool bCaseSensitive = m_pFindDialog->m_pCaseSensitive->isChecked();
 
     LineRef d3vLine = m_pFindDialog->currentLine;
-    int posInLine = m_pFindDialog->currentPos;
+    QtSizeType posInLine = m_pFindDialog->currentPos;
     LineRef l;
-    int p = 0;
+    QtSizeType p = 0;
     if(m_pFindDialog->getCurrentWindow() == eWindowIndex::A)
     {
         if(m_pFindDialog->m_pSearchInA->isChecked() && m_pDiffTextWindow1 != nullptr &&
@@ -1875,7 +1875,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow1->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1892,7 +1892,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow2->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1910,7 +1910,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow3->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1928,7 +1928,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pMergeResultWindow->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
             MergeResultWindow::mVScrollBar->setValue(d3vLine - MergeResultWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;

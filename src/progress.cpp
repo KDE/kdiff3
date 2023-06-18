@@ -10,6 +10,7 @@
 
 #include "progress.h"
 
+#include "TypeUtils.h"
 #include "defmac.h"
 
 #include <cmath>
@@ -213,7 +214,7 @@ void ProgressDialog::setInformationImp(const QString& info)
 {
     assert(!m_progressStack.empty());
 
-    int level = m_progressStack.size();
+    QtSizeType level = m_progressStack.size();
     if(level == 1)
     {
         dialogUi.information->setText(info);
@@ -340,7 +341,7 @@ void ProgressDialog::recalc(bool bUpdate)
             if(!m_bStayHidden)
                 m_progressDelayTimer = startTimer(3000); /* 3 s delay */
 
-            int level = m_progressStack.size();
+            QtSizeType level = m_progressStack.size();
             if((bUpdate && level == 1) || m_t1.elapsed() > 200)
             {
                 if(m_progressStack.empty())

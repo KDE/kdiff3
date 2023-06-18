@@ -61,7 +61,7 @@ QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunab
 class RecalcWordWrapRunnable: public QRunnable
 {
   private:
-    static QAtomicInt s_runnableCount;
+    static QAtomicInteger<QtSizeType> s_runnableCount;
 
     std::shared_ptr<DiffTextWindow> m_pDTW = nullptr;
     int m_visibleTextWidth;
@@ -71,7 +71,7 @@ class RecalcWordWrapRunnable: public QRunnable
     std::shared_ptr<ProgressDialog> progressDialog = g_pProgressDialog;
 
   public:
-    static QAtomicInt s_maxNofRunnables;
+    static QAtomicInteger<QtSizeType> s_maxNofRunnables;
     RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx):
         m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
@@ -81,7 +81,7 @@ class RecalcWordWrapRunnable: public QRunnable
     void run() override
     {
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
-        int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
+        QtSizeType newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
         progressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
@@ -90,8 +90,8 @@ class RecalcWordWrapRunnable: public QRunnable
     }
 };
 
-QAtomicInt RecalcWordWrapRunnable::s_runnableCount = 0;
-QAtomicInt RecalcWordWrapRunnable::s_maxNofRunnables = 0;
+QAtomicInteger<QtSizeType> RecalcWordWrapRunnable::s_runnableCount = 0;
+QAtomicInteger<QtSizeType> RecalcWordWrapRunnable::s_maxNofRunnables = 0;
 
 class WrapLineCacheData
 {
@@ -348,7 +348,7 @@ void DiffTextWindow::slotRefresh()
 void DiffTextWindow::slotSelectAll()
 {
     LineRef l;
-    int p = 0; // needed as dummy return values
+    QtSizeType p = 0; // needed as dummy return values
 
     if(hasFocus())
     {
@@ -527,7 +527,7 @@ LineType DiffTextWindow::getNofLines() const
 LineType DiffTextWindow::convertLineToDiff3LineIdx(const LineRef line) const
 {
     if(line.isValid() && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
-        return d->m_diff3WrapLineVector[std::min((LineType)line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
+        return d->m_diff3WrapLineVector[std::min<QtSizeType>(line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
     else
         return line;
 }
@@ -1382,11 +1382,11 @@ QString DiffTextWindow::getSelection() const
 
     QString selectionString;
 
-    int line = 0;
+    LineRef line = 0;
     LineType lineIdx = 0;
 
-    int it;
-    int vectorSize = d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
+    QtSizeType it;
+    QtSizeType vectorSize = d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
     for(it = 0; it < vectorSize; ++it)
     {
         std::shared_ptr<const Diff3Line> d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->getDiff3LineVector())[it];
@@ -1474,11 +1474,11 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& 
     return false;
 }
 
-void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos) const
+void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, QtSizeType d3LPos, LineRef& line, QtSizeType& pos) const
 {
     if(d->m_bWordWrap)
     {
-        int wrapPos = d3LPos;
+        QtSizeType wrapPos = d3LPos;
         LineRef wrapLine = convertDiff3LineIdxToLine(d3LIdx);
         while(wrapPos > d->m_diff3WrapLineVector[wrapLine].wrapLineLength)
         {
@@ -1495,7 +1495,7 @@ void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, L
     }
 }
 
-void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos) const
+void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, QtSizeType pos, LineType& d3LIdx, QtSizeType& d3LPos) const
 {
     if(d->m_bWordWrap)
     {
@@ -1515,7 +1515,7 @@ void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineTyp
     }
 }
 
-void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, int endPos, LineRef& l, int& p)
+void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, QtSizeType endPos, LineRef& l, QtSizeType& p)
 {
     d->m_selection.reset();
     if(lastLine >= getNofLines())
@@ -1534,8 +1534,8 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr)
     {
         QString s1 = d->getString(firstLine);
-        int firstWrapLine = convertDiff3LineIdxToLine(firstLine);
-        int wrapStartPos = startPos;
+        LineRef firstWrapLine = convertDiff3LineIdxToLine(firstLine);
+        QtSizeType wrapStartPos = startPos;
         while(wrapStartPos > d->m_diff3WrapLineVector[firstWrapLine].wrapLineLength)
         {
             wrapStartPos -= d->m_diff3WrapLineVector[firstWrapLine].wrapLineLength;
@@ -1544,8 +1544,8 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
         }
 
         QString s2 = d->getString(lastLine);
-        int lastWrapLine = convertDiff3LineIdxToLine(lastLine);
-        int wrapEndPos = endPos;
+        LineRef lastWrapLine = convertDiff3LineIdxToLine(lastLine);
+        QtSizeType wrapEndPos = endPos;
         while(wrapEndPos > d->m_diff3WrapLineVector[lastWrapLine].wrapLineLength)
         {
             wrapEndPos -= d->m_diff3WrapLineVector[lastWrapLine].wrapLineLength;
@@ -1579,7 +1579,7 @@ LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnSc
         if(coordType == eWrapCoords) return lineOnScreen;
         LineType d3lIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(lineOnScreen);
         if(!bFirstLine && d3lIdx >= mDiff3LineVector->size())
-            d3lIdx = mDiff3LineVector->size() - 1;
+            d3lIdx = SafeInt<LineType>(mDiff3LineVector->size() - 1);
         if(coordType == eD3LLineCoords) return d3lIdx;
         while(!line.isValid() && d3lIdx < mDiff3LineVector->size() && d3lIdx >= 0)
         {
@@ -1613,12 +1613,14 @@ void DiffTextWindow::convertSelectionToD3LCoords() const
     }
 
     // convert the d->m_selection to unwrapped coordinates: Later restore to new coords
-    int firstD3LIdx, firstD3LPos;
+    LineType firstD3LIdx;
+    QtSizeType firstD3LPos;
     QString s = d->getLineString(d->m_selection.beginLine());
     QtSizeType firstPosInText = d->m_selection.beginPos();
     convertLineCoordsToD3LCoords(d->m_selection.beginLine(), firstPosInText, firstD3LIdx, firstD3LPos);
 
-    int lastD3LIdx, lastD3LPos;
+    LineType lastD3LIdx;
+    QtSizeType lastD3LPos;
     s = d->getLineString(d->m_selection.endLine());
     QtSizeType lastPosInText = d->m_selection.endPos();
     convertLineCoordsToD3LCoords(d->m_selection.endLine(), lastPosInText, lastD3LIdx, lastD3LPos);
@@ -1717,8 +1719,8 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         LineType i;
         QtSizeType wrapLineIdx = 0;
         QtSizeType size = d->getDiff3LineVector()->size();
-        LineType firstD3LineIdx = (LineType)wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable;
-        LineType endIdx = wrapLineVectorSize > 0 ? size : std::min(firstD3LineIdx + s_linesPerRunnable, size);
+        LineType firstD3LineIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable);
+        LineType endIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? size : std::min<QtSizeType>(firstD3LineIdx + s_linesPerRunnable, size));
         QVector<WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
         QtSizeType cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
@@ -1808,7 +1810,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         if(wrapLineVectorSize > 0)
         {
             assert(wrapLineVectorSize <= limits<LineType>::max()); //Posiable but unlikely starting in Qt6
-            d->m_firstLine = std::min<LineType>(d->m_firstLine, wrapLineVectorSize - 1);
+            d->m_firstLine = (LineType)std::min<SafeInt<LineType>>(d->m_firstLine, wrapLineVectorSize - 1);
             d->m_horizScrollOffset = 0;
 
             Q_EMIT firstLineChanged(d->m_firstLine);
@@ -1820,7 +1822,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
             return;
 
         QtSizeType size = d->getDiff3LineVector()->size();
-        LineType firstD3LineIdx = cacheListIdx * s_linesPerRunnable;
+        LineType firstD3LineIdx = SafeInt<LineType>(cacheListIdx * s_linesPerRunnable);
         LineType endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, (LineType)size);
 
         int maxTextWidth = d->m_maxTextWidth.loadRelaxed(); // current value
@@ -1854,11 +1856,11 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 
         // convert the d->m_selection to unwrapped coordinates.
         LineRef firstLine;
-        qint32 firstPos;
+        QtSizeType firstPos;
         convertD3LCoordsToLineCoords(d->m_selection.beginLine(), d->m_selection.beginPos(), firstLine, firstPos);
 
         LineRef lastLine;
-        qint32 lastPos;
+        QtSizeType lastPos;
         convertD3LCoordsToLineCoords(d->m_selection.endLine(), d->m_selection.endPos(), lastLine, lastPos);
 
         d->m_selection.start(firstLine, firstPos);
@@ -2154,8 +2156,8 @@ void EncodingLabel::slotSelectEncoding()
             QStringList& recentEncodings = gOptions->m_recentEncodings;
             if(!recentEncodings.contains(s) && s != "UTF-8" && s != "System")
             {
-                int itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;
-                for(int i = 0; i < itemsToRemove; ++i)
+                QtSizeType itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;
+                for(QtSizeType i = 0; i < itemsToRemove; ++i)
                 {
                     recentEncodings.removeFirst();
                 }

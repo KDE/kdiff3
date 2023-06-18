@@ -43,7 +43,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
         {
             QChar quoteChar = cmd[i];
             ++i;
-            int argStart = i;
+            QtSizeType argStart = i;
             bool bSkip = false;
             while(i < cmd.length() && (cmd[i] != quoteChar || bSkip))
             {
@@ -74,7 +74,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
         }
         else
         {
-            int argStart = i;
+            QtSizeType argStart = i;
             while(i < cmd.length() && (!cmd[i].isSpace() /*|| bSkip*/))
             {
                 if(cmd[i] == '"' || cmd[i] == '\'')
@@ -156,7 +156,7 @@ QString Utils::calcHistoryLead(const QString& s)
     static const QRegularExpression nonWhitespace("\\S"), whitespace("\\s");
 
     // Return the start of the line until the first white char after the first non white char.
-    int i = s.indexOf(nonWhitespace);
+    QtSizeType i = s.indexOf(nonWhitespace);
     if(i == -1)
         return QString("");
 

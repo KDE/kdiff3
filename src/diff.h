@@ -452,7 +452,7 @@ struct HistoryRange
 struct Diff3WrapLine
 {
     std::shared_ptr<Diff3Line> pD3L = nullptr;
-    int diff3LineIndex = 0;
+    LineType diff3LineIndex = 0;
     int wrapLineOffset = 0;
     int wrapLineLength = 0;
 };

@@ -151,16 +151,16 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
             return QModelIndex();
 
         MergeFileInfos* pParentsParent = pMFI->parent()->parent();
-        return createIndex(pParentsParent->children().indexOf(pMFI->parent()), 0, pMFI->parent());
+        return createIndex(SafeInt<int>(pParentsParent->children().indexOf(pMFI->parent())), 0, pMFI->parent());
     }
 
     [[nodiscard]] int rowCount(const QModelIndex& parent = QModelIndex()) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI != nullptr)
-            return pParentMFI->children().count();
+            return SafeInt<int>(pParentMFI->children().count());
         else
-            return m_pRoot->children().count();
+            return SafeInt<int>(m_pRoot->children().count());
     }
 
     [[nodiscard]] int columnCount(const QModelIndex& /*parent*/) const override
@@ -1315,7 +1315,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
     mWindow->setRootIsDecorated(true);
 
-    int nrOfFiles = m_fileMergeMap.size();
+    QtSizeType nrOfFiles = m_fileMergeMap.size();
     int currentIdx = 1;
     QElapsedTimer t;
     t.start();
@@ -1335,7 +1335,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
             break;
 
         // Get dirname from fileName: Search for "/" from end:
-        int pos = fileName.lastIndexOf('/');
+        QtSizeType pos = fileName.lastIndexOf('/');
         QString dirPart;
         QString filePart;
         if(pos == -1)
@@ -2502,7 +2502,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
 
     QStringList errors;
     // Make sure that the dir exists, into which we will save the file later.
-    int pos = nameDest.lastIndexOf('/');
+    QtSizeType pos = nameDest.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = nameDest.left(pos);
@@ -2583,7 +2583,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& s
         return bSuccess;
     }
 
-    int pos = destName.lastIndexOf('/');
+    QtSizeType pos = destName.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = destName.left(pos);
@@ -2659,7 +2659,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
         }
     }
 
-    int pos = name.lastIndexOf('/');
+    QtSizeType pos = name.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = name.left(pos);
