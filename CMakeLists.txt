@@ -91,6 +91,7 @@ find_package(
 
 if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(Qt6Core5Compat)
+    set(COMPATLIB Qt6::Core5Compat)
 endif()
 
 find_package(

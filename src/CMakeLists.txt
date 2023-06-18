@@ -4,7 +4,6 @@
 
 ########### kdiff3 executable ###############
 
-
 set(kdiff3_SRCS
    main.cpp
    kdiff3_shell.cpp
@@ -56,7 +55,8 @@ ecm_optional_add_subdirectory( autotests )
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 Qt::PrintSupport KF${KF_MAJOR_VERSION}::ConfigCore KF${KF_MAJOR_VERSION}::ConfigGui KF${KF_MAJOR_VERSION}::XmlGui KF${KF_MAJOR_VERSION}::KIOWidgets KF${KF_MAJOR_VERSION}::Crash KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::CoreAddons )
+
+target_link_libraries(kdiff3 Qt::PrintSupport ${COMPATLIB} KF${KF_MAJOR_VERSION}::ConfigCore KF${KF_MAJOR_VERSION}::ConfigGui KF${KF_MAJOR_VERSION}::XmlGui KF${KF_MAJOR_VERSION}::KIOWidgets KF${KF_MAJOR_VERSION}::Crash KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::CoreAddons )
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)
