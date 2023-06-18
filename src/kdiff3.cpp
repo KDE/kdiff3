@@ -36,7 +36,6 @@
 #include <QCheckBox>
 #include <QClipboard>
 #include <QCommandLineParser>
-#include <QDesktopWidget>
 #include <QDir>
 #include <QDockWidget>
 #include <QFileDialog>
@@ -51,6 +50,7 @@
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QPushButton>
+#include <QScreen>
 #include <QShortcut>
 #include <QSplitter>
 #include <QStatusBar>
@@ -419,7 +419,7 @@ void KDiff3App::showMainWindow()
         {
             m_pKDiff3Shell->resize(size);
 
-            QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
+            QRect visibleRect = QRect(pos, size) & m_pKDiff3Shell->screen()->availableGeometry();
             if(visibleRect.width() > 100 && visibleRect.height() > 100)
                 m_pKDiff3Shell->move(pos);
         }
