@@ -570,7 +570,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         return false;
 
     QString line;
-    QChar curChar, prevChar = 0;
+    QChar curChar, prevChar = '\0';
     LineType lines = 0;
     QtSizeType lastOffset = 0;
     FileOffset skipBytes = 0;
