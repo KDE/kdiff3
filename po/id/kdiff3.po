@@ -1,98 +1,96 @@
-# Translation of kdiff3 to Norwegian Nynorsk
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdiff3 package.
+# Wantoyèk <wantoyek@gmail.com>, 2023.
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: KDE 4\n"
+"Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-15 02:46+0000\n"
-"PO-Revision-Date: 2020-05-10 12:21+0200\n"
-"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
-"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
-"Language: nn\n"
+"PO-Revision-Date: 2023-06-18 01:10+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Environment: kde\n"
-"X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 20.04.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Karl Ove Hufthammer"
+msgstr "Wantoyèk"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "karl@huftis.org"
+msgstr "wantoyek@gmail.com"
 
 #: DefaultFileAccessJobHandler.cpp:54
 #, kde-format
 msgid "Getting file status: %1"
-msgstr ""
+msgstr "Mendapatkan status file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:106
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr ""
+msgstr "Membaca file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:146
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr ""
+msgstr "Menulis file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:180
 #, kde-format
 msgid "Out of memory"
-msgstr "Ikkje nok minne"
+msgstr "Kehabisan memori"
 
 #: DefaultFileAccessJobHandler.cpp:217
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr ""
+msgstr "Membuat folder: %1"
 
 #: DefaultFileAccessJobHandler.cpp:239
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr ""
+msgstr "Menghapus folder: %1"
 
 #: DefaultFileAccessJobHandler.cpp:255
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr ""
+msgstr "Menghapus file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:272
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
-msgstr "Lagar symbolsk lenkje: %1 → %2"
+msgstr "Membuat tautan simbolis: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:297
 #, kde-format
 msgid "Renaming file: %1 -> %2"
-msgstr "Endrar namn på fil: %1 → %2"
+msgstr "Mengubah nama file: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:340
 #, kde-format
 msgid "Copying file: %1 -> %2"
-msgstr "Kopierer fil: %1 → %2"
+msgstr "Menyalin file:  %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:362
 #, kde-format
 msgid "Reading folder: %1"
-msgstr "Les mappe: %1"
+msgstr "Membaca folder: %1"
 
 #: DefaultFileAccessJobHandler.cpp:420
 #, kde-format
 msgid "Listing directory: %1"
-msgstr "Hentar mappeinnhald: %1"
+msgstr "Mendaftar direktori: %1"
 
 #: diff.cpp:1577 diff.cpp:1593
 #, kde-format
@@ -100,31 +98,33 @@ msgid ""
 "Data loss error:\n"
 "If it is reproducible please contact the author.\n"
 msgstr ""
+"Galat kehilangan data:\n"
+"Jika ini dapat mereproduksi ulang silakan hubungi penulis.\n"
 
 #: diff.cpp:1579 diff.cpp:1595
 #, kde-format
 msgid "Severe Internal Error"
-msgstr "Kritisk intern feil"
+msgstr "Galat Internal Parah"
 
 #: difftextwindow.cpp:563
 #, kde-format
 msgid "File %1: Line %2"
-msgstr "Fil %1: Linje %2"
+msgstr "File %1: Baris %2"
 
 #: difftextwindow.cpp:565
 #, kde-format
 msgid "File %1: Line not available"
-msgstr "Fil %1: Linja er ikkje tilgjengeleg"
+msgstr "File %1: Baris tidak tersedia"
 
 #: difftextwindow.cpp:1904
 #, kde-format
 msgid "Encoding:"
-msgstr "Teiknkoding:"
+msgstr "Enkoding:"
 
 #: difftextwindow.cpp:1908 mergeresultwindow.cpp:2814 optiondialog.cpp:798
 #, kde-format
 msgid "Line end style:"
-msgstr "Linjeskift-stil:"
+msgstr "Gaya akhir baris:"
 
 #: difftextwindow.cpp:1941 directorymergewindow.cpp:388
 #: directorymergewindow.cpp:439 directorymergewindow.cpp:527
@@ -171,12 +171,12 @@ msgstr "C"
 #: difftextwindow.cpp:1941
 #, kde-format
 msgid "A (Base)"
-msgstr "A (base)"
+msgstr "A (Dasar)"
 
 #: difftextwindow.cpp:1943
 #, kde-format
 msgid "Encoding: %1"
-msgstr "Teiknkoding: %1"
+msgstr "Enkoding: %1"
 
 #: difftextwindow.cpp:1944 mergeresultwindow.cpp:2860
 #, kde-format
@@ -191,199 +191,199 @@ msgstr "Unix"
 #: difftextwindow.cpp:1944
 #, kde-format
 msgid "Line end style: %1"
-msgstr "Linjeskift-stil: %1"
+msgstr "Gaya akhir baris: %1"
 
 #: difftextwindow.cpp:1945
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak diketahui"
 
 #: difftextwindow.cpp:1973 kdiff3.cpp:936
 #, kde-format
 msgid "Top line"
-msgstr "Øvste linje"
+msgstr "Baris atas"
 
 #: difftextwindow.cpp:1982
 #, kde-format
 msgid "End"
-msgstr ""
+msgstr "Akhir"
 
 #: difftextwindow.cpp:2040 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
-msgstr "Opna fil"
+msgstr "Buka File"
 
 #: difftextwindow.cpp:2088 optiondialog.cpp:383
 #, kde-format
 msgid "Unicode, 8 bit"
-msgstr "Unicode, 8-bit"
+msgstr "Kode unik, 8 bit"
 
 #: difftextwindow.cpp:2104
 #, kde-format
 msgid "Other"
-msgstr "Anna"
+msgstr "Lainnya"
 
 #: directorymergewindow.cpp:415
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
-msgstr ""
+msgstr "Salin A ke B"
 
 #: directorymergewindow.cpp:418
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
-msgstr ""
+msgstr "Salin B ke A"
 
 #: directorymergewindow.cpp:421
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
-msgstr ""
+msgstr "Hapus A"
 
 #: directorymergewindow.cpp:424
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
-msgstr ""
+msgstr "Hapus B"
 
 #: directorymergewindow.cpp:427
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A & B"
-msgstr ""
+msgstr "Hapus A & B"
 
 #: directorymergewindow.cpp:430
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
-msgstr ""
+msgstr "Gabungkan ke A"
 
 #: directorymergewindow.cpp:433
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
-msgstr ""
+msgstr "Gabungkan ke B"
 
 #: directorymergewindow.cpp:436
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A & B"
-msgstr ""
+msgstr "Gabungkan ke A & B"
 
 #: directorymergewindow.cpp:448
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
-msgstr ""
+msgstr "Hapus (jika ada)"
 
 #: directorymergewindow.cpp:452
 #, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
-msgstr ""
+msgstr "Gabungkan"
 
 #: directorymergewindow.cpp:452
 #, kde-format
 msgctxt "Operation column message (File merge)"
 msgid "Merge (manual)"
-msgstr ""
+msgstr "Gabungkan (manual)"
 
 #: directorymergewindow.cpp:455
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Conflicting File Types"
-msgstr ""
+msgstr "Galat: Tipe File Bentrok"
 
 #: directorymergewindow.cpp:458
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Changed and Deleted"
-msgstr ""
+msgstr "Galat: Diubah dan Dihapus"
 
 #: directorymergewindow.cpp:461
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Dates are equal but files are not."
-msgstr ""
+msgstr "Galat: Tanggal sama tetapi file tidak sama."
 
 #: directorymergewindow.cpp:475
 #, kde-format
 msgctxt "Status column message"
 msgid "Done"
-msgstr ""
+msgstr "Kelar"
 
 #: directorymergewindow.cpp:477
 #, kde-format
 msgctxt "Status column message"
 msgid "Error"
-msgstr ""
+msgstr "Galat"
 
 #: directorymergewindow.cpp:479
 #, kde-format
 msgctxt "Status column message"
 msgid "Skipped."
-msgstr ""
+msgstr "Dilewati."
 
 #: directorymergewindow.cpp:481
 #, kde-format
 msgctxt "Status column message"
 msgid "Not saved."
-msgstr ""
+msgstr "Tidak disimpan."
 
 #: directorymergewindow.cpp:483
 #, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
-msgstr ""
+msgstr "Dalam progres..."
 
 #: directorymergewindow.cpp:485
 #, kde-format
 msgctxt "Status column message"
 msgid "To do."
-msgstr ""
+msgstr "Rencana."
 
 #: directorymergewindow.cpp:525
 #, kde-format
 msgctxt "Column title"
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: directorymergewindow.cpp:533
 #, kde-format
 msgctxt "Column title"
 msgid "Operation"
-msgstr ""
+msgstr "Operasi"
 
 #: directorymergewindow.cpp:535
 #, kde-format
 msgctxt "Column title"
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: directorymergewindow.cpp:537
 #, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
-msgstr ""
+msgstr "Tidak terbereskan"
 
 #: directorymergewindow.cpp:539
 #, kde-format
 msgctxt "Column title"
 msgid "Solved"
-msgstr ""
+msgstr "Terbereskan"
 
 #: directorymergewindow.cpp:541
 #, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr ""
+msgstr "Bukan putih"
 
 #: directorymergewindow.cpp:543
 #, kde-format
 msgctxt "Column title"
 msgid "White"
-msgstr ""
+msgstr "Putih"
 
 #: directorymergewindow.cpp:694
 #, kde-format
@@ -391,50 +391,52 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort the "
 "merge and rescan the folder?"
 msgstr ""
+"Anda saat ini sedang melakukan penggabungan folder. Apakah Anda yakin ingin "
+"membatalkan penggabungan dan memindai ulang folder?"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:795 kdiff3.cpp:805 kdiff3.cpp:817
 #: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1712 pdiff.cpp:1722
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
-msgstr ""
+msgstr "Peringatan"
 
 #: directorymergewindow.cpp:696
 #, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
-msgstr ""
+msgstr "Pindai ulang"
 
 #: directorymergewindow.cpp:697
 #, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
-msgstr ""
+msgstr "Lanjutkan Penggabungan"
 
 #: directorymergewindow.cpp:847
 #, kde-format
 msgid "Opening of folders failed:"
-msgstr ""
+msgstr "Pembukaan folder-folder gagal:"
 
 #: directorymergewindow.cpp:851
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "Folder A \"%1\" tidak ada atau  bukan sebuah folder.\n"
 
 #: directorymergewindow.cpp:856
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "Folder B \"%1\" tidak ada atau  bukan sebuah folder.\n"
 
 #: directorymergewindow.cpp:861
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
-msgstr ""
+msgstr "Folder C \"%1\" tidak ada atau  bukan sebuah folder.\n"
 
 #: directorymergewindow.cpp:864
 #, kde-format
 msgid "Folder Opening Error"
-msgstr ""
+msgstr "Galat Membuka Folder"
 
 #: directorymergewindow.cpp:872
 #, kde-format
@@ -443,48 +445,51 @@ msgid ""
 "merged.\n"
 "Check again before continuing."
 msgstr ""
+"Destinasi folder harus tidak sama sebagai A atau B ketika tiga folder sedang "
+"digabungkan.\n"
+"Periksa kembali sebelum melanjutkan."
 
 #: directorymergewindow.cpp:874
 #, kde-format
 msgid "Parameter Warning"
-msgstr ""
+msgstr "Peringatan Parameter"
 
 #: directorymergewindow.cpp:879
 #, kde-format
 msgid "Scanning folders..."
-msgstr ""
+msgstr "Pemindaian folder..."
 
 #: directorymergewindow.cpp:905
 #, kde-format
 msgid "Reading Folder A"
-msgstr ""
+msgstr "Membaca Folder A"
 
 #: directorymergewindow.cpp:914
 #, kde-format
 msgid "Reading Folder B"
-msgstr ""
+msgstr "Membaca Folder B"
 
 #: directorymergewindow.cpp:924
 #, kde-format
 msgid "Reading Folder C"
-msgstr ""
+msgstr "Membaca Folder C"
 
 #: directorymergewindow.cpp:940
 #, kde-format
 msgid "Some subfolders were not readable in"
-msgstr ""
+msgstr "Beberapa sub folder yang tidak dapat dibaca dalam"
 
 #: directorymergewindow.cpp:945
 #, kde-format
 msgid "Check the permissions of the subfolders."
-msgstr ""
+msgstr "Periksa perizinan pada sub foldernya."
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:744 kdiff3.cpp:850 kdiff3.cpp:874
 #: kdiff3.cpp:1143 kdiff3.cpp:1164 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
 #: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
 #, kde-format
 msgid "Ready."
-msgstr ""
+msgstr "Siap."
 
 #: directorymergewindow.cpp:983
 #, kde-format
@@ -495,21 +500,26 @@ msgid ""
 "Number of equal files: %2\n"
 "Number of different files: %3"
 msgstr ""
+"Status Perbandingan Folder\n"
+"\n"
+"Jumlah sub folder: %1\n"
+"Jumlah file yang sama: %2\n"
+"Jumlah file yang beda: %3"
 
 #: directorymergewindow.cpp:990
 #, kde-format
 msgid "Number of manual merges: %1"
-msgstr ""
+msgstr "Jumlah penggabungan yang manual: %1"
 
 #: directorymergewindow.cpp:1248
 #, kde-format
 msgid "This affects all merge operations."
-msgstr ""
+msgstr "Ini memengaruhi semua operasi penggabungan."
 
 #: directorymergewindow.cpp:1249
 #, kde-format
 msgid "Changing All Merge Operations"
-msgstr ""
+msgstr "Mengubah Semua Operasi Penggabungan"
 
 #: directorymergewindow.cpp:1326
 #, kde-format
@@ -517,48 +527,51 @@ msgid ""
 "Processing %1 / %2\n"
 "%3"
 msgstr ""
+"Memproses %1 / %2\n"
+"%3"
 
 #: directorymergewindow.cpp:1372 directorymergewindow.cpp:1376
 #, kde-format
 msgid "Some files could not be processed."
-msgstr ""
+msgstr "Beberapa file tidak dapat diproses."
 
 #: directorymergewindow.cpp:1379
 #, kde-format
 msgid "Aborting due to too many errors."
-msgstr ""
+msgstr "Gugur karena terlalu banyak galat."
 
 #: directorymergewindow.cpp:1866 directorymergewindow.cpp:1891
 #: directorymergewindow.cpp:1916
 #, kde-format
 msgid "This operation is currently not possible."
-msgstr ""
+msgstr "Operasi ini untuk saat ini tidak memungkinkan."
 
 #: directorymergewindow.cpp:1866 directorymergewindow.cpp:1891
 #: directorymergewindow.cpp:1916 directorymergewindow.cpp:2197
 #, kde-format
 msgid "Operation Not Possible"
-msgstr ""
+msgstr "Operasi Tidak Memungkinkan"
 
 #: directorymergewindow.cpp:1963
 #, kde-format
 msgid "An error occurred while copying."
-msgstr ""
+msgstr "Sebuah galat terjadi selagi menyalin."
 
 #: directorymergewindow.cpp:1964 directorymergewindow.cpp:2402
 #, kde-format
 msgid "Merge Error"
-msgstr ""
+msgstr "Galat Penggabungan"
 
 #: directorymergewindow.cpp:2042
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr ""
+"Operasi penggabungan tidak diketahui. (Mustinya ini tidak pernah terjadi!)"
 
 #: directorymergewindow.cpp:2087
 #, kde-format
 msgid "Unknown merge operation."
-msgstr ""
+msgstr "Operasi penggabungan tidak diketahui."
 
 #: directorymergewindow.cpp:2100
 #, kde-format
@@ -577,19 +590,19 @@ msgstr ""
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
-msgstr ""
+msgstr "Memulai Penggabungan"
 
 #: directorymergewindow.cpp:2106
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
-msgstr ""
+msgstr "Lakukan"
 
 #: directorymergewindow.cpp:2107
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
-msgstr ""
+msgstr "Simulasikan"
 
 #: directorymergewindow.cpp:2133
 #, kde-format
@@ -597,6 +610,8 @@ msgid ""
 "The highlighted item has a different type in the different folders. Select "
 "what to do."
 msgstr ""
+"Item yang disorot memiliki sebuah tipe yang berbeda dalam folder yang "
+"berbeda. Pilih apa yang mau dilakukan."
 
 #: directorymergewindow.cpp:2137
 #, kde-format
@@ -604,6 +619,8 @@ msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr ""
+"Tanggal modifikasi pada file adalah sama tetapi filenya tidak. pilih apa "
+"yang mau dilakukan."
 
 #: directorymergewindow.cpp:2141
 #, kde-format
@@ -611,6 +628,8 @@ msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
 "Select what to do."
 msgstr ""
+"Item yang disorot telah diubah di salah satu folder dan di lainnya dihapus. "
+"Pilih apa yang mau dilakukan."
 
 #: directorymergewindow.cpp:2197
 #, kde-format
@@ -618,6 +637,8 @@ msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr ""
+"Operasi saat ini tidak mungkin karena penggabungan folder saat ini sedang "
+"berjalan."
 
 #: directorymergewindow.cpp:2254
 #, kde-format
@@ -626,101 +647,108 @@ msgid ""
 "Do you want to continue with the item that caused the error or do you want "
 "to skip this item?"
 msgstr ""
+"ada sebuah galat dalam langkah terakhir.\n"
+"Apakah Anda ingin melanjutkan dengan item yang terjadi galat atau Anda ingin "
+"melewati item ini?"
 
 #: directorymergewindow.cpp:2256
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
-msgstr ""
+msgstr "Lanjutkan penggabungan setelah galat"
 
 #: directorymergewindow.cpp:2257
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
-msgstr ""
+msgstr "Lanjutkan Dengan Item Terakhir"
 
 #: directorymergewindow.cpp:2258
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
-msgstr ""
+msgstr "Lewati Item"
 
 #: directorymergewindow.cpp:2352
 #, kde-format
 msgid "Merge operation complete."
-msgstr ""
+msgstr "Operasi penggabungan selesai."
 
 #: directorymergewindow.cpp:2352 directorymergewindow.cpp:2355
 #, kde-format
 msgid "Merge Complete"
-msgstr ""
+msgstr "Penggabungan Selesai"
 
 #: directorymergewindow.cpp:2365
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
 msgstr ""
+"Penggabungan yang disimulasikan selesai: Periksa jika Anda setuju dengan "
+"operasi yang diajukan."
 
 #: directorymergewindow.cpp:2401
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
-msgstr ""
+msgstr "Sebuah galat terjadi. Tekan Oke untuk melihat informasi lebih lanjut."
 
 #: directorymergewindow.cpp:2434
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
-msgstr ""
+msgstr "Galat: Selagi menghapus %1: Pembuatan cadangan, gagal."
 
 #: directorymergewindow.cpp:2441
 #, kde-format
 msgid "delete folder recursively( %1 )"
-msgstr ""
+msgstr "hapus folder secara rekursif ( %1 )"
 
 #: directorymergewindow.cpp:2443
 #, kde-format
 msgid "delete( %1 )"
-msgstr ""
+msgstr "hapus( %1 )"
 
 #: directorymergewindow.cpp:2459
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
-msgstr ""
+msgstr "Galat: operasi menghapus folder gagal selagi mencoba membaca folder."
 
 #: directorymergewindow.cpp:2475
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
-msgstr ""
+msgstr "Galat: operasi rmdir( %1 ), gagal."
 
 #: directorymergewindow.cpp:2485
 #, kde-format
 msgid "Error: delete operation failed."
-msgstr ""
+msgstr "Galat: operasi hapus, gagal."
 
 #: directorymergewindow.cpp:2512
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr ""
+msgstr "penggabungan manual ( %1, %2, %3 -> %4)"
 
 #: directorymergewindow.cpp:2515
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr ""
+"     Catatan: Setelah penggabungan manual pengguna seharusnya melanjutkan "
+"dengan menekan F7."
 
 #: directorymergewindow.cpp:2542
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
-msgstr ""
+msgstr "Galat: salin( %1 -> %2) gagal. Penghapusan destinasi yang ada, gagal."
 
 #: directorymergewindow.cpp:2551
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
-msgstr ""
+msgstr "salin tautan( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2560
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
-msgstr ""
+msgstr "Galat: salin tautan gagal: Tautan jarak jauh belum didukung."
 
 #: directorymergewindow.cpp:2570
 #, kde-format
@@ -730,7 +758,7 @@ msgstr ""
 #: directorymergewindow.cpp:2593
 #, kde-format
 msgid "copy( %1 -> %2 )"
-msgstr ""
+msgstr "salin( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2619
 #, kde-format
@@ -740,7 +768,7 @@ msgstr ""
 #: directorymergewindow.cpp:2626
 #, kde-format
 msgid "rename( %1 -> %2 )"
-msgstr ""
+msgstr "Ubah nama( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2635
 #, kde-format
@@ -765,58 +793,58 @@ msgstr ""
 #: directorymergewindow.cpp:2716 directorymergewindow.cpp:2830
 #, kde-format
 msgid "Dest"
-msgstr "Mål"
+msgstr "Tujuan"
 
 #: directorymergewindow.cpp:2724 directorymergewindow.cpp:2752
 #: optiondialog.cpp:1094 optiondialog.cpp:1095
 #, kde-format
 msgid "Folder"
-msgstr "Mappe"
+msgstr "Folder"
 
 #: directorymergewindow.cpp:2724
 #, kde-format
 msgid "Type"
-msgstr "Type"
+msgstr "Tipe"
 
 #: directorymergewindow.cpp:2724
 #, kde-format
 msgid "Size"
-msgstr "Storleik"
+msgstr "Ukuran"
 
 #: directorymergewindow.cpp:2725
 #, kde-format
 msgid "Attr"
-msgstr "Attributt"
+msgstr ""
 
 #: directorymergewindow.cpp:2725
 #, kde-format
 msgid "Last Modification"
-msgstr "Sist endra"
+msgstr "Modifikasi Terakhir"
 
 #: directorymergewindow.cpp:2725
 #, kde-format
 msgid "Link-Destination"
-msgstr "Lenkjemål"
+msgstr "Tautan Tujuan"
 
 #: directorymergewindow.cpp:2752
 #, kde-format
 msgid "File"
-msgstr "Fil"
+msgstr "File"
 
 #: directorymergewindow.cpp:2752
 #, kde-format
 msgid "-Link"
-msgstr "-lenkje"
+msgstr "-Tautan"
 
 #: directorymergewindow.cpp:2758
 #, kde-format
 msgid "not available"
-msgstr "ikkje tilgjengeleg"
+msgstr "tidak tersedia"
 
 #: directorymergewindow.cpp:2772
 #, kde-format
 msgid "A (Dest): "
-msgstr "A (mål): "
+msgstr "A (Tujuan): "
 
 #: directorymergewindow.cpp:2776
 #, kde-format
@@ -826,12 +854,12 @@ msgstr "A:    "
 #: directorymergewindow.cpp:2776
 #, kde-format
 msgid "A (Base): "
-msgstr "A (base): "
+msgstr "A (Dasar): "
 
 #: directorymergewindow.cpp:2782
 #, kde-format
 msgid "B (Dest): "
-msgstr "B (mål): "
+msgstr "B (Tujuan): "
 
 #: directorymergewindow.cpp:2786
 #, kde-format
@@ -841,7 +869,7 @@ msgstr "B:    "
 #: directorymergewindow.cpp:2791
 #, kde-format
 msgid "C (Dest): "
-msgstr "C (mål): "
+msgstr "C (Tujuan): "
 
 #: directorymergewindow.cpp:2795
 #, kde-format
@@ -851,33 +879,33 @@ msgstr "C:    "
 #: directorymergewindow.cpp:2798
 #, kde-format
 msgid "Dest: "
-msgstr "Mål: "
+msgstr "Tujuan: "
 
 #. i18n("Saving Directory Merge State ..."));
 #: directorymergewindow.cpp:2840
 #, kde-format
 msgid "Save Folder Merge State As..."
-msgstr ""
+msgstr "Simpan Keadaan Penggabungan Folder Sebagai..."
 
 #: directorymergewindow.cpp:2947
 #, kde-format
 msgid "Start/Continue Folder Merge"
-msgstr ""
+msgstr "Mulai/Lanjutkan Penggabungan Folder"
 
 #: directorymergewindow.cpp:2948
 #, kde-format
 msgid "Run Operation for Current Item"
-msgstr ""
+msgstr "Jalankan Operasi untuk Item Saat Ini"
 
 #: directorymergewindow.cpp:2949
 #, kde-format
 msgid "Compare Selected File"
-msgstr "Samanlikna vald fil"
+msgstr "Bandingkan File Yang Dipilh"
 
 #: directorymergewindow.cpp:2950
 #, kde-format
 msgid "Merge Current File"
-msgstr "Flett gjeldande fil"
+msgstr "Gabungkan File Saat Ini"
 
 #: directorymergewindow.cpp:2950
 #, kde-format
@@ -885,57 +913,57 @@ msgid ""
 "Merge\n"
 "File"
 msgstr ""
-"Flett\n"
-"Fil"
+"Gabungkan\n"
+"File"
 
 #: directorymergewindow.cpp:2951
 #, kde-format
 msgid "Fold All Subfolders"
-msgstr ""
+msgstr "Melipat Semua Sub Folder"
 
 #: directorymergewindow.cpp:2952
 #, kde-format
 msgid "Unfold All Subfolders"
-msgstr ""
+msgstr "Mengungkap Semua Sub Folder"
 
 #: directorymergewindow.cpp:2953
 #, kde-format
 msgid "Rescan"
-msgstr "Skann på nytt"
+msgstr "Pindai ulang"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
 #: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Choose A for All Items"
-msgstr ""
+msgstr "Memilih A untuk Semua Item"
 
 #: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Choose B for All Items"
-msgstr ""
+msgstr "Memilih B untuk Semua Item"
 
 #: directorymergewindow.cpp:2958
 #, kde-format
 msgid "Choose C for All Items"
-msgstr ""
+msgstr "Memilih C untuk Semua Item"
 
 #: directorymergewindow.cpp:2959
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
-msgstr ""
+msgstr "Operasi Memilih Otomatis untuk Semua Item"
 
 #: directorymergewindow.cpp:2960
 #, kde-format
 msgid "No Operation for All Items"
-msgstr ""
+msgstr "Tidak Ada Operasi untuk Semua Item"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
 #: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Show Identical Files"
-msgstr ""
+msgstr "Tampilkan File Identik"
 
 #: directorymergewindow.cpp:2965
 #, kde-format
@@ -943,16 +971,18 @@ msgid ""
 "Identical\n"
 "Files"
 msgstr ""
+"File-file\n"
+"Identik"
 
 #: directorymergewindow.cpp:2966
 #, kde-format
 msgid "Show Different Files"
-msgstr ""
+msgstr "Tampilkan File Berbeda"
 
 #: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Show Files only in A"
-msgstr ""
+msgstr "Tampilkan File hanya di A"
 
 #: directorymergewindow.cpp:2967
 #, kde-format
@@ -960,11 +990,13 @@ msgid ""
 "Files\n"
 "only in A"
 msgstr ""
+"File\n"
+"hanya di A"
 
 #: directorymergewindow.cpp:2968
 #, kde-format
 msgid "Show Files only in B"
-msgstr ""
+msgstr "Tampilkan File hanya di B"
 
 #: directorymergewindow.cpp:2968
 #, kde-format
@@ -972,11 +1004,13 @@ msgid ""
 "Files\n"
 "only in B"
 msgstr ""
+"File\n"
+"hanya di B"
 
 #: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Show Files only in C"
-msgstr ""
+msgstr "Tampilkan File hanya di C"
 
 #: directorymergewindow.cpp:2969
 #, kde-format
@@ -984,97 +1018,99 @@ msgid ""
 "Files\n"
 "only in C"
 msgstr ""
+"File\n"
+"hanya di C"
 
 #: directorymergewindow.cpp:2973
 #, kde-format
 msgid "Compare Explicitly Selected Files"
-msgstr ""
+msgstr "Bandingkan Secara Gamblang File-file Yang Dipilih"
 
 #: directorymergewindow.cpp:2974
 #, kde-format
 msgid "Merge Explicitly Selected Files"
-msgstr ""
+msgstr "Gabungkan Secara Gamblang File-file Yang Dipilih"
 
 #: directorymergewindow.cpp:2976 directorymergewindow.cpp:2983
 #, kde-format
 msgid "Do Nothing"
-msgstr "Ikkje gjer noko"
+msgstr "Jangan Lakukan Apa-apa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
 #: directorymergewindow.cpp:2980 opendialog.ui:68
 #, kde-format
 msgid "Merge"
-msgstr "Flett"
+msgstr "Gabungkan"
 
 #: directorymergewindow.cpp:2981
 #, kde-format
 msgid "Delete (if exists)"
-msgstr "Slett (viss det finst)"
+msgstr "Hapus (jika ada)"
 
 #: directorymergewindow.cpp:2984
 #, kde-format
 msgid "Copy A to B"
-msgstr "Kopier A til B"
+msgstr "Salin A ke B"
 
 #: directorymergewindow.cpp:2985
 #, kde-format
 msgid "Copy B to A"
-msgstr "Kopier B til A"
+msgstr "Salin B ke A"
 
 #: directorymergewindow.cpp:2986
 #, kde-format
 msgid "Delete A"
-msgstr "Slett A"
+msgstr "Hapus A"
 
 #: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Delete B"
-msgstr "Slett B"
+msgstr "Hapus B"
 
 #: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Delete A && B"
-msgstr "Slett A og B"
+msgstr "Hapus A && B"
 
 #: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Merge to A"
-msgstr "Flett til A"
+msgstr "Gabungkan ke A"
 
 #: directorymergewindow.cpp:2990
 #, kde-format
 msgid "Merge to B"
-msgstr "Flett til B"
+msgstr "Gabungkan ke B"
 
 #: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Merge to A && B"
-msgstr "Flett til A og B"
+msgstr "Gabungkan ke A && B"
 
 #: fileaccess.cpp:516
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
-msgstr ""
+msgstr "Tidak dapat menentukan url lengkap. Tidak ada induk yang ditentukan."
 
 #: fileaccess.cpp:789
 #, kde-format
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "Gagal membaca file: %1"
 
 #: fileaccess.cpp:929
 #, kde-format
 msgid "Creating temp copy of %1 failed."
-msgstr ""
+msgstr "Membuat salinan temp %1 gagal."
 
 #: fileaccess.cpp:937 fileaccess.cpp:942
 #, kde-format
 msgid "Opening %1 failed. %2"
-msgstr ""
+msgstr "Pembukaan %1 gagal. %2"
 
 #: fileaccess.cpp:961 fileaccess.cpp:969
 #, kde-format
 msgid "Error reading from %1. %2"
-msgstr ""
+msgstr "Galat pembacaan dari %1. %2"
 
 #: fileaccess.cpp:1098
 #, kde-format
@@ -1082,6 +1118,8 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
+"Sedang mencoba membuat cadangan, penghapusan cadangan yang lawas gagal.\n"
+"Nama file: %1"
 
 #: fileaccess.cpp:1105
 #, kde-format
@@ -1089,131 +1127,133 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
+"Sedang mencoba membuat cadangan, pengubahan-nama gagal.\n"
+"Nama file: %1 -> %2"
 
 #: kdiff3.cpp:179
 #, kde-format
 msgid "Current Configuration:"
-msgstr "Gjeldande oppsett:"
+msgstr "Pengaturan Saat Ini:"
 
 #: kdiff3.cpp:184
 #, kde-format
 msgid "Config Option Error:"
-msgstr ""
+msgstr "Galat Opsi Konfig:"
 
 #: kdiff3.cpp:242
 #, kde-format
 msgid "Option --auto used, but no output file specified."
-msgstr ""
+msgstr "Opsi --auto digunakan, tetapi tidak ada file keluaran yang ditentukan."
 
 #: kdiff3.cpp:347
 #, kde-format
 msgid "Directory merge"
-msgstr ""
+msgstr "Penggabungan direktori"
 
 #: kdiff3.cpp:352
 #, kde-format
 msgid "Merge info"
-msgstr ""
+msgstr "Info penggabungan"
 
 #: kdiff3.cpp:459
 #, kde-format
 msgid "Saving failed."
-msgstr ""
+msgstr "Gagal menyimpan."
 
 #: kdiff3.cpp:522
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
-msgstr ""
+msgstr "Opsi --auto diabaikan untuk perbandingan folder."
 
 #: kdiff3.cpp:558 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
-msgstr ""
+msgstr "Pembukaan file tersebut agal:"
 
 #: kdiff3.cpp:567 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
-msgstr ""
+msgstr "Galat membuka file"
 
 #: kdiff3.cpp:604
 #, kde-format
 msgid "Opens documents for comparison..."
-msgstr ""
+msgstr "Membuka dokumen untuk perbandingan..."
 
 #: kdiff3.cpp:606
 #, kde-format
 msgid "Reload"
-msgstr "Last om att"
+msgstr "Muat ulang"
 
 #: kdiff3.cpp:609
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
-msgstr ""
+msgstr "Simpan hasil penggabungan. Semua bentrok mustinya dibereskan!"
 
 #: kdiff3.cpp:611
 #, kde-format
 msgid "Saves the current document as..."
-msgstr ""
+msgstr "Simpan dokumen saat ini sebagai..."
 
 #: kdiff3.cpp:614
 #, kde-format
 msgid "Print the differences"
-msgstr ""
+msgstr "Cetak perbedaan"
 
 #: kdiff3.cpp:617
 #, kde-format
 msgid "Quits the application"
-msgstr "Avsluttar programmet"
+msgstr "Keluarkan aplikasi"
 
 #: kdiff3.cpp:621
 #, kde-format
 msgid "Undo last action."
-msgstr ""
+msgstr "Urungkan aksi terakhir."
 
 #: kdiff3.cpp:625
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
-msgstr ""
+msgstr "Memotong bagian yang dipilih dan menaruhnya ke papan klip"
 
 #: kdiff3.cpp:628
 #, kde-format
 msgid "Copies the selected section to the clipboard"
-msgstr ""
+msgstr "Menyalin bagian yang dipilih ke papan klip"
 
 #: kdiff3.cpp:630
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
-msgstr ""
+msgstr "Menempel konten papan klip ke posisi saat ini"
 
 #: kdiff3.cpp:633
 #, kde-format
 msgid "Select everything in current window"
-msgstr ""
+msgstr "Pilih apa saja di jendela saat ini"
 
 #: kdiff3.cpp:636
 #, kde-format
 msgid "Search for a string"
-msgstr ""
+msgstr "Mencari sebuah string"
 
 #: kdiff3.cpp:638
 #, kde-format
 msgid "Search again for the string"
-msgstr ""
+msgstr "Mencari string lagi"
 
 #: kdiff3.cpp:643
 #, kde-format
 msgid "Enables/disables the statusbar"
-msgstr ""
+msgstr "Memfungsikan/menonfungsikanbilah status "
 
 #: kdiff3.cpp:647
 #, kde-format
 msgid "Configure KDiff3..."
-msgstr "Sett opp KDiff3 …"
+msgstr "Atur KDiff3..."
 
 #: kdiff3.cpp:667
 #, kde-format
 msgid "Go to Current Delta"
-msgstr "Gå til gjeldande delta"
+msgstr "Pergi ke Delta Saat Ini"
 
 #: kdiff3.cpp:667
 #, kde-format
@@ -1221,13 +1261,13 @@ msgid ""
 "Current\n"
 "Delta"
 msgstr ""
-"Gjeldande\n"
-"delta"
+"Delta\n"
+"Saat Ini"
 
 #: kdiff3.cpp:669
 #, kde-format
 msgid "Go to First Delta"
-msgstr "Gå til første delta"
+msgstr "Pergi ke Delta Pertama"
 
 #: kdiff3.cpp:669
 #, kde-format
@@ -1235,13 +1275,13 @@ msgid ""
 "First\n"
 "Delta"
 msgstr ""
-"Første\n"
-"delta"
+"Delta\n"
+"Pertama"
 
 #: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Last Delta"
-msgstr "Gå til siste delta"
+msgstr "Pergi ke Delta Terakhir"
 
 #: kdiff3.cpp:671
 #, kde-format
@@ -1249,13 +1289,15 @@ msgid ""
 "Last\n"
 "Delta"
 msgstr ""
-"Siste\n"
-"delta"
+"Delta\n"
+"Terakhir"
 
 #: kdiff3.cpp:673
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
+"(Melewati spasi putih yang berbeda ketika \"Tampilkan Spasi Putih\" "
+"dinonfungsikan.)"
 
 #: kdiff3.cpp:674
 #, kde-format
@@ -1263,11 +1305,13 @@ msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
+"(Jangan lewati spasi putih yang berbeda bahkan ketika \"Tampilkan Spasi Putih"
+"\" dinonfungsikan.)"
 
 #: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Previous Delta"
-msgstr ""
+msgstr "Pergi ke Delta Sebelumnya"
 
 #: kdiff3.cpp:675
 #, kde-format
@@ -1275,11 +1319,13 @@ msgid ""
 "Prev\n"
 "Delta"
 msgstr ""
+"Delta\n"
+"Sebelumnya"
 
 #: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Next Delta"
-msgstr ""
+msgstr "Pergi ke Delta Selanjutnya"
 
 #: kdiff3.cpp:677
 #, kde-format
@@ -1287,11 +1333,13 @@ msgid ""
 "Next\n"
 "Delta"
 msgstr ""
+"Delta\n"
+"Selanjutnya"
 
 #: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Previous Conflict"
-msgstr ""
+msgstr "Pergi ke Bentrokan Sebelumnya"
 
 #: kdiff3.cpp:679
 #, kde-format
@@ -1299,11 +1347,13 @@ msgid ""
 "Prev\n"
 "Conflict"
 msgstr ""
+"Bentrokan\n"
+"Sebelumnya"
 
 #: kdiff3.cpp:681
 #, kde-format
 msgid "Go to Next Conflict"
-msgstr ""
+msgstr "Pergi ke Bentrokan Selanjutnya"
 
 #: kdiff3.cpp:681
 #, kde-format
@@ -1311,11 +1361,13 @@ msgid ""
 "Next\n"
 "Conflict"
 msgstr ""
+"Bentrokan\n"
+"Selanjutnya"
 
 #: kdiff3.cpp:683
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
-msgstr ""
+msgstr "Pergi ke Bentrokan Tak Terbereskan Sebelumnya"
 
 #: kdiff3.cpp:683
 #, kde-format
@@ -1323,11 +1375,13 @@ msgid ""
 "Prev\n"
 "Unsolved"
 msgstr ""
+"Tak Terbereskan\n"
+"Sebelumnya"
 
 #: kdiff3.cpp:685
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
-msgstr ""
+msgstr "Pergi ke Bentrokan Tak Terbereskan Selanjutnya"
 
 #: kdiff3.cpp:685
 #, kde-format
@@ -1335,12 +1389,14 @@ msgid ""
 "Next\n"
 "Unsolved"
 msgstr ""
+"Tak Terbereskan\n"
+"Selanjutnya"
 
 #: kdiff3.cpp:687
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr ""
+msgstr "Pergi ke Baris"
 
 #: kdiff3.cpp:687
 #, kde-format
@@ -1349,6 +1405,8 @@ msgid ""
 "Go\n"
 "Line"
 msgstr ""
+"Ke\n"
+"Baris"
 
 #: kdiff3.cpp:688
 #, kde-format
@@ -1357,12 +1415,14 @@ msgid ""
 ".\n"
 " Goto specified line."
 msgstr ""
+".\n"
+" Menuju baris yang ditentukan."
 
 #: kdiff3.cpp:689
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
-msgstr ""
+msgstr "Pilih Baris(-baris) Dari A"
 
 #: kdiff3.cpp:689
 #, kde-format
@@ -1371,12 +1431,14 @@ msgid ""
 "Choose\n"
 "A"
 msgstr ""
+"Memilih\n"
+"A"
 
 #: kdiff3.cpp:690
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
-msgstr ""
+msgstr "Pilih Baris(-baris) Dari B"
 
 #: kdiff3.cpp:690
 #, kde-format
@@ -1385,12 +1447,14 @@ msgid ""
 "Choose\n"
 "B"
 msgstr ""
+"Memilih\n"
+"B"
 
 #: kdiff3.cpp:691
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
-msgstr ""
+msgstr "Pilih Baris(-baris) Dari C"
 
 #: kdiff3.cpp:691
 #, kde-format
@@ -1399,12 +1463,16 @@ msgid ""
 "Choose\n"
 "C"
 msgstr ""
+"Memilih\n"
+"C"
 
 #: kdiff3.cpp:692
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
+"Secara Otomatis Pergi ke Bentrokan Tak Terbereskan Selanjutnya Setelah "
+"Pemilihan Sumber"
 
 #: kdiff3.cpp:692
 #, kde-format
@@ -1417,7 +1485,7 @@ msgstr ""
 #: kdiff3.cpp:694
 #, kde-format
 msgid "Show Space && Tabulator Characters"
-msgstr ""
+msgstr "Tampilkan Karakter Tabulator && Spasi"
 
 #: kdiff3.cpp:694
 #, kde-format
@@ -1430,7 +1498,7 @@ msgstr ""
 #: kdiff3.cpp:695
 #, kde-format
 msgid "Show White Space"
-msgstr ""
+msgstr "Tampilkan Spasi Putih"
 
 #: kdiff3.cpp:695
 #, kde-format
@@ -1443,7 +1511,7 @@ msgstr ""
 #: kdiff3.cpp:697
 #, kde-format
 msgid "Show Line Numbers"
-msgstr ""
+msgstr "Tampilkan Baris Nomor"
 
 #: kdiff3.cpp:697
 #, kde-format
@@ -1456,122 +1524,122 @@ msgstr ""
 #: kdiff3.cpp:699
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
-msgstr ""
+msgstr "Secara Otomatis Bereskan Bentrokan Sederhana"
 
 #: kdiff3.cpp:700
 #, kde-format
 msgid "Set Deltas to Conflicts"
-msgstr ""
+msgstr "Atur Delta-delta untuk Bentrokan"
 
 #: kdiff3.cpp:701
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
-msgstr ""
+msgstr "Jalankan Ekspresi Reguler Penggabungan Otomatis"
 
 #: kdiff3.cpp:702
 #, kde-format
 msgid "Automatically Solve History Conflicts"
-msgstr ""
+msgstr "Secara Otomatis Bereskan Bentrokan Histori"
 
 #: kdiff3.cpp:703
 #, kde-format
 msgid "Split Diff At Selection"
-msgstr ""
+msgstr "Belah Diff di Pemilihan"
 
 #: kdiff3.cpp:704
 #, kde-format
 msgid "Join Selected Diffs"
-msgstr ""
+msgstr "Ikut Dengan Diff Yang Dipilih"
 
 #: kdiff3.cpp:706
 #, kde-format
 msgid "Show Window A"
-msgstr ""
+msgstr "Tampilkan Jendela A"
 
 #: kdiff3.cpp:707
 #, kde-format
 msgid "Show Window B"
-msgstr ""
+msgstr "Tampilkan Jendela B"
 
 #: kdiff3.cpp:708
 #, kde-format
 msgid "Show Window C"
-msgstr ""
+msgstr "Tampilkan Jendela C"
 
 #: kdiff3.cpp:710
 #, kde-format
 msgid "Normal Overview"
-msgstr ""
+msgstr "Ikhtisar Normal"
 
 #: kdiff3.cpp:711
 #, kde-format
 msgid "A vs. B Overview"
-msgstr ""
+msgstr "Ikhtisar A vs. B"
 
 #: kdiff3.cpp:712
 #, kde-format
 msgid "A vs. C Overview"
-msgstr ""
+msgstr "Ikhtisar A vs. C"
 
 #: kdiff3.cpp:713
 #, kde-format
 msgid "B vs. C Overview"
-msgstr ""
+msgstr "Ikhtisar B vs. C"
 
 #: kdiff3.cpp:714
 #, kde-format
 msgid "Word Wrap Diff Windows"
-msgstr ""
+msgstr "Jendela Perbedaan Kemas Kata"
 
 #: kdiff3.cpp:715
 #, kde-format
 msgid "Add Manual Diff Alignment"
-msgstr ""
+msgstr "Tambahkan Kesejajaran Perbedaan Manual"
 
 #: kdiff3.cpp:716
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
-msgstr ""
+msgstr "Bersihkan Semua Kesejajaran Perbedaan Manual"
 
 #: kdiff3.cpp:718
 #, kde-format
 msgid "Focus Next Window"
-msgstr ""
+msgstr "Fokus Jendela Selanjutnya"
 
 #: kdiff3.cpp:719
 #, kde-format
 msgid "Focus Prev Window"
-msgstr ""
+msgstr "Fokus Jendela Sebelumnya"
 
 #: kdiff3.cpp:720
 #, kde-format
 msgid "Toggle Split Orientation"
-msgstr ""
+msgstr "Jungkit Orientasi Belah"
 
 #: kdiff3.cpp:722
 #, kde-format
 msgid "Folder && Text Split Screen View"
-msgstr ""
+msgstr "Tampilan Layar Belah Teks && Folder"
 
 #: kdiff3.cpp:724
 #, kde-format
 msgid "Toggle Between Folder && Text View"
-msgstr ""
+msgstr "Jungkit Antar Tampilan Teks && Folder"
 
 #: kdiff3.cpp:794 pdiff.cpp:1711
 #, kde-format
 msgid "The merge result has not been saved."
-msgstr ""
+msgstr "Hasil penggabungan tidak disimpan."
 
 #: kdiff3.cpp:796
 #, kde-format
 msgid "Save && Quit"
-msgstr ""
+msgstr "Simpan && Keluar"
 
 #: kdiff3.cpp:797
 #, kde-format
 msgid "Quit Without Saving"
-msgstr ""
+msgstr "Keluar Tanpa Menyimpan"
 
 #: kdiff3.cpp:805 pdiff.cpp:1722
 #, kde-format
@@ -1583,81 +1651,83 @@ msgstr ""
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
+"Anda saat ini sedang menggabungkan folder. Apakah Anda yakin, ingin "
+"menggugurkannya?"
 
 #: kdiff3.cpp:839
 #, kde-format
 msgid "Saving file..."
-msgstr ""
+msgstr "Menyimpan file..."
 
 #: kdiff3.cpp:856
 #, kde-format
 msgid "Saving file with a new filename..."
-msgstr ""
+msgstr "Menyimpan file dengan nama file baru..."
 
 #: kdiff3.cpp:858
 #, kde-format
 msgid "Save As..."
-msgstr ""
+msgstr "Simpan Sebagai..."
 
 #: kdiff3.cpp:882
 #, kde-format
 msgid "Printing not implemented."
-msgstr ""
+msgstr "Pencetakan tidak diimplementasikan."
 
 #: kdiff3.cpp:920
 #, kde-format
 msgid "Printing..."
-msgstr ""
+msgstr "Mencetak..."
 
 #: kdiff3.cpp:1024
 #, kde-format
 msgid "Printing page %1 of %2"
-msgstr ""
+msgstr "Mencetak halaman %1 dari %2"
 
 #: kdiff3.cpp:1076
 #, kde-format
 msgid " (Selection)"
-msgstr ""
+msgstr " (Pemilihan)"
 
 #: kdiff3.cpp:1105
 #, kde-format
 msgid "Printing completed."
-msgstr ""
+msgstr "Selesai mencetak."
 
 #: kdiff3.cpp:1109
 #, kde-format
 msgid "Printing aborted."
-msgstr ""
+msgstr "Pencetakan digugurkan."
 
 #: kdiff3.cpp:1116
 #, kde-format
 msgid "Exiting..."
-msgstr ""
+msgstr "Mengeluarkan..."
 
 #: kdiff3.cpp:1127
 #, kde-format
 msgid "Toggling toolbar..."
-msgstr ""
+msgstr "Menjungkit bilah alat..."
 
 #: kdiff3.cpp:1148
 #, kde-format
 msgid "Toggle the statusbar..."
-msgstr ""
+msgstr "Jungkit bilah status..."
 
 #: kdiff3_part.cpp:39
 #, kde-format
 msgid "KDiff3 Part"
-msgstr ""
+msgstr "KDiff3 Part"
 
 #: kdiff3_part.cpp:40
 #, kde-format
 msgid "A KPart to display SVG images"
-msgstr "Ein KPart for vising av SVG-bilete"
+msgstr "Sebuah KPart untuk menampilkan citra-citra SVG"
 
 #: kdiff3_part.cpp:42
 #, kde-format
 msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-msgstr "© 2007 Aurélien Gâteau <aurelien.gateau@free.fr>"
+msgstr ""
 
 #: kdiff3_part.cpp:43
 #, kde-format
@@ -1673,7 +1743,7 @@ msgstr ""
 #: kdiff3_part.rc:9
 #, kde-format
 msgid "&KDiff3"
-msgstr ""
+msgstr "&KDiff3"
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_part.rc:18
@@ -1685,7 +1755,7 @@ msgstr ""
 #: kdiff3_part.rc:21 main.cpp:103
 #, kde-format
 msgid "KDiff3"
-msgstr ""
+msgstr "KDiff3"
 
 #: kdiff3_shell.cpp:67
 #, kde-format
@@ -1699,137 +1769,142 @@ msgstr ""
 #: kdiff3_shell.rc:4
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "&File"
 
 #. i18n: ectx: Menu (directory)
 #: kdiff3_shell.rc:7
 #, kde-format
 msgid "F&older"
-msgstr ""
+msgstr "F&older"
 
 #. i18n: ectx: Menu (dir_current_merge_menu)
 #: kdiff3_shell.rc:30
 #, kde-format
 msgid "Current Item Merge Operation"
-msgstr ""
+msgstr "Operasi Penggabungan Item Saat Ini"
 
 #. i18n: ectx: Menu (dir_current_sync_menu)
 #: kdiff3_shell.rc:38
 #, kde-format
 msgid "Current Item Sync Operation"
-msgstr ""
+msgstr "Operasi Sinkron Item Saat Ini"
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_shell.rc:50
 #, kde-format
 msgid "M&ovement"
-msgstr ""
+msgstr "Per&pindahan"
 
 #. i18n: ectx: Menu (diff)
 #: kdiff3_shell.rc:61
 #, kde-format
 msgid "D&iffview"
-msgstr ""
+msgstr "Tampilan D&iff"
 
 #. i18n: ectx: Menu (merge)
 #: kdiff3_shell.rc:73
 #, kde-format
 msgid "M&erge"
-msgstr ""
+msgstr "&Gabungkan"
 
 #. i18n: ectx: Menu (window)
 #: kdiff3_shell.rc:95
 #, kde-format
 msgid "&Window"
-msgstr ""
+msgstr "&Jendela"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kdiff3_shell.rc:106
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Bilah Alat Utama"
 
 #: main.cpp:71 main.cpp:75
 #, kde-format
 msgid "Ignored. (User defined.)"
-msgstr ""
+msgstr "Diabaikan. (Ditentukan pengguna.)"
 
 #: main.cpp:107
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
-msgstr ""
+msgstr " (64 bit)"
 
 #: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
-msgstr ""
+msgstr " (32 bit)"
 
 #: main.cpp:110
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
-msgstr ""
+msgstr "Alat untuk Membandingkan dan Menggabungkan File dan Folder"
 
 #: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
-msgstr ""
+msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
 #: main.cpp:131
 #, kde-format
 msgid "Merge the input."
-msgstr ""
+msgstr "Gabungkan masukan."
 
 #: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr ""
+"File dasar yang gamblang. Untuk kompatibilitas dengan peralatan yang memadai."
 
 #: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
-msgstr ""
+msgstr "File keluaran. Menyiratkan -m. Misal: -o file_baru.txt"
 
 #: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
+"Keluaran file, lagi. (Untuk kompatibilitas dengan peralatan yang memadai.)"
 
 #: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
+"Tidak ada GUI jika semua bentrokan adalah dapat dibereskan secara otomatis. "
+"(Memerlukan -o file)"
 
 #: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
-msgstr ""
+msgstr "Abaikan --auto dan selalu tampilkan GUI."
 
 #: main.cpp:139 main.cpp:140
 #, kde-format
 msgid "Ignored."
-msgstr ""
+msgstr "Diabaikan."
 
 #: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
-msgstr ""
+msgstr "Penggantian nama yang terlihat untuk file 1 masukan (dasar)."
 
 #: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
-msgstr ""
+msgstr "Penggantian nama yang terlihat untuk file 2 masukan."
 
 #: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
-msgstr ""
+msgstr "Penggantian nama yang terlihat untuk file 3 masukan."
 
 #: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
+"Penggantian nama alternatif yang terlihat. Lakukan ini untuk setiap masukan."
 
 #: main.cpp:146
 #, kde-format
@@ -1837,31 +1912,33 @@ msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
+"Mengesampingkan pengaturan konfig. Gunakan salah satunya untuk setiap "
+"pengaturan. Misal: --cs \"AutoAdvance=1\""
 
 #: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
-msgstr ""
+msgstr "Tampilkan dafar pengaturan konfig dan nilai saat ini."
 
 #: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
-msgstr ""
+msgstr "Gunakan sebuah file konfig yang berbeda."
 
 #: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
-msgstr ""
+msgstr "file1 untuk dibuka (dasar, jika tidak ditentukan via --base)"
 
 #: main.cpp:152
 #, kde-format
 msgid "file2 to open"
-msgstr ""
+msgstr "file2 untuk dibuka"
 
 #: main.cpp:153
 #, kde-format
 msgid "file3 to open"
-msgstr ""
+msgstr "file3 untuk dibuka"
 
 #: main.cpp:177
 #, kde-format
@@ -1881,67 +1958,67 @@ msgstr ""
 #: MergeFileInfos.cpp:420
 #, kde-format
 msgid "Link: "
-msgstr ""
+msgstr "Tautan: "
 
 #: MergeFileInfos.cpp:430
 #, kde-format
 msgid "Size. "
-msgstr ""
+msgstr "Ukuran. "
 
 #: MergeFileInfos.cpp:446 MergeFileInfos.cpp:456
 #, kde-format
 msgid "Date & Size: "
-msgstr ""
+msgstr "Tanggal & Ukuran: "
 
 #: MergeFileInfos.cpp:477
 #, kde-format
 msgid "Comparing file..."
-msgstr ""
+msgstr "Membandingkan file..."
 
 #: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose A Everywhere"
-msgstr ""
+msgstr "Pilih A Di Mana Saja"
 
 #: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose B Everywhere"
-msgstr ""
+msgstr "Pilih B Di Mana Saja"
 
 #: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose C Everywhere"
-msgstr ""
+msgstr "Pilih C Di Mana Saja"
 
 #: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
-msgstr ""
+msgstr "Memilih A untuk Semua Bentrokan Tak Terbereskan"
 
 #: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
-msgstr ""
+msgstr "Memilih B untuk Semua Bentrokan Tak Terbereskan"
 
 #: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
-msgstr ""
+msgstr "Memilih C untuk Semua Bentrokan Tak Terbereskan"
 
 #: mergeresultwindow.cpp:153
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
-msgstr ""
+msgstr "Memilih A untuk Semua Bentrokan Spasi Putih Tak Terbereskan"
 
 #: mergeresultwindow.cpp:154
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
-msgstr ""
+msgstr "Memilih B untuk Semua Bentrokan Spasi Putih Tak Terbereskan"
 
 #: mergeresultwindow.cpp:155
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
-msgstr ""
+msgstr "Memilih C untuk Semua Bentrokan Spasi Putih Tak Terbereskan"
 
 #: mergeresultwindow.cpp:264
 #, kde-format
@@ -1969,13 +2046,13 @@ msgstr ""
 #: mergeresultwindow.cpp:787 pdiff.cpp:743 pdiff.cpp:747 pdiff.cpp:751
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
-msgstr ""
+msgstr "File %1 dan %2 adalah biner yang sama.\n"
 
 #: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
 #: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
-msgstr ""
+msgstr "File %1 dan %2 memiliki teks yang sama.\n"
 
 #: mergeresultwindow.cpp:793
 #, kde-format
@@ -2012,6 +2089,8 @@ msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
+"Ada bentrokan yang belum dibereskan.\n"
+"File tidak tersimpan."
 
 #: mergeresultwindow.cpp:2648 mergeresultwindow.cpp:2657
 #, kde-format
@@ -2047,12 +2126,12 @@ msgstr ""
 #: mergeresultwindow.cpp:2786
 #, kde-format
 msgid "Output:"
-msgstr ""
+msgstr "Keluaran:"
 
 #: mergeresultwindow.cpp:2799 mergeresultwindow.cpp:2989
 #, kde-format
 msgid "[Modified]"
-msgstr ""
+msgstr "[Dimodifikasi]"
 
 #: mergeresultwindow.cpp:2806
 #, kde-format
@@ -2062,7 +2141,7 @@ msgstr ""
 #: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Conflict"
-msgstr ""
+msgstr "Bentrok"
 
 #: mergeresultwindow.cpp:2938
 #, kde-format
@@ -2084,25 +2163,25 @@ msgstr ""
 #: opendialog.ui:24 progressdialog.ui:17
 #, kde-format
 msgid "Dialog"
-msgstr ""
+msgstr "Dialog"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: opendialog.ui:47
 #, kde-format
 msgid "B:"
-msgstr ""
+msgstr "B:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: opendialog.ui:54
 #, kde-format
 msgid "A (Base):"
-msgstr ""
+msgstr "A (Dasar):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: opendialog.ui:61
 #, kde-format
 msgid "Output (Optional):"
-msgstr ""
+msgstr "Keluaran (Opsional):"
 
 #. i18n: ectx: property (text), widget (QPushButton, fileSelectC)
 #. i18n: ectx: property (text), widget (QPushButton, fileSelectB)
@@ -2111,19 +2190,19 @@ msgstr ""
 #: opendialog.ui:75 opendialog.ui:202 opendialog.ui:246 opendialog.ui:257
 #, kde-format
 msgid "File..."
-msgstr ""
+msgstr "File..."
 
 #. i18n: ectx: property (text), widget (QPushButton, swapCopy)
 #: opendialog.ui:107
 #, kde-format
 msgid "Swap/Copy Names..."
-msgstr ""
+msgstr "Tukar/Salin Nama-nama..."
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: opendialog.ui:129
 #, kde-format
 msgid "C (Optional):"
-msgstr ""
+msgstr "C (Opsional):"
 
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectB)
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectC)
@@ -2132,7 +2211,7 @@ msgstr ""
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
 #, kde-format
 msgid "Folder..."
-msgstr ""
+msgstr "Folder..."
 
 #: optiondialog.cpp:93
 #, kde-format
@@ -2146,7 +2225,7 @@ msgstr ""
 #, kde-format
 msgctxt "Button title"
 msgid "Change Font"
-msgstr ""
+msgstr "Ubah Font"
 
 #: optiondialog.cpp:118 optiondialog.cpp:128
 #, kde-format
@@ -2156,16 +2235,19 @@ msgid ""
 "\n"
 "Example:"
 msgstr ""
+"Font: %1, %2, %3\n"
+"\n"
+"Contohnya:"
 
 #: optiondialog.cpp:384
 #, kde-format
 msgid "Unicode"
-msgstr ""
+msgstr "Unicode"
 
 #: optiondialog.cpp:385
 #, kde-format
 msgid "Latin1"
-msgstr ""
+msgstr "Latin1"
 
 #: optiondialog.cpp:404
 #, kde-format
@@ -2175,103 +2257,103 @@ msgstr ""
 #: optiondialog.cpp:493
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Atur"
 
 #: optiondialog.cpp:532
 #, kde-format
 msgid "Font"
-msgstr ""
+msgstr "Font"
 
 #: optiondialog.cpp:534
 #, kde-format
 msgid "Editor & Diff Output Font"
-msgstr ""
+msgstr "Editor & Font Keluaran Diff"
 
 #: optiondialog.cpp:552
 #, kde-format
 msgid "Application font"
-msgstr ""
+msgstr "Font aplikasi"
 
 #: optiondialog.cpp:557
 #, kde-format
 msgid "File view font"
-msgstr ""
+msgstr "Font tampilan file"
 
 #: optiondialog.cpp:576
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
-msgstr ""
+msgstr "Warna"
 
 #: optiondialog.cpp:577
 #, kde-format
 msgid "Colors Settings"
-msgstr ""
+msgstr "Pengaturan Warna"
 
 #: optiondialog.cpp:602
 #, kde-format
 msgid "Editor and Diff Views:"
-msgstr ""
+msgstr "Editor dan Tampilan Diff:"
 
 #: optiondialog.cpp:610
 #, kde-format
 msgid "Foreground color:"
-msgstr ""
+msgstr "Warna latar depan:"
 
 #: optiondialog.cpp:618
 #, kde-format
 msgid "Background color:"
-msgstr ""
+msgstr "Warna latar belakang:"
 
 #: optiondialog.cpp:628
 #, kde-format
 msgid "Diff background color:"
-msgstr ""
+msgstr "Warna latar belakang diff:"
 
 #: optiondialog.cpp:637
 #, kde-format
 msgid "Color A:"
-msgstr ""
+msgstr "Warna A:"
 
 #: optiondialog.cpp:646
 #, kde-format
 msgid "Color B:"
-msgstr ""
+msgstr "Warna B:"
 
 #: optiondialog.cpp:655
 #, kde-format
 msgid "Color C:"
-msgstr ""
+msgstr "Warna C:"
 
 #: optiondialog.cpp:663
 #, kde-format
 msgid "Conflict color:"
-msgstr ""
+msgstr "Warna bentrok:"
 
 #: optiondialog.cpp:672
 #, kde-format
 msgid "Current range background color:"
-msgstr ""
+msgstr "Warna latar belakang rentang saat ini:"
 
 #: optiondialog.cpp:681
 #, kde-format
 msgid "Current range diff background color:"
-msgstr ""
+msgstr "Warna latar belakang diff rentang saat ini:"
 
 #: optiondialog.cpp:689
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
-msgstr ""
+msgstr "Warna untuk rentang perbedaan yang disejajarkan secara manual:"
 
 #: optiondialog.cpp:696
 #, kde-format
 msgid "Folder Comparison View:"
-msgstr ""
+msgstr "Tampilan Perbandingan Folder:"
 
 #: optiondialog.cpp:702
 #, kde-format
 msgid "Newest file color:"
-msgstr ""
+msgstr "Warna file yang lebih baru:"
 
 #: optiondialog.cpp:707
 #, kde-format
@@ -2283,32 +2365,32 @@ msgstr ""
 #: optiondialog.cpp:712
 #, kde-format
 msgid "Oldest file color:"
-msgstr ""
+msgstr "Warna file yang lebih lawas:"
 
 #: optiondialog.cpp:721
 #, kde-format
 msgid "Middle age file color:"
-msgstr ""
+msgstr "Warna file berumur sedang:"
 
 #: optiondialog.cpp:730
 #, kde-format
 msgid "Color for missing files:"
-msgstr ""
+msgstr "Warna untuk file yang hilang:"
 
 #: optiondialog.cpp:744
 #, kde-format
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: optiondialog.cpp:745
 #, kde-format
 msgid "Editor Behavior"
-msgstr ""
+msgstr "Perilaku Editor"
 
 #: optiondialog.cpp:767
 #, kde-format
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "Tab menyisipkan spasi"
 
 #: optiondialog.cpp:771
 #, kde-format
@@ -2320,12 +2402,12 @@ msgstr ""
 #: optiondialog.cpp:776
 #, kde-format
 msgid "Tab size:"
-msgstr ""
+msgstr "Ukuran tab:"
 
 #: optiondialog.cpp:783
 #, kde-format
 msgid "Auto indentation"
-msgstr ""
+msgstr "Indentasi otomatis"
 
 #: optiondialog.cpp:787
 #, kde-format
@@ -2335,7 +2417,7 @@ msgstr ""
 #: optiondialog.cpp:790
 #, kde-format
 msgid "Auto copy selection"
-msgstr ""
+msgstr "Auto simpan pemilihan"
 
 #: optiondialog.cpp:794
 #, kde-format
@@ -2348,19 +2430,19 @@ msgstr ""
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: optiondialog.cpp:805
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
-msgstr ""
+msgstr "Dos/Windows"
 
 #: optiondialog.cpp:806
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
-msgstr ""
+msgstr "Deteksi Otomatis"
 
 #: optiondialog.cpp:809
 #, kde-format
@@ -2372,17 +2454,17 @@ msgstr ""
 #: optiondialog.cpp:819
 #, kde-format
 msgid "Diff"
-msgstr ""
+msgstr "Diff"
 
 #: optiondialog.cpp:820
 #, kde-format
 msgid "Diff Settings"
-msgstr ""
+msgstr "Pengaturan Diff"
 
 #: optiondialog.cpp:843
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
-msgstr ""
+msgstr "Abaikan nomor (utas sebagai spasi putih)"
 
 #: optiondialog.cpp:847
 #, kde-format
@@ -2395,7 +2477,7 @@ msgstr ""
 #: optiondialog.cpp:851
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
-msgstr ""
+msgstr "Abaikan komentar C/C++ (utas sebagai spasi putih)"
 
 #: optiondialog.cpp:854
 #, kde-format
@@ -2405,7 +2487,7 @@ msgstr ""
 #: optiondialog.cpp:857
 #, kde-format
 msgid "Ignore case (treat as white space)"
-msgstr ""
+msgstr "Abaikan huruf (utas sebagai spasi putih)"
 
 #: optiondialog.cpp:861
 #, kde-format
@@ -2415,7 +2497,7 @@ msgstr ""
 #: optiondialog.cpp:864
 #, kde-format
 msgid "Preprocessor command:"
-msgstr ""
+msgstr "Perintah preprocessor:"
 
 #: optiondialog.cpp:869
 #, kde-format
@@ -2425,7 +2507,7 @@ msgstr ""
 #: optiondialog.cpp:872
 #, kde-format
 msgid "Line-matching preprocessor command:"
-msgstr ""
+msgstr "Perintah preprocessor pencocokan baris:"
 
 #: optiondialog.cpp:877
 #, kde-format
@@ -2437,7 +2519,7 @@ msgstr ""
 #: optiondialog.cpp:880
 #, kde-format
 msgid "Try hard (slower)"
-msgstr ""
+msgstr "Coba keras (lebih lambat)"
 
 #: optiondialog.cpp:884
 #, kde-format
@@ -2449,7 +2531,7 @@ msgstr ""
 #: optiondialog.cpp:888
 #, kde-format
 msgid "Align B and C for 3 input files"
-msgstr ""
+msgstr "Sejajarkan B dan C untuk 3 file masukan"
 
 #: optiondialog.cpp:892
 #, kde-format
@@ -2463,7 +2545,7 @@ msgstr ""
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
-msgstr ""
+msgstr "Gabungkan"
 
 #: optiondialog.cpp:904
 #, kde-format
@@ -2825,7 +2907,7 @@ msgstr ""
 #: optiondialog.cpp:1251
 #, kde-format
 msgid "Synchronize folders"
-msgstr ""
+msgstr "Sinkronkan folder-folder"
 
 #: optiondialog.cpp:1255
 #, kde-format
@@ -2875,7 +2957,7 @@ msgstr ""
 #: optiondialog.cpp:1293 optiondialog.cpp:1294
 #, kde-format
 msgid "Regional Settings"
-msgstr ""
+msgstr "Pengaturan Regional"
 
 #: optiondialog.cpp:1317
 #, kde-format
@@ -2961,7 +3043,7 @@ msgstr ""
 #: optiondialog.cpp:1405
 #, kde-format
 msgid "Integration"
-msgstr ""
+msgstr "Integrasi"
 
 #: optiondialog.cpp:1406
 #, kde-format
@@ -3100,7 +3182,7 @@ msgstr ""
 #: pdiff.cpp:745 pdiff.cpp:749 pdiff.cpp:753
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
-msgstr ""
+msgstr "File %1 dan %2 memiliki teks yang sama, tetapi biner tidak sama.\n"
 
 #: pdiff.cpp:763
 #, kde-format
@@ -3113,12 +3195,12 @@ msgstr ""
 #: pdiff.cpp:773
 #, kde-format
 msgid ", B"
-msgstr ""
+msgstr ", B"
 
 #: pdiff.cpp:775
 #, kde-format
 msgid ", C"
-msgstr ""
+msgstr ", C"
 
 #: pdiff.cpp:777
 #, kde-format
@@ -3132,12 +3214,12 @@ msgstr ""
 #: pdiff.cpp:863
 #, kde-format
 msgid "Abort"
-msgstr ""
+msgstr "Gugurkan"
 
 #: pdiff.cpp:864
 #, kde-format
 msgid "Continue Merging"
-msgstr "Hald fram fletting"
+msgstr "Lanjutkan Penggabungan"
 
 #: pdiff.cpp:869 pdiff.cpp:961
 #, kde-format
@@ -3162,17 +3244,17 @@ msgstr ""
 #: pdiff.cpp:1164
 #, kde-format
 msgid "Ok"
-msgstr ""
+msgstr "Oke"
 
 #: pdiff.cpp:1180
 #, kde-format
 msgid "Go to Line"
-msgstr ""
+msgstr "Menuju ke Baris"
 
 #: pdiff.cpp:1491
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
-msgstr ""
+msgstr "Kemas kata (Batalkan penonfungsian kemas kata)"
 
 #: pdiff.cpp:1492
 #, kde-format
@@ -3213,32 +3295,32 @@ msgstr ""
 #: progress.cpp:54 progressdialog.ui:94
 #, kde-format
 msgid "&Cancel"
-msgstr ""
+msgstr "&Batal"
 
 #: smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:83
 #, kde-format
 msgid "Swap %1<->%2"
-msgstr ""
+msgstr "Tukar %1<->%2"
 
 #: smalldialogs.cpp:84 smalldialogs.cpp:85 smalldialogs.cpp:86
 #, kde-format
 msgid "Copy %1->Output"
-msgstr ""
+msgstr "Salin %1->Keluaran"
 
 #: smalldialogs.cpp:87 smalldialogs.cpp:88 smalldialogs.cpp:89
 #, kde-format
 msgid "Swap %1<->Output"
-msgstr ""
+msgstr "Tukar %1<->Keluaran"
 
 #: smalldialogs.cpp:108
 #, kde-format
 msgid "Configure..."
-msgstr ""
+msgstr "Atur..."
 
 #: smalldialogs.cpp:161
 #, kde-format
 msgid "Open Folder"
-msgstr ""
+msgstr "Buka Folder"
 
 #: smalldialogs.cpp:162
 #, kde-format
@@ -3258,7 +3340,7 @@ msgstr ""
 #: smalldialogs.cpp:331
 #, kde-format
 msgid "Case sensitive"
-msgstr ""
+msgstr "Sensitif huruf"
 
 #: smalldialogs.cpp:334
 #, kde-format
@@ -3283,7 +3365,7 @@ msgstr ""
 #: smalldialogs.cpp:356
 #, kde-format
 msgid "&Search"
-msgstr ""
+msgstr "&Cari"
 
 #: smalldialogs.cpp:382
 #, kde-format
@@ -3362,7 +3444,7 @@ msgstr ""
 #: SourceData.cpp:158
 #, kde-format
 msgid "From Clipboard"
-msgstr ""
+msgstr "Dari Papan Klip"
 
 #: SourceData.cpp:359
 #, kde-format
