@@ -1922,7 +1922,7 @@ void MergeResultWindow::wheelEvent(QWheelEvent* pWheelEvent)
     if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && mVScrollBar != nullptr)
     {
         pWheelEvent->accept();
-        QCoreApplication::postEvent(mVScrollBar, new QWheelEvent(*pWheelEvent));
+        QCoreApplication::sendEvent(mVScrollBar, pWheelEvent);
     }
 }
 

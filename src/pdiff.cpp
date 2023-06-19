@@ -814,7 +814,7 @@ void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 
     //Block diagonal scrolling easily generated unintentionally with track pads.
     if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
-        QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));
+        QCoreApplication::sendEvent(m_pHScrollBar, pWheelEvent);
 }
 
 void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
@@ -828,24 +828,24 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
         case Qt::Key_PageDown:
         case Qt::Key_PageUp:
             if(DiffTextWindow::mVScrollBar != nullptr)
-                QCoreApplication::postEvent(DiffTextWindow::mVScrollBar, new QKeyEvent(*keyEvent));
+                QCoreApplication::sendEvent(DiffTextWindow::mVScrollBar, keyEvent);
             return;
         case Qt::Key_Left:
         case Qt::Key_Right:
             if(m_pHScrollBar != nullptr)
-                QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
+                QCoreApplication::sendEvent(m_pHScrollBar, keyEvent);
             return;
         case Qt::Key_End:
         case Qt::Key_Home:
             if(bCtrl)
             {
                 if(DiffTextWindow::mVScrollBar != nullptr)
-                    QCoreApplication::postEvent(DiffTextWindow::mVScrollBar, new QKeyEvent(*keyEvent));
+                    QCoreApplication::sendEvent(DiffTextWindow::mVScrollBar, keyEvent);
             }
             else
             {
                 if(m_pHScrollBar != nullptr)
-                    QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
+                    QCoreApplication::sendEvent(m_pHScrollBar, keyEvent);
             }
             return;
     }
