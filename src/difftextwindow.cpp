@@ -1663,7 +1663,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
         }
     }
 }
-//FIXME: incoming visableTextWidth used as de-facto bool.
+
 void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx)
 {
     if(d->m_bWordWrap)
