@@ -16,12 +16,12 @@
 
 #include <QAtomicInt>
 #include <QString>
+#include <QStringList>
 
 class QFont;
 class QColor;
 class QSize;
 class QPoint;
-class QStringList;
 class QTextStream;
 
 class ValueMap
