@@ -1929,7 +1929,7 @@ DiffTextWindowFrame::~DiffTextWindowFrame()
         DiffTextWindow pointers which must be std::shared_ptr.
     */
     getDiffTextWindow()->setParent(nullptr);
-};
+}
 
 void DiffTextWindowFrame::init()
 {
