@@ -2952,7 +2952,7 @@ void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KAct
     d->m_pDirMergeCurrent = GuiUtils::createAction<QAction>(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, &KDiff3App::slotMergeCurrentFile, ac, "merge_current");
     d->m_pDirFoldAll = GuiUtils::createAction<QAction>(i18n("Fold All Subfolders"), this, &DirectoryMergeWindow::collapseAll, ac, "dir_fold_all");
     d->m_pDirUnfoldAll = GuiUtils::createAction<QAction>(i18n("Unfold All Subfolders"), this, &DirectoryMergeWindow::expandAll, ac, "dir_unfold_all");
-    d->m_pDirRescan = GuiUtils::createAction<QAction>(i18n("Rescan"), QKeySequence(Qt::SHIFT + Qt::Key_F5), this, &DirectoryMergeWindow::reload, ac, "dir_rescan");
+    d->m_pDirRescan = GuiUtils::createAction<QAction>(i18n("Rescan"), QKeySequence(Qt::SHIFT | Qt::Key_F5), this, &DirectoryMergeWindow::reload, ac, "dir_rescan");
     d->m_pDirSaveMergeState = nullptr; //GuiUtils::createAction< QAction >(i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
     d->m_pDirLoadMergeState = nullptr; //GuiUtils::createAction< QAction >(i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
     d->m_pDirChooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A for All Items"), this, &DirectoryMergeWindow::slotChooseAEverywhere, ac, "dir_choose_a_everywhere");
