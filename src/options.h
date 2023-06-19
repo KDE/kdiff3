@@ -23,6 +23,7 @@
 #include <QPoint>
 #include <QSize>
 #include <QStringList>
+#include <QTextCodec>
 
 #include <KSharedConfig>
 #include <qcolor.h>
