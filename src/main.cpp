@@ -21,7 +21,7 @@
 #endif
 
 #include <KAboutData>
-#include <KCrash/KCrash>
+#include <KCrash>
 #include <KLocalizedString>
 #include <KMessageBox>
 
