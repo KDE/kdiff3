@@ -10,6 +10,7 @@
 
 #include "DefaultFileAccessJobHandler.h"
 
+#include "compat.h"
 #include "defmac.h"
 #include "fileaccess.h"
 #include "IgnoreList.h"
@@ -40,10 +41,17 @@ bool DefaultFileAccessJobHandler::stat(bool bWantToWrite)
 #if HAS_KFKIO
     mFileAccess->setStatusText(QString());
 
+    //For testing kf6 build.
+    #if KF_VERSION < KF_VERSION_CHECK(5,240,0)
     KIO::StatJob* pStatJob = KIO::statDetails(mFileAccess->url(),
                                        bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
                                        KIO::StatDefaultDetails, KIO::HideProgressInfo);
+    #else
+    KIO::StatJob* pStatJob = KIO::stat(mFileAccess->url(),
+                                       bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
+                                       KIO::StatDefaultDetails, KIO::HideProgressInfo);
 
+    #endif
     chk_connect(pStatJob, &KIO::StatJob::result, this, &DefaultFileAccessJobHandler::slotStatResult);
     chk_connect(pStatJob, &KIO::StatJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
