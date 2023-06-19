@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -2033,7 +2034,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             else
             {
                 QString s = str.left(x);
-                s += str.midRef(x + 1);
+                s += QStringView(str).mid(x + 1);
                 melIt->setString(s);
                 setModified();
             }
@@ -2068,7 +2069,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             else
             {
                 QString s = str.left(x - 1);
-                s += str.midRef(x);
+                s += QStringView(str).mid(x);
                 --x;
                 melIt->setString(s);
                 setModified();
@@ -2536,7 +2537,7 @@ void MergeResultWindow::deleteSelection()
                 {
                     // This is the last line in the selection
                     int pos = lastPosInLine;
-                    firstLineString += lineString.midRef(pos); // rest of line
+                    firstLineString += QStringView(lineString).mid(pos); // rest of line
                     melItFirst->setString(firstLineString);
                 }
 
