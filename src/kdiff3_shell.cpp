@@ -134,7 +134,7 @@ void KDiff3Shell::optionsShowStatusbar()
 
 void KDiff3Shell::optionsConfigureKeys()
 {
-    KShortcutsDialog::configure(actionCollection() /*, "kdiff3_shell.rc" */);
+    KShortcutsDialog::configure(actionCollection(), KShortcutsEditor::LetterShortcutsDisallowed /*, "kdiff3_shell.rc" */);
 }
 
 void KDiff3Shell::optionsConfigureToolbars()
