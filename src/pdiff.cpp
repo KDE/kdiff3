@@ -641,6 +641,7 @@ void KDiff3App::initView()
 
     chk_connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
     chk_connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1.get(), &DiffTextWindow::setFirstLine);
+    chk_connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1.get(), &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow1->setupConnections(this);
 
     chk_connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2.get(), &DiffTextWindow::setFirstLine);
