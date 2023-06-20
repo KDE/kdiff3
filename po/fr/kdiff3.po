@@ -6,15 +6,16 @@
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
 # Xavier Besnard <xavier.besnard@neuf.fr>, 2020, 2021, 2022.
 # Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
+# Thomas Vergnaud <thomas.vergnaud@mailo.eu>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 00:50+0000\n"
-"PO-Revision-Date: 2023-06-03 20:14+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
-"Language-Team: fr\n"
+"POT-Creation-Date: 2023-06-20 00:55+0000\n"
+"PO-Revision-Date: 2023-06-18 20:47+0200\n"
+"Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,68 +36,68 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "jcorn@free.fr, sdepiets@gmail.com, xavier.besnard@neuf.fr"
 
-#: DefaultFileAccessJobHandler.cpp:50
+#: DefaultFileAccessJobHandler.cpp:58
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "Obtention de l'état du fichier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:105
+#: DefaultFileAccessJobHandler.cpp:113
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Lecture du fichier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:149
+#: DefaultFileAccessJobHandler.cpp:157
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Écriture du fichier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:185
+#: DefaultFileAccessJobHandler.cpp:193
 #, kde-format
 msgid "Out of memory"
 msgstr "Mémoire pleine"
 
-#: DefaultFileAccessJobHandler.cpp:224
+#: DefaultFileAccessJobHandler.cpp:232
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Création du dossier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:248
+#: DefaultFileAccessJobHandler.cpp:256
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Suppression du dossier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:266
+#: DefaultFileAccessJobHandler.cpp:274
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Suppression du fichier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:288
+#: DefaultFileAccessJobHandler.cpp:296
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Création d'un lien symbolique : %1 ==> %2"
 
-#: DefaultFileAccessJobHandler.cpp:318
+#: DefaultFileAccessJobHandler.cpp:326
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Renommage du fichier : %1 ==> %2"
 
-#: DefaultFileAccessJobHandler.cpp:359
+#: DefaultFileAccessJobHandler.cpp:367
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Copie du fichier : %1 ==> %2"
 
-#: DefaultFileAccessJobHandler.cpp:381
+#: DefaultFileAccessJobHandler.cpp:389
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Lecture du dossier : %1"
 
-#: DefaultFileAccessJobHandler.cpp:439
+#: DefaultFileAccessJobHandler.cpp:447
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Listage du dossier : %1"
@@ -125,67 +126,67 @@ msgstr "Fichier %1 : ligne %2"
 msgid "File %1: Line not available"
 msgstr "Fichier %1 : ligne non disponible"
 
-#: difftextwindow.cpp:1912
+#: difftextwindow.cpp:1914
 #, kde-format
 msgid "Encoding:"
 msgstr "Encodage :"
 
-#: difftextwindow.cpp:1916 mergeresultwindow.cpp:2783 optiondialog.cpp:805
+#: difftextwindow.cpp:1918 mergeresultwindow.cpp:2783 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Style de fin de ligne :"
 
-#: difftextwindow.cpp:1949
+#: difftextwindow.cpp:1951
 #, kde-format
 msgid "A (Base)"
 msgstr "A (base)"
 
-#: difftextwindow.cpp:1951
+#: difftextwindow.cpp:1953
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Encodage : %1"
 
-#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2829
+#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2829
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2828
+#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2828
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1952
+#: difftextwindow.cpp:1954
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Style de fin de ligne : %1"
 
-#: difftextwindow.cpp:1953
+#: difftextwindow.cpp:1955
 #, kde-format
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: difftextwindow.cpp:1981 kdiff3.cpp:943
+#: difftextwindow.cpp:1983 kdiff3.cpp:943
 #, kde-format
 msgid "Top line"
 msgstr "Première ligne"
 
-#: difftextwindow.cpp:1990
+#: difftextwindow.cpp:1992
 #, kde-format
 msgid "End"
 msgstr "Fin"
 
-#: difftextwindow.cpp:2046 smalldialogs.cpp:163
+#: difftextwindow.cpp:2048 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Ouvrir un fichier"
 
-#: difftextwindow.cpp:2092 optiondialog.cpp:390
+#: difftextwindow.cpp:2094 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2108
+#: difftextwindow.cpp:2110
 #, kde-format
 msgid "Other"
 msgstr "Autre"
@@ -1828,94 +1829,94 @@ msgstr "&Fenêtre"
 msgid "Main Toolbar"
 msgstr "Barre principale"
 
-#: main.cpp:71 main.cpp:75
+#: main.cpp:72 main.cpp:76
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignoré. (Défini par l'utilisateur)"
 
-#: main.cpp:102
+#: main.cpp:103
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:105
+#: main.cpp:106
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr "(64 bits)"
 
-#: main.cpp:107
+#: main.cpp:108
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Outil de comparaison et de fusion de fichiers et de dossiers"
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves Portage vers KF5/Qt5"
 
-#: main.cpp:128
+#: main.cpp:129
 #, kde-format
 msgid "Merge the input."
 msgstr "Fusionner les entrées."
 
-#: main.cpp:129
+#: main.cpp:130
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Fichier de base explicite. Pour la compatibilité avec certains outils."
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Fichier de sortie. Implique -m. Par ex. : -o nouveau_fichier.txt"
 
-#: main.cpp:131
+#: main.cpp:132
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Fichier de sortie, encore. (Pour la compatibilité avec certains outils)"
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Pas d'interface graphique si tous les conflits se résolvent automatiquement. "
 "(Nécessite un fichier -o)"
 
-#: main.cpp:134
+#: main.cpp:135
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignorer --auto et toujours afficher l'interface graphique."
 
-#: main.cpp:136 main.cpp:137
+#: main.cpp:137 main.cpp:138
 #, kde-format
 msgid "Ignored."
 msgstr "Ignoré."
 
-#: main.cpp:139
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Remplacement de nom visible pour le fichier d'entrée 1 (base)."
 
-#: main.cpp:140
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Remplacement de nom visible pour le fichier d'entrée 2."
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Remplacement de nom visible pour le fichier d'entrée 3."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Remplacement de nom visible secondaire. À fournir une seule fois pour chaque "
 "entrée."
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1924,33 +1925,33 @@ msgstr ""
 "Annuler un paramètre de configuration. À utiliser une seule fois pour chaque "
 "paramètre. Par ex. : --cs « AutoAdvance=1 »"
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr ""
 "Afficher la liste des paramètres de configuration et les valeurs actuelles."
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid "Use a different config file."
 msgstr "Utiliser un fichier de configuration différent."
 
-#: main.cpp:148
+#: main.cpp:149
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "fichier 1 à ouvrir (base, si non spécifié, via --base)"
 
-#: main.cpp:149
+#: main.cpp:150
 #, kde-format
 msgid "file2 to open"
 msgstr "fichier 2 à ouvrir"
 
-#: main.cpp:150
+#: main.cpp:151
 #, kde-format
 msgid "file3 to open"
 msgstr "fichier 3 à ouvrir"
 
-#: main.cpp:174
+#: main.cpp:175
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Consulter kdiff3 --help pour les options prises en charge."
@@ -2986,20 +2987,15 @@ msgid "Case sensitive filename comparison"
 msgstr "Tenir compte de la casse lors de la comparaison des noms de fichiers"
 
 #: optiondialog.cpp:1199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The folder comparison will compare files or folders when their names "
-#| "match.\n"
-#| "Set this option if the case of the names must match. (Default for Windows "
-#| "is off, otherwise on.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
 "Set this option if the case of the names must match. (Default for Windows is "
 "off, otherwise on.)"
 msgstr ""
-"La comparaison de dossiers compare les fichiers ou les dossiers lorsque "
-"leurs noms correspondent.\n"
+"La comparaison de dossiers comparera les fichiers ou les dossiers dont les "
+"noms correspondent.\n"
 "Réglez cette option si la casse des noms doit correspondre. (Désactivée par "
 "défaut pour Windows, sinon Activée)"
 
@@ -3009,10 +3005,7 @@ msgid "Unfold all subfolders on load"
 msgstr "Déplier tous les sous-dossiers au chargement"
 
 #: optiondialog.cpp:1207
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Unfold all subfolders when starting a folder diff.\n"
-#| "Off: Leave subfolders folded."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
@@ -3027,10 +3020,7 @@ msgid "Skip folder status report"
 msgstr "Sauter le rapport d'état du dossier"
 
 #: optiondialog.cpp:1215
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Do not show the Folder Comparison Status.\n"
-#| "Off: Show the status dialog on start."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
@@ -3245,10 +3235,7 @@ msgid "Use the same encoding for everything:"
 msgstr "Utiliser le même encodage pour tout :"
 
 #: optiondialog.cpp:1328
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enable this allows to change all encodings by changing the first only.\n"
-#| "Disable this if different individual settings are needed."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
@@ -3308,21 +3295,17 @@ msgid "Auto Select"
 msgstr "Sélectionner automatiquement"
 
 #: optiondialog.cpp:1383
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then the encoding from the input files is used.\n"
-#| "In ambiguous cases a dialog will ask the user to choose the encoding for "
-#| "saving."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
-"Si cette option est cochée, l'encodage provenant des fichiers d'entrée est "
+"Si cette option est cochée, l’encodage provenant des fichiers d'entrée est "
 "utilisé.\n"
-"Dans les cas ambigus, une boîte de dialogue demandera à l'utilisateur de "
-"choisir l'encodage pour l'enregistrement."
+"Dans les cas ambigus, une boîte de dialogue demandera à l’utilisateur de "
+"choisir l’encodage pour l’enregistrement."
 
 #: optiondialog.cpp:1386
 #, kde-format
@@ -3335,10 +3318,7 @@ msgid "Right To Left Language"
 msgstr "Langue de droite à gauche"
 
 #: optiondialog.cpp:1402
-#, fuzzy, kde-format
-#| msgid ""
-#| "Some languages are read from right to left.\n"
-#| "This setting will change the viewer and editor accordingly."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Some languages are read from right to left.\n"
@@ -3644,7 +3624,7 @@ msgid "Error while adding manual diff range"
 msgstr "Erreur lors de l'ajout d'une plage de différences manuel"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:54 progressdialog.ui:100
+#: progress.cpp:55 progressdialog.ui:100
 #, kde-format
 msgid "&Cancel"
 msgstr "&Annuler"

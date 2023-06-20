@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:55+0000\n"
 "PO-Revision-Date: 2019-10-19 22:33+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -31,74 +31,74 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xabier.villar@gmail.com"
 
-#: DefaultFileAccessJobHandler.cpp:50
+#: DefaultFileAccessJobHandler.cpp:58
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "Estase a obter o estado do ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:105
+#: DefaultFileAccessJobHandler.cpp:113
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Estase a ler o ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:149
+#: DefaultFileAccessJobHandler.cpp:157
 #, fuzzy, kde-format
 #| msgid "Writing file: %1"
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Estase a escribir o ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:185
+#: DefaultFileAccessJobHandler.cpp:193
 #, kde-format
 msgid "Out of memory"
 msgstr "Esgotou a memoria"
 
-#: DefaultFileAccessJobHandler.cpp:224
+#: DefaultFileAccessJobHandler.cpp:232
 #, fuzzy, kde-format
 #| msgid "Making directory: %1"
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Estase a crear o directorio: %1"
 
-#: DefaultFileAccessJobHandler.cpp:248
+#: DefaultFileAccessJobHandler.cpp:256
 #, fuzzy, kde-format
 #| msgid "Removing file: %1"
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Estase a retirar o ficheiro. %1"
 
-#: DefaultFileAccessJobHandler.cpp:266
+#: DefaultFileAccessJobHandler.cpp:274
 #, fuzzy, kde-format
 #| msgid "Removing file: %1"
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Estase a retirar o ficheiro. %1"
 
-#: DefaultFileAccessJobHandler.cpp:288
+#: DefaultFileAccessJobHandler.cpp:296
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Estase a crear a ligazón simbólica: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:318
+#: DefaultFileAccessJobHandler.cpp:326
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Renomeando o ficheiro: %1 → %2"
 
-#: DefaultFileAccessJobHandler.cpp:359
+#: DefaultFileAccessJobHandler.cpp:367
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Estase a copiar o ficheiro: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:381
+#: DefaultFileAccessJobHandler.cpp:389
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Estase a ler o ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:439
+#: DefaultFileAccessJobHandler.cpp:447
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Estase a listar o directorio: %1"
@@ -127,67 +127,67 @@ msgstr "Ficheiro %1: liña %2"
 msgid "File %1: Line not available"
 msgstr "Ficheiro %1: a liña non está dispoñíbel"
 
-#: difftextwindow.cpp:1912
+#: difftextwindow.cpp:1914
 #, kde-format
 msgid "Encoding:"
 msgstr "Codificación:"
 
-#: difftextwindow.cpp:1916 mergeresultwindow.cpp:2783 optiondialog.cpp:805
+#: difftextwindow.cpp:1918 mergeresultwindow.cpp:2783 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Estilo do fin de liña:"
 
-#: difftextwindow.cpp:1949
+#: difftextwindow.cpp:1951
 #, kde-format
 msgid "A (Base)"
 msgstr "A (base)"
 
-#: difftextwindow.cpp:1951
+#: difftextwindow.cpp:1953
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Codificación: %1"
 
-#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2829
+#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2829
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2828
+#: difftextwindow.cpp:1954 mergeresultwindow.cpp:2828
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1952
+#: difftextwindow.cpp:1954
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Estilo de fin de liña: %1"
 
-#: difftextwindow.cpp:1953
+#: difftextwindow.cpp:1955
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1981 kdiff3.cpp:943
+#: difftextwindow.cpp:1983 kdiff3.cpp:943
 #, kde-format
 msgid "Top line"
 msgstr "Liña superior"
 
-#: difftextwindow.cpp:1990
+#: difftextwindow.cpp:1992
 #, kde-format
 msgid "End"
 msgstr "Fin"
 
-#: difftextwindow.cpp:2046 smalldialogs.cpp:163
+#: difftextwindow.cpp:2048 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Abrir un ficheiro"
 
-#: difftextwindow.cpp:2092 optiondialog.cpp:390
+#: difftextwindow.cpp:2094 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2108
+#: difftextwindow.cpp:2110
 #, kde-format
 msgid "Other"
 msgstr "Outro"
@@ -621,7 +621,7 @@ msgstr ""
 "Se escolle «Simulala» saberá o que ocorrería.\n"
 "\n"
 "Teña en conta que este programa aínda está en estado Beta e non hai ningunha "
-"GARANTÍA! Faga copias de seguranza dos seus datos vitais!"
+"GARANTÍA! Faga copias de seguridade dos seus datos vitais!"
 
 #: directorymergewindow.cpp:2107
 #, fuzzy, kde-format
@@ -744,7 +744,7 @@ msgstr "Ocorreu un erro. Prema Aceptar para ver información detallada."
 #: directorymergewindow.cpp:2436
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
-msgstr "Erro: Eliminando %1: A creación da copia de seguranza fallou."
+msgstr "Erro: Eliminando %1: A creación da copia de seguridade fallou."
 
 #: directorymergewindow.cpp:2443
 #, fuzzy, kde-format
@@ -1039,7 +1039,7 @@ msgstr "Ningunha operación para todos os elementos"
 #: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Show Identical Files"
-msgstr "Mostrar os ficheiros idénticos"
+msgstr "Amosar os ficheiros idénticos"
 
 #: directorymergewindow.cpp:2967
 #, kde-format
@@ -1053,12 +1053,12 @@ msgstr ""
 #: directorymergewindow.cpp:2968
 #, kde-format
 msgid "Show Different Files"
-msgstr "Mostrar os ficheiros distintos"
+msgstr "Amosar os ficheiros distintos"
 
 #: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Show Files only in A"
-msgstr "Mostrar os ficheiros só en A"
+msgstr "Amosar os ficheiros só en A"
 
 #: directorymergewindow.cpp:2969
 #, kde-format
@@ -1072,7 +1072,7 @@ msgstr ""
 #: directorymergewindow.cpp:2970
 #, kde-format
 msgid "Show Files only in B"
-msgstr "Mostrar os ficheiros só en B"
+msgstr "Amosar os ficheiros só en B"
 
 #: directorymergewindow.cpp:2970
 #, kde-format
@@ -1086,7 +1086,7 @@ msgstr ""
 #: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Files only in C"
-msgstr "Mostrar os ficheiros só en C"
+msgstr "Amosar os ficheiros só en C"
 
 #: directorymergewindow.cpp:2971
 #, kde-format
@@ -1192,8 +1192,8 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"A eliminación dunha copia de seguranza anterior fallou ao intentar facer "
-"unha copia de seguranza.\n"
+"A eliminación dunha copia de seguridade anterior fallou ao intentar facer "
+"unha copia de seguridade.\n"
 "Ficheiro: %1"
 
 #: fileaccess.cpp:1102
@@ -1202,7 +1202,7 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"O cambio de nome fallou ao intentar facer unha copia de seguranza.\n"
+"O cambio de nome fallou ao intentar facer unha copia de seguridade.\n"
 "Ficheiros: %1 → %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -1618,7 +1618,7 @@ msgstr ""
 #: kdiff3.cpp:700
 #, kde-format
 msgid "Show Space && Tabulator Characters"
-msgstr "Mostrar os caracteres de espazos e tabuladores"
+msgstr "Amosar os caracteres de espazos e tabuladores"
 
 #: kdiff3.cpp:700
 #, fuzzy, kde-format
@@ -1636,7 +1636,7 @@ msgstr ""
 #: kdiff3.cpp:701
 #, kde-format
 msgid "Show White Space"
-msgstr "Mostrar os espazos en branco"
+msgstr "Amosar os espazos en branco"
 
 #: kdiff3.cpp:701
 #, fuzzy, kde-format
@@ -1654,7 +1654,7 @@ msgstr ""
 #: kdiff3.cpp:703
 #, kde-format
 msgid "Show Line Numbers"
-msgstr "Mostrar os números de liña"
+msgstr "Amosar os números de liña"
 
 #: kdiff3.cpp:703
 #, fuzzy, kde-format
@@ -1702,17 +1702,17 @@ msgstr "Xuntar as diferenzas escollidas"
 #: kdiff3.cpp:712
 #, kde-format
 msgid "Show Window A"
-msgstr "Mostrar a xanela A"
+msgstr "Amosar a xanela A"
 
 #: kdiff3.cpp:713
 #, kde-format
 msgid "Show Window B"
-msgstr "Mostrar a xanela B"
+msgstr "Amosar a xanela B"
 
 #: kdiff3.cpp:714
 #, kde-format
 msgid "Show Window C"
-msgstr "Mostrar a xanela C"
+msgstr "Amosar a xanela C"
 
 #: kdiff3.cpp:716
 #, kde-format
@@ -1928,95 +1928,95 @@ msgstr "&Xanela"
 msgid "Main Toolbar"
 msgstr "Barra de ferramentas Principal"
 
-#: main.cpp:71 main.cpp:75
+#: main.cpp:72 main.cpp:76
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignorado. (Definido polo usuario.)"
 
-#: main.cpp:102
+#: main.cpp:103
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:105
+#: main.cpp:106
 #, fuzzy, kde-format
 #| msgid " (64 bit)"
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bits)"
 
-#: main.cpp:107
+#: main.cpp:108
 #, fuzzy, kde-format
 #| msgid "Tool for Comparison and Merge of Files and Directories"
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Ferramenta para comparar e fundir ficheiros e directorios"
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "© 2002-2014 Joachim Eibl, © 2017 Michael Reeve; Adaptación a KF5 e Qt5"
 
-#: main.cpp:128
+#: main.cpp:129
 #, kde-format
 msgid "Merge the input."
 msgstr "Fundir a entrada."
 
-#: main.cpp:129
+#: main.cpp:130
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr ""
 "Ficheiro de base explícito. Para compatibilidade con certas ferramentas."
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Ficheiro de saída. Implica -m. P.ex.: -o novoficheiro.txt"
 
-#: main.cpp:131
+#: main.cpp:132
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Ficheiro de saída, de novo. (Para compatibilidade con certas ferramentas)"
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Sen interface se todos os conflitos son resolvidos automaticamente. (Precisa "
 "de -o ficheiro)"
 
-#: main.cpp:134
+#: main.cpp:135
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr ""
 
-#: main.cpp:136 main.cpp:137
+#: main.cpp:137 main.cpp:138
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorado."
 
-#: main.cpp:139
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Substitución do nome visíbel para o ficheiro de entrada 1 (base)."
 
-#: main.cpp:140
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Substitución do nome visíbel para o ficheiro de entrada 2."
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Substitución do nome visíbel para o ficheiro de entrada 3."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Substitución alternativa do nome visíbel. Indique isto para cada entrada."
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -2025,32 +2025,32 @@ msgstr ""
 "Substitúe unha opción de configuración. Use unha vez para cada opción. P."
 "ex.: --cs \" AutoAdvance=1\""
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Mostra unha lista das opcións de configuración e os valores actuais."
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid "Use a different config file."
 msgstr "Usar un ficheiro de configuración distinto."
 
-#: main.cpp:148
+#: main.cpp:149
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "o ficheiro 1 a abrir (base, se non se indicou mediante --base)"
 
-#: main.cpp:149
+#: main.cpp:150
 #, kde-format
 msgid "file2 to open"
 msgstr "o ficheiro 2 a abrir"
 
-#: main.cpp:150
+#: main.cpp:151
 #, kde-format
 msgid "file3 to open"
 msgstr "o ficheiro 3 a abrir"
 
-#: main.cpp:174
+#: main.cpp:175
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Ver con «kdiff3 --help» as opcións permitidas."
@@ -2240,7 +2240,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"A creación da copia de seguranza fallou. O ficheiro non se gardou."
+"A creación da copia de seguridade fallou. O ficheiro non se gardou."
 
 #: mergeresultwindow.cpp:2638 mergeresultwindow.cpp:2680
 #, kde-format
@@ -2774,7 +2774,7 @@ msgstr ""
 #: optiondialog.cpp:944
 #, kde-format
 msgid "Show info dialogs"
-msgstr "Mostrar os diálogos de información"
+msgstr "Amosar os diálogos de información"
 
 #: optiondialog.cpp:947
 #, fuzzy, kde-format
@@ -3347,7 +3347,7 @@ msgstr ""
 #: optiondialog.cpp:1287
 #, kde-format
 msgid "Backup files (.orig)"
-msgstr "Facer copia de seguranza dos ficheiros (.orig)"
+msgstr "Facer copia de seguridade dos ficheiros (.orig)"
 
 #: optiondialog.cpp:1291
 #, fuzzy, kde-format
@@ -3686,8 +3686,8 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 "Non se puideron converter algúns caracteres de entrada a Unicode correcto.\n"
-"Poida que estea a empregar un códec incorrecto. (p.ex. UTF-8 para ficheiros "
-"que non son UTF-8).\n"
+"Poida que estea a usar un códec incorrecto. (p.ex. UTF-8 para ficheiros que "
+"non son UTF-8).\n"
 "Non garde o resultado se non está seguro. Continúe baixo a súa "
 "responsabilidade.\n"
 "Os ficheiros afectados están en %1."
@@ -3776,7 +3776,7 @@ msgid "Error while adding manual diff range"
 msgstr "Ocorreu un erro ao engadir o intervalo manual de diferenzas"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:54 progressdialog.ui:100
+#: progress.cpp:55 progressdialog.ui:100
 #, kde-format
 msgid "&Cancel"
 msgstr "&Cancelar"
