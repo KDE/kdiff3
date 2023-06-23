@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-20 00:55+0000\n"
-"PO-Revision-Date: 2023-05-27 20:51+0200\n"
+"PO-Revision-Date: 2023-06-22 21:20+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1173,18 +1173,16 @@ msgid "Merge info"
 msgstr "Информация за сливане"
 
 #: kdiff3.cpp:465
-#, fuzzy, kde-format
-#| msgid "Unable to compare non-normal file with normal file."
+#, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
-msgstr "Невъзможно е да се сравни ненормален файл с нормален файл."
+msgstr "Невъзможно е да се сравни файл с директория."
 
 #: kdiff3.cpp:466
-#, fuzzy, kde-format
-#| msgid "Binary comparison"
+#, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
-msgstr "Двоично сравнение"
+msgstr "Несъвместимо сравняване"
 
 #: kdiff3.cpp:475
 #, kde-format
