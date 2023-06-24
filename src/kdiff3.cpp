@@ -535,7 +535,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
                 }
                 if(bSuccess)
                 {
-                    QMetaObject::invokeMethod(qApp, &QApplication::quit, Qt::QueuedConnection);
+                    qApp->exit(0);
                 }
             }
         }
