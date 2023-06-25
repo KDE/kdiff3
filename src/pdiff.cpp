@@ -342,7 +342,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     {
         m_neededLines = SafeInt<LineType>(m_diff3LineList.size());
     }
-    catch(std::exception)
+    catch(std::exception&)
     {
         mErrors.append(i18n("Too many lines in diff. Skipping file."));
     }
