@@ -589,7 +589,7 @@ void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
 
     if(d->getDiff3LineVector() != nullptr && d3lIdx >= 0 && d3lIdx < (int)d->getDiff3LineVector()->size())
     {
-        std::shared_ptr<const Diff3Line> pD3l = (*d->getDiff3LineVector())[d3lIdx];
+        const Diff3Line* pD3l = (*d->getDiff3LineVector())[d3lIdx];
         if(pD3l != nullptr)
         {
             LineRef actualLine = pD3l->getLineInFile(getWindowIndex());
@@ -1273,7 +1273,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
     {
         int wrapLineOffset = 0;
         int wrapLineLength = 0;
-        std::shared_ptr<const Diff3Line> d3l = nullptr;
+        const Diff3Line* d3l = nullptr;
         bool bWrapLine = false;
         if(m_bWordWrap)
         {
@@ -1318,7 +1318,7 @@ QString DiffTextWindowData::getString(const LineType d3lIdx) const
     if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || d3lIdx >= mDiff3LineVector->size())
         return QString();
 
-    std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
+    const Diff3Line* d3l = (*mDiff3LineVector)[d3lIdx];
     const LineType lineIdx = d3l->getLineIndex(getWindowIndex());
 
     if(lineIdx == LineRef::invalid)
@@ -1389,7 +1389,7 @@ QString DiffTextWindow::getSelection() const
     QtSizeType vectorSize = d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
     for(it = 0; it < vectorSize; ++it)
     {
-        std::shared_ptr<const Diff3Line> d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->getDiff3LineVector())[it];
+        const Diff3Line* d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->getDiff3LineVector())[it];
 
         assert(getWindowIndex() >= e_SrcSelector::A && getWindowIndex() <= e_SrcSelector::C);
 
@@ -1522,7 +1522,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
     {
         lastLine = getNofLines() - 1;
 
-        std::shared_ptr<const Diff3Line> d3l = (*d->getDiff3LineVector())[convertLineToDiff3LineIdx(lastLine)];
+        const Diff3Line* d3l = (*d->getDiff3LineVector())[convertLineToDiff3LineIdx(lastLine)];
         LineRef line;
         if(getWindowIndex() == e_SrcSelector::A) line = d3l->getLineA();
         if(getWindowIndex() == e_SrcSelector::B) line = d3l->getLineB();
@@ -1583,7 +1583,7 @@ LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnSc
         if(coordType == eD3LLineCoords) return d3lIdx;
         while(!line.isValid() && d3lIdx < mDiff3LineVector->size() && d3lIdx >= 0)
         {
-            std::shared_ptr<const Diff3Line> d3l = (*mDiff3LineVector)[d3lIdx];
+            const Diff3Line* d3l = (*mDiff3LineVector)[d3lIdx];
             if(getWindowIndex() == e_SrcSelector::A) line = d3l->getLineA();
             if(getWindowIndex() == e_SrcSelector::B) line = d3l->getLineB();
             if(getWindowIndex() == e_SrcSelector::C) line = d3l->getLineC();
@@ -1968,7 +1968,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine) const
     LineRef currentLine;
     for(QtSizeType i = convertLineToDiff3LineIdx(firstLine); i < d->getDiff3LineVector()->size(); ++i)
     {
-        std::shared_ptr<const Diff3Line> d3l = (*d->getDiff3LineVector())[i];
+        const Diff3Line* d3l = (*d->getDiff3LineVector())[i];
         currentLine = d3l->getLineInFile(getWindowIndex());
         if(currentLine.isValid()) break;
     }

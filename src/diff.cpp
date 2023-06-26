@@ -572,10 +572,10 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     QtSizeType i;
     for(i = 0; i < d3lv.size(); ++i)
     {
-        const Diff3Line& d3l = *d3lv[i];
-        if((lineA1.isValid() && lineA1 == d3l.getLineA()) ||
-           (lineB1.isValid() && lineB1 == d3l.getLineB()) ||
-           (lineC1.isValid() && lineC1 == d3l.getLineC()))
+        const Diff3Line* d3l = d3lv[i];
+        if((lineA1.isValid() && lineA1 == d3l->getLineA()) ||
+           (lineB1.isValid() && lineB1 == d3l->getLineB()) ||
+           (lineC1.isValid() && lineC1 == d3l->getLineC()))
             return SafeInt<int>(i);
     }
     return -1;
@@ -1525,7 +1525,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
     QtSizeType j = 0;
     for(i = begin(); i != end(); ++i, ++j)
     {
-        d3lv[j] = std::make_shared<Diff3Line>(*i);
+        d3lv[j] = &(*i);
     }
     assert(j == d3lv.size());
 }

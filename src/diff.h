@@ -204,7 +204,7 @@ class ManualDiffHelpList; // A list of corresponding ranges
 class Diff3Line;
 class Diff3LineList;
 
-using Diff3LineVector = QVector<std::shared_ptr<Diff3Line>>;
+using Diff3LineVector = QVector<Diff3Line*>;
 
 class DiffBufferInfo
 {
@@ -451,7 +451,7 @@ struct HistoryRange
 
 struct Diff3WrapLine
 {
-    std::shared_ptr<Diff3Line> pD3L = nullptr;
+    Diff3Line* pD3L = nullptr;
     LineType diff3LineIndex = 0;
     int wrapLineOffset = 0;
     int wrapLineLength = 0;
