@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-20 00:55+0000\n"
-"PO-Revision-Date: 2023-06-26 21:37+0200\n"
+"PO-Revision-Date: 2023-06-29 09:57+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -1342,17 +1342,13 @@ msgstr ""
 "désactivé)"
 
 #: kdiff3.cpp:680
-#, fuzzy, kde-format
-#| msgctxt "Tooltip explaination text"
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
-"(Ne pas ignorer les différences d'espaces même quand « Afficher les "
+"(Ne prend pas en compte les différences d'espaces même quand « Afficher les "
 "espaces » est désactivé.)"
 
 #: kdiff3.cpp:681
@@ -2541,8 +2537,7 @@ msgid "Ignore case (treat as white space)"
 msgstr "Ignorer la casse (considérer comme des espaces)"
 
 #: optiondialog.cpp:868
-#, fuzzy, kde-format
-#| msgid "Treat case differences like white space changes. ('a'<=>'A')"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
@@ -2568,18 +2563,15 @@ msgid "Line-matching preprocessor command:"
 msgstr "Commande du préprocesseur pour la mise en correspondance de lignes :"
 
 #: optiondialog.cpp:884
-#, fuzzy, kde-format
-#| msgid ""
-#| "This pre-processor is only used during line matching.\n"
-#| "(See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
 msgstr ""
-"Ce préprocesseur n'est utilisé que durant la mise en correspondance de "
-"lignes\n"
-"(consultez la documentation pour les détails)."
+"Ce pré-processeur n'est utilisé que durant la mise en correspondance des "
+"lignes.\n"
+"(Veuillez consulter la documentation pour plus de détails)."
 
 #: optiondialog.cpp:887
 #, kde-format
@@ -2776,14 +2768,12 @@ msgid "Max number of history entries:"
 msgstr "Nombre maximal d'éléments d'historique :"
 
 #: optiondialog.cpp:1067
-#, fuzzy, kde-format
-#| msgid ""
-#| "Cut off after specified number. Use -1 for infinite number of entries."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
-"Couper après le nombre spécifié. Utiliser -1 pour un nombre illimité "
-"d'éléments."
+"Couper après le nombre spécifié. Utiliser une valeur de « -1 » pour un "
+"nombre illimité d'éléments."
 
 #: optiondialog.cpp:1071
 #, kde-format
@@ -3718,10 +3708,7 @@ msgid "Example history start line (with leading comment):"
 msgstr "Exemple de ligne de début d'historique (avec commentaire de départ) :"
 
 #: smalldialogs.cpp:409
-#, fuzzy, kde-format
-#| msgid ""
-#| "Copy a history start line as used in your files,\n"
-#| "including the leading comment."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history start line as used in your files,\n"
