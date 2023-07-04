@@ -586,7 +586,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t i
     ProgressProxy pp;
     static GnuDiff gnuDiff; // All values are initialized with zeros.
 
-    pp.setCurrent(0);
+    ProgressProxy::setCurrent(0);
 
     clear();
     if(p1->empty() || (*p1)[index1].getBuffer() == nullptr || p2->empty() || (*p2)[index2].getBuffer() == nullptr || size1 == 0 || size2 == 0)
@@ -664,7 +664,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t i
 #ifndef NDEBUG
     verify(size1, size2);
 #endif
-    pp.setCurrent(1);
+    ProgressProxy::setCurrent(1);
 }
 
 #ifndef NDEBUG
@@ -1507,12 +1507,12 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
     ProgressProxy pp;
     bool bTextsTotalEqual = true;
     size_t listSize = size();
-    pp.setMaxNofSteps(listSize);
+    ProgressProxy::setMaxNofSteps(listSize);
 
     for(Diff3Line &diff: *this)
     {
         bTextsTotalEqual = diff.fineDiff(bTextsTotalEqual, selector, v1, v2, eIgnoreFlags);
-        pp.step();
+        ProgressProxy::step();
     }
     return bTextsTotalEqual;
 }

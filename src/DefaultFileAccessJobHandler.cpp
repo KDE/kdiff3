@@ -95,7 +95,7 @@ bool DefaultFileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 {
     ProgressProxyExtender pp; // Implicitly used in slotPercent()
 
-    if(maxLength > 0 && !pp.wasCancelled())
+    if(maxLength > 0 && !ProgressProxy::wasCancelled())
     {
         m_bSuccess = false;
 #if HAS_KFKIO
@@ -383,10 +383,10 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
     m_filePattern = filePattern;
     m_dirAntiPattern = dirAntiPattern;
 
-    if(pp.wasCancelled())
+    if(ProgressProxy::wasCancelled())
         return true; // Cancelled is not an error.
 
-    pp.setInformation(i18nc("Status message", "Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
+    ProgressProxy::setInformation(i18nc("Status message", "Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
     qCInfo(kdiffFileAccess) << "Reading folder: " << mFileAccess->absoluteFilePath();
 
     if(mFileAccess->isLocal())
@@ -413,7 +413,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
         {
             for(const QFileInfo& fi: fiList) // for each file...
             {
-                if(pp.wasCancelled())
+                if(ProgressProxy::wasCancelled())
                     break;
 
                 assert(fi.fileName() != "." && fi.fileName() != "..");

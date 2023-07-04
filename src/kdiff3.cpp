@@ -1014,7 +1014,7 @@ void KDiff3App::slotFilePrint()
         int page = 1;
 
         ProgressProxy pp;
-        pp.setMaxNofSteps(totalNofPages);
+        ProgressProxy::setMaxNofSteps(totalNofPages);
         quint32 i = from;
 
         while(bPrintCurrentPage ||
@@ -1022,9 +1022,9 @@ void KDiff3App::slotFilePrint()
               (bPrintSelection && line < selectionEndLine))
         {
             assert(!(bPrintCurrentPage && i > from));
-            pp.setInformation(i18nc("Status message", "Printing page %1 of %2", page, totalNofPages), false);
-            pp.setCurrent(page - 1);
-            if(pp.wasCancelled())
+            ProgressProxy::setInformation(i18nc("Status message", "Printing page %1 of %2", page, totalNofPages), false);
+            ProgressProxy::setCurrent(page - 1);
+            if(ProgressProxy::wasCancelled())
             {
                 printer.abort();
                 break;

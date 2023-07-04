@@ -76,20 +76,20 @@ void ProgressDialog::initConnections()
 
     connections.push_back(ProgressProxy::push.connect(boost::bind(&ProgressDialog::push, this)));
     connections.push_back(ProgressProxy::pop.connect(boost::bind(&ProgressDialog::pop, this, placeholders::_1)));
-    connections.push_back(ProgressProxy::clearSig.connect(boost::bind(&ProgressDialog::clear, this)));
+    connections.push_back(ProgressProxy::clear.connect(boost::bind(&ProgressDialog::clear, this)));
 
     connections.push_back(ProgressProxy::enterEventLoop.connect(boost::bind(&ProgressDialog::enterEventLoop, this, placeholders::_1, placeholders::_2)));
     connections.push_back(ProgressProxy::exitEventLoop.connect(boost::bind(&ProgressDialog::exitEventLoop, this)));
 
     connections.push_back(ProgressProxy::setCurrentSig.connect(boost::bind(&ProgressDialog::setCurrent, this, placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::addNofStepsSig.connect(boost::bind(&ProgressDialog::addNofSteps, this, placeholders::_1)));
-    connections.push_back(ProgressProxy::setMaxNofStepsSig.connect(boost::bind(&ProgressDialog::setMaxNofSteps, this, placeholders::_1)));
+    connections.push_back(ProgressProxy::addNofSteps.connect(boost::bind(&ProgressDialog::addNofSteps, this, placeholders::_1)));
+    connections.push_back(ProgressProxy::setMaxNofSteps.connect(boost::bind(&ProgressDialog::setMaxNofSteps, this, placeholders::_1)));
     connections.push_back(ProgressProxy::stepSig.connect(boost::bind(&ProgressDialog::step, this, placeholders::_1)));
 
-    connections.push_back(ProgressProxy::setRangeTransformationSig.connect(boost::bind(&ProgressDialog::setRangeTransformation, this, placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::setSubRangeTransformationSig.connect(boost::bind(&ProgressDialog::setSubRangeTransformation, this, placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::setRangeTransformation.connect(boost::bind(&ProgressDialog::setRangeTransformation, this, placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::setSubRangeTransformation.connect(boost::bind(&ProgressDialog::setSubRangeTransformation, this, placeholders::_1, placeholders::_2)));
 
-    connections.push_back(ProgressProxy::wasCancelledSig.connect(boost::bind(&ProgressDialog::wasCancelled, this)));
+    connections.push_back(ProgressProxy::wasCancelled.connect(boost::bind(&ProgressDialog::wasCancelled, this)));
 
     connections.push_back(ProgressProxy::setInformationSig.connect(boost::bind(
         static_cast<void (ProgressDialog::*)(const QString&, bool)>(&ProgressDialog::setInformation),
