@@ -28,6 +28,7 @@
 #include <boost/signals2.hpp>
 #include <list>
 #include <memory>
+#include <vector>
 
 class QMenu;
 class QPushButton;
@@ -90,7 +91,7 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
 
     void setPaintingAllowed(bool bAllowPainting);
     void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
-    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx);
+    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, size_t cacheListIdx);
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineType linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, int firstLine, const LineType nofLinesPerPage);
@@ -156,7 +157,7 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
     void timerEvent(QTimerEvent*) override;
 
   private:
-    static QList<RecalcWordWrapRunnable*> s_runnables;
+    static std::vector<RecalcWordWrapRunnable*> s_runnables;
     static constexpr int s_linesPerRunnable = 2000;
 
     /*

@@ -14,9 +14,10 @@
 #include "ProgressProxy.h"
 #include "ui_progressdialog.h"
 
+#include <list>
+
 #include <QDialog>
 #include <QElapsedTimer>
-#include <QList>
 #include <QPointer>
 #include <QThread>
 
@@ -102,7 +103,7 @@ class ProgressDialog: public QDialog
         double m_dSubRangeMin = 0;
     };
     quint64 backgroundTaskCount = 0;
-    QList<ProgressLevelData> m_progressStack;
+    std::list<ProgressLevelData> m_progressStack;
 
     int m_progressDelayTimer = 0;
     int m_delayedHideTimer = 0;

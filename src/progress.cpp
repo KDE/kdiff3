@@ -214,7 +214,7 @@ void ProgressDialog::setInformationImp(const QString& info)
 {
     assert(!m_progressStack.empty());
 
-    QtSizeType level = m_progressStack.size();
+    size_t level = m_progressStack.size();
     if(level == 1)
     {
         dialogUi.information->setText(info);
@@ -260,7 +260,7 @@ void ProgressDialog::setCurrent(quint64 subCurrent, bool bRedrawUpdate)
 
 void ProgressDialog::clear()
 {
-    if(m_progressStack.isEmpty())
+    if(m_progressStack.empty())
         return;
 
     ProgressLevelData& pld = m_progressStack.back();
@@ -341,7 +341,7 @@ void ProgressDialog::recalc(bool bUpdate)
             if(!m_bStayHidden)
                 m_progressDelayTimer = startTimer(3000); /* 3 s delay */
 
-            QtSizeType level = m_progressStack.size();
+            size_t level = m_progressStack.size();
             if((bUpdate && level == 1) || m_t1.elapsed() > 200)
             {
                 if(m_progressStack.empty())
@@ -351,7 +351,7 @@ void ProgressDialog::recalc(bool bUpdate)
                 }
                 else
                 {
-                    QList<ProgressLevelData>::iterator i = m_progressStack.begin();
+                    std::list<ProgressLevelData>::iterator i = m_progressStack.begin();
                     int value = int(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin));
                     dialogUi.progressBar->setValue(value);
                     if(m_bStayHidden && m_pStatusProgressBar)

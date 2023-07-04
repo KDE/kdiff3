@@ -56,23 +56,23 @@
 #include <QUrl>
 
 QPointer<QScrollBar> DiffTextWindow::mVScrollBar = nullptr;
-QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
+std::vector<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
 
 class RecalcWordWrapRunnable: public QRunnable
 {
   private:
-    static QAtomicInteger<QtSizeType> s_runnableCount;
+    static QAtomicInteger<size_t> s_runnableCount;
 
     std::shared_ptr<DiffTextWindow> m_pDTW = nullptr;
     int m_visibleTextWidth;
-    QtSizeType m_cacheIdx;
+    size_t m_cacheIdx;
 
     //Only way to be thread-safe. Globals are inheriently prone to tare down timing issues.
     std::shared_ptr<ProgressDialog> progressDialog = g_pProgressDialog;
 
   public:
-    static QAtomicInteger<QtSizeType> s_maxNofRunnables;
-    RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx):
+    static QAtomicInteger<size_t> s_maxNofRunnables;
+    RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, SafeInt<size_t> cacheIdx):
         m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
         setAutoDelete(true);
@@ -81,7 +81,7 @@ class RecalcWordWrapRunnable: public QRunnable
     void run() override
     {
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
-        QtSizeType newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
+        size_t newValue = s_runnableCount.fetchAndSubOrdered(1) - 1;
         progressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
@@ -90,8 +90,8 @@ class RecalcWordWrapRunnable: public QRunnable
     }
 };
 
-QAtomicInteger<QtSizeType> RecalcWordWrapRunnable::s_runnableCount = 0;
-QAtomicInteger<QtSizeType> RecalcWordWrapRunnable::s_maxNofRunnables = 0;
+QAtomicInteger<size_t> RecalcWordWrapRunnable::s_runnableCount = 0;
+QAtomicInteger<size_t> RecalcWordWrapRunnable::s_maxNofRunnables = 0;
 
 class WrapLineCacheData
 {
@@ -201,7 +201,7 @@ class DiffTextWindowData
     const Diff3LineVector* mDiff3LineVector = nullptr;
     Diff3WrapLineVector m_diff3WrapLineVector;
     const ManualDiffHelpList* m_pManualDiffHelpList = nullptr;
-    QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
+    std::vector<std::vector<WrapLineCacheData>> m_wrapLineCacheList;
 
     QColor m_cThis;
     QColor m_cDiff1;
@@ -1627,7 +1627,7 @@ void DiffTextWindow::convertSelectionToD3LCoords() const
 
 bool DiffTextWindow::startRunnables()
 {
-    if(s_runnables.count() == 0)
+    if(s_runnables.size() == 0)
     {
         return false;
     }
@@ -1635,11 +1635,11 @@ bool DiffTextWindow::startRunnables()
     {
         g_pProgressDialog->setStayHidden(true);
         ProgressProxy::startBackgroundTask();
-        g_pProgressDialog->setMaxNofSteps(s_runnables.count());
-        RecalcWordWrapRunnable::s_maxNofRunnables = s_runnables.count();
+        g_pProgressDialog->setMaxNofSteps(s_runnables.size());
+        RecalcWordWrapRunnable::s_maxNofRunnables = s_runnables.size();
         g_pProgressDialog->setCurrent(0);
 
-        for(int i = 0; i < s_runnables.count(); ++i)
+        for(size_t i = 0; i < s_runnables.size(); ++i)
         {
             QThreadPool::globalInstance()->start(s_runnables[i]);
         }
@@ -1673,7 +1673,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             setUpdatesEnabled(false);
             for(QtSizeType i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
-                d->m_wrapLineCacheList.append(QVector<WrapLineCacheData>());
+                d->m_wrapLineCacheList.push_back(std::vector<WrapLineCacheData>());
                 s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
             }
         }
@@ -1702,7 +1702,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
     }
 }
 
-void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx)
+void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, size_t cacheListIdx)
 {
     if(d->m_bWordWrap)
     {
@@ -1717,8 +1717,8 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         QtSizeType size = d->getDiff3LineVector()->size();
         LineType firstD3LineIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable);
         LineType endIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? size : std::min<QtSizeType>(firstD3LineIdx + s_linesPerRunnable, size));
-        QVector<WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
-        QtSizeType cacheListIdx2 = 0;
+        std::vector<WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
+        size_t cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
 
         for(i = firstD3LineIdx; i < endIdx; ++i)
@@ -1740,13 +1740,13 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                     wrapLineCache.push_back(WrapLineCacheData(i, line.textStart(), line.textLength()));
                 }
             }
-            else if(wrapLineVectorSize > 0 && cacheListIdx2 < d->m_wrapLineCacheList.count())
+            else if(wrapLineVectorSize > 0 && cacheListIdx2 < d->m_wrapLineCacheList.size())
             {
                 WrapLineCacheData* pWrapLineCache = d->m_wrapLineCacheList[cacheListIdx2].data();
-                QtSizeType cacheIdx = 0;
-                QtSizeType clc = d->m_wrapLineCacheList.count() - 1;
-                QtSizeType cllc = d->m_wrapLineCacheList.last().count();
-                QtSizeType curCount = d->m_wrapLineCacheList[cacheListIdx2].count() - 1;
+                size_t cacheIdx = 0;
+                size_t clc = d->m_wrapLineCacheList.size() - 1;
+                size_t cllc = d->m_wrapLineCacheList.back().size();
+                size_t curCount = d->m_wrapLineCacheList[cacheListIdx2].size() - 1;
                 LineType l = 0;
 
                 while(wrapLineIdx + l < d->m_diff3WrapLineVector.size() && (cacheListIdx2 < clc || (cacheListIdx2 == clc && cacheIdx < cllc)) && pWrapLineCache->d3LineIdx() <= i)
@@ -1766,10 +1766,10 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                     else
                     {
                         ++cacheListIdx2;
-                        if(cacheListIdx2 >= d->m_wrapLineCacheList.count())
+                        if(cacheListIdx2 >= d->m_wrapLineCacheList.size())
                             break;
                         pWrapLineCache = d->m_wrapLineCacheList[cacheListIdx2].data();
-                        curCount = d->m_wrapLineCacheList[cacheListIdx2].count();
+                        curCount = d->m_wrapLineCacheList[cacheListIdx2].size();
                         cacheIdx = 0;
                     }
                 }
