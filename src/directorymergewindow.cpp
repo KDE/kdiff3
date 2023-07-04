@@ -1850,7 +1850,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
     if(bRecursive)
     {
         e_MergeOperation eChildrenMergeOp = pMFI->getOperation();
-        if(eChildrenMergeOp == eConflictingFileTypes) eChildrenMergeOp = eMergeABCToDest;
+        if(eChildrenMergeOp == eConflictingFileTypes)
+            eChildrenMergeOp = isDirThreeWay() ? eMergeABCToDest : eMergeABToDest;
 
         for(int childIdx = 0; childIdx < pMFI->children().count(); ++childIdx)
         {
