@@ -1443,7 +1443,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& 
 {
     LineRef it = d3vLine;
     QtSizeType endIt = bDirDown ? d->getDiff3LineVector()->size() : -1;
-    quint32 step = bDirDown ? 1 : -1;
+    qint32 step = bDirDown ? 1 : -1;
     QtSizeType startPos = posInLine;
 
     for(; it != endIt; it += step)
