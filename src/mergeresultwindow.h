@@ -65,7 +65,7 @@ class MergeResultWindow: public QWidget
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
     [[nodiscard]] int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr) const;
-    void choose(e_SrcSelector selector);
+    void choose(const e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
     [[nodiscard]] int getMaxTextWidth(); // width of longest text line

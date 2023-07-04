@@ -827,7 +827,7 @@ void MergeResultWindow::setFastSelector(MergeBlockListImp::iterator i)
     Q_EMIT updateAvailabilities();
 }
 
-void MergeResultWindow::choose(e_SrcSelector selector)
+void MergeResultWindow::choose(const e_SrcSelector selector)
 {
     if(m_currentMergeBlockIt == m_mergeBlockList.list().end())
         return;
@@ -845,7 +845,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
     // Remove unneeded lines in the range.
     for(melIt = mb.list().begin(); melIt != mb.list().end();)
     {
-        MergeEditLine& mel = *melIt;
+        const MergeEditLine& mel = *melIt;
         if(mel.src() == selector)
             bActive = true;
 
@@ -875,9 +875,8 @@ void MergeResultWindow::choose(e_SrcSelector selector)
         // Remove all lines that are empty, because no src lines are there.
         for(melIt = mb.list().begin(); melIt != mb.list().end();)
         {
-            MergeEditLine& mel = *melIt;
-
-            LineRef srcLine = mel.src() == e_SrcSelector::A ? mel.id3l()->getLineA() : mel.src() == e_SrcSelector::B ? mel.id3l()->getLineB() : mel.src() == e_SrcSelector::C ? mel.id3l()->getLineC() : LineRef();
+            const MergeEditLine& mel = *melIt;
+            const LineRef srcLine = mel.src() == e_SrcSelector::A ? mel.id3l()->getLineA() : mel.src() == e_SrcSelector::B ? mel.id3l()->getLineB() : mel.src() == e_SrcSelector::C ? mel.id3l()->getLineC() : LineRef();
 
             if(!srcLine.isValid())
                 melIt = mb.list().erase(melIt);
