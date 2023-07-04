@@ -1429,7 +1429,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
                 //TODO: verify conditions here
                 if(!bCopyNewer || pMFI->isDirA())
                     setMergeOperation(mi, eDefaultMergeOp);
-                else if(bCopyNewer && pMFI->conflictingAges())
+                else if(pMFI->conflictingAges())
                 {
                     setMergeOperation(mi, eConflictingAges);
                 }

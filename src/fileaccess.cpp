@@ -361,7 +361,7 @@ void FileAccess::loadData()
 
         m_bBrokenLink = !QFileInfo::exists(m_linkTarget);
         //We want to know if the link itself exists
-        if(!m_bExists)
+        if(m_bBrokenLink)
             m_bExists = true;
 
         if(!m_modificationTime.isValid())

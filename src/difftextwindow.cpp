@@ -1076,11 +1076,9 @@ void DiffTextWindowData::writeLine(
         Merger merger(pLineDiff1, pLineDiff2);
         while(!merger.isEndReached() && i < pld->size())
         {
-            if(i < pld->size())
-            {
-                charChanged[i] = merger.whatChanged();
-                ++i;
-            }
+            charChanged[i] = merger.whatChanged();
+            ++i;
+
             merger.next();
         }
 
@@ -1615,13 +1613,11 @@ void DiffTextWindow::convertSelectionToD3LCoords() const
     // convert the d->m_selection to unwrapped coordinates: Later restore to new coords
     LineType firstD3LIdx;
     QtSizeType firstD3LPos;
-    QString s = d->getLineString(d->m_selection.beginLine());
     QtSizeType firstPosInText = d->m_selection.beginPos();
     convertLineCoordsToD3LCoords(d->m_selection.beginLine(), firstPosInText, firstD3LIdx, firstD3LPos);
 
     LineType lastD3LIdx;
     QtSizeType lastD3LPos;
-    s = d->getLineString(d->m_selection.endLine());
     QtSizeType lastPosInText = d->m_selection.endPos();
     convertLineCoordsToD3LCoords(d->m_selection.endLine(), lastPosInText, lastD3LIdx, lastD3LPos);
 

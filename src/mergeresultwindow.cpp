@@ -1742,7 +1742,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         m_cursorOldXPixelPos = 0;
         m_cursorYPos = line;
         LineType l = 0;
-        MergeBlockListImp::iterator i = m_mergeBlockList.list().begin();
+        MergeBlockListImp::iterator i;
         for(i = m_mergeBlockList.list().begin(); i != m_mergeBlockList.list().end(); ++i)
         {
             if(l == line)
