@@ -336,12 +336,14 @@ class Diff3Line
         if(src == e_SrcSelector::B && lineB.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineB);
         return m_pDiffBufferInfo->getLineData(src)->at(lineC);
     }
+
     [[nodiscard]] const QString getString(const e_SrcSelector src) const
     {
         const LineData& pld = getLineData(src);
 
         return pld.getLine();
     }
+
     [[nodiscard]] LineRef getLineInFile(e_SrcSelector src) const
     {
         if(src == e_SrcSelector::A) return lineA;
