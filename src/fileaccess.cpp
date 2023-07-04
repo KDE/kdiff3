@@ -351,7 +351,7 @@ void FileAccess::loadData()
 #ifndef Q_OS_WIN
         // Unfortunately Qt5 symLinkTarget/readLink always return an absolute path, even if the link is relative
         std::unique_ptr<char[]> s = std::make_unique<char[]>(PATH_MAX + 1);
-        size_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s.get(), PATH_MAX);
+        ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s.get(), PATH_MAX);
         if(len > 0)
         {
             s[len] = '\0';
