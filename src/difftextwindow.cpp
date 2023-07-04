@@ -145,7 +145,7 @@ class DiffTextWindowData
     void reset()
     {
         m_firstLine = 0;
-        m_oldFirstLine = -1;
+        m_oldFirstLine = LineRef::invalid;
         m_horizScrollOffset = 0;
         m_scrollDeltaX = 0;
         m_scrollDeltaY = 0;
@@ -212,7 +212,7 @@ class DiffTextWindowData
     LineType m_fastSelectorNofLines = 0;
 
     LineRef m_firstLine = 0;
-    LineRef m_oldFirstLine = -1;
+    LineRef m_oldFirstLine;
     int m_horizScrollOffset = 0;
     int m_lineNumberWidth = 0;
     QAtomicInt m_maxTextWidth = -1;
