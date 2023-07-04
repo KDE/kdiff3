@@ -213,8 +213,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     */
     [[nodiscard]] bool isDirThreeWay() const
     {
-        if(rootMFI() == nullptr) return false;
-        return rootMFI()->isThreeWay();
+        return MergeFileInfos::isThreeWay();
     }
 
     [[nodiscard]] MergeFileInfos* rootMFI() const { return m_pRoot; }
@@ -1160,7 +1159,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* keyEvent)
         if(pMFI == nullptr)
             return;
 
-        bool bThreeDirs = pMFI->isThreeWay();
+        bool bThreeDirs = MergeFileInfos::isThreeWay();
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
         bool bFTConflict = pMFI->conflictingFileTypes();
 
@@ -1392,7 +1391,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
     if(pMFI == nullptr)
         return;
 
-    bool bCheckC = pMFI->isThreeWay();
+    bool bCheckC = MergeFileInfos::isThreeWay();
     bool bCopyNewer = gOptions->m_bDmCopyNewer;
     bool bOtherDest = !((gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirA().absoluteFilePath()) ||
                         (gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirB().absoluteFilePath()) ||
@@ -1851,7 +1850,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
     {
         e_MergeOperation eChildrenMergeOp = pMFI->getOperation();
         if(eChildrenMergeOp == eConflictingFileTypes)
-            eChildrenMergeOp = isDirThreeWay() ? eMergeABCToDest : eMergeABToDest;
+            eChildrenMergeOp = MergeFileInfos::isThreeWay() ? eMergeABCToDest : eMergeABToDest;
 
         for(int childIdx = 0; childIdx < pMFI->children().count(); ++childIdx)
         {

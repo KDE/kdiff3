@@ -145,7 +145,7 @@ class MergeFileInfos
     [[nodiscard]] inline bool isOperationRunning() const { return !m_bOperationComplete; }
     inline void endOperation() { m_bOperationComplete = true; };
 
-    [[nodiscard]] inline bool isThreeWay() const
+    [[nodiscard]] inline static bool isThreeWay()
     {
         if(gDirInfo == nullptr) return false;
         return gDirInfo->dirC().isValid();
