@@ -798,7 +798,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         //}
     }
 
-    ProgressProxy pp;
+    ProgressScope pp;
     m_bFollowDirLinks = gOptions->m_bDmFollowDirLinks;
     m_bFollowFileLinks = gOptions->m_bDmFollowFileLinks;
     m_bSimulatedMergeStarted = false;
@@ -2224,7 +2224,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
 // When bVerbose is true then a messagebox will tell when the merge is complete.
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStart, bool bVerbose)
 {
-    ProgressProxy pp;
+    ProgressScope pp;
     if(m_mergeItemList.empty())
         return;
 

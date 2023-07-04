@@ -65,7 +65,7 @@ void addWidget(L* layout, W* widget)
 
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
-    ProgressProxy pp;
+    ProgressScope pp;
     mErrors.clear();
     bool bLoadFiles = inFlags & InitFlag::loadFiles;
     bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;

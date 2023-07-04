@@ -45,12 +45,12 @@ signals2::signal<bool(), find> ProgressProxy::wasCancelled;
 
 signals2::signal<void(const QString&, bool)> ProgressProxy::setInformationSig;
 
-ProgressProxy::ProgressProxy()
+ProgressScope::ProgressScope()
 {
     ProgressProxy::push();
 }
 
-ProgressProxy::~ProgressProxy()
+ProgressScope::~ProgressScope()
 {
     ProgressProxy::pop(false);
 }

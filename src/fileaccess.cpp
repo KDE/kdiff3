@@ -773,7 +773,7 @@ const QDateTime& FileAccess::lastModified() const
 
 bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
 {
-    ProgressProxy pp;
+    ProgressScope pp;
     const qint64 maxChunkSize = 100000;
     qint64 i = 0;
     ProgressProxy::setMaxNofSteps(maxLength / maxChunkSize + 1);
@@ -822,7 +822,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 
 bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
 {
-    ProgressProxy pp;
+    ProgressScope pp;
     if(isLocal())
     {
         if(realFile->open(QIODevice::WriteOnly))

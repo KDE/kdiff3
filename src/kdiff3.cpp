@@ -1013,7 +1013,7 @@ void KDiff3App::slotFilePrint()
 
         int page = 1;
 
-        ProgressProxy pp;
+        ProgressScope pp;
         ProgressProxy::setMaxNofSteps(totalNofPages);
         quint32 i = from;
 
