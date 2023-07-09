@@ -30,11 +30,19 @@ class QStatusBar;
 /*
     Due to Qt/automoc wonkyness multiple inhertance can not be used with by this class.
 */
-class ProgressDialog: public QDialog
+class ProgressDialog: public QDialog, public std::enable_shared_from_this<ProgressDialog>
 {
     Q_OBJECT
   public:
-    ProgressDialog(QWidget* pParent, QStatusBar*);
+    static std::shared_ptr<ProgressDialog> makeShared(QWidget* pParent, QStatusBar* pStatusBar)
+    {
+
+        auto p = std::make_shared<ProgressDialog>(pParent, pStatusBar);
+        p->initConnections(); //can'nt be called from within constuctor.
+        return p;
+    }
+
+    ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar);
 
     void beginBackgroundTask();
     void endBackgroundTask();
@@ -122,10 +130,6 @@ class ProgressDialog: public QDialog
     QWidget* m_pStatusBarWidget = nullptr;
     QProgressBar* m_pStatusProgressBar = nullptr;
     QPushButton* m_pStatusAbortButton = nullptr;
-    /*
-        This list exists solely to auto disconnect boost signals.
-    */
-    std::list<boost::signals2::scoped_connection> connections;
 };
 
 extern std::shared_ptr<ProgressDialog> g_pProgressDialog;
