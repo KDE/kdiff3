@@ -24,9 +24,6 @@ class QLabel;
 class QProgressBar;
 class QStatusBar;
 
-/*
-    Due to Qt/automoc wonkyness multiple inhertance can not be used with by this class.
-*/
 class ProgressDialog: public QDialog, public std::enable_shared_from_this<ProgressDialog>
 {
     Q_OBJECT
