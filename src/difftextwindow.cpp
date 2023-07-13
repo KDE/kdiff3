@@ -68,9 +68,6 @@ class RecalcWordWrapRunnable : public QRunnable
     int m_visibleTextWidth;
     QtSizeType m_cacheIdx;
 
-    //Only way to be thread-safe. Globals are inheriently prone to tare down timing issues.
-    std::shared_ptr<ProgressDialog> progressDialog = g_pProgressDialog;
-
   public:
     static QAtomicInt s_maxNofRunnables;
     RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, QtSizeType cacheIdx)
@@ -83,7 +80,7 @@ class RecalcWordWrapRunnable : public QRunnable
     {
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
-        progressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
+        ProgressProxy::setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
             Q_EMIT m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);

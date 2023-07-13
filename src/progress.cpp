@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -65,33 +66,32 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     m_t1.start();
     m_t2.start();
 #endif
-
-    initConnections();
 }
 
 void ProgressDialog::initConnections()
 {
-    connections.push_back(ProgressProxy::startBackgroundTask.connect(boost::bind(&ProgressDialog::beginBackgroundTask, this)));
-    connections.push_back(ProgressProxy::endBackgroundTask.connect(boost::bind(&ProgressDialog::endBackgroundTask, this)));
+    //This must be a thread safe setup that will disconnect if we're distroyed.
+    ProgressProxy::startBackgroundTask.connect(decltype(ProgressProxy::startBackgroundTask)::slot_type(boost::bind(&ProgressDialog::beginBackgroundTask, this)).track_foreign(shared_from_this()));
+    ProgressProxy::endBackgroundTask.connect(decltype(ProgressProxy::endBackgroundTask)::slot_type(boost::bind(&ProgressDialog::endBackgroundTask, this)).track_foreign(shared_from_this()));
 
-    connections.push_back(ProgressProxy::push.connect(boost::bind(&ProgressDialog::push, this)));
-    connections.push_back(ProgressProxy::pop.connect(boost::bind(&ProgressDialog::pop, this, placeholders::_1)));
-    connections.push_back(ProgressProxy::clear.connect(boost::bind(&ProgressDialog::clear, this)));
+    ProgressProxy::push.connect(decltype(ProgressProxy::push)::slot_type(boost::bind(&ProgressDialog::push, this)).track_foreign(shared_from_this()));
+    ProgressProxy::pop.connect(decltype(ProgressProxy::pop)::slot_type(boost::bind(&ProgressDialog::pop, this, placeholders::_1)).track_foreign(shared_from_this()));
+    ProgressProxy::clear.connect(decltype(ProgressProxy::clear)::slot_type(boost::bind(&ProgressDialog::clear, this)).track_foreign(shared_from_this()));
 
-    connections.push_back(ProgressProxy::enterEventLoop.connect(boost::bind(&ProgressDialog::enterEventLoop, this, placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::exitEventLoop.connect(boost::bind(&ProgressDialog::exitEventLoop, this)));
+    ProgressProxy::enterEventLoop.connect(decltype(ProgressProxy::enterEventLoop)::slot_type(boost::bind(&ProgressDialog::enterEventLoop, this, placeholders::_1, placeholders::_2)).track_foreign(shared_from_this()));
+    ProgressProxy::exitEventLoop.connect(decltype(ProgressProxy::exitEventLoop)::slot_type(boost::bind(&ProgressDialog::exitEventLoop, this)).track_foreign(shared_from_this()));
 
-    connections.push_back(ProgressProxy::setCurrentSig.connect(boost::bind(&ProgressDialog::setCurrent, this, placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::addNofSteps.connect(boost::bind(&ProgressDialog::addNofSteps, this, placeholders::_1)));
-    connections.push_back(ProgressProxy::setMaxNofSteps.connect(boost::bind(&ProgressDialog::setMaxNofSteps, this, placeholders::_1)));
-    connections.push_back(ProgressProxy::stepSig.connect(boost::bind(&ProgressDialog::step, this, placeholders::_1)));
+    ProgressProxy::setCurrentSig.connect(decltype(ProgressProxy::setCurrentSig)::slot_type(boost::bind(&ProgressDialog::setCurrent, this, placeholders::_1, placeholders::_2)).track_foreign(shared_from_this()));
+    ProgressProxy::addNofSteps.connect(decltype(ProgressProxy::addNofSteps)::slot_type(boost::bind(&ProgressDialog::addNofSteps, this, placeholders::_1)).track_foreign(shared_from_this()));
+    ProgressProxy::setMaxNofSteps.connect(decltype(ProgressProxy::setMaxNofSteps)::slot_type(boost::bind(&ProgressDialog::setMaxNofSteps, this, placeholders::_1)).track_foreign(shared_from_this()));
+    ProgressProxy::stepSig.connect(decltype(ProgressProxy::stepSig)::slot_type(boost::bind(&ProgressDialog::step, this, placeholders::_1)).track_foreign(shared_from_this()));
 
-    connections.push_back(ProgressProxy::setRangeTransformation.connect(boost::bind(&ProgressDialog::setRangeTransformation, this, placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::setSubRangeTransformation.connect(boost::bind(&ProgressDialog::setSubRangeTransformation, this, placeholders::_1, placeholders::_2)));
+    ProgressProxy::setRangeTransformation.connect(decltype(ProgressProxy::setRangeTransformation)::slot_type(boost::bind(&ProgressDialog::setRangeTransformation, this, placeholders::_1, placeholders::_2)).track_foreign(shared_from_this()));
+    ProgressProxy::setSubRangeTransformation.connect(decltype(ProgressProxy::setSubRangeTransformation)::slot_type(boost::bind(&ProgressDialog::setSubRangeTransformation, this, placeholders::_1, placeholders::_2)).track_foreign(shared_from_this()));
 
-    connections.push_back(ProgressProxy::wasCancelled.connect(boost::bind(&ProgressDialog::wasCancelled, this)));
+    ProgressProxy::wasCancelled.connect(decltype(ProgressProxy::wasCancelled)::slot_type(boost::bind(&ProgressDialog::wasCancelled, this)).track_foreign(shared_from_this()));
 
-    connections.push_back(ProgressProxy::setInformationSig.connect(boost::bind(
+    ProgressProxy::setInformationSig.connect(decltype(ProgressProxy::setInformationSig)::slot_type(boost::bind(
         static_cast<void (ProgressDialog::*)(const QString&, bool)>(&ProgressDialog::setInformation),
         this,
         placeholders::_1, placeholders::_2)));
