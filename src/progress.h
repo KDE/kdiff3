@@ -65,6 +65,7 @@ class ProgressDialog: public QDialog, public std::enable_shared_from_this<Progre
     bool wasCancelled();
     enum e_CancelReason
     {
+        eExit,
         eUserAbort,
         eResize
     };
