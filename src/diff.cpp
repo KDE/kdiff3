@@ -606,7 +606,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
 void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2,
                     const QSharedPointer<Options> &pOptions)
 {
-    ProgressProxy pp;
+    ProgressScope pp;
     static GnuDiff gnuDiff; // All values are initialized with zeros.
 
     ProgressProxy::setCurrent(0);
@@ -1523,7 +1523,7 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
 bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags)
 {
     // Finetuning: Diff each line with deltas
-    ProgressProxy pp;
+    ProgressScope pp;
     bool bTextsTotalEqual = true;
     size_t listSize = size();
     ProgressProxy::setMaxNofSteps(listSize);

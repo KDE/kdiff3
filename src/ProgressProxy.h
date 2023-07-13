@@ -13,13 +13,18 @@ class ProgressDialog;
 class KJob;
 
 namespace signals2 = boost::signals2;
-// When using the ProgressProxy you need not take care of the push and pop, except when explicit.
+// When using the ProgressScope you need not take care of the push and pop, except when explicit.
+
+class ProgressScope
+{
+  public:
+    ProgressScope();
+    ~ProgressScope();
+};
+
 class ProgressProxy
 {
   public:
-    ProgressProxy();
-    ~ProgressProxy();
-
     static void setInformation(const QString& info, bool bRedrawUpdate = true);
     static void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
     static void setCurrent(qint64 current, bool bRedrawUpdate = true);

@@ -63,7 +63,7 @@ void addWidget(L* layout, W* widget)
 
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
-    ProgressProxy pp;
+    ProgressScope pp;
     QStringList errors;
     // When doing a full analysis in the directory-comparison, then the statistics-results
     // will be stored in the given TotalDiffStatus. Otherwise pTotalDiffStatus will
