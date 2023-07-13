@@ -1703,7 +1703,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 {
     if(d->m_bWordWrap)
     {
-        if(g_pProgressDialog->wasCancelled())
+        if(ProgressProxy::wasCancelled())
             return;
         if(visibleTextWidth < 0)
             visibleTextWidth = getVisibleTextAreaWidth();
@@ -1720,7 +1720,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 
         for(i = firstD3LineIdx; i < endIdx; ++i)
         {
-            if(g_pProgressDialog->wasCancelled())
+            if(ProgressProxy::wasCancelled())
                 return;
 
             LineType linesNeeded = 0;
@@ -1811,7 +1811,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
     }
     else // no word wrap, just calc the maximum text width
     {
-        if(g_pProgressDialog->wasCancelled())
+        if(ProgressProxy::wasCancelled())
             return;
 
         QtSizeType size = d->getDiff3LineVector()->size();
@@ -1822,7 +1822,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         QTextLayout textLayout(QString(), font(), this);
         for(LineType i = firstD3LineIdx; i < endIdx; ++i)
         {
-            if(g_pProgressDialog->wasCancelled())
+            if(ProgressProxy::wasCancelled())
                 return;
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
