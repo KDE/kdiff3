@@ -56,7 +56,7 @@
 #include <QUrl>
 
 QPointer<QScrollBar> DiffTextWindow::mVScrollBar = nullptr;
-std::vector<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
+std::vector<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunnables and recalWordWrap
 
 class RecalcWordWrapRunnable: public QRunnable
 {
