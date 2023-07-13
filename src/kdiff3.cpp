@@ -56,6 +56,7 @@
 #include <QStatusBar>
 #include <QTextEdit>
 #include <QTextStream>
+#include <QThreadPool>
 #include <QUrl>
 // include files for KDE
 #include <KActionCollection>
@@ -592,6 +593,14 @@ KDiff3App::~KDiff3App()
         DiffTextWindow pointers which must be std::shared_ptr.
     */
     g_pProgressDialog->setParent(nullptr);
+
+    if(mRunnablesStarted)
+    {
+        g_pProgressDialog->cancel(ProgressDialog::eExit);
+        //Drain helper thread queue. These things are a pain if active during exit.
+        QThreadPool::globalInstance()->clear();
+        QThreadPool::globalInstance()->waitForDone();
+    }
     // Prevent spurious focus change signals from Qt from being picked up by KDiff3App during destruction.
     QObject::disconnect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
 };
