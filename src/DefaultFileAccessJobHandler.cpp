@@ -1,3 +1,4 @@
+
 /**
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -89,7 +90,7 @@ bool DefaultFileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 {
     ProgressProxyExtender pp; // Implicitly used in slotPercent()
 
-    if(maxLength > 0 && !pp.wasCancelled())
+    if(maxLength > 0 && !ProgressProxy::wasCancelled())
     {
         KIO::TransferJob* pJob = KIO::get(mFileAccess->url(), KIO::NoReload);
         m_transferredBytes = 0;
@@ -356,10 +357,10 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
     m_filePattern = filePattern;
     m_dirAntiPattern = dirAntiPattern;
 
-    if(pp.wasCancelled())
+    if(ProgressProxy::wasCancelled())
         return true; // Cancelled is not an error.
 
-    pp.setInformation(i18n("Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
+    ProgressProxy::setInformation(i18n("Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
     qCInfo(kdiffFileAccess) << "Reading folder: " << mFileAccess->absoluteFilePath();
 
     if(mFileAccess->isLocal())
@@ -386,7 +387,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
         {
             for(const QFileInfo& fi: fiList) // for each file...
             {
-                if(pp.wasCancelled())
+                if(ProgressProxy::wasCancelled())
                     break;
 
                 assert(fi.fileName() != "." && fi.fileName() != "..");

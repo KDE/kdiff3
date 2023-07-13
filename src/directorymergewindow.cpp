@@ -221,7 +221,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
 
     void mergeContinue(bool bStart, bool bVerbose);
 
-    void prepareListView(ProgressProxy& pp);
+    void prepareListView();
     void calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultMergeOp);
     void setAllMergeOperations(e_MergeOperation eDefaultOperation);
 
@@ -902,8 +902,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(dirA.isValid())
     {
-        pp.setInformation(i18n("Reading Folder A"));
-        pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
+        ProgressProxy::setInformation(i18n("Reading Folder A"));
+        ProgressProxy::setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
         bListDirSuccessA = gDirInfo->listDirA(m_pOptions);
@@ -911,8 +911,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(dirB.isValid())
     {
-        pp.setInformation(i18n("Reading Folder B"));
-        pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
+        ProgressProxy::setInformation(i18n("Reading Folder B"));
+        ProgressProxy::setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
         bListDirSuccessB = gDirInfo->listDirB(m_pOptions);
@@ -921,8 +921,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     e_MergeOperation eDefaultMergeOp;
     if(dirC.isValid())
     {
-        pp.setInformation(i18n("Reading Folder C"));
-        pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
+        ProgressProxy::setInformation(i18n("Reading Folder C"));
+        ProgressProxy::setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
         bListDirSuccessC = gDirInfo->listDirC(m_pOptions);
@@ -948,7 +948,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(bContinue)
     {
-        prepareListView(pp);
+        prepareListView();
 
         mWindow->updateFileVisibilities();
 
@@ -1303,7 +1303,7 @@ QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::treeIterator(QMod
     return mi;
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(ProgressProxy& pp)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView()
 {
     QStringList errors;
     //TODO   clear();
@@ -1316,15 +1316,15 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     int currentIdx = 1;
     QElapsedTimer t;
     t.start();
-    pp.setMaxNofSteps(nrOfFiles);
+    ProgressProxy::setMaxNofSteps(nrOfFiles);
 
     for(MergeFileInfos& mfi: m_fileMergeMap)
     {
         const QString& fileName = mfi.subPath();
 
-        pp.setInformation(
+        ProgressProxy::setInformation(
             i18n("Processing %1 / %2\n%3", currentIdx, nrOfFiles, fileName), currentIdx, false);
-        if(pp.wasCancelled()) break;
+        if(ProgressProxy::wasCancelled()) break;
         ++currentIdx;
 
         // The comparisons and calculations for each file take place here.
@@ -2266,7 +2266,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
         m_bError = false;
     }
 
-    pp.setMaxNofSteps(nrOfItems);
+    ProgressProxy::setMaxNofSteps(nrOfItems);
 
     bool bSuccess = true;
     bool bSingleFileMerge = false;
@@ -2373,7 +2373,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
 
         pMFI = getMFI(miCurrent);
 
-        pp.setInformation(pMFI->subPath(),
+        ProgressProxy::setInformation(pMFI->subPath(),
                           bSim ? nrOfCompletedSimItems : nrOfCompletedItems,
                           false // bRedrawUpdate
         );
@@ -2389,7 +2389,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
             bContinueWithCurrentItem = false;
         }
 
-        if(pp.wasCancelled())
+        if(ProgressProxy::wasCancelled())
             break;
     } // end while
 

@@ -1018,12 +1018,12 @@ void KDiff3App::slotFilePrint()
         int page = 1;
 
         ProgressProxy pp;
-        pp.setMaxNofSteps(totalNofPages);
+        ProgressProxy::setMaxNofSteps(totalNofPages);
         QList<int>::iterator pageListIt = pageList.begin();
         for(;;) {
-            pp.setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);
-            pp.setCurrent(page - 1);
-            if(pp.wasCancelled())
+            ProgressProxy::setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);
+            ProgressProxy::setCurrent(page - 1);
+            if(ProgressProxy::wasCancelled())
             {
                 printer.abort();
                 break;

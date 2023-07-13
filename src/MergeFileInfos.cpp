@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -474,14 +475,14 @@ bool MergeFileInfos::fastFileComparison(
         return bEqual;
     }
     qCInfo(kdiffMergeFileInfo) << "Comparing files...";
-    pp.setInformation(i18n("Comparing file..."), 0, false);
+    ProgressProxy::setInformation(i18n("Comparing file..."), 0, false);
     typedef qint64 t_FileSize;
     t_FileSize fullSize = fi1.size();
     t_FileSize sizeLeft = fullSize;
 
-    pp.setMaxNofSteps(fullSize / buf1.size());
+    ProgressProxy::setMaxNofSteps(fullSize / buf1.size());
 
-    while(sizeLeft > 0 && !pp.wasCancelled())
+    while(sizeLeft > 0 && !ProgressProxy::wasCancelled())
     {
         qint64 len = std::min(sizeLeft, (t_FileSize)buf1.size());
         if(len != fi1.read(&buf1[0], len))
@@ -508,8 +509,8 @@ bool MergeFileInfos::fastFileComparison(
             return bEqual;
         }
         sizeLeft -= len;
-        //pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
-        pp.step();
+        //ProgressProxy::setCurrent(double(fullSize-sizeLeft)/fullSize, false );
+        ProgressProxy::step();
     }
     fi1.close();
     fi2.close();

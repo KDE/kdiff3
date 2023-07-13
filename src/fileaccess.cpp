@@ -779,7 +779,7 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
     ProgressProxy pp;
     const qint64 maxChunkSize = 100000;
     qint64 i = 0;
-    pp.setMaxNofSteps(maxLength / maxChunkSize + 1);
+    ProgressProxy::setMaxNofSteps(maxLength / maxChunkSize + 1);
     while(i < maxLength)
     {
         qint64 nextLength = std::min(maxLength - i, maxChunkSize);
@@ -791,8 +791,8 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
         }
         i += reallyRead;
 
-        pp.setCurrent(qFloor(double(i) / maxLength * 100));
-        if(pp.wasCancelled())
+        ProgressProxy::setCurrent(qFloor(double(i) / maxLength * 100));
+        if(ProgressProxy::wasCancelled())
             return false;
     }
     return true;
@@ -831,7 +831,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
         if(realFile->open(QIODevice::WriteOnly))
         {
             const qint64 maxChunkSize = 100000;
-            pp.setMaxNofSteps(length / maxChunkSize + 1);
+            ProgressProxy::setMaxNofSteps(length / maxChunkSize + 1);
             qint64 i = 0;
             while(i < length)
             {
@@ -844,8 +844,8 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
                 }
                 i += reallyWritten;
 
-                pp.step();
-                if(pp.wasCancelled())
+                ProgressProxy::step();
+                if(ProgressProxy::wasCancelled())
                 {
                     realFile->close();
                     return false;
