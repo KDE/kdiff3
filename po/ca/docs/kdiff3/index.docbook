@@ -117,7 +117,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->This document describes &kdiff3;-version 1.11. </para>
+>Aquest document descriu la versió 1.10.6 del &kdiff3;. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -916,17 +916,17 @@ Please at least include KDE, the KDE package it is in, the name
 ></menuchoice
 >. </para
 ><para
->Automatic merge for version control history (also called "log") is also supported. The history auto-merge can either run immediately when the merge starts by activating the option <guilabel
->Merge version control history on merge start</guilabel
-> at <guilabel
->Merge</guilabel
-> item in the settings dialog or later via the <menuchoice
+>També s'admet la fusió automàtica per a l'historial del control de versions (també anomenat «registre»). La fusió automàtica de l'historial pot executar-se immediatament quan comença la fusió activant l'opció <guilabel
+>Fusiona l'historial del control de versions quan es comenci a fusionar</guilabel
+> a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració o més tard mitjançant l'element de menú <menuchoice
 ><guimenu
->Merge</guimenu
+>Fusiona</guimenu
 ><guimenuitem
->Automatically Solve History Conflicts</guimenuitem
+>Resol automàticament els conflictes cronològics</guimenuitem
 ></menuchoice
-> menu item. </para
+>. </para
 ><para
 >En general, l'historial del control de versions comença amb una línia que conté la paraula clau «<literal
 >&#36;Log&#36;</literal
@@ -3195,7 +3195,7 @@ Please at least include KDE, the KDE package it is in, the name
 >F6</keycap
 >. </para
 ><para
->If due to conflicting filetypes some items with invalid operations still exist, then a messagebox will appear and these items will be pointed out, so you can select a valid operation for the item. </para
+>Si a causa de tipus de fitxer en conflicte encara hi ha alguns elements amb operacions no vàlides, apareixerà un quadre de missatge i s'indicaran aquests elements, de manera que pugueu seleccionar una operació vàlida per a l'element. </para
 ><para
 >Si fusioneu tots els elements, apareixerà un diàleg que us donarà les opcions <guilabel
 >Fes-ho</guilabel
@@ -3662,6 +3662,31 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
+<sect1 id="kpart">
+<title
+>Emprar el &kdiff3; com a una KPart</title>
+<para
+>El &kdiff3; és una KPart. Actualment implementa la interfície «KParts::ReadOnlyPart». </para
+><para
+>El seu ús principal és com a visualitzador de diferències en el &kdevelop;. El &kdevelop; sempre inicia primer el visualitzador de diferències intern. Per a invocar el &kdiff3;, premeu el &BDR; a la finestra de la vista de diferències i seleccioneu <guimenuitem
+>Mostra a la part del &kdiff3;</guimenuitem
+> des del menú contextual. </para
+><para
+>El &kdiff3; normalment requereix dos fitxers complets com a entrada. Quan s'utilitza com a part, el &kdiff3; assumirà que el fitxer d'entrada és un fitxer de pedaç en el format unificat. Llavors el &kdiff3; recuperarà els noms de fitxer originals des del fitxer de pedaç. Almenys un dels dos fitxers haurà d'estar disponible. Llavors el &kdiff3; invocarà l'ordre <command
+>patch</command
+> per a recrear el segon fitxer. </para
+><para
+>En el &dolphin; podreu seleccionar un fitxer de pedaç i seleccionar l'element <menuchoice
+><guimenuitem
+>Vista prèvia a</guimenuitem
+><guisubmenu
+>Part del &kdiff3;</guisubmenu
+></menuchoice
+> des del menú contextual. Cal tenir en compte que això no funcionarà si cap dels fitxers originals està disponible, i no és fiable si els fitxers originals han canviat des que es va generar el fitxer de pedaç. </para
+><para
+>Quan s'executa com a part, el &kdiff3; només proporciona una diferència de dos fitxers amb una barra d'eines i un menú molt petits. De manera que la fusió o la comparació de carpetes no s'admeten. </para>
+</sect1>
+
 <sect1 id="git">
 <title
 >Usar el &kdiff3; com a una eina de «diff» i fusió de &git;</title>
@@ -3854,11 +3879,11 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->For each equal or different section the editor in the merge result window remembers where it begins or ends. "&lt;No src line&gt;" means that there is nothing left in a section, not even a new line character. This can happen either while merging automatically or by editing. This is no problem, since this hint won't appear in the saved file. If you want the original source back just select the section (click on the left summary column) and then click the source button with the needed contents (<guilabel
+>Per a cada secció igual o diferent, l'editor a la finestra de resultats de la fusió recordarà on comença o on acaba. «&lt;La línia no és codi&gt;» vol dir que no queda res en una secció, ni tan sols un caràcter de línia nova. Això pot succeir mentre es fusiona automàticament o s'edita. Això no és cap problema, ja que aquest suggeriment no apareixerà en el fitxer desat. Si voleu recuperar la font original, només haureu de seleccionar la secció (feu clic a la columna del resum a l'esquerra) i després feu clic al botó de la font amb el contingut necessari (<guilabel
 >A</guilabel
 >/<guilabel
 >B</guilabel
-> or <guilabel
+> o <guilabel
 >C</guilabel
 >). </para
 ></answer
@@ -3878,29 +3903,25 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Can I use &kdiff3; to compare <application
->LibreOffice</application
->/<trademark class="registered"
+>Puc emprar el &kdiff3; per a comparar fitxers <trademark class="registered"
 >OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
 >, <application
 >&Microsoft; Excel</application
->, &PDF;, &etc; files? </para
+>, &PDF;, &etc;? </para
 ></question
 ><answer
 ><para
 >Encara que el &kdiff3; analitzarà qualsevol classe de fitxer, el resultat probablement no serà molt satisfactori. </para
 ><para
->&kdiff3; was made to compare pure text files. <application
->LibreOffice</application
->/<trademark class="registered"
-> OpenOffice.org</trademark
->, <application
+>El &kdiff3; es va crear per a comparar fitxers de text pur. L'<trademark class="registered"
+>OpenOffice.org</trademark
+>, el <application
 >&Microsoft; Word</application
->, <application
+>, el <application
 >&Microsoft; Excel</application
->, &etc; store much more information in the files (about fonts, pictures, pages, colors, &etc;) which &kdiff3; doesn't know about. So &kdiff3; will show you the contents of the file interpreted as pure text, but this might be unreadable or at least it will look very odd. </para
+>, &etc; emmagatzemen molta més informació en els fitxers (sobre els tipus de lletra, imatges, pàgines, colors, &etc;) que el &kdiff3; no coneix. Per tant, el &kdiff3; mostrarà el contingut del fitxer interpretat com a text pur, però això podria ser il·legible o almenys es veurà molt estrany. </para
 ><para
 >Com la majoria dels programes avui en dia emmagatzemen el seu contingut en el format &XML;, és possible que pugueu llegir-lo com a text pur. Llavors, si el canvi només ha estat petit, el &kdiff3; encara podria ajudar-vos. </para
 ><para
