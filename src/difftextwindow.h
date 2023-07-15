@@ -34,7 +34,7 @@ class QMenu;
 class QPushButton;
 class QScrollBar;
 class QStatusBar;
-class RecalcWordWrapRunnable;
+class RecalcWordWrapThread;
 class Options;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
@@ -45,7 +45,7 @@ class FileNameLineEdit;
 
 class KDiff3App;
 
-class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTextWindow>
+class DiffTextWindow: public QWidget
 {
     Q_OBJECT
   public:
@@ -157,7 +157,7 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
     void timerEvent(QTimerEvent*) override;
 
   private:
-    static std::vector<RecalcWordWrapRunnable*> s_runnables;
+    static std::vector<RecalcWordWrapThread*> s_runnables;
     static constexpr int s_linesPerRunnable = 2000;
 
     /*
@@ -180,7 +180,7 @@ class DiffTextWindowFrame: public QWidget
   public:
     DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
     ~DiffTextWindowFrame() override;
-    std::shared_ptr<DiffTextWindow> getDiffTextWindow();
+    QPointer<DiffTextWindow> getDiffTextWindow();
     void init();
 
     void setupConnections(const KDiff3App* app);
@@ -210,7 +210,7 @@ class DiffTextWindowFrame: public QWidget
     FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
 
-    std::shared_ptr<DiffTextWindow> m_pDiffTextWindow;
+    QPointer<DiffTextWindow> m_pDiffTextWindow;
     e_SrcSelector m_winIdx;
 
     QSharedPointer<SourceData> mSourceData;

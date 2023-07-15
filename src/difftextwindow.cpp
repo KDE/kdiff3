@@ -50,45 +50,65 @@
 #include <QStatusBar>
 #include <QTextCodec>
 #include <QTextLayout>
-#include <QThreadPool>
+#include <QThread>
 #include <QtMath>
 #include <QToolTip>
 #include <QUrl>
 
 QPointer<QScrollBar> DiffTextWindow::mVScrollBar = nullptr;
-std::vector<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunnables and recalWordWrap
+std::vector<RecalcWordWrapThread*> DiffTextWindow::s_runnables; //Used in startRunnables and recalWordWrap
 
-class RecalcWordWrapRunnable: public QRunnable
+/*
+    QRunnable is not enough here be may appear to work depending on configuration.
+    That is an artifact of the threads being short-lived. Never the less such code is
+    not safe because of a potenial race condition on exit.
+
+    The use of Qt's parent system establishes order of destruction for QObjects.
+    Allowing us to guarantee clearance of these helper threads and their accompanying
+    objects before the associated DiffTextWindow begins teardown.
+*/
+class RecalcWordWrapThread: public QThread
 {
   private:
     static QAtomicInteger<size_t> s_runnableCount;
 
-    std::shared_ptr<DiffTextWindow> m_pDTW = nullptr;
     int m_visibleTextWidth;
     size_t m_cacheIdx;
 
   public:
     static QAtomicInteger<size_t> s_maxNofRunnables;
-    RecalcWordWrapRunnable(std::shared_ptr<DiffTextWindow> p, int visibleTextWidth, SafeInt<size_t> cacheIdx):
-        m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
+    RecalcWordWrapThread(DiffTextWindow* parent, int visibleTextWidth, SafeInt<size_t> cacheIdx):
+        QThread(parent), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
-        setAutoDelete(true);
+        setTerminationEnabled(true);
         s_runnableCount.fetchAndAddOrdered(1);
     }
     void run() override
     {
-        m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
+        //safe thanks to Qt memmory mangement
+        DiffTextWindow* pDTW = qobject_cast<DiffTextWindow*>(parent());
+
+        pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         size_t newValue = s_runnableCount.fetchAndSubOrdered(1) - 1;
         ProgressProxy::setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
-            Q_EMIT m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
+            Q_EMIT pDTW->finishRecalcWordWrap(m_visibleTextWidth);
         }
+        //Cleanup our object to avoid a memmory leak
+        deleteLater();
+    }
+
+    ~RecalcWordWrapThread() override
+    {
+        //Wait for thread to finish.
+        if(isRunning())
+            wait();
     }
 };
 
-QAtomicInteger<size_t> RecalcWordWrapRunnable::s_runnableCount = 0;
-QAtomicInteger<size_t> RecalcWordWrapRunnable::s_maxNofRunnables = 0;
+QAtomicInteger<size_t> RecalcWordWrapThread::s_runnableCount = 0;
+QAtomicInteger<size_t> RecalcWordWrapThread::s_maxNofRunnables = 0;
 
 class WrapLineCacheData
 {
@@ -1633,12 +1653,12 @@ bool DiffTextWindow::startRunnables()
         g_pProgressDialog->setStayHidden(true);
         ProgressProxy::startBackgroundTask();
         g_pProgressDialog->setMaxNofSteps(s_runnables.size());
-        RecalcWordWrapRunnable::s_maxNofRunnables = s_runnables.size();
+        RecalcWordWrapThread::s_maxNofRunnables = s_runnables.size();
         g_pProgressDialog->setCurrent(0);
 
         for(size_t i = 0; i < s_runnables.size(); ++i)
         {
-            QThreadPool::globalInstance()->start(s_runnables[i]);
+            s_runnables[i]->start();
         }
 
         s_runnables.clear();
@@ -1671,7 +1691,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             for(QtSizeType i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
                 d->m_wrapLineCacheList.push_back(std::vector<WrapLineCacheData>());
-                s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapThread(this, visibleTextWidth, j));
             }
         }
         else
@@ -1689,7 +1709,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
-                s_runnables.push_back(new RecalcWordWrapRunnable(shared_from_this(), visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapThread(this, visibleTextWidth, j));
             }
         }
         else
@@ -1881,7 +1901,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     chk_connect_a(m_pBrowseButton, &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     chk_connect_a(m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
-    m_pDiffTextWindow = std::make_shared<DiffTextWindow>(this, winIdx, app);
+    m_pDiffTextWindow = new DiffTextWindow(this, winIdx, app);
     m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(m_pTopLineWidget);
     pVTopLayout->setContentsMargins(2, 2, 2, 2);
@@ -1916,7 +1936,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     pVL->setContentsMargins(0, 0, 0, 0);
     pVL->setSpacing(0);
     pVL->addWidget(m_pTopLineWidget, 0);
-    pVL->addWidget(m_pDiffTextWindow.get(), 1);
+    pVL->addWidget(m_pDiffTextWindow, 1);
 
     m_pDiffTextWindow->installEventFilter(this);
     m_pFileSelection->installEventFilter(this);
@@ -1924,19 +1944,11 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     init();
 }
 
-DiffTextWindowFrame::~DiffTextWindowFrame()
-{
-    /*
-        Qt uses parent for memory management and event hierachy this is the only way to
-        by pass auto cleanup. That is needed thanks to the wordwrap helper threads using
-        DiffTextWindow pointers which must be std::shared_ptr.
-    */
-    m_pDiffTextWindow->setParent(nullptr);
-}
+DiffTextWindowFrame::~DiffTextWindowFrame() = default;
 
 void DiffTextWindowFrame::init()
 {
-    std::shared_ptr<DiffTextWindow> pDTW = m_pDiffTextWindow;
+    QPointer<DiffTextWindow> pDTW = m_pDiffTextWindow;
     if(pDTW)
     {
         QString s = QDir::toNativeSeparators(pDTW->getFileName());
@@ -1970,7 +1982,7 @@ LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine) const
 
 void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
 {
-    std::shared_ptr<DiffTextWindow> pDTW = m_pDiffTextWindow;
+    QPointer<DiffTextWindow> pDTW = m_pDiffTextWindow;
     if(pDTW && pDTW->getDiff3LineVector())
     {
         QString s = i18n("Top line");
@@ -1991,7 +2003,7 @@ void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
     }
 }
 
-std::shared_ptr<DiffTextWindow> DiffTextWindowFrame::getDiffTextWindow()
+QPointer<DiffTextWindow> DiffTextWindowFrame::getDiffTextWindow()
 {
     return m_pDiffTextWindow;
 }

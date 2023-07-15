@@ -647,16 +647,16 @@ void KDiff3App::initView()
     pHScrollBarLayout->addWidget(m_pCornerWidget);
 
     chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
-    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1.get(), &DiffTextWindow::setFirstLine);
-    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1.get(), &DiffTextWindow::setHorizScrollOffset);
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1, &DiffTextWindow::setFirstLine);
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1, &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow1->setupConnections(this);
 
-    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2.get(), &DiffTextWindow::setFirstLine);
-    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2.get(), &DiffTextWindow::setHorizScrollOffset);
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2, &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow2->setupConnections(this);
 
-    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3.get(), &DiffTextWindow::setFirstLine);
-    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3.get(), &DiffTextWindow::setHorizScrollOffset);
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3, &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow3->setupConnections(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;
@@ -667,22 +667,22 @@ void KDiff3App::initView()
     p->setupConnections(this);
     sourceMask(0, 0);
 
-    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow1.get(), &DiffTextWindow::setFastSelectorRange);
-    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow2.get(), &DiffTextWindow::setFastSelectorRange);
-    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow3.get(), &DiffTextWindow::setFastSelectorRange);
-    chk_connect_a(m_pDiffTextWindow1.get(), &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
-    chk_connect_a(m_pDiffTextWindow2.get(), &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
-    chk_connect_a(m_pDiffTextWindow3.get(), &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
-    chk_connect_a(m_pDiffTextWindow1.get(), &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
-    chk_connect_a(m_pDiffTextWindow2.get(), &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
-    chk_connect_a(m_pDiffTextWindow3.get(), &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorRange);
+    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorRange);
+    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow3, &DiffTextWindow::setFastSelectorRange);
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    chk_connect_a(m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    chk_connect_a(m_pDiffTextWindow3, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    chk_connect_a(m_pDiffTextWindow2, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    chk_connect_a(m_pDiffTextWindow3, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
     chk_connect_a(m_pDirectoryMergeInfo, &DirectoryMergeInfo::gotFocus, p, &MergeResultWindow::updateSourceMask);
 
-    chk_connect_a(m_pDiffTextWindow1.get(), &DiffTextWindow::resizeHeightChangedSignal, this, &KDiff3App::resizeDiffTextWindowHeight);
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::resizeHeightChangedSignal, this, &KDiff3App::resizeDiffTextWindowHeight);
     // The following connects cause the wordwrap to be recalced thrice, just to make sure. Better than forgetting one.
-    chk_connect_a(m_pDiffTextWindow1.get(), &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
-    chk_connect_a(m_pDiffTextWindow2.get(), &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
-    chk_connect_a(m_pDiffTextWindow3.get(), &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    chk_connect_a(m_pDiffTextWindow2, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    chk_connect_a(m_pDiffTextWindow3, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
 
     m_pDiffTextWindow1->setFocus();
     m_pMainWidget->setMinimumSize(50, 50);
@@ -1277,7 +1277,7 @@ void KDiff3App::slotSplitDiff()
 {
     LineRef firstLine;
     LineRef lastLine;
-    std::shared_ptr<DiffTextWindow> pDTW = nullptr;
+    QPointer<DiffTextWindow> pDTW = nullptr;
     if(m_pDiffTextWindow1)
     {
         pDTW = m_pDiffTextWindow1;
@@ -1305,7 +1305,7 @@ void KDiff3App::slotJoinDiffs()
 {
     LineRef firstLine;
     LineRef lastLine;
-    std::shared_ptr<DiffTextWindow> pDTW = nullptr;
+    QPointer<DiffTextWindow> pDTW = nullptr;
     if(m_pDiffTextWindow1)
     {
         pDTW = m_pDiffTextWindow1;
@@ -1364,9 +1364,9 @@ void KDiff3App::slotSelectionStart()
     const QObject* s = sender();
     if(s == nullptr) return;
 
-    if(s != m_pDiffTextWindow1.get()) m_pDiffTextWindow1->resetSelection();
-    if(s != m_pDiffTextWindow2.get()) m_pDiffTextWindow2->resetSelection();
-    if(s != m_pDiffTextWindow3.get()) m_pDiffTextWindow3->resetSelection();
+    if(s != m_pDiffTextWindow1) m_pDiffTextWindow1->resetSelection();
+    if(s != m_pDiffTextWindow2) m_pDiffTextWindow2->resetSelection();
+    if(s != m_pDiffTextWindow3) m_pDiffTextWindow3->resetSelection();
     if(s != m_pMergeResultWindow) m_pMergeResultWindow->resetSelection();
 }
 
@@ -1984,9 +1984,9 @@ void KDiff3App::slotWinFocusNext()
     }
 
     std::list<QWidget*> visibleWidgetList;
-    if(m_pDiffTextWindow1 && m_pDiffTextWindow1->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow1.get());
-    if(m_pDiffTextWindow2 && m_pDiffTextWindow2->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow2.get());
-    if(m_pDiffTextWindow3 && m_pDiffTextWindow3->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow3.get());
+    if(m_pDiffTextWindow1 && m_pDiffTextWindow1->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow1);
+    if(m_pDiffTextWindow2 && m_pDiffTextWindow2->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow2);
+    if(m_pDiffTextWindow3 && m_pDiffTextWindow3->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow3);
     if(m_pMergeResultWindow && m_pMergeResultWindow->isVisible()) visibleWidgetList.push_back(m_pMergeResultWindow);
     if(m_bDirCompare /*m_pDirectoryMergeWindow->isVisible()*/) visibleWidgetList.push_back(m_pDirectoryMergeWindow);
     //if ( m_pDirectoryMergeInfo->isVisible() ) visibleWidgetList.push_back(m_pDirectoryMergeInfo->getInfoList());
@@ -2014,9 +2014,9 @@ void KDiff3App::slotWinFocusPrev()
     }
 
     std::list<QWidget*> visibleWidgetList;
-    if(m_pDiffTextWindow1 && m_pDiffTextWindow1->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow1.get());
-    if(m_pDiffTextWindow2 && m_pDiffTextWindow2->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow2.get());
-    if(m_pDiffTextWindow3 && m_pDiffTextWindow3->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow3.get());
+    if(m_pDiffTextWindow1 && m_pDiffTextWindow1->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow1);
+    if(m_pDiffTextWindow2 && m_pDiffTextWindow2->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow2);
+    if(m_pDiffTextWindow3 && m_pDiffTextWindow3->isVisible()) visibleWidgetList.push_back(m_pDiffTextWindow3);
     if(m_pMergeResultWindow && m_pMergeResultWindow->isVisible()) visibleWidgetList.push_back(m_pMergeResultWindow);
     if(m_bDirCompare /* m_pDirectoryMergeWindow->isVisible() */) visibleWidgetList.push_back(m_pDirectoryMergeWindow);
     //if ( m_pDirectoryMergeInfo->isVisible() ) visibleWidgetList.push_back(m_pDirectoryMergeInfo->getInfoList());
