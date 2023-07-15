@@ -21,6 +21,7 @@
 #include <cstdlib>
 #include <ctype.h>
 #include <memory>
+#include <optional>
 #include <utility>             // for swap
 
 #ifndef AUTOTEST
@@ -58,6 +59,34 @@ int LineData::width(int tabSize) const
     return w;
 }
 
+class StringIter {
+    QString::const_iterator ptr;
+    QString::const_iterator end;
+
+public:
+    StringIter(QString const& s)
+        : ptr(s.begin())
+        , end(s.end())
+    {}
+
+    bool hasPeek() const {
+        return ptr < end;
+    }
+
+    std::optional<QChar> tryPeek() const {
+        if (ptr < end) {
+            return *ptr;
+        } else {
+            return {};
+        }
+    }
+
+    void next() {
+        assert(ptr < end);
+        ptr++;
+    }
+};
+
 /*
     Implement support for g_bIgnoreWhiteSpace
 */
@@ -69,21 +98,30 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
     {
         // Ignore white space diff
         const QString line1 = l1.getLine(), line2 = l2.getLine();
-        QString::const_iterator p1 = line1.begin();
-        QString::const_iterator p1End = line1.end();
-        QString::const_iterator p2 = line2.begin();
-        QString::const_iterator p2End = line2.end();
+        StringIter p1{line1};
+        StringIter p2{line2};
 
-        for(; p1 != p1End && p2 != p2End; p1++, p2++)
+        for(; ; p1.next(), p2.next())
         {
-            while(isspace(p1->unicode()) && p1 != p1End) ++p1;
-            while(isspace(p2->unicode()) && p2 != p2End) ++p2;
+            // Advance to the next non-whitespace character or EOL.
+            while (p1.hasPeek() && isspace(p1.tryPeek()->toLatin1())) {
+                p1.next();
+            }
+            while (p2.hasPeek() && isspace(p2.tryPeek()->toLatin1())) {
+                p2.next();
+            }
 
-            if(*p1 != *p2)
+            // If the two strings differ outside of whitespace, or either ends earlier, return false.
+            if(p1.tryPeek() != p2.tryPeek())
                 return false;
-        }
 
-        return (p1 == p1End && p2 == p2End);
+            // If both strings end together, return true.
+            if (!p1.hasPeek() && !p2.hasPeek()) {
+                return true;
+            }
+
+            // Test remaining characters.
+        }
     }
     else
     {
