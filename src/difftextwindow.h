@@ -29,7 +29,7 @@
 #include <memory>
 
 class QMenu;
-class RecalcWordWrapRunnable;
+class RecalcWordWrapThread;
 class QScrollBar;
 class QStatusBar;
 class Options;
@@ -41,7 +41,7 @@ class SourceData;
 
 class KDiff3App;
 
-class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTextWindow>
+class DiffTextWindow: public QWidget
 {
     Q_OBJECT
   public:
@@ -154,7 +154,7 @@ class DiffTextWindow: public QWidget, public std::enable_shared_from_this<DiffTe
     void timerEvent(QTimerEvent*) override;
 
   private:
-    static QList<RecalcWordWrapRunnable*> s_runnables;
+    static QList<RecalcWordWrapThread*> s_runnables;
     static constexpr int s_linesPerRunnable = 2000;
 
     /*
@@ -178,7 +178,7 @@ class DiffTextWindowFrame : public QWidget
   public:
     DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData> &psd, KDiff3App &app);
     ~DiffTextWindowFrame() override;
-    std::shared_ptr<DiffTextWindow> getDiffTextWindow();
+    QPointer<DiffTextWindow> getDiffTextWindow();
     void init();
 
     void setupConnections(const KDiff3App *app);
