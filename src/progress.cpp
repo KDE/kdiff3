@@ -10,9 +10,9 @@
 
 #include "progress.h"
 
-#include "TypeUtils.h"
 #include "defmac.h"
 #include "difftextwindow.h"
+#include "TypeUtils.h"
 
 #include <cmath>
 
