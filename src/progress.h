@@ -40,6 +40,7 @@ class ProgressDialog: public QDialog, public std::enable_shared_from_this<Progre
     }
 
     ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar);
+    ~ProgressDialog() override;
 
     void beginBackgroundTask();
     void endBackgroundTask();

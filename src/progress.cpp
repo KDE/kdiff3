@@ -12,6 +12,7 @@
 
 #include "TypeUtils.h"
 #include "defmac.h"
+#include "difftextwindow.h"
 
 #include <cmath>
 
@@ -65,6 +66,11 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
 
     m_t1.start();
     m_t2.start();
+}
+
+ProgressDialog::~ProgressDialog()
+{
+    while(DiffTextWindow::maxThreads() > 0) {} //expected to be set by last helper thread.
 }
 
 void ProgressDialog::initConnections()

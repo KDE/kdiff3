@@ -51,6 +51,7 @@ class DiffTextWindow: public QWidget
   public:
     //Using this as a scoped global
     static QPointer<QScrollBar> mVScrollBar;
+    static QAtomicInteger<size_t> maxThreads();
 
     DiffTextWindow(DiffTextWindowFrame* pParent, e_SrcSelector winIdx, KDiff3App& app);
     ~DiffTextWindow() override;

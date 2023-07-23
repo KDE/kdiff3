@@ -94,6 +94,8 @@ class RecalcWordWrapThread: public QThread
         if(newValue == 0)
         {
             Q_EMIT pDTW->finishRecalcWordWrap(m_visibleTextWidth);
+
+            s_maxNofRunnables.storeRelease(0);
         }
         //Cleanup our object to avoid a memmory leak
         deleteLater();
@@ -246,6 +248,11 @@ class DiffTextWindowData
 
     QSharedPointer<SourceData> sourceData;
 };
+
+QAtomicInteger<size_t> DiffTextWindow::maxThreads()
+{
+    return RecalcWordWrapThread::s_maxNofRunnables.loadAcquire();
+}
 
 void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData)
 {
@@ -1644,6 +1651,8 @@ void DiffTextWindow::convertSelectionToD3LCoords() const
 
 bool DiffTextWindow::startRunnables()
 {
+    assert(RecalcWordWrapThread::s_maxNofRunnables == 0);
+
     if(s_runnables.size() == 0)
     {
         return false;

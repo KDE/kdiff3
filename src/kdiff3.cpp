@@ -586,17 +586,11 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
 KDiff3App::~KDiff3App()
 {
-    /*
-        Qt uses parent for memory management and event hierachy this is the only way to
-        by pass auto cleanup. That is needed thanks to the wordwrap helper threads using
-        DiffTextWindow pointers which must be std::shared_ptr.
-    */
-    g_pProgressDialog->setParent(nullptr);
-
     if(mRunnablesStarted)
     {
         g_pProgressDialog->cancel(ProgressDialog::eExit);
     }
+
     // Prevent spurious focus change signals from Qt from being picked up by KDiff3App during destruction.
     QObject::disconnect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
 };
