@@ -155,7 +155,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     // ProgressProxy will otherwise emit no-ops to disconnected boost signals.
     if(g_pProgressDialog == nullptr)
     {
-        g_pProgressDialog = ProgressDialog::makeShared(this, statusBar());
+        g_pProgressDialog = std::make_shared<ProgressDialog>(this, statusBar());
         g_pProgressDialog->setStayHidden(true);
     }
 

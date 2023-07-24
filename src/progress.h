@@ -24,19 +24,11 @@ class QLabel;
 class QProgressBar;
 class QStatusBar;
 
-class ProgressDialog: public QDialog, public std::enable_shared_from_this<ProgressDialog>
+class ProgressDialog: public QDialog
 {
     Q_OBJECT
   public:
-    static std::shared_ptr<ProgressDialog> makeShared(QWidget* pParent, QStatusBar* pStatusBar)
-    {
-
-        auto p = std::make_shared<ProgressDialog>(pParent, pStatusBar);
-        p->initConnections(); //can'nt be called from within constuctor.
-        return p;
-    }
-
-    ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar);
+    ProgressDialog(QWidget* pParent, QStatusBar*);
      ~ProgressDialog() override;
 
     void beginBackgroundTask();
@@ -126,6 +118,10 @@ class ProgressDialog: public QDialog, public std::enable_shared_from_this<Progre
     QWidget* m_pStatusBarWidget = nullptr;
     QProgressBar* m_pStatusProgressBar = nullptr;
     QPushButton* m_pStatusAbortButton = nullptr;
+    /*
+        This list exists solely to auto disconnect boost signals.
+    */
+    std::list<boost::signals2::scoped_connection> connections;
 };
 
 extern std::shared_ptr<ProgressDialog> g_pProgressDialog;
