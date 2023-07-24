@@ -17,6 +17,7 @@
 
 #include <boost/safe_numerics/automatic.hpp>
 #include <boost/safe_numerics/safe_integer.hpp>
+#include <boost/safe_numerics/safe_integer_range.hpp>
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 using QtSizeType = qint32;
@@ -28,6 +29,9 @@ using QtNumberType = qint32;//Qt insists on one type for all but does not create
 
 using PtrDiffRef = size_t;
 
+template <typename T>
+using limits = std::numeric_limits<T>;
+
 using KDiff3_exception_policy = boost::safe_numerics::exception_policy<
     boost::safe_numerics::throw_exception, // arithmetic error
     boost::safe_numerics::trap_exception,  // implementation defined behavior
@@ -35,11 +39,12 @@ using KDiff3_exception_policy = boost::safe_numerics::exception_policy<
     boost::safe_numerics::trap_exception   // uninitialized value
 >;
 
-template <typename T>
-using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, KDiff3_exception_policy>;
+template <typename T, T MIN = limits<T>::min(), T MAX = limits<T>::max()>
+using SafeSignedRange =
+    boost::safe_numerics::safe_signed_range<MIN, MAX>;
 
 template <typename T>
-using limits = std::numeric_limits<T>;
+using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, KDiff3_exception_policy>;
 
 static_assert(sizeof(int) >= sizeof(qint32), "Legacy LP32 systems/compilers not supported"); // e.g. Windows 16-bit
 static_assert(sizeof(FileOffset) >= sizeof(QtSizeType), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
