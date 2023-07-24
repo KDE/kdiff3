@@ -530,6 +530,7 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     for(i = begin(); i != end();)
     {
         ManualDiffHelpList::iterator next = std::next(i);
+        if(next == end()) break;
 
         for(e_SrcSelector wIdx = e_SrcSelector::A; wIdx != e_SrcSelector::Invalid; wIdx = nextSelector(wIdx))
         {
