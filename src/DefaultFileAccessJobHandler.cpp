@@ -167,10 +167,10 @@ void DefaultFileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
         */
         qint64 maxChunkSize = 100000;
         qint64 length = std::min(maxChunkSize, m_maxLength - m_transferredBytes);
-        data.resize((QtSizeType)length);
-        if(data.size() == (QtSizeType)length)
+        if(length > 0)
         {
-            if(length > 0)
+            data.resize((QtSizeType)length);
+            if(data.size() == (QtSizeType)length)
             {
                 ::memcpy(data.data(), m_pTransferBuffer + m_transferredBytes, data.size());
                 m_transferredBytes += length;
