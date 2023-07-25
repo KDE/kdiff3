@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-24 10:11+0000\n"
+"POT-Creation-Date: 2023-07-25 02:34+0000\n"
 "PO-Revision-Date: 2023-05-05 11:35-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -118,27 +118,27 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Erro interno grave"
 
-#: difftextwindow.cpp:579
+#: difftextwindow.cpp:586
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Arquivo %1: Linha %2"
 
-#: difftextwindow.cpp:581
+#: difftextwindow.cpp:588
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Arquivo %1: Linha não disponível"
 
-#: difftextwindow.cpp:1920
+#: difftextwindow.cpp:1929
 #, kde-format
 msgid "Encoding:"
 msgstr "Codificação:"
 
-#: difftextwindow.cpp:1924 mergeresultwindow.cpp:2815 optiondialog.cpp:798
+#: difftextwindow.cpp:1933 mergeresultwindow.cpp:2815 optiondialog.cpp:798
 #, kde-format
 msgid "Line end style:"
 msgstr "Estilo de fim de linha:"
 
-#: difftextwindow.cpp:1949 directorymergewindow.cpp:388
+#: difftextwindow.cpp:1958 directorymergewindow.cpp:388
 #: directorymergewindow.cpp:439 directorymergewindow.cpp:527
 #: directorymergewindow.cpp:2699 directorymergewindow.cpp:2825
 #: directorymergewindow.cpp:2978 mergeresultwindow.cpp:780
@@ -152,7 +152,7 @@ msgstr "Estilo de fim de linha:"
 msgid "A"
 msgstr "A"
 
-#: difftextwindow.cpp:1949 directorymergewindow.cpp:390
+#: difftextwindow.cpp:1958 directorymergewindow.cpp:390
 #: directorymergewindow.cpp:442 directorymergewindow.cpp:529
 #: directorymergewindow.cpp:2705 directorymergewindow.cpp:2826
 #: directorymergewindow.cpp:2979 mergeresultwindow.cpp:780
@@ -166,7 +166,7 @@ msgstr "A"
 msgid "B"
 msgstr "B"
 
-#: difftextwindow.cpp:1949 directorymergewindow.cpp:392
+#: difftextwindow.cpp:1958 directorymergewindow.cpp:392
 #: directorymergewindow.cpp:445 directorymergewindow.cpp:531
 #: directorymergewindow.cpp:2711 directorymergewindow.cpp:2827
 #: directorymergewindow.cpp:2980 mergeresultwindow.cpp:784
@@ -180,57 +180,57 @@ msgstr "B"
 msgid "C"
 msgstr "C"
 
-#: difftextwindow.cpp:1949
+#: difftextwindow.cpp:1958
 #, kde-format
 msgid "A (Base)"
 msgstr "A (base)"
 
-#: difftextwindow.cpp:1951
+#: difftextwindow.cpp:1960
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Codificação: %1"
 
-#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2861
+#: difftextwindow.cpp:1961 mergeresultwindow.cpp:2861
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1952 mergeresultwindow.cpp:2860
+#: difftextwindow.cpp:1961 mergeresultwindow.cpp:2860
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1952
+#: difftextwindow.cpp:1961
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Estilo de fim de linha: %1"
 
-#: difftextwindow.cpp:1953
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: difftextwindow.cpp:1981 kdiff3.cpp:945
+#: difftextwindow.cpp:1990 kdiff3.cpp:939
 #, kde-format
 msgid "Top line"
 msgstr "Linha superior"
 
-#: difftextwindow.cpp:1990
+#: difftextwindow.cpp:1999
 #, kde-format
 msgid "End"
 msgstr "Fim"
 
-#: difftextwindow.cpp:2048 smalldialogs.cpp:163
+#: difftextwindow.cpp:2057 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Abrir arquivo"
 
-#: difftextwindow.cpp:2096 optiondialog.cpp:383
+#: difftextwindow.cpp:2105 optiondialog.cpp:383
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2112
+#: difftextwindow.cpp:2121
 #, kde-format
 msgid "Other"
 msgstr "Outro"
@@ -406,7 +406,7 @@ msgstr ""
 "Você está neste momento fazendo uma mesclagem de pastas. Tem certeza que "
 "deseja interromper a mesclagem e analisar a pasta novamente?"
 
-#: directorymergewindow.cpp:695 kdiff3.cpp:804 kdiff3.cpp:814 kdiff3.cpp:826
+#: directorymergewindow.cpp:695 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
 #: mergeresultwindow.cpp:329 pdiff.cpp:863 pdiff.cpp:1713 pdiff.cpp:1723
 #, kde-format
 msgctxt "Error dialog caption"
@@ -496,8 +496,8 @@ msgstr "Algumas subpastas não eram legíveis"
 msgid "Check the permissions of the subfolders."
 msgstr "Verifique as permissões das subpastas."
 
-#: directorymergewindow.cpp:968 kdiff3.cpp:753 kdiff3.cpp:859 kdiff3.cpp:883
-#: kdiff3.cpp:1152 kdiff3.cpp:1173 pdiff.cpp:948 pdiff.cpp:1015 pdiff.cpp:1051
+#: directorymergewindow.cpp:968 kdiff3.cpp:747 kdiff3.cpp:853 kdiff3.cpp:877
+#: kdiff3.cpp:1146 kdiff3.cpp:1167 pdiff.cpp:948 pdiff.cpp:1015 pdiff.cpp:1051
 #: pdiff.cpp:1060 pdiff.cpp:1106 pdiff.cpp:1114
 #, kde-format
 msgid "Ready."
@@ -1202,88 +1202,88 @@ msgstr "Não foi possível abrir esses arquivos:"
 msgid "File open error"
 msgstr "Erro ao abrir arquivo"
 
-#: kdiff3.cpp:613
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Abre documentos para comparação..."
 
-#: kdiff3.cpp:615
+#: kdiff3.cpp:609
 #, kde-format
 msgid "Reload"
 msgstr "Recarregar"
 
-#: kdiff3.cpp:618
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr ""
 "Salvar resultado da mesclagem. Todos os conflitos precisam ser resolvidos!"
 
-#: kdiff3.cpp:620
+#: kdiff3.cpp:614
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Salvar documento atual como..."
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:617
 #, kde-format
 msgid "Print the differences"
 msgstr "Imprimir as diferenças"
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Quits the application"
 msgstr "Sair do aplicativo"
 
-#: kdiff3.cpp:630
+#: kdiff3.cpp:624
 #, kde-format
 msgid "Undo last action."
 msgstr "Desfaz a última ação."
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Corta a seção selecionada e a coloca na área de transferência"
 
-#: kdiff3.cpp:637
+#: kdiff3.cpp:631
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Copia a seção selecionada para a área de transferência"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Colar conteúdo da área de transferência na posição atual"
 
-#: kdiff3.cpp:642
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Seleciona tudo na janela atual"
 
-#: kdiff3.cpp:645
+#: kdiff3.cpp:639
 #, kde-format
 msgid "Search for a string"
 msgstr "Pesquisa um texto"
 
-#: kdiff3.cpp:647
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Search again for the string"
 msgstr "Pesquisa novamente o texto"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:646
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Habilita/desabilita a barra de status"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:650
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Configurar KDiff3..."
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:670
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Ir para delta atual"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 "Current\n"
@@ -1292,12 +1292,12 @@ msgstr ""
 "Delta\n"
 "atual"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:672
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Ir para primeiro delta"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:672
 #, kde-format
 msgid ""
 "First\n"
@@ -1306,12 +1306,12 @@ msgstr ""
 "Primeiro\n"
 "delta"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Ir para último delta"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:674
 #, kde-format
 msgid ""
 "Last\n"
@@ -1320,14 +1320,14 @@ msgstr ""
 "Último\n"
 "delta"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:676
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(Ignora as diferenças de espaço em branco quando \"Mostrar espaços em branco"
 "\" está desativado.)"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1336,12 +1336,12 @@ msgstr ""
 "(Não ignora as diferenças de espaço em branco quando \"Mostrar espaços em "
 "branco\" está desativado.)"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:678
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Ir para delta anterior"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:678
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1350,12 +1350,12 @@ msgstr ""
 "Delta\n"
 "anterior"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:680
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Ir para próximo delta"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:680
 #, kde-format
 msgid ""
 "Next\n"
@@ -1364,12 +1364,12 @@ msgstr ""
 "Próximo\n"
 "delta"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:682
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Ir para conflito anterior"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:682
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1378,12 +1378,12 @@ msgstr ""
 "Conflito\n"
 "anterior"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Ir para próximo conflito"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:684
 #, kde-format
 msgid ""
 "Next\n"
@@ -1392,12 +1392,12 @@ msgstr ""
 "Próximo\n"
 "conflito"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Ir para conflito não resolvido anterior"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:686
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1406,12 +1406,12 @@ msgstr ""
 "Não resolvido\n"
 "anterior"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Ir para próximo conflito não resolvido"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:688
 #, kde-format
 msgid ""
 "Next\n"
@@ -1420,13 +1420,13 @@ msgstr ""
 "Próximo\n"
 "não resolvido"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:690
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Ir para a linha"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:690
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1436,7 +1436,7 @@ msgstr ""
 "Ir\n"
 "Linha"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:691
 #, kde-format
 msgctxt "Additional text intooltip"
 msgid ""
@@ -1446,13 +1446,13 @@ msgstr ""
 ".\n"
 " Ir para a linha especificada."
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:692
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Selecionar linha(s) de A"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:692
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1462,13 +1462,13 @@ msgstr ""
 "Escolher\n"
 "A"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:693
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Selecionar linha(s) de B"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:693
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1478,13 +1478,13 @@ msgstr ""
 "Escolher\n"
 "B"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Selecione linha(s) de C"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1494,14 +1494,14 @@ msgstr ""
 "Escolher\n"
 "C"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 "Ir automaticamente para próximo conflito não resolvido após seleção da fonte"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
@@ -1511,12 +1511,12 @@ msgstr ""
 "Próximo\n"
 "automático"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Exibir caracteres de espaço e tabulação"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1526,12 +1526,12 @@ msgstr ""
 "Caracteres\n"
 "em branco"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Show White Space"
 msgstr "Exibir espaço em branco"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1541,12 +1541,12 @@ msgstr ""
 "Deltas\n"
 "em branco"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Exibir números de linha"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:700
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1556,132 +1556,132 @@ msgstr ""
 "Números\n"
 "de linha"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Resolver conflitos simples automaticamente"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Definir deltas para conflitos"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Executar mesclagem automática com expressões regulares"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Resolver conflitos de histórico automaticamente"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Separar diferenças ao selecionar"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Reunir diferenças selecionadas"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Show Window A"
 msgstr "Exibir janela A"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Show Window B"
 msgstr "Exibir janela B"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Show Window C"
 msgstr "Exibir janela C"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Normal Overview"
 msgstr "Visão normal"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:714
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Visão A vs. B"
 
-#: kdiff3.cpp:721
+#: kdiff3.cpp:715
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Visão A vs. C"
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:716
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Visão B vs. C"
 
-#: kdiff3.cpp:723
+#: kdiff3.cpp:717
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Quebrar linhas nas exibições de diferenças"
 
-#: kdiff3.cpp:724
+#: kdiff3.cpp:718
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Adicionar alinhamento manual de diferenças"
 
-#: kdiff3.cpp:725
+#: kdiff3.cpp:719
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Limpar todos os alinhamentos manuais de diferenças"
 
-#: kdiff3.cpp:727
+#: kdiff3.cpp:721
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Focar na próxima janela"
 
-#: kdiff3.cpp:728
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Focar na janela anterior"
 
-#: kdiff3.cpp:729
+#: kdiff3.cpp:723
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Alternar a orientação da separação"
 
-#: kdiff3.cpp:731
+#: kdiff3.cpp:725
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Janela dividida de pasta e texto"
 
-#: kdiff3.cpp:733
+#: kdiff3.cpp:727
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Alternar entre visualização de pasta e texto"
 
-#: kdiff3.cpp:803 pdiff.cpp:1712
+#: kdiff3.cpp:797 pdiff.cpp:1712
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "O resultado da mesclagem não foi salvo."
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:799
 #, kde-format
 msgid "Save && Quit"
 msgstr "Salvar e sair"
 
-#: kdiff3.cpp:806
+#: kdiff3.cpp:800
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Sair sem salvar"
 
-#: kdiff3.cpp:814 pdiff.cpp:1723
+#: kdiff3.cpp:808 pdiff.cpp:1723
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Não foi possível salvar resultado da mesclagem."
 
-#: kdiff3.cpp:825 pdiff.cpp:862
+#: kdiff3.cpp:819 pdiff.cpp:862
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1689,62 +1689,62 @@ msgstr ""
 "Você está fazendo uma mesclagem de pastas. Tem certeza de que deseja "
 "cancelar?"
 
-#: kdiff3.cpp:848
+#: kdiff3.cpp:842
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvando arquivo..."
 
-#: kdiff3.cpp:865
+#: kdiff3.cpp:859
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Salvando arquivo com um novo nome..."
 
-#: kdiff3.cpp:867
+#: kdiff3.cpp:861
 #, kde-format
 msgid "Save As..."
 msgstr "Salvar como..."
 
-#: kdiff3.cpp:891
+#: kdiff3.cpp:885
 #, kde-format
 msgid "Printing not implemented."
 msgstr "A impressão não está implementada."
 
-#: kdiff3.cpp:929
+#: kdiff3.cpp:923
 #, kde-format
 msgid "Printing..."
 msgstr "Imprimindo..."
 
-#: kdiff3.cpp:1033
+#: kdiff3.cpp:1027
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "Imprimindo página %1 de %2"
 
-#: kdiff3.cpp:1085
+#: kdiff3.cpp:1079
 #, kde-format
 msgid " (Selection)"
 msgstr " (seleção)"
 
-#: kdiff3.cpp:1114
+#: kdiff3.cpp:1108
 #, kde-format
 msgid "Printing completed."
 msgstr "Impressão concluída."
 
-#: kdiff3.cpp:1118
+#: kdiff3.cpp:1112
 #, kde-format
 msgid "Printing aborted."
 msgstr "Impressão cancelada."
 
-#: kdiff3.cpp:1125
+#: kdiff3.cpp:1119
 #, kde-format
 msgid "Exiting..."
 msgstr "Saindo..."
 
-#: kdiff3.cpp:1136
+#: kdiff3.cpp:1130
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Alternando barra de ferramentas..."
 
-#: kdiff3.cpp:1157
+#: kdiff3.cpp:1151
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Alternar barra de status..."
@@ -3474,7 +3474,7 @@ msgid "Error while adding manual diff range"
 msgstr "Erro ao adicionar o intervalo manual de diferenças"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:55 progressdialog.ui:94
+#: progress.cpp:56 progressdialog.ui:94
 #, kde-format
 msgid "&Cancel"
 msgstr "&Cancelar"
