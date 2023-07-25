@@ -2613,7 +2613,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
         KMessageBox::error(this,
                            i18n("Not all conflicts are solved yet.\n"
                                 "File not saved."),
-                           i18n("Conflicts Left"));
+                           i18nc("Dialog title", "Conflicts Left"));
         return false;
     }
 
@@ -2622,7 +2622,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
         KMessageBox::error(this,
                            i18n("There is a line end style conflict. Please choose the line end style manually.\n"
                                 "File not saved."),
-                           i18n("Conflicts Left"));
+                           i18nc("Dialog title", "Conflicts Left"));
         return false;
     }
 
