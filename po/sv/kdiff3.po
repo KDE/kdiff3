@@ -2,13 +2,13 @@
 # Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 #
 # Stefan Asserhäll <stefan.asserhall@bredband.net>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2018, 2019, 2020, 2021, 2022.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-26 00:48+0000\n"
-"PO-Revision-Date: 2022-09-26 20:20+0200\n"
+"PO-Revision-Date: 2023-07-24 15:44+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -344,7 +344,7 @@ msgstr "Inte blank"
 #, kde-format
 msgctxt "Column title"
 msgid "White"
-msgstr "Vit"
+msgstr "Blank"
 
 #: directorymergewindow.cpp:687
 #, kde-format
@@ -357,7 +357,9 @@ msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
 #: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Error dialog caption"
+#| msgid "Warning"
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Varning"
@@ -395,7 +397,8 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "Katalog C \"%1\" finns inte eller är inte en katalog.\n"
 
 #: directorymergewindow.cpp:856
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Folder Opening Error"
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Fel vid öppna katalog"
@@ -412,7 +415,8 @@ msgstr ""
 "Kontrollera igen innan du fortsätter."
 
 #: directorymergewindow.cpp:866
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Parameter Warning"
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Parametervarning"
@@ -444,19 +448,22 @@ msgid "Reading Folder C"
 msgstr "Läser katalog C"
 
 #: directorymergewindow.cpp:932
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Some subfolders were not readable in"
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Vissa underkataloger kunde inte läsas i"
 
 #: directorymergewindow.cpp:937
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Check the permissions of the subfolders."
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Kontrollera rättigheter för underkatalogerna."
 
 #: directorymergewindow.cpp:960
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ready."
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Klar."
@@ -902,7 +909,7 @@ msgstr "Jämför markerade filer"
 #: directorymergewindow.cpp:2952
 #, kde-format
 msgid "Merge Current File"
-msgstr "Sammanfoga aktuell fil"
+msgstr "Sammanfoga markerade filer"
 
 #: directorymergewindow.cpp:2952
 #, kde-format
@@ -1133,11 +1140,15 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr "Textetikett"
+msgstr ""
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "The quick brown fox jumps over the river\n"
+#| "but the little red hen escapes with a shiver.\n"
+#| ":-)"
 msgid ""
 "The quick brown fox jumps over the river\n"
 "but the little red hen escapes with a shiver\n"
@@ -1145,11 +1156,13 @@ msgid ""
 msgstr ""
 "Östen äter müsli på ett café\n"
 "med mössan på sné.\n"
-":-)\n"
+":-)"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:49
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Button title"
+#| msgid "Change Font"
 msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Ändra teckensnitt"
@@ -1455,6 +1468,7 @@ msgstr ""
 
 #: kdiff3.cpp:693
 #, fuzzy, kde-format
+#| msgctxt "Additional text intooltip"
 #| msgid ""
 #| ".\n"
 #| " Goto specified line."
@@ -2244,7 +2258,7 @@ msgstr "Katalog..."
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr "ingen"
+msgstr ""
 
 #: optiondialog.cpp:110 optiondialog.cpp:122
 #, kde-format
@@ -3869,28 +3883,26 @@ msgstr "Oväntat citationstecken inne i argument."
 msgid "No program specified."
 msgstr "Inget program angivet."
 
-#, fuzzy
-#~| msgid ""
-#~| "Could not initialize the KDiff3 part.\n"
-#~| "This usually happens due to an installation problem. Please read the "
-#~| "README-file in the source package for details."
-#~ msgid ""
-#~ "Could not initialize KDiff3.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "Kunde inte initiera Kdiff3-delprogrammet.\n"
-#~ "Detta händer oftast beroende på ett installationsproblem. Läs filen "
-#~ "README i källkodspaketet för detaljinformation."
+#~ msgid "A"
+#~ msgstr "A"
 
-#~ msgid "Loading A"
-#~ msgstr "Läser in A"
+#~ msgid "B"
+#~ msgstr "B"
 
-#~ msgid "Loading B"
-#~ msgstr "Läser in B"
+#~ msgid "C"
+#~ msgstr "C"
 
-#~ msgid "Loading C"
-#~ msgstr "Läser in C"
+#~ msgid "KDiff3 Part"
+#~ msgstr "Kdiff3-del"
+
+#~ msgid "A KPart to display SVG images"
+#~ msgstr "Ett KDE delprogram för att visa SVG-bilder"
+
+#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
+#~ msgstr "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
+
+#~ msgid "Joachim Eibl"
+#~ msgstr "Joachim Eibl"
 
 #~ msgid "Could not find files for comparison."
 #~ msgstr "Kunde inte hitta filer för jämförelse."
@@ -3901,17 +3913,30 @@ msgstr "Inget program angivet."
 #~ msgid "Configure KDiff3"
 #~ msgstr "Anpassa Kdiff3"
 
-#~ msgid "KDiff3 Part"
-#~ msgstr "Kdiff3-del"
+#~ msgid ""
+#~ "Could not initialize the KDiff3 part.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "Kunde inte initiera Kdiff3-delprogrammet.\n"
+#~ "Detta händer oftast beroende på ett installationsproblem. Läs filen "
+#~ "README i källkodspaketet för detaljinformation."
 
-#~ msgid "A KPart for displaying diffs"
-#~ msgstr "Ett delprogram för att visa skillnader"
+#~ msgctxt "Program version info."
+#~ msgid " (32 bit)"
+#~ msgstr " (32 bitar)"
 
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
+#~ msgid "Loading A"
+#~ msgstr "Läser in A"
 
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
+#~ msgid "Loading B"
+#~ msgstr "Läser in B"
+
+#~ msgid "Loading C"
+#~ msgstr "Läser in C"
+
+#~ msgid "all/allfiles (*)"
+#~ msgstr "Alla/Alla filer (*)"
 
 #~ msgid ""
 #~ "A version control history entry consists of several lines.\n"
@@ -3968,49 +3993,11 @@ msgstr "Inget program angivet."
 #~ "Oftast innehåller raden nyckelordet  \"$Log$\".\n"
 #~ "Standardvärde:  \".*\\$Log.*\\$.*\""
 
-#~ msgid "all/allfiles (*)"
-#~ msgstr "Alla/Alla filer (*)"
-
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid " (32 bit)"
-#~ msgstr " (32 bitar)"
-
 #~ msgid "Severe Internal Error."
 #~ msgstr "Allvarligt internt fel."
 
 #~ msgid "Severe Internal Error.: "
 #~ msgstr "Allvarligt internt fel:"
-
-#~ msgid "Do not solve conflicts automatically."
-#~ msgstr "Lös inte konflikter automatiskt."
-
-#~ msgid "Unable to determine full url. No file path/name specified."
-#~ msgstr ""
-#~ "Kan inte bestämma fullständig webbadress. Ingen filsökväg angiven eller "
-#~ "inget filnamn angivet."
-
-#~ msgid "Errors occurred during pre-processing of file A."
-#~ msgstr "Fel uppstod vid förbehandlingen av fil A."
-
-#~ msgid "Errors occurred during pre-processing of file B."
-#~ msgstr "Fel uppstod vid förbehandlingen av fil B."
-
-#~ msgid "Errors occurred during pre-processing of file C."
-#~ msgstr "Fel uppstod vid förbehandlingen av fil C."
-
-#~ msgid "File Open Error"
-#~ msgstr "Fel vid öppna fil"
-
-#~ msgid "Open Directory"
-#~ msgstr "Öppna katalog"
 
 #~ msgid "Directory Open Error"
 #~ msgstr "Fel vid öppna katalog"
@@ -4036,6 +4023,9 @@ msgstr "Inget program angivet."
 #~ msgid "&Directory"
 #~ msgstr "&Katalog"
 
+#~ msgid "Do not solve conflicts automatically."
+#~ msgstr "Lös inte konflikter automatiskt."
+
 #~ msgid "Dir-anti-pattern(s):"
 #~ msgstr "Undantagsmönster för kataloger:"
 
@@ -4060,6 +4050,18 @@ msgstr "Inget program angivet."
 
 #~ msgid "Dir..."
 #~ msgstr "Katalog..."
+
+#~ msgid "Open Directory"
+#~ msgstr "Öppna katalog"
+
+#~ msgid "Errors occurred during pre-processing of file A."
+#~ msgstr "Fel uppstod vid förbehandlingen av fil A."
+
+#~ msgid "Errors occurred during pre-processing of file B."
+#~ msgstr "Fel uppstod vid förbehandlingen av fil B."
+
+#~ msgid "Errors occurred during pre-processing of file C."
+#~ msgstr "Fel uppstod vid förbehandlingen av fil C."
 
 #~ msgid "Finds files and directories with the hidden attribute."
 #~ msgstr "Söker efter filer och kataloger med egenskapen gömd."
