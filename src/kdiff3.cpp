@@ -56,7 +56,6 @@
 #include <QStatusBar>
 #include <QTextEdit>
 #include <QTextStream>
-#include <QThreadPool>
 #include <QUrl>
 // include files for KDE
 #include <KCrash>
@@ -581,13 +580,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
 KDiff3App::~KDiff3App()
 {
-    if(mRunnablesStarted)
-    {
-        g_pProgressDialog->cancel(ProgressDialog::eExit);
-        //Drain helper thread queue. These things are a pain if active during exit.
-        QThreadPool::globalInstance()->clear();
-        QThreadPool::globalInstance()->waitForDone();
-    }
+    g_pProgressDialog->cancel(ProgressDialog::eExit);
 
     // Prevent spurious focus change signals from Qt from being picked up by KDiff3App during destruction.
     QObject::disconnect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
