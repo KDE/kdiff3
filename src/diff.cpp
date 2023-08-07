@@ -70,8 +70,6 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
 
     if(g_bIgnoreWhiteSpace)
     {
-        if(l1.size() != l2.size())
-            return false;
         // Ignore white space diff
         const QString line1 = l1.getLine(), line2 = l2.getLine();
         QString::const_iterator p1 = line1.begin();
