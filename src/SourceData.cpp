@@ -671,7 +671,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
                 }
 
                 //old mac style ending.
-                vOrigDataLineEndStyle.push_back(eLineEndStyleOldMac);
+                vOrigDataLineEndStyle.push_back(eLineEndStyleUndefined);
                 break;
         }
         parser->processLine(line);

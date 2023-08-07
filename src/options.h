@@ -35,7 +35,6 @@ enum e_LineEndStyle
 {
     eLineEndStyleUnix = 0,
     eLineEndStyleDos,
-    eLineEndStyleOldMac,
     eLineEndStyleAutoDetect,
     eLineEndStyleUndefined, // only one line exists
     eLineEndStyleConflict   // User must resolve manually
