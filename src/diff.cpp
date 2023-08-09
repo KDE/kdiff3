@@ -377,7 +377,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         //nofDisturbingLines = 0;
                     }
 
-                    // Only do this if nofDisturbingLines == 0 currently always true
+                    // Was checking if nofDisturbingLines == 0 which would always be true. See above.
                     // Yes, the line from B can be moved.
                     i3b->setLineB(LineRef::invalid); // This might leave an empty line: removed later.
                     i3b->bAEqB = false;
