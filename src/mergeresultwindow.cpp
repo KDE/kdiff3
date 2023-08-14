@@ -2650,7 +2650,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     // Determine the line feed for this file
     const QString lineFeed(eLineEndStyle == eLineEndStyleDos ? QString("\r\n") : QString("\n"));
 
-    int line = 0;
+    bool isFirstLine = true;
     for(const MergeBlock& mb: m_mergeBlockList.list())
     {
         for(const MergeEditLine& mel: mb.list())
@@ -2659,7 +2659,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
             {
                 const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
 
-                if(line > 0 && !mel.isRemoved())
+                if(!isFirstLine && !mel.isRemoved())
                 {
                     // Put line feed between lines, but not for the first line
                     // or between lines that have been removed (because there
@@ -2667,8 +2667,10 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
                     textOutStream << lineFeed;
                 }
 
+                if(isFirstLine)
+                    isFirstLine = mel.isRemoved();
+
                 textOutStream << str;
-                ++line;
             }
         }
     }
