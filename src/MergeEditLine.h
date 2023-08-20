@@ -57,7 +57,7 @@ class MergeEditLine
         mSrc = e_SrcSelector::None;
         mChanged = true;
     }
-    [[nodiscard]] QString getString(const std::shared_ptr<LineDataVector>& pLineDataA, const std::shared_ptr<LineDataVector>& pLineDataB, const std::shared_ptr<LineDataVector>& pLineDataC) const;
+    [[nodiscard]] QString getString(const std::shared_ptr<const LineDataVector>& pLineDataA, const std::shared_ptr<const LineDataVector>& pLineDataB, const std::shared_ptr<const LineDataVector>& pLineDataC) const;
     [[nodiscard]] inline bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
@@ -171,21 +171,15 @@ class MergeBlock
     void removeEmptySource();
 };
 
-typedef std::list<MergeBlock> MergeBlockListImp;
-
-class MergeBlockList
+class MergeBlockList: public std::list<MergeBlock>
 {
-  private:
-    MergeBlockListImp mImp;
-
   public:
-    [[nodiscard]] inline const MergeBlockListImp& list() const { return mImp; }
-    [[nodiscard]] inline MergeBlockListImp& list() { return mImp; }
+    using std::list<MergeBlock>::list;
 
     void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
     void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
 
-    MergeBlockListImp::iterator splitAtDiff3LineIdx(int d3lLineIdx);
+    MergeBlockList::iterator splitAtDiff3LineIdx(int d3lLineIdx);
 };
 
 #endif

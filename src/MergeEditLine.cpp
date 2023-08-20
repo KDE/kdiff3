@@ -17,7 +17,7 @@
 #include <optional>
 #include <vector>
 
-QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDataA, const std::shared_ptr<LineDataVector> &pLineDataB, const std::shared_ptr<LineDataVector> &pLineDataC) const
+QString MergeEditLine::getString(const std::shared_ptr<const LineDataVector> &pLineDataA, const std::shared_ptr<const LineDataVector> &pLineDataB, const std::shared_ptr<const LineDataVector> &pLineDataC) const
 {
     //Triggered by resize event during early init. Ignore these calls.
     if((mSrc == e_SrcSelector::A && pLineDataA->empty()) || (mSrc == e_SrcSelector::B && pLineDataB->empty()) || (mSrc == e_SrcSelector::C && pLineDataC->empty()))
@@ -211,7 +211,7 @@ void MergeBlockList::buildFromDiff3(const Diff3LineList &diff3List, bool isThree
         mb.mId3l = it;
         mb.srcRangeLength = 1;
 
-        MergeBlock *lBack = mImp.empty() ? nullptr : &mImp.back();
+        MergeBlock *lBack = empty() ? nullptr : &back();
 
         bool bSame = lBack != nullptr && mb.isSameKind(*lBack);
         if(bSame)
@@ -222,19 +222,19 @@ void MergeBlockList::buildFromDiff3(const Diff3LineList &diff3List, bool isThree
         }
         else
         {
-            mImp.push_back(mb);
+            push_back(mb);
         }
 
         if(!mb.isConflict())
         {
-            MergeBlock &tmpBack = mImp.back();
+            MergeBlock &tmpBack = back();
             MergeEditLine mel(mb.id3l());
             mel.setSource(mb.srcSelect, bLineRemoved);
             tmpBack.list().push_back(mel);
         }
         else if(lBack == nullptr || !lBack->isConflict() || !bSame)
         {
-            MergeBlock &tmpBack = mImp.back();
+            MergeBlock &tmpBack = back();
             MergeEditLine mel(mb.id3l());
             mel.setConflict();
             tmpBack.list().push_back(mel);
@@ -249,8 +249,8 @@ void MergeBlockList::buildFromDiff3(const Diff3LineList &diff3List, bool isThree
 void MergeBlockList::updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly)
 {
     // Change all auto selections
-    MergeBlockListImp::iterator mbIt;
-    for(mbIt = mImp.begin(); mbIt != mImp.end(); ++mbIt)
+    MergeBlockList::iterator mbIt;
+    for(mbIt = begin(); mbIt != end(); ++mbIt)
     {
         MergeBlock &mb = *mbIt;
         bool bConflict = mb.list().empty() || mb.list().begin()->isConflict();
@@ -333,10 +333,10 @@ void MergeBlock::removeEmptySource()
 }
 
 // Returns the iterator to the MergeBlock after the split
-MergeBlockListImp::iterator MergeBlockList::splitAtDiff3LineIdx(int d3lLineIdx)
+MergeBlockList::iterator MergeBlockList::splitAtDiff3LineIdx(int d3lLineIdx)
 {
-    MergeBlockListImp::iterator i;
-    for(i = mImp.begin(); i != mImp.end(); ++i)
+    MergeBlockList::iterator i;
+    for(i = begin(); i != end(); ++i)
     {
         if(i->getIndex() == d3lLineIdx)
         {
@@ -351,7 +351,7 @@ MergeBlockListImp::iterator MergeBlockList::splitAtDiff3LineIdx(int d3lLineIdx)
             MergeBlock newMB;
             mb.split(newMB, d3lLineIdx);
             ++i;
-            return mImp.insert(i, newMB);
+            return insert(i, newMB);
         }
     }
     // The split must be in the previous MergeBlock
@@ -360,5 +360,5 @@ MergeBlockListImp::iterator MergeBlockList::splitAtDiff3LineIdx(int d3lLineIdx)
     MergeBlock newMB;
     mb.split(newMB, d3lLineIdx);
     ++i;
-    return mImp.insert(i, newMB);
+    return insert(i, newMB);
 }
