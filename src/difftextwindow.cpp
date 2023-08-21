@@ -321,6 +321,8 @@ void DiffTextWindow::setupConnections(const KDiff3App* app)
 
 void DiffTextWindow::reset()
 {
+    while(DiffTextWindow::maxThreads() > 0) {} //Clear word wrap threads.
+
     d->m_pLineData = nullptr;
     d->m_size = 0;
     d->mDiff3LineVector = nullptr;
@@ -521,6 +523,8 @@ LineIndex DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
 
 LineRef DiffTextWindow::convertDiff3LineIdxToLine(LineIndex d3lIdx)
 {
+    assert(d3lIdx >= 0);
+
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
         return (*d->getDiff3LineVector())[std::min(d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
     else
