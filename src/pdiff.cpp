@@ -1444,6 +1444,7 @@ void KDiff3App::postRecalcWordWrap()
 {
     if(!m_bRecalcWordWrapPosted)
     {
+        while(DiffTextWindow::maxThreads() > 0) {} //Clear wordwrap threads.
         m_bRecalcWordWrapPosted = true;
         m_firstD3LIdx = -1;
         Q_EMIT sigRecalcWordWrap();
@@ -1468,8 +1469,10 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     if(m_firstD3LIdx < 0)
     {
         m_firstD3LIdx = 0;
-        if(m_pDiffTextWindow1)
-            m_firstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(m_pDiffTextWindow1->getFirstLine());
+        if(!m_pDiffTextWindow1)
+            return; //Nothing that happens from here on makes any sense if we don't have a DiffTextWindow.
+
+        m_firstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(m_pDiffTextWindow1->getFirstLine());
     }
 
     // Convert selection to D3L-coords (converting back happens in DiffTextWindow::recalcWordWrap()
@@ -1530,6 +1533,8 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
 
 void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 {
+    assert(m_firstD3LIdx >= 0);
+
     if(mRunnablesStarted)
     {
         ProgressProxy::endBackgroundTask();

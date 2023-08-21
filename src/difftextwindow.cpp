@@ -163,6 +163,8 @@ class DiffTextWindowData
 
     void reset()
     {
+        while(DiffTextWindow::maxThreads() > 0) {} //Clear word wrap threads.
+
         m_firstLine = 0;
         m_oldFirstLine = LineRef::invalid;
         m_horizScrollOffset = 0;
@@ -558,6 +560,8 @@ LineType DiffTextWindow::convertLineToDiff3LineIdx(const LineRef line) const
 
 LineRef DiffTextWindow::convertDiff3LineIdxToLine(const LineType d3lIdx) const
 {
+    assert(d3lIdx >= 0);
+
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
         return (*d->getDiff3LineVector())[std::min((QtSizeType)d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
     else
