@@ -1523,11 +1523,11 @@ void DiffTextWindow::convertD3LCoordsToLineCoords(LineType d3LIdx, QtSizeType d3
 
 void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, QtSizeType pos, LineType& d3LIdx, QtSizeType& d3LPos) const
 {
-    if(d->m_bWordWrap)
+    if(d->m_bWordWrap && !d->m_diff3WrapLineVector.empty())
     {
         d3LPos = pos;
         d3LIdx = convertLineToDiff3LineIdx(line);
-        int wrapLine = convertDiff3LineIdxToLine(d3LIdx); // First wrap line belonging to this d3LIdx
+        LineRef wrapLine = convertDiff3LineIdxToLine(d3LIdx); // First wrap line belonging to this d3LIdx
         while(wrapLine < line)
         {
             d3LPos += d->m_diff3WrapLineVector[wrapLine].wrapLineLength;
