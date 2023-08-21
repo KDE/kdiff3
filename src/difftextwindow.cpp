@@ -1485,11 +1485,11 @@ void DiffTextWindow::convertD3LCoordsToLineCoords(LineIndex d3LIdx, int d3LPos, 
 
 void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineIndex& d3LIdx, int& d3LPos)
 {
-    if(d->m_bWordWrap)
+    if(d->m_bWordWrap && !d->m_diff3WrapLineVector.empty())
     {
         d3LPos = pos;
         d3LIdx = convertLineToDiff3LineIdx(line);
-        int wrapLine = convertDiff3LineIdxToLine(d3LIdx); // First wrap line belonging to this d3LIdx
+        LineRef wrapLine = convertDiff3LineIdxToLine(d3LIdx); // First wrap line belonging to this d3LIdx
         while(wrapLine < line)
         {
             d3LPos += d->m_diff3WrapLineVector[wrapLine].wrapLineLength;
