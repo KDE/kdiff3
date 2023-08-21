@@ -1565,12 +1565,10 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
     bool bTextsTotalEqual = true;
     size_t listSize = size();
     ProgressProxy::setMaxNofSteps(listSize);
-    int listIdx = 0;
 
     for(Diff3Line &diff: *this)
     {
         bTextsTotalEqual = diff.fineDiff(bTextsTotalEqual, selector, v1, v2, eIgnoreFlags);
-        ++listIdx;
         ProgressProxy::step();
     }
     return bTextsTotalEqual;
