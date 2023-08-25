@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 02:28+0000\n"
+"POT-Creation-Date: 2023-08-25 02:28+0000\n"
 "PO-Revision-Date: 2011-10-09 21:25+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -99,7 +99,7 @@ msgstr "Datei warrt leest: %1"
 msgid "Listing directory: %1"
 msgstr "Orner warrt oplist: %1"
 
-#: diff.cpp:1615 diff.cpp:1631
+#: diff.cpp:1613 diff.cpp:1629
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -108,33 +108,33 @@ msgstr ""
 "Daten sünd wegkamen:\n"
 "Lett sik dit wedderhalen, snack dor bitte den Autor op an.\n"
 
-#: diff.cpp:1617 diff.cpp:1633
+#: diff.cpp:1615 diff.cpp:1631
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Swoor intern Fehler"
 
-#: difftextwindow.cpp:586
+#: difftextwindow.cpp:590
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:588
+#: difftextwindow.cpp:592
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "Reeg nich verföögbor"
 
-#: difftextwindow.cpp:1929
+#: difftextwindow.cpp:1933
 #, kde-format
 msgid "Encoding:"
 msgstr "Koderen:"
 
-#: difftextwindow.cpp:1933 mergeresultwindow.cpp:2817 optiondialog.cpp:798
+#: difftextwindow.cpp:1937 mergeresultwindow.cpp:2817 optiondialog.cpp:798
 #, kde-format
 msgid "Line end style:"
 msgstr "Reegenn-Stil:"
 
-#: difftextwindow.cpp:1958 directorymergewindow.cpp:388
+#: difftextwindow.cpp:1962 directorymergewindow.cpp:388
 #: directorymergewindow.cpp:439 directorymergewindow.cpp:527
 #: directorymergewindow.cpp:2699 directorymergewindow.cpp:2825
 #: directorymergewindow.cpp:2978 mergeresultwindow.cpp:780
@@ -148,7 +148,7 @@ msgstr "Reegenn-Stil:"
 msgid "A"
 msgstr "A"
 
-#: difftextwindow.cpp:1958 directorymergewindow.cpp:390
+#: difftextwindow.cpp:1962 directorymergewindow.cpp:390
 #: directorymergewindow.cpp:442 directorymergewindow.cpp:529
 #: directorymergewindow.cpp:2705 directorymergewindow.cpp:2826
 #: directorymergewindow.cpp:2979 mergeresultwindow.cpp:780
@@ -162,7 +162,7 @@ msgstr "A"
 msgid "B"
 msgstr "B"
 
-#: difftextwindow.cpp:1958 directorymergewindow.cpp:392
+#: difftextwindow.cpp:1962 directorymergewindow.cpp:392
 #: directorymergewindow.cpp:445 directorymergewindow.cpp:531
 #: directorymergewindow.cpp:2711 directorymergewindow.cpp:2827
 #: directorymergewindow.cpp:2980 mergeresultwindow.cpp:784
@@ -176,61 +176,61 @@ msgstr "B"
 msgid "C"
 msgstr "C"
 
-#: difftextwindow.cpp:1958
+#: difftextwindow.cpp:1962
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (Basis):"
 
-#: difftextwindow.cpp:1960
+#: difftextwindow.cpp:1964
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "Koderen:"
 
-#: difftextwindow.cpp:1961 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1965 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1961 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1965 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1965
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "Reegenn-Stil:"
 
-#: difftextwindow.cpp:1962
+#: difftextwindow.cpp:1966
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1990 kdiff3.cpp:932
+#: difftextwindow.cpp:1994 kdiff3.cpp:932
 #, kde-format
 msgid "Top line"
 msgstr "Böverst Reeg"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2003
 #, kde-format
 msgid "End"
 msgstr "Enn"
 
-#: difftextwindow.cpp:2057 smalldialogs.cpp:163
+#: difftextwindow.cpp:2061 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Dateien warrt opmaakt..."
 
-#: difftextwindow.cpp:2105 optiondialog.cpp:383
+#: difftextwindow.cpp:2109 optiondialog.cpp:383
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 Bit"
 
-#: difftextwindow.cpp:2121
+#: difftextwindow.cpp:2125
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -437,7 +437,7 @@ msgstr ""
 "redig afbreken un den Orner nieg dörkieken?"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:791 kdiff3.cpp:801 kdiff3.cpp:813
-#: mergeresultwindow.cpp:329 pdiff.cpp:863 pdiff.cpp:1713 pdiff.cpp:1723
+#: mergeresultwindow.cpp:329 pdiff.cpp:863 pdiff.cpp:1718 pdiff.cpp:1728
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog caption"
@@ -1763,7 +1763,7 @@ msgstr "Deelt Ansicht för Orner un Text"
 msgid "Toggle Between Folder && Text View"
 msgstr "Orner- un Text-Ansicht wesseln"
 
-#: kdiff3.cpp:790 pdiff.cpp:1712
+#: kdiff3.cpp:790 pdiff.cpp:1717
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1779,7 +1779,7 @@ msgstr "Sekern && Utmaken"
 msgid "Quit Without Saving"
 msgstr "Utmaken un nich Sekern"
 
-#: kdiff3.cpp:801 pdiff.cpp:1723
+#: kdiff3.cpp:801 pdiff.cpp:1728
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Tosamenföhr-Resultaat lett sik nich sekern"
@@ -3613,42 +3613,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Na lesten Verscheel gahn"
 
-#: pdiff.cpp:1492
+#: pdiff.cpp:1495
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1493
+#: pdiff.cpp:1496
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1714
+#: pdiff.cpp:1719
 #, kde-format
 msgid "Save && Continue"
 msgstr "Sekern un wiedermaken"
 
-#: pdiff.cpp:1715
+#: pdiff.cpp:1720
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Ahn Sekern wiedermaken"
 
-#: pdiff.cpp:1913
+#: pdiff.cpp:1918
 #, kde-format
 msgid "Search complete."
 msgstr "Söök afslaten."
 
-#: pdiff.cpp:1913
+#: pdiff.cpp:1918
 #, kde-format
 msgid "Search Complete"
 msgstr "Söök afslaten"
 
-#: pdiff.cpp:2094
+#: pdiff.cpp:2099
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Binnen keen Verscheel-Ingaavfinster is wat utsöcht."
 
-#: pdiff.cpp:2094
+#: pdiff.cpp:2099
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Fehler bi't Tofögen vun en Verscheelrebeet vun Hand"
