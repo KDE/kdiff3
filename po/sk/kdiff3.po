@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-16 00:48+0000\n"
+"POT-Creation-Date: 2023-08-26 00:48+0000\n"
 "PO-Revision-Date: 2022-04-15 19:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -114,77 +114,77 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Závažná interná chyba"
 
-#: difftextwindow.cpp:623
+#: difftextwindow.cpp:627
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Súbor %1: Riadok %2"
 
-#: difftextwindow.cpp:625
+#: difftextwindow.cpp:629
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Súbor %1: Riadok nie je dostupný"
 
-#: difftextwindow.cpp:1936
+#: difftextwindow.cpp:1940
 #, kde-format
 msgid "Encoding:"
 msgstr "Kódovanie:"
 
-#: difftextwindow.cpp:1940 mergeresultwindow.cpp:2784 optiondialog.cpp:805
+#: difftextwindow.cpp:1944 mergeresultwindow.cpp:2784 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Spôsob ukončenia riadka:"
 
-#: difftextwindow.cpp:1965
+#: difftextwindow.cpp:1969
 #, kde-format
 msgid "A (Base)"
 msgstr "A (základ)"
 
-#: difftextwindow.cpp:1967
+#: difftextwindow.cpp:1971
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kódovanie: %1"
 
-#: difftextwindow.cpp:1968 mergeresultwindow.cpp:2830
+#: difftextwindow.cpp:1972 mergeresultwindow.cpp:2830
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1968 mergeresultwindow.cpp:2829
+#: difftextwindow.cpp:1972 mergeresultwindow.cpp:2829
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1968
+#: difftextwindow.cpp:1972
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Spôsob ukončenia riadka: %1"
 
-#: difftextwindow.cpp:1969
+#: difftextwindow.cpp:1973
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1997 kdiff3.cpp:942
+#: difftextwindow.cpp:2001 kdiff3.cpp:942
 #, kde-format
 msgid "Top line"
 msgstr "Vrchný riadok"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2010
 #, kde-format
 msgid "End"
 msgstr "Koniec"
 
-#: difftextwindow.cpp:2062 smalldialogs.cpp:163
+#: difftextwindow.cpp:2066 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Otvoriť súbor"
 
-#: difftextwindow.cpp:2108 optiondialog.cpp:390
+#: difftextwindow.cpp:2112 optiondialog.cpp:390
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2124
+#: difftextwindow.cpp:2128
 #, kde-format
 msgid "Other"
 msgstr "Iné"
@@ -388,7 +388,7 @@ msgstr ""
 "a opätovne prehľadať adresáre?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1740 pdiff.cpp:1750
+#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1745 pdiff.cpp:1755
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1748,7 +1748,7 @@ msgstr "Prepnúť pohľad medzi textovým a priečinkovým"
 msgid "Ready."
 msgstr "Pripravený."
 
-#: kdiff3.cpp:797 pdiff.cpp:1739
+#: kdiff3.cpp:797 pdiff.cpp:1744
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Výsledok zlúčenia nebol uložený."
@@ -1763,7 +1763,7 @@ msgstr "Uložiť && koniec"
 msgid "Quit Without Saving"
 msgstr "Ukončiť bez uloženia"
 
-#: kdiff3.cpp:808 pdiff.cpp:1750
+#: kdiff3.cpp:808 pdiff.cpp:1755
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Uloženie výsledku zlúčenia zlyhalo."
@@ -3653,42 +3653,42 @@ msgstr ""
 msgid "Go to Line"
 msgstr "Prejsť na poslednú položku delta"
 
-#: pdiff.cpp:1520
+#: pdiff.cpp:1523
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Zalomenie slov (Zrušiť zakáže zalomenie slov)"
 
-#: pdiff.cpp:1520
+#: pdiff.cpp:1523
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Vypočítavam maximálnu šírku pre vodorovný posuvník"
 
-#: pdiff.cpp:1741
+#: pdiff.cpp:1746
 #, kde-format
 msgid "Save && Continue"
 msgstr "Uložiť && pokračovať"
 
-#: pdiff.cpp:1742
+#: pdiff.cpp:1747
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Pokračovať bez uloženia"
 
-#: pdiff.cpp:1940
+#: pdiff.cpp:1945
 #, kde-format
 msgid "Search complete."
 msgstr "Hľadanie ukončené."
 
-#: pdiff.cpp:1940
+#: pdiff.cpp:1945
 #, kde-format
 msgid "Search Complete"
 msgstr "Hľadanie ukončené"
 
-#: pdiff.cpp:2121
+#: pdiff.cpp:2126
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Nič nie je vybrané ani vo vstupnom okne diff."
 
-#: pdiff.cpp:2121
+#: pdiff.cpp:2126
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Chyba pri pridávaní ručného diff rozsahu"
