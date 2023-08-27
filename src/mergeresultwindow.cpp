@@ -299,6 +299,7 @@ void MergeResultWindow::reset()
 {
     m_mergeBlockList.clear();
 
+    m_currentMergeBlockIt = m_mergeBlockList.end();
     m_pDiff3LineList = nullptr;
     m_pTotalDiffStatus = nullptr;
     m_pldA = nullptr;
@@ -329,6 +330,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
         }
 
         m_mergeBlockList.clear();
+        m_currentMergeBlockIt = m_mergeBlockList.end();
 
         m_mergeBlockList.buildFromDiff3(*m_pDiff3LineList, lIsThreeWay);
     }
@@ -1565,7 +1567,6 @@ void MergeResultWindow::setPaintingAllowed(bool bPaintingAllowed)
     setUpdatesEnabled(bPaintingAllowed);
     if(!bPaintingAllowed)
     {
-        m_currentMergeBlockIt = m_mergeBlockList.end();
         reset();
     }
     else
