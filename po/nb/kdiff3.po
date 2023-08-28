@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 02:28+0000\n"
+"POT-Creation-Date: 2023-08-25 02:28+0000\n"
 "PO-Revision-Date: 2011-09-04 22:27+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Listing directory: %1"
 msgstr "Lister mappe: %1"
 
-#: diff.cpp:1615 diff.cpp:1631
+#: diff.cpp:1613 diff.cpp:1629
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -104,32 +104,32 @@ msgstr ""
 "Datatap-feil:\n"
 "Hvis det kan gjenskapes, vennligst kontakt forfatteren.\n"
 
-#: diff.cpp:1617 diff.cpp:1633
+#: diff.cpp:1615 diff.cpp:1631
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Alvorlig intern feil"
 
-#: difftextwindow.cpp:586
+#: difftextwindow.cpp:590
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:588
+#: difftextwindow.cpp:592
 #, kde-format
 msgid "File %1: Line not available"
 msgstr ""
 
-#: difftextwindow.cpp:1929
+#: difftextwindow.cpp:1933
 #, kde-format
 msgid "Encoding:"
 msgstr "Tegnkoding:"
 
-#: difftextwindow.cpp:1933 mergeresultwindow.cpp:2817 optiondialog.cpp:798
+#: difftextwindow.cpp:1937 mergeresultwindow.cpp:2817 optiondialog.cpp:798
 #, kde-format
 msgid "Line end style:"
 msgstr "Linjeavslutning:"
 
-#: difftextwindow.cpp:1958 directorymergewindow.cpp:388
+#: difftextwindow.cpp:1962 directorymergewindow.cpp:388
 #: directorymergewindow.cpp:439 directorymergewindow.cpp:527
 #: directorymergewindow.cpp:2699 directorymergewindow.cpp:2825
 #: directorymergewindow.cpp:2978 mergeresultwindow.cpp:780
@@ -143,7 +143,7 @@ msgstr "Linjeavslutning:"
 msgid "A"
 msgstr "A"
 
-#: difftextwindow.cpp:1958 directorymergewindow.cpp:390
+#: difftextwindow.cpp:1962 directorymergewindow.cpp:390
 #: directorymergewindow.cpp:442 directorymergewindow.cpp:529
 #: directorymergewindow.cpp:2705 directorymergewindow.cpp:2826
 #: directorymergewindow.cpp:2979 mergeresultwindow.cpp:780
@@ -157,7 +157,7 @@ msgstr "A"
 msgid "B"
 msgstr "B"
 
-#: difftextwindow.cpp:1958 directorymergewindow.cpp:392
+#: difftextwindow.cpp:1962 directorymergewindow.cpp:392
 #: directorymergewindow.cpp:445 directorymergewindow.cpp:531
 #: directorymergewindow.cpp:2711 directorymergewindow.cpp:2827
 #: directorymergewindow.cpp:2980 mergeresultwindow.cpp:784
@@ -171,57 +171,57 @@ msgstr "B"
 msgid "C"
 msgstr "C"
 
-#: difftextwindow.cpp:1958
+#: difftextwindow.cpp:1962
 #, kde-format
 msgid "A (Base)"
 msgstr ""
 
-#: difftextwindow.cpp:1960
+#: difftextwindow.cpp:1964
 #, kde-format
 msgid "Encoding: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1961 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1965 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1961 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1965 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1961
+#: difftextwindow.cpp:1965
 #, kde-format
 msgid "Line end style: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1962
+#: difftextwindow.cpp:1966
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1990 kdiff3.cpp:932
+#: difftextwindow.cpp:1994 kdiff3.cpp:932
 #, kde-format
 msgid "Top line"
 msgstr "Øverste linje"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2003
 #, kde-format
 msgid "End"
 msgstr "Slutt"
 
-#: difftextwindow.cpp:2057 smalldialogs.cpp:163
+#: difftextwindow.cpp:2061 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr ""
 
-#: difftextwindow.cpp:2105 optiondialog.cpp:383
+#: difftextwindow.cpp:2109 optiondialog.cpp:383
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2121
+#: difftextwindow.cpp:2125
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -396,7 +396,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:791 kdiff3.cpp:801 kdiff3.cpp:813
-#: mergeresultwindow.cpp:329 pdiff.cpp:863 pdiff.cpp:1713 pdiff.cpp:1723
+#: mergeresultwindow.cpp:329 pdiff.cpp:863 pdiff.cpp:1718 pdiff.cpp:1728
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
@@ -1597,7 +1597,7 @@ msgstr ""
 msgid "Toggle Between Folder && Text View"
 msgstr ""
 
-#: kdiff3.cpp:790 pdiff.cpp:1712
+#: kdiff3.cpp:790 pdiff.cpp:1717
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr ""
@@ -1612,7 +1612,7 @@ msgstr "Lagre og avslutt"
 msgid "Quit Without Saving"
 msgstr "Avslutt uten lagring"
 
-#: kdiff3.cpp:801 pdiff.cpp:1723
+#: kdiff3.cpp:801 pdiff.cpp:1728
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Fletteresultatet kunne ikke lagres."
@@ -3281,42 +3281,42 @@ msgstr ""
 msgid "Go to Line"
 msgstr ""
 
-#: pdiff.cpp:1492
+#: pdiff.cpp:1495
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1493
+#: pdiff.cpp:1496
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1714
+#: pdiff.cpp:1719
 #, kde-format
 msgid "Save && Continue"
 msgstr "Lagre og fortsett"
 
-#: pdiff.cpp:1715
+#: pdiff.cpp:1720
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Fortsett uten lagring"
 
-#: pdiff.cpp:1913
+#: pdiff.cpp:1918
 #, kde-format
 msgid "Search complete."
 msgstr "Søk fullført."
 
-#: pdiff.cpp:1913
+#: pdiff.cpp:1918
 #, kde-format
 msgid "Search Complete"
 msgstr "Søk fullført"
 
-#: pdiff.cpp:2094
+#: pdiff.cpp:2099
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ingenting er valgt i noe av inndata-vinduene."
 
-#: pdiff.cpp:2094
+#: pdiff.cpp:2099
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Feil oppsto ved tillegg av manuelt diff-område"
