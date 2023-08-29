@@ -123,6 +123,15 @@ class MergeResultWindow: public QWidget
         eEnd
     };
 
+    enum class RangeMark
+    {
+        none = 0,
+        begin = 1,
+        end = 2,
+        current = 4
+    };
+    Q_DECLARE_FLAGS(RangeFlags, RangeMark);
+
     std::shared_ptr<LineDataVector> m_pldA = nullptr;
     std::shared_ptr<LineDataVector> m_pldB = nullptr;
     std::shared_ptr<LineDataVector> m_pldC = nullptr;
@@ -208,7 +217,7 @@ class MergeResultWindow: public QWidget
     void myUpdate(int afterMilliSecs);
     void writeLine(
         RLPainter& p, LineRef line, const QString& str,
-        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict);
+        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, RangeFlags rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict);
     void setFastSelector(MergeBlockList::iterator i);
     LineRef convertToLine(QtNumberType y);
 

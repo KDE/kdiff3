@@ -1455,7 +1455,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
 
 void MergeResultWindow::writeLine(
     RLPainter& p, LineRef line, const QString& str,
-    e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
+    e_SrcSelector srcSelect, e_MergeDetails mergeDetails, RangeFlags rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
 {
     const QFontMetrics& fm = fontMetrics();
     int fontHeight = fm.lineSpacing();
@@ -1480,7 +1480,7 @@ void MergeResultWindow::writeLine(
     else if(srcSelect == e_SrcSelector::C)
         srcName = QStringLiteral("C");
 
-    if(rangeMark & 4)
+    if(rangeMark & RangeMark::current)
     {
         p.fillRect(xOffset, yOffset, width(), fontHeight, gOptions->getCurrentRangeBgColor());
     }
@@ -1533,7 +1533,7 @@ void MergeResultWindow::writeLine(
 
     xOffset -= fm.horizontalAdvance('0');
     p.setPen(gOptions->foregroundColor());
-    if(rangeMark & 1) // begin mark
+    if(rangeMark & RangeMark::begin) // begin mark
     {
         p.drawLine(xOffset, yOffset + 1, xOffset, yOffset + fontHeight / 2);
         p.drawLine(xOffset, yOffset + 1, xOffset - 2, yOffset + 1);
@@ -1543,7 +1543,7 @@ void MergeResultWindow::writeLine(
         p.drawLine(xOffset, yOffset, xOffset, yOffset + fontHeight / 2);
     }
 
-    if(rangeMark & 2) // end mark
+    if(rangeMark & RangeMark::end) // end mark
     {
         p.drawLine(xOffset, yOffset + fontHeight / 2, xOffset, yOffset + fontHeight - 1);
         p.drawLine(xOffset, yOffset + fontHeight - 1, xOffset - 2, yOffset + fontHeight - 1);
@@ -1553,7 +1553,7 @@ void MergeResultWindow::writeLine(
         p.drawLine(xOffset, yOffset + fontHeight / 2, xOffset, yOffset + fontHeight);
     }
 
-    if(rangeMark & 4)
+    if(rangeMark & RangeMark::current)
     {
         p.fillRect(xOffset + 3, yOffset, 3, fontHeight, gOptions->foregroundColor());
         /*      p.setPen( blue );
@@ -1617,11 +1617,11 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
                         MergeEditLineList::const_iterator melIt1 = melIt;
                         ++melIt1;
 
-                        int rangeMark = 0;
-                        if(melIt == mb.list().cbegin()) rangeMark |= 1; // Begin range mark
-                        if(melIt1 == mb.list().cend()) rangeMark |= 2;  // End range mark
+                        RangeFlags rangeMark = RangeMark::none;
+                        if(melIt == mb.list().cbegin()) rangeMark |= RangeMark::begin; // Begin range mark
+                        if(melIt1 == mb.list().cend()) rangeMark |= RangeMark::end;    // End range mark
 
-                        if(mbIt == m_currentMergeBlockIt) rangeMark |= 4; // Mark of the current line
+                        if(mbIt == m_currentMergeBlockIt) rangeMark |= RangeMark::current; // Mark of the current line
 
                         const QString s = mel.getString(m_pldA, m_pldB, m_pldC);
 
