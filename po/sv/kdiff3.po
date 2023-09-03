@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-26 00:48+0000\n"
+"POT-Creation-Date: 2023-09-03 00:47+0000\n"
 "PO-Revision-Date: 2023-08-01 08:47+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -123,7 +123,7 @@ msgstr "Fil %1: Rad inte tillgänglig"
 msgid "Encoding:"
 msgstr "Kodning:"
 
-#: difftextwindow.cpp:1944 mergeresultwindow.cpp:2784 optiondialog.cpp:805
+#: difftextwindow.cpp:1944 mergeresultwindow.cpp:2789 optiondialog.cpp:805
 #, kde-format
 msgid "Line end style:"
 msgstr "Typ av radslut:"
@@ -138,12 +138,12 @@ msgstr "A (bas)"
 msgid "Encoding: %1"
 msgstr "Kodning: %1"
 
-#: difftextwindow.cpp:1972 mergeresultwindow.cpp:2830
+#: difftextwindow.cpp:1972 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1972 mergeresultwindow.cpp:2829
+#: difftextwindow.cpp:1972 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -355,7 +355,7 @@ msgstr ""
 "du vill avbryta den och avsöka katalogen igen?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
-#: mergeresultwindow.cpp:324 pdiff.cpp:870 pdiff.cpp:1745 pdiff.cpp:1755
+#: mergeresultwindow.cpp:329 pdiff.cpp:870 pdiff.cpp:1745 pdiff.cpp:1755
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -2003,12 +2003,12 @@ msgstr "Välj B för olösta konflikter med blanktecken"
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Välj C för olösta konflikter med blanktecken"
 
-#: mergeresultwindow.cpp:260
+#: mergeresultwindow.cpp:264
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Antal återstående olösta konflikter: %1 (av vilka %2 är blanktecken)"
 
-#: mergeresultwindow.cpp:322
+#: mergeresultwindow.cpp:327
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2017,29 +2017,29 @@ msgstr ""
 "Utdata har ändrats.\n"
 "Om du fortsätter kommer dina ändringar att gå förlorade."
 
-#: mergeresultwindow.cpp:765 pdiff.cpp:745
+#: mergeresultwindow.cpp:771 pdiff.cpp:745
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Alla indatafiler är binärt lika."
 
-#: mergeresultwindow.cpp:767
+#: mergeresultwindow.cpp:773
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Alla indatafiler innehåller samma text."
 
-#: mergeresultwindow.cpp:771 mergeresultwindow.cpp:775
-#: mergeresultwindow.cpp:779 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
+#: mergeresultwindow.cpp:785 pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Filerna %1 och %2 är binärt likadana.\n"
 
-#: mergeresultwindow.cpp:773 mergeresultwindow.cpp:777
-#: mergeresultwindow.cpp:781
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Filerna %1 och %2 innehåller samma text.\n"
 
-#: mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:791
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2052,27 +2052,27 @@ msgstr ""
 "Antal olösta konflikter: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:797
 #, kde-format
 msgid "Conflicts"
 msgstr "Konflikter"
 
-#: mergeresultwindow.cpp:1515
+#: mergeresultwindow.cpp:1521
 #, kde-format
 msgid "<No src line>"
 msgstr "<Ingen källrad>"
 
-#: mergeresultwindow.cpp:1523
+#: mergeresultwindow.cpp:1529
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Konflikt vid sammanfogning (bara blanktecken)>"
 
-#: mergeresultwindow.cpp:1525 mergeresultwindow.cpp:2394
+#: mergeresultwindow.cpp:1531 mergeresultwindow.cpp:2399
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Konflikter vid sammanfogning>"
 
-#: mergeresultwindow.cpp:2614
+#: mergeresultwindow.cpp:2619
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2081,13 +2081,13 @@ msgstr ""
 "Alla konflikter har inte lösts ännu.\n"
 "Filen har inte sparats."
 
-#: mergeresultwindow.cpp:2616 mergeresultwindow.cpp:2625
+#: mergeresultwindow.cpp:2621 mergeresultwindow.cpp:2630
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Konflikter kvar"
 
-#: mergeresultwindow.cpp:2623
+#: mergeresultwindow.cpp:2628
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2097,7 +2097,7 @@ msgstr ""
 "Det finns konflikter i typ av radslut. Välj typ av radslut manuellt.\n"
 "Filen har inte sparats."
 
-#: mergeresultwindow.cpp:2637
+#: mergeresultwindow.cpp:2642
 #, kde-format
 msgid ""
 "\n"
@@ -2108,47 +2108,47 @@ msgstr ""
 "\n"
 "Misslyckades skapa säkerhetskopia. Filen sparades inte."
 
-#: mergeresultwindow.cpp:2637 mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2642 mergeresultwindow.cpp:2686
 #, kde-format
 msgid "File Save Error"
 msgstr "Fel vid spara fil"
 
-#: mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2686
 #, kde-format
 msgid "Error while writing."
 msgstr "Fel vid skrivning."
 
-#: mergeresultwindow.cpp:2756
+#: mergeresultwindow.cpp:2761
 #, kde-format
 msgid "Output:"
 msgstr "Utmatning:"
 
-#: mergeresultwindow.cpp:2769 mergeresultwindow.cpp:2959
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2964
 #, kde-format
 msgid "[Modified]"
 msgstr "[Ändrad]"
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kodning för att spara:"
 
-#: mergeresultwindow.cpp:2876
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2908
+#: mergeresultwindow.cpp:2913
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodare från A: %1"
 
-#: mergeresultwindow.cpp:2910
+#: mergeresultwindow.cpp:2915
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodare från B: %1"
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2917
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodare från C: %1"
