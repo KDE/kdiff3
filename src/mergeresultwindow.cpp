@@ -1819,6 +1819,7 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
 
         if(!s.isEmpty())
         {
+            const bool selectionWasEmpty = m_selection.isEmpty();
             QtSizeType pos1, pos2;
 
             Utils::calcTokenPos(s, pos, pos1, pos2);
@@ -1826,6 +1827,8 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
             resetSelection();
             m_selection.start(line, pos1);
             m_selection.end(line, pos2);
+            if(!m_selection.isEmpty() && selectionWasEmpty)
+                Q_EMIT newSelection();
 
             update();
             // Q_EMIT selectionEnd() happens in the mouseReleaseEvent.

@@ -712,12 +712,16 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
 
         if(!s.isEmpty())
         {
+            const bool selectionWasEmpty = d->m_selection.isEmpty();
             QtSizeType pos1, pos2;
             Utils::calcTokenPos(s, pos, pos1, pos2);
 
             resetSelection();
             d->m_selection.start(line, pos1);
             d->m_selection.end(line, pos2);
+            if(!d->m_selection.isEmpty() && selectionWasEmpty)
+                Q_EMIT newSelection();
+
             update();
             // Q_EMIT d->m_selectionEnd() happens in the mouseReleaseEvent.
             showStatusLine(line);
