@@ -51,16 +51,6 @@
 #include <KParts/MainWindow>
 #include <KShortcutsDialog>
 
-// Function uses setMinSize( sizeHint ) before adding the widget.
-// void addWidget(QBoxLayout* layout, QWidget* widget);
-template <class W, class L>
-void addWidget(L* layout, W* widget)
-{
-    QSize s = widget->sizeHint();
-    widget->setMinimumSize(QSize(std::max(s.width(), 0), std::max(s.height(), 0)));
-    layout->addWidget(widget);
-}
-
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
     ProgressScope pp;
