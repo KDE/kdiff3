@@ -28,11 +28,11 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
 {
     m_widget = new KDiff3App(this, u8"KDiff3Part", this);
     assert(m_widget);
+    setStandardToolBarMenuEnabled(true);
 
     setupGUI(Default, "kdiff3_shell.rc");
     // and a status bar
     statusBar()->show();
-    //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
     setCentralWidget(m_widget);
 

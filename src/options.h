@@ -74,9 +74,6 @@ class Options
     [[nodiscard]] bool isMaximized() const { return m_bMaximized; };
     void setMaximized(const bool maximized) { m_bMaximized = maximized; };
 
-    [[nodiscard]] bool isToolBarVisible() const { return m_bShowToolBar; }
-    void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
-
     [[nodiscard]] bool isStatusBarVisible() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
@@ -136,7 +133,6 @@ class Options
     QPoint m_position = QPoint(0, 22);
     bool   m_bFullScreen = false;
     bool   m_bMaximized = false;
-    bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;
     // clang-format on
 

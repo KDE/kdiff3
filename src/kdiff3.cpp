@@ -642,9 +642,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     editFind->setStatusTip(i18n("Search for a string"));
     editFindNext = KStandardAction::findNext(this, &KDiff3App::slotEditFindNext, ac);
     editFindNext->setStatusTip(i18n("Search again for the string"));
-    /*   FIXME figure out how to implement this action
-       viewToolBar = KStandardAction::showToolbar(this, &KDiff3App::slotViewToolBar, ac);
-       viewToolBar->setStatusTip(i18n("Enables/disables the toolbar")); */
+
     viewStatusBar = KStandardAction::showStatusbar(this, &KDiff3App::slotViewStatusBar, ac);
     viewStatusBar->setStatusTip(i18n("Enables/disables the statusbar"));
     KStandardAction::keyBindings(this, &KDiff3App::slotConfigureKeys, ac);
@@ -1115,28 +1113,6 @@ void KDiff3App::slotFileQuit()
         return; // Don't quit
 
     QApplication::exit(isFileSaved() || isDirComparison() ? 0 : 1);
-}
-
-void KDiff3App::slotViewToolBar()
-{
-    assert(viewToolBar != nullptr);
-    slotStatusMsg(i18n("Toggling toolbar..."));
-    gOptions->setToolbarState(viewToolBar->isChecked());
-    ///////////////////////////////////////////////////////////////////
-    // turn Toolbar on or off
-    if(toolBar(MAIN_TOOLBAR_NAME) != nullptr)
-    {
-        if(!gOptions->isToolBarVisible())
-        {
-            toolBar(MAIN_TOOLBAR_NAME)->hide();
-        }
-        else
-        {
-            toolBar(MAIN_TOOLBAR_NAME)->show();
-        }
-    }
-
-    slotStatusMsg(i18n("Ready."));
 }
 
 void KDiff3App::slotViewStatusBar()

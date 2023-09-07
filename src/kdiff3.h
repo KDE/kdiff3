@@ -232,9 +232,6 @@ public Q_SLOTS:
     /** paste the clipboard into the document
      */
     void slotEditPaste();
-    /** toggles the toolbar
-     */
-    void slotViewToolBar();
     /** toggles the statusbar
      */
     void slotViewStatusBar();
@@ -361,7 +358,6 @@ public Q_SLOTS:
     QPointer<QAction> editCopy;
     QPointer<QAction> editPaste;
     QPointer<QAction> editSelectAll;
-    KToggleAction* viewToolBar = nullptr;
     KToggleAction* viewStatusBar = nullptr;
 
     QPointer<QShortcut> mEscapeAction;

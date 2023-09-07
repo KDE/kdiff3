@@ -23,7 +23,6 @@
 #include <KHelpClient>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KToolBar>
 
 #include <QApplication>
 #include <QCheckBox>
