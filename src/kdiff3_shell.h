@@ -54,8 +54,7 @@ public:
       static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
       return parser;
     };
-private Q_SLOTS:
-    void optionsShowToolbar();
+  private Q_SLOTS:
     void optionsShowStatusbar();
     void optionsConfigureKeys();
     void optionsConfigureToolbars();
@@ -67,7 +66,6 @@ private:
     KParts::ReadWritePart *m_part;
     KDiff3App *m_widget;
 
-    KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;
     bool m_bUnderConstruction;
 };

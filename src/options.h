@@ -70,9 +70,6 @@ class Options
     [[nodiscard]] bool isMaximised() const { return m_bMaximised; };
     void setMaximised(const bool maximised) { m_bMaximised = maximised; };
 
-    [[nodiscard]] bool isToolBarVisable() const { return m_bShowToolBar; }
-    void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
-
     [[nodiscard]] bool isStatusBarVisable() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
@@ -117,7 +114,6 @@ class Options
     QPoint m_position = QPoint(0, 22);
     bool   m_bFullScreen = false;
     bool   m_bMaximised = false;
-    bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;
 
     // These are the results of the option dialog.

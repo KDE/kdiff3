@@ -235,9 +235,6 @@ public Q_SLOTS:
     /** paste the clipboard into the document
      */
     void slotEditPaste();
-    /** toggles the toolbar
-     */
-    void slotViewToolBar();
     /** toggles the statusbar
      */
     void slotViewStatusBar();

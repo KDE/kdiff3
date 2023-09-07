@@ -15,6 +15,7 @@
 #include <QCloseEvent>
 #include <QStatusBar>
 
+#include <KActionCollection>
 #include <KConfig>
 #include <KEditToolBar>
 #include <KLocalizedString>
@@ -51,6 +52,9 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
         m_widget = qobject_cast<KDiff3App*>(m_part->widget());
         // and integrate the part's GUI with the shell's
         createGUI(m_part);
+        setStandardToolBarMenuEnabled(true);
+        KStandardAction::configureToolbars(this, &KDiff3Shell::configureToolbars, actionCollection());
+
         //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
         // tell the KParts::MainWindow that this is indeed the main widget
@@ -110,16 +114,6 @@ void KDiff3Shell::closeEvent(QCloseEvent* e)
     }
     else
         e->ignore();
-}
-
-void KDiff3Shell::optionsShowToolbar()
-{
-    // this is all very cut and paste code for showing/hiding the
-    // toolbar
-    if(m_toolbarAction->isChecked())
-        toolBar()->show();
-    else
-        toolBar()->hide();
 }
 
 void KDiff3Shell::optionsShowStatusbar()

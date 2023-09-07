@@ -69,7 +69,6 @@ void Options::init()
     addOptionItem(std::make_shared<OptionToggleAction>(false, "WindowStateFullScreen", &m_bFullScreen));
     addOptionItem(std::make_shared<OptionToggleAction>(false, "WindowStateMaximised", &m_bMaximised));
 
-    addOptionItem(std::make_shared<OptionToggleAction>(true, "Show Toolbar", &m_bShowToolBar));
     addOptionItem(std::make_shared<OptionToggleAction>(true, "Show Statusbar", &m_bShowStatusBar));
 
     //Options in Options dialog.
