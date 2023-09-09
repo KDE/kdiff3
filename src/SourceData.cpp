@@ -549,9 +549,8 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     if(gOptions->ignoreComments() && hasData())
     {
         qint64 vSize = std::min(m_normalData.lineCount(), m_lmppData.lineCount());
-        assert(vSize < limits<qint32>::max());
-        //Perform explicit cast to insure well defined behavior comparing 32-bit to a 64-bit value
-        for(qint32 i = 0; (qint64)i < vSize; ++i)
+
+        for(qint64 i = 0; i < vSize; ++i)
         {
             //TODO: Phase this out. We should not be messing with these flags outside the parser.
             (*m_normalData.m_v)[i].setPureComment((*m_lmppData.m_v)[i].isPureComment());
