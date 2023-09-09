@@ -139,7 +139,7 @@ OpenDialog::OpenDialog(
     dialogUi.lineOut->setLineEdit(new FileNameLineEdit(dialogUi.lineOut));
 }
 
-void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
+void OpenDialog::selectURL(QComboBox* pLine, bool bDir, qint32 i, bool bSave)
 {
     QString current = pLine->currentText();
     QUrl currentUrl;
@@ -182,7 +182,7 @@ void OpenDialog::selectDirB() { selectURL(dialogUi.lineB, true, 2, false); }
 void OpenDialog::selectDirC() { selectURL(dialogUi.lineC, true, 3, false); }
 void OpenDialog::selectOutputDir() { selectURL(dialogUi.lineOut, true, 4, true); }
 
-void OpenDialog::internalSlot(int i)
+void OpenDialog::internalSlot(qint32 i)
 {
     Q_EMIT internalSignal(i != 0);
 }
@@ -305,7 +305,7 @@ FindDialog::FindDialog(QWidget* pParent)
     layout->setContentsMargins(5, 5, 5, 5);
     layout->setSpacing(5);
 
-    int line = 0;
+    qint32 line = 0;
     layout->addWidget(new QLabel(i18n("Search text:"), this), line, 0, 1, 2);
     ++line;
 
@@ -363,7 +363,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
                            const QString& historyStartRegExpToolTip, const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip)
     : QDialog(pParent)
 {
-    int line = 0;
+    qint32 line = 0;
     setWindowTitle(i18n("Regular Expression Tester"));
     QGridLayout* pGrid = new QGridLayout(this);
     pGrid->setSpacing(5);

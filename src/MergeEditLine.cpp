@@ -268,7 +268,7 @@ void MergeBlockList::updateDefaults(const e_SrcSelector defaultSelector, const b
             else
             {
                 Diff3LineList::const_iterator d3llit = mb.id3l();
-                int j;
+                qint32 j;
 
                 for(j = 0; j < mb.srcRangeLength; ++j)
                 {
@@ -333,7 +333,7 @@ void MergeBlock::removeEmptySource()
 }
 
 // Returns the iterator to the MergeBlock after the split
-MergeBlockList::iterator MergeBlockList::splitAtDiff3LineIdx(int d3lLineIdx)
+MergeBlockList::iterator MergeBlockList::splitAtDiff3LineIdx(qint32 d3lLineIdx)
 {
     MergeBlockList::iterator i;
     for(i = begin(); i != end(); ++i)

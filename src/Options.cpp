@@ -107,11 +107,11 @@ void Options::readOptions(const KSharedConfigPtr config)
 
     read(&cvm);
 
-    if(m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Min)
-        m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::None;
+    if(m_whiteSpace2FileMergeDefault <= (qint32)e_SrcSelector::Min)
+        m_whiteSpace2FileMergeDefault = (qint32)e_SrcSelector::None;
 
-    if(m_whiteSpace2FileMergeDefault > (int)e_SrcSelector::Max)
-        m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::C;
+    if(m_whiteSpace2FileMergeDefault > (qint32)e_SrcSelector::Max)
+        m_whiteSpace2FileMergeDefault = (qint32)e_SrcSelector::C;
 }
 
 const QString Options::parseOptions(const QStringList& optionList)

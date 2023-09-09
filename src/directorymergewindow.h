@@ -45,7 +45,7 @@ class DirectoryMergeWindow : public QTreeView
    );
    bool isFileSelected();
    bool isDirectoryMergeInProgress();
-   int totalColumnWidth();
+   qint32 totalColumnWidth();
    bool isSyncMode();
    bool isScanning();
    void initDirectoryMergeActions(KDiff3App* pKDiff3App, KActionCollection* ac);
@@ -125,7 +125,7 @@ protected Q_SLOTS:
 private:
   class DirectoryMergeWindowPrivate;
   class DirMergeItemDelegate;
-  [[nodiscard]] int getIntFromIndex(const QModelIndex& index) const;
+  [[nodiscard]] qint32 getIntFromIndex(const QModelIndex& index) const;
 
   std::unique_ptr<DirectoryMergeWindowPrivate> d;
 };

@@ -64,14 +64,14 @@ class MergeResultWindow: public QWidget
     void reset();
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
-    [[nodiscard]] int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr) const;
+    [[nodiscard]] qint32 getNumberOfUnsolvedConflicts(qint32* pNrOfWhiteSpaceConflicts = nullptr) const;
     void choose(const e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
-    [[nodiscard]] int getMaxTextWidth(); // width of longest text line
+    [[nodiscard]] qint32 getMaxTextWidth(); // width of longest text line
     [[nodiscard]] LineType getNofLines() const;
-    [[nodiscard]] int getVisibleTextAreaWidth() const; // text area width without the border
-    [[nodiscard]] int getNofVisibleLines() const;
+    [[nodiscard]] qint32 getVisibleTextAreaWidth() const; // text area width without the border
+    [[nodiscard]] qint32 getNofVisibleLines() const;
     [[nodiscard]] QString getSelection() const;
     void resetSelection();
     void showNumberOfConflicts(bool showIfNone = false);
@@ -142,31 +142,31 @@ class MergeResultWindow: public QWidget
     const Diff3LineList* m_pDiff3LineList = nullptr;
     TotalDiffStatus* m_pTotalDiffStatus = nullptr;
 
-    int m_delayedDrawTimer = 0;
+    qint32 m_delayedDrawTimer = 0;
     e_OverviewMode mOverviewMode = e_OverviewMode::eOMNormal;
     QString m_persistentStatusMessage;
 
     MergeBlockList m_mergeBlockList;
     MergeBlockList::iterator m_currentMergeBlockIt;
 
-    int m_currentPos;
+    qint32 m_currentPos;
 
     QPixmap m_pixmap;
     LineRef m_firstLine = 0;
-    int m_horizScrollOffset = 0;
+    qint32 m_horizScrollOffset = 0;
     LineType m_nofLines = 0;
-    int m_maxTextWidth = -1;
+    qint32 m_maxTextWidth = -1;
     bool m_bMyUpdate = false;
     bool m_bInsertMode = true;
     bool m_bModified = false;
     void setModified(bool bModified = true);
 
-    int m_scrollDeltaX = 0;
-    int m_scrollDeltaY = 0;
-    SafeInt<int> m_cursorXPos = 0;
-    SafeInt<int> m_cursorXPixelPos = 0;
+    qint32 m_scrollDeltaX = 0;
+    qint32 m_scrollDeltaY = 0;
+    SafeInt<qint32> m_cursorXPos = 0;
+    SafeInt<qint32> m_cursorXPixelPos = 0;
     LineRef m_cursorYPos = 0;
-    int m_cursorOldXPixelPos = 0;
+    qint32 m_cursorOldXPixelPos = 0;
     bool m_bCursorOn = true; // blinking on and off each second
     QTimer m_cursorTimer;
     bool m_bCursorUpdate = false;
@@ -191,7 +191,7 @@ class MergeResultWindow: public QWidget
     void focusInEvent(QFocusEvent* e) override;
     //Costum functions
     void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
-    QString getString(int lineIdx);
+    QString getString(qint32 lineIdx);
     void showUnsolvedConflictsStatusMessage();
 
     void collectHistoryInformation(e_SrcSelector src, const HistoryRange& historyRange, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
@@ -212,26 +212,26 @@ class MergeResultWindow: public QWidget
         MergeBlockList::iterator& mbIt,
         MergeEditLineList::iterator& melIt);
 
-    int getTextXOffset() const;
+    qint32 getTextXOffset() const;
     QVector<QTextLayout::FormatRange> getTextLayoutForLine(LineRef line, const QString& s, QTextLayout& textLayout);
-    void myUpdate(int afterMilliSecs);
+    void myUpdate(qint32 afterMilliSecs);
     void writeLine(
         RLPainter& p, LineRef line, const QString& str,
         enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, RangeFlags rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict);
     void setFastSelector(MergeBlockList::iterator i);
-    LineRef convertToLine(QtNumberType y);
+    LineRef convertToLine(qint32 y);
 
     bool canCut() { return hasFocus() && !getSelection().isEmpty(); }
     bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
 
-    bool deleteSelection2(QString& str, SafeInt<int>& x, int& y,
+    bool deleteSelection2(QString& str, SafeInt<qint32>& x, qint32& y,
                           MergeBlockList::iterator& mbIt, MergeEditLineList::iterator& melIt);
     bool doRelevantChangesExist();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
     void setFirstLine(LineRef firstLine);
-    void setHorizScrollOffset(const int horizScrollOffset);
+    void setHorizScrollOffset(const qint32 horizScrollOffset);
 
     void slotGoCurrent();
     void slotGoTop();
@@ -273,7 +273,7 @@ class MergeResultWindow: public QWidget
     void slotCopy();
     void slotSelectAll();
 
-    void scrollVertically(QtNumberType deltaY);
+    void scrollVertically(qint32 deltaY);
 
     void deleteSelection();
     void pasteClipboard(bool bFromSelection);
@@ -282,10 +282,10 @@ class MergeResultWindow: public QWidget
 
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void scrollMergeResultWindow(int deltaX, int deltaY);
+    void scrollMergeResultWindow(qint32 deltaX, qint32 deltaY);
     void modifiedChanged(bool bModified);
     void setFastSelectorRange(LineRef line1, LineType nofLines);
-    void sourceMask(int srcMask, int enabledMask);
+    void sourceMask(qint32 srcMask, qint32 enabledMask);
     void resizeSignal();
     void selectionEnd();
     void newSelection();

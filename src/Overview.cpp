@@ -54,7 +54,7 @@ void Overview::slotRedraw()
     update();
 }
 
-void Overview::setRange(LineRef firstLine, QtNumberType pageHeight)
+void Overview::setRange(LineRef firstLine, qint32 pageHeight)
 {
     assert(firstLine.isValid());
     m_firstLine = firstLine;
@@ -89,8 +89,8 @@ e_OverviewMode Overview::getOverviewMode()
 
 void Overview::mousePressEvent(QMouseEvent* e)
 {
-    int h = height() - 1;
-    int h1 = h * m_pageHeight / std::max(1, m_nofLines) + 3;
+    qint32 h = height() - 1;
+    qint32 h1 = h * m_pageHeight / std::max(1, m_nofLines) + 3;
     if(h > 0)
         Q_EMIT setLine((e->y() - h1 / 2) * m_nofLines / h);
 }
@@ -113,23 +113,23 @@ void Overview::setPaintingAllowed(bool bAllowPainting)
     }
 }
 
-void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines)
+void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, qint32 x, qint32 w, qint32 h, qint32 nofLines)
 {
     p.setPen(Qt::black);
     p.drawLine(x, 0, x, h);
 
     if(nofLines == 0) return;
 
-    int line = 0;
-    int oldY = 0;
-    int oldConflictY = -1;
-    int wrapLineIdx = 0;
+    qint32 line = 0;
+    qint32 oldY = 0;
+    qint32 oldConflictY = -1;
+    qint32 wrapLineIdx = 0;
     Diff3LineList::const_iterator i;
 
     for(i = m_pDiff3LineList->begin(); i != m_pDiff3LineList->end();)
     {
         const Diff3Line& d3l = *i;
-        int y = h * (line + 1) / nofLines;
+        qint32 y = h * (line + 1) / nofLines;
         MergeBlock lMergeBlock;
         e_MergeDetails md;
         bool bConflict;
@@ -225,8 +225,8 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
         }
 
-        int x2 = x;
-        int w2 = w;
+        qint32 x2 = x;
+        qint32 w2 = w;
 
         if(!KDiff3App::isTripleDiff())
         {
@@ -279,8 +279,8 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
 void Overview::paintEvent(QPaintEvent*)
 {
     if(m_pDiff3LineList == nullptr) return;
-    int h = height() - 1;
-    int w = width();
+    qint32 h = height() - 1;
+    qint32 w = width();
 
     const auto dpr = devicePixelRatioF();
     if(m_pixmap.size() != size() * dpr)
@@ -306,7 +306,7 @@ void Overview::paintEvent(QPaintEvent*)
 
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_pixmap);
-    int y1 = 0, h1 = 0;
+    qint32 y1 = 0, h1 = 0;
     if(m_nofLines > 0)
     {
         y1 = h * m_firstLine / m_nofLines - 1;

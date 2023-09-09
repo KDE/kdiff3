@@ -35,7 +35,7 @@ class DefaultFileAccessJobHandler: public FileAccessJobHandler
     FileAccessJobHandler* copy(FileAccess* inFileAccess) override { return new DefaultFileAccessJobHandler(inFileAccess);}
 
     bool get(void* pDestBuffer, long maxLength) override;
-    bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1) override;
+    bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, qint32 permissions = -1) override;
     bool stat(bool bWantToWrite = false) override;
     bool copyFile(const QString& dest) override;
     bool rename(const FileAccess& dest) override;

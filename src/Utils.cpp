@@ -127,7 +127,7 @@ bool Utils::isCTokenChar(QChar c)
 
 //TODO: Needed? Only user of isCTokenChar.
 /// Calculate where a token starts and ends, given the x-position on screen.
-void Utils::calcTokenPos(const QString& s, int posOnScreen, QtSizeType& pos1, QtSizeType& pos2)
+void Utils::calcTokenPos(const QString& s, qint32 posOnScreen, QtSizeType& pos1, QtSizeType& pos2)
 {
     QtSizeType pos = std::max(0, posOnScreen);
     if(pos >= s.length())

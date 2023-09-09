@@ -106,5 +106,5 @@ static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to 
 using LineType = LineRef::LineType;
 
 //Break in an obvious way if way can't get LineCounts from Qt supplied ints without overflow issues.
-static_assert(sizeof(LineType) >= sizeof(QtNumberType)); //Generally assumed by KDiff3
+static_assert(sizeof(LineType) >= sizeof(qint32)); //Generally assumed by KDiff3
 #endif

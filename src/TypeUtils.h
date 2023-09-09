@@ -25,8 +25,6 @@ using QtSizeType = qint32;
 using QtSizeType = qsizetype;
 #endif
 using FileOffset = quint64;
-using QtNumberType = qint32;//Qt insists on one type for all but does not create a typedef for it.
-
 using PtrDiffRef = size_t;
 
 template <typename T>
@@ -46,7 +44,6 @@ using SafeSignedRange =
 template <typename T>
 using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, KDiff3_exception_policy>;
 
-static_assert(sizeof(int) >= sizeof(qint32), "Legacy LP32 systems/compilers not supported"); // e.g. Windows 16-bit
 static_assert(sizeof(FileOffset) >= sizeof(QtSizeType), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
 
 #endif

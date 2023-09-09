@@ -41,7 +41,7 @@ class ValueMap
     virtual void writeEntry(const QString&, const QColor&);
     virtual void writeEntry(const QString&, const QSize&);
     virtual void writeEntry(const QString&, const QPoint&);
-    virtual void writeEntry(const QString&, int);
+    virtual void writeEntry(const QString&, qint32);
     virtual void writeEntry(const QString&, bool);
     virtual void writeEntry(const QString&, const QStringList&);
     virtual void writeEntry(const QString&, const QString&);
@@ -54,7 +54,7 @@ class ValueMap
     QSize       readEntry(const QString& s, const QSize defaultVal);
     QPoint      readEntry(const QString& s, const QPoint defaultVal);
     bool        readEntry(const QString& s, bool bDefault);
-    int         readEntry(const QString& s, int iDefault);
+    qint32         readEntry(const QString& s, qint32 iDefault);
     QStringList readEntry(const QString& s, const QStringList& defaultVal);
 
   private:
@@ -63,7 +63,7 @@ class ValueMap
     virtual QSize       readSizeEntry(const QString&, const QSize* defaultVal);
     virtual QPoint      readPointEntry(const QString&, const QPoint* defaultVal);
     virtual bool        readBoolEntry(const QString&, bool bDefault);
-    virtual int         readNumEntry(const QString&, int iDefault);
+    virtual qint32         readNumEntry(const QString&, qint32 iDefault);
     virtual QStringList readListEntry(const QString&, const QStringList& defaultVal);
     virtual QString     readStringEntry(const QString&, const QString&);
 };

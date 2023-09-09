@@ -187,7 +187,7 @@ void ProgressDialog::pop(bool bRedrawUpdate)
     }
 }
 
-void ProgressDialog::setInformation(const QString& info, int current, bool bRedrawUpdate)
+void ProgressDialog::setInformation(const QString& info, qint32 current, bool bRedrawUpdate)
 {
     if(m_progressStack.empty())
         return;
@@ -358,16 +358,16 @@ void ProgressDialog::recalc(bool bUpdate)
                 else
                 {
                     std::list<ProgressLevelData>::iterator i = m_progressStack.begin();
-                    int value = int(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin));
+                    qint32 value = qint32(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin));
                     dialogUi.progressBar->setValue(value);
                     if(m_bStayHidden && m_pStatusProgressBar)
                         m_pStatusProgressBar->setValue(value);
 
                     ++i;
                     if(i != m_progressStack.end())
-                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin)));
+                        dialogUi.subProgressBar->setValue((qint32)lround(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin)));
                     else
-                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
+                        dialogUi.subProgressBar->setValue((qint32)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }
 
                 if(!m_bStayHidden)

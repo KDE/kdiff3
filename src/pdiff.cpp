@@ -454,19 +454,19 @@ void KDiff3App::createCaption()
 
 void KDiff3App::setHScrollBarRange()
 {
-    int w1 = m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getMaxTextWidth() : 0;
-    int w2 = m_pDiffTextWindow2 != nullptr && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getMaxTextWidth() : 0;
-    int w3 = m_pDiffTextWindow3 != nullptr && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getMaxTextWidth() : 0;
+    qint32 w1 = m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getMaxTextWidth() : 0;
+    qint32 w2 = m_pDiffTextWindow2 != nullptr && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getMaxTextWidth() : 0;
+    qint32 w3 = m_pDiffTextWindow3 != nullptr && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getMaxTextWidth() : 0;
 
-    int wm = m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getMaxTextWidth() : 0;
+    qint32 wm = m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getMaxTextWidth() : 0;
 
-    int v1 = m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getVisibleTextAreaWidth() : 0;
-    int v2 = m_pDiffTextWindow2 != nullptr && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getVisibleTextAreaWidth() : 0;
-    int v3 = m_pDiffTextWindow3 != nullptr && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getVisibleTextAreaWidth() : 0;
-    int vm = m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getVisibleTextAreaWidth() : 0;
+    qint32 v1 = m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getVisibleTextAreaWidth() : 0;
+    qint32 v2 = m_pDiffTextWindow2 != nullptr && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getVisibleTextAreaWidth() : 0;
+    qint32 v3 = m_pDiffTextWindow3 != nullptr && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getVisibleTextAreaWidth() : 0;
+    qint32 vm = m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getVisibleTextAreaWidth() : 0;
 
     // Find the minimum, but don't consider 0.
-    int pageStep = v1;
+    qint32 pageStep = v1;
 
     if((pageStep == 0 || pageStep > v2) && v2 > 0)
         pageStep = v2;
@@ -475,7 +475,7 @@ void KDiff3App::setHScrollBarRange()
     if((pageStep == 0 || pageStep > vm) && vm > 0)
         pageStep = vm;
 
-    int rangeMax = 0;
+    qint32 rangeMax = 0;
     if(w1 > v1 && w1 - v1 > rangeMax && v1 > 0)
         rangeMax = w1 - v1;
     if(w2 > v2 && w2 - v2 > rangeMax && v2 > 0)
@@ -490,7 +490,7 @@ void KDiff3App::setHScrollBarRange()
     m_pHScrollBar->setPageStep(pageStep);
 }
 
-void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
+void KDiff3App::resizeDiffTextWindowHeight(qint32 newHeight)
 {
     m_DTWHeight = newHeight;
 
@@ -501,7 +501,7 @@ void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
     setHScrollBarRange();
 }
 
-void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
+void KDiff3App::scrollDiffTextWindow(qint32 deltaX, qint32 deltaY)
 {
     if(deltaY != 0 && DiffTextWindow::mVScrollBar != nullptr)
     {
@@ -511,7 +511,7 @@ void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
         m_pHScrollBar->QScrollBar::setValue(m_pHScrollBar->value() + deltaX);
 }
 
-void KDiff3App::scrollMergeResultWindow(int deltaX, int deltaY)
+void KDiff3App::scrollMergeResultWindow(qint32 deltaX, qint32 deltaY)
 {
     if(deltaY != 0)
         MergeResultWindow::mVScrollBar->setValue(MergeResultWindow::mVScrollBar->value() + deltaY);
@@ -519,7 +519,7 @@ void KDiff3App::scrollMergeResultWindow(int deltaX, int deltaY)
         m_pHScrollBar->setValue(m_pHScrollBar->value() + deltaX);
 }
 
-void KDiff3App::sourceMask(int srcMask, int enabledMask)
+void KDiff3App::sourceMask(qint32 srcMask, qint32 enabledMask)
 {
     chooseA->blockSignals(true);
     chooseB->blockSignals(true);
@@ -615,15 +615,15 @@ void KDiff3App::initView()
 
     autoAdvance->setEnabled(true);
 
-    QList<int> sizes = pVSplitter->sizes();
-    int total = sizes[0] + sizes[1];
+    QList<qint32> sizes = pVSplitter->sizes();
+    qint32 total = sizes[0] + sizes[1];
     if(total < 10)
         total = 100;
     sizes[0] = total / 2;
     sizes[1] = total / 2;
     pVSplitter->setSizes(sizes);
 
-    QList<int> hSizes = {1, 1, 1};
+    QList<qint32> hSizes = {1, 1, 1};
 
     m_pDiffWindowSplitter->setSizes(hSizes);
 
@@ -689,15 +689,15 @@ void KDiff3App::slotFinishMainInit()
 
     setHScrollBarRange();
 
-    int newHeight = m_pDiffTextWindow1->getNofVisibleLines();
-    /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
+    qint32 newHeight = m_pDiffTextWindow1->getNofVisibleLines();
+    /*qint32 newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
     m_DTWHeight = newHeight;
 
     DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
     DiffTextWindow::mVScrollBar->setPageStep(newHeight);
     m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), DiffTextWindow::mVScrollBar->pageStep());
 
-    int d3l = -1;
+    qint32 d3l = -1;
     if(!m_manualDiffHelpList.empty())
         d3l = m_manualDiffHelpList.front().calcManualDiffFirstDiff3LineIdx(mDiff3LineVector);
 
@@ -705,7 +705,7 @@ void KDiff3App::slotFinishMainInit()
 
     if(d3l >= 0)
     {
-        int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
+        qint32 line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
         DiffTextWindow::mVScrollBar->setValue(std::max(0, line - 1));
     }
     else
@@ -855,7 +855,7 @@ void KDiff3App::slotFileOpen()
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
-        int result = Compat::warningTwoActions(this,
+        qint32 result = Compat::warningTwoActions(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18nc("Error dialog title", "Warning"),
                                                KGuiItem(i18n("Abort")),
@@ -878,7 +878,7 @@ void KDiff3App::slotFileOpen()
                                                                      m_bDirCompare ? !gDirInfo->destDir().prettyAbsPath().isEmpty() : !m_outputFilename.isEmpty(),
                                                                      QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename)));
 
-        int status = d->exec();
+        qint32 status = d->exec();
         if(status == QDialog::Accepted)
         {
             m_sd1->setFilename(d->getFileA());
@@ -1188,7 +1188,7 @@ void KDiff3App::slotGoToLine()
                 ([&pDialog, pLineNumEdit]() {
                     if(pLineNumEdit->text() != "")
                     {
-                        int lineNum = pLineNumEdit->text().toInt();
+                        qint32 lineNum = pLineNumEdit->text().toInt();
                         lineNum = qMax(lineNum - 2, 0);
                         //No need for anything else here setValue triggers a valueChanged signal internally.
                         DiffTextWindow::mVScrollBar->setValue(lineNum);
@@ -1451,7 +1451,7 @@ void KDiff3App::slotRecalcWordWrap()
 }
 
 // visibleTextWidthForPrinting is >=0 only for printing, otherwise the really visible width is used
-void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
+void KDiff3App::recalcWordWrap(qint32 visibleTextWidthForPrinting)
 {
     m_bRecalcWordWrapPosted = true;
     mainWindowEnable(false);
@@ -1521,7 +1521,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     }
 }
 
-void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
+void KDiff3App::slotFinishRecalcWordWrap(qint32 visibleTextWidthForPrinting)
 {
     assert(m_firstD3LIdx >= 0);
 
@@ -1730,7 +1730,7 @@ bool KDiff3App::canContinue()
     // First test if anything must be saved.
     if(m_bOutputModified)
     {
-        int result = Compat::warningTwoActionsCancel(this,
+        qint32 result = Compat::warningTwoActionsCancel(this,
                                                      i18n("The merge result has not been saved."),
                                                      i18nc("Error dialog title", "Warning"),
                                                      KGuiItem(i18n("Save && Continue")),
@@ -1870,7 +1870,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow1->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, p + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1887,7 +1887,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow2->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, p + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1905,7 +1905,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow3->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, p + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1923,7 +1923,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pMergeResultWindow->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
             MergeResultWindow::mVScrollBar->setValue(d3vLine - MergeResultWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<int>>(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;

@@ -813,7 +813,7 @@ bool KDiff3App::queryClose()
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
-        int result = Compat::warningTwoActions(this,
+        qint32 result = Compat::warningTwoActions(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18nc("Error dialog title", "Warning"),
                                                KStandardGuiItem::quit(),
@@ -912,8 +912,8 @@ void KDiff3App::slotFilePrint()
         printDialog->setPrintRange(QAbstractPrintDialog::AllPages);
     printDialog->setFromTo(0, 0);
 
-    int currentFirstLine = m_pDiffTextWindow1->getFirstLine();
-    int currentFirstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(currentFirstLine);
+    qint32 currentFirstLine = m_pDiffTextWindow1->getFirstLine();
+    qint32 currentFirstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(currentFirstLine);
 
     // do some printer initialization
     printer.setFullPage(false);
@@ -926,11 +926,11 @@ void KDiff3App::slotFilePrint()
         RLPainter painter(&printer, gOptions->m_bRightToLeftLanguage, width(), fontMetrics().horizontalAdvance('W'));
 
         QPaintDevice* pPaintDevice = painter.device();
-        int dpiy = pPaintDevice->logicalDpiY();
-        int columnDistance = qRound((0.5 / 2.54) * dpiy); // 0.5 cm between the columns
+        qint32 dpiy = pPaintDevice->logicalDpiY();
+        qint32 columnDistance = qRound((0.5 / 2.54) * dpiy); // 0.5 cm between the columns
 
-        int columns = m_bTripleDiff ? 3 : 2;
-        int columnWidth = (pPaintDevice->width() - (columns - 1) * columnDistance) / columns;
+        qint32 columns = m_bTripleDiff ? 3 : 2;
+        qint32 columnWidth = (pPaintDevice->width() - (columns - 1) * columnDistance) / columns;
 
         QFont f = gOptions->defaultFont();
         f.setPointSizeF(f.pointSizeF() - 1); // Print with slightly smaller font.
@@ -939,11 +939,11 @@ void KDiff3App::slotFilePrint()
 
         QString topLineText = i18n("Top line");
 
-        int headerWidth = fm.horizontalAdvance(m_sd1->getAliasName() + ", " + topLineText + ": 01234567");
-        int headerLines = headerWidth / columnWidth + 1;
+        qint32 headerWidth = fm.horizontalAdvance(m_sd1->getAliasName() + ", " + topLineText + ": 01234567");
+        qint32 headerLines = headerWidth / columnWidth + 1;
 
-        int headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
-        int footerMargin = fm.height() + 3;
+        qint32 headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
+        qint32 footerMargin = fm.height() + 3;
 
         QRect view(0, headerMargin, pPaintDevice->width(), pPaintDevice->height() - (headerMargin + footerMargin));
         QRect view1(0 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
@@ -1008,7 +1008,7 @@ void KDiff3App::slotFilePrint()
             }
         }
 
-        int page = 1;
+        qint32 page = 1;
 
         ProgressScope pp;
         ProgressProxy::setMaxNofSteps(totalNofPages);

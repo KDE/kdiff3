@@ -39,7 +39,7 @@ class ProgressDialog: public QDialog
 
     void setStayHidden(bool bStayHidden);
     void setInformation(const QString& info, bool bRedrawUpdate = true);
-    void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
+    void setInformation(const QString& info, qint32 current, bool bRedrawUpdate = true);
     void setCurrent(quint64 current, bool bRedrawUpdate = true);
     void step(bool bRedrawUpdate = true);
     void clear();
@@ -104,9 +104,9 @@ class ProgressDialog: public QDialog
     quint64 backgroundTaskCount = 0;
     std::list<ProgressLevelData> m_progressStack;
 
-    int m_progressDelayTimer = 0;
-    int m_delayedHideTimer = 0;
-    int m_delayedHideStatusBarWidgetTimer = 0;
+    qint32 m_progressDelayTimer = 0;
+    qint32 m_delayedHideTimer = 0;
+    qint32 m_delayedHideStatusBarWidgetTimer = 0;
     QPointer<QEventLoop> m_eventLoop;
 
     QElapsedTimer m_t1;

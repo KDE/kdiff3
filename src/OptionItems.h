@@ -154,7 +154,7 @@ class OptionNum : public Option<T>
 };
 
 typedef Option<bool> OptionToggleAction;
-typedef OptionNum<int> OptionInt;
+typedef OptionNum<qint32> OptionInt;
 typedef Option<QPoint> OptionPoint;
 typedef Option<QSize> OptionSize;
 typedef Option<QStringList> OptionStringList;
@@ -173,12 +173,12 @@ class OptionCodec : public OptionString
     void setCurrent(const QByteArray& name) { OptionString::setCurrent(QString::fromLatin1(name)); }
     [[nodiscard]] const QString& defaultName() const { return mDefaultName; }
 
-    void saveDefaultIndex(const SafeInt<QtNumberType> i) { defaultIndex = i; };
-    [[nodiscard]] QtNumberType getDefaultIndex() const { return defaultIndex; }
+    void saveDefaultIndex(const SafeInt<qint32> i) { defaultIndex = i; };
+    [[nodiscard]] qint32 getDefaultIndex() const { return defaultIndex; }
 
   private:
     const QString mDefaultName = QLatin1String(QTextCodec::codecForLocale()->name());
-    QtNumberType defaultIndex = 0;
+    qint32 defaultIndex = 0;
     Q_DISABLE_COPY(OptionCodec)
 };
 

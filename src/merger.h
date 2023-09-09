@@ -40,10 +40,10 @@ class Merger
         DiffList::const_iterator it;
         std::shared_ptr<const DiffList> pDiffList;
         Diff d;
-        int idx;
+        qint32 idx;
 
       public:
-        MergeData(const std::shared_ptr<const DiffList>& p, int i);
+        MergeData(const std::shared_ptr<const DiffList>& p, qint32 i);
         [[nodiscard]] bool eq() const;
         void update();
         [[nodiscard]] bool isEnd() const;

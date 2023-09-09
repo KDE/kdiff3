@@ -164,7 +164,7 @@ class Options
 
     bool m_bReplaceTabs = false;
     bool m_bAutoIndentation = true;
-    int  m_tabSize = 8;
+    qint32  m_tabSize = 8;
     bool m_bAutoCopySelection = false;
     bool m_bSameEncoding = true;
     QTextCodec* m_pEncodingA = nullptr;
@@ -186,8 +186,8 @@ class Options
     bool m_bShowInfoDialogs = true;
     bool m_bDiff3AlignBC = false;
 
-    int  m_whiteSpace2FileMergeDefault = 0;
-    int  m_whiteSpace3FileMergeDefault = 0;
+    qint32  m_whiteSpace2FileMergeDefault = 0;
+    qint32  m_whiteSpace3FileMergeDefault = 0;
     bool m_bIgnoreCase = false;
     bool m_bIgnoreNumbers = false;
     bool m_bIgnoreComments = false;
@@ -200,12 +200,12 @@ class Options
     QString m_historyEntryStartRegExp;
     bool m_bHistoryMergeSorting = false;
     QString m_historyEntryStartSortKeyOrder = "4,3,2,5,1,6";
-    int m_maxNofHistoryEntries = -1;
+    qint32 m_maxNofHistoryEntries = -1;
     QString m_IrrelevantMergeCmd;
     bool m_bAutoSaveAndQuitOnMergeWithoutConflicts = false;
 
     bool m_bAutoAdvance = false;
-    int  m_autoAdvanceDelay = 500;
+    qint32  m_autoAdvanceDelay = 500;
 
     RecentFileList m_recentAFiles;
     RecentFileList m_recentBFiles;

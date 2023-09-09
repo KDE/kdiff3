@@ -53,7 +53,7 @@ class OpenDialog: public QDialog
 
     void accept() override;
   private:
-    void selectURL(QComboBox* pLine, bool bDir, int i, bool bSave);
+    void selectURL(QComboBox* pLine, bool bDir, qint32 i, bool bSave);
 
     void fixCurrentText(QComboBox* pCB);
     bool m_bInputFileNameChanged;
@@ -81,7 +81,7 @@ class OpenDialog: public QDialog
     void selectDirC();
     void selectOutputName();
     void selectOutputDir();
-    void internalSlot(int);
+    void internalSlot(qint32);
     void inputFilenameChanged();
     void slotSwapCopyNames(QAction*) const;
   Q_SIGNALS:

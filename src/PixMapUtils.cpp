@@ -77,7 +77,7 @@ void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middl
     {
 #include "xpm/file.xpm"
 #include "xpm/folder.xpm"
-        const int smallIcon = qApp->style()->pixelMetric(QStyle::PM_SmallIconSize);
+        const qint32 smallIcon = qApp->style()->pixelMetric(QStyle::PM_SmallIconSize);
         s_pm_dir = new QPixmap(QIcon::fromTheme(QStringLiteral("folder")).pixmap(smallIcon));
         if(s_pm_dir->size() != QSize(16, 16))
         {

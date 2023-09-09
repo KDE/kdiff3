@@ -165,7 +165,7 @@ void MergeFileInfos::sort(Qt::SortOrder order)
 {
     std::sort(m_children.begin(), m_children.end(), MfiCompare(order));
 
-    for(int i = 0; i < m_children.count(); ++i)
+    for(qint32 i = 0; i < m_children.count(); ++i)
         m_children[i]->sort(order);
 }
 
@@ -220,7 +220,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, DirectoryMerge
                 existsInC() ? getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
                 "", "", "", &diffStatus());
-            int nofNonwhiteConflicts = diffStatus().getNonWhitespaceConflicts();
+            qint32 nofNonwhiteConflicts = diffStatus().getNonWhitespaceConflicts();
 
             if(gOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
             {
@@ -571,7 +571,7 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("EqualAC", mfi.isEqualAC());
     vm.writeEntry("EqualBC", mfi.isEqualBC());
 
-    vm.writeEntry("MergeOperation", (int)mfi.getOperation());
+    vm.writeEntry("MergeOperation", (qint32)mfi.getOperation());
     vm.writeEntry("DirA", mfi.isDirA());
     vm.writeEntry("DirB", mfi.isDirB());
     vm.writeEntry("DirC", mfi.isDirC());
@@ -580,9 +580,9 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("LinkC", mfi.isLinkC());
     vm.writeEntry("OperationComplete", !mfi.isOperationRunning());
 
-    vm.writeEntry("AgeA", (int)mfi.getAgeA());
-    vm.writeEntry("AgeB", (int)mfi.getAgeB());
-    vm.writeEntry("AgeC", (int)mfi.getAgeC());
+    vm.writeEntry("AgeA", (qint32)mfi.getAgeA());
+    vm.writeEntry("AgeB", (qint32)mfi.getAgeB());
+    vm.writeEntry("AgeC", (qint32)mfi.getAgeC());
     vm.writeEntry("ConflictingAges", mfi.conflictingAges()); // Equal age but files are not!
 
     vm.save(ts);

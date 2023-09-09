@@ -72,12 +72,12 @@ class RecalcWordWrapThread: public QThread
   private:
     static QAtomicInteger<size_t> s_runnableCount;
 
-    int m_visibleTextWidth;
+    qint32 m_visibleTextWidth;
     size_t m_cacheIdx;
 
   public:
     static QAtomicInteger<size_t> s_maxNofRunnables;
-    RecalcWordWrapThread(DiffTextWindow* parent, int visibleTextWidth, SafeInt<size_t> cacheIdx):
+    RecalcWordWrapThread(DiffTextWindow* parent, qint32 visibleTextWidth, SafeInt<size_t> cacheIdx):
         QThread(parent), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
         setTerminationEnabled(true);
@@ -116,7 +116,7 @@ class WrapLineCacheData
 {
   public:
     WrapLineCacheData() = default;
-    WrapLineCacheData(int d3LineIdx, int textStart, int textLength):
+    WrapLineCacheData(qint32 d3LineIdx, qint32 textStart, qint32 textLength):
         m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
     [[nodiscard]] qint32 d3LineIdx() const { return m_d3LineIdx; }
     [[nodiscard]] qint32 textStart() const { return m_textStart; }
@@ -184,22 +184,22 @@ class DiffTextWindowData
     }
 
     [[nodiscard]] QString getString(const LineType d3lIdx) const;
-    [[nodiscard]] QString getLineString(const int line) const;
+    [[nodiscard]] QString getLineString(const qint32 line) const;
 
     void writeLine(
         RLPainter& p, const LineData* pld,
         const std::shared_ptr<const DiffList>& pLineDiff1, const std::shared_ptr<const DiffList>& pLineDiff2, const LineRef& line,
         const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
-        int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect);
+        qint32 wrapLineOffset, qint32 wrapLineLength, bool bWrapLine, const QRect& invalidRect);
 
-    void draw(RLPainter& p, const QRect& invalidRect, const int beginLine, const LineRef& endLine);
+    void draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine);
 
-    void myUpdate(int afterMilliSecs);
+    void myUpdate(qint32 afterMilliSecs);
 
-    [[nodiscard]] int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
-    [[nodiscard]] LineRef convertLineOnScreenToLineInSource(const int lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const;
+    [[nodiscard]] qint32 leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
+    [[nodiscard]] LineRef convertLineOnScreenToLineInSource(const qint32 lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const;
 
-    void prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth = -1);
+    void prepareTextLayout(QTextLayout& textLayout, qint32 visibleTextWidth = -1);
 
     [[nodiscard]] bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
     [[nodiscard]] const QString& getFileName() const { return m_filename; }
@@ -217,7 +217,7 @@ class DiffTextWindowData
     LineType m_size = 0;
     QString m_filename;
     bool m_bWordWrap = false;
-    int m_delayedDrawTimer = 0;
+    qint32 m_delayedDrawTimer = 0;
 
     const Diff3LineVector* mDiff3LineVector = nullptr;
     Diff3WrapLineVector m_diff3WrapLineVector;
@@ -234,14 +234,14 @@ class DiffTextWindowData
 
     LineRef m_firstLine = 0;
     LineRef m_oldFirstLine;
-    int m_horizScrollOffset = 0;
-    int m_lineNumberWidth = 0;
+    qint32 m_horizScrollOffset = 0;
+    qint32 m_lineNumberWidth = 0;
     QAtomicInt m_maxTextWidth = -1;
 
     Selection m_selection;
 
-    int m_scrollDeltaX = 0;
-    int m_scrollDeltaY = 0;
+    qint32 m_scrollDeltaX = 0;
+    qint32 m_scrollDeltaY = 0;
 
     bool m_bMyUpdate = false;
 
@@ -293,7 +293,7 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
 
 qint32 DiffTextWindow::getLineNumberWidth() const
 {
-    return (int)floor(log10((double)std::max(d->m_size, 1))) + 1;
+    return (qint32)floor(log10((double)std::max(d->m_size, 1))) + 1;
 }
 
 DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
@@ -302,7 +302,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     QWidget(pParent),
     m_app(app)
 {
-    setObjectName(QString("DiffTextWindow%1").arg((int)winIdx));
+    setObjectName(QString("DiffTextWindow%1").arg((qint32)winIdx));
     setAttribute(Qt::WA_OpaquePaintEvent);
     setUpdatesEnabled(false);
 
@@ -452,7 +452,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
     }
 }
 
-void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineType linesPerPage, const QColor& fgColor)
+void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineType linesPerPage, const QColor& fgColor)
 {
     QRect clipRect = view;
     clipRect.setTop(0);
@@ -460,7 +460,7 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
     painter.translate(view.left(), 0);
     QFontMetrics fm = painter.fontMetrics();
     {
-        int lineHeight = fm.height() + fm.ascent();
+        qint32 lineHeight = fm.height() + fm.ascent();
         const QRectF headerRect(0, 5, view.width(), 3 * (lineHeight));
         QTextOption options;
         options.setWrapMode(QTextOption::WordWrap);
@@ -479,18 +479,18 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
 
 void DiffTextWindow::setFirstLine(LineRef firstLine)
 {
-    int fontHeight = fontMetrics().lineSpacing();
+    qint32 fontHeight = fontMetrics().lineSpacing();
 
     LineRef newFirstLine = std::max<LineRef>(0, firstLine);
 
-    int deltaY = fontHeight * (d->m_firstLine - newFirstLine);
+    qint32 deltaY = fontHeight * (d->m_firstLine - newFirstLine);
 
     d->m_firstLine = newFirstLine;
 
     if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
     {
         LineRef line;
-        int pos;
+        qint32 pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
         d->m_selection.end(line, pos);
         update();
@@ -508,14 +508,14 @@ LineRef DiffTextWindow::getFirstLine() const
     return d->m_firstLine;
 }
 
-void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
+void DiffTextWindow::setHorizScrollOffset(qint32 horizScrollOffset)
 {
     d->m_horizScrollOffset = std::max(0, horizScrollOffset);
 
     if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
     {
         LineRef line;
-        int pos;
+        qint32 pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
         d->m_selection.end(line, pos);
     }
@@ -523,7 +523,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
     update();
 }
 
-int DiffTextWindow::getMaxTextWidth() const
+qint32 DiffTextWindow::getMaxTextWidth() const
 {
     if(d->m_bWordWrap)
     {
@@ -533,7 +533,7 @@ int DiffTextWindow::getMaxTextWidth() const
     {
         d->m_maxTextWidth = 0;
         QTextLayout textLayout(QString(), font(), this);
-        for(int i = 0; i < d->m_size; ++i)
+        for(qint32 i = 0; i < d->m_size; ++i)
         {
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
@@ -586,7 +586,7 @@ LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, Lin
     return newFirstLine;
 }
 
-void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
+void DiffTextWindow::setFastSelectorRange(qint32 line1, qint32 nofLines)
 {
     d->m_fastSelectorLine1 = line1;
     d->m_fastSelectorNofLines = nofLines;
@@ -615,7 +615,7 @@ void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
 {
     LineType d3lIdx = convertLineToDiff3LineIdx(lineFromPos);
 
-    if(d->getDiff3LineVector() != nullptr && d3lIdx >= 0 && d3lIdx < (int)d->getDiff3LineVector()->size())
+    if(d->getDiff3LineVector() != nullptr && d3lIdx >= 0 && d3lIdx < (qint32)d->getDiff3LineVector()->size())
     {
         const Diff3Line* pD3l = (*d->getDiff3LineVector())[d3lIdx];
         if(pD3l != nullptr)
@@ -634,7 +634,7 @@ void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
     }
 }
 
-void DiffTextWindow::scrollVertically(QtNumberType deltaY)
+void DiffTextWindow::scrollVertically(qint32 deltaY)
 {
     mVScrollBar->setValue(mVScrollBar->value() + deltaY);
 }
@@ -651,14 +651,14 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
     if(e->button() == Qt::LeftButton)
     {
         LineRef line;
-        int pos;
+        qint32 pos;
         convertToLinePos(e->x(), e->y(), line, pos);
         qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
         //TODO: Fix after line number area is converted to a QWidget.
-        int fontWidth = fontMetrics().horizontalAdvance('0');
-        int xOffset = d->leftInfoWidth() * fontWidth;
+        qint32 fontWidth = fontMetrics().horizontalAdvance('0');
+        qint32 xOffset = d->leftInfoWidth() * fontWidth;
 
         if((!gOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (gOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
         {
@@ -689,7 +689,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
     if(e->button() == Qt::LeftButton)
     {
         LineRef line;
-        QtNumberType pos;
+        qint32 pos;
         convertToLinePos(e->x(), e->y(), line, pos);
         qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
@@ -754,7 +754,7 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
 void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 { //Handles selection highlighting.
     LineRef line;
-    int pos;
+    qint32 pos;
 
     qCInfo(kdiffDiffTextWindow) << "Mouse Moved";
     qCDebug(kdiffDiffTextWindow) << "d->m_lastKnownMousePos = " << d->m_lastKnownMousePos << ", e->pos() = " << e->pos();
@@ -776,9 +776,9 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        int fontWidth = fm.horizontalAdvance('0');
-        int deltaX = 0;
-        int deltaY = 0;
+        qint32 fontWidth = fm.horizontalAdvance('0');
+        qint32 deltaX = 0;
+        qint32 deltaY = 0;
         //TODO: Fix after line number area is converted to a QWidget.
         //FIXME: Why are we manually doing Layout adjustments?
         if(!gOptions->m_bRightToLeftLanguage)
@@ -791,8 +791,8 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
             if(e->x() > width() - 1 - d->leftInfoWidth() * fontWidth) deltaX = +1 + abs(e->x() - (width() - 1 - d->leftInfoWidth() * fontWidth)) / fontWidth;
             if(e->x() < fontWidth) deltaX = -1 - abs(e->x() - fontWidth) / fontWidth;
         }
-        if(e->y() < 0) deltaY = -1 - (int)std::pow<int, int>(e->y(), 2) / (int)std::pow(fm.lineSpacing(), 2);
-        if(e->y() > height()) deltaY = 1 + (int)std::pow(e->y() - height(), 2) / (int)std::pow(fm.lineSpacing(), 2);
+        if(e->y() < 0) deltaY = -1 - (qint32)std::pow<qint32, qint32>(e->y(), 2) / (qint32)std::pow(fm.lineSpacing(), 2);
+        if(e->y() > height()) deltaY = 1 + (qint32)std::pow(e->y() - height(), 2) / (qint32)std::pow(fm.lineSpacing(), 2);
         if((deltaX != 0 && d->m_scrollDeltaX != deltaX) || (deltaY != 0 && d->m_scrollDeltaY != deltaY))
         {
             d->m_scrollDeltaX = deltaX;
@@ -823,7 +823,7 @@ void DiffTextWindow::wheelEvent(QWheelEvent* pWheelEvent)
     }
 }
 
-void DiffTextWindowData::myUpdate(int afterMilliSecs)
+void DiffTextWindowData::myUpdate(qint32 afterMilliSecs)
 {
     if(m_delayedDrawTimer)
         m_pDiffTextWindow->killTimer(m_delayedDrawTimer);
@@ -838,7 +838,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
     if(d->m_bMyUpdate)
     {
-        int fontHeight = fontMetrics().lineSpacing();
+        qint32 fontHeight = fontMetrics().lineSpacing();
 
         if(d->m_selection.getOldLastLine().isValid())
         {
@@ -854,8 +854,8 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
                 firstLine = std::min(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
                 lastLine = std::max(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
             }
-            int y1 = (firstLine - d->m_firstLine) * fontHeight;
-            int y2 = std::min(height(), (lastLine - d->m_firstLine + 1) * fontHeight);
+            qint32 y1 = (firstLine - d->m_firstLine) * fontHeight;
+            qint32 y2 = std::min(height(), (lastLine - d->m_firstLine + 1) * fontHeight);
 
             if(y1 < height() && y2 > 0)
             {
@@ -883,12 +883,12 @@ void DiffTextWindow::resetSelection()
     update();
 }
 
-void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos)
+void DiffTextWindow::convertToLinePos(qint32 x, qint32 y, LineRef& line, qint32& pos)
 {
     const QFontMetrics& fm = fontMetrics();
-    int fontHeight = fm.lineSpacing();
+    qint32 fontHeight = fm.lineSpacing();
 
-    int yOffset = -d->m_firstLine * fontHeight;
+    qint32 yOffset = -d->m_firstLine * fontHeight;
 
     line = (y - yOffset) / fontHeight;
     if(line.isValid() && (!gOptions->wordWrapOn() || line < d->m_diff3WrapLineVector.count()))
@@ -908,7 +908,7 @@ class FormatRangeHelper
     QFont m_font;
     QPen m_pen;
     QColor m_background;
-    int m_currentPos;
+    qint32 m_currentPos;
 
     QVector<QTextLayout::FormatRange> m_formatRanges;
 
@@ -955,7 +955,7 @@ class FormatRangeHelper
     }
 };
 
-void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth)
+void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, qint32 visibleTextWidth)
 {
     QTextOption textOption;
 
@@ -979,23 +979,23 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
         QVector<QTextLayout::FormatRange> formats;
         QTextLayout::FormatRange formatRange;
         formatRange.start = 0;
-        formatRange.length = SafeInt<int>(textLayout.text().length());
+        formatRange.length = SafeInt<qint32>(textLayout.text().length());
         formatRange.format.setFont(m_pDiffTextWindow->font());
         formats.append(formatRange);
         textLayout.setFormats(formats);
     }
     textLayout.beginLayout();
 
-    int leading = m_pDiffTextWindow->fontMetrics().leading();
-    int height = 0;
+    qint32 leading = m_pDiffTextWindow->fontMetrics().leading();
+    qint32 height = 0;
     //TODO: Fix after line number area is converted to a QWidget.
-    int fontWidth = m_pDiffTextWindow->fontMetrics().horizontalAdvance('0');
-    int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
-    int textWidth = visibleTextWidth;
+    qint32 fontWidth = m_pDiffTextWindow->fontMetrics().horizontalAdvance('0');
+    qint32 xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
+    qint32 textWidth = visibleTextWidth;
     if(textWidth < 0)
         textWidth = m_pDiffTextWindow->width() - xOffset;
 
-    int indentation = 0;
+    qint32 indentation = 0;
     while(true)
     {
         QTextLine line = textLayout.createLine();
@@ -1036,23 +1036,23 @@ void DiffTextWindowData::writeLine(
     const ChangeFlags whatChanged,
     const ChangeFlags whatChanged2,
     const LineRef& srcLineIdx,
-    int wrapLineOffset,
-    int wrapLineLength,
+    qint32 wrapLineOffset,
+    qint32 wrapLineLength,
     bool bWrapLine,
     const QRect& invalidRect)
 {
     QFont normalFont = p.font();
 
     const QFontMetrics& fm = p.fontMetrics();
-    int fontHeight = fm.lineSpacing();
-    int fontAscent = fm.ascent();
-    int fontWidth = fm.horizontalAdvance('0');
+    qint32 fontHeight = fm.lineSpacing();
+    qint32 fontAscent = fm.ascent();
+    qint32 fontWidth = fm.horizontalAdvance('0');
 
-    int xOffset = 0;
-    int yOffset = (line - m_firstLine) * fontHeight;
+    qint32 xOffset = 0;
+    qint32 yOffset = (line - m_firstLine) * fontHeight;
 
-    int fastSelectorLine1 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1);
-    int fastSelectorLine2 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1 + m_fastSelectorNofLines) - 1;
+    qint32 fastSelectorLine1 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1);
+    qint32 fastSelectorLine2 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1 + m_fastSelectorNofLines) - 1;
 
     bool bFastSelectionRange = (line >= fastSelectorLine1 && line <= fastSelectorLine2);
     QColor bgColor = gOptions->backgroundColor();
@@ -1114,7 +1114,7 @@ void DiffTextWindowData::writeLine(
             merger.next();
         }
 
-        int outPos = 0;
+        qint32 outPos = 0;
 
         QtSizeType lineLength = m_bWordWrap ? wrapLineOffset + wrapLineLength : lineString.length();
 
@@ -1176,7 +1176,7 @@ void DiffTextWindowData::writeLine(
 
     //TODO: Fix after line number area is converted to a QWidget.
     xOffset = (m_lineNumberWidth + 2) * fontWidth;
-    int xLeft = m_lineNumberWidth * fontWidth;
+    qint32 xLeft = m_lineNumberWidth * fontWidth;
     p.setPen(gOptions->foregroundColor());
     if(pld != nullptr)
     {
@@ -1256,7 +1256,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     d->m_selection.clearOldSelection();
 }
 
-void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const LineType nofLinesPerPage)
+void DiffTextWindow::print(RLPainter& p, const QRect&, qint32 firstLine, const LineType nofLinesPerPage)
 {
     if(d->getDiff3LineVector() == nullptr || !updatesEnabled() ||
        (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
@@ -1271,7 +1271,7 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const Line
     d->m_firstLine = oldFirstLine;
 }
 
-void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int beginLine, const LineRef& endLine)
+void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine)
 {
     if(m_pLineData == nullptr || m_pLineData->empty()) return;
     //TODO: Fix after line number area is converted to a QWidget.
@@ -1299,10 +1299,10 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
 
     p.setPen(m_cThis);
 
-    for(int line = beginLine; line < endLine; ++line)
+    for(qint32 line = beginLine; line < endLine; ++line)
     {
-        int wrapLineOffset = 0;
-        int wrapLineLength = 0;
+        qint32 wrapLineOffset = 0;
+        qint32 wrapLineLength = 0;
         const Diff3Line* d3l = nullptr;
         bool bWrapLine = false;
         if(m_bWordWrap)
@@ -1379,9 +1379,9 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
 {
     QSize newSize = e->size();
     QFontMetrics fm = fontMetrics();
-    int visibleLines = newSize.height() / fm.lineSpacing() - 2;
+    qint32 visibleLines = newSize.height() / fm.lineSpacing() - 2;
     //TODO: Fix after line number area is converted to a QWidget.
-    int visibleColumns = newSize.width() / fm.horizontalAdvance('0') - d->leftInfoWidth();
+    qint32 visibleColumns = newSize.width() / fm.horizontalAdvance('0') - d->leftInfoWidth();
 
     if(e->size().height() != e->oldSize().height())
         Q_EMIT resizeHeightChangedSignal(visibleLines);
@@ -1397,7 +1397,7 @@ LineType DiffTextWindow::getNofVisibleLines() const
     return height() / fm.lineSpacing() - 1;
 }
 
-int DiffTextWindow::getVisibleTextAreaWidth() const
+qint32 DiffTextWindow::getVisibleTextAreaWidth() const
 {
     //TODO: Check after line number area is converted to a QWidget.
     QFontMetrics fm = fontMetrics();
@@ -1485,7 +1485,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& 
         {
             QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
             //TODO: Provide error message when failsafe is triggered.
-            if(Q_UNLIKELY(pos > limits<int>::max()))
+            if(Q_UNLIKELY(pos > limits<qint32>::max()))
             {
                 qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
                 continue;
@@ -1601,7 +1601,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
     update();
 }
 
-LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const int lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const
+LineRef DiffTextWindowData::convertLineOnScreenToLineInSource(const qint32 lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const
 {
     LineRef line;
     if(lineOnScreen >= 0)
@@ -1683,7 +1683,7 @@ bool DiffTextWindow::startRunnables()
     }
 }
 
-void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth)
+void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, qint32 visibleTextWidth)
 {
     if(d->getDiff3LineVector() == nullptr || !isVisible())
     {
@@ -1724,7 +1724,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
             d->m_diff3WrapLineVector.resize(0);
             d->m_wrapLineCacheList.clear();
             setUpdatesEnabled(false);
-            for(int i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
+            for(qint32 i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
                 s_runnables.push_back(new RecalcWordWrapThread(this, visibleTextWidth, j));
             }
@@ -1736,7 +1736,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
     }
 }
 
-void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, size_t cacheListIdx)
+void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx)
 {
     if(d->m_bWordWrap)
     {
@@ -1768,7 +1768,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                 textLayout.setText(s);
                 d->prepareTextLayout(textLayout, visibleTextWidth);
                 linesNeeded = textLayout.lineCount();
-                for(QtNumberType l = 0; l < linesNeeded; ++l)
+                for(qint32 l = 0; l < linesNeeded; ++l)
                 {
                     QTextLine line = textLayout.lineAt(l);
                     wrapLineCache.push_back(WrapLineCacheData(i, line.textStart(), line.textLength()));
@@ -1819,7 +1819,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
 
             if(wrapLineVectorSize > 0)
             {
-                int j;
+                qint32 j;
                 for(j = 0; wrapLineIdx < d->m_diff3WrapLineVector.size() && j < d3l.linesNeededForDisplay(); ++j, ++wrapLineIdx)
                 {
                     Diff3WrapLine& d3wl = d->m_diff3WrapLineVector[wrapLineIdx];
@@ -1855,7 +1855,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         LineType firstD3LineIdx = SafeInt<LineType>(cacheListIdx * s_linesPerRunnable);
         LineType endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, (LineType)size);
 
-        int maxTextWidth = d->m_maxTextWidth.loadRelaxed(); // current value
+        qint32 maxTextWidth = d->m_maxTextWidth.loadRelaxed(); // current value
         QTextLayout textLayout(QString(), font(), this);
         for(LineType i = firstD3LineIdx; i < endIdx; ++i)
         {
@@ -1868,7 +1868,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
                 maxTextWidth = qCeil(textLayout.maximumWidth());
         }
 
-        for(int prevMaxTextWidth = d->m_maxTextWidth.fetchAndStoreOrdered(maxTextWidth);
+        for(qint32 prevMaxTextWidth = d->m_maxTextWidth.fetchAndStoreOrdered(maxTextWidth);
             prevMaxTextWidth > maxTextWidth;
             prevMaxTextWidth = d->m_maxTextWidth.fetchAndStoreOrdered(maxTextWidth))
         {
@@ -2003,11 +2003,11 @@ void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
     if(pDTW && pDTW->getDiff3LineVector())
     {
         QString s = i18n("Top line");
-        int lineNumberWidth = pDTW->getLineNumberWidth();
+        qint32 lineNumberWidth = pDTW->getLineNumberWidth();
 
         LineRef topVisiableLine = pDTW->calcTopLineInFile(firstLine);
 
-        int w = m_pTopLine->fontMetrics().horizontalAdvance(s + ' ' + QString().fill('0', lineNumberWidth));
+        qint32 w = m_pTopLine->fontMetrics().horizontalAdvance(s + ' ' + QString().fill('0', lineNumberWidth));
         m_pTopLine->setMinimumWidth(w);
 
         if(!topVisiableLine.isValid())
@@ -2108,9 +2108,9 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         m_pContextEncodingMenu = new QMenu(this);
         QMenu* pContextEncodingSubMenu = new QMenu(m_pContextEncodingMenu);
 
-        int currentTextCodecEnum = m_pSourceData->getEncoding()->mibEnum(); // the codec that will be checked in the context menu
-        const QList<int> mibs = QTextCodec::availableMibs();
-        QList<int> codecEnumList;
+        qint32 currentTextCodecEnum = m_pSourceData->getEncoding()->mibEnum(); // the codec that will be checked in the context menu
+        const QList<qint32> mibs = QTextCodec::availableMibs();
+        QList<qint32> codecEnumList;
 
         // Adding "main" encodings
         insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
@@ -2130,7 +2130,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         }
         // Submenu to add the rest of available encodings
         pContextEncodingSubMenu->setTitle(i18n("Other"));
-        for(int i: mibs)
+        for(qint32 i: mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)
@@ -2143,12 +2143,12 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
     }
 }
 
-void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& codecEnumList, QMenu* pMenu, int currentTextCodecEnum) const
+void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<qint32>& codecEnumList, QMenu* pMenu, qint32 currentTextCodecEnum) const
 {
     if(pCodec == nullptr)
         return;
 
-    int CodecMIBEnum = pCodec->mibEnum();
+    qint32 CodecMIBEnum = pCodec->mibEnum();
     if(!codecEnumList.contains(CodecMIBEnum))
     {
         QAction* pAction = new QAction(pMenu); // menu takes ownership, so deleting the menu deletes the action too.

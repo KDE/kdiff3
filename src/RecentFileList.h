@@ -28,7 +28,7 @@ class RecentFileList: public QStringList
     }
 
   private:
-    constexpr static int maxNofRecentFiles = 10;
+    constexpr static qint32 maxNofRecentFiles = 10;
 };
 
 #endif /* RECENTFILELIST_H */

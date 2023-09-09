@@ -147,7 +147,7 @@ class CommentParserTest : public QObject
         QVERIFY(test.isPureComment());
 
         test = DefaultCommentParser();
-        test.processLine("  int i = 8 / 8 * 3;/* comment*/");
+        test.processLine("  qint32 i = 8 / 8 * 3;/* comment*/");
         QVERIFY(!test.inComment());
         QVERIFY(!test.isSkipable());
         QVERIFY(!test.isPureComment());
@@ -268,7 +268,7 @@ class CommentParserTest : public QObject
     {
         DefaultCommentParser test;
 
-        test.processLine("  int i = 8 / 8 * 3;");
+        test.processLine("  qint32 i = 8 / 8 * 3;");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isSkipable());
@@ -313,7 +313,7 @@ class CommentParserTest : public QObject
     void removeComment()
     {
         DefaultCommentParser test;
-        QString line=u8"  int i = 8 / 8 * 3;", correct=u8"  int i = 8 / 8 * 3;";
+        QString line=u8"  qint32 i = 8 / 8 * 3;", correct=u8"  qint32 i = 8 / 8 * 3;";
 
         test.processLine(line);
         test.removeComment(line);
@@ -321,14 +321,14 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
-        correct = line = u8"  //int i = 8 / 8 * 3;";
+        correct = line = u8"  //qint32 i = 8 / 8 * 3;";
 
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);
 
         test = DefaultCommentParser();
-        correct = line = u8"//  int i = 8 / 8 * 3;";
+        correct = line = u8"//  qint32 i = 8 / 8 * 3;";
 
         test.processLine(line);
         test.removeComment(line);
@@ -336,8 +336,8 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
-        line = u8"  int i = 8 / 8 * 3;// comment";
-        correct = u8"  int i = 8 / 8 * 3;          ";
+        line = u8"  qint32 i = 8 / 8 * 3;// comment";
+        correct = u8"  qint32 i = 8 / 8 * 3;          ";
 
         test.processLine(line);
         test.removeComment(line);
@@ -345,15 +345,15 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
-        line = u8"  int i = 8 / 8 * 3;/* comment";
-        correct = u8"  int i = 8 / 8 * 3;          ";
+        line = u8"  qint32 i = 8 / 8 * 3;/* comment";
+        correct = u8"  qint32 i = 8 / 8 * 3;          ";
 
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
 
-        correct = line = u8"  int i = 8 / 8 * 3;/* mot a comment";
+        correct = line = u8"  qint32 i = 8 / 8 * 3;/* mot a comment";
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);
@@ -369,8 +369,8 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
-        line = u8"  int i = 8 / 8 * 3;/* comment*/";
-        correct = u8"  int i = 8 / 8 * 3;            ";
+        line = u8"  qint32 i = 8 / 8 * 3;/* comment*/";
+        correct = u8"  qint32 i = 8 / 8 * 3;            ";
 
         test.processLine(line);
         test.removeComment(line);
@@ -378,7 +378,7 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
-        correct = line = u8"  /*int i = 8 / 8 * 3;/* comment*/";
+        correct = line = u8"  /*qint32 i = 8 / 8 * 3;/* comment*/";
 
         test.processLine(line);
         test.removeComment(line);
@@ -387,8 +387,8 @@ class CommentParserTest : public QObject
 
         //line with multiple comments weird but legal c/c++
         test = DefaultCommentParser();
-        line = u8"  int /*why?*/ i = 8 / 8 * 3;/* comment*/";
-        correct = u8"  int          i = 8 / 8 * 3;            ";
+        line = u8"  qint32 /*why?*/ i = 8 / 8 * 3;/* comment*/";
+        correct = u8"  qint32          i = 8 / 8 * 3;            ";
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);

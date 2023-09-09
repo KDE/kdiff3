@@ -60,7 +60,7 @@ void ProgressProxy::setInformation(const QString& info, bool bRedrawUpdate)
     setInformationSig(info, bRedrawUpdate);
 }
 
-void ProgressProxy::setInformation(const QString& info, int current, bool bRedrawUpdate)
+void ProgressProxy::setInformation(const QString& info, qint32 current, bool bRedrawUpdate)
 {
     setCurrentSig(current, false);
     setInformationSig(info, bRedrawUpdate);

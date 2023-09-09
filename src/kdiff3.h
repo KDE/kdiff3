@@ -64,7 +64,7 @@ class ReversibleScrollBar : public QScrollBar
 {
     Q_OBJECT
     bool* m_pbRightToLeftLanguage;
-    int m_realVal;
+    qint32 m_realVal;
 
   public:
     ReversibleScrollBar(Qt::Orientation o, bool* pbRightToLeftLanguage)
@@ -76,7 +76,7 @@ class ReversibleScrollBar : public QScrollBar
     }
     void setAgain() { setValue(m_realVal); }
 
-    void setValue(int i)
+    void setValue(qint32 i)
     {
         if(m_pbRightToLeftLanguage != nullptr && *m_pbRightToLeftLanguage)
             QScrollBar::setValue(maximum() - (i - minimum()));
@@ -84,12 +84,12 @@ class ReversibleScrollBar : public QScrollBar
             QScrollBar::setValue(i);
     }
 
-    [[nodiscard]] int value() const
+    [[nodiscard]] qint32 value() const
     {
         return m_realVal;
     }
   public Q_SLOTS:
-    void slotValueChanged(int i)
+    void slotValueChanged(qint32 i)
     {
         m_realVal = i;
         if(m_pbRightToLeftLanguage != nullptr && *m_pbRightToLeftLanguage)
@@ -98,7 +98,7 @@ class ReversibleScrollBar : public QScrollBar
     }
 
   Q_SIGNALS:
-    void valueChanged2(int);
+    void valueChanged2(qint32);
 };
 
 /*
@@ -240,16 +240,16 @@ public Q_SLOTS:
      */
     void slotStatusMsg(const QString& text);
 
-    void resizeDiffTextWindowHeight(int newHeight);
+    void resizeDiffTextWindowHeight(qint32 newHeight);
     void slotRecalcWordWrap();
     void postRecalcWordWrap();
-    void slotFinishRecalcWordWrap(int visibleTextWidth);
+    void slotFinishRecalcWordWrap(qint32 visibleTextWidth);
 
     void showPopupMenu(const QPoint& point);
 
-    void scrollDiffTextWindow(int deltaX, int deltaY);
-    void scrollMergeResultWindow(int deltaX, int deltaY);
-    void sourceMask(int srcMask, int enabledMask);
+    void scrollDiffTextWindow(qint32 deltaX, qint32 deltaY);
+    void scrollMergeResultWindow(qint32 deltaX, qint32 deltaY);
+    void sourceMask(qint32 srcMask, qint32 enabledMask);
 
     void slotDirShowBoth();
     void slotDirViewToggle();
@@ -339,7 +339,7 @@ public Q_SLOTS:
 
     [[nodiscard]] QStatusBar* statusBar() const;
     [[nodiscard]] KToolBar* toolBar(const QLatin1String &toolBarId) const;
-    void recalcWordWrap(int visibleTextWidthForPrinting = -1);
+    void recalcWordWrap(qint32 visibleTextWidthForPrinting = -1);
 
     bool canCut();
     bool canCopy();
@@ -451,7 +451,7 @@ public Q_SLOTS:
     ManualDiffHelpList m_manualDiffHelpList;
 
     LineType m_neededLines = 0;
-    int m_DTWHeight = 0;
+    qint32 m_DTWHeight = 0;
     bool m_bOutputModified = false;
     bool m_bFileSaved = false;
     bool m_bTimerBlock = false; // Synchronization
@@ -467,7 +467,7 @@ public Q_SLOTS:
     bool m_bAutoMode = false;
     bool m_bRecalcWordWrapPosted = false;
 
-    int m_firstD3LIdx = 0; // only needed during recalcWordWrap
+    qint32 m_firstD3LIdx = 0; // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
 
     bool mRunnablesStarted = false;

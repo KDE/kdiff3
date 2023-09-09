@@ -67,16 +67,16 @@ class DiffTextWindow: public QWidget
     void setupConnections(const KDiff3App* app);
 
     void reset();
-    void convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos);
+    void convertToLinePos(qint32 x, qint32 y, LineRef& line, qint32& pos);
 
     [[nodiscard]] QString getSelection() const;
     [[nodiscard]] LineRef getFirstLine() const;
     LineRef calcTopLineInFile(const LineRef firstLine) const;
 
-    [[nodiscard]] int getMaxTextWidth() const;
+    [[nodiscard]] qint32 getMaxTextWidth() const;
     [[nodiscard]] LineType getNofLines() const;
     [[nodiscard]] LineType getNofVisibleLines() const;
-    [[nodiscard]] int getVisibleTextAreaWidth() const;
+    [[nodiscard]] qint32 getVisibleTextAreaWidth() const;
 
     LineType convertLineToDiff3LineIdx(const LineRef line) const;
     LineRef convertDiff3LineIdxToLine(const LineType d3lIdx) const;
@@ -91,11 +91,11 @@ class DiffTextWindow: public QWidget
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType) const;
 
     void setPaintingAllowed(bool bAllowPainting);
-    void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
-    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, size_t cacheListIdx);
+    void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, qint32 visibleTextWidth);
+    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
 
-    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineType linesPerPage, const QColor& fgColor);
-    void print(RLPainter& painter, const QRect& r, int firstLine, const LineType nofLinesPerPage);
+    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineType linesPerPage, const QColor& fgColor);
+    void print(RLPainter& painter, const QRect& r, qint32 firstLine, const LineType nofLinesPerPage);
 
     static bool startRunnables();
 
@@ -112,28 +112,28 @@ class DiffTextWindow: public QWidget
 
     void setSourceData(const QSharedPointer<SourceData>& inData);
 
-    void scrollVertically(QtNumberType deltaY);
+    void scrollVertically(qint32 deltaY);
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void resizeHeightChangedSignal(int nofVisibleLines);
-    void resizeWidthChangedSignal(int nofVisibleColumns);
-    void scrollDiffTextWindow(int deltaX, int deltaY);
+    void resizeHeightChangedSignal(qint32 nofVisibleLines);
+    void resizeWidthChangedSignal(qint32 nofVisibleColumns);
+    void scrollDiffTextWindow(qint32 deltaX, qint32 deltaY);
     void newSelection();
     void selectionEnd();
     void setFastSelectorLine(LineType line);
     void gotFocus();
     void lineClicked(e_SrcSelector winIdx, LineRef line);
 
-    void finishRecalcWordWrap(int visibleTextWidthForPrinting);
+    void finishRecalcWordWrap(qint32 visibleTextWidthForPrinting);
 
     void finishDrop();
 
     void firstLineChanged(const LineRef firstLine);
   public Q_SLOTS:
     void setFirstLine(LineRef line);
-    void setHorizScrollOffset(int horizScrollOffset);
+    void setHorizScrollOffset(qint32 horizScrollOffset);
     void resetSelection();
-    void setFastSelectorRange(int line1, int nofLines);
+    void setFastSelectorRange(qint32 line1, qint32 nofLines);
     void slotRefresh();
 
     void slotSelectAll();
@@ -159,7 +159,7 @@ class DiffTextWindow: public QWidget
 
   private:
     static std::vector<RecalcWordWrapThread*> s_runnables;
-    static constexpr int s_linesPerRunnable = 2000;
+    static constexpr qint32 s_linesPerRunnable = 2000;
 
     /*
       This list exists solely to auto disconnect boost signals.
@@ -236,9 +236,9 @@ class EncodingLabel: public QLabel
   private:
     QMenu* m_pContextEncodingMenu;
     QSharedPointer<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
-    static const int m_maxRecentEncodings = 5;
+    static const qint32 m_maxRecentEncodings = 5;
 
-    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum) const;
+    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<qint32>& CodecEnumList, QMenu* pMenu, qint32 currentTextCodecEnum) const;
 };
 
 #endif

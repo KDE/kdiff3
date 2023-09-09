@@ -37,7 +37,7 @@ class Overview : public QWidget
 
     void init(Diff3LineList* pDiff3LineList);
     void reset();
-    void setRange(LineRef firstLine, QtNumberType pageHeight);
+    void setRange(LineRef firstLine, qint32 pageHeight);
     void setPaintingAllowed(bool bAllowPainting);
 
     e_OverviewMode getOverviewMode();
@@ -52,7 +52,7 @@ class Overview : public QWidget
   private:
     const Diff3LineList* m_pDiff3LineList;
     LineRef m_firstLine;
-    int m_pageHeight;
+    qint32 m_pageHeight;
     QPixmap m_pixmap;
     e_OverviewMode mOverviewMode;
     LineType m_nofLines;
@@ -60,7 +60,7 @@ class Overview : public QWidget
     void paintEvent(QPaintEvent* e) override;
     void mousePressEvent(QMouseEvent* e) override;
     void mouseMoveEvent(QMouseEvent* e) override;
-    void drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines);
+    void drawColumn(QPainter& p, e_OverviewMode eOverviewMode, qint32 x, qint32 w, qint32 h, qint32 nofLines);
 };
 
 #endif // !OVERVIEW_H

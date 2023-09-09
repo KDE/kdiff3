@@ -80,7 +80,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
     }
 }
 
-int main(int argc, char* argv[])
+qint32 main(qint32 argc, char* argv[])
 {
     constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
     /*
@@ -207,7 +207,7 @@ int main(int argc, char* argv[])
             p = new KDiff3Shell();
         },
         Qt::QueuedConnection);
-    int retVal = QApplication::exec();
+    qint32 retVal = QApplication::exec();
     delete p;
     return retVal;
 }

@@ -216,13 +216,13 @@ class OptionLineEdit: public QComboBox, public OptionString
     QStringList m_list;
 };
 
-class OptionIntEdit: public QLineEdit, public OptionNum<int>
+class OptionIntEdit: public QLineEdit, public OptionNum<qint32>
 {
   public:
-    OptionIntEdit(int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
+    OptionIntEdit(qint32 defaultVal, const QString& saveName, qint32* pVar, qint32 rangeMin, qint32 rangeMax,
                   QWidget* pParent):
         QLineEdit(pParent),
-        OptionNum<int>(pVar, defaultVal, saveName)
+        OptionNum<qint32>(pVar, defaultVal, saveName)
     {
         QIntValidator* v = new QIntValidator(this);
         v->setRange(rangeMin, rangeMax);
@@ -240,7 +240,7 @@ class OptionIntEdit: public QLineEdit, public OptionNum<int>
         setText(getString());
     }
 
-    using OptionNum<int>::apply;
+    using OptionNum<qint32>::apply;
     void apply() override
     {
         const QIntValidator* v = static_cast<const QIntValidator*>(validator());
@@ -256,7 +256,7 @@ class OptionIntEdit: public QLineEdit, public OptionNum<int>
 class OptionComboBox: public QComboBox, public OptionItemBase
 {
   public:
-    OptionComboBox(int defaultVal, const QString& saveName, int* pVarNum,
+    OptionComboBox(qint32 defaultVal, const QString& saveName, qint32* pVarNum,
                    QWidget* pParent):
         QComboBox(pParent),
         OptionItemBase(saveName)
@@ -268,7 +268,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
         setEditable(false);
     }
 
-    OptionComboBox(int defaultVal, const QString& saveName, QString* pVarStr,
+    OptionComboBox(qint32 defaultVal, const QString& saveName, QString* pVarStr,
                    QWidget* pParent):
         QComboBox(pParent),
         OptionItemBase(saveName)
@@ -351,16 +351,16 @@ class OptionComboBox: public QComboBox, public OptionItemBase
 
   private:
     Q_DISABLE_COPY(OptionComboBox)
-    int* m_pVarNum;
-    int m_preservedNumVal = 0;
+    qint32* m_pVarNum;
+    qint32 m_preservedNumVal = 0;
     QString* m_pVarStr;
     QString m_preservedStrVal;
-    int m_defaultVal;
+    qint32 m_defaultVal;
 
     void setText(const QString& s)
     {
         // Find the string in the combobox-list, don't change the value if nothing fits.
-        for(int i = 0; i < count(); ++i)
+        for(qint32 i = 0; i < count(); ++i)
         {
             if(itemText(i) == s)
             {
@@ -392,8 +392,8 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
 
         // First sort codec names:
         std::map<QString, QTextCodec*> names;
-        const QList<int> mibs = QTextCodec::availableMibs();
-        for(int i: mibs)
+        const QList<qint32> mibs = QTextCodec::availableMibs();
+        for(qint32 i: mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)
@@ -434,7 +434,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
 
     void setToDefault() override
     {
-        QtNumberType index = getDefaultIndex();
+        qint32 index = getDefaultIndex();
 
         setCurrentIndex(index);
         if(m_ppVarCodec != nullptr)
@@ -447,7 +447,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     {
         if(m_ppVarCodec != nullptr)
         {
-            for(QtNumberType i = 0; i < m_codecVec.size(); ++i)
+            for(qint32 i = 0; i < m_codecVec.size(); ++i)
             {
                 if(*m_ppVarCodec == m_codecVec[i])
                 {
@@ -475,7 +475,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     void read(ValueMap* config) override
     {
         QString codecName = config->readEntry(m_saveName, (const char*)m_codecVec[currentIndex()]->name());
-        for(int i = 0; i < m_codecVec.size(); ++i)
+        for(qint32 i = 0; i < m_codecVec.size(); ++i)
         {
             if(codecName == QLatin1String(m_codecVec[i]->name()))
             {
@@ -489,7 +489,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
   protected:
     void preserveImp() override { m_preservedVal = currentIndex(); }
     void unpreserveImp() override { setCurrentIndex(m_preservedVal); }
-    int m_preservedVal;
+    qint32 m_preservedVal;
 };
 
 OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent):
@@ -564,7 +564,7 @@ void OptionDialog::setupFontPage()
 
     //QGridLayout* gbox = new QGridLayout();
     //topLayout->addLayout(gbox);
-    //int line=0;
+    //qint32 line=0;
 
     // This currently does not work (see rendering in class DiffTextWindow)
     //OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic font for deltas"), false, "ItalicForDeltas", &m_options->m_bItalicForDeltas, page, this );
@@ -600,9 +600,9 @@ void OptionDialog::setupColorPage()
     topLayout->addLayout(gbox);
 
     QLabel* label;
-    int line = 0;
+    qint32 line = 0;
 
-    int depth = QPixmap::defaultDepth();
+    qint32 depth = QPixmap::defaultDepth();
     bool bLowColor = depth <= 8;
 
     label = new QLabel(i18n("Editor and Diff Views:"), page);
@@ -768,7 +768,7 @@ void OptionDialog::setupEditPage()
     gbox->setColumnStretch(1, 5);
     topLayout->addLayout(gbox);
     QLabel* label;
-    int line = 0;
+    qint32 line = 0;
 
     OptionCheckBox* pReplaceTabs = new OptionCheckBox(i18n("Tab inserts spaces"), false, "ReplaceTabs", &gOptions->m_bReplaceTabs, page);
 
@@ -804,7 +804,7 @@ void OptionDialog::setupEditPage()
     label = new QLabel(i18n("Line end style:"), page);
     gbox->addWidget(label, line, 0);
 
-    OptionComboBox* pLineEndStyle = new OptionComboBox(eLineEndStyleAutoDetect, "LineEndStyle", (int*)&gOptions->m_lineEndStyle, page);
+    OptionComboBox* pLineEndStyle = new OptionComboBox(eLineEndStyleAutoDetect, "LineEndStyle", (qint32*)&gOptions->m_lineEndStyle, page);
     gbox->addWidget(pLineEndStyle, line, 1);
 
     pLineEndStyle->insertItem(eLineEndStyleUnix, i18nc("Unix line ending", "Unix"));
@@ -842,7 +842,7 @@ void OptionDialog::setupDiffPage()
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
     topLayout->addLayout(gbox);
-    int line = 0;
+    qint32 line = 0;
 
     QLabel* label = nullptr;
 
@@ -926,7 +926,7 @@ void OptionDialog::setupMergePage()
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
     topLayout->addLayout(gbox);
-    int line = 0;
+    qint32 line = 0;
 
     QLabel* label = nullptr;
 
@@ -1035,9 +1035,9 @@ void OptionDialog::setupMergePage()
         m_pHistoryMergeSorting->setToolTip(i18nc("Tool Tip", "Sort version control history by a key."));
         ++line;
         //QString branch = newHistoryEntry.cap(1);
-        //int day    = newHistoryEntry.cap(2).toInt();
-        //int month  = QString("Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec").find(newHistoryEntry.cap(3))/4 + 1;
-        //int year   = newHistoryEntry.cap(4).toInt();
+        //qint32 day    = newHistoryEntry.cap(2).toInt();
+        //qint32 month  = QString("Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec").find(newHistoryEntry.cap(3))/4 + 1;
+        //qint32 year   = newHistoryEntry.cap(4).toInt();
         //QString time = newHistoryEntry.cap(5);
         //QString name = newHistoryEntry.cap(6);
         QString defaultSortKeyOrder = "4,3,2,5,1,6"; //QDate(year,month,day).toString(Qt::ISODate) +" "+ time + " " + branch + " " + name;
@@ -1116,7 +1116,7 @@ void OptionDialog::setupDirectoryMergePage()
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
     topLayout->addLayout(gbox);
-    int line = 0;
+    qint32 line = 0;
 
     OptionCheckBox* pRecursiveDirs = new OptionCheckBox(i18n("Recursive folders"), true, "RecursiveDirs", &gOptions->m_bDmRecursiveDirs, page);
     gbox->addWidget(pRecursiveDirs, line, 0, 1, 2);
@@ -1316,7 +1316,7 @@ void OptionDialog::setupRegionalPage()
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
     topLayout->addLayout(gbox);
-    int line = 0;
+    qint32 line = 0;
 
     QLabel* label;
 
@@ -1390,7 +1390,7 @@ void OptionDialog::setupRegionalPage()
     ++line;
 
     chk_connect_a(m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
-    chk_connect_a(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(int)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
+    chk_connect_a(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(qint32)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
     chk_connect_a(m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
     chk_connect_a(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
 
@@ -1427,7 +1427,7 @@ void OptionDialog::setupIntegrationPage()
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(2, 5);
     topLayout->addLayout(gbox);
-    int line = 0;
+    qint32 line = 0;
 
     QLabel* label;
     label = new QLabel(i18n("Command line options to ignore:"), page);
@@ -1503,7 +1503,7 @@ void OptionDialog::slotApply()
     public variables remain unchanged. */
 void OptionDialog::slotDefault()
 {
-    int result = KMessageBox::warningContinueCancel(this, i18n("This resets all options. Not only those of the current topic."));
+    qint32 result = KMessageBox::warningContinueCancel(this, i18n("This resets all options. Not only those of the current topic."));
     if(result == KMessageBox::Cancel)
         return;
     else

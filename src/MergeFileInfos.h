@@ -152,7 +152,7 @@ class MergeFileInfos
     }
     [[nodiscard]] inline bool existsEveryWhere() const { return existsInA() && existsInB() && (existsInC() || !isThreeWay()); }
 
-    [[nodiscard]] inline int existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
+    [[nodiscard]] inline qint32 existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
 
     [[nodiscard]] inline bool onlyInA() const { return existsInA() && !existsInB() && !existsInC(); }
     [[nodiscard]] inline bool onlyInB() const { return !existsInA() && existsInB() && !existsInC(); }

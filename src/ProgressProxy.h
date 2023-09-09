@@ -35,7 +35,7 @@ class ProgressProxy
 {
   public:
     static void setInformation(const QString& info, bool bRedrawUpdate = true);
-    static void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
+    static void setInformation(const QString& info, qint32 current, bool bRedrawUpdate = true);
     static void setCurrent(quint64 current, bool bRedrawUpdate = true);
     static void step(bool bRedrawUpdate = true);
 

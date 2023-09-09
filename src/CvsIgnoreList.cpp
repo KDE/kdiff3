@@ -100,7 +100,7 @@ void CvsIgnoreList::addEntry(const QString& dir, const QString& pattern)
         // allow fast checks.
 
         // Count number of '*' and '?'
-        unsigned int nofMetaCharacters = 0;
+        quint32 nofMetaCharacters = 0;
 
         const QChar* pos;
         pos = pattern.unicode();

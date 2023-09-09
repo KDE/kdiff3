@@ -179,7 +179,7 @@ class MergeBlockList: public std::list<MergeBlock>
     void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
     void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
 
-    MergeBlockList::iterator splitAtDiff3LineIdx(int d3lLineIdx);
+    MergeBlockList::iterator splitAtDiff3LineIdx(qint32 d3lLineIdx);
 };
 
 #endif

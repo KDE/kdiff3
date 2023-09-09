@@ -147,7 +147,7 @@ class DiffList: public std::list<Diff>
 {
   public:
     using std::list<Diff>::list;
-    void calcDiff(const QString& line1, const QString& line2, const int maxSearchRange);
+    void calcDiff(const QString& line1, const QString& line2, const qint32 maxSearchRange);
     void runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, const size_t index2, LineRef size2);
 #ifndef NDEBUG
     void verify(const LineRef size1, const LineRef size2);
@@ -186,7 +186,7 @@ class LineData
     [[nodiscard]] inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
 
     [[nodiscard]] inline QtSizeType getOffset() const { return mOffset; }
-    [[nodiscard]] int width(int tabSize) const; // Calcs width considering tabs.
+    [[nodiscard]] qint32 width(qint32 tabSize) const; // Calcs width considering tabs.
 
     [[nodiscard]] inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
 
@@ -447,16 +447,16 @@ struct HistoryRange
 {
     Diff3LineList::const_iterator start;
     Diff3LineList::const_iterator end;
-    int startIdx = -1;
-    int endIdx = -1;
+    qint32 startIdx = -1;
+    qint32 endIdx = -1;
 };
 
 struct Diff3WrapLine
 {
     Diff3Line* pD3L = nullptr;
     LineType diff3LineIndex = 0;
-    int wrapLineOffset = 0;
-    int wrapLineLength = 0;
+    qint32 wrapLineOffset = 0;
+    qint32 wrapLineLength = 0;
 };
 
 typedef QVector<Diff3WrapLine> Diff3WrapLineVector;
@@ -477,16 +477,16 @@ class TotalDiffStatus
         nofWhitespaceConflicts = 0;
     }
 
-    [[nodiscard]] inline int getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
-    inline void setUnsolvedConflicts(const int unsolved) { nofUnsolvedConflicts = unsolved; }
+    [[nodiscard]] inline qint32 getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
+    inline void setUnsolvedConflicts(const qint32 unsolved) { nofUnsolvedConflicts = unsolved; }
 
-    [[nodiscard]] inline int getSolvedConflicts() const { return nofSolvedConflicts; }
-    inline void setSolvedConflicts(const int solved) { nofSolvedConflicts = solved; }
+    [[nodiscard]] inline qint32 getSolvedConflicts() const { return nofSolvedConflicts; }
+    inline void setSolvedConflicts(const qint32 solved) { nofSolvedConflicts = solved; }
 
-    [[nodiscard]] inline int getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
-    inline void setWhitespaceConflicts(const int wintespace) { nofWhitespaceConflicts = wintespace; }
+    [[nodiscard]] inline qint32 getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
+    inline void setWhitespaceConflicts(const qint32 wintespace) { nofWhitespaceConflicts = wintespace; }
 
-    [[nodiscard]] inline int getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
+    [[nodiscard]] inline qint32 getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
 
     [[nodiscard]] bool isBinaryEqualAC() const { return bBinaryAEqC; }
     [[nodiscard]] bool isBinaryEqualBC() const { return bBinaryBEqC; }
@@ -512,9 +512,9 @@ class TotalDiffStatus
     bool bTextAEqC = false;
     bool bTextBEqC = false;
     bool bTextAEqB = false;
-    int nofUnsolvedConflicts = 0;
-    int nofSolvedConflicts = 0;
-    int nofWhitespaceConflicts = -1;
+    qint32 nofUnsolvedConflicts = 0;
+    qint32 nofSolvedConflicts = 0;
+    qint32 nofWhitespaceConflicts = -1;
 };
 
 // Three corresponding ranges. (Minimum size of a valid range is one line.)
@@ -570,7 +570,7 @@ class ManualDiffHelpEntry
                lineA2 == r.lineA2 && lineB2 == r.lineB2 && lineC2 == r.lineC2;
     }
 
-    int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
+    qint32 calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
 
     void getRangeForUI(const e_SrcSelector winIdx, LineRef* rangeLine1, LineRef* rangeLine2) const
     {
@@ -611,7 +611,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 
 /** Returns the number of equivalent spaces at position outPos.
 */
-inline int tabber(int outPos, int tabSize)
+inline qint32 tabber(qint32 outPos, qint32 tabSize)
 {
     return tabSize - (outPos % tabSize);
 }
