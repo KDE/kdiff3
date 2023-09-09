@@ -46,7 +46,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             const QString line = ts.readLine();
             if(line.startsWith(u8"IgnorableCmdLineOptions="))
             {
-                const int pos = line.indexOf('=');
+                const qint32 pos = line.indexOf('=');
                 if(pos >= 0)
                 {
                     ignorableOptionsLine = line.mid(pos + 1);
@@ -79,7 +79,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
     }
 }
 
-int main(int argc, char* argv[])
+qint32 main(qint32 argc, char* argv[])
 {
     constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
     /*
@@ -201,6 +201,6 @@ int main(int argc, char* argv[])
     const QPointer<KDiff3Shell> p(new KDiff3Shell());//QPointer will take it from here.
     Q_UNUSED(p);
 
-    int retVal = QApplication::exec();
+    qint32 retVal = QApplication::exec();
     return retVal;
 }

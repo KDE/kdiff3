@@ -71,8 +71,8 @@ bool Selection::within(LineRef l, qint32 p) const
 
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;
-    int p1 = firstPos;
-    int p2 = lastPos;
+    qint32 p1 = firstPos;
+    qint32 p2 = lastPos;
     if(l1 > l2)
     {
         std::swap(l1, l2);

@@ -267,7 +267,7 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
             else
             {
                 Diff3LineList::const_iterator d3llit = ml.id3l();
-                int j;
+                qint32 j;
 
                 for(j = 0; j < ml.srcRangeLength; ++j)
                 {
@@ -332,7 +332,7 @@ void MergeLine::removeEmptySource()
 }
 
 // Returns the iterator to the MergeLine after the split
-MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
+MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(qint32 d3lLineIdx)
 {
     MergeLineListImp::iterator i;
     for(i = mImp.begin(); i != mImp.end(); ++i)

@@ -17,11 +17,11 @@ class UTF8BOMCodec: public QTextCodec
     class PublicTextCodec: public QTextCodec
     {
       public:
-        QString publicConvertToUnicode(const char* p, int len, ConverterState* pState) const
+        QString publicConvertToUnicode(const char* p, qint32 len, ConverterState* pState) const
         {
             return convertToUnicode(p, len, pState);
         }
-        QByteArray publicConvertFromUnicode(const QChar* input, int number, ConverterState* pState) const
+        QByteArray publicConvertFromUnicode(const QChar* input, qint32 number, ConverterState* pState) const
         {
             return convertFromUnicode(input, number, pState);
         }
@@ -33,9 +33,9 @@ class UTF8BOMCodec: public QTextCodec
         m_pUtf8Codec = QTextCodec::codecForName("UTF-8");
     }
     QByteArray name() const override { return "UTF-8-BOM"; }
-    int mibEnum() const override { return 2123; }
+    qint32 mibEnum() const override { return 2123; }
 
-    QByteArray convertFromUnicode(const QChar* input, int number, ConverterState* pState) const override
+    QByteArray convertFromUnicode(const QChar* input, qint32 number, ConverterState* pState) const override
     {
         QByteArray r;
         if(pState && pState->state_data[2] == 0) // state_data[2] not used by QUtf8::convertFromUnicode (see qutfcodec.cpp)
@@ -49,7 +49,7 @@ class UTF8BOMCodec: public QTextCodec
         return r;
     }
 
-    QString convertToUnicode(const char* p, int len, ConverterState* pState) const override
+    QString convertToUnicode(const char* p, qint32 len, ConverterState* pState) const override
     {
         return ((PublicTextCodec*)m_pUtf8Codec)->publicConvertToUnicode(p, len, pState);
     }

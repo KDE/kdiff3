@@ -121,7 +121,7 @@ class MergeLine
 
     [[nodiscard]] inline LineCount lineCount() const { return SafeInt<qint32>(list().size()); }
 
-    void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
+    void split(MergeLine& ml2, qint32 d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
             return; //Error
@@ -135,7 +135,7 @@ class MergeLine
         ml2.srcRangeLength = srcRangeLength - (d3lLineIdx2 - d3lLineIdx);
         srcRangeLength = d3lLineIdx2 - d3lLineIdx; // current MergeLine controls fewer lines
         ml2.mId3l = mId3l;
-        for(int i = 0; i < srcRangeLength; ++i)
+        for(qint32 i = 0; i < srcRangeLength; ++i)
             ++ml2.mId3l;
 
         ml2.mMergeEditLineList.clear();
@@ -184,7 +184,7 @@ class MergeLineList
     void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
     void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
 
-    MergeLineListImp::iterator splitAtDiff3LineIdx(int d3lLineIdx);
+    MergeLineListImp::iterator splitAtDiff3LineIdx(qint32 d3lLineIdx);
 };
 
 #endif

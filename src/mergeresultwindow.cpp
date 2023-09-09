@@ -263,8 +263,8 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
 {
     if(m_pStatusBar != nullptr)
     {
-        int wsc;
-        int nofUnsolved = getNumberOfUnsolvedConflicts(&wsc);
+        qint32 wsc;
+        qint32 nofUnsolved = getNumberOfUnsolvedConflicts(&wsc);
 
         m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)", nofUnsolved, wsc);
 
@@ -327,7 +327,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     {
         if(m_bModified)
         {
-            int result = KMessageBox::warningYesNo(this,
+            qint32 result = KMessageBox::warningYesNo(this,
                                                    i18n("The output has been modified.\n"
                                                         "If you continue your changes will be lost."),
                                                    i18nc("Error dialog caption", "Warning"),
@@ -345,16 +345,16 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     bool bSolveWhiteSpaceConflicts = false;
     if(bAutoSolve) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
     {
-        if(!lIsThreeWay && m_pOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
+        if(!lIsThreeWay && m_pOptions->m_whiteSpace2FileMergeDefault != (qint32)e_SrcSelector::None) // Only two inputs
         {
-            assert(m_pOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
+            assert(m_pOptions->m_whiteSpace2FileMergeDefault <= (qint32)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (qint32)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
-        else if(lIsThreeWay && m_pOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
+        else if(lIsThreeWay && m_pOptions->m_whiteSpace3FileMergeDefault != (qint32)e_SrcSelector::None)
         {
-            assert(m_pOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
+            assert(m_pOptions->m_whiteSpace3FileMergeDefault <= (qint32)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (qint32)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace3FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
@@ -384,9 +384,9 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             Q_EMIT noRelevantChangesDetected();
     }
 
-    int nrOfSolvedConflicts = 0;
-    int nrOfUnsolvedConflicts = 0;
-    int nrOfWhiteSpaceConflicts = 0;
+    qint32 nrOfSolvedConflicts = 0;
+    qint32 nrOfUnsolvedConflicts = 0;
+    qint32 nrOfWhiteSpaceConflicts = 0;
 
     MergeLineListImp::iterator i;
     for(i = m_mergeLineList.list().begin(); i != m_mergeLineList.list().end(); ++i)
@@ -421,19 +421,19 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     update();
 }
 
-void MergeResultWindow::setFirstLine(QtNumberType firstLine)
+void MergeResultWindow::setFirstLine(qint32 firstLine)
 {
     m_firstLine = std::max(0, firstLine);
     update();
 }
 
-void MergeResultWindow::setHorizScrollOffset(int horizScrollOffset)
+void MergeResultWindow::setHorizScrollOffset(qint32 horizScrollOffset)
 {
     m_horizScrollOffset = std::max(0, horizScrollOffset);
     update();
 }
 
-int MergeResultWindow::getMaxTextWidth()
+qint32 MergeResultWindow::getMaxTextWidth()
 {
     if(m_maxTextWidth < 0)
     {
@@ -460,23 +460,23 @@ int MergeResultWindow::getMaxTextWidth()
     return m_maxTextWidth;
 }
 
-int MergeResultWindow::getNofLines() const
+qint32 MergeResultWindow::getNofLines() const
 {
     return m_nofLines;
 }
 
-int MergeResultWindow::getVisibleTextAreaWidth() const
+qint32 MergeResultWindow::getVisibleTextAreaWidth() const
 {
     return width() - getTextXOffset();
 }
 
-int MergeResultWindow::getNofVisibleLines() const
+qint32 MergeResultWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
     return (height() - 3) / fm.lineSpacing() - 2;
 }
 
-int MergeResultWindow::getTextXOffset() const
+qint32 MergeResultWindow::getTextXOffset() const
 {
     QFontMetrics fm = fontMetrics();
     return 3 * Utils::getHorizontalAdvance(fm, '0');
@@ -737,9 +737,9 @@ void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
     }
 }
 
-int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts) const
+qint32 MergeResultWindow::getNumberOfUnsolvedConflicts(qint32* pNrOfWhiteSpaceConflicts) const
 {
-    int nrOfUnsolvedConflicts = 0;
+    qint32 nrOfUnsolvedConflicts = 0;
     if(pNrOfWhiteSpaceConflicts != nullptr)
         *pNrOfWhiteSpaceConflicts = 0;
 
@@ -761,8 +761,8 @@ void MergeResultWindow::showNumberOfConflicts(bool showIfNone)
 {
     if(!m_pOptions->m_bShowInfoDialogs)
         return;
-    int nrOfConflicts = 0;
-    int nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
+    qint32 nrOfConflicts = 0;
+    qint32 nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
 
     for(const MergeLine& entry: m_mergeLineList.list())
     {
@@ -811,7 +811,7 @@ void MergeResultWindow::setFastSelector(MergeLineListImp::iterator i)
     m_currentMergeLineIt = i;
     Q_EMIT setFastSelectorRange(i->getIndex(), i->sourceRangeLength());
 
-    int line1 = 0;
+    qint32 line1 = 0;
 
     MergeLineListImp::const_iterator mlIt = m_mergeLineList.list().cbegin();
     for(; mlIt != m_mergeLineList.list().cend(); ++mlIt)
@@ -821,8 +821,8 @@ void MergeResultWindow::setFastSelector(MergeLineListImp::iterator i)
         line1 += mlIt->lineCount();
     }
 
-    int nofLines = m_currentMergeLineIt->lineCount();
-    int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
+    qint32 nofLines = m_currentMergeLineIt->lineCount();
+    qint32 newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
         scrollVertically(newFirstLine - m_firstLine);
@@ -871,7 +871,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
     if(!bActive) // Selected source wasn't active.
     {            // Append the lines from selected source here at rangeEnd.
         Diff3LineList::const_iterator d3llit = ml.id3l();
-        int j;
+        qint32 j;
 
         for(j = 0; j < ml.sourceRangeLength(); ++j)
         {
@@ -958,9 +958,9 @@ void MergeResultWindow::slotUnsolve()
 bool findParenthesesGroups(const QString& s, QStringList& sl)
 {
     sl.clear();
-    int i = 0;
-    std::list<int> startPosStack;
-    int length = s.length();
+    qint32 i = 0;
+    std::list<qint32> startPosStack;
+    qint32 length = s.length();
     for(i = 0; i < length; ++i)
     {
         if(s[i] == '\\' && i + 1 < length && (s[i + 1] == '\\' || s[i + 1] == '(' || s[i + 1] == ')'))
@@ -976,7 +976,7 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
         {
             if(startPosStack.empty())
                 return false; // Parentheses don't match
-            int startPos = startPosStack.back();
+            qint32 startPos = startPosStack.back();
             startPosStack.pop_back();
             sl.push_back(s.mid(startPos + 1, i - startPos - 1));
         }
@@ -994,7 +994,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
         if(keyIt.isEmpty())
             continue;
         bool bOk = false;
-        int groupIdx = keyIt.toInt(&bOk);
+        qint32 groupIdx = keyIt.toInt(&bOk);
         if(!bOk || groupIdx < 0 || groupIdx > parenthesesGroupList.size())
             continue;
         QString s = regExprMatch.captured(groupIdx);
@@ -1008,7 +1008,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
         if(groupRegExp.indexOf('|') < 0 || groupRegExp.indexOf('(') >= 0)
         {
             bOk = false;
-            int i = s.toInt(&bOk);
+            qint32 i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
             {
                 s += QString(4 - s.size(), '0'); // This should help for correct sorting of numbers.
@@ -1021,7 +1021,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
             // s is the string that managed to match.
             // Now we want to know at which position it occurred. e.g. Jan=0, Feb=1, Mar=2, etc.
             QStringList sl = groupRegExp.split('|');
-            int idx = sl.indexOf(s);
+            qint32 idx = sl.indexOf(s);
             if(idx >= 0)
             {
                 QString sIdx;
@@ -1245,7 +1245,7 @@ void MergeResultWindow::slotMergeHistory()
         mel.setString(lead);
         iMLLStart->list().push_back(mel);
 
-        int historyCount = 0;
+        qint32 historyCount = 0;
         if(bHistoryMergeSorting)
         {
             // Create a sorted history
@@ -1336,14 +1336,14 @@ bool MergeResultWindow::doRelevantChangesExist()
     return false;
 }
 
-void MergeResultWindow::slotSplitDiff(int firstD3lLineIdx, int lastD3lLineIdx)
+void MergeResultWindow::slotSplitDiff(qint32 firstD3lLineIdx, qint32 lastD3lLineIdx)
 {
     if(lastD3lLineIdx >= 0)
         m_mergeLineList.splitAtDiff3LineIdx(lastD3lLineIdx + 1);
     setFastSelector(m_mergeLineList.splitAtDiff3LineIdx(firstD3lLineIdx));
 }
 
-void MergeResultWindow::slotJoinDiffs(int firstD3lLineIdx, int lastD3lLineIdx)
+void MergeResultWindow::slotJoinDiffs(qint32 firstD3lLineIdx, qint32 lastD3lLineIdx)
 {
     MergeLineListImp::iterator i;
     MergeLineListImp::iterator iMLLStart = m_mergeLineList.list().end();
@@ -1386,7 +1386,7 @@ void MergeResultWindow::slotJoinDiffs(int firstD3lLineIdx, int lastD3lLineIdx)
     setFastSelector(iMLLStart);
 }
 
-void MergeResultWindow::myUpdate(int afterMilliSecs)
+void MergeResultWindow::myUpdate(qint32 afterMilliSecs)
 {
     if(m_delayedDrawTimer)
         killTimer(m_delayedDrawTimer);
@@ -1442,9 +1442,9 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     textLayout.beginLayout();
     if(m_selection.lineWithin(line))
     {
-        int firstPosInText = m_selection.firstPosInLine(line);
-        int lastPosInText = m_selection.lastPosInLine(line);
-        int lengthInText = std::max(0, lastPosInText - firstPosInText);
+        qint32 firstPosInText = m_selection.firstPosInLine(line);
+        qint32 lastPosInText = m_selection.lastPosInLine(line);
+        qint32 lengthInText = std::max(0, lastPosInText - firstPosInText);
         if(lengthInText > 0)
             m_selection.bSelectionContainsData = true;
 
@@ -1458,7 +1458,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     QTextLine textLine = textLayout.createLine();
     textLine.setPosition(QPointF(0, fontMetrics().leading()));
     textLayout.endLayout();
-    int cursorWidth = 5;
+    qint32 cursorWidth = 5;
     if(m_pOptions->m_bRightToLeftLanguage)
         textLayout.setPosition(QPointF(width() - textLayout.maximumWidth() - getTextXOffset() + m_horizScrollOffset - cursorWidth, 0));
     else
@@ -1467,17 +1467,17 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
 }
 
 void MergeResultWindow::writeLine(
-    RLPainter& p, int line, const QString& str,
-    e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
+    RLPainter& p, qint32 line, const QString& str,
+    e_SrcSelector srcSelect, e_MergeDetails mergeDetails, qint32 rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
 {
     const QFontMetrics& fm = fontMetrics();
-    int fontHeight = fm.lineSpacing();
-    int fontAscent = fm.ascent();
+    qint32 fontHeight = fm.lineSpacing();
+    qint32 fontAscent = fm.ascent();
 
-    int topLineYOffset = 0;
-    int xOffset = getTextXOffset();
+    qint32 topLineYOffset = 0;
+    qint32 xOffset = getTextXOffset();
 
-    int yOffset = (line - m_firstLine) * fontHeight;
+    qint32 yOffset = (line - m_firstLine) * fontHeight;
     if(yOffset < 0 || yOffset > height())
         return;
 
@@ -1505,16 +1505,16 @@ void MergeResultWindow::writeLine(
         else
             p.setClipRect(QRectF(0, 0, width() - xOffset, height()));
 
-        int outPos = 0;
+        qint32 outPos = 0;
         QString s;
-        int size = str.length();
-        for(int i = 0; i < size; ++i)
+        qint32 size = str.length();
+        for(qint32 i = 0; i < size; ++i)
         {
-            int spaces = 1;
+            qint32 spaces = 1;
             if(str[i] == '\t')
             {
                 spaces = tabber(outPos, m_pOptions->m_tabSize);
-                for(int j = 0; j < spaces; ++j)
+                for(qint32 j = 0; j < spaces; ++j)
                     s += ' ';
             }
             else
@@ -1613,7 +1613,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
     bool bOldSelectionContainsData = m_selection.selectionContainsData();
     const QFontMetrics& fm = fontMetrics();
-    int fontWidth = Utils::getHorizontalAdvance(fm, '0');
+    qint32 fontWidth = Utils::getHorizontalAdvance(fm, '0');
 
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
@@ -1629,9 +1629,9 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         p.setFont(font());
         p.QPainter::fillRect(rect(), m_pOptions->backgroundColor());
 
-        //int visibleLines = height() / fontHeight;
+        //qint32 visibleLines = height() / fontHeight;
 
-        int lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
+        qint32 lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
         LineRef line = 0;
         MergeLineListImp::const_iterator mlIt = m_mergeLineList.list().cbegin();
         for(; mlIt != m_mergeLineList.list().cend(); ++mlIt)
@@ -1652,7 +1652,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
                         MergeEditLineList::const_iterator melIt1 = melIt;
                         ++melIt1;
 
-                        int rangeMark = 0;
+                        qint32 rangeMark = 0;
                         if(melIt == ml.list().cbegin()) rangeMark |= 1; // Begin range mark
                         if(melIt1 == ml.list().cend()) rangeMark |= 2;  // End range mark
 
@@ -1707,8 +1707,8 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
 void MergeResultWindow::updateSourceMask()
 {
-    int srcMask = 0;
-    int enabledMask = 0;
+    qint32 srcMask = 0;
+    qint32 enabledMask = 0;
     if(!hasFocus() || m_pDiff3LineList == nullptr || !updatesEnabled() || m_currentMergeLineIt == m_mergeLineList.list().end())
     {
         srcMask = 0;
@@ -1747,13 +1747,13 @@ void MergeResultWindow::focusInEvent(QFocusEvent* e)
     QWidget::focusInEvent(e);
 }
 
-LineRef MergeResultWindow::convertToLine(int y)
+LineRef MergeResultWindow::convertToLine(qint32 y)
 {
     const QFontMetrics& fm = fontMetrics();
-    const int fontHeight = fm.lineSpacing();
-    constexpr int topLineYOffset = 0;
+    const qint32 fontHeight = fm.lineSpacing();
+    constexpr qint32 topLineYOffset = 0;
 
-    int yOffset = topLineYOffset - m_firstLine * fontHeight;
+    qint32 yOffset = topLineYOffset - m_firstLine * fontHeight;
 
     const LineRef line = std::min((y - yOffset) / fontHeight, m_nofLines - 1);
     return line;
@@ -1763,13 +1763,13 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 {
     m_bCursorOn = true;
 
-    const int xOffset = getTextXOffset();
+    const qint32 xOffset = getTextXOffset();
 
     const LineRef line = std::max<LineRef::LineType>(convertToLine(e->y()), 0);
     const QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
-    QtNumberType pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+    qint32 pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
 
     const bool lLeftMouseButton = e->button() == Qt::LeftButton;
     const bool lMiddleMouseButton = e->button() == Qt::MiddleButton;
@@ -1847,7 +1847,7 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
         const QString s = getString(line);
         QTextLayout textLayout(s, font(), this);
         getTextLayoutForLine(line, s, textLayout);
-        QtNumberType pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+        qint32 pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
         m_cursorXPos = pos;
         m_cursorOldXPixelPos = m_cursorXPixelPos;
         m_cursorYPos = line;
@@ -1893,7 +1893,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
     const QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
-    const int pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+    const qint32 pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
     m_cursorXPos = pos;
     m_cursorOldXPixelPos = m_cursorXPixelPos;
     m_cursorYPos = line;
@@ -1904,10 +1904,10 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        const int fontWidth = Utils::getHorizontalAdvance(fm, '0');
-        constexpr int topLineYOffset = 0;
-        int deltaX = 0;
-        int deltaY = 0;
+        const qint32 fontWidth = Utils::getHorizontalAdvance(fm, '0');
+        constexpr qint32 topLineYOffset = 0;
+        qint32 deltaX = 0;
+        qint32 deltaY = 0;
         if(!m_pOptions->m_bRightToLeftLanguage)
         {
             if(e->x() < getTextXOffset()) deltaX = -1;
@@ -1939,8 +1939,8 @@ void MergeResultWindow::slotCursorUpdate()
         m_bCursorUpdate = true;
 
         const QFontMetrics& fm = fontMetrics();
-        constexpr int topLineYOffset = 0;
-        int yOffset = (m_cursorYPos - m_firstLine) * fm.lineSpacing() + topLineYOffset;
+        constexpr qint32 topLineYOffset = 0;
+        qint32 yOffset = (m_cursorYPos - m_firstLine) * fm.lineSpacing() + topLineYOffset;
 
         repaint(0, yOffset, width(), fm.lineSpacing() + 2);
 
@@ -1978,7 +1978,7 @@ bool MergeResultWindow::event(QEvent* e)
 
 void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 {
-    QtNumberType y = m_cursorYPos;
+    qint32 y = m_cursorYPos;
     MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt;
     if(!calcIteratorFromLineNr(y, mlIt, melIt))
@@ -1989,7 +1989,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     }
 
     QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
-    QtNumberType x = m_cursorXPos;
+    qint32 x = m_cursorXPos;
 
     QTextLayout textLayoutOrig(str, font(), this);
     getTextLayoutForLine(y, str, textLayoutOrig);
@@ -2095,7 +2095,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                     const QString s = melIt1->getString(m_pldA, m_pldB, m_pldC);
                     if(!s.isEmpty())
                     {
-                        int i;
+                        qint32 i;
                         for(i = 0; i < s.length(); ++i)
                         {
                             if(s[i] != ' ' && s[i] != '\t') break;
@@ -2149,10 +2149,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             }
             break; // cursor movement
         case Qt::Key_End:
-            x = TYPE_MAX(int);
+            x = TYPE_MAX(qint32);
             if(bCtrl)
             {
-                y = TYPE_MAX(int);
+                y = TYPE_MAX(qint32);
             }
             break;
 
@@ -2162,11 +2162,11 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             {
                 if(!bCtrl)
                 {
-                    int newX = textLayoutOrig.previousCursorPosition(x);
+                    qint32 newX = textLayoutOrig.previousCursorPosition(x);
                     if(newX == x && y > 0)
                     {
                         --y;
-                        x = TYPE_MAX(int);
+                        x = TYPE_MAX(qint32);
                     }
                     else
                     {
@@ -2177,13 +2177,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                 {
                     while(x > 0 && (str[x - 1] == ' ' || str[x - 1] == '\t'))
                     {
-                        int newX = textLayoutOrig.previousCursorPosition(x);
+                        qint32 newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
                     while(x > 0 && (str[x - 1] != ' ' && str[x - 1] != '\t'))
                     {
-                        int newX = textLayoutOrig.previousCursorPosition(x);
+                        qint32 newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
@@ -2193,7 +2193,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             {
                 if(!bCtrl)
                 {
-                    int newX = textLayoutOrig.nextCursorPosition(x);
+                    qint32 newX = textLayoutOrig.nextCursorPosition(x);
                     if(newX == x && y < m_nofLines - 1)
                     {
                         ++y;
@@ -2208,13 +2208,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                 {
                     while(x < str.length() && (str[x] == ' ' || str[x] == '\t'))
                     {
-                        int newX = textLayoutOrig.nextCursorPosition(x);
+                        qint32 newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
                     while(x < str.length() && (str[x] != ' ' && str[x] != '\t'))
                     {
-                        int newX = textLayoutOrig.nextCursorPosition(x);
+                        qint32 newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
@@ -2265,7 +2265,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             QString s = str;
             if(t[0] == '\t' && m_pOptions->m_bReplaceTabs)
             {
-                int spaces = (m_cursorXPos / m_pOptions->m_tabSize + 1) * m_pOptions->m_tabSize - m_cursorXPos;
+                qint32 spaces = (m_cursorXPos / m_pOptions->m_tabSize + 1) * m_pOptions->m_tabSize - m_cursorXPos;
                 t.fill(' ', spaces);
             }
             if(m_bInsertMode)
@@ -2286,10 +2286,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             ? melIt->getString(m_pldA, m_pldB, m_pldC)
             : QString();
 
-    x = qBound(0, x, (int)str.length());
+    x = qBound(0, x, (qint32)str.length());
 
-    int newFirstLine = m_firstLine;
-    int newHorizScrollOffset = m_horizScrollOffset;
+    qint32 newFirstLine = m_firstLine;
+    qint32 newHorizScrollOffset = m_horizScrollOffset;
 
     if(y < m_firstLine)
         newFirstLine = y;
@@ -2309,19 +2309,19 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     }
 
     m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(x));
-    int hF = 1; // horizontal factor
+    qint32 hF = 1; // horizontal factor
     if(m_pOptions->m_bRightToLeftLanguage)
     {
         m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         hF = -1;
     }
-    int cursorWidth = 5;
+    qint32 cursorWidth = 5;
     if(m_cursorXPixelPos < hF * m_horizScrollOffset)
         newHorizScrollOffset = hF * m_cursorXPixelPos;
     else if(m_cursorXPixelPos > hF * m_horizScrollOffset + getVisibleTextAreaWidth() - cursorWidth)
         newHorizScrollOffset = hF * (m_cursorXPixelPos - (getVisibleTextAreaWidth() - cursorWidth));
 
-    int newCursorX = x;
+    qint32 newCursorX = x;
     if(bShift)
     {
         if(!m_selection.isValidFirstLine())
@@ -2406,15 +2406,15 @@ QString MergeResultWindow::getSelection() const
         {
             if(m_selection.lineWithin(line))
             {
-                int outPos = 0;
+                qint32 outPos = 0;
                 if(mel.isEditableText())
                 {
                     const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
 
                     // Consider tabs
-                    for(int i = 0; i < str.length(); ++i)
+                    for(qint32 i = 0; i < str.length(); ++i)
                     {
-                        int spaces = 1;
+                        qint32 spaces = 1;
                         if(str[i] == '\t')
                         {
                             spaces = tabber(outPos, m_pOptions->m_tabSize);
@@ -2449,7 +2449,7 @@ QString MergeResultWindow::getSelection() const
     return selectionString;
 }
 
-bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
+bool MergeResultWindow::deleteSelection2(QString& s, qint32& x, qint32& y,
                                          MergeLineListImp::iterator& mlIt, MergeEditLineList::iterator& melIt)
 {
     if(m_selection.selectionContainsData())
@@ -2526,21 +2526,21 @@ void MergeResultWindow::deleteSelection()
             {
                 const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
 
-                int firstPosInLine = m_selection.firstPosInLine(line);
-                int lastPosInLine = m_selection.lastPosInLine(line);
+                qint32 firstPosInLine = m_selection.firstPosInLine(line);
+                qint32 lastPosInLine = m_selection.lastPosInLine(line);
 
                 if(line == firstLine)
                 {
                     mlItFirst = mlIt;
                     melItFirst = melIt;
-                    int pos = firstPosInLine;
+                    qint32 pos = firstPosInLine;
                     firstLineString = lineString.left(pos);
                 }
 
                 if(line == lastLine)
                 {
                     // This is the last line in the selection
-                    int pos = lastPosInLine;
+                    qint32 pos = lastPosInLine;
                     firstLineString += QStringView(lineString).mid(pos); // rest of line
                     melItFirst->setString(firstLineString);
                 }
@@ -2574,7 +2574,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
 
     setModified();
 
-    int y = m_cursorYPos;
+    qint32 y = m_cursorYPos;
     MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt, melItAfter;
     if (!calcIteratorFromLineNr(y, mlIt, melIt))
@@ -2584,7 +2584,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     melItAfter = melIt;
     ++melItAfter;
     QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
-    int x = m_cursorXPos;
+    qint32 x = m_cursorXPos;
 
     if(!QApplication::clipboard()->supportsSelection())
         bFromSelection = false;
@@ -2593,8 +2593,8 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
 
     QString currentLine = str.left(x);
     QString endOfLine = str.mid(x);
-    int i;
-    int len = clipBoard.length();
+    qint32 i;
+    qint32 len = clipBoard.length();
     for(i = 0; i < len; ++i)
     {
         QChar c = clipBoard[i];
@@ -2725,7 +2725,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     return true;
 }
 
-QString MergeResultWindow::getString(int lineIdx)
+QString MergeResultWindow::getString(qint32 lineIdx)
 {
     MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt;
@@ -2736,19 +2736,19 @@ QString MergeResultWindow::getString(int lineIdx)
     return melIt->getString(m_pldA, m_pldB, m_pldC);
 }
 
-bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
+bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, qint32& posInLine, bool bDirDown, bool bCaseSensitive)
 {
-    int it = d3vLine;
-    int endIt = bDirDown ? getNofLines() : -1;
-    int step = bDirDown ? 1 : -1;
-    int startPos = posInLine;
+    qint32 it = d3vLine;
+    qint32 endIt = bDirDown ? getNofLines() : -1;
+    qint32 step = bDirDown ? 1 : -1;
+    qint32 startPos = posInLine;
 
     for(; it != endIt; it += step)
     {
         QString line = getString(it);
         if(!line.isEmpty())
         {
-            int pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+            qint32 pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
             if(pos != -1)
             {
                 d3vLine = it;
@@ -2762,7 +2762,7 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, int& posI
     return false;
 }
 
-void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, int endPos)
+void MergeResultWindow::setSelection(qint32 firstLine, qint32 startPos, qint32 lastLine, qint32 endPos)
 {
     if(lastLine >= getNofLines())
     {
@@ -2776,7 +2776,7 @@ void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, 
     update();
 }
 
-void MergeResultWindow::scrollVertically(QtNumberType deltaY)
+void MergeResultWindow::scrollVertically(qint32 deltaY)
 {
     mVScrollBar->setValue(mVScrollBar->value()  + deltaY);
 }
@@ -2918,7 +2918,7 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
 e_LineEndStyle WindowTitleWidget::getLineEndStyle()
 {
 
-    int current = m_pLineEndStyleSelector->currentIndex();
+    qint32 current = m_pLineEndStyleSelector->currentIndex();
     if(current == 0)
         return eLineEndStyleUnix;
     else if(current == 1)
@@ -2933,8 +2933,8 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
 
     // First sort codec names:
     std::map<QString, QTextCodec*> names;
-    const QList<int> mibs = QTextCodec::availableMibs();
-    for(int i: mibs)
+    const QList<qint32> mibs = QTextCodec::availableMibs();
+    for(qint32 i: mibs)
     {
         QTextCodec* c = QTextCodec::codecForMib(i);
         if(c != nullptr)
@@ -2975,7 +2975,7 @@ QTextCodec* WindowTitleWidget::getEncoding()
 
 void WindowTitleWidget::setEncoding(QTextCodec* pEncoding)
 {
-    int idx = m_pEncodingSelector->findText(QLatin1String(pEncoding->name()));
+    qint32 idx = m_pEncodingSelector->findText(QLatin1String(pEncoding->name()));
     if(idx >= 0)
         m_pEncodingSelector->setCurrentIndex(idx);
 }

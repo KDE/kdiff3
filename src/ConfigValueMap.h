@@ -43,7 +43,7 @@ class ConfigValueMap : public ValueMap
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, int v) override
+    void writeEntry(const QString& s, qint32 v) override
     {
         m_config.writeEntry(s, v);
     }
@@ -80,7 +80,7 @@ private:
     {
         return m_config.readEntry(s, defaultVal);
     }
-    int readNumEntry(const QString& s, int defaultVal) override
+    qint32 readNumEntry(const QString& s, qint32 defaultVal) override
     {
         return m_config.readEntry(s, defaultVal);
     }

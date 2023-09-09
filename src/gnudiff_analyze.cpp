@@ -191,7 +191,7 @@ GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
                     {
                         /* We have a good enough best diagonal;
              now insist that it end with a significant snake.  */
-                        int k;
+                        qint32 k;
 
                         for(k = 1; xv[x - k] == yv[y - k]; k++)
                             if(k == SNAKE_LIMIT)
@@ -224,7 +224,7 @@ GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
                     {
                         /* We have a good enough best diagonal;
              now insist that it end with a significant snake.  */
-                        int k;
+                        qint32 k;
 
                         for(k = 0; xv[x + k] == yv[y + k]; k++)
                             if(k == SNAKE_LIMIT - 1)
@@ -371,7 +371,7 @@ void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
 
 void GnuDiff::discard_confusing_lines(file_data filevec[])
 {
-    int f;
+    qint32 f;
     GNULineRef i;
     char *discarded[2];
     GNULineRef *equiv_count[2];
@@ -579,7 +579,7 @@ void GnuDiff::discard_confusing_lines(file_data filevec[])
 
 void GnuDiff::shift_boundaries(file_data filevec[])
 {
-    int f;
+    qint32 f;
 
     for(f = 0; f < 2; ++f)
     {
@@ -765,7 +765,7 @@ GnuDiff::change *GnuDiff::build_script(file_data const filevec[])
 GnuDiff::change *GnuDiff::diff_2_files(comparison *cmp)
 {
     GNULineRef diags;
-    int f;
+    qint32 f;
     change *script;
 
     read_files(cmp->file, files_can_be_treated_as_binary);

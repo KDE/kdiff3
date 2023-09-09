@@ -23,8 +23,6 @@ using QtSizeType = qint32;
 using QtSizeType = qsizetype;
 #endif
 using FileOffset = quint64;
-using QtNumberType = qint32;//Qt insists on one type for all but does not create a typedef for it.
-
 using PtrDiffRef = size_t;
 
 using KDiff3_exception_policy = boost::safe_numerics::exception_policy<
@@ -40,7 +38,6 @@ using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, K
 #define TYPE_MAX(x) std::numeric_limits<x>::max()
 #define TYPE_MIN(x) std::numeric_limits<x>::min()
 
-static_assert(sizeof(int) >= sizeof(qint32), "Legacy LP32 systems/compilers not supported"); // e.g. Windows 16-bit
 static_assert(sizeof(FileOffset) >= sizeof(QtSizeType), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
 
 #endif

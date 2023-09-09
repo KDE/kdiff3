@@ -138,7 +138,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     bool init(bool bDirectoryMerge, bool bReload);
 
     // Implement QAbstractItemModel
-    [[nodiscard]] QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] QVariant data(const QModelIndex& index, qint32 role = Qt::DisplayRole) const override;
 
     //Qt::ItemFlags flags ( const QModelIndex & index ) const
     [[nodiscard]] QModelIndex parent(const QModelIndex& index) const override
@@ -151,7 +151,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
         return createIndex(pParentsParent->children().indexOf(pMFI->parent()), 0, pMFI->parent());
     }
 
-    [[nodiscard]] int rowCount(const QModelIndex& parent = QModelIndex()) const override
+    [[nodiscard]] qint32 rowCount(const QModelIndex& parent = QModelIndex()) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI != nullptr)
@@ -160,12 +160,12 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
             return m_pRoot->children().count();
     }
 
-    [[nodiscard]] int columnCount(const QModelIndex& /*parent*/) const override
+    [[nodiscard]] qint32 columnCount(const QModelIndex& /*parent*/) const override
     {
         return 10;
     }
 
-    [[nodiscard]] QModelIndex index(int row, int column, const QModelIndex& parent) const override
+    [[nodiscard]] QModelIndex index(qint32 row, qint32 column, const QModelIndex& parent) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI == nullptr && row < m_pRoot->children().count())
@@ -176,9 +176,9 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
             return QModelIndex();
     }
 
-    [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] QVariant headerData(qint32 section, Qt::Orientation orientation, qint32 role = Qt::DisplayRole) const override;
 
-    void sort(int column, Qt::SortOrder order) override;
+    void sort(qint32 column, Qt::SortOrder order) override;
 
     void selectItemAndColumn(const QModelIndex& mi, bool bContextMenu);
 
@@ -217,7 +217,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     [[nodiscard]] MergeFileInfos* rootMFI() const { return m_pRoot; }
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
-                       int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges);
+                       qint32& nofFiles, qint32& nofDirs, qint32& nofEqualFiles, qint32& nofManualMerges);
 
     void mergeContinue(bool bStart, bool bVerbose);
 
@@ -269,7 +269,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
         }
 
         // This is essentially the same as
-        // int r = filePath().compare( fa.filePath() )
+        // qint32 r = filePath().compare( fa.filePath() )
         // if ( r<0 ) return true;
         // if ( r==0 ) return m_col < fa.m_col;
         // return false;
@@ -282,7 +282,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
 
             for(quint32 i = 0; i < v1Size && i < v2Size; ++i)
             {
-                int r = v1[v1Size - i - 1]->fileName().compare(v2[v2Size - i - 1]->fileName(), s_eCaseSensitivity);
+                qint32 r = v1[v1Size - i - 1]->fileName().compare(v2[v2Size - i - 1]->fileName(), s_eCaseSensitivity);
                 if(r < 0)
                     return true;
                 else if(r > 0)
@@ -373,7 +373,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     QPointer<QAction> m_pDirLoadMergeState;
 };
 
-QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelIndex& index, int role) const
+QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelIndex& index, qint32 role) const
 {
     MergeFileInfos* pMFI = getMFI(index);
     if(pMFI)
@@ -515,7 +515,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
     return QVariant();
 }
 
-QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(qint32 section, Qt::Orientation orientation, qint32 role) const
 {
     if(orientation == Qt::Horizontal && section >= 0 && section < columnCount(QModelIndex()) && role == Qt::DisplayRole)
     {
@@ -548,7 +548,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
     return QVariant();
 }
 
-int DirectoryMergeWindow::getIntFromIndex(const QModelIndex& index) const
+qint32 DirectoryMergeWindow::getIntFromIndex(const QModelIndex& index) const
 {
     return index == d->m_selection1Index ? 1 : index == d->m_selection2Index ? 2 : index == d->m_selection3Index ? 3 : 0;
 }
@@ -573,7 +573,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
 
     void paint(QPainter* thePainter, const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
-        QtNumberType column = index.column();
+        qint32 column = index.column();
         if(column == s_ACol || column == s_BCol || column == s_CCol)
         {
             QVariant value = index.data(Qt::DecorationRole);
@@ -593,18 +593,18 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
                 }
             }
 
-            int x = option.rect.left();
-            int y = option.rect.top();
+            qint32 x = option.rect.left();
+            qint32 y = option.rect.top();
             //QPixmap icon = value.value<QPixmap>(); //pixmap(column);
             if(!icon.isNull())
             {
                 const auto dpr = thePainter->device()->devicePixelRatioF();
-                const int w = qRound(icon.width() / dpr);
-                const int h = qRound(icon.height() / dpr);
-                int yOffset = (sizeHint(option, index).height() - h) / 2;
+                const qint32 w = qRound(icon.width() / dpr);
+                const qint32 h = qRound(icon.height() / dpr);
+                qint32 yOffset = (sizeHint(option, index).height() - h) / 2;
                 thePainter->drawPixmap(x + 2, y + yOffset, icon);
 
-                int i = m_pDMW->getIntFromIndex(index);
+                qint32 i = m_pDMW->getIntFromIndex(index);
                 if(i != 0)
                 {
                     QColor c(i == 1 ? getOptions()->aColor() : i == 2 ? getOptions()->bColor() :
@@ -676,10 +676,10 @@ bool DirectoryMergeWindow::isScanning()
     return d->m_bScanning;
 }
 
-int DirectoryMergeWindow::totalColumnWidth()
+qint32 DirectoryMergeWindow::totalColumnWidth()
 {
-    int w = 0;
-    for(int i = 0; i < s_OpStatusCol; ++i)
+    qint32 w = 0;
+    for(qint32 i = 0; i < s_OpStatusCol; ++i)
     {
         w += columnWidth(i);
     }
@@ -690,7 +690,7 @@ void DirectoryMergeWindow::reload()
 {
     if(isDirectoryMergeInProgress())
     {
-        int result = KMessageBox::warningYesNo(this,
+        qint32 result = KMessageBox::warningYesNo(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort the merge and rescan the folder?"),
                                                i18nc("Error dialog caption", "Warning"),
                                                KGuiItem(i18nc("Title for rescan button", "Rescan")),
@@ -705,7 +705,7 @@ void DirectoryMergeWindow::reload()
 }
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
-                                                                      int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
+                                                                      qint32& nofFiles, qint32& nofDirs, qint32& nofEqualFiles, qint32& nofManualMerges)
 {
     const MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI->hasDir())
@@ -725,7 +725,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
                 ++nofManualMerges;
         }
     }
-    for(int childIdx = 0; childIdx < rowCount(mi); ++childIdx)
+    for(qint32 childIdx = 0; childIdx < rowCount(mi); ++childIdx)
         calcDirStatus(bThreeDirs, index(childIdx, 0, mi), nofFiles, nofDirs, nofEqualFiles, nofManualMerges);
 }
 
@@ -884,7 +884,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
     // calc how many directories will be read:
     double nofScans = (dirA.isValid() ? 1 : 0) + (dirB.isValid() ? 1 : 0) + (dirC.isValid() ? 1 : 0);
-    int currentScan = 0;
+    qint32 currentScan = 0;
 
     //TODO   setColumnWidthMode(s_UnsolvedCol, Q3ListView::Manual);
     //   setColumnWidthMode(s_SolvedCol,   Q3ListView::Manual);
@@ -952,7 +952,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
         mWindow->updateFileVisibilities();
 
-        for(int childIdx = 0; childIdx < rowCount(); ++childIdx)
+        for(qint32 childIdx = 0; childIdx < rowCount(); ++childIdx)
         {
             QModelIndex mi = index(childIdx, 0, QModelIndex());
             calcSuggestedOperation(mi, eDefaultMergeOp);
@@ -961,7 +961,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     mWindow->sortByColumn(0, Qt::AscendingOrder);
 
-    for(int column = 0; column < columnCount(QModelIndex()); ++column)
+    for(qint32 column = 0; column < columnCount(QModelIndex()); ++column)
         mWindow->resizeColumnToContents(column);
 
     m_bScanning = false;
@@ -970,12 +970,12 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     if(bContinue && !m_bSkipDirStatus)
     {
         // Generate a status report
-        int nofFiles = 0;
-        int nofDirs = 0;
-        int nofEqualFiles = 0;
-        int nofManualMerges = 0;
+        qint32 nofFiles = 0;
+        qint32 nofDirs = 0;
+        qint32 nofEqualFiles = 0;
+        qint32 nofManualMerges = 0;
         //TODO
-        for(int childIdx = 0; childIdx < rowCount(); ++childIdx)
+        for(qint32 childIdx = 0; childIdx < rowCount(); ++childIdx)
             calcDirStatus(dirC.isValid(), index(childIdx, 0, QModelIndex()),
                           nofFiles, nofDirs, nofEqualFiles, nofManualMerges);
 
@@ -1250,7 +1250,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_
                                                      KStandardGuiItem::cont(),
                                                      KStandardGuiItem::cancel()))
     {
-        for(int i = 0; i < rowCount(); ++i)
+        for(qint32 i = 0; i < rowCount(); ++i)
         {
             calcSuggestedOperation(index(i, 0, QModelIndex()), eDefaultOperation);
         }
@@ -1260,7 +1260,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_
 QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::nextSibling(const QModelIndex& mi)
 {
     QModelIndex miParent = mi.parent();
-    int currentIdx = mi.row();
+    qint32 currentIdx = mi.row();
     if(currentIdx + 1 < mi.model()->rowCount(miParent))
         return mi.model()->index(mi.row() + 1, 0, miParent); // next child of parent
     return QModelIndex();
@@ -1312,8 +1312,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView()
 
     mWindow->setRootIsDecorated(true);
 
-    int nrOfFiles = m_fileMergeMap.size();
-    int currentIdx = 1;
+    qint32 nrOfFiles = m_fileMergeMap.size();
+    qint32 currentIdx = 1;
     QElapsedTimer t;
     t.start();
     ProgressProxy::setMaxNofSteps(nrOfFiles);
@@ -1332,7 +1332,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView()
             break;
 
         // Get dirname from fileName: Search for "/" from end:
-        int pos = fileName.lastIndexOf('/');
+        qint32 pos = fileName.lastIndexOf('/');
         QString dirPart;
         QString filePart;
         if(pos == -1)
@@ -1606,7 +1606,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
 {
     QTreeView::mousePressEvent(e);
     QModelIndex mi = indexAt(e->pos());
-    int c = mi.column();
+    qint32 c = mi.column();
     QPoint p = e->globalPos();
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
@@ -1620,7 +1620,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
         if(bThreeDirs)
         {
             m.addAction(d->m_pDirCurrentDoNothing);
-            int count = 0;
+            qint32 count = 0;
             if(pMFI->existsInA())
             {
                 m.addAction(d->m_pDirCurrentChooseA);
@@ -1701,7 +1701,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
 void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
 {
     QModelIndex mi = indexAt(e->pos());
-    int c = mi.column();
+    qint32 c = mi.column();
 
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
@@ -1824,7 +1824,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(cons
 //   setSizeHint( s_CCol, QSize(17,17) ); // Iconsize
 //}
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::sort(int column, Qt::SortOrder order)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::sort(qint32 column, Qt::SortOrder order)
 {
     Q_UNUSED(column);
     beginResetModel();
@@ -1851,7 +1851,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
         if(eChildrenMergeOp == eConflictingFileTypes)
             eChildrenMergeOp = isDirThreeWay() ? eMergeABCToDest : eMergeABToDest;
 
-        for(int childIdx = 0; childIdx < pMFI->children().count(); ++childIdx)
+        for(qint32 childIdx = 0; childIdx < pMFI->children().count(); ++childIdx)
         {
             calcSuggestedOperation(index(childIdx, 0, mi), eChildrenMergeOp);
         }
@@ -2097,7 +2097,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
 {
     if(bVerbose)
     {
-        int status = KMessageBox::warningYesNoCancel(mWindow,
+        qint32 status = KMessageBox::warningYesNoCancel(mWindow,
                                                      i18n("The merge is about to begin.\n\n"
                                                           "Choose \"Do it\" if you have read the instructions and know what you are doing.\n"
                                                           "Choosing \"Simulate it\" will tell you what would happen.\n\n"
@@ -2227,9 +2227,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     if(m_mergeItemList.empty())
         return;
 
-    int nrOfItems = 0;
-    int nrOfCompletedItems = 0;
-    int nrOfCompletedSimItems = 0;
+    qint32 nrOfItems = 0;
+    qint32 nrOfCompletedItems = 0;
+    qint32 nrOfCompletedSimItems = 0;
 
     // Count the number of completed items (for the progress bar).
     for(const QModelIndex& i: m_mergeItemList)
@@ -2251,7 +2251,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     bool bSkipItem = false;
     if(!bStart && m_bError && miCurrent.isValid())
     {
-        int status = KMessageBox::warningYesNoCancel(mWindow,
+        qint32 status = KMessageBox::warningYesNoCancel(mWindow,
                                                      i18n("There was an error in the last step.\n"
                                                           "Do you want to continue with the item that caused the error or do you want to skip this item?"),
                                                      i18nc("Caption for message dialog", "Continue merge after an error"),
@@ -2319,7 +2319,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
                 bool bDone = true;
                 while(bDone && miParent.isValid())
                 {
-                    for(int childIdx = 0; childIdx < rowCount(miParent); ++childIdx)
+                    for(qint32 childIdx = 0; childIdx < rowCount(miParent); ++childIdx)
                     {
                         pMFI = getMFI(index(childIdx, 0, miParent));
                         if((!bSim && pMFI->isOperationRunning()) || (bSim && !pMFI->isSimOpRunning()))
@@ -2501,7 +2501,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
 
     QStringList errors;
     // Make sure that the dir exists, into which we will save the file later.
-    int pos = nameDest.lastIndexOf('/');
+    qint32 pos = nameDest.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = nameDest.left(pos);
@@ -2582,7 +2582,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& s
         return bSuccess;
     }
 
-    int pos = destName.lastIndexOf('/');
+    qint32 pos = destName.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = destName.left(pos);
@@ -2658,7 +2658,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
         }
     }
 
-    int pos = name.lastIndexOf('/');
+    qint32 pos = name.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = name.left(pos);
@@ -2694,7 +2694,7 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent):
     topLayout->addLayout(grid);
     grid->setColumnStretch(1, 10);
 
-    int line = 0;
+    qint32 line = 0;
 
     m_pA = new QLabel(i18n("A"), this);
     grid->addWidget(m_pA, line, 0);
@@ -2830,7 +2830,7 @@ void DirectoryMergeInfo::setInfo(
         FileAccess fiDest(dirDest.prettyAbsPath() + '/' + mfi.subPath(), true);
         addListViewItem(i18n("Dest"), dirDest.prettyAbsPath(), &fiDest);
     }
-    for(int i = 0; i < m_pInfoList->columnCount(); ++i)
+    for(qint32 i = 0; i < m_pInfoList->columnCount(); ++i)
         m_pInfoList->resizeColumnToContents(i);
 }
 
@@ -2879,7 +2879,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
     // in first run set all dirs to equal and determine if they are not equal.
     // on second run don't change the equal-status anymore; it is needed to
     // set the visibility (when bShowIdentical is false).
-    for(int loop = 0; loop < 2; ++loop)
+    for(qint32 loop = 0; loop < 2; ++loop)
     {
         QModelIndex mi = d->rowCount() > 0 ? d->index(0, 0, QModelIndex()) : QModelIndex();
         while(mi.isValid())

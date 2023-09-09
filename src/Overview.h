@@ -11,7 +11,7 @@
 #define OVERVIEW_H
 
 #include "LineRef.h"       // for LineRef
-#include "TypeUtils.h"     // for QtNumberType
+#include "TypeUtils.h"     // for qint32
 
 #include <QSharedPointer>
 #include <QString>         // for QString
@@ -37,14 +37,14 @@ class Overview : public QWidget
 
     void init(Diff3LineList* pDiff3LineList);
     void reset();
-    void setRange(QtNumberType firstLine, QtNumberType pageHeight);
+    void setRange(qint32 firstLine, qint32 pageHeight);
     void setPaintingAllowed(bool bAllowPainting);
 
     e_OverviewMode getOverviewMode();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
-    void setFirstLine(QtNumberType firstLine);
+    void setFirstLine(qint32 firstLine);
     void slotRedraw();
   Q_SIGNALS:
     void setLine(LineRef);
@@ -53,15 +53,15 @@ class Overview : public QWidget
     const Diff3LineList* m_pDiff3LineList;
     QSharedPointer<Options> m_pOptions;
     LineRef m_firstLine;
-    int m_pageHeight;
+    qint32 m_pageHeight;
     QPixmap m_pixmap;
     e_OverviewMode mOverviewMode;
-    int m_nofLines;
+    qint32 m_nofLines;
 
     void paintEvent(QPaintEvent* e) override;
     void mousePressEvent(QMouseEvent* e) override;
     void mouseMoveEvent(QMouseEvent* e) override;
-    void drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines);
+    void drawColumn(QPainter& p, e_OverviewMode eOverviewMode, qint32 x, qint32 w, qint32 h, qint32 nofLines);
 };
 
 #endif // !OVERVIEW_H

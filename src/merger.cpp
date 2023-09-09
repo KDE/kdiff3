@@ -18,7 +18,7 @@ Merger::Merger(const std::shared_ptr<DiffList>& pDiffList1, const std::shared_pt
 {
 }
 
-Merger::MergeData::MergeData(const std::shared_ptr<DiffList>& p, int i)
+Merger::MergeData::MergeData(const std::shared_ptr<DiffList>& p, qint32 i)
 {
     idx = i;
     pDiffList = p;

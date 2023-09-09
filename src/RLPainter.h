@@ -20,12 +20,12 @@
 class RLPainter : public QPainter
 {
   private:
-    int m_xOffset;
-    int m_fontWidth;
+    qint32 m_xOffset;
+    qint32 m_fontWidth;
     bool bRightToLeft = false;
 
   public:
-    RLPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth)
+    RLPainter(QPaintDevice* pd, bool bRTL, qint32 width, qint32 fontWidth)
         : QPainter(pd)
     {
         bRightToLeft = bRTL;
@@ -41,7 +41,7 @@ class RLPainter : public QPainter
         }
     }
 
-    void fillRect(int x, int y, int w, int h, const QBrush& b)
+    void fillRect(qint32 x, qint32 y, qint32 w, qint32 h, const QBrush& b)
     {
         if(!bRightToLeft)
             QPainter::fillRect(m_xOffset + x, y, w, h, b);
@@ -49,7 +49,7 @@ class RLPainter : public QPainter
             QPainter::fillRect(m_xOffset - x - w, y, w, h, b);
     }
 
-    void drawText(int x, int y, const QString& s, bool bAdapt = false)
+    void drawText(qint32 x, qint32 y, const QString& s, bool bAdapt = false)
     {
         Qt::LayoutDirection ld = (!bRightToLeft || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
         // Qt will automaticly reverse the text as needed just set the layout direction
@@ -62,7 +62,7 @@ class RLPainter : public QPainter
         QPainter::drawText(m_xOffset - m_fontWidth * s.length() + x, y, s);
     }
 
-    void drawLine(int x1, int y1, int x2, int y2)
+    void drawLine(qint32 x1, qint32 y1, qint32 x2, qint32 y2)
     {
         if(bRightToLeft)
             QPainter::drawLine(m_xOffset - x1, y1, m_xOffset - x2, y2);

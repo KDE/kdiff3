@@ -168,7 +168,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pOptionDialog->readOptions(KSharedConfig::openConfig());
 
     // Option handling: Only when pParent==0 (no parent)
-    int argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
+    qint32 argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
     bool hasArgs = !isPart() && argCount > 0;
     if(hasArgs) {
         QString s;
@@ -784,7 +784,7 @@ bool KDiff3App::queryClose()
 
     if(m_bOutputModified)
     {
-        int result = KMessageBox::warningYesNoCancel(this,
+        qint32 result = KMessageBox::warningYesNoCancel(this,
                                                      i18n("The merge result has not been saved."),
                                                      i18nc("Error dialog caption", "Warning"),
                                                      KGuiItem(i18n("Save && Quit")),
@@ -806,7 +806,7 @@ bool KDiff3App::queryClose()
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
-        int result = KMessageBox::warningYesNo(this,
+        qint32 result = KMessageBox::warningYesNo(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18nc("Error dialog caption", "Warning"),
                                                KStandardGuiItem::quit(),
@@ -902,8 +902,8 @@ void KDiff3App::slotFilePrint()
     //printDialog.setMinMax(0,0);
     printDialog->setFromTo(0, 0);
 
-    int currentFirstLine = m_pDiffTextWindow1->getFirstLine();
-    int currentFirstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(currentFirstLine);
+    qint32 currentFirstLine = m_pDiffTextWindow1->getFirstLine();
+    qint32 currentFirstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(currentFirstLine);
 
     // do some printer initialization
     printer.setFullPage(false);
@@ -916,11 +916,11 @@ void KDiff3App::slotFilePrint()
         RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(),'W'));
 
         QPaintDevice* pPaintDevice = painter.device();
-        int dpiy = pPaintDevice->logicalDpiY();
-        int columnDistance = qRound((0.5 / 2.54) * dpiy); // 0.5 cm between the columns
+        qint32 dpiy = pPaintDevice->logicalDpiY();
+        qint32 columnDistance = qRound((0.5 / 2.54) * dpiy); // 0.5 cm between the columns
 
-        int columns = m_bTripleDiff ? 3 : 2;
-        int columnWidth = (pPaintDevice->width() - (columns - 1) * columnDistance) / columns;
+        qint32 columns = m_bTripleDiff ? 3 : 2;
+        qint32 columnWidth = (pPaintDevice->width() - (columns - 1) * columnDistance) / columns;
 
         QFont f = m_pOptions->defaultFont();
         f.setPointSizeF(f.pointSizeF() - 1); // Print with slightly smaller font.
@@ -929,11 +929,11 @@ void KDiff3App::slotFilePrint()
 
         QString topLineText = i18n("Top line");
 
-        //int headerWidth = fm.width( m_sd1->getAliasName() + ", "+topLineText+": 01234567" );
-        int headerLines = Utils::getHorizontalAdvance(fm, m_sd1->getAliasName() + ", " + topLineText + ": 01234567") / columnWidth + 1;
+        //qint32 headerWidth = fm.width( m_sd1->getAliasName() + ", "+topLineText+": 01234567" );
+        qint32 headerLines = Utils::getHorizontalAdvance(fm, m_sd1->getAliasName() + ", " + topLineText + ": 01234567") / columnWidth + 1;
 
-        int headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
-        int footerMargin = fm.height() + 3;
+        qint32 headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
+        qint32 footerMargin = fm.height() + 3;
 
         QRect view(0, headerMargin, pPaintDevice->width(), pPaintDevice->height() - (headerMargin + footerMargin));
         QRect view1(0 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
@@ -955,7 +955,7 @@ void KDiff3App::slotFilePrint()
         if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
             totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
-        QList<int> pageList; // = printer.pageList();
+        QList<qint32> pageList; // = printer.pageList();
 
         bool bPrintCurrentPage = false;
         bool bFirstPrintedPage = false;
@@ -967,7 +967,7 @@ void KDiff3App::slotFilePrint()
 
         if(printer.printRange() == QPrinter::AllPages) {
             pageList.clear();
-            for(int i = 0; i < totalNofPages; ++i)
+            for(qint32 i = 0; i < totalNofPages; ++i)
             {
                 pageList.push_back(i + 1);
             }
@@ -976,7 +976,7 @@ void KDiff3App::slotFilePrint()
         {
             pageList.clear();
 
-            int from = printer.fromPage(), to = printer.toPage();
+            qint32 from = printer.fromPage(), to = printer.toPage();
             /*
                 Per Qt docs QPrinter::fromPage and QPrinter::toPage return 0 to indicate they are not set.
                 Account for this and other invalid settings the user may try.
@@ -986,7 +986,7 @@ void KDiff3App::slotFilePrint()
             if(to == 0 || to > totalNofPages) to = totalNofPages;
             if(from > to) to = from;
 
-            for(int i = from; i <= to; ++i)
+            for(qint32 i = from; i <= to; ++i)
             {
                 pageList.push_back(i);
             }
@@ -1009,11 +1009,11 @@ void KDiff3App::slotFilePrint()
             }
         }
 
-        int page = 1;
+        qint32 page = 1;
 
         ProgressScope pp;
         ProgressProxy::setMaxNofSteps(totalNofPages);
-        QList<int>::iterator pageListIt = pageList.begin();
+        QList<qint32>::iterator pageListIt = pageList.begin();
         for(;;) {
             ProgressProxy::setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);
             ProgressProxy::setCurrent(page - 1);

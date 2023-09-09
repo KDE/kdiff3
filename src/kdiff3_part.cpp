@@ -121,10 +121,10 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
     if(str.startsWith(lineStart) && fileName.isEmpty())
     {
         //Skip the start string
-        int pos = lineStart.length();
+        qint32 pos = lineStart.length();
         //Skip white space if any after start string.
         while(pos < str.length() && (str[pos] == ' ' || str[pos] == '\t')) ++pos;
-        int pos2 = str.length() - 1;
+        qint32 pos2 = str.length() - 1;
         while(pos2 > pos)
         {
             //skip trailing whitespace
@@ -136,7 +136,7 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
             --pos2;
         }
 
-        int vpos = str.lastIndexOf("\t", -1);
+        qint32 vpos = str.lastIndexOf("\t", -1);
         if(vpos > 0 && vpos > pos2)
         {
             version = str.mid(vpos + 1);

@@ -194,7 +194,7 @@ void ProgressDialog::pop(bool bRedrawUpdate)
     }
 }
 
-void ProgressDialog::setInformation(const QString& info, int current, bool bRedrawUpdate)
+void ProgressDialog::setInformation(const QString& info, qint32 current, bool bRedrawUpdate)
 {
     if(m_progressStack.empty())
         return;
@@ -228,7 +228,7 @@ void ProgressDialog::setInformationImp(const QString& info)
 #ifndef AUTOTEST
     assert(!m_progressStack.empty());
 
-    int level = m_progressStack.size();
+    qint32 level = m_progressStack.size();
     if(level == 1)
     {
         dialogUi.information->setText(info);
@@ -366,7 +366,7 @@ void ProgressDialog::recalc(bool bUpdate)
             if(!m_bStayHidden)
                 m_progressDelayTimer = startTimer(3000); /* 3 s delay */
 
-            int level = m_progressStack.size();
+            qint32 level = m_progressStack.size();
             if((bUpdate && level == 1) || m_t1.elapsed() > 200)
             {
                 if(m_progressStack.empty())
@@ -377,16 +377,16 @@ void ProgressDialog::recalc(bool bUpdate)
                 else
                 {
                     QList<ProgressLevelData>::iterator i = m_progressStack.begin();
-                    int value = int(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin));
+                    qint32 value = qint32(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin));
                     dialogUi.progressBar->setValue(value);
                     if(m_bStayHidden && m_pStatusProgressBar)
                         m_pStatusProgressBar->setValue(value);
 
                     ++i;
                     if(i != m_progressStack.end())
-                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
+                        dialogUi.subProgressBar->setValue((qint32)lround(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
                     else
-                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
+                        dialogUi.subProgressBar->setValue((qint32)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }
 
                 if(!m_bStayHidden && !isVisible())

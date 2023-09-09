@@ -590,7 +590,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(pCodec != pEncoding)
         skipBytes = 0;
 
-    if(mDataSize - skipBytes > TYPE_MAX(QtNumberType))
+    if(mDataSize - skipBytes > TYPE_MAX(qint32))
         return false;
 
     const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
@@ -844,7 +844,7 @@ QTextCodec* SourceData::dectectUTF8(const QByteArray& data)
     utf8->toUnicode(data.constData(), data.size(), &state);
 
     if(state.invalidChars == 0)
-        for (int i = 0; i < data.size()-state.remainingChars; i++)
+        for (qint32 i = 0; i < data.size()-state.remainingChars; i++)
             if ((unsigned)data.at(i) > 127)
                 return utf8;
 

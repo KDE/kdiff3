@@ -59,7 +59,7 @@ bool DefaultFileAccessJobHandler::stat(bool bWantToWrite)
 
 void DefaultFileAccessJobHandler::slotStatResult(KJob* pJob)
 {
-    int err = pJob->error();
+    qint32 err = pJob->error();
     if(err != KJob::NoError)
     {
         qCDebug(kdiffFileAccess) << "slotStatResult: pJob->error() = " << pJob->error();
@@ -126,7 +126,7 @@ void DefaultFileAccessJobHandler::slotGetData(KJob* pJob, const QByteArray& newD
     }
 }
 
-bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume, int permissions)
+bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume, qint32 permissions)
 {
     ProgressProxyExtender pp; // Implicitly used in slotPercent()
     if(maxLength > 0)
@@ -162,7 +162,7 @@ void DefaultFileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
     {
         /*
             Think twice before doing this in new code.
-            The maxChunkSize must be able to fit a 32-bit int. Given that the fallowing is safe for qt5.
+            The maxChunkSize must be able to fit a 32-bit qint32. Given that the fallowing is safe for qt5.
             Qt6 resolves this issue as it uses 64 bit sizes.
         */
         qint64 maxChunkSize = 100000;
@@ -287,7 +287,7 @@ bool DefaultFileAccessJobHandler::rename(const FileAccess& destFile)
     else
     {
         ProgressProxyExtender pp;
-        int permissions = -1;
+        qint32 permissions = -1;
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(mFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
         chk_connect(pJob, &KIO::FileCopyJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
@@ -330,7 +330,7 @@ bool DefaultFileAccessJobHandler::copyFile(const QString& inDest)
     mFileAccess->setStatusText(QString());
     if(!mFileAccess->isNormal() || !dest.isNormal()) return false;
 
-    int permissions = (mFileAccess->isExecutable() ? 0111 : 0) + (mFileAccess->isWritable() ? 0222 : 0) + (mFileAccess->isReadable() ? 0444 : 0);
+    qint32 permissions = (mFileAccess->isExecutable() ? 0111 : 0) + (mFileAccess->isWritable() ? 0222 : 0) + (mFileAccess->isReadable() ? 0444 : 0);
     m_bSuccess = false;
     KIO::FileCopyJob* pJob = KIO::file_copy(mFileAccess->url(), dest.url(), permissions, KIO::HideProgressInfo|KIO::Overwrite);
     chk_connect(pJob, &KIO::FileCopyJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);

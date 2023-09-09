@@ -50,7 +50,7 @@ class OpenDialog: public QDialog
 
     void accept() override;
   private:
-    void selectURL(QComboBox* pLine, bool bDir, int i, bool bSave);
+    void selectURL(QComboBox* pLine, bool bDir, qint32 i, bool bSave);
 
     void fixCurrentText(QComboBox* pCB);
     QSharedPointer<Options> m_pOptions;
@@ -66,7 +66,7 @@ class OpenDialog: public QDialog
     void selectDirC();
     void selectOutputName();
     void selectOutputDir();
-    void internalSlot(int);
+    void internalSlot(qint32);
     void inputFilenameChanged();
     void slotSwapCopyNames(QAction*) const;
   Q_SIGNALS:
@@ -122,8 +122,8 @@ class FindDialog: public QDialog
     QCheckBox* m_pSearchInOutput;
     QCheckBox* m_pCaseSensitive;
 
-    int currentLine = 0;
-    int currentPos = 0;
+    qint32 currentLine = 0;
+    qint32 currentPos = 0;
 
   private:
     eWindowIndex currentWindow = eWindowIndex::None;

@@ -64,35 +64,35 @@ class DiffTextWindow: public QWidget
     void setupConnections(const KDiff3App *app);
 
     void reset();
-    void convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos);
+    void convertToLinePos(qint32 x, qint32 y, LineRef& line, qint32& pos);
 
     [[nodiscard]] QString getSelection() const;
-    [[nodiscard]] int getFirstLine() const;
+    [[nodiscard]] qint32 getFirstLine() const;
     LineRef calcTopLineInFile(const LineRef firstLine);
 
-    [[nodiscard]] int getMaxTextWidth() const;
+    [[nodiscard]] qint32 getMaxTextWidth() const;
     [[nodiscard]] LineCount getNofLines() const;
     [[nodiscard]] LineCount getNofVisibleLines() const;
-    [[nodiscard]] int getVisibleTextAreaWidth() const;
+    [[nodiscard]] qint32 getVisibleTextAreaWidth() const;
 
     LineIndex convertLineToDiff3LineIdx(LineRef line);
     LineRef convertDiff3LineIdxToLine(LineIndex d3lIdx);
 
-    void convertD3LCoordsToLineCoords(LineIndex d3LIdx, int d3LPos, LineRef& line, int& pos);
-    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineIndex& d3LIdx, int& d3LPos);
+    void convertD3LCoordsToLineCoords(LineIndex d3LIdx, qint32 d3LPos, LineRef& line, qint32& pos);
+    void convertLineCoordsToD3LCoords(LineRef line, qint32 pos, LineIndex& d3LIdx, qint32& d3LPos);
 
     void convertSelectionToD3LCoords();
 
-    bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(LineRef firstLine, int startPos, LineRef lastLine, int endPos, LineRef& l, int& p);
+    bool findString(const QString& s, LineRef& d3vLine, qint32& posInLine, bool bDirDown, bool bCaseSensitive);
+    void setSelection(LineRef firstLine, qint32 startPos, LineRef lastLine, qint32 endPos, LineRef& l, qint32& p);
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType);
 
     void setPaintingAllowed(bool bAllowPainting);
-    void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
-    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx);
+    void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, qint32 visibleTextWidth);
+    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, qint32 visibleTextWidth, QtSizeType cacheListIdx);
 
-    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineCount linesPerPage, const QColor& fgColor);
-    void print(RLPainter& painter, const QRect& r, int firstLine, const LineCount nofLinesPerPage);
+    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineCount linesPerPage, const QColor& fgColor);
+    void print(RLPainter& painter, const QRect& r, qint32 firstLine, const LineCount nofLinesPerPage);
 
     static bool startRunnables();
 
@@ -109,28 +109,28 @@ class DiffTextWindow: public QWidget
 
     void setSourceData(const QSharedPointer<SourceData>& inData);
 
-    void scrollVertically(QtNumberType deltaY);
+    void scrollVertically(qint32 deltaY);
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void resizeHeightChangedSignal(int nofVisibleLines);
-    void resizeWidthChangedSignal(int nofVisibleColumns);
-    void scrollDiffTextWindow(int deltaX, int deltaY);
+    void resizeHeightChangedSignal(qint32 nofVisibleLines);
+    void resizeWidthChangedSignal(qint32 nofVisibleColumns);
+    void scrollDiffTextWindow(qint32 deltaX, qint32 deltaY);
     void newSelection();
     void selectionEnd();
     void setFastSelectorLine(LineIndex line);
     void gotFocus();
     void lineClicked(e_SrcSelector winIdx, LineRef line);
 
-    void finishRecalcWordWrap(int visibleTextWidthForPrinting);
+    void finishRecalcWordWrap(qint32 visibleTextWidthForPrinting);
 
     void finishDrop();
 
-    void firstLineChanged(QtNumberType firstLine);
+    void firstLineChanged(qint32 firstLine);
   public Q_SLOTS:
-    void setFirstLine(QtNumberType line);
-    void setHorizScrollOffset(int horizScrollOffset);
+    void setFirstLine(qint32 line);
+    void setHorizScrollOffset(qint32 horizScrollOffset);
     void resetSelection();
-    void setFastSelectorRange(int line1, int nofLines);
+    void setFastSelectorRange(qint32 line1, qint32 nofLines);
     void slotRefresh();
 
     void slotSelectAll();
@@ -156,7 +156,7 @@ class DiffTextWindow: public QWidget
 
   private:
     static QList<RecalcWordWrapThread*> s_runnables;
-    static constexpr int s_linesPerRunnable = 2000;
+    static constexpr qint32 s_linesPerRunnable = 2000;
 
     /*
       This list exists solely to auto disconnect boost signals.
@@ -189,7 +189,7 @@ class DiffTextWindowFrame : public QWidget
     void encodingChanged(QTextCodec*);
 
   public Q_SLOTS:
-    void setFirstLine(QtNumberType firstLine);
+    void setFirstLine(qint32 firstLine);
 
   protected:
     bool eventFilter(QObject*, QEvent*) override;
@@ -223,10 +223,10 @@ class EncodingLabel : public QLabel
   private:
     QMenu* m_pContextEncodingMenu;
     QSharedPointer<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
-    static const int m_maxRecentEncodings = 5;
+    static const qint32 m_maxRecentEncodings = 5;
     QSharedPointer<Options> m_pOptions;
 
-    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum) const;
+    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<qint32>& CodecEnumList, QMenu* pMenu, qint32 currentTextCodecEnum) const;
 };
 
 #endif

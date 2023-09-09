@@ -152,7 +152,7 @@ void ValueMap::writeEntry(const QString& k, const QPoint& v)
     m_map[k].setNum(v.x()) + u8"," + QString().setNum(v.y());
 }
 
-void ValueMap::writeEntry(const QString& k, int v)
+void ValueMap::writeEntry(const QString& k, qint32 v)
 {
     m_map[k].setNum(v);
 }
@@ -243,9 +243,9 @@ bool ValueMap::readBoolEntry(const QString& k, bool bDefault)
     return b;
 }
 
-int ValueMap::readNumEntry(const QString& k, int iDefault)
+qint32 ValueMap::readNumEntry(const QString& k, qint32 iDefault)
 {
-    int ival = iDefault;
+    qint32 ival = iDefault;
     std::map<QString, QString>::iterator i = m_map.find(k);
     if(i != m_map.end())
     {
@@ -309,7 +309,7 @@ bool ValueMap::readEntry(const QString& s, bool bDefault)
 {
     return readBoolEntry(s, bDefault);
 }
-int ValueMap::readEntry(const QString& s, int iDefault)
+qint32 ValueMap::readEntry(const QString& s, qint32 iDefault)
 {
     return readNumEntry(s, iDefault);
 }

@@ -37,11 +37,11 @@ constexpr bool g_bIgnoreWhiteSpace = true;
 
 QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create();
 
-int LineData::width(int tabSize) const
+qint32 LineData::width(qint32 tabSize) const
 {
     const QString pLine = getLine();
-    int w = 0;
-    int j = 0;
+    qint32 w = 0;
+    qint32 j = 0;
     for(QtSizeType i = 0; i < size(); ++i)
     {
         if(pLine[i] == '\t')
@@ -330,7 +330,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                 if(i3c1 == i3b && !i3b->isEqualAB()) // i3c before i3b
                 {
                     Diff3LineList::iterator i3 = i3c;
-                    int nofDisturbingLines = 0;
+                    qint32 nofDisturbingLines = 0;
                     while(i3 != i3b && i3 != end())
                     {
                         if(i3->getLineB().isValid())
@@ -406,7 +406,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                 else if(i3b1 == i3c && !i3c->isEqualAC())
                 {
                     Diff3LineList::iterator i3 = i3b;
-                    int nofDisturbingLines = 0;
+                    qint32 nofDisturbingLines = 0;
                     while(i3 != i3c && i3 != end())
                     {
                         if(i3->getLineC().isValid())
@@ -525,7 +525,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
     }
     /*
    Diff3LineList::iterator it = d3ll.begin();
-   int li=0;
+   qint32 li=0;
    for( ; it!=d3ll.end(); ++it, ++li )
    {
       printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
@@ -627,7 +627,7 @@ bool ManualDiffHelpEntry::isValidMove(LineRef line1, LineRef line2, e_SrcSelecto
     return true;
 }
 
-int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
+qint32 ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
 {
     QtSizeType i;
     for(i = 0; i < d3lv.size(); ++i)
@@ -636,7 +636,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
         if((lineA1.isValid() && lineA1 == d3l->getLineA()) ||
            (lineB1.isValid() && lineB1 == d3l->getLineB()) ||
            (lineC1.isValid() && lineC1 == d3l->getLineC()))
-            return SafeInt<int>(i);
+            return SafeInt<qint32>(i);
     }
     return -1;
 }
@@ -756,8 +756,8 @@ void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector> &p1, Line
     diffList.clear();
     DiffList diffList2;
 
-    int l1begin = 0;
-    int l2begin = 0;
+    qint32 l1begin = 0;
+    qint32 l2begin = 0;
     ManualDiffHelpList::const_iterator i;
     for(i = begin(); i != end(); ++i)
     {
@@ -803,7 +803,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
     {
         Diff3LineList::iterator i3 = begin();
         e_SrcSelector missingWinIdx = e_SrcSelector::None;
-        int alignedSum = (!iMDHL->getLine1(e_SrcSelector::A).isValid() ? 0 : 1) + (!iMDHL->getLine1(e_SrcSelector::B).isValid() ? 0 : 1) + (!iMDHL->getLine1(e_SrcSelector::C).isValid() ? 0 : 1);
+        qint32 alignedSum = (!iMDHL->getLine1(e_SrcSelector::A).isValid() ? 0 : 1) + (!iMDHL->getLine1(e_SrcSelector::B).isValid() ? 0 : 1) + (!iMDHL->getLine1(e_SrcSelector::C).isValid() ? 0 : 1);
         if(alignedSum == 2)
         {
             // If only A & B are aligned then let C rather be aligned with A
@@ -965,10 +965,10 @@ void Diff3LineList::calcDiff3LineListTrim(
     Diff3LineList::iterator i3B = begin();
     Diff3LineList::iterator i3C = begin();
 
-    int line = 0;  // diff3line counters
-    int lineA = 0; //
-    int lineB = 0;
-    int lineC = 0;
+    qint32 line = 0;  // diff3line counters
+    qint32 lineA = 0; //
+    qint32 lineB = 0;
+    qint32 lineC = 0;
 
     ManualDiffHelpList::iterator iMDHL = pManualDiffHelpList->begin();
     // The iterator lookAhead is the variable line look ahead.
@@ -1112,7 +1112,7 @@ void Diff3LineList::calcDiff3LineListTrim(
         {
             // Empty space for A and B. A matches B, but not C. Move A & B up.
             Diff3LineList::iterator i = lineA > lineB ? i3A : i3B;
-            int l = lineA > lineB ? lineA : lineB;
+            qint32 l = lineA > lineB ? lineA : lineB;
 
             if(pManualDiffHelpList->isValidMove(i->getLineC(), lookAhead->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
                pManualDiffHelpList->isValidMove(i->getLineC(), lookAhead->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
@@ -1142,7 +1142,7 @@ void Diff3LineList::calcDiff3LineListTrim(
         {
             // Empty space for A and C. A matches C, but not B. Move A & C up.
             Diff3LineList::iterator i = lineA > lineC ? i3A : i3C;
-            int l = lineA > lineC ? lineA : lineC;
+            qint32 l = lineA > lineC ? lineA : lineC;
 
             if(pManualDiffHelpList->isValidMove(i->getLineB(), lookAhead->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
                pManualDiffHelpList->isValidMove(i->getLineB(), lookAhead->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
@@ -1172,7 +1172,7 @@ void Diff3LineList::calcDiff3LineListTrim(
         {
             // Empty space for B and C. B matches C, but not A. Move B & C up.
             Diff3LineList::iterator i = lineB > lineC ? i3B : i3C;
-            int l = lineB > lineC ? lineB : lineC;
+            qint32 l = lineB > lineC ? lineB : lineC;
             if(pManualDiffHelpList->isValidMove(i->getLineA(), lookAhead->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
                pManualDiffHelpList->isValidMove(i->getLineA(), lookAhead->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
             {
@@ -1223,7 +1223,7 @@ void Diff3LineList::calcDiff3LineListTrim(
     /*
 
    Diff3LineList::iterator it = d3ll.begin();
-   int li=0;
+   qint32 li=0;
    for( ; it!=d3ll.end(); ++it, ++li )
    {
       printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
@@ -1258,7 +1258,7 @@ void Diff3LineList::calcWhiteDiff3Lines(
 /*
     Builds DiffList for scratch. Automaticly clears all previous data in list.
 */
-void DiffList::calcDiff(const QString& line1, const QString& line2, const int maxSearchRange)
+void DiffList::calcDiff(const QString& line1, const QString& line2, const qint32 maxSearchRange)
 {
     clear();
 
@@ -1274,7 +1274,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
      */
     for(; size() * sizeof(Diff) + sizeof(DiffList) < (50 << 20);)
     {
-        int nofEquals = 0;
+        qint32 nofEquals = 0;
         while(p1 != line1.cend() && p2 != line2.cend() && *p1 == *p2)
         {
             ++p1;
@@ -1283,10 +1283,10 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
         }
 
         bool bBestValid = false;
-        int bestI1 = 0;
-        int bestI2 = 0;
-        int i1 = 0;
-        int i2 = 0;
+        qint32 bestI1 = 0;
+        qint32 bestI2 = 0;
+        qint32 i1 = 0;
+        qint32 i2 = 0;
 
         for(i1 = 0;; ++i1)
         {
@@ -1314,7 +1314,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
                 }
             }
             //Bail this should never happen. Not a nice exit but acts as a back stop against harder to detect infine looping.
-            if(i1 == TYPE_MAX(int))
+            if(i1 == TYPE_MAX(qint32))
             {
                 assert(false);
                 abort();
@@ -1354,7 +1354,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
         // a match where later actually equal parts don't match anymore.
         // A different match could be achieved, if we start at the end.
         // Do it, if it would be a better match.
-        int nofUnmatched = 0;
+        qint32 nofUnmatched = 0;
         QString::const_iterator pu1 = p1 - 1;
         QString::const_iterator pu2 = p2 - 1;
 
@@ -1437,7 +1437,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 {
     LineRef k1 = 0;
     LineRef k2 = 0;
-    int maxSearchLength = 500;
+    qint32 maxSearchLength = 500;
     bool bTextsTotalEqual = inBTextsTotalEqual;
     bool bIgnoreComments = eIgnoreFlags & IgnoreFlag::ignoreComments;
     bool bIgnoreWhiteSpace = eIgnoreFlags & IgnoreFlag::ignoreWhiteSpace;
@@ -1615,7 +1615,7 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
                                    i18n("Severe Internal Error"));
                 #endif
 
-                qCCritical(kdiffMain) << "Severe Internal Error." << " line != i for srcSelector=" << (int)srcSelector << "\n";
+                qCCritical(kdiffMain) << "Severe Internal Error." << " line != i for srcSelector=" << (qint32)srcSelector << "\n";
                 ::exit(-1);
             }
             ++i;

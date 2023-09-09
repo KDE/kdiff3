@@ -53,7 +53,7 @@ class LineRef
         return *this;
     };
 
-    const LineRef operator++(int) noexcept
+    const LineRef operator++(qint32) noexcept
     {
         LineRef line(*this);
         ++mLineNumber;
@@ -66,7 +66,7 @@ class LineRef
         return *this;
     };
 
-    const LineRef operator--(int) noexcept
+    const LineRef operator--(qint32) noexcept
     {
         LineRef line(*this);
         --mLineNumber;
@@ -89,12 +89,12 @@ static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy 
 static_assert(std::is_copy_assignable<LineRef>::value, "LineRef must copy assignable.");
 static_assert(std::is_move_constructible<LineRef>::value, "LineRef must be move constructible.");
 static_assert(std::is_move_assignable<LineRef>::value, "LineRef must be move assignable.");
-static_assert(std::is_convertible<LineRef, int>::value, "Can not convert LineRef to int.");
-static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to LineRef.");
+static_assert(std::is_convertible<LineRef, qint32>::value, "Can not convert LineRef to qint32.");
+static_assert(std::is_convertible<qint32, LineRef>::value, "Can not convert qint32 to LineRef.");
 
 typedef LineRef::LineType LineCount;
 typedef LineRef::LineType LineIndex;
 
 //Break in an obvious way if way cann't get LineCounts from Qt supplied ints without overflow issues.
-static_assert(sizeof(LineCount) >= sizeof(QtNumberType)); //Generally assumed by KDiff3
+static_assert(sizeof(LineCount) >= sizeof(qint32)); //Generally assumed by KDiff3
 #endif

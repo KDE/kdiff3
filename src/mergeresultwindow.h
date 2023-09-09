@@ -64,14 +64,14 @@ class MergeResultWindow: public QWidget
     void reset();
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
-    int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr) const;
+    qint32 getNumberOfUnsolvedConflicts(qint32* pNrOfWhiteSpaceConflicts = nullptr) const;
     void choose(e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
-    int getMaxTextWidth();         // width of longest text line
-    [[nodiscard]] int getNofLines() const;
-    int getVisibleTextAreaWidth() const; // text area width without the border
-    int getNofVisibleLines() const;
+    qint32 getMaxTextWidth();         // width of longest text line
+    [[nodiscard]] qint32 getNofLines() const;
+    qint32 getVisibleTextAreaWidth() const; // text area width without the border
+    qint32 getNofVisibleLines() const;
     QString getSelection() const;
     void resetSelection();
     void showNumberOfConflicts(bool showIfNone = false);
@@ -82,16 +82,16 @@ class MergeResultWindow: public QWidget
     bool isUnsolvedConflictAtCurrent() const;
     bool isUnsolvedConflictAboveCurrent() const;
     bool isUnsolvedConflictBelowCurrent() const;
-    bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(int firstLine, int startPos, int lastLine, int endPos);
+    bool findString(const QString& s, LineRef& d3vLine, qint32& posInLine, bool bDirDown, bool bCaseSensitive);
+    void setSelection(qint32 firstLine, qint32 startPos, qint32 lastLine, qint32 endPos);
     e_OverviewMode getOverviewMode() const;
 
     void slotUpdateAvailabilities();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
-    void setFirstLine(QtNumberType firstLine);
-    void setHorizScrollOffset(int horizScrollOffset);
+    void setFirstLine(qint32 firstLine);
+    void setHorizScrollOffset(qint32 horizScrollOffset);
 
     void slotGoCurrent();
     void slotGoTop();
@@ -132,14 +132,14 @@ class MergeResultWindow: public QWidget
 
     void slotSelectAll();
 
-    void scrollVertically(QtNumberType deltaY);
+    void scrollVertically(qint32 deltaY);
 
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void scrollMergeResultWindow(int deltaX, int deltaY);
+    void scrollMergeResultWindow(qint32 deltaX, qint32 deltaY);
     void modifiedChanged(bool bModified);
     void setFastSelectorRange(LineRef line1, LineCount nofLines);
-    void sourceMask(int srcMask, int enabledMask);
+    void sourceMask(qint32 srcMask, qint32 enabledMask);
     void resizeSignal();
     void selectionEnd();
     void newSelection();
@@ -149,7 +149,7 @@ class MergeResultWindow: public QWidget
 
   private:
     void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
-    QString getString(int lineIdx);
+    QString getString(qint32 lineIdx);
     void showUnsolvedConflictsStatusMessage();
 
     static QPointer<QAction> chooseAEverywhere;
@@ -174,7 +174,7 @@ class MergeResultWindow: public QWidget
     const Diff3LineList* m_pDiff3LineList = nullptr;
     TotalDiffStatus* m_pTotalDiffStatus = nullptr;
 
-    int m_delayedDrawTimer = 0;
+    qint32 m_delayedDrawTimer = 0;
     e_OverviewMode mOverviewMode = e_OverviewMode::eOMNormal;
     QString m_persistentStatusMessage;
 
@@ -199,7 +199,7 @@ class MergeResultWindow: public QWidget
             return i != m_mergeLineList.list().begin();
     }
 
-    int m_currentPos;
+    qint32 m_currentPos;
     bool checkOverviewIgnore(MergeLineListImp::iterator& i) const;
 
     enum e_Direction
@@ -223,16 +223,16 @@ class MergeResultWindow: public QWidget
 
     void paintEvent(QPaintEvent* e) override;
 
-    int getTextXOffset() const;
+    qint32 getTextXOffset() const;
     QVector<QTextLayout::FormatRange> getTextLayoutForLine(LineRef line, const QString& s, QTextLayout& textLayout);
-    void myUpdate(int afterMilliSecs);
+    void myUpdate(qint32 afterMilliSecs);
     void timerEvent(QTimerEvent*) override;
     void writeLine(
-        RLPainter& p, int line, const QString& str,
-        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
+        RLPainter& p, qint32 line, const QString& str,
+        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, qint32 rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
     );
     void setFastSelector(MergeLineListImp::iterator i);
-    LineRef convertToLine(QtNumberType y);
+    LineRef convertToLine(qint32 y);
     bool event(QEvent*) override;
     void mousePressEvent(QMouseEvent* e) override;
     void mouseDoubleClickEvent(QMouseEvent* e) override;
@@ -248,20 +248,20 @@ class MergeResultWindow: public QWidget
 
     QPixmap m_pixmap;
     LineRef m_firstLine = 0;
-    int m_horizScrollOffset = 0;
+    qint32 m_horizScrollOffset = 0;
     LineCount m_nofLines = 0;
-    int m_maxTextWidth = -1;
+    qint32 m_maxTextWidth = -1;
     bool m_bMyUpdate = false;
     bool m_bInsertMode = true;
     bool m_bModified = false;
     void setModified(bool bModified = true);
 
-    int m_scrollDeltaX = 0;
-    int m_scrollDeltaY = 0;
-    QtNumberType m_cursorXPos = 0;
-    int m_cursorXPixelPos;
-    int m_cursorYPos = 0;
-    int m_cursorOldXPixelPos = 0;
+    qint32 m_scrollDeltaX = 0;
+    qint32 m_scrollDeltaY = 0;
+    qint32 m_cursorXPos = 0;
+    qint32 m_cursorXPixelPos;
+    qint32 m_cursorYPos = 0;
+    qint32 m_cursorOldXPixelPos = 0;
     bool m_bCursorOn = true; // blinking on and off each second
     QTimer m_cursorTimer;
     bool m_bCursorUpdate = false;
@@ -269,7 +269,7 @@ class MergeResultWindow: public QWidget
 
     Selection m_selection;
 
-    bool deleteSelection2(QString& str, int& x, int& y,
+    bool deleteSelection2(QString& str, qint32& x, qint32& y,
                           MergeLineListImp::iterator& mlIt, MergeEditLineList::iterator& melIt);
     bool doRelevantChangesExist();
 

@@ -151,7 +151,7 @@ class MergeFileInfos
     }
     Q_REQUIRED_RESULT inline bool existsEveryWhere() const { return existsInA() && existsInB() && (existsInC() || !isThreeWay()); }
 
-    Q_REQUIRED_RESULT inline int existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
+    Q_REQUIRED_RESULT inline qint32 existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
 
     Q_REQUIRED_RESULT inline bool onlyInA() const { return existsInA() && !existsInB() && !existsInC(); }
     Q_REQUIRED_RESULT inline bool onlyInB() const { return !existsInA() && existsInB() && !existsInC(); }
