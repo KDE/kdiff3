@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-06 00:48+0000\n"
+"POT-Creation-Date: 2023-09-10 00:48+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -127,7 +127,7 @@ msgstr "Linija nije na raspolaganju"
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2792 optiondialog.cpp:805
+#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2792 optiondialog.cpp:804
 #, kde-format
 msgid "Line end style:"
 msgstr "Stil završetka linije:"
@@ -165,7 +165,7 @@ msgstr "Stil završetka linije:"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2005 kdiff3.cpp:942
+#: difftextwindow.cpp:2005 kdiff3.cpp:940
 #, kde-format
 msgid "Top line"
 msgstr "Gornja linija"
@@ -181,7 +181,7 @@ msgstr "Kraj"
 msgid "Open File"
 msgstr "Otvaram datoteke..."
 
-#: difftextwindow.cpp:2116 optiondialog.cpp:390
+#: difftextwindow.cpp:2116 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8-bitni"
@@ -392,7 +392,7 @@ msgstr ""
 "Trenutno stapate direktorije. Da li ste sigurni da želite prekinuti stapanje "
 "i ponovo skenirati direktorij?"
 
-#: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
+#: directorymergewindow.cpp:688 kdiff3.cpp:796 kdiff3.cpp:806 kdiff3.cpp:818
 #: mergeresultwindow.cpp:329 pdiff.cpp:860 pdiff.cpp:1735 pdiff.cpp:1745
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -1364,22 +1364,22 @@ msgstr "Potraži znakovni niz"
 msgid "Search again for the string"
 msgstr "Ponovo potraži znakovni niz"
 
-#: kdiff3.cpp:649
+#: kdiff3.cpp:647
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Uključuje/isključuje statusnu traku"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:650
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Podesi KDiff3..."
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:670
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Idi na trenutnu deltu"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 "Current\n"
@@ -1388,12 +1388,12 @@ msgstr ""
 "Trenutni\n"
 "Delta"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:672
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Idi na prvu deltu"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:672
 #, kde-format
 msgid ""
 "First\n"
@@ -1402,12 +1402,12 @@ msgstr ""
 "Prva\n"
 "Delta"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Idi na posljednju deltu"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:674
 #, kde-format
 msgid ""
 "Last\n"
@@ -1416,7 +1416,7 @@ msgstr ""
 "Posljednja\n"
 "Delta"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:676
 #, fuzzy, kde-format
 #| msgid ""
 #| "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1426,7 +1426,7 @@ msgstr ""
 "(Preskače razlike u blanko znacima kada je \"Prikaži blanko znake\" "
 "isključeno.)"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:677
 #, fuzzy, kde-format
 #| msgid ""
 #| "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1439,12 +1439,12 @@ msgstr ""
 "(Ne preskače razlike u blanko znacima čak i kada je \"Prikaži blanko znake\" "
 "isključeno.)"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:678
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Idi na prethodnu deltu"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:678
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1453,12 +1453,12 @@ msgstr ""
 "Prethodno\n"
 "Delta"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:680
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Idi na slijedeću deltu"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:680
 #, kde-format
 msgid ""
 "Next\n"
@@ -1467,12 +1467,12 @@ msgstr ""
 "Sljedeća\n"
 "Delta"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:682
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Idi na prethodni sukob"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:682
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1481,12 +1481,12 @@ msgstr ""
 "Prethodni\n"
 "Konflikt"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Idi na slijedeći sukob"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:684
 #, kde-format
 msgid ""
 "Next\n"
@@ -1495,12 +1495,12 @@ msgstr ""
 "Sljedeći\n"
 "Konflikt"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Idi na prethodni neriješeni sukob"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:686
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1509,12 +1509,12 @@ msgstr ""
 "Prethodni\n"
 "Neriješen"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Idi na slijedeći neriješeni sukob"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:688
 #, kde-format
 msgid ""
 "Next\n"
@@ -1523,14 +1523,14 @@ msgstr ""
 "Sljedeći\n"
 "Neriješen"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:690
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Idi na posljednju deltu"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:690
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1539,21 +1539,21 @@ msgid ""
 "Line"
 msgstr "Linija"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 #| msgid "No program specified."
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Nijedan program nije naveden."
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:692
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Odaberite liniju/linije iz A"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:692
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1566,14 +1566,14 @@ msgstr ""
 "Odaberi\n"
 "A"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Odaberite liniju/linije iz B"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1586,14 +1586,14 @@ msgstr ""
 "Odaberi\n"
 "B"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:694
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Odaberite liniju/linije iz C"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:694
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1606,14 +1606,14 @@ msgstr ""
 "Odaberi\n"
 "C"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Automatski idi na slijedeći neriješeni sukob nakon izbora izvora"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1626,13 +1626,13 @@ msgstr ""
 "Automatski\n"
 "Sljedeći"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:697
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "Prikaži znakove razmaka i tabulatora za razlike"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:697
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1645,12 +1645,12 @@ msgstr ""
 "Bijeli\n"
 "Karakteri"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Show White Space"
 msgstr "Prikaži blanko znak"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:698
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1663,12 +1663,12 @@ msgstr ""
 "Bijele\n"
 "Delte"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Prikaži brojeve linija"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:700
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1681,142 +1681,141 @@ msgstr ""
 "Linijski\n"
 "Brojevi"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Automatski riješi jednostavne sukobe"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Postavi delte na sukobe"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Pokreni auto-stapanje regularnih izraza"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Automatski riješi sukobe historije"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Razdvoji razlike pri odabiru"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Sjedini odabrane razlike"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Show Window A"
 msgstr "Prikaži prozor A"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Show Window B"
 msgstr "Prikaži prozor B"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Show Window C"
 msgstr "Prikaži prozor C"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normalan pregled"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:714
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Pregled A prema B"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:715
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Pregled A prema C"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:716
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Pregled B prema C"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:717
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Prozori razlika omota riječi"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:718
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Dodaj ručno poravnanje razlika"
 
-#: kdiff3.cpp:721
+#: kdiff3.cpp:719
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Izbriši sva ručna poravnanja razlika"
 
-#: kdiff3.cpp:723
+#: kdiff3.cpp:721
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Fokusiraj slijedeći prozor"
 
-#: kdiff3.cpp:724
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Fokusiraj prethodni prozor"
 
-#: kdiff3.cpp:725
+#: kdiff3.cpp:723
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Prebaci orijentaciju razdvajanja"
 
-#: kdiff3.cpp:727
+#: kdiff3.cpp:725
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "Podijeljeni prikaz ekrana za dir. i tekst"
 
-#: kdiff3.cpp:729
+#: kdiff3.cpp:727
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "Prebaci između dir. i tekst. prikaza"
 
-#: kdiff3.cpp:751 kdiff3.cpp:853 kdiff3.cpp:878 kdiff3.cpp:1139 kdiff3.cpp:1160
-#: pdiff.cpp:944 pdiff.cpp:1013 pdiff.cpp:1049 pdiff.cpp:1058 pdiff.cpp:1116
-#: pdiff.cpp:1124
+#: kdiff3.cpp:749 kdiff3.cpp:851 kdiff3.cpp:876 kdiff3.cpp:1136 pdiff.cpp:944
+#: pdiff.cpp:1013 pdiff.cpp:1049 pdiff.cpp:1058 pdiff.cpp:1116 pdiff.cpp:1124
 #, kde-format
 msgid "Ready."
 msgstr "Spreman."
 
-#: kdiff3.cpp:797 pdiff.cpp:1734
+#: kdiff3.cpp:795 pdiff.cpp:1734
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "Rezultat stapanja nije snimljen."
 
-#: kdiff3.cpp:799
+#: kdiff3.cpp:797
 #, kde-format
 msgid "Save && Quit"
 msgstr "Snimi i izađi"
 
-#: kdiff3.cpp:800
+#: kdiff3.cpp:798
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Izađi bez snimanja"
 
-#: kdiff3.cpp:808 pdiff.cpp:1745
+#: kdiff3.cpp:806 pdiff.cpp:1745
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Snimanje rezultata stapanja nije uspjelo."
 
-#: kdiff3.cpp:819 pdiff.cpp:859
+#: kdiff3.cpp:817 pdiff.cpp:859
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1825,64 +1824,59 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Trenutno stapate direktorije. Da li ste sigurni da želite prekinuti?"
 
-#: kdiff3.cpp:842
+#: kdiff3.cpp:840
 #, kde-format
 msgid "Saving file..."
 msgstr "Snimam datoteku..."
 
-#: kdiff3.cpp:859
+#: kdiff3.cpp:857
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Snimam datoteku pod novim nazivom..."
 
-#: kdiff3.cpp:861
+#: kdiff3.cpp:859
 #, kde-format
 msgid "Save As..."
 msgstr "Snimi kao..."
 
-#: kdiff3.cpp:886
+#: kdiff3.cpp:884
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Printanje nije izvršeno."
 
-#: kdiff3.cpp:926
+#: kdiff3.cpp:924
 #, kde-format
 msgid "Printing..."
 msgstr "Štampam..."
 
-#: kdiff3.cpp:1024
+#: kdiff3.cpp:1022
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1072
+#: kdiff3.cpp:1070
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "Odabir"
 
-#: kdiff3.cpp:1101
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Printing completed."
 msgstr "Štampanje završeno."
 
-#: kdiff3.cpp:1105
+#: kdiff3.cpp:1103
 #, kde-format
 msgid "Printing aborted."
 msgstr "Štampanje prekinuto."
 
-#: kdiff3.cpp:1112
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Exiting..."
 msgstr "Izlazim..."
 
-#: kdiff3.cpp:1123
-#, kde-format
-msgid "Toggling toolbar..."
-msgstr "Prebacujem traku sa alatom..."
-
-#: kdiff3.cpp:1144
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Prebaci statusnu traku..."
@@ -2362,13 +2356,13 @@ msgstr "C (opcionalno):"
 msgid "Folder..."
 msgstr "Otvaram datoteke..."
 
-#: optiondialog.cpp:108 optiondialog.cpp:120
+#: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
 msgstr ""
 
-#: optiondialog.cpp:110 optiondialog.cpp:122
+#: optiondialog.cpp:109 optiondialog.cpp:121
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2377,128 +2371,128 @@ msgid ""
 "Example:"
 msgstr ""
 
-#: optiondialog.cpp:391
+#: optiondialog.cpp:390
 #, kde-format
 msgid "Unicode"
 msgstr "Unicode"
 
-#: optiondialog.cpp:392
+#: optiondialog.cpp:391
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:411
+#: optiondialog.cpp:410
 #, fuzzy, kde-format
 #| msgid "Change this if non-ASCII characters are not displayed correctly."
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Izmijenite ovo ako se znakovi koji nisu ASCII ne prikazuju ispravno."
 
-#: optiondialog.cpp:500
+#: optiondialog.cpp:499
 #, kde-format
 msgid "Configure"
 msgstr "Podesi"
 
-#: optiondialog.cpp:539
+#: optiondialog.cpp:538
 #, kde-format
 msgid "Font"
 msgstr "Font"
 
-#: optiondialog.cpp:541
+#: optiondialog.cpp:540
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Font editora i raz. izlaza"
 
-#: optiondialog.cpp:559
+#: optiondialog.cpp:558
 #, kde-format
 msgid "Application font"
 msgstr ""
 
-#: optiondialog.cpp:564
+#: optiondialog.cpp:563
 #, fuzzy, kde-format
 #| msgid "File Save Error"
 msgid "File view font"
 msgstr "Greška u snimanju datoteke"
 
-#: optiondialog.cpp:583
+#: optiondialog.cpp:582
 #, fuzzy, kde-format
 #| msgid "Color"
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Boja"
 
-#: optiondialog.cpp:584
+#: optiondialog.cpp:583
 #, kde-format
 msgid "Colors Settings"
 msgstr "Postavke boja"
 
-#: optiondialog.cpp:609
+#: optiondialog.cpp:608
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Prikazi editora i razlika:"
 
-#: optiondialog.cpp:617
+#: optiondialog.cpp:616
 #, kde-format
 msgid "Foreground color:"
 msgstr "Boja iscrtavanja:"
 
-#: optiondialog.cpp:625
+#: optiondialog.cpp:624
 #, kde-format
 msgid "Background color:"
 msgstr "Boja pozadine:"
 
-#: optiondialog.cpp:635
+#: optiondialog.cpp:634
 #, kde-format
 msgid "Diff background color:"
 msgstr "Boja pozadine razlika:"
 
-#: optiondialog.cpp:644
+#: optiondialog.cpp:643
 #, kde-format
 msgid "Color A:"
 msgstr "Boja A:"
 
-#: optiondialog.cpp:653
+#: optiondialog.cpp:652
 #, kde-format
 msgid "Color B:"
 msgstr "Boja B:"
 
-#: optiondialog.cpp:662
+#: optiondialog.cpp:661
 #, kde-format
 msgid "Color C:"
 msgstr "Boja C:"
 
-#: optiondialog.cpp:670
+#: optiondialog.cpp:669
 #, kde-format
 msgid "Conflict color:"
 msgstr "Boja sukoba:"
 
-#: optiondialog.cpp:679
+#: optiondialog.cpp:678
 #, kde-format
 msgid "Current range background color:"
 msgstr "Pozadinska boja trenutnog opsega:"
 
-#: optiondialog.cpp:688
+#: optiondialog.cpp:687
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Pozadinska boja trenutnog opsega razlika:"
 
-#: optiondialog.cpp:696
+#: optiondialog.cpp:695
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Boja za ručno poravnate opsege razlika:"
 
-#: optiondialog.cpp:703
+#: optiondialog.cpp:702
 #, fuzzy, kde-format
 #| msgid "Directory Comparison View:"
 msgid "Folder Comparison View:"
 msgstr "Prikaz poređenja direktorija:"
 
-#: optiondialog.cpp:709
+#: optiondialog.cpp:708
 #, kde-format
 msgid "Newest file color:"
 msgstr "Boja najnovije datoteke:"
 
-#: optiondialog.cpp:714
+#: optiondialog.cpp:713
 #, fuzzy, kde-format
 #| msgid ""
 #| "Changing this color will only be effective when starting the next "
@@ -2510,37 +2504,37 @@ msgstr ""
 "Izmjena ove boje će biti djelotvorna samo kod pokretanja slijedeće usporedbe "
 "direktorija."
 
-#: optiondialog.cpp:719
+#: optiondialog.cpp:718
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Boja najstarije datoteke:"
 
-#: optiondialog.cpp:728
+#: optiondialog.cpp:727
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Boja srednjovječne datoteke:"
 
-#: optiondialog.cpp:737
+#: optiondialog.cpp:736
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Boja za nestale datoteke:"
 
-#: optiondialog.cpp:751
+#: optiondialog.cpp:750
 #, kde-format
 msgid "Editor"
 msgstr "Editor"
 
-#: optiondialog.cpp:752
+#: optiondialog.cpp:751
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Ponašanje editora"
 
-#: optiondialog.cpp:774
+#: optiondialog.cpp:773
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "Tabulator ubacuje razmake"
 
-#: optiondialog.cpp:778
+#: optiondialog.cpp:777
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2553,29 +2547,29 @@ msgstr ""
 "On: Pritiskom na tab generiše se odgovarajući broj razmaka.\n"
 "Off: Tab karakter će biti umetnut."
 
-#: optiondialog.cpp:783
+#: optiondialog.cpp:782
 #, kde-format
 msgid "Tab size:"
 msgstr "Veličina tabulatora:"
 
-#: optiondialog.cpp:790
+#: optiondialog.cpp:789
 #, kde-format
 msgid "Auto indentation"
 msgstr "Automatsko uvlačenje"
 
-#: optiondialog.cpp:794
+#: optiondialog.cpp:793
 #, fuzzy, kde-format
 #| msgid "On: The indentation of the previous line is used for a new line.\n"
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "Uključeno: Uvlačenje prethodne linije koristi se za novu liniju.\n"
 
-#: optiondialog.cpp:797
+#: optiondialog.cpp:796
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Automatsko kopiranje izbora"
 
-#: optiondialog.cpp:801
+#: optiondialog.cpp:800
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Any selection is immediately written to the clipboard.\n"
@@ -2588,28 +2582,28 @@ msgstr ""
 "Uključeno: Svaki izbor se odmah upisuje u clipboard.\n"
 "Isključeno: Morate eksplicitno kopirati, nrp. preko Ctrl+C."
 
-#: optiondialog.cpp:811
+#: optiondialog.cpp:810
 #, fuzzy, kde-format
 #| msgid "Unix"
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:812
+#: optiondialog.cpp:811
 #, fuzzy, kde-format
 #| msgid "&Window"
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "P&rozor"
 
-#: optiondialog.cpp:813
+#: optiondialog.cpp:812
 #, fuzzy, kde-format
 #| msgid "Auto Select"
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Automatski izbor"
 
-#: optiondialog.cpp:816
+#: optiondialog.cpp:815
 #, fuzzy, kde-format
 #| msgid ""
 #| "Sets the line endings for when an edited file is saved.\n"
@@ -2622,23 +2616,23 @@ msgstr ""
 "Postavlja završetke linija kada se izmijenjena datoteka snima.\n"
 "DOS/Windows: CR+LF; Unix: LF; sa CR=0D, LF=0A"
 
-#: optiondialog.cpp:826
+#: optiondialog.cpp:825
 #, kde-format
 msgid "Diff"
 msgstr "Diff"
 
-#: optiondialog.cpp:827
+#: optiondialog.cpp:826
 #, kde-format
 msgid "Diff Settings"
 msgstr "Podešavanja proframa Diff"
 
-#: optiondialog.cpp:850
+#: optiondialog.cpp:849
 #, fuzzy, kde-format
 #| msgid "Treat as white space."
 msgid "Ignore numbers (treat as white space)"
 msgstr "Tretirajte kao bijeli prostor."
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:853
 #, fuzzy, kde-format
 #| msgid ""
 #| "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2654,26 +2648,26 @@ msgstr ""
 "ignorisanju blanko znakova.)\n"
 "Može pomoći pri uspoređivanju datoteka sa numeričkim podacima."
 
-#: optiondialog.cpp:858
+#: optiondialog.cpp:857
 #, fuzzy, kde-format
 #| msgid "Treat C/C++ comments like white space."
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "Tretiraj C/C++ komentare kao blanko znake."
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:860
 #, fuzzy, kde-format
 #| msgid "Treat C/C++ comments like white space."
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "Tretiraj C/C++ komentare kao blanko znake."
 
-#: optiondialog.cpp:864
+#: optiondialog.cpp:863
 #, fuzzy, kde-format
 #| msgid "Treat as white space."
 msgid "Ignore case (treat as white space)"
 msgstr "Tretirajte kao bijeli prostor."
 
-#: optiondialog.cpp:868
+#: optiondialog.cpp:867
 #, fuzzy, kde-format
 #| msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgctxt "Tool Tip"
@@ -2681,12 +2675,12 @@ msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
 "Tretira razliku u veličini slova kao promjene blanko znakova. ('a'<=>'A')"
 
-#: optiondialog.cpp:871
+#: optiondialog.cpp:870
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Predobradna naredba:"
 
-#: optiondialog.cpp:876
+#: optiondialog.cpp:875
 #, fuzzy, kde-format
 #| msgid "User defined pre-processing. (See the docs for details.)"
 msgctxt "Tool Tip"
@@ -2694,12 +2688,12 @@ msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
 "Korisnički definisana predobrada. (Pogledajte dokumentaciju radi detalja.)"
 
-#: optiondialog.cpp:879
+#: optiondialog.cpp:878
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Predobradna naredba za usklađivanje linija:"
 
-#: optiondialog.cpp:884
+#: optiondialog.cpp:883
 #, fuzzy, kde-format
 #| msgid ""
 #| "This pre-processor is only used during line matching.\n"
@@ -2712,12 +2706,12 @@ msgstr ""
 "Ova predobrada se koristi samo tokom usklađivanja linija.\n"
 "(Pogledajte dokumentaciju radi detalja.)"
 
-#: optiondialog.cpp:887
+#: optiondialog.cpp:886
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "Potrudi se (sporije)"
 
-#: optiondialog.cpp:891
+#: optiondialog.cpp:890
 #, fuzzy, kde-format
 #| msgid ""
 #| "Enables the --minimal option for the external diff.\n"
@@ -2730,12 +2724,12 @@ msgstr ""
 "Uključuje opciju --minimal za spoljašnje razlikovanje.\n"
 "Analiza velikih datoteka će biti mnogo sporija."
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:894
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "Poravnaj B i C za 3 ulazna dokumenta"
 
-#: optiondialog.cpp:899
+#: optiondialog.cpp:898
 #, fuzzy, kde-format
 #| msgid ""
 #| "Try to align B and C when comparing or merging three input files.\n"
@@ -2752,24 +2746,24 @@ msgstr ""
 "komplikovanije.\n"
 "(Zadano je isključeno.)"
 
-#: optiondialog.cpp:910
+#: optiondialog.cpp:909
 #, fuzzy, kde-format
 #| msgid "Merge"
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Stopi"
 
-#: optiondialog.cpp:911
+#: optiondialog.cpp:910
 #, kde-format
 msgid "Merge Settings"
 msgstr "Postavke spajanja"
 
-#: optiondialog.cpp:934
+#: optiondialog.cpp:933
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Zastoj automatskog napredovanja (ms):"
 
-#: optiondialog.cpp:940
+#: optiondialog.cpp:939
 #, fuzzy, kde-format
 #| msgid ""
 #| "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2783,29 +2777,29 @@ msgstr ""
 "U režimu automatskog napredovanja rezultat trenutnog izbora prikazuje se \n"
 "za navedeno vrijeme, prije skoka na slijedeći sukob. Opseg: 0-2000 ms"
 
-#: optiondialog.cpp:944
+#: optiondialog.cpp:943
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Prikaži informacijske dijaloge"
 
-#: optiondialog.cpp:947
+#: optiondialog.cpp:946
 #, fuzzy, kde-format
 #| msgid "Show a dialog with information about the number of conflicts."
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "Prikaži dijalog sa informacijama o broju konflikata."
 
-#: optiondialog.cpp:950
+#: optiondialog.cpp:949
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Podrazumjevano stapanje blanko znakova dvije datoteke:"
 
-#: optiondialog.cpp:955 optiondialog.cpp:968
+#: optiondialog.cpp:954 optiondialog.cpp:967
 #, kde-format
 msgid "Manual Choice"
 msgstr "Ručni izbor"
 
-#: optiondialog.cpp:959 optiondialog.cpp:973
+#: optiondialog.cpp:958 optiondialog.cpp:972
 #, fuzzy, kde-format
 #| msgid ""
 #| "Allow the merge algorithm to automatically select an input for white-"
@@ -2818,27 +2812,27 @@ msgstr ""
 "Dozvoljava algoritmu stapanja da automatski odabere ulaz za izmjene samo u "
 "blanko znakovima."
 
-#: optiondialog.cpp:963
+#: optiondialog.cpp:962
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Podrazumjevano stapanje blanko znakova tri datoteke:"
 
-#: optiondialog.cpp:977
+#: optiondialog.cpp:976
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Regularni izraz automatskog stapanja"
 
-#: optiondialog.cpp:985 smalldialogs.cpp:372
+#: optiondialog.cpp:984 smalldialogs.cpp:372
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Regularni izraz auto-stapanja:"
 
-#: optiondialog.cpp:993
+#: optiondialog.cpp:992
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "Pokreni auto-stapanje regularnih izraza na početku stapanja"
 
-#: optiondialog.cpp:996
+#: optiondialog.cpp:995
 #, fuzzy, kde-format
 #| msgid ""
 #| "Run the merge for auto merge regular expressions\n"
@@ -2851,56 +2845,56 @@ msgstr ""
 "Pokreni stapanje za regularne izraze auto-stapanja\n"
 "odmah kada stapanje počne.\n"
 
-#: optiondialog.cpp:1001
+#: optiondialog.cpp:1000
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Stapanje historije kontrola verzije"
 
-#: optiondialog.cpp:1009 smalldialogs.cpp:399
+#: optiondialog.cpp:1008 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Regularni izraz početka historije:"
 
-#: optiondialog.cpp:1017 smalldialogs.cpp:427
+#: optiondialog.cpp:1016 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Regularni izraz početka zapisa historije:"
 
-#: optiondialog.cpp:1033
+#: optiondialog.cpp:1032
 #, kde-format
 msgid "History merge sorting"
 msgstr "Sortiranje stapanja historije"
 
-#: optiondialog.cpp:1036
+#: optiondialog.cpp:1035
 #, fuzzy, kde-format
 #| msgid "Sort version control history by a key."
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "Sortiraj historiju kontrola verzije pomoću tipke."
 
-#: optiondialog.cpp:1046
+#: optiondialog.cpp:1045
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "Poredak tipki za sortiranje početka zapisa historije:"
 
-#: optiondialog.cpp:1056
+#: optiondialog.cpp:1055
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "Stopi historiju kontrola verzije na početku stapanja"
 
-#: optiondialog.cpp:1059
+#: optiondialog.cpp:1058
 #, fuzzy, kde-format
 #| msgid "Run version control history automerge on merge start."
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr "Pokreni auto-stapanje historije kontrola verzije na početku stapanja."
 
-#: optiondialog.cpp:1063
+#: optiondialog.cpp:1062
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Najveći broj zapisa historije:"
 
-#: optiondialog.cpp:1067
+#: optiondialog.cpp:1066
 #, fuzzy, kde-format
 #| msgid ""
 #| "Cut off after specified number. Use -1 for infinite number of entries."
@@ -2909,17 +2903,17 @@ msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
 "Odrežite nakon određenog broja. Koristite -1 za beskonačan broj prijava."
 
-#: optiondialog.cpp:1071
+#: optiondialog.cpp:1070
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Testirajte svoje regularne izraze"
 
-#: optiondialog.cpp:1076
+#: optiondialog.cpp:1075
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Nevažna naredba stapanja:"
 
-#: optiondialog.cpp:1081
+#: optiondialog.cpp:1080
 #, fuzzy, kde-format
 #| msgid ""
 #| "If specified this script is run after automerge\n"
@@ -2935,12 +2929,12 @@ msgstr ""
 "kada nisu ustanovljene nikakve druge važne promjene.\n"
 "Pozvana parametrima: filename1 filename2 filename3"
 
-#: optiondialog.cpp:1086
+#: optiondialog.cpp:1085
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "Automatsko snimanje i izlazak na spajanju bez konflikta"
 
-#: optiondialog.cpp:1090
+#: optiondialog.cpp:1089
 #, fuzzy, kde-format
 #| msgid ""
 #| "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2959,32 +2953,32 @@ msgstr ""
 "izađi.\n"
 "(Slično opciji komandne linije \"--auto\".)"
 
-#: optiondialog.cpp:1101 optiondialog.cpp:1102
+#: optiondialog.cpp:1100 optiondialog.cpp:1101
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "Otvaram datoteke..."
 
-#: optiondialog.cpp:1122
+#: optiondialog.cpp:1121
 #, fuzzy, kde-format
 #| msgid "Recursive directories"
 msgid "Recursive folders"
 msgstr "Rekurzivni direktoriji"
 
-#: optiondialog.cpp:1125
+#: optiondialog.cpp:1124
 #, fuzzy, kde-format
 #| msgid "Whether to analyze subdirectories or not."
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "Bilo da se analiziraju poddirektoriji ili ne."
 
-#: optiondialog.cpp:1127
+#: optiondialog.cpp:1126
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Uzorak/uzorci datoteka:"
 
-#: optiondialog.cpp:1133
+#: optiondialog.cpp:1132
 #, fuzzy, kde-format
 #| msgid ""
 #| "Pattern(s) of files to be analyzed. \n"
@@ -3000,12 +2994,12 @@ msgstr ""
 "Zamjenski znaci: '*' i '?'\n"
 "Više uzoraka može biti navedeno upotrebom razdjelnika: ';'"
 
-#: optiondialog.cpp:1138
+#: optiondialog.cpp:1137
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Anti-uzorak/uzorci datoteka:"
 
-#: optiondialog.cpp:1144
+#: optiondialog.cpp:1143
 #, fuzzy, kde-format
 #| msgid ""
 #| "Pattern(s) of files to be excluded from analysis. \n"
@@ -3021,13 +3015,13 @@ msgstr ""
 "Zamjenski znaci: '*' i '?'\n"
 "Više uzoraka može biti navedeno upotrebom razdjelnika: ';'"
 
-#: optiondialog.cpp:1149
+#: optiondialog.cpp:1148
 #, fuzzy, kde-format
 #| msgid "File-anti-pattern(s):"
 msgid "Folder-anti-pattern(s):"
 msgstr "Anti-uzorak/uzorci datoteka:"
 
-#: optiondialog.cpp:1155
+#: optiondialog.cpp:1154
 #, fuzzy, kde-format
 #| msgid ""
 #| "Pattern(s) of files to be excluded from analysis. \n"
@@ -3043,13 +3037,13 @@ msgstr ""
 "Zamjenski znaci: '*' i '?'\n"
 "Više uzoraka može biti navedeno upotrebom razdjelnika: ';'"
 
-#: optiondialog.cpp:1160
+#: optiondialog.cpp:1159
 #, fuzzy, kde-format
 #| msgid "Use .cvsignore"
 msgid "Use Ignore File"
 msgstr "Koristi datoteku .cvsignore"
 
-#: optiondialog.cpp:1164
+#: optiondialog.cpp:1163
 #, fuzzy, kde-format
 #| msgid ""
 #| "Extends the antipattern to anything that would be ignored by CVS.\n"
@@ -3063,25 +3057,25 @@ msgstr ""
 "Proširuje antipatern na sve što će biti ignorisano od CVS.\n"
 "Preko lokal \".cvsignore\" dokumenata ovo može biti direktorijski specifično."
 
-#: optiondialog.cpp:1168
+#: optiondialog.cpp:1167
 #, fuzzy, kde-format
 #| msgid "Find hidden files and directories"
 msgid "Find hidden files and folders"
 msgstr "Pronađi skrivene datoteke i direktorije"
 
-#: optiondialog.cpp:1171
+#: optiondialog.cpp:1170
 #, fuzzy, kde-format
 #| msgid "Find hidden files and directories"
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "Pronađi skrivene datoteke i direktorije"
 
-#: optiondialog.cpp:1174
+#: optiondialog.cpp:1173
 #, kde-format
 msgid "Follow file links"
 msgstr "Prati veze datoteka"
 
-#: optiondialog.cpp:1178
+#: optiondialog.cpp:1177
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Compare the file the link points to.\n"
@@ -3094,13 +3088,13 @@ msgstr ""
 "Uključeno: Uporedi datoteku na koju pokazuje veza.\n"
 "Isključeno: Uporedi veze."
 
-#: optiondialog.cpp:1182
+#: optiondialog.cpp:1181
 #, fuzzy, kde-format
 #| msgid "Follow file links"
 msgid "Follow folder links"
 msgstr "Prati veze datoteka"
 
-#: optiondialog.cpp:1186
+#: optiondialog.cpp:1185
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Compare the file the link points to.\n"
@@ -3113,12 +3107,12 @@ msgstr ""
 "Uključeno: Uporedi datoteku na koju pokazuje veza.\n"
 "Isključeno: Uporedi veze."
 
-#: optiondialog.cpp:1195
+#: optiondialog.cpp:1194
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "Poređenje datoteka po nazivu koje razlikuje veličinu slova"
 
-#: optiondialog.cpp:1199
+#: optiondialog.cpp:1198
 #, fuzzy, kde-format
 #| msgid ""
 #| "The directory comparison will compare files or directories when their "
@@ -3136,13 +3130,13 @@ msgstr ""
 "Postavi ovu opciju ako se veličine slova za nazive moraju podudarati. "
 "(Podrazumjevano za Windows je isključeno, u protivnom uključeno.)"
 
-#: optiondialog.cpp:1203
+#: optiondialog.cpp:1202
 #, fuzzy, kde-format
 #| msgid "Unfold All Subdirs"
 msgid "Unfold all subfolders on load"
 msgstr "Raširi sve poddirektorije"
 
-#: optiondialog.cpp:1207
+#: optiondialog.cpp:1206
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3150,12 +3144,12 @@ msgid ""
 "Off: Leave subfolders folded."
 msgstr ""
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1210
 #, kde-format
 msgid "Skip folder status report"
 msgstr ""
 
-#: optiondialog.cpp:1215
+#: optiondialog.cpp:1214
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3163,29 +3157,29 @@ msgid ""
 "Off: Show the status dialog on start."
 msgstr ""
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1218
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Režim poređenja datoteka"
 
-#: optiondialog.cpp:1224
+#: optiondialog.cpp:1223
 #, kde-format
 msgid "Binary comparison"
 msgstr "Binarno poređenje"
 
-#: optiondialog.cpp:1226
+#: optiondialog.cpp:1225
 #, fuzzy, kde-format
 #| msgid "Binary comparison of each file. (Default)"
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "Binarno poređenje za svaku datoteku. (Podrazumjevano)"
 
-#: optiondialog.cpp:1229
+#: optiondialog.cpp:1228
 #, kde-format
 msgid "Full analysis"
 msgstr "Puna analiza"
 
-#: optiondialog.cpp:1231
+#: optiondialog.cpp:1230
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do a full analysis and show statistics information in extra columns.\n"
@@ -3198,12 +3192,12 @@ msgstr ""
 "Obavi punu analizu i prikaži statističke podatke u dodatnim kolonama.\n"
 "(Sporije nego binarno poređenje, mnogo sporije za binarne datoteke.)"
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1234
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Čuvaj veličinu i datum promjene (nesigurno)"
 
-#: optiondialog.cpp:1237
+#: optiondialog.cpp:1236
 #, fuzzy, kde-format
 #| msgid ""
 #| "Assume that files are equal if the modification date and file length are "
@@ -3225,7 +3219,7 @@ msgstr ""
 "kao drugačije.\n"
 "Korisno za velike direktorije ili na sporim mrežama."
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1241
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -3234,7 +3228,7 @@ msgstr ""
 "Čuvaj veličinu i datum, ali koristi binarno poređenje ako datum ne odgovara "
 "(nesigurno)"
 
-#: optiondialog.cpp:1244
+#: optiondialog.cpp:1243
 #, fuzzy, kde-format
 #| msgid ""
 #| "Assume that files are equal if the modification date and file length are "
@@ -3253,12 +3247,12 @@ msgstr ""
 "Ako datumi nisu jednaki, ali su veličine, koristite binarno poređenje\n"
 "Korisno za velike direktorije ili na sporim mrežama."
 
-#: optiondialog.cpp:1249
+#: optiondialog.cpp:1248
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Čuvaj veličinu (nesigurno)"
 
-#: optiondialog.cpp:1251
+#: optiondialog.cpp:1250
 #, fuzzy, kde-format
 #| msgid ""
 #| "Assume that files are equal if their file lengths are equal.\n"
@@ -3274,13 +3268,13 @@ msgstr ""
 "Korisno za velike direktorije ili spore mreže kada je datum izmijenjen u "
 "toku preuzimanja."
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1257
 #, fuzzy, kde-format
 #| msgid "Synchronize directories"
 msgid "Synchronize folders"
 msgstr "Sinhronizuj direktorije"
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1261
 #, fuzzy, kde-format
 #| msgid ""
 #| "Offers to store files in both directories so that\n"
@@ -3297,12 +3291,12 @@ msgstr ""
 "da su oba direktorija nakon toga ista.\n"
 "Radi samo kada se porede dva direktorija bez navođenja odredišta."
 
-#: optiondialog.cpp:1268
+#: optiondialog.cpp:1267
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Razlike blanko znakova smatraju se jednakim"
 
-#: optiondialog.cpp:1272
+#: optiondialog.cpp:1271
 #, fuzzy, kde-format
 #| msgid ""
 #| "If files differ only by white space consider them equal.\n"
@@ -3315,12 +3309,12 @@ msgstr ""
 "Ako se datoteke razlikuju samo po blanko znacima, smatraj ih jednakim.\n"
 "Ovo je aktivno samo kada je odabrana puna analiza."
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1277
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Kopiraj noviji umjesto stapanja (nesigurno)"
 
-#: optiondialog.cpp:1282
+#: optiondialog.cpp:1281
 #, fuzzy, kde-format
 #| msgid ""
 #| "Don't look inside, just take the newer file.\n"
@@ -3336,12 +3330,12 @@ msgstr ""
 "(Koristite ovo samo ako znate šta radite!)\n"
 "Djelotvorno samo kada se porede dva direktorija."
 
-#: optiondialog.cpp:1287
+#: optiondialog.cpp:1286
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Napravi rezerve datoteka (.orig)"
 
-#: optiondialog.cpp:1291
+#: optiondialog.cpp:1290
 #, fuzzy, kde-format
 #| msgid ""
 #| "If a file would be saved over an old file, then the old file\n"
@@ -3354,17 +3348,17 @@ msgstr ""
 "Ako dokument bude snimljen preko starog dokumenta, onda stari dokument\n"
 "će biti preimenovan sa '.orig' ekstenzijom umjesto da bude izbrisan."
 
-#: optiondialog.cpp:1300 optiondialog.cpp:1301
+#: optiondialog.cpp:1299 optiondialog.cpp:1300
 #, kde-format
 msgid "Regional Settings"
 msgstr "Regionalne postavke"
 
-#: optiondialog.cpp:1324
+#: optiondialog.cpp:1323
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "Koristi isto kodiranje za sve:"
 
-#: optiondialog.cpp:1328
+#: optiondialog.cpp:1327
 #, fuzzy, kde-format
 #| msgid ""
 #| "Enable this allows to change all encodings by changing the first only.\n"
@@ -3377,18 +3371,18 @@ msgstr ""
 "Uključivanjem ovog možete promijeniti sva kodiranja promjenom samo prvog.\n"
 "Isključite ovo ako su potrebne različite zasebne postavke."
 
-#: optiondialog.cpp:1332
+#: optiondialog.cpp:1331
 #, fuzzy, kde-format
 #| msgid "Note: Local Encoding is "
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Napomna: Lokalno kodiranje je "
 
-#: optiondialog.cpp:1336
+#: optiondialog.cpp:1335
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "Kodiranje datoteke za A:"
 
-#: optiondialog.cpp:1343
+#: optiondialog.cpp:1342
 #, kde-format
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3401,32 +3395,32 @@ msgstr ""
 "rezervno.\n"
 "(Unicode detekcija ovisi o prvim bajtovima u datoteci.)"
 
-#: optiondialog.cpp:1346 optiondialog.cpp:1357 optiondialog.cpp:1368
+#: optiondialog.cpp:1345 optiondialog.cpp:1356 optiondialog.cpp:1367
 #, kde-format
 msgid "Auto Detect Unicode"
 msgstr "Automatsko nalaženje Unicode"
 
-#: optiondialog.cpp:1352
+#: optiondialog.cpp:1351
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "Kodiranje datoteke za B:"
 
-#: optiondialog.cpp:1363
+#: optiondialog.cpp:1362
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "Kodiranje datoteke za C:"
 
-#: optiondialog.cpp:1374
+#: optiondialog.cpp:1373
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Kodiranje datoteke za stapanje izlaza i snimanje:"
 
-#: optiondialog.cpp:1379
+#: optiondialog.cpp:1378
 #, kde-format
 msgid "Auto Select"
 msgstr "Automatski izbor"
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1382
 #, fuzzy, kde-format
 #| msgid ""
 #| "If enabled then the encoding from the input files is used.\n"
@@ -3442,17 +3436,17 @@ msgstr ""
 "U nesigurnim slučajevima dijalog će pitati korisnika za odabir kodiranja za "
 "snimanje."
 
-#: optiondialog.cpp:1386
+#: optiondialog.cpp:1385
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Kodiranje datoteke za preprocesorke datoteke:"
 
-#: optiondialog.cpp:1398
+#: optiondialog.cpp:1397
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Jezik s desna na lijevo"
 
-#: optiondialog.cpp:1402
+#: optiondialog.cpp:1401
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some languages are read from right to left.\n"
@@ -3465,22 +3459,22 @@ msgstr ""
 "Neki jezici se čitaju s desna na lijevo.\n"
 "Ova postavka će prilagoditi tome prikazivač i editor."
 
-#: optiondialog.cpp:1412
+#: optiondialog.cpp:1411
 #, kde-format
 msgid "Integration"
 msgstr "Uklapanje"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1412
 #, kde-format
 msgid "Integration Settings"
 msgstr "Postavke uklapanja"
 
-#: optiondialog.cpp:1434
+#: optiondialog.cpp:1433
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Opcije komandne linije koje treba ignorisati:"
 
-#: optiondialog.cpp:1440
+#: optiondialog.cpp:1439
 #, fuzzy, kde-format
 #| msgid ""
 #| "List of command line options that should be ignored when KDiff3 is used "
@@ -3499,12 +3493,12 @@ msgstr ""
 "Nekoliko vrijednosti se mogu navesti ukoliko je odvojeno putem ';'\n"
 "To će suzbiti \"Nepoznati opciju\" pogrešku."
 
-#: optiondialog.cpp:1445
+#: optiondialog.cpp:1444
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Izađi i sa Escape tipkom"
 
-#: optiondialog.cpp:1449
+#: optiondialog.cpp:1448
 #, fuzzy, kde-format
 #| msgid ""
 #| "Fast method to exit.\n"
@@ -3517,7 +3511,7 @@ msgstr ""
 "Brzi način za izlazak.\n"
 "Za one koji koriste Escape tipku za izlazak."
 
-#: optiondialog.cpp:1507
+#: optiondialog.cpp:1506
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Ovo poništava sve opcije. Ne samo one na trenutnoj temi."
@@ -4014,6 +4008,9 @@ msgstr "Neočekivan apostrof unutar argumenata."
 #, kde-format
 msgid "No program specified."
 msgstr "Nijedan program nije naveden."
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "Prebacujem traku sa alatom..."
 
 #, fuzzy
 #~| msgid ""
