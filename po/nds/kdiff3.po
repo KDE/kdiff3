@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-05 02:24+0000\n"
+"POT-Creation-Date: 2023-09-11 02:31+0000\n"
 "PO-Revision-Date: 2011-10-09 21:25+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -129,7 +129,7 @@ msgstr "Reeg nich verföögbor"
 msgid "Encoding:"
 msgstr "Koderen:"
 
-#: difftextwindow.cpp:1937 mergeresultwindow.cpp:2821 optiondialog.cpp:798
+#: difftextwindow.cpp:1937 mergeresultwindow.cpp:2821 optiondialog.cpp:797
 #, kde-format
 msgid "Line end style:"
 msgstr "Reegenn-Stil:"
@@ -140,8 +140,8 @@ msgstr "Reegenn-Stil:"
 #: directorymergewindow.cpp:2978 mergeresultwindow.cpp:784
 #: mergeresultwindow.cpp:786 mergeresultwindow.cpp:788
 #: mergeresultwindow.cpp:790 mergeresultwindow.cpp:1490
-#: mergeresultwindow.cpp:2853 mergeresultwindow.cpp:2860 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:738 pdiff.cpp:740
+#: mergeresultwindow.cpp:2853 mergeresultwindow.cpp:2860 optiondialog.cpp:948
+#: optiondialog.cpp:961 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:738 pdiff.cpp:740
 #: pdiff.cpp:762 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
@@ -154,8 +154,8 @@ msgstr "A"
 #: directorymergewindow.cpp:2979 mergeresultwindow.cpp:784
 #: mergeresultwindow.cpp:786 mergeresultwindow.cpp:792
 #: mergeresultwindow.cpp:794 mergeresultwindow.cpp:1492
-#: mergeresultwindow.cpp:2855 mergeresultwindow.cpp:2862 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:742 pdiff.cpp:744
+#: mergeresultwindow.cpp:2855 mergeresultwindow.cpp:2862 optiondialog.cpp:949
+#: optiondialog.cpp:962 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:742 pdiff.cpp:744
 #: pdiff.cpp:764 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
@@ -168,7 +168,7 @@ msgstr "B"
 #: directorymergewindow.cpp:2980 mergeresultwindow.cpp:788
 #: mergeresultwindow.cpp:790 mergeresultwindow.cpp:792
 #: mergeresultwindow.cpp:794 mergeresultwindow.cpp:1494
-#: mergeresultwindow.cpp:2857 mergeresultwindow.cpp:2864 optiondialog.cpp:964
+#: mergeresultwindow.cpp:2857 mergeresultwindow.cpp:2864 optiondialog.cpp:963
 #: pdiff.cpp:738 pdiff.cpp:740 pdiff.cpp:742 pdiff.cpp:744 pdiff.cpp:766
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
@@ -209,7 +209,7 @@ msgstr "Reegenn-Stil:"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1994 kdiff3.cpp:932
+#: difftextwindow.cpp:1994 kdiff3.cpp:930
 #, kde-format
 msgid "Top line"
 msgstr "Böverst Reeg"
@@ -225,7 +225,7 @@ msgstr "Enn"
 msgid "Open File"
 msgstr "Dateien warrt opmaakt..."
 
-#: difftextwindow.cpp:2109 optiondialog.cpp:383
+#: difftextwindow.cpp:2109 optiondialog.cpp:382
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 Bit"
@@ -436,7 +436,7 @@ msgstr ""
 "Du büst jüst togang un föhrst Ornern tosamen. Wullt Du dat Tosamenföhren "
 "redig afbreken un den Orner nieg dörkieken?"
 
-#: directorymergewindow.cpp:695 kdiff3.cpp:791 kdiff3.cpp:801 kdiff3.cpp:813
+#: directorymergewindow.cpp:695 kdiff3.cpp:789 kdiff3.cpp:799 kdiff3.cpp:811
 #: mergeresultwindow.cpp:333 pdiff.cpp:853 pdiff.cpp:1708 pdiff.cpp:1718
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -545,9 +545,9 @@ msgstr "En Reeg Ünnerornern lett sik nich lesen binnen"
 msgid "Check the permissions of the subfolders."
 msgstr "Prööv bitte de Verlöven vun de Ünnerornern."
 
-#: directorymergewindow.cpp:968 kdiff3.cpp:740 kdiff3.cpp:846 kdiff3.cpp:870
-#: kdiff3.cpp:1139 kdiff3.cpp:1160 pdiff.cpp:938 pdiff.cpp:1005 pdiff.cpp:1041
-#: pdiff.cpp:1050 pdiff.cpp:1096 pdiff.cpp:1104
+#: directorymergewindow.cpp:968 kdiff3.cpp:738 kdiff3.cpp:844 kdiff3.cpp:868
+#: kdiff3.cpp:1136 pdiff.cpp:938 pdiff.cpp:1005 pdiff.cpp:1041 pdiff.cpp:1050
+#: pdiff.cpp:1096 pdiff.cpp:1104
 #, kde-format
 msgid "Ready."
 msgstr "Praat."
@@ -887,7 +887,7 @@ msgid "Dest"
 msgstr "Teel"
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2753
-#: optiondialog.cpp:1094 optiondialog.cpp:1095
+#: optiondialog.cpp:1093 optiondialog.cpp:1094
 #, kde-format
 msgid "Folder"
 msgstr ""
@@ -1350,22 +1350,22 @@ msgstr "Na en Tekenkeed söken"
 msgid "Search again for the string"
 msgstr "Nochmaal na en Tekenkeed söken"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:637
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Maakt den Statusbalken an oder ut"
 
-#: kdiff3.cpp:643
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3 instellen..."
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Na aktuellen Verscheel gahn"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Current\n"
@@ -1374,12 +1374,12 @@ msgstr ""
 "Aktuell\n"
 "Verscheel"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Na eersten Verscheel gahn"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "First\n"
@@ -1388,12 +1388,12 @@ msgstr ""
 "Eerst\n"
 "Verscheel"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Na lesten Verscheel gahn"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Last\n"
@@ -1402,12 +1402,12 @@ msgstr ""
 "Lest\n"
 "Verscheel"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:667
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(Övergeiht Freeruum-Verschelen, wenn \"Freerüüm wiesen\" utmaakt is.)"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:668
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1415,12 +1415,12 @@ msgid ""
 msgstr ""
 "(Övergeiht Freeruum-Verschelen nich, ok wenn \"Freerüüm wiesen\" utmaakt is.)"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:669
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Na verleden Verscheel gahn"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:669
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1429,12 +1429,12 @@ msgstr ""
 "Verleden\n"
 "Verscheel"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Na nakamen Verscheel gahn"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:671
 #, kde-format
 msgid ""
 "Next\n"
@@ -1443,12 +1443,12 @@ msgstr ""
 "Nakamen\n"
 "Verscheel"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Na verleden Konflikt gahn"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:673
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1457,12 +1457,12 @@ msgstr ""
 "Verleden\n"
 "Konflikt"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Na nakamen Konflikt gahn"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "Next\n"
@@ -1471,12 +1471,12 @@ msgstr ""
 "Nakamen\n"
 "Konflikt"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Na verleden Konflikt gahn, de nich oplööst is"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1485,12 +1485,12 @@ msgstr ""
 "Verleden\n"
 "n. oplööst"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Na nakamen Konflikt gahn, de nich oplööst is"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:679
 #, kde-format
 msgid ""
 "Next\n"
@@ -1499,14 +1499,14 @@ msgstr ""
 "Nakamen\n"
 "n. oplööst"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Na lesten Verscheel gahn"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1515,7 +1515,7 @@ msgid ""
 "Line"
 msgstr "Reeg"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:682
 #, kde-format
 msgctxt "Additional text intooltip"
 msgid ""
@@ -1523,14 +1523,14 @@ msgid ""
 " Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Reeg ut A bruken"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1543,14 +1543,14 @@ msgstr ""
 "A\n"
 "bruken"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Reeg ut B bruken"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1563,14 +1563,14 @@ msgstr ""
 "B\n"
 "bruken"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Reeg ut C bruken"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1583,14 +1583,14 @@ msgstr ""
 "C\n"
 "bruken"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Na Bornköör automaatsch na nakamen nich oplöösten Konflikt gahn"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1603,13 +1603,13 @@ msgstr ""
 "Autom.\n"
 "Nakamen"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "Free- un Tab-Tekens as Verscheel wiesen"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1620,12 +1620,12 @@ msgid ""
 "Characters"
 msgstr "Freerüüm"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Show White Space"
 msgstr "Freerüüm wiesen"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:689
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1638,12 +1638,12 @@ msgstr ""
 "Freeruum-\n"
 "Verschelen"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Reegnummern wiesen"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1656,135 +1656,135 @@ msgstr ""
 "Reeg-\n"
 "nummern"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Eenfach Konflikten automaatsch oplösen"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:694
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "All Verschelen as Konflikten markeren"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Automaatsch Tosamenföhren mit reguleer Utdruck"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Vörgeschicht-Konflikten automaatsch oplösen"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Verscheel bi Köör delen"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Utsöcht Verschelen tosamenstellen"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Window A"
 msgstr "Finster A wiesen"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show Window B"
 msgstr "Finster B wiesen"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Window C"
 msgstr "Finster C wiesen"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normaal Översicht"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:705
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A-B-Översicht"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:706
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A-C-Översicht"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:707
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B-C-Översicht"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Regen ümbreken"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Verscheel-Utrichten vun Hand tofögen"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "All Vun-Hand-Utrichten wegmaken"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Nakamen Finster anmaken"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Verleden Finster anmaken"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Deelricht wesseln"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:716
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "Deelt Ansicht för Orner un Text"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:718
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "Orner- un Text-Ansicht wesseln"
 
-#: kdiff3.cpp:790 pdiff.cpp:1707
+#: kdiff3.cpp:788 pdiff.cpp:1707
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "Tosamenföhr-Resultaat wöör nich sekert"
 
-#: kdiff3.cpp:792
+#: kdiff3.cpp:790
 #, kde-format
 msgid "Save && Quit"
 msgstr "Sekern && Utmaken"
 
-#: kdiff3.cpp:793
+#: kdiff3.cpp:791
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Utmaken un nich Sekern"
 
-#: kdiff3.cpp:801 pdiff.cpp:1718
+#: kdiff3.cpp:799 pdiff.cpp:1718
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Tosamenföhr-Resultaat lett sik nich sekern"
 
-#: kdiff3.cpp:812 pdiff.cpp:852
+#: kdiff3.cpp:810 pdiff.cpp:852
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1793,63 +1793,58 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Du föhrst jüst Ornern tosamen. Wullt Du dat redig afbreken?"
 
-#: kdiff3.cpp:835
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Saving file..."
 msgstr "Datei warrt sekert..."
 
-#: kdiff3.cpp:852
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Datei warrt mit en nieg Dateinaam sekert..."
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:852
 #, kde-format
 msgid "Save As..."
 msgstr "Sekern as..."
 
-#: kdiff3.cpp:878
+#: kdiff3.cpp:876
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Drucken nich inbuut"
 
-#: kdiff3.cpp:916
+#: kdiff3.cpp:914
 #, kde-format
 msgid "Printing..."
 msgstr "An't Drucken..."
 
-#: kdiff3.cpp:1020
+#: kdiff3.cpp:1018
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1072
+#: kdiff3.cpp:1070
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "Köör"
 
-#: kdiff3.cpp:1101
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Printing completed."
 msgstr "Drucken afslaten."
 
-#: kdiff3.cpp:1105
+#: kdiff3.cpp:1103
 #, kde-format
 msgid "Printing aborted."
 msgstr "Drucken afbraken."
 
-#: kdiff3.cpp:1112
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Exiting..."
 msgstr "Bi to utstiegen..."
 
-#: kdiff3.cpp:1123
-#, kde-format
-msgid "Toggling toolbar..."
-msgstr "Warktüüchbalken warrt an-/utmaakt..."
-
-#: kdiff3.cpp:1144
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Statusbalken an-/utmaken..."
@@ -1899,7 +1894,7 @@ msgstr "KDiff3 instellen"
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: kdiff3_shell.cpp:67
+#: kdiff3_shell.cpp:71
 #, kde-format
 msgid ""
 "Could not initialize the KDiff3 part.\n"
@@ -2386,7 +2381,7 @@ msgstr "C (köörwies):"
 msgid "Folder..."
 msgstr ""
 
-#: optiondialog.cpp:93
+#: optiondialog.cpp:92
 #, kde-format
 msgid ""
 "The quick brown fox jumps over the river\n"
@@ -2394,13 +2389,13 @@ msgid ""
 ":-)"
 msgstr ""
 
-#: optiondialog.cpp:102
+#: optiondialog.cpp:101
 #, kde-format
 msgctxt "Button title"
 msgid "Change Font"
 msgstr ""
 
-#: optiondialog.cpp:118 optiondialog.cpp:128
+#: optiondialog.cpp:117 optiondialog.cpp:127
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2409,127 +2404,127 @@ msgid ""
 "Example:"
 msgstr ""
 
-#: optiondialog.cpp:384
+#: optiondialog.cpp:383
 #, kde-format
 msgid "Unicode"
 msgstr "Unicode"
 
-#: optiondialog.cpp:385
+#: optiondialog.cpp:384
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:404
+#: optiondialog.cpp:403
 #, kde-format
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr ""
 "Änner dit, wenn Tekens buten dat ASCII-Rebeet nich propper wiest warrt."
 
-#: optiondialog.cpp:493
+#: optiondialog.cpp:492
 #, kde-format
 msgid "Configure"
 msgstr "Instellen"
 
-#: optiondialog.cpp:532
+#: optiondialog.cpp:531
 #, kde-format
 msgid "Font"
 msgstr "Schriftoort"
 
-#: optiondialog.cpp:534
+#: optiondialog.cpp:533
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Editor- un Verscheel-Schriftoort"
 
-#: optiondialog.cpp:552
+#: optiondialog.cpp:551
 #, kde-format
 msgid "Application font"
 msgstr ""
 
-#: optiondialog.cpp:557
+#: optiondialog.cpp:556
 #, fuzzy, kde-format
 #| msgid "File Save Error"
 msgid "File view font"
 msgstr "Fehler bi't Sekern"
 
-#: optiondialog.cpp:576
+#: optiondialog.cpp:575
 #, fuzzy, kde-format
 #| msgid "Color"
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Klöör"
 
-#: optiondialog.cpp:577
+#: optiondialog.cpp:576
 #, kde-format
 msgid "Colors Settings"
 msgstr "Klören instellen"
 
-#: optiondialog.cpp:602
+#: optiondialog.cpp:601
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Editor- un Verscheel-Ansichten:"
 
-#: optiondialog.cpp:610
+#: optiondialog.cpp:609
 #, kde-format
 msgid "Foreground color:"
 msgstr "Vörgrundklöör:"
 
-#: optiondialog.cpp:618
+#: optiondialog.cpp:617
 #, kde-format
 msgid "Background color:"
 msgstr "Achtergrundklöör:"
 
-#: optiondialog.cpp:628
+#: optiondialog.cpp:627
 #, kde-format
 msgid "Diff background color:"
 msgstr "Verscheel-Achtergrundklöör:"
 
-#: optiondialog.cpp:637
+#: optiondialog.cpp:636
 #, kde-format
 msgid "Color A:"
 msgstr "Klöör A:"
 
-#: optiondialog.cpp:646
+#: optiondialog.cpp:645
 #, kde-format
 msgid "Color B:"
 msgstr "Klöör B:"
 
-#: optiondialog.cpp:655
+#: optiondialog.cpp:654
 #, kde-format
 msgid "Color C:"
 msgstr "Klöör C:"
 
-#: optiondialog.cpp:663
+#: optiondialog.cpp:662
 #, kde-format
 msgid "Conflict color:"
 msgstr "Konflikt-Klöör:"
 
-#: optiondialog.cpp:672
+#: optiondialog.cpp:671
 #, kde-format
 msgid "Current range background color:"
 msgstr "Achtergrundklöör för aktuell Rebeet:"
 
-#: optiondialog.cpp:681
+#: optiondialog.cpp:680
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Verscheel-Achtergrundklöör för aktuell Rebeet:"
 
-#: optiondialog.cpp:689
+#: optiondialog.cpp:688
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Klöör för vun Hand utricht Verscheelrebeden:"
 
-#: optiondialog.cpp:696
+#: optiondialog.cpp:695
 #, fuzzy, kde-format
 #| msgid "Directory Comparison View:"
 msgid "Folder Comparison View:"
 msgstr "Ornerverscheel-Ansicht:"
 
-#: optiondialog.cpp:702
+#: optiondialog.cpp:701
 #, kde-format
 msgid "Newest file color:"
 msgstr "Klöör för niegst Datei:"
 
-#: optiondialog.cpp:707
+#: optiondialog.cpp:706
 #, fuzzy, kde-format
 #| msgid ""
 #| "Changing this color will only be effective when starting the next "
@@ -2540,37 +2535,37 @@ msgid ""
 msgstr ""
 "Ännern an disse Klöör warrt eerst bi't nakamen Verglieken vun Ornern bruukt."
 
-#: optiondialog.cpp:712
+#: optiondialog.cpp:711
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Klöör för öllst Datei:"
 
-#: optiondialog.cpp:721
+#: optiondialog.cpp:720
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Klöör för en middeloolt Datei:"
 
-#: optiondialog.cpp:730
+#: optiondialog.cpp:729
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Klöör för fehlen Dateien:"
 
-#: optiondialog.cpp:744
+#: optiondialog.cpp:743
 #, kde-format
 msgid "Editor"
 msgstr "Editor"
 
-#: optiondialog.cpp:745
+#: optiondialog.cpp:744
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Editor-Bedregen"
 
-#: optiondialog.cpp:767
+#: optiondialog.cpp:766
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "Tabtast föögt Freetekens in"
 
-#: optiondialog.cpp:771
+#: optiondialog.cpp:770
 #, kde-format
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2579,27 +2574,27 @@ msgstr ""
 "An: De Tabtast föögt en propper Tall vun Freetekens in.\n"
 "Ut: De Tabtast föögt en Tabteken in."
 
-#: optiondialog.cpp:776
+#: optiondialog.cpp:775
 #, kde-format
 msgid "Tab size:"
 msgstr "Tab-Breed:"
 
-#: optiondialog.cpp:783
+#: optiondialog.cpp:782
 #, kde-format
 msgid "Auto indentation"
 msgstr "Autom. inrücken"
 
-#: optiondialog.cpp:787
+#: optiondialog.cpp:786
 #, kde-format
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "An: De Inrückdeepde ut de verleden Reeg warrt för de niege bruukt.\n"
 
-#: optiondialog.cpp:790
+#: optiondialog.cpp:789
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Köör autom. koperen"
 
-#: optiondialog.cpp:794
+#: optiondialog.cpp:793
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Any selection is immediately written to the clipboard.\n"
@@ -2611,28 +2606,28 @@ msgstr ""
 "An: All Kören warrt fuurts na de Twischenaflaag kopeert.\n"
 "Ut: Du muttst dat Koperen sülven maken, a.B. mit Strg+C."
 
-#: optiondialog.cpp:804
+#: optiondialog.cpp:803
 #, fuzzy, kde-format
 #| msgid "Unix"
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:805
+#: optiondialog.cpp:804
 #, fuzzy, kde-format
 #| msgid "&Window"
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "&Finster"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:805
 #, fuzzy, kde-format
 #| msgid "Auto Select"
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Autom. Köör"
 
-#: optiondialog.cpp:809
+#: optiondialog.cpp:808
 #, kde-format
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2641,23 +2636,23 @@ msgstr ""
 "Leggt de Tekens fast, de bi't Sekern för Reegennen bruukt warrt.\n"
 "DOS/Windows: CR+LF, UNIX: LF (CR = 0D, LF = 0A)"
 
-#: optiondialog.cpp:819
+#: optiondialog.cpp:818
 #, kde-format
 msgid "Diff"
 msgstr "Verscheel"
 
-#: optiondialog.cpp:820
+#: optiondialog.cpp:819
 #, kde-format
 msgid "Diff Settings"
 msgstr "Verscheel-Instellen"
 
-#: optiondialog.cpp:843
+#: optiondialog.cpp:842
 #, fuzzy, kde-format
 #| msgid "Treat as white space."
 msgid "Ignore numbers (treat as white space)"
 msgstr "As Freeruum hanteren"
 
-#: optiondialog.cpp:847
+#: optiondialog.cpp:846
 #, kde-format
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2667,46 +2662,46 @@ msgstr ""
 "Talltekens bi't Regenutrichten övergahn (liek to \"Freerüüm övergahn\").\n"
 "Mag bi't Verglieken vun Dateien mit Tallen beter Resultaten geven."
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:850
 #, fuzzy, kde-format
 #| msgid "Treat C/C++ comments like white space."
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "C/C++-Kommentaren liek as Freerüüm hanteren."
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:853
 #, kde-format
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++-Kommentaren liek as Freerüüm hanteren."
 
-#: optiondialog.cpp:857
+#: optiondialog.cpp:856
 #, fuzzy, kde-format
 #| msgid "Treat as white space."
 msgid "Ignore case (treat as white space)"
 msgstr "As Freeruum hanteren"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:860
 #, kde-format
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
 "Verschelen in Groot- un Lüttschrieven liek as Freerüüm-Verschelen hanteren."
 
-#: optiondialog.cpp:864
+#: optiondialog.cpp:863
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Vörverarbeid-Befehl:"
 
-#: optiondialog.cpp:869
+#: optiondialog.cpp:868
 #, kde-format
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
 "Vun Bruker fastleggt Vörverarbeiden (Enkelheiten binnen de Dokmentatschoon)."
 
-#: optiondialog.cpp:872
+#: optiondialog.cpp:871
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Vörverarbeid-Befehl för't Regenutrichten:"
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:876
 #, kde-format
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2715,12 +2710,12 @@ msgstr ""
 "Disse Vörverarbeiden warrt bloots bi't Regenutrichten bruukt.\n"
 "(Enkelheiten binnen de Dokmentatschoon)"
 
-#: optiondialog.cpp:880
+#: optiondialog.cpp:879
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "In't Tüüch leggen (langsamer)"
 
-#: optiondialog.cpp:884
+#: optiondialog.cpp:883
 #, kde-format
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2729,12 +2724,12 @@ msgstr ""
 "Bruukt de Optschoon \"--minimal\" vun't Diff-Programm.\n"
 "Dat Dörkieken vun groot Dateien warrt denn bannig wat langsamer."
 
-#: optiondialog.cpp:888
+#: optiondialog.cpp:887
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "B un C för 3 Ingaavdateien utrichten"
 
-#: optiondialog.cpp:892
+#: optiondialog.cpp:891
 #, kde-format
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2746,24 +2741,24 @@ msgstr ""
 "Bi't Tosamenföhren nich anraadt, dat mag to vigeliensch warrn.\n"
 "(Standard is Ut.)"
 
-#: optiondialog.cpp:903
+#: optiondialog.cpp:902
 #, fuzzy, kde-format
 #| msgid "Merge"
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Tosamenföhren"
 
-#: optiondialog.cpp:904
+#: optiondialog.cpp:903
 #, kde-format
 msgid "Merge Settings"
 msgstr "Tosamenföhr-Instellen"
 
-#: optiondialog.cpp:927
+#: optiondialog.cpp:926
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Töövtiet för't autom. Wiedergahn (ms):"
 
-#: optiondialog.cpp:933
+#: optiondialog.cpp:932
 #, kde-format
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2774,27 +2769,27 @@ msgstr ""
 "för de angeven Tiet wiest, ehr dat Programm na den nakamen Konflikt jumpt. "
 "Weerten: 0 - 2000 ms."
 
-#: optiondialog.cpp:937
+#: optiondialog.cpp:936
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Infodialogen wiesen"
 
-#: optiondialog.cpp:940
+#: optiondialog.cpp:939
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "En Dialoog mit de Tall vun Konflikten wiesen"
 
-#: optiondialog.cpp:943
+#: optiondialog.cpp:942
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Freeruum-Standard bi 2-Dateien-Tosamenföhren:"
 
-#: optiondialog.cpp:948 optiondialog.cpp:961
+#: optiondialog.cpp:947 optiondialog.cpp:960
 #, kde-format
 msgid "Manual Choice"
 msgstr "Köör vun Hand"
 
-#: optiondialog.cpp:952 optiondialog.cpp:966
+#: optiondialog.cpp:951 optiondialog.cpp:965
 #, kde-format
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
@@ -2803,29 +2798,29 @@ msgstr ""
 "Den Tosamenföhr-Algoritmus bi Freeruum-Konflikten automaatsch en Born "
 "utsöken laten"
 
-#: optiondialog.cpp:956
+#: optiondialog.cpp:955
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Freeruum-Standard bi 3-Dateien-Tosamenföhren:"
 
-#: optiondialog.cpp:970
+#: optiondialog.cpp:969
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Reguleer Utdruck för't autom. Tosamenföhren"
 
-#: optiondialog.cpp:978 smalldialogs.cpp:387
+#: optiondialog.cpp:977 smalldialogs.cpp:387
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Reguleer Utdruck för't autom. Tosamenföhren:"
 
-#: optiondialog.cpp:986
+#: optiondialog.cpp:985
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
 "Bi't Starten vun't Tosamenföhren automaatsch na reguleer Utdruck "
 "tosamenföhren"
 
-#: optiondialog.cpp:989
+#: optiondialog.cpp:988
 #, kde-format
 msgid ""
 "Run the merge for auto merge regular expressions\n"
@@ -2835,70 +2830,70 @@ msgstr ""
 "Utdrück för't automaatsche Tosamenföhren direktemang\n"
 "utföhren, wenn dat Tosamenföhren anfangt.\n"
 
-#: optiondialog.cpp:994
+#: optiondialog.cpp:993
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Tosamenföhren mit Verschoonkuntrull-Vörgeschicht"
 
-#: optiondialog.cpp:1002 smalldialogs.cpp:414
+#: optiondialog.cpp:1001 smalldialogs.cpp:414
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Reguleer Utdruck för Vörgeschicht-Anfang:"
 
-#: optiondialog.cpp:1010 smalldialogs.cpp:442
+#: optiondialog.cpp:1009 smalldialogs.cpp:442
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Reguleer Utdruck för Vörgeschichtindrag-Anfang:"
 
-#: optiondialog.cpp:1026
+#: optiondialog.cpp:1025
 #, kde-format
 msgid "History merge sorting"
 msgstr "Sorteren bi Vörgeschicht-Tosamenföhren"
 
-#: optiondialog.cpp:1029
+#: optiondialog.cpp:1028
 #, kde-format
 msgid "Sort version control history by a key."
 msgstr "Verschoonkuntrull-Vörgeschicht na Slötel sorteren"
 
-#: optiondialog.cpp:1039
+#: optiondialog.cpp:1038
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "Sorteerreeg för Vörgeschichtindrag-Anfang:"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1048
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr ""
 "Verschoonkuntrull-Vörgeschicht bi't Starten vun't Tosamenföhren tosamenföhren"
 
-#: optiondialog.cpp:1052
+#: optiondialog.cpp:1051
 #, kde-format
 msgid "Run version control history automerge on merge start."
 msgstr ""
 "Bi't Starten vun't Tosamenföhren automaatsch Verschoonkuntrull-Vörgeschicht "
 "tosamenföhren"
 
-#: optiondialog.cpp:1056
+#: optiondialog.cpp:1055
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Hööchsttall vun Vörgeschichtindrääg:"
 
-#: optiondialog.cpp:1060
+#: optiondialog.cpp:1059
 #, kde-format
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr "Na angeven Tall ophollen. Bi -1 nich ophollen."
 
-#: optiondialog.cpp:1064
+#: optiondialog.cpp:1063
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Regulere Utdrück utproberen"
 
-#: optiondialog.cpp:1069
+#: optiondialog.cpp:1068
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Tosamenföhr-Befehl bi fehlen Ännern:"
 
-#: optiondialog.cpp:1074
+#: optiondialog.cpp:1073
 #, kde-format
 msgid ""
 "If specified this script is run after automerge\n"
@@ -2909,12 +2904,12 @@ msgstr ""
 "Tosamenföhren opropen, wenn dat sünst keen Ännern geven hett.\n"
 "Warrt mit disse Parameters opropen: Dateinaam1 Dateinaam2 Dateinaam3"
 
-#: optiondialog.cpp:1079
+#: optiondialog.cpp:1078
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "Na't Tosamenföhren ahn Konflikten autom. sekern un utmaken"
 
-#: optiondialog.cpp:1083
+#: optiondialog.cpp:1082
 #, kde-format
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2927,24 +2922,24 @@ msgstr ""
 "dat Resultaat automaatsch sekern un dat Programm utmaken.\n"
 "(Liek to de Befehlsreegoptschoon \"--auto\".)"
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1114
 #, fuzzy, kde-format
 #| msgid "Recursive directories"
 msgid "Recursive folders"
 msgstr "Rekursiev"
 
-#: optiondialog.cpp:1118
+#: optiondialog.cpp:1117
 #, fuzzy, kde-format
 #| msgid "Whether to analyze subdirectories or not."
 msgid "Whether to analyze subfolders or not."
 msgstr "Leggt fast, wat ok Ünnerornern dörkeken warrt."
 
-#: optiondialog.cpp:1120
+#: optiondialog.cpp:1119
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Dateimuster(n):"
 
-#: optiondialog.cpp:1126
+#: optiondialog.cpp:1125
 #, kde-format
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2955,12 +2950,12 @@ msgstr ""
 "Platzholltekens: \"*\" un \"?\"\n"
 "Trennteken twischen Mustern: \";\""
 
-#: optiondialog.cpp:1131
+#: optiondialog.cpp:1130
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Datei-Utsluutmuster(n):"
 
-#: optiondialog.cpp:1137
+#: optiondialog.cpp:1136
 #, kde-format
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2971,13 +2966,13 @@ msgstr ""
 "Platzholltekens: \"*\" un \"?\"\n"
 "Trennteken twischen Mustern: \";\""
 
-#: optiondialog.cpp:1142
+#: optiondialog.cpp:1141
 #, fuzzy, kde-format
 #| msgid "File-anti-pattern(s):"
 msgid "Folder-anti-pattern(s):"
 msgstr "Datei-Utsluutmuster(n):"
 
-#: optiondialog.cpp:1148
+#: optiondialog.cpp:1147
 #, fuzzy, kde-format
 #| msgid ""
 #| "Pattern(s) of files to be excluded from analysis. \n"
@@ -2992,13 +2987,13 @@ msgstr ""
 "Platzholltekens: \"*\" un \"?\"\n"
 "Trennteken twischen Mustern: \";\""
 
-#: optiondialog.cpp:1153
+#: optiondialog.cpp:1152
 #, fuzzy, kde-format
 #| msgid "Use .cvsignore"
 msgid "Use Ignore File"
 msgstr "\".cvsignore\" bruken"
 
-#: optiondialog.cpp:1157
+#: optiondialog.cpp:1156
 #, fuzzy, kde-format
 #| msgid ""
 #| "Extends the antipattern to anything that would be ignored by CVS.\n"
@@ -3011,24 +3006,24 @@ msgstr ""
 "Verwiedert dat Utsluutmuster op allens, wat CVS övergahn dee.\n"
 "Bi lokaal \".cvsignore\"-Dateien kann dat vun den Orner afhangen."
 
-#: optiondialog.cpp:1161
+#: optiondialog.cpp:1160
 #, fuzzy, kde-format
 #| msgid "Find hidden files and directories"
 msgid "Find hidden files and folders"
 msgstr "Versteken Dateien un Ornern bekieken"
 
-#: optiondialog.cpp:1164
+#: optiondialog.cpp:1163
 #, fuzzy, kde-format
 #| msgid "Find hidden files and directories"
 msgid "Finds hidden files and folders."
 msgstr "Versteken Dateien un Ornern bekieken"
 
-#: optiondialog.cpp:1167
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Follow file links"
 msgstr "Dateilinks nagahn"
 
-#: optiondialog.cpp:1171
+#: optiondialog.cpp:1170
 #, kde-format
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -3037,13 +3032,13 @@ msgstr ""
 "An: De Datei verglieken, op de de Link wiest.\n"
 "Ut: De Links verglieken."
 
-#: optiondialog.cpp:1175
+#: optiondialog.cpp:1174
 #, fuzzy, kde-format
 #| msgid "Follow file links"
 msgid "Follow folder links"
 msgstr "Dateilinks nagahn"
 
-#: optiondialog.cpp:1179
+#: optiondialog.cpp:1178
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Compare the file the link points to.\n"
@@ -3055,12 +3050,12 @@ msgstr ""
 "An: De Datei verglieken, op de de Link wiest.\n"
 "Ut: De Links verglieken."
 
-#: optiondialog.cpp:1188
+#: optiondialog.cpp:1187
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "Bi Dateinaam-Vergliek op Groot- un Lüttschrieven kieken"
 
-#: optiondialog.cpp:1192
+#: optiondialog.cpp:1191
 #, fuzzy, kde-format
 #| msgid ""
 #| "The directory comparison will compare files or directories when their "
@@ -3076,52 +3071,52 @@ msgstr ""
 "Maakt dit an, wenn de Groot-/Lüttschrieven liek wesen mutt. (Op Windows "
 "standardwies ut, sünst an)."
 
-#: optiondialog.cpp:1196
+#: optiondialog.cpp:1195
 #, fuzzy, kde-format
 #| msgid "Unfold All Subdirs"
 msgid "Unfold all subfolders on load"
 msgstr "All Ünnerornern utfoolden"
 
-#: optiondialog.cpp:1200
+#: optiondialog.cpp:1199
 #, kde-format
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
 "Off: Leave subfolders folded."
 msgstr ""
 
-#: optiondialog.cpp:1204
+#: optiondialog.cpp:1203
 #, kde-format
 msgid "Skip folder status report"
 msgstr ""
 
-#: optiondialog.cpp:1208
+#: optiondialog.cpp:1207
 #, kde-format
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
 "Off: Show the status dialog on start."
 msgstr ""
 
-#: optiondialog.cpp:1212
+#: optiondialog.cpp:1211
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Dateivergliek-Bedriefoort"
 
-#: optiondialog.cpp:1217
+#: optiondialog.cpp:1216
 #, kde-format
 msgid "Binary comparison"
 msgstr "Bineervergliek"
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1218
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
 msgstr "Bineervergliek bi all Dateien (Standard)"
 
-#: optiondialog.cpp:1222
+#: optiondialog.cpp:1221
 #, kde-format
 msgid "Full analysis"
 msgstr "Heel Dörkiek"
 
-#: optiondialog.cpp:1224
+#: optiondialog.cpp:1223
 #, kde-format
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
@@ -3130,12 +3125,12 @@ msgstr ""
 "En heel Dörkiek doon un bito Statistik binnen besünner Striepen wiesen.\n"
 "(Langsamer as en Bineervergliek, veel langsamer bi Bineerdateien.)"
 
-#: optiondialog.cpp:1228
+#: optiondialog.cpp:1227
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Grött un Ännerdatum bruken (nich seker)"
 
-#: optiondialog.cpp:1230
+#: optiondialog.cpp:1229
 #, fuzzy, kde-format
 #| msgid ""
 #| "Assume that files are equal if the modification date and file length are "
@@ -3155,7 +3150,7 @@ msgstr ""
 "wiest.\n"
 "Goot bi groot Ornern oder binnen langsam Nettwarken."
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1234
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -3164,7 +3159,7 @@ msgstr ""
 "Grött un Ännerdatum bruken, man bi nich liek Datum bineer verglieken (nich "
 "seker)"
 
-#: optiondialog.cpp:1237
+#: optiondialog.cpp:1236
 #, fuzzy, kde-format
 #| msgid ""
 #| "Assume that files are equal if the modification date and file length are "
@@ -3181,12 +3176,12 @@ msgstr ""
 "Is de Grött liek, man dat Datum nich, de Dateien bineer verglieken.\n"
 "Goot bi groot Ornern oder binnen langsam Nettwarken."
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1241
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Grött bruken (nich seker)"
 
-#: optiondialog.cpp:1244
+#: optiondialog.cpp:1243
 #, fuzzy, kde-format
 #| msgid ""
 #| "Assume that files are equal if their file lengths are equal.\n"
@@ -3201,13 +3196,13 @@ msgstr ""
 "Goot bi groot Ornern oder binnen langsam Nettwarken, wenn sik dat Datum bi't "
 "Daalladen ännert."
 
-#: optiondialog.cpp:1251
+#: optiondialog.cpp:1250
 #, fuzzy, kde-format
 #| msgid "Synchronize directories"
 msgid "Synchronize folders"
 msgstr "Ornern synkroniseren"
 
-#: optiondialog.cpp:1255
+#: optiondialog.cpp:1254
 #, fuzzy, kde-format
 #| msgid ""
 #| "Offers to store files in both directories so that\n"
@@ -3224,12 +3219,12 @@ msgstr ""
 "Funkscheneert bloots bi't Verglieken vun twee Ornern, un wenn keen Teel "
 "angeven is."
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1260
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Freeruum-Verschelen as liek hanteren"
 
-#: optiondialog.cpp:1265
+#: optiondialog.cpp:1264
 #, kde-format
 msgid ""
 "If files differ only by white space consider them equal.\n"
@@ -3238,12 +3233,12 @@ msgstr ""
 "Dateien as liek hanteren, wenn se bloots in de Freerüüm verscheden sünd.\n"
 "Dit is bloots anmaakt, wenn Du \"Heel Dörkiek\" utsöcht hest."
 
-#: optiondialog.cpp:1271
+#: optiondialog.cpp:1270
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Nieger Datei koperen, nich tosamenföhren (nich seker)"
 
-#: optiondialog.cpp:1275
+#: optiondialog.cpp:1274
 #, fuzzy, kde-format
 #| msgid ""
 #| "Don't look inside, just take the newer file.\n"
@@ -3258,12 +3253,12 @@ msgstr ""
 "(Bruuk dit bloots, wenn Du nau weetst, wat Du dor deist!)\n"
 "Funkscheneert bloots bi't Verglieken vun twee Ornern."
 
-#: optiondialog.cpp:1280
+#: optiondialog.cpp:1279
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Sekerheitkopie (.orig) opstellen"
 
-#: optiondialog.cpp:1284
+#: optiondialog.cpp:1283
 #, kde-format
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
@@ -3272,17 +3267,17 @@ msgstr ""
 "Schull en Datei över en öller Datei schreven warrn, denn warrt de\n"
 "öllere Datei ümnöömt un \".orig\" na ehr Naam anhangt."
 
-#: optiondialog.cpp:1293 optiondialog.cpp:1294
+#: optiondialog.cpp:1292 optiondialog.cpp:1293
 #, kde-format
 msgid "Regional Settings"
 msgstr "Regiooninstellen"
 
-#: optiondialog.cpp:1317
+#: optiondialog.cpp:1316
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "De sülve Koderen för allens bruken:"
 
-#: optiondialog.cpp:1321
+#: optiondialog.cpp:1320
 #, kde-format
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
@@ -3291,18 +3286,18 @@ msgstr ""
 "Is dit anmaakt, kannst Du all Koderen över de eerste ännern.\n"
 "Maak dit ut, wenn verscheden Instellen för de Dateien nödig sünd."
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1324
 #, fuzzy, kde-format
 #| msgid "Note: Local Encoding is "
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Beacht: De lokale Koderen is "
 
-#: optiondialog.cpp:1329
+#: optiondialog.cpp:1328
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "Koderen för Datei A:"
 
-#: optiondialog.cpp:1336
+#: optiondialog.cpp:1335
 #, kde-format
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3314,32 +3309,32 @@ msgstr ""
 "Is de Datei nich in Unicode, warrt de utsöchte Koderen bruukt.\n"
 "(Dat Opdecken vun Unicode hangt vun de eersten Bytes vun en Datei af.)"
 
-#: optiondialog.cpp:1339 optiondialog.cpp:1350 optiondialog.cpp:1361
+#: optiondialog.cpp:1338 optiondialog.cpp:1349 optiondialog.cpp:1360
 #, kde-format
 msgid "Auto Detect Unicode"
 msgstr "Unicode automaatsch opdecken"
 
-#: optiondialog.cpp:1345
+#: optiondialog.cpp:1344
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "Koderen för Datei B:"
 
-#: optiondialog.cpp:1356
+#: optiondialog.cpp:1355
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "Koderen för Datei C:"
 
-#: optiondialog.cpp:1367
+#: optiondialog.cpp:1366
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Koderen för't Tosamenföhren un Sekern:"
 
-#: optiondialog.cpp:1372
+#: optiondialog.cpp:1371
 #, kde-format
 msgid "Auto Select"
 msgstr "Autom. Köör"
 
-#: optiondialog.cpp:1376
+#: optiondialog.cpp:1375
 #, kde-format
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
@@ -3349,17 +3344,17 @@ msgstr ""
 "Wenn anmaakt, warrt de Koderen vun de Ingaavdateien bruukt.\n"
 "Is dat nich eenkennig, warrt de Bruker na de Koderen för't Sekern fraagt."
 
-#: optiondialog.cpp:1379
+#: optiondialog.cpp:1378
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Koderen för de Vörverarbeid-Dateien:"
 
-#: optiondialog.cpp:1391
+#: optiondialog.cpp:1390
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Rechts-Na-Links-Spraak"
 
-#: optiondialog.cpp:1395
+#: optiondialog.cpp:1394
 #, kde-format
 msgid ""
 "Some languages are read from right to left.\n"
@@ -3368,22 +3363,22 @@ msgstr ""
 "En Reeg Schriften warrt vun rechts na links leest.\n"
 "Disse Optschoon passt dor de Ansicht un den Editor op to."
 
-#: optiondialog.cpp:1405
+#: optiondialog.cpp:1404
 #, kde-format
 msgid "Integration"
 msgstr "Inbinnen"
 
-#: optiondialog.cpp:1406
+#: optiondialog.cpp:1405
 #, kde-format
 msgid "Integration Settings"
 msgstr "Inbinnen instellen"
 
-#: optiondialog.cpp:1427
+#: optiondialog.cpp:1426
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Befehlsreeg-Optschonen, de övergahn warrt:"
 
-#: optiondialog.cpp:1433
+#: optiondialog.cpp:1432
 #, kde-format
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3396,12 +3391,12 @@ msgstr ""
 "Du kannst mehr Weerten angeven, wenn dor twischen en \";\" steiht.\n"
 "Dit verhöödt den \"Nich begäng Optschoon\"-Fehler."
 
-#: optiondialog.cpp:1438
+#: optiondialog.cpp:1437
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Ok mit ESC-Tast utmaken"
 
-#: optiondialog.cpp:1442
+#: optiondialog.cpp:1441
 #, kde-format
 msgid ""
 "Fast method to exit.\n"
@@ -3410,7 +3405,7 @@ msgstr ""
 "Gau Metood för't Utmaken.\n"
 "För de Lüüd, de de ESC-Tast anworrn sünd."
 
-#: optiondialog.cpp:1500
+#: optiondialog.cpp:1499
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr ""
@@ -3900,6 +3895,9 @@ msgstr "Argument bargt nich verwacht Hoochkomma"
 #, kde-format
 msgid "No program specified."
 msgstr "Keen Programm angeven"
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "Warktüüchbalken warrt an-/utmaakt..."
 
 #~ msgid ""
 #~ "A version control history entry consists of several lines.\n"

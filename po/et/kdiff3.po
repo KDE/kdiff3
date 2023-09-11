@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-05 02:24+0000\n"
+"POT-Creation-Date: 2023-09-11 02:31+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -128,7 +128,7 @@ msgstr "Fail %1: Rida pole kättesaadav"
 msgid "Encoding:"
 msgstr "Kodeering:"
 
-#: difftextwindow.cpp:1937 mergeresultwindow.cpp:2821 optiondialog.cpp:798
+#: difftextwindow.cpp:1937 mergeresultwindow.cpp:2821 optiondialog.cpp:797
 #, kde-format
 msgid "Line end style:"
 msgstr "Realõpu stiil:"
@@ -139,8 +139,8 @@ msgstr "Realõpu stiil:"
 #: directorymergewindow.cpp:2978 mergeresultwindow.cpp:784
 #: mergeresultwindow.cpp:786 mergeresultwindow.cpp:788
 #: mergeresultwindow.cpp:790 mergeresultwindow.cpp:1490
-#: mergeresultwindow.cpp:2853 mergeresultwindow.cpp:2860 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:738 pdiff.cpp:740
+#: mergeresultwindow.cpp:2853 mergeresultwindow.cpp:2860 optiondialog.cpp:948
+#: optiondialog.cpp:961 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:738 pdiff.cpp:740
 #: pdiff.cpp:762 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
@@ -153,8 +153,8 @@ msgstr "A"
 #: directorymergewindow.cpp:2979 mergeresultwindow.cpp:784
 #: mergeresultwindow.cpp:786 mergeresultwindow.cpp:792
 #: mergeresultwindow.cpp:794 mergeresultwindow.cpp:1492
-#: mergeresultwindow.cpp:2855 mergeresultwindow.cpp:2862 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:742 pdiff.cpp:744
+#: mergeresultwindow.cpp:2855 mergeresultwindow.cpp:2862 optiondialog.cpp:949
+#: optiondialog.cpp:962 pdiff.cpp:734 pdiff.cpp:736 pdiff.cpp:742 pdiff.cpp:744
 #: pdiff.cpp:764 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
@@ -167,7 +167,7 @@ msgstr "B"
 #: directorymergewindow.cpp:2980 mergeresultwindow.cpp:788
 #: mergeresultwindow.cpp:790 mergeresultwindow.cpp:792
 #: mergeresultwindow.cpp:794 mergeresultwindow.cpp:1494
-#: mergeresultwindow.cpp:2857 mergeresultwindow.cpp:2864 optiondialog.cpp:964
+#: mergeresultwindow.cpp:2857 mergeresultwindow.cpp:2864 optiondialog.cpp:963
 #: pdiff.cpp:738 pdiff.cpp:740 pdiff.cpp:742 pdiff.cpp:744 pdiff.cpp:766
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
@@ -205,7 +205,7 @@ msgstr "Realõpu stiil: %1"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1994 kdiff3.cpp:932
+#: difftextwindow.cpp:1994 kdiff3.cpp:930
 #, kde-format
 msgid "Top line"
 msgstr "Ülarida"
@@ -220,7 +220,7 @@ msgstr "Lõpp"
 msgid "Open File"
 msgstr "Faili avamine"
 
-#: difftextwindow.cpp:2109 optiondialog.cpp:383
+#: difftextwindow.cpp:2109 optiondialog.cpp:382
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode (8-bitine)"
@@ -428,7 +428,7 @@ msgstr ""
 "Sul on parajasti käsil kataloogi ühendamine. Kas tõesti ühendamine "
 "katkestada ja kataloog uuesti läbi uurida?"
 
-#: directorymergewindow.cpp:695 kdiff3.cpp:791 kdiff3.cpp:801 kdiff3.cpp:813
+#: directorymergewindow.cpp:695 kdiff3.cpp:789 kdiff3.cpp:799 kdiff3.cpp:811
 #: mergeresultwindow.cpp:333 pdiff.cpp:853 pdiff.cpp:1708 pdiff.cpp:1718
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -520,9 +520,9 @@ msgstr "Mõned alamkataloogid ei olnud loetavad"
 msgid "Check the permissions of the subfolders."
 msgstr "Kontrolli alamkataloogide õigusi."
 
-#: directorymergewindow.cpp:968 kdiff3.cpp:740 kdiff3.cpp:846 kdiff3.cpp:870
-#: kdiff3.cpp:1139 kdiff3.cpp:1160 pdiff.cpp:938 pdiff.cpp:1005 pdiff.cpp:1041
-#: pdiff.cpp:1050 pdiff.cpp:1096 pdiff.cpp:1104
+#: directorymergewindow.cpp:968 kdiff3.cpp:738 kdiff3.cpp:844 kdiff3.cpp:868
+#: kdiff3.cpp:1136 pdiff.cpp:938 pdiff.cpp:1005 pdiff.cpp:1041 pdiff.cpp:1050
+#: pdiff.cpp:1096 pdiff.cpp:1104
 #, kde-format
 msgid "Ready."
 msgstr "Valmis."
@@ -845,7 +845,7 @@ msgid "Dest"
 msgstr "Sihtkoht"
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2753
-#: optiondialog.cpp:1094 optiondialog.cpp:1095
+#: optiondialog.cpp:1093 optiondialog.cpp:1094
 #, kde-format
 msgid "Folder"
 msgstr "Kataloog"
@@ -1292,22 +1292,22 @@ msgstr "Otsib stringi"
 msgid "Search again for the string"
 msgstr "Otsib uuesti stringi"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:637
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Lülitab staatusriba sisse/välja"
 
-#: kdiff3.cpp:643
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3 seadistamine..."
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Liigu praegusele erinevusele"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Current\n"
@@ -1316,12 +1316,12 @@ msgstr ""
 "Praegune\n"
 "erinevus"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Liigu esimesele erinevusele"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "First\n"
@@ -1330,12 +1330,12 @@ msgstr ""
 "Esimene\n"
 "erinevus"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Liigu viimasele erinevusele"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Last\n"
@@ -1344,14 +1344,14 @@ msgstr ""
 "Viimane\n"
 "erinevus"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:667
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(Jätab tühimärkide erinevused vahele, kui \"Tühimärkide näitamine\" ei ole "
 "sees.)"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:668
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1360,12 +1360,12 @@ msgstr ""
 "(Tühimärkide erinevusi näidatakse isegi siis, kui \"Tühimärkide näitamine\" "
 "ei ole sees.)"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:669
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Liigu eelmisele erinevusele"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:669
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1374,12 +1374,12 @@ msgstr ""
 "Eelmine\n"
 "erinevus"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Liigu järgmisele erinevusele"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:671
 #, kde-format
 msgid ""
 "Next\n"
@@ -1388,12 +1388,12 @@ msgstr ""
 "Järgmine\n"
 "erinevus"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Liigu eelmisele konfliktile"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:673
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1402,12 +1402,12 @@ msgstr ""
 "Eelmine\n"
 "konflikt"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Liigu järgmisele konfliktile"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "Next\n"
@@ -1416,12 +1416,12 @@ msgstr ""
 "Järgmine\n"
 "konflikt"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Liigu eelmisele lahendamata konfliktile"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1430,12 +1430,12 @@ msgstr ""
 "Eelmine\n"
 "lahendamata"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Liigu järgmisele lahendamata konfliktile"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:679
 #, kde-format
 msgid ""
 "Next\n"
@@ -1444,14 +1444,14 @@ msgstr ""
 "Järgmine\n"
 "lahendamata"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Liigu viimasele erinevusele"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:681
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1460,7 +1460,7 @@ msgid ""
 "Line"
 msgstr "Rida"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:682
 #, kde-format
 msgctxt "Additional text intooltip"
 msgid ""
@@ -1468,14 +1468,14 @@ msgid ""
 " Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Vali rida/read A-st"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1488,14 +1488,14 @@ msgstr ""
 "Vali\n"
 "A"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Vali rida/read B-st"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1508,14 +1508,14 @@ msgstr ""
 "Vali\n"
 "B"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Vali rida/read C-st"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1528,7 +1528,7 @@ msgstr ""
 "Vali\n"
 "C"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
@@ -1536,7 +1536,7 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 "Pärast allikavalikut liigu automaatselt järgmisele lahendamata konfliktile"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1549,12 +1549,12 @@ msgstr ""
 "Automaatselt\n"
 "järgmine"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Näita tühiku- ja tabeldusmärke"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1565,12 +1565,12 @@ msgid ""
 "Characters"
 msgstr "Tühimärgid"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Show White Space"
 msgstr "Näita tühimärke"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:689
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1583,12 +1583,12 @@ msgstr ""
 "Tühimärkide\n"
 "erinevus"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Näita reanumbreid"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1599,193 +1599,188 @@ msgid ""
 "Numbers"
 msgstr "Reanumbrid"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Lahenda automaatselt lihtsad konfliktid"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:694
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Määra erinevused konfliktideks"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Käivita regulaaravaldisega automaatühendamine"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Lahenda automaatselt ajalookonfliktid"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Jaga erinevused valiku juures"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Liida valitud erinevused"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Window A"
 msgstr "Näita akent A"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show Window B"
 msgstr "Näita akent B"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Window C"
 msgstr "Näita akent C"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normaalne ülevaade"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:705
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A-B ülevaade"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:706
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A-C ülevaade"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:707
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B-C ülevaade"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Reamurdmine võrdlusakendes"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Lisa käsitsi samasus"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Eemalda kõik käsitsi määratud samasused"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Fokuseeri järgmisele aknale"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Fokuseeri eelmisele aknale"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Lülita poolitamissuund"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:716
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Kataloogi ja teksti poolitamisvaade"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:718
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Lülita kataloogi- ja tekstivaadet"
 
-#: kdiff3.cpp:790 pdiff.cpp:1707
+#: kdiff3.cpp:788 pdiff.cpp:1707
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Ühendamise tulemust pole salvestatud."
 
-#: kdiff3.cpp:792
+#: kdiff3.cpp:790
 #, kde-format
 msgid "Save && Quit"
 msgstr "Salvesta ja välju"
 
-#: kdiff3.cpp:793
+#: kdiff3.cpp:791
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Välju salvestamata"
 
-#: kdiff3.cpp:801 pdiff.cpp:1718
+#: kdiff3.cpp:799 pdiff.cpp:1718
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Ühendamise tulemuse salvestamine nurjus."
 
-#: kdiff3.cpp:812 pdiff.cpp:852
+#: kdiff3.cpp:810 pdiff.cpp:852
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Sul on parajasti käsil kataloogide ühendamine. Kas tõesti katkestada?"
 
-#: kdiff3.cpp:835
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Saving file..."
 msgstr "Faili salvestamine..."
 
-#: kdiff3.cpp:852
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Faili salvestamine uue nimega..."
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:852
 #, kde-format
 msgid "Save As..."
 msgstr "Salvestamine..."
 
-#: kdiff3.cpp:878
+#: kdiff3.cpp:876
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Trükkimine ei ole veel võimalik."
 
-#: kdiff3.cpp:916
+#: kdiff3.cpp:914
 #, kde-format
 msgid "Printing..."
 msgstr "Trükkimine..."
 
-#: kdiff3.cpp:1020
+#: kdiff3.cpp:1018
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "Trükitakse lehekülge %1 / %2"
 
-#: kdiff3.cpp:1072
+#: kdiff3.cpp:1070
 #, kde-format
 msgid " (Selection)"
 msgstr " (Valik)"
 
-#: kdiff3.cpp:1101
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Printing completed."
 msgstr "Trükkimine lõpetatud."
 
-#: kdiff3.cpp:1105
+#: kdiff3.cpp:1103
 #, kde-format
 msgid "Printing aborted."
 msgstr "Trükkimine katkestati"
 
-#: kdiff3.cpp:1112
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Exiting..."
 msgstr "Väljumine..."
 
-#: kdiff3.cpp:1123
-#, kde-format
-msgid "Toggling toolbar..."
-msgstr "Tööriistariba lülitamine..."
-
-#: kdiff3.cpp:1144
+#: kdiff3.cpp:1120
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Olekuriba lülitamine..."
@@ -1833,7 +1828,7 @@ msgstr "KDiff3 seadistamine"
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: kdiff3_shell.cpp:67
+#: kdiff3_shell.cpp:71
 #, kde-format
 msgid ""
 "Could not initialize the KDiff3 part.\n"
@@ -2306,7 +2301,7 @@ msgstr "C (lisavõimalus):"
 msgid "Folder..."
 msgstr "Kataloog ..."
 
-#: optiondialog.cpp:93
+#: optiondialog.cpp:92
 #, kde-format
 msgid ""
 "The quick brown fox jumps over the river\n"
@@ -2314,14 +2309,14 @@ msgid ""
 ":-)"
 msgstr ""
 
-#: optiondialog.cpp:102
+#: optiondialog.cpp:101
 #, fuzzy, kde-format
 #| msgid "Change Font"
 msgctxt "Button title"
 msgid "Change Font"
 msgstr "Muuda fonti"
 
-#: optiondialog.cpp:118 optiondialog.cpp:128
+#: optiondialog.cpp:117 optiondialog.cpp:127
 #, fuzzy, kde-format
 #| msgid ""
 #| "Font: %1, %2, %3\n"
@@ -2337,123 +2332,123 @@ msgstr ""
 "\n"
 "Näide:"
 
-#: optiondialog.cpp:384
+#: optiondialog.cpp:383
 #, kde-format
 msgid "Unicode"
 msgstr "Unicode"
 
-#: optiondialog.cpp:385
+#: optiondialog.cpp:384
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:404
+#: optiondialog.cpp:403
 #, kde-format
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Muuda, kui mitte-ASCII sümboleid ei näidata korrektselt."
 
-#: optiondialog.cpp:493
+#: optiondialog.cpp:492
 #, kde-format
 msgid "Configure"
 msgstr "Seadistamine"
 
-#: optiondialog.cpp:532
+#: optiondialog.cpp:531
 #, kde-format
 msgid "Font"
 msgstr "Font"
 
-#: optiondialog.cpp:534
+#: optiondialog.cpp:533
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Redaktori ja erinevuse väljundi font"
 
-#: optiondialog.cpp:552
+#: optiondialog.cpp:551
 #, kde-format
 msgid "Application font"
 msgstr "Rakenduse font"
 
-#: optiondialog.cpp:557
+#: optiondialog.cpp:556
 #, kde-format
 msgid "File view font"
 msgstr "Failivaate font"
 
-#: optiondialog.cpp:576
+#: optiondialog.cpp:575
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Värv"
 
-#: optiondialog.cpp:577
+#: optiondialog.cpp:576
 #, kde-format
 msgid "Colors Settings"
 msgstr "Värviseadistused"
 
-#: optiondialog.cpp:602
+#: optiondialog.cpp:601
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Redaktori ja erinevuse vaated:"
 
-#: optiondialog.cpp:610
+#: optiondialog.cpp:609
 #, kde-format
 msgid "Foreground color:"
 msgstr "Esiplaani värv:"
 
-#: optiondialog.cpp:618
+#: optiondialog.cpp:617
 #, kde-format
 msgid "Background color:"
 msgstr "Tausta värv:"
 
-#: optiondialog.cpp:628
+#: optiondialog.cpp:627
 #, kde-format
 msgid "Diff background color:"
 msgstr "Erinevuse tausta värv:"
 
-#: optiondialog.cpp:637
+#: optiondialog.cpp:636
 #, kde-format
 msgid "Color A:"
 msgstr "Värv A:"
 
-#: optiondialog.cpp:646
+#: optiondialog.cpp:645
 #, kde-format
 msgid "Color B:"
 msgstr "Värv B:"
 
-#: optiondialog.cpp:655
+#: optiondialog.cpp:654
 #, kde-format
 msgid "Color C:"
 msgstr "Värv C:"
 
-#: optiondialog.cpp:663
+#: optiondialog.cpp:662
 #, kde-format
 msgid "Conflict color:"
 msgstr "Konflikti värv:"
 
-#: optiondialog.cpp:672
+#: optiondialog.cpp:671
 #, kde-format
 msgid "Current range background color:"
 msgstr "Praeguse vahemiku tausta värv:"
 
-#: optiondialog.cpp:681
+#: optiondialog.cpp:680
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Praeguse vahemiku erinevuse tausta värv:"
 
-#: optiondialog.cpp:689
+#: optiondialog.cpp:688
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Käsitsi määratud samasuse vahemiku värv:"
 
-#: optiondialog.cpp:696
+#: optiondialog.cpp:695
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "Kataloogi võrdlemise vaade:"
 
-#: optiondialog.cpp:702
+#: optiondialog.cpp:701
 #, kde-format
 msgid "Newest file color:"
 msgstr "Uusima faili värv:"
 
-#: optiondialog.cpp:707
+#: optiondialog.cpp:706
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
@@ -2462,37 +2457,37 @@ msgstr ""
 "Seda värvi muudetakse alles siis, kui alustad järgmist kataloogide "
 "võrdlemist."
 
-#: optiondialog.cpp:712
+#: optiondialog.cpp:711
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Vanima faili värv:"
 
-#: optiondialog.cpp:721
+#: optiondialog.cpp:720
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Keskmise vanusega faili värv:"
 
-#: optiondialog.cpp:730
+#: optiondialog.cpp:729
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Puuduvate failide värv:"
 
-#: optiondialog.cpp:744
+#: optiondialog.cpp:743
 #, kde-format
 msgid "Editor"
 msgstr "Redaktor"
 
-#: optiondialog.cpp:745
+#: optiondialog.cpp:744
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Redaktori käitumine"
 
-#: optiondialog.cpp:767
+#: optiondialog.cpp:766
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "TAB lisab tühikud"
 
-#: optiondialog.cpp:771
+#: optiondialog.cpp:770
 #, kde-format
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2501,27 +2496,27 @@ msgstr ""
 "Sees: TAB klahvi vajutamine tekitab sobiva hulga tühikuid.\n"
 "Väljas: lisatakse tabeldusmärk."
 
-#: optiondialog.cpp:776
+#: optiondialog.cpp:775
 #, kde-format
 msgid "Tab size:"
 msgstr "TABi suurus:"
 
-#: optiondialog.cpp:783
+#: optiondialog.cpp:782
 #, kde-format
 msgid "Auto indentation"
 msgstr "Automaatne taandus"
 
-#: optiondialog.cpp:787
+#: optiondialog.cpp:786
 #, kde-format
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "Sees: uuel real kasutatakse eelmise rea taandust.\n"
 
-#: optiondialog.cpp:790
+#: optiondialog.cpp:789
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Valiku automaatne kopeerimine"
 
-#: optiondialog.cpp:794
+#: optiondialog.cpp:793
 #, kde-format
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
@@ -2530,25 +2525,25 @@ msgstr ""
 "Sees: iga valik asetatakse otsekohe lõikepuhvrisse.\n"
 "Väljas: kopeerimiseks tuleb anda selge käsk, nt. Ctrl+C."
 
-#: optiondialog.cpp:804
+#: optiondialog.cpp:803
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:805
+#: optiondialog.cpp:804
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "DOS/Windows"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:805
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Automaatne tuvastamine"
 
-#: optiondialog.cpp:809
+#: optiondialog.cpp:808
 #, kde-format
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2557,22 +2552,22 @@ msgstr ""
 "Määrab realõpu stiili redigeeritud faili salvestamisel.\n"
 "DOS/Windows: CR+LF; Unix: LF; sealjuures CR=0D, LF=0A"
 
-#: optiondialog.cpp:819
+#: optiondialog.cpp:818
 #, kde-format
 msgid "Diff"
 msgstr "Erinevused"
 
-#: optiondialog.cpp:820
+#: optiondialog.cpp:819
 #, kde-format
 msgid "Diff Settings"
 msgstr "Erinevuse seadistused"
 
-#: optiondialog.cpp:843
+#: optiondialog.cpp:842
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "Numbrite eiramine (käsitletakse tühimärkidena)"
 
-#: optiondialog.cpp:847
+#: optiondialog.cpp:846
 #, kde-format
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2583,42 +2578,42 @@ msgstr ""
 "ignoreerimisega).\n"
 "Võib olla abiks numbrilisi andmeid sisaldavate failide võrdlemisel."
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:850
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "C/C++ kommentaaride eiramine (käsitletakse tühimärkidena)"
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:853
 #, kde-format
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++ kommentaare käsitletakse tühimärkidena."
 
-#: optiondialog.cpp:857
+#: optiondialog.cpp:856
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "Tähesuuruse eiramine (käsitletakse tühimärkidena)"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:860
 #, kde-format
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "Tõstuerinevusi käsitletakse tühimärgimuutustena. ('a'<=>'A')"
 
-#: optiondialog.cpp:864
+#: optiondialog.cpp:863
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Eeltöötluse käsk"
 
-#: optiondialog.cpp:869
+#: optiondialog.cpp:868
 #, kde-format
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "Kasutaja määratud eeltöötlus (vaata lähemalt käsiraamatust)."
 
-#: optiondialog.cpp:872
+#: optiondialog.cpp:871
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Ridade sobivuse eeltöötluse käsk:"
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:876
 #, kde-format
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2627,12 +2622,12 @@ msgstr ""
 "Seda eeltöötlusvahendit kasutatakse ainult ridade sobivuse leidmisel\n"
 "(vaata lähemalt käsiraamatust)."
 
-#: optiondialog.cpp:880
+#: optiondialog.cpp:879
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "Karm uurimine (aeglane)"
 
-#: optiondialog.cpp:884
+#: optiondialog.cpp:883
 #, kde-format
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2641,12 +2636,12 @@ msgstr ""
 "Lubab välise diff-rakenduse korral võtme --minimal.\n"
 "Suurte failide analüüs muutub palju aeglasemaks."
 
-#: optiondialog.cpp:888
+#: optiondialog.cpp:887
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "B ja C joondamine 3 sisendfaili korral"
 
-#: optiondialog.cpp:892
+#: optiondialog.cpp:891
 #, kde-format
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2659,23 +2654,23 @@ msgstr ""
 "keeruliseks.\n"
 "(Vaikimisi on välja lülitatud.)"
 
-#: optiondialog.cpp:903
+#: optiondialog.cpp:902
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Ühendamine"
 
-#: optiondialog.cpp:904
+#: optiondialog.cpp:903
 #, kde-format
 msgid "Merge Settings"
 msgstr "Ühendamise seadistused"
 
-#: optiondialog.cpp:927
+#: optiondialog.cpp:926
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Automaatse edasiliikumise viivitus (ms):"
 
-#: optiondialog.cpp:933
+#: optiondialog.cpp:932
 #, kde-format
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2684,27 +2679,27 @@ msgstr ""
 "Automaatse edasiliikumise režiimis näidatakse tulemust määratud aeg ning \n"
 "siis hüpatakse järgmisele konfliktile. Vahemik: 0-2000 ms"
 
-#: optiondialog.cpp:937
+#: optiondialog.cpp:936
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Infodialoogide näitamine"
 
-#: optiondialog.cpp:940
+#: optiondialog.cpp:939
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "Infodialoogi näitamine konfliktide arvu kohta."
 
-#: optiondialog.cpp:943
+#: optiondialog.cpp:942
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Tühimärkide käsitlemine kahe faili ühendamisel:"
 
-#: optiondialog.cpp:948 optiondialog.cpp:961
+#: optiondialog.cpp:947 optiondialog.cpp:960
 #, kde-format
 msgid "Manual Choice"
 msgstr "Käsitsivalik"
 
-#: optiondialog.cpp:952 optiondialog.cpp:966
+#: optiondialog.cpp:951 optiondialog.cpp:965
 #, kde-format
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
@@ -2713,27 +2708,27 @@ msgstr ""
 "Lubab ühendamisalgoritmil ainult tühimärkides seisneva erinevuse korral "
 "automaatselt valida sisendi."
 
-#: optiondialog.cpp:956
+#: optiondialog.cpp:955
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Tühimärkide käsitlemine kolme faili ühendamisel:"
 
-#: optiondialog.cpp:970
+#: optiondialog.cpp:969
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Automaatühendamise regulaaravaldis"
 
-#: optiondialog.cpp:978 smalldialogs.cpp:387
+#: optiondialog.cpp:977 smalldialogs.cpp:387
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Automaatühendamise regulaaravaldis:"
 
-#: optiondialog.cpp:986
+#: optiondialog.cpp:985
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "Regulaaravaldisega automaatühendamine ühendamise alustamisel"
 
-#: optiondialog.cpp:989
+#: optiondialog.cpp:988
 #, kde-format
 msgid ""
 "Run the merge for auto merge regular expressions\n"
@@ -2742,69 +2737,69 @@ msgstr ""
 "Regulaarühendusega automaatühendamine käivitatakse\n"
 "kohe ühendamise alustamisel.\n"
 
-#: optiondialog.cpp:994
+#: optiondialog.cpp:993
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Versioonikonrolli ajaloo ühendamine"
 
-#: optiondialog.cpp:1002 smalldialogs.cpp:414
+#: optiondialog.cpp:1001 smalldialogs.cpp:414
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Ajaloo alguse regulaaravaldis:"
 
-#: optiondialog.cpp:1010 smalldialogs.cpp:442
+#: optiondialog.cpp:1009 smalldialogs.cpp:442
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Ajalookirje alguse regulaaravaldis:"
 
-#: optiondialog.cpp:1026
+#: optiondialog.cpp:1025
 #, kde-format
 msgid "History merge sorting"
 msgstr "Ajaloo ühendamise sortimine"
 
-#: optiondialog.cpp:1029
+#: optiondialog.cpp:1028
 #, kde-format
 msgid "Sort version control history by a key."
 msgstr "Versioonikontrolli ajaloo sortimine võtmete järgi."
 
-#: optiondialog.cpp:1039
+#: optiondialog.cpp:1038
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "Ajalookirje alguse sortimisvõtmete järjekord:"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1048
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "Versioonikontrolli ajaloo ühendamine ühendamise alustamisel"
 
-#: optiondialog.cpp:1052
+#: optiondialog.cpp:1051
 #, kde-format
 msgid "Run version control history automerge on merge start."
 msgstr ""
 "Versioonikontrolli ajaloo automaatühendamise käivitamine kohe ühendamise "
 "alustamisel."
 
-#: optiondialog.cpp:1056
+#: optiondialog.cpp:1055
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Ajalookirjete maks. arv:"
 
-#: optiondialog.cpp:1060
+#: optiondialog.cpp:1059
 #, kde-format
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr "Kärpimine pärast määratud arvu. -1 tähendab piirangu puudumist."
 
-#: optiondialog.cpp:1064
+#: optiondialog.cpp:1063
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Regulaaravaldiste test"
 
-#: optiondialog.cpp:1069
+#: optiondialog.cpp:1068
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Ebaolulise ühendamise käsk:"
 
-#: optiondialog.cpp:1074
+#: optiondialog.cpp:1073
 #, kde-format
 msgid ""
 "If specified this script is run after automerge\n"
@@ -2815,12 +2810,12 @@ msgstr ""
 "pärast automaatühendamist, kui muid muudatusi ei avastada.\n"
 "See kutsutakse välja parameetritega: failinimi1 failinimi2 failinimi3"
 
-#: optiondialog.cpp:1079
+#: optiondialog.cpp:1078
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "Automaatne salvestamine ja väljumine konfliktideta ühendamisel"
 
-#: optiondialog.cpp:1083
+#: optiondialog.cpp:1082
 #, kde-format
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2833,22 +2828,22 @@ msgstr ""
 "automaatselt.\n"
 "(Samane käsurea võtmega \"--auto\")"
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1114
 #, kde-format
 msgid "Recursive folders"
 msgstr "Rekursiivsed kataloogid"
 
-#: optiondialog.cpp:1118
+#: optiondialog.cpp:1117
 #, kde-format
 msgid "Whether to analyze subfolders or not."
 msgstr "Kas analüüsida alamkatalooge või mitte."
 
-#: optiondialog.cpp:1120
+#: optiondialog.cpp:1119
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Failimustrid:"
 
-#: optiondialog.cpp:1126
+#: optiondialog.cpp:1125
 #, kde-format
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2859,12 +2854,12 @@ msgstr ""
 "Metamärgid: '*' ja '?'\n"
 "Mitme mustri määramisel kasuta eraldajana semikoolonit (;)"
 
-#: optiondialog.cpp:1131
+#: optiondialog.cpp:1130
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Anti-failimustrid:"
 
-#: optiondialog.cpp:1137
+#: optiondialog.cpp:1136
 #, kde-format
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2875,12 +2870,12 @@ msgstr ""
 "Metamärgid: '*' ja '?'\n"
 "Mitme mustri määramisel kasuta eraldajana semikoolonit (;)"
 
-#: optiondialog.cpp:1142
+#: optiondialog.cpp:1141
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "Anti-kataloogimustrid:"
 
-#: optiondialog.cpp:1148
+#: optiondialog.cpp:1147
 #, kde-format
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -2891,13 +2886,13 @@ msgstr ""
 "Metamärgid: '*' ja '?'\n"
 "Mitme mustri määramisel kasuta eraldajana semikoolonit (;)"
 
-#: optiondialog.cpp:1153
+#: optiondialog.cpp:1152
 #, fuzzy, kde-format
 #| msgid "Use .cvsignore"
 msgid "Use Ignore File"
 msgstr ".cvsignore kasutamine"
 
-#: optiondialog.cpp:1157
+#: optiondialog.cpp:1156
 #, fuzzy, kde-format
 #| msgid ""
 #| "Extends the antipattern to anything that would be ignored by CVS.\n"
@@ -2910,22 +2905,22 @@ msgstr ""
 "Laiendab antimustrit kõigele, mida eiraks CVS.\n"
 "Kohalike \".cvsignore\" failide abil võib see olla kataloogipõhine."
 
-#: optiondialog.cpp:1161
+#: optiondialog.cpp:1160
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "Peidetud failide ja kataloogide otsimine"
 
-#: optiondialog.cpp:1164
+#: optiondialog.cpp:1163
 #, kde-format
 msgid "Finds hidden files and folders."
 msgstr "Peidetud failide ja kataloogide otsimine."
 
-#: optiondialog.cpp:1167
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Follow file links"
 msgstr "Failiviitade järgimine"
 
-#: optiondialog.cpp:1171
+#: optiondialog.cpp:1170
 #, kde-format
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -2934,12 +2929,12 @@ msgstr ""
 "Sees: võrreldakse faili, mille viit osutab.\n"
 "Väljas: võrreldakse viitu."
 
-#: optiondialog.cpp:1175
+#: optiondialog.cpp:1174
 #, kde-format
 msgid "Follow folder links"
 msgstr "Kataloogiviitade järgimine"
 
-#: optiondialog.cpp:1179
+#: optiondialog.cpp:1178
 #, kde-format
 msgid ""
 "On: Compare the folder the link points to.\n"
@@ -2948,12 +2943,12 @@ msgstr ""
 "Sees: võrreldakse kataloogi, mille viit osutab.\n"
 "Väljas: võrreldakse viitu."
 
-#: optiondialog.cpp:1188
+#: optiondialog.cpp:1187
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "Tõstutundlik failinimede võrdlemine"
 
-#: optiondialog.cpp:1192
+#: optiondialog.cpp:1191
 #, kde-format
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
@@ -2964,12 +2959,12 @@ msgstr ""
 "Selle valiku sisselülitamisel peab sobima ka nimede tähesuurus (Windowsis on "
 "see vaikimisi välja lülitatud, muidu sees)."
 
-#: optiondialog.cpp:1196
+#: optiondialog.cpp:1195
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "Laadimisel avatakse kõik alamkataloogid"
 
-#: optiondialog.cpp:1200
+#: optiondialog.cpp:1199
 #, kde-format
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
@@ -2979,12 +2974,12 @@ msgstr ""
 "alamkataloogid.\n"
 "Väljas: alamkataloogid jäetakse suletuks."
 
-#: optiondialog.cpp:1204
+#: optiondialog.cpp:1203
 #, kde-format
 msgid "Skip folder status report"
 msgstr "Kataloogide staatuse aruanne jäetakse vahele"
 
-#: optiondialog.cpp:1208
+#: optiondialog.cpp:1207
 #, kde-format
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
@@ -2993,27 +2988,27 @@ msgstr ""
 "Sees: kataloogide võrdlemise staatust ei näidata.\n"
 "Väljas: Staatusedialoogi näitamine alustamisel."
 
-#: optiondialog.cpp:1212
+#: optiondialog.cpp:1211
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Faili võrdlemise režiim"
 
-#: optiondialog.cpp:1217
+#: optiondialog.cpp:1216
 #, kde-format
 msgid "Binary comparison"
 msgstr "Binaarvõrdlus"
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1218
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
 msgstr "Iga faili binaarvõrdlus. (vaikimisi)"
 
-#: optiondialog.cpp:1222
+#: optiondialog.cpp:1221
 #, kde-format
 msgid "Full analysis"
 msgstr "Täielik analüüs"
 
-#: optiondialog.cpp:1224
+#: optiondialog.cpp:1223
 #, kde-format
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
@@ -3022,12 +3017,12 @@ msgstr ""
 "Tehakse täielik analüüs, statistikat näidatakse lisaveergudes.\n"
 "(Aeglasem kui binaarvõrdlus ja eriti aeglane binaarfailide korral.)"
 
-#: optiondialog.cpp:1228
+#: optiondialog.cpp:1227
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Suuruse ja muutmiskuupäeva usaldamine (ebaturvaline)"
 
-#: optiondialog.cpp:1230
+#: optiondialog.cpp:1229
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3041,7 +3036,7 @@ msgstr ""
 "Ühesuguse sisu, kuid erineva muutmiskuupäevaga faile peetakse erinevaks.\n"
 "Mõttekas suurte kataloogide või aeglase võrgu korral."
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1234
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -3050,7 +3045,7 @@ msgstr ""
 "Suuruse ja muutmiskuupäeva usaldamine, kuid muutmiskuupäeva erinemisel "
 "binaarvõrdluse kasutamine (pole turvaline)"
 
-#: optiondialog.cpp:1237
+#: optiondialog.cpp:1236
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3063,12 +3058,12 @@ msgstr ""
 "Kui kuupäevad ei ole võrdsed, aga suurus on, kasutatakse binaarvõrdlust.\n"
 "Mõttekas suurte kataloogide või aeglase võrgu korral."
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1241
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Suuruse usaldamine (ebaturvaline)"
 
-#: optiondialog.cpp:1244
+#: optiondialog.cpp:1243
 #, kde-format
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
@@ -3079,12 +3074,12 @@ msgstr ""
 "Mõttekas suurte kataloogide või aeglase võrgu korral, kui kuupäev võib "
 "allalaadimise käigus olla muutunud."
 
-#: optiondialog.cpp:1251
+#: optiondialog.cpp:1250
 #, kde-format
 msgid "Synchronize folders"
 msgstr "Kataloogide sünkroonimine"
 
-#: optiondialog.cpp:1255
+#: optiondialog.cpp:1254
 #, kde-format
 msgid ""
 "Offers to store files in both folders so that\n"
@@ -3095,12 +3090,12 @@ msgstr ""
 "nii et need näevad pärast seda välja ühesugused.\n"
 "Toimib ainult kahe kataloogi võrdlemisel ilma sihtkohta määramata."
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1260
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Tühimärkide erinevust ei arvestata"
 
-#: optiondialog.cpp:1265
+#: optiondialog.cpp:1264
 #, kde-format
 msgid ""
 "If files differ only by white space consider them equal.\n"
@@ -3109,12 +3104,12 @@ msgstr ""
 "Kui failid erinevad ainult tühimärkide poolest, peetakse neid võrdseks.\n"
 "See valik on aktiivne ainult täieliku analüüsi korral."
 
-#: optiondialog.cpp:1271
+#: optiondialog.cpp:1270
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Ühendamise asemel kopeeritakse uuem (ebaturvaline)"
 
-#: optiondialog.cpp:1275
+#: optiondialog.cpp:1274
 #, kde-format
 msgid ""
 "Do not look inside, just take the newer file.\n"
@@ -3125,12 +3120,12 @@ msgstr ""
 "(Kasuta ainult siis, kui tead, mida teed!)\n"
 "Toimib ainult kahe kataloogi võrdlemisel."
 
-#: optiondialog.cpp:1280
+#: optiondialog.cpp:1279
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Failidest tehakse varukoopia (.orig)"
 
-#: optiondialog.cpp:1284
+#: optiondialog.cpp:1283
 #, kde-format
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
@@ -3139,17 +3134,17 @@ msgstr ""
 "Kui fail salvestatakse vana faili asemele, ei kustutata vana faili,\n"
 "vaid sellele antakse uus nimi laiendiga '.orig'."
 
-#: optiondialog.cpp:1293 optiondialog.cpp:1294
+#: optiondialog.cpp:1292 optiondialog.cpp:1293
 #, kde-format
 msgid "Regional Settings"
 msgstr "Lokaale seadistused"
 
-#: optiondialog.cpp:1317
+#: optiondialog.cpp:1316
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "Kõikjal kasutatakse kodeeringut:"
 
-#: optiondialog.cpp:1321
+#: optiondialog.cpp:1320
 #, kde-format
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
@@ -3158,17 +3153,17 @@ msgstr ""
 "Lubab muuta kõiki kodeeringuid ainult esimest kodeeringut muutes.\n"
 "Kui vaja on erinevaid määratlusi, lülita välja."
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1324
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Märkus: kohalik kodeering on \"%1\""
 
-#: optiondialog.cpp:1329
+#: optiondialog.cpp:1328
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "A kodeering:"
 
-#: optiondialog.cpp:1336
+#: optiondialog.cpp:1335
 #, kde-format
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3181,32 +3176,32 @@ msgstr ""
 "kodeeringut.\n"
 "(Unicode tuvastamine sõltub faili esimestest baitidest.)"
 
-#: optiondialog.cpp:1339 optiondialog.cpp:1350 optiondialog.cpp:1361
+#: optiondialog.cpp:1338 optiondialog.cpp:1349 optiondialog.cpp:1360
 #, kde-format
 msgid "Auto Detect Unicode"
 msgstr "Unicode automaatne tuvastamine"
 
-#: optiondialog.cpp:1345
+#: optiondialog.cpp:1344
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "B kodeering:"
 
-#: optiondialog.cpp:1356
+#: optiondialog.cpp:1355
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "C kodeering:"
 
-#: optiondialog.cpp:1367
+#: optiondialog.cpp:1366
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Kodeering ühendamisväljundil ja salvestamisel:"
 
-#: optiondialog.cpp:1372
+#: optiondialog.cpp:1371
 #, kde-format
 msgid "Auto Select"
 msgstr "Automaatne valik"
 
-#: optiondialog.cpp:1376
+#: optiondialog.cpp:1375
 #, kde-format
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
@@ -3217,17 +3212,17 @@ msgstr ""
 "Kahtluse korral ilmub dialoog, mis laseb kasutajal valida salvestamisel "
 "kasutatava kodeeringu."
 
-#: optiondialog.cpp:1379
+#: optiondialog.cpp:1378
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Eelprotsessori failide kodeering:"
 
-#: optiondialog.cpp:1391
+#: optiondialog.cpp:1390
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Paremalt-vasakule keeled"
 
-#: optiondialog.cpp:1395
+#: optiondialog.cpp:1394
 #, kde-format
 msgid ""
 "Some languages are read from right to left.\n"
@@ -3236,22 +3231,22 @@ msgstr ""
 "Mõningaid keeli loetakse ja kirjutatakse paremalt vasakule.\n"
 "Selle valikuga saab vastavalt muuta näitajat ja redaktorit."
 
-#: optiondialog.cpp:1405
+#: optiondialog.cpp:1404
 #, kde-format
 msgid "Integration"
 msgstr "Integreerimine"
 
-#: optiondialog.cpp:1406
+#: optiondialog.cpp:1405
 #, kde-format
 msgid "Integration Settings"
 msgstr "Integreerimisseadistused"
 
-#: optiondialog.cpp:1427
+#: optiondialog.cpp:1426
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Ignoreeritavad käsurea võtmed:"
 
-#: optiondialog.cpp:1433
+#: optiondialog.cpp:1432
 #, kde-format
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3264,12 +3259,12 @@ msgstr ""
 "Mitme väärtuse andmisel tuleb need eraldada semikooloniga (;).\n"
 "See väldib vigu \"Tundmatu võti\"."
 
-#: optiondialog.cpp:1438
+#: optiondialog.cpp:1437
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Väljumine ka klahviga Escape"
 
-#: optiondialog.cpp:1442
+#: optiondialog.cpp:1441
 #, kde-format
 msgid ""
 "Fast method to exit.\n"
@@ -3278,7 +3273,7 @@ msgstr ""
 "Kiire väljumisviis.\n"
 "Mõeldud neile, kellele on südamelähedane klahv Escape."
 
-#: optiondialog.cpp:1500
+#: optiondialog.cpp:1499
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "See lähtestab kõik valikud, mitte ainult praeguse teema omad."
@@ -3743,6 +3738,9 @@ msgstr "Ootamatu tsitaadimärk argumendi sees."
 #, kde-format
 msgid "No program specified."
 msgstr "Programmi pole määratud."
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "Tööriistariba lülitamine..."
 
 #~ msgid ""
 #~ "A version control history entry consists of several lines.\n"
