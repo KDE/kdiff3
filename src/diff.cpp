@@ -566,14 +566,15 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     for(i = begin(); i != end();)
     {
         ManualDiffHelpList::iterator next = std::next(i);
-        if(next == end()) break;
-
-        for(e_SrcSelector wIdx = e_SrcSelector::A; wIdx != e_SrcSelector::Invalid; wIdx = nextSelector(wIdx))
+        if(next != end())
         {
-            if(!i->firstLine(wIdx).isValid() && next->firstLine(wIdx).isValid())
+            for(e_SrcSelector wIdx = e_SrcSelector::A; wIdx != e_SrcSelector::Invalid; wIdx = nextSelector(wIdx))
             {
-                std::swap(i->firstLine(wIdx), next->firstLine(wIdx));
-                std::swap(i->lastLine(wIdx), next->lastLine(wIdx));
+                if(!i->firstLine(wIdx).isValid() && next->firstLine(wIdx).isValid())
+                {
+                    std::swap(i->firstLine(wIdx), next->firstLine(wIdx));
+                    std::swap(i->lastLine(wIdx), next->lastLine(wIdx));
+                }
             }
         }
         //Delete completely empty entries

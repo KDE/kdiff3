@@ -19,7 +19,7 @@ class ManualDiffHelpListTest: public QObject
 
         list.insertEntry(e_SrcSelector::A, 20, 50);
 
-        QVERIFY(list.size() == 1);
+        QCOMPARE(list.size(), 1);
         QVERIFY(list == expected);
     }
 
@@ -36,7 +36,7 @@ class ManualDiffHelpListTest: public QObject
         list.insertEntry(e_SrcSelector::A, 50, 60);
         list.insertEntry(e_SrcSelector::A, 20, 30);
 
-        QVERIFY(list.size() == 3);
+        QCOMPARE(list.size(), 3);
         QVERIFY(list == expected);
     }
 
