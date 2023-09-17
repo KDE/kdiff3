@@ -84,7 +84,7 @@ class CombinertestTest: public QObject
         boost::signals2::signal<QString (), FirstNonEmpty<QString>> test1;
         std::list<boost::signals2::scoped_connection> connections;
 
-        //Just in case someone moneys with the test functions
+        //Just in case someone monkeys with the test functions
         QVERIFY(emptyString().isEmpty());
         QVERIFY(!nonEmpty1().isEmpty());
         QVERIFY(!nonEmpty1().isEmpty());

@@ -243,6 +243,10 @@ bool SourceData::FileData::readFile(FileAccess& file)
         return true;
 
     mDataSize = file.sizeForReading();
+    /*
+        If the extra bytes are removed an unknown heap currption issue is triggered in the
+        diff code. I don't have time to track this down to its true root cause.
+    */
     m_pBuf = std::make_unique<char[]>(mDataSize + 100); // Alloc 100 byte extra: Safety hack, not nice but does no harm.
                                                         // Some extra bytes at the end of the buffer are needed by
                                                         // the diff algorithm. See also GnuDiff::diff_2_files().
