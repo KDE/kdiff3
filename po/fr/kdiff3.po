@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-10 00:48+0000\n"
-"PO-Revision-Date: 2023-09-11 18:43+0200\n"
+"POT-Creation-Date: 2023-09-17 00:47+0000\n"
+"PO-Revision-Date: 2023-09-15 21:20+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -102,7 +102,7 @@ msgstr "Lecture du dossier : %1"
 msgid "Listing directory: %1"
 msgstr "Listage du dossier : %1"
 
-#: diff.cpp:1593 diff.cpp:1609
+#: diff.cpp:1594 diff.cpp:1610
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -111,7 +111,7 @@ msgstr ""
 "Problème de perte de données :\n"
 "Si cela se reproduit, veuillez contacter l'auteur.\n"
 
-#: diff.cpp:1595 diff.cpp:1611
+#: diff.cpp:1596 diff.cpp:1612
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Erreur interne critique"
@@ -2752,20 +2752,17 @@ msgid "Irrelevant merge command:"
 msgstr "Commande de fusion non pertinente :"
 
 #: optiondialog.cpp:1080
-#, fuzzy, kde-format
-#| msgid ""
-#| "If specified this script is run after automerge\n"
-#| "when no other relevant changes were detected.\n"
-#| "Called with the parameters: filename1 filename2 filename3"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If specified this script is run after auto-merge\n"
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
-"Si indiquée, ce script est lancé après une fusion automatique\n"
+"Si cette option est sélectionnée, ce script est lancé après une fusion "
+"automatique\n"
 "quand aucun autre changement pertinent n'a été détecté.\n"
-"Appelée avec les paramètres : nom_fichier1 nom_fichier2 nom_fichier3"
+"Appelée avec les paramètres : nom_fichier_1 nom_fichier_2 nom_fichier_3"
 
 #: optiondialog.cpp:1085
 #, kde-format
@@ -2773,12 +2770,7 @@ msgid "Auto save and quit on merge without conflicts"
 msgstr "Enregistrer automatiquement et quitter en cas de fusion sans conflits"
 
 #: optiondialog.cpp:1089
-#, fuzzy, kde-format
-#| msgid ""
-#| "If KDiff3 was started for a file-merge from the command line and all\n"
-#| "conflicts are solvable without user interaction then automatically save "
-#| "and quit.\n"
-#| "(Similar to command line option \"--auto\".)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2786,11 +2778,10 @@ msgid ""
 "quit.\n"
 "(Similar to command line option \"--auto\".)"
 msgstr ""
-"Lorsque KDiff3 a été lancé depuis la ligne de commande pour effectuer une "
-"fusion de fichiers et\n"
-"que tous les conflits peuvent être résolus sans interaction de "
-"l'utilisateur, alors cette commande enregistre automatiquement et ferme "
-"l'application.\n"
+"Lorsque KDiff3 a été lancé depuis la ligne de commandes pour effectuer une "
+"fusion de fichiers et que tous les conflits\n"
+"peuvent être résolus sans intervention de l'utilisateur, alors, cette "
+"commande enregistre automatiquement et ferme l'application.\n"
 "(Similaire à l'option en ligne de commande « --auto »)"
 
 #: optiondialog.cpp:1100 optiondialog.cpp:1101
@@ -2867,11 +2858,7 @@ msgid "Use Ignore File"
 msgstr "Utiliser un fichier « ignore »"
 
 #: optiondialog.cpp:1163
-#, fuzzy, kde-format
-#| msgid ""
-#| "Extends the antipattern to anything that would be ignored by source "
-#| "control.\n"
-#| "Via local ignore files this can be folder-specific."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Extends the anti-pattern to anything that would be ignored by source "
@@ -3010,13 +2997,7 @@ msgid "Trust the size and modification date (unsafe)"
 msgstr "Se fier à la taille et à la date de modification (peu sûr)"
 
 #: optiondialog.cpp:1236
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if the modification date and file length are "
-#| "equal.\n"
-#| "Files with equal contents but different modification dates will appear as "
-#| "different.\n"
-#| "Useful for big folders or slow networks."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3029,7 +3010,7 @@ msgstr ""
 "longueur du fichier sont égales.\n"
 "Les fichiers ayant un contenu identique mais des dates de modification "
 "distinctes apparaîtront comme étant différents.\n"
-"Utile pour les dossiers volumineux ou les réseaux lents."
+"Ceci est utile pour les dossiers volumineux ou les réseaux lents."
 
 #: optiondialog.cpp:1241
 #, kde-format
@@ -3041,12 +3022,7 @@ msgstr ""
 "la date ne correspond pas (peu sûr)"
 
 #: optiondialog.cpp:1243
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if the modification date and file length are "
-#| "equal.\n"
-#| "If the dates are not equal but the sizes are, use binary comparison.\n"
-#| "Useful for big folders or slow networks."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3055,10 +3031,10 @@ msgid ""
 "Useful for big folders or slow networks."
 msgstr ""
 "Suppose que les fichiers sont identiques si la date de modification et la "
-"longueur du fichier sont égales.\n"
-"Si la date n'est pas identique mais que les tailles le sont, utilise la "
+"taille du fichier sont égales.\n"
+"Si les dates sont différentes mais que les tailles le sont, utilisez la "
 "comparaison binaire.\n"
-"Utile pour les dossiers volumineux ou les réseaux lents."
+"Ceci est utile pour les dossiers volumineux ou les réseaux lents."
 
 #: optiondialog.cpp:1248
 #, kde-format
@@ -3066,19 +3042,14 @@ msgid "Trust the size (unsafe)"
 msgstr "Se fier à la taille (peu sûr)"
 
 #: optiondialog.cpp:1250
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if their file lengths are equal.\n"
-#| "Useful for big folders or slow networks when the date is modified during "
-#| "download."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big folders or slow networks when the date is modified during "
 "download."
 msgstr ""
-"Suppose que tous les fichiers sont identiques si leurs longueurs sont "
-"égales.\n"
+"Suppose que tous les fichiers sont identiques si leurs tailles sont égales.\n"
 "Utile pour les dossiers volumineux ou les réseaux lents, quand la taille est "
 "modifiée durant le téléchargement."
 
@@ -3088,20 +3059,16 @@ msgid "Synchronize folders"
 msgstr "Synchroniser les dossiers"
 
 #: optiondialog.cpp:1261
-#, fuzzy, kde-format
-#| msgid ""
-#| "Offers to store files in both folders so that\n"
-#| "both folders are the same afterwards.\n"
-#| "Works only when comparing two folders without specifying a destination."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Offers to store files in both folders so that\n"
 "both folders are the same afterwards.\n"
 "Works only when comparing two folders without specifying a destination."
 msgstr ""
-"Propose d'enregistrer les fichiers dans les deux dossiers pour que les deux "
-"dossiers soient identiques ensuite.\n"
-"Fonctionne seulement quand la comparaison de deux dossiers ne spécifie pas "
+"Propose d'enregistrer les fichiers dans les deux dossiers pour que\n"
+"les deux dossiers soient identiques ensuite.\n"
+"Fonctionne uniquement quand la comparaison de deux dossiers ne spécifie pas "
 "de destination."
 
 #: optiondialog.cpp:1267
@@ -3272,12 +3239,7 @@ msgid "Command line options to ignore:"
 msgstr "Options en ligne de commande à ignorer :"
 
 #: optiondialog.cpp:1439
-#, fuzzy, kde-format
-#| msgid ""
-#| "List of command line options that should be ignored when KDiff3 is used "
-#| "by other tools.\n"
-#| "Several values can be specified if separated via ';'\n"
-#| "This will suppress the \"Unknown option\" error."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3285,10 +3247,10 @@ msgid ""
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\" error."
 msgstr ""
-"Liste des options en ligne de commande qui devront être ignorées quand "
-"KDiff3 est utilisé par d'autres outils.\n"
+"Liste des options en ligne de commandes devant être ignorées quand KDiff3 "
+"est utilisé par d'autres outils.\n"
 "Plusieurs valeurs peuvent être spécifiées si on les sépare par des « ; »,\n"
-"ce qui supprimera l'erreur « Option inconnue »."
+"Ceci supprimera l'erreur « Option inconnue »."
 
 #: optiondialog.cpp:1444
 #, kde-format
