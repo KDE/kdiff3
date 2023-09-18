@@ -127,6 +127,7 @@ void SourceData::setFileAccess(const FileAccess& fileAccess)
 
     mErrors.clear();
 }
+
 void SourceData::setEncoding(QTextCodec* pEncoding)
 {
     m_pEncoding = pEncoding;
