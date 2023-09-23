@@ -58,7 +58,7 @@ extern std::unique_ptr<Options> gOptions;
 void SourceData::reset()
 {
     mFromClipBoard = false;
-    m_pEncoding = nullptr;
+    mEncoding = nullptr;
     m_fileAccess = FileAccess();
     m_normalData.reset();
     m_lmppData.reset();
@@ -128,9 +128,9 @@ void SourceData::setFileAccess(const FileAccess& fileAccess)
     mErrors.clear();
 }
 
-void SourceData::setEncoding(QTextCodec* pEncoding)
+void SourceData::setEncoding(const char* encoding)
 {
-    m_pEncoding = pEncoding;
+    mEncoding = encoding;
 }
 
 void SourceData::setData(const QString& data)
@@ -321,7 +321,7 @@ void SourceData::FileData::copyBufFrom(const FileData& src) //TODO: Remove me.
     memcpy(m_pBuf.get(), src.m_pBuf.get(), mDataSize);
 }
 
-QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec)
+std::optional<const char*> SourceData::detectEncoding(const QString& fileName)
 {
     QFile f(fileName);
     if(f.open(QIODevice::ReadOnly))
@@ -330,16 +330,14 @@ QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFal
 
         qint64 size = f.read(buf, sizeof(buf));
         FileOffset skipBytes = 0;
-        QTextCodec* pCodec = detectEncoding(buf, size, skipBytes);
-        if(pCodec)
-            return pCodec;
+        return detectEncoding(buf, size, skipBytes);
     }
-    return pFallbackCodec;
+    return {};
 }
 
-void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode)
+void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetectUnicode)
 {
-    m_pEncoding = pEncoding;
+    mEncoding = encoding;
     QTemporaryFile fileIn1, fileOut1;
     QString fileNameIn1;
     QString fileNameOut1;
@@ -375,7 +373,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         }
         if(bAutoDetectUnicode)
         {
-            m_pEncoding = detectEncoding(fileNameIn1, pEncoding);
+            mEncoding = detectEncoding(fileNameIn1).value_or(encoding);
         }
     }
     else // The input was set via setData(), probably from clipboard.
@@ -387,10 +385,10 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             return;
 
         fileNameIn1 = m_tempInputFileName;
-        m_pEncoding = QTextCodec::codecForName("UTF-8");
+        mEncoding = "UTF-8";
     }
-    QTextCodec* pEncoding1 = m_pEncoding;
-    QTextCodec* pEncoding2 = m_pEncoding;
+    const char* pEncoding1 = getEncoding();
+    const char* pEncoding2 = getEncoding();
 
     m_normalData.reset();
     m_lmppData.reset();
@@ -415,13 +413,13 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             QTemporaryFile tmpInPPFile;
             QString fileNameInPP = fileNameIn1;
 
-            if(pEncoding1 != gOptions->m_pEncodingPP)
+            if(pEncoding1 != gOptions->mEncodingPP)
             {
                 // Before running the preprocessor convert to the format that the preprocessor expects.
                 FileAccess::createTempFile(tmpInPPFile);
                 fileNameInPP = tmpInPPFile.fileName();
-                pEncoding1 = gOptions->m_pEncodingPP;
-                convertFileEncoding(fileNameIn1, pEncoding, fileNameInPP, pEncoding1);
+                pEncoding1 = gOptions->mEncodingPP;
+                convertFileEncoding(fileNameIn1, encoding, fileNameInPP, pEncoding1);
             }
 
             QString ppCmd = gOptions->m_PreProcessorCmd;
@@ -458,7 +456,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
                     errorReason);
                 gOptions->m_PreProcessorCmd = "";
 
-                pEncoding1 = m_pEncoding;
+                pEncoding1 = getEncoding();
             }
         }
 
@@ -478,12 +476,12 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
             QString fileNameInPP = fileNameIn2;
             pEncoding2 = pEncoding1;
-            if(pEncoding2 != gOptions->m_pEncodingPP)
+            if(pEncoding2 != gOptions->mEncodingPP)
             {
                 // Before running the preprocessor convert to the format that the preprocessor expects.
                 FileAccess::createTempFile(fileInPP);
                 fileNameInPP = fileInPP.fileName();
-                pEncoding2 = gOptions->m_pEncodingPP;
+                pEncoding2 = gOptions->mEncodingPP;
                 convertFileEncoding(fileNameIn2, pEncoding1, fileNameInPP, pEncoding2);
             }
 
@@ -565,13 +563,10 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
 }
 
 /** Prepare the linedata vector for every input line.*/
-bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments)
+bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
 {
     if(m_pBuf == nullptr)
         return true;
-
-    if(pEncoding == nullptr)
-        return false;
 
     QString line;
     QChar curChar, prevChar = '\0';
@@ -584,8 +579,8 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
 
-    QTextCodec* pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes);
-    if(pCodec != pEncoding)
+    QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes).value_or(encoding);
+    if(pCodec != encoding)
         skipBytes = 0;
 
     if(mDataSize - skipBytes > limits<qint32>::max())
@@ -593,7 +588,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly); // Don't use text mode we need to see the actual line ending.
-    ts.setCodec(pEncoding);
+    ts.setCodec(encoding);
     ts.setAutoDetectUnicode(false);
 
     m_bIncompleteConversion = false;
@@ -721,8 +716,8 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 }
 
 // Convert the input file from input encoding to output encoding and write it to the output file.
-bool SourceData::convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
-                                     const QString& fileNameOut, QTextCodec* pCodecOut)
+bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray& pCodecIn,
+                                     const QString& fileNameOut, const QByteArray& pCodecOut)
 {
     QFile in(fileNameIn);
     if(!in.open(QIODevice::ReadOnly))
@@ -743,7 +738,7 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, QTextCodec* pCod
     return true;
 }
 
-QTextCodec* SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
+std::optional<const char*> SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
 {
     QtSizeType encodingPos = s.indexOf(encodingTag);
     if(encodingPos >= 0)
@@ -761,31 +756,33 @@ QTextCodec* SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray
         if(encodingEnd >= 0) // e.g.: <meta charset="utf-8"> or <?xml version="1.0" encoding="ISO-8859-1"?>
         {
             QByteArray encoding = s.mid(apostrophPos + 1, encodingEnd - (apostrophPos + 1));
-            return QTextCodec::codecForName(encoding);
+            if(QTextCodec::codecForName(encoding))
+                return encoding;
         }
         else // e.g.: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         {
             QByteArray encoding = s.mid(encodingPos + encodingTag.length(), apostrophPos - (encodingPos + encodingTag.length()));
-            return QTextCodec::codecForName(encoding);
+            if(QTextCodec::codecForName(encoding))
+                return encoding;
         }
     }
-    return nullptr;
+    return {};
 }
 
-QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes)
+std::optional<const char*> SourceData::detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes)
 {
     if(size >= 2)
     {
         if(buf[0] == '\xFF' && buf[1] == '\xFE')
         {
             skipBytes = 2;
-            return QTextCodec::codecForName("UTF-16LE");
+            return "UTF-16LE";
         }
 
         if(buf[0] == '\xFE' && buf[1] == '\xFF')
         {
             skipBytes = 2;
-            return QTextCodec::codecForName("UTF-16BE");
+            return "UTF-16BE";
         }
     }
     if(size >= 3)
@@ -794,7 +791,7 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset&
         {
             skipBytes = 3;
             //Custom codec.
-            return QTextCodec::codecForName("UTF-8-BOM");
+            return "UTF-8-BOM";
         }
     }
     skipBytes = 0;
@@ -813,9 +810,9 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset&
         QtSizeType xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
         if(xmlHeaderEnd >= 0)
         {
-            QTextCodec* pCodec = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
-            if(pCodec)
-                return pCodec;
+            std::optional<const char*> encoding = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
+            if(encoding.has_value())
+                return encoding;
         }
     }
     else // HTML
@@ -826,9 +823,9 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset&
             QtSizeType metaHeaderEnd = s.indexOf(">", metaHeaderPos);
             if(metaHeaderEnd >= 0)
             {
-                QTextCodec* pCodec = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");
-                if(pCodec)
-                    return pCodec;
+                std::optional<const char*> encoding = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");
+                if(encoding.has_value())
+                    return encoding;
 
                 metaHeaderPos = s.indexOf("<meta", metaHeaderEnd);
             }
@@ -840,7 +837,7 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset&
     return detectUTF8(s);
 }
 
-QTextCodec* SourceData::detectUTF8(const QByteArray& data)
+std::optional<const char*> SourceData::detectUTF8(const QByteArray& data)
 {
     QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
 
@@ -850,7 +847,7 @@ QTextCodec* SourceData::detectUTF8(const QByteArray& data)
     if(state.invalidChars == 0)
         for (qint32 i = 0; i < data.size()-state.remainingChars; i++)
             if ((unsigned)data.at(i) > 127)
-                return utf8;
+                return "UTF-8";
 
-    return nullptr;
+    return {};
 }

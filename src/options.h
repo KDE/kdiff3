@@ -23,7 +23,6 @@
 #include <QPoint>
 #include <QSize>
 #include <QStringList>
-#include <QTextCodec>
 
 #include <KSharedConfig>
 #include <qcolor.h>
@@ -167,15 +166,15 @@ class Options
     qint32  m_tabSize = 8;
     bool m_bAutoCopySelection = false;
     bool m_bSameEncoding = true;
-    QTextCodec* m_pEncodingA = nullptr;
+    QByteArray mEncodingA = nullptr;
     bool m_bAutoDetectUnicodeA = true;
-    QTextCodec* m_pEncodingB = nullptr;
+    QByteArray mEncodingB = nullptr;
     bool m_bAutoDetectUnicodeB = true;
-    QTextCodec* m_pEncodingC = nullptr;
+    QByteArray mEncodingC = nullptr;
     bool m_bAutoDetectUnicodeC = true;
-    QTextCodec* m_pEncodingOut = nullptr;
+    QByteArray mEncodingOut = nullptr;
     bool m_bAutoSelectOutEncoding = true;
-    QTextCodec* m_pEncodingPP = nullptr;
+    QByteArray mEncodingPP = nullptr;
     e_LineEndStyle m_lineEndStyle = eLineEndStyleAutoDetect;
 
     bool m_bTryHard = true;

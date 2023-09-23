@@ -18,7 +18,6 @@
 
 #include <QString>
 #include <QTest>
-#include <QTextCodec>
 
 std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
@@ -87,7 +86,7 @@ class DiffTest: public QObject
         SourceDataMoc simData;
         simData.setFilename(testFile.fileName());
 
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
 
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(simData.hasData());
@@ -148,7 +147,7 @@ class DiffTest: public QObject
         simData2.setFilename(testFile2.fileName());
         simData.setFilename(testFile3.fileName());
 
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(simData.hasData());
 
@@ -157,7 +156,7 @@ class DiffTest: public QObject
         // Verify basic line data structure.
         QCOMPARE(lineData->size() - 1, 4);
 
-        simData2.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData2.readAndPreprocess("UTF-8", true);
         QVERIFY(simData2.getErrors().isEmpty());
         QVERIFY(simData2.hasData());
 
@@ -189,7 +188,7 @@ class DiffTest: public QObject
 
         simData.setFilename(testFile.fileName());
 
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isEmpty());
         QVERIFY(simData.hasData());

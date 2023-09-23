@@ -46,7 +46,6 @@
 #include <QSplitter>
 #include <QStatusBar>
 #include <QStringList>
-#include <QTextCodec>
 #include <QUrl>
 
 #include <KLocalizedString>
@@ -127,7 +126,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         if(bUseCurrentEncoding)
             m_sd1->readAndPreprocess(m_sd1->getEncoding(), false);
         else
-            m_sd1->readAndPreprocess(gOptions->m_pEncodingA, gOptions->m_bAutoDetectUnicodeA);
+            m_sd1->readAndPreprocess(gOptions->mEncodingA, gOptions->m_bAutoDetectUnicodeA);
 
         ProgressProxy::step();
 
@@ -137,7 +136,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         if(bUseCurrentEncoding)
             m_sd2->readAndPreprocess(m_sd2->getEncoding(), false);
         else
-            m_sd2->readAndPreprocess(gOptions->m_pEncodingB, gOptions->m_bAutoDetectUnicodeB);
+            m_sd2->readAndPreprocess(gOptions->mEncodingB, gOptions->m_bAutoDetectUnicodeB);
 
         ProgressProxy::step();
         mErrors.append(m_sd1->getErrors());
@@ -195,7 +194,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                     if(bUseCurrentEncoding)
                         m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
                     else
-                        m_sd3->readAndPreprocess(gOptions->m_pEncodingC, gOptions->m_bAutoDetectUnicodeC);
+                        m_sd3->readAndPreprocess(gOptions->mEncodingC, gOptions->m_bAutoDetectUnicodeC);
 
                     ProgressProxy::step();
                 }
@@ -345,7 +344,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     m_pMergeResultWindowTitle->setEncodings(m_sd1->getEncoding(), m_sd2->getEncoding(), m_sd3->getEncoding());
     if(!gOptions->m_bAutoSelectOutEncoding)
-        m_pMergeResultWindowTitle->setEncoding(gOptions->m_pEncodingOut);
+        m_pMergeResultWindowTitle->setEncoding(gOptions->mEncodingOut);
 
     m_pMergeResultWindowTitle->setLineEndStyles(m_sd1->getLineEndStyle(), m_sd2->getLineEndStyle(), m_sd3->getLineEndStyle());
 
@@ -2130,7 +2129,7 @@ void KDiff3App::slotClearManualDiffHelpList()
     slotRefresh();
 }
 
-void KDiff3App::slotEncodingChanged(QTextCodec*)
+void KDiff3App::slotEncodingChanged(const QByteArray&)
 {
     mainInit(m_totalDiffStatus, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve); // Init with reload
     slotRefresh();

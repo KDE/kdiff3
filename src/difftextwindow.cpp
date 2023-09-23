@@ -143,7 +143,7 @@ class DiffTextWindowData
 
     void init(
         const QString& filename,
-        QTextCodec* pTextCodec,
+        const char* encoding,
         e_LineEndStyle eLineEndStyle,
         const std::shared_ptr<LineDataVector>& pLineData,
         LineType size,
@@ -157,7 +157,7 @@ class DiffTextWindowData
         m_diff3WrapLineVector.clear();
         m_pManualDiffHelpList = pManualDiffHelpList;
 
-        m_pTextCodec = pTextCodec;
+        mTextEncoding = QString::fromLatin1(encoding);
         m_eLineEndStyle = eLineEndStyle;
     }
 
@@ -210,7 +210,7 @@ class DiffTextWindowData
     e_SrcSelector getWindowIndex() const { return m_pDiffTextWindow->getWindowIndex(); }
 
     QPointer<DiffTextWindow> m_pDiffTextWindow;
-    QTextCodec* m_pTextCodec = nullptr;
+    QString mTextEncoding;
     e_LineEndStyle m_eLineEndStyle;
 
     std::shared_ptr<LineDataVector> m_pLineData;
@@ -278,7 +278,7 @@ e_SrcSelector DiffTextWindow::getWindowIndex() const
 
 const QString DiffTextWindow::getEncodingDisplayString() const
 {
-    return d->m_pTextCodec != nullptr ? QLatin1String(d->m_pTextCodec->name()) : QString();
+    return d->mTextEncoding;
 }
 
 e_LineEndStyle DiffTextWindow::getLineEndStyle() const
@@ -324,14 +324,14 @@ DiffTextWindow::~DiffTextWindow() = default;
 
 void DiffTextWindow::init(
     const QString& filename,
-    QTextCodec* pTextCodec,
+    const char* encoding,
     e_LineEndStyle eLineEndStyle,
     const std::shared_ptr<LineDataVector>& pLineData,
     LineType size,
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList)
 {
-    d->init(filename, pTextCodec, eLineEndStyle, pLineData, size, pDiff3LineVector, pManualDiffHelpList);
+    d->init(filename, encoding, eLineEndStyle, pLineData, size, pDiff3LineVector, pManualDiffHelpList);
 
     update();
 }
@@ -2074,10 +2074,10 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     }
 }
 
-void DiffTextWindowFrame::slotEncodingChanged(QTextCodec* c)
+void DiffTextWindowFrame::slotEncodingChanged(const QByteArray& name)
 {
-    Q_EMIT encodingChanged(c); //relay signal from encoding label
-    mSourceData->setEncoding(c);
+    Q_EMIT encodingChanged(name); //relay signal from encoding label
+    mSourceData->setEncoding(name);
 }
 
 EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD):
@@ -2108,15 +2108,21 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         m_pContextEncodingMenu = new QMenu(this);
         QMenu* pContextEncodingSubMenu = new QMenu(m_pContextEncodingMenu);
 
-        qint32 currentTextCodecEnum = m_pSourceData->getEncoding()->mibEnum(); // the codec that will be checked in the context menu
-        const QList<qint32> mibs = QTextCodec::availableMibs();
-        QList<qint32> codecEnumList;
+        const QByteArray& currentTextCodec = m_pSourceData->getEncoding(); // the codec that will be checked in the context menu
+
+        const QList<int> mibs = QTextCodec::availableMibs();
+        QList<QByteArray> names;
+        QList<QByteArray> codecNameList;
+        for(const qint32 mib: mibs)
+        {
+            names.append(QTextCodec::codecForMib(mib)->name());
+        }
 
         // Adding "main" encodings
-        insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+        insertCodec(i18n("Unicode, 8 bit"), "UTF-8", codecNameList, m_pContextEncodingMenu, currentTextCodec);
         if(QTextCodec::codecForName("System"))
         {
-            insertCodec(QString(), QTextCodec::codecForName("System"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+            insertCodec(QString(), "System", codecNameList, m_pContextEncodingMenu, currentTextCodec);
         }
 
         // Adding recent encodings
@@ -2125,16 +2131,14 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
             const QStringList& recentEncodings = gOptions->m_recentEncodings;
             for(const QString& s: recentEncodings)
             {
-                insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+                insertCodec("", s.toLatin1(), codecNameList, m_pContextEncodingMenu, currentTextCodec);
             }
         }
         // Submenu to add the rest of available encodings
         pContextEncodingSubMenu->setTitle(i18n("Other"));
-        for(qint32 i: mibs)
+        for(const QByteArray& name: names)
         {
-            QTextCodec* c = QTextCodec::codecForMib(i);
-            if(c != nullptr)
-                insertCodec("", c, codecEnumList, pContextEncodingSubMenu, currentTextCodecEnum);
+            insertCodec("", name, codecNameList, pContextEncodingSubMenu, currentTextCodec);
         }
 
         m_pContextEncodingMenu->addMenu(pContextEncodingSubMenu);
@@ -2143,26 +2147,21 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
     }
 }
 
-void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<qint32>& codecEnumList, QMenu* pMenu, qint32 currentTextCodecEnum) const
+void EncodingLabel::insertCodec(const QString& visibleCodecName, const QByteArray& nameArray, QList<QByteArray>& codecList, QMenu* pMenu, const QByteArray& currentTextCodecName) const
 {
-    if(pCodec == nullptr)
-        return;
-
-    qint32 CodecMIBEnum = pCodec->mibEnum();
-    if(!codecEnumList.contains(CodecMIBEnum))
+    if(!codecList.contains(nameArray))
     {
         QAction* pAction = new QAction(pMenu); // menu takes ownership, so deleting the menu deletes the action too.
-        QByteArray nameArray = pCodec->name();
-        QLatin1String codecName = QLatin1String(nameArray);
+        const QLatin1String codecName = QLatin1String(nameArray);
 
         pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")");
-        pAction->setData(CodecMIBEnum);
+        pAction->setData(nameArray);
         pAction->setCheckable(true);
-        if(currentTextCodecEnum == CodecMIBEnum)
+        if(currentTextCodecName == nameArray)
             pAction->setChecked(true);
         pMenu->addAction(pAction);
         chk_connect_a(pAction, &QAction::triggered, this, &EncodingLabel::slotSelectEncoding);
-        codecEnumList.append(CodecMIBEnum);
+        codecList.append(nameArray);
     }
 }
 
@@ -2171,22 +2170,19 @@ void EncodingLabel::slotSelectEncoding()
     QAction* pAction = qobject_cast<QAction*>(sender());
     if(pAction)
     {
-        QTextCodec* pCodec = QTextCodec::codecForMib(pAction->data().toInt());
-        if(pCodec != nullptr)
+        QByteArray codecName = pAction->data().toByteArray();
+        QString s{QLatin1String(codecName)};
+        QStringList& recentEncodings = gOptions->m_recentEncodings;
+        if(!recentEncodings.contains(s) && s != "UTF-8" && s != "System")
         {
-            QString s(QLatin1String(pCodec->name()));
-            QStringList& recentEncodings = gOptions->m_recentEncodings;
-            if(!recentEncodings.contains(s) && s != "UTF-8" && s != "System")
+            QtSizeType itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;
+            for(QtSizeType i = 0; i < itemsToRemove; ++i)
             {
-                QtSizeType itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;
-                for(QtSizeType i = 0; i < itemsToRemove; ++i)
-                {
-                    recentEncodings.removeFirst();
-                }
-                recentEncodings.append(s);
+                recentEncodings.removeFirst();
             }
+            recentEncodings.append(s);
         }
 
-        Q_EMIT encodingChanged(pCodec);
+        Q_EMIT encodingChanged(codecName);
     }
 }

@@ -57,7 +57,7 @@ class DiffTextWindow: public QWidget
     ~DiffTextWindow() override;
     void init(
         const QString& fileName,
-        QTextCodec* pTextCodec,
+        const char* pTextCodec,
         e_LineEndStyle eLineEndStyle,
         const std::shared_ptr<LineDataVector>& pLineData,
         LineType size,
@@ -188,7 +188,7 @@ class DiffTextWindowFrame: public QWidget
 
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);
-    void encodingChanged(QTextCodec*);
+    void encodingChanged(const QByteArray&);
 
   public Q_SLOTS:
     void setFirstLine(LineRef firstLine);
@@ -200,7 +200,7 @@ class DiffTextWindowFrame: public QWidget
     void slotReturnPressed();
     void slotBrowseButtonClicked();
 
-    void slotEncodingChanged(QTextCodec* c);
+    void slotEncodingChanged(const QByteArray& name);
 
   private:
     QLabel* m_pLabel;
@@ -228,7 +228,7 @@ class EncodingLabel: public QLabel
     void mousePressEvent(QMouseEvent* ev) override;
 
   Q_SIGNALS:
-    void encodingChanged(QTextCodec*);
+    void encodingChanged(const QByteArray&);
 
   private Q_SLOTS:
     void slotSelectEncoding();
@@ -238,7 +238,7 @@ class EncodingLabel: public QLabel
     QSharedPointer<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
     static const qint32 m_maxRecentEncodings = 5;
 
-    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<qint32>& CodecEnumList, QMenu* pMenu, qint32 currentTextCodecEnum) const;
+    void insertCodec(const QString& visibleCodecName, const QByteArray& nameArray, QList<QByteArray>& codecEnumList, QMenu* pMenu, const QByteArray& currentTextCodecEnum) const;
 };
 
 #endif

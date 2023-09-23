@@ -2613,7 +2613,7 @@ void MergeResultWindow::setModified(bool bModified)
 }
 
 /// Saves and returns true when successful.
-bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle)
+bool MergeResultWindow::saveDocument(const QString& fileName, const char* encoding, e_LineEndStyle eLineEndStyle)
 {
     // Are still conflicts somewhere?
     if(getNumberOfUnsolvedConflicts() > 0)
@@ -2649,11 +2649,12 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
 
     QByteArray dataArray;
     QTextStream textOutStream(&dataArray, QIODevice::WriteOnly);
-    if(pEncoding->name() == "UTF-8")
+    if(strcmp(encoding, "UTF-8") != 0)
         textOutStream.setGenerateByteOrderMark(false); // Shouldn't be necessary. Bug in Qt or docs
     else
         textOutStream.setGenerateByteOrderMark(true); // Only for UTF-16
-    textOutStream.setCodec(pEncoding);
+
+    textOutStream.setCodec(encoding);
 
     // Determine the line feed for this file
     const QString lineFeed(eLineEndStyle == eLineEndStyleDos ? QString("\r\n") : QString("\n"));
@@ -2898,31 +2899,28 @@ e_LineEndStyle WindowTitleWidget::getLineEndStyle()
         return eLineEndStyleConflict;
 }
 
-void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecForB, QTextCodec* pCodecForC)
+void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecForB, const char* pCodecForC)
 {
     m_pEncodingSelector->clear();
 
-    // First sort codec names:
-    std::map<QString, QTextCodec*> names;
+    //Gather unique codecs not aliases
     const QList<qint32> mibs = QTextCodec::availableMibs();
-    for(qint32 i: mibs)
+    QList<QByteArray> names;
+    for(const qint32 mib: mibs)
     {
-        QTextCodec* c = QTextCodec::codecForMib(i);
-        if(c != nullptr)
-            names[QLatin1String(c->name())] = c;
+        names.append(QTextCodec::codecForMib(mib)->name());
     }
 
     if(pCodecForA != nullptr)
-        m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA->name())), QVariant::fromValue((void*)pCodecForA));
+        m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA)), QVariant::fromValue(QByteArray(pCodecForA)));
     if(pCodecForB != nullptr)
-        m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB->name())), QVariant::fromValue((void*)pCodecForB));
+        m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB)), QVariant::fromValue(QByteArray(pCodecForB)));
     if(pCodecForC != nullptr)
-        m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC->name())), QVariant::fromValue((void*)pCodecForC));
+        m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC)), QVariant::fromValue(QByteArray(pCodecForC)));
 
-    std::map<QString, QTextCodec*>::const_iterator it;
-    for(it = names.begin(); it != names.end(); ++it)
+    for(const QByteArray& name: names)
     {
-        m_pEncodingSelector->addItem(it->first, QVariant::fromValue((void*)it->second));
+        m_pEncodingSelector->addItem(QString::fromUtf8(name), QVariant::fromValue(name));
     }
     m_pEncodingSelector->setMinimumSize(m_pEncodingSelector->sizeHint());
 
@@ -2939,14 +2937,14 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
         m_pEncodingSelector->setCurrentIndex(0);
 }
 
-QTextCodec* WindowTitleWidget::getEncoding()
+const char* WindowTitleWidget::getEncoding()
 {
-    return (QTextCodec*)m_pEncodingSelector->itemData(m_pEncodingSelector->currentIndex()).value<void*>();
+    return (const char*)m_pEncodingSelector->itemData(m_pEncodingSelector->currentIndex()).value<void*>();
 }
 
-void WindowTitleWidget::setEncoding(QTextCodec* pEncoding)
+void WindowTitleWidget::setEncoding(const char* encoding)
 {
-    qint32 idx = m_pEncodingSelector->findText(QLatin1String(pEncoding->name()));
+    qint32 idx = m_pEncodingSelector->findText(QLatin1String(encoding));
     if(idx >= 0)
         m_pEncodingSelector->setCurrentIndex(idx);
 }

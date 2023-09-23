@@ -376,60 +376,51 @@ class OptionComboBox: public QComboBox, public OptionItemBase
 class OptionEncodingComboBox: public QComboBox, public OptionCodec
 {
     Q_OBJECT
-    QVector<QTextCodec*> m_codecVec;
-    QTextCodec** m_ppVarCodec;
+    QVector<QByteArray> m_codecVec;
+    QByteArray* mVarCodec;
 
   public:
-    OptionEncodingComboBox(const QString& saveName, QTextCodec** ppVarCodec,
+    OptionEncodingComboBox(const QString& saveName, QByteArray* inVarCodec,
                            QWidget* pParent):
         QComboBox(pParent),
         OptionCodec(saveName)
     {
-        m_ppVarCodec = ppVarCodec;
-        insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"));
-        insertCodec(i18n("Unicode"), QTextCodec::codecForName("iso-10646-UCS-2"));
-        insertCodec(i18n("Latin1"), QTextCodec::codecForName("iso 8859-1"));
+        mVarCodec = inVarCodec;
+        insertCodec(i18n("Unicode, 8 bit"), "UTF-8");
+        insertCodec(i18n("Unicode"), "iso-10646-UCS-2");
+        insertCodec(i18n("Latin1"), "iso 8859-1");
 
-        // First sort codec names:
-        std::map<QString, QTextCodec*> names;
         const QList<qint32> mibs = QTextCodec::availableMibs();
-        for(qint32 i: mibs)
+        QList<QByteArray> names;
+        for(const qint32 mib: mibs)
         {
-            QTextCodec* c = QTextCodec::codecForMib(i);
-            if(c != nullptr)
-                names[QString(QLatin1String(c->name())).toUpper()] = c;
+            names.append(QTextCodec::codecForMib(mib)->name());
         }
 
-        std::map<QString, QTextCodec*>::const_iterator it;
-        for(const auto& pair: names)
+        for(const QByteArray& name: names)
         {
-            insertCodec("", pair.second);
+            insertCodec("", name);
         }
 
         setToolTip(i18nc("Tool Tip",
             "Change this if non-ASCII characters are not displayed correctly."));
     }
 
-    void insertCodec(const QString& visibleCodecName, QTextCodec* c)
+    void insertCodec(const QString& visibleCodecName, const QByteArray& name)
     {
-        if(c != nullptr)
+        const QLatin1String codecName = QLatin1String(name);
+
+        for(QtSizeType i = 0; i < m_codecVec.size(); ++i)
         {
-            const QByteArray nameArray = c->name();
-            const QLatin1String codecName = QLatin1String(nameArray);
-
-            for(QtSizeType i = 0; i < m_codecVec.size(); ++i)
-            {
-                if(c == m_codecVec[i])
-                    return; // don't insert any codec twice
-            }
-
-            // The m_codecVec.size will at this point return the value we need for the index.
-            if(codecName == defaultName())
-                saveDefaultIndex(m_codecVec.size());
-            QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")";
-            addItem(itemText, m_codecVec.size());
-            m_codecVec.push_back(c);
+            if(name == m_codecVec[i])
+                return; // don't insert any codec twice
         }
+        // The m_codecVec.size will at this point return the value we need for the index.
+        if(codecName == defaultName())
+            saveDefaultIndex(m_codecVec.size());
+        QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")";
+        addItem(itemText, m_codecVec.size());
+        m_codecVec.push_back(name);
     }
 
     void setToDefault() override
@@ -437,19 +428,19 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
         qint32 index = getDefaultIndex();
 
         setCurrentIndex(index);
-        if(m_ppVarCodec != nullptr)
+        if(mVarCodec != nullptr)
         {
-            *m_ppVarCodec = m_codecVec[index];
+            *mVarCodec = m_codecVec[index];
         }
     }
 
     void setToCurrent() override
     {
-        if(m_ppVarCodec != nullptr)
+        if(mVarCodec != nullptr)
         {
             for(qint32 i = 0; i < m_codecVec.size(); ++i)
             {
-                if(*m_ppVarCodec == m_codecVec[i])
+                if(*mVarCodec == m_codecVec[i])
                 {
                     setCurrentIndex(i);
                     break;
@@ -461,26 +452,26 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     using OptionCodec::apply;
     void apply() override
     {
-        if(m_ppVarCodec != nullptr)
+        if(mVarCodec != nullptr)
         {
-            *m_ppVarCodec = m_codecVec[currentIndex()];
+            *mVarCodec = m_codecVec[currentIndex()];
         }
     }
 
     void write(ValueMap* config) const override
     {
-        if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, (const char*)(*m_ppVarCodec)->name());
+        if(mVarCodec != nullptr) config->writeEntry(m_saveName, (const char*)(*mVarCodec));
     }
 
     void read(ValueMap* config) override
     {
-        QString codecName = config->readEntry(m_saveName, (const char*)m_codecVec[currentIndex()]->name());
+        QString codecName = config->readEntry(m_saveName, (const char*)m_codecVec[currentIndex()]);
         for(qint32 i = 0; i < m_codecVec.size(); ++i)
         {
-            if(codecName == QLatin1String(m_codecVec[i]->name()))
+            if(codecName == QLatin1String(m_codecVec[i]))
             {
                 setCurrentIndex(i);
-                if(m_ppVarCodec != nullptr) *m_ppVarCodec = m_codecVec[i];
+                if(mVarCodec != nullptr) *mVarCodec = m_codecVec[i];
                 break;
             }
         }
@@ -1334,7 +1325,7 @@ void OptionDialog::setupRegionalPage()
 
     label = new QLabel(i18n("File Encoding for A:"), page);
     gbox->addWidget(label, line, 0);
-    m_pEncodingAComboBox = new OptionEncodingComboBox("EncodingForA", &gOptions->m_pEncodingA, page);
+    m_pEncodingAComboBox = new OptionEncodingComboBox("EncodingForA", &gOptions->mEncodingA, page);
 
     gbox->addWidget(m_pEncodingAComboBox, line, 1);
 
@@ -1350,7 +1341,7 @@ void OptionDialog::setupRegionalPage()
 
     label = new QLabel(i18n("File Encoding for B:"), page);
     gbox->addWidget(label, line, 0);
-    m_pEncodingBComboBox = new OptionEncodingComboBox("EncodingForB", &gOptions->m_pEncodingB, page);
+    m_pEncodingBComboBox = new OptionEncodingComboBox("EncodingForB", &gOptions->mEncodingB, page);
 
     gbox->addWidget(m_pEncodingBComboBox, line, 1);
     m_pAutoDetectUnicodeB = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeB", &gOptions->m_bAutoDetectUnicodeB, page);
@@ -1361,7 +1352,7 @@ void OptionDialog::setupRegionalPage()
 
     label = new QLabel(i18n("File Encoding for C:"), page);
     gbox->addWidget(label, line, 0);
-    m_pEncodingCComboBox = new OptionEncodingComboBox("EncodingForC", &gOptions->m_pEncodingC, page);
+    m_pEncodingCComboBox = new OptionEncodingComboBox("EncodingForC", &gOptions->mEncodingC, page);
 
     gbox->addWidget(m_pEncodingCComboBox, line, 1);
     m_pAutoDetectUnicodeC = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeC", &gOptions->m_bAutoDetectUnicodeC, page);
@@ -1372,7 +1363,7 @@ void OptionDialog::setupRegionalPage()
 
     label = new QLabel(i18n("File Encoding for Merge Output and Saving:"), page);
     gbox->addWidget(label, line, 0);
-    m_pEncodingOutComboBox = new OptionEncodingComboBox("EncodingForOutput", &gOptions->m_pEncodingOut, page);
+    m_pEncodingOutComboBox = new OptionEncodingComboBox("EncodingForOutput", &gOptions->mEncodingOut, page);
 
     gbox->addWidget(m_pEncodingOutComboBox, line, 1);
     m_pAutoSelectOutEncoding = new OptionCheckBox(i18n("Auto Select"), true, "AutoSelectOutEncoding", &gOptions->m_bAutoSelectOutEncoding, page);
@@ -1384,7 +1375,7 @@ void OptionDialog::setupRegionalPage()
     ++line;
     label = new QLabel(i18n("File Encoding for Preprocessor Files:"), page);
     gbox->addWidget(label, line, 0);
-    m_pEncodingPPComboBox = new OptionEncodingComboBox("EncodingForPP", &gOptions->m_pEncodingPP, page);
+    m_pEncodingPPComboBox = new OptionEncodingComboBox("EncodingForPP", &gOptions->mEncodingPP, page);
 
     gbox->addWidget(m_pEncodingPPComboBox, line, 1);
     ++line;

@@ -18,7 +18,6 @@
 
 #include <memory>
 
-#include <QTextCodec>
 #include <QTemporaryFile>
 #include <QSharedPointer>
 #include <QString>
@@ -48,7 +47,7 @@ class SourceData
     [[nodiscard]] bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
-    void readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
+    void readAndPreprocess(const char* encoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
     [[nodiscard]] bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
@@ -57,23 +56,23 @@ class SourceData
 
     [[nodiscard]] bool isDir() const { return m_fileAccess.isDir(); }
 
-    [[nodiscard]] QTextCodec* getEncoding() const { return m_pEncoding; }
+    [[nodiscard]] const char* getEncoding() const { return mEncoding; }
     [[nodiscard]] e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
     [[nodiscard]] inline bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
 
     [[nodiscard]] const QStringList& getErrors() const { return mErrors; }
 
-    void setEncoding(QTextCodec* pEncoding);
+    void setEncoding(const char* encoding);
 
   protected:
-    bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
-                                const QString& fileNameOut, QTextCodec* pCodecOut);
+    bool convertFileEncoding(const QString& fileNameIn, const QByteArray& pCodecIn,
+                             const QString& fileNameOut, const QByteArray& pCodecOut);
 
-    [[nodiscard]] static QTextCodec* detectUTF8(const QByteArray& data);
-    [[nodiscard]] static QTextCodec* detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
-    [[nodiscard]] static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
+    [[nodiscard]] static std::optional<const char*> detectUTF8(const QByteArray& data);
+    [[nodiscard]] static std::optional<const char*> detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
+    [[nodiscard]] static std::optional<const char*> getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
-    QTextCodec* detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec);
+    std::optional<const char*> detectEncoding(const QString& fileName);
     QString m_aliasName;
     FileAccess m_fileAccess;
     QString m_tempInputFileName;
@@ -102,7 +101,7 @@ class SourceData
         bool readFile(const QString& filename);
         bool writeFile(const QString& filename);
 
-        bool preprocess(QTextCodec* pEncoding, bool removeComments);
+        bool preprocess(const char* encoding, bool removeComments);
         void reset();
         void copyBufFrom(const FileData& src);
 
@@ -116,7 +115,7 @@ class SourceData
     };
     FileData m_normalData;
     FileData m_lmppData;
-    QTextCodec* m_pEncoding = nullptr;
+    const char* mEncoding = nullptr;
 };
 
 #endif // !SOURCEDATA_H

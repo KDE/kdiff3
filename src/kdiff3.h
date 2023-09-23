@@ -304,7 +304,7 @@ public Q_SLOTS:
     void slotAddManualDiffHelp();
     void slotClearManualDiffHelpList();
     void slotNoRelevantChangesDetected();
-    void slotEncodingChanged(QTextCodec*);
+    void slotEncodingChanged(const QByteArray&);
 
     void slotFinishDrop();
 

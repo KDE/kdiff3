@@ -15,6 +15,7 @@
 
 #include <QTemporaryFile>
 #include <QTest>
+#include <QTextCodec>
 
 std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
@@ -81,7 +82,7 @@ class DataReadTest: public QObject
         QVERIFY(file.size() > 0);
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -101,7 +102,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -116,7 +117,7 @@ class DataReadTest: public QObject
 
         simData.reset();
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -132,7 +133,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec, true);
+        simData.readAndPreprocess(codec->name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -145,7 +146,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec, true);
+        simData.readAndPreprocess(codec->name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -160,7 +161,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec, true);
+        simData.readAndPreprocess(codec->name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -174,7 +175,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec, true);
+        simData.readAndPreprocess(codec->name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -189,7 +190,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec, true);
+        simData.readAndPreprocess(codec->name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -203,7 +204,7 @@ class DataReadTest: public QObject
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec, true);
+        simData.readAndPreprocess(codec->name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -221,7 +222,7 @@ class DataReadTest: public QObject
         eolTest.close();
 
         simData.setFilename(eolTest.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
 
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
@@ -244,7 +245,7 @@ class DataReadTest: public QObject
         eolTest.close();
 
         simData.setFilename(eolTest.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        simData.readAndPreprocess("UTF-8", true);
 
         QVERIFY(simData.getErrors().isEmpty());
 

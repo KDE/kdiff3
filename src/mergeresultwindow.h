@@ -63,7 +63,7 @@ class MergeResultWindow: public QWidget
     void connectActions() const;
     void reset();
 
-    bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
+    bool saveDocument(const QString& fileName, const char* encoding, e_LineEndStyle eLineEndStyle);
     [[nodiscard]] qint32 getNumberOfUnsolvedConflicts(qint32* pNrOfWhiteSpaceConflicts = nullptr) const;
     void choose(const e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
@@ -295,7 +295,6 @@ class MergeResultWindow: public QWidget
 };
 
 class QLineEdit;
-class QTextCodec;
 class QComboBox;
 class QLabel;
 
@@ -314,11 +313,11 @@ class WindowTitleWidget: public QWidget
 
   public:
     WindowTitleWidget();
-    QTextCodec* getEncoding();
+    const char* getEncoding();
     void setFileName(const QString& fileName);
     QString getFileName();
-    void setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecForB, QTextCodec* pCodecForC);
-    void setEncoding(QTextCodec* pEncoding);
+    void setEncodings(const char* pCodecForA, const char* pCodecForB, const char* pCodecForC);
+    void setEncoding(const char* encoding);
     void setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC);
     e_LineEndStyle getLineEndStyle();
 
