@@ -1410,7 +1410,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     // tabs
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(font()).horizontalAdvance(' ') * gOptions->m_tabSize);
+    textOption.setTabStopDistance(QFontMetricsF(font()).horizontalAdvance(' ') * gOptions->tabSize());
 
     if(gOptions->m_bShowWhiteSpaceCharacters)
     {
@@ -2061,7 +2061,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             deleteSelection2(str, x, y, mbIt, melIt);
             setModified();
             QString indentation;
-            if(gOptions->m_bAutoIndentation)
+            if(gOptions->autoIndent())
             { // calc last indentation
                 MergeBlockList::iterator mbIt1 = mbIt;
                 MergeEditLineList::iterator melIt1 = melIt;
@@ -2234,9 +2234,9 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             setModified();
             // Characters to insert
             QString s = str;
-            if(t[0] == '\t' && gOptions->m_bReplaceTabs)
+            if(t[0] == '\t' && gOptions->replaceTabs())
             {
-                qint32 spaces = (m_cursorXPos / gOptions->m_tabSize + 1) * gOptions->m_tabSize - m_cursorXPos;
+                qint32 spaces = (m_cursorXPos / gOptions->tabSize() + 1) * gOptions->tabSize() - m_cursorXPos;
                 t.fill(' ', spaces);
             }
             if(m_bInsertMode)
@@ -2386,7 +2386,7 @@ QString MergeResultWindow::getSelection() const
                         qint32 spaces = 1;
                         if(str[i] == '\t')
                         {
-                            spaces = tabber(outPos, gOptions->m_tabSize);
+                            spaces = tabber(outPos, gOptions->tabSize());
                         }
 
                         if(m_selection.within(line, outPos))

@@ -959,7 +959,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, qint32 visib
 {
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * gOptions->m_tabSize);
+    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * gOptions->tabSize());
 
     if(gOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
@@ -1558,7 +1558,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRe
         if(getWindowIndex() == e_SrcSelector::B) line = d3l->getLineB();
         if(getWindowIndex() == e_SrcSelector::C) line = d3l->getLineC();
         if(line.isValid())
-            endPos = (*d->m_pLineData)[line].width(gOptions->m_tabSize);
+            endPos = (*d->m_pLineData)[line].width(gOptions->tabSize());
     }
 
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr)

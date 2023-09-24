@@ -82,6 +82,10 @@ class Options
     [[nodiscard]] bool wordWrapOn() const { return m_bWordWrap; }
     void setWordWrap(const bool enabled) { m_bWordWrap = enabled; }
 
+    [[nodiscard]] bool replaceTabs() const { return m_bReplaceTabs; }
+    [[nodiscard]] bool autoIndent() const { return m_bAutoIndentation; }
+    [[nodiscard]] qint32 tabSize() const { return m_tabSize; }
+
     [[nodiscard]] bool ignoreComments() const { return m_bIgnoreComments; }
 
     [[nodiscard]] bool whiteSpaceIsEqual() const { return m_bDmWhiteSpaceEqual; }
@@ -158,12 +162,12 @@ class Options
     QColor m_missingFileColor = qRgb(0, 0, 0);
     QColor m_manualHelpRangeColor = qRgb(0xff, 0xd0, 0x80);
 
-  public:
     bool m_bWordWrap = false;
-
     bool m_bReplaceTabs = false;
     bool m_bAutoIndentation = true;
-    qint32  m_tabSize = 8;
+    qint32 m_tabSize = 8;
+
+  public:
     bool m_bAutoCopySelection = false;
     bool m_bSameEncoding = true;
     QByteArray mEncodingA = nullptr;
