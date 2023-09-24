@@ -4,7 +4,7 @@
 
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
-cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
 project(kdiff3 VERSION 1.10.70)
 
@@ -15,13 +15,13 @@ option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(KF_MIN_VERSION "5.85.0")
+set(KF_MIN_VERSION "5.95.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
     set(QT_MIN_VERSION "6.5.0")
 else()
     set(QT_MAJOR_VERSION "5")
-    set(QT_MIN_VERSION "5.15.2")
+    set(QT_MIN_VERSION "5.15.5")
 endif()
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
