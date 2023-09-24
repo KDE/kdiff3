@@ -394,7 +394,9 @@ bool KDiff3App::canCopy()
 */
 void KDiff3App::slotFocusChanged([[maybe_unused]] QWidget* old, [[maybe_unused]] QWidget* now)
 {
-    Q_EMIT updateAvailabilities();
+    qCDebug(kdiffMain) << "[KDiff3App::slotFocusChanged] old = " << old << ", new =" << now;
+    //This needs to be called after the focus change is complete
+    QMetaObject::invokeMethod(this, &KDiff3App::updateAvailabilities, Qt::QueuedConnection);
 }
 
 // Restore and show mainWindow.
