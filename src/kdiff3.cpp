@@ -407,7 +407,9 @@ void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
     Q_UNUSED(now);
     Q_UNUSED(old);
 
-    Q_EMIT updateAvailabilities();
+    qCDebug(kdiffMain) << "[KDiff3App::slotFocusChanged] old = " << old << ", new =" << now;
+    //This needs to be called after the focus change is complete
+    QMetaObject::invokeMethod(this, &KDiff3App::updateAvailabilities, Qt::QueuedConnection);
 }
 
 // Do file comparision.
