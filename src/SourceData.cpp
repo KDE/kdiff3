@@ -41,6 +41,7 @@ Optimizations: Skip unneeded steps.
 
 #include <algorithm>         // for min
 #include <memory>
+#include <optional>
 #include <vector>            // for vector
 
 #include <QtGlobal>

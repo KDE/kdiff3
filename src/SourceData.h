@@ -17,6 +17,7 @@
 #include "options.h"
 
 #include <memory>
+#include <optional>
 
 #include <QTemporaryFile>
 #include <QSharedPointer>
