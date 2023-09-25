@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-24 00:45+0000\n"
+"POT-Creation-Date: 2023-09-25 00:43+0000\n"
 "PO-Revision-Date: 2019-09-29 12:43+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2005 kdiff3.cpp:940
+#: difftextwindow.cpp:2005 kdiff3.cpp:942
 #, fuzzy, kde-format
 msgid "Top line"
 msgstr "Сатри яккум%1"
@@ -398,7 +398,7 @@ msgstr ""
 "ҳақиқат мехоҳед, ки ҳамаи тағйиротҳоро нест кунед ва таркиби каталогро ан "
 "нав кунед?"
 
-#: directorymergewindow.cpp:688 kdiff3.cpp:796 kdiff3.cpp:806 kdiff3.cpp:818
+#: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
 #: mergeresultwindow.cpp:329 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
 #, kde-format
 msgctxt "Error dialog title"
@@ -1244,123 +1244,123 @@ msgstr "Хатогӣ дар вақти хониши каталог"
 msgid "Merge info"
 msgstr "Пайваст кардан ба A"
 
-#: kdiff3.cpp:465
+#: kdiff3.cpp:467
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr ""
 
-#: kdiff3.cpp:466
+#: kdiff3.cpp:468
 #, fuzzy, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr "Ҳолати муқоисакунии каталогҳо"
 
-#: kdiff3.cpp:475
+#: kdiff3.cpp:477
 #, fuzzy, kde-format
 #| msgid "Option --auto ignored for directory comparison."
 msgid "Option --auto ignored for folder comparison."
 msgstr "Интихоб --худ аҳамият надиҳи барои муқоисаи директория."
 
-#: kdiff3.cpp:530
+#: kdiff3.cpp:532
 #, kde-format
 msgid "Saving failed."
 msgstr "Нигоҳ куни нашуд."
 
-#: kdiff3.cpp:564 pdiff.cpp:924
+#: kdiff3.cpp:566 pdiff.cpp:924
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Кушодани ин файлҳо нашуд:"
 
-#: kdiff3.cpp:573 pdiff.cpp:933
+#: kdiff3.cpp:575 pdiff.cpp:933
 #, fuzzy, kde-format
 msgid "File open error"
 msgstr "Хатогӣ дар кушодани файл"
 
-#: kdiff3.cpp:610
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Мекушояд документҳоро барои муқоиса..."
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:614
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgid "Reload"
 msgstr "Тайёр аст."
 
-#: kdiff3.cpp:615
+#: kdiff3.cpp:617
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr ""
 "Нигоҳ медорад натиҷаи якҷошавиро. Ҳамаи ҷанҷолҳо бояд ҳал карда шаванд!"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:619
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Нигоҳ медорад документи ҷориро мисли..."
 
-#: kdiff3.cpp:620
+#: kdiff3.cpp:622
 #, kde-format
 msgid "Print the differences"
 msgstr ""
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:625
 #, kde-format
 msgid "Quits the application"
 msgstr "Маҳкам мекунад аризаро"
 
-#: kdiff3.cpp:627
+#: kdiff3.cpp:629
 #, kde-format
 msgid "Undo last action."
 msgstr ""
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:633
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Мебурад қисми интихоб карда шударо ва меандозад онро ба клипборд"
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Нусха мебардорад қисми интихоб карда шударо ба клипборд"
 
-#: kdiff3.cpp:636
+#: kdiff3.cpp:638
 #, fuzzy, kde-format
 #| msgid "Pastes the clipboard contents to actual position"
 msgid "Pastes the clipboard contents to current position"
 msgstr "Мечаспонад таркиботҳои клибордро ба ҷойгиршавии амалӣ"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:641
 #, kde-format
 msgid "Select everything in current window"
 msgstr ""
 
-#: kdiff3.cpp:642
+#: kdiff3.cpp:644
 #, kde-format
 msgid "Search for a string"
 msgstr "Ковтукови ришта"
 
-#: kdiff3.cpp:644
+#: kdiff3.cpp:646
 #, kde-format
 msgid "Search again for the string"
 msgstr "Бори дигар ковтуков барои ришта"
 
-#: kdiff3.cpp:647
+#: kdiff3.cpp:649
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Пайраҳаи ҳолати фаъол/ғайри фаъолро созед"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:652
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Танзимоти KDiff3..."
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:672
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Равед ба Делтаи Ҷори"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:672
 #, fuzzy, kde-format
 #| msgid "Go to Current Delta"
 msgid ""
@@ -1368,12 +1368,12 @@ msgid ""
 "Delta"
 msgstr "Равед ба Делтаи Ҷори"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Равед ба Делтаи Аввала"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:674
 #, fuzzy, kde-format
 #| msgid "Go to First Delta"
 msgid ""
@@ -1381,12 +1381,12 @@ msgid ""
 "Delta"
 msgstr "Равед ба Делтаи Аввала"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:676
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Равед ба Делтаи Охирон"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:676
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid ""
@@ -1394,13 +1394,13 @@ msgid ""
 "Delta"
 msgstr "Равед ба Делтаи Охирон"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:678
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:679
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1408,12 +1408,12 @@ msgid ""
 "disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:680
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Равед ба Делтаи Пешангӣ"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:680
 #, fuzzy, kde-format
 #| msgid "Go to Previous Delta"
 msgid ""
@@ -1421,12 +1421,12 @@ msgid ""
 "Delta"
 msgstr "Равед ба Делтаи Пешангӣ"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:682
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Равед ба Делтаи Дар пеш интизор"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:682
 #, fuzzy, kde-format
 #| msgid "Go to Next Delta"
 msgid ""
@@ -1434,24 +1434,24 @@ msgid ""
 "Delta"
 msgstr "Равед ба Делтаи Дар пеш интизор"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Равед ба Ҷанҷоли Пешангӣ"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:684
 #, fuzzy, kde-format
 msgid ""
 "Prev\n"
 "Conflict"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Равед ба Ҷанҷоли Дар пеш интизор "
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid "Go to Next Conflict"
 msgid ""
@@ -1459,12 +1459,12 @@ msgid ""
 "Conflict"
 msgstr "Равед ба Ҷанҷоли Дар пеш интизор "
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Равед ба Ҷанҷоли Пешангии Ҳалнашуда"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid "Unsolved"
 msgid ""
@@ -1472,12 +1472,12 @@ msgid ""
 "Unsolved"
 msgstr "Иҷозат дода нашуд"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Равед ба Ҷанҷоли Дар пеш интизори Ҳалнашуда"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, fuzzy, kde-format
 #| msgid "Unsolved"
 msgid ""
@@ -1485,14 +1485,14 @@ msgid ""
 "Unsolved"
 msgstr "Иҷозат дода нашуд"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:692
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Равед ба Делтаи Охирон"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:692
 #, fuzzy, kde-format
 #| msgid "Link: "
 msgctxt "Text used for toolbar button."
@@ -1501,20 +1501,20 @@ msgid ""
 "Line"
 msgstr "Алоқа: "
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:693
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:694
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Интихоб кунед Рах(ҳо)-ро Аз А"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1522,14 +1522,14 @@ msgid ""
 "A"
 msgstr ""
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:695
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Интихоб кунед Рах(ҳо)-ро Аз В"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1537,14 +1537,14 @@ msgid ""
 "B"
 msgstr ""
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:696
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Интихоб кунед Рах(ҳо)-ро Аз С"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1552,14 +1552,14 @@ msgid ""
 "C"
 msgstr ""
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:697
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Зуд равед ба ҷанҷоли пешангии ҳалнашуда баъди интихоби сарчашма"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1567,13 +1567,13 @@ msgid ""
 "Next"
 msgstr ""
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:699
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "Нишон диҳед фосиларо && Феълҳои табулятори барои гуногуниҳо"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:699
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1581,12 +1581,12 @@ msgid ""
 "Characters"
 msgstr ""
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show White Space"
 msgstr "Нишон диҳед фосиларо"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:700
 #, fuzzy, kde-format
 #| msgid "Go to First Delta"
 msgctxt "Show whitespace changes toolbar text."
@@ -1595,12 +1595,12 @@ msgid ""
 "Deltas"
 msgstr "Равед ба Делтаи Аввала"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Нишон диҳед рахи рақамҳоро"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:702
 #, fuzzy, kde-format
 #| msgid "Show Line Numbers"
 msgctxt "Show line numbers toolbar text"
@@ -1609,141 +1609,141 @@ msgid ""
 "Numbers"
 msgstr "Нишон диҳед рахи рақамҳоро"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Зуд ҳал мекунад ҷанҷолҳои оддиро"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Танзим кунед делтаҳоро ба ҷанҷолҳо"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:707
 #, fuzzy, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Зуд ҳал мекунад ҷанҷолҳои оддиро"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr ""
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:709
 #, fuzzy, kde-format
 msgid "Join Selected Diffs"
 msgstr "Муқоисаи файли интихобшуда"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Show Window A"
 msgstr "Нишон диҳед Тирезаи А-ро"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Show Window B"
 msgstr "Нишон диҳед Тирезаи В-ро"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Show Window C"
 msgstr "Нишон диҳед Тирезаи С-ро"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:715
 #, kde-format
 msgid "Normal Overview"
 msgstr "Оддӣ аз назар гузарондан"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:716
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Аз назар гузарондани A vs. B "
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:717
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Аз назар гузарондани A vs. C"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:718
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Аз назар гузарондани B vs. C"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:719
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Калимаи печидаи тирезаҳои гуногун"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:720
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:721
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:721
+#: kdiff3.cpp:723
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Активация кардани дигар тиреза"
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:724
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Активация кардани тирезаи гузашта"
 
-#: kdiff3.cpp:723
+#: kdiff3.cpp:725
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Дигаркунӣ ва тақсимкунии ҷои исти худ"
 
-#: kdiff3.cpp:725
+#: kdiff3.cpp:727
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "аппп"
 
-#: kdiff3.cpp:727
+#: kdiff3.cpp:729
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "Дигаркунӣ байни феҳристҳо && намоиши матн"
 
-#: kdiff3.cpp:749 kdiff3.cpp:851 kdiff3.cpp:876 kdiff3.cpp:1136 pdiff.cpp:943
+#: kdiff3.cpp:751 kdiff3.cpp:853 kdiff3.cpp:878 kdiff3.cpp:1138 pdiff.cpp:943
 #: pdiff.cpp:1012 pdiff.cpp:1048 pdiff.cpp:1057 pdiff.cpp:1115 pdiff.cpp:1123
 #, kde-format
 msgid "Ready."
 msgstr "Тайёр аст."
 
-#: kdiff3.cpp:795 pdiff.cpp:1733
+#: kdiff3.cpp:797 pdiff.cpp:1733
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "Натиҷаи иттиҳодия нигоҳ надоштагӣ."
 
-#: kdiff3.cpp:797
+#: kdiff3.cpp:799
 #, kde-format
 msgid "Save && Quit"
 msgstr "Нигоҳ доштан && баромадан"
 
-#: kdiff3.cpp:798
+#: kdiff3.cpp:800
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Бе нигоҳдорӣ баромадан"
 
-#: kdiff3.cpp:806 pdiff.cpp:1744
+#: kdiff3.cpp:808 pdiff.cpp:1744
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Натиҷаи якҷоя кардан,нигоҳ дошта нашуд."
 
-#: kdiff3.cpp:817 pdiff.cpp:858
+#: kdiff3.cpp:819 pdiff.cpp:858
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1752,58 +1752,58 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Якҷояшавии каталогро нигоҳ дорем.Оё,шумо дилпур мехоҳед, баровардан?"
 
-#: kdiff3.cpp:840
+#: kdiff3.cpp:842
 #, kde-format
 msgid "Saving file..."
 msgstr "Нигоҳ доштани файл..."
 
-#: kdiff3.cpp:857
+#: kdiff3.cpp:859
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Бо номи нав нигоҳ доштани файл..."
 
-#: kdiff3.cpp:859
+#: kdiff3.cpp:861
 #, kde-format
 msgid "Save As..."
 msgstr ""
 
-#: kdiff3.cpp:884
+#: kdiff3.cpp:886
 #, fuzzy, kde-format
 msgid "Printing not implemented."
 msgstr "Якҷояшавӣ ба анҷом расид."
 
-#: kdiff3.cpp:924
+#: kdiff3.cpp:926
 #, fuzzy, kde-format
 msgid "Printing..."
 msgstr "Баромад..."
 
-#: kdiff3.cpp:1022
+#: kdiff3.cpp:1024
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1070
+#: kdiff3.cpp:1072
 #, fuzzy, kde-format
 msgid " (Selection)"
 msgstr "Интихоб кунед Рах(ҳо)-ро Аз С"
 
-#: kdiff3.cpp:1099
+#: kdiff3.cpp:1101
 #, fuzzy, kde-format
 msgid "Printing completed."
 msgstr "Якҷояшавӣ ба анҷом расид."
 
-#: kdiff3.cpp:1103
+#: kdiff3.cpp:1105
 #, fuzzy, kde-format
 msgid "Printing aborted."
 msgstr "Якҷояшавӣ ба анҷом расид."
 
-#: kdiff3.cpp:1110
+#: kdiff3.cpp:1112
 #, kde-format
 msgid "Exiting..."
 msgstr "Баромад..."
 
-#: kdiff3.cpp:1120
+#: kdiff3.cpp:1122
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Тасвир кардан/вазъияти навори пинҳонӣ..."
@@ -3524,28 +3524,28 @@ msgstr "Нигоҳ куни нашуд."
 msgid "Opening and closing parentheses do not match in regular expression."
 msgstr ""
 
-#: SourceData.cpp:150
+#: SourceData.cpp:151
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Дар силули мухобиротӣ навиштани таърих ва суръати файл."
 
-#: SourceData.cpp:155
+#: SourceData.cpp:156
 #, kde-format
 msgid "From Clipboard"
 msgstr "Аз буфери иваз"
 
-#: SourceData.cpp:356
+#: SourceData.cpp:357
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "Мувофиқкунии ишораҳо бо файлҳои оддӣ."
 
-#: SourceData.cpp:450
+#: SourceData.cpp:451
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:454
+#: SourceData.cpp:455
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3560,12 +3560,12 @@ msgstr ""
 "\n"
 "Фармони пеш-коркардкуни ҳоло аз кор мемонад."
 
-#: SourceData.cpp:465
+#: SourceData.cpp:466
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:509
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3581,14 +3581,14 @@ msgstr ""
 "\n"
 "Хати-ҷамъ кунии- пешкоркардкунии фармон ҳоло аз кор мемонад."
 
-#: SourceData.cpp:515
+#: SourceData.cpp:516
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Хониши файл: %1"
 
-#: SourceData.cpp:534
+#: SourceData.cpp:535
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
