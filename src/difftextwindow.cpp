@@ -2128,7 +2128,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         // Adding recent encodings
         if(gOptions != nullptr)
         {
-            const QStringList& recentEncodings = gOptions->m_recentEncodings;
+            const RecentItems<maxNofRecentCodecs>& recentEncodings = gOptions->m_recentEncodings;
             for(const QString& s: recentEncodings)
             {
                 insertCodec("", s.toLatin1(), codecNameList, m_pContextEncodingMenu, currentTextCodec);
@@ -2172,15 +2172,10 @@ void EncodingLabel::slotSelectEncoding()
     {
         QByteArray codecName = pAction->data().toByteArray();
         QString s{QLatin1String(codecName)};
-        QStringList& recentEncodings = gOptions->m_recentEncodings;
-        if(!recentEncodings.contains(s) && s != "UTF-8" && s != "System")
+        RecentItems<maxNofRecentCodecs>& recentEncodings = gOptions->m_recentEncodings;
+        if(s != "UTF-8" && s != "System")
         {
-            QtSizeType itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;
-            for(QtSizeType i = 0; i < itemsToRemove; ++i)
-            {
-                recentEncodings.removeFirst();
-            }
-            recentEncodings.append(s);
+            recentEncodings.push_front(s);
         }
 
         Q_EMIT encodingChanged(codecName);

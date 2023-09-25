@@ -218,22 +218,22 @@ void OpenDialog::accept()
     fixCurrentText(dialogUi.lineA);
     QString s = dialogUi.lineA->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    gOptions->getRecentFilesA().addFile(s);
+    gOptions->getRecentFilesA().push_front(s);
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    gOptions->getRecentFilesB().addFile(s);
+    gOptions->getRecentFilesB().push_front(s);
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    gOptions->getRecentFilesC().addFile(s);
+    gOptions->getRecentFilesC().push_front(s);
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    gOptions->getRecentOutputFiles().addFile(s);
+    gOptions->getRecentOutputFiles().push_front(s);
 
     QDialog::accept();
 }

@@ -44,6 +44,9 @@ using SafeSignedRange =
 template <typename T>
 using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, KDiff3_exception_policy>;
 
+constexpr static qint32 maxNofRecentFiles = 10;
+constexpr static qint32 maxNofRecentCodecs = 5;
+
 static_assert(sizeof(FileOffset) >= sizeof(QtSizeType), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
 
 #endif

@@ -12,7 +12,8 @@
 #define OPTIONS_H
 
 #include "combiners.h"
-#include "RecentFileList.h"
+#include "RecentItems.h"
+#include "TypeUtils.h"
 
 #include <boost/signals2.hpp>
 #include <list>
@@ -103,11 +104,11 @@ class Options
 
     [[nodiscard]] const QColor& conflictColor() const { return m_colorForConflict; }
 
-    [[nodiscard]] RecentFileList& getRecentFilesA() { return m_recentAFiles; }
-    [[nodiscard]] RecentFileList& getRecentFilesB() { return m_recentBFiles; }
-    [[nodiscard]] RecentFileList& getRecentFilesC() { return m_recentCFiles; }
+    [[nodiscard]] RecentItems<maxNofRecentFiles>& getRecentFilesA() { return m_recentAFiles; }
+    [[nodiscard]] RecentItems<maxNofRecentFiles>& getRecentFilesB() { return m_recentBFiles; }
+    [[nodiscard]] RecentItems<maxNofRecentFiles>& getRecentFilesC() { return m_recentCFiles; }
 
-    [[nodiscard]] RecentFileList& getRecentOutputFiles() { return m_recentOutputFiles; }
+    [[nodiscard]] RecentItems<maxNofRecentFiles>& getRecentOutputFiles() { return m_recentOutputFiles; }
 
     inline void beginPrint() { mPrintMode = true; }
     inline void endPrint() { mPrintMode = false; }
@@ -210,13 +211,13 @@ class Options
     bool m_bAutoAdvance = false;
     qint32  m_autoAdvanceDelay = 500;
 
-    RecentFileList m_recentAFiles;
-    RecentFileList m_recentBFiles;
-    RecentFileList m_recentCFiles;
+    RecentItems<maxNofRecentFiles> m_recentAFiles;
+    RecentItems<maxNofRecentFiles> m_recentBFiles;
+    RecentItems<maxNofRecentFiles> m_recentCFiles;
 
-    RecentFileList m_recentEncodings;
+    RecentItems<maxNofRecentCodecs> m_recentEncodings;
 
-    RecentFileList m_recentOutputFiles;
+    RecentItems<maxNofRecentFiles> m_recentOutputFiles;
 
     // Directory Merge options
     bool m_bDmSyncMode = false;

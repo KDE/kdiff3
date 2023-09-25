@@ -236,7 +236,6 @@ class EncodingLabel: public QLabel
   private:
     QMenu* m_pContextEncodingMenu;
     QSharedPointer<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
-    static const qint32 m_maxRecentEncodings = 5;
 
     void insertCodec(const QString& visibleCodecName, const QByteArray& nameArray, QList<QByteArray>& codecEnumList, QMenu* pMenu, const QByteArray& currentTextCodecEnum) const;
 };
