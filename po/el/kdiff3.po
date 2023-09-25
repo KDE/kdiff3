@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-11 02:31+0000\n"
+"POT-Creation-Date: 2023-09-25 02:34+0000\n"
 "PO-Revision-Date: 2021-06-14 16:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -205,7 +205,7 @@ msgstr "Στιλ τέλους γραμμής: %1"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1994 kdiff3.cpp:930
+#: difftextwindow.cpp:1994 kdiff3.cpp:932
 #, kde-format
 msgid "Top line"
 msgstr "Πρώτη γραμμή"
@@ -428,7 +428,7 @@ msgstr ""
 "Αυτή τη στιγμή κάνετε μια συγχώνευση φακέλου. Είστε σίγουροι ότι επιθυμείτε "
 "την εγκατάλειψη της συγχώνευσης και την επανασάρωση του φακέλου;"
 
-#: directorymergewindow.cpp:695 kdiff3.cpp:789 kdiff3.cpp:799 kdiff3.cpp:811
+#: directorymergewindow.cpp:695 kdiff3.cpp:791 kdiff3.cpp:801 kdiff3.cpp:813
 #: mergeresultwindow.cpp:333 pdiff.cpp:853 pdiff.cpp:1708 pdiff.cpp:1718
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -521,8 +521,8 @@ msgstr "Μερικοί υποφάκελοι δεν είναι αναγνώσιμ
 msgid "Check the permissions of the subfolders."
 msgstr "Ελέγξτε τις άδειες χρήσης των υποφακέλων."
 
-#: directorymergewindow.cpp:968 kdiff3.cpp:738 kdiff3.cpp:844 kdiff3.cpp:868
-#: kdiff3.cpp:1136 pdiff.cpp:938 pdiff.cpp:1005 pdiff.cpp:1041 pdiff.cpp:1050
+#: directorymergewindow.cpp:968 kdiff3.cpp:740 kdiff3.cpp:846 kdiff3.cpp:870
+#: kdiff3.cpp:1138 pdiff.cpp:938 pdiff.cpp:1005 pdiff.cpp:1041 pdiff.cpp:1050
 #: pdiff.cpp:1096 pdiff.cpp:1104
 #, kde-format
 msgid "Ready."
@@ -1221,109 +1221,109 @@ msgstr "Συγχώνευση καταλόγου"
 msgid "Merge info"
 msgstr "Συγχώνευση στο Α"
 
-#: kdiff3.cpp:459
+#: kdiff3.cpp:461
 #, kde-format
 msgid "Saving failed."
 msgstr "Η αποθήκευση απέτυχε."
 
-#: kdiff3.cpp:522
+#: kdiff3.cpp:524
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "Η επιλογή --auto αγνοήθηκε για τη σύγκριση φακέλων."
 
-#: kdiff3.cpp:558 pdiff.cpp:919
+#: kdiff3.cpp:560 pdiff.cpp:919
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Το άνοιγμα αυτών των αρχείων απέτυχε:"
 
-#: kdiff3.cpp:567 pdiff.cpp:928
+#: kdiff3.cpp:569 pdiff.cpp:928
 #, kde-format
 msgid "File open error"
 msgstr "Σφάλμα ανοίγματος αρχείου"
 
-#: kdiff3.cpp:600
+#: kdiff3.cpp:602
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Ανοίγει έγγραφα για σύγκριση..."
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Reload"
 msgstr "Επαναφόρτωση"
 
-#: kdiff3.cpp:605
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr ""
 "Αποθηκεύει το αποτέλεσμα της συγχώνευσης. Όλες οι συγκρούσεις θα πρέπει να "
 "έχουν επιλυθεί!"
 
-#: kdiff3.cpp:607
+#: kdiff3.cpp:609
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Αποθηκεύει το τρέχον έγγραφο ως..."
 
-#: kdiff3.cpp:610
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Print the differences"
 msgstr "Εκτύπωση των διαφορών"
 
-#: kdiff3.cpp:613
+#: kdiff3.cpp:615
 #, kde-format
 msgid "Quits the application"
 msgstr "Κλείνει την εφαρμογή"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:619
 #, kde-format
 msgid "Undo last action."
 msgstr ""
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:623
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Αποκοπή του επιλεγμένου τμήματος και τοποθέτηση στο πρόχειρο"
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:626
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Αντιγραφή του επιλεγμένου τμήματος στο πρόχειρο"
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Επικόλληση των περιεχομένων του πρόχειρου στην ενεργή θέση"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:631
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Επιλογή όλων στο τρέχον παράθυρο"
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:634
 #, kde-format
 msgid "Search for a string"
 msgstr "Αναζήτηση για μια συμβολοσειρά"
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Search again for the string"
 msgstr "Αναζήτηση ξανά για μια συμβολοσειρά"
 
-#: kdiff3.cpp:637
+#: kdiff3.cpp:639
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Ενεργοποιεί/απενεργοποιεί τη γραμμή κατάστασης"
 
-#: kdiff3.cpp:641
+#: kdiff3.cpp:643
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Διαμόρφωση του KDiff3..."
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Μετάβαση στην τρέχουσα διαφορά"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "Current\n"
@@ -1332,12 +1332,12 @@ msgstr ""
 "Τρέχουσα\n"
 "διαφορά"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Μετάβαση στη πρώτη διαφορά"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "First\n"
@@ -1346,12 +1346,12 @@ msgstr ""
 "Πρώτη\n"
 "διαφορά"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:667
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: kdiff3.cpp:665
+#: kdiff3.cpp:667
 #, kde-format
 msgid ""
 "Last\n"
@@ -1360,14 +1360,14 @@ msgstr ""
 "Τελευταία\n"
 "διαφορά"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:669
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(Παράλειψη των διαφορών στα κενά όταν είναι απενεργοποιημένη η \"Εμφάνιση "
 "κενών\")"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1376,12 +1376,12 @@ msgstr ""
 "(Μη παράλειψη των διαφορών στα κενά ακόμη και αν είναι απενεργοποιημένη η "
 "\"Εμφάνιση κενών\")"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Μετάβαση στη προηγούμενη διαφορά"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:671
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1390,12 +1390,12 @@ msgstr ""
 "Προηγούμενη\n"
 "διαφορά"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Μετάβαση στην επόμενη διαφορά"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:673
 #, kde-format
 msgid ""
 "Next\n"
@@ -1404,12 +1404,12 @@ msgstr ""
 "Επόμενη\n"
 "διαφορά"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Μετάβαση στην προηγούμενη σύγκρουση"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1418,12 +1418,12 @@ msgstr ""
 "Προηγούμενη\n"
 "σύγκρουση"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Μετάβαση στην επόμενη σύγκρουση"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "Next\n"
@@ -1432,12 +1432,12 @@ msgstr ""
 "Επόμενη\n"
 "σύγκρουση"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Μετάβαση στην προηγούμενη μη λυμένη σύγκρουση"
 
-#: kdiff3.cpp:677
+#: kdiff3.cpp:679
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1446,12 +1446,12 @@ msgstr ""
 "Προηγούμενη\n"
 "μη λυμένη"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Μετάβαση στην επόμενη μη λυμένη σύγκρουση"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:681
 #, kde-format
 msgid ""
 "Next\n"
@@ -1460,14 +1460,14 @@ msgstr ""
 "Επόμενη\n"
 "μη λυμένη"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:683
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1476,7 +1476,7 @@ msgid ""
 "Line"
 msgstr "Γραμμή"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:684
 #, kde-format
 msgctxt "Additional text intooltip"
 msgid ""
@@ -1484,14 +1484,14 @@ msgid ""
 " Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Επιλογή γραμμής(ών) από το Α"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:685
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1504,14 +1504,14 @@ msgstr ""
 "Επιλογή\n"
 "A"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Επιλογή γραμμής(ών) από το Β"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1524,14 +1524,14 @@ msgstr ""
 "Επιλογή\n"
 "B"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:687
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Επιλογή γραμμής(ών) από το Γ"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:687
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1544,7 +1544,7 @@ msgstr ""
 "Επιλογή\n"
 "Γ"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
@@ -1552,7 +1552,7 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 "Αυτόματη μετάβαση στην επόμενη μη λυμένη σύγκρουση μετά την επιλογή πηγής"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:688
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1565,12 +1565,12 @@ msgstr ""
 "Αυτόματα\n"
 "επόμενο"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Εμφάνιση κενών && χαρακτήρων οριοθέτησης"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1583,12 +1583,12 @@ msgstr ""
 "Κενοί\n"
 "χαρακτήρες"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Show White Space"
 msgstr "Εμφάνιση κενών"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:691
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1601,12 +1601,12 @@ msgstr ""
 "Κενές\n"
 "διαφορές"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:693
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Εμφάνιση αριθμών γραμμής"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:693
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1619,132 +1619,132 @@ msgstr ""
 "Αριθμοί\n"
 "γραμμών"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:695
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Αυτόματη επίλυση απλών συγκρούσεων"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Ορισμός διαφορών στις συγκρούσεις"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Εκτέλεση κανονικής έκφρασης αυτόματης συγχώνευσης"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Αυτόματη επίλυση συγκρούσεων ιστορικού"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:699
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Διαίρεση διαφορών στην επιλογή"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Ένωση των επιλεγμένων διαφορών"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show Window A"
 msgstr "Εμφάνιση του παραθύρου Α"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Show Window B"
 msgstr "Εμφάνιση του παραθύρου Β"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Show Window C"
 msgstr "Εμφάνιση του παραθύρου Γ"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Normal Overview"
 msgstr "Κανονική επισκόπηση"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:707
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Επισκόπηση Α με το Β"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:708
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Επισκόπηση Α με το Γ"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:709
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Επισκόπηση Β με το Γ"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Αναδίπλωση λέξεων στα παράθυρα διαφοράς"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Προσθήκη χειροκίνητης στοίχισης διαφορών"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Καθαρισμός όλων των χειροκίνητων στοιχίσεων διαφορών"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Εστίαση στο επόμενο παράθυρο"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:715
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Εστίαση στο προηγούμενο παράθυρο"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:716
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Εναλλαγή προσανατολισμού διαίρεσης"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:718
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Διαίρεση προβολής φακέλου && κειμένου"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:720
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Εναλλαγή μεταξύ προβολής φακέλου && κειμένου"
 
-#: kdiff3.cpp:788 pdiff.cpp:1707
+#: kdiff3.cpp:790 pdiff.cpp:1707
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Το αποτέλεσμα της συγχώνευσης δεν έχει αποθηκευτεί."
 
-#: kdiff3.cpp:790
+#: kdiff3.cpp:792
 #, kde-format
 msgid "Save && Quit"
 msgstr "Αποθήκευση && έξοδος"
 
-#: kdiff3.cpp:791
+#: kdiff3.cpp:793
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-#: kdiff3.cpp:799 pdiff.cpp:1718
+#: kdiff3.cpp:801 pdiff.cpp:1718
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Αποτυχία αποθήκευσης του αποτελέσματος συγχώνευσης."
 
-#: kdiff3.cpp:810 pdiff.cpp:852
+#: kdiff3.cpp:812 pdiff.cpp:852
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1752,57 +1752,57 @@ msgstr ""
 "Αυτή τη στιγμή εκτελείται μια συγχώνευση φακέλων. Είστε σίγουροι ότι "
 "επιθυμείτε να την εγκαταλείψετε;"
 
-#: kdiff3.cpp:833
+#: kdiff3.cpp:835
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση αρχείου..."
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:852
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Αποθήκευση αρχείου με ένα νέο όνομα..."
 
-#: kdiff3.cpp:852
+#: kdiff3.cpp:854
 #, kde-format
 msgid "Save As..."
 msgstr "Αποθήκευση ως..."
 
-#: kdiff3.cpp:876
+#: kdiff3.cpp:878
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Η εκτύπωση δεν πραγματοποιήθηκε."
 
-#: kdiff3.cpp:914
+#: kdiff3.cpp:916
 #, kde-format
 msgid "Printing..."
 msgstr "Εκτύπωση..."
 
-#: kdiff3.cpp:1018
+#: kdiff3.cpp:1020
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "Εκτύπωση σελίδας %1 από %2"
 
-#: kdiff3.cpp:1070
+#: kdiff3.cpp:1072
 #, kde-format
 msgid " (Selection)"
 msgstr " (Επιλογή)"
 
-#: kdiff3.cpp:1099
+#: kdiff3.cpp:1101
 #, kde-format
 msgid "Printing completed."
 msgstr "Η εκτύπωση ολοκληρώθηκε."
 
-#: kdiff3.cpp:1103
+#: kdiff3.cpp:1105
 #, kde-format
 msgid "Printing aborted."
 msgstr "Εγκατάλειψη εκτύπωσης."
 
-#: kdiff3.cpp:1110
+#: kdiff3.cpp:1112
 #, kde-format
 msgid "Exiting..."
 msgstr "Έξοδος..."
 
-#: kdiff3.cpp:1120
+#: kdiff3.cpp:1122
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Εναλλαγή της γραμμής κατάστασης..."
