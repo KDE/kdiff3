@@ -6,7 +6,7 @@
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(kdiff3 VERSION 1.10.5)
+project(kdiff3 VERSION 1.10.6)
 
 option(BUILD_WITH_QT6 OFF)
 option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
