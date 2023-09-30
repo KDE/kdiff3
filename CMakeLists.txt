@@ -14,6 +14,7 @@ option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
 set(KF_MIN_VERSION "5.95.0")
 if (BUILD_WITH_QT6)
