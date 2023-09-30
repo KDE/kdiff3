@@ -2070,7 +2070,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                     const QString s = melIt1->getString(m_pldA, m_pldB, m_pldC);
                     if(!s.isEmpty())
                     {
-                        qint32 i;
+                        QtSizeType i;
                         for(i = 0; i < s.length(); ++i)
                         {
                             if(s[i] != ' ' && s[i] != '\t') break;
