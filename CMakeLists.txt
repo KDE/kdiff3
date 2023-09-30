@@ -11,9 +11,9 @@ project(kdiff3 VERSION 1.10.70)
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
 
-option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
-option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
-option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
+set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(KF_MIN_VERSION "5.95.0")
 if (BUILD_WITH_QT6)
