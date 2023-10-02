@@ -2223,12 +2223,12 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             break;
         default: {
             QString t = keyEvent->text();
-            if(t.isEmpty() || bCtrl)
+            if(t.isEmpty() || bCtrl || !melIt->isEditableText())
             {
                 keyEvent->ignore();
                 return;
             }
-            if(!melIt->isEditableText()) break;
+
             deleteSelection2(str, x, y, mbIt, melIt);
 
             setModified();
