@@ -125,7 +125,10 @@ class MergeBlock
     void split(MergeBlock& mb2, LineType d3lLineIdx2) // The caller must insert the mb2 after this mb in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
+        {
+            assert(false);
             return; //Error
+        }
         mb2.mergeDetails = mergeDetails;
         mb2.bConflict = bConflict;
         mb2.bWhiteSpaceConflict = bWhiteSpaceConflict;
