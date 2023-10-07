@@ -124,7 +124,10 @@ class MergeLine
     void split(MergeLine& ml2, qint32 d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
+        {
+            assert(false);
             return; //Error
+        }
         ml2.mergeDetails = mergeDetails;
         ml2.bConflict = bConflict;
         ml2.bWhiteSpaceConflict = bWhiteSpaceConflict;
