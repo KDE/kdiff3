@@ -116,7 +116,7 @@ class SourceData
     };
     FileData m_normalData;
     FileData m_lmppData;
-    const char* mEncoding = nullptr;
+    const char* mEncoding = u8"UTF-8";
 };
 
 #endif // !SOURCEDATA_H

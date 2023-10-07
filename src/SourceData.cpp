@@ -59,7 +59,7 @@ extern std::unique_ptr<Options> gOptions;
 void SourceData::reset()
 {
     mFromClipBoard = false;
-    mEncoding = nullptr;
+    mEncoding = u8"UTF-8";
     m_fileAccess = FileAccess();
     m_normalData.reset();
     m_lmppData.reset();
