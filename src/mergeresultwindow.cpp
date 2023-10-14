@@ -12,6 +12,7 @@
 
 #include "compat.h"
 #include "defmac.h"
+#include "EncodedDataStream.h"
 #include "guiutils.h"
 #include "kdiff3.h"
 #include "options.h"
@@ -2648,13 +2649,13 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
     }
 
     QByteArray dataArray;
-    QTextStream textOutStream(&dataArray, QIODevice::WriteOnly);
+    EncodedDataStream textOutStream(&dataArray, QIODevice::WriteOnly);
     if(strcmp(encoding, "UTF-8") != 0)
-        textOutStream.setGenerateByteOrderMark(false); // Shouldn't be necessary. Bug in Qt or docs
+        textOutStream.setGenerateByteOrderMark(false);
     else
         textOutStream.setGenerateByteOrderMark(true); // Only for UTF-16
 
-    textOutStream.setCodec(encoding);
+    textOutStream.setEncoding(encoding);
 
     // Determine the line feed for this file
     const QString lineFeed(eLineEndStyle == eLineEndStyleDos ? QString("\r\n") : QString("\n"));
@@ -2683,8 +2684,11 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
             }
         }
     }
-    textOutStream.flush();
-    bool bSuccess = file.writeFile(dataArray.data(), dataArray.size());
+
+    bool bSuccess = !textOutStream.hasError();
+    if(bSuccess)
+        bSuccess = file.writeFile(dataArray.data(), dataArray.size());
+
     if(!bSuccess)
     {
         KMessageBox::error(this, i18n("Error while writing."), i18n("File Save Error"));

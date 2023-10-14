@@ -35,6 +35,7 @@ Optimizations: Skip unneeded steps.
 #include "CommentParser.h"
 #include "compat.h"
 #include "diff.h"
+#include "EncodedDataStream.h"
 #include "LineRef.h"
 #include "Logging.h"
 #include "Utils.h"
@@ -51,7 +52,6 @@ Optimizations: Skip unneeded steps.
 #include <QString>
 #include <QTemporaryFile>
 #include <QTextCodec>
-#include <QTextStream>
 #include <QVector>
 
 extern std::unique_ptr<Options> gOptions;
@@ -564,7 +564,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetectUnicode
 }
 
 /** Prepare the linedata vector for every input line.*/
-bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
+bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeComments)
 {
     if(m_pBuf == nullptr)
         return true;
@@ -588,9 +588,8 @@ bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
         return false;
 
     const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
-    QTextStream ts(ba, QIODevice::ReadOnly); // Don't use text mode we need to see the actual line ending.
-    ts.setCodec(encoding);
-    ts.setAutoDetectUnicode(false);
+    EncodedDataStream ds(ba);
+    ds.setEncoding(encoding);
 
     m_bIncompleteConversion = false;
     m_unicodeBuf->clear();
@@ -599,7 +598,7 @@ bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
 
     mHasEOLTermination = false;
     bool skipNextRead = false;
-    while(!ts.atEnd())
+    while(!ds.atEnd())
     {
         line.clear();
         if(lines >= limits<LineType>::max() - 5)
@@ -610,7 +609,7 @@ bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
 
         if(!skipNextRead){
             prevChar = curChar;
-            curChar = ts.read(1).unicode()[0];
+            ds.readChar(curChar);
         }
         else
             skipNextRead = false;
@@ -618,7 +617,6 @@ bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
         QtSizeType  firstNonwhite = 0;
         bool        foundNonWhite = false;
 
-        //QTextStream::readLine doesn't tell us about line endings.
         while(curChar != '\n' && curChar != '\r')
         {
             if(curChar.isNull() || curChar.isNonCharacter())
@@ -637,11 +635,11 @@ bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
                 foundNonWhite = true;
             }
 
-            if(ts.atEnd())
+            if(ds.atEnd())
                 break;
 
             prevChar = curChar;
-            curChar = ts.read(1).unicode()[0];
+            ds.readChar(curChar);
         }
 
         switch(curChar.unicode())
@@ -653,14 +651,14 @@ bool SourceData::FileData::preprocess(const char* encoding, bool removeComments)
                 if((FileOffset)lastOffset < mDataSize)
                 {
                     prevChar = curChar;
-                    curChar = ts.read(1).unicode()[0];
+                    ds.readChar(curChar);
 
                     if(curChar == '\n')
                     {
                         vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
                         break;
                     }
-                    //work around for lack of seek API in QTextStream
+                    //work around for lack of seek API in QDataStream
                     skipNextRead = true;
                 }
 

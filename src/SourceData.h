@@ -102,7 +102,7 @@ class SourceData
         bool readFile(const QString& filename);
         bool writeFile(const QString& filename);
 
-        bool preprocess(const char* encoding, bool removeComments);
+        bool preprocess(const QByteArray& encoding, bool removeComments);
         void reset();
         void copyBufFrom(const FileData& src);
 
