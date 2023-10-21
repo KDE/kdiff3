@@ -56,25 +56,21 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             }
         }
     }
-    //support our own old preferences this is obsolete
-    const QStringList sl = ignorableOptionsLine.split(',');
 
-    if(!sl.isEmpty())
+    const QStringList ignorableOptions = ignorableOptionsLine.split(';');
+
+    for(QString ignorableOption: ignorableOptions)
     {
-        const QStringList ignorableOptions = sl.front().split(';');
-        for(QString ignorableOption: ignorableOptions)
+        ignorableOption.remove('-');
+        if(!ignorableOption.isEmpty())
         {
-            ignorableOption.remove('-');
-            if(!ignorableOption.isEmpty())
+            if(ignorableOption.length() == 1)
             {
-                if(ignorableOption.length() == 1)
-                {
-                    cmdLineParser->addOption(QCommandLineOption({ignorableOption, u8"ignore"}, i18n("Ignored. (User defined.)")));
-                }
-                else
-                {
-                    cmdLineParser->addOption(QCommandLineOption(ignorableOption, i18n("Ignored. (User defined.)")));
-                }
+                cmdLineParser->addOption(QCommandLineOption({ignorableOption, u8"ignore"}, i18n("Ignored. (User defined.)")));
+            }
+            else
+            {
+                cmdLineParser->addOption(QCommandLineOption(ignorableOption, i18n("Ignored. (User defined.)")));
             }
         }
     }
