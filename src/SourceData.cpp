@@ -381,10 +381,9 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetectUnicode
     else // The input was set via setData(), probably from clipboard.
     {
         /*
-            Happens during initial startup. This means we have nothing to compare
+            Used to happen during early startup this is now a bug.
         */
-        if(m_tempInputFileName.isEmpty())
-            return;
+        assert(!m_tempInputFileName.isEmpty());
 
         fileNameIn1 = m_tempInputFileName;
         mEncoding = "UTF-8";
