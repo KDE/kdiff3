@@ -47,6 +47,7 @@ Optimizations: Skip unneeded steps.
 
 #include <QtGlobal>
 
+#include <QByteArray>
 #include <QProcess>
 #include <QScopedPointer>
 #include <QString>
