@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 00:43+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2023-02-19 17:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -41,14 +41,18 @@ msgid "Getting file status: %1"
 msgstr "Получение состояния файла: %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Reading file: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Чтение файла: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Writing file: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Запись в файл: %1"
 
@@ -58,20 +62,26 @@ msgid "Out of memory"
 msgstr "Недостаточно памяти"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Making folder: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Создание папки: %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Removing folder: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Удаление папки: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Removing file: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Удаление файла: %1"
 
@@ -131,7 +141,7 @@ msgstr "Файл %1: строка недоступна"
 msgid "Encoding:"
 msgstr "Кодировка:"
 
-#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2793 optiondialog.cpp:795
+#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2797 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Тип завершения строки:"
@@ -146,12 +156,12 @@ msgstr "A (базовый):"
 msgid "Encoding: %1"
 msgstr "Кодировка: %1"
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2839
+#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2843
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2842
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -365,7 +375,7 @@ msgstr ""
 "и сканировать папку повторно?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
-#: mergeresultwindow.cpp:329 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
+#: mergeresultwindow.cpp:330 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1989,59 +1999,59 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Сравниваем файл…"
 
-#: mergeresultwindow.cpp:143
+#: mergeresultwindow.cpp:144
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "Выбрать A везде"
 
-#: mergeresultwindow.cpp:144
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "Выбрать B везде"
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "Выбрать C везде"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "Выбрать A для всех неразрешённых конфликтов"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "Выбрать B для всех неразрешённых конфликтов"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "Выбрать C для всех неразрешённых конфликтов"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "Для всех неразрешённых конфликтов пробельных символов выбрать A"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "Для всех неразрешённых конфликтов пробельных символов выбрать B"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Для всех неразрешённых конфликтов пробельных символов выбрать C"
 
-#: mergeresultwindow.cpp:264
+#: mergeresultwindow.cpp:265
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Осталось неразрешённых конфликтов: %1 (%2 из которых — конфликты пробельных "
 "символов)"
 
-#: mergeresultwindow.cpp:327
+#: mergeresultwindow.cpp:328
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2050,29 +2060,29 @@ msgstr ""
 "Вывод был изменён.\n"
 "При продолжении изменения будут утеряны."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:734
+#: mergeresultwindow.cpp:772 pdiff.cpp:734
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Все входные файлы одинаковы на двоичном уровне."
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:774
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Все входные файлы содержат одинаковый текст."
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
+#: mergeresultwindow.cpp:778 mergeresultwindow.cpp:782
+#: mergeresultwindow.cpp:786 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Файлы %1 и %2 одинаковы на двоичном уровне.\n"
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
+#: mergeresultwindow.cpp:788
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Файлы %1 и %2 содержат одинаковый текст. \n"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:792
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2085,27 +2095,27 @@ msgstr ""
 "Число неразрешённых конфликтов: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:798
 #, kde-format
 msgid "Conflicts"
 msgstr "Конфликты"
 
-#: mergeresultwindow.cpp:1521
+#: mergeresultwindow.cpp:1522
 #, kde-format
 msgid "<No src line>"
 msgstr "<Нет исходной строки>"
 
-#: mergeresultwindow.cpp:1529
+#: mergeresultwindow.cpp:1530
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Конфликт объединения (только пробельные символы)>"
 
-#: mergeresultwindow.cpp:1531 mergeresultwindow.cpp:2402
+#: mergeresultwindow.cpp:1532 mergeresultwindow.cpp:2403
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Конфликт объединения>"
 
-#: mergeresultwindow.cpp:2622
+#: mergeresultwindow.cpp:2623
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2114,14 +2124,14 @@ msgstr ""
 "Ещё не все конфликты разрешены.\n"
 "Файл не сохранён."
 
-#: mergeresultwindow.cpp:2624 mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2625 mergeresultwindow.cpp:2634
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Остались конфликты"
 
-#: mergeresultwindow.cpp:2631
+#: mergeresultwindow.cpp:2632
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2132,7 +2142,7 @@ msgstr ""
 "вручную.\n"
 "Файл не сохранён."
 
-#: mergeresultwindow.cpp:2645
+#: mergeresultwindow.cpp:2646
 #, kde-format
 msgid ""
 "\n"
@@ -2143,47 +2153,47 @@ msgstr ""
 "\n"
 "Не удалось создать резервную копию. Файл не сохранён."
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2690
+#: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2694
 #, kde-format
 msgid "File Save Error"
 msgstr "Ошибка сохранения файла"
 
-#: mergeresultwindow.cpp:2690
+#: mergeresultwindow.cpp:2694
 #, kde-format
 msgid "Error while writing."
 msgstr "Ошибка записи"
 
-#: mergeresultwindow.cpp:2765
+#: mergeresultwindow.cpp:2769
 #, kde-format
 msgid "Output:"
 msgstr "Вывод:"
 
-#: mergeresultwindow.cpp:2778 mergeresultwindow.cpp:2965
+#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2969
 #, kde-format
 msgid "[Modified]"
 msgstr "[Изменён]"
 
-#: mergeresultwindow.cpp:2785
+#: mergeresultwindow.cpp:2789
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Кодировка для сохранения:"
 
-#: mergeresultwindow.cpp:2885
+#: mergeresultwindow.cpp:2889
 #, kde-format
 msgid "Conflict"
 msgstr "Конфликт"
 
-#: mergeresultwindow.cpp:2915
+#: mergeresultwindow.cpp:2919
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Кодировка A: %1"
 
-#: mergeresultwindow.cpp:2917
+#: mergeresultwindow.cpp:2921
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Кодировка B: %1"
 
-#: mergeresultwindow.cpp:2919
+#: mergeresultwindow.cpp:2923
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Кодировка C: %1"
@@ -3812,27 +3822,27 @@ msgid "Opening and closing parentheses do not match in regular expression."
 msgstr ""
 "Неодинаковое число открывающих и закрывающих скобок в регулярном выражении."
 
-#: SourceData.cpp:151
+#: SourceData.cpp:152
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Не удалось записать данные из буфера обмена во временный файл."
 
-#: SourceData.cpp:156
+#: SourceData.cpp:157
 #, kde-format
 msgid "From Clipboard"
 msgstr "Из буфера обмена"
 
-#: SourceData.cpp:357
+#: SourceData.cpp:358
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 не является обычным файлом."
 
-#: SourceData.cpp:451
+#: SourceData.cpp:452
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Временный файл: %1"
 
-#: SourceData.cpp:455
+#: SourceData.cpp:456
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3847,12 +3857,12 @@ msgstr ""
 "\n"
 "Команда препроцессора будет отключена."
 
-#: SourceData.cpp:466
+#: SourceData.cpp:467
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "Файл %1 слишком велик для обработки. Пропускается."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3868,13 +3878,13 @@ msgstr ""
 "\n"
 "Команда препроцессора для проверки соответствия строк будет отключена."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Не удалось прочитать файл: %1"
 
-#: SourceData.cpp:535
+#: SourceData.cpp:536
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."

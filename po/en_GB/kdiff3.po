@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 00:43+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2023-06-17 12:19+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -36,14 +36,18 @@ msgid "Getting file status: %1"
 msgstr "Getting file status: %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Reading file: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Reading file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Writing file: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Writing file: %1"
 
@@ -53,20 +57,26 @@ msgid "Out of memory"
 msgstr "Out of memory"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Making folder: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Making folder: %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Removing folder: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Removing folder: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, kde-format
-msgctxt "Mesage for progress dialog %1 = path to file"
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Removing file: %1"
+msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Removing file: %1"
 
@@ -125,7 +135,7 @@ msgstr "File %1: Line not available"
 msgid "Encoding:"
 msgstr "Encoding:"
 
-#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2793 optiondialog.cpp:795
+#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2797 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Line end style:"
@@ -140,12 +150,12 @@ msgstr "A (Base)"
 msgid "Encoding: %1"
 msgstr "Encoding: %1"
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2839
+#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2843
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2842
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -357,7 +367,7 @@ msgstr ""
 "merge and rescan the folder?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
-#: mergeresultwindow.cpp:329 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
+#: mergeresultwindow.cpp:330 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1941,58 +1951,58 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Comparing file..."
 
-#: mergeresultwindow.cpp:143
+#: mergeresultwindow.cpp:144
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "Choose A Everywhere"
 
-#: mergeresultwindow.cpp:144
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "Choose B Everywhere"
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "Choose C Everywhere"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "Choose A for All Unsolved Conflicts"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "Choose B for All Unsolved Conflicts"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "Choose C for All Unsolved Conflicts"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "Choose A for All Unsolved Whitespace Conflicts"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "Choose B for All Unsolved Whitespace Conflicts"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Choose C for All Unsolved Whitespace Conflicts"
 
-#: mergeresultwindow.cpp:264
+#: mergeresultwindow.cpp:265
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 
-#: mergeresultwindow.cpp:327
+#: mergeresultwindow.cpp:328
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2001,29 +2011,29 @@ msgstr ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:734
+#: mergeresultwindow.cpp:772 pdiff.cpp:734
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "All input files are binary equal."
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:774
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "All input files contain the same text."
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
+#: mergeresultwindow.cpp:778 mergeresultwindow.cpp:782
+#: mergeresultwindow.cpp:786 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Files %1 and %2 are binary equal.\n"
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
+#: mergeresultwindow.cpp:788
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Files %1 and %2 have equal text.\n"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:792
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2036,27 +2046,27 @@ msgstr ""
 "Number of unsolved conflicts: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:798
 #, kde-format
 msgid "Conflicts"
 msgstr "Conflicts"
 
-#: mergeresultwindow.cpp:1521
+#: mergeresultwindow.cpp:1522
 #, kde-format
 msgid "<No src line>"
 msgstr "<No src line>"
 
-#: mergeresultwindow.cpp:1529
+#: mergeresultwindow.cpp:1530
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Merge Conflict (Whitespace only)>"
 
-#: mergeresultwindow.cpp:1531 mergeresultwindow.cpp:2402
+#: mergeresultwindow.cpp:1532 mergeresultwindow.cpp:2403
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Merge Conflict>"
 
-#: mergeresultwindow.cpp:2622
+#: mergeresultwindow.cpp:2623
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2065,14 +2075,14 @@ msgstr ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 
-#: mergeresultwindow.cpp:2624 mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2625 mergeresultwindow.cpp:2634
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Conflicts Left"
 
-#: mergeresultwindow.cpp:2631
+#: mergeresultwindow.cpp:2632
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2083,7 +2093,7 @@ msgstr ""
 "manually.\n"
 "File not saved."
 
-#: mergeresultwindow.cpp:2645
+#: mergeresultwindow.cpp:2646
 #, kde-format
 msgid ""
 "\n"
@@ -2094,47 +2104,47 @@ msgstr ""
 "\n"
 "Creating backup failed. File not saved."
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2690
+#: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2694
 #, kde-format
 msgid "File Save Error"
 msgstr "File Save Error"
 
-#: mergeresultwindow.cpp:2690
+#: mergeresultwindow.cpp:2694
 #, kde-format
 msgid "Error while writing."
 msgstr "Error while writing."
 
-#: mergeresultwindow.cpp:2765
+#: mergeresultwindow.cpp:2769
 #, kde-format
 msgid "Output:"
 msgstr "Output:"
 
-#: mergeresultwindow.cpp:2778 mergeresultwindow.cpp:2965
+#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2969
 #, kde-format
 msgid "[Modified]"
 msgstr "[Modified]"
 
-#: mergeresultwindow.cpp:2785
+#: mergeresultwindow.cpp:2789
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Encoding for saving:"
 
-#: mergeresultwindow.cpp:2885
+#: mergeresultwindow.cpp:2889
 #, kde-format
 msgid "Conflict"
 msgstr "Conflict"
 
-#: mergeresultwindow.cpp:2915
+#: mergeresultwindow.cpp:2919
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Codec from A: %1"
 
-#: mergeresultwindow.cpp:2917
+#: mergeresultwindow.cpp:2921
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Codec from B: %1"
 
-#: mergeresultwindow.cpp:2919
+#: mergeresultwindow.cpp:2923
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Codec from C: %1"
@@ -3574,27 +3584,27 @@ msgstr "Match failed."
 msgid "Opening and closing parentheses do not match in regular expression."
 msgstr "Opening and closing brackets do not match in regular expression."
 
-#: SourceData.cpp:151
+#: SourceData.cpp:152
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Writing clipboard data to temp file failed."
 
-#: SourceData.cpp:156
+#: SourceData.cpp:157
 #, kde-format
 msgid "From Clipboard"
 msgstr "From Clipboard"
 
-#: SourceData.cpp:357
+#: SourceData.cpp:358
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 is not a normal file."
 
-#: SourceData.cpp:451
+#: SourceData.cpp:452
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Temp file is: %1"
 
-#: SourceData.cpp:455
+#: SourceData.cpp:456
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3609,12 +3619,12 @@ msgstr ""
 "\n"
 "The preprocessing command will be disabled now."
 
-#: SourceData.cpp:466
+#: SourceData.cpp:467
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "File %1 too large to process. Skipping."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3629,13 +3639,13 @@ msgstr ""
 "\n"
 "The line-matching-preprocessing command will be disabled now."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Failed to read file: %1"
 
-#: SourceData.cpp:535
+#: SourceData.cpp:536
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
