@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:44+0000\n"
-"PO-Revision-Date: 2023-07-26 08:46+0300\n"
+"PO-Revision-Date: 2023-10-22 09:04+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -37,17 +37,13 @@ msgid "Getting file status: %1"
 msgstr "Отримання стану файла: %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Читання файла: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Запис файла: %1"
@@ -58,25 +54,19 @@ msgid "Out of memory"
 msgstr "Не вистачає пам'яті"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Створення теки: %1."
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Вилучення теки: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Вилучення файла: %1"
