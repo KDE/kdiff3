@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:44+0000\n"
-"PO-Revision-Date: 2023-09-04 20:29+0100\n"
+"PO-Revision-Date: 2023-10-23 21:19+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -35,20 +35,16 @@ msgid "Getting file status: %1"
 msgstr "Akiro de dosierstatuso: %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Legante dosieron: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr "Skribanta dosieron: %1"
+msgstr "Skribante dosieron: %1"
 
 #: DefaultFileAccessJobHandler.cpp:193
 #, kde-format
@@ -56,25 +52,19 @@ msgid "Out of memory"
 msgstr "Sen memoro"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Farante dosierujon: %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Forigante dosierujon: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Forigante dosieron: %1"
@@ -1743,7 +1733,7 @@ msgstr "Finante..."
 #: kdiff3.cpp:1122
 #, kde-format
 msgid "Toggle the statusbar..."
-msgstr "Inversigante la statobreton..."
+msgstr "Baskuligi la statusbreton..."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -3672,6 +3662,3 @@ msgstr "Neatendita citaĵo en argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Neniu programo specifita."
-
-#~ msgid "Toggling toolbar..."
-#~ msgstr "Inversigante ilobreton..."
