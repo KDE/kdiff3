@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:44+0000\n"
-"PO-Revision-Date: 2023-10-13 09:57+0200\n"
+"PO-Revision-Date: 2023-10-23 12:09+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -42,17 +42,13 @@ msgid "Getting file status: %1"
 msgstr "Obtention de l'état du fichier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Lecture du fichier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Écriture du fichier : %1"
@@ -63,28 +59,22 @@ msgid "Out of memory"
 msgstr "Mémoire pleine"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr "Création du dossier : %1"
+msgstr "Création d'un dossier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr "Suppression du dossier : %1"
+msgstr "Suppression d'un dossier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr "Suppression du fichier : %1"
+msgstr "Suppression d'un fichier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:296
 #, kde-format
