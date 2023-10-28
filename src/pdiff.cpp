@@ -126,7 +126,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         if(bUseCurrentEncoding)
             m_sd1->readAndPreprocess(m_sd1->getEncoding(), false);
         else
-            m_sd1->readAndPreprocess(gOptions->mEncodingA, gOptions->m_bAutoDetectUnicodeA);
+            m_sd1->readAndPreprocess(gOptions->mEncodingA, gOptions->mAutoDetectA);
 
         ProgressProxy::step();
 
@@ -136,7 +136,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         if(bUseCurrentEncoding)
             m_sd2->readAndPreprocess(m_sd2->getEncoding(), false);
         else
-            m_sd2->readAndPreprocess(gOptions->mEncodingB, gOptions->m_bAutoDetectUnicodeB);
+            m_sd2->readAndPreprocess(gOptions->mEncodingB, gOptions->mAutoDetectB);
 
         ProgressProxy::step();
         mErrors.append(m_sd1->getErrors());
@@ -194,7 +194,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                     if(bUseCurrentEncoding)
                         m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
                     else
-                        m_sd3->readAndPreprocess(gOptions->mEncodingC, gOptions->m_bAutoDetectUnicodeC);
+                        m_sd3->readAndPreprocess(gOptions->mEncodingC, gOptions->mAutoDetectC);
 
                     ProgressProxy::step();
                 }

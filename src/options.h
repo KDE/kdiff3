@@ -172,11 +172,11 @@ class Options
     bool m_bAutoCopySelection = false;
     bool m_bSameEncoding = true;
     QByteArray mEncodingA = nullptr;
-    bool m_bAutoDetectUnicodeA = true;
+    bool mAutoDetectA = true;
     QByteArray mEncodingB = nullptr;
-    bool m_bAutoDetectUnicodeB = true;
+    bool mAutoDetectB = true;
     QByteArray mEncodingC = nullptr;
-    bool m_bAutoDetectUnicodeC = true;
+    bool mAutoDetectC = true;
     QByteArray mEncodingOut = nullptr;
     bool m_bAutoSelectOutEncoding = true;
     QByteArray mEncodingPP = nullptr;

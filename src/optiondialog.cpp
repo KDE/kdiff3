@@ -1330,13 +1330,13 @@ void OptionDialog::setupRegionalPage()
     gbox->addWidget(m_pEncodingAComboBox, line, 1);
 
     QString autoDetectToolTip = i18n(
-        "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-        "If the file is not Unicode then the selected encoding will be used as fallback.\n"
+        "If enabled then encoding will be automaticly detected.\n"
+        "If the file's encoding can not be found automaticly then the selected encoding will be used as fallback.\n"
         "(Unicode detection depends on the first bytes of a file.)");
-    m_pAutoDetectUnicodeA = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeA", &gOptions->m_bAutoDetectUnicodeA, page);
-    gbox->addWidget(m_pAutoDetectUnicodeA, line, 2);
+    mAutoDetectA = new OptionCheckBox(i18n("Auto Detect"), true, "AutoDetectUnicodeA", &gOptions->mAutoDetectA, page);
+    gbox->addWidget(mAutoDetectA, line, 2);
 
-    m_pAutoDetectUnicodeA->setToolTip(autoDetectToolTip);
+    mAutoDetectA->setToolTip(autoDetectToolTip);
     ++line;
 
     label = new QLabel(i18n("File Encoding for B:"), page);
@@ -1344,10 +1344,10 @@ void OptionDialog::setupRegionalPage()
     m_pEncodingBComboBox = new OptionEncodingComboBox("EncodingForB", &gOptions->mEncodingB, page);
 
     gbox->addWidget(m_pEncodingBComboBox, line, 1);
-    m_pAutoDetectUnicodeB = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeB", &gOptions->m_bAutoDetectUnicodeB, page);
+    mAutoDetectB = new OptionCheckBox(i18n("Auto Detect"), true, "AutoDetectUnicodeB", &gOptions->mAutoDetectB, page);
 
-    gbox->addWidget(m_pAutoDetectUnicodeB, line, 2);
-    m_pAutoDetectUnicodeB->setToolTip(autoDetectToolTip);
+    gbox->addWidget(mAutoDetectB, line, 2);
+    mAutoDetectB->setToolTip(autoDetectToolTip);
     ++line;
 
     label = new QLabel(i18n("File Encoding for C:"), page);
@@ -1355,10 +1355,10 @@ void OptionDialog::setupRegionalPage()
     m_pEncodingCComboBox = new OptionEncodingComboBox("EncodingForC", &gOptions->mEncodingC, page);
 
     gbox->addWidget(m_pEncodingCComboBox, line, 1);
-    m_pAutoDetectUnicodeC = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeC", &gOptions->m_bAutoDetectUnicodeC, page);
+    mAutoDetectC = new OptionCheckBox(i18n("Auto Detect"), true, "AutoDetectUnicodeC", &gOptions->mAutoDetectC, page);
 
-    gbox->addWidget(m_pAutoDetectUnicodeC, line, 2);
-    m_pAutoDetectUnicodeC->setToolTip(autoDetectToolTip);
+    gbox->addWidget(mAutoDetectC, line, 2);
+    mAutoDetectC->setToolTip(autoDetectToolTip);
     ++line;
 
     label = new QLabel(i18n("File Encoding for Merge Output and Saving:"), page);
@@ -1382,7 +1382,7 @@ void OptionDialog::setupRegionalPage()
 
     chk_connect_a(m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
     chk_connect_a(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(qint32)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
-    chk_connect_a(m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+    chk_connect_a(mAutoDetectA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
     chk_connect_a(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
 
     OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox(i18n("Right To Left Language"), false, "RightToLeftLanguage", &gOptions->m_bRightToLeftLanguage, page);
@@ -1455,12 +1455,12 @@ void OptionDialog::slotEncodingChanged()
         m_pEncodingOutComboBox->setCurrentIndex(m_pEncodingAComboBox->currentIndex());
         m_pEncodingPPComboBox->setEnabled(false);
         m_pEncodingPPComboBox->setCurrentIndex(m_pEncodingAComboBox->currentIndex());
-        m_pAutoDetectUnicodeB->setEnabled(false);
-        m_pAutoDetectUnicodeB->setCheckState(m_pAutoDetectUnicodeA->checkState());
-        m_pAutoDetectUnicodeC->setEnabled(false);
-        m_pAutoDetectUnicodeC->setCheckState(m_pAutoDetectUnicodeA->checkState());
+        mAutoDetectB->setEnabled(false);
+        mAutoDetectB->setCheckState(mAutoDetectA->checkState());
+        mAutoDetectC->setEnabled(false);
+        mAutoDetectC->setCheckState(mAutoDetectA->checkState());
         m_pAutoSelectOutEncoding->setEnabled(false);
-        m_pAutoSelectOutEncoding->setCheckState(m_pAutoDetectUnicodeA->checkState());
+        m_pAutoSelectOutEncoding->setCheckState(mAutoDetectA->checkState());
     }
     else
     {
@@ -1468,8 +1468,8 @@ void OptionDialog::slotEncodingChanged()
         m_pEncodingCComboBox->setEnabled(true);
         m_pEncodingOutComboBox->setEnabled(true);
         m_pEncodingPPComboBox->setEnabled(true);
-        m_pAutoDetectUnicodeB->setEnabled(true);
-        m_pAutoDetectUnicodeC->setEnabled(true);
+        mAutoDetectB->setEnabled(true);
+        mAutoDetectC->setEnabled(true);
         m_pAutoSelectOutEncoding->setEnabled(true);
         m_pEncodingOutComboBox->setEnabled(m_pAutoSelectOutEncoding->checkState() == Qt::Unchecked);
     }

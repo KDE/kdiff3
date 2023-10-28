@@ -337,14 +337,15 @@ std::optional<const char*> SourceData::detectEncoding(const QString& fileName)
     return {};
 }
 
-void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetectUnicode)
+void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
 {
-    mEncoding = encoding;
     QTemporaryFile fileIn1, fileOut1;
     QString fileNameIn1;
     QString fileNameOut1;
     QString fileNameIn2;
     QString fileNameOut2;
+
+    mEncoding = encoding;
 
     // Detect the input for the preprocessing operations
     if(!mFromClipBoard)
@@ -373,7 +374,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetectUnicode
 
             fileNameIn1 = m_tempInputFileName;
         }
-        if(bAutoDetectUnicode)
+        if(bAutoDetect)
         {
             mEncoding = detectEncoding(fileNameIn1).value_or(encoding);
         }

@@ -66,11 +66,11 @@ class OptionDialog: public KPageDialog
 
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
-    OptionCheckBox* m_pAutoDetectUnicodeA;
+    OptionCheckBox* mAutoDetectA;
     OptionEncodingComboBox* m_pEncodingBComboBox;
-    OptionCheckBox* m_pAutoDetectUnicodeB;
+    OptionCheckBox* mAutoDetectB;
     OptionEncodingComboBox* m_pEncodingCComboBox;
-    OptionCheckBox* m_pAutoDetectUnicodeC;
+    OptionCheckBox* mAutoDetectC;
     OptionEncodingComboBox* m_pEncodingOutComboBox;
     OptionCheckBox* m_pAutoSelectOutEncoding;
     OptionEncodingComboBox* m_pEncodingPPComboBox;
