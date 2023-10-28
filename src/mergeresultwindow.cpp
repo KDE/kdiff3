@@ -2922,6 +2922,9 @@ void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecF
     if(pCodecForC != nullptr)
         m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC)), QVariant::fromValue(QByteArray(pCodecForC)));
 
+    m_pEncodingSelector->addItem("UTF 8", QVariant::fromValue(QByteArray("UTF-8")));
+    m_pEncodingSelector->addItem("UTF 8 (BOM)", QVariant::fromValue(QByteArray("UTF-8-BOM")));
+
     for(const QByteArray& name: names)
     {
         m_pEncodingSelector->addItem(QString::fromUtf8(name), QVariant::fromValue(name));

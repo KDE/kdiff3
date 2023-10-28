@@ -302,6 +302,11 @@ class WindowTitleWidget: public QWidget
 {
     Q_OBJECT
   private:
+    struct {
+        QByteArray name;
+        bool hasBOM = false;
+    } EcodingItemData;
+
     QLabel*      m_pLabel;
     FileNameLineEdit*   m_pFileNameLineEdit;
     //QPushButton* m_pBrowseButton;

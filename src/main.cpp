@@ -10,7 +10,6 @@
 
 #include "kdiff3_shell.h"
 #include "TypeUtils.h"
-#include "UTF8BOMCodec.h"
 #include "version.h"
 
 #include <stdio.h>  // for fileno, stderr
@@ -79,13 +78,6 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 qint32 main(qint32 argc, char* argv[])
 {
     constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
-    /*
-        QTextCodec auto registers text codecs in its constructor.
-        Do this now because we only need one codec object.
-        This object is Qt's domain once created and must be on the heap.
-    */
-    [[maybe_unused]] const UTF8BOMCodec* textCodec = new UTF8BOMCodec();
-
     //Syncronize qt HDPI behavoir on all versions/platforms
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

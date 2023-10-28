@@ -60,7 +60,7 @@ class SourceData
     [[nodiscard]] const char* getEncoding() const { return mEncoding; }
     [[nodiscard]] e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
     [[nodiscard]] inline bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
-
+    [[nodiscard]] inline bool hasBOM() const { return m_normalData.hasBOM(); }
     [[nodiscard]] const QStringList& getErrors() const { return mErrors; }
 
     void setEncoding(const char* encoding);
@@ -87,6 +87,8 @@ class SourceData
     {
       private:
         friend SourceData;
+        bool mHasBOM = false;
+
         std::unique_ptr<char[]> m_pBuf; //TODO: Phase out needlessly wastes memory and time by keeping second copy of file data.
         quint64 mDataSize = 0;
         qint64 mLineCount = 0; // Number of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
@@ -109,7 +111,8 @@ class SourceData
         [[nodiscard]] bool isEmpty() const { return mDataSize == 0; }
 
         [[nodiscard]] bool isText() const { return m_bIsText || isEmpty(); }
-        [[nodiscard]] inline bool hasEOLTermiantion() { return m_bIsText && mHasEOLTermination; }
+        [[nodiscard]] inline bool hasEOLTermiantion() const { return m_bIsText && mHasEOLTermination; }
+        [[nodiscard]] inline bool hasBOM() const { return mHasBOM; }
 
         [[nodiscard]] inline qint64 lineCount() const { return mLineCount; }
         [[nodiscard]] inline qint64 byteCount() const { return mDataSize; }

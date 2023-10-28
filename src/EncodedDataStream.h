@@ -32,13 +32,25 @@ class EncodedDataStream: public QDataStream
     inline void setEncoding(const QByteArray &inEncoding) noexcept
     {
         assert(!inEncoding.isEmpty());
-        mEncoding = inEncoding;
+        if(inEncoding == "UTF-8-BOM")
+        {
+            mGenerateBOM = true;
+            mEncoding = "UTF-8";
+        }
+        else
+            mEncoding = inEncoding;
     };
 
     inline void setEncoding(const QByteArray &&inEncoding) noexcept
     {
         assert(!inEncoding.isEmpty());
-        mEncoding = inEncoding;
+        if(inEncoding == "UTF-8-BOM")
+        {
+            mGenerateBOM = true;
+            mEncoding = "UTF-8";
+        }
+        else
+            mEncoding = inEncoding;
     };
 
     inline qint32 readChar(QChar& c)

@@ -590,7 +590,10 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
     EncodedDataStream ds(ba);
+
+    mHasBOM = skipBytes != 0;
     ds.setEncoding(encoding);
+    ds.setGenerateByteOrderMark(skipBytes != 0);
 
     m_bIncompleteConversion = false;
     m_unicodeBuf->clear();
@@ -790,7 +793,6 @@ std::optional<const char*> SourceData::detectEncoding(const char* buf, qint64 si
         if(buf[0] == '\xEF' && buf[1] == '\xBB' && buf[2] == '\xBF')
         {
             skipBytes = 3;
-            //Custom codec.
             return "UTF-8-BOM";
         }
     }

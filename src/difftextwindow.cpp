@@ -2120,6 +2120,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
 
         // Adding "main" encodings
         insertCodec(i18n("Unicode, 8 bit"), "UTF-8", codecNameList, m_pContextEncodingMenu, currentTextCodec);
+        insertCodec(i18n("Unicode, 8 bit (BOM)"), "UTF-8-BOM", codecNameList, m_pContextEncodingMenu, currentTextCodec);
         if(QTextCodec::codecForName("System"))
         {
             insertCodec(QString(), "System", codecNameList, m_pContextEncodingMenu, currentTextCodec);
