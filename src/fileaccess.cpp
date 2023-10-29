@@ -600,7 +600,7 @@ bool FileAccess::isNormal() const
         /*
             Catch local links to special files. '/dev' has many of these.
         */
-        bool result = target.isSymLink() || target.isNormal();
+        bool result = target.isNormal();
         // mVisited has done its job and should be reset here.
         mVisited = false;
         --depth;
