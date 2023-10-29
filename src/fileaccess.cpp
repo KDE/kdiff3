@@ -573,6 +573,7 @@ bool FileAccess::isValid() const
 
 bool FileAccess::isNormal() const
 {
+    static quint32 depth = 0;
     /*
         Speed is important here isNormal is called for every file during directory
         comparison. It can therefor have great impact on overall performance.
@@ -581,7 +582,7 @@ bool FileAccess::isNormal() const
         links that point to links. Therefore we hard cap at 15 such links in a chain
         and make sure we don't cycle back to something we already saw.
     */
-    if(!mVisited && mDepth < 15 && isLocal() && isSymLink())
+    if(!mVisited && depth < 15 && isLocal() && isSymLink())
     {
         /*
             wierd psudo-name created from commandline input redirection from output of another command.
@@ -595,20 +596,17 @@ bool FileAccess::isNormal() const
         FileAccess target(m_linkTarget);
 
         mVisited = true;
-        ++mDepth;
+        ++depth;
         /*
             Catch local links to special files. '/dev' has many of these.
         */
         bool result = target.isSymLink() || target.isNormal();
         // mVisited has done its job and should be reset here.
         mVisited = false;
-        --mDepth;
+        --depth;
 
         return result;
     }
-
-    mVisited = false;
-    mDepth = 0;
 
     return !exists() || isFile() || isDir() || isSymLink();
 }

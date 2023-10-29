@@ -190,7 +190,6 @@ class FileAccess
     Never expose these outside FileAccess as they are internal values.
     */
     mutable bool mVisited = false;
-    mutable quint32 mDepth = 0;
 };
 /*
  FileAccess objects should be copy and move assignable.
