@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 00:44+0000\n"
+"POT-Creation-Date: 2023-10-29 00:44+0000\n"
 "PO-Revision-Date: 2023-10-23 12:09+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -186,7 +186,13 @@ msgstr "Ouvrir un fichier"
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2138
+#: difftextwindow.cpp:2123
+#, fuzzy, kde-format
+#| msgid "Unicode, 8 bit"
+msgid "Unicode, 8 bit (BOM)"
+msgstr "Unicode, 8 bit"
+
+#: difftextwindow.cpp:2139
 #, kde-format
 msgid "Other"
 msgstr "Autre"
@@ -1817,94 +1823,94 @@ msgstr "&Fenêtre"
 msgid "Main Toolbar"
 msgstr "Barre principale"
 
-#: main.cpp:72 main.cpp:76
+#: main.cpp:68 main.cpp:72
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignoré. (Défini par l'utilisateur)"
 
-#: main.cpp:103
+#: main.cpp:91
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:106
+#: main.cpp:94
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr "(64 bits)"
 
-#: main.cpp:108
+#: main.cpp:96
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Outil de comparaison et de fusion de fichiers et de dossiers"
 
-#: main.cpp:109
+#: main.cpp:97
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves Portage vers KF5/Qt5"
 
-#: main.cpp:129
+#: main.cpp:117
 #, kde-format
 msgid "Merge the input."
 msgstr "Fusionner les entrées."
 
-#: main.cpp:130
+#: main.cpp:118
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Fichier de base explicite. Pour la compatibilité avec certains outils."
 
-#: main.cpp:131
+#: main.cpp:119
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Fichier de sortie. Implique -m. Par ex. : -o nouveau_fichier.txt"
 
-#: main.cpp:132
+#: main.cpp:120
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Fichier de sortie, encore. (Pour la compatibilité avec certains outils)"
 
-#: main.cpp:134
+#: main.cpp:122
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Pas d'interface graphique si tous les conflits se résolvent automatiquement. "
 "(Nécessite un fichier -o)"
 
-#: main.cpp:135
+#: main.cpp:123
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignorer --auto et toujours afficher l'interface graphique."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:125 main.cpp:126
 #, kde-format
 msgid "Ignored."
 msgstr "Ignoré."
 
-#: main.cpp:140
+#: main.cpp:128
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Remplacement de nom visible pour le fichier d'entrée 1 (base)."
 
-#: main.cpp:141
+#: main.cpp:129
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Remplacement de nom visible pour le fichier d'entrée 2."
 
-#: main.cpp:142
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Remplacement de nom visible pour le fichier d'entrée 3."
 
-#: main.cpp:143
+#: main.cpp:131
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Remplacement de nom visible secondaire. À fournir une seule fois pour chaque "
 "entrée."
 
-#: main.cpp:144
+#: main.cpp:132
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1913,33 +1919,33 @@ msgstr ""
 "Annuler un paramètre de configuration. À utiliser une seule fois pour chaque "
 "paramètre. Par ex. : --cs « AutoAdvance=1 »"
 
-#: main.cpp:145
+#: main.cpp:133
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr ""
 "Afficher la liste des paramètres de configuration et les valeurs actuelles."
 
-#: main.cpp:146
+#: main.cpp:134
 #, kde-format
 msgid "Use a different config file."
 msgstr "Utiliser un fichier de configuration différent."
 
-#: main.cpp:149
+#: main.cpp:137
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "fichier 1 à ouvrir (base, si non spécifié, via --base)"
 
-#: main.cpp:150
+#: main.cpp:138
 #, kde-format
 msgid "file2 to open"
 msgstr "fichier 2 à ouvrir"
 
-#: main.cpp:151
+#: main.cpp:139
 #, kde-format
 msgid "file3 to open"
 msgstr "fichier 3 à ouvrir"
 
-#: main.cpp:175
+#: main.cpp:163
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Consulter kdiff3 --help pour les options prises en charge."
@@ -2142,7 +2148,7 @@ msgstr "Erreur durant l'écriture."
 msgid "Output:"
 msgstr "Sortie :"
 
-#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2969
+#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2972
 #, kde-format
 msgid "[Modified]"
 msgstr "[Modifié]"
@@ -3152,11 +3158,16 @@ msgid "File Encoding for A:"
 msgstr "Encodage du fichier pour A :"
 
 #: optiondialog.cpp:1333
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+#| "If the file is not Unicode then the selected encoding will be used as "
+#| "fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
-"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-"If the file is not Unicode then the selected encoding will be used as "
-"fallback.\n"
+"If enabled then encoding will be automaticly detected.\n"
+"If the file's encoding can not be found automaticly then the selected "
+"encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 "Si cette option est cochée, alors l'encodage Unicode (UTF-16 ou UTF-8) sera "
@@ -3166,9 +3177,11 @@ msgstr ""
 "(la détection de l'Unicode repose sur les premiers octets d'un fichier)."
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, kde-format
-msgid "Auto Detect Unicode"
-msgstr "Détecter automatiquement Unicode"
+#, fuzzy, kde-format
+#| msgctxt "Automatically detected line ending"
+#| msgid "Autodetect"
+msgid "Auto Detect"
+msgstr "Détecter automatiquement"
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3676,7 +3689,7 @@ msgstr ""
 msgid "From Clipboard"
 msgstr "Depuis le presse-papiers"
 
-#: SourceData.cpp:358
+#: SourceData.cpp:359
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "« %1 » n'est pas un fichier normal."
@@ -3754,6 +3767,9 @@ msgstr "Guillemet inattendu dans l'argument."
 #, kde-format
 msgid "No program specified."
 msgstr "Pas de programme spécifié."
+
+#~ msgid "Auto Detect Unicode"
+#~ msgstr "Détecter automatiquement Unicode"
 
 #~ msgid "Toggling toolbar..."
 #~ msgstr "(Dés)Activation de la barre d'outils..."

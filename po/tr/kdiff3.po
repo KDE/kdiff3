@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 00:44+0000\n"
+"POT-Creation-Date: 2023-10-29 00:44+0000\n"
 "PO-Revision-Date: 2023-10-22 09:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -186,7 +186,13 @@ msgstr "Dosya Aç"
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2138
+#: difftextwindow.cpp:2123
+#, fuzzy, kde-format
+#| msgid "Unicode, 8 bit"
+msgid "Unicode, 8 bit (BOM)"
+msgstr "Unicode, 8 bit"
+
+#: difftextwindow.cpp:2139
 #, kde-format
 msgid "Other"
 msgstr "Diğer"
@@ -1799,90 +1805,90 @@ msgstr "&Pencere"
 msgid "Main Toolbar"
 msgstr "Ana Araç Çubuğu"
 
-#: main.cpp:72 main.cpp:76
+#: main.cpp:68 main.cpp:72
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Yok sayıldı. (Kullanıcı tanımlı.)"
 
-#: main.cpp:103
+#: main.cpp:91
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:106
+#: main.cpp:94
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bit)"
 
-#: main.cpp:108
+#: main.cpp:96
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Dosyaları ve Klasörleri Karşılaştırma ve Birleştirme Aracı"
 
-#: main.cpp:109
+#: main.cpp:97
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 aktarımı"
 
-#: main.cpp:129
+#: main.cpp:117
 #, kde-format
 msgid "Merge the input."
 msgstr "Girdiyi birleştir."
 
-#: main.cpp:130
+#: main.cpp:118
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Açık temel dosya. Belirli araçlarla uyumluluk için."
 
-#: main.cpp:131
+#: main.cpp:119
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Çıktı dosyası. -m ima eder. Örneğin: -o yenidosya.txt"
 
-#: main.cpp:132
+#: main.cpp:120
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Çıktı dosyası, tekrar. (Belirli araçlarla uyumluluk için.)"
 
-#: main.cpp:134
+#: main.cpp:122
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Tüm çakışmalar otomatik çözülebilirse GUI yok. (-o dosyaadı na gereksinim "
 "duyar)"
 
-#: main.cpp:135
+#: main.cpp:123
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "--auto'yu yok say ve her zaman grafik arabirimi göster."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:125 main.cpp:126
 #, kde-format
 msgid "Ignored."
 msgstr "Yok sayıldı."
 
-#: main.cpp:140
+#: main.cpp:128
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Giriş dosyası 1 için görünür ad değiştirme (temel)."
 
-#: main.cpp:141
+#: main.cpp:129
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Giriş dosyası 2 için görünür ad değiştirme."
 
-#: main.cpp:142
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Giriş dosyası 3 için görünür ad değiştirme."
 
-#: main.cpp:143
+#: main.cpp:131
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "Alternatif görünür ao değiştirme. Her giriş için bunu bir kez verin."
 
-#: main.cpp:144
+#: main.cpp:132
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1891,32 +1897,32 @@ msgstr ""
 "Bir yapılandırma ayarının üzerine yazın. Her ayar için bir kez kullanın. "
 "Örneğin: --cs \"AutoAdvance=1\""
 
-#: main.cpp:145
+#: main.cpp:133
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Yapılandırma ayarlarının listesini ve geçerli değerleri göster."
 
-#: main.cpp:146
+#: main.cpp:134
 #, kde-format
 msgid "Use a different config file."
 msgstr "Farklı bir yapılandırma dosyası kullan."
 
-#: main.cpp:149
+#: main.cpp:137
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "file1'i açmak için (baz, --base ile belirtilmemişse)"
 
-#: main.cpp:150
+#: main.cpp:138
 #, kde-format
 msgid "file2 to open"
 msgstr "açılacak ikinci dosya"
 
-#: main.cpp:151
+#: main.cpp:139
 #, kde-format
 msgid "file3 to open"
 msgstr "açılacak üçüncü dosya"
 
-#: main.cpp:175
+#: main.cpp:163
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Desteklenen seçenekler için kdiff3 --help'e bakın."
@@ -2118,7 +2124,7 @@ msgstr "Yazılırken hata oluştu."
 msgid "Output:"
 msgstr "Çıktı:"
 
-#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2969
+#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2972
 #, kde-format
 msgid "[Modified]"
 msgstr "[Değişiklik Yapıldı]"
@@ -3106,11 +3112,16 @@ msgid "File Encoding for A:"
 msgstr "A için Dosya Kodlaması:"
 
 #: optiondialog.cpp:1333
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+#| "If the file is not Unicode then the selected encoding will be used as "
+#| "fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
-"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-"If the file is not Unicode then the selected encoding will be used as "
-"fallback.\n"
+"If enabled then encoding will be automaticly detected.\n"
+"If the file's encoding can not be found automaticly then the selected "
+"encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 "Etkinleştirilirse Unicode (UTF-16 veya UTF-8) kodlaması algılanır.\n"
@@ -3118,9 +3129,11 @@ msgstr ""
 " (Unicode algılama, dosyanın ilk baytlarına bağlıdır.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, kde-format
-msgid "Auto Detect Unicode"
-msgstr "Unicode Kodlamasını Otomatik olarak Bul"
+#, fuzzy, kde-format
+#| msgctxt "Automatically detected line ending"
+#| msgid "Autodetect"
+msgid "Auto Detect"
+msgstr "Otomatik Algıla"
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3614,7 +3627,7 @@ msgstr "Geçici dosyaya pano verisi yazma başarısız."
 msgid "From Clipboard"
 msgstr "Panodan"
 
-#: SourceData.cpp:358
+#: SourceData.cpp:359
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1, normal bir dosya değil."
@@ -3690,3 +3703,6 @@ msgstr "Argüman içinde beklenmedik bir tırnak işareti."
 #, kde-format
 msgid "No program specified."
 msgstr "Program belirtilmemiş."
+
+#~ msgid "Auto Detect Unicode"
+#~ msgstr "Unicode Kodlamasını Otomatik olarak Bul"

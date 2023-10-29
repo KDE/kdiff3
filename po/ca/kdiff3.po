@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 00:44+0000\n"
+"POT-Creation-Date: 2023-10-29 00:44+0000\n"
 "PO-Revision-Date: 2023-10-22 09:54+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -181,7 +181,13 @@ msgstr "Obre un fitxer"
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
 
-#: difftextwindow.cpp:2138
+#: difftextwindow.cpp:2123
+#, fuzzy, kde-format
+#| msgid "Unicode, 8 bit"
+msgid "Unicode, 8 bit (BOM)"
+msgstr "Unicode, 8 bits"
+
+#: difftextwindow.cpp:2139
 #, kde-format
 msgid "Other"
 msgstr "Altres"
@@ -1807,94 +1813,94 @@ msgid "Main Toolbar"
 msgstr "Barra d'eines principal"
 
 # skip-rule: punctuation-period-no
-#: main.cpp:72 main.cpp:76
+#: main.cpp:68 main.cpp:72
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignorat. (Definit per l'usuari)."
 
-#: main.cpp:103
+#: main.cpp:91
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:106
+#: main.cpp:94
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bits)"
 
-#: main.cpp:108
+#: main.cpp:96
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Eina per a comparar i fusionar fitxers i carpetes"
 
-#: main.cpp:109
+#: main.cpp:97
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves adaptació a KF5/Qt5"
 
-#: main.cpp:129
+#: main.cpp:117
 #, kde-format
 msgid "Merge the input."
 msgstr "Fusiona l'entrada."
 
-#: main.cpp:130
+#: main.cpp:118
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Fitxer base explícit. Per compatibilitat amb certes eines."
 
-#: main.cpp:131
+#: main.cpp:119
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Fitxer de sortida. Implica -m P. ex: -o fitxernou.txt"
 
 # skip-rule: punctuation-period-no
-#: main.cpp:132
+#: main.cpp:120
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Fitxer de sortida, un altre cop. (Per compatibilitat amb certes eines)."
 
-#: main.cpp:134
+#: main.cpp:122
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Sense IGU si tots els conflictes es poden resoldre automàticament. (Cal -o "
 "fitxer)"
 
-#: main.cpp:135
+#: main.cpp:123
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignora --auto i mostra sempre la IGU."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:125 main.cpp:126
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorat."
 
-#: main.cpp:140
+#: main.cpp:128
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Substitució del nom visible per al fitxer de sortida 1 (base)."
 
-#: main.cpp:141
+#: main.cpp:129
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Substitució del nom visible per al fitxer de sortida 2."
 
-#: main.cpp:142
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Substitució del nom visible per al fitxer de sortida 3."
 
-#: main.cpp:143
+#: main.cpp:131
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Substitució del nom visible alternatiu. Proporcioneu-lo per a cada sortida."
 
-#: main.cpp:144
+#: main.cpp:132
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1903,32 +1909,32 @@ msgstr ""
 "Sobreescriu una opció de la configuració. Useu-ho per a cada opció. P. ex.: "
 "--cs \"AutoAdvance=1\""
 
-#: main.cpp:145
+#: main.cpp:133
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Mostra una llista de les opcions de configuració i els valors actuals."
 
-#: main.cpp:146
+#: main.cpp:134
 #, kde-format
 msgid "Use a different config file."
 msgstr "Usa un fitxer de configuració diferent."
 
-#: main.cpp:149
+#: main.cpp:137
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Fitxer1 a obrir (base, si no s'especifica via --base)"
 
-#: main.cpp:150
+#: main.cpp:138
 #, kde-format
 msgid "file2 to open"
 msgstr "Fitxer 2 a obrir"
 
-#: main.cpp:151
+#: main.cpp:139
 #, kde-format
 msgid "file3 to open"
 msgstr "Fitxer 3 a obrir"
 
-#: main.cpp:175
+#: main.cpp:163
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Vegeu «kdiff3 --help» per a les opcions admeses."
@@ -2132,7 +2138,7 @@ msgstr "Error en escriure."
 msgid "Output:"
 msgstr "Sortida:"
 
-#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2969
+#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2972
 #, kde-format
 msgid "[Modified]"
 msgstr "[Modificat]"
@@ -3137,11 +3143,16 @@ msgstr "Codificació per al fitxer A:"
 
 # skip-rule: punctuation-period-no
 #: optiondialog.cpp:1333
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+#| "If the file is not Unicode then the selected encoding will be used as "
+#| "fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
-"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-"If the file is not Unicode then the selected encoding will be used as "
-"fallback.\n"
+"If enabled then encoding will be automaticly detected.\n"
+"If the file's encoding can not be found automaticly then the selected "
+"encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 "Si està activat, es detectaran les codificacions Unicode (UTF-16 o UTF-8).\n"
@@ -3150,9 +3161,11 @@ msgstr ""
 "(La detecció de l'Unicode depèn dels primers bytes d'un fitxer)."
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, kde-format
-msgid "Auto Detect Unicode"
-msgstr "Detecta automàticament l'Unicode"
+#, fuzzy, kde-format
+#| msgctxt "Automatically detected line ending"
+#| msgid "Autodetect"
+msgid "Auto Detect"
+msgstr "Detecta automàticament"
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3651,7 +3664,7 @@ msgstr "Ha fallat l'escriptura de dades del porta-retalls al fitxer temporal."
 msgid "From Clipboard"
 msgstr "Des del porta-retalls"
 
-#: SourceData.cpp:358
+#: SourceData.cpp:359
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 no és un fitxer normal."
@@ -3728,3 +3741,6 @@ msgstr "Caràcter inesperat de cometa en l'argument."
 #, kde-format
 msgid "No program specified."
 msgstr "No s'ha especificat cap programa."
+
+#~ msgid "Auto Detect Unicode"
+#~ msgstr "Detecta automàticament l'Unicode"

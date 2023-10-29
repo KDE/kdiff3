@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 00:44+0000\n"
+"POT-Creation-Date: 2023-10-29 00:44+0000\n"
 "PO-Revision-Date: 2023-10-23 21:19+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -179,7 +179,13 @@ msgstr "Malfermi Dosieron"
 msgid "Unicode, 8 bit"
 msgstr "Unikodo, 8 bitoj"
 
-#: difftextwindow.cpp:2138
+#: difftextwindow.cpp:2123
+#, fuzzy, kde-format
+#| msgid "Unicode, 8 bit"
+msgid "Unicode, 8 bit (BOM)"
+msgstr "Unikodo, 8 bitoj"
+
+#: difftextwindow.cpp:2139
 #, kde-format
 msgid "Other"
 msgstr "Alia"
@@ -1789,90 +1795,90 @@ msgstr "Fe&nestro"
 msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"
 
-#: main.cpp:72 main.cpp:76
+#: main.cpp:68 main.cpp:72
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignorita. (Uzantodifinita.)"
 
-#: main.cpp:103
+#: main.cpp:91
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:106
+#: main.cpp:94
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bitoj)"
 
-#: main.cpp:108
+#: main.cpp:96
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Ilo por Komparo kaj Kunfandado de Dosieroj kaj Dosierujoj"
 
-#: main.cpp:109
+#: main.cpp:97
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5-portado"
 
-#: main.cpp:129
+#: main.cpp:117
 #, kde-format
 msgid "Merge the input."
 msgstr "Kunfandi la enigon."
 
-#: main.cpp:130
+#: main.cpp:118
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Eksplicita baza dosiero. Por kongruo kun certaj iloj."
 
-#: main.cpp:131
+#: main.cpp:119
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Eligo dosiero. Implicas -m. Ekz.: -o nova dosiero.txt"
 
-#: main.cpp:132
+#: main.cpp:120
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Eligo dosiero, denove. (Por kongruo kun certaj iloj.)"
 
-#: main.cpp:134
+#: main.cpp:122
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Neniu GUI se ĉiuj konfliktoj estas aŭtomate solveblaj. (Bezonas -o dosieron)"
 
-#: main.cpp:135
+#: main.cpp:123
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignori --auto kaj ĉiam montri GUI."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:125 main.cpp:126
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorita."
 
-#: main.cpp:140
+#: main.cpp:128
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Videbla nomo anstataŭaĵo por eniga dosiero 1 (bazo)."
 
-#: main.cpp:141
+#: main.cpp:129
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Videbla nomo anstataŭaĵo por eniga dosiero 2."
 
-#: main.cpp:142
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Videbla nomo anstataŭaĵo por eniga dosiero 3."
 
-#: main.cpp:143
+#: main.cpp:131
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternativa videbla nomo anstataŭaĵo. Provizu ĉi tion unufoje por ĉiu enigo."
 
-#: main.cpp:144
+#: main.cpp:132
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1880,32 +1886,32 @@ msgid ""
 msgstr ""
 "Anstataŭigi agordon. Uzu unufoje por ĉiu agordo. Ekz.: --cs \"AutoAdvance=1\""
 
-#: main.cpp:145
+#: main.cpp:133
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Montru liston de agordaj agordoj kaj aktualaj valoroj."
 
-#: main.cpp:146
+#: main.cpp:134
 #, kde-format
 msgid "Use a different config file."
 msgstr "Uzu malsaman agordosieron."
 
-#: main.cpp:149
+#: main.cpp:137
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "dosiero1 por malfermi (bazo, se ne specifita per --base)"
 
-#: main.cpp:150
+#: main.cpp:138
 #, kde-format
 msgid "file2 to open"
 msgstr "dosiero2 por malfermi"
 
-#: main.cpp:151
+#: main.cpp:139
 #, kde-format
 msgid "file3 to open"
 msgstr "dosiero3 por malfermi"
 
-#: main.cpp:175
+#: main.cpp:163
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Vidu kdiff3 --help por subtenataj opcioj."
@@ -2108,7 +2114,7 @@ msgstr "Eraro dum skribado."
 msgid "Output:"
 msgstr "Eligo:"
 
-#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2969
+#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2972
 #, kde-format
 msgid "[Modified]"
 msgstr "[Modifita]"
@@ -3084,11 +3090,16 @@ msgid "File Encoding for A:"
 msgstr "Dosiera Kodado por A:"
 
 #: optiondialog.cpp:1333
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+#| "If the file is not Unicode then the selected encoding will be used as "
+#| "fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
-"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-"If the file is not Unicode then the selected encoding will be used as "
-"fallback.\n"
+"If enabled then encoding will be automaticly detected.\n"
+"If the file's encoding can not be found automaticly then the selected "
+"encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 "Se enŝaltite, tiam Unikoda (UTF-16 aŭ UTF-8) kodigo estos detektita.\n"
@@ -3097,9 +3108,11 @@ msgstr ""
 "(Unikoda detekto dependas de la unuaj bajtoj de dosiero.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, kde-format
-msgid "Auto Detect Unicode"
-msgstr "Aŭtomate Detekti Unikodon"
+#, fuzzy, kde-format
+#| msgctxt "Automatically detected line ending"
+#| msgid "Autodetect"
+msgid "Auto Detect"
+msgstr "Aŭtodetekti"
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3585,7 +3598,7 @@ msgstr "Malsukcesis skribado de la tondujo al tempdosiero."
 msgid "From Clipboard"
 msgstr "El Clipboard"
 
-#: SourceData.cpp:358
+#: SourceData.cpp:359
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 ne estas normala dosiero."
@@ -3662,3 +3675,6 @@ msgstr "Neatendita citaĵo en argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Neniu programo specifita."
+
+#~ msgid "Auto Detect Unicode"
+#~ msgstr "Aŭtomate Detekti Unikodon"
