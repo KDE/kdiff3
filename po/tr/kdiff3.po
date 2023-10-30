@@ -10,13 +10,13 @@
 # Muhammet Kara <muhammetk@gmail.com>, 2014.
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012-2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 02:34+0000\n"
-"PO-Revision-Date: 2023-08-26 12:00+0300\n"
+"POT-Creation-Date: 2023-10-30 02:28+0000\n"
+"PO-Revision-Date: 2023-10-29 14:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -976,7 +976,7 @@ msgstr "Tüm Ögeler için C'yi Seç"
 #: directorymergewindow.cpp:2960
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
-msgstr "Tüm Ögeler için Otomatik Seçim İşlemi"
+msgstr "Tüm Ögeler için Kendiliğinden Seçim İşlemi"
 
 #: directorymergewindow.cpp:2961
 #, kde-format
@@ -1117,27 +1117,27 @@ msgstr "A ve B ile Birleştir"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Tam URL algılanamıyor. Üst öge belirtilmemiş."
 
-#: fileaccess.cpp:789
+#: fileaccess.cpp:787
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Dosya okunumadı: %1"
 
-#: fileaccess.cpp:929
+#: fileaccess.cpp:927
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "%1 dosyasının geçici kopyasının oluşturulmasında hata oluştu."
 
-#: fileaccess.cpp:937 fileaccess.cpp:942
+#: fileaccess.cpp:935 fileaccess.cpp:940
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "%1 açılamadı. %2"
 
-#: fileaccess.cpp:961 fileaccess.cpp:969
+#: fileaccess.cpp:959 fileaccess.cpp:967
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "%1 konumundan okunamıyor. %2"
 
-#: fileaccess.cpp:1098
+#: fileaccess.cpp:1096
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1146,7 +1146,7 @@ msgstr ""
 "Yedekleme yapılırken, eski bir yedeğin silinmesi başarısız oldu.\n"
 "Dosya adı: %1"
 
-#: fileaccess.cpp:1105
+#: fileaccess.cpp:1103
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -1499,7 +1499,7 @@ msgstr ""
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
-"Kaynak Seçiminden Sonra Otomatik Olarak Bir Sonraki Çözülmeyen Çakışmaya Git"
+"Kaynak Seçiminden Sonra Kendiliğinden Bir Sonraki Çözülmeyen Çakışmaya Git"
 
 #: kdiff3.cpp:688
 #, kde-format
@@ -1508,7 +1508,7 @@ msgid ""
 "Auto\n"
 "Next"
 msgstr ""
-"Otomatik\n"
+"Kendiliğinden\n"
 "Sonraki"
 
 #: kdiff3.cpp:690
@@ -1559,7 +1559,7 @@ msgstr ""
 #: kdiff3.cpp:695
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
-msgstr "Basit Çakışmaları Otomatik Olarak Çöz"
+msgstr "Basit Çakışmaları Kendiliğinden Çöz"
 
 #: kdiff3.cpp:696
 #, kde-format
@@ -1569,12 +1569,12 @@ msgstr "Deltaları Çakışmalara Ayarla"
 #: kdiff3.cpp:697
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
-msgstr "Düzenli İfade Otomatik Birleştirme'yi Çalıştır"
+msgstr "Düzenli İfade Kendiliğinden Birleştirme'yi Çalıştır"
 
 #: kdiff3.cpp:698
 #, kde-format
 msgid "Automatically Solve History Conflicts"
-msgstr "Geçmiş Çakışmalarını Otomatik Olarak Çözümle"
+msgstr "Geçmiş Çakışmalarını Kendiliğinden Çözümle"
 
 #: kdiff3.cpp:699
 #, kde-format
@@ -1821,7 +1821,7 @@ msgstr "Geçerli Öge Birleştirme İşlemi"
 #: kdiff3_shell.rc:38
 #, kde-format
 msgid "Current Item Sync Operation"
-msgstr "Geçerli Öge Eşitleme İşlemi"
+msgstr "Geçerli Öge Eşzamanlama İşlemi"
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_shell.rc:50
@@ -1833,7 +1833,7 @@ msgstr "&Hareket"
 #: kdiff3_shell.rc:61
 #, kde-format
 msgid "D&iffview"
-msgstr "F&arkGörünümü"
+msgstr "F&ark Görünümü"
 
 #. i18n: ectx: Menu (merge)
 #: kdiff3_shell.rc:73
@@ -2108,12 +2108,12 @@ msgstr "Çakışmalar"
 #: mergeresultwindow.cpp:1549
 #, kde-format
 msgid "<No src line>"
-msgstr "<Kaynak Satır Yok>"
+msgstr "<Kaynak Satırı Yok>"
 
 #: mergeresultwindow.cpp:1557
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
-msgstr "<Merge Conflict (Whitespace only)>"
+msgstr "<Birleştirme Çakışması (Yalnızca Boşluk)>"
 
 #: mergeresultwindow.cpp:1559 mergeresultwindow.cpp:2433
 #, kde-format
@@ -2463,7 +2463,7 @@ msgstr "Tab boyutu:"
 #: optiondialog.cpp:782
 #, kde-format
 msgid "Auto indentation"
-msgstr "Otomatik girintileme"
+msgstr "Kendiliğinden girintileme"
 
 #: optiondialog.cpp:786
 #, kde-format
@@ -2473,7 +2473,7 @@ msgstr "Açık: Bir önceki satırın girintisi yeni bir satır için kullanıl�
 #: optiondialog.cpp:789
 #, kde-format
 msgid "Auto copy selection"
-msgstr "Seçimi otomatik olarak kopyala"
+msgstr "Seçimi Kendiliğinden kopyala"
 
 #: optiondialog.cpp:793
 #, kde-format
@@ -2500,7 +2500,7 @@ msgstr "DOS/Windows"
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
-msgstr "Otomatik Algıla"
+msgstr "Kendiliğinden Algıla"
 
 #: optiondialog.cpp:808
 #, kde-format
@@ -2629,7 +2629,7 @@ msgstr "Birleştirme Ayarları"
 #: optiondialog.cpp:926
 #, kde-format
 msgid "Auto advance delay (ms):"
-msgstr "Otomatik ilerleme gecikmesi (ms):"
+msgstr "Kendiliğinden ilerleme gecikmesi (ms):"
 
 #: optiondialog.cpp:932
 #, kde-format
@@ -2667,8 +2667,8 @@ msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
 "only changes."
 msgstr ""
-"Birleştirme algoritmasına yalnızca boşluk değişiklikleri için otomatik "
-"olarak bir girdi seçmesine izin verin."
+"Birleştirme algoritmasına yalnızca boşluk değişiklikleri için kendiliğinden "
+"bir girdi seçmesine izin verin."
 
 #: optiondialog.cpp:955
 #, kde-format
@@ -2678,18 +2678,18 @@ msgstr "Boşluk 3 dosyalı birleştirme varsayılanı:"
 #: optiondialog.cpp:969
 #, kde-format
 msgid "Automatic Merge Regular Expression"
-msgstr "Otomatik Birleştirme Düzenli İfadesi"
+msgstr "Kendiliğinden Birleştirme Düzenli İfadesi"
 
 #: optiondialog.cpp:977 smalldialogs.cpp:387
 #, kde-format
 msgid "Auto merge regular expression:"
-msgstr "Otomatik birleştirme düzenli ifadesi:"
+msgstr "Kendiliğinden birleştirme düzenli ifadesi:"
 
 #: optiondialog.cpp:985
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
-"Birleştirme başlangıcında düzenli ifade otomatik birleştirmeyi çalıştır"
+"Birleştirme başlangıcında düzenli ifade kendiliğinden birleştirmeyi çalıştır"
 
 #: optiondialog.cpp:988
 #, kde-format
@@ -2697,8 +2697,8 @@ msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
-"Bir birleştirme başladığında düzenli ifadeleri\n"
-"derhal otomatik birleştirmek için birleştirmeyi çalıştırın.\n"
+"Bir birleştirme başladığında düzenli ifadeleri derhal\n"
+"kendiliğinden birleştirmek için birleştirmeyi çalıştırın.\n"
 
 #: optiondialog.cpp:993
 #, kde-format
@@ -2776,7 +2776,7 @@ msgstr ""
 #: optiondialog.cpp:1078
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
-msgstr "Birleştirmede çakışmalar olmadan otomatik kaydedin ve çıkın"
+msgstr "Birleştirmede çakışmalar olmadan kendiliğinden kaydet ve çık"
 
 #: optiondialog.cpp:1082
 #, kde-format
@@ -3160,7 +3160,7 @@ msgstr "Birleştirme Çıktısı ve Kaydetme için Dosya Kodlaması:"
 #: optiondialog.cpp:1371
 #, kde-format
 msgid "Auto Select"
-msgstr "Otomatik Seç"
+msgstr "Kendiliğinden Seç"
 
 #: optiondialog.cpp:1375
 #, kde-format
@@ -3382,9 +3382,8 @@ msgstr ""
 "Bazı girdi karakterleri geçerli Unicode'a dönüştürülemez.\n"
 "Yanlış kod çözücü kullanıyor olabilirsiniz. (Örneğin, UTF-8 olmayan dosyalar "
 "için UTF-8).\n"
-"Emin değilseniz sonucu kaydetmeyiniz. Kendi sorumluluğunuzu alarak "
-"sürdürün.\n"
-"Etkilenen girdi dosyaları %1 içerisindedir."
+"Emin değilseniz sonucu kaydetmeyin. Kendi sorumluluğunuzu alarak sürdürün.\n"
+"Etkilenen girdi dosyaları %1 içindedir."
 
 #: pdiff.cpp:854
 #, kde-format
@@ -3470,22 +3469,22 @@ msgstr "Elle fark aralığı eklenirken hata oluştu"
 #: progress.cpp:56 progressdialog.ui:94
 #, kde-format
 msgid "&Cancel"
-msgstr "&İptal"
+msgstr "İ&ptal"
 
 #: smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:83
 #, kde-format
 msgid "Swap %1<->%2"
-msgstr "Takas yap %1<->%2"
+msgstr "Takas Yap: %1<->%2"
 
 #: smalldialogs.cpp:84 smalldialogs.cpp:85 smalldialogs.cpp:86
 #, kde-format
 msgid "Copy %1->Output"
-msgstr "%1 Kopyala->Çıktı"
+msgstr "Kopyala: %1->Çıktı"
 
 #: smalldialogs.cpp:87 smalldialogs.cpp:88 smalldialogs.cpp:89
 #, kde-format
 msgid "Swap %1<->Output"
-msgstr "Takas yap %1<->Çıktı"
+msgstr "Takas Yap: %1 <->Çıktı"
 
 #: smalldialogs.cpp:108
 #, kde-format
@@ -3500,7 +3499,7 @@ msgstr "Klasör Aç"
 #: smalldialogs.cpp:162
 #, kde-format
 msgid "Select Output File"
-msgstr "Çıktı Dosyasını Seç"
+msgstr "Çıktı Dosyası Seç"
 
 #: smalldialogs.cpp:162 smalldialogs.cpp:163
 #, kde-format
@@ -3550,7 +3549,7 @@ msgstr "Düzenli İfade Sınayıcısı"
 #: smalldialogs.cpp:395
 #, kde-format
 msgid "Example auto merge line:"
-msgstr "Örnek otomatik birleştirme satırı:"
+msgstr "Örnek kendiliğinden birleştirme satırı:"
 
 #: smalldialogs.cpp:397
 #, kde-format

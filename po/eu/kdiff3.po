@@ -1,7 +1,7 @@
 # Translation for kdiff3.po to Euskara/Basque (eu).
 # Copyright (C) 2018-2023 This file is copyright:
 # This file is distributed under the same license as the kdiff3 package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2020, 2021, 2022, 2023.
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 02:34+0000\n"
-"PO-Revision-Date: 2023-08-07 20:27+0200\n"
+"POT-Creation-Date: 2023-10-30 02:28+0000\n"
+"PO-Revision-Date: 2023-10-29 22:59+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1108,27 +1108,27 @@ msgstr "Bateratu A eta B"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Ezin da zehaztu URL osoa. Ez da gurasorik zehaztu."
 
-#: fileaccess.cpp:789
+#: fileaccess.cpp:787
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Ezin izan da fitxategia irakurri: %1"
 
-#: fileaccess.cpp:929
+#: fileaccess.cpp:927
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Aldi baterako %1(r)en kopia sortzea huts egin du."
 
-#: fileaccess.cpp:937 fileaccess.cpp:942
+#: fileaccess.cpp:935 fileaccess.cpp:940
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "%1 irekitzea huts egin du. %2"
 
-#: fileaccess.cpp:961 fileaccess.cpp:969
+#: fileaccess.cpp:959 fileaccess.cpp:967
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Errorea %1(e)tik irakurtzean. %2"
 
-#: fileaccess.cpp:1098
+#: fileaccess.cpp:1096
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1138,7 +1138,7 @@ msgstr ""
 "egin du.\n"
 "Fitxategi-izena: %1"
 
-#: fileaccess.cpp:1105
+#: fileaccess.cpp:1103
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -2486,7 +2486,7 @@ msgstr "Dos/Windows"
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
-msgstr "Auto-hauteman"
+msgstr "Auto-antzeman"
 
 #: optiondialog.cpp:808
 #, kde-format
