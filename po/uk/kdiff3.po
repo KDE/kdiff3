@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-29 00:44+0000\n"
-"PO-Revision-Date: 2023-10-22 09:04+0300\n"
+"POT-Creation-Date: 2023-10-30 00:44+0000\n"
+"PO-Revision-Date: 2023-10-29 08:28+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -182,10 +182,9 @@ msgid "Unicode, 8 bit"
 msgstr "Юнікод, 8 бітів"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Юнікод, 8 бітів"
+msgstr "Юнікод, 8 бітів (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -1086,27 +1085,27 @@ msgstr "Об'єднати у A і B"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Неможливо визначити повну адресу. Не вказано батьківської теки."
 
-#: fileaccess.cpp:786
+#: fileaccess.cpp:784
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Не вдалося прочитати файл: %1"
 
-#: fileaccess.cpp:926
+#: fileaccess.cpp:924
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Помилка створення тимчасової копії %1."
 
-#: fileaccess.cpp:934 fileaccess.cpp:939
+#: fileaccess.cpp:932 fileaccess.cpp:937
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "Помилка відкриття %1. %2"
 
-#: fileaccess.cpp:958 fileaccess.cpp:966
+#: fileaccess.cpp:956 fileaccess.cpp:964
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Помилка читання з %1. %2"
 
-#: fileaccess.cpp:1095
+#: fileaccess.cpp:1093
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1116,7 +1115,7 @@ msgstr ""
 "копію.\n"
 "Назва файла: %1"
 
-#: fileaccess.cpp:1102
+#: fileaccess.cpp:1100
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -3108,28 +3107,22 @@ msgid "File Encoding for A:"
 msgstr "Кодування файла для A:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Якщо увімкнено Юнікод (UTF-16 або UTF-8) визначатиметься автоматично.\n"
-"Якщо файл не у Юнікоді, відбудеться повернення до вибраного кодування.\n"
+"Якщо увімкнено , кодування визначатиметься автоматично.\n"
+"Якщо кодування файла не вдасться визначити автоматично, відбудеться "
+"повернення до резервного кодування.\n"
 "(Визначення Юнікоду відбувається за першими байтами файла.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
-msgstr "Автовибір"
+msgstr "Автовизначення"
 
 #: optiondialog.cpp:1342
 #, kde-format

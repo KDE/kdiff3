@@ -3,21 +3,21 @@
 # This file is distributed under the license LGPL version 2 or later
 #
 # Joan Maspons <joanmaspons@gmail.com>, 2011.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Josep M. Ferrer <txemaq@gmail.com>
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2018, 2019, 2020, 2021, 2022, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-29 00:44+0000\n"
-"PO-Revision-Date: 2023-10-22 09:54+0200\n"
+"POT-Creation-Date: 2023-10-30 00:44+0000\n"
+"PO-Revision-Date: 2023-10-29 09:17+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -182,10 +182,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bits"
+msgstr "Unicode, 8 bits (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -1088,27 +1087,27 @@ msgstr "Fusiona a A i B"
 msgid "Unable to determine full url. No parent specified."
 msgstr "No s'ha pogut determinar l'URL complet. No s'ha especificat cap pare."
 
-#: fileaccess.cpp:786
+#: fileaccess.cpp:784
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Ha fallat en llegir el fitxer: %1"
 
-#: fileaccess.cpp:926
+#: fileaccess.cpp:924
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Ha fallat la creació de la còpia temporal de %1."
 
-#: fileaccess.cpp:934 fileaccess.cpp:939
+#: fileaccess.cpp:932 fileaccess.cpp:937
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "Ha fallat l'obertura de %1. %2"
 
-#: fileaccess.cpp:958 fileaccess.cpp:966
+#: fileaccess.cpp:956 fileaccess.cpp:964
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Error en llegir des de %1. %2"
 
-#: fileaccess.cpp:1095
+#: fileaccess.cpp:1093
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1118,7 +1117,7 @@ msgstr ""
 "nova.\n"
 "Nom de fitxer: %1"
 
-#: fileaccess.cpp:1102
+#: fileaccess.cpp:1100
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -3143,27 +3142,20 @@ msgstr "Codificació per al fitxer A:"
 
 # skip-rule: punctuation-period-no
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Si està activat, es detectaran les codificacions Unicode (UTF-16 o UTF-8).\n"
-"Si el fitxer no és Unicode, s'usarà la codificació seleccionada com a "
-"alternativa.\n"
+"Si està activat, es detectaran les codificacions automàticament.\n"
+"Si no es pot trobar automàticament la codificació del fitxer, s'usarà la "
+"codificació seleccionada com a alternativa.\n"
 "(La detecció de l'Unicode depèn dels primers bytes d'un fitxer)."
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "Detecta automàticament"
 

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-29 00:44+0000\n"
-"PO-Revision-Date: 2023-10-23 21:19+0100\n"
+"POT-Creation-Date: 2023-10-30 00:44+0000\n"
+"PO-Revision-Date: 2023-10-29 19:55+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -180,10 +180,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unikodo, 8 bitoj"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unikodo, 8 bitoj"
+msgstr "Unikodo, 8-bita (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -1078,27 +1077,27 @@ msgstr "Kunfandi al A && B"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Ne eblas determini plenan URL. Neniu gepatro specifita."
 
-#: fileaccess.cpp:786
+#: fileaccess.cpp:784
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Malsukcesis legi dosieron: %1"
 
-#: fileaccess.cpp:926
+#: fileaccess.cpp:924
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Kreado de provizora kopio de %1 malsukcesis."
 
-#: fileaccess.cpp:934 fileaccess.cpp:939
+#: fileaccess.cpp:932 fileaccess.cpp:937
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "Malfermo de %1 malsukcesis. %2"
 
-#: fileaccess.cpp:958 fileaccess.cpp:966
+#: fileaccess.cpp:956 fileaccess.cpp:964
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Eraro legante de %1. %2"
 
-#: fileaccess.cpp:1095
+#: fileaccess.cpp:1093
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1107,7 +1106,7 @@ msgstr ""
 "Dum provado fari sekurkopion, forigo de pli malnova sekurkopio malsukcesis.\n"
 "Dosiernomo: %1"
 
-#: fileaccess.cpp:1102
+#: fileaccess.cpp:1100
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -3090,29 +3089,22 @@ msgid "File Encoding for A:"
 msgstr "Dosiera Kodado por A:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Se enŝaltite, tiam Unikoda (UTF-16 aŭ UTF-8) kodigo estos detektita.\n"
-"Se la dosiero ne estas Unikodo, tiam la elektita kodado estos uzata kiel "
-"rezerva.\n"
+"Se enŝaltite, tiam kodigo estos aŭtomate detektita.\n"
+"Se la kodigo de la dosiero ne povas esti trovita aŭtomate, tiam la elektita "
+"kodado estos uzata kiel rezervo.\n"
 "(Unikoda detekto dependas de la unuaj bajtoj de dosiero.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
-msgstr "Aŭtodetekti"
+msgstr "Aŭtomate Detekti"
 
 #: optiondialog.cpp:1342
 #, kde-format
