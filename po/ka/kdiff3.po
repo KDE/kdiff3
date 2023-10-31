@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-30 00:44+0000\n"
-"PO-Revision-Date: 2023-10-23 05:59+0200\n"
+"PO-Revision-Date: 2023-10-30 05:23+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -177,10 +177,9 @@ msgid "Unicode, 8 bit"
 msgstr "8-ბიტიანი უნიკოდი"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "8-ბიტიანი უნიკოდი"
+msgstr "უნიკოდი, 8-ბიტიანი (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -2938,9 +2937,7 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "ავტოამოცნობა"
 
