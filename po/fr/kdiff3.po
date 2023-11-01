@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-30 00:44+0000\n"
-"PO-Revision-Date: 2023-10-23 12:09+0200\n"
+"PO-Revision-Date: 2023-10-30 15:21+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -187,10 +187,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bit"
+msgstr "Unicode, 8 bits (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -3158,28 +3157,21 @@ msgid "File Encoding for A:"
 msgstr "Encodage du fichier pour A :"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Si cette option est cochée, alors l'encodage Unicode (UTF-16 ou UTF-8) sera "
+"Si cette option est sélectionnée, alors l'encodage sera automatiquement "
 "détecté.\n"
-"Si le fichier n'est pas en Unicode, alors l'encodage sélectionné sera "
-"utilisé comme solution de repli\n"
-"(la détection de l'Unicode repose sur les premiers octets d'un fichier)."
+"Si l'encodage du fichier ne peut être trouvé automatiquement, alors "
+"l'encodage sélectionné sera utilisée en mode de repli.\n"
+"(La détection « Unicode » repose sur les premiers octets d'un fichier)."
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "Détecter automatiquement"
 

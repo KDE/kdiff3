@@ -180,10 +180,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bit"
+msgstr ""
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -3092,28 +3091,18 @@ msgid "File Encoding for A:"
 msgstr "Kódování souboru A:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Pokud je volba zapnuta, bude rozeznáno kódování Unicode (UTF-16 a UTF-8).\n"
-"Pokud není soubor Unicode, pak bude vybrané kódování použito jako náhradní.\n"
-"(Detekce Unicode závisí na prvním bajtu souboru.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
-msgstr "Automaticky detekovat"
+msgstr "Automatická detekce"
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3676,6 +3665,3 @@ msgstr "Neočekávaná uvozovka uvnitř argumentu."
 #, kde-format
 msgid "No program specified."
 msgstr "Nebyl zadán program."
-
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "Automaticky rozeznat Unicode"
