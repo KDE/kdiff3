@@ -1930,11 +1930,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Detektera automatiskt Unicode</guilabel
+>Detektera automatiskt</guilabel
 ></term
 ><listitem
 ><para
->Alternativet försöker använda BOM eller metadata från XML/HTML-dokument för att detektera Unicode-kodning. Misslyckas det kontrollerar det om ett kort prov från början av en fil kan tolkas som UTF-8. Om kontrollen går igenom används UTF-8. Annars återgår det till den användarutvalda kodaren. Bara UTF-8 stöds utan när BOM eller metadata inte finns. </para
+>Alternativet försöker använda BOM eller metadata från XML/HTML-dokument för att detektera kodning. Misslyckas det kontrollerar det om ett kort prov från början av en fil kan tolkas som UTF-8. Om kontrollen går igenom används UTF-8. Annars återgår det till den användarutvalda kodaren. Bara UTF-8 stöds utan när BOM eller metadata inte finns. </para
 ></listitem
 ></varlistentry>
     <varlistentry

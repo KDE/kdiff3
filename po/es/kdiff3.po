@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-30 00:44+0000\n"
-"PO-Revision-Date: 2023-10-22 15:16+0100\n"
+"PO-Revision-Date: 2023-11-02 01:19+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -186,13 +186,12 @@ msgstr "Abrir archivo"
 #: difftextwindow.cpp:2122 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
-msgstr "Unicode, 8 bit"
+msgstr "Unicode, 8 bits"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bit"
+msgstr "Unicode, 8 bits (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -3147,27 +3146,20 @@ msgid "File Encoding for A:"
 msgstr "Codificación de archivo para A:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Si está activada la codificación Unicode (UTF-16 ó UTF-8) se detectará.\n"
-"Sino se detecta la codificación del archivo se utilizará la codificación "
+"Si está activada, la codificación se detectará automáticamente.\n"
+"Si no puede detectar la codificación del archivo, se usará la codificación "
 "seleccionada como alternativa.\n"
-"(La detección Unicode depende de los primeros bytes de un archivo)."
+"(La detección de Unicode depende de los primeros bytes de un archivo)."
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "Detectar automáticamente"
 

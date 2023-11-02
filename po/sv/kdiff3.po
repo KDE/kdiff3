@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-30 00:44+0000\n"
-"PO-Revision-Date: 2023-10-23 21:18+0200\n"
+"PO-Revision-Date: 2023-11-01 07:31+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -179,10 +179,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bitar"
 
 #: difftextwindow.cpp:2123
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bitar"
+msgstr "Unicode, 8 bitar (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -3101,27 +3100,20 @@ msgid "File Encoding for A:"
 msgstr "Filkodning för A:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Om aktiverad detekteras Unicode-kodning (UTF-16 eller UTF-8).\n"
-"Om filens kodning inte kan detekteras, används den valda kodningen som "
-"reserv.\n"
-"(Detektering av Unicode beror på den första byten i en fil.)"
+"Om aktiverad detekteras kodningen automatiskt.\n"
+"Om filens kodning inte kan detekteras automatiskt, används den valda "
+"kodningen som reserv.\n"
+"(Detektering av Unicode beror på de första byte-värdena i en fil.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "Detektera automatiskt"
 
