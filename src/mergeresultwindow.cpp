@@ -2021,8 +2021,8 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             break;
         }
         case Qt::Key_Backspace: {
-            if(deleteSelection2(str, x, y, mbIt, melIt)) break;
-            if(!melIt->isEditableText()) break;
+            if(deleteSelection2(str, x, y, mbIt, melIt) || !melIt->isEditableText()) break;
+
             if(x == 0)
             {
                 if(y > 0)
