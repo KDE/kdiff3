@@ -9,6 +9,7 @@
 // clang-format on
 
 #ifndef MERGEEDITLINE_H
+#define MERGEEDITLINE_H
 
 #include "diff.h"
 #include "LineRef.h"
