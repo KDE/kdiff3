@@ -18,6 +18,7 @@
 #include "options.h"
 #include "RLPainter.h"
 #include "TypeUtils.h"
+#include "UndoRecord.h"
 #include "Utils.h"
 
 #include <memory>
@@ -2454,6 +2455,7 @@ void MergeResultWindow::deleteSelection()
 
     setModified();
 
+    std::shared_ptr<UndoRecord> undoRec;
     LineRef line = 0;
     MergeBlockList::iterator mbItFirst;
     MergeEditLineList::iterator melItFirst;
@@ -2498,6 +2500,7 @@ void MergeResultWindow::deleteSelection()
             {
                 const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
 
+                undoRec = std::make_shared<UndoRecord>(mb, m_selection);
                 QtSizeType firstPosInLine = m_selection.firstPosInLine(line);
                 QtSizeType lastPosInLine = m_selection.lastPosInLine(line);
 
