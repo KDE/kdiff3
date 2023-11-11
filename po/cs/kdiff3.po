@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2013, 2014, 2015, 2017, 2018, 2019, 2020.
+# SPDX-FileCopyrightText: 2010, 2011, 2013, 2014, 2015, 2017, 2018, 2019, 2020, 2023 Vít Pelčák <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
 #
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2023-08-07 11:45+0200\n"
+"PO-Revision-Date: 2023-11-10 16:10+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,13 +38,13 @@ msgstr "Získávám stav souboru: %1"
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr ""
+msgstr "Čtu soubor: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr ""
+msgstr "Zapisuji soubor: %1"
 
 #: DefaultFileAccessJobHandler.cpp:193
 #, kde-format
@@ -55,19 +55,19 @@ msgstr "Nedostatek paměti"
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr ""
+msgstr "Vytvářím složku: %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr ""
+msgstr "Odstraňuji složku: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr ""
+msgstr "Odstraňuji soubor: %1"
 
 #: DefaultFileAccessJobHandler.cpp:296
 #, kde-format
@@ -182,7 +182,7 @@ msgstr "Unicode, 8 bit"
 #: difftextwindow.cpp:2123
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr ""
+msgstr "Unicode, 8 bit (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
@@ -1113,7 +1113,7 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr "Textový štítek"
+msgstr "Textový popisek"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
@@ -3098,6 +3098,10 @@ msgid ""
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
+"Pokud je volba zapnuta, kódování bude automaticky rozeznáno.\n"
+"Pokud kódování nepůjde rozeznat automaticky, pak bude vybrané kódování "
+"použito jako náhradní.\n"
+"(Detekce Unicode závisí na prvních bajtech souboru.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
 #, kde-format
