@@ -1400,7 +1400,17 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
 
     if(m_scrollDeltaX != 0 || m_scrollDeltaY != 0)
     {
-        m_selection.end(m_selection.getLastLine() + m_scrollDeltaY, m_selection.getLastPos() + m_scrollDeltaX);
+        QtSizeType newPos = m_selection.getLastPos() + m_scrollDeltaX;
+        try
+        {
+            LineRef newLine = m_selection.getLastLine() + m_scrollDeltaY;
+            m_selection.end(newLine, newPos > 0 ? newPos : 0);
+        }
+        catch(const std::system_error&)
+        {
+            m_selection.end(LineRef::invalid, newPos > 0 ? newPos : 0);
+        }
+
         Q_EMIT scrollMergeResultWindow(m_scrollDeltaX, m_scrollDeltaY);
         killTimer(m_delayedDrawTimer);
         m_delayedDrawTimer = startTimer(50);
@@ -1721,6 +1731,8 @@ LineRef MergeResultWindow::convertToLine(qint32 y)
     constexpr qint32 topLineYOffset = 0;
 
     qint32 yOffset = topLineYOffset - m_firstLine * fontHeight;
+    if(yOffset > y)
+        return LineRef::invalid;
 
     const LineRef line = std::min((y - yOffset) / fontHeight, m_nofLines - 1);
     return line;
