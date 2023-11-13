@@ -823,7 +823,17 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
     if(d->m_scrollDeltaX != 0 || d->m_scrollDeltaY != 0)
     {
-        d->m_selection.end(d->m_selection.getLastLine() + d->m_scrollDeltaY, d->m_selection.getLastPos() + d->m_scrollDeltaX);
+        QtSizeType newPos = d->m_selection.getLastPos() + d->m_scrollDeltaX;
+        try
+        {
+            LineRef newLine = d->m_selection.getLastLine() + d->m_scrollDeltaY;
+
+            d->m_selection.end(newLine, newPos > 0 ? newPos : 0);
+        }
+        catch(const std::system_error&)
+        {
+            d->m_selection.end(LineRef::invalid, newPos > 0 ? newPos : 0);
+        }
         Q_EMIT scrollDiffTextWindow(d->m_scrollDeltaX, d->m_scrollDeltaY);
         killTimer(d->m_delayedDrawTimer);
         d->m_delayedDrawTimer = startTimer(50);
@@ -842,9 +852,13 @@ void DiffTextWindow::convertToLinePos(qint32 x, qint32 y, LineRef& line, qint32&
     const QFontMetrics& fm = fontMetrics();
     qint32 fontHeight = fm.lineSpacing();
 
-    qint32 yOffset = -d->m_firstLine * fontHeight;
+    qint32 yOffset = d->m_firstLine * fontHeight;
 
-    line = (y - yOffset) / fontHeight;
+    if((y + yOffset) >= 0)
+        line = (y + yOffset) / fontHeight;
+    else
+        line = LineRef::invalid;
+
     if(line.isValid() && (!d->getOptions()->wordWrapOn() || line < d->m_diff3WrapLineVector.count()))
     {
         QString s = d->getLineString(line);
