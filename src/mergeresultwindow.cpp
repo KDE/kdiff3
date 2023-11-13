@@ -2457,8 +2457,7 @@ void MergeResultWindow::deleteSelection()
 
     std::shared_ptr<UndoRecord> undoRec;
     LineRef line = 0;
-    MergeBlockList::iterator mbItFirst;
-    MergeEditLineList::iterator melItFirst;
+    std::optional<MergeEditLineList::iterator> melItFirst;
     QString firstLineString;
 
     LineRef firstLine;
@@ -2484,11 +2483,9 @@ void MergeResultWindow::deleteSelection()
         return; // Nothing to delete.
     }
 
-    MergeBlockList::iterator mbIt;
     line = 0;
-    for(mbIt = m_mergeBlockList.begin(); mbIt != m_mergeBlockList.end(); ++mbIt)
+    for(MergeBlock& mb: m_mergeBlockList)
     {
-        MergeBlock& mb = *mbIt;
         MergeEditLineList::iterator melIt, melIt1;
         for(melIt = mb.list().begin(); melIt != mb.list().end();)
         {
@@ -2506,7 +2503,6 @@ void MergeResultWindow::deleteSelection()
 
                 if(line == firstLine)
                 {
-                    mbItFirst = mbIt;
                     melItFirst = melIt;
                     QtSizeType pos = firstPosInLine;
                     firstLineString = lineString.left(pos);
@@ -2514,10 +2510,11 @@ void MergeResultWindow::deleteSelection()
 
                 if(line == lastLine)
                 {
+                    assert(melItFirst.has_value());
                     // This is the last line in the selection
                     QtSizeType pos = lastPosInLine;
                     firstLineString += QStringView(lineString).mid(pos); // rest of line
-                    melItFirst->setString(firstLineString);
+                    melItFirst.value_or(melIt)->setString(firstLineString);
                 }
 
                 if(line != firstLine || (m_selection.endPos() - m_selection.beginPos()) == lineString.length())
