@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:38+0000\n"
+"POT-Creation-Date: 2023-11-14 00:43+0000\n"
 "PO-Revision-Date: 2009-03-20 10:56+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -121,76 +121,76 @@ msgstr ""
 msgid "File %1: Line not available"
 msgstr "लाइन नइ मिलत हे"
 
-#: difftextwindow.cpp:1944
+#: difftextwindow.cpp:1958
 #, kde-format
 msgid "Encoding:"
 msgstr ""
 
-#: difftextwindow.cpp:1948 mergeresultwindow.cpp:2797 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2809 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "लकीर खतम होए के सैलीः"
 
-#: difftextwindow.cpp:1973
+#: difftextwindow.cpp:1987
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "अ (बेस):"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1989
 #, kde-format
 msgid "Encoding: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2843
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2855
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2842
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2854
 #, kde-format
 msgid "Unix"
 msgstr ""
 
-#: difftextwindow.cpp:1976
+#: difftextwindow.cpp:1990
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "लकीर खतम होए के सैलीः"
 
-#: difftextwindow.cpp:1977
+#: difftextwindow.cpp:1991
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2005 kdiff3.cpp:942
+#: difftextwindow.cpp:2019 kdiff3.cpp:942
 #, kde-format
 msgid "Top line"
 msgstr "सबसे ऊपर के लाइन"
 
-#: difftextwindow.cpp:2014
+#: difftextwindow.cpp:2028
 #, kde-format
 msgid "End"
 msgstr "आखरी"
 
-#: difftextwindow.cpp:2070 smalldialogs.cpp:163
+#: difftextwindow.cpp:2084 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "फाइल मन ल खोलत हे..."
 
-#: difftextwindow.cpp:2122 optiondialog.cpp:389
+#: difftextwindow.cpp:2136 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "युनिकोड, 8 बिट"
 
-#: difftextwindow.cpp:2123
+#: difftextwindow.cpp:2137
 #, fuzzy, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
 msgstr "युनिकोड, 8 बिट"
 
-#: difftextwindow.cpp:2139
+#: difftextwindow.cpp:2153
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -391,7 +391,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
-#: mergeresultwindow.cpp:330 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
+#: mergeresultwindow.cpp:331 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1987,57 +1987,57 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "फाइल के तुलना करत हे ..."
 
-#: mergeresultwindow.cpp:144
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "सब्बो जगह अ चुनव"
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "सब्बो जगह ब चुनव"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "सब्बो जगह स चुनव"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "सब्बो समाधान-रहित आपसी विरोधों बर अ चुनव"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "सब्बो समाधान-रहित आपसी विरोधों बर ब चुनव"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "सब्बो समाधान-रहित आपसी विरोधों बर स चुनव"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "सब्बो समाधान-रहित सफेद-जगह आपसी विरोधों बर अ चुनव"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "सब्बो समाधान-रहित सफेद-जगह आपसी विरोधों बर ब चुनव"
 
-#: mergeresultwindow.cpp:152
+#: mergeresultwindow.cpp:153
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "सब्बो समाधान-रहित सफेद-जगह आपसी विरोधों बर स चुनव"
 
-#: mergeresultwindow.cpp:265
+#: mergeresultwindow.cpp:266
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 
-#: mergeresultwindow.cpp:328
+#: mergeresultwindow.cpp:329
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2046,29 +2046,29 @@ msgstr ""
 "आउटपुट सुधारे जा गे हे.\n"
 "यदि आप मन जारी रखथो तहां आप मन के बदलाव खो जाही."
 
-#: mergeresultwindow.cpp:772 pdiff.cpp:734
+#: mergeresultwindow.cpp:773 pdiff.cpp:734
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "सब्बो इनपुट फाइल बाइनरी समान हे."
 
-#: mergeresultwindow.cpp:774
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "सब्बो इनपुट फाइल मन ल एके पाठ रखे हे."
 
-#: mergeresultwindow.cpp:778 mergeresultwindow.cpp:782
-#: mergeresultwindow.cpp:786 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:792
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2077,27 +2077,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr "आपसी विरोध"
 
-#: mergeresultwindow.cpp:1522
+#: mergeresultwindow.cpp:1533
 #, kde-format
 msgid "<No src line>"
 msgstr "<कोई स्रोत लकीर नइ>"
 
-#: mergeresultwindow.cpp:1530
+#: mergeresultwindow.cpp:1541
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<विरोधाभास (सिरिफ सफेद जगह) सम्मिलित करव>"
 
-#: mergeresultwindow.cpp:1532 mergeresultwindow.cpp:2403
+#: mergeresultwindow.cpp:1543 mergeresultwindow.cpp:2416
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<विरोधाभास सम्मिलित करव>"
 
-#: mergeresultwindow.cpp:2623
+#: mergeresultwindow.cpp:2635
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2109,14 +2109,14 @@ msgstr ""
 "अब तक सब्बो विरोधाभासों के समाधान नइ करे गे हे.\n"
 "फाइल सहेजे नइ गिस.\n"
 
-#: mergeresultwindow.cpp:2625 mergeresultwindow.cpp:2634
+#: mergeresultwindow.cpp:2637 mergeresultwindow.cpp:2646
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "विरोधाभास डेरी "
 
-#: mergeresultwindow.cpp:2632
+#: mergeresultwindow.cpp:2644
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2124,7 +2124,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2646
+#: mergeresultwindow.cpp:2658
 #, kde-format
 msgid ""
 "\n"
@@ -2132,48 +2132,48 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2694
+#: mergeresultwindow.cpp:2658 mergeresultwindow.cpp:2706
 #, kde-format
 msgid "File Save Error"
 msgstr "फाइल सहेजे मं गलती"
 
-#: mergeresultwindow.cpp:2694
+#: mergeresultwindow.cpp:2706
 #, kde-format
 msgid "Error while writing."
 msgstr "लिखे के समय गलती."
 
-#: mergeresultwindow.cpp:2769
+#: mergeresultwindow.cpp:2781
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "आउटपुट"
 
-#: mergeresultwindow.cpp:2782 mergeresultwindow.cpp:2972
+#: mergeresultwindow.cpp:2794 mergeresultwindow.cpp:2984
 #, kde-format
 msgid "[Modified]"
 msgstr "[परिवर्धित]"
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2801
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2889
+#: mergeresultwindow.cpp:2901
 #, fuzzy, kde-format
 msgid "Conflict"
 msgstr "आपसी विरोध"
 
-#: mergeresultwindow.cpp:2919
+#: mergeresultwindow.cpp:2931
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2921
+#: mergeresultwindow.cpp:2933
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2923
+#: mergeresultwindow.cpp:2935
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
