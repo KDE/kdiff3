@@ -1950,11 +1950,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Rileva Unicode automaticamente</guilabel
+>Rileva automaticamente</guilabel
 ></term
 ><listitem
 ><para
->Questa opzione tenta di utilizzare i dati BOM o i metadati dai documenti XML/HTML per rilevare la codifica Unicode. Se non vi riesce, controllerà se un breve campione preso dall'inizio del file può essere interpretato come UTF-8. Se questo controllo passa, verrà utilizzata la codifica UTF-8. In caso contrario, tornerà a usare la codifica selezionata dall'utente. In assenza di dati BOM o metadati, è supportata solo la codifica UTF-8. </para
+>Questa opzione tenta di utilizzare i dati BOM o i metadati dai documenti XML/HTML per rilevare la codifica. Se non vi riesce, controllerà se un breve campione preso dall'inizio del file può essere interpretato come UTF-8. Se questo controllo passa, verrà utilizzata la codifica UTF-8. In caso contrario, tornerà a usare la codifica selezionata dall'utente. In assenza di dati BOM o metadati, è supportata solo la codifica UTF-8. </para
 ></listitem
 ></varlistentry>
     <varlistentry
