@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-14 00:43+0000\n"
-"PO-Revision-Date: 2023-10-21 13:54\n"
+"PO-Revision-Date: 2023-11-19 03:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -33,17 +33,13 @@ msgid "Getting file status: %1"
 msgstr "正在获取文件状态：%1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "正在读取文件：%1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "正在写入文件：%1"
@@ -54,25 +50,19 @@ msgid "Out of memory"
 msgstr "内存不足"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "正在创建文件夹：%1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "正在删除文件夹：%1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "正在删除文件：%1"
@@ -188,10 +178,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8位"
 
 #: difftextwindow.cpp:2137
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8位"
+msgstr ""
 
 #: difftextwindow.cpp:2153
 #, kde-format
@@ -3033,28 +3022,18 @@ msgid "File Encoding for A:"
 msgstr "A 的文字编码："
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"如果启用，将会检测 Unicode (UTF-16 或 UTF-8) 编码。\n"
-"如果文件非 Unicode 编码，将使用选择的编码作为后备。\n"
-"(Unicode 检测取决于文件的第一个字节)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
-msgstr "自动检测"
+msgstr ""
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3598,6 +3577,3 @@ msgstr "参数包含意外的引号字符。"
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
-
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "自动检测 Unicode"
