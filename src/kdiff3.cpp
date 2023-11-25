@@ -461,7 +461,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     //Should not fail ever.
     assert(m_bDirCompare == m_sd1->isDir());
-    if((m_bDirCompare && (!m_sd2->isDir() || !m_sd3->isDir())) ||
+    if((m_bDirCompare && (!m_sd2->isDir() || !(m_sd3->isValid() && m_sd3->isDir()))) ||
        (!m_bDirCompare && (m_sd2->isDir() || m_sd3->isDir())))
     {
         KMessageBox::error(this, i18nc("Error message", "Can't compare file with folder."),
