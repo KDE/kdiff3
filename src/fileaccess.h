@@ -104,7 +104,7 @@ class FileAccess
     virtual bool writeFile(const void* pSrcBuffer, qint64 length);
     bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
-                 const QString& dirAntiPattern, bool bFollowDirLinks, IgnoreList& ignoreList);
+                 const QString& dirAntiPattern, bool bFollowDirLinks, IgnoreList& ignoreList) const;
     virtual bool copyFile(const QString& destUrl);
     virtual bool createBackup(const QString& bakExtension);
 

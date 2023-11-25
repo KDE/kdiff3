@@ -365,10 +365,8 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
         m_mergeBlockList.updateDefaults(defaultSelector, bConflictsOnly, bWhiteSpaceOnly);
     }
 
-    MergeBlockList::iterator mbIt;
-    for(mbIt = m_mergeBlockList.begin(); mbIt != m_mergeBlockList.end(); ++mbIt)
+    for(MergeBlock& mb: m_mergeBlockList)
     {
-        MergeBlock& mb = *mbIt;
         // Remove all lines that are empty, because no src lines are there.
         mb.removeEmptySource();
     }

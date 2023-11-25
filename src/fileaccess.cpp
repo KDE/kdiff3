@@ -895,7 +895,7 @@ bool FileAccess::removeFile()
 
 bool FileAccess::listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
-                         bool bFollowDirLinks, IgnoreList& ignoreList)
+                         bool bFollowDirLinks, IgnoreList& ignoreList) const
 {
     assert(mJobHandler != nullptr);
     return mJobHandler->listDir(pDirList, bRecursive, bFindHidden, filePattern, fileAntiPattern,
