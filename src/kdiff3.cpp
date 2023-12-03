@@ -588,6 +588,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
 KDiff3App::~KDiff3App()
 {
+    delete m_totalDiffStatus;
+
     if(mRunnablesStarted)
     {
         g_pProgressDialog->cancel(ProgressDialog::eExit);
