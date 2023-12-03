@@ -279,21 +279,7 @@ bool SourceData::FileData::readFile(const QString& filename)
     }
 
     FileAccess fa(filename);
-
-    if(!fa.isNormal())
-        return true;
-
-    mDataSize = fa.sizeForReading();
-    m_pBuf = std::make_unique<char[]>(mDataSize + 100); // Alloc 100 byte extra: Safety hack, not nice but does no harm.
-                                                        // Some extra bytes at the end of the buffer are needed by
-                                                        // the diff algorithm. See also GnuDiff::diff_2_files().
-    bool bSuccess = fa.readFile(m_pBuf.get(), mDataSize);
-    if(!bSuccess)
-    {
-        m_pBuf = nullptr;
-        mDataSize = 0;
-    }
-    return bSuccess;
+    return readFile(fa);
 }
 
 bool SourceData::saveNormalDataAs(const QString& fileName)
