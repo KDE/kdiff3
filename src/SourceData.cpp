@@ -413,6 +413,15 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         }
         else
         {
+            unsigned char b;
+            //Don't fail the preprocessor command if the file can't be read.
+            if(!faIn.readFile(&b, 1))
+            {
+                mErrors.append(faIn.getStatusText());
+                mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
+                return;
+            }
+
             QTemporaryFile tmpInPPFile;
             QString fileNameInPP = fileNameIn1;
 
@@ -446,13 +455,6 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
             {
-                //Don't fail the preprocessor command if the file can't be read.
-                if(!m_normalData.readFile(faIn))
-                {
-                    mErrors.append(faIn.getStatusText());
-                    mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
-                    return;
-                }
                 mErrors.append(
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe preprocessing command will be disabled now.", ppCmd) +
