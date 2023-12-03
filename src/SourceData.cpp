@@ -391,6 +391,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
     }
     const char* pEncoding1 = getEncoding();
     const char* pEncoding2 = getEncoding();
+    const QString overSizedFile = i18nc("Read error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1);
 
     m_normalData.reset();
     m_lmppData.reset();
@@ -464,7 +465,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
 
         if(!m_normalData.preprocess(pEncoding1, false))
         {
-            mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+            mErrors.append(overSizedFile);
             return;
         }
         //exit early for non text data further processing assumes a text file as input
@@ -533,7 +534,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
 
     if(!m_lmppData.preprocess(pEncoding2, true))
     {
-        mErrors.append(i18nc("Read error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1));
+        mErrors.append(overSizedFile);
         return;
     }
 
