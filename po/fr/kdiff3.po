@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-13 02:30+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2023-04-13 20:16+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -3677,12 +3677,12 @@ msgstr "Depuis le presse-papiers"
 msgid "%1 is not a normal file."
 msgstr "« %1 » n'est pas un fichier normal."
 
-#: SourceData.cpp:453
+#: SourceData.cpp:421
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Le fichier temporaire est : %1"
 
-#: SourceData.cpp:457
+#: SourceData.cpp:459
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3697,12 +3697,12 @@ msgstr ""
 "\n"
 "La commande de prétraitement sera désactivée dorénavant."
 
-#: SourceData.cpp:468
+#: SourceData.cpp:470
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "Le fichier %1 est trop volumineux pour être traité. Il sera sauté."
 
-#: SourceData.cpp:512
+#: SourceData.cpp:514
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3719,13 +3719,13 @@ msgstr ""
 "La commande de prétraitement de mise en correspondance de lignes sera "
 "désactivée dorénavant."
 
-#: SourceData.cpp:518
+#: SourceData.cpp:520
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Impossible de lire le fichier : %1"
 
-#: SourceData.cpp:537
+#: SourceData.cpp:539
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."

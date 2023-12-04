@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-13 02:30+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -3665,12 +3665,12 @@ msgstr "Lõikepuhvrist"
 msgid "%1 is not a normal file."
 msgstr "%1 ei ole tavaline fail."
 
-#: SourceData.cpp:453
+#: SourceData.cpp:421
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Ajutine fail on: %1"
 
-#: SourceData.cpp:457
+#: SourceData.cpp:459
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3685,12 +3685,12 @@ msgstr ""
 "\n"
 "Praegu lülitatakse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:468
+#: SourceData.cpp:470
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "Fail %1 on töötlemiseks liiga suur. Jäetakse vahele."
 
-#: SourceData.cpp:512
+#: SourceData.cpp:514
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3705,14 +3705,14 @@ msgstr ""
 "\n"
 "Praegu lülitatakse reasobivuse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:518
+#: SourceData.cpp:520
 #, fuzzy, kde-format
 #| msgid "Failed to read file: %1"
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Faili lugemine: %1"
 
-#: SourceData.cpp:537
+#: SourceData.cpp:539
 #, fuzzy, kde-format
 #| msgid "File %1 too large to process. Skipping."
 msgctxt "Read error message. %1 = filepath"

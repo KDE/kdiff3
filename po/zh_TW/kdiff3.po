@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-13 02:30+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -3468,12 +3468,12 @@ msgstr "從剪貼簿"
 msgid "%1 is not a normal file."
 msgstr "連結與一般檔案混合。"
 
-#: SourceData.cpp:453
+#: SourceData.cpp:421
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:457
+#: SourceData.cpp:459
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3488,12 +3488,12 @@ msgstr ""
 "\n"
 "預處理指令將會被關閉。"
 
-#: SourceData.cpp:468
+#: SourceData.cpp:470
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:512
+#: SourceData.cpp:514
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3508,14 +3508,14 @@ msgstr ""
 "\n"
 "逐行比對預處理指令將被關閉。"
 
-#: SourceData.cpp:518
+#: SourceData.cpp:520
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "正在讀取檔案：%1"
 
-#: SourceData.cpp:537
+#: SourceData.cpp:539
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."

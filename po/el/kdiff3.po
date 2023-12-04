@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-13 02:30+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2021-06-14 16:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -3717,12 +3717,12 @@ msgstr "Από το πρόχειρο"
 msgid "%1 is not a normal file."
 msgstr "Το %1 δεν είναι κανονικό αρχείο."
 
-#: SourceData.cpp:453
+#: SourceData.cpp:421
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Προσωρινό αρχείο είναι το: %1"
 
-#: SourceData.cpp:457
+#: SourceData.cpp:459
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3737,12 +3737,12 @@ msgstr ""
 "\n"
 "Η εντολή προεπεξεργασίας θα απενεργοποιηθεί τώρα."
 
-#: SourceData.cpp:468
+#: SourceData.cpp:470
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "Το αρχείο %1 είναι πολύ μεγάλο για επεξεργασία. Παραλείπεται."
 
-#: SourceData.cpp:512
+#: SourceData.cpp:514
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3758,14 +3758,14 @@ msgstr ""
 "\n"
 "Η δυνατότητα προεπεξεργασίας αντιστοίχησης γραμμών θα απενεργοποιηθεί τώρα."
 
-#: SourceData.cpp:518
+#: SourceData.cpp:520
 #, fuzzy, kde-format
 #| msgid "Failed to read file: %1"
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Αποτυχία ανάγνωσης αρχείου: %1"
 
-#: SourceData.cpp:537
+#: SourceData.cpp:539
 #, fuzzy, kde-format
 #| msgid "File %1 too large to process. Skipping."
 msgctxt "Read error message. %1 = filepath"

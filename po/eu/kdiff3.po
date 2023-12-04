@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-13 02:30+0000\n"
+"POT-Creation-Date: 2023-12-04 02:28+0000\n"
 "PO-Revision-Date: 2023-10-29 22:59+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -3622,12 +3622,12 @@ msgstr "Arbeletik"
 msgid "%1 is not a normal file."
 msgstr "%1 ez da fitxategi arrunta."
 
-#: SourceData.cpp:453
+#: SourceData.cpp:421
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Aldi baterako fitxategia da: %1"
 
-#: SourceData.cpp:457
+#: SourceData.cpp:459
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3642,12 +3642,12 @@ msgstr ""
 "\n"
 "Aurreprozesatzeko komandoa desgaitua egonen da orain."
 
-#: SourceData.cpp:468
+#: SourceData.cpp:470
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "%1 fitxategia prozesatzeko handiegia. Alboratzen."
 
-#: SourceData.cpp:512
+#: SourceData.cpp:514
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3663,13 +3663,13 @@ msgstr ""
 "\n"
 "Lerro-bat-etortze-aurreprozesatzeko komandoa desgaitu egingo da orain."
 
-#: SourceData.cpp:518
+#: SourceData.cpp:520
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Fitxategia irakurtzea huts egin du: %1"
 
-#: SourceData.cpp:537
+#: SourceData.cpp:539
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
