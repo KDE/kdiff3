@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-26 00:43+0000\n"
+"POT-Creation-Date: 2023-12-04 00:42+0000\n"
 "PO-Revision-Date: 2023-06-25 09:51+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -167,7 +167,7 @@ msgstr "Gaya akhir baris: %1"
 msgid "Unknown"
 msgstr "Tidak diketahui"
 
-#: difftextwindow.cpp:2019 kdiff3.cpp:942
+#: difftextwindow.cpp:2019 kdiff3.cpp:944
 #, kde-format
 msgid "Top line"
 msgstr "Baris atas"
@@ -369,7 +369,7 @@ msgstr ""
 "Anda saat ini sedang melakukan penggabungan folder. Apakah Anda yakin ingin "
 "membatalkan penggabungan dan memindai ulang folder?"
 
-#: directorymergewindow.cpp:688 kdiff3.cpp:798 kdiff3.cpp:808 kdiff3.cpp:820
+#: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
 #: mergeresultwindow.cpp:331 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
 #, kde-format
 msgctxt "Error dialog title"
@@ -1201,87 +1201,87 @@ msgstr "Pembukaan file tersebut agal:"
 msgid "File open error"
 msgstr "Galat membuka file"
 
-#: kdiff3.cpp:612
+#: kdiff3.cpp:614
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Membuka dokumen untuk perbandingan..."
 
-#: kdiff3.cpp:614
+#: kdiff3.cpp:616
 #, kde-format
 msgid "Reload"
 msgstr "Muat ulang"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:619
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "Simpan hasil penggabungan. Semua bentrok mustinya dibereskan!"
 
-#: kdiff3.cpp:619
+#: kdiff3.cpp:621
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Simpan dokumen saat ini sebagai..."
 
-#: kdiff3.cpp:622
+#: kdiff3.cpp:624
 #, kde-format
 msgid "Print the differences"
 msgstr "Cetak perbedaan"
 
-#: kdiff3.cpp:625
+#: kdiff3.cpp:627
 #, kde-format
 msgid "Quits the application"
 msgstr "Keluarkan aplikasi"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:631
 #, kde-format
 msgid "Undo last action."
 msgstr "Urungkan aksi terakhir."
 
-#: kdiff3.cpp:633
+#: kdiff3.cpp:635
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Memotong bagian yang dipilih dan menaruhnya ke papan klip"
 
-#: kdiff3.cpp:636
+#: kdiff3.cpp:638
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Menyalin bagian yang dipilih ke papan klip"
 
-#: kdiff3.cpp:638
+#: kdiff3.cpp:640
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Menempel konten papan klip ke posisi saat ini"
 
-#: kdiff3.cpp:641
+#: kdiff3.cpp:643
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Pilih apa saja di jendela saat ini"
 
-#: kdiff3.cpp:644
+#: kdiff3.cpp:646
 #, kde-format
 msgid "Search for a string"
 msgstr "Mencari sebuah string"
 
-#: kdiff3.cpp:646
+#: kdiff3.cpp:648
 #, kde-format
 msgid "Search again for the string"
 msgstr "Mencari string lagi"
 
-#: kdiff3.cpp:649
+#: kdiff3.cpp:651
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Memfungsikan/menonfungsikanbilah status "
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:654
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Atur KDiff3..."
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:674
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Pergi ke Delta Saat Ini"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:674
 #, kde-format
 msgid ""
 "Current\n"
@@ -1290,12 +1290,12 @@ msgstr ""
 "Delta\n"
 "Saat Ini"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:676
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Pergi ke Delta Pertama"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:676
 #, kde-format
 msgid ""
 "First\n"
@@ -1304,12 +1304,12 @@ msgstr ""
 "Delta\n"
 "Pertama"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:678
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Pergi ke Delta Terakhir"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:678
 #, kde-format
 msgid ""
 "Last\n"
@@ -1318,7 +1318,7 @@ msgstr ""
 "Delta\n"
 "Terakhir"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:680
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1326,7 +1326,7 @@ msgstr ""
 "(Melewati spasi putih yang berbeda ketika \"Tampilkan Spasi Putih\" "
 "dinonfungsikan.)"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:681
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1336,12 +1336,12 @@ msgstr ""
 "(Jangan lewati spasi putih yang berbeda bahkan ketika \"Tampilkan Spasi Putih"
 "\" dinonfungsikan.)"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:682
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Pergi ke Delta Sebelumnya"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:682
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1350,12 +1350,12 @@ msgstr ""
 "Delta\n"
 "Sebelumnya"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Pergi ke Delta Selanjutnya"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:684
 #, kde-format
 msgid ""
 "Next\n"
@@ -1364,12 +1364,12 @@ msgstr ""
 "Delta\n"
 "Selanjutnya"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Pergi ke Bentrokan Sebelumnya"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:686
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1378,12 +1378,12 @@ msgstr ""
 "Bentrokan\n"
 "Sebelumnya"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Pergi ke Bentrokan Selanjutnya"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:688
 #, kde-format
 msgid ""
 "Next\n"
@@ -1392,12 +1392,12 @@ msgstr ""
 "Bentrokan\n"
 "Selanjutnya"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Pergi ke Bentrokan Tak Terbereskan Sebelumnya"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:690
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1406,12 +1406,12 @@ msgstr ""
 "Tak Terbereskan\n"
 "Sebelumnya"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:692
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Pergi ke Bentrokan Tak Terbereskan Selanjutnya"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:692
 #, kde-format
 msgid ""
 "Next\n"
@@ -1420,13 +1420,13 @@ msgstr ""
 "Tak Terbereskan\n"
 "Selanjutnya"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Pergi ke Baris"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1436,19 +1436,19 @@ msgstr ""
 "Ke\n"
 "Baris"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Menuju baris yang ditentukan."
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Pilih Baris(-baris) Dari A"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1458,13 +1458,13 @@ msgstr ""
 "Memilih\n"
 "A"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Pilih Baris(-baris) Dari B"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1474,13 +1474,13 @@ msgstr ""
 "Memilih\n"
 "B"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Pilih Baris(-baris) Dari C"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1490,7 +1490,7 @@ msgstr ""
 "Memilih\n"
 "C"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:699
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
@@ -1498,7 +1498,7 @@ msgstr ""
 "Secara Otomatis Pergi ke Bentrokan Tak Terbereskan Selanjutnya Setelah "
 "Pemilihan Sumber"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:699
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1508,12 +1508,12 @@ msgstr ""
 "Auto\n"
 "Selanjutnya"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Tampilkan Karakter Tabulator && Spasi"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:701
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1521,12 +1521,12 @@ msgid ""
 "Characters"
 msgstr ""
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Show White Space"
 msgstr "Tampilkan Spasi Putih"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:702
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1534,12 +1534,12 @@ msgid ""
 "Deltas"
 msgstr ""
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Tampilkan Baris Nomor"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:704
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1547,138 +1547,138 @@ msgid ""
 "Numbers"
 msgstr ""
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Secara Otomatis Bereskan Bentrokan Sederhana"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Atur Delta-delta untuk Bentrokan"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Jalankan Ekspresi Reguler Auto Penggabungan"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Secara Otomatis Bereskan Bentrokan Histori"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Belah Diff di Pemilihan"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:711
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Ikut Dengan Diff Yang Dipilih"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Show Window A"
 msgstr "Tampilkan Jendela A"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Show Window B"
 msgstr "Tampilkan Jendela B"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:715
 #, kde-format
 msgid "Show Window C"
 msgstr "Tampilkan Jendela C"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:717
 #, kde-format
 msgid "Normal Overview"
 msgstr "Ikhtisar Normal"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:718
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Ikhtisar A vs. B"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:719
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Ikhtisar A vs. C"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:720
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Ikhtisar B vs. C"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:721
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Jendela Perbedaan Kemas Kata"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Tambahkan Kesejajaran Perbedaan Manual"
 
-#: kdiff3.cpp:721
+#: kdiff3.cpp:723
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Bersihkan Semua Kesejajaran Perbedaan Manual"
 
-#: kdiff3.cpp:723
+#: kdiff3.cpp:725
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Fokus Jendela Selanjutnya"
 
-#: kdiff3.cpp:724
+#: kdiff3.cpp:726
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Fokus Jendela Sebelumnya"
 
-#: kdiff3.cpp:725
+#: kdiff3.cpp:727
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Jungkit Orientasi Belah"
 
-#: kdiff3.cpp:727
+#: kdiff3.cpp:729
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Tampilan Layar Belah Teks && Folder"
 
-#: kdiff3.cpp:729
+#: kdiff3.cpp:731
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Jungkit Antar Tampilan Teks && Folder"
 
-#: kdiff3.cpp:751 kdiff3.cpp:853 kdiff3.cpp:878 kdiff3.cpp:1138 pdiff.cpp:943
+#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:943
 #: pdiff.cpp:1012 pdiff.cpp:1048 pdiff.cpp:1057 pdiff.cpp:1115 pdiff.cpp:1123
 #, kde-format
 msgid "Ready."
 msgstr "Siap."
 
-#: kdiff3.cpp:797 pdiff.cpp:1733
+#: kdiff3.cpp:799 pdiff.cpp:1733
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Hasil penggabungan tidak disimpan."
 
-#: kdiff3.cpp:799
+#: kdiff3.cpp:801
 #, kde-format
 msgid "Save && Quit"
 msgstr "Simpan && Keluar"
 
-#: kdiff3.cpp:800
+#: kdiff3.cpp:802
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Keluar Tanpa Menyimpan"
 
-#: kdiff3.cpp:808 pdiff.cpp:1744
+#: kdiff3.cpp:810 pdiff.cpp:1744
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr ""
 
-#: kdiff3.cpp:819 pdiff.cpp:858
+#: kdiff3.cpp:821 pdiff.cpp:858
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1686,58 +1686,58 @@ msgstr ""
 "Anda saat ini sedang menggabungkan folder. Apakah Anda yakin, ingin "
 "menggugurkannya?"
 
-#: kdiff3.cpp:842
+#: kdiff3.cpp:844
 #, kde-format
 msgid "Saving file..."
 msgstr "Menyimpan file..."
 
-#: kdiff3.cpp:859
+#: kdiff3.cpp:861
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Menyimpan file dengan nama file baru..."
 
-#: kdiff3.cpp:861
+#: kdiff3.cpp:863
 #, kde-format
 msgid "Save As..."
 msgstr "Simpan Sebagai..."
 
-#: kdiff3.cpp:886
+#: kdiff3.cpp:888
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Pencetakan tidak diimplementasikan."
 
-#: kdiff3.cpp:926
+#: kdiff3.cpp:928
 #, kde-format
 msgid "Printing..."
 msgstr "Mencetak..."
 
-#: kdiff3.cpp:1024
+#: kdiff3.cpp:1026
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Mencetak halaman %1 dari %2"
 
-#: kdiff3.cpp:1072
+#: kdiff3.cpp:1074
 #, kde-format
 msgid " (Selection)"
 msgstr " (Pemilihan)"
 
-#: kdiff3.cpp:1101
+#: kdiff3.cpp:1103
 #, kde-format
 msgid "Printing completed."
 msgstr "Selesai mencetak."
 
-#: kdiff3.cpp:1105
+#: kdiff3.cpp:1107
 #, kde-format
 msgid "Printing aborted."
 msgstr "Pencetakan digugurkan."
 
-#: kdiff3.cpp:1112
+#: kdiff3.cpp:1114
 #, kde-format
 msgid "Exiting..."
 msgstr "Mengeluarkan..."
 
-#: kdiff3.cpp:1122
+#: kdiff3.cpp:1124
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Jungkit bilah status..."
@@ -3517,17 +3517,23 @@ msgstr ""
 msgid "From Clipboard"
 msgstr "Dari Papan Klip"
 
-#: SourceData.cpp:359
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr ""
 
-#: SourceData.cpp:452
+#: SourceData.cpp:380
+#, kde-format
+msgctxt "Read error message. %1 = filepath"
+msgid "File %1 too large to process. Skipping."
+msgstr ""
+
+#: SourceData.cpp:407
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:456
+#: SourceData.cpp:445
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3537,12 +3543,7 @@ msgid ""
 "The preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:467
-#, kde-format
-msgid "File %1 too large to process. Skipping."
-msgstr ""
-
-#: SourceData.cpp:511
+#: SourceData.cpp:500
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3552,16 +3553,10 @@ msgid ""
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:517
+#: SourceData.cpp:506
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
-msgstr ""
-
-#: SourceData.cpp:536
-#, kde-format
-msgctxt "Read error message. %1 = filepath"
-msgid "File %1 too large to process. Skipping."
 msgstr ""
 
 #: Utils.cpp:69
