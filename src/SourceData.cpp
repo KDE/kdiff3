@@ -377,7 +377,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
     }
     const char* pEncoding1 = getEncoding();
     const char* pEncoding2 = getEncoding();
-    const QString overSizedFile = i18nc("Read error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1);
+    const QString overSizedFile = i18nc("Error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1);
 
     m_normalData.reset();
     m_lmppData.reset();
@@ -387,68 +387,78 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
 
     if(faIn.exists() && !faIn.isBrokenLink())
     {
-        // Run the first preprocessor
-        if(gOptions->m_PreProcessorCmd.isEmpty())
+        try
         {
-            // No preprocessing: Read the file directly:
-            if(!m_normalData.readFile(faIn))
+            // Run the first preprocessor
+            if(gOptions->m_PreProcessorCmd.isEmpty())
             {
-                mErrors.append(faIn.getStatusText());
-                return;
-            }
-        }
-        else
-        {
-            unsigned char b;
-            //Don't fail the preprocessor command if the file can't be read.
-            if(!faIn.readFile(&b, 1))
-            {
-                mErrors.append(faIn.getStatusText());
-                mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
-                return;
-            }
-
-            QTemporaryFile tmpInPPFile;
-            QString fileNameInPP = fileNameIn1;
-
-            if(pEncoding1 != gOptions->mEncodingPP)
-            {
-                // Before running the preprocessor convert to the format that the preprocessor expects.
-                FileAccess::createTempFile(tmpInPPFile);
-                fileNameInPP = tmpInPPFile.fileName();
-                pEncoding1 = gOptions->mEncodingPP;
-                convertFileEncoding(fileNameIn1, encoding, fileNameInPP, pEncoding1);
-            }
-
-            QString ppCmd = gOptions->m_PreProcessorCmd;
-            FileAccess::createTempFile(fileOut1);
-            fileNameOut1 = fileOut1.fileName();
-
-            QProcess ppProcess;
-            ppProcess.setStandardInputFile(fileNameInPP);
-            ppProcess.setStandardOutputFile(fileNameOut1);
-            QString program;
-            QStringList args;
-            QString errorReason = Utils::getArguments(ppCmd, program, args);
-            if(errorReason.isEmpty())
-            {
-                ppProcess.start(program, args);
-                ppProcess.waitForFinished(-1);
+                // No preprocessing: Read the file directly:
+                if(!m_normalData.readFile(faIn))
+                {
+                    mErrors.append(faIn.getStatusText());
+                    return;
+                }
             }
             else
-                errorReason = "\n(" + errorReason + ')';
-
-            bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
-            if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
             {
-                mErrors.append(
-                    i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
-                         "\n\nThe preprocessing command will be disabled now.", ppCmd) +
-                    errorReason);
-                gOptions->m_PreProcessorCmd = "";
+                unsigned char b;
+                //Don't fail the preprocessor command if the file can't be read.
+                if(!faIn.readFile(&b, 1))
+                {
+                    mErrors.append(faIn.getStatusText());
+                    mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
+                    return;
+                }
 
-                pEncoding1 = getEncoding();
+                QTemporaryFile tmpInPPFile;
+                QString fileNameInPP = fileNameIn1;
+
+                if(pEncoding1 != gOptions->mEncodingPP)
+                {
+                    // Before running the preprocessor convert to the format that the preprocessor expects.
+                    FileAccess::createTempFile(tmpInPPFile);
+                    fileNameInPP = tmpInPPFile.fileName();
+                    pEncoding1 = gOptions->mEncodingPP;
+                    convertFileEncoding(fileNameIn1, encoding, fileNameInPP, pEncoding1);
+                }
+
+                QString ppCmd = gOptions->m_PreProcessorCmd;
+                FileAccess::createTempFile(fileOut1);
+                fileNameOut1 = fileOut1.fileName();
+
+                QProcess ppProcess;
+                ppProcess.setStandardInputFile(fileNameInPP);
+                ppProcess.setStandardOutputFile(fileNameOut1);
+                QString program;
+                QStringList args;
+                QString errorReason = Utils::getArguments(ppCmd, program, args);
+                if(errorReason.isEmpty())
+                {
+                    ppProcess.start(program, args);
+                    ppProcess.waitForFinished(-1);
+                }
+                else
+                    errorReason = "\n(" + errorReason + ')';
+
+                bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
+                if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
+                {
+                    mErrors.append(
+                        i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
+                             "\n\nThe preprocessing command will be disabled now.",
+                             ppCmd) +
+                        errorReason);
+                    gOptions->m_PreProcessorCmd = "";
+
+                    pEncoding1 = getEncoding();
+                }
             }
+        }
+        catch(std::bad_alloc&)
+        {
+            m_normalData.reset();
+            mErrors.append(overSizedFile);
+            return;
         }
 
         if(!m_normalData.preprocess(pEncoding1, false))
@@ -575,136 +585,148 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         skipBytes = 0;
 
     if(mDataSize - skipBytes > limits<qint32>::max())
-        return false;
-
-    const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
-    EncodedDataStream ds(ba);
-
-    mHasBOM = skipBytes != 0;
-    ds.setEncoding(encoding);
-    ds.setGenerateByteOrderMark(skipBytes != 0);
-
-    m_bIncompleteConversion = false;
-    m_unicodeBuf->clear();
-
-    assert(m_unicodeBuf->length() == 0);
-
-    mHasEOLTermination = false;
-    bool skipNextRead = false;
-    while(!ds.atEnd())
     {
-        line.clear();
-        if(lines >= limits<LineType>::max() - 5)
+        reset();
+        return false;
+    }
+
+    try
+    {
+        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
+        EncodedDataStream ds(ba);
+
+        mHasBOM = skipBytes != 0;
+        ds.setEncoding(encoding);
+        ds.setGenerateByteOrderMark(skipBytes != 0);
+
+        m_bIncompleteConversion = false;
+        m_unicodeBuf->clear();
+
+        assert(m_unicodeBuf->length() == 0);
+
+        mHasEOLTermination = false;
+        bool skipNextRead = false;
+        while(!ds.atEnd())
         {
-            m_v->clear();
-            return false;
-        }
-
-        if(!skipNextRead){
-            prevChar = curChar;
-            ds.readChar(curChar);
-        }
-        else
-            skipNextRead = false;
-
-        QtSizeType  firstNonwhite = 0;
-        bool        foundNonWhite = false;
-
-        while(curChar != '\n' && curChar != '\r')
-        {
-            if(curChar.isNull() || curChar.isNonCharacter())
+            line.clear();
+            if(lines >= limits<LineType>::max() - 5)
             {
-                m_v->clear();
-                return true;
+                reset();
+                return false;
             }
 
-            if(curChar == QChar::ReplacementCharacter)
-                m_bIncompleteConversion = true;
-
-            line.append(curChar);
-            if(!curChar.isSpace() && !foundNonWhite)
+            if(!skipNextRead)
             {
-                firstNonwhite = line.length();
-                foundNonWhite = true;
+                prevChar = curChar;
+                ds.readChar(curChar);
             }
+            else
+                skipNextRead = false;
 
-            if(ds.atEnd())
-                break;
+            QtSizeType firstNonwhite = 0;
+            bool foundNonWhite = false;
 
-            prevChar = curChar;
-            ds.readChar(curChar);
-        }
-
-        switch(curChar.unicode())
-        {
-            case '\n':
-                vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
-                break;
-            case '\r':
-                if((FileOffset)lastOffset < mDataSize)
+            while(curChar != '\n' && curChar != '\r')
+            {
+                if(curChar.isNull() || curChar.isNonCharacter())
                 {
-                    prevChar = curChar;
-                    ds.readChar(curChar);
-
-                    if(curChar == '\n')
-                    {
-                        vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
-                        break;
-                    }
-                    //work around for lack of seek API in QDataStream
-                    skipNextRead = true;
+                    m_v->clear();
+                    return true;
                 }
 
-                //old mac style ending.
-                vOrigDataLineEndStyle.push_back(eLineEndStyleOldMac);
-                break;
-        }
-        parser->processLine(line);
-        if(removeComments)
-            parser->removeComment(line);
-        //Qt6 intrudes 64bit sizes
-        if(line.size() >= limits<LineType>::max())
-        {
-            m_v->clear();
-            return false;
+                if(curChar == QChar::ReplacementCharacter)
+                    m_bIncompleteConversion = true;
+
+                line.append(curChar);
+                if(!curChar.isSpace() && !foundNonWhite)
+                {
+                    firstNonwhite = line.length();
+                    foundNonWhite = true;
+                }
+
+                if(ds.atEnd())
+                    break;
+
+                prevChar = curChar;
+                ds.readChar(curChar);
+            }
+
+            switch(curChar.unicode())
+            {
+                case '\n':
+                    vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
+                    break;
+                case '\r':
+                    if((FileOffset)lastOffset < mDataSize)
+                    {
+                        prevChar = curChar;
+                        ds.readChar(curChar);
+
+                        if(curChar == '\n')
+                        {
+                            vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
+                            break;
+                        }
+                        //work around for lack of seek API in QDataStream
+                        skipNextRead = true;
+                    }
+
+                    //old mac style ending.
+                    vOrigDataLineEndStyle.push_back(eLineEndStyleOldMac);
+                    break;
+            }
+            parser->processLine(line);
+            if(removeComments)
+                parser->removeComment(line);
+            //Qt6 intrudes 64bit sizes
+            if(line.size() >= limits<LineType>::max())
+            {
+                reset();
+                return false;
+            }
+
+            ++lines;
+            m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
+            //The last line may not have an EOL mark. In that case don't add one to our buffer.
+            m_unicodeBuf->append(line);
+            if(curChar == '\n' || curChar == '\r' || prevChar == '\r')
+            {
+                //kdiff3 internally uses only unix style endings for simplicity.
+                m_unicodeBuf->append('\n');
+            }
+
+            assert(m_unicodeBuf->length() != lastOffset);
+            lastOffset = m_unicodeBuf->length();
         }
 
-        ++lines;
-        m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
-        //The last line may not have an EOL mark. In that case don't add one to our buffer.
-        m_unicodeBuf->append(line);
-        if(curChar == '\n' || curChar == '\r' || prevChar == '\r')
+        /*
+            Process trailing new line as if there were a blank non-terminated line after it.
+            But do nothing to the data buffer since this is a phantom line needed for internal purposes.
+        */
+        if(curChar == '\n' || curChar == '\r')
         {
-            //kdiff3 internally uses only unix style endings for simplicity.
-            m_unicodeBuf->append('\n');
+            mHasEOLTermination = true;
+            ++lines;
+
+            parser->processLine("");
+            m_v->push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
         }
 
-        assert(m_unicodeBuf->length() != lastOffset);
-        lastOffset = m_unicodeBuf->length();
+        m_v->push_back(LineData(m_unicodeBuf, lastOffset));
+
+        m_bIsText = true;
+
+        if(!vOrigDataLineEndStyle.isEmpty())
+            m_eLineEndStyle = vOrigDataLineEndStyle[0];
+
+        mLineCount = lines;
+        return true;
     }
-
-    /*
-        Process trailing new line as if there were a blank non-terminated line after it.
-        But do nothing to the data buffer since this is a phantom line needed for internal purposes.
-    */
-    if(curChar == '\n' || curChar == '\r')
+    catch(std::bad_alloc&)
     {
-        mHasEOLTermination = true;
-        ++lines;
-
-        parser->processLine("");
-        m_v->push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
+        reset();
+        return false;
     }
-
-    m_v->push_back(LineData(m_unicodeBuf, lastOffset));
-
-    m_bIsText = true;
-
-    if(!vOrigDataLineEndStyle.isEmpty())
-        m_eLineEndStyle = vOrigDataLineEndStyle[0];
-
-    mLineCount = lines;
-    return true;
 }
 
 // Convert the input file from input encoding to output encoding and write it to the output file.

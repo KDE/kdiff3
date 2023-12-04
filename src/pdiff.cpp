@@ -300,10 +300,19 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 mErrors.append(m_sd3->getErrors());
             }
         }
+        catch(const std::bad_alloc)
+        {
+            m_manualDiffHelpList.clear();
+            m_diff3LineList.clear();
+            mDiff3LineVector.clear();
+            m_sd1->reset();
+            m_sd2->reset();
+            m_sd3->reset();
+            mErrors.append(i18nc("Error message", "Not enough memmory too complete request."));
+            ProgressProxy::clear();
+        }
         catch(const std::exception& e)
         {
-            if(typeid(e) == typeid(std::bad_alloc))
-                throw;
             qCCritical(kdiffMain) << "An internal error occurred:" << e.what();
 
             mErrors.append(i18n("An internal error occurred: %1", QString::fromStdString(e.what())));
