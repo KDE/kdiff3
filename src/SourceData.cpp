@@ -392,6 +392,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     }
     QTextCodec* pEncoding1 = m_pEncoding;
     QTextCodec* pEncoding2 = m_pEncoding;
+    const QString overSizedFile = i18nc("Read error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1);
 
     m_normalData.reset();
     m_lmppData.reset();
@@ -467,7 +468,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
 
         if(!m_normalData.preprocess(pEncoding1, false))
         {
-            mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+            mErrors.append(overSizedFile);
             return;
         }
         //exit early for non text data further processing assumes a text file as input
@@ -536,7 +537,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
 
     if(!m_lmppData.preprocess(pEncoding2, true))
     {
-        mErrors.append(i18nc("Read error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1));
+        mErrors.append(overSizedFile);
         return;
     }
 
