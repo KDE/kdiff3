@@ -402,68 +402,77 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
 
     if(faIn.exists() && !faIn.isBrokenLink())
     {
-        // Run the first preprocessor
-        if(m_pOptions->m_PreProcessorCmd.isEmpty())
+        try
         {
-            // No preprocessing: Read the file directly:
-            if(!m_normalData.readFile(faIn))
+            // Run the first preprocessor
+            if(m_pOptions->m_PreProcessorCmd.isEmpty())
             {
-                mErrors.append(faIn.getStatusText());
-                return;
-            }
-        }
-        else
-        {
-            unsigned char b;
-            //Don't fail the preprocessor command if the file can't be read.
-            if(!faIn.readFile(&b, 1))
-            {
-                mErrors.append(faIn.getStatusText());
-                mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
-                return;
-            }
-
-            QTemporaryFile tmpInPPFile;
-            QString fileNameInPP = fileNameIn1;
-
-            if(pEncoding1 != m_pOptions->m_pEncodingPP)
-            {
-                // Before running the preprocessor convert to the format that the preprocessor expects.
-                FileAccess::createTempFile(tmpInPPFile);
-                fileNameInPP = tmpInPPFile.fileName();
-                pEncoding1 = m_pOptions->m_pEncodingPP;
-                convertFileEncoding(fileNameIn1, pEncoding, fileNameInPP, pEncoding1);
-            }
-
-            QString ppCmd = m_pOptions->m_PreProcessorCmd;
-            FileAccess::createTempFile(fileOut1);
-            fileNameOut1 = fileOut1.fileName();
-
-            QProcess ppProcess;
-            ppProcess.setStandardInputFile(fileNameInPP);
-            ppProcess.setStandardOutputFile(fileNameOut1);
-            QString program;
-            QStringList args;
-            QString errorReason = Utils::getArguments(ppCmd, program, args);
-            if(errorReason.isEmpty())
-            {
-                ppProcess.start(program, args);
-                ppProcess.waitForFinished(-1);
+                // No preprocessing: Read the file directly:
+                if(!m_normalData.readFile(faIn))
+                {
+                    mErrors.append(faIn.getStatusText());
+                    return;
+                }
             }
             else
-                errorReason = "\n(" + errorReason + ')';
-
-            bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
-            if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
             {
-                mErrors.append(
-                    i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
-                         "\n\nThe preprocessing command will be disabled now.", ppCmd) +
-                    errorReason);
-                m_pOptions->m_PreProcessorCmd = "";
+                unsigned char b;
+                //Don't fail the preprocessor command if the file can't be read.
+                if(!faIn.readFile(&b, 1))
+                {
+                    mErrors.append(faIn.getStatusText());
+                    mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
+                    return;
+                }
 
-                pEncoding1 = m_pEncoding;
+                QTemporaryFile tmpInPPFile;
+                QString fileNameInPP = fileNameIn1;
+
+                if(pEncoding1 != m_pOptions->m_pEncodingPP)
+                {
+                    // Before running the preprocessor convert to the format that the preprocessor expects.
+                    FileAccess::createTempFile(tmpInPPFile);
+                    fileNameInPP = tmpInPPFile.fileName();
+                    pEncoding1 = m_pOptions->m_pEncodingPP;
+                    convertFileEncoding(fileNameIn1, pEncoding, fileNameInPP, pEncoding1);
+                }
+
+                QString ppCmd = m_pOptions->m_PreProcessorCmd;
+                FileAccess::createTempFile(fileOut1);
+                fileNameOut1 = fileOut1.fileName();
+
+                QProcess ppProcess;
+                ppProcess.setStandardInputFile(fileNameInPP);
+                ppProcess.setStandardOutputFile(fileNameOut1);
+                QString program;
+                QStringList args;
+                QString errorReason = Utils::getArguments(ppCmd, program, args);
+                if(errorReason.isEmpty())
+                {
+                    ppProcess.start(program, args);
+                    ppProcess.waitForFinished(-1);
+                }
+                else
+                    errorReason = "\n(" + errorReason + ')';
+
+                bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
+                if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
+                {
+                    mErrors.append(
+                        i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
+                             "\n\nThe preprocessing command will be disabled now.", ppCmd) +
+                        errorReason);
+                    m_pOptions->m_PreProcessorCmd = "";
+
+                    pEncoding1 = m_pEncoding;
+                }
             }
+        }
+        catch(std::bad_alloc&)
+        {
+            m_normalData.reset();
+            mErrors.append(overSizedFile);
+            return;
         }
 
         if(!m_normalData.preprocess(pEncoding1, false))
