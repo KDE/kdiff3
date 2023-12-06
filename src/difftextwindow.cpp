@@ -85,7 +85,7 @@ class RecalcWordWrapThread: public QThread
     }
     void run() override
     {
-        //safe thanks to Qt memmory mangement
+        //safe thanks to Qt memory mangement
         DiffTextWindow* pDTW = qobject_cast<DiffTextWindow*>(parent());
 
         pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
@@ -97,7 +97,7 @@ class RecalcWordWrapThread: public QThread
 
             s_maxNofRunnables.storeRelease(0);
         }
-        //Cleanup our object to avoid a memmory leak
+        //Cleanup our object to avoid a memory leak
         deleteLater();
     }
 

@@ -308,7 +308,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             m_sd1->reset();
             m_sd2->reset();
             m_sd3->reset();
-            mErrors.append(i18nc("Error message", "Not enough memmory too complete request."));
+            mErrors.append(i18nc("Error message", "Not enough memory to complete request."));
             ProgressProxy::clear();
         }
         catch(const std::exception& e)

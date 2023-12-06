@@ -180,7 +180,7 @@ class LineData
     [[nodiscard]] inline QtSizeType getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
     /*
-        QString::fromRawData allows us to create a light weight QString backed by the buffer memmory.
+        QString::fromRawData allows us to create a light weight QString backed by the buffer memory.
     */
     [[nodiscard]] inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
     [[nodiscard]] inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
