@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
+"POT-Creation-Date: 2023-12-06 00:43+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -395,7 +395,7 @@ msgstr ""
 "katkestada ja kataloog uuesti läbi uurida?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
+#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1250,12 +1250,12 @@ msgstr "Kataloogide võrdlemisel ignoreeriti võtit --auto."
 msgid "Saving failed."
 msgstr "Salvestamine nurjus."
 
-#: kdiff3.cpp:566 pdiff.cpp:924
+#: kdiff3.cpp:566 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Nende failide avamine nurjus:"
 
-#: kdiff3.cpp:575 pdiff.cpp:933
+#: kdiff3.cpp:575 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "Viga faili avamisel"
@@ -1744,13 +1744,13 @@ msgstr "Kataloogi ja teksti poolitamisvaade"
 msgid "Toggle Between Folder && Text View"
 msgstr "Lülita kataloogi- ja tekstivaadet"
 
-#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:943
-#: pdiff.cpp:1012 pdiff.cpp:1048 pdiff.cpp:1057 pdiff.cpp:1115 pdiff.cpp:1123
+#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:952
+#: pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124 pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "Valmis."
 
-#: kdiff3.cpp:799 pdiff.cpp:1733
+#: kdiff3.cpp:799 pdiff.cpp:1742
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Ühendamise tulemust pole salvestatud."
@@ -1765,12 +1765,12 @@ msgstr "Salvesta ja välju"
 msgid "Quit Without Saving"
 msgstr "Välju salvestamata"
 
-#: kdiff3.cpp:810 pdiff.cpp:1744
+#: kdiff3.cpp:810 pdiff.cpp:1753
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Ühendamise tulemuse salvestamine nurjus."
 
-#: kdiff3.cpp:821 pdiff.cpp:858
+#: kdiff3.cpp:821 pdiff.cpp:867
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2100,7 +2100,7 @@ msgstr ""
 "Väljundit on muudetud.\n"
 "Kui jätkad, lähevad sinu muudatused kaotsi."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:734
+#: mergeresultwindow.cpp:771 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Kõik sisendfailid on binaarselt võrdsed."
@@ -2111,7 +2111,7 @@ msgid "All input files contain the same text."
 msgstr "Kõik sisendfailid sisaldavad ühesugust teksti."
 
 #: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
+#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Failid %1 ja %2 on binaarselt võrdsed.\n"
@@ -3558,29 +3558,35 @@ msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Reaerinevus: A <-> C"
 
-#: pdiff.cpp:309
+#: pdiff.cpp:311
+#, kde-format
+msgctxt "Error message"
+msgid "Not enough memmory too complete request."
+msgstr ""
+
+#: pdiff.cpp:318
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr ""
 
-#: pdiff.cpp:336
+#: pdiff.cpp:345
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr ""
 
-#: pdiff.cpp:736
+#: pdiff.cpp:745
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Kõik sisendfailid sisaldavad ühesugust teksti, aga pole binaarselt võrdsed."
 
-#: pdiff.cpp:742 pdiff.cpp:746 pdiff.cpp:750
+#: pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Failid %1 ja %2 sisaldavad ühesugust teksti, aga pole binaarselt võrdsed. \n"
 
-#: pdiff.cpp:760
+#: pdiff.cpp:769
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3591,17 +3597,17 @@ msgstr ""
 "Arvesta, et KDiff3 ühendamine ei ole mõeldud binaarfailidele.\n"
 "Jätka oma riskil."
 
-#: pdiff.cpp:770
+#: pdiff.cpp:779
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:772
+#: pdiff.cpp:781
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:774
+#: pdiff.cpp:783
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3614,83 +3620,83 @@ msgstr ""
 "Kui sa pole kindel, ära salvesta tulemust. Jätka omal vastutusel.\n"
 "Mõjutatud sisendfailid asuvad %1."
 
-#: pdiff.cpp:860
+#: pdiff.cpp:869
 #, kde-format
 msgid "Abort"
 msgstr "Katkesta"
 
-#: pdiff.cpp:861
+#: pdiff.cpp:870
 #, kde-format
 msgid "Continue Merging"
 msgstr "Jätka ühendamist"
 
-#: pdiff.cpp:866 pdiff.cpp:957
+#: pdiff.cpp:875 pdiff.cpp:966
 #, kde-format
 msgid "Opening files..."
 msgstr "Failide avamine..."
 
-#: pdiff.cpp:1046
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Valitud teksti lõikamine..."
 
-#: pdiff.cpp:1053
+#: pdiff.cpp:1062
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Valitud teksti kopeerimine lõikepuhvrisse..."
 
-#: pdiff.cpp:1062
+#: pdiff.cpp:1071
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Lõikepuhvri sisu sisestamine..."
 
-#: pdiff.cpp:1182
+#: pdiff.cpp:1191
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1198
+#: pdiff.cpp:1207
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Liigu viimasele erinevusele"
 
-#: pdiff.cpp:1512
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Reamurdmine (Loobumine keelab reamurdmise)"
 
-#: pdiff.cpp:1512
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Rõhtse kerimisriba maks. laiuse arvutamine"
 
-#: pdiff.cpp:1735
+#: pdiff.cpp:1744
 #, kde-format
 msgid "Save && Continue"
 msgstr "Salvesta ja jätka"
 
-#: pdiff.cpp:1736
+#: pdiff.cpp:1745
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Jätka salvestamata"
 
-#: pdiff.cpp:1934
+#: pdiff.cpp:1943
 #, kde-format
 msgid "Search complete."
 msgstr "Otsing lõpetatud."
 
-#: pdiff.cpp:1934
+#: pdiff.cpp:1943
 #, kde-format
 msgid "Search Complete"
 msgstr "Otsing lõpetatud"
 
-#: pdiff.cpp:2115
+#: pdiff.cpp:2124
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Erinevuste sisendakendes pole midagi valitud."
 
-#: pdiff.cpp:2115
+#: pdiff.cpp:2124
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Viga käsitsi määratud samasuse vahemiku lisamisel"
@@ -3867,16 +3873,16 @@ msgstr "%1 ei ole tavaline fail."
 #: SourceData.cpp:380
 #, fuzzy, kde-format
 #| msgid "File %1 too large to process. Skipping."
-msgctxt "Read error message. %1 = filepath"
+msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Fail %1 on töötlemiseks liiga suur. Jäetakse vahele."
 
-#: SourceData.cpp:407
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Ajutine fail on: %1"
 
-#: SourceData.cpp:445
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3891,7 +3897,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:500
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3906,7 +3912,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse reasobivuse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:506
+#: SourceData.cpp:516
 #, fuzzy, kde-format
 #| msgid "Failed to read file: %1"
 msgctxt "Read error message. %1 = filepath"
@@ -3933,6 +3939,9 @@ msgstr "Ootamatu tsitaadimärk argumendi sees."
 msgid "No program specified."
 msgstr "Programmi pole määratud."
 
+#, fuzzy
+#~| msgid "File %1 too large to process. Skipping."
+#~ msgctxt "Read error message. %1 = filepath"
 #~ msgid "File %1 too large to process. Skipping."
 #~ msgstr "Fail %1 on töötlemiseks liiga suur. Jäetakse vahele."
 

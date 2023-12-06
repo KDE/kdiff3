@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
+"POT-Creation-Date: 2023-12-06 00:43+0000\n"
 "PO-Revision-Date: 2023-11-08 15:45-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -371,7 +371,7 @@ msgstr ""
 "deseja interromper a mesclagem e analisar a pasta novamente?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:859 pdiff.cpp:1734 pdiff.cpp:1744
+#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1207,12 +1207,12 @@ msgstr "A opção --auto é ignorada para comparação de pastas."
 msgid "Saving failed."
 msgstr "Não foi possível salvar."
 
-#: kdiff3.cpp:566 pdiff.cpp:924
+#: kdiff3.cpp:566 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Não foi possível abrir esses arquivos:"
 
-#: kdiff3.cpp:575 pdiff.cpp:933
+#: kdiff3.cpp:575 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "Erro ao abrir arquivo"
@@ -1674,13 +1674,13 @@ msgstr "Janela dividida de pasta e texto"
 msgid "Toggle Between Folder && Text View"
 msgstr "Alternar entre visualização de pasta e texto"
 
-#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:943
-#: pdiff.cpp:1012 pdiff.cpp:1048 pdiff.cpp:1057 pdiff.cpp:1115 pdiff.cpp:1123
+#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:952
+#: pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124 pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "Pronto."
 
-#: kdiff3.cpp:799 pdiff.cpp:1733
+#: kdiff3.cpp:799 pdiff.cpp:1742
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "O resultado da mesclagem não foi salvo."
@@ -1695,12 +1695,12 @@ msgstr "Salvar e sair"
 msgid "Quit Without Saving"
 msgstr "Sair sem salvar"
 
-#: kdiff3.cpp:810 pdiff.cpp:1744
+#: kdiff3.cpp:810 pdiff.cpp:1753
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Não foi possível salvar resultado da mesclagem."
 
-#: kdiff3.cpp:821 pdiff.cpp:858
+#: kdiff3.cpp:821 pdiff.cpp:867
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2036,7 +2036,7 @@ msgstr ""
 "A saída foi modificada.\n"
 "Se você continuar suas alterações serão perdidas."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:734
+#: mergeresultwindow.cpp:771 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Todos os arquivos de entrada são iguais em nível binário."
@@ -2047,7 +2047,7 @@ msgid "All input files contain the same text."
 msgstr "Todos os arquivos de entrada contém o mesmo texto."
 
 #: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:740 pdiff.cpp:744 pdiff.cpp:748
+#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Os arquivos %1 e %2 são iguais em nível binário.\n"
@@ -3340,31 +3340,37 @@ msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Dif. Linhas: A <-> C"
 
-#: pdiff.cpp:309
+#: pdiff.cpp:311
+#, kde-format
+msgctxt "Error message"
+msgid "Not enough memmory too complete request."
+msgstr ""
+
+#: pdiff.cpp:318
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr "Ocorreu um erro interno: %1"
 
-#: pdiff.cpp:336
+#: pdiff.cpp:345
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Muitas linhas na diferença. Ignorando arquivo."
 
-#: pdiff.cpp:736
+#: pdiff.cpp:745
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Todos os arquivos de entrada contém o mesmo texto, mas não são iguais em "
 "nível binário."
 
-#: pdiff.cpp:742 pdiff.cpp:746 pdiff.cpp:750
+#: pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Os arquivos %1 e %2 contém o mesmo texto, mas não são iguais em nível "
 "binário.\n"
 
-#: pdiff.cpp:760
+#: pdiff.cpp:769
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3375,17 +3381,17 @@ msgstr ""
 "Note que a mesclagem do KDiff3 não foi pensada para dados binários.\n"
 "Continue por sua conta e risco."
 
-#: pdiff.cpp:770
+#: pdiff.cpp:779
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:772
+#: pdiff.cpp:781
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:774
+#: pdiff.cpp:783
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3400,82 +3406,82 @@ msgstr ""
 "Não salve o resultado se não tiver certeza. Continue por sua conta e risco.\n"
 "Os arquivos de entrada afetados estão em %1."
 
-#: pdiff.cpp:860
+#: pdiff.cpp:869
 #, kde-format
 msgid "Abort"
 msgstr "Cancelar"
 
-#: pdiff.cpp:861
+#: pdiff.cpp:870
 #, kde-format
 msgid "Continue Merging"
 msgstr "Continuar mesclando"
 
-#: pdiff.cpp:866 pdiff.cpp:957
+#: pdiff.cpp:875 pdiff.cpp:966
 #, kde-format
 msgid "Opening files..."
 msgstr "Abrindo arquivos..."
 
-#: pdiff.cpp:1046
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Recortando seleção..."
 
-#: pdiff.cpp:1053
+#: pdiff.cpp:1062
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Copiando a seleção para a área de transferência..."
 
-#: pdiff.cpp:1062
+#: pdiff.cpp:1071
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Inserindo o conteúdo da área de transferência..."
 
-#: pdiff.cpp:1182
+#: pdiff.cpp:1191
 #, kde-format
 msgid "Ok"
 msgstr "OK"
 
-#: pdiff.cpp:1198
+#: pdiff.cpp:1207
 #, kde-format
 msgid "Go to Line"
 msgstr "Ir para a linha"
 
-#: pdiff.cpp:1512
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Quebra de palavra (Cancelar desabilita a quebra de palavra)"
 
-#: pdiff.cpp:1512
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Calculando a largura máxima para a barra de rolagem"
 
-#: pdiff.cpp:1735
+#: pdiff.cpp:1744
 #, kde-format
 msgid "Save && Continue"
 msgstr "Salvar e continuar"
 
-#: pdiff.cpp:1736
+#: pdiff.cpp:1745
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continuar sem salvar"
 
-#: pdiff.cpp:1934
+#: pdiff.cpp:1943
 #, kde-format
 msgid "Search complete."
 msgstr "Pesquisa finalizada."
 
-#: pdiff.cpp:1934
+#: pdiff.cpp:1943
 #, kde-format
 msgid "Search Complete"
 msgstr "Pesquisa finalizada"
 
-#: pdiff.cpp:2115
+#: pdiff.cpp:2124
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Nada foi selecionado em nenhuma janela de entrada de diferenças."
 
-#: pdiff.cpp:2115
+#: pdiff.cpp:2124
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Erro ao adicionar o intervalo manual de diferenças"
@@ -3649,17 +3655,18 @@ msgid "%1 is not a normal file."
 msgstr "%1 não é um arquivo normal."
 
 #: SourceData.cpp:380
-#, kde-format
-msgctxt "Read error message. %1 = filepath"
+#, fuzzy, kde-format
+#| msgid "File %1 too large to process. Skipping."
+msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "O arquivo %1 é muito grande pra ser processado. Ignorando-o."
 
-#: SourceData.cpp:407
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    O arquivo temporário é: %1"
 
-#: SourceData.cpp:445
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3674,7 +3681,7 @@ msgstr ""
 "\n"
 "O comando de pré-processamento será desabilitado agora."
 
-#: SourceData.cpp:500
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3691,7 +3698,7 @@ msgstr ""
 "O comando de pré-processamento de correspondência de linhas será "
 "desabilitado."
 
-#: SourceData.cpp:506
+#: SourceData.cpp:516
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
@@ -3717,6 +3724,7 @@ msgstr "Apóstrofo inesperado dentro do argumento."
 msgid "No program specified."
 msgstr "Não foi especificado nenhum programa."
 
+#~ msgctxt "Read error message. %1 = filepath"
 #~ msgid "File %1 too large to process. Skipping."
 #~ msgstr "O arquivo %1 é muito grande pra ser processado. Ignorando-o."
 
