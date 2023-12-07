@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-06 00:43+0000\n"
-"PO-Revision-Date: 2023-11-15 19:30+0100\n"
+"POT-Creation-Date: 2023-12-07 00:43+0000\n"
+"PO-Revision-Date: 2023-12-06 07:25+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3315,10 +3315,12 @@ msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
 #: pdiff.cpp:311
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Error message"
+#| msgid "Not enough memmory too complete request."
 msgctxt "Error message"
-msgid "Not enough memmory too complete request."
-msgstr ""
+msgid "Not enough memory to complete request."
+msgstr "Ni dovolj pomnilnika za dokončanje zahteve."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3623,11 +3625,10 @@ msgid "%1 is not a normal file."
 msgstr "%1 ni običajna datoteka."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "Datoteka %1 je prevelika za obdelavo. Spuščam."
+msgstr "Datoteka %1 je prevelika za obdelavo. Preskok te."
 
 #: SourceData.cpp:409
 #, kde-format

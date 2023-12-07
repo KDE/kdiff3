@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-06 00:43+0000\n"
-"PO-Revision-Date: 2023-10-29 23:02+0100\n"
+"POT-Creation-Date: 2023-12-07 00:43+0000\n"
+"PO-Revision-Date: 2023-12-06 11:06+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3331,10 +3331,12 @@ msgid "Linediff: A <-> C"
 msgstr "Lerro ezberdina: A <-> C"
 
 #: pdiff.cpp:311
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Error message"
+#| msgid "Not enough memmory too complete request."
 msgctxt "Error message"
-msgid "Not enough memmory too complete request."
-msgstr ""
+msgid "Not enough memory to complete request."
+msgstr "Ez dago eskaera osatzeko behar adina memoria."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3641,8 +3643,7 @@ msgid "%1 is not a normal file."
 msgstr "%1 ez da fitxategi arrunta."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "%1 fitxategia prozesatzeko handiegia. Alboratzen."

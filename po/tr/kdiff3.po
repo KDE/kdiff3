@@ -2,6 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 # Adem Alp Yıldız <ademalp@kde.org.tr>, 2005.
 # Alper Sen <aalpersen@gmail.com>, 2005.
 # Alper Şen <aalpersen@gmail.com>, 2005.
@@ -10,13 +11,13 @@
 # Muhammet Kara <muhammetk@gmail.com>, 2014.
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012-2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014.
-# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
+# Emir SARI <emir_sari@icloud.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-06 00:43+0000\n"
-"PO-Revision-Date: 2023-10-29 14:13+0300\n"
+"POT-Creation-Date: 2023-12-07 00:43+0000\n"
+"PO-Revision-Date: 2023-12-06 07:29+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3319,10 +3320,12 @@ msgid "Linediff: A <-> C"
 msgstr "Satır Diff'i: A<-> C"
 
 #: pdiff.cpp:311
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Error message"
+#| msgid "Not enough memmory too complete request."
 msgctxt "Error message"
-msgid "Not enough memmory too complete request."
-msgstr ""
+msgid "Not enough memory to complete request."
+msgstr "İsteği tamamlamak için yeterli bellek yok."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3629,11 +3632,10 @@ msgid "%1 is not a normal file."
 msgstr "%1, normal bir dosya değil."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "%1 dosyası işlemek için pek büyük. Atlanıyor."
+msgstr "%1, işlenmek için pek büyük. Atlanıyor."
 
 #: SourceData.cpp:409
 #, kde-format

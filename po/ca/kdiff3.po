@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-06 00:43+0000\n"
-"PO-Revision-Date: 2023-10-29 09:17+0100\n"
+"POT-Creation-Date: 2023-12-07 00:43+0000\n"
+"PO-Revision-Date: 2023-12-06 10:37+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3352,10 +3352,12 @@ msgid "Linediff: A <-> C"
 msgstr "Diferència de línia: A <-> C"
 
 #: pdiff.cpp:311
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Error message"
+#| msgid "Not enough memmory too complete request."
 msgctxt "Error message"
-msgid "Not enough memmory too complete request."
-msgstr ""
+msgid "Not enough memory to complete request."
+msgstr "No hi ha memòria suficient per a completar la petició."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3668,11 +3670,10 @@ msgid "%1 is not a normal file."
 msgstr "%1 no és un fitxer normal."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "Fitxer %1 és massa gran per a processar. S'omet."
+msgstr "El fitxer %1 és massa gran per a processar. S'omet."
 
 #: SourceData.cpp:409
 #, kde-format
