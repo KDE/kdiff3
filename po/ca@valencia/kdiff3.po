@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-07 00:43+0000\n"
-"PO-Revision-Date: 2023-10-29 09:17+0100\n"
+"PO-Revision-Date: 2023-12-06 10:37+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -3365,7 +3365,7 @@ msgstr "Diferència de línia: A <-> C"
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
-msgstr ""
+msgstr "No hi ha memòria suficient per a completar la petició."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3682,11 +3682,10 @@ msgid "%1 is not a normal file."
 msgstr "%1 no és un fitxer normal."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "Fitxer %1 és massa gran per a processar. S'omet."
+msgstr "El fitxer %1 és massa gran per a processar. S'omet."
 
 #: SourceData.cpp:409
 #, kde-format
@@ -3749,7 +3748,3 @@ msgstr "Caràcter inesperat de cometa en l'argument."
 #, kde-format
 msgid "No program specified."
 msgstr "No s'ha especificat cap programa."
-
-#~ msgctxt "Read error message. %1 = filepath"
-#~ msgid "File %1 too large to process. Skipping."
-#~ msgstr "Fitxer %1 és massa gran per a processar. S'omet."
