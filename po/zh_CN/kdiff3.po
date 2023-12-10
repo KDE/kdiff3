@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-07 00:43+0000\n"
-"PO-Revision-Date: 2023-11-25 02:29\n"
+"PO-Revision-Date: 2023-12-09 09:27\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -3514,8 +3514,7 @@ msgid "%1 is not a normal file."
 msgstr "%1 不是一个正常的文件。"
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "文件 %1 太大，无法处理。跳过。"
@@ -3579,7 +3578,3 @@ msgstr "参数包含意外的引号字符。"
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
-
-#~ msgctxt "Read error message. %1 = filepath"
-#~ msgid "File %1 too large to process. Skipping."
-#~ msgstr "文件 %1 太大，无法处理。跳过。"
