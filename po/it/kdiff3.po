@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-07 00:43+0000\n"
-"PO-Revision-Date: 2023-11-08 22:06+0100\n"
+"PO-Revision-Date: 2023-12-08 19:55+0100\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3334,7 +3334,7 @@ msgstr "Differenze per righe: A <-> C"
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
-msgstr ""
+msgstr "Non vi è sufficiente memoria per completare la richiesta."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3644,8 +3644,7 @@ msgid "%1 is not a normal file."
 msgstr "%1 non è un file normale."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "File %1 troppo grande da elaborare. Verrà saltato."
