@@ -119,6 +119,7 @@ list(GET VERSION_LIST 2 KF_VERSION_PATCH)
 
 option(ENABLE_AUTO "Enable kdiff3's '--auto' flag" ON)
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
+option(ENABLE_GDBINDEX OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 
