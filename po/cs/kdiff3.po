@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-07 00:43+0000\n"
+"POT-Creation-Date: 2023-12-30 00:43+0000\n"
 "PO-Revision-Date: 2023-11-10 16:10+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -426,43 +426,43 @@ msgstr "Varování - parametr"
 msgid "Scanning folders..."
 msgstr "Procházím složky..."
 
-#: directorymergewindow.cpp:897
+#: directorymergewindow.cpp:893
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "Čtu složku A"
 
-#: directorymergewindow.cpp:906
+#: directorymergewindow.cpp:902
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "Čtu složku B"
 
-#: directorymergewindow.cpp:916
+#: directorymergewindow.cpp:912
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "Čtu složku C"
 
-#: directorymergewindow.cpp:932
+#: directorymergewindow.cpp:928
 #, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Některé podsložky byly nečitelné v"
 
-#: directorymergewindow.cpp:937
+#: directorymergewindow.cpp:933
 #, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Zkontrolujte oprávnění podsložek."
 
-#: directorymergewindow.cpp:960
+#: directorymergewindow.cpp:956
 #, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Připraven."
 
-#: directorymergewindow.cpp:975
+#: directorymergewindow.cpp:971
 #, kde-format
 msgid ""
 "Folder Comparison Status\n"
@@ -477,22 +477,22 @@ msgstr ""
 "Počet shodných souborů: %2\n"
 "Počet odlišných souborů: %3"
 
-#: directorymergewindow.cpp:982
+#: directorymergewindow.cpp:978
 #, kde-format
 msgid "Number of manual merges: %1"
 msgstr "Počet ručních sloučení: %1"
 
-#: directorymergewindow.cpp:1250
+#: directorymergewindow.cpp:1246
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "Toto ovlivňuje všechny operace slučování."
 
-#: directorymergewindow.cpp:1251
+#: directorymergewindow.cpp:1247
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "Změna všech operací sloučení"
 
-#: directorymergewindow.cpp:1328
+#: directorymergewindow.cpp:1324
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -501,49 +501,49 @@ msgstr ""
 "Zpracovává se soubor %1 / %2\n"
 "%3"
 
-#: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
+#: directorymergewindow.cpp:1370 directorymergewindow.cpp:1374
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "Některé soubory nelze zpracovat."
 
-#: directorymergewindow.cpp:1381
+#: directorymergewindow.cpp:1377
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "Přerušuji kvůli příliš mnoho chybám."
 
-#: directorymergewindow.cpp:1868 directorymergewindow.cpp:1893
-#: directorymergewindow.cpp:1918
+#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
+#: directorymergewindow.cpp:1914
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "Tuto operaci nelze nyní provést."
 
-#: directorymergewindow.cpp:1868 directorymergewindow.cpp:1893
-#: directorymergewindow.cpp:1918 directorymergewindow.cpp:2199
+#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
+#: directorymergewindow.cpp:1914 directorymergewindow.cpp:2195
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Operaci nelze provést"
 
-#: directorymergewindow.cpp:1965
+#: directorymergewindow.cpp:1961
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "Během kopírování došlo k chybě."
 
-#: directorymergewindow.cpp:1966 directorymergewindow.cpp:2404
+#: directorymergewindow.cpp:1962 directorymergewindow.cpp:2400
 #, kde-format
 msgid "Merge Error"
 msgstr "Chyba slučování"
 
-#: directorymergewindow.cpp:2044
+#: directorymergewindow.cpp:2040
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "Neznámá slučovací operace. (Toto se nesmí nikdy stát.)"
 
-#: directorymergewindow.cpp:2089
+#: directorymergewindow.cpp:2085
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "Neznámá slučovací operace."
 
-#: directorymergewindow.cpp:2102
+#: directorymergewindow.cpp:2098
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -563,39 +563,39 @@ msgstr ""
 "Uvědomte si, že tento program je stále ve stavu beta a proto není vůbec "
 "žádná ZÁRUKA vaše důležitá data si zazálohujte."
 
-#: directorymergewindow.cpp:2107
+#: directorymergewindow.cpp:2103
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Spouští se sloučení"
 
-#: directorymergewindow.cpp:2108
+#: directorymergewindow.cpp:2104
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Provést"
 
-#: directorymergewindow.cpp:2109
+#: directorymergewindow.cpp:2105
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Simulovat"
 
-#: directorymergewindow.cpp:2135
+#: directorymergewindow.cpp:2131
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
 "what to do."
 msgstr "Zvýrazněná položka je jiného typu v jiné složce. Zvolte co udělat."
 
-#: directorymergewindow.cpp:2139
+#: directorymergewindow.cpp:2135
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr "Datum změny souboru je shodné, soubory však nikoliv. Zvolte co udělat."
 
-#: directorymergewindow.cpp:2143
+#: directorymergewindow.cpp:2139
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
@@ -604,14 +604,14 @@ msgstr ""
 "Zvýrazněná položka byla pozměněna v jedné složce a v druhé byla smazána. "
 "Zvolte co udělat."
 
-#: directorymergewindow.cpp:2199
+#: directorymergewindow.cpp:2195
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr "Tato operace není nyní možná, protože slučování složky právě probíhá."
 
-#: directorymergewindow.cpp:2256
+#: directorymergewindow.cpp:2252
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -622,35 +622,35 @@ msgstr ""
 "Přejete si pokračovat s položkou, která chybu způsobila, nebo si přejete "
 "položku přeskočit?"
 
-#: directorymergewindow.cpp:2258
+#: directorymergewindow.cpp:2254
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Pokračovat se slučováním po chybě"
 
-#: directorymergewindow.cpp:2259
+#: directorymergewindow.cpp:2255
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Pokračovat s poslední položkou"
 
-#: directorymergewindow.cpp:2260
+#: directorymergewindow.cpp:2256
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Přeskočit položku"
 
-#: directorymergewindow.cpp:2354
+#: directorymergewindow.cpp:2350
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Operace sloučení dokončena."
 
-#: directorymergewindow.cpp:2354 directorymergewindow.cpp:2357
+#: directorymergewindow.cpp:2350 directorymergewindow.cpp:2353
 #, kde-format
 msgid "Merge Complete"
 msgstr "Slučování dokončeno"
 
-#: directorymergewindow.cpp:2367
+#: directorymergewindow.cpp:2363
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -658,235 +658,235 @@ msgstr ""
 "Simulované sloučení dokončeno: Ověřte si, zda souhlasíte s navrženými "
 "operacemi."
 
-#: directorymergewindow.cpp:2403
+#: directorymergewindow.cpp:2399
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "Vyskytla se chyba. Podrobné informace uvidíte po stisknutí OK."
 
-#: directorymergewindow.cpp:2436
+#: directorymergewindow.cpp:2432
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "Chyba: při mazání %1: Vytvoření zálohy selhalo."
 
-#: directorymergewindow.cpp:2443
+#: directorymergewindow.cpp:2439
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "smazat složku rekurzivně( %1 )"
 
-#: directorymergewindow.cpp:2445
+#: directorymergewindow.cpp:2441
 #, kde-format
 msgid "delete( %1 )"
 msgstr "odstranit( %1)"
 
-#: directorymergewindow.cpp:2461
+#: directorymergewindow.cpp:2457
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr "Chyba: operace mazání složky selhala při pokusu o načtení složky."
 
-#: directorymergewindow.cpp:2477
+#: directorymergewindow.cpp:2473
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Chyba: operace smazat adresář( %1 ) selhala."
 
-#: directorymergewindow.cpp:2487
+#: directorymergewindow.cpp:2483
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Chyba: operace mazání selhala."
 
-#: directorymergewindow.cpp:2514
+#: directorymergewindow.cpp:2510
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "ručně sloučit( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2517
+#: directorymergewindow.cpp:2513
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr "Pozn.: Po ručním slučování by měl uživatel pokračovat stiskem F7."
 
-#: directorymergewindow.cpp:2544
+#: directorymergewindow.cpp:2540
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Chyba: Kopírování ( %1 -> %2 ) selhalo. Existující cíl nelze odstranit."
 
-#: directorymergewindow.cpp:2553
+#: directorymergewindow.cpp:2549
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "Kopírovat odkaz ( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2562
+#: directorymergewindow.cpp:2558
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Chyba: kopírování odkazu selhalo: Vzdálené odkazy nejsou nyní podporovány."
 
-#: directorymergewindow.cpp:2572
+#: directorymergewindow.cpp:2568
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Chyba: kopírování odkazu selhalo."
 
-#: directorymergewindow.cpp:2595
+#: directorymergewindow.cpp:2591
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "kopírovat( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2621
+#: directorymergewindow.cpp:2617
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr "Chyba při přejmenování ( %1 -> %2 ): Existující cíl nelze odstranit."
 
-#: directorymergewindow.cpp:2628
+#: directorymergewindow.cpp:2624
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "přejmenovat( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2637
+#: directorymergewindow.cpp:2633
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Chyba: Přejmenování selhalo."
 
-#: directorymergewindow.cpp:2655
+#: directorymergewindow.cpp:2651
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr "Chyba při vytvoření adresáře %1. Nelze odstranit existující soubor."
 
-#: directorymergewindow.cpp:2672
+#: directorymergewindow.cpp:2668
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "Vytvořit adresář ( %1 )"
 
-#: directorymergewindow.cpp:2682
+#: directorymergewindow.cpp:2678
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Chyba při vytváření složky."
 
-#: directorymergewindow.cpp:2718 directorymergewindow.cpp:2832
+#: directorymergewindow.cpp:2714 directorymergewindow.cpp:2828
 #, kde-format
 msgid "Dest"
 msgstr "Cíl"
 
-#: directorymergewindow.cpp:2726 directorymergewindow.cpp:2754
+#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Složka"
 
-#: directorymergewindow.cpp:2726
+#: directorymergewindow.cpp:2722
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Typ"
 
-#: directorymergewindow.cpp:2726
+#: directorymergewindow.cpp:2722
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Velikost"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2723
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Atributy"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2723
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Poslední změna"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2723
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Cíl odkazu"
 
-#: directorymergewindow.cpp:2754
+#: directorymergewindow.cpp:2750
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "Soubor"
 
-#: directorymergewindow.cpp:2754
+#: directorymergewindow.cpp:2750
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Odkaz"
 
-#: directorymergewindow.cpp:2760
+#: directorymergewindow.cpp:2756
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "nedostupný"
 
-#: directorymergewindow.cpp:2774
+#: directorymergewindow.cpp:2770
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (cíl): "
 
-#: directorymergewindow.cpp:2778
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2778
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgid "A (Base): "
 msgstr "A (základní): "
 
-#: directorymergewindow.cpp:2784
+#: directorymergewindow.cpp:2780
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (cíl): "
 
-#: directorymergewindow.cpp:2788
+#: directorymergewindow.cpp:2784
 #, kde-format
 msgid "B:    "
 msgstr "B:    "
 
-#: directorymergewindow.cpp:2793
+#: directorymergewindow.cpp:2789
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (cíl): "
 
-#: directorymergewindow.cpp:2797
+#: directorymergewindow.cpp:2793
 #, kde-format
 msgid "C:    "
 msgstr "C:    "
 
-#: directorymergewindow.cpp:2800
+#: directorymergewindow.cpp:2796
 #, kde-format
 msgid "Dest: "
 msgstr "Cíl: "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2842
+#: directorymergewindow.cpp:2838
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Uložit stav sloučení složky jako..."
 
-#: directorymergewindow.cpp:2949
+#: directorymergewindow.cpp:2945
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Spustit / pokračovat ve sloučení složek"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2946
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Spustit operaci pro aktuální položku"
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2947
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Porovnat vybraný soubor"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2948
 #, kde-format
 msgid "Merge Current File"
 msgstr "Sloučit aktuální soubory"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2948
 #, kde-format
 msgid ""
 "Merge\n"
@@ -895,56 +895,56 @@ msgstr ""
 "Sloučit\n"
 "Soubor"
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2949
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Sbalit všechny podsložky"
 
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2950
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Rozbalit všechny podsložky"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2951
 #, kde-format
 msgid "Rescan"
 msgstr "Znovu prohledat"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Zvolit A pro všechny položky"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Zvolit B pro všechny položky"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Zvolit C pro všechny položky"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Automaticky zvolit operaci pro všechny položky"
 
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2958
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Žádná operace pro všechny položky"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Zobrazit identické soubory"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid ""
 "Identical\n"
@@ -953,17 +953,17 @@ msgstr ""
 "Shodné\n"
 "Soubory"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2964
 #, kde-format
 msgid "Show Different Files"
 msgstr "Zobrazit rozdílné soubory"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Zobrazit soubory pouze v A"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2965
 #, kde-format
 msgid ""
 "Files\n"
@@ -972,12 +972,12 @@ msgstr ""
 "Soubory\n"
 "pouze v A"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Zobrazit soubory pouze v B"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid ""
 "Files\n"
@@ -986,12 +986,12 @@ msgstr ""
 "Soubory\n"
 "pouze v B"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Zobrazit soubory pouze v C"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid ""
 "Files\n"
@@ -1000,68 +1000,68 @@ msgstr ""
 "Soubory\n"
 "pouze v C"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Porovnat výlučně vybrané soubory"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Sloučit výlučně vybrané soubory"
 
-#: directorymergewindow.cpp:2978 directorymergewindow.cpp:2985
+#: directorymergewindow.cpp:2974 directorymergewindow.cpp:2981
 #, kde-format
 msgid "Do Nothing"
 msgstr "Nedělat nic"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2982 opendialog.ui:68
+#: directorymergewindow.cpp:2978 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Sloučení"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2979
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Smazat (pokud existuje)"
 
-#: directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2982
 #, kde-format
 msgid "Copy A to B"
 msgstr "Zkopírovat A do B"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2983
 #, kde-format
 msgid "Copy B to A"
 msgstr "Zkopírovat B do A"
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2984
 #, kde-format
 msgid "Delete A"
 msgstr "Smazat A"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2985
 #, kde-format
 msgid "Delete B"
 msgstr "Smazat B"
 
-#: directorymergewindow.cpp:2990
+#: directorymergewindow.cpp:2986
 #, kde-format
 msgid "Delete A && B"
 msgstr "Smazat A a B"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Merge to A"
 msgstr "Sloučit do A"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Merge to B"
 msgstr "Sloučit do B"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Sloučit do A a B"
