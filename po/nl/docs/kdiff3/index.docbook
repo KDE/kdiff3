@@ -117,7 +117,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Dit document beschrijft &kdiff3; versie 1.11. </para>
+>This document describes &kdiff3;-version 1.10.7. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -918,17 +918,17 @@ Please at least include KDE, the KDE package it is in, the name
 ></menuchoice
 >. </para
 ><para
->Ook het automatisch samenvoegen van de geschiedenis van versiebeheer (ook "log" genoemd) is ondersteund. De geschiedenis samenvoegen kunt u, naar keuze, onmiddellijk na het starten van het samenvoegen uitvoeren door het inschakelen van de keuze <guilabel
->Geschiedenis versiebeheer samenvoegen bij aanvang van samenvoegen</guilabel
-> in het item <guilabel
->Samenvoegen</guilabel
-> in de instellingendialoog of later via het menu-item <menuchoice
+>Automatic merge for version control history (also called "log") is also supported. The history automerge can either run immediately when the merge starts by activating the option <guilabel
+>Merge version control history on merge start</guilabel
+> at <guilabel
+>Merge</guilabel
+> item in the settings dialog or later via the <menuchoice
 ><guimenu
->Samenvoegen</guimenu
+>Merge</guimenu
 ><guimenuitem
->Automatisch geschiedenisconflicten oplossen</guimenuitem
+>Automatically Solve History Conflicts</guimenuitem
 ></menuchoice
-> </para
+> menu item. </para
 ><para
 >Meestal begint de geschiedenis van het versiebeheer met een regel waarin het trefwoord "<literal
 >&#36;Log&#36;</literal
@@ -1874,11 +1874,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Automatisch detecteren</guilabel
+>Auto Detect Unicode</guilabel
 ></term
 ><listitem
 ><para
->Deze optie probeert de BOM of metagegevens uit XML/HTML documenten te gebruiken om codering te detecteren. Als dat mislukt zal het controleren of een kort stukje uit het begin van het bestand geïnterpreteerd kan worden als UTF-8. Als deze controle lukt zal UTF-8 gebruikt worden. Anders zal het terugvallen op de door de gebruiker geselecteerde codec. UTF-8 wordt alleen ondersteund zonder BOM of metagegevens aanwezig. </para
+>This option attempts to use the BOM or meta data from XML/HTML documents to detect Unicode encoding. Failing that it will check if a short sample from the beginning of the file can be interpreted as UTF-8. If this check passes UTF-8 will be used. Otherwise it will fall back to the user selected codec. Only UTF-8 is supported with no BOM or metadata present. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -3175,7 +3175,7 @@ Please at least include KDE, the KDE package it is in, the name
 >F6</keycap
 >. </para
 ><para
->Als er door conflicterende bestandstypes nog steeds bestanden zijn met ongeldige operaties, verschijnt er een melding, worden die items aangewezen, en kunt u een geldige operatie voor die items kiezen. </para
+>If due to conflicting filetypes still some items with invalid operations exist, then a messagebox will appear and these items will be pointed out, so you can select a valid operation for the item. </para
 ><para
 >Als u alle items samenvoegt, verschijnt er een dialoogvenster met de opties <guilabel
 >Starten</guilabel
@@ -3642,6 +3642,31 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
+<sect1 id="kpart">
+<title
+>Using &kdiff3; as a KPart</title>
+<para
+>&kdiff3; is a KPart. Currently it implements the KParts::ReadOnlyPart interface. </para
+><para
+>It's main use is as difference-viewer in &kdevelop;. &kdevelop; always starts the internal difference viewer first. To invoke &kdiff3; press the &RMB; on the difference viewer window and select <guimenuitem
+>Show in KDiff3Part</guimenuitem
+> from the context menu. </para
+><para
+>&kdiff3; normally requires two complete files as input. When used as part &kdiff3; will assume that the input file is a patch-file in the unified format. &kdiff3; then retrieves the original filenames from the patch-file. At least one of the two files must be available. &kdiff3; will then invoke <command
+>patch</command
+> to recreate the second file. </para
+><para
+>In &dolphin; you can select a patch-file and select <menuchoice
+><guimenuitem
+>Preview in</guimenuitem
+><guisubmenu
+>KDiff3Part</guisubmenu
+></menuchoice
+> item from the context menu. Be aware that this won't work if none of the original files are available, and it is not reliable if the original file(s) have changed since the patch-file was generated. </para
+><para
+>When run as a part &kdiff3; only provides the a two-file-diff, a very small toolbar and menu. Merging or folder comparison are not supported then. </para>
+</sect1>
+
 <sect1 id="git">
 <title
 >&kdiff3; gebruiken als een &git; Diff en hulpmiddel voor samenvoegen</title>
@@ -3833,11 +3858,11 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->Voor elke gelijke of verschillende sectie onthoudt de editor in het resultaatvenster waar deze begint en eindigt. "&lt;Geen regel in de bron&gt;" betekent dat er niets over is in de sectie (zelfs geen regeleinde). Dit kan tijdens automatisch samenvoegen of tijdens bewerken gebeuren. Dit is geen probleem, want de aanwijzing verschijnt niet in het opgeslagen bestand. Als u de originele bron terug wilt, selecteert u de sectie (klik op de linker overzichtskolom) en klikt u op de knop van de bron met de gewenste inhoud (<guilabel
+>For each equal or different section the editor in the merge result window remembers where it begins or ends. "&lt;No src line&gt;" means that there is nothing left in a section, not even a new line character. This can happen either while merging automatically or by editing. This is no problem, since this hint won't appear in the saved file. If you want the orignal source back just select the section (click on the left summary column) and then click the source button with the needed contents (<guilabel
 >A</guilabel
->, <guilabel
+>/<guilabel
 >B</guilabel
-> of <guilabel
+> or <guilabel
 >C</guilabel
 >). </para
 ></answer
@@ -3857,29 +3882,25 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Kan ik &kdiff3; gebruiken om <application
->LibreOffice</application
->/<trademark class="registered"
->OpenOffice.org</trademark
+>Can I use &kdiff3; to compare <trademark class="registered"
+> OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
 >, <application
 >&Microsoft; Excel</application
->, &PDF;, &etc; bestanden te vergelijken? </para
+>, &PDF;, &etc; files? </para
 ></question
 ><answer
 ><para
 >Hoewel &kdiff3; elk soort bestand zal analyseren zal het resultaat waarschijnlijk niet erg bevredigend voor u zijn. </para
 ><para
->&kdiff3; is ontworpen om pure tekstbestanden te vergelijken. <application
->LibreOffice</application
->/<trademark class="registered"
->OpenOffice.org</trademark
+>&kdiff3; was made to compare pure text files. <trademark class="registered"
+> OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
 >, <application
 >&Microsoft; Excel</application
-> &etc; slaan in de bestanden veel meer informatie op (over lettertypes, afbeeldingen, pagina's, kleuren &etc;) waarover &kdiff3; niets weet. Daarom zal &kdiff3; de inhoud van het bestand u als pure tekst tonen, maar dit kan onleesbaar zijn of er minstens zeer vreemd uitzien. </para
+>, &etc; store much more information in the files (about fonts, pictures, pages, colors, &etc;) which &kdiff3; doesn't know about. So &kdiff3; will show you the contents of the file interpreted as pure text, but this might be unreadable or at least it will look very odd. </para
 ><para
 >Omdat meer en meer programma's hun data opslaan in het &XML;-formaat, is er een kans dat u het als pure tekst kunt lezen. Hoewel de kans dus klein is, kan &kdiff3; u misschien nog steeds helpen. </para
 ><para
