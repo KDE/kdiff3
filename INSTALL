@@ -1,15 +1,15 @@
 Building KDiff3 requires the fallowing minimum versions:
  1)Qt 5.15 or later
- 2)KF5 5.80+
+ 2)KF5 5.86+
  3)CMake 3.18
- 4)ECM 5.80+
+ 4)ECM 5.86+
  5)boost 1.71+
  Supported compilers:(Must have full c++17 support version cut offs are approximate)
- 6)MSVC 2019+, gcc 8.0+, clang 7+
+ 6)MSVC 2019+, gcc 9.0+, clang 10+
 
 *nix:
-
 On debian based systems you needed to install the fallowing.
+
 gettext, qtbase5-dev, extra-cmake-modules, libboost-dev, libkf5i18n-dev, libkf5coreaddons-dev, libkf5iconthemes-dev libkf5parts-dev, libkf5doctools-dev, libkf5crash-dev, cmake, (gcc or clang)
 These should available as part of the standard repos.
 To build KDiff3 run:
@@ -22,7 +22,7 @@ Windows:
 For windows the build should be done via. craft. Although other methods may work they are not
 tested.
 
-Craft requires python 3.6 or later to be installed it can be downloaded here:
+Craft requires python 3.7 or later to be installed it can be downloaded here:
 https://www.python.org/downloads/windows/
 This should be automatically installed by craft.
 
@@ -41,8 +41,8 @@ Run:
 2)C:\CraftRoot\craft\craftenv.ps1
 3)craft png2ico
 4)craft kdiff3
-If you what to build 1.10.x than use:
-4) craft --target 1.10 kdiff3
+If you what to build 1.11.x than use:
+4) craft --target 1.11 kdiff3
 
 Otherwise craft will use master which is the development branch and therefor more likely to experience breakage.
 
@@ -53,7 +53,7 @@ bin/kdiff3
 If you want to create an install package you would run:
 5)craft nsis
 
-6)craft --package kdiff3 or craft --target 1.10 --package kdiff3
+6)craft --package kdiff3 or craft --target 1.11 --package kdiff3
 
 This will be a time consuming process on first run as craft will have to download all dependencies.
 KDiff3 does not require special configuration for craft.
