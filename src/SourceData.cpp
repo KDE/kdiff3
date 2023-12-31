@@ -454,7 +454,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
                 }
             }
         }
-        catch(std::bad_alloc&)
+        catch(const std::bad_alloc&)
         {
             m_normalData.reset();
             mErrors.append(overSizedFile);
@@ -722,7 +722,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         mLineCount = lines;
         return true;
     }
-    catch(std::bad_alloc&)
+    catch(const std::bad_alloc&)
     {
         reset();
         return false;

@@ -300,7 +300,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 mErrors.append(m_sd3->getErrors());
             }
         }
-        catch(const std::bad_alloc)
+        catch(const std::bad_alloc&)
         {
             m_manualDiffHelpList.clear();
             m_diff3LineList.clear();
