@@ -4,9 +4,9 @@
 
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
-cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
-project(kdiff3 VERSION 1.10.70)
+project(kdiff3 VERSION 1.11.70)
 
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
@@ -16,13 +16,13 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
-set(KF_MIN_VERSION "5.95.0")
+set(KF_MIN_VERSION "5.100.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
     set(QT_MIN_VERSION "6.5.0")
 else()
     set(QT_MAJOR_VERSION "5")
-    set(QT_MIN_VERSION "5.15.5")
+    set(QT_MIN_VERSION "5.15.8")
 endif()
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
@@ -177,10 +177,10 @@ add_definitions(
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.104.0 (below as hex.hex.hex number)
+    #Don't warn for API depreciated after 5.110.0 (below as hex.hex.hex number)
     -DKF_DEPRECATED_WARNINGS_SINCE=0x056800
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x056800
-    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x056800
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x056E00
+    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x056E00
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
