@@ -303,6 +303,7 @@ void MergeResultWindow::slotStatusMessageChanged(const QString& s)
 
 void MergeResultWindow::reset()
 {
+    mUndoRec.reset();
     m_mergeBlockList.clear();
 
     m_currentMergeBlockIt = m_mergeBlockList.end();
@@ -335,6 +336,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                 return;
         }
 
+        mUndoRec.reset();
         m_mergeBlockList.clear();
         m_currentMergeBlockIt = m_mergeBlockList.end();
 
@@ -1164,6 +1166,7 @@ void MergeResultWindow::slotMergeHistory()
     m_pDiff3LineList->findHistoryRange(QRegularExpression(gOptions->m_historyStartRegExp), m_pldC != nullptr, historyRange);
     if(historyRange.start != m_pDiff3LineList->end())
     {
+        mUndoRec.reset();
         // Now collect the historyMap information
         HistoryMap historyMap;
         std::list<HistoryMap::iterator> hitList;
@@ -1288,6 +1291,8 @@ void MergeResultWindow::slotRegExpAutoMerge()
 
     QRegularExpression vcsKeywords(gOptions->m_autoMergeRegExp);
     MergeBlockList::iterator i;
+
+    mUndoRec.reset();
     for(i = m_mergeBlockList.begin(); i != m_mergeBlockList.end(); ++i)
     {
         if(i->isConflict())
@@ -1329,6 +1334,8 @@ bool MergeResultWindow::doRelevantChangesExist()
 
 void MergeResultWindow::slotSplitDiff(qint32 firstD3lLineIdx, qint32 lastD3lLineIdx)
 {
+    mUndoRec.reset();
+
     if(lastD3lLineIdx >= 0)
         m_mergeBlockList.splitAtDiff3LineIdx(lastD3lLineIdx + 1);
     setFastSelector(m_mergeBlockList.splitAtDiff3LineIdx(firstD3lLineIdx));
@@ -1339,6 +1346,8 @@ void MergeResultWindow::slotJoinDiffs(qint32 firstD3lLineIdx, qint32 lastD3lLine
     MergeBlockList::iterator i;
     MergeBlockList::iterator iMBLStart = m_mergeBlockList.end();
     MergeBlockList::iterator iMBLEnd = m_mergeBlockList.end();
+
+    mUndoRec.reset();
     for(i = m_mergeBlockList.begin(); i != m_mergeBlockList.end(); ++i)
     {
         const MergeBlock& mb = *i;
@@ -2465,7 +2474,6 @@ void MergeResultWindow::deleteSelection()
 
     setModified();
 
-    std::shared_ptr<UndoRecord> undoRec;
     LineRef line = 0;
     std::optional<MergeEditLineList::iterator> melItFirst;
     QString firstLineString;
@@ -2493,9 +2501,11 @@ void MergeResultWindow::deleteSelection()
         return; // Nothing to delete.
     }
 
+    MergeBlockList::iterator mbIt;
     line = 0;
-    for(MergeBlock& mb: m_mergeBlockList)
+    for(mbIt = m_mergeBlockList.begin(); mbIt != m_mergeBlockList.end(); ++mbIt)
     {
+        MergeBlock& mb = *mbIt;
         MergeEditLineList::iterator melIt, melIt1;
         for(melIt = mb.list().begin(); melIt != mb.list().end();)
         {
@@ -2506,17 +2516,18 @@ void MergeResultWindow::deleteSelection()
             if(mel.isEditableText() && m_selection.lineWithin(line))
             {
                 const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
-
-                undoRec = std::make_shared<UndoRecord>(mb, m_selection);
                 QtSizeType firstPosInLine = m_selection.firstPosInLine(line);
                 QtSizeType lastPosInLine = m_selection.lastPosInLine(line);
 
                 if(line == firstLine)
                 {
+                    mUndoRec = std::make_shared<UndoRecord>(m_selection, mbIt);
                     melItFirst = melIt;
                     QtSizeType pos = firstPosInLine;
                     firstLineString = lineString.left(pos);
                 }
+                assert(mUndoRec);
+                mUndoRec->push(mb);
 
                 if(line == lastLine)
                 {
@@ -2524,7 +2535,7 @@ void MergeResultWindow::deleteSelection()
                     // This is the last line in the selection
                     QtSizeType pos = lastPosInLine;
                     firstLineString += QStringView(lineString).mid(pos); // rest of line
-                    melItFirst.value_or(melIt)->setString(firstLineString);
+                    melItFirst.value()->setString(firstLineString);
                 }
 
                 if(line != firstLine || (m_selection.endPos() - m_selection.beginPos()) == lineString.length())
@@ -2551,6 +2562,7 @@ void MergeResultWindow::deleteSelection()
 
 void MergeResultWindow::pasteClipboard(bool bFromSelection)
 {
+    mUndoRec.reset();
     //checking of m_selection if needed is done by deleteSelection no need for check here.
     deleteSelection();
 

@@ -12,14 +12,45 @@
 #include "MergeEditLine.h"
 #include "selection.h"
 
+#include <deque>
+
 class UndoRecord
 {
   public:
-    UndoRecord(MergeBlock oldData, Selection sel) { mOldData = oldData, mSel = sel; };
+    UndoRecord(Selection sel, MergeBlockList::iterator start)
+    {
+        mSel = sel;
+        mEnd = mStart = start;
+    };
+
+    void push(const MergeBlock& mb) { savedLines.push_back(mb); }
+    void push(const MergeBlock&& mb)
+    {
+        savedLines.push_back(mb);
+        ++mEnd;
+    }
+
+    const MergeBlock& pop()
+    {
+        const MergeBlock& mb = savedLines.front();
+        savedLines.pop_front();
+        return mb;
+    }
+
+    void undo()
+    {
+        std::deque<MergeBlock>::iterator savedRec = savedLines.begin();
+        for(MergeBlockList::iterator it = mStart; it == mEnd; it++)
+        {
+            std::swap(*it, *savedRec);
+            savedRec++;
+        }
+    }
 
   private:
-    MergeBlock mOldData;
+    MergeBlockList::iterator mStart, mEnd;
     Selection mSel;
+    std::deque<MergeBlock> savedLines;
 };
 
 #endif /* UNDORECORD_H */
