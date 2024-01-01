@@ -14,6 +14,7 @@
 #include <QByteArray>
 #include <QDataStream>
 #include <QString>
+#include <QTextCodec>
 #include <QTextDecoder>
 
 class EncodedDataStream: public QDataStream
