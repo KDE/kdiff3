@@ -431,7 +431,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
 #if KF_VERSION < KF_VERSION_CHECK(5, 240, 0)
         pListJob = KIO::listDir(mFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/);
 #else
-        pListJob = KIO::listDir(mFileAccess->url(), KIO::HideProgressInfo, KIO::ListJob::ListFlags::IncludeHidden /*bFindHidden*/);
+        pListJob = KIO::listDir(mFileAccess->url(), KIO::HideProgressInfo, KIO::ListJob::ListFlag::IncludeHidden /*bFindHidden*/);
 #endif
         m_bSuccess = false;
         if(pListJob != nullptr)
