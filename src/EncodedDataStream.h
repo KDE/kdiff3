@@ -81,7 +81,7 @@ class EncodedDataStream: public QDataStream
 #if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlag::DefaultConversion : QTextCodec::ConversionFlag::IgnoreHeader);
 #else
-        QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlags::DefaultConversion : QTextCodec::ConversionFlags::IgnoreHeader);
+        QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QStringConverter::Flag::writeBOM : QStringConverter::Flag::ConvertInitialBom);
 #endif
         QByteArray data = encoder.fromUnicode(s);
         mError = encoder.hasFailure();
