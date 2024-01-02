@@ -14,7 +14,6 @@
 #include <QByteArray>
 #include <QDataStream>
 #include <QString>
-#include <QTextCodec>
 #include <QTextDecoder>
 
 class EncodedDataStream: public QDataStream
@@ -79,8 +78,11 @@ class EncodedDataStream: public QDataStream
 
     EncodedDataStream &operator<<(const QString &s)
     {
+#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlag::DefaultConversion : QTextCodec::ConversionFlag::IgnoreHeader);
-
+#else
+        QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlags::DefaultConversion : QTextCodec::ConversionFlags::IgnoreHeader);
+#endif
         QByteArray data = encoder.fromUnicode(s);
         mError = encoder.hasFailure();
 
