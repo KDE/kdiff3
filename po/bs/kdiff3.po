@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:43+0000\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -92,7 +92,7 @@ msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Čitam datoteku: %1"
 
-#: DefaultFileAccessJobHandler.cpp:447
+#: DefaultFileAccessJobHandler.cpp:450
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Listam direktorij: %1"
@@ -127,7 +127,7 @@ msgstr "Linija nije na raspolaganju"
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2807 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2819 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Stil završetka linije:"
@@ -144,12 +144,12 @@ msgstr "A (baza):"
 msgid "Encoding: %1"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2853
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2865
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2852
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -399,7 +399,7 @@ msgstr ""
 "i ponovo skenirati direktorij?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -2148,7 +2148,7 @@ msgstr "Izaberi C za sve neriješene sukobe blanko znakova"
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Broj preostalih neriješenih sukoba: %1 (od kojih su %2 blanko znaci)"
 
-#: mergeresultwindow.cpp:329
+#: mergeresultwindow.cpp:330
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2157,29 +2157,29 @@ msgstr ""
 "Izlaz je izmijenjen.\n"
 "Ako nastavite, vaše izmjene će biti izgubljene."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:743
+#: mergeresultwindow.cpp:773 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Sve ulazne datoteke su binarno jednake."
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Sve ulazne datoteke sadrže isti tekst."
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Datoteke %1 i %2 su binarno jednake.\n"
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Dokumenti %1 i %2 imaju isti tekst.\n"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2188,27 +2188,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr "Sukobi"
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1540
 #, kde-format
 msgid "<No src line>"
 msgstr "<Nema izv. linije>"
 
-#: mergeresultwindow.cpp:1539
+#: mergeresultwindow.cpp:1548
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Sukob u stapanju (samo blanko znaci)>"
 
-#: mergeresultwindow.cpp:1541 mergeresultwindow.cpp:2414
+#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Sukob u stapanju>"
 
-#: mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2645
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2220,14 +2220,14 @@ msgstr ""
 "Još uvijek nisu riješeni svi sukobi.\n"
 "Datoteka nije snimljena.\n"
 
-#: mergeresultwindow.cpp:2635 mergeresultwindow.cpp:2644
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Preostali sukobi"
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2654
 #, fuzzy, kde-format
 #| msgid ""
 #| "There is a line end style conflict. Please choose the line end style "
@@ -2242,7 +2242,7 @@ msgstr ""
 "ručno.\n"
 "Dokument nije sačuvan.\n"
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2253,51 +2253,51 @@ msgstr ""
 "\n"
 "Stvaranje rezerve nije uspjelo. Datoteka nije snimljena."
 
-#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2716
 #, kde-format
 msgid "File Save Error"
 msgstr "Greška u snimanju datoteke"
 
-#: mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2716
 #, kde-format
 msgid "Error while writing."
 msgstr "Greška prilikom pisanja."
 
-#: mergeresultwindow.cpp:2779
+#: mergeresultwindow.cpp:2791
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Izlaz"
 
-#: mergeresultwindow.cpp:2792 mergeresultwindow.cpp:2982
+#: mergeresultwindow.cpp:2804 mergeresultwindow.cpp:2994
 #, kde-format
 msgid "[Modified]"
 msgstr "[Izmijenjen]"
 
-#: mergeresultwindow.cpp:2799
+#: mergeresultwindow.cpp:2811
 #, fuzzy, kde-format
 #| msgid "Encoding for saving"
 msgid "Encoding for saving:"
 msgstr "Kodiranje za snimanje"
 
-#: mergeresultwindow.cpp:2899
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2929
+#: mergeresultwindow.cpp:2941
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "Codec od"
 
-#: mergeresultwindow.cpp:2931
+#: mergeresultwindow.cpp:2943
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "Codec od"
 
-#: mergeresultwindow.cpp:2933
+#: mergeresultwindow.cpp:2945
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
@@ -2357,10 +2357,9 @@ msgstr "C (opcionalno):"
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectA)
 #. i18n: ectx: property (text), widget (QPushButton, selectOutputFolder)
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgid "Folder..."
-msgstr "Otvaram datoteke..."
+msgstr ""
 
 #: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
@@ -3573,10 +3572,10 @@ msgstr "Učitavam A"
 
 #: pdiff.cpp:133
 #, fuzzy, kde-format
-#| msgid "Loading B"
+#| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading B: %1"
-msgstr "Učitavam B"
+msgstr "Učitavam A"
 
 #: pdiff.cpp:166 pdiff.cpp:206
 #, fuzzy, kde-format
@@ -4022,34 +4021,22 @@ msgstr "Neočekivan apostrof unutar argumenata."
 msgid "No program specified."
 msgstr "Nijedan program nije naveden."
 
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "Automatsko nalaženje Unicode"
+#~ msgid "A"
+#~ msgstr "A"
 
-#~ msgid "Toggling toolbar..."
-#~ msgstr "Prebacujem traku sa alatom..."
+#~ msgid "B"
+#~ msgstr "B"
+
+#~ msgid "C"
+#~ msgstr "C"
 
 #, fuzzy
-#~| msgid ""
-#~| "Could not initialize the KDiff3 part.\n"
-#~| "This usually happens due to an installation problem. Please read the "
-#~| "README-file in the source package for details."
-#~ msgid ""
-#~ "Could not initialize KDiff3.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "Nije moguće izvršiti KDiff3 dio.\n"
-#~ "Ovo se obićno dešava tokom problema instalacije. Molimo pročitajte README-"
-#~ "dokument u izvoru paketa za detalje."
+#~| msgid "KDiff3Part"
+#~ msgid "KDiff3 Part"
+#~ msgstr "KDiff3Dio"
 
-#~ msgid "Loading A"
-#~ msgstr "Učitavam A"
-
-#~ msgid "Loading B"
-#~ msgstr "Učitavam B"
-
-#~ msgid "Loading C"
-#~ msgstr "Učitavam C"
+#~ msgid "Joachim Eibl"
+#~ msgstr "Joachim Eibl"
 
 #, fuzzy
 #~| msgid "Couldn't find files for comparison."
@@ -4062,13 +4049,29 @@ msgstr "Nijedan program nije naveden."
 #~ msgid "Configure KDiff3"
 #~ msgstr "Podesi KDiff3"
 
-#, fuzzy
-#~| msgid "KDiff3Part"
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3Dio"
+#~ msgid ""
+#~ "Could not initialize the KDiff3 part.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "Nije moguće izvršiti KDiff3 dio.\n"
+#~ "Ovo se obićno dešava tokom problema instalacije. Molimo pročitajte README-"
+#~ "dokument u izvoru paketa za detalje."
 
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
+#~ msgid "Auto Detect Unicode"
+#~ msgstr "Automatsko nalaženje Unicode"
+
+#~ msgid "Loading A"
+#~ msgstr "Učitavam A"
+
+#~ msgid "Loading B"
+#~ msgstr "Učitavam B"
+
+#~ msgid "Loading C"
+#~ msgstr "Učitavam C"
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "Prebacujem traku sa alatom..."
 
 #~ msgid ""
 #~ "A version control history entry consists of several lines.\n"
@@ -4125,15 +4128,6 @@ msgstr "Nijedan program nije naveden."
 #~ "Obično ova linija sadrži \"$Log$\" ključnu riječ.\n"
 #~ "Zadana vrijednost: \".*\\$Log.*\\$.*\""
 
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
 #, fuzzy
 #~| msgid "Severe Internal Error"
 #~ msgid "Severe Internal Error."
@@ -4143,19 +4137,6 @@ msgstr "Nijedan program nije naveden."
 #~| msgid "Severe Internal Error"
 #~ msgid "Severe Internal Error.: "
 #~ msgstr "Ozbiljna unutrašnja greška"
-
-#, fuzzy
-#~| msgid "Don't solve conflicts automatically. (For compatibility...)"
-#~ msgid "Do not solve conflicts automatically."
-#~ msgstr "Ne rješavaj sukobe automatski. (Za kompatibilnost...)"
-
-#~ msgid "File Open Error"
-#~ msgstr "Greška pri otvaranju datoteke"
-
-#, fuzzy
-#~| msgid "Directory"
-#~ msgid "Open Directory"
-#~ msgstr "Direktorij"
 
 #~ msgid "Directory Open Error"
 #~ msgstr "Greška pri otvaranju direktorij"
@@ -4183,6 +4164,11 @@ msgstr "Nijedan program nije naveden."
 #~ msgid "&Directory"
 #~ msgstr "&Direktorij"
 
+#, fuzzy
+#~| msgid "Don't solve conflicts automatically. (For compatibility...)"
+#~ msgid "Do not solve conflicts automatically."
+#~ msgstr "Ne rješavaj sukobe automatski. (Za kompatibilnost...)"
+
 #~ msgid "Dir-anti-pattern(s):"
 #~ msgstr "Anti-uzorak/uzorci direktorija:"
 
@@ -4207,6 +4193,11 @@ msgstr "Nijedan program nije naveden."
 
 #~ msgid "Dir..."
 #~ msgstr "Dir..."
+
+#, fuzzy
+#~| msgid "Directory"
+#~ msgid "Open Directory"
+#~ msgstr "Direktorij"
 
 #~ msgid "Finds files and directories with the hidden attribute."
 #~ msgstr "Nalazi datoteke i direktorije sa atributom skrivenih."

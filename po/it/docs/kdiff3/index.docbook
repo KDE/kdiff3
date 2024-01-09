@@ -165,7 +165,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Questo documento descrive la versione 1.11 di &kdiff3;. </para>
+>Questo documento descrive la versione 1.10.6 di &kdiff3;. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -1950,11 +1950,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Rileva automaticamente</guilabel
+>Rileva Unicode automaticamente</guilabel
 ></term
 ><listitem
 ><para
->Questa opzione tenta di utilizzare i dati BOM o i metadati dai documenti XML/HTML per rilevare la codifica. Se non vi riesce, controllerà se un breve campione preso dall'inizio del file può essere interpretato come UTF-8. Se questo controllo passa, verrà utilizzata la codifica UTF-8. In caso contrario, tornerà a usare la codifica selezionata dall'utente. In assenza di dati BOM o metadati, è supportata solo la codifica UTF-8. </para
+>Questa opzione tenta di utilizzare i dati BOM o i metadati dai documenti XML/HTML per rilevare la codifica Unicode. Se non vi riesce, controllerà se un breve campione preso dall'inizio del file può essere interpretato come UTF-8. Se questo controllo passa, verrà utilizzata la codifica UTF-8. In caso contrario, tornerà a usare la codifica selezionata dall'utente. In assenza di dati BOM o metadati, è supportata solo la codifica UTF-8. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -3780,6 +3780,33 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
+<sect1 id="kpart">
+<title
+>Usare &kdiff3; come un componente KPart</title>
+<para
+>&kdiff3; è un componente KPart. Attualmente implementa l'interfaccia <classname
+>KParts::ReadOnlyPart</classname
+>. </para
+><para
+>Il suo impiego principale è come visore di differenze in &kdevelop;. &kdevelop; fa sempre partire prima il visore delle differenze interno. Per richiamare &kdiff3; premi il &RMB; nella finestra del visore e seleziona <guimenuitem
+>Mostra in KDiff3Part</guimenuitem
+> dal menu contestuale. </para
+><para
+>&kdiff3; richiede normalmente due file completi in ingresso. Quando viene usato come componente, &kdiff3; presupporrà che il file di ingresso sia una patch nel formato unificato. &kdiff3; recupererà i nome originali dei file dalla patch. Deve essere disponibile almeno uno dei due file. &kdiff3; chiamerà quindi <command
+>patch</command
+> per ricreare il secondo file. </para
+><para
+>In &dolphin; puoi selezionare una patch e selezionare dal menu contestuale <menuchoice
+><guimenuitem
+>Anteprima in</guimenuitem
+><guisubmenu
+>KDiff3Part</guisubmenu
+></menuchoice
+>. Nota che questa opzione non funzionerà se nessuno dei file originali è disponibile, e non è affidabile se i file originali sono stati modificati prima della generazione della patch. </para
+><para
+>Quando avviato come componente, &kdiff3; include solo la differenza tra due file, e una barra degli strumenti e un menu ridotti. La fusione o il confronto tra cartelle non sono supportati. </para>
+</sect1>
+
 <sect1 id="git">
 <title
 >Usare &kdiff3; come strumento Diff e Merge di &git;</title>
@@ -4003,9 +4030,7 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Posso usare &kdiff3; per confrontare file di <application
->LibreOffice</application
->/<trademark class="registered"
+>Posso usare &kdiff3; per confrontare file di <trademark class="registered"
 > OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
@@ -4017,9 +4042,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Nonostante &kdiff3; possa analizzare ogni tipo di file, probabilmente il risultato non sarà molto soddisfacente. </para
 ><para
->&kdiff3; è stato fatto per confrontare file di testo semplice. <application
->LibreOffice</application
->/<trademark class="registered"
+>&kdiff3; è stato fatto per confrontare file di testo semplice. <trademark class="registered"
 > OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:43+0000\n"
-"PO-Revision-Date: 2023-10-30 05:23+0100\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
+"PO-Revision-Date: 2023-06-14 06:07+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,13 +34,17 @@ msgid "Getting file status: %1"
 msgstr "ფაილის მდგომარეობის მიღება: %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Reading file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "ფაილის კითხვა: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Writing file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "ფაილის ჩაწერა: %1"
@@ -51,19 +55,25 @@ msgid "Out of memory"
 msgstr "არასაკმარისი მეხსიერება"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Making folder: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "საქაღალდის შექმნა: %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Removing folder: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "საქაღალდის წაშლა: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Mesage for progress dialog %1 = path to file"
+#| msgid "Removing file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "ფაილის წაშლა: %1"
@@ -84,12 +94,13 @@ msgid "Copying file: %1 -> %2"
 msgstr "ფაილის კოპირება %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reading folder: %1"
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "საქაღალდის კითხვა: %1"
 
-#: DefaultFileAccessJobHandler.cpp:447
+#: DefaultFileAccessJobHandler.cpp:450
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "საქაღალდის სია: %1"
@@ -121,7 +132,7 @@ msgstr "ფაილი %1: ხაზი მიუწდომელია"
 msgid "Encoding:"
 msgstr "კოდირება:"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2807 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2819 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "ხაზის დასრულების სტილი:"
@@ -136,12 +147,12 @@ msgstr "A (ბაზა)"
 msgid "Encoding: %1"
 msgstr "კოდირება: %1"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2853
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2865
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2852
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -177,26 +188,27 @@ msgid "Unicode, 8 bit"
 msgstr "8-ბიტიანი უნიკოდი"
 
 #: difftextwindow.cpp:2137
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
-msgstr "უნიკოდი, 8-ბიტიანი (BOM)"
+msgstr "8-ბიტიანი უნიკოდი"
 
 #: difftextwindow.cpp:2153
 #, kde-format
 msgid "Other"
-msgstr "სხვა"
+msgstr "სხვები"
 
 #: directorymergewindow.cpp:416
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
-msgstr "A-ის B-ში კოპირება"
+msgstr "A-ს B-ში კოპირება"
 
 #: directorymergewindow.cpp:419
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
-msgstr "B-ის A-ში კოპირება"
+msgstr "B-ს A-ში კოპირება"
 
 #: directorymergewindow.cpp:422
 #, kde-format
@@ -274,7 +286,7 @@ msgstr "შეცდომა: თარიღები ტოლია, მა�
 #, kde-format
 msgctxt "Status column message"
 msgid "Done"
-msgstr "დასრულდა"
+msgstr "დასრულება"
 
 #: directorymergewindow.cpp:478
 #, kde-format
@@ -310,7 +322,7 @@ msgstr "გასაკეთებელი."
 #, kde-format
 msgctxt "Column title"
 msgid "Name"
-msgstr "სახელით"
+msgstr "სახელი"
 
 #: directorymergewindow.cpp:534
 #, kde-format
@@ -356,11 +368,13 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
-#, kde-format
+#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#, fuzzy, kde-format
+#| msgctxt "Error dialog caption"
+#| msgid "Warning"
 msgctxt "Error dialog title"
 msgid "Warning"
-msgstr "ყურადღება"
+msgstr "შეტყობინება"
 
 #: directorymergewindow.cpp:689
 #, kde-format
@@ -395,7 +409,8 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "საქაღალდე C \"%1\" არ არსებობს ან საქაღალდე არაა.\n"
 
 #: directorymergewindow.cpp:856
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Folder Opening Error"
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "ფაილის გახსნის შეცდომა"
@@ -409,7 +424,8 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:866
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Parameter Warning"
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "პარამეტრის გაფრთხლება"
@@ -420,37 +436,43 @@ msgid "Scanning folders..."
 msgstr "საქაღალდეების სკანირება..."
 
 #: directorymergewindow.cpp:893
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reading Folder A"
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "A საქაღალდის კითხვა"
 
 #: directorymergewindow.cpp:902
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reading Folder B"
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "B საქაღალდის კითხვა"
 
 #: directorymergewindow.cpp:912
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Reading Folder C"
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "C საქაღალდის კითხვა"
 
 #: directorymergewindow.cpp:928
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Some subfolders were not readable in"
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "ზოგიერთი ქვესაქაღალდე წაკითხვადი არაა"
 
 #: directorymergewindow.cpp:933
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Check the permissions of the subfolders."
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "შეამოწმეთ თქვენი წვდომები ქვესაქაღალდეებზე."
 
 #: directorymergewindow.cpp:956
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ready."
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "მზადაა."
@@ -739,55 +761,64 @@ msgid "Dest"
 msgstr "სამიზნე"
 
 #: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Folder"
 msgctxt "Header label"
 msgid "Folder"
 msgstr "საქაღალდე"
 
 #: directorymergewindow.cpp:2722
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt "Header label"
 msgid "Type"
-msgstr "ტიპი"
+msgstr "ტიპით"
 
 #: directorymergewindow.cpp:2722
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Size"
 msgctxt "Header label"
 msgid "Size"
 msgstr "ზომა"
 
 #: directorymergewindow.cpp:2723
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Attr"
 msgctxt "Header label"
 msgid "Attr"
 msgstr "ატრ"
 
 #: directorymergewindow.cpp:2723
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Last Modification"
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "ბოლო ცვლილება"
 
 #: directorymergewindow.cpp:2723
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Link-Destination"
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "ბმულის სამიზნე"
 
 #: directorymergewindow.cpp:2750
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File"
 msgctxt "Header label"
 msgid "File"
 msgstr "ფაილი"
 
 #: directorymergewindow.cpp:2750
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "-Link"
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-ბმული"
 
 #: directorymergewindow.cpp:2756
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "not available"
 msgctxt "Header label"
 msgid "not available"
 msgstr "მიუწვდომელია"
@@ -993,12 +1024,12 @@ msgstr "წაშლა (თუ არსებობს)"
 #: directorymergewindow.cpp:2982
 #, kde-format
 msgid "Copy A to B"
-msgstr "A-ის B-ში კოპირება"
+msgstr "A-ს B-ში კოპირება"
 
 #: directorymergewindow.cpp:2983
 #, kde-format
 msgid "Copy B to A"
-msgstr "B-ის A-ში კოპირება"
+msgstr "B-ს A-ში კოპირება"
 
 #: directorymergewindow.cpp:2984
 #, kde-format
@@ -1073,7 +1104,7 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr "ტექსტური ჭდე"
+msgstr ""
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
@@ -1086,7 +1117,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:49
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Button title"
+#| msgid "Change Font"
 msgctxt "Button Title"
 msgid "Change Font"
 msgstr "ფონტის შეცვლა"
@@ -1123,10 +1156,11 @@ msgid "Can't compare file with folder."
 msgstr ""
 
 #: kdiff3.cpp:468
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Binary comparison"
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
-msgstr "შედარების ცუდი მცდელობა"
+msgstr "ბინარული შედარება"
 
 #: kdiff3.cpp:477
 #, kde-format
@@ -1380,10 +1414,16 @@ msgstr ""
 "გადასვლა"
 
 #: kdiff3.cpp:695
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Additional text intooltip"
+#| msgid ""
+#| ".\n"
+#| " Goto specified line."
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr "მითითებულ ხაზზე გადასვლა."
+msgstr ""
+".\n"
+" მითითებულ ხაზზე გადასვლა."
 
 #: kdiff3.cpp:696
 #, kde-format
@@ -1434,7 +1474,11 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 
 #: kdiff3.cpp:699
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Auto goto next unsolced toolbar text."
+#| msgid ""
+#| "Auto\n"
+#| "Next"
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
@@ -1641,7 +1685,7 @@ msgstr "შენახვა, როგორც..."
 #: kdiff3.cpp:888
 #, kde-format
 msgid "Printing not implemented."
-msgstr "ბეჭდვა განხორციელებული არაა."
+msgstr ""
 
 #: kdiff3.cpp:928
 #, kde-format
@@ -1877,10 +1921,11 @@ msgid "Date & Size: "
 msgstr "თარიღი და ზომა: "
 
 #: MergeFileInfos.cpp:482
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Comparing file..."
 msgctxt "Status message"
 msgid "Comparing file..."
-msgstr "ფაილის შედარება..."
+msgstr "ფაილის სედარება..."
 
 #: mergeresultwindow.cpp:145
 #, kde-format
@@ -1932,36 +1977,36 @@ msgstr ""
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 
-#: mergeresultwindow.cpp:329
+#: mergeresultwindow.cpp:330
 #, kde-format
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
 msgstr ""
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:743
+#: mergeresultwindow.cpp:773 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr ""
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr ""
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1970,40 +2015,41 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr "კონფლიქტები"
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1540
 #, kde-format
 msgid "<No src line>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1539
+#: mergeresultwindow.cpp:1548
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1541 mergeresultwindow.cpp:2414
+#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr ""
 
-#: mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2645
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2635 mergeresultwindow.cpp:2644
-#, kde-format
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
+#, fuzzy, kde-format
+#| msgid "Conflicts"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
-msgstr "დარჩენილი კონფლიქტები"
+msgstr "კონფლიქტები"
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2011,7 +2057,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2019,47 +2065,47 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2716
 #, kde-format
 msgid "File Save Error"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2716
 #, kde-format
 msgid "Error while writing."
 msgstr ""
 
-#: mergeresultwindow.cpp:2779
+#: mergeresultwindow.cpp:2791
 #, kde-format
 msgid "Output:"
 msgstr "გამოტანა:"
 
-#: mergeresultwindow.cpp:2792 mergeresultwindow.cpp:2982
+#: mergeresultwindow.cpp:2804 mergeresultwindow.cpp:2994
 #, kde-format
 msgid "[Modified]"
 msgstr "[შეცვლილია]"
 
-#: mergeresultwindow.cpp:2799
+#: mergeresultwindow.cpp:2811
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "კოდირება შენახვისთვის:"
 
-#: mergeresultwindow.cpp:2899
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Conflict"
 msgstr "კონფლიქტი"
 
-#: mergeresultwindow.cpp:2929
+#: mergeresultwindow.cpp:2941
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2931
+#: mergeresultwindow.cpp:2943
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2933
+#: mergeresultwindow.cpp:2945
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
@@ -2123,7 +2169,7 @@ msgstr "საქაღალდე..."
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr "არა"
+msgstr ""
 
 #: optiondialog.cpp:109 optiondialog.cpp:121
 #, kde-format
@@ -2161,7 +2207,7 @@ msgstr "მორგება"
 #: optiondialog.cpp:529
 #, kde-format
 msgid "Font"
-msgstr "შრიფტი"
+msgstr "ფონტი"
 
 #: optiondialog.cpp:531
 #, kde-format
@@ -2620,7 +2666,8 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1091 optiondialog.cpp:1092
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Folder"
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "საქაღალდე"
@@ -2937,7 +2984,9 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "Automatically detected line ending"
+#| msgid "Autodetect"
 msgid "Auto Detect"
 msgstr "ავტოამოცნობა"
 
@@ -3065,55 +3114,64 @@ msgid "Disable Unsafe Options"
 msgstr ""
 
 #: pdiff.cpp:123
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loading A: %1"
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "A-ის ჩატვირთვა: %1"
 
 #: pdiff.cpp:133
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loading B: %1"
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "B-ის ჩატვირთვა: %1"
 
 #: pdiff.cpp:166 pdiff.cpp:206
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Diff: A <-> B"
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "განსხვავება: A <-> B"
 
 #: pdiff.cpp:172 pdiff.cpp:252 pdiff.cpp:275
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Linediff: A <-> B"
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "ხაზის განსხვავება: A <-> B"
 
 #: pdiff.cpp:191
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Loading C: %1"
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "C-ის ჩატვირთვა: %1"
 
 #: pdiff.cpp:217
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Diff: A <-> C"
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "განსხვავება: A <-> C"
 
 #: pdiff.cpp:230
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Diff: B <-> C"
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "განსხვავება: B <-> C"
 
 #: pdiff.cpp:258 pdiff.cpp:280
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Linediff: B <-> C"
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "ხაზის განსხვავება: B <-> C"
 
 #: pdiff.cpp:264 pdiff.cpp:285
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Linediff: A <-> C"
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "ხაზის განსხვავება: A <-> C"
@@ -3204,7 +3262,7 @@ msgstr "ბაფერის შემცველობის ჩასმა.
 #: pdiff.cpp:1191
 #, kde-format
 msgid "Ok"
-msgstr "Ok"
+msgstr "დიახ"
 
 #: pdiff.cpp:1207
 #, kde-format
@@ -3255,7 +3313,7 @@ msgstr ""
 #: progress.cpp:56 progressdialog.ui:100
 #, kde-format
 msgid "&Cancel"
-msgstr "&შეწყვეტა"
+msgstr "&გაუქმება"
 
 #: smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:83
 #, kde-format
@@ -3275,7 +3333,7 @@ msgstr ""
 #: smalldialogs.cpp:108
 #, kde-format
 msgid "Configure..."
-msgstr "გამართვა..."
+msgstr "მორგება..."
 
 #: smalldialogs.cpp:161
 #, kde-format
@@ -3466,17 +3524,23 @@ msgstr ""
 msgid "No program specified."
 msgstr ""
 
-#~ msgid "Toggling toolbar..."
-#~ msgstr "ხელსაწყოების ზოლის გადართვა.."
+#~ msgid "A"
+#~ msgstr "A"
 
-#~ msgid "Loading A"
-#~ msgstr "A-ის ჩატვირთვა"
+#~ msgid "B"
+#~ msgstr "B"
 
-#~ msgid "Loading B"
-#~ msgstr "B-ის ჩატვირთვა"
+#~ msgid "C"
+#~ msgstr "C"
 
-#~ msgid "Loading C"
-#~ msgstr "C-ის ჩატვირთვა"
+#~ msgid "KDiff3 Part"
+#~ msgstr "KDiff3 Part"
+
+#~ msgid "A KPart to display SVG images"
+#~ msgstr "SVG-ის KPart-ში ჩვენება"
+
+#~ msgid "Joachim Eibl"
+#~ msgstr "Joachim Eibl"
 
 #~ msgid "Could not find files for comparison."
 #~ msgstr "შესადარებელი ფაილები ვერ ვიპოვე."
@@ -3487,8 +3551,18 @@ msgstr ""
 #~ msgid "Configure KDiff3"
 #~ msgstr "KDiff3-ის მორგება"
 
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3 Part"
+#~ msgctxt "Program version info."
+#~ msgid " (32 bit)"
+#~ msgstr " (32-ბიტიანი)"
 
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
+#~ msgid "Loading A"
+#~ msgstr "A-ის ჩატვირთვა"
+
+#~ msgid "Loading B"
+#~ msgstr "B-ის ჩატვირთვა"
+
+#~ msgid "Loading C"
+#~ msgstr "C-ის ჩატვირთვა"
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "ხელსაწყოების ზოლის გადართვა.."

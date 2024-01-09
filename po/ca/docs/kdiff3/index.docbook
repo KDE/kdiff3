@@ -117,7 +117,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Aquest document descriu la versió 1.11 del &kdiff3;. </para>
+>Aquest document descriu la versió 1.10.7 del &kdiff3;. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -1878,11 +1878,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Detecta automàticament</guilabel
+>Detecta automàticament l'Unicode</guilabel
 ></term
 ><listitem
 ><para
->Aquesta opció intenta utilitzar el BOM o les metadades dels documents XML/HTML per detectar la codificació. En cas contrari comprovarà si es pot interpretar com UTF-8 una mostra petita des del principi del fitxer. Si aquesta comprovació passa s'utilitzarà UTF-8. En cas contrari tornarà al còdec seleccionat per l'usuari. Només s'admet UTF-8 sense BOM ni metadades presents. </para
+>Aquesta opció intenta utilitzar el BOM o les metadades dels documents XML/HTML per detectar la codificació Unicode. En cas contrari comprovarà si es pot interpretar com UTF-8 una mostra petita des del principi del fitxer. Si aquesta comprovació passa s'utilitzarà UTF-8. En cas contrari tornarà al còdec seleccionat per l'usuari. Només s'admet UTF-8 sense BOM ni metadades presents. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -3195,7 +3195,7 @@ Please at least include KDE, the KDE package it is in, the name
 >F6</keycap
 >. </para
 ><para
->Si a causa de tipus de fitxer en conflicte hi ha alguns elements amb operacions encara no vàlides, apareixerà un quadre de missatge i s'indicaran aquests elements, de manera que pugueu seleccionar una operació vàlida per a l'element. </para
+>Si a causa de tipus de fitxer en conflicte encara hi ha alguns elements amb operacions no vàlides, apareixerà un quadre de missatge i s'indicaran aquests elements, de manera que pugueu seleccionar una operació vàlida per a l'element. </para
 ><para
 >Si fusioneu tots els elements, apareixerà un diàleg que us donarà les opcions <guilabel
 >Fes-ho</guilabel
@@ -3662,6 +3662,31 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
+<sect1 id="kpart">
+<title
+>Emprar el &kdiff3; com a una KPart</title>
+<para
+>El &kdiff3; és una KPart. Actualment implementa la interfície «KParts::ReadOnlyPart». </para
+><para
+>El seu ús principal és com a visualitzador de diferències en el &kdevelop;. El &kdevelop; sempre inicia primer el visualitzador de diferències intern. Per a invocar el &kdiff3;, premeu el &BDR; a la finestra de la vista de diferències i seleccioneu <guimenuitem
+>Mostra a la part del &kdiff3;</guimenuitem
+> des del menú contextual. </para
+><para
+>El &kdiff3; normalment requereix dos fitxers complets com a entrada. Quan s'utilitza com a part, el &kdiff3; assumirà que el fitxer d'entrada és un fitxer de pedaç en el format unificat. Llavors el &kdiff3; recuperarà els noms de fitxer originals des del fitxer de pedaç. Almenys un dels dos fitxers haurà d'estar disponible. Llavors el &kdiff3; invocarà l'ordre <command
+>patch</command
+> per a recrear el segon fitxer. </para
+><para
+>En el &dolphin; podreu seleccionar un fitxer de pedaç i seleccionar l'element <menuchoice
+><guimenuitem
+>Vista prèvia a</guimenuitem
+><guisubmenu
+>Part del &kdiff3;</guisubmenu
+></menuchoice
+> des del menú contextual. Cal tenir en compte que això no funcionarà si cap dels fitxers originals està disponible, i no és fiable si els fitxers originals han canviat des que es va generar el fitxer de pedaç. </para
+><para
+>Quan s'executa com a part, el &kdiff3; només proporciona una diferència de dos fitxers amb una barra d'eines i un menú molt petits. De manera que la fusió o la comparació de carpetes no s'admeten. </para>
+</sect1>
+
 <sect1 id="git">
 <title
 >Usar el &kdiff3; com a una eina de «diff» i fusió de &git;</title>
@@ -3878,9 +3903,7 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Puc emprar el &kdiff3; per a comparar fitxers del <application
->LibreOffice</application
->/<trademark class="registered"
+>Puc emprar el &kdiff3; per a comparar fitxers <trademark class="registered"
 >OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
@@ -3892,9 +3915,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Encara que el &kdiff3; analitzarà qualsevol classe de fitxer, el resultat probablement no serà molt satisfactori. </para
 ><para
->El &kdiff3; es va crear per a comparar fitxers de text pur. El <application
->LibreOffice</application
->/<trademark class="registered"
+>El &kdiff3; es va crear per a comparar fitxers de text pur. L'<trademark class="registered"
 >OpenOffice.org</trademark
 >, el <application
 >&Microsoft; Word</application

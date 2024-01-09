@@ -36,7 +36,7 @@
 >kdiff3</command
 ></refname>
 <refpurpose
->Herramienta para comparar y fusionar archivos y carpetas</refpurpose>
+>Tool for Comparison and Merge of Files and Directories</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -73,21 +73,21 @@
 ><option
 >-o, --output</option
 > <replaceable
->archivo</replaceable
+>file</replaceable
 ></arg
 > <arg choice="opt"
 ><option
 >--out</option
 > <replaceable
->archivo</replaceable
-></arg
-> <arg choice="opt"
-><option
->--noauto</option
+>file</replaceable
 ></arg
 > <arg choice="opt"
 ><option
 >--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--qall</option
 ></arg
 > <arg choice="opt"
 ><option
@@ -117,7 +117,7 @@
 ><option
 >--cs</option
 > <replaceable
->texto</replaceable
+>string</replaceable
 ></arg
 > <arg choice="opt"
 ><option
@@ -127,24 +127,24 @@
 ><option
 >--config</option
 > <replaceable
->archivo</replaceable
+>file</replaceable
 ></arg
 > <arg choice="opt"
 ><option
 ><replaceable
->Archivo1</replaceable
+>File1</replaceable
 ></option
 ></arg
 > <arg choice="opt"
 ><option
 ><replaceable
->Archivo2</replaceable
+>File2</replaceable
 ></option
 ></arg
 > <arg choice="opt"
 ><option
 ><replaceable
->Archivo3</replaceable
+>File3</replaceable
 ></option
 ></arg
 > </cmdsynopsis>
@@ -154,7 +154,8 @@
 <title
 >Descripción</title>
 <para
->Compara dos o tres archivos o carpetas de entrada.</para>
+>Compares two or three input files or directories.</para
+> 
 
 </refsect1>
 
@@ -274,11 +275,11 @@
 <varlistentry>
 <term
 ><option
->--noauto</option
+>--qall</option
 ></term>
 <listitem
 ><para
->Ignorar --auto y mostrar siempre la interfaz gráfica del usuario. </para
+>Don't solve conflicts automatically. </para
 ></listitem>
 </varlistentry>
 

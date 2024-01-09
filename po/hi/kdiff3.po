@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:43+0000\n"
-"PO-Revision-Date: 2021-09-17 20:07+0530\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
+"PO-Revision-Date: 2021-09-17 20:34+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
 "Language: hi\n"
@@ -93,7 +93,7 @@ msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "फ़ाइल पढ़ा जा रहा है: %1"
 
-#: DefaultFileAccessJobHandler.cpp:447
+#: DefaultFileAccessJobHandler.cpp:450
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "डिरेक्ट्री सूचीबद्ध की जा रही है: %1"
@@ -125,7 +125,7 @@ msgstr "उपलब्ध नहीं"
 msgid "Encoding:"
 msgstr ""
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2807 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2819 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "पंक्ति ख़त्म होने की शैलीः"
@@ -141,12 +141,12 @@ msgstr "अ (बेस):"
 msgid "Encoding: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2853
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2865
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2852
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "Unix"
 msgstr ""
@@ -388,7 +388,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1996,7 +1996,7 @@ msgstr "सभी समाधान-रहित सफेद-जगह पर�
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "बचे हुए समाधान-रहित विरोधाभासों की संख्या: %1"
 
-#: mergeresultwindow.cpp:329
+#: mergeresultwindow.cpp:330
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2005,29 +2005,29 @@ msgstr ""
 "आउटपुट परिवर्धित किया जा चुका है.\n"
 "यदि आप जारी रखते हैं तो आपके परिवर्तन खो जाएँगे."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:743
+#: mergeresultwindow.cpp:773 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "सभी इनपुट फ़ाइलें बाइनरी समान हैं."
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "सभी इनपुट फ़ाइलें एक ही पाठ रखे हैं."
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "फ़ाइलें ब तथा स बाइनरी समान हैं.\n"
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "फ़ाइलें अ तथा ब में पाठ समान हैं.\n"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2036,27 +2036,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr "परस्पर विरोध"
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1540
 #, kde-format
 msgid "<No src line>"
 msgstr "<कोई स्रोत पंक्ति नहीं>"
 
-#: mergeresultwindow.cpp:1539
+#: mergeresultwindow.cpp:1548
 #, fuzzy, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<विरोधाभास सम्मिलित करें>"
 
-#: mergeresultwindow.cpp:1541 mergeresultwindow.cpp:2414
+#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<विरोधाभास सम्मिलित करें>"
 
-#: mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2645
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2068,14 +2068,14 @@ msgstr ""
 "अब तक सभी विरोधाभासों का समाधान नहीं किया गया है.\n"
 "फ़ाइल सहेजा नहीं गया.\n"
 
-#: mergeresultwindow.cpp:2635 mergeresultwindow.cpp:2644
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "विरोधाभास बायाँ "
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2083,7 +2083,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2091,49 +2091,49 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2716
 #, kde-format
 msgid "File Save Error"
 msgstr "फ़ाइल सहेजने में त्रुटि"
 
-#: mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2716
 #, kde-format
 msgid "Error while writing."
 msgstr "लिखने के दौरान त्रुटि."
 
-#: mergeresultwindow.cpp:2779
+#: mergeresultwindow.cpp:2791
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "आउटपुट"
 
-#: mergeresultwindow.cpp:2792 mergeresultwindow.cpp:2982
+#: mergeresultwindow.cpp:2804 mergeresultwindow.cpp:2994
 #, kde-format
 msgid "[Modified]"
 msgstr "[परिवर्धित]"
 
-#: mergeresultwindow.cpp:2799
+#: mergeresultwindow.cpp:2811
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2899
+#: mergeresultwindow.cpp:2911
 #, fuzzy, kde-format
 #| msgid "Conflicts"
 msgid "Conflict"
 msgstr "परस्पर विरोध"
 
-#: mergeresultwindow.cpp:2929
+#: mergeresultwindow.cpp:2941
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2931
+#: mergeresultwindow.cpp:2943
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2933
+#: mergeresultwindow.cpp:2945
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
@@ -2191,10 +2191,9 @@ msgstr "स (वैकल्पिक):"
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectA)
 #. i18n: ectx: property (text), widget (QPushButton, selectOutputFolder)
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgid "Folder..."
-msgstr "फ़ाइलें खोली जा रही हैं..."
+msgstr ""
 
 #: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
@@ -3168,10 +3167,10 @@ msgstr "अ लोड किया जा रहा है"
 
 #: pdiff.cpp:133
 #, fuzzy, kde-format
-#| msgid "Loading B"
+#| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading B: %1"
-msgstr "ब लोड किया जा रहा है"
+msgstr "अ लोड किया जा रहा है"
 
 #: pdiff.cpp:166 pdiff.cpp:206
 #, fuzzy, kde-format
@@ -3574,17 +3573,19 @@ msgstr ""
 msgid "No program specified."
 msgstr ""
 
-#~ msgid "Toggling toolbar..."
-#~ msgstr "टूलबार टॉगल किया जा रहा है..."
+#~ msgid "A"
+#~ msgstr "अ"
 
-#~ msgid "Loading A"
-#~ msgstr "अ लोड किया जा रहा है"
+#~ msgid "B"
+#~ msgstr "ब"
 
-#~ msgid "Loading B"
-#~ msgstr "ब लोड किया जा रहा है"
+#~ msgid "C"
+#~ msgstr "स"
 
-#~ msgid "Loading C"
-#~ msgstr "स लोड किया जा रहा है"
+#, fuzzy
+#~| msgid "KDiff3Part"
+#~ msgid "KDiff3 Part"
+#~ msgstr "के-डिफ3पार्ट"
 
 #, fuzzy
 #~| msgid "Couldn't find files for comparison."
@@ -3597,19 +3598,17 @@ msgstr ""
 #~ msgid "Configure KDiff3"
 #~ msgstr "के-डिफ3 को कॉन्फ़िगर करें"
 
-#, fuzzy
-#~| msgid "KDiff3Part"
-#~ msgid "KDiff3 Part"
-#~ msgstr "के-डिफ3पार्ट"
+#~ msgid "Loading A"
+#~ msgstr "अ लोड किया जा रहा है"
 
-#~ msgid "A"
-#~ msgstr "अ"
+#~ msgid "Loading B"
+#~ msgstr "ब लोड किया जा रहा है"
 
-#~ msgid "B"
-#~ msgstr "ब"
+#~ msgid "Loading C"
+#~ msgstr "स लोड किया जा रहा है"
 
-#~ msgid "C"
-#~ msgstr "स"
+#~ msgid "Toggling toolbar..."
+#~ msgstr "टूलबार टॉगल किया जा रहा है..."
 
 #, fuzzy
 #~| msgid "Severe Internal Error"
@@ -3620,14 +3619,6 @@ msgstr ""
 #~| msgid "Severe Internal Error"
 #~ msgid "Severe Internal Error.: "
 #~ msgstr "गंभीर आंतरिक त्रुटि"
-
-#~ msgid "File Open Error"
-#~ msgstr "फ़ाइल खोलने में त्रुटि"
-
-#, fuzzy
-#~| msgid "&Directory"
-#~ msgid "Open Directory"
-#~ msgstr "डिरेक्ट्री (&D)"
 
 #~ msgid "Directory Open Error"
 #~ msgstr "डिरेक्ट्री खोलने में त्रुटि"
@@ -3668,6 +3659,11 @@ msgstr ""
 
 #~ msgid "Dir..."
 #~ msgstr "डिर.:"
+
+#, fuzzy
+#~| msgid "&Directory"
+#~ msgid "Open Directory"
+#~ msgstr "डिरेक्ट्री (&D)"
 
 #~ msgid "Finds files and directories with the hidden attribute."
 #~ msgstr "हिडन एट्रिब्यूट वाली फ़ाइल तथा डिरेक्ट्रीज़ को ढूंढें."

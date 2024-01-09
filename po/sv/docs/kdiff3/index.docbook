@@ -131,7 +131,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Det här dokumentet beskriver &kdiff3; version 1.11. </para>
+>This document describes &kdiff3;-version 1.11. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -1930,11 +1930,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Detektera automatiskt</guilabel
+>Detektera automatiskt Unicode</guilabel
 ></term
 ><listitem
 ><para
->Alternativet försöker använda BOM eller metadata från XML/HTML-dokument för att detektera kodning. Misslyckas det kontrollerar det om ett kort prov från början av en fil kan tolkas som UTF-8. Om kontrollen går igenom används UTF-8. Annars återgår det till den användarutvalda kodaren. Bara UTF-8 stöds utan när BOM eller metadata inte finns. </para
+>Alternativet försöker använda BOM eller metadata från XML/HTML-dokument för att detektera Unicode-kodning. Misslyckas det kontrollerar det om ett kort prov från början av en fil kan tolkas som UTF-8. Om kontrollen går igenom används UTF-8. Annars återgår det till den användarutvalda kodaren. Bara UTF-8 stöds utan när BOM eller metadata inte finns. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -3706,6 +3706,31 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
+<sect1 id="kpart">
+<title
+>Använda &kdiff3; som en Kpart</title>
+<para
+>&kdiff3; är en Kpart. För närvarande implementeras gränssnittet KParts::ReadOnlyPart. </para
+><para
+>Den huvudsakliga användningen är för skillnadsvisning i &kdevelop;. &kdevelop; startar alltid den interna skillnadsvisningen först. För att använda &kdiff3;, klicka med höger musknapp i skillnadsvisningens fönster och välj <guimenuitem
+>Visa i KDiff3-del</guimenuitem
+> i den sammanhangsberoende menyn. </para
+><para
+>&kdiff3; kräver normalt två fullständiga filer som indata. När det används som en del, antar &kdiff3; att indatafilen är en programfixfil med unifierat format. &kdiff3; hämtar därefter originalfilernas namn i programfixfilen. Åtminstone en av de två filerna måste vara tillgänglig. &kdiff3; startar då kommandot <command
+>patch</command
+> för att återskapa den andra filen. </para
+><para
+>Du kan välja en programfixfil i &dolphin; och välja <menuchoice
+><guimenuitem
+>Förhandsgranska i</guimenuitem
+><guisubmenu
+>Kdiff3-del</guisubmenu
+></menuchoice
+> i den sammanhangsberoende menyn. Var medveten om att det inte fungerar om ingen av originalfilerna finns tillgänglig, och är inte tillförlitligt om originalfilen eller filerna har ändrats sedan programfixfilen skapades. </para
+><para
+>När det kör som ett delprogram tillhandahåller &kdiff3; bara jämförelse mellan två filer, en mycket liten verktygsrad och meny. Sammanfogning eller katalogjämförelse stöds då inte. </para>
+</sect1>
+
 <sect1 id="git">
 <title
 >Använda &kdiff3; som ett verktyg för jämförelse och sammanfogning med &git;</title>
@@ -3921,9 +3946,7 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Kan man använda &kdiff3; för att jämföra <application
->LibreOffice</application
->/<trademark class="registered"
+>Kan man använda &kdiff3; för att jämföra <trademark class="registered"
 > OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
@@ -3935,9 +3958,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Även om &kdiff3; kan analysera alla sorters filer, är resultatet troligen inte särskilt tillfredsställande för dig. </para
 ><para
->&kdiff3; skapades för att jämföra rena textfiler. <application
->LibreOffice</application
->/<trademark class="registered"
+>&kdiff3; skapades för att jämföra rena textfiler. <trademark class="registered"
 >OpenOffice</trademark
 >, <application
 >&Microsoft; Word</application

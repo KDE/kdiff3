@@ -5,6 +5,10 @@
 >">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % German "INCLUDE">
+  <!-- This entity is missing from KF5DocTools 5.44 -->
+  <!ENTITY ASCII "<acronym
+>ASCII</acronym
+>">
 ]>
 
 <book lang="&language;">
@@ -3936,25 +3940,6 @@ Options:
 >Klicken Sie in die Zusammenfassungs-Spalte links neben dem Text, weitere Informationen dazu finden Sie in diesem <link linkend="synchronise_views"
 >Abschnitt</link
 >. </para
-></answer
-></qandaentry>
-
-<qandaentry
-><question
-><para
->Warum ergibt der Befehl <userinput
->git difftool --dir-diff</userinput
-> den Fehlermeldung „Vermischung von Verknüpfungen und Dateien“? </para
-></question
-><answer
-><para
->Dies ist ein Seiteneffekt der internen Funktionsweise von Git. Wenn Sie versuchen, eine vorherige Revision mit der aktuellen Arbeitskopie zu vergleichen, vergleicht Git tatsächlich Dateien die den vergangenen Commit repräsentieren, mit symbolischen Verknüpfungen, die auf die Arbeitskopie zeigen. Ab KDiff3 1.9 sind standardmäßig <guilabel
->Datei-Verknüpfungen folgen</guilabel
-> und <guilabel
->Ordner-Verknüpfungen folgen</guilabel
-> eingeschaltet. Davor waren sie als Voreinstellung  ausgeschaltet. Dies spielte keine Rolle, wenn die „Vollständige Analyse“ ebenfalls ausgeschaltet war. Bei eingeschalteter <guilabel
->Vollständige Analyse</guilabel
-> wird KDiff3 jedoch zunächst den Pfad, auf den eine Verknüpfung zeigt, vergleichen anstatt zu ihm folgen. Vor 1.8 wurde der daraus resultierende Fehler ignoriert. Allerdings wird ab 1.8 dieser Fehler ausgegeben. </para
 ></answer
 ></qandaentry>
 

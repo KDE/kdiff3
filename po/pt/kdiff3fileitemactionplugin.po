@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3fileitemactionplugin\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2023-06-13 17:32+0100\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
+"PO-Revision-Date: 2018-06-10 18:56+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -14,61 +14,71 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: kdiff3fileitemaction.cpp:82
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "KDiff3..."
 msgctxt "Contexualmenu title"
 msgid "KDiff3..."
 msgstr "KDiff3..."
 
 #: kdiff3fileitemaction.cpp:107
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
 msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Comparar com %1"
 
 #: kdiff3fileitemaction.cpp:113
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
 msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Reunir com %1"
 
 #: kdiff3fileitemaction.cpp:119
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
 msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Gravar '%1' para a posteridade"
 
 #: kdiff3fileitemaction.cpp:125
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
 msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "Reunião a 3-níveis com a base"
 
 #: kdiff3fileitemaction.cpp:132
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with..."
 msgctxt "Contexualmenu option"
 msgid "Compare with..."
 msgstr "Comparar com..."
 
 #: kdiff3fileitemaction.cpp:145
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Clear list"
 msgctxt "Contexualmenu option to cleat comparison list"
 msgid "Clear list"
 msgstr "Limpar a lista"
 
 #: kdiff3fileitemaction.cpp:153
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare"
 msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Comparar"
 
 #: kdiff3fileitemaction.cpp:159
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
 msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "Comparação a 3 níveis"
 
 #: kdiff3fileitemaction.cpp:163
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About KDiff3 menu plugin..."
 msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
 msgstr "Acerca do 'plugin' de menu do KDiff3..."
@@ -80,7 +90,17 @@ msgstr ""
 "'Plugin' de Acção sobre Itens de Ficheiros: Copyright (C) 2011 Joachim Eibl\n"
 
 #: kdiff3fileitemaction.cpp:275
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Using the context menu extension:\n"
+#| "For simple comparison of two selected files choose \"Compare\".\n"
+#| "If the other file is somewhere else \"Save\" the first file for later. It "
+#| "will appear in the \"Compare with...\" submenu. Then use \"Compare With\" "
+#| "on the second file.\n"
+#| "For a 3-way merge first \"Save\" the base file, then the branch to merge "
+#| "and choose \"3-way merge with base\" on the other branch which will be "
+#| "used as destination.\n"
+#| "Same also applies to directory comparison and merge."
 msgid ""
 "Using the context menu extension:\n"
 "For simple comparison of two selected files choose \"Compare\".\n"
@@ -96,7 +116,7 @@ msgstr ""
 "Para uma comparação simples entre dois ficheiros seleccionados, escolha "
 "\"Comparar\".\n"
 "Se o outro ficheiro estiver noutro lado qualquer, pode \"Gravar\" o primeiro "
-"ficheiro para a posteridade. Irá depois aparecer no submenu \"Comparar com..."
+"ficheiro para a posteridade. Irá depois aparecer no submenu \"Comparar Com..."
 "\". Depois use o \"Comparar Com\" no segundo ficheiro.\n"
 "Para uma junção a 3-níveis, pode \"Gravar\" o ficheiro de base, depois a "
 "ramificação a reunir e escolher \"Junção 3-níveis com a base\" na outra "

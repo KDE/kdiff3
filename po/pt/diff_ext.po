@@ -7,67 +7,76 @@ msgid ""
 msgstr ""
 "Project-Id-Version: diff_ext\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2023-06-13 17:31+0100\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
+"PO-Revision-Date: 2018-08-06 11:25+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POFile-SpellExtra: Zorin Joachim Sergey Ext Eibl Diff KDiff Kf Reeves\n"
+"X-POFile-SpellExtra: Zorin Joachim Sergey Ext Eibl Diff KDiff\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: diff_ext.cpp:211
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with %1"
 msgctxt "Contexualmenu option"
 msgid "Compare with %1"
 msgstr "Comparar com %1"
 
 #: diff_ext.cpp:212
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge with %1"
 msgctxt "Contexualmenu option"
 msgid "Merge with %1"
 msgstr "Reunir com %1"
 
 #: diff_ext.cpp:217
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3-way merge with base"
 msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
 msgstr "Reunião a 3-níveis com a base"
 
 #: diff_ext.cpp:220
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later"
 msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
 msgstr "Gravar '%1' para a posteridade"
 
 #: diff_ext.cpp:234
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare with ..."
 msgctxt "Contexualmenu option"
 msgid "Compare with ..."
 msgstr "Comparar com ..."
 
 #: diff_ext.cpp:237
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Clear list"
 msgctxt "Contexualmenu option"
 msgid "Clear list"
 msgstr "Limpar a lista"
 
 #: diff_ext.cpp:242
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare"
 msgctxt "Contexualmenu option"
 msgid "Compare"
 msgstr "Comparar"
 
 #: diff_ext.cpp:246
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "3 way comparison"
 msgctxt "Contexualmenu option"
 msgid "3 way comparison"
 msgstr "Comparação a 3 níveis"
 
 #: diff_ext.cpp:252
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About Diff-Ext ..."
 msgctxt "Contexualmenu option"
 msgid "About Diff-Ext ..."
 msgstr "Acerca do Diff-Ext ..."
@@ -80,9 +89,10 @@ msgstr ""
 "reservados.\n"
 
 #: diff_ext.cpp:324
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This software is distributable under the BSD license.\n"
 msgid "This software is distributable under the BSD-2-Clause license.\n"
-msgstr "Este 'software' pode ser distribuído de acordo com a licença BSD-2.\n"
+msgstr "Este 'software' pode ser distribuído de acordo com a licença BSD.\n"
 
 #: diff_ext.cpp:324
 #, kde-format
@@ -92,7 +102,7 @@ msgstr "Algumas extensões para o KDiff3 (c) 2006-2013 de Joachim Eibl.\n"
 #: diff_ext.cpp:324
 #, kde-format
 msgid "Ported to Qt5/Kf5 by Michael Reeves\n"
-msgstr "Migrado para o Qt5/Kf5 por Michael Reeves\n"
+msgstr ""
 
 #: diff_ext.cpp:324
 #, kde-format
@@ -100,24 +110,28 @@ msgid "Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"
 msgstr "Página Web do Diff-Ext: http://diff-ext.sourceforge.net\n"
 
 #: diff_ext.cpp:324
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "About Diff-Ext for KDiff3 "
 msgid "About Diff-Ext for KDiff3 (64 Bit)"
-msgstr "Acerca da Diff-Ext para o KDiff3 (64 Bits)"
+msgstr "Acerca da Diff-Ext para o KDiff3 "
 
 #: diff_ext.cpp:353
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare selected files"
 msgctxt "Contexualmenu option"
 msgid "Compare selected files"
 msgstr "Comparar os ficheiros seleccionados"
 
 #: diff_ext.cpp:359 diff_ext.cpp:377
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Compare '%1' with '%2'"
 msgctxt "Contexualmenu option"
 msgid "Compare '%1' with '%2'"
 msgstr "Comparar o '%1' com o '%2'"
 
 #: diff_ext.cpp:364
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Save '%1' for later operation"
 msgctxt "Contexualmenu option"
 msgid "Save '%1' for later operation"
 msgstr "Gravar o '%1' para a posteridade"
@@ -143,3 +157,12 @@ msgstr "Linha de Comandos"
 #, kde-format
 msgid "Diff-Ext For KDiff3"
 msgstr "Diff-Ext para o KDiff3"
+
+#~ msgid "(32 Bit)"
+#~ msgstr "(32 Bits)"
+
+#~ msgid "(64 Bit)"
+#~ msgstr "(64 Bits)"
+
+#~ msgid "Homepage for KDiff3: http://kdiff3.sourceforge.net"
+#~ msgstr "Página Web do KDiff3: http://kdiff3.sourceforge.net"

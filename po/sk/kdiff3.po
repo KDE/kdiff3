@@ -1,14 +1,13 @@
 # translation of kdiff3.po to Slovak
 # Richard Fric <Richard.Fric@kdemail.net>, 2006, 2009.
-# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2019, 2021, 2022.
+# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2019, 2020, 2022.
 # Ferdinand Galko <galko.ferdinand@gmail.com>, 2015.
-# Matej Mrenica <matejm98mthw@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:43+0000\n"
-"PO-Revision-Date: 2022-04-15 19:07+0200\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
+"PO-Revision-Date: 2022-04-06 17:51+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
@@ -95,7 +94,7 @@ msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Čítam adresár: %1"
 
-#: DefaultFileAccessJobHandler.cpp:447
+#: DefaultFileAccessJobHandler.cpp:450
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Vypisujem adresár: %1"
@@ -129,7 +128,7 @@ msgstr "Súbor %1: Riadok nie je dostupný"
 msgid "Encoding:"
 msgstr "Kódovanie:"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2807 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2819 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Spôsob ukončenia riadka:"
@@ -144,12 +143,12 @@ msgstr "A (základ)"
 msgid "Encoding: %1"
 msgstr "Kódovanie: %1"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2853
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2865
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2852
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -394,7 +393,7 @@ msgstr ""
 "a opätovne prehľadať adresáre?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1221,14 +1220,16 @@ msgid "Option --auto used, but no output file specified."
 msgstr "Použitá voľba --auto, ale nie je zadaný výstupný súbor."
 
 #: kdiff3.cpp:335
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgid "Directory merge"
-msgstr "Zlúčenia adresára"
+msgstr "Adresár"
 
 #: kdiff3.cpp:340
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge to A"
 msgid "Merge info"
-msgstr "Informácie o zlúčení"
+msgstr "Zlúčiť do A"
 
 #: kdiff3.cpp:467
 #, fuzzy, kde-format
@@ -1814,7 +1815,7 @@ msgstr "Tlačím stranu %1 z %2"
 #: kdiff3.cpp:1074
 #, kde-format
 msgid " (Selection)"
-msgstr "(Výber)"
+msgstr " (Výber)"
 
 #: kdiff3.cpp:1103
 #, kde-format
@@ -1952,7 +1953,7 @@ msgstr "Ignorovať --auto a vždy zobraziť GUI."
 #: main.cpp:125 main.cpp:126
 #, kde-format
 msgid "Ignored."
-msgstr "Ignorované"
+msgstr "Ignorované."
 
 #: main.cpp:128
 #, kde-format
@@ -2095,7 +2096,7 @@ msgstr "Zvoliť C pre všetky nevyriešené nezhody medzier"
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Počet zostávajúcich nevyriešených nezhôd: %1 (z ktorých %2 sú medzery)"
 
-#: mergeresultwindow.cpp:329
+#: mergeresultwindow.cpp:330
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2104,29 +2105,29 @@ msgstr ""
 "Výstup bol zmenený.\n"
 "Ak budete pokračovať, vaše zmeny sa stratia."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:743
+#: mergeresultwindow.cpp:773 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Všetky vstupné súbory sú binárne rovnaké."
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Všetky vstupné súbory obsahujú rovnaký text."
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Súbory %1 a %2 sú binárne rovnaké.\n"
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Súbory %1 a %2 majú rovnaký text.\n"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2139,27 +2140,27 @@ msgstr ""
 "Počet nevyriešených konfliktov: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr "Nezhody"
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1540
 #, kde-format
 msgid "<No src line>"
 msgstr "<Žiadny zdrojový riadok>"
 
-#: mergeresultwindow.cpp:1539
+#: mergeresultwindow.cpp:1548
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Nezhody zlúčenia (Iba medzery)>"
 
-#: mergeresultwindow.cpp:1541 mergeresultwindow.cpp:2414
+#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Nezhoda zlúčenia>"
 
-#: mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2645
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2168,14 +2169,14 @@ msgstr ""
 "Nie všetky konflikty sú už vyriešené.\n"
 "Súbor nie je uložený."
 
-#: mergeresultwindow.cpp:2635 mergeresultwindow.cpp:2644
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Zostávajúce nezhody"
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2186,7 +2187,7 @@ msgstr ""
 "riadka ručne.\n"
 "Súbor nie je uložený."
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2197,47 +2198,47 @@ msgstr ""
 "\n"
 "Vytvorenie zálohy zlyhalo. Súbor neuložený."
 
-#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2716
 #, kde-format
 msgid "File Save Error"
 msgstr "Chyba ukladania súboru"
 
-#: mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2716
 #, kde-format
 msgid "Error while writing."
 msgstr "Chyba počas zapisovania."
 
-#: mergeresultwindow.cpp:2779
+#: mergeresultwindow.cpp:2791
 #, kde-format
 msgid "Output:"
 msgstr "Výstup:"
 
-#: mergeresultwindow.cpp:2792 mergeresultwindow.cpp:2982
+#: mergeresultwindow.cpp:2804 mergeresultwindow.cpp:2994
 #, kde-format
 msgid "[Modified]"
 msgstr "[Zmenené]"
 
-#: mergeresultwindow.cpp:2799
+#: mergeresultwindow.cpp:2811
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kódovanie pre uloženie:"
 
-#: mergeresultwindow.cpp:2899
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Conflict"
 msgstr "Nezhoda"
 
-#: mergeresultwindow.cpp:2929
+#: mergeresultwindow.cpp:2941
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodek z A: %1"
 
-#: mergeresultwindow.cpp:2931
+#: mergeresultwindow.cpp:2943
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodek z B: %1"
 
-#: mergeresultwindow.cpp:2933
+#: mergeresultwindow.cpp:2945
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodek z C: %1"
@@ -2247,7 +2248,7 @@ msgstr "Kodek z C: %1"
 #: opendialog.ui:24 progressdialog.ui:23
 #, kde-format
 msgid "Dialog"
-msgstr "Dialógové okno"
+msgstr "Dialóg"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: opendialog.ui:47
@@ -3948,40 +3949,26 @@ msgstr "Neočakávaný apostrof v argumente."
 msgid "No program specified."
 msgstr "Neurčený žiadny program."
 
-#, fuzzy
-#~| msgid "File %1 too large to process. Skipping."
-#~ msgctxt "Read error message. %1 = filepath"
-#~ msgid "File %1 too large to process. Skipping."
-#~ msgstr "Súbor %1 je príliš veľký na spracovanie. Preskočím."
+#~ msgid "A"
+#~ msgstr "A"
 
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "Automaticky detegovať Unicode"
+#~ msgid "B"
+#~ msgstr "B"
 
-#~ msgid "Toggling toolbar..."
-#~ msgstr "Prepínam panel nástrojov..."
+#~ msgid "C"
+#~ msgstr "C"
 
-#, fuzzy
-#~| msgid ""
-#~| "Could not initialize the KDiff3 part.\n"
-#~| "This usually happens due to an installation problem. Please read the "
-#~| "README-file in the source package for details."
-#~ msgid ""
-#~ "Could not initialize KDiff3.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "Nebolo možné inicializovať časť KDiff3.\n"
-#~ "To sa zvyčajne stáva kvôli problému s inštaláciou. Prosím, prečítajte si "
-#~ "súbor README v zdrojovom balíku kvôli podrobnostiam."
+#~ msgid "KDiff3 Part"
+#~ msgstr "KDiff3 Part"
 
-#~ msgid "Loading A"
-#~ msgstr "Načítavam A"
+#~ msgid "A KPart to display SVG images"
+#~ msgstr "Komponent na zobrazenie SVG obrázkov"
 
-#~ msgid "Loading B"
-#~ msgstr "Načítavam B"
+#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
+#~ msgstr "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
 
-#~ msgid "Loading C"
-#~ msgstr "Načítavam C"
+#~ msgid "Joachim Eibl"
+#~ msgstr "Joachim Eibl"
 
 #~ msgid "Could not find files for comparison."
 #~ msgstr "Nebolo možné nájsť súbory pre porovnanie."
@@ -3992,19 +3979,44 @@ msgstr "Neurčený žiadny program."
 #~ msgid "Configure KDiff3"
 #~ msgstr "Nastaviť KDiff3"
 
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3 Part"
+#~ msgid ""
+#~ "Could not initialize the KDiff3 part.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "Nebolo možné inicializovať časť KDiff3.\n"
+#~ "To sa zvyčajne stáva kvôli problému s inštaláciou. Prosím, prečítajte si "
+#~ "súbor README v zdrojovom balíku kvôli podrobnostiam."
 
 #, fuzzy
-#~| msgid "A KPart to display SVG images"
-#~ msgid "A KPart for displaying diffs"
-#~ msgstr "Komponent na zobrazenie SVG obrázkov"
+#~| msgid " (32 bit)"
+#~ msgctxt "Program version info."
+#~ msgid " (32 bit)"
+#~ msgstr " (32 bit)"
 
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
+#~ msgid "Auto Detect Unicode"
+#~ msgstr "Automaticky detegovať Unicode"
 
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
+#~ msgid "Loading A"
+#~ msgstr "Načítavam A"
+
+#~ msgid "Loading B"
+#~ msgstr "Načítavam B"
+
+#~ msgid "Loading C"
+#~ msgstr "Načítavam C"
+
+#~ msgid "all/allfiles (*)"
+#~ msgstr "všetko/všetky súbory(*)"
+
+#, fuzzy
+#~| msgid "File %1 too large to process. Skipping."
+#~ msgctxt "Read error message. %1 = filepath"
+#~ msgid "File %1 too large to process. Skipping."
+#~ msgstr "Súbor %1 je príliš veľký na spracovanie. Preskočím."
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "Prepínam panel nástrojov..."
 
 #~ msgid ""
 #~ "A version control history entry consists of several lines.\n"
@@ -4059,49 +4071,11 @@ msgstr "Neurčený žiadny program."
 #~ "Obvykle tento riadok obsahuje kľúčové slovo \"$Log$\".\n"
 #~ "Predvolená hodnota: \".*\\$Log.*\\$.*\""
 
-#~ msgid "all/allfiles (*)"
-#~ msgstr "všetko/všetky súbory(*)"
-
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid " (32 bit)"
-#~ msgstr " (32 bit)"
-
 #~ msgid "Severe Internal Error."
 #~ msgstr "Závažná interná chyba."
 
 #~ msgid "Severe Internal Error.: "
 #~ msgstr "Závažná interná chyba:"
-
-#~ msgid "Do not solve conflicts automatically."
-#~ msgstr "Neriešiť nezhody automaticky."
-
-#, fuzzy
-#~| msgid "Unable to determine full url. No parent specified."
-#~ msgid "Unable to determine full url. No file path/name specified."
-#~ msgstr "Nemôžem určiť celé URL. Nebol učený predok."
-
-#~ msgid "Errors occurred during pre-processing of file A."
-#~ msgstr "Nastali chyby počas predspracovania súboru A."
-
-#~ msgid "Errors occurred during pre-processing of file B."
-#~ msgstr "Nastali chyby počas predspracovania súboru B."
-
-#~ msgid "Errors occurred during pre-processing of file C."
-#~ msgstr "Nastali chyby počas predspracovania súboru C."
-
-#~ msgid "File Open Error"
-#~ msgstr "Chyba pri otváraní súboru"
-
-#~ msgid "Open Directory"
-#~ msgstr "Otvoriť adresár"
 
 #~ msgid "Directory Open Error"
 #~ msgstr "Chyba otvorenia adresára"
@@ -4127,6 +4101,9 @@ msgstr "Neurčený žiadny program."
 #~ msgid "&Directory"
 #~ msgstr "Adresár"
 
+#~ msgid "Do not solve conflicts automatically."
+#~ msgstr "Neriešiť nezhody automaticky."
+
 #~ msgid "Dir-anti-pattern(s):"
 #~ msgstr "Adresárový protivzor(y):"
 
@@ -4151,6 +4128,18 @@ msgstr "Neurčený žiadny program."
 
 #~ msgid "Dir..."
 #~ msgstr "Adresár..."
+
+#~ msgid "Open Directory"
+#~ msgstr "Otvoriť adresár"
+
+#~ msgid "Errors occurred during pre-processing of file A."
+#~ msgstr "Nastali chyby počas predspracovania súboru A."
+
+#~ msgid "Errors occurred during pre-processing of file B."
+#~ msgstr "Nastali chyby počas predspracovania súboru B."
+
+#~ msgid "Errors occurred during pre-processing of file C."
+#~ msgstr "Nastali chyby počas predspracovania súboru C."
 
 #~ msgid "Finds files and directories with the hidden attribute."
 #~ msgstr "Hľadá súbory a adresáre so skrytým atribútom."

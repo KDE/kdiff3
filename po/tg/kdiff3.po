@@ -6,20 +6,20 @@
 # Akmal Vatanshoev <akmal_49@hotmail.com>, 2004.
 # Akbar Vatanshoev <vatanshoevAkbar@hotmail.com>, 2004.
 # Victor Ibragimov <youth_opportunities@tajik.net>, 2004.
-# Victor Ibragimov <youth_opportunities@tajikngo.org>, 2005, 2019.
+# Victor Ibragimov <youth_opportunities@tajikngo.org>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-30 00:43+0000\n"
-"PO-Revision-Date: 2019-09-29 12:43+0500\n"
-"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
-"Language-Team: English <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2024-01-09 02:27+0000\n"
+"PO-Revision-Date: 2005-09-17 13:29+0500\n"
+"Last-Translator: Victor Ibragimov <youth_opportunities@tajikngo.org>\n"
+"Language-Team: Tajik\n"
 "Language: tg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: KBabel 1.10\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -99,7 +99,7 @@ msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Хониши файл: %1"
 
-#: DefaultFileAccessJobHandler.cpp:447
+#: DefaultFileAccessJobHandler.cpp:450
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Нигоҳ кардани директория: %1"
@@ -137,7 +137,7 @@ msgstr "дастрас нест"
 msgid "Encoding:"
 msgstr ""
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2807 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2819 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr ""
@@ -152,12 +152,12 @@ msgstr "A (баромад): "
 msgid "Encoding: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2853
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2865
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2852
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "Unix"
 msgstr ""
@@ -404,7 +404,7 @@ msgstr ""
 "нав кунед?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1811,7 +1811,7 @@ msgstr "Баромад..."
 #: kdiff3.cpp:1124
 #, kde-format
 msgid "Toggle the statusbar..."
-msgstr "Тасвир кардан/вазъияти навори пинҳонӣ..."
+msgstr "Тасвир кардан/вазъияти панели пинҳонӣ..."
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -2068,36 +2068,36 @@ msgstr "Интихоб кунед С-ро барои фосилаи ҳамаи �
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 
-#: mergeresultwindow.cpp:329
+#: mergeresultwindow.cpp:330
 #, kde-format
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
 msgstr ""
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:743
+#: mergeresultwindow.cpp:773 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr ""
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr ""
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2106,40 +2106,40 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr ""
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1540
 #, kde-format
 msgid "<No src line>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1539
+#: mergeresultwindow.cpp:1548
 #, fuzzy, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:1541 mergeresultwindow.cpp:2414
+#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
 #, fuzzy, kde-format
 msgid "<Merge Conflict>"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2645
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2635 mergeresultwindow.cpp:2644
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, fuzzy, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2147,7 +2147,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2155,47 +2155,47 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2716
 #, fuzzy, kde-format
 msgid "File Save Error"
 msgstr "Хатогӣ дар кушодани файл"
 
-#: mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2716
 #, fuzzy, kde-format
 msgid "Error while writing."
 msgstr "Хатогӣ дар вақти эҷод кардани каталог."
 
-#: mergeresultwindow.cpp:2779
+#: mergeresultwindow.cpp:2791
 #, kde-format
 msgid "Output:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2792 mergeresultwindow.cpp:2982
+#: mergeresultwindow.cpp:2804 mergeresultwindow.cpp:2994
 #, kde-format
 msgid "[Modified]"
-msgstr "[Тағйирёфта]"
+msgstr ""
 
-#: mergeresultwindow.cpp:2799
+#: mergeresultwindow.cpp:2811
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2899
+#: mergeresultwindow.cpp:2911
 #, fuzzy, kde-format
 msgid "Conflict"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:2929
+#: mergeresultwindow.cpp:2941
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2931
+#: mergeresultwindow.cpp:2943
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2933
+#: mergeresultwindow.cpp:2945
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
@@ -2252,9 +2252,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectA)
 #. i18n: ectx: property (text), widget (QPushButton, selectOutputFolder)
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
-#, fuzzy, kde-format
+#, kde-format
 msgid "Folder..."
-msgstr "Кушодан %1 нашуд."
+msgstr ""
 
 #: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
@@ -3620,22 +3620,19 @@ msgstr ""
 msgid "No program specified."
 msgstr ""
 
-#~ msgid "Toggling toolbar..."
-#~ msgstr "Тасвир кардан/навори асбобҳои пинҳонӣ..."
+#~ msgid "A"
+#~ msgstr "A"
+
+#~ msgid "B"
+#~ msgstr "B"
+
+#~ msgid "C"
+#~ msgstr "C"
 
 #, fuzzy
-#~| msgid ""
-#~| "Could not find our part!\n"
-#~| "This usually happens due to an installation problem. Please read the "
-#~| "README-file in the source package for details."
-#~ msgid ""
-#~ "Could not initialize KDiff3.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "Қисми мо ёфт нашуд!\n"
-#~ "Ин масъала одатан дар вақти аниқ рӯй медиҳад.Файли README-ро хонед, ҷой "
-#~ "ва калидро ба тафсил баён кунед."
+#~| msgid "KDiff3Part"
+#~ msgid "KDiff3 Part"
+#~ msgstr "KDiff3Part"
 
 #, fuzzy
 #~| msgid "Couldn't find files for comparison."
@@ -3651,18 +3648,21 @@ msgstr ""
 #~ msgstr "Танзимоти KDiff3..."
 
 #, fuzzy
-#~| msgid "KDiff3Part"
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3Part"
+#~| msgid ""
+#~| "Could not find our part!\n"
+#~| "This usually happens due to an installation problem. Please read the "
+#~| "README-file in the source package for details."
+#~ msgid ""
+#~ "Could not initialize the KDiff3 part.\n"
+#~ "This usually happens due to an installation problem. Please read the "
+#~ "README-file in the source package for details."
+#~ msgstr ""
+#~ "Қисми мо ёфт нашуд!\n"
+#~ "Ин масъала одатан дар вақти аниқ рӯй медиҳад.Файли README-ро хонед, ҷой "
+#~ "ва калидро ба тафсил баён кунед."
 
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
+#~ msgid "Toggling toolbar..."
+#~ msgstr "Тасвир кардан/панели асбобҳои пинҳонӣ..."
 
 #, fuzzy
 #~| msgid "Severe Internal Error"
@@ -3673,13 +3673,6 @@ msgstr ""
 #~| msgid "Severe Internal Error"
 #~ msgid "Severe Internal Error.: "
 #~ msgstr "Хатогии даруни"
-
-#~ msgid "File Open Error"
-#~ msgstr "Хатогӣ дар кушодани файл"
-
-#, fuzzy
-#~ msgid "Open Directory"
-#~ msgstr "Хониши каталоги А"
 
 #~ msgid "Directory Open Error"
 #~ msgstr "Хатогӣ дар вақти хониши каталог"
@@ -3715,6 +3708,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Dir..."
 #~ msgstr "Каталог"
+
+#, fuzzy
+#~ msgid "Open Directory"
+#~ msgstr "Хониши каталоги А"
 
 #, fuzzy
 #~ msgid "Compare failed"
