@@ -14,7 +14,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <name xml:lang="cs">KDiff3</name>
   <name xml:lang="da">KDiff3</name>
   <name xml:lang="de">KDiff3</name>
-  <name xml:lang="el">KDaff3</name>
+  <name xml:lang="el">KDiff3</name>
   <name xml:lang="en-GB">KDiff3</name>
   <name xml:lang="eo">KDiff3</name>
   <name xml:lang="es">KDiff3</name>
@@ -51,20 +51,17 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <summary xml:lang="en-GB">A file and folder comparison and merge tool</summary>
   <summary xml:lang="eo">Dosiera kaj dosieruja komparilo kaj kunfandilo</summary>
   <summary xml:lang="es">Una herramienta para comparar y fusionar archivos y carpetas</summary>
-  <summary xml:lang="et">Failide ja kataloogide võrdlemise ja ühendamise tööriist</summary>
-  <summary xml:lang="eu">Fitxategiak eta karpetak alderatu eta bateratzeko tresna bat</summary>
+  <summary xml:lang="eu">Fitxategiak eta direktorioak konparatzeko eta bateratzeko tresna bat</summary>
   <summary xml:lang="fi">Tiedostojen ja kansioiden vertailu- ja yhdistämistyökalu</summary>
   <summary xml:lang="fr">Un outil de comparaison et de fusion de fichiers et de dossiers</summary>
   <summary xml:lang="gl">Unha ferramenta de comparación e fusión de ficheiros e cartafoles.</summary>
-  <summary xml:lang="ia">Un instrumento de fusion e comparation de file e dossier</summary>
   <summary xml:lang="id">Sebuah alat penggabung dan pembanding folder dan file</summary>
   <summary xml:lang="it">Uno strumento di confronto e fusione di file e cartelle</summary>
   <summary xml:lang="ka">ფაილებისა და საქაღალდეების შედარებისა და შერწყმის ხელსაწყო</summary>
   <summary xml:lang="ko">파일과 폴더 비교 및 병합 도구</summary>
   <summary xml:lang="nl">Een hulpmiddel voor het vergelijken en samenvoegen van bestanden en mappen</summary>
   <summary xml:lang="pl">Narzędzie do porównywania i scalania plików i katalogów</summary>
-  <summary xml:lang="pt">Uma ferramenta de comparação e junção de pastas e ficheiros</summary>
-  <summary xml:lang="pt-BR">Uma ferramenta de comparação e combinação de arquivos e pastas</summary>
+  <summary xml:lang="pt-BR">Uma ferramenta de comparação e junção de arquivos e pastas</summary>
   <summary xml:lang="ru">Инструмент для сравнения и объединения файлов и папок</summary>
   <summary xml:lang="sk">Nástroj na porovnanie a zlúčenie súborov a adresárov</summary>
   <summary xml:lang="sl">Orodje za primerjavo datotek in map ter za združevanje</summary>
@@ -84,8 +81,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="en-GB">KDiff3 is a file and folder diff and merge tool which</p>
     <p xml:lang="eo">KDiff3 estas dosiera kaj dosieruja diff- kaj kunfanda ilo kiu</p>
     <p xml:lang="es">KDiff es una herramienta de visualización de diferencias y de fusión de archivos y carpetas que</p>
-    <p xml:lang="et">KDiff3 on failide ja kataloogide võrdlemise ja ühendamise tööriist, mis</p>
-    <p xml:lang="eu">KDiff3 fitxategiak eta karpetak «diff» eta bateratzeko tresna bat da,</p>
+    <p xml:lang="eu">KDiff3 fitxategiak eta direktorioak alderatzeko eta bateratzeko tresna bat da,</p>
     <p xml:lang="fi">Kdiff3 on tiedostojen ja kansioiden vertailu- ja yhdistämistyökalu, joka</p>
     <p xml:lang="fr">KDiff3 est un outil de comparaison et de fusion de fichiers et de dossiers qui</p>
     <p xml:lang="gl">KDiff3 é unha ferramenta de diferenzas e fusión de ficheiros e cartafoles que:</p>
@@ -95,7 +91,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="ko">KDiff3는 파일 및 폴더 diff 및 병합 도구입니다</p>
     <p xml:lang="nl">KDdiff3 is een hulpmiddel om bestanden en mappen te vergelijken en samen te voegen dat</p>
     <p xml:lang="pl">KDiff3 jest narzędziem do pokazywania różnicy i scalania plików i katalogów, które</p>
-    <p xml:lang="pt">O KDiff3 é uma ferramenta de detecção e junção das diferenças entre ficheiros e pastas que</p>
     <p xml:lang="pt-BR">O KDiff3 é uma ferramenta de diferenças e mesclagem de arquivos e pastas que</p>
     <p xml:lang="ru"> — это приложение для поиска различий между файлами и каталогами, которое:</p>
     <p xml:lang="sk">KDiff3 je nástroj na porovnávanie a zlučovanie súborov a adresárov</p>
@@ -115,8 +110,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <li xml:lang="en-GB">compares and merges two or three text input files or folders,</li>
       <li xml:lang="eo">komparas kaj kunfandas du aŭ tri tekstajn enigdosierojn aŭ dosierujojn,</li>
       <li xml:lang="es">compara y fusiona dos o tres archivos de texto de entrada o carpetas,</li>
-      <li xml:lang="et">võrdleb ja ühendab kaht või kolme sisendfaili või -kataloogi,</li>
-      <li xml:lang="eu">sarrerako bi edo hiru testu fitxategi edo karpeta alderatu eta bateratzen dituena,</li>
+      <li xml:lang="eu">sarrerako bi edo hiru testu fitxategi edo direktorio alderatu eta bateratzen dituena,</li>
       <li xml:lang="fi">vertaa ja yhdistää kaksi tai kolme tekstitiedostoa tai kansiota</li>
       <li xml:lang="fr">compare et fusionne deux ou trois fichiers ou dossiers en entrée,</li>
       <li xml:lang="gl">compara e fusiona dous ou tres ficheiros ou cartafoles de entrada de texto,</li>
@@ -126,14 +120,13 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <li xml:lang="ko">텍스트 입력 파일 또는 폴더 두 개 또는 세 개를 비교하고 병합하며,</li>
       <li xml:lang="nl">twee of drie tekstbestanden of mappen vergelijkt en samenvoegt,</li>
       <li xml:lang="pl">porównuje i scala dwa, trzy lub więcej plików wejściowych lub katalogów,</li>
-      <li xml:lang="pt">compara e junta dois ou três ficheiros de texto ou pastas de entrada,</li>
       <li xml:lang="pt-BR">compara e mescla dois ou três arquivos de texto ou pastas,</li>
       <li xml:lang="ru">позволяет сравнивать и объединять два или три текстовых вводных файла или папки;</li>
       <li xml:lang="sk">porovnáva a zlučuje dva alebo viac textových súborov alebo adresárov,</li>
       <li xml:lang="sl">primerja in združuje dve ali tri vhodne datoteke ali mape besedil,</li>
       <li xml:lang="sv">jämför och sammanfogar två eller tre textfiler eller kataloger,</li>
       <li xml:lang="tr">dosyalardan ve klasörlerden iki veya üç metin girdi dosyasını karşılaştırır,</li>
-      <li xml:lang="uk">порівнює і об’єднує два або три вхідних текстових файлів або тек.</li>
+      <li xml:lang="uk">порівнює і об'єднує два або три вхідних текстових файли або теки.</li>
       <li xml:lang="x-test">xxcompares and merges two or three text input files or folders,xx</li>
       <li xml:lang="zh-CN">它能比较、合并输入的两份或三份文件和文件夹，</li>
       <li>shows the differences line by line and character by character(!),</li>
@@ -159,7 +152,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <li xml:lang="pt">mostra as diferenças linha-a-linha e carácter-a-carácter(!),</li>
       <li xml:lang="pt-BR">mostra as diferenças linha por linha e caractere por caractere(!),</li>
       <li xml:lang="ru">позволяет просматривать различия построчно и посимвольно;</li>
-      <li xml:lang="sk">zobrazí rozdiely riadok po riadku a znak po znaku,</li>
+      <li xml:lang="sk">zobrazuje rozdiely riadok po riadku a znak po znaku,</li>
       <li xml:lang="sl">prikazuje razlike črto za črto in znak za znakom (!),</li>
       <li xml:lang="sv">visar skillnaderna rad för rad och tecken för tecken (!),</li>
       <li xml:lang="tr">ayrımları satır satır ve karakter karakter gösterir,</li>
