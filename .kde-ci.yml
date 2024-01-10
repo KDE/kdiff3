@@ -2,18 +2,18 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux', 'FreeBSD', 'Windows']
+- 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Windows/Qt6']
   'require':
-    'frameworks/extra-cmake-modules': '@stable'
-    'frameworks/kconfig': '@stable'
-    'frameworks/kcoreaddons': '@stable'
-    'frameworks/kcrash': '@stable'
-    'frameworks/kdoctools': '@stable'
-    'frameworks/ki18n': '@stable'
-    'frameworks/kio': '@stable'
-    'frameworks/kparts': '@stable'
-    'frameworks/kwidgetsaddons': '@stable'
-    'frameworks/kxmlgui': '@stable'
+    'frameworks/extra-cmake-modules': '@stable-kf6'
+    'frameworks/kconfig': '@stable-kf6'
+    'frameworks/kcoreaddons': '@stable-kf6'
+    'frameworks/kcrash': '@stable-kf6'
+    'frameworks/kdoctools': '@stable-kf6'
+    'frameworks/ki18n': '@stable-kf6'
+    'frameworks/kio': '@stable-kf6'
+    'frameworks/kparts': '@stable-kf6'
+    'frameworks/kwidgetsaddons': '@stable-kf6'
+    'frameworks/kxmlgui': '@stable-kf6'
 
 Options:
     cppcheck-arguments: '--enable=warning,style,performance -i build -i test -i src/xpm --suppressions-list=CppCheckSuppressions.txt --inline-suppr'

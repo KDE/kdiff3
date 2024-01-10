@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 project(kdiff3 VERSION 1.11.70)
 
 #Avaliable as QtVersionOption starting in ECM 5.82.
-option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
+option(BUILD_WITH_QT6 "Build against Qt 6" ON)
 
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
@@ -19,7 +19,7 @@ set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 set(KF_MIN_VERSION "5.100.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
-    set(QT_MIN_VERSION "6.5.0")
+    set(QT_MIN_VERSION "6.6.0")
 else()
     set(QT_MAJOR_VERSION "5")
     set(QT_MIN_VERSION "5.15.8")
