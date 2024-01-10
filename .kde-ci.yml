@@ -17,3 +17,5 @@ Dependencies:
 
 Options:
     cppcheck-arguments: '--enable=warning,style,performance -i build -i test -i src/xpm --suppressions-list=CppCheckSuppressions.txt --inline-suppr'
+    # a list of platforms on which unit test failures are considered fatal
+    require-passing-tests-on: ['Linux','FreeBSD','Windows']
