@@ -70,9 +70,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2019-02-22</date>
+>2023-12-23</date>
 <releaseinfo
->1.08.70</releaseinfo>
+>1.11.0</releaseinfo>
 
 
 <abstract>
@@ -117,7 +117,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Dit document beschrijft &kdiff3; versie 1.10.6. </para>
+>Dit document beschrijft &kdiff3; versie 1.11. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -1874,11 +1874,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Unicode automatisch detecteren</guilabel
+>Automatisch detecteren</guilabel
 ></term
 ><listitem
 ><para
->Deze optie probeert de BOM of metagegevens uit XML/HTML documenten te gebruiken om codering met Unicode te detecteren. Als dat mislukt zal het controleren of een kort stukje uit het begin van het bestand geïnterpreteerd kan worden als UTF-8. Als deze controle lukt zal UTF-8 gebruikt worden. Anders zal het terugvallen op de door de gebruiker geselecteerde codec. UTF-8 wordt alleen ondersteund zonder BOM of metagegevens aanwezig. </para
+>Deze optie probeert de BOM of metagegevens uit XML/HTML documenten te gebruiken om codering te detecteren. Als dat mislukt zal het controleren of een kort stukje uit het begin van het bestand geïnterpreteerd kan worden als UTF-8. Als deze controle lukt zal UTF-8 gebruikt worden. Anders zal het terugvallen op de door de gebruiker geselecteerde codec. UTF-8 wordt alleen ondersteund zonder BOM of metagegevens aanwezig. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -3175,7 +3175,7 @@ Please at least include KDE, the KDE package it is in, the name
 >F6</keycap
 >. </para
 ><para
->Als er door conflicterende bestandstypes nog bestanden zijn met ongeldige operaties, verschijnt er een melding, worden die items aangewezen en kunt u een geldige operatie voor die items kiezen. </para
+>Als er door conflicterende bestandstypes nog steeds bestanden zijn met ongeldige bewerkingen, verschijnt er een melding en worden die items aangewezen en kunt u een geldige bewerking voor die items kiezen. </para
 ><para
 >Als u alle items samenvoegt, verschijnt er een dialoogvenster met de opties <guilabel
 >Starten</guilabel
@@ -3642,31 +3642,6 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
-<sect1 id="kpart">
-<title
->&kdiff3; als een KPart gebruiken</title>
-<para
->&kdiff3; is een KPart. Het implementeert momenteel de interface KParts::ReadOnlyPart. </para
-><para
->Het belangrijkste gebruik is als een weergever van verschillen in &kdevelop;. &kdevelop; start altijd eerst de interne weergever van verschillen. Om &kdiff3; op te starten klikt u met de &RMB; op het verschilvenster en kiest u <guimenuitem
->In KDiff3Part tonen</guimenuitem
-> uit het contextmenu. </para
-><para
->&kdiff3; vereist normaal gesproken twee complete bestanden als invoer. Als het als een KPart gebruikt wordt, neemt &kdiff3; aan dat het invoerbestand een patch-bestand in het standaard formaat is. &kdiff3; haalt dan de twee bestandsnamen op uit het patch-bestand. Minstens één van de twee bestanden moet beschikbaar zijn. &kdiff3; roept dan <command
->patch</command
-> aan om het andere bestand opnieuw te maken. </para
-><para
->In &dolphin; kunt u een patch-bestand selecteren en item <menuchoice
-><guimenuitem
->Tonen in</guimenuitem
-><guisubmenu
->KDiff3Part</guisubmenu
-></menuchoice
-> uit het contextmenu kiezen. Merk op dat dit niet werkt als geen van de originele bestanden beschikbaar is en dat het niet betrouwbaar is als een origineel bestand gewijzigd is sinds het patch-bestand gegenereerd is. </para
-><para
->Als het als een KPart gestart wordt, biedt &kdiff3; alleen een verschillenmodus voor twee bestanden, een kleine werkbalk en een menu. Samenvoegen of mappen vergelijken worden dan niet ondersteund. </para>
-</sect1>
-
 <sect1 id="git">
 <title
 >&kdiff3; gebruiken als een &git; Diff en hulpmiddel voor samenvoegen</title>
@@ -3858,7 +3833,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->Voor elke gelijke of verschillende sectie onthoudt de editor in het resultaatvenster waar deze begint en eindigt. "&lt;Geen regel in de bron&gt;" betekent dat er niets over is in de sectie (zelfs geen regeleinde). Dit kan tijdens automatisch samenvoegen of tijdens bewerken gebeuren. Dit is geen probleem, want de aanwijzing verschijnt niet in het opgeslagen bestand. Als u de originele bron terug wilt, selecteert u de sectie (klik op de linker overzichtkolom) en klikt u op de knop van de bron met de gewenste inhoud (<guilabel
+>Voor elke gelijke of verschillende sectie onthoudt de editor in het resultaatvenster waar deze begint en eindigt. "&lt;Geen regel in de bron&gt;" betekent dat er niets over is in de sectie (zelfs geen regeleinde). Dit kan tijdens automatisch samenvoegen of tijdens bewerken gebeuren. Dit is geen probleem, want de aanwijzing verschijnt niet in het opgeslagen bestand. Als u de originele bron terug wilt, selecteert u de sectie (klik op de linker overzichtskolom) en klikt u op de knop van de bron met de gewenste inhoud (<guilabel
 >A</guilabel
 >, <guilabel
 >B</guilabel
@@ -3882,19 +3857,23 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Kan ik &kdiff3; gebruiken om <trademark class="registered"
-> OpenOffice.org</trademark
+>Kan ik &kdiff3; gebruiken om <application
+>LibreOffice</application
+>/<trademark class="registered"
+>OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
 >, <application
 >&Microsoft; Excel</application
->, &PDF;, &etc; bestanden gebruik? </para
+>, &PDF;, &etc; bestanden te vergelijken? </para
 ></question
 ><answer
 ><para
 >Hoewel &kdiff3; elk soort bestand zal analyseren zal het resultaat waarschijnlijk niet erg bevredigend voor u zijn. </para
 ><para
->&kdiff3; is ontworpen om pure tekstbestanden te vergelijken. <trademark class="registered"
+>&kdiff3; is ontworpen om pure tekstbestanden te vergelijken. <application
+>LibreOffice</application
+>/<trademark class="registered"
 >OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
