@@ -26,7 +26,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
-#include <KPluginLoader>
 
 std::unique_ptr<QStringList> s_pHistory;
 
