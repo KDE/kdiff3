@@ -176,7 +176,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Un altre frontal de diferències?</title>
 <para
->Hi ha diverses eines gràfiques de diferències. Perquè triar el &kdiff3;? Deixeu-me dir perquè el vaig escriure. </para
+>Hi ha diverses eines gràfiques de diferències. Perquè triar el &kdiff3;? Deixeu-me dir per què el vaig escriure. </para
 ><para
 >El &kdiff3; va començar perquè vaig haver de fer una fusió difícil. La fusió és necessària quan diverses persones treballen en els mateixos fitxers en un projecte. Una fusió pot ser una cosa automatitzada, quan l'eina de fusió no només té fitxers nous (anomenats «branques»), sinó també el fitxer original (anomenat «base»). L'eina de fusió prendrà qualsevol modificació que només s'hagi realitzat en una branca. Quan diversos col·laboradors canvien les mateixes línies, l'eina de fusió detectarà els conflictes que s'han de resoldre manualment. </para
 ><para
@@ -649,7 +649,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></note
 ><warning
 ><para
->Alguns editors encara interpreten l'arrossegament i deixat anar en un altre programa com un retallat (en lloc de copiat) i enganxat. Llavors podríeu perdre les vostres dades originals. </para
+>Alguns editors encara interpreten l'arrossegament i deixat anar en un altre programa com un retallat (en lloc de còpia) i enganxat. Llavors podríeu perdre les vostres dades originals. </para
 ></warning>
 </sect1>
 
@@ -850,7 +850,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >De vegades, quan s'elimina una línia, sigui per fusió automàtica o per edició, i no queden altres línies en aquest grup, llavors apareixerà el text «&lt;La línia no és codi&gt;» en aquesta línia. Només es tracta d'un marcador de posició per al grup per a quan pugueu canviar d'opinió i seleccionar de nou alguna font. Aquest text no apareixerà al fitxer desat ni en cap selecció que vulgueu copiar i enganxar. </para
 ><para
->El text «&lt;Conflicte de fusió&gt;» apareixerà en el porta-retalls si copieu i enganxeu algun text que contingui aquesta línia. Però així i tot aneu amb compte en fer-ho. </para
+>El text «&lt;Conflicte de fusió&gt;» apareixerà en el porta-retalls si copieu i enganxeu algun text que contingui aquesta línia. Però, així i tot, aneu amb compte en fer-ho. </para
 ></sect2
 ><sect2
 ><title
@@ -1273,7 +1273,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><itemizedlist>
    <listitem
 ><para
->Tipus de lletra i mida</para
+>Lletra i mida</para
 ></listitem>
    <listitem
 ><para
@@ -1309,9 +1309,9 @@ Please at least include KDE, the KDE package it is in, the name
 >). </para>
 <sect2
 ><title
->Tipus de lletra</title>
+>Lletra</title>
 <para
->Seleccioneu un tipus de lletra d'amplada fixa. (En alguns sistemes, aquest diàleg també presentarà tipus de lletra d'amplada variable, però no les hauríeu d'emprar). </para>
+>Seleccioneu una lletra d'amplada fixa. (En alguns sistemes, aquest diàleg també presentarà lletres d'amplada variable, però no les hauríeu d'emprar). </para>
 </sect2>
 
 <sect2
@@ -1723,7 +1723,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Una entrada de l'historial per al control de versions consisteix en diverses línies. Especifiqueu l'expressió regular per a detectar la primera línia (sense el comentari inicial). Empreu els parèntesis per a agrupar les claus que vulgueu utilitzar per a ordenar-les. Si es deixa en blanc, llavors el &kdiff3; assumirà que les línies en blanc separen les entrades de l'historial. Per a més detalls, vegeu també el <link linkend="vcskeywordsmergesupport"
+>Una entrada de l'historial per al control de versions consisteix en diverses línies. Especifiqueu l'expressió regular per a detectar la primera línia (sense el comentari inicial). Empreu els parèntesis per a agrupar les claus que vulgueu utilitzar per a ordenar-les. Si es deixa en blanc, llavors el &kdiff3; assumirà que les línies en blanc separen les entrades de l'historial. Per a més detalls, vegeu també la <link linkend="vcskeywordsmergesupport"
 >Fusió automàtica...</link
 >. </para
 ></listitem
@@ -1749,8 +1749,8 @@ Please at least include KDE, the KDE package it is in, the name
 >1</literal
 >) utilitzant «,» com a separador (&pex;, «<literal
 >4,5,6,1,2,3,7</literal
->»). Si es deixa en blanc, no s'ordenarà. Per a més detalls, vegeu també el <link linkend="vcskeywordsmergesupport"
->Fusió automàtic...</link
+>»). Si es deixa en blanc, no s'ordenarà. Per a més detalls, vegeu també la <link linkend="vcskeywordsmergesupport"
+>Fusió automàtica...</link
 >. </para
 ></listitem
 ></varlistentry>
@@ -1845,7 +1845,7 @@ Please at least include KDE, the KDE package it is in, the name
 >.orig</filename
 >. Si ja existeix un fitxer de còpia de seguretat antic amb l'extensió <filename class="extension"
 >.orig</filename
->, s'eliminarà per fer-ho sense còpia de seguretat. </para
+>, s'eliminarà sense fer còpia de seguretat. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1882,7 +1882,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Aquesta opció intenta utilitzar el BOM o les metadades dels documents XML/HTML per detectar la codificació. En cas contrari comprovarà si es pot interpretar com UTF-8 una mostra petita des del principi del fitxer. Si aquesta comprovació passa s'utilitzarà UTF-8. En cas contrari tornarà al còdec seleccionat per l'usuari. Només s'admet UTF-8 sense BOM ni metadades presents. </para
+>Aquesta opció intenta utilitzar el BOM o les metadades dels documents XML/HTML per a detectar la codificació. En cas contrari comprovarà si es pot interpretar com UTF-8 una mostra petita des del principi del fitxer. Si aquesta comprovació passa s'utilitzarà UTF-8. En cas contrari tornarà al còdec seleccionat per l'usuari. Només s'admet UTF-8 sense BOM ni metadades presents. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -2125,7 +2125,7 @@ Please at least include KDE, the KDE package it is in, the name
       fa
 </screen>
 <para
->Probablement això no sigui desitjable perquè la primera lletra conté la informació realment interessant. Per a ajudar a l'algoritme de coincidència a ignorar la segona lletra, podem utilitzar una ordre de preprocessador per a la coincidència de les línies, que substitueixi «g» amb «a»: </para>
+>Probablement això no serà desitjable perquè la primera lletra conté la informació realment interessant. Per a ajudar a l'algoritme de coincidència a ignorar la segona lletra, podem utilitzar una ordre de preprocessador per a la coincidència de les línies, que substitueixi «g» amb «a»: </para>
 <screen
 ><command
 >sed</command
@@ -3822,9 +3822,7 @@ Please at least include KDE, the KDE package it is in, the name
 >Segueix els enllaços de fitxer</guilabel
 > i <guilabel
 >Segueix els enllaços de carpeta</guilabel
->. Abans d'això, de manera predeterminada estaven desactivades. Això no importava si també estava desactivada <quote
->Anàlisi completa</quote
->. No obstant això, amb <guilabel
+>. Abans d'això, de manera predeterminada estaven desactivades. Això no importava si també estava desactivada «Anàlisi completa». No obstant això, amb <guilabel
 >Anàlisi completa</guilabel
 >, el &kdiff3; inicialment intentaria comparar el camí apuntat per un enllaç en lloc de seguir-lo. Abans de la 1.8, s'ignorava l'error resultant. No obstant això, la 1.8 va començar a informar de l'error. </para
 ></answer
@@ -3900,7 +3898,7 @@ Please at least include KDE, the KDE package it is in, the name
 >&Microsoft; Word</application
 >, el <application
 >&Microsoft; Excel</application
->, &etc; emmagatzemen molta més informació en els fitxers (sobre els tipus de lletra, imatges, pàgines, colors, &etc;) que el &kdiff3; no coneix. Per tant, el &kdiff3; mostrarà el contingut del fitxer interpretat com a text pur, però això podria ser il·legible o almenys es veurà molt estrany. </para
+>, &etc; emmagatzemen molta més informació en els fitxers (sobre les lletres, imatges, pàgines, colors, &etc;) que el &kdiff3; no coneix. Per tant, el &kdiff3; mostrarà el contingut del fitxer interpretat com a text pur, però això podria ser il·legible o almenys es veurà molt estrany. </para
 ><para
 >Com la majoria dels programes avui en dia emmagatzemen el seu contingut en el format &XML;, és possible que pugueu llegir-lo com a text pur. Llavors, si el canvi només ha estat petit, el &kdiff3; encara podria ajudar-vos. </para
 ><para
