@@ -736,17 +736,22 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray
     QFile in(fileNameIn);
     if(!in.open(QIODevice::ReadOnly))
         return false;
-    QTextStream inStream(&in);
-    inStream.setCodec(pCodecIn);
-    inStream.setAutoDetectUnicode(false);
+    EncodedDataStream inStream(&in);
+    inStream.setEncoding(pCodecIn);
 
     QFile out(fileNameOut);
     if(!out.open(QIODevice::WriteOnly))
         return false;
-    QTextStream outStream(&out);
-    outStream.setCodec(pCodecOut);
+    EncodedDataStream outStream(&out);
+    outStream.setEncoding(pCodecOut);
 
-    QString data = inStream.readAll();
+    QString data;
+    while(!inStream.atEnd())
+    {
+        QChar c;
+        inStream.readChar(c);
+        data += c;
+    }
     outStream << data;
 
     return true;
