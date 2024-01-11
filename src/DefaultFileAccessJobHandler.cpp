@@ -29,8 +29,8 @@
 
 #include <KIO/CopyJob>
 #include <KIO/FileCopyJob>
-#include <KIO/Job>
 #include <KIO/ListJob>
+#include <KIO/MkdirJob>
 #include <KIO/SimpleJob>
 #include <KIO/StatJob>
 #include <KIO/TransferJob>
