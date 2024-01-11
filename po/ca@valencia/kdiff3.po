@@ -1,23 +1,23 @@
 # Translation of kdiff3.po to Catalan (Valencian)
-# Copyright (C) 2011-2023 This_file_is_part_of_KDE
+# Copyright (C) 2011-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later
 #
 # Joan Maspons <joanmaspons@gmail.com>, 2011.
-# Josep M. Ferrer <txemaq@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-09 02:27+0000\n"
-"PO-Revision-Date: 2023-04-19 10:26+0200\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2024-01-10 12:38+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -37,17 +37,13 @@ msgid "Getting file status: %1"
 msgstr "S'està obtenint l'estat del fitxer: %1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "S'està llegint el fitxer: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "S'està escrivint el fitxer: %1"
@@ -58,25 +54,19 @@ msgid "Out of memory"
 msgstr "Memòria exhaurida"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "S'està creant la carpeta: %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "S'està eliminant la carpeta: %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "S'està eliminant el fitxer: %1"
@@ -97,8 +87,7 @@ msgid "Copying file: %1 -> %2"
 msgstr "S'està copiant el fitxer: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:389
-#, fuzzy, kde-format
-#| msgid "Reading folder: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "S'està llegint la carpeta: %1"
@@ -193,10 +182,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
 
 #: difftextwindow.cpp:2137
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bits"
+msgstr "Unicode, 8 bits (BOM)"
 
 #: difftextwindow.cpp:2153
 #, kde-format
@@ -376,9 +364,7 @@ msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
 #: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
-#, fuzzy, kde-format
-#| msgctxt "Error dialog caption"
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Avís"
@@ -416,8 +402,7 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "La carpeta C «%1» no existix o no és una carpeta.\n"
 
 #: directorymergewindow.cpp:856
-#, fuzzy, kde-format
-#| msgid "Folder Opening Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "S'ha produït un error en obrir la carpeta"
@@ -434,8 +419,7 @@ msgstr ""
 "Torneu-ho a comprovar abans de continuar."
 
 #: directorymergewindow.cpp:866
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Avís de paràmetres"
@@ -446,43 +430,37 @@ msgid "Scanning folders..."
 msgstr "S'estan explorant les carpetes..."
 
 #: directorymergewindow.cpp:893
-#, fuzzy, kde-format
-#| msgid "Reading Folder A"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "S'està llegint la carpeta A"
 
 #: directorymergewindow.cpp:902
-#, fuzzy, kde-format
-#| msgid "Reading Folder B"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "S'està llegint la carpeta B"
 
 #: directorymergewindow.cpp:912
-#, fuzzy, kde-format
-#| msgid "Reading Folder C"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "S'està llegint la carpeta C"
 
 #: directorymergewindow.cpp:928
-#, fuzzy, kde-format
-#| msgid "Some subfolders were not readable in"
+#, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Algunes subcarpetes no eren llegibles a"
 
 #: directorymergewindow.cpp:933
-#, fuzzy, kde-format
-#| msgid "Check the permissions of the subfolders."
+#, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Comproveu els permisos de les subcarpetes."
 
 #: directorymergewindow.cpp:956
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Preparat."
@@ -813,64 +791,55 @@ msgid "Dest"
 msgstr "Destinació"
 
 #: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "Folder"
+#, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Carpeta"
 
 #: directorymergewindow.cpp:2722
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Tipus"
 
 #: directorymergewindow.cpp:2722
-#, fuzzy, kde-format
-#| msgid "Size"
+#, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Mida"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Attr"
+#, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Atributs"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Last Modification"
+#, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Última modificació"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Link-Destination"
+#, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Destinació de l'enllaç"
 
 #: directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "Fitxer"
 
 #: directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "-Link"
+#, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Enllaç"
 
 #: directorymergewindow.cpp:2756
-#, fuzzy, kde-format
-#| msgid "not available"
+#, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "no disponible"
@@ -1169,15 +1138,11 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "EtiquetaDeText"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
-#, fuzzy, kde-format
-#| msgid ""
-#| "The quick brown fox jumps over the river\n"
-#| "but the little red hen escapes with a shiver.\n"
-#| ":-)"
+#, kde-format
 msgid ""
 "The quick brown fox jumps over the river\n"
 "but the little red hen escapes with a shiver\n"
@@ -1185,13 +1150,11 @@ msgid ""
 msgstr ""
 "Jove xef, porte ací per a beure whisky amb quinze glaçons d'hidrogen\n"
 "El gos peresós salta per damunt de la rabosa marró.\n"
-":-)"
+":-)\n"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:49
-#, fuzzy, kde-format
-#| msgctxt "Button title"
-#| msgid "Change Font"
+#, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Canvia el tipus de lletra"
@@ -1223,18 +1186,16 @@ msgid "Merge info"
 msgstr "Informació de la fusió"
 
 #: kdiff3.cpp:467
-#, fuzzy, kde-format
-#| msgid "Unable to compare non-normal file with normal file."
+#, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
-msgstr "No es pot comparar un fitxer no normal amb un de normal."
+msgstr "No es pot comparar un fitxer amb una carpeta."
 
 #: kdiff3.cpp:468
-#, fuzzy, kde-format
-#| msgid "Binary comparison"
+#, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
-msgstr "Comparació binària"
+msgstr "Intent de comparació incorrecta"
 
 #: kdiff3.cpp:477
 #, kde-format
@@ -1374,9 +1335,7 @@ msgstr ""
 "diferència"
 
 #: kdiff3.cpp:680
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
@@ -1384,10 +1343,7 @@ msgstr ""
 "blanc» està desactivat)."
 
 #: kdiff3.cpp:681
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1497,16 +1453,10 @@ msgstr ""
 "línia"
 
 #: kdiff3.cpp:695
-#, fuzzy, kde-format
-#| msgctxt "Additional text intooltip"
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
-".\n"
-"Va fins a la línia especificada."
+msgstr "Va fins a la línia especificada."
 
 #: kdiff3.cpp:696
 #, kde-format
@@ -1565,11 +1515,7 @@ msgstr ""
 "font"
 
 #: kdiff3.cpp:699
-#, fuzzy, kde-format
-#| msgctxt "Auto goto next unsolced toolbar text."
-#| msgid ""
-#| "Auto\n"
-#| "Next"
+#, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
@@ -1787,8 +1733,7 @@ msgid "Printing..."
 msgstr "S'està imprimint..."
 
 #: kdiff3.cpp:1026
-#, fuzzy, kde-format
-#| msgid "Printing page %1 of %2"
+#, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "S'està imprimint la pàgina %1 de %2"
@@ -2023,8 +1968,7 @@ msgid "Date & Size: "
 msgstr "Data i mida: "
 
 #: MergeFileInfos.cpp:482
-#, fuzzy, kde-format
-#| msgid "Comparing file..."
+#, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "S'està comparant el fitxer..."
@@ -2155,8 +2099,7 @@ msgstr ""
 "El fitxer no s'ha guardat."
 
 #: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
-#, fuzzy, kde-format
-#| msgid "Conflicts Left"
+#, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Conflictes pendents"
@@ -2287,7 +2230,7 @@ msgstr "Carpeta..."
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "sense"
 
 #: optiondialog.cpp:109 optiondialog.cpp:121
 #, kde-format
@@ -2312,8 +2255,7 @@ msgid "Latin1"
 msgstr "Latin1"
 
 #: optiondialog.cpp:406
-#, fuzzy, kde-format
-#| msgid "Change this if non-ASCII characters are not displayed correctly."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Canvia açò si els caràcters no ASCII no es mostren correctament."
@@ -2459,10 +2401,7 @@ msgid "Tab inserts spaces"
 msgstr "El tabulador inserix espais"
 
 #: optiondialog.cpp:768
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Pressing tab generates the appropriate number of spaces.\n"
-#| "Off: A tab character will be inserted."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2483,8 +2422,7 @@ msgid "Auto indentation"
 msgstr "Sagnat automàtic"
 
 #: optiondialog.cpp:784
-#, fuzzy, kde-format
-#| msgid "On: The indentation of the previous line is used for a new line.\n"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
@@ -2496,10 +2434,7 @@ msgid "Auto copy selection"
 msgstr "Copia la selecció automàticament"
 
 #: optiondialog.cpp:791
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Any selection is immediately written to the clipboard.\n"
-#| "Off: You must explicitly copy e.g. via Ctrl-C."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
@@ -2528,10 +2463,7 @@ msgid "Autodetect"
 msgstr "Detecta automàticament"
 
 #: optiondialog.cpp:806
-#, fuzzy, kde-format
-#| msgid ""
-#| "Sets the line endings for when an edited file is saved.\n"
-#| "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2556,11 +2488,7 @@ msgid "Ignore numbers (treat as white space)"
 msgstr "Ignora els números (tracta'ls com a espais en blanc)"
 
 #: optiondialog.cpp:844
-#, fuzzy, kde-format
-#| msgid ""
-#| "Ignore number characters during line matching phase. (Similar to Ignore "
-#| "white space.)\n"
-#| "Might help to compare files with numeric data."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2577,8 +2505,7 @@ msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)"
 
 #: optiondialog.cpp:851
-#, fuzzy, kde-format
-#| msgid "Treat C/C++ comments like white space."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "Tracta els comentaris de C/C++ com si foren espais en blanc."
@@ -2589,8 +2516,7 @@ msgid "Ignore case (treat as white space)"
 msgstr "Ignora les majúscules/minúscules (tracta-les com a espais en blanc)"
 
 #: optiondialog.cpp:858
-#, fuzzy, kde-format
-#| msgid "Treat case differences like white space changes. ('a'<=>'A')"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
@@ -2603,8 +2529,7 @@ msgid "Preprocessor command:"
 msgstr "Ordre del preprocessador:"
 
 #: optiondialog.cpp:866
-#, fuzzy, kde-format
-#| msgid "User defined pre-processing. (See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
@@ -2617,10 +2542,7 @@ msgid "Line-matching preprocessor command:"
 msgstr "Ordre del preprocessador de coincidència de les línies:"
 
 #: optiondialog.cpp:874
-#, fuzzy, kde-format
-#| msgid ""
-#| "This pre-processor is only used during line matching.\n"
-#| "(See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2635,10 +2557,7 @@ msgid "Try hard (slower)"
 msgstr "Esforça't (més lent)"
 
 #: optiondialog.cpp:881
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enables the --minimal option for the external diff.\n"
-#| "The analysis of big files will be much slower."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2653,11 +2572,7 @@ msgid "Align B and C for 3 input files"
 msgstr "Alinea B i C per a 3 fitxers d'entrada"
 
 #: optiondialog.cpp:889
-#, fuzzy, kde-format
-#| msgid ""
-#| "Try to align B and C when comparing or merging three input files.\n"
-#| "Not recommended for merging because merge might get more complicated.\n"
-#| "(Default is off.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2685,11 +2600,7 @@ msgid "Auto advance delay (ms):"
 msgstr "Retard de l'avanç automàtic (ms):"
 
 #: optiondialog.cpp:930
-#, fuzzy, kde-format
-#| msgid ""
-#| "When in Auto-Advance mode the result of the current selection is shown \n"
-#| "for the specified time, before jumping to the next conflict. Range: "
-#| "0-2000 ms"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2705,8 +2616,7 @@ msgid "Show info dialogs"
 msgstr "Mostra els diàlegs informatius"
 
 #: optiondialog.cpp:937
-#, fuzzy, kde-format
-#| msgid "Show a dialog with information about the number of conflicts."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "Mostra un diàleg amb informació sobre el nombre de conflictes."
@@ -2722,10 +2632,7 @@ msgid "Manual Choice"
 msgstr "Selecció manual"
 
 #: optiondialog.cpp:949 optiondialog.cpp:963
-#, fuzzy, kde-format
-#| msgid ""
-#| "Allow the merge algorithm to automatically select an input for white-"
-#| "space-only changes."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
@@ -2756,10 +2663,7 @@ msgstr ""
 "Executa la fusió automàtica amb l'expressió regular a l'inici de la fusió"
 
 #: optiondialog.cpp:986
-#, fuzzy, kde-format
-#| msgid ""
-#| "Run the merge for auto merge regular expressions\n"
-#| "immediately when a merge starts.\n"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Run the merge for auto merge regular expressions\n"
@@ -2789,8 +2693,7 @@ msgid "History merge sorting"
 msgstr "Ordena la fusió de l'historial"
 
 #: optiondialog.cpp:1026
-#, fuzzy, kde-format
-#| msgid "Sort version control history by a key."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "Ordena l'historial del control de versions amb una clau."
@@ -2807,8 +2710,7 @@ msgid "Merge version control history on merge start"
 msgstr "Fusiona l'historial del control de versions quan es comence a fusionar"
 
 #: optiondialog.cpp:1049
-#, fuzzy, kde-format
-#| msgid "Run version control history automerge on merge start."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr ""
@@ -2822,9 +2724,7 @@ msgstr "Nombre màxim d'entrades de l'historial:"
 
 # skip-rule: kct-cut
 #: optiondialog.cpp:1057
-#, fuzzy, kde-format
-#| msgid ""
-#| "Cut off after specified number. Use -1 for infinite number of entries."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
@@ -2842,11 +2742,7 @@ msgid "Irrelevant merge command:"
 msgstr "Ordre de fusió irrellevant:"
 
 #: optiondialog.cpp:1071
-#, fuzzy, kde-format
-#| msgid ""
-#| "If specified this script is run after automerge\n"
-#| "when no other relevant changes were detected.\n"
-#| "Called with the parameters: filename1 filename2 filename3"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If specified this script is run after auto-merge\n"
@@ -2863,12 +2759,7 @@ msgid "Auto save and quit on merge without conflicts"
 msgstr "En les fusions sense conflictes guarda i ix automàticament"
 
 #: optiondialog.cpp:1080
-#, fuzzy, kde-format
-#| msgid ""
-#| "If KDiff3 was started for a file-merge from the command line and all\n"
-#| "conflicts are solvable without user interaction then automatically save "
-#| "and quit.\n"
-#| "(Similar to command line option \"--auto\".)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2882,8 +2773,7 @@ msgstr ""
 "(Similar a l'opció de la línia d'ordres «--auto»)."
 
 #: optiondialog.cpp:1091 optiondialog.cpp:1092
-#, fuzzy, kde-format
-#| msgid "Folder"
+#, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "Carpeta"
@@ -2894,8 +2784,7 @@ msgid "Recursive folders"
 msgstr "Carpetes recursives"
 
 #: optiondialog.cpp:1115
-#, fuzzy, kde-format
-#| msgid "Whether to analyze subfolders or not."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "Si analitzar o no les subcarpetes."
@@ -2906,11 +2795,7 @@ msgid "File pattern(s):"
 msgstr "Patrons de fitxer:"
 
 #: optiondialog.cpp:1123
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be analyzed. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2927,11 +2812,7 @@ msgid "File-anti-pattern(s):"
 msgstr "Negatiu del patró dels fitxers:"
 
 #: optiondialog.cpp:1134
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be excluded from analysis. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2948,11 +2829,7 @@ msgid "Folder-anti-pattern(s):"
 msgstr "Negatiu dels patrons de carpeta:"
 
 #: optiondialog.cpp:1145
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of folders to be excluded from analysis. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -2969,11 +2846,7 @@ msgid "Use Ignore File"
 msgstr "Utilitza el fitxer «Ignore»"
 
 #: optiondialog.cpp:1154
-#, fuzzy, kde-format
-#| msgid ""
-#| "Extends the antipattern to anything that would be ignored by source "
-#| "control.\n"
-#| "Via local ignore files this can be folder-specific."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Extends the anti-pattern to anything that would be ignored by source "
@@ -2991,8 +2864,7 @@ msgid "Find hidden files and folders"
 msgstr "Busca en els fitxers i carpetes ocults"
 
 #: optiondialog.cpp:1161
-#, fuzzy, kde-format
-#| msgid "Finds hidden files and folders."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "Busca en els fitxers i carpetes ocults."
@@ -3003,10 +2875,7 @@ msgid "Follow file links"
 msgstr "Seguix els enllaços de fitxer"
 
 #: optiondialog.cpp:1168
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Compare the file the link points to.\n"
-#| "Off: Compare the links."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -3021,10 +2890,7 @@ msgid "Follow folder links"
 msgstr "Seguix els enllaços de carpeta"
 
 #: optiondialog.cpp:1176
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Compare the folder the link points to.\n"
-#| "Off: Compare the links."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Compare the folder the link points to.\n"
@@ -3040,12 +2906,7 @@ msgstr ""
 "La comparació dels noms de fitxer distingix entre majúscules i minúscules"
 
 #: optiondialog.cpp:1189
-#, fuzzy, kde-format
-#| msgid ""
-#| "The folder comparison will compare files or folders when their names "
-#| "match.\n"
-#| "Set this option if the case of the names must match. (Default for Windows "
-#| "is off, otherwise on.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
@@ -3064,10 +2925,7 @@ msgid "Unfold all subfolders on load"
 msgstr "Desplega totes les subcarpetes en carregar"
 
 #: optiondialog.cpp:1197
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Unfold all subfolders when starting a folder diff.\n"
-#| "Off: Leave subfolders folded."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
@@ -3082,10 +2940,7 @@ msgid "Skip folder status report"
 msgstr "Omet l'informe d'estat de la carpeta"
 
 #: optiondialog.cpp:1205
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Do not show the Folder Comparison Status.\n"
-#| "Off: Show the status dialog on start."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
@@ -3105,8 +2960,7 @@ msgid "Binary comparison"
 msgstr "Comparació binària"
 
 #: optiondialog.cpp:1216
-#, fuzzy, kde-format
-#| msgid "Binary comparison of each file. (Default)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "Comparació binària de cada fitxer. (De manera predeterminada)"
@@ -3117,10 +2971,7 @@ msgid "Full analysis"
 msgstr "Anàlisi completa"
 
 #: optiondialog.cpp:1221
-#, fuzzy, kde-format
-#| msgid ""
-#| "Do a full analysis and show statistics information in extra columns.\n"
-#| "(Slower than a binary comparison, much slower for binary files.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
@@ -3137,13 +2988,7 @@ msgid "Trust the size and modification date (unsafe)"
 msgstr "Confia en la mida i la data de modificació (insegur)"
 
 #: optiondialog.cpp:1227
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if the modification date and file length are "
-#| "equal.\n"
-#| "Files with equal contents but different modification dates will appear as "
-#| "different.\n"
-#| "Useful for big folders or slow networks."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3168,12 +3013,7 @@ msgstr ""
 "dates no coincidixen (insegur)"
 
 #: optiondialog.cpp:1234
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if the modification date and file length are "
-#| "equal.\n"
-#| "If the dates are not equal but the sizes are, use binary comparison.\n"
-#| "Useful for big folders or slow networks."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3193,11 +3033,7 @@ msgid "Trust the size (unsafe)"
 msgstr "Confia en la mida (insegur)"
 
 #: optiondialog.cpp:1241
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if their file lengths are equal.\n"
-#| "Useful for big folders or slow networks when the date is modified during "
-#| "download."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
@@ -3214,11 +3050,7 @@ msgid "Synchronize folders"
 msgstr "Sincronitza les carpetes"
 
 #: optiondialog.cpp:1252
-#, fuzzy, kde-format
-#| msgid ""
-#| "Offers to store files in both folders so that\n"
-#| "both folders are the same afterwards.\n"
-#| "Works only when comparing two folders without specifying a destination."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Offers to store files in both folders so that\n"
@@ -3236,10 +3068,7 @@ msgid "White space differences considered equal"
 msgstr "Les diferències en els espais en blanc no es consideren"
 
 #: optiondialog.cpp:1262
-#, fuzzy, kde-format
-#| msgid ""
-#| "If files differ only by white space consider them equal.\n"
-#| "This is only active when full analysis is chosen."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If files differ only by white space consider them equal.\n"
@@ -3255,11 +3084,7 @@ msgid "Copy newer instead of merging (unsafe)"
 msgstr "Copia el més nou en comptes de fusionar-los (insegur)"
 
 #: optiondialog.cpp:1272
-#, fuzzy, kde-format
-#| msgid ""
-#| "Do not look inside, just take the newer file.\n"
-#| "(Use this only if you know what you are doing!)\n"
-#| "Only effective when comparing two folders."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Do not look inside, just take the newer file.\n"
@@ -3276,10 +3101,7 @@ msgid "Backup files (.orig)"
 msgstr "Fitxers de còpia de seguretat (.orig)"
 
 #: optiondialog.cpp:1281
-#, fuzzy, kde-format
-#| msgid ""
-#| "If a file would be saved over an old file, then the old file\n"
-#| "will be renamed with a '.orig' extension instead of being deleted."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
@@ -3299,10 +3121,7 @@ msgid "Use the same encoding for everything:"
 msgstr "Utilitza la mateixa codificació a tot arreu:"
 
 #: optiondialog.cpp:1318
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enable this allows to change all encodings by changing the first only.\n"
-#| "Disable this if different individual settings are needed."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
@@ -3323,27 +3142,20 @@ msgid "File Encoding for A:"
 msgstr "Codificació per al fitxer A:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Si se selecciona, es detectaran les codificacions Unicode (UTF-16 o UTF-8).\n"
-"Si el fitxer no és Unicode, s'utilitzarà la codificació seleccionada com a "
-"alternativa.\n"
+"Si se selecciona, es detectaran les codificacions automàticament.\n"
+"Si no es pot trobar automàticament la codificació del fitxer, s'utilitzarà "
+"la codificació seleccionada com a alternativa.\n"
 "(La detecció d'Unicode depén dels primers bytes d'un fitxer)."
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "Detecta automàticament"
 
@@ -3368,11 +3180,7 @@ msgid "Auto Select"
 msgstr "Selecciona automàticament"
 
 #: optiondialog.cpp:1373
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then the encoding from the input files is used.\n"
-#| "In ambiguous cases a dialog will ask the user to choose the encoding for "
-#| "saving."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
@@ -3394,10 +3202,7 @@ msgid "Right To Left Language"
 msgstr "Idioma de dreta a esquerra"
 
 #: optiondialog.cpp:1392
-#, fuzzy, kde-format
-#| msgid ""
-#| "Some languages are read from right to left.\n"
-#| "This setting will change the viewer and editor accordingly."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Some languages are read from right to left.\n"
@@ -3422,12 +3227,7 @@ msgid "Command line options to ignore:"
 msgstr "Opcions que s'han d'ignorar de la línia d'ordres:"
 
 #: optiondialog.cpp:1430
-#, fuzzy, kde-format
-#| msgid ""
-#| "List of command line options that should be ignored when KDiff3 is used "
-#| "by other tools.\n"
-#| "Several values can be specified if separated via ';'\n"
-#| "This will suppress the \"Unknown option\" error."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3447,10 +3247,7 @@ msgstr "Ix també en prémer la tecla d'escapada"
 
 # skip-rule: common-esteu
 #: optiondialog.cpp:1439
-#, fuzzy, kde-format
-#| msgid ""
-#| "Fast method to exit.\n"
-#| "For those who are used to using the Escape key."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Fast method to exit.\n"
@@ -3501,64 +3298,55 @@ msgid "Disable Unsafe Options"
 msgstr "Desactiva les opcions insegures"
 
 #: pdiff.cpp:123
-#, fuzzy, kde-format
-#| msgid "Loading A: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "S'està carregant A: %1"
 
 #: pdiff.cpp:133
-#, fuzzy, kde-format
-#| msgid "Loading B: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "S'està carregant B: %1"
 
 #: pdiff.cpp:166 pdiff.cpp:206
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> B"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Diferència: A <-> B"
 
 #: pdiff.cpp:172 pdiff.cpp:252 pdiff.cpp:275
-#, fuzzy, kde-format
-#| msgid "Linediff: A <-> B"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "Diferència de línia: A <-> B"
 
 #: pdiff.cpp:191
-#, fuzzy, kde-format
-#| msgid "Loading C: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "S'està carregant C: %1"
 
 #: pdiff.cpp:217
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Diferència: A <-> C"
 
 #: pdiff.cpp:230
-#, fuzzy, kde-format
-#| msgid "Diff: B <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Diferència: B <-> C"
 
 #: pdiff.cpp:258 pdiff.cpp:280
-#, fuzzy, kde-format
-#| msgid "Linediff: B <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "Diferència de línia: B <-> C"
 
 #: pdiff.cpp:264 pdiff.cpp:285
-#, fuzzy, kde-format
-#| msgid "Linediff: A <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Diferència de línia: A <-> C"
@@ -3567,17 +3355,17 @@ msgstr "Diferència de línia: A <-> C"
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
-msgstr ""
+msgstr "No hi ha memòria suficient per a completar la petició."
 
 #: pdiff.cpp:318
 #, kde-format
 msgid "An internal error occurred: %1"
-msgstr ""
+msgstr "S'ha produït un error intern: %1"
 
 #: pdiff.cpp:345
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
-msgstr ""
+msgstr "Hi ha massa línies en les diferències. S'omet el fitxer."
 
 #: pdiff.cpp:745
 #, kde-format
@@ -3793,8 +3581,7 @@ msgid "Example auto merge line:"
 msgstr "Exemple de línia de fusió automàtica:"
 
 #: smalldialogs.cpp:382
-#, fuzzy, kde-format
-#| msgid "To test auto merge, copy a line as used in your files."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "To test auto merge, copy a line as used in your files."
 msgstr ""
@@ -3812,10 +3599,7 @@ msgid "Example history start line (with leading comment):"
 msgstr "Exemple de la línia d'inici de l'historial (amb el comentari inicial):"
 
 #: smalldialogs.cpp:409
-#, fuzzy, kde-format
-#| msgid ""
-#| "Copy a history start line as used in your files,\n"
-#| "including the leading comment."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history start line as used in your files,\n"
@@ -3838,10 +3622,7 @@ msgstr ""
 "inicial):"
 
 #: smalldialogs.cpp:445
-#, fuzzy, kde-format
-#| msgid ""
-#| "Copy a history entry start line as used in your files,\n"
-#| "but omit the leading comment."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history entry start line as used in your files,\n"
@@ -3891,12 +3672,10 @@ msgid "%1 is not a normal file."
 msgstr "%1 no és un fitxer normal."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgctxt "Read error message. %1 = filepath"
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "Fitxer %1 és massa gran per a processar. S'omet."
+msgstr "El fitxer %1 és massa gran per a processar-lo. S'omet."
 
 #: SourceData.cpp:409
 #, kde-format
@@ -3959,61 +3738,3 @@ msgstr "Caràcter inesperat de cometa en l'argument."
 #, kde-format
 msgid "No program specified."
 msgstr "No s'ha especificat cap programa."
-
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid "KDiff3 Part"
-#~ msgstr "Part de KDiff3"
-
-#~ msgid "A KPart to display SVG images"
-#~ msgstr "Una KPart per a visualitzar imatges SVG"
-
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
-
-#~ msgid "Could not find files for comparison."
-#~ msgstr "No s'ha trobat cap fitxer per a comparar."
-
-#~ msgid "&KDiff3"
-#~ msgstr "&KDiff3"
-
-#~ msgid "Configure KDiff3"
-#~ msgstr "Configura KDiff3"
-
-#~ msgid ""
-#~ "Could not initialize the KDiff3 part.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "No s'ha pogut restablir el component de KDiff3.\n"
-#~ "Açò sol ser degut a problemes d'instal·lació. Per a més detalls, llegiu "
-#~ "el fitxer README del paquet de codi."
-
-#~ msgctxt "Program version info."
-#~ msgid " (32 bit)"
-#~ msgstr " (32 bits)"
-
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "Detecta automàticament Unicode"
-
-#~ msgid "Loading A"
-#~ msgstr "S'està carregant A"
-
-#~ msgid "Loading B"
-#~ msgstr "S'està carregant B"
-
-#~ msgid "Loading C"
-#~ msgstr "S'està carregant C"
-
-#~ msgid "all/allfiles (*)"
-#~ msgstr "Tot/Tots els fitxers (*)"
