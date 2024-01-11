@@ -27,13 +27,18 @@
 #include <QDir>
 #include <QUrl>
 
-#include <KJob>
 #include <KIO/CopyJob>
+#include <KIO/FileCopyJob>
 #include <KIO/Job>
+#include <KIO/ListJob>
+#include <KIO/SimpleJob>
+#include <KIO/StatJob>
+#include <KIO/TransferJob>
+#include <KJob>
 #include <KLocalizedString>
 
-#include <KMessageBox>
 #include <KIO/JobUiDelegate>
+#include <KMessageBox>
 
 bool DefaultFileAccessJobHandler::stat(bool bWantToWrite)
 {
