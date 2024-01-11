@@ -15,6 +15,9 @@
 #include <boost/signals2.hpp>
 #include <type_traits>
 
+//remove conflicting non-standard definations for 'or' and 'and' in MSVC and posiablly other compilers.
+#undef or
+#undef and
 struct or
 {
     typedef bool result_type;
