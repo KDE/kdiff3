@@ -71,8 +71,8 @@ bool KDiff3App::m_bTripleDiff = false;
 std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
-boost::signals2::signal<bool(), or> KDiff3App::allowCopy;
-boost::signals2::signal<bool(), or> KDiff3App::allowCut;
+boost::signals2::signal<bool(), or_> KDiff3App::allowCopy;
+boost::signals2::signal<bool(), or_> KDiff3App::allowCut;
 
 /*
     To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
