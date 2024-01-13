@@ -84,9 +84,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->22 лютого 2019 року</date>
+>23 грудня 2023 року</date>
 <releaseinfo
->1.08.70</releaseinfo>
+>1.11.0</releaseinfo>
 
 
 <abstract>
@@ -131,7 +131,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->У цьому документі описано &kdiff3; версії 1.10.7. </para>
+>У цьому документі описано &kdiff3; версії 1.11. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -1797,11 +1797,11 @@ Please at least include KDE, the KDE package it is in, the name
     <varlistentry
 ><term
 ><guilabel
->Визначати Юнікод автоматично</guilabel
+>Автовизначення</guilabel
 ></term
 ><listitem
 ><para
->Якщо буде позначено цей пункт, програма використовуватиме позначку порядку байтів (BOM) або метадані з документів XML/HTML для виявлення кодування Unicode. Якщо визначити кодування у такий спосіб не вдасться, програма виконає перевірку того, чи може бути короткий зразок з початку файла оброблено як UTF-8. Якщо цю перевірку буде пройдено, буде використано кодування UTF-8. Якщо і цю перевірку не буде пройдено, програма скористається вибраним користувачем кодеком. Якщо не буде виявлено позначки порядку байтів або метаданих, підтримку кодувань буде обмежено лише UTF-8. </para
+>Якщо буде позначено цей пункт, програма використовуватиме позначку порядку байтів (BOM) або метадані з документів XML/HTML для визначення кодування. Якщо визначити кодування у такий спосіб не вдасться, програма виконає перевірку того, чи може бути короткий зразок з початку файла оброблено як UTF-8. Якщо цю перевірку буде пройдено, буде використано кодування UTF-8. Якщо і цю перевірку не буде пройдено, програма скористається вибраним користувачем кодеком. Якщо не буде виявлено позначки порядку байтів або метаданих, підтримку кодувань буде обмежено лише UTF-8. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -3463,31 +3463,6 @@ Please at least include KDE, the KDE package it is in, the name
 </sect2>
 </sect1>
 
-<sect1 id="kpart">
-<title
->Користування &kdiff3; як модулем KPart</title>
-<para
->&kdiff3; є модулем KPart. У поточній версії реалізовано інтерфейс KParts::ReadOnlyPart. </para
-><para
->Основним його призначенням є перегляд відмінностей у KDevelop. KDevelop завжди спочатку запускає вбудований засіб перегляду відмінностей. Щоб викликати &kdiff3;, наведіть вказівник миші на вікно перегляду відмінностей, клацніть правою кнопкою миші і виберіть у контекстному меню пункт <guimenuitem
->Показати у KDiff3Part</guimenuitem
->. </para
-><para
->Зазвичай, &kdiff3; потрібні повні вхідні дані двох файлів. Якщо використовується модуль, &kdiff3; припускатиме, що вхідним файлом є файл латки в уніфікованому форматі. Далі &kdiff3; отримає початкові назви файлів з файла латки. Програма повинна мати доступ до принаймні одного з цих файлів. Потім &kdiff3; викличе програму <command
->patch</command
-> для відтворення другого файла. </para
-><para
->У &dolphin; ви можете вибрати файл латки і скористатися пунктом контекстного меню <menuchoice
-><guimenuitem
->Відкрити за допомогою</guimenuitem
-> <guisubmenu
->KDiff3</guisubmenu
-></menuchoice
->. Варто зауважити, що це не спрацює, якщо немає доступу до жодного з початкових файлів, і не працюватиме як слід, якщо початкові файли було змінено з часу створення файла латки. </para
-><para
->У режимі модуля &kdiff3; надає доступ лише до порівняння двох файлів і показує дуже маленьку панель інструментів і меню. У цьому режимі не можна скористатися порівнянням тек та об'єднанням файлів. </para>
-</sect1>
-
 <sect1 id="git">
 <title
 >Використання &kdiff3; як інструмента перегляду різниць та об'єднання &git;</title>
@@ -3701,7 +3676,9 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Чи можна скористатися &kdiff3; для порівння файлів <trademark class="registered"
+>Чи можна скористатися &kdiff3; для порівння файлів <application
+>LibreOffice</application
+>/<trademark class="registered"
 >OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
@@ -3713,8 +3690,10 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Хоча &kdiff3; може аналізувати файли будь-яких типів, у таких випадках результат буде не зовсім тим, на який ви очікували. </para
 ><para
->&kdiff3; було створено для порівняння суто текстових файлів. <trademark class="registered"
->LibreOffice</trademark
+>&kdiff3; було створено для порівняння суто текстових файлів. <application
+>LibreOffice</application
+>/<trademark class="registered"
+>OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
 >, <application

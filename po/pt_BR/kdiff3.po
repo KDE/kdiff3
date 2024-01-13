@@ -7,7 +7,7 @@
 # Diniz Fernando Bortolotto Ferreira <diniz.bortolotto@gmail.com>, 2006.
 # Diniz Bortolotto <diniz.bortolotto@gmail.com>, 2006, 2007, 2008.
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2015, 2019.
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2018, 2019, 2020, 2021, 2022, 2023.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 # Marcus Gama <marcus.gama@gmail.com>, 2011.
 # Frederico Gonçalves Guimarães <frederico@teia.bio.br>, 2019.
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-09 02:27+0000\n"
-"PO-Revision-Date: 2023-10-26 15:25-0300\n"
+"PO-Revision-Date: 2024-01-11 20:45-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -3557,7 +3557,7 @@ msgstr "LineDiff: A <-> C"
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
-msgstr ""
+msgstr "Sem memória suficiente para completar a requisição."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3875,8 +3875,7 @@ msgid "%1 is not a normal file."
 msgstr "%1 não é um arquivo normal."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "O arquivo %1 é muito grande pra ser processado. Ignorando-o."
