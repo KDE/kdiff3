@@ -16,7 +16,7 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
-set(KF_MIN_VERSION "5.100.0")
+set(KF_MIN_VERSION "5.110.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
     set(QT_MIN_VERSION "6.6.0")
@@ -67,8 +67,17 @@ include(ECMSetupVersion)
 include(ECMAddTests)
 include(ECMOptionalAddSubdirectory)
 include(ECMSetupQtPluginMacroNames)
+include(ECMDeprecationSettings)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
+
+#Don't warn for API depreciated after 5.110.0 (below as hex.hex.hex number)
+ecm_set_disabled_deprecation_versions(
+     QT ${QT_MIN_VERSION}
+     KF ${KF_MIN_VERSION}
+     KXMLGUI ${KF_MIN_VERSION}
+     KIOCORE ${KF_MIN_VERSION}
+   )
 
 # Some older versions on boost contain a bug that prevents compiling gcc offers a built-in workaround
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
@@ -171,16 +180,10 @@ add_definitions(
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x050F00#warn if deprecated at 5.15 or before. Qt default setting is not useful for kdiff3.
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050F00#disable deprecated api for Qt<5.15.
     #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
-    #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.110.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x056E00
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x056E00
-    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x056E00
+
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
