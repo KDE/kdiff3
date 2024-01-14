@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-09 02:27+0000\n"
-"PO-Revision-Date: 2024-01-06 03:37\n"
+"PO-Revision-Date: 2024-01-13 06:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -33,20 +33,16 @@ msgid "Getting file status: %1"
 msgstr "正在获取文件状态：%1"
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr "正在读取文件：%1"
+msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr "正在写入文件：%1"
+msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:193
 #, kde-format
@@ -54,28 +50,22 @@ msgid "Out of memory"
 msgstr "内存不足"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr "正在创建文件夹：%1"
+msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr "正在删除文件夹：%1"
+msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr "正在删除文件：%1"
+msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:296
 #, kde-format
@@ -93,8 +83,7 @@ msgid "Copying file: %1 -> %2"
 msgstr "正在复制文件：%1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:389
-#, fuzzy, kde-format
-#| msgid "Reading folder: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "正在读取文件夹：%1"
@@ -189,10 +178,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8位"
 
 #: difftextwindow.cpp:2137
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8位"
+msgstr ""
 
 #: difftextwindow.cpp:2153
 #, kde-format
@@ -370,12 +358,10 @@ msgstr "您正在合并文件夹，确定要放弃合并并重新扫描文件夹
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
 #: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
-#, fuzzy, kde-format
-#| msgctxt "Error dialog caption"
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
-msgstr "警告"
+msgstr ""
 
 #: directorymergewindow.cpp:689
 #, kde-format
@@ -410,11 +396,10 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "文件夹 C“%1”不存在或不属于文件夹。\n"
 
 #: directorymergewindow.cpp:856
-#, fuzzy, kde-format
-#| msgid "Folder Opening Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
-msgstr "打开文件夹时出错"
+msgstr ""
 
 #: directorymergewindow.cpp:864
 #, kde-format
@@ -427,11 +412,10 @@ msgstr ""
 "请检查后再试。"
 
 #: directorymergewindow.cpp:866
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
-msgstr "参数警告"
+msgstr ""
 
 #: directorymergewindow.cpp:871
 #, kde-format
@@ -439,46 +423,40 @@ msgid "Scanning folders..."
 msgstr "正在扫描文件夹..."
 
 #: directorymergewindow.cpp:893
-#, fuzzy, kde-format
-#| msgid "Reading Folder A"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "正在读取文件夹 A"
 
 #: directorymergewindow.cpp:902
-#, fuzzy, kde-format
-#| msgid "Reading Folder B"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "正在读取文件夹 B"
 
 #: directorymergewindow.cpp:912
-#, fuzzy, kde-format
-#| msgid "Reading Folder C"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "正在读取文件夹 C"
 
 #: directorymergewindow.cpp:928
-#, fuzzy, kde-format
-#| msgid "Some subfolders were not readable in"
+#, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
-msgstr "无法读取部分子文件夹"
+msgstr ""
 
 #: directorymergewindow.cpp:933
-#, fuzzy, kde-format
-#| msgid "Check the permissions of the subfolders."
+#, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
-msgstr "请检查子文件夹的权限。"
+msgstr ""
 
 #: directorymergewindow.cpp:956
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
-msgstr "就绪。"
+msgstr "准备就绪。"
 
 #: directorymergewindow.cpp:971
 #, kde-format
@@ -778,64 +756,55 @@ msgid "Dest"
 msgstr "目标"
 
 #: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "Folder"
+#, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "文件夹"
 
 #: directorymergewindow.cpp:2722
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "类型"
 
 #: directorymergewindow.cpp:2722
-#, fuzzy, kde-format
-#| msgid "Size"
+#, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "大小"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Attr"
+#, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "属性"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Last Modification"
+#, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "最后修改"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Link-Destination"
+#, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "链接目标"
 
 #: directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "文件"
 
 #: directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "-Link"
+#, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-链接"
 
 #: directorymergewindow.cpp:2756
-#, fuzzy, kde-format
-#| msgid "not available"
+#, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "不可用"
@@ -1131,32 +1100,26 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "文本标签"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
-#, fuzzy, kde-format
-#| msgid ""
-#| "The quick brown fox jumps over the river\n"
-#| "but the little red hen escapes with a shiver.\n"
-#| ":-)"
+#, kde-format
 msgid ""
 "The quick brown fox jumps over the river\n"
 "but the little red hen escapes with a shiver\n"
 ":-)\n"
 msgstr ""
-"敏捷的棕色狐狸越过了河流\n"
-"但小红母鸡颤抖着逃走了。\n"
-":-)"
+"The quick brown fox jumps over the river\n"
+"but the little red hen escapes with a shiver\n"
+":-)\n"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:49
-#, fuzzy, kde-format
-#| msgctxt "Button title"
-#| msgid "Change Font"
+#, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
-msgstr "更改字体"
+msgstr ""
 
 #: kdiff3.cpp:167
 #, kde-format
@@ -1184,18 +1147,16 @@ msgid "Merge info"
 msgstr "合并信息"
 
 #: kdiff3.cpp:467
-#, fuzzy, kde-format
-#| msgid "Unable to compare non-normal file with normal file."
+#, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
-msgstr "无法将普通文件与非普通文件进行比较。"
+msgstr ""
 
 #: kdiff3.cpp:468
-#, fuzzy, kde-format
-#| msgid "Binary comparison"
+#, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
-msgstr "二进制比较"
+msgstr ""
 
 #: kdiff3.cpp:477
 #, kde-format
@@ -1335,18 +1296,13 @@ msgstr ""
 "增补"
 
 #: kdiff3.cpp:680
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(禁用“显示空白字符”时，跳过空白字符差异。)"
 
 #: kdiff3.cpp:681
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1454,16 +1410,10 @@ msgstr ""
 "行"
 
 #: kdiff3.cpp:695
-#, fuzzy, kde-format
-#| msgctxt "Additional text intooltip"
-#| msgid ""
-#| ".\n"
-#| " Goto specified line."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
-".\n"
-" 跳转到指定的行。"
+msgstr "跳转到指定的行。"
 
 #: kdiff3.cpp:696
 #, kde-format
@@ -1520,18 +1470,12 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "选择源内容后自动跳转至下一个未解决冲突"
 
 #: kdiff3.cpp:699
-#, fuzzy, kde-format
-#| msgctxt "Auto goto next unsolced toolbar text."
-#| msgid ""
-#| "Auto\n"
-#| "Next"
+#, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
 "Next"
 msgstr ""
-"自动\n"
-"下一个"
 
 #: kdiff3.cpp:701
 #, kde-format
@@ -1739,8 +1683,7 @@ msgid "Printing..."
 msgstr "正在打印..."
 
 #: kdiff3.cpp:1026
-#, fuzzy, kde-format
-#| msgid "Printing page %1 of %2"
+#, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "正在打印第 %1 页，共 %2 页"
@@ -1970,8 +1913,7 @@ msgid "Date & Size: "
 msgstr "日期和大小： "
 
 #: MergeFileInfos.cpp:482
-#, fuzzy, kde-format
-#| msgid "Comparing file..."
+#, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "正在比较文件"
@@ -2100,11 +2042,10 @@ msgstr ""
 "文件未保存。"
 
 #: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
-#, fuzzy, kde-format
-#| msgid "Conflicts"
+#, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
-msgstr "冲突"
+msgstr ""
 
 #: mergeresultwindow.cpp:2654
 #, kde-format
@@ -2231,7 +2172,7 @@ msgstr "文件夹..."
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "无"
 
 #: optiondialog.cpp:109 optiondialog.cpp:121
 #, kde-format
@@ -2256,8 +2197,7 @@ msgid "Latin1"
 msgstr "Latin1"
 
 #: optiondialog.cpp:406
-#, fuzzy, kde-format
-#| msgid "Change this if non-ASCII characters are not displayed correctly."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "如果非 ASCII 字符不能正确显示，请更改此选项。"
@@ -2401,10 +2341,7 @@ msgid "Tab inserts spaces"
 msgstr "空格代替制表符"
 
 #: optiondialog.cpp:768
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Pressing tab generates the appropriate number of spaces.\n"
-#| "Off: A tab character will be inserted."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2424,8 +2361,7 @@ msgid "Auto indentation"
 msgstr "自动缩进"
 
 #: optiondialog.cpp:784
-#, fuzzy, kde-format
-#| msgid "On: The indentation of the previous line is used for a new line.\n"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "启用：前一行的缩进会应用到新一行。\n"
@@ -2436,10 +2372,7 @@ msgid "Auto copy selection"
 msgstr "自动复制选区"
 
 #: optiondialog.cpp:791
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Any selection is immediately written to the clipboard.\n"
-#| "Off: You must explicitly copy e.g. via Ctrl-C."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
@@ -2467,10 +2400,7 @@ msgid "Autodetect"
 msgstr "自动检测"
 
 #: optiondialog.cpp:806
-#, fuzzy, kde-format
-#| msgid ""
-#| "Sets the line endings for when an edited file is saved.\n"
-#| "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2495,11 +2425,7 @@ msgid "Ignore numbers (treat as white space)"
 msgstr "忽略数字(作为空白字符处理)"
 
 #: optiondialog.cpp:844
-#, fuzzy, kde-format
-#| msgid ""
-#| "Ignore number characters during line matching phase. (Similar to Ignore "
-#| "white space.)\n"
-#| "Might help to compare files with numeric data."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2515,8 +2441,7 @@ msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "忽略 C/C++ 注释 (作为空白字符处理)"
 
 #: optiondialog.cpp:851
-#, fuzzy, kde-format
-#| msgid "Treat C/C++ comments like white space."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++ 注释作为空白字符处理。"
@@ -2527,8 +2452,7 @@ msgid "Ignore case (treat as white space)"
 msgstr "忽略大小写(作为空白字符处理)"
 
 #: optiondialog.cpp:858
-#, fuzzy, kde-format
-#| msgid "Treat case differences like white space changes. ('a'<=>'A')"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "将大小写差异作为空白字符改动处理。('a'<=>'A')"
@@ -2539,8 +2463,7 @@ msgid "Preprocessor command:"
 msgstr "预处理命令："
 
 #: optiondialog.cpp:866
-#, fuzzy, kde-format
-#| msgid "User defined pre-processing. (See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "用户定义的预处理。(详情见文档)"
@@ -2551,10 +2474,7 @@ msgid "Line-matching preprocessor command:"
 msgstr "行匹配预处理命令："
 
 #: optiondialog.cpp:874
-#, fuzzy, kde-format
-#| msgid ""
-#| "This pre-processor is only used during line matching.\n"
-#| "(See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2569,10 +2489,7 @@ msgid "Try hard (slower)"
 msgstr "尽量仔细 (较慢)"
 
 #: optiondialog.cpp:881
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enables the --minimal option for the external diff.\n"
-#| "The analysis of big files will be much slower."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2587,11 +2504,7 @@ msgid "Align B and C for 3 input files"
 msgstr "3路比较时对齐B和C"
 
 #: optiondialog.cpp:889
-#, fuzzy, kde-format
-#| msgid ""
-#| "Try to align B and C when comparing or merging three input files.\n"
-#| "Not recommended for merging because merge might get more complicated.\n"
-#| "(Default is off.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2619,11 +2532,7 @@ msgid "Auto advance delay (ms):"
 msgstr "自动继续模式延迟 (毫秒)："
 
 #: optiondialog.cpp:930
-#, fuzzy, kde-format
-#| msgid ""
-#| "When in Auto-Advance mode the result of the current selection is shown \n"
-#| "for the specified time, before jumping to the next conflict. Range: "
-#| "0-2000 ms"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2638,8 +2547,7 @@ msgid "Show info dialogs"
 msgstr "显示信息对话框"
 
 #: optiondialog.cpp:937
-#, fuzzy, kde-format
-#| msgid "Show a dialog with information about the number of conflicts."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "显示冲突数量对话框"
@@ -2655,10 +2563,7 @@ msgid "Manual Choice"
 msgstr "手动选择"
 
 #: optiondialog.cpp:949 optiondialog.cpp:963
-#, fuzzy, kde-format
-#| msgid ""
-#| "Allow the merge algorithm to automatically select an input for white-"
-#| "space-only changes."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
@@ -2686,10 +2591,7 @@ msgid "Run regular expression auto merge on merge start"
 msgstr "合并开始时运行正则表达式自动合并"
 
 #: optiondialog.cpp:986
-#, fuzzy, kde-format
-#| msgid ""
-#| "Run the merge for auto merge regular expressions\n"
-#| "immediately when a merge starts.\n"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Run the merge for auto merge regular expressions\n"
@@ -2717,8 +2619,7 @@ msgid "History merge sorting"
 msgstr "历史合并排序"
 
 #: optiondialog.cpp:1026
-#, fuzzy, kde-format
-#| msgid "Sort version control history by a key."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "按照关键字排序版本控制历史记录"
@@ -2734,8 +2635,7 @@ msgid "Merge version control history on merge start"
 msgstr "开始合并时合并版本控制历史"
 
 #: optiondialog.cpp:1049
-#, fuzzy, kde-format
-#| msgid "Run version control history automerge on merge start."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr "开始合并时运行版本控制历史自动合并。"
@@ -2746,9 +2646,7 @@ msgid "Max number of history entries:"
 msgstr "最大历史记录数："
 
 #: optiondialog.cpp:1057
-#, fuzzy, kde-format
-#| msgid ""
-#| "Cut off after specified number. Use -1 for infinite number of entries."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr "舍弃指定数量后的记录，指定 -1 则不舍弃记录。"
@@ -2764,11 +2662,7 @@ msgid "Irrelevant merge command:"
 msgstr "无关合并的指令："
 
 #: optiondialog.cpp:1071
-#, fuzzy, kde-format
-#| msgid ""
-#| "If specified this script is run after automerge\n"
-#| "when no other relevant changes were detected.\n"
-#| "Called with the parameters: filename1 filename2 filename3"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If specified this script is run after auto-merge\n"
@@ -2784,12 +2678,7 @@ msgid "Auto save and quit on merge without conflicts"
 msgstr "合并无冲突时自动保存并退出"
 
 #: optiondialog.cpp:1080
-#, fuzzy, kde-format
-#| msgid ""
-#| "If KDiff3 was started for a file-merge from the command line and all\n"
-#| "conflicts are solvable without user interaction then automatically save "
-#| "and quit.\n"
-#| "(Similar to command line option \"--auto\".)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2802,8 +2691,7 @@ msgstr ""
 "(类似命令行选项\"--auto\")"
 
 #: optiondialog.cpp:1091 optiondialog.cpp:1092
-#, fuzzy, kde-format
-#| msgid "Folder"
+#, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "文件夹"
@@ -2814,8 +2702,7 @@ msgid "Recursive folders"
 msgstr "递归文件夹"
 
 #: optiondialog.cpp:1115
-#, fuzzy, kde-format
-#| msgid "Whether to analyze subfolders or not."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "是否分析子文件夹。"
@@ -2826,11 +2713,7 @@ msgid "File pattern(s):"
 msgstr "文件名表达式："
 
 #: optiondialog.cpp:1123
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be analyzed. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2847,11 +2730,7 @@ msgid "File-anti-pattern(s):"
 msgstr "排除文件表达式："
 
 #: optiondialog.cpp:1134
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be excluded from analysis. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2868,11 +2747,7 @@ msgid "Folder-anti-pattern(s):"
 msgstr "排除文件夹表达式："
 
 #: optiondialog.cpp:1145
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of folders to be excluded from analysis. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -2889,11 +2764,7 @@ msgid "Use Ignore File"
 msgstr "使用忽略文件"
 
 #: optiondialog.cpp:1154
-#, fuzzy, kde-format
-#| msgid ""
-#| "Extends the antipattern to anything that would be ignored by source "
-#| "control.\n"
-#| "Via local ignore files this can be folder-specific."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Extends the anti-pattern to anything that would be ignored by source "
@@ -2909,8 +2780,7 @@ msgid "Find hidden files and folders"
 msgstr "查找隐藏的文件和文件夹"
 
 #: optiondialog.cpp:1161
-#, fuzzy, kde-format
-#| msgid "Finds hidden files and folders."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "查找隐藏的文件和文件夹。"
@@ -2921,10 +2791,7 @@ msgid "Follow file links"
 msgstr "跟随文件链接"
 
 #: optiondialog.cpp:1168
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Compare the file the link points to.\n"
-#| "Off: Compare the links."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -2939,10 +2806,7 @@ msgid "Follow folder links"
 msgstr "追踪文件夹链接"
 
 #: optiondialog.cpp:1176
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Compare the folder the link points to.\n"
-#| "Off: Compare the links."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Compare the folder the link points to.\n"
@@ -2957,12 +2821,7 @@ msgid "Case sensitive filename comparison"
 msgstr "文件名区分大小写"
 
 #: optiondialog.cpp:1189
-#, fuzzy, kde-format
-#| msgid ""
-#| "The folder comparison will compare files or folders when their names "
-#| "match.\n"
-#| "Set this option if the case of the names must match. (Default for Windows "
-#| "is off, otherwise on.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
@@ -2978,10 +2837,7 @@ msgid "Unfold all subfolders on load"
 msgstr "加载时展开所有子文件夹"
 
 #: optiondialog.cpp:1197
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Unfold all subfolders when starting a folder diff.\n"
-#| "Off: Leave subfolders folded."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
@@ -2996,10 +2852,7 @@ msgid "Skip folder status report"
 msgstr "跳过文件夹状态报告"
 
 #: optiondialog.cpp:1205
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Do not show the Folder Comparison Status.\n"
-#| "Off: Show the status dialog on start."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
@@ -3167,28 +3020,18 @@ msgid "File Encoding for A:"
 msgstr "A 的文字编码："
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"如果启用，将会检测 Unicode (UTF-16 或 UTF-8) 编码。\n"
-"如果文件非 Unicode 编码，将使用选择的编码作为后备。\n"
-"(Unicode 检测取决于文件的第一个字节)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
-msgstr "自动检测"
+msgstr ""
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3317,18 +3160,16 @@ msgid "Disable Unsafe Options"
 msgstr "禁用不安全的选项"
 
 #: pdiff.cpp:123
-#, fuzzy, kde-format
-#| msgid "Loading A: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
-msgstr "正在加载 A：%1"
+msgstr ""
 
 #: pdiff.cpp:133
-#, fuzzy, kde-format
-#| msgid "Loading A: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
-msgstr "正在加载 A：%1"
+msgstr ""
 
 #: pdiff.cpp:166 pdiff.cpp:206
 #, kde-format
@@ -3343,11 +3184,10 @@ msgid "Linediff: A <-> B"
 msgstr ""
 
 #: pdiff.cpp:191
-#, fuzzy, kde-format
-#| msgid "Loading A: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
-msgstr "正在加载 A：%1"
+msgstr ""
 
 #: pdiff.cpp:217
 #, kde-format
@@ -3382,7 +3222,7 @@ msgstr ""
 #: pdiff.cpp:318
 #, kde-format
 msgid "An internal error occurred: %1"
-msgstr ""
+msgstr "发生内部错误：%1"
 
 #: pdiff.cpp:345
 #, kde-format
@@ -3611,13 +3451,12 @@ msgid "Example history start line (with leading comment):"
 msgstr "历史记录起始行的示例 (带开头的注释)："
 
 #: smalldialogs.cpp:409
-#, fuzzy, kde-format
-#| msgid "Example history start line (with leading comment):"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
-msgstr "历史记录起始行的示例 (带开头的注释)："
+msgstr ""
 
 #: smalldialogs.cpp:435
 #, kde-format
@@ -3630,13 +3469,12 @@ msgid "Example history entry start line (without leading comment):"
 msgstr "历史记录起始行的示例 (不带开头的注释)："
 
 #: smalldialogs.cpp:445
-#, fuzzy, kde-format
-#| msgid "Example history entry start line (without leading comment):"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
-msgstr "历史记录起始行的示例 (不带开头的注释)："
+msgstr ""
 
 #: smalldialogs.cpp:459
 #, kde-format
@@ -3674,12 +3512,10 @@ msgid "%1 is not a normal file."
 msgstr "%1 不是一个正常的文件。"
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgctxt "Read error message. %1 = filepath"
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "文件 %1 太大，无法处理。跳过。"
+msgstr ""
 
 #: SourceData.cpp:409
 #, kde-format
@@ -3740,60 +3576,3 @@ msgstr "参数包含意外的引号字符。"
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
-
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid "KDiff3 Part"
-#~ msgstr "KDiff3 Part"
-
-#~ msgid "A KPart to display SVG images"
-#~ msgstr "显示 SVG 图像的 KPart"
-
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "版权 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
-
-#~ msgid "Could not find files for comparison."
-#~ msgstr "找不到要比较的文件。"
-
-#~ msgid "&KDiff3"
-#~ msgstr "&KDiff3"
-
-#~ msgid "Configure KDiff3"
-#~ msgstr "配置 KDiff3"
-
-#~ msgid ""
-#~ "Could not initialize the KDiff3 part.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "无法初始化 KDiff 组件！\n"
-#~ "此问题的原因通常为安装错误。详情请阅读源码包内的 README 文件。"
-
-#~ msgctxt "Program version info."
-#~ msgid " (32 bit)"
-#~ msgstr " (32 位)"
-
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "自动检测 Unicode"
-
-#~ msgid "Loading A"
-#~ msgstr "正在加载A"
-
-#~ msgid "Loading B"
-#~ msgstr "正在加载B"
-
-#~ msgid "Loading C"
-#~ msgstr "正在加载C"
-
-#~ msgid "all/allfiles (*)"
-#~ msgstr "全部内容及所有文件 (*)"
