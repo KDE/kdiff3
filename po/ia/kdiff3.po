@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdiff3 package.
 #
-# giovanni <g.sora@tiscali.it>, 2020, 2021, 2022, 2023.
+# giovanni <g.sora@tiscali.it>, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-09 02:27+0000\n"
-"PO-Revision-Date: 2023-06-14 12:23+0200\n"
+"PO-Revision-Date: 2024-01-17 09:49+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -33,17 +33,13 @@ msgid "Getting file status: %1"
 msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Legente file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Scribente file : %1"
@@ -54,25 +50,19 @@ msgid "Out of memory"
 msgstr "Foras de Memoria"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Creante dossier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Removente dossier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Removente file: %1"
@@ -93,12 +83,10 @@ msgid "Copying file: %1 -> %2"
 msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:389
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
-msgstr "Legente file: %1"
+msgstr "Legente dossier: %1"
 
 #: DefaultFileAccessJobHandler.cpp:450
 #, kde-format
@@ -188,10 +176,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
 #: difftextwindow.cpp:2137
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 bit"
+msgstr "Unicode, 8 bit (BOM)"
 
 #: difftextwindow.cpp:2153
 #, kde-format
@@ -369,9 +356,7 @@ msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
 #: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
-#, fuzzy, kde-format
-#| msgctxt "Error dialog caption"
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Aviso"
@@ -409,8 +394,7 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "Dossier C \"%1\" non existe o non es un dossier.\n"
 
 #: directorymergewindow.cpp:856
-#, fuzzy, kde-format
-#| msgid "Folder Opening Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Error de aperir dossier"
@@ -424,8 +408,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:866
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Aviso de parametro"
@@ -436,22 +419,19 @@ msgid "Scanning folders..."
 msgstr "Scandente dossieres ..."
 
 #: directorymergewindow.cpp:893
-#, fuzzy, kde-format
-#| msgid "Reading Folder A"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "Legente dossier A"
 
 #: directorymergewindow.cpp:902
-#, fuzzy, kde-format
-#| msgid "Reading Folder B"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "Legente dossier B"
 
 #: directorymergewindow.cpp:912
-#, fuzzy, kde-format
-#| msgid "Reading Folder C"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "Legente dossier C"
@@ -469,8 +449,7 @@ msgid "Check the permissions of the subfolders."
 msgstr ""
 
 #: directorymergewindow.cpp:956
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Preste."
@@ -761,64 +740,55 @@ msgid "Dest"
 msgstr "Dest"
 
 #: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "Folder"
+#, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Dossier"
 
 #: directorymergewindow.cpp:2722
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Typo"
 
 #: directorymergewindow.cpp:2722
-#, fuzzy, kde-format
-#| msgid "Size"
+#, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Dimension"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Attr"
+#, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Attr"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Last Modification"
+#, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Ultime modification"
 
 #: directorymergewindow.cpp:2723
-#, fuzzy, kde-format
-#| msgid "Link-Destination"
+#, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Ligamine-Destination"
 
 #: directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "File"
 
 #: directorymergewindow.cpp:2750
-#, fuzzy, kde-format
-#| msgid "-Link"
+#, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Ligamine"
 
 #: directorymergewindow.cpp:2756
-#, fuzzy, kde-format
-#| msgid "not available"
+#, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "Non disponibile"
@@ -1104,7 +1074,7 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "Etiquetta de Texto (TextLabel)"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
@@ -1117,9 +1087,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:49
-#, fuzzy, kde-format
-#| msgctxt "Button title"
-#| msgid "Change Font"
+#, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Cambia font"
@@ -1395,11 +1363,10 @@ msgstr ""
 "Linea"
 
 #: kdiff3.cpp:695
-#, fuzzy, kde-format
-#| msgid "No program specified."
+#, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr "Nulle programma specificate."
+msgstr "Vade a rango specificate."
 
 #: kdiff3.cpp:696
 #, kde-format
@@ -1450,11 +1417,7 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 
 #: kdiff3.cpp:699
-#, fuzzy, kde-format
-#| msgctxt "Auto goto next unsolced toolbar text."
-#| msgid ""
-#| "Auto\n"
-#| "Next"
+#, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
@@ -1895,8 +1858,7 @@ msgid "Date & Size: "
 msgstr "Data & Grandor:"
 
 #: MergeFileInfos.cpp:482
-#, fuzzy, kde-format
-#| msgid "Comparing file..."
+#, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Comparante file..."
@@ -2017,11 +1979,10 @@ msgid ""
 msgstr ""
 
 #: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
-#, fuzzy, kde-format
-#| msgid "Conflicts"
+#, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
-msgstr "Conflictos"
+msgstr "Conflictos Lassate"
 
 #: mergeresultwindow.cpp:2654
 #, kde-format
@@ -2143,7 +2104,7 @@ msgstr "Dossier..."
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "nulle"
 
 #: optiondialog.cpp:109 optiondialog.cpp:121
 #, kde-format
@@ -2637,8 +2598,7 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1091 optiondialog.cpp:1092
-#, fuzzy, kde-format
-#| msgid "Folder"
+#, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "Dossier"
@@ -2955,11 +2915,9 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
-msgstr "Auto relevate"
+msgstr "Releva automaticamente"
 
 #: optiondialog.cpp:1342
 #, kde-format
@@ -3085,67 +3043,58 @@ msgid "Disable Unsafe Options"
 msgstr ""
 
 #: pdiff.cpp:123
-#, fuzzy, kde-format
-#| msgid "Loading A: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "Cargante A: %1"
 
 #: pdiff.cpp:133
-#, fuzzy, kde-format
-#| msgid "Loading B: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Cargante B: %1"
 
 #: pdiff.cpp:166 pdiff.cpp:206
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> B"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Diff: A <-> B"
 
 #: pdiff.cpp:172 pdiff.cpp:252 pdiff.cpp:275
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> B"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
-msgstr "Diff: A <-> B"
+msgstr "Diff de linea: A <-> B"
 
 #: pdiff.cpp:191
-#, fuzzy, kde-format
-#| msgid "Loading C: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "Cargante C: %1"
 
 #: pdiff.cpp:217
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Diff: A <-> C"
 
 #: pdiff.cpp:230
-#, fuzzy, kde-format
-#| msgid "Diff: B <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Diff: B <-> C"
 
 #: pdiff.cpp:258 pdiff.cpp:280
-#, fuzzy, kde-format
-#| msgid "Diff: B <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
-msgstr "Diff: B <-> C"
+msgstr "Diff de Linea: B <-> C"
 
 #: pdiff.cpp:264 pdiff.cpp:285
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
-msgstr "Diff: A <-> C"
+msgstr "Diff de Linea: A <-> C"
 
 #: pdiff.cpp:311
 #, kde-format
