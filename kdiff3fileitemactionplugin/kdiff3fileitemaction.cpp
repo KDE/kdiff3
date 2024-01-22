@@ -22,7 +22,7 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KIOCore/KFileItem>
+#include <KFileItem>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
