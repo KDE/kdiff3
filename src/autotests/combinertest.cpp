@@ -27,7 +27,7 @@ class CombinertestTest: public QObject
   private Q_SLOTS:
     void testOrCombiner()
     {
-        boost::signals2::signal<bool(), or> test1;
+        boost::signals2::signal<bool(), or_> test1;
         std::list<boost::signals2::scoped_connection> connections;
 
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::no, this)));
@@ -54,7 +54,7 @@ class CombinertestTest: public QObject
 
     void testAndCombiner()
     {
-        boost::signals2::signal<bool(), and> test1;
+        boost::signals2::signal<bool(), and_> test1;
         std::list<boost::signals2::scoped_connection> connections;
 
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::no, this)));
