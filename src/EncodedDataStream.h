@@ -60,7 +60,11 @@ class EncodedDataStream: public QDataStream
         qint32 len = 0;
         QString s;
 
+#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         QTextDecoder decoder = QTextDecoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlag::DefaultConversion : QTextCodec::ConversionFlag::IgnoreHeader);
+#else
+        QTextDecoder decoder = QTextDecoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
+#endif
 
         do
         {
