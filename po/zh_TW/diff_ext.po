@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2024-01-12 22:45+0900\n"
+"PO-Revision-Date: 2024-01-22 16:44+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.01.90\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: diff_ext.cpp:211
 #, kde-format
@@ -31,11 +31,10 @@ msgid "Merge with %1"
 msgstr "與 %1 合併"
 
 #: diff_ext.cpp:217
-#, fuzzy, kde-format
-#| msgid "3-way merge with base"
+#, kde-format
 msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
-msgstr "三路與基礎合併"
+msgstr "與基底做三方合併"
 
 #: diff_ext.cpp:220
 #, kde-format
@@ -62,11 +61,10 @@ msgid "Compare"
 msgstr "比較"
 
 #: diff_ext.cpp:246
-#, fuzzy, kde-format
-#| msgid "3 way comparison"
+#, kde-format
 msgctxt "Contexualmenu option"
 msgid "3 way comparison"
-msgstr "三路比較"
+msgstr "三方比對"
 
 #: diff_ext.cpp:252
 #, kde-format
@@ -100,10 +98,9 @@ msgid "Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"
 msgstr "Diff-Ext 首頁：http://diff-ext.sourceforge.net\n"
 
 #: diff_ext.cpp:324
-#, fuzzy, kde-format
-#| msgid "About Diff-Ext for KDiff3 "
+#, kde-format
 msgid "About Diff-Ext for KDiff3 (64 Bit)"
-msgstr "關於適用 KDiff3 的 Diff-Ext"
+msgstr "關於 KDiff3 用的 Diff-Ext（64 位元）"
 
 #: diff_ext.cpp:353
 #, kde-format
@@ -112,18 +109,16 @@ msgid "Compare selected files"
 msgstr "比對選取檔案"
 
 #: diff_ext.cpp:359 diff_ext.cpp:377
-#, fuzzy, kde-format
-#| msgid "Compare '%1' with '%2'"
+#, kde-format
 msgctxt "Contexualmenu option"
 msgid "Compare '%1' with '%2'"
 msgstr "將「%1」跟「%2」比較"
 
 #: diff_ext.cpp:364
-#, fuzzy, kde-format
-#| msgid "Save '%1' for later operation"
+#, kde-format
 msgctxt "Contexualmenu option"
 msgid "Save '%1' for later operation"
-msgstr "儲存「%1」供稍候操作"
+msgstr "儲存「%1」供稍後操作"
 
 #: diff_ext.cpp:417
 #, kde-format
