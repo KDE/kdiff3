@@ -454,7 +454,7 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
                 }
             }
         }
-        catch(std::bad_alloc&)
+        catch(const std::bad_alloc&)
         {
             m_normalData.reset();
             mErrors.append(overSizedFile);
@@ -722,7 +722,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         mLineCount = lines;
         return true;
     }
-    catch(std::bad_alloc&)
+    catch(const std::bad_alloc&)
     {
         reset();
         return false;
@@ -736,17 +736,22 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray
     QFile in(fileNameIn);
     if(!in.open(QIODevice::ReadOnly))
         return false;
-    QTextStream inStream(&in);
-    inStream.setCodec(pCodecIn);
-    inStream.setAutoDetectUnicode(false);
+    EncodedDataStream inStream(&in);
+    inStream.setEncoding(pCodecIn);
 
     QFile out(fileNameOut);
     if(!out.open(QIODevice::WriteOnly))
         return false;
-    QTextStream outStream(&out);
-    outStream.setCodec(pCodecOut);
+    EncodedDataStream outStream(&out);
+    outStream.setEncoding(pCodecOut);
 
-    QString data = inStream.readAll();
+    QString data;
+    while(!inStream.atEnd())
+    {
+        QChar c;
+        inStream.readChar(c);
+        data += c;
+    }
     outStream << data;
 
     return true;

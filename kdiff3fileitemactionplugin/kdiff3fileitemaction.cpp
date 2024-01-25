@@ -22,11 +22,10 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KIOCore/KFileItem>
+#include <KFileItem>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
-#include <KPluginLoader>
 
 std::unique_ptr<QStringList> s_pHistory;
 

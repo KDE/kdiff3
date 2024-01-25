@@ -58,9 +58,11 @@ class EncodedDataStream: public QDataStream
         char curByte;
         qint32 len = 0;
         QString s;
-
+#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         QTextDecoder decoder = QTextDecoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlag::DefaultConversion : QTextCodec::ConversionFlag::IgnoreHeader);
-
+#else
+        QTextDecoder decoder = QTextDecoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
+#endif
         do
         {
             len += readRawData(&curByte, 1);
@@ -78,8 +80,11 @@ class EncodedDataStream: public QDataStream
 
     EncodedDataStream &operator<<(const QString &s)
     {
+#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QTextCodec::ConversionFlag::DefaultConversion : QTextCodec::ConversionFlag::IgnoreHeader);
-
+#else
+        QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
+#endif
         QByteArray data = encoder.fromUnicode(s);
         mError = encoder.hasFailure();
 

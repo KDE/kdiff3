@@ -37,16 +37,6 @@ inline KMessageBox::ButtonCode warningTwoActionsCancel(QWidget *parent,
                                                        const QString &dontAskAgainName = QString(),
                                                        KMessageBox::Options options = KMessageBox::Options(KMessageBox::Notify | KMessageBox::Dangerous))
 {
-#if KF_VERSION < KF_VERSION_CHECK(5, 100, 0)
-    return KMessageBox::warningYesNoCancel(parent,
-                                           text,
-                                           title,
-                                           primaryAction,
-                                           secondaryAction,
-                                           cancelAction,
-                                           dontAskAgainName,
-                                           options);
-#else
     return KMessageBox::warningTwoActionsCancel(parent,
                                                 text,
                                                 title,
@@ -55,7 +45,6 @@ inline KMessageBox::ButtonCode warningTwoActionsCancel(QWidget *parent,
                                                 cancelAction,
                                                 dontAskAgainName,
                                                 options);
-#endif
 }
 
 inline KMessageBox::ButtonCode warningTwoActions(QWidget *parent,
@@ -66,15 +55,6 @@ inline KMessageBox::ButtonCode warningTwoActions(QWidget *parent,
                                                  const QString &dontAskAgainName = QString(),
                                                  KMessageBox::Options options = KMessageBox::Options(KMessageBox::Notify | KMessageBox::Dangerous))
 {
-#if KF_VERSION < KF_VERSION_CHECK(5, 100, 0)
-    return KMessageBox::warningYesNo(parent,
-                                     text,
-                                     title,
-                                     primaryAction,
-                                     secondaryAction,
-                                     dontAskAgainName,
-                                     options);
-#else
     return KMessageBox::warningTwoActions(parent,
                                           text,
                                           title,
@@ -82,16 +62,10 @@ inline KMessageBox::ButtonCode warningTwoActions(QWidget *parent,
                                           secondaryAction,
                                           dontAskAgainName,
                                           options);
-#endif
 }
 
-#if KF_VERSION < KF_VERSION_CHECK(5, 100, 0)
-constexpr KMessageBox::ButtonCode PrimaryAction = KMessageBox::Yes;
-constexpr KMessageBox::ButtonCode SecondaryAction = KMessageBox::No;
-#else
 constexpr KMessageBox::ButtonCode PrimaryAction = KMessageBox::PrimaryAction;
 constexpr KMessageBox::ButtonCode SecondaryAction = KMessageBox::SecondaryAction;
-#endif
 
 } //namespace Compat
 #endif // ndef AUTOTEST

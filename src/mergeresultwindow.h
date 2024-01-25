@@ -38,6 +38,7 @@ class KActionCollection;
 class KToggleAction;
 
 class KDiff3App;
+class UndoRecord;
 
 class MergeResultWindow: public QWidget
 {
@@ -131,6 +132,8 @@ class MergeResultWindow: public QWidget
         current = 4
     };
     Q_DECLARE_FLAGS(RangeFlags, RangeMark);
+
+    std::shared_ptr<UndoRecord> mUndoRec;
 
     std::shared_ptr<LineDataVector> m_pldA = nullptr;
     std::shared_ptr<LineDataVector> m_pldB = nullptr;

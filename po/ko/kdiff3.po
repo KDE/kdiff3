@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-07 00:43+0000\n"
+"POT-Creation-Date: 2024-01-13 00:40+0000\n"
 "PO-Revision-Date: 2023-08-06 20:15+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -28,12 +28,12 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name,daemul72@gmail.com"
 
-#: DefaultFileAccessJobHandler.cpp:58
+#: DefaultFileAccessJobHandler.cpp:63
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "파일 상태 가져오는 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:113
+#: DefaultFileAccessJobHandler.cpp:118
 #, fuzzy, kde-format
 #| msgctxt "Mesage for progress dialog %1 = path to file"
 #| msgid "Reading file: %1"
@@ -41,7 +41,7 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "파일 읽는 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:157
+#: DefaultFileAccessJobHandler.cpp:162
 #, fuzzy, kde-format
 #| msgctxt "Mesage for progress dialog %1 = path to file"
 #| msgid "Writing file: %1"
@@ -49,12 +49,12 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "파일에 쓰는 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:193
+#: DefaultFileAccessJobHandler.cpp:198
 #, kde-format
 msgid "Out of memory"
 msgstr "메모리 부족"
 
-#: DefaultFileAccessJobHandler.cpp:232
+#: DefaultFileAccessJobHandler.cpp:237
 #, fuzzy, kde-format
 #| msgctxt "Mesage for progress dialog %1 = path to file"
 #| msgid "Making folder: %1"
@@ -62,7 +62,7 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "폴더 만드는 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:256
+#: DefaultFileAccessJobHandler.cpp:261
 #, fuzzy, kde-format
 #| msgctxt "Mesage for progress dialog %1 = path to file"
 #| msgid "Removing folder: %1"
@@ -70,7 +70,7 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "폴더 삭제 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:274
+#: DefaultFileAccessJobHandler.cpp:279
 #, fuzzy, kde-format
 #| msgctxt "Mesage for progress dialog %1 = path to file"
 #| msgid "Removing file: %1"
@@ -78,28 +78,28 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "파일 삭제 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:296
+#: DefaultFileAccessJobHandler.cpp:301
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "심볼릭 링크 만드는 중: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:326
+#: DefaultFileAccessJobHandler.cpp:331
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "파일 이름 변경 중: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:367
+#: DefaultFileAccessJobHandler.cpp:372
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "파일 복사 중: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:389
+#: DefaultFileAccessJobHandler.cpp:394
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "폴더 읽는 중: %1"
 
-#: DefaultFileAccessJobHandler.cpp:447
+#: DefaultFileAccessJobHandler.cpp:455
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "디렉터리 항목 가져오는 중: %1"
@@ -133,7 +133,7 @@ msgstr "파일 %1: 줄을 사용할 수 없음"
 msgid "Encoding:"
 msgstr "인코딩:"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2807 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2819 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "줄 끝 스타일:"
@@ -148,12 +148,12 @@ msgstr "A(기반)"
 msgid "Encoding: %1"
 msgstr "인코딩: %1"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2853
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2865
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2852
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "Unix"
 msgstr "유닉스"
@@ -370,7 +370,7 @@ msgstr ""
 "폴더를 합치고 있습니다. 합치기 작업을 중단하고 폴더를 다시 탐색하시겠습니까?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:331 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -435,43 +435,43 @@ msgstr "인자 경고"
 msgid "Scanning folders..."
 msgstr "폴더 검사 중..."
 
-#: directorymergewindow.cpp:897
+#: directorymergewindow.cpp:893
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "폴더 A 읽는 중"
 
-#: directorymergewindow.cpp:906
+#: directorymergewindow.cpp:902
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "폴더 B 읽는 중"
 
-#: directorymergewindow.cpp:916
+#: directorymergewindow.cpp:912
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "폴더 C 읽는 중"
 
-#: directorymergewindow.cpp:932
+#: directorymergewindow.cpp:928
 #, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "다음의 일부 하위 폴더를 읽을 수 없음:"
 
-#: directorymergewindow.cpp:937
+#: directorymergewindow.cpp:933
 #, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "하위 폴더의 권한을 확인하십시오."
 
-#: directorymergewindow.cpp:960
+#: directorymergewindow.cpp:956
 #, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "준비됨."
 
-#: directorymergewindow.cpp:975
+#: directorymergewindow.cpp:971
 #, kde-format
 msgid ""
 "Folder Comparison Status\n"
@@ -486,22 +486,22 @@ msgstr ""
 "동일한 파일 수: %2\n"
 "다른 파일 수: %3"
 
-#: directorymergewindow.cpp:982
+#: directorymergewindow.cpp:978
 #, kde-format
 msgid "Number of manual merges: %1"
 msgstr "수동 합침 개수: %1"
 
-#: directorymergewindow.cpp:1250
+#: directorymergewindow.cpp:1246
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "모든 합치기 동작에 영향을 줍니다."
 
-#: directorymergewindow.cpp:1251
+#: directorymergewindow.cpp:1247
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "모든 합치기 동작 변경 중"
 
-#: directorymergewindow.cpp:1328
+#: directorymergewindow.cpp:1324
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -510,49 +510,49 @@ msgstr ""
 "%1 / %2 처리 중\n"
 "%3"
 
-#: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
+#: directorymergewindow.cpp:1370 directorymergewindow.cpp:1374
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "일부 파일을 처리할 수 없습니다."
 
-#: directorymergewindow.cpp:1381
+#: directorymergewindow.cpp:1377
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "오류가 너무 많아서 중단합니다."
 
-#: directorymergewindow.cpp:1868 directorymergewindow.cpp:1893
-#: directorymergewindow.cpp:1918
+#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
+#: directorymergewindow.cpp:1914
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "이 작업을 진행할 수 없습니다."
 
-#: directorymergewindow.cpp:1868 directorymergewindow.cpp:1893
-#: directorymergewindow.cpp:1918 directorymergewindow.cpp:2199
+#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
+#: directorymergewindow.cpp:1914 directorymergewindow.cpp:2195
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "작업을 진행할 수 없음"
 
-#: directorymergewindow.cpp:1965
+#: directorymergewindow.cpp:1961
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "복사하는 동안 오류가 발생했습니다."
 
-#: directorymergewindow.cpp:1966 directorymergewindow.cpp:2404
+#: directorymergewindow.cpp:1962 directorymergewindow.cpp:2400
 #, kde-format
 msgid "Merge Error"
 msgstr "합치기 오류"
 
-#: directorymergewindow.cpp:2044
+#: directorymergewindow.cpp:2040
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "알 수 없는 합치기 작업입니다(일어나서는 안 됨!)."
 
-#: directorymergewindow.cpp:2089
+#: directorymergewindow.cpp:2085
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "알 수 없는 합치기 작업입니다."
 
-#: directorymergewindow.cpp:2102
+#: directorymergewindow.cpp:2098
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -572,25 +572,25 @@ msgstr ""
 "이 프로그램은 베타 상태에 있으며 데이터 손실에 대하여 책임지지 않습니다! 중요"
 "한 데이터는 백업 후 시작하십시오!"
 
-#: directorymergewindow.cpp:2107
+#: directorymergewindow.cpp:2103
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "합치기 시작"
 
-#: directorymergewindow.cpp:2108
+#: directorymergewindow.cpp:2104
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "진행"
 
-#: directorymergewindow.cpp:2109
+#: directorymergewindow.cpp:2105
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "시험"
 
-#: directorymergewindow.cpp:2135
+#: directorymergewindow.cpp:2131
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
@@ -599,7 +599,7 @@ msgstr ""
 "강조한 항목은 다른 폴더에서 서로 다른 형식을 가지고 있습니다. 할 일을 선택하"
 "십시오."
 
-#: directorymergewindow.cpp:2139
+#: directorymergewindow.cpp:2135
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
@@ -608,7 +608,7 @@ msgstr ""
 "파일의 수정한 날짜가 일치하지만 파일이 일치하지 않습니다. 할 일을 선택하십시"
 "오."
 
-#: directorymergewindow.cpp:2143
+#: directorymergewindow.cpp:2139
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
@@ -617,14 +617,14 @@ msgstr ""
 "강조한 항목은 한 쪽 폴더에서 변경되었고 다른 쪽에서 삭제되었습니다. 할 일을 "
 "선택하십시오."
 
-#: directorymergewindow.cpp:2199
+#: directorymergewindow.cpp:2195
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr "폴더 합치기 작업이 진행 중이므로 이 작업을 사용할 수 없습니다."
 
-#: directorymergewindow.cpp:2256
+#: directorymergewindow.cpp:2252
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -635,270 +635,270 @@ msgstr ""
 "오류가 발생한 항목에서 계속 진행하시겠습니까? 아니면 이 항목을 건너뛰겠습니"
 "까?"
 
-#: directorymergewindow.cpp:2258
+#: directorymergewindow.cpp:2254
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "오류 발생 후 합치기 계속 진행"
 
-#: directorymergewindow.cpp:2259
+#: directorymergewindow.cpp:2255
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "마지막 항목에서 진행"
 
-#: directorymergewindow.cpp:2260
+#: directorymergewindow.cpp:2256
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "항목 건너뛰기"
 
-#: directorymergewindow.cpp:2354
+#: directorymergewindow.cpp:2350
 #, kde-format
 msgid "Merge operation complete."
 msgstr "합치기 작업이 완료되었습니다."
 
-#: directorymergewindow.cpp:2354 directorymergewindow.cpp:2357
+#: directorymergewindow.cpp:2350 directorymergewindow.cpp:2353
 #, kde-format
 msgid "Merge Complete"
 msgstr "합치기 완료됨"
 
-#: directorymergewindow.cpp:2367
+#: directorymergewindow.cpp:2363
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
 msgstr "합치기 시험 완료됨: 제안하는 변경 사항이 올바르면 선택하십시오."
 
-#: directorymergewindow.cpp:2403
+#: directorymergewindow.cpp:2399
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "오류가 발생했습니다. 자세한 정보를 보려면 확인을 누르십시오."
 
-#: directorymergewindow.cpp:2436
+#: directorymergewindow.cpp:2432
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "%1 삭제 중 오류: 백업을 만들 수 없습니다."
 
-#: directorymergewindow.cpp:2443
+#: directorymergewindow.cpp:2439
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "폴더를 재귀적으로 삭제(%1)"
 
-#: directorymergewindow.cpp:2445
+#: directorymergewindow.cpp:2441
 #, kde-format
 msgid "delete( %1 )"
 msgstr "삭제(%1)"
 
-#: directorymergewindow.cpp:2461
+#: directorymergewindow.cpp:2457
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr "오류: 폴더를 읽는 중 폴더 삭제 작업에서 오류가 발생했습니다."
 
-#: directorymergewindow.cpp:2477
+#: directorymergewindow.cpp:2473
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "오류: rmdir(%1) 작업이 실패했습니다."
 
-#: directorymergewindow.cpp:2487
+#: directorymergewindow.cpp:2483
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "오류: 삭제 작업이 실패했습니다."
 
-#: directorymergewindow.cpp:2514
+#: directorymergewindow.cpp:2510
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "수동 합치기(%1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2517
+#: directorymergewindow.cpp:2513
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr "     메모: 수동 합치기 이후 계속 진행하려면 F7 키를 누르십시오."
 
-#: directorymergewindow.cpp:2544
+#: directorymergewindow.cpp:2540
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "오류: copy(%1 -> %2) 작업이 실패했습니다. 존재하는 대상을 삭제할 수 없습니다."
 
-#: directorymergewindow.cpp:2553
+#: directorymergewindow.cpp:2549
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "copyLink(%1 -> %2)"
 
-#: directorymergewindow.cpp:2562
+#: directorymergewindow.cpp:2558
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr "오류: copyLink 작업이 실패했습니다. 원격 링크는 지원하지 않습니다."
 
-#: directorymergewindow.cpp:2572
+#: directorymergewindow.cpp:2568
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "오류: copyLink 작업이 실패했습니다."
 
-#: directorymergewindow.cpp:2595
+#: directorymergewindow.cpp:2591
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "copy(%1 -> %2)"
 
-#: directorymergewindow.cpp:2621
+#: directorymergewindow.cpp:2617
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "rename(%1 -> %2) 작업 중 오류 발생: 존재하는 대상을 삭제할 수 없습니다."
 
-#: directorymergewindow.cpp:2628
+#: directorymergewindow.cpp:2624
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "rename(%1 -> %2)"
 
-#: directorymergewindow.cpp:2637
+#: directorymergewindow.cpp:2633
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "오류: 이름 변경이 실패했습니다."
 
-#: directorymergewindow.cpp:2655
+#: directorymergewindow.cpp:2651
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "makeDir %1 작업 중 오류가 발생했습니다. 존재하는 파일은 삭제할 수 없습니다."
 
-#: directorymergewindow.cpp:2672
+#: directorymergewindow.cpp:2668
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "makeDir(%1)"
 
-#: directorymergewindow.cpp:2682
+#: directorymergewindow.cpp:2678
 #, kde-format
 msgid "Error while creating folder."
 msgstr "폴더를 만드는 중 오류가 발생했습니다."
 
-#: directorymergewindow.cpp:2718 directorymergewindow.cpp:2832
+#: directorymergewindow.cpp:2714 directorymergewindow.cpp:2828
 #, kde-format
 msgid "Dest"
 msgstr "대상"
 
-#: directorymergewindow.cpp:2726 directorymergewindow.cpp:2754
+#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "폴더"
 
-#: directorymergewindow.cpp:2726
+#: directorymergewindow.cpp:2722
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "종류"
 
-#: directorymergewindow.cpp:2726
+#: directorymergewindow.cpp:2722
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "크기"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2723
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "속성"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2723
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "마지막 수정"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2723
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "링크 대상"
 
-#: directorymergewindow.cpp:2754
+#: directorymergewindow.cpp:2750
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "파일"
 
-#: directorymergewindow.cpp:2754
+#: directorymergewindow.cpp:2750
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-링크"
 
-#: directorymergewindow.cpp:2760
+#: directorymergewindow.cpp:2756
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "사용할 수 없음"
 
-#: directorymergewindow.cpp:2774
+#: directorymergewindow.cpp:2770
 #, kde-format
 msgid "A (Dest): "
 msgstr "A(대상): "
 
-#: directorymergewindow.cpp:2778
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2778
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgid "A (Base): "
 msgstr "A(기반): "
 
-#: directorymergewindow.cpp:2784
+#: directorymergewindow.cpp:2780
 #, kde-format
 msgid "B (Dest): "
 msgstr "B(대상): "
 
-#: directorymergewindow.cpp:2788
+#: directorymergewindow.cpp:2784
 #, kde-format
 msgid "B:    "
 msgstr "B:    "
 
-#: directorymergewindow.cpp:2793
+#: directorymergewindow.cpp:2789
 #, kde-format
 msgid "C (Dest): "
 msgstr "C(대상): "
 
-#: directorymergewindow.cpp:2797
+#: directorymergewindow.cpp:2793
 #, kde-format
 msgid "C:    "
 msgstr "C:    "
 
-#: directorymergewindow.cpp:2800
+#: directorymergewindow.cpp:2796
 #, kde-format
 msgid "Dest: "
 msgstr "대상: "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2842
+#: directorymergewindow.cpp:2838
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "폴더 합치기 상태를 다른 이름으로 저장..."
 
-#: directorymergewindow.cpp:2949
+#: directorymergewindow.cpp:2945
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "폴더 합치기 시작/계속 진행"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2946
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "현재 항목의 작업 실행"
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2947
 #, kde-format
 msgid "Compare Selected File"
 msgstr "선택한 파일 비교"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2948
 #, kde-format
 msgid "Merge Current File"
 msgstr "현재 파일 합치기"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2948
 #, kde-format
 msgid ""
 "Merge\n"
@@ -907,56 +907,56 @@ msgstr ""
 "파일\n"
 "합치기"
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2949
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "모든 하위 폴더 접기"
 
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2950
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "모든 하위 폴더 펼치기"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2951
 #, kde-format
 msgid "Rescan"
 msgstr "재탐색"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "모든 항목에서 A 선택"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "모든 항목에서 B 선택"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "모든 항목에서 C 선택"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "모든 항목에서 작업 자동 선택"
 
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2958
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "모든 항목에서 작업 진행하지 않음"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Show Identical Files"
 msgstr "같은 파일 표시"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid ""
 "Identical\n"
@@ -965,17 +965,17 @@ msgstr ""
 "같은\n"
 "파일"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2964
 #, kde-format
 msgid "Show Different Files"
 msgstr "다른 파일 표시"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Show Files only in A"
 msgstr "A에만 있는 파일 표시"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2965
 #, kde-format
 msgid ""
 "Files\n"
@@ -984,12 +984,12 @@ msgstr ""
 "A에만 있는\n"
 "파일"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid "Show Files only in B"
 msgstr "B에만 있는 파일 표시"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid ""
 "Files\n"
@@ -998,12 +998,12 @@ msgstr ""
 "B에만 있는\n"
 "파일"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Show Files only in C"
 msgstr "C에만 있는 파일 표시"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid ""
 "Files\n"
@@ -1012,68 +1012,68 @@ msgstr ""
 "C에만 있는\n"
 "파일"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "명시적으로 선택한 파일만 비교"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "명시적으로 선택한 파일만 합치기"
 
-#: directorymergewindow.cpp:2978 directorymergewindow.cpp:2985
+#: directorymergewindow.cpp:2974 directorymergewindow.cpp:2981
 #, kde-format
 msgid "Do Nothing"
 msgstr "아무것도 하지 않음"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2982 opendialog.ui:68
+#: directorymergewindow.cpp:2978 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "합치기"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2979
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "삭제(존재하는 경우)"
 
-#: directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2982
 #, kde-format
 msgid "Copy A to B"
 msgstr "A를 B로 복사"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2983
 #, kde-format
 msgid "Copy B to A"
 msgstr "B를 A로 복사"
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2984
 #, kde-format
 msgid "Delete A"
 msgstr "A 삭제"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2985
 #, kde-format
 msgid "Delete B"
 msgstr "B 삭제"
 
-#: directorymergewindow.cpp:2990
+#: directorymergewindow.cpp:2986
 #, kde-format
 msgid "Delete A && B"
 msgstr "A와 B 삭제"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Merge to A"
 msgstr "A로 합치기"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Merge to B"
 msgstr "B로 합치기"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Merge to A && B"
 msgstr "A와 B로 합치기"
@@ -1801,84 +1801,84 @@ msgstr "주 도구 모음"
 msgid "Ignored. (User defined.)"
 msgstr "무시함.(사용자 정의)"
 
-#: main.cpp:91
+#: main.cpp:93
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:94
+#: main.cpp:96
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64비트)"
 
-#: main.cpp:96
+#: main.cpp:98
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "파일과 폴더를 비교하고 합치는 도구"
 
-#: main.cpp:97
+#: main.cpp:99
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Merge the input."
 msgstr "입력을 합칩니다."
 
-#: main.cpp:118
+#: main.cpp:120
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "명시적인 기반 파일. 일부 도구와 호환성 때문에 사용합니다."
 
-#: main.cpp:119
+#: main.cpp:121
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "출력 파일. -m을 암시합니다. 예: -o newfile.txt"
 
-#: main.cpp:120
+#: main.cpp:122
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "출력 파일, 또 다시.(일부 도구와 호환성 때문에 사용합니다.)"
 
-#: main.cpp:122
+#: main.cpp:124
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "모든 충돌 사항을 자동적으로 해결할 수 있는 경우 GUI 사용 안 함(-o file 필요)"
 
-#: main.cpp:123
+#: main.cpp:125
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "--auto 옵션을 무시하고 항상 GUI를 표시합니다."
 
-#: main.cpp:125 main.cpp:126
+#: main.cpp:127 main.cpp:128
 #, kde-format
 msgid "Ignored."
 msgstr "무시됨."
 
-#: main.cpp:128
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "입력 파일 1(기반)에 대한 표시 이름 대체입니다."
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "입력 파일 2에 대한 표시 이름 대체입니다."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "입력 파일 3에 대한 표시 이름 대체입니다."
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "대안 표시 이름 대체입니다. 입력 파일마다 하나씩 지정하십시오."
 
-#: main.cpp:132
+#: main.cpp:134
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1887,32 +1887,32 @@ msgstr ""
 "설정 옵션을 재정의합니다. 설정마다 하나씩 사용하십시오. 예: --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:133
+#: main.cpp:135
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "설정 옵션과 현재 값을 표시합니다."
 
-#: main.cpp:134
+#: main.cpp:136
 #, kde-format
 msgid "Use a different config file."
 msgstr "다른 설정 파일을 사용합니다."
 
-#: main.cpp:137
+#: main.cpp:139
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "열 파일 1(--base로 지정하지 않은 경우의 기반)"
 
-#: main.cpp:138
+#: main.cpp:140
 #, kde-format
 msgid "file2 to open"
 msgstr "열 파일 2"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid "file3 to open"
 msgstr "열 파일 3"
 
-#: main.cpp:163
+#: main.cpp:165
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "지원되는 옵션은 kdiff3 --help 명령을 참조하십시오."
@@ -1998,7 +1998,7 @@ msgstr "모든 해결하지 않은 공백 문자 충돌 항목에서 C 선택"
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "남은 해결하지 않은 충돌 항목: %1(공백 %2개 포함)"
 
-#: mergeresultwindow.cpp:329
+#: mergeresultwindow.cpp:330
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2007,29 +2007,29 @@ msgstr ""
 "출력 파일이 수정되었습니다.\n"
 "계속 진행하면 변경 사항을 저장하지 않습니다."
 
-#: mergeresultwindow.cpp:771 pdiff.cpp:743
+#: mergeresultwindow.cpp:773 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "모든 입력 파일의 바이너리가 같습니다."
 
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:775
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "모든 입력 파일의 텍스트가 같습니다."
 
-#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:785 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "파일 %1와(과) %2의 바이너리가 동일합니다.\n"
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
+#: mergeresultwindow.cpp:789
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "파일 %1와(과) %2의 텍스트가 동일합니다.\n"
 
-#: mergeresultwindow.cpp:791
+#: mergeresultwindow.cpp:793
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2042,27 +2042,27 @@ msgstr ""
 "해결되지 않은 충돌 개수: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 #, kde-format
 msgid "Conflicts"
 msgstr "충돌"
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1540
 #, kde-format
 msgid "<No src line>"
 msgstr "<원본 줄 없음>"
 
-#: mergeresultwindow.cpp:1539
+#: mergeresultwindow.cpp:1548
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<충돌 합치기(공백만>"
 
-#: mergeresultwindow.cpp:1541 mergeresultwindow.cpp:2414
+#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<충돌 합치기>"
 
-#: mergeresultwindow.cpp:2633
+#: mergeresultwindow.cpp:2645
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2071,13 +2071,13 @@ msgstr ""
 "모든 충돌 사항을 해결하지 않았습니다.\n"
 "파일이 저장되지 않았습니다."
 
-#: mergeresultwindow.cpp:2635 mergeresultwindow.cpp:2644
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "충돌 사항 남음"
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2087,7 +2087,7 @@ msgstr ""
 "줄 끝 스타일이 충돌합니다. 줄 끝 스타일을 직접 선택하십시오.\n"
 "파일이 저장되지 않았습니다."
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2098,47 +2098,47 @@ msgstr ""
 "\n"
 "백업을 만들 수 없습니다. 파일을 저장하지 않았습니다."
 
-#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2716
 #, kde-format
 msgid "File Save Error"
 msgstr "파일 저장 오류"
 
-#: mergeresultwindow.cpp:2704
+#: mergeresultwindow.cpp:2716
 #, kde-format
 msgid "Error while writing."
 msgstr "쓰는 중 오류가 발생했습니다."
 
-#: mergeresultwindow.cpp:2779
+#: mergeresultwindow.cpp:2791
 #, kde-format
 msgid "Output:"
 msgstr "출력:"
 
-#: mergeresultwindow.cpp:2792 mergeresultwindow.cpp:2982
+#: mergeresultwindow.cpp:2804 mergeresultwindow.cpp:2994
 #, kde-format
 msgid "[Modified]"
 msgstr "[수정됨]"
 
-#: mergeresultwindow.cpp:2799
+#: mergeresultwindow.cpp:2811
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "저장용 인코딩:"
 
-#: mergeresultwindow.cpp:2899
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Conflict"
 msgstr "충돌"
 
-#: mergeresultwindow.cpp:2929
+#: mergeresultwindow.cpp:2941
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "A의 코덱: %1"
 
-#: mergeresultwindow.cpp:2931
+#: mergeresultwindow.cpp:2943
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "B의 코덱: %1"
 
-#: mergeresultwindow.cpp:2933
+#: mergeresultwindow.cpp:2945
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "C의 코덱: %1"

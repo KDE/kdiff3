@@ -15,7 +15,7 @@
 #include <boost/signals2.hpp>
 #include <type_traits>
 
-struct or
+struct or_
 {
     typedef bool result_type;
     template <typename InputIterator> bool operator()(InputIterator first, InputIterator last) const
@@ -36,7 +36,7 @@ struct or
     }
 };
 
-struct and
+struct and_
 {
     typedef bool result_type;
     template <typename InputIterator> bool operator()(InputIterator first, InputIterator last) const

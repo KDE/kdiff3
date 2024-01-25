@@ -878,10 +878,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     double nofScans = (dirA.isValid() ? 1 : 0) + (dirB.isValid() ? 1 : 0) + (dirC.isValid() ? 1 : 0);
     qint32 currentScan = 0;
 
-    //TODO   setColumnWidthMode(s_UnsolvedCol, Q3ListView::Manual);
-    //   setColumnWidthMode(s_SolvedCol,   Q3ListView::Manual);
-    //   setColumnWidthMode(s_WhiteCol,    Q3ListView::Manual);
-    //   setColumnWidthMode(s_NonWhiteCol, Q3ListView::Manual);
     mWindow->setColumnHidden(s_CCol, !dirC.isValid());
     mWindow->setColumnHidden(s_WhiteCol, !gOptions->m_bDmFullAnalysis);
     mWindow->setColumnHidden(s_NonWhiteCol, !gOptions->m_bDmFullAnalysis);
