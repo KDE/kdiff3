@@ -71,10 +71,10 @@ include(ECMDeprecationSettings)
 
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
-#Don't warn for API depreciated after 5.110.0 (below as hex.hex.hex number)
+#Don't warn for API depreciated after 5.110.0
 ecm_set_disabled_deprecation_versions(
-     QT ${QT_MIN_VERSION}
-     KF ${KF_MIN_VERSION}
+     QT 5.15.0
+     KF 5.110.0
      KXMLGUI ${KF_MIN_VERSION}
      KIOCORE ${KF_MIN_VERSION}
    )
