@@ -171,13 +171,14 @@ add_definitions(
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x050F00#warn if deprecated at 5.15 or before. Qt default setting is not useful for kdiff3.
+    -DQT_DEPRECATED_WARNINGS_SINCE=0x060100#warn if deprecated at 6.1 or before. Qt default setting is not useful for kdiff3.
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050F00#disable deprecated api for Qt<5.15.
     #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
     #Don't warn for API depreciated after 5.110.0 (below as hex.hex.hex number)
+    -DKF_DISABLE_DEPRECATED_BEFORE=0x056E00#disable deprecated api for KF 5.110.
     -DKF_DEPRECATED_WARNINGS_SINCE=0x056E00
     -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x056E00
     -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x056E00
