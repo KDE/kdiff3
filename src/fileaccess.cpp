@@ -96,7 +96,7 @@ FileAccess::FileAccess(FileAccess&& b) noexcept:
     m_bExecutable{b.m_bExecutable},
     m_bHidden{b.m_bHidden}
 {
-    mJobHandler.reset(b.mJobHandler.take());
+    mJobHandler.reset(b.mJobHandler.release());
     if(mJobHandler) mJobHandler->setFileAccess(this);
 
     m_url = std::move(b.m_url);
@@ -162,7 +162,7 @@ FileAccess& FileAccess::operator=(FileAccess&& b) noexcept
 {
     if(&b == this) return *this;
 
-    mJobHandler.reset(b.mJobHandler.take());
+    mJobHandler.reset(b.mJobHandler.release());
     if (mJobHandler) mJobHandler->setFileAccess(this);
 
     m_pParent = b.m_pParent;

@@ -652,7 +652,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
     {
         LineRef line;
         qint32 pos;
-        convertToLinePos(e->x(), e->y(), line, pos);
+        convertToLinePos(e->pos().x(), e->pos().y(), line, pos);
         qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
@@ -660,7 +660,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         qint32 fontWidth = fontMetrics().horizontalAdvance('0');
         qint32 xOffset = d->leftInfoWidth() * fontWidth;
 
-        if((!gOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (gOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
+        if((!gOptions->m_bRightToLeftLanguage && e->pos().x() < xOffset) || (gOptions->m_bRightToLeftLanguage && e->pos().x() > width() - xOffset))
         {
             Q_EMIT setFastSelectorLine(convertLineToDiff3LineIdx(line));
             d->m_selection.reset(); // Disable current d->m_selection
@@ -690,7 +690,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
     {
         LineRef line;
         qint32 pos;
-        convertToLinePos(e->x(), e->y(), line, pos);
+        convertToLinePos(e->pos().x(), e->pos().y(), line, pos);
         qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
@@ -759,7 +759,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
     qCInfo(kdiffDiffTextWindow) << "Mouse Moved";
     qCDebug(kdiffDiffTextWindow) << "d->m_lastKnownMousePos = " << d->m_lastKnownMousePos << ", e->pos() = " << e->pos();
 
-    convertToLinePos(e->x(), e->y(), line, pos);
+    convertToLinePos(e->pos().x(), e->pos().y(), line, pos);
     d->m_lastKnownMousePos = e->pos();
 
     qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
@@ -783,16 +783,16 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         //FIXME: Why are we manually doing Layout adjustments?
         if(!gOptions->m_bRightToLeftLanguage)
         {
-            if(e->x() < d->leftInfoWidth() * fontWidth) deltaX = -1 - abs(e->x() - d->leftInfoWidth() * fontWidth) / fontWidth;
-            if(e->x() > width()) deltaX = +1 + abs(e->x() - width()) / fontWidth;
+            if(e->pos().x() < d->leftInfoWidth() * fontWidth) deltaX = -1 - abs(e->pos().x() - d->leftInfoWidth() * fontWidth) / fontWidth;
+            if(e->pos().x() > width()) deltaX = +1 + abs(e->pos().x() - width()) / fontWidth;
         }
         else
         {
-            if(e->x() > width() - 1 - d->leftInfoWidth() * fontWidth) deltaX = +1 + abs(e->x() - (width() - 1 - d->leftInfoWidth() * fontWidth)) / fontWidth;
-            if(e->x() < fontWidth) deltaX = -1 - abs(e->x() - fontWidth) / fontWidth;
+            if(e->pos().x() > width() - 1 - d->leftInfoWidth() * fontWidth) deltaX = +1 + abs(e->pos().x() - (width() - 1 - d->leftInfoWidth() * fontWidth)) / fontWidth;
+            if(e->pos().x() < fontWidth) deltaX = -1 - abs(e->pos().x() - fontWidth) / fontWidth;
         }
-        if(e->y() < 0) deltaY = -1 - (qint32)std::pow<qint32, qint32>(e->y(), 2) / (qint32)std::pow(fm.lineSpacing(), 2);
-        if(e->y() > height()) deltaY = 1 + (qint32)std::pow(e->y() - height(), 2) / (qint32)std::pow(fm.lineSpacing(), 2);
+        if(e->pos().y() < 0) deltaY = -1 - (qint32)std::pow<qint32, qint32>(e->pos().y(), 2) / (qint32)std::pow(fm.lineSpacing(), 2);
+        if(e->pos().y() > height()) deltaY = 1 + (qint32)std::pow(e->pos().y() - height(), 2) / (qint32)std::pow(fm.lineSpacing(), 2);
         if((deltaX != 0 && d->m_scrollDeltaX != deltaX) || (deltaY != 0 && d->m_scrollDeltaY != deltaY))
         {
             d->m_scrollDeltaX = deltaX;

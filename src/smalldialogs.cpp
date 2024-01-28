@@ -240,7 +240,7 @@ void OpenDialog::accept()
 
 void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the popup menu
 {
-    const QtSizeType id = pAction->parentWidget()->actions().indexOf(pAction);
+    const QtSizeType id = qobject_cast<QWidget*>(pAction->parent())->actions().indexOf(pAction);
     QComboBox* cb1 = nullptr;
     QComboBox* cb2 = nullptr;
 

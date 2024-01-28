@@ -28,7 +28,6 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>
-#include <QScopedPointer>
 #include <QStandardPaths>
 #include <QStringList>
 #include <QTextStream>

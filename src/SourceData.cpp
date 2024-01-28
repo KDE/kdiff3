@@ -49,7 +49,6 @@ Optimizations: Skip unneeded steps.
 
 #include <QByteArray>
 #include <QProcess>
-#include <QScopedPointer>
 #include <QString>
 #include <QTemporaryFile>
 #include <QTextCodec>
@@ -574,7 +573,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
     LineType lines = 0;
     QtSizeType lastOffset = 0;
     FileOffset skipBytes = 0;
-    QScopedPointer<CommentParser> parser(new DefaultCommentParser());
+    std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
 
     // detect line end style
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;

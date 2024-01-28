@@ -575,7 +575,11 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
             QPixmap icon;
             if(value.isValid())
             {
+#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
                 if(value.type() == QVariant::Icon)
+#else
+                if(value.typeId() == QMetaType::QIcon)
+#endif
                 {
                     icon = qvariant_cast<QIcon>(value).pixmap(16, 16);
                     //icon = qvariant_cast<QIcon>(value);
@@ -1605,7 +1609,11 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     QTreeView::mousePressEvent(e);
     QModelIndex mi = indexAt(e->pos());
     qint32 c = mi.column();
+#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     QPoint p = e->globalPos();
+#else
+    QPoint p = e->globalPosition().toPoint();
+#endif
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
         return;

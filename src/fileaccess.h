@@ -19,7 +19,6 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QScopedPointer>
 #include <QSharedPointer>
 #include <QTemporaryFile>
 #include <QUrl>
@@ -152,7 +151,7 @@ class FileAccess
 
     bool interruptableReadFile(void* pDestBuffer, qint64 maxLength);
 
-    QScopedPointer<FileAccessJobHandler> mJobHandler;
+    std::unique_ptr<FileAccessJobHandler> mJobHandler;
     FileAccess* m_pParent = nullptr;
     QUrl m_url;
     bool m_bValidData = false;

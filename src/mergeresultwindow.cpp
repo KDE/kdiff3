@@ -1751,17 +1751,17 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 
     const qint32 xOffset = getTextXOffset();
 
-    const LineRef line = std::max<LineType>(convertToLine(e->y()), 0);
+    const LineRef line = std::max<LineType>(convertToLine(e->pos().y()), 0);
     const QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
-    qint32 pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+    qint32 pos = textLayout.lineAt(0).xToCursor(e->pos().x() - textLayout.position().x());
 
     const bool lLeftMouseButton = e->button() == Qt::LeftButton;
     const bool lMiddleMouseButton = e->button() == Qt::MiddleButton;
     const bool lRightMouseButton = e->button() == Qt::RightButton;
 
-    if((lLeftMouseButton && (e->x() < xOffset)) || lRightMouseButton) // Fast range selection
+    if((lLeftMouseButton && (e->pos().x() < xOffset)) || lRightMouseButton) // Fast range selection
     {
         m_cursorXPos = 0;
         m_cursorOldXPixelPos = 0;
@@ -1829,11 +1829,11 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        const LineRef line = convertToLine(e->y());
+        const LineRef line = convertToLine(e->pos().y());
         const QString s = getString(line);
         QTextLayout textLayout(s, font(), this);
         getTextLayoutForLine(line, s, textLayout);
-        qint32 pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+        qint32 pos = textLayout.lineAt(0).xToCursor(e->pos().x() - textLayout.position().x());
         m_cursorXPos = pos;
         m_cursorOldXPixelPos = m_cursorXPixelPos;
         m_cursorYPos = line;
@@ -1878,11 +1878,11 @@ void MergeResultWindow::mouseReleaseEvent(QMouseEvent* e)
 
 void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
 {
-    const LineRef line = convertToLine(e->y());
+    const LineRef line = convertToLine(e->pos().y());
     const QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
-    const qint32 pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+    const qint32 pos = textLayout.lineAt(0).xToCursor(e->pos().x() - textLayout.position().x());
     m_cursorXPos = pos;
     m_cursorOldXPixelPos = m_cursorXPixelPos;
     m_cursorYPos = line;
@@ -1903,16 +1903,16 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
         qint32 deltaY = 0;
         if(!gOptions->m_bRightToLeftLanguage)
         {
-            if(e->x() < getTextXOffset()) deltaX = -1;
-            if(e->x() > width()) deltaX = +1;
+            if(e->pos().x() < getTextXOffset()) deltaX = -1;
+            if(e->pos().x() > width()) deltaX = +1;
         }
         else
         {
-            if(e->x() > width() - 1 - getTextXOffset()) deltaX = -1;
-            if(e->x() < fontWidth) deltaX = +1;
+            if(e->pos().x() > width() - 1 - getTextXOffset()) deltaX = -1;
+            if(e->pos().x() < fontWidth) deltaX = +1;
         }
-        if(e->y() < topLineYOffset) deltaY = -1;
-        if(e->y() > height()) deltaY = +1;
+        if(e->pos().y() < topLineYOffset) deltaY = -1;
+        if(e->pos().y() > height()) deltaY = +1;
         m_scrollDeltaX = deltaX;
         m_scrollDeltaY = deltaY;
         if(deltaX != 0 || deltaY != 0)

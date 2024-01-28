@@ -579,7 +579,7 @@ void OptionDialog::setupColorPage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
@@ -747,7 +747,7 @@ void OptionDialog::setupEditPage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
@@ -822,7 +822,7 @@ void OptionDialog::setupDiffPage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
@@ -906,7 +906,7 @@ void OptionDialog::setupMergePage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
@@ -1097,7 +1097,7 @@ void OptionDialog::setupDirectoryMergePage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
@@ -1296,7 +1296,7 @@ void OptionDialog::setupRegionalPage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
@@ -1408,7 +1408,7 @@ void OptionDialog::setupIntegrationPage()
     scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
-    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    std::unique_ptr<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
