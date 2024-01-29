@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-13 00:40+0000\n"
+"POT-Creation-Date: 2024-01-29 00:39+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -385,7 +385,7 @@ msgctxt "Column title"
 msgid "White"
 msgstr "Tühimärk"
 
-#: directorymergewindow.cpp:687
+#: directorymergewindow.cpp:691
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort the "
@@ -394,7 +394,7 @@ msgstr ""
 "Sul on parajasti käsil kataloogi ühendamine. Kas tõesti ühendamine "
 "katkestada ja kataloog uuesti läbi uurida?"
 
-#: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
+#: directorymergewindow.cpp:692 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
 #: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -402,48 +402,48 @@ msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Hoiatus"
 
-#: directorymergewindow.cpp:689
+#: directorymergewindow.cpp:693
 #, fuzzy, kde-format
 #| msgid "Rescan"
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Uuri uuesti läbi"
 
-#: directorymergewindow.cpp:690
+#: directorymergewindow.cpp:694
 #, fuzzy, kde-format
 #| msgid "Continue Merging"
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "Jätka ühendamist"
 
-#: directorymergewindow.cpp:839
+#: directorymergewindow.cpp:843
 #, kde-format
 msgid "Opening of folders failed:"
 msgstr "Kataloogide avamine nurjus:"
 
-#: directorymergewindow.cpp:843
+#: directorymergewindow.cpp:847
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
 msgstr "Kataloogi A \"%1\" ei ole olemas või ei ole see kataloog.\n"
 
-#: directorymergewindow.cpp:848
+#: directorymergewindow.cpp:852
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
 msgstr "Kataloogi B \"%1\" ei ole olemas või ei ole see kataloog.\n"
 
-#: directorymergewindow.cpp:853
+#: directorymergewindow.cpp:857
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "Kataloogi C \"%1\" ei ole olemas või ei ole see kataloog.\n"
 
-#: directorymergewindow.cpp:856
+#: directorymergewindow.cpp:860
 #, fuzzy, kde-format
 #| msgid "Folder Opening Error"
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Tõrge kataloogi avamisel"
 
-#: directorymergewindow.cpp:864
+#: directorymergewindow.cpp:868
 #, kde-format
 msgid ""
 "The destination folder must not be the same as A or B when three folders are "
@@ -453,61 +453,61 @@ msgstr ""
 "Sihtkataloog ei saa kolme kataloogi ühendamisel olla sama, mis A või B.\n"
 "Kontrolli seda asja enne jätkamist."
 
-#: directorymergewindow.cpp:866
+#: directorymergewindow.cpp:870
 #, fuzzy, kde-format
 #| msgid "Parameter Warning"
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Parameetri hoiatus"
 
-#: directorymergewindow.cpp:871
+#: directorymergewindow.cpp:875
 #, kde-format
 msgid "Scanning folders..."
 msgstr "Kataloogide läbiuurimine..."
 
-#: directorymergewindow.cpp:893
+#: directorymergewindow.cpp:897
 #, fuzzy, kde-format
 #| msgid "Reading Folder A"
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "Kataloogi A lugemine"
 
-#: directorymergewindow.cpp:902
+#: directorymergewindow.cpp:906
 #, fuzzy, kde-format
 #| msgid "Reading Folder B"
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "Kataloogi B lugemine"
 
-#: directorymergewindow.cpp:912
+#: directorymergewindow.cpp:916
 #, fuzzy, kde-format
 #| msgid "Reading Folder C"
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "Kataloogi C lugemine"
 
-#: directorymergewindow.cpp:928
+#: directorymergewindow.cpp:932
 #, fuzzy, kde-format
 #| msgid "Some subfolders were not readable in"
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Mõned alamkataloogid ei olnud loetavad"
 
-#: directorymergewindow.cpp:933
+#: directorymergewindow.cpp:937
 #, fuzzy, kde-format
 #| msgid "Check the permissions of the subfolders."
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Kontrolli alamkataloogide õigusi."
 
-#: directorymergewindow.cpp:956
+#: directorymergewindow.cpp:960
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Valmis."
 
-#: directorymergewindow.cpp:971
+#: directorymergewindow.cpp:975
 #, kde-format
 msgid ""
 "Folder Comparison Status\n"
@@ -522,22 +522,22 @@ msgstr ""
 "Võrdsete failide arv: %2\n"
 "Erinevate failide arv: %3"
 
-#: directorymergewindow.cpp:978
+#: directorymergewindow.cpp:982
 #, kde-format
 msgid "Number of manual merges: %1"
 msgstr "Käsitsiühendamiste arv: %1"
 
-#: directorymergewindow.cpp:1246
+#: directorymergewindow.cpp:1250
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "See mõjutab kõiki ühendamisoperatsioone."
 
-#: directorymergewindow.cpp:1247
+#: directorymergewindow.cpp:1251
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "Kõigi ühendamisoperatsioonide muutmine"
 
-#: directorymergewindow.cpp:1324
+#: directorymergewindow.cpp:1328
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -546,49 +546,49 @@ msgstr ""
 "Töödeldakse %1 / %2\n"
 "%3"
 
-#: directorymergewindow.cpp:1370 directorymergewindow.cpp:1374
+#: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "Mõnda faili ei õnnestunud töödelda."
 
-#: directorymergewindow.cpp:1377
+#: directorymergewindow.cpp:1381
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "Loobumine liiga paljude tõrgete tõttu."
 
-#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
-#: directorymergewindow.cpp:1914
+#: directorymergewindow.cpp:1872 directorymergewindow.cpp:1897
+#: directorymergewindow.cpp:1922
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "See operatsioon ei ole praegu võimalik."
 
-#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
-#: directorymergewindow.cpp:1914 directorymergewindow.cpp:2195
+#: directorymergewindow.cpp:1872 directorymergewindow.cpp:1897
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:2203
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Operatsioon ei ole võimalik"
 
-#: directorymergewindow.cpp:1961
+#: directorymergewindow.cpp:1969
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "Kopeerimisel tekkis viga."
 
-#: directorymergewindow.cpp:1962 directorymergewindow.cpp:2400
+#: directorymergewindow.cpp:1970 directorymergewindow.cpp:2408
 #, kde-format
 msgid "Merge Error"
 msgstr "Ühendamise viga"
 
-#: directorymergewindow.cpp:2040
+#: directorymergewindow.cpp:2048
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "Tundmatu ühendamisoperatsioon. (Seda ei peaks kunagi ette tulema!)"
 
-#: directorymergewindow.cpp:2085
+#: directorymergewindow.cpp:2093
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "Tundmatu ühendamisoperatsioon."
 
-#: directorymergewindow.cpp:2098
+#: directorymergewindow.cpp:2106
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -610,28 +610,28 @@ msgstr ""
 "üldse midagi juhtub või et kõik õigesti juhtub! Tee kindlasti tähtsatest "
 "andmetest varukoopia!"
 
-#: directorymergewindow.cpp:2103
+#: directorymergewindow.cpp:2111
 #, fuzzy, kde-format
 #| msgid "Starting Merge"
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Ühendamise alustamine"
 
-#: directorymergewindow.cpp:2104
+#: directorymergewindow.cpp:2112
 #, fuzzy, kde-format
 #| msgid "Do It"
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Tee ära"
 
-#: directorymergewindow.cpp:2105
+#: directorymergewindow.cpp:2113
 #, fuzzy, kde-format
 #| msgid "Simulate It"
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Simuleeri"
 
-#: directorymergewindow.cpp:2131
+#: directorymergewindow.cpp:2139
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
@@ -640,7 +640,7 @@ msgstr ""
 "Esiletõstetud element on erinevates kataloogides erineva tüübiga. Otsusta, "
 "mida teha."
 
-#: directorymergewindow.cpp:2135
+#: directorymergewindow.cpp:2143
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
@@ -648,7 +648,7 @@ msgid ""
 msgstr ""
 "Failide muutmise aeg on sama, aga failid ise mitte. Otsusta, mida teha."
 
-#: directorymergewindow.cpp:2139
+#: directorymergewindow.cpp:2147
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
@@ -657,7 +657,7 @@ msgstr ""
 "Esiletõstetud elementi on muudetud ühes ja kustutatud teises kataloogis. "
 "Otsusta, mida teha."
 
-#: directorymergewindow.cpp:2195
+#: directorymergewindow.cpp:2203
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
@@ -665,7 +665,7 @@ msgid ""
 msgstr ""
 "See operatsioon ei ole praegu võimalik, sest käib kataloogide ühendamine."
 
-#: directorymergewindow.cpp:2252
+#: directorymergewindow.cpp:2260
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -675,38 +675,38 @@ msgstr ""
 "Viimasel sammul tekkis viga.\n"
 "Kas soovid jätkata elemendiga, mis vea põhjustas, või selle vahele jätta?"
 
-#: directorymergewindow.cpp:2254
+#: directorymergewindow.cpp:2262
 #, fuzzy, kde-format
 #| msgid "Continue merge after an error"
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Jätka ühendamist pärast viga"
 
-#: directorymergewindow.cpp:2255
+#: directorymergewindow.cpp:2263
 #, fuzzy, kde-format
 #| msgid "Continue With Last Item"
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Jätka viimase elemendiga"
 
-#: directorymergewindow.cpp:2256
+#: directorymergewindow.cpp:2264
 #, fuzzy, kde-format
 #| msgid "Skip Item"
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Jäta vahele"
 
-#: directorymergewindow.cpp:2350
+#: directorymergewindow.cpp:2358
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Ühendamisoperatsioon lõpetatud."
 
-#: directorymergewindow.cpp:2350 directorymergewindow.cpp:2353
+#: directorymergewindow.cpp:2358 directorymergewindow.cpp:2361
 #, kde-format
 msgid "Merge Complete"
 msgstr "Ühendamine lõpetatud"
 
-#: directorymergewindow.cpp:2363
+#: directorymergewindow.cpp:2371
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -714,246 +714,246 @@ msgstr ""
 "Ühendamise simulatsioon lõpetatud: märgi, kui oled pakutavate "
 "operatsioonidega nõus."
 
-#: directorymergewindow.cpp:2399
+#: directorymergewindow.cpp:2407
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "Tekkis viga. Lähema info saamiseks klõpsa 'OK'."
 
-#: directorymergewindow.cpp:2432
+#: directorymergewindow.cpp:2440
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "Viga %1 kustutamisel: varukoopia loomine nurjus."
 
-#: directorymergewindow.cpp:2439
+#: directorymergewindow.cpp:2447
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "kustuta kataloog rekursiivselt( %1 )"
 
-#: directorymergewindow.cpp:2441
+#: directorymergewindow.cpp:2449
 #, kde-format
 msgid "delete( %1 )"
 msgstr "kustuta( %1 )"
 
-#: directorymergewindow.cpp:2457
+#: directorymergewindow.cpp:2465
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr "Tõrge: kataloogi kustutamine nurjus juba kataloogi lugemise katsel."
 
-#: directorymergewindow.cpp:2473
+#: directorymergewindow.cpp:2481
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Viga: operatsioon rmdir( %1 ) nurjus."
 
-#: directorymergewindow.cpp:2483
+#: directorymergewindow.cpp:2491
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Viga: kustutamisoperatsioon nurjus."
 
-#: directorymergewindow.cpp:2510
+#: directorymergewindow.cpp:2518
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "käsitsi ühendamine( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2513
+#: directorymergewindow.cpp:2521
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr "     Märkus: pärast käsitsi ühendamist tuleks jätkata klahviga F7."
 
-#: directorymergewindow.cpp:2540
+#: directorymergewindow.cpp:2548
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Viga: kopeeri( %1 -> %2) nurjus, sest olemasoleva sihtkoha kustutamine "
 "nurjus."
 
-#: directorymergewindow.cpp:2549
+#: directorymergewindow.cpp:2557
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "kopeeri viit( %1 -> %2)"
 
-#: directorymergewindow.cpp:2558
+#: directorymergewindow.cpp:2566
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr "Viga: viida kopeerimine nurjus, sest kaugviidad ei ole veel toetatud."
 
-#: directorymergewindow.cpp:2568
+#: directorymergewindow.cpp:2576
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Viga: viida kopeerimine nurjus."
 
-#: directorymergewindow.cpp:2591
+#: directorymergewindow.cpp:2599
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "kopeeri( %1 -> %2)"
 
-#: directorymergewindow.cpp:2617
+#: directorymergewindow.cpp:2625
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Viga operatsioonil 'nimeta ümber( %1 -> %2)': olemasoleva sihtkoha "
 "kustutamine nurjus."
 
-#: directorymergewindow.cpp:2624
+#: directorymergewindow.cpp:2632
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "nimeta ümber( %1 -> %2)"
 
-#: directorymergewindow.cpp:2633
+#: directorymergewindow.cpp:2641
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Viga: ümbernimetamine nurjus."
 
-#: directorymergewindow.cpp:2651
+#: directorymergewindow.cpp:2659
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr "Viga kataloogi %1 loomisel: olemasoleva faili kustutamine nurjus."
 
-#: directorymergewindow.cpp:2668
+#: directorymergewindow.cpp:2676
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "loo kataloog( %1 )"
 
-#: directorymergewindow.cpp:2678
+#: directorymergewindow.cpp:2686
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Tõrge kataloogi loomisel."
 
-#: directorymergewindow.cpp:2714 directorymergewindow.cpp:2828
+#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2836
 #, kde-format
 msgid "Dest"
 msgstr "Sihtkoht"
 
-#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
+#: directorymergewindow.cpp:2730 directorymergewindow.cpp:2758
 #, fuzzy, kde-format
 #| msgid "Folder"
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Kataloog"
 
-#: directorymergewindow.cpp:2722
+#: directorymergewindow.cpp:2730
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt "Header label"
 msgid "Type"
 msgstr "Tüüp"
 
-#: directorymergewindow.cpp:2722
+#: directorymergewindow.cpp:2730
 #, fuzzy, kde-format
 #| msgid "Size"
 msgctxt "Header label"
 msgid "Size"
 msgstr "Suurus"
 
-#: directorymergewindow.cpp:2723
+#: directorymergewindow.cpp:2731
 #, fuzzy, kde-format
 #| msgid "Attr"
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Atribuut"
 
-#: directorymergewindow.cpp:2723
+#: directorymergewindow.cpp:2731
 #, fuzzy, kde-format
 #| msgid "Last Modification"
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Viimase muutmise aeg"
 
-#: directorymergewindow.cpp:2723
+#: directorymergewindow.cpp:2731
 #, fuzzy, kde-format
 #| msgid "Link-Destination"
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Viit-sihtkoht"
 
-#: directorymergewindow.cpp:2750
+#: directorymergewindow.cpp:2758
 #, fuzzy, kde-format
 #| msgid "File"
 msgctxt "Header label"
 msgid "File"
 msgstr "Fail"
 
-#: directorymergewindow.cpp:2750
+#: directorymergewindow.cpp:2758
 #, fuzzy, kde-format
 #| msgid "-Link"
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Viit: "
 
-#: directorymergewindow.cpp:2756
+#: directorymergewindow.cpp:2764
 #, fuzzy, kde-format
 #| msgid "not available"
 msgctxt "Header label"
 msgid "not available"
 msgstr "pole kättesaadav"
 
-#: directorymergewindow.cpp:2770
+#: directorymergewindow.cpp:2778
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (sihtkoht): "
 
-#: directorymergewindow.cpp:2774
+#: directorymergewindow.cpp:2782
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2774
+#: directorymergewindow.cpp:2782
 #, kde-format
 msgid "A (Base): "
 msgstr "A (baas): "
 
-#: directorymergewindow.cpp:2780
+#: directorymergewindow.cpp:2788
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (sihtkoht): "
 
-#: directorymergewindow.cpp:2784
+#: directorymergewindow.cpp:2792
 #, kde-format
 msgid "B:    "
 msgstr "B:    "
 
-#: directorymergewindow.cpp:2789
+#: directorymergewindow.cpp:2797
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (sihtkoht): "
 
-#: directorymergewindow.cpp:2793
+#: directorymergewindow.cpp:2801
 #, kde-format
 msgid "C:    "
 msgstr "C:    "
 
-#: directorymergewindow.cpp:2796
+#: directorymergewindow.cpp:2804
 #, kde-format
 msgid "Dest: "
 msgstr "Sihtkoht: "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2838
+#: directorymergewindow.cpp:2846
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Kataloogi ühendamisoleku salvestamine..."
 
-#: directorymergewindow.cpp:2945
+#: directorymergewindow.cpp:2953
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Alusta/jätka kataloogi ühendamist"
 
-#: directorymergewindow.cpp:2946
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Käivita operatsioon käesoleva elemendiga"
 
-#: directorymergewindow.cpp:2947
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Võrdle valitud faili"
 
-#: directorymergewindow.cpp:2948
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Merge Current File"
 msgstr "Ühenda praegune fail"
 
-#: directorymergewindow.cpp:2948
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid ""
 "Merge\n"
@@ -962,56 +962,56 @@ msgstr ""
 "Ühenda\n"
 "fail"
 
-#: directorymergewindow.cpp:2949
+#: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Ava kõik alamkataloogid"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2958
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Sule kõik alamkataloogid"
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2959
 #, kde-format
 msgid "Rescan"
 msgstr "Uuri uuesti läbi"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Vali A kõigile elementidele"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Vali B kõigile elementidele"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2964
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Vali C kõigile elementidele"
 
-#: directorymergewindow.cpp:2957
+#: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Automaatne valik kõigile elementidele"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Ei ühtki operatsiooni kõigile elementidele"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Näita identseid faile"
 
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid ""
 "Identical\n"
@@ -1020,17 +1020,17 @@ msgstr ""
 "Identsed\n"
 "failid"
 
-#: directorymergewindow.cpp:2964
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Show Different Files"
 msgstr "Näita erinevaid faile"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Näita ainult A faile"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid ""
 "Files\n"
@@ -1039,12 +1039,12 @@ msgstr ""
 "Ainult\n"
 "A failid"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:2974
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Näita ainult B faile"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:2974
 #, kde-format
 msgid ""
 "Files\n"
@@ -1053,12 +1053,12 @@ msgstr ""
 "Ainult\n"
 "B failid"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2975
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Näita ainult C faile"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2975
 #, kde-format
 msgid ""
 "Files\n"
@@ -1067,68 +1067,68 @@ msgstr ""
 "Ainult\n"
 "C failid"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2979
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Võrdle valitud faile"
 
-#: directorymergewindow.cpp:2972
+#: directorymergewindow.cpp:2980
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Ühenda valitud failid"
 
-#: directorymergewindow.cpp:2974 directorymergewindow.cpp:2981
+#: directorymergewindow.cpp:2982 directorymergewindow.cpp:2989
 #, kde-format
 msgid "Do Nothing"
 msgstr "Ära tee midagi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2978 opendialog.ui:68
+#: directorymergewindow.cpp:2986 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Ühenda"
 
-#: directorymergewindow.cpp:2979
+#: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Kustuta (kui on olemas)"
 
-#: directorymergewindow.cpp:2982
+#: directorymergewindow.cpp:2990
 #, kde-format
 msgid "Copy A to B"
 msgstr "Kopeeri A->B"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Copy B to A"
 msgstr "Kopeeri B->A"
 
-#: directorymergewindow.cpp:2984
+#: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Delete A"
 msgstr "Kustuta A"
 
-#: directorymergewindow.cpp:2985
+#: directorymergewindow.cpp:2993
 #, kde-format
 msgid "Delete B"
 msgstr "Kustuta B"
 
-#: directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Delete A && B"
 msgstr "Kustuta A ja B"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Merge to A"
 msgstr "Ühenda A-sse"
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Merge to B"
 msgstr "Ühenda B-sse"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Ühenda A-sse ja B-sse"
@@ -1887,90 +1887,90 @@ msgstr "Ake&n"
 msgid "Main Toolbar"
 msgstr "Peamine tööriistariba"
 
-#: main.cpp:68 main.cpp:72
+#: main.cpp:67 main.cpp:71
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignoreeritakse (kasutaja määratud)"
 
-#: main.cpp:93
+#: main.cpp:92
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:96
+#: main.cpp:95
 #, fuzzy, kde-format
 #| msgid " (64 bit)"
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64-bitine)"
 
-#: main.cpp:98
+#: main.cpp:97
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Failide ja kataloogide võrdlemise ning ühendamise vahend"
 
-#: main.cpp:99
+#: main.cpp:98
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014: Joachim Eibl, (c) 2017: Michael Reeves KF5/Qt5 port"
 
-#: main.cpp:119
+#: main.cpp:118
 #, kde-format
 msgid "Merge the input."
 msgstr "Liidab sisendi."
 
-#: main.cpp:120
+#: main.cpp:119
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Konkreetne põhifail (ühilduvuseks teatud tööriistadega)."
 
-#: main.cpp:121
+#: main.cpp:120
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Väljundfail. Eeldab -m. Nt. -o uusfail.txt"
 
-#: main.cpp:122
+#: main.cpp:121
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Taas väljundfail (ühilduvuseks teatud tööriistadega)"
 
-#: main.cpp:124
+#: main.cpp:123
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "GUI puudub, kui kõik konfliktid lahenevad ise (vajalik on -o fail)"
 
-#: main.cpp:125
+#: main.cpp:124
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "--auto eiramine ja alati graafilise kasutajaliidese näitamine."
 
-#: main.cpp:127 main.cpp:128
+#: main.cpp:126 main.cpp:127
 #, kde-format
 msgid "Ignored."
 msgstr "Eiratakse."
 
-#: main.cpp:130
+#: main.cpp:129
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Nähtava nime asendus sisendfailile 1 (baas)."
 
-#: main.cpp:131
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Nähtava nime asendus sisendfailile 2."
 
-#: main.cpp:132
+#: main.cpp:131
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Nähtava nime asendus sisendfailile 3."
 
-#: main.cpp:133
+#: main.cpp:132
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Nähtava nime alternatiivne asendus. See tuleb anda kord iga sisendi jaoks."
 
-#: main.cpp:134
+#: main.cpp:133
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1979,32 +1979,32 @@ msgstr ""
 "Seadistusvõtme tühistamine. Tuleb kasutada iga võtme jaoks eraldi, nt. --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:135
+#: main.cpp:134
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Seadistuste nimekirja ja võtmete kehtivate väärtuste näitamine."
 
-#: main.cpp:136
+#: main.cpp:135
 #, kde-format
 msgid "Use a different config file."
 msgstr "Muu seadistustefaili kasutamine."
 
-#: main.cpp:139
+#: main.cpp:138
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "avatav fail1 (põhifail, kui --base teisiti ei määra)"
 
-#: main.cpp:140
+#: main.cpp:139
 #, kde-format
 msgid "file2 to open"
 msgstr "avatav fail2"
 
-#: main.cpp:141
+#: main.cpp:140
 #, kde-format
 msgid "file3 to open"
 msgstr "avatav fail3"
 
-#: main.cpp:165
+#: main.cpp:164
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Toetatud valikuid näitab kdiff3 --help."
@@ -3855,34 +3855,34 @@ msgstr "Sobivust ei leitud."
 msgid "Opening and closing parentheses do not match in regular expression."
 msgstr "Regulaaravaldises ei sobi alustavad ja lõpetavad sulud."
 
-#: SourceData.cpp:152
+#: SourceData.cpp:151
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Lõikepuhvri andmete kirjutamine ajutisse faili nurjus."
 
-#: SourceData.cpp:157
+#: SourceData.cpp:156
 #, kde-format
 msgid "From Clipboard"
 msgstr "Lõikepuhvrist"
 
-#: SourceData.cpp:345
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 ei ole tavaline fail."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:379
 #, fuzzy, kde-format
 #| msgid "File %1 too large to process. Skipping."
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Fail %1 on töötlemiseks liiga suur. Jäetakse vahele."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:408
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Ajutine fail on: %1"
 
-#: SourceData.cpp:447
+#: SourceData.cpp:446
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3897,7 +3897,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:509
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3912,7 +3912,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse reasobivuse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:515
 #, fuzzy, kde-format
 #| msgid "Failed to read file: %1"
 msgctxt "Read error message. %1 = filepath"

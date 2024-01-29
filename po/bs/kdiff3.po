@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-13 00:40+0000\n"
+"POT-Creation-Date: 2024-01-29 00:39+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -386,7 +386,7 @@ msgctxt "Column title"
 msgid "White"
 msgstr "Bijelo"
 
-#: directorymergewindow.cpp:687
+#: directorymergewindow.cpp:691
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -398,7 +398,7 @@ msgstr ""
 "Trenutno stapate direktorije. Da li ste sigurni da želite prekinuti stapanje "
 "i ponovo skenirati direktorij?"
 
-#: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
+#: directorymergewindow.cpp:692 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
 #: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -406,52 +406,52 @@ msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Upozorenje"
 
-#: directorymergewindow.cpp:689
+#: directorymergewindow.cpp:693
 #, fuzzy, kde-format
 #| msgid "Rescan"
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Ponovo skeniraj"
 
-#: directorymergewindow.cpp:690
+#: directorymergewindow.cpp:694
 #, fuzzy, kde-format
 #| msgid "Continue Merging"
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "Nastavi stapanje"
 
-#: directorymergewindow.cpp:839
+#: directorymergewindow.cpp:843
 #, fuzzy, kde-format
 #| msgid "Opening of directories failed:"
 msgid "Opening of folders failed:"
 msgstr "Otvaranje direktorija nije uspjelo:"
 
-#: directorymergewindow.cpp:843
+#: directorymergewindow.cpp:847
 #, fuzzy, kde-format
 #| msgid "Dir A \"%1\" does not exist or is not a directory.\n"
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
 msgstr "Direktorij A \"%1\" ne postoji ili nije direktorij.\n"
 
-#: directorymergewindow.cpp:848
+#: directorymergewindow.cpp:852
 #, fuzzy, kde-format
 #| msgid "Dir B \"%1\" does not exist or is not a directory.\n"
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
 msgstr "Direktorij B \"%1\" ne postoji ili nije direktorij.\n"
 
-#: directorymergewindow.cpp:853
+#: directorymergewindow.cpp:857
 #, fuzzy, kde-format
 #| msgid "Dir C \"%1\" does not exist or is not a directory.\n"
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "Direktorij C \"%1\" ne postoji ili nije direktorij.\n"
 
-#: directorymergewindow.cpp:856
+#: directorymergewindow.cpp:860
 #, fuzzy, kde-format
 #| msgid "File Open Error"
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Greška pri otvaranju datoteke"
 
-#: directorymergewindow.cpp:864
+#: directorymergewindow.cpp:868
 #, fuzzy, kde-format
 #| msgid ""
 #| "The destination directory must not be the same as A or B when three "
@@ -466,62 +466,62 @@ msgstr ""
 "direktorija.\n"
 "Provjerite ponovo prije nego nastavite."
 
-#: directorymergewindow.cpp:866
+#: directorymergewindow.cpp:870
 #, fuzzy, kde-format
 #| msgid "Parameter Warning"
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Upozorenje o parametrima"
 
-#: directorymergewindow.cpp:871
+#: directorymergewindow.cpp:875
 #, fuzzy, kde-format
 #| msgid "Scanning directories..."
 msgid "Scanning folders..."
 msgstr "Skeniram direktorije..."
 
-#: directorymergewindow.cpp:893
+#: directorymergewindow.cpp:897
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "Čitam datoteku: %1"
 
-#: directorymergewindow.cpp:902
+#: directorymergewindow.cpp:906
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "Čitam datoteku: %1"
 
-#: directorymergewindow.cpp:912
+#: directorymergewindow.cpp:916
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "Čitam datoteku: %1"
 
-#: directorymergewindow.cpp:928
+#: directorymergewindow.cpp:932
 #, fuzzy, kde-format
 #| msgid "Some subdirectories were not readable in"
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Neki poddirektoriji nisu bili čitljivi u"
 
-#: directorymergewindow.cpp:933
+#: directorymergewindow.cpp:937
 #, fuzzy, kde-format
 #| msgid "Check the permissions of the subdirectories."
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Provjerite dozvole poddirektorija."
 
-#: directorymergewindow.cpp:956
+#: directorymergewindow.cpp:960
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Spreman."
 
-#: directorymergewindow.cpp:971
+#: directorymergewindow.cpp:975
 #, kde-format
 msgid ""
 "Folder Comparison Status\n"
@@ -531,23 +531,23 @@ msgid ""
 "Number of different files: %3"
 msgstr ""
 
-#: directorymergewindow.cpp:978
+#: directorymergewindow.cpp:982
 #, fuzzy, kde-format
 #| msgid "Number of manual merges:"
 msgid "Number of manual merges: %1"
 msgstr "Broj ručnih stapanja:"
 
-#: directorymergewindow.cpp:1246
+#: directorymergewindow.cpp:1250
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "Ovo utiče na sve operacije stapanja."
 
-#: directorymergewindow.cpp:1247
+#: directorymergewindow.cpp:1251
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "Mijenjam sve operacije stapanja"
 
-#: directorymergewindow.cpp:1324
+#: directorymergewindow.cpp:1328
 #, fuzzy, kde-format
 #| msgid "Processing "
 msgid ""
@@ -555,50 +555,50 @@ msgid ""
 "%3"
 msgstr "Obrađujem "
 
-#: directorymergewindow.cpp:1370 directorymergewindow.cpp:1374
+#: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
 #, kde-format
 msgid "Some files could not be processed."
 msgstr ""
 
-#: directorymergewindow.cpp:1377
+#: directorymergewindow.cpp:1381
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr ""
 
-#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
-#: directorymergewindow.cpp:1914
+#: directorymergewindow.cpp:1872 directorymergewindow.cpp:1897
+#: directorymergewindow.cpp:1922
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "Ova operacija trenutno nije moguća."
 
-#: directorymergewindow.cpp:1864 directorymergewindow.cpp:1889
-#: directorymergewindow.cpp:1914 directorymergewindow.cpp:2195
+#: directorymergewindow.cpp:1872 directorymergewindow.cpp:1897
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:2203
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Operacija nije moguća"
 
-#: directorymergewindow.cpp:1961
+#: directorymergewindow.cpp:1969
 #, fuzzy, kde-format
 #| msgid "An error occurred while copying.\n"
 msgid "An error occurred while copying."
 msgstr "Došlo je do greške u toku kopiranja.\n"
 
-#: directorymergewindow.cpp:1962 directorymergewindow.cpp:2400
+#: directorymergewindow.cpp:1970 directorymergewindow.cpp:2408
 #, kde-format
 msgid "Merge Error"
 msgstr "Greška stapanja"
 
-#: directorymergewindow.cpp:2040
+#: directorymergewindow.cpp:2048
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "Nepoznata operacija stapanja. (Ovo nikad ne smije da se desi!)"
 
-#: directorymergewindow.cpp:2085
+#: directorymergewindow.cpp:2093
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "Nepoznata operacija stapanja."
 
-#: directorymergewindow.cpp:2098
+#: directorymergewindow.cpp:2106
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -618,28 +618,28 @@ msgstr ""
 "Znajte da ovaj program još uvijek ima beta status i nema NIKAKVIH GARANCIJA "
 "uopšte! Napravite rezervu svojih najvažnijih podataka!"
 
-#: directorymergewindow.cpp:2103
+#: directorymergewindow.cpp:2111
 #, fuzzy, kde-format
 #| msgid "Starting Merge"
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Počinjem stapanje"
 
-#: directorymergewindow.cpp:2104
+#: directorymergewindow.cpp:2112
 #, fuzzy, kde-format
 #| msgid "Do It"
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Uradi"
 
-#: directorymergewindow.cpp:2105
+#: directorymergewindow.cpp:2113
 #, fuzzy, kde-format
 #| msgid "Simulate It"
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Simuliraj"
 
-#: directorymergewindow.cpp:2131
+#: directorymergewindow.cpp:2139
 #, fuzzy, kde-format
 #| msgid ""
 #| "The highlighted item has a different type in the different directories. "
@@ -651,7 +651,7 @@ msgstr ""
 "Istaknuta stavka različitog je tipa u različitim direktorijima. Odaberite "
 "šta činiti."
 
-#: directorymergewindow.cpp:2135
+#: directorymergewindow.cpp:2143
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
@@ -659,7 +659,7 @@ msgid ""
 msgstr ""
 "Datumi izmjene datoteke su jednaki ali datoteke nisu. Odaberite šta činiti."
 
-#: directorymergewindow.cpp:2139
+#: directorymergewindow.cpp:2147
 #, fuzzy, kde-format
 #| msgid ""
 #| "The highlighted item was changed in one directory and deleted in the "
@@ -671,7 +671,7 @@ msgstr ""
 "Označena stavka je promijenjena u jednom folderu i obrisana u drugom. "
 "Odaberite šta učiniti."
 
-#: directorymergewindow.cpp:2195
+#: directorymergewindow.cpp:2203
 #, fuzzy, kde-format
 #| msgid ""
 #| "This operation is currently not possible because directory merge is "
@@ -682,7 +682,7 @@ msgid ""
 msgstr ""
 "Ova operacija trenutno nije moguća zato što je stapanje direktorija u toku."
 
-#: directorymergewindow.cpp:2252
+#: directorymergewindow.cpp:2260
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -693,38 +693,38 @@ msgstr ""
 "Želite li da nastavite sa stavkom koja je izazvala grešku ili želite da je "
 "preskočite?"
 
-#: directorymergewindow.cpp:2254
+#: directorymergewindow.cpp:2262
 #, fuzzy, kde-format
 #| msgid "Continue merge after an error"
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Nastavi stapanje poslije greške"
 
-#: directorymergewindow.cpp:2255
+#: directorymergewindow.cpp:2263
 #, fuzzy, kde-format
 #| msgid "Continue With Last Item"
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Nastavi sa posljednjom stavkom"
 
-#: directorymergewindow.cpp:2256
+#: directorymergewindow.cpp:2264
 #, fuzzy, kde-format
 #| msgid "Skip Item"
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Preskoči stavku"
 
-#: directorymergewindow.cpp:2350
+#: directorymergewindow.cpp:2358
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Operacija stapanja je završena."
 
-#: directorymergewindow.cpp:2350 directorymergewindow.cpp:2353
+#: directorymergewindow.cpp:2358 directorymergewindow.cpp:2361
 #, kde-format
 msgid "Merge Complete"
 msgstr "Stapanje je završeno"
 
-#: directorymergewindow.cpp:2363
+#: directorymergewindow.cpp:2371
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -732,7 +732,7 @@ msgstr ""
 "Simulirano stapanje je završeno: Provjerite da li se slažete sa predloženim "
 "operacijama."
 
-#: directorymergewindow.cpp:2399
+#: directorymergewindow.cpp:2407
 #, fuzzy, kde-format
 #| msgid "An error occurred. Press OK to see detailed information.\n"
 msgid "An error occurred. Press OK to see detailed information."
@@ -740,23 +740,23 @@ msgstr ""
 "Došlo je do greške. Pritisnite \"U redu\" da biste vidjeli detaljne "
 "informacije.\n"
 
-#: directorymergewindow.cpp:2432
+#: directorymergewindow.cpp:2440
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "Greška: U toku brisanja %1: Stvaranje rezerve nije uspjelo."
 
-#: directorymergewindow.cpp:2439
+#: directorymergewindow.cpp:2447
 #, fuzzy, kde-format
 #| msgid "delete directory recursively( %1 )"
 msgid "delete folder recursively( %1 )"
 msgstr "obriši direktorij rekurzivno( %1 )"
 
-#: directorymergewindow.cpp:2441
+#: directorymergewindow.cpp:2449
 #, kde-format
 msgid "delete( %1 )"
 msgstr "obriši( %1 )"
 
-#: directorymergewindow.cpp:2457
+#: directorymergewindow.cpp:2465
 #, fuzzy, kde-format
 #| msgid ""
 #| "Error: delete dir operation failed while trying to read the directory."
@@ -765,22 +765,22 @@ msgstr ""
 "Greška: Operacija brisanja direktorija nije uspjela u toku pokušaja da se "
 "direktorij pročita."
 
-#: directorymergewindow.cpp:2473
+#: directorymergewindow.cpp:2481
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Greška: Operacija rmdir( %1 ) nije uspjela."
 
-#: directorymergewindow.cpp:2483
+#: directorymergewindow.cpp:2491
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Greška: Operacija brisanja nije uspjela."
 
-#: directorymergewindow.cpp:2510
+#: directorymergewindow.cpp:2518
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "ručno stapanje( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2513
+#: directorymergewindow.cpp:2521
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
@@ -788,206 +788,206 @@ msgstr ""
 "     Napomena: Poslije ručnog stapanja korisnik bi trebalo da nastavi pomoću "
 "F7."
 
-#: directorymergewindow.cpp:2540
+#: directorymergewindow.cpp:2548
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Greška: Kopiranje( %1 -> %2 ) nije uspjelo. Brisanje postojećeg odredišta "
 "nije uspjelo."
 
-#: directorymergewindow.cpp:2549
+#: directorymergewindow.cpp:2557
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "kopiranje veze( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2558
+#: directorymergewindow.cpp:2566
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Greška: Kopiranje veze nije uspjelo: Udaljene veze još uvijek nisu podržane."
 
-#: directorymergewindow.cpp:2568
+#: directorymergewindow.cpp:2576
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Greška: Kopiranje veze nije uspjelo."
 
-#: directorymergewindow.cpp:2591
+#: directorymergewindow.cpp:2599
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "kopiraj( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2617
+#: directorymergewindow.cpp:2625
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Greška u toku preimenovanja( %1 -> %2 ): Ne mogu da obrišem postojeće "
 "odredište."
 
-#: directorymergewindow.cpp:2624
+#: directorymergewindow.cpp:2632
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "preimenuj( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2633
+#: directorymergewindow.cpp:2641
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Greška: Preimenovanje nije uspjelo."
 
-#: directorymergewindow.cpp:2651
+#: directorymergewindow.cpp:2659
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "Greška u toku pravljenja direktorija %1. Ne mogu da obrišem postojeću "
 "datoteku."
 
-#: directorymergewindow.cpp:2668
+#: directorymergewindow.cpp:2676
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "napravi direktorij( %1 )"
 
-#: directorymergewindow.cpp:2678
+#: directorymergewindow.cpp:2686
 #, fuzzy, kde-format
 #| msgid "Error while creating directory."
 msgid "Error while creating folder."
 msgstr "Greška u toku stvaranja direktorija."
 
-#: directorymergewindow.cpp:2714 directorymergewindow.cpp:2828
+#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2836
 #, kde-format
 msgid "Dest"
 msgstr "Odr."
 
-#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2750
+#: directorymergewindow.cpp:2730 directorymergewindow.cpp:2758
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Otvaram datoteke..."
 
-#: directorymergewindow.cpp:2722
+#: directorymergewindow.cpp:2730
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt "Header label"
 msgid "Type"
 msgstr "Tip"
 
-#: directorymergewindow.cpp:2722
+#: directorymergewindow.cpp:2730
 #, fuzzy, kde-format
 #| msgid "Size"
 msgctxt "Header label"
 msgid "Size"
 msgstr "Veličina"
 
-#: directorymergewindow.cpp:2723
+#: directorymergewindow.cpp:2731
 #, fuzzy, kde-format
 #| msgid "Attr"
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Atr."
 
-#: directorymergewindow.cpp:2723
+#: directorymergewindow.cpp:2731
 #, fuzzy, kde-format
 #| msgid "Last Modification"
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Posljednja izmjena"
 
-#: directorymergewindow.cpp:2723
+#: directorymergewindow.cpp:2731
 #, fuzzy, kde-format
 #| msgid "Link-Destination"
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Veza-odredište"
 
-#: directorymergewindow.cpp:2750
+#: directorymergewindow.cpp:2758
 #, fuzzy, kde-format
 #| msgid "File"
 msgctxt "Header label"
 msgid "File"
 msgstr "Datoteka"
 
-#: directorymergewindow.cpp:2750
+#: directorymergewindow.cpp:2758
 #, fuzzy, kde-format
 #| msgid "Link: "
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "Veza: "
 
-#: directorymergewindow.cpp:2756
+#: directorymergewindow.cpp:2764
 #, fuzzy, kde-format
 #| msgid "not available"
 msgctxt "Header label"
 msgid "not available"
 msgstr "nije dostupno"
 
-#: directorymergewindow.cpp:2770
+#: directorymergewindow.cpp:2778
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (odr.): "
 
-#: directorymergewindow.cpp:2774
+#: directorymergewindow.cpp:2782
 #, kde-format
 msgid "A:    "
 msgstr ""
 
-#: directorymergewindow.cpp:2774
+#: directorymergewindow.cpp:2782
 #, kde-format
 msgid "A (Base): "
 msgstr "A (baza): "
 
-#: directorymergewindow.cpp:2780
+#: directorymergewindow.cpp:2788
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (odr.): "
 
-#: directorymergewindow.cpp:2784
+#: directorymergewindow.cpp:2792
 #, kde-format
 msgid "B:    "
 msgstr ""
 
-#: directorymergewindow.cpp:2789
+#: directorymergewindow.cpp:2797
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (odr.): "
 
-#: directorymergewindow.cpp:2793
+#: directorymergewindow.cpp:2801
 #, kde-format
 msgid "C:    "
 msgstr ""
 
-#: directorymergewindow.cpp:2796
+#: directorymergewindow.cpp:2804
 #, kde-format
 msgid "Dest: "
 msgstr "Odr.: "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2838
+#: directorymergewindow.cpp:2846
 #, fuzzy, kde-format
 #| msgid "Save Directory Merge State As..."
 msgid "Save Folder Merge State As..."
 msgstr "Snimi stanje stapanja direktorija kao..."
 
-#: directorymergewindow.cpp:2945
+#: directorymergewindow.cpp:2953
 #, fuzzy, kde-format
 #| msgid "Start/Continue Directory Merge"
 msgid "Start/Continue Folder Merge"
 msgstr "Pokreni/nastavi stapanje direktorija"
 
-#: directorymergewindow.cpp:2946
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Pokreni operaciju za trenutnu stavku"
 
-#: directorymergewindow.cpp:2947
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Uporedi odabranu datoteku"
 
-#: directorymergewindow.cpp:2948
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Merge Current File"
 msgstr "Stopi trenutnu datoteku"
 
-#: directorymergewindow.cpp:2948
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid ""
 "Merge\n"
@@ -996,58 +996,58 @@ msgstr ""
 "Spoji\n"
 "Datoteku"
 
-#: directorymergewindow.cpp:2949
+#: directorymergewindow.cpp:2957
 #, fuzzy, kde-format
 #| msgid "Fold All Subdirs"
 msgid "Fold All Subfolders"
 msgstr "Sažmi sve poddirektorije"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2958
 #, fuzzy, kde-format
 #| msgid "Unfold All Subdirs"
 msgid "Unfold All Subfolders"
 msgstr "Raširi sve poddirektorije"
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2959
 #, kde-format
 msgid "Rescan"
 msgstr "Ponovo skeniraj"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Izaberi A za sve stavke"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Izaberi B za sve stavke"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2964
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Izaberi C za sve stavke"
 
-#: directorymergewindow.cpp:2957
+#: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Automatski izaberi operaciju za sve stavke"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Nema operacije za sve stavke"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Prikaži identične datoteke"
 
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid ""
 "Identical\n"
@@ -1056,17 +1056,17 @@ msgstr ""
 "Iste\n"
 "Datoteke"
 
-#: directorymergewindow.cpp:2964
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Show Different Files"
 msgstr "Prikaži različite datoteke"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Prikaži datoteke samo u A"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid ""
 "Files\n"
@@ -1075,12 +1075,12 @@ msgstr ""
 "Datoteke\n"
 "samo u A"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:2974
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Prikaži datoteke samo u B"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:2974
 #, kde-format
 msgid ""
 "Files\n"
@@ -1089,12 +1089,12 @@ msgstr ""
 "Datoteke\n"
 "samo u B"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2975
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Prikaži datoteke samo u C"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2975
 #, kde-format
 msgid ""
 "Files\n"
@@ -1103,68 +1103,68 @@ msgstr ""
 "Datoteke\n"
 "samo u C"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2979
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Uporedi eksplicitno odabrane datoteke"
 
-#: directorymergewindow.cpp:2972
+#: directorymergewindow.cpp:2980
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Stopi eksplicitno odabrane datoteke"
 
-#: directorymergewindow.cpp:2974 directorymergewindow.cpp:2981
+#: directorymergewindow.cpp:2982 directorymergewindow.cpp:2989
 #, kde-format
 msgid "Do Nothing"
 msgstr "Ne čini ništa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2978 opendialog.ui:68
+#: directorymergewindow.cpp:2986 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Stopi"
 
-#: directorymergewindow.cpp:2979
+#: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Obriši (ako postoji)"
 
-#: directorymergewindow.cpp:2982
+#: directorymergewindow.cpp:2990
 #, kde-format
 msgid "Copy A to B"
 msgstr "Kopiraj A u B"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Copy B to A"
 msgstr "Kopiraj B u A"
 
-#: directorymergewindow.cpp:2984
+#: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Delete A"
 msgstr "Obriši A"
 
-#: directorymergewindow.cpp:2985
+#: directorymergewindow.cpp:2993
 #, kde-format
 msgid "Delete B"
 msgstr "Obriši B"
 
-#: directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Delete A && B"
 msgstr "Obriši A i B"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Merge to A"
 msgstr "Stopi u A"
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Merge to B"
 msgstr "Stopi u B"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Stopi u A i B"
@@ -1943,91 +1943,91 @@ msgstr "P&rozor"
 msgid "Main Toolbar"
 msgstr "Glavna alatna traka"
 
-#: main.cpp:68 main.cpp:72
+#: main.cpp:67 main.cpp:71
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "Ignorisano. (Korisnički definisano)."
 
-#: main.cpp:93
+#: main.cpp:92
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:96
+#: main.cpp:95
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr ""
 
-#: main.cpp:98
+#: main.cpp:97
 #, fuzzy, kde-format
 #| msgid "Tool for Comparison and Merge of Files and Directories"
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Alat za upoređivanje i stapanje datoteka i direktorija"
 
-#: main.cpp:99
+#: main.cpp:98
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 
-#: main.cpp:119
+#: main.cpp:118
 #, kde-format
 msgid "Merge the input."
 msgstr "Stopi ulaz."
 
-#: main.cpp:120
+#: main.cpp:119
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Eksplicitna bazna datoteka. Za kompatibilnost sa određenim alatima."
 
-#: main.cpp:121
+#: main.cpp:120
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Izlazna datoteka. Implicira -m. Npr.: -o newfile.txt"
 
-#: main.cpp:122
+#: main.cpp:121
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Izlazna datoteka, ponovo. (Za kompatibilnost sa određenim alatima.)"
 
-#: main.cpp:124
+#: main.cpp:123
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "Bez GUI-ja ako su svi sukobi automatski rješivi. (Zahtjeva -o file)"
 
-#: main.cpp:125
+#: main.cpp:124
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr ""
 
-#: main.cpp:127 main.cpp:128
+#: main.cpp:126 main.cpp:127
 #, fuzzy, kde-format
 #| msgid "Ignore"
 msgid "Ignored."
 msgstr "Ignoriši"
 
-#: main.cpp:130
+#: main.cpp:129
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Vidljiva zamjena naziva za ulaznu datoteku 1 (bazna)."
 
-#: main.cpp:131
+#: main.cpp:130
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Vidljiva zamjena naziva za ulaznu datoteku 2."
 
-#: main.cpp:132
+#: main.cpp:131
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Vidljiva zamjena naziva za ulaznu datoteku 3."
 
-#: main.cpp:133
+#: main.cpp:132
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternativa vidljivoj zamijeni naziva. Dobavite ovo jednom za svaki ulaz."
 
-#: main.cpp:134
+#: main.cpp:133
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -2036,32 +2036,32 @@ msgstr ""
 "Prespoji postavku konfiguracije. Koristi jednom za svaku postavku. Npr.: --"
 "cs \"AutoAdvance=1\""
 
-#: main.cpp:135
+#: main.cpp:134
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Prikaži listu postavki konfiguracije i trenutnih vrijednosti."
 
-#: main.cpp:136
+#: main.cpp:135
 #, kde-format
 msgid "Use a different config file."
 msgstr "Koristi drugačiju konfiguracionu datoteku."
 
-#: main.cpp:139
+#: main.cpp:138
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "datoteka 1 za otvaranje (bazna, ako nije naveden preko --base)"
 
-#: main.cpp:140
+#: main.cpp:139
 #, kde-format
 msgid "file2 to open"
 msgstr "datoteka 2 za otvaranje"
 
-#: main.cpp:141
+#: main.cpp:140
 #, kde-format
 msgid "file3 to open"
 msgstr "datoteka 3 za otvaranje"
 
-#: main.cpp:165
+#: main.cpp:164
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr ""
@@ -3935,34 +3935,34 @@ msgstr "Usklađivanje nije uspjelo."
 msgid "Opening and closing parentheses do not match in regular expression."
 msgstr "Otvarajuća i zatvarajuća zagrada se ne podudaraju u regularnom izrazu."
 
-#: SourceData.cpp:152
+#: SourceData.cpp:151
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Upisivanje podataka iz clipboarda u privremenu datoteku nije uspjelo."
 
-#: SourceData.cpp:157
+#: SourceData.cpp:156
 #, kde-format
 msgid "From Clipboard"
 msgstr "Iz clipboarda"
 
-#: SourceData.cpp:345
+#: SourceData.cpp:344
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "Mješavina veza i normalnih datoteka."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:379
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:409
+#: SourceData.cpp:408
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:447
+#: SourceData.cpp:446
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3977,7 +3977,7 @@ msgstr ""
 "\n"
 "Naredba predobrade će sada biti isključena."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:509
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3993,7 +3993,7 @@ msgstr ""
 "\n"
 "Predobrada usklađivanja linija će sada biti isključena."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:515
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"
