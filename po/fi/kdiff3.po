@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-29 00:39+0000\n"
-"PO-Revision-Date: 2023-09-26 10:47+0300\n"
+"PO-Revision-Date: 2023-11-19 19:19+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -36,17 +36,13 @@ msgid "Getting file status: %1"
 msgstr "Noudetaan tiedoston tilaa: %1"
 
 #: DefaultFileAccessJobHandler.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Luetaan tiedostoa: %1"
 
 #: DefaultFileAccessJobHandler.cpp:162
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Kirjoitetaan tiedostoa: %1"
@@ -57,25 +53,19 @@ msgid "Out of memory"
 msgstr "Muisti lopussa"
 
 #: DefaultFileAccessJobHandler.cpp:237
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Tehdään kansio: %1"
 
 #: DefaultFileAccessJobHandler.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Poistetaan kansio: %1"
 
 #: DefaultFileAccessJobHandler.cpp:279
-#, fuzzy, kde-format
-#| msgctxt "Mesage for progress dialog %1 = path to file"
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Poistetaan tiedosto: %1"
@@ -191,10 +181,9 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8-bittinen"
 
 #: difftextwindow.cpp:2137
-#, fuzzy, kde-format
-#| msgid "Unicode, 8 bit"
+#, kde-format
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8-bittinen"
+msgstr "Unicode, 8-bittinen (BOM)"
 
 #: difftextwindow.cpp:2153
 #, kde-format
@@ -3115,26 +3104,20 @@ msgid "File Encoding for A:"
 msgstr "A-tiedoston koodaus:"
 
 #: optiondialog.cpp:1333
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
 "If the file's encoding can not be found automaticly then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Jos asetettu, Unicode-koodaukset (UTF-16 ja UTF-8) tunnistetaan.\n"
-"Ellei tiedosto ole Unicodea, käytetään varalla valittua merkkikoodausta.\n"
-"(Unicode-tunnistus tapahtuu tiedoston ensitavusta.)"
+"Jos asetettu, merkistö tunnistetaan automaattisesti.\n"
+"Ellei merkistö löydy automaattissti, tässä tehtyä valintaa käytetään "
+"varalla.\n"
+"(Unicode-tunnistus tapahtuu tiedoston ensitavuista.)"
 
 #: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgid "Auto Detect"
 msgstr "Tunnista automaattisesti"
 
