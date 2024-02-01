@@ -165,6 +165,7 @@ if(ENABLE_AUTO)
 endif()
 
 add_definitions(
+    -DBOOST_NO_CXX98_FUNCTION_BASE #Work around for Boost config bug fixed in 1.84
     -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
