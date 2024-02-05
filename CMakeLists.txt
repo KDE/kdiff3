@@ -74,6 +74,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
+# Change this to 1.84 when its more widely available
 find_package(Boost 1.80 REQUIRED)
 #add_definitions()
 #needed on craft and possiablely other custom setups.
@@ -165,7 +166,7 @@ if(ENABLE_AUTO)
 endif()
 
 add_definitions(
-    -DBOOST_NO_CXX98_FUNCTION_BASE #since we use the header only portion of boost we can hard code this until the upstream fix gets
+    -DBOOST_NO_CXX98_FUNCTION_BASE #since we use the header only portion of boost we can hard code this until the upstream fix gets more widely distributed
     -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
