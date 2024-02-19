@@ -1,21 +1,13 @@
 # SPDX-FileCopyrightText: 2018-2021 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-if(NOT BUILD_WITH_QT6)
-    find_package(
-        Qt5 ${QT_MIN_VERSION}
-        REQUIRED
-        COMPONENTS
-        Test
-    )
-else()
-    find_package(
-        Qt6 ${QT_MIN_VERSION}
-        REQUIRED
-        COMPONENTS
-        Test
-    )
-
+find_package(
+    Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION}
+    REQUIRED
+    COMPONENTS
+    Test
+)
+if(BUILD_WITH_QT6)
     set(COMPATLIB Qt6::Core5Compat)
 endif()
 add_definitions(-DAUTOTEST)

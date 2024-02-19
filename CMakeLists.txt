@@ -12,22 +12,12 @@ if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
     message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
 endif()
 
-#Avaliable as QtVersionOption starting in ECM 5.82.
-option(BUILD_WITH_QT6 "Build against Qt 6" ON)
-
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
 set(KF_MIN_VERSION "5.110.0")
-if (BUILD_WITH_QT6)
-    set(QT_MAJOR_VERSION "6")
-    set(QT_MIN_VERSION "6.6.0")
-else()
-    set(QT_MAJOR_VERSION "5")
-    set(QT_MIN_VERSION "5.15.8")
-endif()
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -36,8 +26,18 @@ set(
     ${ECM_MODULE_PATH}
 )
 
+# QtVersionOption adds BUILD_WITH_QT6 with an auto configured default.
+include(QtVersionOption)
+
+if (BUILD_WITH_QT6)
+    set(QT_MAJOR_VERSION "6")
+    set(QT_MIN_VERSION "6.6.0")
+else()
+    set(QT_MAJOR_VERSION "5")
+    set(QT_MIN_VERSION "5.15.8")
+endif()
+
 if(BUILD_WITH_QT6)
-    include(QtVersionOption)
     set(KF_MAJOR_VERSION "6")
 else()
     set(KF_MAJOR_VERSION "5")
