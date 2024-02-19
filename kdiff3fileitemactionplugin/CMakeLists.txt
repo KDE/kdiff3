@@ -15,5 +15,5 @@ ecm_setup_qtplugin_macro_names(
         "K_PLUGIN_CLASS_WITH_JSON"
 )
 
-kcoreaddons_add_plugin(kdiff3fileitemaction SOURCES ${kdiff3_fileitemaction_src} INSTALL_NAMESPACE "kf5/kfileitemaction")
+kcoreaddons_add_plugin(kdiff3fileitemaction SOURCES ${kdiff3_fileitemaction_src} INSTALL_NAMESPACE "kf${KF_MAJOR_VERSION}/kfileitemaction")
 target_link_libraries(kdiff3fileitemaction KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::KIOWidgets)
