@@ -8,6 +8,10 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 project(kdiff3 VERSION 1.11.70)
 
+if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
+    message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
+endif()
+
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" ON)
 
@@ -23,10 +27,6 @@ if (BUILD_WITH_QT6)
 else()
     set(QT_MAJOR_VERSION "5")
     set(QT_MIN_VERSION "5.15.8")
-endif()
-
-if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
-    message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
 endif()
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
