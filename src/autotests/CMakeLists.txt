@@ -7,9 +7,11 @@ find_package(
     COMPONENTS
     Test
 )
+
 if(BUILD_WITH_QT6)
     set(COMPATLIB Qt6::Core5Compat)
 endif()
+
 add_definitions(-DAUTOTEST)
 
 ecm_add_test(connectiontest.cpp
