@@ -30,6 +30,8 @@ set(
 include(QtVersionOption)
 
 if (BUILD_WITH_QT6)
+    set(KF_MIN_VERSION "5.240.0")
+
     set(QT_MAJOR_VERSION "6")
     set(QT_MIN_VERSION "6.6.0")
 else()
