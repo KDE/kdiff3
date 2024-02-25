@@ -1,5 +1,18 @@
-Version 1.10 - 2023
+Version 1.10.x - 2023
 ===========================
+
+*improved handling of oversized files
+*follows links to links to a maximum depth of 15.
+*8c14db62775d6233 Fix attempts to set out of range value for LineRef
+ Follow symlinks recursively
+a038a3da250ee9683075a6742f33ac1312229e83 Make invalid calls to MergeBlock::split crash in debug mode
+Fix crash on exit.
+*Resolve thread safety issues in word wrap runner
+*Fix Bug: 471234
+*Fix horizontal scroll broken for first diff window
+*Fixed no UI shown for failed auto-merge.
+*Fix 469817 no text if word wrap is on.
+
 *Prevent false error due to faulty check when m_pOptions->m_bDiff3AlignBC = true
 *468492 fix crash when word wrap enabled
 *Rework KDiff3App::completeInit to avoid crash on exit in auto mode
