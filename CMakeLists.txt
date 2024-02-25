@@ -140,7 +140,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     add_compile_options("/EHsc")
     #Suppress MSVCs min/max macros
     add_definitions(-DNOMINMAX)
-    #Suppress Microsoft specfic C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
+    #Suppress Microsoft specific C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
     add_definitions(-D_CRT_NONSTDC_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS_GLOBALS)
     #force compliant use of __cplusplus
     add_compile_options("/Zc:__cplusplus")
