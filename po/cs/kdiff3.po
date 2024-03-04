@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 03:20+0000\n"
+"POT-Creation-Date: 2024-03-04 03:01+0000\n"
 "PO-Revision-Date: 2024-01-19 15:54+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -159,7 +159,7 @@ msgstr "Styl konce řádku: %1"
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: difftextwindow.cpp:2019 kdiff3.cpp:944
+#: difftextwindow.cpp:2019 kdiff3.cpp:943
 #, kde-format
 msgid "Top line"
 msgstr "Horní řádek"
@@ -360,7 +360,7 @@ msgstr ""
 "Právě probíhá slučování složek. Opravdu si přejete slučování ukončit a znovu "
 "prohledat složku?"
 
-#: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
+#: directorymergewindow.cpp:688 kdiff3.cpp:799 kdiff3.cpp:809 kdiff3.cpp:821
 #: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
 #, kde-format
 msgctxt "Error dialog title"
@@ -1158,119 +1158,119 @@ msgstr "Sloučení adresářů"
 msgid "Merge info"
 msgstr "Sloučit informace"
 
-#: kdiff3.cpp:467
+#: kdiff3.cpp:466
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr "Nelze porovnat soubor se složkou."
 
-#: kdiff3.cpp:468
+#: kdiff3.cpp:467
 #, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr "Špatný pokus o porovnání"
 
-#: kdiff3.cpp:477
+#: kdiff3.cpp:476
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "Volba --auto je při porovnávání složek ignorována."
 
-#: kdiff3.cpp:532
+#: kdiff3.cpp:531
 #, kde-format
 msgid "Saving failed."
 msgstr "Ukládání selhalo."
 
-#: kdiff3.cpp:566 pdiff.cpp:933
+#: kdiff3.cpp:565 pdiff.cpp:933
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Otevření těchto souborů selhalo:"
 
-#: kdiff3.cpp:575 pdiff.cpp:942
+#: kdiff3.cpp:574 pdiff.cpp:942
 #, kde-format
 msgid "File open error"
 msgstr "Chyba otevírání souboru"
 
-#: kdiff3.cpp:614
+#: kdiff3.cpp:613
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Otevře dokumenty pro porovnání..."
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:615
 #, kde-format
 msgid "Reload"
 msgstr "Obnovit"
 
-#: kdiff3.cpp:619
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "Uloží výsledek sloučení. Musí být vyřešeny všechny konflikty."
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Uloží aktuální dokument jako..."
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:623
 #, kde-format
 msgid "Print the differences"
 msgstr "Vytisknout rozdíly"
 
-#: kdiff3.cpp:627
+#: kdiff3.cpp:626
 #, kde-format
 msgid "Quits the application"
 msgstr "Ukončí aplikaci"
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:630
 #, kde-format
 msgid "Undo last action."
 msgstr "Vrátí poslední činnost."
 
-#: kdiff3.cpp:635
+#: kdiff3.cpp:634
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Vyjme současný výběr a umístí jej do schránky"
 
-#: kdiff3.cpp:638
+#: kdiff3.cpp:637
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Zkopíruje vybranou sekci do schránky"
 
-#: kdiff3.cpp:640
+#: kdiff3.cpp:639
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Vloží současný obsah schránky na aktuální pozici"
 
-#: kdiff3.cpp:643
+#: kdiff3.cpp:642
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Vybrat vše v aktuálním okně"
 
-#: kdiff3.cpp:646
+#: kdiff3.cpp:645
 #, kde-format
 msgid "Search for a string"
 msgstr "Hledání řetězce"
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:647
 #, kde-format
 msgid "Search again for the string"
 msgstr "Další hledání řetězce"
 
-#: kdiff3.cpp:651
+#: kdiff3.cpp:650
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Povolí/zakáže stavový panel"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:653
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Nastavit: KDiff3..."
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Přejít na aktuální rozdíl"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:673
 #, kde-format
 msgid ""
 "Current\n"
@@ -1279,12 +1279,12 @@ msgstr ""
 "Aktuální\n"
 "rozdíl"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Přejít na první rozdíl"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:675
 #, kde-format
 msgid ""
 "First\n"
@@ -1293,12 +1293,12 @@ msgstr ""
 "První\n"
 "rozdíl"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Přejít na poslední rozdíl"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:677
 #, kde-format
 msgid ""
 "Last\n"
@@ -1307,14 +1307,14 @@ msgstr ""
 "Poslední\n"
 "rozdíl"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:679
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(Přeskočí rozdíly v mezerách pokud je vypnuta volba \"Zobrazit mezery\".)"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:680
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1324,12 +1324,12 @@ msgstr ""
 "(Nepřeskočí rozdíly v mezerách ani pokud je vypnuta volba \"Zobrazit mezery"
 "\".)"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Přejít na předchozí rozdíl"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:681
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1338,12 +1338,12 @@ msgstr ""
 "Předchozí\n"
 "rozdíl"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Přejít na následující rozdíl"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:683
 #, kde-format
 msgid ""
 "Next\n"
@@ -1352,12 +1352,12 @@ msgstr ""
 "Následující\n"
 "rozdíl"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Přejít na předchozí konflikt"
 
-#: kdiff3.cpp:686
+#: kdiff3.cpp:685
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1366,12 +1366,12 @@ msgstr ""
 "Předchozí\n"
 "Konflikt"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:687
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Přejít na následující konflikt"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:687
 #, kde-format
 msgid ""
 "Next\n"
@@ -1380,12 +1380,12 @@ msgstr ""
 "Následující\n"
 "Konflikt"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Přejít na předchozí nevyřešený konflikt"
 
-#: kdiff3.cpp:690
+#: kdiff3.cpp:689
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1394,12 +1394,12 @@ msgstr ""
 "Předchozí\n"
 "Nevyřešeno"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:691
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Přejít na následující nevyřešený konflikt"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:691
 #, kde-format
 msgid ""
 "Next\n"
@@ -1408,13 +1408,13 @@ msgstr ""
 "Následující\n"
 "Nevyřešeno"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:693
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Přejít na řádek"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:693
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1424,19 +1424,19 @@ msgstr ""
 "Přejít\n"
 "na řádek"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:694
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Jít na vybraný řádek."
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Vybrat řádky z A"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:695
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1446,13 +1446,13 @@ msgstr ""
 "Zvolit\n"
 "A"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Vybrat řádky z B"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:696
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1462,13 +1462,13 @@ msgstr ""
 "Zvolit\n"
 "B"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Vybrat řádky z C"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:697
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1478,13 +1478,13 @@ msgstr ""
 "Zvolit\n"
 "C"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Po výběru zdroje automaticky přejít na následující nevyřešený konflikt"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:698
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1494,12 +1494,12 @@ msgstr ""
 "Automaticky\n"
 "Následující"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Zobrazit znaky mezer a tabulátorů"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:700
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1509,12 +1509,12 @@ msgstr ""
 "Bílé\n"
 "znaky"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Show White Space"
 msgstr "Zobrazit mezery"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:701
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1524,12 +1524,12 @@ msgstr ""
 "Bílé\n"
 "rozdíly"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:703
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Zobrazit čísla řádků"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:703
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1539,195 +1539,195 @@ msgstr ""
 "Řádky\n"
 "čísla"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:705
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Automaticky vyřešit jednoduché konflikty"
 
-#: kdiff3.cpp:707
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Všechny rozdíly považovat za konflikty"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:707
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Spustit regulární výraz automatického sloučení"
 
-#: kdiff3.cpp:709
+#: kdiff3.cpp:708
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Automaticky vyřešit historii konfliktů"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:709
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Rozdělit rozdíl ve výběru"
 
-#: kdiff3.cpp:711
+#: kdiff3.cpp:710
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Sloučit vybrané rozdíly"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:712
 #, kde-format
 msgid "Show Window A"
 msgstr "Zobrazit okno A"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:713
 #, kde-format
 msgid "Show Window B"
 msgstr "Zobrazit okno B"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:714
 #, kde-format
 msgid "Show Window C"
 msgstr "Zobrazit okno C"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:716
 #, kde-format
 msgid "Normal Overview"
 msgstr "Normální přehled"
 
-#: kdiff3.cpp:718
+#: kdiff3.cpp:717
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Přehled A proti B"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:718
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Přehled A proti C"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:719
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Přehled B proti C"
 
-#: kdiff3.cpp:721
+#: kdiff3.cpp:720
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Zalamovat řádky v porovnávacích oknech"
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:721
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Ručně přidat zarovnání"
 
-#: kdiff3.cpp:723
+#: kdiff3.cpp:722
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Odstranit všechna ručně přidaná zarovnání"
 
-#: kdiff3.cpp:725
+#: kdiff3.cpp:724
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Zaměřit následující okno"
 
-#: kdiff3.cpp:726
+#: kdiff3.cpp:725
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Zaostřit předchozí okno"
 
-#: kdiff3.cpp:727
+#: kdiff3.cpp:726
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Přepnout orientaci rozdělení"
 
-#: kdiff3.cpp:729
+#: kdiff3.cpp:728
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Zobrazit rozdělení obrazovky na složky a text"
 
-#: kdiff3.cpp:731
+#: kdiff3.cpp:730
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Přepnout mezi zobrazením složek a textu"
 
-#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:952
+#: kdiff3.cpp:752 kdiff3.cpp:854 kdiff3.cpp:879 kdiff3.cpp:1139 pdiff.cpp:952
 #: pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124 pdiff.cpp:1132
 #, kde-format
 msgid "Ready."
 msgstr "Připraven."
 
-#: kdiff3.cpp:799 pdiff.cpp:1742
+#: kdiff3.cpp:798 pdiff.cpp:1742
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Výsledek sloučení nebyl uložen."
 
-#: kdiff3.cpp:801
+#: kdiff3.cpp:800
 #, kde-format
 msgid "Save && Quit"
 msgstr "Uložit a ukončit"
 
-#: kdiff3.cpp:802
+#: kdiff3.cpp:801
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Ukončit bez uložení"
 
-#: kdiff3.cpp:810 pdiff.cpp:1753
+#: kdiff3.cpp:809 pdiff.cpp:1753
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Uložení výsledku sloučení selhalo."
 
-#: kdiff3.cpp:821 pdiff.cpp:867
+#: kdiff3.cpp:820 pdiff.cpp:867
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Právě probíhá sloučení složek. Opravdu si jej přejete ukončit?"
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:843
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
 
-#: kdiff3.cpp:861
+#: kdiff3.cpp:860
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Ukládám soubor pod jiným názvem..."
 
-#: kdiff3.cpp:863
+#: kdiff3.cpp:862
 #, kde-format
 msgid "Save As..."
 msgstr "Uložit jako..."
 
-#: kdiff3.cpp:888
+#: kdiff3.cpp:887
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Tisk neimplementován"
 
-#: kdiff3.cpp:928
+#: kdiff3.cpp:927
 #, kde-format
 msgid "Printing..."
 msgstr "Tisknu..."
 
-#: kdiff3.cpp:1026
+#: kdiff3.cpp:1025
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Tisknu stránku %1 z %2"
 
-#: kdiff3.cpp:1074
+#: kdiff3.cpp:1073
 #, kde-format
 msgid " (Selection)"
 msgstr " (Výběr)"
 
-#: kdiff3.cpp:1103
+#: kdiff3.cpp:1102
 #, kde-format
 msgid "Printing completed."
 msgstr "Tisk dokončen."
 
-#: kdiff3.cpp:1107
+#: kdiff3.cpp:1106
 #, kde-format
 msgid "Printing aborted."
 msgstr "Tisk přerušen."
 
-#: kdiff3.cpp:1114
+#: kdiff3.cpp:1113
 #, kde-format
 msgid "Exiting..."
 msgstr "Ukončuji..."
 
-#: kdiff3.cpp:1124
+#: kdiff3.cpp:1123
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Přepnout stavový panel..."
