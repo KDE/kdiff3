@@ -2968,7 +2968,7 @@ void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecF
 
 const char* WindowTitleWidget::getEncoding()
 {
-    return (const char*)m_pEncodingSelector->itemData(m_pEncodingSelector->currentIndex()).value<void*>();
+    return m_pEncodingSelector->itemData(m_pEncodingSelector->currentIndex()).toByteArray();
 }
 
 void WindowTitleWidget::setEncoding(const char* encoding)
