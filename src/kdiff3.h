@@ -160,6 +160,8 @@ class KDiff3App: public QMainWindow
     [[nodiscard]] KActionCollection* actionCollection() const;
 
     static boost::signals2::signal<QString (), FirstNonEmpty<QString>> getSelection;
+    static boost::signals2::signal<bool(), or_> allowSave;
+    static boost::signals2::signal<bool(), or_> allowSaveAs;
     static boost::signals2::signal<bool(), or_> allowCopy;
     static boost::signals2::signal<bool(), or_> allowCut;
 
@@ -341,6 +343,8 @@ public Q_SLOTS:
     [[nodiscard]] KToolBar* toolBar(const QLatin1String &toolBarId) const;
     void recalcWordWrap(qint32 visibleTextWidthForPrinting = -1);
 
+    bool canSave();
+    bool canSaveAs();
     bool canCut();
     bool canCopy();
 

@@ -71,6 +71,8 @@ bool KDiff3App::m_bTripleDiff = false;
 std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
+boost::signals2::signal<bool(), or_> KDiff3App::allowSave;
+boost::signals2::signal<bool(), or_> KDiff3App::allowSaveAs;
 boost::signals2::signal<bool(), or_> KDiff3App::allowCopy;
 boost::signals2::signal<bool(), or_> KDiff3App::allowCut;
 
@@ -352,6 +354,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
     chk_connect_a(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
+    connections.push_back(allowSave.connect(boost::bind(&KDiff3App::canSave, this)));
+    connections.push_back(allowSaveAs.connect(boost::bind(&KDiff3App::canSaveAs, this)));
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
     connections.push_back(allowCopy.connect(boost::bind(&KDiff3App::canCopy, this)));
 
@@ -374,6 +378,21 @@ bool KDiff3App::canCut()
     QWidget* focus = focusWidget();
 
     return (qobject_cast<QLineEdit*>(focus) != nullptr || qobject_cast<QTextEdit*>(focus) != nullptr);
+}
+
+/*canSave*/
+bool KDiff3App::canSave()
+{
+    bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
+    bool bSavable = bMergeEditorVisible && m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0;
+
+    return bSavable;
+}
+
+/*canSaveAs*/
+bool KDiff3App::canSaveAs()
+{
+    return (m_bOutputModified && allowSave());
 }
 
 /*

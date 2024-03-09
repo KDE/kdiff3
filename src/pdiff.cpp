@@ -2194,9 +2194,8 @@ void KDiff3App::slotUpdateAvailabilities()
     m_pFindDialog->m_pSearchInC->setEnabled(m_bTripleDiff);
     m_pFindDialog->m_pSearchInOutput->setEnabled(bMergeEditorVisible);
 
-    bool bSavable = bMergeEditorVisible && m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0;
-    fileSave->setEnabled(m_bOutputModified && bSavable);
-    fileSaveAs->setEnabled(bSavable);
+    fileSave->setEnabled(allowSaveAs());
+    fileSaveAs->setEnabled(allowSave());
 
     mGoTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
     mGoBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
