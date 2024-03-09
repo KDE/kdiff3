@@ -2672,10 +2672,6 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
 
     QByteArray dataArray;
     EncodedDataStream textOutStream(&dataArray, QIODevice::WriteOnly);
-    if(strcmp(encoding, "UTF-8") != 0)
-        textOutStream.setGenerateByteOrderMark(false);
-    else
-        textOutStream.setGenerateByteOrderMark(true); // Only for UTF-16
 
     textOutStream.setEncoding(encoding);
 
