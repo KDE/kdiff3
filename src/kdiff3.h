@@ -11,9 +11,9 @@
 #ifndef KDIFF3_H
 #define KDIFF3_H
 
-#include "diff.h"
-#include "defmac.h"
 #include "combiners.h"
+#include "defmac.h"
+#include "diff.h"
 #include "SourceData.h"
 #include "TypeUtils.h"
 
