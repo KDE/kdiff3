@@ -70,7 +70,7 @@ template<typename T> struct FirstNonEmpty
         if(first == last) return T();
 
         T ret = *first++;
-        //return first non-true as if && were used
+        //return firs non-empty or empty if none
         while(ret.isEmpty() && first != last)
         {
             ret = *first;
