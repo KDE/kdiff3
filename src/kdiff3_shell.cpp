@@ -26,7 +26,7 @@
 
 KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    m_widget = new KDiff3App(this, u8"KDiff3Part", this);
+    m_widget = new KDiff3App(this, u8"KDiff3App", this);
     assert(m_widget);
     setStandardToolBarMenuEnabled(true);
 
