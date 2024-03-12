@@ -15,6 +15,7 @@
 #include "defmac.h"
 #include "diff.h"
 #include "SourceData.h"
+#include "StandardMenus.h"
 #include "TypeUtils.h"
 
 #include <boost/signals2.hpp>
@@ -282,7 +283,6 @@ public Q_SLOTS:
     void slotRefresh();
     void slotSelectionEnd();
     void slotSelectionStart();
-    void slotClipboardChanged();
     void slotOutputModified(bool);
     void slotFinishMainInit();
     void slotMergeCurrentFile();
@@ -350,18 +350,7 @@ public Q_SLOTS:
 
     bool mInitCalled = false;
 
-    // QAction pointers to enable/disable actions
-    QPointer<QAction> fileOpen;
-    QPointer<QAction> fileSave;
-    QPointer<QAction> fileSaveAs;
-    QPointer<QAction> filePrint;
-    QPointer<QAction> fileQuit;
-    QPointer<QAction> fileReload;
-    QPointer<QAction> editUndo;
-    QPointer<QAction> editCut;
-    QPointer<QAction> editCopy;
-    QPointer<QAction> editPaste;
-    QPointer<QAction> editSelectAll;
+    QPointer<class StandardMenus> stdMenus = new StandardMenus(this);
     KToggleAction* viewStatusBar = nullptr;
 
     QPointer<QShortcut> mEscapeAction;

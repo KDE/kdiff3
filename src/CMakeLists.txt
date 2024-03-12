@@ -7,6 +7,7 @@
 set(kdiff3_SRCS
    main.cpp
    kdiff3_shell.cpp
+   StandardMenus.cpp
    kdiff3.cpp
    directorymergewindow.cpp
    merger.cpp

@@ -39,7 +39,6 @@
 #include <QFile>
 #include <QLayout>
 #include <QLineEdit>
-#include <QMimeData>
 #include <QPointer>
 #include <QProcess>
 #include <QScrollBar>
@@ -1392,21 +1391,6 @@ void KDiff3App::slotSelectionEnd()
     Q_EMIT updateAvailabilities();
 }
 
-void KDiff3App::slotClipboardChanged()
-{
-    const QClipboard* clipboard = QApplication::clipboard();
-    const QMimeData* mimeData = clipboard->mimeData();
-    if(mimeData && mimeData->hasText())
-    {
-        QString s = clipboard->text();
-        editPaste->setEnabled(!s.isEmpty());
-    }
-    else
-    {
-        editPaste->setEnabled(false);
-    }
-}
-
 void KDiff3App::slotOutputModified(bool bModified)
 {
     if(bModified && !m_bOutputModified)
@@ -2180,10 +2164,6 @@ void KDiff3App::slotUpdateAvailabilities()
     mAutoSolve->setEnabled(bMergeEditorVisible && m_bTripleDiff);
     mUnsolve->setEnabled(bMergeEditorVisible);
 
-    editUndo->setEnabled(false); //Not yet implemented but planned.
-    editCut->setEnabled(allowCut());
-    editCopy->setEnabled(allowCopy());
-
     mMergeHistory->setEnabled(bMergeEditorVisible);
     mergeRegExp->setEnabled(bMergeEditorVisible);
     showWindowA->setEnabled(bDiffWindowVisible && (m_pDiffTextWindow2->isVisible() || m_pDiffTextWindow3->isVisible()));
@@ -2193,9 +2173,7 @@ void KDiff3App::slotUpdateAvailabilities()
     editFindNext->setEnabled(bDiffWindowVisible);
     m_pFindDialog->m_pSearchInC->setEnabled(m_bTripleDiff);
     m_pFindDialog->m_pSearchInOutput->setEnabled(bMergeEditorVisible);
-
-    fileSave->setEnabled(allowSaveAs());
-    fileSaveAs->setEnabled(allowSave());
+    stdMenus->updateAvailabilities();
 
     mGoTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
     mGoBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());

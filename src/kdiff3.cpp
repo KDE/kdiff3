@@ -23,6 +23,7 @@
 #include "progress.h"
 #include "RLPainter.h"
 #include "smalldialogs.h"
+#include "StandardMenus.h"
 #include "Utils.h"
 // Standard c/c++ includes
 #include <memory>
@@ -350,7 +351,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     addDockWidget(Qt::LeftDockWidgetArea, m_pDirectoryMergeDock);
     splitDockWidget(m_pDirectoryMergeDock, m_pDirectoryMergeInfoDock, Qt::Vertical);
 
-    chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
+    chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, stdMenus, &StandardMenus::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
     chk_connect_a(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
@@ -571,7 +572,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     if(statusBar() != nullptr)
         statusBar()->setSizeGripEnabled(true);
 
-    slotClipboardChanged(); // For initialisation.
+    stdMenus->slotClipboardChanged(); // For initialisation.
 
     Q_EMIT updateAvailabilities();
 
@@ -628,42 +629,6 @@ void KDiff3App::initActions(KActionCollection* ac)
         KMessageBox::error(nullptr, "actionCollection==0");
         exit(-1); //we cannot recover from this.
     }
-    fileOpen = KStandardAction::open(this, &KDiff3App::slotFileOpen, ac);
-    fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
-
-    fileReload = GuiUtils::createAction<QAction>(i18n("Reload"), QKeySequence(QKeySequence::Refresh), this, &KDiff3App::slotReload, ac, u8"file_reload");
-
-    fileSave = KStandardAction::save(this, &KDiff3App::slotFileSave, ac);
-    fileSave->setStatusTip(i18n("Saves the merge result. All conflicts must be solved!"));
-    fileSaveAs = KStandardAction::saveAs(this, &KDiff3App::slotFileSaveAs, ac);
-    fileSaveAs->setStatusTip(i18n("Saves the current document as..."));
-#ifndef QT_NO_PRINTER
-    filePrint = KStandardAction::print(this, &KDiff3App::slotFilePrint, ac);
-    filePrint->setStatusTip(i18n("Print the differences"));
-#endif
-    fileQuit = KStandardAction::quit(this, &KDiff3App::slotFileQuit, ac);
-    fileQuit->setStatusTip(i18n("Quits the application"));
-
-    editUndo = KStandardAction::undo(this, &KDiff3App::slotEditUndo, ac);
-    editUndo->setShortcuts(QKeySequence::Undo);
-    editUndo->setStatusTip(i18n("Undo last action."));
-
-    editCut = KStandardAction::cut(this, &KDiff3App::slotEditCut, ac);
-    editCut->setShortcuts(QKeySequence::Cut);
-    editCut->setStatusTip(i18n("Cuts the selected section and puts it to the clipboard"));
-    editCopy = KStandardAction::copy(this, &KDiff3App::slotEditCopy, ac);
-    editCopy->setShortcut(QKeySequence::Copy);
-    editCopy->setStatusTip(i18n("Copies the selected section to the clipboard"));
-    editPaste = KStandardAction::paste(this, &KDiff3App::slotEditPaste, ac);
-    editPaste->setStatusTip(i18n("Pastes the clipboard contents to current position"));
-    editPaste->setShortcut(QKeySequence::Paste);
-    editSelectAll = KStandardAction::selectAll(this, &KDiff3App::slotEditSelectAll, ac);
-    editSelectAll->setStatusTip(i18n("Select everything in current window"));
-    editFind = KStandardAction::find(this, &KDiff3App::slotEditFind, ac);
-    editFind->setShortcut(QKeySequence::Find);
-    editFind->setStatusTip(i18n("Search for a string"));
-    editFindNext = KStandardAction::findNext(this, &KDiff3App::slotEditFindNext, ac);
-    editFindNext->setStatusTip(i18n("Search again for the string"));
 
     viewStatusBar = KStandardAction::showStatusbar(this, &KDiff3App::slotViewStatusBar, ac);
     viewStatusBar->setStatusTip(i18n("Enables/disables the statusbar"));
@@ -671,6 +636,13 @@ void KDiff3App::initActions(KActionCollection* ac)
     QAction* pAction = KStandardAction::preferences(this, &KDiff3App::slotConfigure, ac);
     pAction->setText(i18n("Configure KDiff3..."));
 
+    stdMenus->setup(this, ac);
+
+    editFind = KStandardAction::find(this, &KDiff3App::slotEditFind, ac);
+    editFind->setShortcut(QKeySequence::Find);
+    editFind->setStatusTip(i18n("Search for a string"));
+    editFindNext = KStandardAction::findNext(this, &KDiff3App::slotEditFindNext, ac);
+    editFindNext->setStatusTip(i18n("Search again for the string"));
 #include "xpm/autoadvance.xpm"
 #include "xpm/currentpos.xpm"
 #include "xpm/down1arrow.xpm"
