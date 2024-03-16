@@ -387,8 +387,7 @@ bool KDiff3App::canCut()
 /*canSave*/
 bool KDiff3App::canSave()
 {
-    bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
-    bool bSavable = bMergeEditorVisible && m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0;
+    bool bSavable = m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0;
 
     return bSavable;
 }
