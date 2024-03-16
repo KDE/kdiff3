@@ -303,7 +303,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
 
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
-    // Warning: Call this before connecting KDiff3App::slotUpdateAvailabilities or
+    // Warning: Call initActions before connecting KDiff3App::slotUpdateAvailabilities or
     //  calling KXMLGUIClient::setXMLFile or KXMLGUIClient::createGUI
     initActions(actionCollection());
 
@@ -334,25 +334,11 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     }
 
     slotRefresh();
-
-    m_pDirectoryMergeDock = new QDockWidget(i18n("Directory merge"), this);
-    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeDock, *this);
-    m_pDirectoryMergeDock->setObjectName("DirectoryMergeDock");
-    m_pDirectoryMergeDock->setWidget(m_pDirectoryMergeWindow);
-    m_pDirectoryMergeDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
-    m_pDirectoryMergeInfoDock = new QDockWidget(i18n("Merge info"), this);
-    m_pDirectoryMergeInfoDock->setObjectName("MergeInfoDock");
-    m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeInfoDock);
-    m_pDirectoryMergeInfoDock->setWidget(m_pDirectoryMergeInfo);
-    m_pDirectoryMergeInfoDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
-    m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
-    //Warning: Make sure initActions is called before this point or we can crash when selectionChanged is sent.
-    m_pDirectoryMergeWindow->setupConnections(this);
-    addDockWidget(Qt::LeftDockWidgetArea, m_pDirectoryMergeDock);
-    splitDockWidget(m_pDirectoryMergeDock, m_pDirectoryMergeInfoDock, Qt::Vertical);
-
     //initView does first time setup for ui.
     initView();
+
+    //Warning: Make sure initActions is called before this point or we can crash when selectionChanged is sent.
+    m_pDirectoryMergeWindow->setupConnections(this);
 
     chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, stdMenus, &StandardMenus::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
@@ -373,6 +359,21 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
 
 void KDiff3App::initView()
 {
+    m_pDirectoryMergeDock = new QDockWidget(i18n("Directory merge"), this);
+    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeDock, *this);
+    m_pDirectoryMergeDock->setObjectName("DirectoryMergeDock");
+    m_pDirectoryMergeDock->setWidget(m_pDirectoryMergeWindow);
+    m_pDirectoryMergeDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
+    m_pDirectoryMergeInfoDock = new QDockWidget(i18n("Merge info"), this);
+    m_pDirectoryMergeInfoDock->setObjectName("MergeInfoDock");
+    m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeInfoDock);
+    m_pDirectoryMergeInfoDock->setWidget(m_pDirectoryMergeInfo);
+    m_pDirectoryMergeInfoDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
+    m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
+
+    addDockWidget(Qt::LeftDockWidgetArea, m_pDirectoryMergeDock);
+    splitDockWidget(m_pDirectoryMergeDock, m_pDirectoryMergeInfoDock, Qt::Vertical);
+
     //m_pMainWidget // Contains vertical splitter and horiz scrollbar
     QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
     pVLayout->setContentsMargins(0, 0, 0, 0);
