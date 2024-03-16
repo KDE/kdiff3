@@ -301,13 +301,26 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     }
     g_pProgressDialog->setStayHidden(m_bAutoMode);
 
+    //initView does first time setup for ui.
+    initView();
     ///////////////////////////////////////////////////////////////////
-    // call inits to invoke all other construction parts
+    //
     // Warning: Call initActions before connecting KDiff3App::slotUpdateAvailabilities or
     //  calling KXMLGUIClient::setXMLFile or KXMLGUIClient::createGUI
     initActions(actionCollection());
+    m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     initStatusBar();
+
+    autoAdvance->setEnabled(true);
+    sourceMask(0, 0);
+
+    showWindowA->setChecked(true);
+    showWindowB->setChecked(true);
+    showWindowC->setChecked(true);
+
+    m_pMergeResultWindow->setupConnections(this);
+    m_pDirectoryMergeWindow->setupConnections(this);
 
     m_pFindDialog = new FindDialog(this);
     chk_connect_a(m_pFindDialog, &FindDialog::findNext, this, &KDiff3App::slotEditFindNext);
@@ -334,11 +347,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     }
 
     slotRefresh();
-    //initView does first time setup for ui.
-    initView();
-
-    //Warning: Make sure initActions is called before this point or we can crash when selectionChanged is sent.
-    m_pDirectoryMergeWindow->setupConnections(this);
 
     chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, stdMenus, &StandardMenus::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
@@ -348,8 +356,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     connections.push_back(allowSaveAs.connect(boost::bind(&KDiff3App::canSaveAs, this)));
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
     connections.push_back(allowCopy.connect(boost::bind(&KDiff3App::canCopy, this)));
-
-    m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     if(qApp != nullptr)
         chk_connect_a(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
@@ -443,8 +449,6 @@ void KDiff3App::initView()
     MergeResultWindow::mVScrollBar = new QScrollBar(Qt::Vertical, m_pMergeWindowFrame);
     pMergeHLayout->addWidget(MergeResultWindow::mVScrollBar);
 
-    autoAdvance->setEnabled(true);
-
     QList<qint32> sizes = pVSplitter->sizes();
     qint32 total = sizes[0] + sizes[1];
     if(total < 10)
@@ -484,8 +488,6 @@ void KDiff3App::initView()
 
     chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
     chk_connect_a(p, &MergeResultWindow::modifiedChanged, m_pMergeResultWindowTitle, &WindowTitleWidget::slotSetModified);
-    p->setupConnections(this);
-    sourceMask(0, 0);
 
     chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorRange);
     chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorRange);
@@ -507,9 +509,6 @@ void KDiff3App::initView()
     m_pDiffTextWindow1->setFocus();
     m_pMainWidget->setMinimumSize(50, 50);
     m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
-    showWindowA->setChecked(true);
-    showWindowB->setChecked(true);
-    showWindowC->setChecked(true);
 }
 /*
     This function is only concerned with qt objects that don't support canCut.
@@ -867,7 +866,7 @@ void KDiff3App::initActions(KActionCollection* ac)
 
     mEscapeAction = new QShortcut(Qt::Key_Escape, this, this, &KDiff3App::slotFileQuit);
 
-    MergeResultWindow::initActions(ac);
+    m_pMergeResultWindow->initActions(ac);
 }
 
 void KDiff3App::showPopupMenu(const QPoint& point)
