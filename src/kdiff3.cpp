@@ -351,6 +351,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     addDockWidget(Qt::LeftDockWidgetArea, m_pDirectoryMergeDock);
     splitDockWidget(m_pDirectoryMergeDock, m_pDirectoryMergeInfoDock, Qt::Vertical);
 
+    //initView does first time setup for ui.
+    initView();
+
     chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, stdMenus, &StandardMenus::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
     chk_connect_a(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
@@ -501,8 +504,6 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         showMainWindow();
 
     g_pProgressDialog->setStayHidden(false);
-    //initView does first time setup for ui.
-    initView();
 
     if(bSuccess)
     {

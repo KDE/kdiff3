@@ -348,8 +348,6 @@ public Q_SLOTS:
     bool canCut();
     bool canCopy();
 
-    bool mInitCalled = false;
-
     QPointer<class StandardMenus> stdMenus = new StandardMenus(this);
     KToggleAction* viewStatusBar = nullptr;
 

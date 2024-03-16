@@ -544,13 +544,6 @@ void KDiff3App::sourceMask(qint32 srcMask, qint32 enabledMask)
 
 void KDiff3App::initView()
 {
-    // set the main widget here
-    if(mInitCalled)
-    {
-        return;
-    }
-
-    mInitCalled = true;
     //m_pMainWidget // Contains vertical splitter and horiz scrollbar
     QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
     pVLayout->setContentsMargins(0, 0, 0, 0);
