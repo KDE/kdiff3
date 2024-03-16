@@ -371,6 +371,145 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     chk_connect_a(this, &KDiff3App::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
 }
 
+void KDiff3App::initView()
+{
+    //m_pMainWidget // Contains vertical splitter and horiz scrollbar
+    QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
+    pVLayout->setContentsMargins(0, 0, 0, 0);
+    pVLayout->setSpacing(0);
+
+    QSplitter* pVSplitter = new QSplitter();
+    pVSplitter->setObjectName("VSplitter");
+    pVSplitter->setOpaqueResize(false);
+    pVSplitter->setOrientation(Qt::Vertical);
+    pVLayout->addWidget(pVSplitter);
+
+    QWidget* pDiffWindowFrame = new QWidget(); // Contains diff windows, overview and vert scrollbar
+    pDiffWindowFrame->setObjectName("DiffWindowFrame");
+    QHBoxLayout* pDiffHLayout = new QHBoxLayout(pDiffWindowFrame);
+    pDiffHLayout->setContentsMargins(0, 0, 0, 0);
+    pDiffHLayout->setSpacing(0);
+    pVSplitter->addWidget(pDiffWindowFrame);
+
+    m_pDiffWindowSplitter = new QSplitter();
+    m_pDiffWindowSplitter->setObjectName("DiffWindowSplitter");
+    m_pDiffWindowSplitter->setOpaqueResize(false);
+
+    m_pDiffWindowSplitter->setOrientation(gOptions->m_bHorizDiffWindowSplitting ? Qt::Horizontal : Qt::Vertical);
+    pDiffHLayout->addWidget(m_pDiffWindowSplitter);
+
+    m_pOverview = new Overview();
+    m_pOverview->setObjectName("Overview");
+    pDiffHLayout->addWidget(m_pOverview);
+
+    DiffTextWindow::mVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
+    pDiffHLayout->addWidget(DiffTextWindow::mVScrollBar);
+
+    chk_connect_a(m_pOverview, &Overview::setLine, DiffTextWindow::mVScrollBar, &QScrollBar::setValue);
+    chk_connect_a(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
+    chk_connect_a(this, &KDiff3App::changeOverViewMode, m_pOverview, &Overview::setOverviewMode);
+
+    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, e_SrcSelector::A, m_sd1, *this);
+    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
+    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, e_SrcSelector::B, m_sd2, *this);
+    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
+    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, e_SrcSelector::C, m_sd3, *this);
+    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
+    m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
+    m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
+    m_pDiffTextWindow3 = m_pDiffTextWindowFrame3->getDiffTextWindow();
+
+    m_pDiffTextWindowFrame1->setupConnections(this);
+    m_pDiffTextWindowFrame2->setupConnections(this);
+    m_pDiffTextWindowFrame3->setupConnections(this);
+
+    // Merge window
+    m_pMergeWindowFrame = new QWidget(pVSplitter);
+    m_pMergeWindowFrame->setObjectName("MergeWindowFrame");
+    pVSplitter->addWidget(m_pMergeWindowFrame);
+    QHBoxLayout* pMergeHLayout = new QHBoxLayout(m_pMergeWindowFrame);
+    pMergeHLayout->setContentsMargins(0, 0, 0, 0);
+    pMergeHLayout->setSpacing(0);
+    QVBoxLayout* pMergeVLayout = new QVBoxLayout();
+    pMergeHLayout->addLayout(pMergeVLayout, 1);
+
+    m_pMergeResultWindowTitle = new WindowTitleWidget();
+    pMergeVLayout->addWidget(m_pMergeResultWindowTitle);
+
+    m_pMergeResultWindow = new MergeResultWindow(m_pMergeWindowFrame, statusBar());
+    pMergeVLayout->addWidget(m_pMergeResultWindow, 1);
+
+    MergeResultWindow::mVScrollBar = new QScrollBar(Qt::Vertical, m_pMergeWindowFrame);
+    pMergeHLayout->addWidget(MergeResultWindow::mVScrollBar);
+
+    autoAdvance->setEnabled(true);
+
+    QList<qint32> sizes = pVSplitter->sizes();
+    qint32 total = sizes[0] + sizes[1];
+    if(total < 10)
+        total = 100;
+    sizes[0] = total / 2;
+    sizes[1] = total / 2;
+    pVSplitter->setSizes(sizes);
+
+    QList<qint32> hSizes = {1, 1, 1};
+
+    m_pDiffWindowSplitter->setSizes(hSizes);
+
+    m_pMergeResultWindow->installEventFilter(m_pMergeResultWindowTitle); // for focus tracking
+
+    QHBoxLayout* pHScrollBarLayout = new QHBoxLayout();
+    pVLayout->addLayout(pHScrollBarLayout);
+    m_pHScrollBar = new ReversibleScrollBar(Qt::Horizontal, &gOptions->m_bRightToLeftLanguage);
+    pHScrollBarLayout->addWidget(m_pHScrollBar);
+    m_pCornerWidget = new QWidget(m_pMainWidget);
+    pHScrollBarLayout->addWidget(m_pCornerWidget);
+
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1, &DiffTextWindow::setFirstLine);
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1, &DiffTextWindow::setHorizScrollOffset);
+    m_pDiffTextWindow1->setupConnections(this);
+
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2, &DiffTextWindow::setHorizScrollOffset);
+    m_pDiffTextWindow2->setupConnections(this);
+
+    chk_connect_a(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3, &DiffTextWindow::setHorizScrollOffset);
+    m_pDiffTextWindow3->setupConnections(this);
+
+    MergeResultWindow* p = m_pMergeResultWindow;
+    chk_connect_a(MergeResultWindow::mVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
+
+    chk_connect_a(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
+    chk_connect_a(p, &MergeResultWindow::modifiedChanged, m_pMergeResultWindowTitle, &WindowTitleWidget::slotSetModified);
+    p->setupConnections(this);
+    sourceMask(0, 0);
+
+    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorRange);
+    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorRange);
+    chk_connect_a(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow3, &DiffTextWindow::setFastSelectorRange);
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    chk_connect_a(m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    chk_connect_a(m_pDiffTextWindow3, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    chk_connect_a(m_pDiffTextWindow2, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    chk_connect_a(m_pDiffTextWindow3, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    chk_connect_a(m_pDirectoryMergeInfo, &DirectoryMergeInfo::gotFocus, p, &MergeResultWindow::updateSourceMask);
+
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::resizeHeightChangedSignal, this, &KDiff3App::resizeDiffTextWindowHeight);
+    // The following connects cause the wordwrap to be recalced thrice, just to make sure. Better than forgetting one.
+    chk_connect_a(m_pDiffTextWindow1, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    chk_connect_a(m_pDiffTextWindow2, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    chk_connect_a(m_pDiffTextWindow3, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+
+    m_pDiffTextWindow1->setFocus();
+    m_pMainWidget->setMinimumSize(50, 50);
+    m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
+    showWindowA->setChecked(true);
+    showWindowB->setChecked(true);
+    showWindowC->setChecked(true);
+}
 /*
     This function is only concerned with qt objects that don't support canCut.
     allowCut() or's the results from all canCut signals
