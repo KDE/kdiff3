@@ -137,39 +137,20 @@ void MergeResultWindow::init(
 }
 
 //This must be called before KXMLGui::SetXMLFile and friends or the actions will not be shown in the menu.
-//At that point in startup we don't have a MergeResultWindow object so we cannot connect the signals yet.
+//
 void MergeResultWindow::initActions(KActionCollection* ac)
 {
     assert(ac != nullptr);
 
-    chooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A Everywhere"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_1), ac, "merge_choose_a_everywhere");
-    chooseBEverywhere = GuiUtils::createAction<QAction>(i18n("Choose B Everywhere"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_2), ac, "merge_choose_b_everywhere");
-    chooseCEverywhere = GuiUtils::createAction<QAction>(i18n("Choose C Everywhere"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_3), ac, "merge_choose_c_everywhere");
-    chooseAForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Conflicts"), ac, "merge_choose_a_for_unsolved_conflicts");
-    chooseBForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Conflicts"), ac, "merge_choose_b_for_unsolved_conflicts");
-    chooseCForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Conflicts"), ac, "merge_choose_c_for_unsolved_conflicts");
-    chooseAForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Whitespace Conflicts"), ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
-    chooseBForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Whitespace Conflicts"), ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
-    chooseCForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Whitespace Conflicts"), ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
-}
-
-void MergeResultWindow::connectActions() const
-{
-    static bool setupComplete = false;
-    if(setupComplete) return;
-
-    setupComplete = true;
-    chk_connect_a(chooseAEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseAEverywhere);
-    chk_connect_a(chooseBEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseBEverywhere);
-    chk_connect_a(chooseCEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseCEverywhere);
-
-    chk_connect_a(chooseAForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedConflicts);
-    chk_connect_a(chooseBForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedConflicts);
-    chk_connect_a(chooseCForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedConflicts);
-
-    chk_connect_a(chooseAForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedWhiteSpaceConflicts);
-    chk_connect_a(chooseBForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedWhiteSpaceConflicts);
-    chk_connect_a(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
+    chooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A Everywhere"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_1), this, &MergeResultWindow::slotChooseAEverywhere, ac, "merge_choose_a_everywhere");
+    chooseBEverywhere = GuiUtils::createAction<QAction>(i18n("Choose B Everywhere"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_2), this, &MergeResultWindow::slotChooseBEverywhere, ac, "merge_choose_b_everywhere");
+    chooseCEverywhere = GuiUtils::createAction<QAction>(i18n("Choose C Everywhere"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_3), this, &MergeResultWindow::slotChooseCEverywhere, ac, "merge_choose_c_everywhere");
+    chooseAForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Conflicts"), this, &MergeResultWindow::slotChooseAForUnsolvedConflicts, ac, "merge_choose_a_for_unsolved_conflicts");
+    chooseBForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Conflicts"), this, &MergeResultWindow::slotChooseBForUnsolvedConflicts, ac, "merge_choose_b_for_unsolved_conflicts");
+    chooseCForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Conflicts"), this, &MergeResultWindow::slotChooseCForUnsolvedConflicts, ac, "merge_choose_c_for_unsolved_conflicts");
+    chooseAForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Whitespace Conflicts"), this, &MergeResultWindow::slotChooseAForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
+    chooseBForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Whitespace Conflicts"), this, &MergeResultWindow::slotChooseBForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
+    chooseCForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Whitespace Conflicts"), this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
 }
 
 void MergeResultWindow::setupConnections(const KDiff3App* app)

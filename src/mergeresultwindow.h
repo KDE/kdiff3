@@ -59,9 +59,8 @@ class MergeResultWindow: public QWidget
 
     void setupConnections(const KDiff3App* app);
 
-    static void initActions(KActionCollection* ac);
+    void initActions(KActionCollection* ac);
 
-    void connectActions() const;
     void reset();
 
     bool saveDocument(const QString& fileName, const char* encoding, e_LineEndStyle eLineEndStyle);
