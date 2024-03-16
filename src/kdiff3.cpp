@@ -346,7 +346,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     m_pDirectoryMergeInfoDock->setWidget(m_pDirectoryMergeInfo);
     m_pDirectoryMergeInfoDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
-    //Warning: Make sure DirectoryMergeWindow::initActions is called before this point or we can crash when selectionChanged is sent.
+    //Warning: Make sure initActions is called before this point or we can crash when selectionChanged is sent.
     m_pDirectoryMergeWindow->setupConnections(this);
     addDockWidget(Qt::LeftDockWidgetArea, m_pDirectoryMergeDock);
     splitDockWidget(m_pDirectoryMergeDock, m_pDirectoryMergeInfoDock, Qt::Vertical);
