@@ -319,9 +319,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     showWindowB->setChecked(true);
     showWindowC->setChecked(true);
 
-    m_pMergeResultWindow->setupConnections(this);
-    m_pDirectoryMergeWindow->setupConnections(this);
-
     m_pFindDialog = new FindDialog(this);
     chk_connect_a(m_pFindDialog, &FindDialog::findNext, this, &KDiff3App::slotEditFindNext);
 
@@ -347,6 +344,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     }
 
     slotRefresh();
+    //Connect singals that may depend on KDiff3App being setup.
+    m_pMergeResultWindow->setupConnections(this);
+    m_pDirectoryMergeWindow->setupConnections(this);
 
     chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, stdMenus, &StandardMenus::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
@@ -357,9 +357,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
     connections.push_back(allowCopy.connect(boost::bind(&KDiff3App::canCopy, this)));
 
-    if(qApp != nullptr)
-        chk_connect_a(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
-
+    chk_connect_a(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
     chk_connect_a(this, &KDiff3App::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
 }
 
@@ -1011,8 +1009,7 @@ void KDiff3App::slotFileSaveAs()
 
 void KDiff3App::slotFilePrint()
 {
-    if(m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow2 == nullptr)
-        return;
+    assert(m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow2 == nullptr);
 #ifdef QT_NO_PRINTER
     slotStatusMsg(i18n("Printing not implemented."));
 #else

@@ -1193,18 +1193,13 @@ void KDiff3App::slotConfigureKeys()
 
 void KDiff3App::slotRefresh()
 {
+    assert(m_pDiffWindowSplitter != nullptr && m_pHScrollBar != nullptr);
     QApplication::setFont(gOptions->appFont());
 
     Q_EMIT doRefresh();
 
-    if(m_pHScrollBar != nullptr)
-    {
-        m_pHScrollBar->setAgain();
-    }
-    if(m_pDiffWindowSplitter != nullptr)
-    {
-        m_pDiffWindowSplitter->setOrientation(gOptions->m_bHorizDiffWindowSplitting ? Qt::Horizontal : Qt::Vertical);
-    }
+    m_pHScrollBar->setAgain();
+    m_pDiffWindowSplitter->setOrientation(gOptions->m_bHorizDiffWindowSplitting ? Qt::Horizontal : Qt::Vertical);
 }
 
 void KDiff3App::slotSelectionStart()
@@ -1981,17 +1976,14 @@ void KDiff3App::slotEncodingChanged(const QByteArray&)
 
 void KDiff3App::slotUpdateAvailabilities()
 {
-    if(m_pDiffTextWindow2 == nullptr || m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow3 == nullptr)
-        return;
+    assert(m_pDiffTextWindow2 != nullptr && m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow3 != nullptr);
 
     bool bTextDataAvailable = (m_sd1->hasData() || m_sd2->hasData() || m_sd3->hasData());
 
     if(dirShowBoth->isChecked())
     {
-        if(m_pDirectoryMergeDock != nullptr)
-            m_pDirectoryMergeDock->setVisible(m_bDirCompare);
-        if(m_pDirectoryMergeInfoDock != nullptr)
-            m_pDirectoryMergeInfoDock->setVisible(m_bDirCompare);
+        m_pDirectoryMergeDock->setVisible(m_bDirCompare);
+        m_pDirectoryMergeInfoDock->setVisible(m_bDirCompare);
 
         if(!m_pMainWidget->isVisible() &&
            bTextDataAvailable && !m_pDirectoryMergeWindow->isScanning())
@@ -1999,16 +1991,15 @@ void KDiff3App::slotUpdateAvailabilities()
     }
 
     bool bDiffWindowVisible = m_pMainWidget->isVisible();
-    bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
+    bool bMergeEditorVisible = m_pMergeWindowFrame->isVisible();
 
     m_pDirectoryMergeWindow->updateAvailabilities(bMergeEditorVisible, m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
 
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
         m_bDirCompare &&
-        (m_pDirectoryMergeDock != nullptr && m_pDirectoryMergeInfoDock != nullptr &&
-         ((!m_pDirectoryMergeDock->isVisible() && m_pMainWidget->isVisible()) ||
-          (m_pDirectoryMergeDock->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
+        ((!m_pDirectoryMergeDock->isVisible() && m_pMainWidget->isVisible()) ||
+         (m_pDirectoryMergeDock->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable)));
 
     showWhiteSpaceCharacters->setEnabled(bDiffWindowVisible);
     autoAdvance->setEnabled(bMergeEditorVisible);
@@ -2026,21 +2017,21 @@ void KDiff3App::slotUpdateAvailabilities()
     m_pFindDialog->m_pSearchInOutput->setEnabled(bMergeEditorVisible);
     stdMenus->updateAvailabilities();
 
-    mGoTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
-    mGoBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
+    mGoTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
+    mGoBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
     mGoCurrent->setEnabled(bDiffWindowVisible);
     mGoPrevUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictAboveCurrent());
     mGoNextUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictBelowCurrent());
     mGoPrevConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictAboveCurrent());
     mGoNextConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictBelowCurrent());
-    mGoPrevDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
-    mGoNextDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
+    mGoPrevDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
+    mGoNextDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
 
     overviewModeNormal->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeAB->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeAC->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeBC->setEnabled(m_bTripleDiff && bDiffWindowVisible);
-    e_OverviewMode overviewMode = m_pOverview == nullptr ? e_OverviewMode::eOMNormal : m_pOverview->getOverviewMode();
+    e_OverviewMode overviewMode = m_pOverview->getOverviewMode();
     overviewModeNormal->setChecked(overviewMode == e_OverviewMode::eOMNormal);
     overviewModeAB->setChecked(overviewMode == e_OverviewMode::eOMAvsB);
     overviewModeAC->setChecked(overviewMode == e_OverviewMode::eOMAvsC);
