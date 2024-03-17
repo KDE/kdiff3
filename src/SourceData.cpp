@@ -130,7 +130,7 @@ void SourceData::setFileAccess(const FileAccess& fileAccess)
     mErrors.clear();
 }
 
-void SourceData::setEncoding(const char* encoding)
+void SourceData::setEncoding(const QByteArray& encoding)
 {
     mEncoding = encoding;
 }
@@ -309,7 +309,7 @@ void SourceData::FileData::copyBufFrom(const FileData& src) //TODO: Remove me.
     memcpy(m_pBuf.get(), src.m_pBuf.get(), mDataSize);
 }
 
-std::optional<const char*> SourceData::detectEncoding(const QString& fileName)
+std::optional<const QByteArray> SourceData::detectEncoding(const QString& fileName)
 {
     QFile f(fileName);
     if(f.open(QIODevice::ReadOnly))
@@ -375,8 +375,8 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
         fileNameIn1 = m_tempInputFileName;
         mEncoding = "UTF-8";
     }
-    const char* pEncoding1 = getEncoding();
-    const char* pEncoding2 = getEncoding();
+    QByteArray pEncoding1 = getEncoding();
+    QByteArray pEncoding2 = getEncoding();
     const QString overSizedFile = i18nc("Error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1);
 
     m_normalData.reset();
@@ -757,7 +757,7 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray
     return true;
 }
 
-std::optional<const char*> SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
+std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
 {
     QtSizeType encodingPos = s.indexOf(encodingTag);
     if(encodingPos >= 0)
@@ -788,7 +788,7 @@ std::optional<const char*> SourceData::getEncodingFromTag(const QByteArray& s, c
     return {};
 }
 
-std::optional<const char*> SourceData::detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes)
+std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes)
 {
     if(size >= 2)
     {
@@ -855,7 +855,7 @@ std::optional<const char*> SourceData::detectEncoding(const char* buf, qint64 si
     return detectUTF8(s);
 }
 
-std::optional<const char*> SourceData::detectUTF8(const QByteArray& data)
+std::optional<const QByteArray> SourceData::detectUTF8(const QByteArray& data)
 {
     QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
 

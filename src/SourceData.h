@@ -57,23 +57,23 @@ class SourceData
 
     [[nodiscard]] bool isDir() const { return m_fileAccess.isDir(); }
 
-    [[nodiscard]] const char* getEncoding() const { return mEncoding; }
+    [[nodiscard]] const QByteArray getEncoding() const { return mEncoding; }
     [[nodiscard]] e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
     [[nodiscard]] inline bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
     [[nodiscard]] inline bool hasBOM() const { return m_normalData.hasBOM(); }
     [[nodiscard]] const QStringList& getErrors() const { return mErrors; }
 
-    void setEncoding(const char* encoding);
+    void setEncoding(const QByteArray& encoding);
 
   protected:
     bool convertFileEncoding(const QString& fileNameIn, const QByteArray& pCodecIn,
                              const QString& fileNameOut, const QByteArray& pCodecOut);
 
-    [[nodiscard]] static std::optional<const char*> detectUTF8(const QByteArray& data);
-    [[nodiscard]] static std::optional<const char*> detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
-    [[nodiscard]] static std::optional<const char*> getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
+    [[nodiscard]] static std::optional<const QByteArray> detectUTF8(const QByteArray& data);
+    [[nodiscard]] static std::optional<const QByteArray> detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
+    [[nodiscard]] static std::optional<const QByteArray> getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
-    std::optional<const char*> detectEncoding(const QString& fileName);
+    std::optional<const QByteArray> detectEncoding(const QString& fileName);
     QString m_aliasName;
     FileAccess m_fileAccess;
     QString m_tempInputFileName;
@@ -119,7 +119,7 @@ class SourceData
     };
     FileData m_normalData;
     FileData m_lmppData;
-    const char* mEncoding = u8"UTF-8";
+    QByteArray mEncoding = u8"UTF-8";
 };
 
 #endif // !SOURCEDATA_H
