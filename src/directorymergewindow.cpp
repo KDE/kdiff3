@@ -635,6 +635,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
         }
         QStyledItemDelegate::paint(thePainter, option2, index);
     }
+
     [[nodiscard]] QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
         QSize sz = QStyledItemDelegate::sizeHint(option, index);
@@ -660,14 +661,17 @@ void DirectoryMergeWindow::setDirectoryMergeInfo(DirectoryMergeInfo* p)
 {
     d->m_pDirectoryMergeInfo = p;
 }
+
 bool DirectoryMergeWindow::isDirectoryMergeInProgress()
 {
     return d->m_bRealMergeStarted;
 }
+
 bool DirectoryMergeWindow::isSyncMode()
 {
     return d->m_bSyncMode;
 }
+
 bool DirectoryMergeWindow::isScanning()
 {
     return d->m_bScanning;
