@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-18 00:40+0000\n"
 "PO-Revision-Date: 2023-12-07 08:48+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -126,7 +126,7 @@ msgstr "Файл %1: рядок недоступний"
 msgid "Encoding:"
 msgstr "Кодування:"
 
-#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2815 optiondialog.cpp:795
+#: difftextwindow.cpp:1962 mergeresultwindow.cpp:2796 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Стиль кінців рядка:"
@@ -141,12 +141,12 @@ msgstr "A (Основний)"
 msgid "Encoding: %1"
 msgstr "Кодування: %1"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2861
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2842
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2860
+#: difftextwindow.cpp:1990 mergeresultwindow.cpp:2841
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -161,7 +161,7 @@ msgstr "Стиль кінців рядка: %1"
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: difftextwindow.cpp:2019 kdiff3.cpp:962
+#: difftextwindow.cpp:2019 kdiff3.cpp:1070
 #, kde-format
 msgid "Top line"
 msgstr "Верхній рядок"
@@ -353,7 +353,7 @@ msgctxt "Column title"
 msgid "White"
 msgstr "Білий"
 
-#: directorymergewindow.cpp:691
+#: directorymergewindow.cpp:695
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort the "
@@ -362,52 +362,52 @@ msgstr ""
 "Зараз ви виконуєте об'єднання тек. Ви впевнені, що бажаєте перервати "
 "об'єднання і пересканувати теку?"
 
-#: directorymergewindow.cpp:692 kdiff3.cpp:818 kdiff3.cpp:828 kdiff3.cpp:840
-#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: directorymergewindow.cpp:696 kdiff3.cpp:927 kdiff3.cpp:937 kdiff3.cpp:949
+#: mergeresultwindow.cpp:313 pdiff.cpp:718 pdiff.cpp:1573 pdiff.cpp:1583
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Попередження"
 
-#: directorymergewindow.cpp:693
+#: directorymergewindow.cpp:697
 #, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Пересканувати"
 
-#: directorymergewindow.cpp:694
+#: directorymergewindow.cpp:698
 #, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "Продовжити об'єднання"
 
-#: directorymergewindow.cpp:843
+#: directorymergewindow.cpp:847
 #, kde-format
 msgid "Opening of folders failed:"
 msgstr "Помилка відкриття тек:"
 
-#: directorymergewindow.cpp:847
+#: directorymergewindow.cpp:851
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
 msgstr "Теки А «%1» не існує або це не тека.\n"
 
-#: directorymergewindow.cpp:852
+#: directorymergewindow.cpp:856
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
 msgstr "Теки В «%1» не існує або це не тека.\n"
 
-#: directorymergewindow.cpp:857
+#: directorymergewindow.cpp:861
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "Тека С «%1» не існує або це не тека.\n"
 
-#: directorymergewindow.cpp:860
+#: directorymergewindow.cpp:864
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Помилка під час відкриття теки"
 
-#: directorymergewindow.cpp:868
+#: directorymergewindow.cpp:872
 #, kde-format
 msgid ""
 "The destination folder must not be the same as A or B when three folders are "
@@ -418,54 +418,54 @@ msgstr ""
 "теки.\n"
 "Перевірте ще раз, перш ніж продовжувати."
 
-#: directorymergewindow.cpp:870
+#: directorymergewindow.cpp:874
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Попередження про параметри"
 
-#: directorymergewindow.cpp:875
+#: directorymergewindow.cpp:879
 #, kde-format
 msgid "Scanning folders..."
 msgstr "Сканування тек…"
 
-#: directorymergewindow.cpp:897
+#: directorymergewindow.cpp:901
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "Читання теки A"
 
-#: directorymergewindow.cpp:906
+#: directorymergewindow.cpp:910
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "Читання теки B"
 
-#: directorymergewindow.cpp:916
+#: directorymergewindow.cpp:920
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "Читання теки C"
 
-#: directorymergewindow.cpp:932
+#: directorymergewindow.cpp:936
 #, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Не вдалося прочитати деякі підтеки у"
 
-#: directorymergewindow.cpp:937
+#: directorymergewindow.cpp:941
 #, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Перевірте права доступу до підтек."
 
-#: directorymergewindow.cpp:960
+#: directorymergewindow.cpp:964
 #, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Готово."
 
-#: directorymergewindow.cpp:975
+#: directorymergewindow.cpp:979
 #, kde-format
 msgid ""
 "Folder Comparison Status\n"
@@ -480,22 +480,22 @@ msgstr ""
 "Кількість однакових файлів: %2\n"
 "Кількість різних файлів: %3"
 
-#: directorymergewindow.cpp:982
+#: directorymergewindow.cpp:986
 #, kde-format
 msgid "Number of manual merges: %1"
 msgstr "Кількість об'єднань вручну: %1"
 
-#: directorymergewindow.cpp:1250
+#: directorymergewindow.cpp:1254
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "Це торкнеться всіх операцій об'єднання."
 
-#: directorymergewindow.cpp:1251
+#: directorymergewindow.cpp:1255
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "Зміна всіх операцій об'єднання"
 
-#: directorymergewindow.cpp:1328
+#: directorymergewindow.cpp:1332
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -504,49 +504,49 @@ msgstr ""
 "Обробка %1 з %2\n"
 "%3"
 
-#: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
+#: directorymergewindow.cpp:1378 directorymergewindow.cpp:1382
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "Деякі з файлів не вдалося обробити."
 
-#: directorymergewindow.cpp:1381
+#: directorymergewindow.cpp:1385
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "Перериваємо обробку через надмірну кількість помилок."
 
-#: directorymergewindow.cpp:1872 directorymergewindow.cpp:1897
-#: directorymergewindow.cpp:1922
+#: directorymergewindow.cpp:1876 directorymergewindow.cpp:1901
+#: directorymergewindow.cpp:1926
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "Зараз ця операція неможлива."
 
-#: directorymergewindow.cpp:1872 directorymergewindow.cpp:1897
-#: directorymergewindow.cpp:1922 directorymergewindow.cpp:2203
+#: directorymergewindow.cpp:1876 directorymergewindow.cpp:1901
+#: directorymergewindow.cpp:1926 directorymergewindow.cpp:2207
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Операція неможлива"
 
-#: directorymergewindow.cpp:1969
+#: directorymergewindow.cpp:1973
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "Під час копіювання сталася помилка."
 
-#: directorymergewindow.cpp:1970 directorymergewindow.cpp:2408
+#: directorymergewindow.cpp:1974 directorymergewindow.cpp:2412
 #, kde-format
 msgid "Merge Error"
 msgstr "Помилка об'єднання"
 
-#: directorymergewindow.cpp:2048
+#: directorymergewindow.cpp:2052
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "Невідома операція об'єднання. (Цього не мало статися!)"
 
-#: directorymergewindow.cpp:2093
+#: directorymergewindow.cpp:2097
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "Невідома операція об'єднання."
 
-#: directorymergewindow.cpp:2106
+#: directorymergewindow.cpp:2110
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -567,25 +567,25 @@ msgstr ""
 "Зауважте, що ця програма знаходиться у стані тестування і розробники НЕ "
 "МОЖУТЬ ГАРАНТУВАТИ нічого! Зробіть резервну копію важливих даних!"
 
-#: directorymergewindow.cpp:2111
+#: directorymergewindow.cpp:2115
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Запуск об'єднання"
 
-#: directorymergewindow.cpp:2112
+#: directorymergewindow.cpp:2116
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Зробити"
 
-#: directorymergewindow.cpp:2113
+#: directorymergewindow.cpp:2117
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Симулювати"
 
-#: directorymergewindow.cpp:2139
+#: directorymergewindow.cpp:2143
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
@@ -593,14 +593,14 @@ msgid ""
 msgstr ""
 "Підсвічений елемент має відмінний тип у різних теках. Виберіть потрібну дію."
 
-#: directorymergewindow.cpp:2143
+#: directorymergewindow.cpp:2147
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr "Дати змін файлів однакові, але файли — різні. Виберіть дію."
 
-#: directorymergewindow.cpp:2147
+#: directorymergewindow.cpp:2151
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
@@ -609,14 +609,14 @@ msgstr ""
 "Підсвічений елемент було змінено у одному з тек і вилучено у іншому. Оберіть "
 "належну дію."
 
-#: directorymergewindow.cpp:2203
+#: directorymergewindow.cpp:2207
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr "Ця дія зараз неможлива, оскільки виконується об'єднання тек."
 
-#: directorymergewindow.cpp:2260
+#: directorymergewindow.cpp:2264
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -627,35 +627,35 @@ msgstr ""
 "Бажаєте продовжити з елемента, що викликав помилку чи бажаєте пропустити цей "
 "елемент?"
 
-#: directorymergewindow.cpp:2262
+#: directorymergewindow.cpp:2266
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Продовжити об'єднання після помилки"
 
-#: directorymergewindow.cpp:2263
+#: directorymergewindow.cpp:2267
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Продовжити з останнього елемента"
 
-#: directorymergewindow.cpp:2264
+#: directorymergewindow.cpp:2268
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Пропустити елемент"
 
-#: directorymergewindow.cpp:2358
+#: directorymergewindow.cpp:2362
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Операцію об'єднання завершено."
 
-#: directorymergewindow.cpp:2358 directorymergewindow.cpp:2361
+#: directorymergewindow.cpp:2362 directorymergewindow.cpp:2365
 #, kde-format
 msgid "Merge Complete"
 msgstr "Об'єднання завершено"
 
-#: directorymergewindow.cpp:2371
+#: directorymergewindow.cpp:2375
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -663,51 +663,51 @@ msgstr ""
 "Імітацію об'єднання завершено: перевірте, чи згодні ви з запропонованими "
 "операціями."
 
-#: directorymergewindow.cpp:2407
+#: directorymergewindow.cpp:2411
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr ""
 "Сталася помилка. Натисніть кнопку «Гаразд», щоб побачити докладнішу "
 "інформацію."
 
-#: directorymergewindow.cpp:2440
+#: directorymergewindow.cpp:2444
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "Помилка: під час вилучення %1: невдала спроба створення резерву."
 
-#: directorymergewindow.cpp:2447
+#: directorymergewindow.cpp:2451
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "рекурсивно вилучити теку( %1 )"
 
-#: directorymergewindow.cpp:2449
+#: directorymergewindow.cpp:2453
 #, kde-format
 msgid "delete( %1 )"
 msgstr "delete( %1 )"
 
-#: directorymergewindow.cpp:2465
+#: directorymergewindow.cpp:2469
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr ""
 "Помилка: невдача під час спроби виконання дії delete для теки на етапі "
 "читання теки."
 
-#: directorymergewindow.cpp:2481
+#: directorymergewindow.cpp:2485
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Помилка: невдала спроба виконати rmdir( %1 )."
 
-#: directorymergewindow.cpp:2491
+#: directorymergewindow.cpp:2495
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Помилка: дія вилучення зазнала невдачі."
 
-#: directorymergewindow.cpp:2518
+#: directorymergewindow.cpp:2522
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "manual merge( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2521
+#: directorymergewindow.cpp:2525
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
@@ -715,192 +715,192 @@ msgstr ""
 "     Зауваження: Після завершення об'єднання вручу користувач може "
 "продовжити роботу натисканням F7."
 
-#: directorymergewindow.cpp:2548
+#: directorymergewindow.cpp:2552
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Помилка: невдала спроба copy( %1 -> %2 ). Неможливо вилучити існуючий файл "
 "призначення."
 
-#: directorymergewindow.cpp:2557
+#: directorymergewindow.cpp:2561
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "copyLink( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2566
+#: directorymergewindow.cpp:2570
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Помилка: невдала спроба copyLink: віддалені посилання ще не підтримуються."
 
-#: directorymergewindow.cpp:2576
+#: directorymergewindow.cpp:2580
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Помилка: copyLink зазнала невдачі."
 
-#: directorymergewindow.cpp:2599
+#: directorymergewindow.cpp:2603
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "copy( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2625
+#: directorymergewindow.cpp:2629
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Помилка під час rename( %1 -> %2 ): Не вдалося вилучити існуюче призначення."
 
-#: directorymergewindow.cpp:2632
+#: directorymergewindow.cpp:2636
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "rename( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2641
+#: directorymergewindow.cpp:2645
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Помилка: Перейменування зазнало невдачі."
 
-#: directorymergewindow.cpp:2659
+#: directorymergewindow.cpp:2663
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "Помилка під час виконання makeDir %1. Не вдалося вилучити існуючий файл."
 
-#: directorymergewindow.cpp:2676
+#: directorymergewindow.cpp:2680
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "makeDir( %1 )"
 
-#: directorymergewindow.cpp:2686
+#: directorymergewindow.cpp:2690
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Помилка створення теки."
 
-#: directorymergewindow.cpp:2722 directorymergewindow.cpp:2836
+#: directorymergewindow.cpp:2726 directorymergewindow.cpp:2840
 #, kde-format
 msgid "Dest"
 msgstr "Призн."
 
-#: directorymergewindow.cpp:2730 directorymergewindow.cpp:2758
+#: directorymergewindow.cpp:2734 directorymergewindow.cpp:2762
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Тека"
 
-#: directorymergewindow.cpp:2730
+#: directorymergewindow.cpp:2734
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Тип"
 
-#: directorymergewindow.cpp:2730
+#: directorymergewindow.cpp:2734
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Розмір"
 
-#: directorymergewindow.cpp:2731
+#: directorymergewindow.cpp:2735
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Атриб."
 
-#: directorymergewindow.cpp:2731
+#: directorymergewindow.cpp:2735
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Час останньої зміни"
 
-#: directorymergewindow.cpp:2731
+#: directorymergewindow.cpp:2735
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Призначення посилання"
 
-#: directorymergewindow.cpp:2758
+#: directorymergewindow.cpp:2762
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "Файл"
 
-#: directorymergewindow.cpp:2758
+#: directorymergewindow.cpp:2762
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Посилання"
 
-#: directorymergewindow.cpp:2764
+#: directorymergewindow.cpp:2768
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "не доступне"
 
-#: directorymergewindow.cpp:2778
+#: directorymergewindow.cpp:2782
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (Призн.): "
 
-#: directorymergewindow.cpp:2782
+#: directorymergewindow.cpp:2786
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2782
+#: directorymergewindow.cpp:2786
 #, kde-format
 msgid "A (Base): "
 msgstr "A (Основа): "
 
-#: directorymergewindow.cpp:2788
+#: directorymergewindow.cpp:2792
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (Призн.): "
 
-#: directorymergewindow.cpp:2792
+#: directorymergewindow.cpp:2796
 #, kde-format
 msgid "B:    "
 msgstr "B:    "
 
-#: directorymergewindow.cpp:2797
+#: directorymergewindow.cpp:2801
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (Призн.): "
 
-#: directorymergewindow.cpp:2801
+#: directorymergewindow.cpp:2805
 #, kde-format
 msgid "C:    "
 msgstr "C:    "
 
-#: directorymergewindow.cpp:2804
+#: directorymergewindow.cpp:2808
 #, kde-format
 msgid "Dest: "
 msgstr "Призн.:"
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2846
+#: directorymergewindow.cpp:2850
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Зберегти режим об'єднання тек як…"
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Почати/Продовжити об'єднання тек"
 
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2958
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Виконати операцію для поточного елемента"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2959
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Порівняти вибраний файл"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2960
 #, kde-format
 msgid "Merge Current File"
 msgstr "Об'єднати поточний файл"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2960
 #, kde-format
 msgid ""
 "Merge\n"
@@ -909,56 +909,56 @@ msgstr ""
 "Об'єднати\n"
 "файл"
 
-#: directorymergewindow.cpp:2957
+#: directorymergewindow.cpp:2961
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Згорнути всі підтеки"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Розгорнути всі підтеки"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Rescan"
 msgstr "Пересканувати"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2966
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Вибрати A для списку всіх елементів"
 
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Вибрати B для списку всіх елементів"
 
-#: directorymergewindow.cpp:2964
+#: directorymergewindow.cpp:2968
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Вибрати C для списку всіх елементів"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Операція автовибору для всіх елементів"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Нічого не робити з усіма елементами"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2975
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Показувати однакові файли"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2975
 #, kde-format
 msgid ""
 "Identical\n"
@@ -967,17 +967,17 @@ msgstr ""
 "Однакові\n"
 "файли"
 
-#: directorymergewindow.cpp:2972
+#: directorymergewindow.cpp:2976
 #, kde-format
 msgid "Show Different Files"
 msgstr "Показувати різні файли"
 
-#: directorymergewindow.cpp:2973
+#: directorymergewindow.cpp:2977
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Показувати файли лише у A"
 
-#: directorymergewindow.cpp:2973
+#: directorymergewindow.cpp:2977
 #, kde-format
 msgid ""
 "Files\n"
@@ -986,12 +986,12 @@ msgstr ""
 "Файли\n"
 "лише у A"
 
-#: directorymergewindow.cpp:2974
+#: directorymergewindow.cpp:2978
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Показувати файли лише у B"
 
-#: directorymergewindow.cpp:2974
+#: directorymergewindow.cpp:2978
 #, kde-format
 msgid ""
 "Files\n"
@@ -1000,12 +1000,12 @@ msgstr ""
 "Файли\n"
 "лише у B"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2979
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Показувати файли лише у C"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2979
 #, kde-format
 msgid ""
 "Files\n"
@@ -1014,68 +1014,68 @@ msgstr ""
 "Файли\n"
 "лише у C"
 
-#: directorymergewindow.cpp:2979
+#: directorymergewindow.cpp:2983
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Порівняти явно вибрані файли"
 
-#: directorymergewindow.cpp:2980
+#: directorymergewindow.cpp:2984
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Об'єднати явно вибрані файли"
 
-#: directorymergewindow.cpp:2982 directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2986 directorymergewindow.cpp:2993
 #, kde-format
 msgid "Do Nothing"
 msgstr "Нічого не робити"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2986 opendialog.ui:68
+#: directorymergewindow.cpp:2990 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Об'єднати"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Вилучити (якщо існує)"
 
-#: directorymergewindow.cpp:2990
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Copy A to B"
 msgstr "Копіювати A до B"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Copy B to A"
 msgstr "Копіювати B до A"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Delete A"
 msgstr "Вилучити A"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid "Delete B"
 msgstr "Вилучити B"
 
-#: directorymergewindow.cpp:2994
+#: directorymergewindow.cpp:2998
 #, kde-format
 msgid "Delete A && B"
 msgstr "Вилучити A і B"
 
-#: directorymergewindow.cpp:2995
+#: directorymergewindow.cpp:2999
 #, kde-format
 msgid "Merge to A"
 msgstr "Об'єднати у A"
 
-#: directorymergewindow.cpp:2996
+#: directorymergewindow.cpp:3000
 #, kde-format
 msgid "Merge to B"
 msgstr "Об'єднати у B"
 
-#: directorymergewindow.cpp:2997
+#: directorymergewindow.cpp:3001
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Об'єднати у A і B"
@@ -1148,144 +1148,89 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Змінити шрифт"
 
-#: kdiff3.cpp:169
+#: kdiff3.cpp:170
 #, kde-format
 msgid "Current Configuration:"
 msgstr "Поточне налаштування:"
 
-#: kdiff3.cpp:174
+#: kdiff3.cpp:175
 #, kde-format
 msgid "Config Option Error:"
 msgstr "Помилковий параметр налаштування:"
 
-#: kdiff3.cpp:229
+#: kdiff3.cpp:230
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "Використано параметр --auto, але не вказано файла виводу."
 
-#: kdiff3.cpp:337
+#: kdiff3.cpp:366
 #, kde-format
 msgid "Directory merge"
 msgstr "Об'єднання каталогів"
 
-#: kdiff3.cpp:342
+#: kdiff3.cpp:371
 #, kde-format
 msgid "Merge info"
 msgstr "Дані щодо об'єднання"
 
-#: kdiff3.cpp:485
+#: kdiff3.cpp:625
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr "Не можна порівнювати файл з текою."
 
-#: kdiff3.cpp:486
+#: kdiff3.cpp:626
 #, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr "Помилкова спроба порівняння"
 
-#: kdiff3.cpp:495
+#: kdiff3.cpp:635
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "Під час порівняння тек параметр --auto проігноровано."
 
-#: kdiff3.cpp:550
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Saving failed."
 msgstr "Помилка збереження."
 
-#: kdiff3.cpp:584 pdiff.cpp:933
+#: kdiff3.cpp:722 pdiff.cpp:783
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Під час спроби відкриття цих файлів сталася помилка:"
 
-#: kdiff3.cpp:593 pdiff.cpp:942
+#: kdiff3.cpp:731 pdiff.cpp:792
 #, kde-format
 msgid "File open error"
 msgstr "Помилка відкриття файла"
 
-#: kdiff3.cpp:632
-#, kde-format
-msgid "Opens documents for comparison..."
-msgstr "Відкриває документи для порівняння…"
-
-#: kdiff3.cpp:634
-#, kde-format
-msgid "Reload"
-msgstr "Перезавантажити"
-
-#: kdiff3.cpp:637
-#, kde-format
-msgid "Saves the merge result. All conflicts must be solved!"
-msgstr "Зберігає результат об'єднання. Всі конфлікти слід розв'язати!"
-
-#: kdiff3.cpp:639
-#, kde-format
-msgid "Saves the current document as..."
-msgstr "Зберігає поточний документ як…"
-
-#: kdiff3.cpp:642
-#, kde-format
-msgid "Print the differences"
-msgstr "Показати розбіжності"
-
-#: kdiff3.cpp:645
-#, kde-format
-msgid "Quits the application"
-msgstr "Закриває програму"
-
-#: kdiff3.cpp:649
-#, kde-format
-msgid "Undo last action."
-msgstr "Скасувати останню дію."
-
-#: kdiff3.cpp:653
-#, kde-format
-msgid "Cuts the selected section and puts it to the clipboard"
-msgstr "Вирізує вибране та кладе його у кишеню"
-
-#: kdiff3.cpp:656
-#, kde-format
-msgid "Copies the selected section to the clipboard"
-msgstr "Копіює вибране до кишені"
-
-#: kdiff3.cpp:658
-#, kde-format
-msgid "Pastes the clipboard contents to current position"
-msgstr "Вставляє вміст кишені в поточну позицію"
-
-#: kdiff3.cpp:661
-#, kde-format
-msgid "Select everything in current window"
-msgstr "Вибрати все у поточному вікні"
-
-#: kdiff3.cpp:664
-#, kde-format
-msgid "Search for a string"
-msgstr "Шукати рядок"
-
-#: kdiff3.cpp:666
-#, kde-format
-msgid "Search again for the string"
-msgstr "Шукати знову рядок"
-
-#: kdiff3.cpp:669
+#: kdiff3.cpp:771
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Вмикає/вимикає рядок стану"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:774
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Налаштувати KDiff3…"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:780
+#, kde-format
+msgid "Search for a string"
+msgstr "Шукати рядок"
+
+#: kdiff3.cpp:782
+#, kde-format
+msgid "Search again for the string"
+msgstr "Шукати знову рядок"
+
+#: kdiff3.cpp:801
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Перейти до поточної дельти"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:801
 #, kde-format
 msgid ""
 "Current\n"
@@ -1294,12 +1239,12 @@ msgstr ""
 "Поточна\n"
 "дельта"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:803
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Перейти до першої дельти"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:803
 #, kde-format
 msgid ""
 "First\n"
@@ -1308,12 +1253,12 @@ msgstr ""
 "Перша\n"
 "дельта"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:805
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Перейти до останньої дельти"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:805
 #, kde-format
 msgid ""
 "Last\n"
@@ -1322,13 +1267,13 @@ msgstr ""
 "Остання\n"
 "дельта"
 
-#: kdiff3.cpp:698
+#: kdiff3.cpp:807
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(Пропускає різниці у пробілах, якщо вимкнено «Показувати пробіли».)"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:808
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1338,12 +1283,12 @@ msgstr ""
 "(Не пропускати різниці у пробілах, навіть якщо вимкнено параметр «Показувати "
 "пробіли».)"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:809
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Перейти до попередньої дельти"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:809
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1352,12 +1297,12 @@ msgstr ""
 "Попередня\n"
 "дельта"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:811
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Перейти до наступної дельти"
 
-#: kdiff3.cpp:702
+#: kdiff3.cpp:811
 #, kde-format
 msgid ""
 "Next\n"
@@ -1366,12 +1311,12 @@ msgstr ""
 "Наступна\n"
 "дельта"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:813
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Перейти до попереднього конфлікту"
 
-#: kdiff3.cpp:704
+#: kdiff3.cpp:813
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1380,12 +1325,12 @@ msgstr ""
 "Попередній\n"
 "конфлікт"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:815
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Перейти до наступного конфлікту"
 
-#: kdiff3.cpp:706
+#: kdiff3.cpp:815
 #, kde-format
 msgid ""
 "Next\n"
@@ -1394,12 +1339,12 @@ msgstr ""
 "Наступний\n"
 "конфлікт"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:817
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Перейти до попереднього нерозв'язаного конфлікту"
 
-#: kdiff3.cpp:708
+#: kdiff3.cpp:817
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1408,12 +1353,12 @@ msgstr ""
 "Попередній\n"
 "нерозв'язаний"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:819
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Перейти до наступного нерозв'язаного конфлікту"
 
-#: kdiff3.cpp:710
+#: kdiff3.cpp:819
 #, kde-format
 msgid ""
 "Next\n"
@@ -1422,13 +1367,13 @@ msgstr ""
 "Наступний\n"
 "нерозв'язаний"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:821
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Перейти до рядка"
 
-#: kdiff3.cpp:712
+#: kdiff3.cpp:821
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1438,19 +1383,19 @@ msgstr ""
 "Перейти\n"
 "до рядка"
 
-#: kdiff3.cpp:713
+#: kdiff3.cpp:822
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Перейти до вказаного рядка."
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:823
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Виберіть рядки з A"
 
-#: kdiff3.cpp:714
+#: kdiff3.cpp:823
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1460,13 +1405,13 @@ msgstr ""
 "Вибрати\n"
 "A"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:824
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Вибрати рядки з B"
 
-#: kdiff3.cpp:715
+#: kdiff3.cpp:824
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1476,13 +1421,13 @@ msgstr ""
 "Вибрати\n"
 "B"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:825
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Вибрати рядки з C"
 
-#: kdiff3.cpp:716
+#: kdiff3.cpp:825
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1492,13 +1437,13 @@ msgstr ""
 "Вибрати\n"
 "C"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:826
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Автоматично перейти до наступного конфлікту за визначення джерела"
 
-#: kdiff3.cpp:717
+#: kdiff3.cpp:826
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1508,12 +1453,12 @@ msgstr ""
 "Автоматично\n"
 "наступний"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:828
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Показувати символи пробілів і табуляцій"
 
-#: kdiff3.cpp:719
+#: kdiff3.cpp:828
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1523,12 +1468,12 @@ msgstr ""
 "Символи-\n"
 "пробіли"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:829
 #, kde-format
 msgid "Show White Space"
 msgstr "Показувати пробіли"
 
-#: kdiff3.cpp:720
+#: kdiff3.cpp:829
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1538,12 +1483,12 @@ msgstr ""
 "Пробіли-\n"
 "дельти"
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Показувати номери рядків"
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:831
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1553,196 +1498,196 @@ msgstr ""
 "Номери\n"
 "рядків"
 
-#: kdiff3.cpp:724
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Автоматично розв'язувати прості конфлікти"
 
-#: kdiff3.cpp:725
+#: kdiff3.cpp:834
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Застосувати різницю до конфліктів"
 
-#: kdiff3.cpp:726
+#: kdiff3.cpp:835
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Запустити автооб'єднання за формальними виразами"
 
-#: kdiff3.cpp:727
+#: kdiff3.cpp:836
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Автоматично розв'язувати конфлікти у журналі"
 
-#: kdiff3.cpp:728
+#: kdiff3.cpp:837
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Розділити різницю на вибраному"
 
-#: kdiff3.cpp:729
+#: kdiff3.cpp:838
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Об'єднати вибрані різниці"
 
-#: kdiff3.cpp:731
+#: kdiff3.cpp:840
 #, kde-format
 msgid "Show Window A"
 msgstr "Показати вікно A"
 
-#: kdiff3.cpp:732
+#: kdiff3.cpp:841
 #, kde-format
 msgid "Show Window B"
 msgstr "Показати вікно B"
 
-#: kdiff3.cpp:733
+#: kdiff3.cpp:842
 #, kde-format
 msgid "Show Window C"
 msgstr "Показати вікно C"
 
-#: kdiff3.cpp:735
+#: kdiff3.cpp:844
 #, kde-format
 msgid "Normal Overview"
 msgstr "Звичайний огляд"
 
-#: kdiff3.cpp:736
+#: kdiff3.cpp:845
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Перегляд A з B"
 
-#: kdiff3.cpp:737
+#: kdiff3.cpp:846
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Перегляд A з C Overview"
 
-#: kdiff3.cpp:738
+#: kdiff3.cpp:847
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Перегляд B з C"
 
-#: kdiff3.cpp:739
+#: kdiff3.cpp:848
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Перенесення рядків у вікнах різниці"
 
-#: kdiff3.cpp:740
+#: kdiff3.cpp:849
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Додати вирівнювання різниці вручну"
 
-#: kdiff3.cpp:741
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Очистити всі вирівнювання різниці вручну"
 
-#: kdiff3.cpp:743
+#: kdiff3.cpp:852
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Фокус до наступного вікна"
 
-#: kdiff3.cpp:744
+#: kdiff3.cpp:853
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Фокус на попереднє вікно"
 
-#: kdiff3.cpp:745
+#: kdiff3.cpp:854
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Перемкнути орієнтацію відокремлення"
 
-#: kdiff3.cpp:747
+#: kdiff3.cpp:856
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Розділений перегляд тексту і тек"
 
-#: kdiff3.cpp:749
+#: kdiff3.cpp:858
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Перемкнутися між переглядом тексту і тек"
 
-#: kdiff3.cpp:771 kdiff3.cpp:873 kdiff3.cpp:898 kdiff3.cpp:1158 pdiff.cpp:952
-#: pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124 pdiff.cpp:1132
+#: kdiff3.cpp:880 kdiff3.cpp:982 kdiff3.cpp:1007 kdiff3.cpp:1266 pdiff.cpp:802
+#: pdiff.cpp:871 pdiff.cpp:907 pdiff.cpp:916 pdiff.cpp:974 pdiff.cpp:982
 #, kde-format
 msgid "Ready."
 msgstr "Готово."
 
-#: kdiff3.cpp:817 pdiff.cpp:1742
+#: kdiff3.cpp:926 pdiff.cpp:1572
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Результат об'єднання не збережено."
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:928
 #, kde-format
 msgid "Save && Quit"
 msgstr "Зберегти і вийти"
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:929
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Вийти без збереження"
 
-#: kdiff3.cpp:828 pdiff.cpp:1753
+#: kdiff3.cpp:937 pdiff.cpp:1583
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Помилка під час збереження результатів об'єднання."
 
-#: kdiff3.cpp:839 pdiff.cpp:867
+#: kdiff3.cpp:948 pdiff.cpp:717
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
 "Зараз ви виконуєте об'єднання тек. Ви впевнені, що бажаєте перервати його?"
 
-#: kdiff3.cpp:862
+#: kdiff3.cpp:971
 #, kde-format
 msgid "Saving file..."
 msgstr "Збереження файла…"
 
-#: kdiff3.cpp:879
+#: kdiff3.cpp:988
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Файл зберігається з новою назвою…"
 
-#: kdiff3.cpp:881
+#: kdiff3.cpp:990
 #, kde-format
 msgid "Save As..."
 msgstr "Зберегти як…"
 
-#: kdiff3.cpp:906
+#: kdiff3.cpp:1014
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Можливість друку не реалізовано."
 
-#: kdiff3.cpp:946
+#: kdiff3.cpp:1054
 #, kde-format
 msgid "Printing..."
 msgstr "Друк…"
 
-#: kdiff3.cpp:1044
+#: kdiff3.cpp:1152
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Друкуємо сторінку %1 з %2"
 
-#: kdiff3.cpp:1092
+#: kdiff3.cpp:1200
 #, kde-format
 msgid " (Selection)"
 msgstr " (Вибір)"
 
-#: kdiff3.cpp:1121
+#: kdiff3.cpp:1229
 #, kde-format
 msgid "Printing completed."
 msgstr "Друк завершено."
 
-#: kdiff3.cpp:1125
+#: kdiff3.cpp:1233
 #, kde-format
 msgid "Printing aborted."
 msgstr "Друк перервано."
 
-#: kdiff3.cpp:1132
+#: kdiff3.cpp:1240
 #, kde-format
 msgid "Exiting..."
 msgstr "Вихід…"
 
-#: kdiff3.cpp:1142
+#: kdiff3.cpp:1250
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Перемикання рядка стану…"
@@ -2002,12 +1947,12 @@ msgstr "Вибрати B для всіх нерозв'язаних конфлі�
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Вибрати C для всіх нерозв'язаних конфліктів пробілів"
 
-#: mergeresultwindow.cpp:266
+#: mergeresultwindow.cpp:247
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Кількість ще нерозв'язаних конфліктів: %1 (з яких %2 пробіли)"
 
-#: mergeresultwindow.cpp:330
+#: mergeresultwindow.cpp:311
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2016,29 +1961,29 @@ msgstr ""
 "Вивід було змінено.\n"
 "Якщо ви продовжите, зміни буде втрачено."
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:743
+#: mergeresultwindow.cpp:754 pdiff.cpp:593
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Всі вхідні файли однакові."
 
-#: mergeresultwindow.cpp:775
+#: mergeresultwindow.cpp:756
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Всі вхідні файли містять однаковий текст."
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:760 mergeresultwindow.cpp:764
+#: mergeresultwindow.cpp:768 pdiff.cpp:599 pdiff.cpp:603 pdiff.cpp:607
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Файли %1 і %2 двійково однакові.\n"
 
-#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
-#: mergeresultwindow.cpp:789
+#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:770
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Текст файлів %1 і %2 однаковий.\n"
 
-#: mergeresultwindow.cpp:793
+#: mergeresultwindow.cpp:774
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2051,27 +1996,27 @@ msgstr ""
 "Кількість нерозв'язаних конфліктів: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:780
 #, kde-format
 msgid "Conflicts"
 msgstr "Конфлікти"
 
-#: mergeresultwindow.cpp:1540
+#: mergeresultwindow.cpp:1521
 #, kde-format
 msgid "<No src line>"
 msgstr "<Немає рядка джерела>"
 
-#: mergeresultwindow.cpp:1548
+#: mergeresultwindow.cpp:1529
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Конфлікт об'єднання (Лише пробіл)>"
 
-#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
+#: mergeresultwindow.cpp:1531 mergeresultwindow.cpp:2404
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Конфлікт об'єднання>"
 
-#: mergeresultwindow.cpp:2645
+#: mergeresultwindow.cpp:2626
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2080,13 +2025,13 @@ msgstr ""
 "Розв'язано не всі конфлікти.\n"
 "Файл не збережено."
 
-#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2628 mergeresultwindow.cpp:2637
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Залишились конфлікти"
 
-#: mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2635
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2097,7 +2042,7 @@ msgstr ""
 "оберіть потрібний стиль вручну.\n"
 "Файл не було збережено."
 
-#: mergeresultwindow.cpp:2668
+#: mergeresultwindow.cpp:2649
 #, kde-format
 msgid ""
 "\n"
@@ -2108,47 +2053,47 @@ msgstr ""
 "\n"
 "Помилка створення резервної копії. Файл не збережено."
 
-#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2693
 #, kde-format
 msgid "File Save Error"
 msgstr "Помилка збереження файла"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2693
 #, kde-format
 msgid "Error while writing."
 msgstr "Помилка при записуванні."
 
-#: mergeresultwindow.cpp:2787
+#: mergeresultwindow.cpp:2768
 #, kde-format
 msgid "Output:"
 msgstr "Виведення:"
 
-#: mergeresultwindow.cpp:2800 mergeresultwindow.cpp:2990
+#: mergeresultwindow.cpp:2781 mergeresultwindow.cpp:2971
 #, kde-format
 msgid "[Modified]"
 msgstr "[Змінено]"
 
-#: mergeresultwindow.cpp:2807
+#: mergeresultwindow.cpp:2788
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Кодування для збереження:"
 
-#: mergeresultwindow.cpp:2907
+#: mergeresultwindow.cpp:2888
 #, kde-format
 msgid "Conflict"
 msgstr "Конфлікт"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2918
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Кодек з A: %1"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2920
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Кодек з B: %1"
 
-#: mergeresultwindow.cpp:2941
+#: mergeresultwindow.cpp:2922
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Кодек з C: %1"
@@ -3227,17 +3172,17 @@ msgstr ""
 "Встановлює типові значення для всіх параметрів. Не лише тих, що у цьому "
 "розділі."
 
-#: pdiff.cpp:84
+#: pdiff.cpp:83
 #, kde-format
 msgid "PreprocessorCmd: "
 msgstr "PreprocessorCmd: "
 
-#: pdiff.cpp:86
+#: pdiff.cpp:85
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
 msgstr "Наступні параметри, які ви обрали, змінять дані:\n"
 
-#: pdiff.cpp:87
+#: pdiff.cpp:86
 #, kde-format
 msgid ""
 "\n"
@@ -3248,104 +3193,104 @@ msgstr ""
 "Скоріше за все, ця поведінка небажана під час об'єднання.\n"
 "Ви бажаєте вимкнути ці параметри ви продовжувати з задіяними параметрами?"
 
-#: pdiff.cpp:89
+#: pdiff.cpp:88
 #, kde-format
 msgid "Option Unsafe for Merging"
 msgstr "Параметр небезпечний для об'єднання"
 
-#: pdiff.cpp:90
+#: pdiff.cpp:89
 #, kde-format
 msgid "Use These Options During Merge"
 msgstr "Використовувати ці параметри під час об'єднання"
 
-#: pdiff.cpp:91
+#: pdiff.cpp:90
 #, kde-format
 msgid "Disable Unsafe Options"
 msgstr "Вимкнути небезпечні параметри"
 
-#: pdiff.cpp:123
+#: pdiff.cpp:122
 #, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "Завантаження A: %1"
 
-#: pdiff.cpp:133
+#: pdiff.cpp:132
 #, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Завантаження B: %1"
 
-#: pdiff.cpp:166 pdiff.cpp:206
+#: pdiff.cpp:165 pdiff.cpp:205
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Diff: A <-> B"
 
-#: pdiff.cpp:172 pdiff.cpp:252 pdiff.cpp:275
+#: pdiff.cpp:171 pdiff.cpp:251 pdiff.cpp:274
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "Linediff: A <-> B"
 
-#: pdiff.cpp:191
+#: pdiff.cpp:190
 #, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "Завантаження C: %1"
 
-#: pdiff.cpp:217
+#: pdiff.cpp:216
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Diff: A <-> C"
 
-#: pdiff.cpp:230
+#: pdiff.cpp:229
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Diff: B <-> C"
 
-#: pdiff.cpp:258 pdiff.cpp:280
+#: pdiff.cpp:257 pdiff.cpp:279
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "Linediff: B <-> C"
 
-#: pdiff.cpp:264 pdiff.cpp:285
+#: pdiff.cpp:263 pdiff.cpp:284
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
-#: pdiff.cpp:311
+#: pdiff.cpp:310
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
 msgstr "Недостатньо пам'яті для завершення виконання запиту."
 
-#: pdiff.cpp:318
+#: pdiff.cpp:317
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr "Сталася внутрішня помилка: %1"
 
-#: pdiff.cpp:345
+#: pdiff.cpp:344
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Забагато рядків у різниці. Пропускаємо файл."
 
-#: pdiff.cpp:745
+#: pdiff.cpp:595
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Всі вхідні файли містять однаковий текст, але не є двійково однаковими."
 
-#: pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: pdiff.cpp:601 pdiff.cpp:605 pdiff.cpp:609
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Файли %1 і %2 містять однаковий текст, але не є двійково однаковими. \n"
 
-#: pdiff.cpp:769
+#: pdiff.cpp:619
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3357,17 +3302,17 @@ msgstr ""
 "файлів.\n"
 "Продовжуйте, але можливі помилки."
 
-#: pdiff.cpp:779
+#: pdiff.cpp:629
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:781
+#: pdiff.cpp:631
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:783
+#: pdiff.cpp:633
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3382,82 +3327,82 @@ msgstr ""
 "лежить лише на вас.\n"
 "Файли вхідних даних, яких стосується це зауваження, зберігаються у %1."
 
-#: pdiff.cpp:869
+#: pdiff.cpp:719
 #, kde-format
 msgid "Abort"
 msgstr "Перервати"
 
-#: pdiff.cpp:870
+#: pdiff.cpp:720
 #, kde-format
 msgid "Continue Merging"
 msgstr "Продовжити об'єднання"
 
-#: pdiff.cpp:875 pdiff.cpp:966
+#: pdiff.cpp:725 pdiff.cpp:816
 #, kde-format
 msgid "Opening files..."
 msgstr "Відкриття файлів…"
 
-#: pdiff.cpp:1055
+#: pdiff.cpp:905
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Вирізання вибраного…"
 
-#: pdiff.cpp:1062
+#: pdiff.cpp:912
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Копіювання вибраного до кишені…"
 
-#: pdiff.cpp:1071
+#: pdiff.cpp:921
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Вставлення вмісту кишені…"
 
-#: pdiff.cpp:1191
+#: pdiff.cpp:1041
 #, kde-format
 msgid "Ok"
 msgstr "Гаразд"
 
-#: pdiff.cpp:1207
+#: pdiff.cpp:1057
 #, kde-format
 msgid "Go to Line"
 msgstr "Перейти до рядка"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1351
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Перенесення рядків («Скасувати» вимикає перенесення)"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1351
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Обчислюємо максимальну ширину для горизонтальної смужки гортання"
 
-#: pdiff.cpp:1744
+#: pdiff.cpp:1574
 #, kde-format
 msgid "Save && Continue"
 msgstr "Зберегти й продовжити"
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1575
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Продовжити без збереження"
 
-#: pdiff.cpp:1943
+#: pdiff.cpp:1773
 #, kde-format
 msgid "Search complete."
 msgstr "Пошук завершено."
 
-#: pdiff.cpp:1943
+#: pdiff.cpp:1773
 #, kde-format
 msgid "Search Complete"
 msgstr "Пошук завершено"
 
-#: pdiff.cpp:2124
+#: pdiff.cpp:1954
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Нічого не позначено у жодному з вхідних вікон різниці."
 
-#: pdiff.cpp:2124
+#: pdiff.cpp:1954
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Помилка під час додавання вручну діапазону diff"
@@ -3675,6 +3620,61 @@ msgstr ""
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Не вдалося прочитати файл: %1"
+
+#: StandardMenus.cpp:18
+#, kde-format
+msgid "Opens documents for comparison..."
+msgstr "Відкриває документи для порівняння…"
+
+#: StandardMenus.cpp:20
+#, kde-format
+msgid "Reload"
+msgstr "Перезавантажити"
+
+#: StandardMenus.cpp:23
+#, kde-format
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr "Зберігає результат об'єднання. Всі конфлікти слід розв'язати!"
+
+#: StandardMenus.cpp:25
+#, kde-format
+msgid "Saves the current document as..."
+msgstr "Зберігає поточний документ як…"
+
+#: StandardMenus.cpp:28
+#, kde-format
+msgid "Print the differences"
+msgstr "Показати розбіжності"
+
+#: StandardMenus.cpp:31
+#, kde-format
+msgid "Quits the application"
+msgstr "Закриває програму"
+
+#: StandardMenus.cpp:35
+#, kde-format
+msgid "Undo last action."
+msgstr "Скасувати останню дію."
+
+#: StandardMenus.cpp:39
+#, kde-format
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "Вирізує вибране та кладе його у кишеню"
+
+#: StandardMenus.cpp:42
+#, kde-format
+msgid "Copies the selected section to the clipboard"
+msgstr "Копіює вибране до кишені"
+
+#: StandardMenus.cpp:44
+#, kde-format
+msgid "Pastes the clipboard contents to current position"
+msgstr "Вставляє вміст кишені в поточну позицію"
+
+#: StandardMenus.cpp:47
+#, kde-format
+msgid "Select everything in current window"
+msgstr "Вибрати все у поточному вікні"
 
 #: Utils.cpp:69
 #, kde-format
