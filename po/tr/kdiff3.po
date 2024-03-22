@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-18 00:40+0000\n"
-"PO-Revision-Date: 2024-03-01 15:53+0300\n"
+"PO-Revision-Date: 2024-03-22 01:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -80,17 +80,17 @@ msgstr "Dosya kaldırılıyor: %1"
 #: DefaultFileAccessJobHandler.cpp:301
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
-msgstr "Sembolik bağlantı oluşturuluyor: %1 -> %2"
+msgstr "Sembolik bağlantı oluşturuluyor: %1 → %2"
 
 #: DefaultFileAccessJobHandler.cpp:331
 #, kde-format
 msgid "Renaming file: %1 -> %2"
-msgstr "Dosya yeniden adlandırılıyor: %1 -> %2"
+msgstr "Dosya yeniden adlandırılıyor: %1 → %2"
 
 #: DefaultFileAccessJobHandler.cpp:372
 #, kde-format
 msgid "Copying file: %1 -> %2"
-msgstr "Dosya kopyalanıyor: %1 -> %2"
+msgstr "Dosya kopyalanıyor: %1 → %2"
 
 #: DefaultFileAccessJobHandler.cpp:394
 #, kde-format
@@ -708,7 +708,7 @@ msgstr "Hata: silme işlemi başarısız oldu."
 #: directorymergewindow.cpp:2522
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr "el ile birleştir( %1, %2, %3 -> %4)"
+msgstr "elle birleştir( %1, %2, %3 → %4)"
 
 #: directorymergewindow.cpp:2525
 #, kde-format
@@ -719,14 +719,12 @@ msgstr "     Not: El ile birleştirmeden sonra kullanıcı F7 ile sürdürmelidi
 #: directorymergewindow.cpp:2552
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
-msgstr ""
-"Hata: kopyala( %1 -> %2) başarısız oldu. Mevcut hedefin silinmesi başarısız "
-"oldu."
+msgstr "Hata: Kopyalama ( %1 → %2) başarısız oldu. Var olan hedef silinemedi."
 
 #: directorymergewindow.cpp:2561
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
-msgstr "Bağlantıyı Kopyala( %1 -> %2 )"
+msgstr "Bağlantıyı Kopyala (%1 → %2)"
 
 #: directorymergewindow.cpp:2570
 #, kde-format
@@ -743,18 +741,18 @@ msgstr "Hata: Bağlantıyı Kopyala başarısız oldu."
 #: directorymergewindow.cpp:2603
 #, kde-format
 msgid "copy( %1 -> %2 )"
-msgstr "kopyala( %1 -> %2 )"
+msgstr "Kopyala (%1 → %2)"
 
 #: directorymergewindow.cpp:2629
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
-"Yeniden adlandırılırken ( %1 -> %2 ) hata oluştu: Mevcut hedef silinemiyor."
+"Yeniden adlandırılırken (%1 → %2 ) hata oluştu: Var olan hedef silinemiyor."
 
 #: directorymergewindow.cpp:2636
 #, kde-format
 msgid "rename( %1 -> %2 )"
-msgstr "yeniden adlandır( %1 -> %2 )"
+msgstr "Yeniden Adlandır (%1 → %2)"
 
 #: directorymergewindow.cpp:2645
 #, kde-format
@@ -1122,7 +1120,7 @@ msgid ""
 "Filenames: %1 -> %2"
 msgstr ""
 "Yedekleme yapılırken, yeniden adlandırma başarısız oldu.\n"
-"Dosya adları: %1 -> %2"
+"Dosya adları: %1 → %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
@@ -2444,8 +2442,8 @@ msgstr "BÜYÜK/küçük harf durumunu yok say (boşluk olarak gör)"
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
-"Boşluk değişiklikleri gibi BÜYÜK/küçük harf farklılıklarını iyileştir. "
-"('a'<=>'A')"
+"Boşluk değişiklikleri gibi BÜYÜK/küçük harf farklılıklarını iyileştir. (‘a’ "
+"⇔ ‘A’)"
 
 #: optiondialog.cpp:861
 #, kde-format
@@ -3226,13 +3224,13 @@ msgstr "B yükleniyor: %1"
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
-msgstr "Diff: A <-> B"
+msgstr "Diff: A ↔ B"
 
 #: pdiff.cpp:171 pdiff.cpp:251 pdiff.cpp:274
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
-msgstr "Satır Diff’i: A <-> B"
+msgstr "Satır Diff’i: A ↔ B"
 
 #: pdiff.cpp:190
 #, kde-format
@@ -3244,25 +3242,25 @@ msgstr "C yükleniyor: %1"
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
-msgstr "Diff: A <-> C"
+msgstr "Diff: A ↔ C"
 
 #: pdiff.cpp:229
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
-msgstr "Diff: B <-> C"
+msgstr "Diff: B ↔ C"
 
 #: pdiff.cpp:257 pdiff.cpp:279
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
-msgstr "Satır Diff’i: B <-> C"
+msgstr "Satır Diff’i: B ↔ C"
 
 #: pdiff.cpp:263 pdiff.cpp:284
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
-msgstr "Satır Diff’i: A<-> C"
+msgstr "Satır Diff’i: A ↔ C"
 
 #: pdiff.cpp:310
 #, kde-format
@@ -3418,17 +3416,17 @@ msgstr "İ&ptal"
 #: smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:83
 #, kde-format
 msgid "Swap %1<->%2"
-msgstr "Takas Yap: %1<->%2"
+msgstr "Takas Yap: %1 ↔ %2"
 
 #: smalldialogs.cpp:84 smalldialogs.cpp:85 smalldialogs.cpp:86
 #, kde-format
 msgid "Copy %1->Output"
-msgstr "Kopyala: %1->Çıktı"
+msgstr "Kopyala: %1 → Çıktı"
 
 #: smalldialogs.cpp:87 smalldialogs.cpp:88 smalldialogs.cpp:89
 #, kde-format
 msgid "Swap %1<->Output"
-msgstr "Takas Yap: %1 <->Çıktı"
+msgstr "Takas Yap: %1 ↔ Çıktı"
 
 #: smalldialogs.cpp:108
 #, kde-format
@@ -3609,11 +3607,11 @@ msgid ""
 "\n"
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
-"Satır-eşleme-önişleme başarısız oldu. Şu komutu inceleyin:\n"
+"Satır eşleme ön işlemesi başarısız oldu. Şu komutu inceleyin:\n"
 "\n"
 "  %1\n"
 "\n"
-"Satır-eşleme-önişleme komutu devre dışı bırakılacak."
+"Satır eşleme ön işlemesi komutu devre dışı bırakılacak."
 
 #: SourceData.cpp:515
 #, kde-format
