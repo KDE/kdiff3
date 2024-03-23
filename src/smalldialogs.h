@@ -105,7 +105,7 @@ class FindDialog: public QDialog
         {
             case eWindowIndex::invalid:
                 qCWarning(kdiffMain) << "FindDialog::nextWindow called with invalid state.";
-                Q_FALLTHROUGH();
+                [[fallthrough]];
             case eWindowIndex::None:
                 currentWindow = eWindowIndex::A;
                 break;
