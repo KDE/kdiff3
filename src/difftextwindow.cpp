@@ -361,7 +361,7 @@ void DiffTextWindow::setupConnections(const KDiff3App* app)
     chk_connect_a(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
     chk_connect_a(app, &KDiff3App::copy, this, &DiffTextWindow::slotCopy);
 
-    connections.push_back(KDiff3App::allowCopy.connect(boost::bind(&DiffTextWindow::canCopy, this)));
+    connections.push_back(StandardMenus::allowCopy.connect(boost::bind(&DiffTextWindow::canCopy, this)));
     connections.push_back(KDiff3App::getSelection.connect(boost::bind(&DiffTextWindow::getSelection, this)));
 }
 

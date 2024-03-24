@@ -72,10 +72,6 @@ bool KDiff3App::m_bTripleDiff = false;
 std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
-boost::signals2::signal<bool(), or_> KDiff3App::allowSave;
-boost::signals2::signal<bool(), or_> KDiff3App::allowSaveAs;
-boost::signals2::signal<bool(), or_> KDiff3App::allowCopy;
-boost::signals2::signal<bool(), or_> KDiff3App::allowCut;
 
 /*
     To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
@@ -348,14 +344,14 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     m_pMergeResultWindow->setupConnections(this);
     m_pDirectoryMergeWindow->setupConnections(this);
 
-    chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, stdMenus, &StandardMenus::slotClipboardChanged);
+    chk_connect(QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() { stdMenus->StandardMenus::slotClipboardChanged(); });
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
     chk_connect_a(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
-    connections.push_back(allowSave.connect(boost::bind(&KDiff3App::canSave, this)));
-    connections.push_back(allowSaveAs.connect(boost::bind(&KDiff3App::canSaveAs, this)));
-    connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
-    connections.push_back(allowCopy.connect(boost::bind(&KDiff3App::canCopy, this)));
+    connections.push_back(StandardMenus::allowSave.connect(boost::bind(&KDiff3App::canSave, this)));
+    connections.push_back(StandardMenus::allowSaveAs.connect(boost::bind(&KDiff3App::canSaveAs, this)));
+    connections.push_back(StandardMenus::allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
+    connections.push_back(StandardMenus::allowCopy.connect(boost::bind(&KDiff3App::canCopy, this)));
 
     chk_connect_a(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
     chk_connect_a(this, &KDiff3App::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
@@ -532,7 +528,7 @@ bool KDiff3App::canSave()
 /*canSaveAs*/
 bool KDiff3App::canSaveAs()
 {
-    return (m_bOutputModified && allowSave());
+    return (m_bOutputModified && StandardMenus::allowSave());
 }
 
 /*

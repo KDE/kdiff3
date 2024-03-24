@@ -12,6 +12,11 @@
 #include <KActionCollection>
 #include <KStandardAction>
 
+boost::signals2::signal<bool(), or_> StandardMenus::allowSave;
+boost::signals2::signal<bool(), or_> StandardMenus::allowSaveAs;
+boost::signals2::signal<bool(), or_> StandardMenus::allowCopy;
+boost::signals2::signal<bool(), or_> StandardMenus::allowCut;
+
 void StandardMenus::setup(KDiff3App* app, KActionCollection* ac)
 {
     fileOpen = KStandardAction::open(app, &KDiff3App::slotFileOpen, ac);
@@ -64,10 +69,10 @@ void StandardMenus::slotClipboardChanged()
 
 void StandardMenus::updateAvailabilities()
 {
-    fileSave->setEnabled(KDiff3App::allowSave());
-    fileSaveAs->setEnabled(KDiff3App::allowSaveAs());
+    fileSave->setEnabled(allowSave());
+    fileSaveAs->setEnabled(allowSaveAs());
 
     editUndo->setEnabled(false); //Not yet implemented but planned.
-    editCut->setEnabled(KDiff3App::allowCut());
-    editCopy->setEnabled(KDiff3App::allowCopy());
+    editCut->setEnabled(allowCut());
+    editCopy->setEnabled(allowCopy());
 }

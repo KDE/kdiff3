@@ -11,14 +11,11 @@
 #ifndef KDIFF3_H
 #define KDIFF3_H
 
-#include "combiners.h"
 #include "defmac.h"
 #include "diff.h"
 #include "SourceData.h"
 #include "StandardMenus.h"
 #include "TypeUtils.h"
-
-#include <boost/signals2.hpp>
 
 #include <memory>
 
@@ -60,6 +57,8 @@ class KActionCollection;
 class KDiff3Shell;
 class DirectoryMergeWindow;
 class DirectoryMergeInfo;
+
+class StandardMenus;
 
 class ReversibleScrollBar : public QScrollBar
 {
@@ -160,11 +159,7 @@ class KDiff3App: public QMainWindow
 
     [[nodiscard]] KActionCollection* actionCollection() const;
 
-    static boost::signals2::signal<QString (), FirstNonEmpty<QString>> getSelection;
-    static boost::signals2::signal<bool(), or_> allowSave;
-    static boost::signals2::signal<bool(), or_> allowSaveAs;
-    static boost::signals2::signal<bool(), or_> allowCopy;
-    static boost::signals2::signal<bool(), or_> allowCut;
+    static boost::signals2::signal<QString(), FirstNonEmpty<QString>> getSelection;
 
     bool canContinue();
 
@@ -348,7 +343,7 @@ public Q_SLOTS:
     bool canCut();
     bool canCopy();
 
-    QPointer<class StandardMenus> stdMenus = new StandardMenus(this);
+    std::unique_ptr<StandardMenus> stdMenus = std::make_unique<StandardMenus>();
     KToggleAction* viewStatusBar = nullptr;
 
     QPointer<QShortcut> mEscapeAction;

@@ -9,21 +9,27 @@
 #ifndef STANDARDMENUS_H
 #define STANDARDMENUS_H
 
+#include "combiners.h"
+
+#include <boost/signals2.hpp>
+
 #include <QAction>
 #include <QPointer>
 
 class KDiff3App;
 class KActionCollection;
 
-class StandardMenus: public QObject
+class StandardMenus
 {
-    Q_OBJECT
   public:
-    using QObject::QObject;
+    static boost::signals2::signal<bool(), or_> allowSave;
+    static boost::signals2::signal<bool(), or_> allowSaveAs;
+    static boost::signals2::signal<bool(), or_> allowCopy;
+    static boost::signals2::signal<bool(), or_> allowCut;
+
     void setup(KDiff3App* app, KActionCollection* ac);
     void updateAvailabilities();
 
-  public Q_SLOTS:
     void slotClipboardChanged();
 
   private:

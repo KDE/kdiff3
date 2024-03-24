@@ -195,8 +195,8 @@ void MergeResultWindow::setupConnections(const KDiff3App* app)
 
     chk_connect_a(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
 
-    connections.push_back(KDiff3App::allowCut.connect(boost::bind(&MergeResultWindow::canCut, this)));
-    connections.push_back(KDiff3App::allowCopy.connect(boost::bind(&MergeResultWindow::canCopy, this)));
+    connections.push_back(StandardMenus::allowCut.connect(boost::bind(&MergeResultWindow::canCut, this)));
+    connections.push_back(StandardMenus::allowCopy.connect(boost::bind(&MergeResultWindow::canCopy, this)));
     connections.push_back(KDiff3App::getSelection.connect(boost::bind(&MergeResultWindow::getSelection, this)));
 }
 
