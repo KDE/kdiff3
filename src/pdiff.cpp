@@ -982,51 +982,16 @@ void KDiff3App::slotEditSelectAll()
     slotStatusMsg(i18n("Ready."));
 }
 
-void KDiff3App::slotGoCurrent()
-{
-    Q_EMIT goCurrent();
-}
-
-void KDiff3App::slotGoTop()
-{
-    Q_EMIT goTop();
-}
-
-void KDiff3App::slotGoBottom()
-{
-    Q_EMIT goBottom();
-}
-
-void KDiff3App::slotGoPrevUnsolvedConflict()
-{
-    Q_EMIT goPrevUnsolvedConflict();
-}
-
 void KDiff3App::slotGoNextUnsolvedConflict()
 {
     m_bTimerBlock = false;
     Q_EMIT goNextUnsolvedConflict();
 }
 
-void KDiff3App::slotGoPrevConflict()
-{
-    Q_EMIT goPrevConflict();
-}
-
 void KDiff3App::slotGoNextConflict()
 {
     m_bTimerBlock = false;
     Q_EMIT goNextConflict();
-}
-
-void KDiff3App::slotGoPrevDelta()
-{
-    Q_EMIT goPrevDelta();
-}
-
-void KDiff3App::slotGoNextDelta()
-{
-    Q_EMIT goNextDelta();
 }
 
 void KDiff3App::slotGoToLine()
@@ -1086,39 +1051,11 @@ void KDiff3App::choose(e_SrcSelector choice)
     }
 }
 
-void KDiff3App::slotChooseA()
-{
-    choose(e_SrcSelector::A);
-}
-void KDiff3App::slotChooseB()
-{
-    choose(e_SrcSelector::B);
-}
-void KDiff3App::slotChooseC()
-{
-    choose(e_SrcSelector::C);
-}
-
 void KDiff3App::slotAutoSolve()
 {
     Q_EMIT autoSolve();
 
     Q_EMIT updateAvailabilities();
-}
-
-void KDiff3App::slotUnsolve()
-{
-    Q_EMIT unsolve();
-}
-
-void KDiff3App::slotMergeHistory()
-{
-    Q_EMIT mergeHistory();
-}
-
-void KDiff3App::slotRegExpAutoMerge()
-{
-    Q_EMIT regExpAutoMerge();
 }
 
 void KDiff3App::slotSplitDiff()
