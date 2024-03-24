@@ -920,7 +920,7 @@ void KDiff3App::slotEditPaste()
 {
     slotStatusMsg(i18n("Inserting clipboard contents..."));
 
-    if(m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible())
+    if(m_pMergeResultWindow->isVisible())
     {
         m_pMergeResultWindow->pasteClipboard(false);
     }
@@ -1064,7 +1064,7 @@ void KDiff3App::choose(e_SrcSelector choice)
 {
     if(!m_bTimerBlock)
     {
-        if(m_pDirectoryMergeWindow && m_pDirectoryMergeWindow->hasFocus())
+        if(m_pDirectoryMergeWindow->hasFocus())
         {
             if(choice == e_SrcSelector::A) m_pDirectoryMergeWindow->slotCurrentChooseA();
             if(choice == e_SrcSelector::B) m_pDirectoryMergeWindow->slotCurrentChooseB();
@@ -1074,7 +1074,7 @@ void KDiff3App::choose(e_SrcSelector choice)
             chooseB->setChecked(false);
             chooseC->setChecked(false);
         }
-        else if(m_pMergeResultWindow)
+        else
         {
             m_pMergeResultWindow->choose(choice);
             if(autoAdvance->isChecked())
@@ -1126,22 +1126,19 @@ void KDiff3App::slotSplitDiff()
     LineRef firstLine;
     LineRef lastLine;
     QPointer<DiffTextWindow> pDTW = nullptr;
-    if(m_pDiffTextWindow1)
-    {
-        pDTW = m_pDiffTextWindow1;
-        pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
-    }
-    if(!firstLine.isValid() && m_pDiffTextWindow2)
+    pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
+
+    if(!firstLine.isValid())
     {
         pDTW = m_pDiffTextWindow2;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(!firstLine.isValid() && m_pDiffTextWindow3)
+    if(!firstLine.isValid())
     {
         pDTW = m_pDiffTextWindow3;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(pDTW && firstLine.isValid() && m_pMergeResultWindow)
+    if(pDTW && firstLine.isValid())
     {
         pDTW->resetSelection();
 
@@ -1154,22 +1151,21 @@ void KDiff3App::slotJoinDiffs()
     LineRef firstLine;
     LineRef lastLine;
     QPointer<DiffTextWindow> pDTW = nullptr;
-    if(m_pDiffTextWindow1)
-    {
-        pDTW = m_pDiffTextWindow1;
-        pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
-    }
-    if(!firstLine.isValid() && m_pDiffTextWindow2)
+
+    pDTW = m_pDiffTextWindow1;
+    pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
+
+    if(!firstLine.isValid())
     {
         pDTW = m_pDiffTextWindow2;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(!firstLine.isValid() && m_pDiffTextWindow3)
+    if(!firstLine.isValid())
     {
         pDTW = m_pDiffTextWindow3;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(pDTW && firstLine.isValid() && m_pMergeResultWindow)
+    if(pDTW && firstLine.isValid())
     {
         pDTW->resetSelection();
 
