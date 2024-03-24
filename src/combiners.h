@@ -87,7 +87,7 @@ struct find
     typedef bool result_type;
     template <typename InputIterator> bool operator()(InputIterator first, InputIterator last) const
     {
-        // If there are no slots to call, just return true
+        // If there are no slots to call, just return false
         if(first == last)
             return false;
 
