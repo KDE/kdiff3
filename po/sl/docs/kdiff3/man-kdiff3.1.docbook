@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Slovenian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Uporabniški priročnik KDiff3</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>KDiff3 man page.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>22.02.2019</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Orodje za primerjavo in spajanje datotek in map</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Opis</title>
+<para
+>Primerja dve ali tri vhodne datoteke ali mape.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Možnosti</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Prezrto. (Uporabniško določeno.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Prezrto. (Uporabniško določeno.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Prezrto. (Uporabniško določeno.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Prezrto. (Uporabniško določeno.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Združi vnos. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>datoteka</replaceable
+></term>
+<listitem
+><para
+>Eksplicitna osnovna datoteka. Zaradi združljivosti z določenimi orodji. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>datoteka</replaceable
+></term>
+<listitem
+><para
+>Izhodna datoteka. Pomeni -m. &eg;: -o novadatoteka.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>datoteka</replaceable
+></term>
+<listitem
+><para
+>Spet izhodna datoteka. (Zaradi združljivosti z določenimi orodji.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>Brez grafičnega uporabniškega vmesnika, če so vsi konflikti samodejno rešljivi. (Potrebuje <option
+>-o</option
+> <replaceable
+>datoteka</replaceable
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>Prezri --auto in vedno prikaži grafični uporabniški vmesnik. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></term>
+<listitem
+><para
+>Vidna zamenjava imena za vhodno datoteko 1 (osnovno). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></term>
+<listitem
+><para
+>Vidna zamenjava imena za vhodno datoteko 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></term>
+<listitem
+><para
+>Vidna zamenjava imena za vhodno datoteko 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></term>
+<listitem
+><para
+>Alternativna vidna zamenjava imena. To navedite PO enkrat za vsak vnos.​ </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></term>
+<listitem
+><para
+>Preglasi nastavitev konfiguracije. Uporabite po enkrat za vsako nastavitev. &eg;: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Pokaže seznam nastavitev konfiguracije in trenutnih vrednosti. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>datoteka</replaceable
+></term>
+<listitem
+><para
+>Uporabi drugo datoteko config. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Datoteka1</replaceable
+></option
+></term>
+<listitem
+><para
+>datoteka1 za odpiranje (osnova, če ni podana prek --<option
+>base</option
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Datoteka2</replaceable
+></option
+></term>
+<listitem
+><para
+>datoteka2 za odpiranje </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Datoteka3</replaceable
+></option
+></term>
+<listitem
+><para
+>datoteka3 za odpiranje </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Glejte tudi</title>
+<simplelist>
+<member
+>Podrobnejša uporabniška dokumentacija je na voljo na <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (vnesite bodisi to &URL; v &konqueror;, ali zaženite <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Avtorji</title>
+<para
+>To stran priročnika je napisal &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>
