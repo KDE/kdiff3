@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-18 00:40+0000\n"
+"POT-Creation-Date: 2024-03-27 09:15+0000\n"
 "PO-Revision-Date: 2024-01-10 12:37+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -161,7 +161,7 @@ msgstr "Estil del salt de línia: %1"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: difftextwindow.cpp:2019 kdiff3.cpp:1070
+#: difftextwindow.cpp:2019 kdiff3.cpp:1066
 #, kde-format
 msgid "Top line"
 msgstr "Línia superior"
@@ -362,8 +362,8 @@ msgstr ""
 "Actualment esteu fent una fusió de carpetes. Segur que voleu interrompre la "
 "fusió i tornar a explorar la carpeta?"
 
-#: directorymergewindow.cpp:696 kdiff3.cpp:927 kdiff3.cpp:937 kdiff3.cpp:949
-#: mergeresultwindow.cpp:313 pdiff.cpp:718 pdiff.cpp:1573 pdiff.cpp:1583
+#: directorymergewindow.cpp:696 kdiff3.cpp:923 kdiff3.cpp:933 kdiff3.cpp:945
+#: mergeresultwindow.cpp:313 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1151,90 +1151,90 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Canvia la lletra"
 
-#: kdiff3.cpp:170
+#: kdiff3.cpp:166
 #, kde-format
 msgid "Current Configuration:"
 msgstr "Configuració actual:"
 
-#: kdiff3.cpp:175
+#: kdiff3.cpp:171
 #, kde-format
 msgid "Config Option Error:"
 msgstr "Error de l'opció de configuració:"
 
-#: kdiff3.cpp:230
+#: kdiff3.cpp:226
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr ""
 "Heu usat l'opció --auto, però no heu especificat cap fitxer de sortida."
 
-#: kdiff3.cpp:366
+#: kdiff3.cpp:362
 #, kde-format
 msgid "Directory merge"
 msgstr "Fusió de directoris"
 
-#: kdiff3.cpp:371
+#: kdiff3.cpp:367
 #, kde-format
 msgid "Merge info"
 msgstr "Informació de la fusió"
 
-#: kdiff3.cpp:625
+#: kdiff3.cpp:621
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr "No es pot comparar un fitxer amb una carpeta."
 
-#: kdiff3.cpp:626
+#: kdiff3.cpp:622
 #, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr "Intent de comparació incorrecta"
 
-#: kdiff3.cpp:635
+#: kdiff3.cpp:631
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "L'opció --auto s'ignora en comparar carpetes."
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Saving failed."
 msgstr "El desament ha fallat."
 
-#: kdiff3.cpp:722 pdiff.cpp:783
+#: kdiff3.cpp:718 pdiff.cpp:783
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Ha fallat en obrir aquests fitxers:"
 
-#: kdiff3.cpp:731 pdiff.cpp:792
+#: kdiff3.cpp:727 pdiff.cpp:792
 #, kde-format
 msgid "File open error"
 msgstr "S'ha produït un error en obrir el fitxer"
 
-#: kdiff3.cpp:771
+#: kdiff3.cpp:767
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Activa/desactiva la barra d'estat"
 
-#: kdiff3.cpp:774
+#: kdiff3.cpp:770
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Configura el KDiff3..."
 
-#: kdiff3.cpp:780
+#: kdiff3.cpp:776
 #, kde-format
 msgid "Search for a string"
 msgstr "Cerca una cadena"
 
-#: kdiff3.cpp:782
+#: kdiff3.cpp:778
 #, kde-format
 msgid "Search again for the string"
 msgstr "Torna a cercar la cadena"
 
-#: kdiff3.cpp:801
+#: kdiff3.cpp:797
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Ves a la diferència actual"
 
-#: kdiff3.cpp:801
+#: kdiff3.cpp:797
 #, kde-format
 msgid ""
 "Current\n"
@@ -1243,12 +1243,12 @@ msgstr ""
 "Diferència\n"
 "actual"
 
-#: kdiff3.cpp:803
+#: kdiff3.cpp:799
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Ves a la primera diferència"
 
-#: kdiff3.cpp:803
+#: kdiff3.cpp:799
 #, kde-format
 msgid ""
 "First\n"
@@ -1257,12 +1257,12 @@ msgstr ""
 "Primera\n"
 "diferència"
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:801
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Ves a l'última diferència"
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:801
 #, kde-format
 msgid ""
 "Last\n"
@@ -1272,7 +1272,7 @@ msgstr ""
 "diferència"
 
 # skip-rule: punctuation-period-no
-#: kdiff3.cpp:807
+#: kdiff3.cpp:803
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1281,7 +1281,7 @@ msgstr ""
 "blanc» està desactivat)."
 
 # skip-rule: punctuation-period-no
-#: kdiff3.cpp:808
+#: kdiff3.cpp:804
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1291,12 +1291,12 @@ msgstr ""
 "(No s'ignoren les diferències en els espais en blanc quan «Mostra els espais "
 "en blanc» està desactivat)."
 
-#: kdiff3.cpp:809
+#: kdiff3.cpp:805
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Ves a la diferència anterior"
 
-#: kdiff3.cpp:809
+#: kdiff3.cpp:805
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1305,12 +1305,12 @@ msgstr ""
 "Diferència\n"
 "anterior"
 
-#: kdiff3.cpp:811
+#: kdiff3.cpp:807
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Ves a la diferència següent"
 
-#: kdiff3.cpp:811
+#: kdiff3.cpp:807
 #, kde-format
 msgid ""
 "Next\n"
@@ -1319,12 +1319,12 @@ msgstr ""
 "Diferència\n"
 "següent"
 
-#: kdiff3.cpp:813
+#: kdiff3.cpp:809
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Ves al conflicte anterior"
 
-#: kdiff3.cpp:813
+#: kdiff3.cpp:809
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1333,12 +1333,12 @@ msgstr ""
 "Conflicte\n"
 "anterior"
 
-#: kdiff3.cpp:815
+#: kdiff3.cpp:811
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Ves al conflicte següent"
 
-#: kdiff3.cpp:815
+#: kdiff3.cpp:811
 #, kde-format
 msgid ""
 "Next\n"
@@ -1347,12 +1347,12 @@ msgstr ""
 "Conflicte\n"
 "següent"
 
-#: kdiff3.cpp:817
+#: kdiff3.cpp:813
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Ves al conflicte no resolt anterior"
 
-#: kdiff3.cpp:817
+#: kdiff3.cpp:813
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1361,12 +1361,12 @@ msgstr ""
 "No resolt\n"
 "anterior"
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:815
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Ves al conflicte no resolt següent"
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:815
 #, kde-format
 msgid ""
 "Next\n"
@@ -1375,13 +1375,13 @@ msgstr ""
 "No resolt\n"
 "següent"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:817
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Ves a la línia"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:817
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1391,19 +1391,19 @@ msgstr ""
 "Va a la\n"
 "línia"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:818
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Va a la línia especificada."
 
-#: kdiff3.cpp:823
+#: kdiff3.cpp:819
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Selecciona línies d'A"
 
-#: kdiff3.cpp:823
+#: kdiff3.cpp:819
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1413,13 +1413,13 @@ msgstr ""
 "Escull\n"
 "A"
 
-#: kdiff3.cpp:824
+#: kdiff3.cpp:820
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Selecciona línies de B"
 
-#: kdiff3.cpp:824
+#: kdiff3.cpp:820
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1429,13 +1429,13 @@ msgstr ""
 "Escull\n"
 "B"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:821
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Selecciona línies de C"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:821
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1445,7 +1445,7 @@ msgstr ""
 "Escull\n"
 "C"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:822
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
@@ -1453,7 +1453,7 @@ msgstr ""
 "Ves automàticament al conflicte no resolt següent després de seleccionar una "
 "font"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:822
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1463,12 +1463,12 @@ msgstr ""
 "Automàticament\n"
 "al següent"
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:824
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Mostra els caràcters d'espai en blanc i els de tabulació"
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:824
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1478,12 +1478,12 @@ msgstr ""
 "Caràcters\n"
 "en blanc"
 
-#: kdiff3.cpp:829
+#: kdiff3.cpp:825
 #, kde-format
 msgid "Show White Space"
 msgstr "Mostra els espais en blanc"
 
-#: kdiff3.cpp:829
+#: kdiff3.cpp:825
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1493,12 +1493,12 @@ msgstr ""
 "Diferències\n"
 "d'espais"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:827
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Mostra els números de les línies"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:827
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1508,196 +1508,196 @@ msgstr ""
 "Números\n"
 "de línia"
 
-#: kdiff3.cpp:833
+#: kdiff3.cpp:829
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Resol automàticament els conflictes senzills"
 
-#: kdiff3.cpp:834
+#: kdiff3.cpp:830
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Estableix les diferències com a conflictes"
 
-#: kdiff3.cpp:835
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Executa la fusió automàtica amb l'expressió regular"
 
-#: kdiff3.cpp:836
+#: kdiff3.cpp:832
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Resol automàticament els conflictes cronològics"
 
-#: kdiff3.cpp:837
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Divideix les diferències a la selecció"
 
-#: kdiff3.cpp:838
+#: kdiff3.cpp:834
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Uneix les diferències seleccionades"
 
-#: kdiff3.cpp:840
+#: kdiff3.cpp:836
 #, kde-format
 msgid "Show Window A"
 msgstr "Mostra la finestra A"
 
-#: kdiff3.cpp:841
+#: kdiff3.cpp:837
 #, kde-format
 msgid "Show Window B"
 msgstr "Mostra la finestra B"
 
-#: kdiff3.cpp:842
+#: kdiff3.cpp:838
 #, kde-format
 msgid "Show Window C"
 msgstr "Mostra la finestra C"
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:840
 #, kde-format
 msgid "Normal Overview"
 msgstr "Visió de conjunt normal"
 
-#: kdiff3.cpp:845
+#: kdiff3.cpp:841
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Visió de conjunt d'A contra B"
 
-#: kdiff3.cpp:846
+#: kdiff3.cpp:842
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Visió de conjunt d'A contra C"
 
-#: kdiff3.cpp:847
+#: kdiff3.cpp:843
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Visió de conjunt de B contra C"
 
-#: kdiff3.cpp:848
+#: kdiff3.cpp:844
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Ajusta les línies a les finestres de diferències"
 
-#: kdiff3.cpp:849
+#: kdiff3.cpp:845
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Afegeix alineació manual de les diferències"
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:846
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Neteja totes les alineacions manuals de les diferències"
 
-#: kdiff3.cpp:852
+#: kdiff3.cpp:848
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Focus a la finestra següent"
 
-#: kdiff3.cpp:853
+#: kdiff3.cpp:849
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Focus a la finestra anterior"
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Commuta l'orientació de les divisions"
 
-#: kdiff3.cpp:856
+#: kdiff3.cpp:852
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Vista de pantalla dividida en carpetes i text"
 
-#: kdiff3.cpp:858
+#: kdiff3.cpp:854
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Commuta entre la vista de carpetes i text"
 
-#: kdiff3.cpp:880 kdiff3.cpp:982 kdiff3.cpp:1007 kdiff3.cpp:1266 pdiff.cpp:802
+#: kdiff3.cpp:876 kdiff3.cpp:978 kdiff3.cpp:1003 kdiff3.cpp:1262 pdiff.cpp:802
 #: pdiff.cpp:871 pdiff.cpp:907 pdiff.cpp:916 pdiff.cpp:974 pdiff.cpp:982
 #, kde-format
 msgid "Ready."
 msgstr "Preparat."
 
-#: kdiff3.cpp:926 pdiff.cpp:1572
+#: kdiff3.cpp:922 pdiff.cpp:1505
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultat de la fusió no s'ha desat."
 
-#: kdiff3.cpp:928
+#: kdiff3.cpp:924
 #, kde-format
 msgid "Save && Quit"
 msgstr "Desa i surt"
 
-#: kdiff3.cpp:929
+#: kdiff3.cpp:925
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Surt sense desar"
 
-#: kdiff3.cpp:937 pdiff.cpp:1583
+#: kdiff3.cpp:933 pdiff.cpp:1516
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Ha fallat en desar el resultat de la fusió."
 
-#: kdiff3.cpp:948 pdiff.cpp:717
+#: kdiff3.cpp:944 pdiff.cpp:717
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
 "Actualment esteu fent una fusió de carpetes. Segur que la voleu interrompre?"
 
-#: kdiff3.cpp:971
+#: kdiff3.cpp:967
 #, kde-format
 msgid "Saving file..."
 msgstr "S'està desant el fitxer..."
 
-#: kdiff3.cpp:988
+#: kdiff3.cpp:984
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "S'està desant el fitxer amb un nom nou..."
 
-#: kdiff3.cpp:990
+#: kdiff3.cpp:986
 #, kde-format
 msgid "Save As..."
 msgstr "Desa com a..."
 
-#: kdiff3.cpp:1014
+#: kdiff3.cpp:1010
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Impressió no implementada."
 
-#: kdiff3.cpp:1054
+#: kdiff3.cpp:1050
 #, kde-format
 msgid "Printing..."
 msgstr "S'està imprimint..."
 
-#: kdiff3.cpp:1152
+#: kdiff3.cpp:1148
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "S'està imprimint la pàgina %1 de %2"
 
-#: kdiff3.cpp:1200
+#: kdiff3.cpp:1196
 #, kde-format
 msgid " (Selection)"
 msgstr " (Selecció)"
 
-#: kdiff3.cpp:1229
+#: kdiff3.cpp:1225
 #, kde-format
 msgid "Printing completed."
 msgstr "Impressió completada."
 
-#: kdiff3.cpp:1233
+#: kdiff3.cpp:1229
 #, kde-format
 msgid "Printing aborted."
 msgstr "S'ha interromput la impressió."
 
-#: kdiff3.cpp:1240
+#: kdiff3.cpp:1236
 #, kde-format
 msgid "Exiting..."
 msgstr "S'està sortint..."
 
-#: kdiff3.cpp:1250
+#: kdiff3.cpp:1246
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Commuta la barra d'estat..."
@@ -3392,53 +3392,53 @@ msgstr "S'està copiant la selecció al porta-retalls..."
 msgid "Inserting clipboard contents..."
 msgstr "S'està inserint el contingut del porta-retalls..."
 
-#: pdiff.cpp:1041
+#: pdiff.cpp:1006
 #, kde-format
 msgid "Ok"
 msgstr "D'acord"
 
-#: pdiff.cpp:1057
+#: pdiff.cpp:1022
 #, kde-format
 msgid "Go to Line"
 msgstr "Ves a la línia"
 
-#: pdiff.cpp:1351
+#: pdiff.cpp:1284
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajust de paraula (Cancel·la desactiva l'ajust de paraula)"
 
-#: pdiff.cpp:1351
+#: pdiff.cpp:1284
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "S'està calculant l'amplada màxima per a la barra de desplaçament horitzontal"
 
-#: pdiff.cpp:1574
+#: pdiff.cpp:1507
 #, kde-format
 msgid "Save && Continue"
 msgstr "Desa i continua"
 
-#: pdiff.cpp:1575
+#: pdiff.cpp:1508
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continua sense desar"
 
-#: pdiff.cpp:1773
+#: pdiff.cpp:1706
 #, kde-format
 msgid "Search complete."
 msgstr "S'ha finalitzat la cerca."
 
-#: pdiff.cpp:1773
+#: pdiff.cpp:1706
 #, kde-format
 msgid "Search Complete"
 msgstr "Cerca completa"
 
-#: pdiff.cpp:1954
+#: pdiff.cpp:1887
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "No hi ha res seleccionat en cap de les finestres de diferències."
 
-#: pdiff.cpp:1954
+#: pdiff.cpp:1887
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Error en afegir un interval manual de diferències"
@@ -3660,57 +3660,57 @@ msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Ha fallat en llegir el fitxer: %1"
 
-#: StandardMenus.cpp:18
+#: StandardMenus.cpp:23
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Obre els documents per a comparar-los..."
 
-#: StandardMenus.cpp:20
+#: StandardMenus.cpp:25
 #, kde-format
 msgid "Reload"
 msgstr "Recarrega"
 
-#: StandardMenus.cpp:23
+#: StandardMenus.cpp:28
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "Desa el resultat de la fusió. S'han de resoldre tots els conflictes!"
 
-#: StandardMenus.cpp:25
+#: StandardMenus.cpp:30
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Desa el document actual com a..."
 
-#: StandardMenus.cpp:28
+#: StandardMenus.cpp:33
 #, kde-format
 msgid "Print the differences"
 msgstr "Imprimeix les diferències"
 
-#: StandardMenus.cpp:31
+#: StandardMenus.cpp:36
 #, kde-format
 msgid "Quits the application"
 msgstr "Surt de l'aplicació"
 
-#: StandardMenus.cpp:35
+#: StandardMenus.cpp:40
 #, kde-format
 msgid "Undo last action."
 msgstr "Desfà l'última acció."
 
-#: StandardMenus.cpp:39
+#: StandardMenus.cpp:44
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Retalla la secció seleccionada i la posa al porta-retalls"
 
-#: StandardMenus.cpp:42
+#: StandardMenus.cpp:47
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Copia la secció seleccionada al porta-retalls"
 
-#: StandardMenus.cpp:44
+#: StandardMenus.cpp:49
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Enganxa el contingut del porta-retalls a la posició actual"
 
-#: StandardMenus.cpp:47
+#: StandardMenus.cpp:52
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Selecciona tot el que hi ha a la finestra actual"
