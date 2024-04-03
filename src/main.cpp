@@ -96,7 +96,7 @@ qint32 main(qint32 argc, char* argv[])
 
     const QString description = i18n("Tool for Comparison and Merge of Files and Folders");
     const QString copyright = i18n("(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port");
-    const QString homePage = QStringLiteral("https://kde.org/applications/development/kdiff3");
+    const QString homePage = QStringLiteral("https://apps.kde.org/kdiff3");
 
     KAboutData aboutData(appName, i18nName,
                          appVersion, description, KAboutLicense::GPL_V2, copyright, QString(),
