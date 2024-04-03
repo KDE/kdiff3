@@ -3,10 +3,13 @@
 SPDX-FileCopyrightText: 2023 Michael Reeves reeves.87@gmail.com
 SPDX-License-Identifier: GPL-2.0-or-later
 -->
-<component type="desktop">
+<component type="desktop-application">
   <id>org.kde.kdiff3.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-or-later</project_license>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+  </developer>
   <name>KDiff3</name>
   <name xml:lang="ast">KDiff3</name>
   <name xml:lang="bg">KDiff3</name>
@@ -408,6 +411,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <provides>
     <binary>kdiff3</binary>
   </provides>
+  <launchable type="desktop-id">org.kde.kdiff3.desktop</launchable>
   <releases>
     <release version="1.10.7" date="2023-12-29"/>
     <release version="1.10.6" date="2023-09-25"/>
