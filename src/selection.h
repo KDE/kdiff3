@@ -24,8 +24,8 @@ class Selection
     LineRef firstLine;
     LineRef lastLine;
 
-    QtSizeType firstPos = -1;
-    QtSizeType lastPos = -1;
+    qsizetype firstPos = -1;
+    qsizetype lastPos = -1;
 
     LineRef oldFirstLine;
     LineRef oldLastLine;
@@ -34,8 +34,8 @@ class Selection
     [[nodiscard]] inline LineRef getFirstLine() const { return firstLine; };
     [[nodiscard]] inline LineRef getLastLine() const { return lastLine; };
 
-    [[nodiscard]] inline QtSizeType getFirstPos() const { return firstPos; };
-    [[nodiscard]] inline QtSizeType getLastPos() const { return lastPos; };
+    [[nodiscard]] inline qsizetype getFirstPos() const { return firstPos; };
+    [[nodiscard]] inline qsizetype getLastPos() const { return lastPos; };
 
     [[nodiscard]] inline bool isValidFirstLine() const { return firstLine.isValid(); }
     inline void clearOldSelection() { oldLastLine.invalidate(), oldFirstLine.invalidate(); };
@@ -52,13 +52,13 @@ class Selection
         lastLine.invalidate();
     }
 
-    void start(LineRef l, QtSizeType p)
+    void start(LineRef l, qsizetype p)
     {
         firstLine = l;
         firstPos = p;
     }
 
-    void end(LineRef l, QtSizeType p)
+    void end(LineRef l, qsizetype p)
     {
         if(!oldLastLine.isValid())
             oldLastLine = lastLine;
@@ -66,11 +66,11 @@ class Selection
         lastPos = p;
     }
 
-    [[nodiscard]] bool within(LineRef l, QtSizeType p) const;
+    [[nodiscard]] bool within(LineRef l, qsizetype p) const;
     [[nodiscard]] bool lineWithin(LineRef l) const;
 
-    [[nodiscard]] QtSizeType firstPosInLine(LineRef l) const;
-    [[nodiscard]] QtSizeType lastPosInLine(LineRef l) const;
+    [[nodiscard]] qsizetype firstPosInLine(LineRef l) const;
+    [[nodiscard]] qsizetype lastPosInLine(LineRef l) const;
 
     [[nodiscard]] LineRef beginLine() const
     {
@@ -84,12 +84,12 @@ class Selection
         return std::max(firstLine, lastLine);
     }
 
-    [[nodiscard]] QtSizeType beginPos() const { return firstLine == lastLine ? std::min(firstPos, lastPos) :
-                                                       firstLine < lastLine  ? (!firstLine.isValid() ? 0 : firstPos) :
-                                                                               (!lastLine.isValid() ? 0 : lastPos); }
-    [[nodiscard]] QtSizeType endPos() const { return firstLine == lastLine ? std::max(firstPos, lastPos) :
-                                                     firstLine < lastLine  ? lastPos :
-                                                                             firstPos; }
+    [[nodiscard]] qsizetype beginPos() const { return firstLine == lastLine ? std::min(firstPos, lastPos) :
+                                                      firstLine < lastLine  ? (!firstLine.isValid() ? 0 : firstPos) :
+                                                                              (!lastLine.isValid() ? 0 : lastPos); }
+    [[nodiscard]] qsizetype endPos() const { return firstLine == lastLine ? std::max(firstPos, lastPos) :
+                                                    firstLine < lastLine  ? lastPos :
+                                                                            firstPos; }
 };
 
 #endif

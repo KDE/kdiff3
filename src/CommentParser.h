@@ -51,11 +51,11 @@ class DefaultCommentParser : public CommentParser
 
     struct CommentRange
     {
-          QtSizeType startOffset = 0;
-          QtSizeType endOffset = 0;
+        qsizetype startOffset = 0;
+        qsizetype endOffset = 0;
     };
 
-    QtSizeType offset = -1;
+    qsizetype offset = -1;
 
     CommentRange lastComment;
 

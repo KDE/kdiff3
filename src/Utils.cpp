@@ -33,7 +33,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
 {
     program = QString();
     args.clear();
-    for(QtSizeType i = 0; i < cmd.length(); ++i)
+    for(qsizetype i = 0; i < cmd.length(); ++i)
     {
         while(i < cmd.length() && cmd[i].isSpace())
         {
@@ -43,7 +43,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
         {
             QChar quoteChar = cmd[i];
             ++i;
-            QtSizeType argStart = i;
+            qsizetype argStart = i;
             bool bSkip = false;
             while(i < cmd.length() && (cmd[i] != quoteChar || bSkip))
             {
@@ -74,7 +74,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
         }
         else
         {
-            QtSizeType argStart = i;
+            qsizetype argStart = i;
             while(i < cmd.length() && (!cmd[i].isSpace() /*|| bSkip*/))
             {
                 if(cmd[i] == '"' || cmd[i] == '\'')
@@ -127,9 +127,9 @@ bool Utils::isCTokenChar(QChar c)
 
 //TODO: Needed? Only user of isCTokenChar.
 /// Calculate where a token starts and ends, given the x-position on screen.
-void Utils::calcTokenPos(const QString& s, qint32 posOnScreen, QtSizeType& pos1, QtSizeType& pos2)
+void Utils::calcTokenPos(const QString& s, qint32 posOnScreen, qsizetype& pos1, qsizetype& pos2)
 {
-    QtSizeType pos = std::max(0, posOnScreen);
+    qsizetype pos = std::max(0, posOnScreen);
     if(pos >= s.length())
     {
         pos1 = s.length();
@@ -156,7 +156,7 @@ QString Utils::calcHistoryLead(const QString& s)
     static const QRegularExpression nonWhitespace("\\S"), whitespace("\\s");
 
     // Return the start of the line until the first white char after the first non white char.
-    QtSizeType i = s.indexOf(nonWhitespace);
+    qsizetype i = s.indexOf(nonWhitespace);
     if(i == -1)
         return QString("");
 

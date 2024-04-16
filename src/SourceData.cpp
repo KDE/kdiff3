@@ -571,7 +571,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
     QString line;
     QChar curChar, prevChar = '\0';
     LineType lines = 0;
-    QtSizeType lastOffset = 0;
+    qsizetype lastOffset = 0;
     FileOffset skipBytes = 0;
     std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
 
@@ -591,7 +591,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     try
     {
-        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
+        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (qsizetype)(mDataSize - skipBytes));
         EncodedDataStream ds(ba);
 
         mHasBOM = skipBytes != 0;
@@ -622,7 +622,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
             else
                 skipNextRead = false;
 
-            QtSizeType firstNonwhite = 0;
+            qsizetype firstNonwhite = 0;
             bool foundNonWhite = false;
 
             while(curChar != '\n' && curChar != '\r')
@@ -758,11 +758,11 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray
 
 std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
 {
-    QtSizeType encodingPos = s.indexOf(encodingTag);
+    qsizetype encodingPos = s.indexOf(encodingTag);
     if(encodingPos >= 0)
     {
-        QtSizeType apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
-        QtSizeType apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
+        qsizetype apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
+        qsizetype apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
         char apostroph = '"';
         if(apostroph2Pos >= 0 && (apostrophPos < 0 || apostroph2Pos < apostrophPos))
         {
@@ -770,7 +770,7 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
             apostrophPos = apostroph2Pos;
         }
 
-        QtSizeType encodingEnd = s.indexOf(apostroph, apostrophPos + 1);
+        qsizetype encodingEnd = s.indexOf(apostroph, apostrophPos + 1);
         if(encodingEnd >= 0) // e.g.: <meta charset="utf-8"> or <?xml version="1.0" encoding="ISO-8859-1"?>
         {
             QByteArray encoding = s.mid(apostrophPos + 1, encodingEnd - (apostrophPos + 1));
@@ -817,14 +817,14 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
         We don't need the whole file here just the header.
     */
     if(size <= 5000)
-        s = QByteArray(buf, (QtSizeType)size);
+        s = QByteArray(buf, (qsizetype)size);
     else
         s = QByteArray(buf, 5000);
 
-    QtSizeType xmlHeaderPos = s.indexOf("<?xml");
+    qsizetype xmlHeaderPos = s.indexOf("<?xml");
     if(xmlHeaderPos >= 0)
     {
-        QtSizeType xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
+        qsizetype xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
         if(xmlHeaderEnd >= 0)
         {
             std::optional<const char*> encoding = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
@@ -834,10 +834,10 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
     }
     else // HTML
     {
-        QtSizeType metaHeaderPos = s.indexOf("<meta");
+        qsizetype metaHeaderPos = s.indexOf("<meta");
         while(metaHeaderPos >= 0)
         {
-            QtSizeType metaHeaderEnd = s.indexOf(">", metaHeaderPos);
+            qsizetype metaHeaderEnd = s.indexOf(">", metaHeaderPos);
             if(metaHeaderEnd >= 0)
             {
                 std::optional<const char*> encoding = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");

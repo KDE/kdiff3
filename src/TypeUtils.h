@@ -19,11 +19,6 @@
 #include <boost/safe_numerics/safe_integer.hpp>
 #include <boost/safe_numerics/safe_integer_range.hpp>
 
-#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-using QtSizeType = qint32;
-#else
-using QtSizeType = qsizetype;
-#endif
 using FileOffset = quint64;
 using PtrDiffRef = size_t;
 
@@ -47,6 +42,6 @@ using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, K
 constexpr static qint32 maxNofRecentFiles = 10;
 constexpr static qint32 maxNofRecentCodecs = 5;
 
-static_assert(sizeof(FileOffset) >= sizeof(QtSizeType), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
+static_assert(sizeof(FileOffset) >= sizeof(qsizetype), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
 
 #endif

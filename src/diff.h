@@ -159,15 +159,15 @@ class LineData
 {
   private:
     QSharedPointer<QString> mBuffer;
-    QtSizeType mFirstNonWhiteChar = 0;
+    qsizetype mFirstNonWhiteChar = 0;
     //This tracks the offset with-in our unicode buffer not the file offset
-    QtSizeType mOffset = 0;
-    QtSizeType mSize = 0;
+    qsizetype mOffset = 0;
+    qsizetype mSize = 0;
     bool bContainsPureComment = false;
     bool bSkipable = false;//TODO: Move me
 
   public:
-    inline LineData(const QSharedPointer<QString>& buffer, const QtSizeType inOffset, QtSizeType inSize = 0, QtSizeType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
+    inline LineData(const QSharedPointer<QString>& buffer, const qsizetype inOffset, qsizetype inSize = 0, qsizetype inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
@@ -176,8 +176,8 @@ class LineData
         bSkipable = inIsSkipable;
         mFirstNonWhiteChar = inFirstNonWhiteChar;
     }
-    [[nodiscard]] inline QtSizeType size() const { return mSize; }
-    [[nodiscard]] inline QtSizeType getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
+    [[nodiscard]] inline qsizetype size() const { return mSize; }
+    [[nodiscard]] inline qsizetype getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
     /*
         QString::fromRawData allows us to create a light weight QString backed by the buffer memory.
@@ -185,7 +185,7 @@ class LineData
     [[nodiscard]] inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
     [[nodiscard]] inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
 
-    [[nodiscard]] inline QtSizeType getOffset() const { return mOffset; }
+    [[nodiscard]] inline qsizetype getOffset() const { return mOffset; }
     [[nodiscard]] qint32 width(qint32 tabSize) const; // Calcs width considering tabs.
 
     [[nodiscard]] inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }

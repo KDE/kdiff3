@@ -82,8 +82,8 @@ class MergeResultWindow: public QWidget
     [[nodiscard]] bool isUnsolvedConflictAtCurrent() const;
     [[nodiscard]] bool isUnsolvedConflictAboveCurrent() const;
     [[nodiscard]] bool isUnsolvedConflictBelowCurrent() const;
-    bool findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(LineType firstLine, QtSizeType startPos, LineType lastLine, QtSizeType endPos);
+    bool findString(const QString& s, LineRef& d3vLine, qsizetype& posInLine, bool bDirDown, bool bCaseSensitive);
+    void setSelection(LineType firstLine, qsizetype startPos, LineType lastLine, qsizetype endPos);
     [[nodiscard]] e_OverviewMode getOverviewMode() const;
 
     void slotUpdateAvailabilities();

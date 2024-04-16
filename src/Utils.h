@@ -29,7 +29,7 @@ class Utils{
       static QString getArguments(QString cmd, QString& program, QStringList& args);
       inline static bool isEndOfLine(QChar c) { return c == '\n'; } //interally all line endings are converted to '\n'
 
-      static void calcTokenPos(const QString& s, qint32 posOnScreen, QtSizeType& pos1, QtSizeType& pos2);
+      static void calcTokenPos(const QString& s, qint32 posOnScreen, qsizetype& pos1, qsizetype& pos2);
       static QString calcHistoryLead(const QString& s);
 
     private:

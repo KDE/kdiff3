@@ -46,17 +46,10 @@ bool DefaultFileAccessJobHandler::stat(bool bWantToWrite)
 #if HAS_KFKIO
     mFileAccess->setStatusText(QString());
 
-    //For testing kf6 build.
-    #if KF_VERSION < KF_VERSION_CHECK(5,240,0)
-    KIO::StatJob* pStatJob = KIO::statDetails(mFileAccess->url(),
-                                       bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
-                                       KIO::StatDefaultDetails, KIO::HideProgressInfo);
-    #else
     KIO::StatJob* pStatJob = KIO::stat(mFileAccess->url(),
                                        bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
                                        KIO::StatDefaultDetails, KIO::HideProgressInfo);
 
-    #endif
     chk_connect(pStatJob, &KIO::StatJob::result, this, &DefaultFileAccessJobHandler::slotStatResult);
     chk_connect(pStatJob, &KIO::StatJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
@@ -186,8 +179,8 @@ void DefaultFileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
         qint64 length = std::min(maxChunkSize, m_maxLength - m_transferredBytes);
         if(length > 0)
         {
-            data.resize((QtSizeType)length);
-            if(data.size() == (QtSizeType)length)
+            data.resize((qsizetype)length);
+            if(data.size() == (qsizetype)length)
             {
                 ::memcpy(data.data(), m_pTransferBuffer + m_transferredBytes, data.size());
                 m_transferredBytes += length;
@@ -433,11 +426,8 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
     else
     {
         KIO::ListJob* pListJob = nullptr;
-#if KF_VERSION < KF_VERSION_CHECK(5, 240, 0)
-        pListJob = KIO::listDir(mFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/);
-#else
         pListJob = KIO::listDir(mFileAccess->url(), KIO::HideProgressInfo, KIO::ListJob::ListFlag::IncludeHidden /*bFindHidden*/);
-#endif
+
         m_bSuccess = false;
         if(pListJob != nullptr)
         {

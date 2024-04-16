@@ -575,11 +575,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
             QPixmap icon;
             if(value.isValid())
             {
-#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-                if(value.type() == QVariant::Icon)
-#else
                 if(value.typeId() == QMetaType::QIcon)
-#endif
                 {
                     icon = qvariant_cast<QIcon>(value).pixmap(16, 16);
                     //icon = qvariant_cast<QIcon>(value);
@@ -1318,7 +1314,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView()
 
     mWindow->setRootIsDecorated(true);
 
-    QtSizeType nrOfFiles = m_fileMergeMap.size();
+    qsizetype nrOfFiles = m_fileMergeMap.size();
     qint32 currentIdx = 1;
     QElapsedTimer t;
     t.start();
@@ -1338,7 +1334,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView()
             break;
 
         // Get dirname from fileName: Search for "/" from end:
-        QtSizeType pos = fileName.lastIndexOf('/');
+        qsizetype pos = fileName.lastIndexOf('/');
         QString dirPart;
         QString filePart;
         if(pos == -1)
@@ -1613,11 +1609,8 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     QTreeView::mousePressEvent(e);
     QModelIndex mi = indexAt(e->pos());
     qint32 c = mi.column();
-#if(QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    QPoint p = e->globalPos();
-#else
     QPoint p = e->globalPosition().toPoint();
-#endif
+
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
         return;
@@ -2510,7 +2503,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
 
     QStringList errors;
     // Make sure that the dir exists, into which we will save the file later.
-    QtSizeType pos = nameDest.lastIndexOf('/');
+    qsizetype pos = nameDest.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = nameDest.left(pos);
@@ -2591,7 +2584,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& s
         return bSuccess;
     }
 
-    QtSizeType pos = destName.lastIndexOf('/');
+    qsizetype pos = destName.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = destName.left(pos);
@@ -2667,7 +2660,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
         }
     }
 
-    QtSizeType pos = name.lastIndexOf('/');
+    qsizetype pos = name.lastIndexOf('/');
     if(pos > 0)
     {
         QString parentName = name.left(pos);

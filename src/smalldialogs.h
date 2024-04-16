@@ -138,7 +138,7 @@ class FindDialog: public QDialog
     QCheckBox* m_pCaseSensitive;
 
     LineRef currentLine = 0;
-    QtSizeType currentPos = 0;
+    qsizetype currentPos = 0;
 
   private:
     eWindowIndex currentWindow = eWindowIndex::None;

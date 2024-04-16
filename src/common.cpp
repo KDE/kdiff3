@@ -55,7 +55,7 @@ void ValueMap::load(QTextStream& ts)
     while(!ts.atEnd())
     {                              // until end of file...
         QString s = ts.readLine(); // line of text excluding '\n'
-        QtSizeType pos = s.indexOf('=');
+        qsizetype pos = s.indexOf('=');
         if(pos > 0) // seems not to have a tag
         {
             QString key = s.left(pos);
@@ -102,8 +102,8 @@ QStringList safeStringSplit(const QString& s, char sepChar, char metaChar)
     assert(sepChar != metaChar);
     QStringList sl;
     // Miniparser
-    QtSizeType i = 0;
-    QtSizeType len = s.length();
+    qsizetype i = 0;
+    qsizetype len = s.length();
     QString b;
     for(i = 0; i < len; ++i)
     {

@@ -410,7 +410,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     {
         const QLatin1String codecName = QLatin1String(name);
 
-        for(QtSizeType i = 0; i < m_codecVec.size(); ++i)
+        for(qsizetype i = 0; i < m_codecVec.size(); ++i)
         {
             if(name == m_codecVec[i])
                 return; // don't insert any codec twice

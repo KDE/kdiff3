@@ -154,7 +154,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     m_pOptionDialog->readOptions(KSharedConfig::openConfig());
 
     // Option handling.
-    QtSizeType argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
+    qsizetype argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
     bool hasArgs = argCount > 0;
     if(hasArgs)
     {

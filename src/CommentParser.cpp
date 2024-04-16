@@ -132,7 +132,7 @@ void DefaultCommentParser::processLine(const QString &line)
     static const QRegularExpression nonWhiteRegexp = QRegularExpression("[\\S]", QRegularExpression::UseUnicodePropertiesOption);
     static const QRegularExpression tailRegexp = QRegularExpression("\\s+$", QRegularExpression::UseUnicodePropertiesOption);
     offset = line.indexOf(nonWhiteRegexp);
-    const QtSizeType trailIndex = line.lastIndexOf(tailRegexp);
+    const qsizetype trailIndex = line.lastIndexOf(tailRegexp);
 
     lastComment.startOffset = lastComment.endOffset = 0; //reset these for each line
     comments.clear();
@@ -176,7 +176,7 @@ void DefaultCommentParser::removeComment(QString &line)
         if(range.endOffset > line.length() && range.startOffset > line.length()) return;
         if(range.endOffset < range.startOffset) return;
 #endif
-        QtSizeType size = range.endOffset - range.startOffset;
+        qsizetype size = range.endOffset - range.startOffset;
         line.replace(range.startOffset, size, QString(" ").repeated(size));
     }
 }

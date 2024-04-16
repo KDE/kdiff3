@@ -423,7 +423,7 @@ void KDiff3App::createCaption()
     QString f1 = m_sd1->getAliasName();
     QString f2 = m_sd2->getAliasName();
     QString f3 = m_sd3->getAliasName();
-    QtSizeType p;
+    qsizetype p;
 
     if((p = f1.lastIndexOf('/')) >= 0 || (p = f1.lastIndexOf('\\')) >= 0)
         f1 = f1.mid(p + 1);
@@ -1631,9 +1631,9 @@ void KDiff3App::slotEditFindNext()
     bool bCaseSensitive = m_pFindDialog->m_pCaseSensitive->isChecked();
 
     LineRef d3vLine = m_pFindDialog->currentLine;
-    QtSizeType posInLine = m_pFindDialog->currentPos;
+    qsizetype posInLine = m_pFindDialog->currentPos;
     LineRef l;
-    QtSizeType p = 0;
+    qsizetype p = 0;
     if(m_pFindDialog->getCurrentWindow() == eWindowIndex::A)
     {
         if(m_pFindDialog->m_pSearchInA->isChecked() && m_pDiffTextWindow1 != nullptr &&

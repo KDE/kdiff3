@@ -81,18 +81,18 @@ class DiffTextWindow: public QWidget
     LineType convertLineToDiff3LineIdx(const LineRef line) const;
     LineRef convertDiff3LineIdxToLine(const LineType d3lIdx) const;
 
-    void convertD3LCoordsToLineCoords(LineType d3LIdx, QtSizeType d3LPos, LineRef& line, QtSizeType& pos) const;
-    void convertLineCoordsToD3LCoords(LineRef line, QtSizeType pos, LineType& d3LIdx, QtSizeType& d3LPos) const;
+    void convertD3LCoordsToLineCoords(LineType d3LIdx, qsizetype d3LPos, LineRef& line, qsizetype& pos) const;
+    void convertLineCoordsToD3LCoords(LineRef line, qsizetype pos, LineType& d3LIdx, qsizetype& d3LPos) const;
 
     void convertSelectionToD3LCoords() const;
 
-    bool findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, QtSizeType endPos, LineRef& l, QtSizeType& p);
+    bool findString(const QString& s, LineRef& d3vLine, qsizetype& posInLine, bool bDirDown, bool bCaseSensitive);
+    void setSelection(LineRef firstLine, qsizetype startPos, LineRef lastLine, qsizetype endPos, LineRef& l, qsizetype& p);
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType) const;
 
     void setPaintingAllowed(bool bAllowPainting);
-    void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, qint32 visibleTextWidth);
-    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
+    void recalcWordWrap(bool bWordWrap, qsizetype wrapLineVectorSize, qint32 visibleTextWidth);
+    void recalcWordWrapHelper(qsizetype wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineType linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, qint32 firstLine, const LineType nofLinesPerPage);

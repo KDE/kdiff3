@@ -101,7 +101,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
 
     if(m_list.count() == 1)
     {
-        QtSizeType historyCount = s_pHistory ? s_pHistory->count() : 0;
+        qsizetype historyCount = s_pHistory ? s_pHistory->count() : 0;
 
         actionText = i18nc("Contexualmenu option", "Compare with %1", (historyCount > 0 ? s_pHistory->first() : QString()));
         pAction = new QAction(actionText, this);

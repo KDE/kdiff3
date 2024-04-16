@@ -45,7 +45,7 @@ qint32 LineData::width(qint32 tabSize) const
     const QString pLine = getLine();
     qint32 w = 0;
     qint32 j = 0;
-    for(QtSizeType i = 0; i < size(); ++i)
+    for(qsizetype i = 0; i < size(); ++i)
     {
         if(pLine[i] == '\t')
         {
@@ -607,7 +607,7 @@ bool ManualDiffHelpEntry::isValidMove(LineRef line1, LineRef line2, e_SrcSelecto
 
 qint32 ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
 {
-    QtSizeType i;
+    qsizetype i;
     for(i = 0; i < d3lv.size(); ++i)
     {
         const Diff3Line* d3l = d3lv[i];
@@ -1558,9 +1558,9 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
 // Convert the list to a vector of pointers
 void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
-    d3lv.resize(SafeInt<QtSizeType>(size()));
+    d3lv.resize(SafeInt<qsizetype>(size()));
     Diff3LineList::iterator i;
-    QtSizeType j = 0;
+    qsizetype j = 0;
     for(i = begin(); i != end(); ++i, ++j)
     {
         d3lv[j] = &(*i);

@@ -933,9 +933,9 @@ void MergeResultWindow::slotUnsolve()
 bool findParenthesesGroups(const QString& s, QStringList& sl)
 {
     sl.clear();
-    QtSizeType i = 0;
-    std::list<QtSizeType> startPosStack;
-    QtSizeType length = s.length();
+    qsizetype i = 0;
+    std::list<qsizetype> startPosStack;
+    qsizetype length = s.length();
     for(i = 0; i < length; ++i)
     {
         if(s[i] == '\\' && i + 1 < length && (s[i + 1] == '\\' || s[i + 1] == '(' || s[i + 1] == ')'))
@@ -951,7 +951,7 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
         {
             if(startPosStack.empty())
                 return false; // Parentheses don't match
-            QtSizeType startPos = startPosStack.back();
+            qsizetype startPos = startPosStack.back();
             startPosStack.pop_back();
             sl.push_back(s.mid(startPos + 1, i - startPos - 1));
         }
@@ -996,7 +996,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
             // s is the string that managed to match.
             // Now we want to know at which position it occurred. e.g. Jan=0, Feb=1, Mar=2, etc.
             QStringList sl = groupRegExp.split('|');
-            QtSizeType idx = sl.indexOf(s);
+            qsizetype idx = sl.indexOf(s);
             if(idx >= 0)
             {
                 QString sIdx;
@@ -1388,7 +1388,7 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
 
     if(m_scrollDeltaX != 0 || m_scrollDeltaY != 0)
     {
-        QtSizeType newPos = m_selection.getLastPos() + m_scrollDeltaX;
+        qsizetype newPos = m_selection.getLastPos() + m_scrollDeltaX;
         try
         {
             LineRef newLine = m_selection.getLastLine() + m_scrollDeltaY;
@@ -1433,10 +1433,10 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     textLayout.beginLayout();
     if(m_selection.lineWithin(line))
     {
-        QtSizeType firstPosInText = m_selection.firstPosInLine(line);
-        QtSizeType lastPosInText = m_selection.lastPosInLine(line);
+        qsizetype firstPosInText = m_selection.firstPosInLine(line);
+        qsizetype lastPosInText = m_selection.lastPosInLine(line);
 
-        QtSizeType lengthInText = std::max<QtSizeType>(0, lastPosInText - firstPosInText);
+        qsizetype lengthInText = std::max<qsizetype>(0, lastPosInText - firstPosInText);
         assert(lengthInText <= limits<qint32>::max());
 
         QTextLayout::FormatRange selection;
@@ -1822,7 +1822,7 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
         if(!s.isEmpty())
         {
             const bool selectionWasEmpty = m_selection.isEmpty();
-            QtSizeType pos1, pos2;
+            qsizetype pos1, pos2;
 
             Utils::calcTokenPos(s, pos, pos1, pos2);
 
@@ -2072,7 +2072,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                     const QString s = melIt1->getString(m_pldA, m_pldB, m_pldC);
                     if(!s.isEmpty())
                     {
-                        QtSizeType i;
+                        qsizetype i;
                         for(i = 0; i < s.length(); ++i)
                         {
                             if(s[i] != ' ' && s[i] != '\t') break;
@@ -2148,13 +2148,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 }
                 else
                 {
-                    while(x > 0 && (str[(QtSizeType)x - 1] == ' ' || str[(QtSizeType)x - 1] == '\t'))
+                    while(x > 0 && (str[(qsizetype)x - 1] == ' ' || str[(qsizetype)x - 1] == '\t'))
                     {
                         qint32 newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
-                    while(x > 0 && (str[(QtSizeType)x - 1] != ' ' && str[(QtSizeType)x - 1] != '\t'))
+                    while(x > 0 && (str[(qsizetype)x - 1] != ' ' && str[(qsizetype)x - 1] != '\t'))
                     {
                         qint32 newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
@@ -2179,13 +2179,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 }
                 else
                 {
-                    while(x < str.length() && (str[(QtSizeType)x] == ' ' || str[(QtSizeType)x] == '\t'))
+                    while(x < str.length() && (str[(qsizetype)x] == ' ' || str[(qsizetype)x] == '\t'))
                     {
                         qint32 newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
-                    while(x < str.length() && (str[(QtSizeType)x] != ' ' && str[(QtSizeType)x] != '\t'))
+                    while(x < str.length() && (str[(qsizetype)x] != ' ' && str[(qsizetype)x] != '\t'))
                     {
                         qint32 newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
@@ -2383,7 +2383,7 @@ QString MergeResultWindow::getSelection() const
                     const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
 
                     // Consider tabs
-                    for(QtSizeType i = 0; i < str.length(); ++i)
+                    for(qsizetype i = 0; i < str.length(); ++i)
                     {
                         qint32 spaces = 1;
                         if(str[i] == '\t')
@@ -2497,14 +2497,14 @@ void MergeResultWindow::deleteSelection()
             if(mel.isEditableText() && m_selection.lineWithin(line))
             {
                 const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
-                QtSizeType firstPosInLine = m_selection.firstPosInLine(line);
-                QtSizeType lastPosInLine = m_selection.lastPosInLine(line);
+                qsizetype firstPosInLine = m_selection.firstPosInLine(line);
+                qsizetype lastPosInLine = m_selection.lastPosInLine(line);
 
                 if(line == firstLine)
                 {
                     mUndoRec = std::make_shared<UndoRecord>(m_selection, mbIt);
                     melItFirst = melIt;
-                    QtSizeType pos = firstPosInLine;
+                    qsizetype pos = firstPosInLine;
                     firstLineString = lineString.left(pos);
                 }
                 assert(mUndoRec);
@@ -2514,7 +2514,7 @@ void MergeResultWindow::deleteSelection()
                 {
                     assert(melItFirst.has_value());
                     // This is the last line in the selection
-                    QtSizeType pos = lastPosInLine;
+                    qsizetype pos = lastPosInLine;
                     firstLineString += QStringView(lineString).mid(pos); // rest of line
                     melItFirst.value()->setString(firstLineString);
                 }
@@ -2568,8 +2568,8 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
 
     QString currentLine = str.left(x);
     const QString endOfLine = str.mid(x);
-    QtSizeType i;
-    const QtSizeType len = clipBoard.length();
+    qsizetype i;
+    const qsizetype len = clipBoard.length();
     for(i = 0; i < len; ++i)
     {
         QChar c = clipBoard[i];
@@ -2711,19 +2711,19 @@ QString MergeResultWindow::getString(qint32 lineIdx)
     return melIt->getString(m_pldA, m_pldB, m_pldC);
 }
 
-bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive)
+bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, qsizetype& posInLine, bool bDirDown, bool bCaseSensitive)
 {
     qint32 it = d3vLine;
     qint32 endIt = bDirDown ? getNofLines() : -1;
     qint32 step = bDirDown ? 1 : -1;
-    QtSizeType startPos = posInLine;
+    qsizetype startPos = posInLine;
 
     for(; it != endIt; it += step)
     {
         QString line = getString(it);
         if(!line.isEmpty())
         {
-            QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+            qsizetype pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
             if(pos != -1)
             {
@@ -2738,7 +2738,7 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeTyp
     return false;
 }
 
-void MergeResultWindow::setSelection(LineType firstLine, QtSizeType startPos, LineType lastLine, QtSizeType endPos)
+void MergeResultWindow::setSelection(LineType firstLine, qsizetype startPos, LineType lastLine, qsizetype endPos)
 {
     if(lastLine >= getNofLines())
     {

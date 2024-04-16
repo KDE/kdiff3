@@ -15,14 +15,14 @@
 
 #include <utility>   // for swap
 
-QtSizeType Selection::firstPosInLine(LineRef l) const
+qsizetype Selection::firstPosInLine(LineRef l) const
 {
     assert(firstLine.isValid());
 
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;
-    QtSizeType p1 = firstPos;
-    QtSizeType p2 = lastPos;
+    qsizetype p1 = firstPos;
+    qsizetype p2 = lastPos;
     if(l1 > l2)
     {
         std::swap(l1, l2);
@@ -39,14 +39,14 @@ QtSizeType Selection::firstPosInLine(LineRef l) const
     return 0;
 }
 
-QtSizeType Selection::lastPosInLine(LineRef l) const
+qsizetype Selection::lastPosInLine(LineRef l) const
 {
     assert(firstLine.isValid());
 
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;
-    QtSizeType p1 = firstPos;
-    QtSizeType p2 = lastPos;
+    qsizetype p1 = firstPos;
+    qsizetype p2 = lastPos;
 
     if(l1 > l2)
     {
@@ -64,15 +64,15 @@ QtSizeType Selection::lastPosInLine(LineRef l) const
     return limits<qint32>::max();
 }
 
-bool Selection::within(LineRef l, QtSizeType p) const
+bool Selection::within(LineRef l, qsizetype p) const
 {
     if(!firstLine.isValid())
         return false;
 
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;
-    QtSizeType p1 = firstPos;
-    QtSizeType p2 = lastPos;
+    qsizetype p1 = firstPos;
+    qsizetype p2 = lastPos;
     if(l1 > l2)
     {
         std::swap(l1, l2);

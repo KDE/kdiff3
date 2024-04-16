@@ -120,7 +120,7 @@ const QString Options::parseOptions(const QStringList& optionList)
 
     for(const QString& optionString: optionList)
     {
-        QtSizeType pos = optionString.indexOf('=');
+        qsizetype pos = optionString.indexOf('=');
         if(pos > 0) // seems not to have a tag
         {
             const QString key = optionString.left(pos);
