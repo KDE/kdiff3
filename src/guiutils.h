@@ -67,7 +67,7 @@ T* createAction(
     const QString& actionName)
 {
     T* theAction = createAction<T, Receiver, Func>(text, receiver, slot, ac, actionName);
-    ac->setDefaultShortcut(theAction, shortcut);
+    KActionCollection::setDefaultShortcut(theAction, shortcut);
     return theAction;
 }
 template <class T, class Receiver, class Func>
@@ -167,7 +167,7 @@ T* createAction(
     const QString& actionName)
 {
     T* theAction = createAction<T>(text, ac, actionName);
-    ac->setDefaultShortcut(theAction, shortcut);
+    KActionCollection::setDefaultShortcut(theAction, shortcut);
     return theAction;
 }
 
