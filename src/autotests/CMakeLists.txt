@@ -6,11 +6,10 @@ find_package(
     REQUIRED
     COMPONENTS
     Test
+    Core5Compat
 )
 
-if(BUILD_WITH_QT6)
-    set(COMPATLIB Qt6::Core5Compat)
-endif()
+set(COMPATLIB Qt6::Core5Compat)
 
 add_definitions(-DAUTOTEST)
 

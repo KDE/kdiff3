@@ -5,6 +5,7 @@
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
+cmake_policy(SET CMP0160 NEW)#cmake 3.29 policy
 
 project(kdiff3 VERSION 1.11.70)
 
@@ -17,7 +18,7 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
-set(KF_MIN_VERSION "5.110.0")
+set(KF_MIN_VERSION "6.0.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -26,24 +27,10 @@ set(
     ${ECM_MODULE_PATH}
 )
 
-# QtVersionOption adds BUILD_WITH_QT6 with an auto configured default.
-include(QtVersionOption)
+set(QT_MAJOR_VERSION "6")
+set(QT_MIN_VERSION "6.6.0")
 
-if (BUILD_WITH_QT6)
-    set(KF_MIN_VERSION "5.240.0")
-
-    set(QT_MAJOR_VERSION "6")
-    set(QT_MIN_VERSION "6.6.0")
-else()
-    set(QT_MAJOR_VERSION "5")
-    set(QT_MIN_VERSION "5.15.8")
-endif()
-
-if(BUILD_WITH_QT6)
-    set(KF_MAJOR_VERSION "6")
-else()
-    set(KF_MAJOR_VERSION "5")
-endif()
+set(KF_MAJOR_VERSION "6")
 
 # project uses settings default as of KDECompilerSettings in ECM 5.85.0
 set(KDE_QT_MODERNCODE_DEFINITIONS_LEVEL 5.85.0)
@@ -77,7 +64,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # Change this to 1.84 when its more widely available
-find_package(Boost 1.80 REQUIRED)
+find_package(Boost 1.82 REQUIRED)
 #add_definitions()
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
@@ -91,12 +78,10 @@ find_package(
     Gui
     Widgets
     PrintSupport
+    Core5Compat
 )
 
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat)
-    set(COMPATLIB Qt6::Core5Compat)
-endif()
+set(COMPATLIB Qt6::Core5Compat)
 
 find_package(
     KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION}
@@ -125,14 +110,13 @@ option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" O
 option(ENABLE_GDBINDEX OFF)
 
 set(CMAKE_CXX_STANDARD 17)
-
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     if(ENABLE_CLAZY)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -plugin-arg-clazy -Xclang level0,level1,no-overloaded-signal,auto-unexpected-qstringbuilder,unused-non-trivial-variable,returning-void-expression,isempty-vs-count,container-inside-loop,assert-with-side-effects")
     endif()
     #Adjust clang specific  warnings
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -fexceptions")
-    set(CLANG_WARNING_FLAGS "-Wno-undef -Wno-trigraphs -Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
+    set(CLANG_WARNING_FLAGS "-Wno-unknown-warning-option -Wno-undef -Wno-trigraphs -Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     #Make MSVC obey standard C++ exception handling by destroying all objects going out of scope as a result of the exception.
