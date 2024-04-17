@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-27 09:15+0000\n"
+"POT-Creation-Date: 2024-04-17 00:40+0000\n"
 "PO-Revision-Date: 2023-12-08 13:35+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -30,68 +30,68 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xalba@ni.eus"
 
-#: DefaultFileAccessJobHandler.cpp:63
+#: DefaultFileAccessJobHandler.cpp:56
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "Fitxategiaren egoera lortzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:118
+#: DefaultFileAccessJobHandler.cpp:111
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Fitxategia irakurtzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:162
+#: DefaultFileAccessJobHandler.cpp:155
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Fitxategia idazten: %1"
 
-#: DefaultFileAccessJobHandler.cpp:198
+#: DefaultFileAccessJobHandler.cpp:191
 #, kde-format
 msgid "Out of memory"
 msgstr "Memoria beteta"
 
-#: DefaultFileAccessJobHandler.cpp:237
+#: DefaultFileAccessJobHandler.cpp:230
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Karpeta sortzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:261
+#: DefaultFileAccessJobHandler.cpp:254
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Karpeta kentzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:279
+#: DefaultFileAccessJobHandler.cpp:272
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Fitxategia kentzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:301
+#: DefaultFileAccessJobHandler.cpp:294
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Esteka sinbolikoa kentzea: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:331
+#: DefaultFileAccessJobHandler.cpp:324
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Fitxategi berrizendatzea: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:372
+#: DefaultFileAccessJobHandler.cpp:365
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Fitxategi kopiatzea: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:394
+#: DefaultFileAccessJobHandler.cpp:387
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Karpeta irakurtzen: %1"
 
-#: DefaultFileAccessJobHandler.cpp:455
+#: DefaultFileAccessJobHandler.cpp:445
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Direktorioa zerrendatzea: %1"
@@ -352,7 +352,7 @@ msgctxt "Column title"
 msgid "White"
 msgstr "Zuria"
 
-#: directorymergewindow.cpp:695
+#: directorymergewindow.cpp:691
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort the "
@@ -361,52 +361,52 @@ msgstr ""
 "Une honetan karpeten arteko bateratze bat egiten ari zara. Ziur zaude, "
 "bateratzea galarazi eta karpeta berriz aztertu nahi duzula?"
 
-#: directorymergewindow.cpp:696 kdiff3.cpp:923 kdiff3.cpp:933 kdiff3.cpp:945
+#: directorymergewindow.cpp:692 kdiff3.cpp:923 kdiff3.cpp:933 kdiff3.cpp:945
 #: mergeresultwindow.cpp:313 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Ohartarazpena"
 
-#: directorymergewindow.cpp:697
+#: directorymergewindow.cpp:693
 #, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Berriz aztertu"
 
-#: directorymergewindow.cpp:698
+#: directorymergewindow.cpp:694
 #, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "Jarraitu bateratzen"
 
-#: directorymergewindow.cpp:847
+#: directorymergewindow.cpp:843
 #, kde-format
 msgid "Opening of folders failed:"
 msgstr "Karpetak irekitzea huts egin du:"
 
-#: directorymergewindow.cpp:851
+#: directorymergewindow.cpp:847
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
 msgstr "A karpeta \"%1\" ez dago edo ez da karpeta bat.\n"
 
-#: directorymergewindow.cpp:856
+#: directorymergewindow.cpp:852
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
 msgstr "B karpeta \"%1\" ez dago edo ez da karpeta bat.\n"
 
-#: directorymergewindow.cpp:861
+#: directorymergewindow.cpp:857
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "C karpeta \"%1\" ez dago edo ez da karpeta bat.\n"
 
-#: directorymergewindow.cpp:864
+#: directorymergewindow.cpp:860
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Karpeta irekitzeko errorea"
 
-#: directorymergewindow.cpp:872
+#: directorymergewindow.cpp:868
 #, kde-format
 msgid ""
 "The destination folder must not be the same as A or B when three folders are "
@@ -417,54 +417,54 @@ msgstr ""
 "bateratzen direnean.\n"
 "Egiaztatu berriz jarraitu baino lehen."
 
-#: directorymergewindow.cpp:874
+#: directorymergewindow.cpp:870
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Parametroen ohartarazpena"
 
-#: directorymergewindow.cpp:879
+#: directorymergewindow.cpp:875
 #, kde-format
 msgid "Scanning folders..."
 msgstr "Karpetak aztertzen..."
 
-#: directorymergewindow.cpp:901
+#: directorymergewindow.cpp:897
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
 msgstr "A karpeta irakurtzen"
 
-#: directorymergewindow.cpp:910
+#: directorymergewindow.cpp:906
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
 msgstr "B karpeta irakurtzen"
 
-#: directorymergewindow.cpp:920
+#: directorymergewindow.cpp:916
 #, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
 msgstr "C karpeta irakurtzen"
 
-#: directorymergewindow.cpp:936
+#: directorymergewindow.cpp:932
 #, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Azpikarpeta batzuk ezin dira irakurri hemen, "
 
-#: directorymergewindow.cpp:941
+#: directorymergewindow.cpp:937
 #, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Egiaztatu azpikarpeten baimenak."
 
-#: directorymergewindow.cpp:964
+#: directorymergewindow.cpp:960
 #, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Prest."
 
-#: directorymergewindow.cpp:979
+#: directorymergewindow.cpp:975
 #, kde-format
 msgid ""
 "Folder Comparison Status\n"
@@ -479,22 +479,22 @@ msgstr ""
 "Fitxategi berdinen kopurua: %2\n"
 "Fitxategi ezberdinen kopurua: %3"
 
-#: directorymergewindow.cpp:986
+#: directorymergewindow.cpp:982
 #, kde-format
 msgid "Number of manual merges: %1"
 msgstr "Eskuz bateratze kopurua: %1"
 
-#: directorymergewindow.cpp:1254
+#: directorymergewindow.cpp:1250
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "Honek bateratze eragiketa guztiei eragiten die."
 
-#: directorymergewindow.cpp:1255
+#: directorymergewindow.cpp:1251
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "Bateratze eragiketa guztiak aldatzen"
 
-#: directorymergewindow.cpp:1332
+#: directorymergewindow.cpp:1328
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -503,49 +503,49 @@ msgstr ""
 "Prozesatzea %1 / %2\n"
 "%3"
 
-#: directorymergewindow.cpp:1378 directorymergewindow.cpp:1382
+#: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "Fitxategi batzuk ezin dira prozesatu."
 
-#: directorymergewindow.cpp:1385
+#: directorymergewindow.cpp:1381
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "Galaraztea gehiegizko erroreengatik."
 
-#: directorymergewindow.cpp:1876 directorymergewindow.cpp:1901
-#: directorymergewindow.cpp:1926
+#: directorymergewindow.cpp:1869 directorymergewindow.cpp:1894
+#: directorymergewindow.cpp:1919
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "Eragiketa hau ezin da egin une honetan."
 
-#: directorymergewindow.cpp:1876 directorymergewindow.cpp:1901
-#: directorymergewindow.cpp:1926 directorymergewindow.cpp:2207
+#: directorymergewindow.cpp:1869 directorymergewindow.cpp:1894
+#: directorymergewindow.cpp:1919 directorymergewindow.cpp:2200
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Eragiketa ezinezkoa"
 
-#: directorymergewindow.cpp:1973
+#: directorymergewindow.cpp:1966
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "Errore bat gertatu da kopiatzean."
 
-#: directorymergewindow.cpp:1974 directorymergewindow.cpp:2412
+#: directorymergewindow.cpp:1967 directorymergewindow.cpp:2405
 #, kde-format
 msgid "Merge Error"
 msgstr "Bateratze errorea"
 
-#: directorymergewindow.cpp:2052
+#: directorymergewindow.cpp:2045
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "Bateratze eragiketa ezezaguna. (Hau ez da sekula gertatu behar!)"
 
-#: directorymergewindow.cpp:2097
+#: directorymergewindow.cpp:2090
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "Bateratze eragiketa ezezaguna."
 
-#: directorymergewindow.cpp:2110
+#: directorymergewindow.cpp:2103
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -565,25 +565,25 @@ msgstr ""
 "Jakizu programa hau oraindik beta egoeran dela eta EZ duela inolako "
 "BERMERIK! Egin zure funtsezko datuen babes-kopia!"
 
-#: directorymergewindow.cpp:2115
+#: directorymergewindow.cpp:2108
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Bateratzea hasten"
 
-#: directorymergewindow.cpp:2116
+#: directorymergewindow.cpp:2109
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Egin"
 
-#: directorymergewindow.cpp:2117
+#: directorymergewindow.cpp:2110
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Simulatu"
 
-#: directorymergewindow.cpp:2143
+#: directorymergewindow.cpp:2136
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
@@ -592,7 +592,7 @@ msgstr ""
 "Nabarmendutako elementuak mota ezberdina du karpeta ezberdinetan. Hautatu "
 "zer egin."
 
-#: directorymergewindow.cpp:2147
+#: directorymergewindow.cpp:2140
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
@@ -601,7 +601,7 @@ msgstr ""
 "Aldatze datak berdinak dira baino fitxategiak ez dira berdinak. Hautatu zer "
 "egin."
 
-#: directorymergewindow.cpp:2151
+#: directorymergewindow.cpp:2144
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
@@ -610,7 +610,7 @@ msgstr ""
 "Nabarmendutako elementua karpeta batean aldatu eta bestea ezabatu egin da. "
 "Hautatu zer egin."
 
-#: directorymergewindow.cpp:2207
+#: directorymergewindow.cpp:2200
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
@@ -618,7 +618,7 @@ msgid ""
 msgstr ""
 "Eragiketa hau ezin da egin une honetan karpeten bateratzea egiten ari delako."
 
-#: directorymergewindow.cpp:2264
+#: directorymergewindow.cpp:2257
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -629,35 +629,35 @@ msgstr ""
 "Jarraitu nahi duzu errorea eragin duen elementuarekin edo hura alboratu nahi "
 "duzu?"
 
-#: directorymergewindow.cpp:2266
+#: directorymergewindow.cpp:2259
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Jarraitu bateratzen errore baten ondoren"
 
-#: directorymergewindow.cpp:2267
+#: directorymergewindow.cpp:2260
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Jarraitu azken elementuarekin"
 
-#: directorymergewindow.cpp:2268
+#: directorymergewindow.cpp:2261
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Alboratu elementua"
 
-#: directorymergewindow.cpp:2362
+#: directorymergewindow.cpp:2355
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Bateratze eragiketa osatu da."
 
-#: directorymergewindow.cpp:2362 directorymergewindow.cpp:2365
+#: directorymergewindow.cpp:2355 directorymergewindow.cpp:2358
 #, kde-format
 msgid "Merge Complete"
 msgstr "Bateratzea osatu da"
 
-#: directorymergewindow.cpp:2375
+#: directorymergewindow.cpp:2368
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -665,49 +665,49 @@ msgstr ""
 "Simulatutako bateratzea osatu da: Egiaztatu proposatutako eragiketekin ados "
 "zauden."
 
-#: directorymergewindow.cpp:2411
+#: directorymergewindow.cpp:2404
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "Errore bat gertatu da. Sakatu Ados informazio zehatza ikusteko."
 
-#: directorymergewindow.cpp:2444
+#: directorymergewindow.cpp:2437
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "Errorea: %1 ezabatzean: Babes-kopia sortzea huts egin du."
 
-#: directorymergewindow.cpp:2451
+#: directorymergewindow.cpp:2444
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "ezabatu direktorioa modu errekurtsiboan( %1 )"
 
-#: directorymergewindow.cpp:2453
+#: directorymergewindow.cpp:2446
 #, kde-format
 msgid "delete( %1 )"
 msgstr "ezabatu( %1 )"
 
-#: directorymergewindow.cpp:2469
+#: directorymergewindow.cpp:2462
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr ""
 "Errorea: ezabatu karpeta eragiketak huts egin du karpeta irakurtzen "
 "saiatzean."
 
-#: directorymergewindow.cpp:2485
+#: directorymergewindow.cpp:2478
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Errorea: rmdir( %1 ) eragiketak huts egin du."
 
-#: directorymergewindow.cpp:2495
+#: directorymergewindow.cpp:2488
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Errorea: ezabatze eragiketak huts egin du."
 
-#: directorymergewindow.cpp:2522
+#: directorymergewindow.cpp:2515
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "eskuz bateratzea( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2525
+#: directorymergewindow.cpp:2518
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
@@ -715,193 +715,193 @@ msgstr ""
 "     Oharra: Eskuz bateratu ondoren erabiltzaileak F7 sakatuta jarraitu "
 "beharko luke."
 
-#: directorymergewindow.cpp:2552
+#: directorymergewindow.cpp:2545
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Errorea: kopiatu( %1 -> %2 ) huts egin du. Dagoen jomuga ezabatzea huts egin "
 "du."
 
-#: directorymergewindow.cpp:2561
+#: directorymergewindow.cpp:2554
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "kopiatu-esteka( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2570
+#: directorymergewindow.cpp:2563
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Errorea: kopiatu-estekak huts egin du: Urruneko estekak ez dira oraindik "
 "onartzen."
 
-#: directorymergewindow.cpp:2580
+#: directorymergewindow.cpp:2573
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Errorea: kopiatu-estekak huts egin du."
 
-#: directorymergewindow.cpp:2603
+#: directorymergewindow.cpp:2596
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "kopiatu( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2629
+#: directorymergewindow.cpp:2622
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Errorea berrizendatu( %1 -> %2 ) bitartean: ezin ezabatu dagoen jomuga."
 
-#: directorymergewindow.cpp:2636
+#: directorymergewindow.cpp:2629
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "berrizendatu( %1 -> %2)"
 
-#: directorymergewindow.cpp:2645
+#: directorymergewindow.cpp:2638
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Errorea: Berrizendatzea huts egin du."
 
-#: directorymergewindow.cpp:2663
+#: directorymergewindow.cpp:2656
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "Errorea %1(r)en «makeDir» bitartean. Ezin da ezabatu dagoen fitxategia."
 
-#: directorymergewindow.cpp:2680
+#: directorymergewindow.cpp:2673
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "makeDir( %1 )"
 
-#: directorymergewindow.cpp:2690
+#: directorymergewindow.cpp:2683
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Errorea karpeta sortzean."
 
-#: directorymergewindow.cpp:2726 directorymergewindow.cpp:2840
+#: directorymergewindow.cpp:2719 directorymergewindow.cpp:2833
 #, kde-format
 msgid "Dest"
 msgstr "Jomuga"
 
-#: directorymergewindow.cpp:2734 directorymergewindow.cpp:2762
+#: directorymergewindow.cpp:2727 directorymergewindow.cpp:2755
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Karpeta"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2727
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Mota"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2727
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Neurria"
 
-#: directorymergewindow.cpp:2735
+#: directorymergewindow.cpp:2728
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Atrib"
 
-#: directorymergewindow.cpp:2735
+#: directorymergewindow.cpp:2728
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Azken aldaketa"
 
-#: directorymergewindow.cpp:2735
+#: directorymergewindow.cpp:2728
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Estekaren jomuga"
 
-#: directorymergewindow.cpp:2762
+#: directorymergewindow.cpp:2755
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "Fitxategia"
 
-#: directorymergewindow.cpp:2762
+#: directorymergewindow.cpp:2755
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-esteka"
 
-#: directorymergewindow.cpp:2768
+#: directorymergewindow.cpp:2761
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "ez eskuragarri"
 
-#: directorymergewindow.cpp:2782
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (Jomuga): "
 
-#: directorymergewindow.cpp:2786
+#: directorymergewindow.cpp:2779
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2786
+#: directorymergewindow.cpp:2779
 #, kde-format
 msgid "A (Base): "
 msgstr "A (Onarria): "
 
-#: directorymergewindow.cpp:2792
+#: directorymergewindow.cpp:2785
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (Jomuga): "
 
-#: directorymergewindow.cpp:2796
+#: directorymergewindow.cpp:2789
 #, kde-format
 msgid "B:    "
 msgstr "B:    "
 
-#: directorymergewindow.cpp:2801
+#: directorymergewindow.cpp:2794
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (Jomuga): "
 
-#: directorymergewindow.cpp:2805
+#: directorymergewindow.cpp:2798
 #, kde-format
 msgid "C:    "
 msgstr "C:    "
 
-#: directorymergewindow.cpp:2808
+#: directorymergewindow.cpp:2801
 #, kde-format
 msgid "Dest: "
 msgstr "Jomuga: "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2850
+#: directorymergewindow.cpp:2843
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Gorde karpeta bateratze egora honela..."
 
-#: directorymergewindow.cpp:2957
+#: directorymergewindow.cpp:2950
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Hasi/jarraitu karpeta bateratzea"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2951
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Exekutatu eragiketa uneko elementuarentzat"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2952
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Alderatu hautatutako fitxategia"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2953
 #, kde-format
 msgid "Merge Current File"
 msgstr "Bateratu uneko fitxategia"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2953
 #, kde-format
 msgid ""
 "Merge\n"
@@ -910,56 +910,56 @@ msgstr ""
 "Bateratu\n"
 "Fitxategia"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Tolestu azpikarpeta guztiak"
 
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Zabaldu karpeta guztiak"
 
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Rescan"
 msgstr "Berriz aztertu"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:2959
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Hautatu A elementu guztietarako"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2960
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Hautatu B elementu guztietarako"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2961
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Hautatu C elementu guztietarako"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Auto-aukeratu elementu guztientzako eragiketa"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Ez dago elementu guztientzako eragiketarik"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2968
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Erakutsi fitxategi berdin-berdinak"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2968
 #, kde-format
 msgid ""
 "Identical\n"
@@ -968,17 +968,17 @@ msgstr ""
 "Fitxategi\n"
 "berdin-berdinak"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Show Different Files"
 msgstr "Erakutsi fitxategi ezberdinak"
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Erakutsi solik A-n dauden fitxategiak"
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid ""
 "Files\n"
@@ -987,12 +987,12 @@ msgstr ""
 "Soilik A-n dauden\n"
 "fitxategiak"
 
-#: directorymergewindow.cpp:2978
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Erakutsi solik B-n dauden fitxategiak"
 
-#: directorymergewindow.cpp:2978
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid ""
 "Files\n"
@@ -1001,12 +1001,12 @@ msgstr ""
 "Solik B-n dauden\n"
 "fitxategiak"
 
-#: directorymergewindow.cpp:2979
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Erakutsi solik C-n dauden fitxategiak"
 
-#: directorymergewindow.cpp:2979
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid ""
 "Files\n"
@@ -1015,68 +1015,68 @@ msgstr ""
 "Soilik C-n dauden\n"
 "fitxategiak"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2976
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Alderatu berariaz hautatutako fitxategiak"
 
-#: directorymergewindow.cpp:2984
+#: directorymergewindow.cpp:2977
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Bateratu berariaz hautatutako fitxategiak"
 
-#: directorymergewindow.cpp:2986 directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2979 directorymergewindow.cpp:2986
 #, kde-format
 msgid "Do Nothing"
 msgstr "Ez egin ezer"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2990 opendialog.ui:68
+#: directorymergewindow.cpp:2983 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Bateratu"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2984
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Ezabatu (baldin badago)"
 
-#: directorymergewindow.cpp:2994
+#: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Copy A to B"
 msgstr "Kopiatu A -> B"
 
-#: directorymergewindow.cpp:2995
+#: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Copy B to A"
 msgstr "Kopiatu B -> A"
 
-#: directorymergewindow.cpp:2996
+#: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Delete A"
 msgstr "Ezabatu A"
 
-#: directorymergewindow.cpp:2997
+#: directorymergewindow.cpp:2990
 #, kde-format
 msgid "Delete B"
 msgstr "Ezabatu B"
 
-#: directorymergewindow.cpp:2998
+#: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Delete A && B"
 msgstr "Ezabatu A eta B"
 
-#: directorymergewindow.cpp:2999
+#: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Merge to A"
 msgstr "Bateratu  -> A"
 
-#: directorymergewindow.cpp:3000
+#: directorymergewindow.cpp:2993
 #, kde-format
 msgid "Merge to B"
 msgstr "Bateratu  -> B"
 
-#: directorymergewindow.cpp:3001
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Bateratu A eta B"
@@ -1759,88 +1759,88 @@ msgstr "Tresna-barra nagusia"
 msgid "Ignored. (User defined.)"
 msgstr "Ez-ikusia. (Erabiltzaileak zehaztu du.)"
 
-#: main.cpp:92
+#: main.cpp:88
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:95
+#: main.cpp:91
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bit)"
 
-#: main.cpp:97
+#: main.cpp:93
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Fitxategiak eta karpetak alderatzeko eta bateratzeko tresna"
 
-#: main.cpp:98
+#: main.cpp:94
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 eratorpena"
 
-#: main.cpp:118
+#: main.cpp:114
 #, kde-format
 msgid "Merge the input."
 msgstr "Bateratu sarrerakoa."
 
-#: main.cpp:119
+#: main.cpp:115
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Oinarri fitxategi esplizitua. Zenbait tresnekin bateragarri izateko."
 
-#: main.cpp:120
+#: main.cpp:116
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr ""
 "Irteerako fitxategia. Berarekin dakar -m. Adib.: -o fitxategiberria.txt"
 
-#: main.cpp:121
+#: main.cpp:117
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Irteerako fitxategia, beste behin. (Zenbait tresnekin bateragarri izateko)"
 
-#: main.cpp:123
+#: main.cpp:119
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Interfaze grafikorik gabe gatazka guztiak auto-ebatzi ezkero. ( -o "
 "fitxategia behar du)"
 
-#: main.cpp:124
+#: main.cpp:120
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "--auto  ezikusi eta erakutsi beti GUI."
 
-#: main.cpp:126 main.cpp:127
+#: main.cpp:122 main.cpp:123
 #, kde-format
 msgid "Ignored."
 msgstr "Ezikusia."
 
-#: main.cpp:129
+#: main.cpp:125
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Izen ikusgaiaren ordezkapena sarrerako 1 fitxategirako (oinarria)."
 
-#: main.cpp:130
+#: main.cpp:126
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Izen ikusgaiaren ordezkapena sarrerako 2 fitxategirako."
 
-#: main.cpp:131
+#: main.cpp:127
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Izen ikusgaiaren ordezkapena sarrerako 3 fitxategirako."
 
-#: main.cpp:132
+#: main.cpp:128
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Ordezko izen ikusgaiaren ordezkapena. Hornitu hau behin sarrera guztietarako."
 
-#: main.cpp:133
+#: main.cpp:129
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1849,32 +1849,32 @@ msgstr ""
 "Gainezarri konfiguratze ezarpen bat. Erabili behin ezarpen bakoitzarentzat. "
 "Adib.: --cs \"AutoAdvance=1\""
 
-#: main.cpp:134
+#: main.cpp:130
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Erakutsi konfiguratze ezarpen eta uneko balioaren zerrenda."
 
-#: main.cpp:135
+#: main.cpp:131
 #, kde-format
 msgid "Use a different config file."
 msgstr "Erabili konfiguratze fitxategi ezberdin bat."
 
-#: main.cpp:138
+#: main.cpp:134
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Ireki beharreko fitxategi1 (oinarria,  --base bidez zehazten ez bada)"
 
-#: main.cpp:139
+#: main.cpp:135
 #, kde-format
 msgid "file2 to open"
 msgstr "Ireki beharreko fitxategi2"
 
-#: main.cpp:140
+#: main.cpp:136
 #, kde-format
 msgid "file3 to open"
 msgstr "Ireki beharreko fitxategi3"
 
-#: main.cpp:164
+#: main.cpp:160
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Begiratu  kdiff3 --help  onartutako aukerak ikusteko."
