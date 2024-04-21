@@ -5,7 +5,9 @@
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
-cmake_policy(SET CMP0160 NEW)#cmake 3.29 policy
+if(POLICY CMP0160)
+    cmake_policy(SET CMP0160 NEW)#cmake 3.29 policy
+endif()
 
 project(kdiff3 VERSION 1.11.70)
 
