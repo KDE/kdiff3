@@ -275,7 +275,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
     if(name.isEmpty())
         return;
 
-    QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
+    QUrl url = QUrl::fromUserInput(name, QDir::currentPath(), QUrl::AssumeLocalFile);
     setFile(url, bWantToWrite);
 }
 

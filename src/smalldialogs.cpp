@@ -217,22 +217,22 @@ void OpenDialog::accept()
 {
     fixCurrentText(dialogUi.lineA);
     QString s = dialogUi.lineA->currentText();
-    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QDir::currentPath(), QUrl::AssumeLocalFile));
     gOptions->getRecentFilesA().push_front(s);
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
-    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QDir::currentPath(), QUrl::AssumeLocalFile));
     gOptions->getRecentFilesB().push_front(s);
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
-    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QDir::currentPath(), QUrl::AssumeLocalFile));
     gOptions->getRecentFilesC().push_front(s);
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
-    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QDir::currentPath(), QUrl::AssumeLocalFile));
     gOptions->getRecentOutputFiles().push_front(s);
 
     QDialog::accept();
