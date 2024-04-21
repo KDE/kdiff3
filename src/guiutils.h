@@ -37,7 +37,12 @@ inline typename std::enable_if_t<std::is_same_v<T, QAction>, QAction>* createAct
 
     theAction = ac->addAction(actionName);
     theAction->setText(text);
-    chk_connect_a(theAction, &QAction::triggered, receiver, slot);
+    if constexpr(std::is_member_function_pointer_v<std::decay_t<Func>>)
+    {
+        chk_connect_a(theAction, &QAction::triggered, receiver, slot);
+    }
+    else
+        chk_connect_custom(theAction, &QAction::triggered, receiver, slot, Qt::AutoConnection);
     return theAction;
 }
 
@@ -53,7 +58,13 @@ inline typename std::enable_if_t<std::is_same_v<T, KToggleAction>, KToggleAction
     KToggleAction* theAction = new KToggleAction(ac);
     ac->addAction(actionName, theAction);
     theAction->setText(text);
-    chk_connect_a(theAction, &KToggleAction::triggered, receiver, slot);
+    if constexpr(std::is_member_function_pointer_v<std::decay_t<Func>>)
+    {
+        chk_connect_a(theAction, &KToggleAction::triggered, receiver, slot);
+    }
+    else
+        chk_connect_custom(theAction, &KToggleAction::triggered, receiver, slot, Qt::AutoConnection);
+
     return theAction;
 }
 
