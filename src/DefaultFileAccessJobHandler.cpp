@@ -133,15 +133,15 @@ void DefaultFileAccessJobHandler::slotGetData(KJob* pJob, const QByteArray& newD
 }
 #endif
 
-bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume, qint32 permissions)
+bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOverwrite)
 {
     ProgressProxyExtender pp; // Implicitly used in slotPercent()
     if(maxLength > 0)
     {
         m_bSuccess = false;
 #if HAS_KFKIO
-        KIO::TransferJob* pJob = KIO::put(mFileAccess->url(), permissions,
-                                          KIO::HideProgressInfo | (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags));
+        KIO::TransferJob* pJob = KIO::put(mFileAccess->url(), -1,
+                                          KIO::HideProgressInfo | (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags));
         m_transferredBytes = 0;
         m_pTransferBuffer = (char*)pSrcBuffer;
         m_maxLength = maxLength;
