@@ -20,7 +20,8 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
-set(KF_MIN_VERSION "6.0.0")
+#required for flatpak
+set(KF_MIN_VERSION "5.249.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(
