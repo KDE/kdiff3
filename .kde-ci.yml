@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
-
+# 1.11 is still a Qt5 release on Linux craft based builds are Qt6 only 
 Dependencies:
 - 'on': ['Linux', 'FreeBSD', 'Windows']
   'require':
@@ -14,6 +14,18 @@ Dependencies:
     'frameworks/kparts': '@stable'
     'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kxmlgui': '@stable'
+- 'on': ['Windows/Qt6']
+  'require':
+    'frameworks/extra-cmake-modules': '@stable-kf6'
+    'frameworks/kconfig': '@stable-kf6'
+    'frameworks/kcoreaddons': '@stable-kf6'
+    'frameworks/kcrash': '@stable-kf6'
+    'frameworks/kdoctools': '@stable-kf6'
+    'frameworks/ki18n': '@stablet-kf6'
+    'frameworks/kio': '@stable-kf6'
+    'frameworks/kparts': '@stable-kf6'
+    'frameworks/kwidgetsaddons': '@stable-kf6'
+    'frameworks/kxmlgui': '@stable-kf6'
 
 Options:
     cppcheck-arguments: '--enable=warning,style,performance -i build -i test -i src/xpm --suppressions-list=CppCheckSuppressions.txt --inline-suppr'
