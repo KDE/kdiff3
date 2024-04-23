@@ -133,7 +133,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
             pHistoryMenuAction->setMenu(pHistoryMenu);
             pHistoryMenu->setEnabled(m_list.count() > 0 && historyCount > 0);
             pActionMenu->addAction(pHistoryMenuAction);
-            for(const QString& file: qAsConst(*s_pHistory))
+            for(const QString& file: std::as_const(*s_pHistory))
             {
                 pAction = new QAction(file, this);
                 pAction->setData(file);

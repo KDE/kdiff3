@@ -162,8 +162,8 @@ add_definitions(
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060100#warn if deprecated at 6.1 or before. Qt default setting is not useful for kdiff3.
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050F00#disable deprecated api for Qt<5.15.
+    -DQT_DEPRECATED_WARNINGS_SINCE=0x060700#warn if deprecated at 6.7 or before. Qt default setting is not useful for kdiff3.
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x060600#disable deprecated api for Qt<6.6.
     #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
