@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
-# 1.11 is still a Qt5 release on Linux craft based builds are Qt6 only 
+# 1.11 is still a Qt5 release on Linux craft based builds are Qt6 only
 Dependencies:
 - 'on': ['Linux', 'FreeBSD', 'Windows']
   'require':
@@ -11,7 +11,6 @@ Dependencies:
     'frameworks/kdoctools': '@stable'
     'frameworks/ki18n': '@stable'
     'frameworks/kio': '@stable'
-    'frameworks/kparts': '@stable'
     'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kxmlgui': '@stable'
 - 'on': ['Windows/Qt6']
@@ -23,7 +22,6 @@ Dependencies:
     'frameworks/kdoctools': '@stable-kf6'
     'frameworks/ki18n': '@stablet-kf6'
     'frameworks/kio': '@stable-kf6'
-    'frameworks/kparts': '@stable-kf6'
     'frameworks/kwidgetsaddons': '@stable-kf6'
     'frameworks/kxmlgui': '@stable-kf6'
 
