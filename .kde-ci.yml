@@ -4,16 +4,16 @@
 Dependencies:
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Windows/Qt6']
   'require':
-    'frameworks/extra-cmake-modules': '@latest-kf6'
-    'frameworks/kconfig': '@latest-kf6'
-    'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/kcrash': '@latest-kf6'
-    'frameworks/kdoctools': '@latest-kf6'
-    'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kio': '@latest-kf6'
-    'frameworks/kparts': '@latest-kf6'
-    'frameworks/kwidgetsaddons': '@latest-kf6'
-    'frameworks/kxmlgui': '@latest-kf6'
+    'frameworks/extra-cmake-modules': '@stable-kf6'
+    'frameworks/kconfig': '@stable-kf6'
+    'frameworks/kcoreaddons': '@stable-kf6'
+    'frameworks/kcrash': '@stable-kf6'
+    'frameworks/kdoctools': '@stable-kf6'
+    'frameworks/ki18n': '@stable-kf6'
+    'frameworks/kio': '@stable-kf6'
+    'frameworks/kparts': '@stable-kf6'
+    'frameworks/kwidgetsaddons': '@stable-kf6'
+    'frameworks/kxmlgui': '@stable-kf6'
 
 Options:
     cppcheck-arguments: '--enable=warning,style,performance -i build -i test -i src/xpm --suppressions-list=CppCheckSuppressions.txt --inline-suppr'
