@@ -574,13 +574,16 @@ LineRef DiffTextWindow::convertDiff3LineIdxToLine(const LineType d3lIdx) const
 */
 LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, LineType visibleLines)
 {
+    if(line < visibleLines) //well known result.
+        return 0;
+
     LineRef newFirstLine = firstLine;
     if(line < firstLine || line + nofLines + 2 > firstLine + visibleLines)
     {
         if(nofLines > visibleLines || nofLines <= (2 * visibleLines / 3 - 1))
-            newFirstLine = line - visibleLines / 3;
+            newFirstLine = std::min(0, line - visibleLines) / 3;
         else
-            newFirstLine = line - (visibleLines - nofLines);
+            newFirstLine = std::min(0, line - (visibleLines - nofLines));
     }
 
     return newFirstLine;
