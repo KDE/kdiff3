@@ -316,7 +316,9 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
     if(m_eventLoop == nullptr)
     {
         m_eventLoop = QPointer<QEventLoop>(new QEventLoop(this));
-        m_eventLoop->exec(); // this function only returns after ProgressDialog::exitEventLoop() is called.
+        m_eventLoop->exec(); // this function returns after starting loop not what you might expect from the docs.
+        // Actually wait for loop to exit.
+        while(m_eventLoop->isRunning()) { m_eventLoop->processEvents(QEventLoop::WaitForMoreEvents); }
         m_eventLoop.clear();
     }
     else
