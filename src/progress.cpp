@@ -168,6 +168,7 @@ void ProgressDialog::endBackgroundTask()
         backgroundTaskCount--;
         if(backgroundTaskCount == 0)
         {
+            killJob();
             hide();
         }
     }
@@ -180,6 +181,7 @@ void ProgressDialog::pop(bool bRedrawUpdate)
         m_progressStack.pop_back();
         if(m_progressStack.empty())
         {
+            killJob();
             hide();
         }
         else
@@ -410,13 +412,17 @@ void ProgressDialog::hide()
     m_delayedHideTimer = startTimer(100);
 }
 
-void ProgressDialog::delayedHide()
+void ProgressDialog::killJob()
 {
     if(m_pJob != nullptr)
     {
-        m_pJob->kill(KJob::Quietly);
+        m_pJob->kill(KJob::EmitResult);
         m_pJob = nullptr;
     }
+}
+
+void ProgressDialog::delayedHide()
+{
     QDialog::hide();
     dialogUi.information->setText("");
 

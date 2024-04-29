@@ -77,6 +77,7 @@ class ProgressDialog: public QDialog
 
   protected:
     void reject() override;
+    void killJob();
 
   private:
     void setInformationImp(const QString& info);
