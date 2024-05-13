@@ -37,7 +37,7 @@ class Overview : public QWidget
 
     void init(Diff3LineList* pDiff3LineList);
     void reset();
-    void setRange(LineRef firstLine, qint32 pageHeight);
+    void setRange(LineRef firstLine, LineType pageHeight);
     void setPaintingAllowed(bool bAllowPainting);
 
     e_OverviewMode getOverviewMode();
@@ -52,7 +52,7 @@ class Overview : public QWidget
   private:
     const Diff3LineList* m_pDiff3LineList;
     LineRef m_firstLine;
-    qint32 m_pageHeight;
+    LineType m_pageHeight; //hieght in lines  for each page
     QPixmap m_pixmap;
     e_OverviewMode mOverviewMode;
     LineType m_nofLines;

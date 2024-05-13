@@ -1396,7 +1396,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
 {
     QSize newSize = e->size();
     QFontMetrics fm = fontMetrics();
-    qint32 visibleLines = newSize.height() / fm.lineSpacing() - 2;
+    LineType visibleLines = newSize.height() / fm.lineSpacing() - 2;
     //TODO: Fix after line number area is converted to a QWidget.
     qint32 visibleColumns = newSize.width() / fm.horizontalAdvance('0') - d->leftInfoWidth();
 

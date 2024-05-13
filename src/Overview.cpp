@@ -54,7 +54,7 @@ void Overview::slotRedraw()
     update();
 }
 
-void Overview::setRange(LineRef firstLine, qint32 pageHeight)
+void Overview::setRange(LineRef firstLine, LineType pageHeight)
 {
     assert(firstLine.isValid());
     m_firstLine = firstLine;

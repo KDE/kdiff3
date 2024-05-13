@@ -494,14 +494,14 @@ void KDiff3App::setHScrollBarRange()
     m_pHScrollBar->setSingleStep(fontMetrics().horizontalAdvance('0') * 10);
     m_pHScrollBar->setPageStep(pageStep);
 }
-
-void KDiff3App::resizeDiffTextWindowHeight(qint32 newHeight)
+// Inbound height should be in lines.
+void KDiff3App::resizeDiffTextWindowHeight(LineType newHeight)
 {
     m_DTWHeight = newHeight;
 
-    DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
+    DiffTextWindow::mVScrollBar->setRange(0, std::max(0, (m_neededLines + 1 - newHeight)));
     DiffTextWindow::mVScrollBar->setPageStep(newHeight);
-    m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), DiffTextWindow::mVScrollBar->pageStep());
+    m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), newHeight);
 
     setHScrollBarRange();
 }
@@ -547,13 +547,13 @@ void KDiff3App::slotFinishMainInit()
 
     setHScrollBarRange();
 
-    qint32 newHeight = m_pDiffTextWindow1->getNofVisibleLines();
+    LineType lineCount = m_pDiffTextWindow1->getNofVisibleLines();
     /*qint32 newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
-    m_DTWHeight = newHeight;
+    m_DTWHeight = lineCount;
 
-    DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
-    DiffTextWindow::mVScrollBar->setPageStep(newHeight);
-    m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), DiffTextWindow::mVScrollBar->pageStep());
+    DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - lineCount));
+    DiffTextWindow::mVScrollBar->setPageStep(lineCount);
+    m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), lineCount);
 
     qint32 d3l = -1;
     if(!m_manualDiffHelpList.empty())
