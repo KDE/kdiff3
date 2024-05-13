@@ -240,7 +240,7 @@ public Q_SLOTS:
      */
     void slotStatusMsg(const QString& text);
 
-    void resizeDiffTextWindowHeight(qint32 newHeight);
+    void resizeDiffTextWindowHeight(LineType newHeight);
     void slotRecalcWordWrap();
     void postRecalcWordWrap();
     void slotFinishRecalcWordWrap(qint32 visibleTextWidth);
@@ -451,7 +451,7 @@ public Q_SLOTS:
     ManualDiffHelpList m_manualDiffHelpList;
 
     LineType m_neededLines = 0;
-    qint32 m_DTWHeight = 0;
+    LineType m_DTWHeight = 0;
     bool m_bOutputModified = false;
     bool m_bFileSaved = false;
     bool m_bTimerBlock = false; // Synchronization

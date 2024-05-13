@@ -115,7 +115,7 @@ class DiffTextWindow: public QWidget
     void scrollVertically(qint32 deltaY);
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void resizeHeightChangedSignal(qint32 nofVisibleLines);
+    void resizeHeightChangedSignal(LineType nofVisibleLines);
     void resizeWidthChangedSignal(qint32 nofVisibleColumns);
     void scrollDiffTextWindow(qint32 deltaX, qint32 deltaY);
     void newSelection();
