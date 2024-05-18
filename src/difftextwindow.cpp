@@ -578,14 +578,16 @@ LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, Lin
         return 0;
 
     LineRef newFirstLine = firstLine;
-    if(line < firstLine || line + nofLines + 2 > firstLine + visibleLines)
-    {
-        if(nofLines > visibleLines || nofLines <= (2 * visibleLines / 3 - 1))
-            newFirstLine = std::max(0, line - visibleLines) / 3;
-        else
-            newFirstLine = std::max(0, line - (visibleLines - nofLines));
-    }
+    if(line > firstLine && line + nofLines + 2 <= firstLine + visibleLines)
+        return newFirstLine;
 
+    if(nofLines < visibleLines)
+        newFirstLine = std::max(0, (LineType)std::ceil(line - (visibleLines - nofLines) / 2));
+    else
+    {
+        qint32 numberPages = floor(nofLines / visibleLines);
+        newFirstLine = std::max(0, line - (visibleLines * numberPages) / 3);
+    }
     return newFirstLine;
 }
 
