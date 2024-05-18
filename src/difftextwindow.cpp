@@ -581,9 +581,9 @@ LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, Lin
     if(line < firstLine || line + nofLines + 2 > firstLine + visibleLines)
     {
         if(nofLines > visibleLines || nofLines <= (2 * visibleLines / 3 - 1))
-            newFirstLine = std::min(0, line - visibleLines) / 3;
+            newFirstLine = std::max(0, line - visibleLines) / 3;
         else
-            newFirstLine = std::min(0, line - (visibleLines - nofLines));
+            newFirstLine = std::max(0, line - (visibleLines - nofLines));
     }
 
     return newFirstLine;

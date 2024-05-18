@@ -93,7 +93,7 @@ void Overview::mousePressEvent(QMouseEvent* e)
     qint32 h1 = h * m_pageHeight / std::max(1, m_nofLines) + 3;
 
     if(h > 0)
-        Q_EMIT setLine(std::min(0, (e->y() - h1 / 2)) * m_nofLines / h);
+        Q_EMIT setLine(std::max(0, (e->y() - h1 / 2)) * m_nofLines / h);
 }
 
 void Overview::mouseMoveEvent(QMouseEvent* e)
