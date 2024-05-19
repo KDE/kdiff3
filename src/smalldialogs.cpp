@@ -130,7 +130,7 @@ OpenDialog::OpenDialog(
         This makes behavior consitant with the main window.
 
         On windows this step also needed to bypasses Qt's quirky behavior when converting from QUrl
-        to QString. Specifically % encoding is by handled differently on windows. This is explicitly documented
+        to QString. Specifically % encoding is handled differently on windows. This is explicitly documented
         as platform specific unspecified behavior. Not what we need.
     */
     dialogUi.lineA->setLineEdit(new FileNameLineEdit(dialogUi.lineA));
