@@ -42,7 +42,7 @@ STDMETHODIMP
 DIFF_EXT::QueryInterface(REFIID refiid, void** ppv)
 {
     HRESULT ret = E_NOINTERFACE;
-    *ppv = 0;
+    *ppv = nullptr;
 
     if(IsEqualIID(refiid, IID_IShellExtInit) || IsEqualIID(refiid, IID_IUnknown))
     {
@@ -53,7 +53,7 @@ DIFF_EXT::QueryInterface(REFIID refiid, void** ppv)
         *ppv = static_cast<IContextMenu*>(this);
     }
 
-    if(*ppv != 0)
+    if(*ppv != nullptr)
     {
         AddRef();
 
@@ -91,7 +91,7 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
 {
     LOG();
 
-    FORMATETC format = {CF_HDROP, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+    FORMATETC format = {CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
     STGMEDIUM medium;
     medium.tymed = TYMED_HGLOBAL;
     HRESULT ret = E_INVALIDARG;
@@ -99,7 +99,7 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
     if(data->GetData(&format, &medium) == S_OK)
     {
         HDROP drop = (HDROP)medium.hGlobal;
-        m_nrOfSelectedFiles = DragQueryFile(drop, 0xFFFFFFFF, 0, 0);
+        m_nrOfSelectedFiles = DragQueryFile(drop, 0xFFFFFFFF, nullptr, 0);
 
         TCHAR tmp[MAX_PATH];
 
@@ -132,7 +132,7 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
 }
 
 static int insertMenuItemHelper(HMENU menu, UINT id, UINT position, const tstring& text,
-                                UINT fState = MFS_ENABLED, HMENU hSubMenu = 0)
+                                UINT fState = MFS_ENABLED, HMENU hSubMenu = nullptr)
 {
     MENUITEMINFO item_info;
     ZeroMemory(&item_info, sizeof(item_info));
@@ -142,11 +142,11 @@ static int insertMenuItemHelper(HMENU menu, UINT id, UINT position, const tstrin
     { // Separator
         item_info.fMask = MIIM_TYPE;
         item_info.fType = MFT_SEPARATOR;
-        item_info.dwTypeData = 0;
+        item_info.dwTypeData = nullptr;
     }
     else
     {
-        item_info.fMask = MIIM_ID | MIIM_TYPE | MIIM_STATE | (hSubMenu != 0 ? MIIM_SUBMENU : 0);
+        item_info.fMask = MIIM_ID | MIIM_TYPE | MIIM_STATE | (hSubMenu != nullptr ? MIIM_SUBMENU : 0);
         item_info.fType = MFT_STRING;
         item_info.fState = fState;
         item_info.dwTypeData = (LPTSTR)text.c_str();
@@ -400,7 +400,7 @@ void DIFF_EXT::diff(const tstring& arguments)
     {
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
-        if(CreateProcess(command.c_str(), (LPTSTR)commandLine.c_str(), 0, 0, FALSE, 0, 0, 0, &si, &pi) == 0)
+        if(CreateProcess(command.c_str(), (LPTSTR)commandLine.c_str(), nullptr, nullptr, FALSE, 0, nullptr, nullptr, &si, &pi) == 0)
         {
             SYSERRORLOG(TEXT("CreateProcess") + command);
         }

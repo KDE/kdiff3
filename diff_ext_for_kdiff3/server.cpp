@@ -32,7 +32,7 @@ struct REGSTRUCT {
   LPCTSTR value;
 };
 
-SERVER* SERVER::_instance = 0;
+SERVER* SERVER::_instance = nullptr;
 static HINSTANCE server_instance; // Handle to this DLL itself.
 
 //DEFINE_GUID(CLSID_DIFF_EXT, 0xA0482097, 0xC69D, 0x4DEC, 0x8A, 0xB6, 0xD3, 0xA2, 0x59, 0xAC, 0xC1, 0x51);
@@ -58,11 +58,11 @@ tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& valu
       if( RegOpenKeyEx( baseKey, keyName.c_str(), 0, KEY_READ | KEY_WOW64_64KEY, &key ) == ERROR_SUCCESS )
       {
          DWORD neededSizeInBytes = 0;
-         if (RegQueryValueEx(key, value.c_str(), 0, 0, 0, &neededSizeInBytes) == ERROR_SUCCESS)
+         if (RegQueryValueEx(key, value.c_str(), nullptr, nullptr, nullptr, &neededSizeInBytes) == ERROR_SUCCESS)
          {
             DWORD length = neededSizeInBytes / sizeof( TCHAR );
             result.resize( length );
-            if ( RegQueryValueEx( key, value.c_str(), 0, 0, (LPBYTE)&result[0], &neededSizeInBytes ) == ERROR_SUCCESS)
+            if ( RegQueryValueEx( key, value.c_str(), nullptr, nullptr, (LPBYTE)&result[0], &neededSizeInBytes ) == ERROR_SUCCESS)
             {
                //Everything is ok, but we want to cut off the terminating 0-character
                result.resize( length - 1 );
@@ -85,8 +85,8 @@ tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& valu
    // Error
    {
       LPTSTR message;
-      FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, 0,
-         GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &message, 0, 0);
+      FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
+         GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &message, 0, nullptr);
       ERRORLOG( (tstring(TEXT("RegOpenKeyEx: ")+keyName+TEXT("->")+value) + TEXT(": ")) + message );                                        \
       LocalFree(message);
    }
@@ -130,7 +130,7 @@ DllMain(HINSTANCE instance, DWORD reason, LPVOID /* reserved */) {
 STDAPI
 DllGetClassObject(REFCLSID rclsid, REFIID riid, void** class_object) {
   HRESULT ret = CLASS_E_CLASSNOTAVAILABLE;
-  *class_object = 0;
+  *class_object = nullptr;
 
   if (IsEqualIID(rclsid, CLSID_DIFF_EXT)) {
     CLASS_FACTORY* pcf = new CLASS_FACTORY();
@@ -166,8 +166,8 @@ SERVER* SERVER::instance()
 SERVER::SERVER()  : _reference_count(0)
 {
    m_registryBaseName = TEXT("Software\\KDE e.V.\\KDiff3\\diff-ext");
-   m_pRecentFiles = 0;
-   m_pLogFile = 0;
+   m_pRecentFiles = nullptr;
+   m_pLogFile = nullptr;
 }
 
 void SERVER::initLogging()
@@ -231,7 +231,7 @@ std::list<tstring>&
 SERVER::recent_files()
 {
    LOG();
-   if ( m_pRecentFiles==0 )
+   if ( m_pRecentFiles==nullptr )
    {
       m_pRecentFiles = new std::list<tstring>;
    }
@@ -257,8 +257,8 @@ SERVER::save_history() const
    if( m_pRecentFiles )
    {
       HKEY key;
-      if( RegCreateKeyEx(HKEY_CURRENT_USER, (m_registryBaseName + TEXT("\\history")).c_str(), 0, 0,
-                         REG_OPTION_NON_VOLATILE, KEY_WRITE | KEY_WOW64_64KEY, 0, &key, 0) == ERROR_SUCCESS )
+      if( RegCreateKeyEx(HKEY_CURRENT_USER, (m_registryBaseName + TEXT("\\history")).c_str(), 0, nullptr,
+                         REG_OPTION_NON_VOLATILE, KEY_WRITE | KEY_WOW64_64KEY, nullptr, &key, nullptr) == ERROR_SUCCESS )
       {
          LOG();
          //DWORD len = MAX_PATH;
@@ -274,10 +274,10 @@ SERVER::save_history() const
             if(RegSetValueEx(key, numAsString, 0, REG_SZ, (const BYTE*)str.c_str(), (DWORD)(str.size()+1)*sizeof(TCHAR) ) != ERROR_SUCCESS)
             {
                LPTSTR message;
-               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, 0,
+               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
                   GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
-                  (LPTSTR) &message, 0, 0);
-               MessageBox(0, message, TEXT("KDiff3-diff-ext: Save history failed"), MB_OK | MB_ICONINFORMATION);
+                  (LPTSTR) &message, 0, nullptr);
+               MessageBox(nullptr, message, TEXT("KDiff3-diff-ext: Save history failed"), MB_OK | MB_ICONINFORMATION);
                LocalFree(message);
             }
          }
@@ -318,14 +318,14 @@ SERVER::do_register() {
     GetModuleFileName(SERVER::instance()->handle(), server_path, MAX_PATH);
 
     REGSTRUCT entry[] = {
-      {TEXT("Software\\Classes\\CLSID\\%s"), 0, TEXT("kdiff3ext")},
-      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), 0, TEXT("%s")},
+      {TEXT("Software\\Classes\\CLSID\\%s"), nullptr, TEXT("kdiff3ext")},
+      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), nullptr, TEXT("%s")},
       {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), TEXT("ThreadingModel"), TEXT("Apartment")}
     };
 
     for(unsigned int i = 0; (i < sizeof(entry)/sizeof(entry[0])) && (result == NOERROR); i++) {
       _sntprintf(subkey, MAX_PATH, entry[i].subkey, class_id);
-      result = RegCreateKeyEx(HKEY_CURRENT_USER, subkey, 0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
+      result = RegCreateKeyEx(HKEY_CURRENT_USER, subkey, 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
 
       if(result == NOERROR) {
         TCHAR szData[MAX_PATH];
@@ -340,18 +340,18 @@ SERVER::do_register() {
     }
 
     if(result == NOERROR) {
-      result = RegCreateKeyEx(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext"), 0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
+      result = RegCreateKeyEx(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext"), 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
 
       if(result == NOERROR) {
 
-        result = RegSetValueEx(key, 0, 0, REG_SZ, (LPBYTE)class_id, DWORD(_tcslen(class_id)*sizeof(TCHAR)));
+        result = RegSetValueEx(key, nullptr, 0, REG_SZ, (LPBYTE)class_id, DWORD(_tcslen(class_id)*sizeof(TCHAR)));
 
         RegCloseKey(key);
 
         // NT needs to have shell extensions "approved".
          result = RegCreateKeyEx(HKEY_CURRENT_USER,
             TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"),
-            0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
+            0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
 
          if(result == NOERROR) {
          TCHAR szData[MAX_PATH];
@@ -368,7 +368,7 @@ SERVER::do_register() {
          TEXT("The application may work anyway, but it is advised to register this module ")
          TEXT("again while having administrator rights.");
 
-	    MessageBox(0, msg, TEXT("Warning"), MB_ICONEXCLAMATION);
+	    MessageBox(nullptr, msg, TEXT("Warning"), MB_ICONEXCLAMATION);
 
 	    ret = S_OK;
           }
@@ -395,8 +395,8 @@ SERVER::do_unregister() {
     TCHAR subkey[MAX_PATH];
 
     REGSTRUCT entry[] = {
-      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), 0, 0},
-      {TEXT("Software\\Classes\\CLSID\\%s"), 0, 0}
+      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), nullptr, nullptr},
+      {TEXT("Software\\Classes\\CLSID\\%s"), nullptr, nullptr}
     };
 
     for(unsigned int i = 0; (i < sizeof(entry)/sizeof(entry[0])) && (result == NOERROR); i++) {

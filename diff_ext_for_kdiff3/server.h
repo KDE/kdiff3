@@ -33,8 +33,8 @@ typedef std::wstring tstring;
 #define SYSERRORLOG( msg )                                                                    \
    {                                                                                          \
       LPTSTR message;                                                                         \
-      FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, 0,           \
-         GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &message, 0, 0); \
+      FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,     \
+         GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &message, 0, nullptr); \
       ERRORLOG( (tstring(msg) + TEXT(": ")) + message );                                        \
       LocalFree(message);                                                                     \
    }

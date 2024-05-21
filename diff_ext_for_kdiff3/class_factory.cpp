@@ -53,7 +53,7 @@ CLASS_FACTORY::Release() {
 STDMETHODIMP
 CLASS_FACTORY::CreateInstance(IUnknown* outer, REFIID refiid, void** obj) {
   HRESULT ret = CLASS_E_NOAGGREGATION;
-  *obj = 0;
+  *obj = nullptr;
 
   // Shell extensions typically don't support aggregation (inheritance)
   if(outer == nullptr) {
