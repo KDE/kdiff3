@@ -7,15 +7,14 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-19 00:40+0000\n"
-"PO-Revision-Date: 2024-05-19 00:10+0300\n"
+"PO-Revision-Date: 2024-05-21 08:57+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
-"n % 10 == 0) ? 2 : 3));\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
@@ -920,7 +919,7 @@ msgstr "בחירה בג׳ לכל הפריטים"
 #: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
-msgstr ""
+msgstr "לבחור אוטומטית פעולה לכל הפריטים"
 
 #: directorymergewindow.cpp:2963
 #, kde-format
@@ -1096,12 +1095,14 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
+"בעת הניסיון לגבות, שינוי השם נכשל.\n"
+"שמות הקובץ: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "תווית טקסט"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
@@ -1245,7 +1246,7 @@ msgstr ""
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
-msgstr ""
+msgstr "(דילוג על רווחים כשהאפשרות „הצגת רווחים” מושבתת.)"
 
 #: kdiff3.cpp:804
 #, kde-format
@@ -1253,7 +1254,7 @@ msgctxt "Tooltip explanation text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
-msgstr ""
+msgstr "(לא ידלג על הבדלי הרווחים אפילו כש„הצגת רווחים” מושבתת.)"
 
 #: kdiff3.cpp:805
 #, kde-format
@@ -1413,7 +1414,7 @@ msgstr ""
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr ""
+msgstr "מעבר אוטומטי לסתירה הבאה שלא נפתרה אחרי בחירת מקור"
 
 #: kdiff3.cpp:822
 #, kde-format
@@ -1538,7 +1539,7 @@ msgstr "סקירת ב׳ מול ג׳"
 #: kdiff3.cpp:844
 #, kde-format
 msgid "Word Wrap Diff Windows"
-msgstr ""
+msgstr "חלונות הבדלי גלישת שורות"
 
 #: kdiff3.cpp:845
 #, kde-format
@@ -1568,12 +1569,12 @@ msgstr "החלפת כיוון הפיצול"
 #: kdiff3.cpp:852
 #, kde-format
 msgid "Folder && Text Split Screen View"
-msgstr ""
+msgstr "תצוגת מסך מפוצלת לתיקיות וטקסט"
 
 #: kdiff3.cpp:854
 #, kde-format
 msgid "Toggle Between Folder && Text View"
-msgstr ""
+msgstr "החלפה בין תצוגת תיקיות לטקסט"
 
 #: kdiff3.cpp:876 kdiff3.cpp:978 kdiff3.cpp:1003 kdiff3.cpp:1262 pdiff.cpp:802
 #: pdiff.cpp:871 pdiff.cpp:907 pdiff.cpp:916 pdiff.cpp:974 pdiff.cpp:982
@@ -1756,12 +1757,12 @@ msgstr "קובץ בסיס מפורש. לתאימות מול מגוון כלים.
 #: main.cpp:116
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
-msgstr ""
+msgstr "קובץ פלט. מרמז על ‎-m. למשל: ‎-o newfile.txt"
 
 #: main.cpp:117
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
-msgstr ""
+msgstr "קובץ פלט, שוב (לתאימות עם כל מיני כלים.)"
 
 #: main.cpp:119
 #, kde-format
@@ -1771,32 +1772,32 @@ msgstr "לא צריך ממשק משתמש אם כל הסתירות ניתנות 
 #: main.cpp:120
 #, kde-format
 msgid "Ignore --auto and always show GUI."
-msgstr ""
+msgstr "התעלמות מ־‎--auto ותמיד להציג ממשק משתמש."
 
 #: main.cpp:122 main.cpp:123
 #, kde-format
 msgid "Ignored."
-msgstr ""
+msgstr "נפסח."
 
 #: main.cpp:125
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
-msgstr ""
+msgstr "החלפת שם גלוי לקובץ קלט 1 (בסיס)."
 
 #: main.cpp:126
 #, kde-format
 msgid "Visible name replacement for input file 2."
-msgstr ""
+msgstr "החלפת שם גלוי לקובץ קלט 2."
 
 #: main.cpp:127
 #, kde-format
 msgid "Visible name replacement for input file 3."
-msgstr ""
+msgstr "החלפת שם גלוי לקובץ קלט 2."
 
 #: main.cpp:128
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
-msgstr ""
+msgstr "החלפת שם גלוי חלופי. יש לספק את זה פעם אחת לכל קלט."
 
 #: main.cpp:129
 #, kde-format
@@ -1804,6 +1805,7 @@ msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
+"מעקף הגדרה מהתצורה. להשתמש פעם אחת לכל הגדרה. למשל: ‎--cs \"AutoAdvance=1\""
 
 #: main.cpp:130
 #, kde-format
@@ -1818,22 +1820,22 @@ msgstr "להשתמש בקובץ הגדרות אחר."
 #: main.cpp:134
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
-msgstr ""
+msgstr "קובץ 1 לפתיחה (בסיס, אם לא צוין דרך ‎--base)"
 
 #: main.cpp:135
 #, kde-format
 msgid "file2 to open"
-msgstr ""
+msgstr "קובץ2 לפתיחה"
 
 #: main.cpp:136
 #, kde-format
 msgid "file3 to open"
-msgstr ""
+msgstr "קובץ3 לפתיחה"
 
 #: main.cpp:160
 #, kde-format
 msgid "See kdiff3 --help for supported options."
-msgstr ""
+msgstr "יש לעיין ב־kdiff3 --help לצפייה באפשרויות הנתמכות."
 
 #: MergeFileInfos.cpp:394
 #, kde-format
@@ -1914,7 +1916,7 @@ msgstr "לבחור בג׳ לכל סתירות הרווחים שטרם נפתרו
 #: mergeresultwindow.cpp:247
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-msgstr ""
+msgstr "מספר הסתירות שלא נפתרו: %1 (מהן %2 הן רווחים)"
 
 #: mergeresultwindow.cpp:311
 #, kde-format
@@ -1955,6 +1957,10 @@ msgid ""
 "Number of unsolved conflicts: %3\n"
 "%4"
 msgstr ""
+"מספר הסתירות בסך הכול: %1\n"
+"מספר הסתירות שנפתרו אוטומטית: %2\n"
+"מספר הסתירות שלא נפתרו: %3\n"
+"%4"
 
 #: mergeresultwindow.cpp:780
 #, kde-format
@@ -1998,6 +2004,8 @@ msgid ""
 "manually.\n"
 "File not saved."
 msgstr ""
+"יש סתירה בסגנון סיומות השורות. נא לבחור את סיומת השורה ידנית.\n"
+"הקובץ לא נשמר."
 
 #: mergeresultwindow.cpp:2649
 #, kde-format
@@ -2233,7 +2241,7 @@ msgstr "צבע רקע הבדלי טווח נוכחי:"
 #: optiondialog.cpp:686
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
-msgstr ""
+msgstr "צבע לטווחי הבדלים שיושרו ידנית:"
 
 #: optiondialog.cpp:693
 #, kde-format
@@ -2250,22 +2258,22 @@ msgstr "צבע הקובץ החדש ביותר:"
 msgid ""
 "Changing this color will only be effective when starting the next folder "
 "comparison."
-msgstr ""
+msgstr "החלפת הצבע הזה תשפיע רק בעת התחלת השוואת התיקייה הבאה."
 
 #: optiondialog.cpp:709
 #, kde-format
 msgid "Oldest file color:"
-msgstr ""
+msgstr "צבע הקובץ הישן ביותר:"
 
 #: optiondialog.cpp:718
 #, kde-format
 msgid "Middle age file color:"
-msgstr ""
+msgstr "צבע הקובץ בגיל האמצעי:"
 
 #: optiondialog.cpp:727
 #, kde-format
 msgid "Color for missing files:"
-msgstr ""
+msgstr "צבע לקבצים חסרים:"
 
 #: optiondialog.cpp:741
 #, kde-format
@@ -2280,7 +2288,7 @@ msgstr "התנהגות עורך"
 #: optiondialog.cpp:764
 #, kde-format
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "טאב מוסיף רווחים"
 
 #: optiondialog.cpp:768
 #, kde-format
@@ -2298,18 +2306,18 @@ msgstr "גודל טאב:"
 #: optiondialog.cpp:780
 #, kde-format
 msgid "Auto indentation"
-msgstr ""
+msgstr "יישור אוטומטי"
 
 #: optiondialog.cpp:784
 #, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
-msgstr ""
+msgstr "פעיל: יישור השורה הקודמת משמש לשורה חדשה.\n"
 
 #: optiondialog.cpp:787
 #, kde-format
 msgid "Auto copy selection"
-msgstr ""
+msgstr "העתקת הבדיקה אוטומטית"
 
 #: optiondialog.cpp:791
 #, kde-format
@@ -2372,13 +2380,13 @@ msgstr ""
 #: optiondialog.cpp:848
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
-msgstr ""
+msgstr "התעלמות מהערות C/C++‎ (להתייחס אליהן כרווח)"
 
 #: optiondialog.cpp:851
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
-msgstr ""
+msgstr "התייחסות להערות כאל רווחים"
 
 #: optiondialog.cpp:854
 #, kde-format
@@ -2394,7 +2402,7 @@ msgstr ""
 #: optiondialog.cpp:861
 #, kde-format
 msgid "Preprocessor command:"
-msgstr ""
+msgstr "פקודת עיבוד טרומי:"
 
 #: optiondialog.cpp:866
 #, kde-format
@@ -2418,7 +2426,7 @@ msgstr ""
 #: optiondialog.cpp:877
 #, kde-format
 msgid "Try hard (slower)"
-msgstr ""
+msgstr "להתאמץ (איטי יותר)"
 
 #: optiondialog.cpp:881
 #, kde-format
@@ -2485,7 +2493,7 @@ msgstr ""
 #: optiondialog.cpp:945 optiondialog.cpp:958
 #, kde-format
 msgid "Manual Choice"
-msgstr ""
+msgstr "בחירה ידנית"
 
 #: optiondialog.cpp:949 optiondialog.cpp:963
 #, kde-format
@@ -2503,7 +2511,7 @@ msgstr ""
 #: optiondialog.cpp:967
 #, kde-format
 msgid "Automatic Merge Regular Expression"
-msgstr ""
+msgstr "ביטוי רגולרי למיזוג אוטומטי"
 
 #: optiondialog.cpp:975 smalldialogs.cpp:372
 #, kde-format
@@ -2526,28 +2534,28 @@ msgstr ""
 #: optiondialog.cpp:991
 #, kde-format
 msgid "Version Control History Merging"
-msgstr ""
+msgstr "מיזוג היסטוריית בקרת גרסאות"
 
 #: optiondialog.cpp:999 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
-msgstr ""
+msgstr "ביטוי רגולרי להתחלת ההיסטוריה:"
 
 #: optiondialog.cpp:1007 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
-msgstr ""
+msgstr "ביטוי רגולרי להתחלת רשומת היסטוריה:"
 
 #: optiondialog.cpp:1023
 #, kde-format
 msgid "History merge sorting"
-msgstr ""
+msgstr "מיון מיזוג היסטוריה"
 
 #: optiondialog.cpp:1026
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
-msgstr ""
+msgstr "מיון היסטוריית בקרת הגרסאות לפי מפתח."
 
 #: optiondialog.cpp:1036
 #, kde-format
@@ -2584,7 +2592,7 @@ msgstr "בדיקת הביטוי הרגולרי שלך"
 #: optiondialog.cpp:1066
 #, kde-format
 msgid "Irrelevant merge command:"
-msgstr ""
+msgstr "פקודת מיזוג לא תקפה:"
 
 #: optiondialog.cpp:1071
 #, kde-format
@@ -2664,7 +2672,7 @@ msgstr ""
 #: optiondialog.cpp:1139
 #, kde-format
 msgid "Folder-anti-pattern(s):"
-msgstr ""
+msgstr "תבניות תיקיות הופכיות:"
 
 #: optiondialog.cpp:1145
 #, kde-format
@@ -2674,6 +2682,9 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
+"תבניות של תיקיות להחרגה מהאבחון.\n"
+"תווי הכללה: ‚*’ ו־‚?’\n"
+"אפשר לציין כמה תבניות באמצעות המפריד: ‚:’"
 
 #: optiondialog.cpp:1150
 #, kde-format
@@ -2769,6 +2780,8 @@ msgid ""
 "On: Do not show the Folder Comparison Status.\n"
 "Off: Show the status dialog on start."
 msgstr ""
+"פעיל: לא להציג את מצב השוואת התיקיות.\n"
+"כבוי: להציג את חלונית המצב עם העלייה."
 
 #: optiondialog.cpp:1209
 #, kde-format
@@ -2784,7 +2797,7 @@ msgstr "השוואה בינרית"
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
-msgstr ""
+msgstr "השוואה בינרית של כל קובץ. (ברירת מחדל)"
 
 #: optiondialog.cpp:1219
 #, kde-format
@@ -2804,7 +2817,7 @@ msgstr ""
 #: optiondialog.cpp:1225
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
-msgstr ""
+msgstr "לסמוך על הגודל ועל תאריך השינוי (מפוקפק)"
 
 #: optiondialog.cpp:1227
 #, kde-format
@@ -2823,6 +2836,7 @@ msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
 "(unsafe)"
 msgstr ""
+"לסמוך על הגודל והתאריך אבל להשתמש בהשוואה בינרית אם התאריך לא תואם (מפוקפק)"
 
 #: optiondialog.cpp:1234
 #, kde-format
