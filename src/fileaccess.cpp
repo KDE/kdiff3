@@ -420,12 +420,24 @@ void FileAccess::addPath(const QString& txt, bool reinit)
 */
 //This is what KIO uses on windows so we might as well check it.
 #ifdef Q_OS_WIN
+#ifndef S_IRUSR
 #define S_IRUSR 0400  // Read by owner.
+#endif
+#ifndef S_IWUSR
 #define S_IWUSR 0200  // Write by owner.
+#endif
+#ifndef S_IXUSR
 #define S_IXUSR 0100  // Execute by owner.
+#endif
+#ifndef S_IROTH
 #define S_IROTH 00004 // others have read permission
+#endif
+#ifndef S_IWOTH
 #define S_IWOTH 00002 // others have write permission
+#endif
+#ifndef S_IXOTH
 #define S_IXOTH 00001 // others have execute permission
+#endif
 #endif
 void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
 {
