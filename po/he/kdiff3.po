@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-19 00:40+0000\n"
-"PO-Revision-Date: 2024-05-22 21:58+0300\n"
+"PO-Revision-Date: 2024-05-23 08:10+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2862,6 +2862,9 @@ msgid ""
 "different.\n"
 "Useful for big folders or slow networks."
 msgstr ""
+"להניח שקבצים זהים אם תאריך השינוי ואורך הקובץ זהים.\n"
+"קבצים עם תוכן זהה אך תאריכי שינוי שונים יופיעו כשונים.\n"
+"חיוני לתיקיות גדולות או לרשתות איטיות."
 
 #: optiondialog.cpp:1232
 #, kde-format
@@ -2880,6 +2883,9 @@ msgid ""
 "If the dates are not equal but the sizes are, use binary comparison.\n"
 "Useful for big folders or slow networks."
 msgstr ""
+"להניח שהקבצים זהים אם תאריך השינוי ואורך הקובץ זהים.\n"
+"אם התאריכים לא זהים אך הגדלים כן, להשתמש בהשוואה בינרית.\n"
+"חיוני לתיקיות גדולות או רשתות איטיות."
 
 #: optiondialog.cpp:1239
 #, kde-format
@@ -2894,6 +2900,8 @@ msgid ""
 "Useful for big folders or slow networks when the date is modified during "
 "download."
 msgstr ""
+"להניח שקבצים זהים אם אורכי הקבצים שלהם זהים.\n"
+"חיוני לתיקיות גדולות או רשתות איטיות כשהתאריך משתנה במהלך ההורדה."
 
 #: optiondialog.cpp:1248
 #, kde-format
@@ -2908,6 +2916,9 @@ msgid ""
 "both folders are the same afterwards.\n"
 "Works only when comparing two folders without specifying a destination."
 msgstr ""
+"להציע לאחסן קבצים בשתי התיקיות כדי ששתי\n"
+"התיקיות תהיינה זהות לאחר מכן.\n"
+"עובד רק בעת השוואת שתי תיקיות מבלי לציין יעד."
 
 #: optiondialog.cpp:1258
 #, kde-format
@@ -3031,6 +3042,8 @@ msgid ""
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
+"אם האפשרות פעילה נעשה שימוש בקידוד מקובצי הקלט.\n"
+"במקרים של חוסר ודאות תופיע חלונית שתבקש מהמשתמש לבחור את הקידוד לשמירה."
 
 #: optiondialog.cpp:1376
 #, kde-format
