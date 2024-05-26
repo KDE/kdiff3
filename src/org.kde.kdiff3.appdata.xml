@@ -1,451 +1,453 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-SPDX-FileCopyrightText: 2023 Michael Reeves reeves.87@gmail.com
-SPDX-License-Identifier: GPL-2.0-or-later
--->
-<component type="desktop-application">
-  <id>org.kde.kdiff3.desktop</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0-or-later</project_license>
-  <developer id="org.kde">
-    <name translate="no">KDE</name>
-  </developer>
-  <name>KDiff3</name>
-  <name xml:lang="ast">KDiff3</name>
-  <name xml:lang="bg">KDiff3</name>
-  <name xml:lang="ca">KDiff3</name>
-  <name xml:lang="ca-valencia">KDiff3</name>
-  <name xml:lang="cs">KDiff3</name>
-  <name xml:lang="da">KDiff3</name>
-  <name xml:lang="de">KDiff3</name>
-  <name xml:lang="el">KDaff3</name>
-  <name xml:lang="en-GB">KDiff3</name>
-  <name xml:lang="eo">KDiff3</name>
-  <name xml:lang="es">KDiff3</name>
-  <name xml:lang="et">KDiff3</name>
-  <name xml:lang="eu">KDiff3</name>
-  <name xml:lang="fi">KDiff3</name>
-  <name xml:lang="fr">KDiff3</name>
-  <name xml:lang="gl">KDiff3</name>
-  <name xml:lang="he">KDiff3</name>
-  <name xml:lang="ia">KDiff3</name>
-  <name xml:lang="id">KDiff3</name>
-  <name xml:lang="it">KDiff3</name>
-  <name xml:lang="ka">KDiff3</name>
-  <name xml:lang="ko">KDiff3</name>
-  <name xml:lang="nl">KDiff3</name>
-  <name xml:lang="nn">KDiff3</name>
-  <name xml:lang="pl">KDiff3</name>
-  <name xml:lang="pt">KDiff3</name>
-  <name xml:lang="pt-BR">KDiff3</name>
-  <name xml:lang="ru">KDiff3</name>
-  <name xml:lang="sk">KDiff3</name>
-  <name xml:lang="sl">KDiff3</name>
-  <name xml:lang="sv">Kdiff3</name>
-  <name xml:lang="tr">KDiff3</name>
-  <name xml:lang="uk">KDiff3</name>
-  <name xml:lang="x-test">xxKDiff3xx</name>
-  <name xml:lang="zh-CN">KDiff3</name>
-  <name xml:lang="zh-TW">KDiff3</name>
-  <summary>A file and folder comparison and merge tool</summary>
-  <summary xml:lang="bg">Инструмент за сравняване и обединяване на файлове и папки</summary>
-  <summary xml:lang="ca">Una eina per a la comparació i fusió de fitxers i carpetes</summary>
-  <summary xml:lang="ca-valencia">Una eina per a la comparació i fusió de fitxers i carpetes</summary>
-  <summary xml:lang="cs">Nástroj pro porovnávání a slučování souborů a složek</summary>
-  <summary xml:lang="de">Programm zum Vergleichen und Zusammenführen von Dateien und Ordnern</summary>
-  <summary xml:lang="el">Ένα εργαλείο σύγκρισης και συγχώνευσης αρχείων και φακέλων</summary>
-  <summary xml:lang="en-GB">A file and folder comparison and merge tool</summary>
-  <summary xml:lang="eo">Dosiera kaj dosieruja komparilo kaj kunfandilo</summary>
-  <summary xml:lang="es">Una herramienta para comparar y fusionar archivos y carpetas</summary>
-  <summary xml:lang="et">Failide ja kataloogide võrdlemise ja ühendamise tööriist</summary>
-  <summary xml:lang="eu">Fitxategiak eta karpetak alderatu eta bateratzeko tresna bat</summary>
-  <summary xml:lang="fi">Tiedostojen ja kansioiden vertailu- ja yhdistämistyökalu</summary>
-  <summary xml:lang="fr">Un outil de comparaison et de fusion de fichiers et de dossiers</summary>
-  <summary xml:lang="gl">Unha ferramenta de comparación e fusión de ficheiros e cartafoles.</summary>
-  <summary xml:lang="he">כלי להשוואה ומיזוג של קבצים ותיקיות</summary>
-  <summary xml:lang="ia">Un instrumento de fusion e comparation de file e dossier</summary>
-  <summary xml:lang="id">Sebuah alat penggabung dan pembanding folder dan file</summary>
-  <summary xml:lang="it">Uno strumento di confronto e fusione di file e cartelle</summary>
-  <summary xml:lang="ka">ფაილებისა და საქაღალდეების შედარებისა და შერწყმის ხელსაწყო</summary>
-  <summary xml:lang="ko">파일과 폴더 비교 및 병합 도구</summary>
-  <summary xml:lang="nl">Een hulpmiddel voor het vergelijken en samenvoegen van bestanden en mappen</summary>
-  <summary xml:lang="pl">Narzędzie do porównywania i scalania plików i katalogów</summary>
-  <summary xml:lang="pt">Uma ferramenta de comparação e junção de pastas e ficheiros</summary>
-  <summary xml:lang="pt-BR">Uma ferramenta de comparação e combinação de arquivos e pastas</summary>
-  <summary xml:lang="ru">Инструмент для сравнения и объединения файлов и папок</summary>
-  <summary xml:lang="sk">Nástroj na porovnanie a zlúčenie súborov a adresárov</summary>
-  <summary xml:lang="sl">Orodje za primerjavo datotek in map ter za združevanje</summary>
-  <summary xml:lang="sv">Ett jämförelse- och sammanfogningsverktyg för fil- och katalogjämförelser</summary>
-  <summary xml:lang="tr">Bir dosya/klasör karşılaştırma ve birleştirme aracı</summary>
-  <summary xml:lang="uk">Програма для порівняння і об'єднання файлів та тек</summary>
-  <summary xml:lang="x-test">xxA file and folder comparison and merge toolxx</summary>
-  <summary xml:lang="zh-CN">一个比较、合并文件和文件夹的工具</summary>
-  <summary xml:lang="zh-TW">一個比對檔案或資料夾差異並進行合併的工具</summary>
-  <project_group>KDE</project_group>
-  <description>
-    <p>KDiff3 is a file and folder diff and merge tool which</p>
-    <p xml:lang="bg">KDiff3 е инструмент за сравняване и обединяване на файлове и папки, който</p>
-    <p xml:lang="ca">El KDiff3 és una eina per a la comparació i fusió de fitxers i carpetes</p>
-    <p xml:lang="ca-valencia">KDiff3 és una eina per a la comparació i fusió de fitxers i carpetes</p>
-    <p xml:lang="de">KDiff3 ist ein Programm zum Anzeigen von Unterschieden und zum Zusammenführen von Dateien und Ordnern.</p>
-    <p xml:lang="el">Το KDiff3 είναι ένα εργαλείο σύγκρισης και συγχώνευσης αρχείων και φακέλων, το οποίο</p>
-    <p xml:lang="en-GB">KDiff3 is a file and folder diff and merge tool which</p>
-    <p xml:lang="eo">KDiff3 estas dosiera kaj dosieruja diff- kaj kunfanda ilo kiu</p>
-    <p xml:lang="es">KDiff es una herramienta de visualización de diferencias y de fusión de archivos y carpetas que</p>
-    <p xml:lang="et">KDiff3 on failide ja kataloogide võrdlemise ja ühendamise tööriist, mis</p>
-    <p xml:lang="eu">KDiff3 fitxategiak eta karpetak «diff» eta bateratzeko tresna bat da,</p>
-    <p xml:lang="fi">Kdiff3 on tiedostojen ja kansioiden vertailu- ja yhdistämistyökalu, joka</p>
-    <p xml:lang="fr">KDiff3 est un outil de comparaison et de fusion de fichiers et de dossiers qui</p>
-    <p xml:lang="gl">KDiff3 é unha ferramenta de diferenzas e fusión de ficheiros e cartafoles que:</p>
-    <p xml:lang="he">KDiff3 הוא כלי להשוואה ומיזוג של קבצים ותיקיות שמשווה</p>
-    <p xml:lang="id">KDiff3 adalah sebuah alat penggabung dan pembeda mana file dan folder</p>
-    <p xml:lang="it">KDiff3 è uno strumento per fondere file e cartelle che</p>
-    <p xml:lang="ka">Kdiff3 ფაილებისა და საქაღალდეების შედარებისა და შერწყმის ხელსაწყოა</p>
-    <p xml:lang="ko">KDiff3는 파일 및 폴더 diff 및 병합 도구입니다</p>
-    <p xml:lang="nl">KDdiff3 is een hulpmiddel om bestanden en mappen te vergelijken en samen te voegen dat</p>
-    <p xml:lang="pl">KDiff3 jest narzędziem do pokazywania różnicy i scalania plików i katalogów, które</p>
-    <p xml:lang="pt">O KDiff3 é uma ferramenta de detecção e junção das diferenças entre ficheiros e pastas que</p>
-    <p xml:lang="pt-BR">O KDiff3 é uma ferramenta de diferenças e mesclagem de arquivos e pastas que</p>
-    <p xml:lang="ru"> — это приложение для поиска различий между файлами и каталогами, которое:</p>
-    <p xml:lang="sk">KDiff3 je nástroj na porovnávanie a zlučovanie súborov a adresárov</p>
-    <p xml:lang="sl">KDiff3 je orodje za prikaz razlik med datotekami in mapami, ki</p>
-    <p xml:lang="sv">Kdiff3 är ett verktyg för jämförelser och sammanfogning av filer och kataloger, som</p>
-    <p xml:lang="tr">KDiff3, şunları yapabilen bir dosya/klasör diff ve birleştirme aracıdır</p>
-    <p xml:lang="uk">KDiff3 — програма для визначення відмінностей у файлах і теках та об'єднання цих відмінностей в один варіант, яка</p>
-    <p xml:lang="x-test">xxKDiff3 is a file and folder diff and merge tool whichxx</p>
-    <p xml:lang="zh-CN">KDiff3 是一个比较、合并文件和文件夹的工具，</p>
-    <p xml:lang="zh-TW">KDiff3 是一個比對檔案或資料夾差異並進行合併的工具，它</p>
-    <ul>
-      <li>compares and merges two or three text input files or folders,</li>
-      <li xml:lang="bg">compares and merges two or three text input files or folders,</li>
-      <li xml:lang="ca">compara i fusiona dos o tres fitxers o carpetes des de l'entrada,</li>
-      <li xml:lang="ca-valencia">compara i fusiona dos o tres fitxers o carpetes des de l'entrada,</li>
-      <li xml:lang="de">vergleicht zwei oder drei Textdateien bzw. Ordner und führt sie zusammen,</li>
-      <li xml:lang="el">συγκρίνει και συγχωνεύει δύο ή τρία αρχεία κειμένου ή φακέλους,</li>
-      <li xml:lang="en-GB">compares and merges two or three text input files or folders,</li>
-      <li xml:lang="eo">komparas kaj kunfandas du aŭ tri tekstajn enigdosierojn aŭ dosierujojn,</li>
-      <li xml:lang="es">compara y fusiona dos o tres archivos de texto de entrada o carpetas,</li>
-      <li xml:lang="et">võrdleb ja ühendab kaht või kolme sisendfaili või -kataloogi,</li>
-      <li xml:lang="eu">sarrerako bi edo hiru testu fitxategi edo karpeta alderatu eta bateratzen dituena,</li>
-      <li xml:lang="fi">vertaa ja yhdistää kaksi tai kolme tekstitiedostoa tai kansiota</li>
-      <li xml:lang="fr">compare et fusionne deux ou trois fichiers ou dossiers en entrée,</li>
-      <li xml:lang="gl">compara e fusiona dous ou tres ficheiros ou cartafoles de entrada de texto,</li>
-      <li xml:lang="he">וממזג שניים או שלושה קבצים או תיקיות כקלט,</li>
-      <li xml:lang="id">membandingkan dan menggabungkan dua atau tiga file atau folder input teks,</li>
-      <li xml:lang="it">confronta e fonde due o tre file di testo o cartelle in ingresso,</li>
-      <li xml:lang="ka">რომელის ადარებს და შეაერთებს ორ ან სამ ფაილს ან საქაღალდეს,</li>
-      <li xml:lang="ko">텍스트 입력 파일 또는 폴더 두 개 또는 세 개를 비교하고 병합하며,</li>
-      <li xml:lang="nl">twee of drie tekstbestanden of mappen vergelijkt en samenvoegt,</li>
-      <li xml:lang="pl">porównuje i scala dwa, trzy lub więcej plików wejściowych lub katalogów,</li>
-      <li xml:lang="pt">compara e junta dois ou três ficheiros de texto ou pastas de entrada,</li>
-      <li xml:lang="pt-BR">compara e mescla dois ou três arquivos de texto ou pastas,</li>
-      <li xml:lang="ru">позволяет сравнивать и объединять два или три текстовых вводных файла или папки;</li>
-      <li xml:lang="sk">porovnáva a zlučuje dva alebo viac textových súborov alebo adresárov,</li>
-      <li xml:lang="sl">primerja in združuje dve ali tri vhodne datoteke ali mape besedil,</li>
-      <li xml:lang="sv">jämför och sammanfogar två eller tre textfiler eller kataloger,</li>
-      <li xml:lang="tr">dosyalardan ve klasörlerden iki veya üç metin girdi dosyasını karşılaştırır,</li>
-      <li xml:lang="uk">порівнює і об’єднує два або три вхідних текстових файлів або тек.</li>
-      <li xml:lang="x-test">xxcompares and merges two or three text input files or folders,xx</li>
-      <li xml:lang="zh-CN">它能比较、合并输入的两份或三份文件和文件夹，</li>
-      <li xml:lang="zh-TW">能夠比對或合併兩個或三個文字輸入檔或資料夾，</li>
-      <li>shows the differences line by line and character by character(!),</li>
-      <li xml:lang="bg">показва разликите ред по ред и символ по символ(!),</li>
-      <li xml:lang="ca">mostra les diferències línia per línia i caràcter per caràcter!,</li>
-      <li xml:lang="ca-valencia">mostra les diferències línia per línia i caràcter per caràcter!,</li>
-      <li xml:lang="de">kann Unterschiede zeilenweise und sogar Zeichen für Zeichen anzeigen,</li>
-      <li xml:lang="el">εμφανίζει τις διαφορές ανά γραμμή και ανά χαρακτήρα(!),</li>
-      <li xml:lang="en-GB">shows the differences line by line and character by character(!),</li>
-      <li xml:lang="eo">montras la diferencojn po linio kaj po signo(!),</li>
-      <li xml:lang="es">muestra las diferencias línea a línea y carácter a carácter (!),</li>
-      <li xml:lang="et">näitab erinevusi ridade ja märkide (!) kaupa,</li>
-      <li xml:lang="eu">ezberdintasunak lerroz-lerro eta karakterez-karaktere erakusten ditu(!),</li>
-      <li xml:lang="fi">näyttää erot riveittäin ja merkeittäin (!)</li>
-      <li xml:lang="fr">affiche les différences ligne par ligne et caractère par caractère (!),</li>
-      <li xml:lang="gl">amosa as diferenzas liña por liña e carácter por carácter(!),</li>
-      <li xml:lang="he">מציג את ההבדלים ביניהם שורה אחר שורה ותו אחר תו(!),</li>
-      <li xml:lang="id">menampilkan perbedaan baris demi baris dan karakter demi karakter(!),</li>
-      <li xml:lang="it">mostra le differenze riga per riga e carattere per carattere(!),</li>
-      <li xml:lang="ka">აჩვენებს განსხვავებებს სიმბოლოებით და ხაზებით,</li>
-      <li xml:lang="ko">줄과 문자 단위로(!)로 다른 줄을 표시하며,</li>
-      <li xml:lang="nl">toont de verschillen regel voor regel en teken voor teken(!),</li>
-      <li xml:lang="pl">pokazuje różnice wiersz po wierszu i znak po znaku(!),</li>
-      <li xml:lang="pt">mostra as diferenças linha-a-linha e carácter-a-carácter(!),</li>
-      <li xml:lang="pt-BR">mostra as diferenças linha por linha e caractere por caractere(!),</li>
-      <li xml:lang="ru">позволяет просматривать различия построчно и посимвольно;</li>
-      <li xml:lang="sk">zobrazí rozdiely riadok po riadku a znak po znaku,</li>
-      <li xml:lang="sl">prikazuje razlike črto za črto in znak za znakom (!),</li>
-      <li xml:lang="sv">visar skillnaderna rad för rad och tecken för tecken (!),</li>
-      <li xml:lang="tr">ayrımları satır satır ve karakter karakter gösterir,</li>
-      <li xml:lang="uk">показує відмінності за рядками і за символами(!),</li>
-      <li xml:lang="x-test">xxshows the differences line by line and character by character(!),xx</li>
-      <li xml:lang="zh-CN">按单行或单字符显示差异(!)，</li>
-      <li xml:lang="zh-TW">能依行或是字元顯示差異，</li>
-      <li>provides an automatic merge-facility,</li>
-      <li xml:lang="bg">предоставя възможност за автоматично сливане,</li>
-      <li xml:lang="ca">proporciona la facilitat de la fusió automàtica,</li>
-      <li xml:lang="ca-valencia">proporciona la facilitat de la fusió automàtica,</li>
-      <li xml:lang="de">hat eine Funktion zum automatischen Zusammenführen,</li>
-      <li xml:lang="el">παρέχει μια αυτόματη υπηρεσία συγχώνευσης,</li>
-      <li xml:lang="en-GB">provides an automatic merge-facility,</li>
-      <li xml:lang="eo">disponigas aŭtomatan kunfand-instalaĵon,</li>
-      <li xml:lang="es">proporciona una utilidad de fusión automática,</li>
-      <li xml:lang="et">pakub automaatse ühendamise võimalust,</li>
-      <li xml:lang="eu">automatikoki bateratzeko erraztasuna ematen du,</li>
-      <li xml:lang="fi">tarjoaa automaattisen yhdistämistoiminnon</li>
-      <li xml:lang="fr">offre des fonctionnalités de fusion automatique,</li>
-      <li xml:lang="gl">fornece unha ferramenta de fusión automática,</li>
-      <li xml:lang="he">מספק מנגנון מיזוג אוטומטי,</li>
-      <li xml:lang="id">menyediakan sebuah fasilitas penggabungan otomatis,</li>
-      <li xml:lang="it">fornisce un servizio automatico per la fusione,</li>
-      <li xml:lang="ka">უზრუნველყოფს ავტომატურ შერწყმას,</li>
-      <li xml:lang="ko">자동 병합 기능을 제공하며,</li>
-      <li xml:lang="nl">een automatische samenvoegfunctie biedt,</li>
-      <li xml:lang="pl">zapewnia narzędzie do samoczynnego scalania,</li>
-      <li xml:lang="pt">oferece uma funcionalidade de junção automática,</li>
-      <li xml:lang="pt-BR">fornecendo a facilidade da mesclagem automática,</li>
-      <li xml:lang="ru">поддерживает автоматическое объединение;</li>
-      <li xml:lang="sk">poskytuje automatickú možnosť zlúčenia,</li>
-      <li xml:lang="sl">omogoča samodejno združitev,</li>
-      <li xml:lang="sv">tillhandahåller en automatisk sammanfogingsfunktion,</li>
-      <li xml:lang="tr">otomatik bir birleştirme ortamı sağlar,</li>
-      <li xml:lang="uk">надає можливість автоматичного об’єднання,</li>
-      <li xml:lang="x-test">xxprovides an automatic merge-facility,xx</li>
-      <li xml:lang="zh-CN">提供自动合并功能，</li>
-      <li xml:lang="zh-TW">提供自動合併功能，</li>
-      <li>has an editor for comfortable solving of merge-conflicts,</li>
-      <li xml:lang="bg">има редактор за удобно решаване на конфликти при сливане,</li>
-      <li xml:lang="ca">té un editor per a la solució còmoda dels conflictes de fusió,</li>
-      <li xml:lang="ca-valencia">té un editor per a la solució còmoda dels conflictes de fusió,</li>
-      <li xml:lang="de">enthält einen speziellen komfortablen Editor zum Auflösen von Konflikten beim Zusammenführen,</li>
-      <li xml:lang="el">έχει έναν κειμενογράφο για άνετη επίλυση των συγκρούσεων σε συγχωνεύσεις,</li>
-      <li xml:lang="en-GB">has an editor for comfortable solving of merge-conflicts,</li>
-      <li xml:lang="eo">havas redaktilon por komforta solvado de kunfandkonfliktoj,</li>
-      <li xml:lang="es">posee un editor para resolver confortablemente los conflictos de fusión,</li>
-      <li xml:lang="et">pakub redaktorit mugavaks ühendamisel tekkinud konfliktide lahendamiseks,</li>
-      <li xml:lang="eu">bateratze-gatazkak erosotasunez ebazteko editore bat dauka,</li>
-      <li xml:lang="fi">sisältää muokkaimen yhdistämisristiriitojen ratkaisemiseksi</li>
-      <li xml:lang="fr">dispose d'un éditeur pour résoudre confortablement les conflits lors de la fusion,</li>
-      <li xml:lang="gl">ten un editor para solucionar de maneira cómoda conflitos de fusión,</li>
-      <li xml:lang="he">כולל עורך לפתרון נוח של סתירות מיזוג,</li>
-      <li xml:lang="id">memiliki sebuah editor untuk pemecahan yang baik pada penggabungan yang bentrok</li>
-      <li xml:lang="it">dispone di un editor per risolvere comodamente i conflitti di fusione,</li>
-      <li xml:lang="ka">გააჩნია რედაქტორი, რომ ადვილად გადაწყვიტოთ შერწყმის კონფლიქტები,</li>
-      <li xml:lang="ko">병합 충돌을 원만하게 해결할 수 있는 편집기가 있으며,</li>
-      <li xml:lang="nl">een editor heeft voor het comfortabel oplossen van samenvoegconflicten,</li>
-      <li xml:lang="pl">ma edytor do wygodnego rozwiązywania sprzeczności przy scalaniu,</li>
-      <li xml:lang="pt">tem um editor para resolver confortavelmente os conflitos de junção,</li>
-      <li xml:lang="pt-BR">tem um editor para resolver confortavelmente os conflitos de mesclagem,</li>
-      <li xml:lang="ru">предоставляет редактор для комфортного разрешения конфликтов объединения;</li>
-      <li xml:lang="sk">má editor na pohodlné riešenie konfliktov zlučovania,</li>
-      <li xml:lang="sl">ima urejevalnik za udobno reševanje sporov med spajanjem,</li>
-      <li xml:lang="sv">har en editor för bekväm lösning av sammanfogningskonflikter,</li>
-      <li xml:lang="tr">birleştirme çakışmalarını çözmek için kolay kullanılabilir bir düzenleyicisi vardır,</li>
-      <li xml:lang="uk">містить редактор для полегшення розв’язання конфліктів під час об’єднання,</li>
-      <li xml:lang="x-test">xxhas an editor for comfortable solving of merge-conflicts,xx</li>
-      <li xml:lang="zh-CN">有一个舒适的编辑器来解决合并冲突，</li>
-      <li xml:lang="zh-TW">提供能夠輕鬆解決合併衝突的編輯器，</li>
-      <li>provides network transparency via KIO,</li>
-      <li xml:lang="bg">предоставя мрежова прозрачност чрез KIO,</li>
-      <li xml:lang="ca">proporciona transparència de xarxa a través del KIO,</li>
-      <li xml:lang="ca-valencia">proporciona transparència de xarxa a través de KIO,</li>
-      <li xml:lang="de">ist mit Hilfe von KIO Netzwerktransparent,</li>
-      <li xml:lang="el">παρέχει δικτυακή διαφάνεια μέσα από το KIO,</li>
-      <li xml:lang="en-GB">provides network transparency via KIO,</li>
-      <li xml:lang="eo">provizas retan travideblecon per KIO,</li>
-      <li xml:lang="es">proporciona transparencia de red mediante el uso de KIO,</li>
-      <li xml:lang="et">võimaldab KIO vahendusel võrgu läbipaistvust,</li>
-      <li xml:lang="eu">KIO bidez sarearekiko gardentasuna hornitzen du,</li>
-      <li xml:lang="fi">tarjoaa läpinäkyvän verkon KIOn kautta</li>
-      <li xml:lang="fr">fournit une transparence réseau via KIO,</li>
-      <li xml:lang="gl">fornece transparencia de rede mediante KIO,</li>
-      <li xml:lang="he">מספק שקיפות רשת דרך KIO,</li>
-      <li xml:lang="id">menyediakan transparan jaringan via KIO</li>
-      <li xml:lang="it">fornisce trasparenza di rete tramite KIO,</li>
-      <li xml:lang="ka">ქსელი გამჭვირვალეა, KIO-ს გავლით,</li>
-      <li xml:lang="ko">KIO를 통한 네트워크 투명성을 제공하며,</li>
-      <li xml:lang="nl">netwerktransparantie biedt via KIO,</li>
-      <li xml:lang="pl">zapewnia przejrzystość sieciową przez KIO,</li>
-      <li xml:lang="pt">oferece a transparência na rede com o KIO,</li>
-      <li xml:lang="pt-BR">fornece transparência de rede via KIO,</li>
-      <li xml:lang="ru">с помощью KIO поддерживает работу с файлами, расположенными на сетевых ресурсах;</li>
-      <li xml:lang="sk">poskytuje sieťovú transparentnosť cez KIO,</li>
-      <li xml:lang="sl">zagotavlja preglednost omrežja prek KIO,</li>
-      <li xml:lang="sv">tillhandahåller nätverkstransparens via KIO,</li>
-      <li xml:lang="tr">KIO ile ağ saydamlığı sağlar,</li>
-      <li xml:lang="uk">забезпечує мережеву прозорість за допомогою KIO,</li>
-      <li xml:lang="x-test">xxprovides network transparency via KIO,xx</li>
-      <li xml:lang="zh-CN">通过 KIO 提供网络文件透明访问，</li>
-      <li xml:lang="zh-TW">透過 KIO 提供「網路透明」，</li>
-      <li>has options to highlight or hide changes in white-space or comments,</li>
-      <li xml:lang="bg">има опции за akcentirane или скриване на промените в бялото пространство или коментарите,</li>
-      <li xml:lang="ca">té opcions per a ressaltar o ocultar els canvis en els espais en blanc o els comentaris,</li>
-      <li xml:lang="ca-valencia">té opcions per a ressaltar o ocultar els canvis en els espais en blanc o els comentaris,</li>
-      <li xml:lang="de">kann Unterschiede in Leerraum-Zeichen oder Kommentaren besonders hervorheben oder ausblenden,</li>
-      <li xml:lang="el">έχει επιλογές τονισμού ή απόκρυψης αλλαγών σε κενά ή σχόλια,</li>
-      <li xml:lang="en-GB">has options to highlight or hide changes in white-space or comments,</li>
-      <li xml:lang="eo">havas eblojn por reliefigi aŭ kaŝi ŝanĝojn en blanka spaco aŭ komentoj,</li>
-      <li xml:lang="es">contiene opciones para resaltar u ocultar cambios en espacios en blanco y en comentarios,</li>
-      <li xml:lang="et">võib esile tõsta või peita erinevusi tühimärkides või kommentaarides,</li>
-      <li xml:lang="eu">zuriune edo iruzkinetako aldaketak nabarmentzeko edo ezkutatzeko aukerak ditu,</li>
-      <li xml:lang="fi">osaa korostaa tai piilottaa muutokset tyhjemerkeissä ja kommenteissa</li>
-      <li xml:lang="fr">dispose d'options permettant de surligner ou de cacher les différences d'espaces ou de commentaires,</li>
-      <li xml:lang="gl">ten opcións para salientar ou agochar cambios en espazos en branco ou comentarios,</li>
-      <li xml:lang="he">יש לו אפשרויות להדגשת או הסתרת השינויים ברווחים או הערות,</li>
-      <li xml:lang="id">memiliki opsi untuk menyorot atau menyembunyikan perubahan dalam spasi putih atau komentar,</li>
-      <li xml:lang="it">ha opzioni per evidenziare o per nascondere le modifiche negli spazi o nei commenti,</li>
-      <li xml:lang="ka">აქვს პარამეტრები, რომ გამოკვეთოს ან დამალოს ცვლილებები ცარიელი ადგილებით ან კომენტარებში,</li>
-      <li xml:lang="ko">공백이나 주석의 변경 사항을 강조 표시하거나 숨길 수 있는 옵션이 있고,</li>
-      <li xml:lang="nl">opties heeft voor het accentueren of verbergen van wijzigingen in witruimte of commentaar,</li>
-      <li xml:lang="pl">ma opcje do podświetlenia i ukrycia zmian w białych znakach lub komentarzach,</li>
-      <li xml:lang="pt">tem opções para realçar ou esconder as alterações nos espaços em branco ou comentários,</li>
-      <li xml:lang="pt-BR">tem opção para realçar ou ocultar alterações nos espaços em branco ou comentários,</li>
-      <li xml:lang="ru">предоставляет возможность подсветки или скрытия изменений в пробельных символах или в комментариях;</li>
-      <li xml:lang="sk">má voľby na zvýraznenie alebo skrytie zmien v bielych znakoch alebo komentároch,</li>
-      <li xml:lang="sl">ima možnosti za označevanje ali skrivanje sprememb v prostoru presledkov ali komentarjih,</li>
-      <li xml:lang="sv">har alternativ för att markera eller dölja ändringar av blanktecken eller kommentarer,</li>
-      <li xml:lang="tr">boşluk veya yorum değişikliklerini vurgulamak veya gizlemek için seçenekleri vardır,</li>
-      <li xml:lang="uk">може підсвічувати або ховати зміни у пробілах або коментарях,</li>
-      <li xml:lang="x-test">xxhas options to highlight or hide changes in white-space or comments,xx</li>
-      <li xml:lang="zh-CN">有选项可以设置高亮或隐藏空白字符和代码注释的更改，</li>
-      <li xml:lang="zh-TW">可以突顯或隱藏空白字元或註解的變更，</li>
-      <li>supports Unicode, UTF-8 and other file encodings,</li>
-      <li xml:lang="bg">поддържа Unicode, UTF-8 и други файлови кдорания,</li>
-      <li xml:lang="ca">admet Unicode, UTF-8 i altres codificacions de fitxer,</li>
-      <li xml:lang="ca-valencia">admet Unicode, UTF-8 i altres codificacions de fitxer,</li>
-      <li xml:lang="cs">podporuje Unicode, UTF-8 a další kódování souborů.</li>
-      <li xml:lang="de">unterstützt Unicode, UTF-8 und weitere Dateikodierungen,</li>
-      <li xml:lang="el">υποστηρίζει Unicode, UTF-8 και άλλες κωδικοποιήσεις αρχείων,</li>
-      <li xml:lang="en-GB">supports Unicode, UTF-8 and other file encodings,</li>
-      <li xml:lang="eo">subtenas Unikodon, UTF-8 kaj aliajn dosierkodigojn,</li>
-      <li xml:lang="es">permite el uso de Unicode, UTF-8 y de otras codificaciones de archivos,</li>
-      <li xml:lang="et">toetab Unicode'i, UTF-8 ja teisi failikodeeringuid,</li>
-      <li xml:lang="eu">Unicode, UTF-8 eta beste fitxategi kodeketa batzuk onartzen ditu,</li>
-      <li xml:lang="fi">tukee Unicodea, UTF-8:aa ja muita merkistökoodauksia</li>
-      <li xml:lang="fr">prend en charge Unicode, UTF-8 et d'autres encodages de fichiers,</li>
-      <li xml:lang="gl">é compatíbel con Unicode, UTF-8 e outras codificacións de ficheiros,s</li>
-      <li xml:lang="he">תמיכה ביוניקוד, UTF-8 וקידודי קבצים נוספים,</li>
-      <li xml:lang="id">dukungan Unicode, UTF-8 dan pengenkodean file lain</li>
-      <li xml:lang="it">supporta Unicode, UTF-8 e altre codifiche di file,</li>
-      <li xml:lang="ka">მხარს უჭერს Unicode, UTF-8 და სხვა ფაილის კოდირებას,</li>
-      <li xml:lang="ko">유니코드, UTF-8 및 기타 파일 인코딩을 지원하며,</li>
-      <li xml:lang="nl">Unicode, UTF-8 en andere bestandscoderingen ondersteunt,</li>
-      <li xml:lang="pl">obsługuje Unikod, UTF-8 i inne kodowania plików,</li>
-      <li xml:lang="pt">suporta o Unicode, o UTF-8 e outras codificações de ficheiros,</li>
-      <li xml:lang="pt-BR">suporta o Unicode, UTF-8 e outras codificações de arquivos,</li>
-      <li xml:lang="ru">поддерживает Юникод, UTF-8 и другие кодировки файлов;</li>
-      <li xml:lang="sk">podporuje Unicode, UTF-8 a iné kódovania súborov,</li>
-      <li xml:lang="sl">podpira Unicode, UTF-8 in drugo kodiranje datotek,</li>
-      <li xml:lang="sv">stöder Unicode, UTF-8 och andra filkodningar,</li>
-      <li xml:lang="tr">Unicode, UTF-8 ve diğer dosya kodlamalarını destekler,</li>
-      <li xml:lang="uk">підтримує Unicode, UTF-8 та інші кодування текстів файлів,</li>
-      <li xml:lang="x-test">xxsupports Unicode, UTF-8 and other file encodings,xx</li>
-      <li xml:lang="zh-CN">支持 Unicode, UTF-8 和其他文件编码,</li>
-      <li xml:lang="zh-TW">支援 Unicode、UTF-8 及其他檔案編碼，</li>
-      <li>prints differences,</li>
-      <li xml:lang="bg">отпечатва разликите,</li>
-      <li xml:lang="ca">imprimeix les diferències,</li>
-      <li xml:lang="ca-valencia">imprimix les diferències,</li>
-      <li xml:lang="cs">vypíše rozdíly,</li>
-      <li xml:lang="de">druckt Abweichungen,</li>
-      <li xml:lang="el">εκτυπώνει διαφορές,</li>
-      <li xml:lang="en-GB">prints differences,</li>
-      <li xml:lang="eo">presas diferencojn,</li>
-      <li xml:lang="es">imprime las diferencias,</li>
-      <li xml:lang="et">trükib erinevusi,</li>
-      <li xml:lang="eu">ezberdintasunak inprimatzen ditu,</li>
-      <li xml:lang="fi">tulostaa eroavuudet</li>
-      <li xml:lang="fr">affiche les différences,</li>
-      <li xml:lang="gl">imprime diferenzas,</li>
-      <li xml:lang="he">מציג הבדלים,</li>
-      <li xml:lang="id">cetakan yang berbeda</li>
-      <li xml:lang="it">stampa le differenze,</li>
-      <li xml:lang="ka">სხვაობების დაბეჭდვა,</li>
-      <li xml:lang="ko">차이점을 인쇄하고,</li>
-      <li xml:lang="nl">verschillen in regels afdrukt,</li>
-      <li xml:lang="pl">drukuje różnice,</li>
-      <li xml:lang="pt">imprime as diferenças,</li>
-      <li xml:lang="pt-BR">imprime as diferenças,</li>
-      <li xml:lang="ru">показывает различия;</li>
-      <li xml:lang="sk">vytlačí rozdiely,</li>
-      <li xml:lang="sl">tiska razlike,</li>
-      <li xml:lang="sv">skriver ut skillnader,</li>
-      <li xml:lang="tr">ayrımları yazdırır,</li>
-      <li xml:lang="uk">може надсилати на друк різницю,</li>
-      <li xml:lang="x-test">xxprints differences,xx</li>
-      <li xml:lang="zh-CN">打印差异,</li>
-      <li xml:lang="zh-TW">可印出差異，</li>
-      <li>supports version control keyword and history merging.</li>
-      <li xml:lang="bg">поддържа контрол на версиите с ключови думи и сливане на историята.</li>
-      <li xml:lang="ca">admet la paraula clau per al control de versions i un historial de les fusions.</li>
-      <li xml:lang="ca-valencia">admet la paraula clau per al control de versions i un historial de les fusions.</li>
-      <li xml:lang="de">unterstützt Schlüsselwörter für Versionsverwaltung und Verlauf-Zusammenführung.</li>
-      <li xml:lang="el">υποστηρίζει συγχώνευση λέξεων κλειδιών και ιστορικού με έλεγχο εκδόσεων.</li>
-      <li xml:lang="en-GB">supports version control keyword and history merging.</li>
-      <li xml:lang="eo">subtenas versio-kontrolan ŝlosilvorton kaj historiokunfandadon.</li>
-      <li xml:lang="es">permite el uso de palabras clave de control de versiones y de fusión de historial.</li>
-      <li xml:lang="et">toetab versioonihalduse võtmesõnade ja ajaloo ühendamist.</li>
-      <li xml:lang="eu">bertsio-kontrolerako gako-hitzak eta historia bateratzea onartzen du.</li>
-      <li xml:lang="fi">tukee versionhallinnan avainsanoja ja historian yhdistämistä.</li>
-      <li xml:lang="fr">prend en charge les mots clés de contrôle de version et la fusion des historiques.</li>
-      <li xml:lang="gl">e permite fusionar historiais e palabras clave de control de versión.</li>
-      <li xml:lang="he">תומך במילות מפתח ומיזוג היסטוריה בבקרת גרסאות.</li>
-      <li xml:lang="id">dukungan katakunci kendali versi dan histori penggabungan.</li>
-      <li xml:lang="it">supporta le parole chiave per il controllo di versione e la fusione della cronologia.</li>
-      <li xml:lang="ka">აქვს ვერსიების კონტროლისა და ისტორიის შერწყმის მხარდაჭერა.</li>
-      <li xml:lang="ko">버전 관리 키워드 및 기록 병합을 지원합니다.</li>
-      <li xml:lang="nl">versiebeheersleutelwoorden ondersteunt en samenvoegen van geschiedenis.</li>
-      <li xml:lang="pl">obsługuje scalanie słów kluczowych i historii zarządzania wersjami</li>
-      <li xml:lang="pt">suporta as palavras-chave de controlo de versões e de junção do histórico.</li>
-      <li xml:lang="pt-BR">suporta palavras-chave de controle de versão e mesclagem de histórico.</li>
-      <li xml:lang="ru">поддерживает ключевые слова систем контроля версий и объединение их историй.</li>
-      <li xml:lang="sk">podporuje kľúčové slová na správu verzií a zlučovanie histórie.</li>
-      <li xml:lang="sl">podpira združevanje ključnih besed in zgodovine za nadzor verzij.</li>
-      <li xml:lang="sv">stöder nyckelord för versionskontroll och sammanfogning av historik.</li>
-      <li xml:lang="tr">sürüm denetimi anahtar sözcüklerini ve geçmiş birleştirmesini destekler.</li>
-      <li xml:lang="uk">підтримує об’єднання за ключовими словами і журналом інструментів керування версіями.</li>
-      <li xml:lang="x-test">xxsupports version control keyword and history merging.xx</li>
-      <li xml:lang="zh-CN">支持版本控制关键词和历史合并。</li>
-      <li xml:lang="zh-TW">支援版本控制關鍵字與歷史合併。</li>
-    </ul>
-  </description>
-  <screenshots>
-    <screenshot type="default">
-      <image>https://cdn.kde.org/screenshots/kdiff3/diffscreen_two_way.png</image>
-    </screenshot>
-    <screenshot>
-      <image>https://cdn.kde.org/screenshots/kdiff3/ManualMerdge.png</image>
-    </screenshot>
-  </screenshots>
-  <url type="homepage">https://apps.kde.org/kdiff3</url>
-  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=kdiff3</url>
-  <url type="help">https://docs.kde.org/?application=kdiff3</url>
-  <url type="donation">https://www.kde.org/community/donations/?app=kdiff3</url>
-  <provides>
-    <binary>kdiff3</binary>
-  </provides>
-  <launchable type="desktop-id">org.kde.kdiff3.desktop</launchable>
-  <releases>
-    <release version="1.10.7" date="2023-12-29"/>
-    <release version="1.10.6" date="2023-09-25"/>
-    <release version="1.10.5" date="2023-06-09"/>
-    <release version="1.10.4" date="2023-05-18"/>
-    <release version="1.10.3" date="2023-05-17"/>
-    <release version="1.10.2" date="2023-05-3"/>
-    <release version="1.10.1" date="2023-03-27"/>
-    <release version="1.10.0" date="2023-01-5"/>
-    <release version="1.9.6" date="2022-06-23"/>
-    <release version="1.9.5" date="2022-03-02"/>
-    <release version="1.9.4" date="2021-11-17"/>
-    <release version="1.9.3" date="2021-07-15"/>
-    <release version="1.9.2" date="2021-05-16"/>
-    <release version="1.9.1" date="2021-05-13"/>
-    <release version="1.9.0" date="2021-04-29"/>
-    <release version="1.8.5" date="2021-01-10"/>
-    <release version="1.8.4" date="2020-08-25"/>
-    <release version="1.8.3" date="2020-06-24"/>
-    <release version="1.8.2" date="2020-03-29"/>
-    <release version="1.8.1" date="2019-03-23"/>
-    <release version="1.8.0" date="2019-03-22"/>
-  </releases>
-  <content_rating type="oars-1.1"/>
-</component>
+﻿<?xml version="1.0" encoding="utf-8"?>﻿
+﻿<!--﻿
+﻿SPDX-FileCopyrightText: 2023 Michael Reeves reeves.87@gmail.com﻿
+﻿SPDX-License-Identifier: GPL-2.0-or-later﻿
+﻿-->﻿
+﻿<component type="desktop-application">﻿
+﻿  <id>org.kde.kdiff3.desktop</id>﻿
+﻿  <metadata_license>CC0-1.0</metadata_license>﻿
+﻿  <project_license>GPL-2.0-or-later</project_license>﻿
+﻿  <developer id="org.kde">﻿
+﻿    <name translate="no">KDE</name>﻿
+﻿  </developer>﻿
+﻿  <name>KDiff3</name>﻿
+﻿  <name xml:lang="ast">KDiff3</name>﻿
+﻿  <name xml:lang="bg">KDiff3</name>﻿
+﻿  <name xml:lang="ca">KDiff3</name>﻿
+﻿  <name xml:lang="ca-valencia">KDiff3</name>﻿
+﻿  <name xml:lang="cs">KDiff3</name>﻿
+﻿  <name xml:lang="da">KDiff3</name>﻿
+﻿  <name xml:lang="de">KDiff3</name>﻿
+﻿  <name xml:lang="el">KDaff3</name>﻿
+﻿  <name xml:lang="en-GB">KDiff3</name>﻿
+﻿  <name xml:lang="eo">KDiff3</name>﻿
+﻿  <name xml:lang="es">KDiff3</name>﻿
+﻿  <name xml:lang="et">KDiff3</name>﻿
+﻿  <name xml:lang="eu">KDiff3</name>﻿
+﻿  <name xml:lang="fi">KDiff3</name>﻿
+﻿  <name xml:lang="fr">KDiff3</name>﻿
+﻿  <name xml:lang="gl">KDiff3</name>﻿
+﻿  <name xml:lang="he">KDiff3</name>﻿
+﻿  <name xml:lang="ia">KDiff3</name>﻿
+﻿  <name xml:lang="id">KDiff3</name>﻿
+﻿  <name xml:lang="it">KDiff3</name>﻿
+﻿  <name xml:lang="ka">KDiff3</name>﻿
+﻿  <name xml:lang="ko">KDiff3</name>﻿
+﻿  <name xml:lang="nl">KDiff3</name>﻿
+﻿  <name xml:lang="nn">KDiff3</name>﻿
+﻿  <name xml:lang="pl">KDiff3</name>﻿
+﻿  <name xml:lang="pt">KDiff3</name>﻿
+﻿  <name xml:lang="pt-BR">KDiff3</name>﻿
+﻿  <name xml:lang="ru">KDiff3</name>﻿
+﻿  <name xml:lang="sk">KDiff3</name>﻿
+﻿  <name xml:lang="sl">KDiff3</name>﻿
+﻿  <name xml:lang="sv">Kdiff3</name>﻿
+﻿  <name xml:lang="tr">KDiff3</name>﻿
+﻿  <name xml:lang="uk">KDiff3</name>﻿
+﻿  <name xml:lang="x-test">xxKDiff3xx</name>﻿
+﻿  <name xml:lang="zh-CN">KDiff3</name>﻿
+﻿  <name xml:lang="zh-TW">KDiff3</name>﻿
+﻿  <summary>A file and folder comparison and merge tool</summary>﻿
+﻿  <summary xml:lang="bg">Инструмент за сравняване и обединяване на файлове и папки</summary>﻿
+﻿  <summary xml:lang="ca">Una eina per a la comparació i fusió de fitxers i carpetes</summary>﻿
+﻿  <summary xml:lang="ca-valencia">Una eina per a la comparació i fusió de fitxers i carpetes</summary>﻿
+﻿  <summary xml:lang="cs">Nástroj pro porovnávání a slučování souborů a složek</summary>﻿
+﻿  <summary xml:lang="de">Programm zum Vergleichen und Zusammenführen von Dateien und Ordnern</summary>﻿
+﻿  <summary xml:lang="el">Ένα εργαλείο σύγκρισης και συγχώνευσης αρχείων και φακέλων</summary>﻿
+﻿  <summary xml:lang="en-GB">A file and folder comparison and merge tool</summary>﻿
+﻿  <summary xml:lang="eo">Dosiera kaj dosieruja komparilo kaj kunfandilo</summary>﻿
+﻿  <summary xml:lang="es">Una herramienta para comparar y fusionar archivos y carpetas</summary>﻿
+﻿  <summary xml:lang="et">Failide ja kataloogide võrdlemise ja ühendamise tööriist</summary>﻿
+﻿  <summary xml:lang="eu">Fitxategiak eta karpetak alderatu eta bateratzeko tresna bat</summary>﻿
+﻿  <summary xml:lang="fi">Tiedostojen ja kansioiden vertailu- ja yhdistämistyökalu</summary>﻿
+﻿  <summary xml:lang="fr">Un outil de comparaison et de fusion de fichiers et de dossiers</summary>﻿
+﻿  <summary xml:lang="gl">Unha ferramenta de comparación e fusión de ficheiros e cartafoles.</summary>﻿
+﻿  <summary xml:lang="he">כלי להשוואה ומיזוג של קבצים ותיקיות</summary>﻿
+﻿  <summary xml:lang="ia">Un instrumento de fusion e comparation de file e dossier</summary>﻿
+﻿  <summary xml:lang="id">Sebuah alat penggabung dan pembanding folder dan file</summary>﻿
+﻿  <summary xml:lang="it">Uno strumento di confronto e fusione di file e cartelle</summary>﻿
+﻿  <summary xml:lang="ka">ფაილებისა და საქაღალდეების შედარებისა და შერწყმის ხელსაწყო</summary>﻿
+﻿  <summary xml:lang="ko">파일과 폴더 비교 및 병합 도구</summary>﻿
+﻿  <summary xml:lang="nl">Een hulpmiddel voor het vergelijken en samenvoegen van bestanden en mappen</summary>﻿
+﻿  <summary xml:lang="pl">Narzędzie do porównywania i scalania plików i katalogów</summary>﻿
+﻿  <summary xml:lang="pt">Uma ferramenta de comparação e junção de pastas e ficheiros</summary>﻿
+﻿  <summary xml:lang="pt-BR">Uma ferramenta de comparação e combinação de arquivos e pastas</summary>﻿
+﻿  <summary xml:lang="ru">Инструмент для сравнения и объединения файлов и папок</summary>﻿
+﻿  <summary xml:lang="sk">Nástroj na porovnanie a zlúčenie súborov a adresárov</summary>﻿
+﻿  <summary xml:lang="sl">Orodje za primerjavo datotek in map ter za združevanje</summary>﻿
+﻿  <summary xml:lang="sv">Ett jämförelse- och sammanfogningsverktyg för fil- och katalogjämförelser</summary>﻿
+﻿  <summary xml:lang="tr">Bir dosya/klasör karşılaştırma ve birleştirme aracı</summary>﻿
+﻿  <summary xml:lang="uk">Програма для порівняння і об'єднання файлів та тек</summary>﻿
+﻿  <summary xml:lang="x-test">xxA file and folder comparison and merge toolxx</summary>﻿
+﻿  <summary xml:lang="zh-CN">一个比较、合并文件和文件夹的工具</summary>﻿
+﻿  <summary xml:lang="zh-TW">一個比對檔案或資料夾差異並進行合併的工具</summary>﻿
+﻿  <project_group>KDE</project_group>﻿
+﻿  <description>﻿
+﻿    <p>KDiff3 is a file and folder diff and merge tool which</p>﻿
+﻿    <p xml:lang="bg">KDiff3 е инструмент за сравняване и обединяване на файлове и папки, който</p>﻿
+﻿    <p xml:lang="ca">El KDiff3 és una eina per a la comparació i fusió de fitxers i carpetes</p>﻿
+﻿    <p xml:lang="ca-valencia">KDiff3 és una eina per a la comparació i fusió de fitxers i carpetes</p>﻿
+﻿    <p xml:lang="de">KDiff3 ist ein Programm zum Anzeigen von Unterschieden und zum Zusammenführen von Dateien und Ordnern.</p>﻿
+﻿    <p xml:lang="el">Το KDiff3 είναι ένα εργαλείο σύγκρισης και συγχώνευσης αρχείων και φακέλων, το οποίο</p>﻿
+﻿    <p xml:lang="en-GB">KDiff3 is a file and folder diff and merge tool which</p>﻿
+﻿    <p xml:lang="eo">KDiff3 estas dosiera kaj dosieruja diff- kaj kunfanda ilo kiu</p>﻿
+﻿    <p xml:lang="es">KDiff es una herramienta de visualización de diferencias y de fusión de archivos y carpetas que</p>﻿
+﻿    <p xml:lang="et">KDiff3 on failide ja kataloogide võrdlemise ja ühendamise tööriist, mis</p>﻿
+﻿    <p xml:lang="eu">KDiff3 fitxategiak eta karpetak «diff» eta bateratzeko tresna bat da,</p>﻿
+﻿    <p xml:lang="fi">Kdiff3 on tiedostojen ja kansioiden vertailu- ja yhdistämistyökalu, joka</p>﻿
+﻿    <p xml:lang="fr">KDiff3 est un outil de comparaison et de fusion de fichiers et de dossiers qui</p>﻿
+﻿    <p xml:lang="gl">KDiff3 é unha ferramenta de diferenzas e fusión de ficheiros e cartafoles que:</p>﻿
+﻿    <p xml:lang="he">KDiff3 הוא כלי להשוואה ומיזוג של קבצים ותיקיות שמשווה</p>﻿
+﻿    <p xml:lang="id">KDiff3 adalah sebuah alat penggabung dan pembeda mana file dan folder</p>﻿
+﻿    <p xml:lang="it">KDiff3 è uno strumento per fondere file e cartelle che</p>﻿
+﻿    <p xml:lang="ka">Kdiff3 ფაილებისა და საქაღალდეების შედარებისა და შერწყმის ხელსაწყოა</p>﻿
+﻿    <p xml:lang="ko">KDiff3는 파일 및 폴더 diff 및 병합 도구입니다</p>﻿
+﻿    <p xml:lang="nl">KDdiff3 is een hulpmiddel om bestanden en mappen te vergelijken en samen te voegen dat</p>﻿
+﻿    <p xml:lang="pl">KDiff3 jest narzędziem do pokazywania różnicy i scalania plików i katalogów, które</p>﻿
+﻿    <p xml:lang="pt">O KDiff3 é uma ferramenta de detecção e junção das diferenças entre ficheiros e pastas que</p>﻿
+﻿    <p xml:lang="pt-BR">O KDiff3 é uma ferramenta de diferenças e mesclagem de arquivos e pastas que</p>﻿
+﻿    <p xml:lang="ru"> — это приложение для поиска различий между файлами и каталогами, которое:</p>﻿
+﻿    <p xml:lang="sk">KDiff3 je nástroj na porovnávanie a zlučovanie súborov a adresárov</p>﻿
+﻿    <p xml:lang="sl">KDiff3 je orodje za prikaz razlik med datotekami in mapami, ki</p>﻿
+﻿    <p xml:lang="sv">Kdiff3 är ett verktyg för jämförelser och sammanfogning av filer och kataloger, som</p>﻿
+﻿    <p xml:lang="tr">KDiff3, şunları yapabilen bir dosya/klasör diff ve birleştirme aracıdır</p>﻿
+﻿    <p xml:lang="uk">KDiff3 — програма для визначення відмінностей у файлах і теках та об'єднання цих відмінностей в один варіант, яка</p>﻿
+﻿    <p xml:lang="x-test">xxKDiff3 is a file and folder diff and merge tool whichxx</p>﻿
+﻿    <p xml:lang="zh-CN">KDiff3 是一个比较、合并文件和文件夹的工具，</p>﻿
+﻿    <p xml:lang="zh-TW">KDiff3 是一個比對檔案或資料夾差異並進行合併的工具，它</p>﻿
+﻿    <ul>﻿
+﻿      <li>compares and merges two or three text input files or folders,</li>﻿
+﻿      <li xml:lang="bg">compares and merges two or three text input files or folders,</li>﻿
+﻿      <li xml:lang="ca">compara i fusiona dos o tres fitxers o carpetes des de l'entrada,</li>﻿
+﻿      <li xml:lang="ca-valencia">compara i fusiona dos o tres fitxers o carpetes des de l'entrada,</li>﻿
+﻿      <li xml:lang="de">vergleicht zwei oder drei Textdateien bzw. Ordner und führt sie zusammen,</li>﻿
+﻿      <li xml:lang="el">συγκρίνει και συγχωνεύει δύο ή τρία αρχεία κειμένου ή φακέλους,</li>﻿
+﻿      <li xml:lang="en-GB">compares and merges two or three text input files or folders,</li>﻿
+﻿      <li xml:lang="eo">komparas kaj kunfandas du aŭ tri tekstajn enigdosierojn aŭ dosierujojn,</li>﻿
+﻿      <li xml:lang="es">compara y fusiona dos o tres archivos de texto de entrada o carpetas,</li>﻿
+﻿      <li xml:lang="et">võrdleb ja ühendab kaht või kolme sisendfaili või -kataloogi,</li>﻿
+﻿      <li xml:lang="eu">sarrerako bi edo hiru testu fitxategi edo karpeta alderatu eta bateratzen dituena,</li>﻿
+﻿      <li xml:lang="fi">vertaa ja yhdistää kaksi tai kolme tekstitiedostoa tai kansiota</li>﻿
+﻿      <li xml:lang="fr">compare et fusionne deux ou trois fichiers ou dossiers en entrée,</li>﻿
+﻿      <li xml:lang="gl">compara e fusiona dous ou tres ficheiros ou cartafoles de entrada de texto,</li>﻿
+﻿      <li xml:lang="he">וממזג שניים או שלושה קבצים או תיקיות כקלט,</li>﻿
+﻿      <li xml:lang="id">membandingkan dan menggabungkan dua atau tiga file atau folder input teks,</li>﻿
+﻿      <li xml:lang="it">confronta e fonde due o tre file di testo o cartelle in ingresso,</li>﻿
+﻿      <li xml:lang="ka">რომელის ადარებს და შეაერთებს ორ ან სამ ფაილს ან საქაღალდეს,</li>﻿
+﻿      <li xml:lang="ko">텍스트 입력 파일 또는 폴더 두 개 또는 세 개를 비교하고 병합하며,</li>﻿
+﻿      <li xml:lang="nl">twee of drie tekstbestanden of mappen vergelijkt en samenvoegt,</li>﻿
+﻿      <li xml:lang="pl">porównuje i scala dwa, trzy lub więcej plików wejściowych lub katalogów,</li>﻿
+﻿      <li xml:lang="pt">compara e junta dois ou três ficheiros de texto ou pastas de entrada,</li>﻿
+﻿      <li xml:lang="pt-BR">compara e mescla dois ou três arquivos de texto ou pastas,</li>﻿
+﻿      <li xml:lang="ru">позволяет сравнивать и объединять два или три текстовых вводных файла или папки;</li>﻿
+﻿      <li xml:lang="sk">porovnáva a zlučuje dva alebo viac textových súborov alebo adresárov,</li>﻿
+﻿      <li xml:lang="sl">primerja in združuje dve ali tri vhodne datoteke ali mape besedil,</li>﻿
+﻿      <li xml:lang="sv">jämför och sammanfogar två eller tre textfiler eller kataloger,</li>﻿
+﻿      <li xml:lang="tr">dosyalardan ve klasörlerden iki veya üç metin girdi dosyasını karşılaştırır,</li>﻿
+﻿      <li xml:lang="uk">порівнює і об’єднує два або три вхідних текстових файлів або тек.</li>﻿
+﻿      <li xml:lang="x-test">xxcompares and merges two or three text input files or folders,xx</li>﻿
+﻿      <li xml:lang="zh-CN">它能比较、合并输入的两份或三份文件和文件夹，</li>﻿
+﻿      <li xml:lang="zh-TW">能夠比對或合併兩個或三個文字輸入檔或資料夾，</li>﻿
+﻿      <li>shows the differences line by line and character by character(!),</li>﻿
+﻿      <li xml:lang="bg">показва разликите ред по ред и символ по символ(!),</li>﻿
+﻿      <li xml:lang="ca">mostra les diferències línia per línia i caràcter per caràcter!,</li>﻿
+﻿      <li xml:lang="ca-valencia">mostra les diferències línia per línia i caràcter per caràcter!,</li>﻿
+﻿      <li xml:lang="de">kann Unterschiede zeilenweise und sogar Zeichen für Zeichen anzeigen,</li>﻿
+﻿      <li xml:lang="el">εμφανίζει τις διαφορές ανά γραμμή και ανά χαρακτήρα(!),</li>﻿
+﻿      <li xml:lang="en-GB">shows the differences line by line and character by character(!),</li>﻿
+﻿      <li xml:lang="eo">montras la diferencojn po linio kaj po signo(!),</li>﻿
+﻿      <li xml:lang="es">muestra las diferencias línea a línea y carácter a carácter (!),</li>﻿
+﻿      <li xml:lang="et">näitab erinevusi ridade ja märkide (!) kaupa,</li>﻿
+﻿      <li xml:lang="eu">ezberdintasunak lerroz-lerro eta karakterez-karaktere erakusten ditu(!),</li>﻿
+﻿      <li xml:lang="fi">näyttää erot riveittäin ja merkeittäin (!)</li>﻿
+﻿      <li xml:lang="fr">affiche les différences ligne par ligne et caractère par caractère (!),</li>﻿
+﻿      <li xml:lang="gl">amosa as diferenzas liña por liña e carácter por carácter(!),</li>﻿
+﻿      <li xml:lang="he">מציג את ההבדלים ביניהם שורה אחר שורה ותו אחר תו(!),</li>﻿
+﻿      <li xml:lang="id">menampilkan perbedaan baris demi baris dan karakter demi karakter(!),</li>﻿
+﻿      <li xml:lang="it">mostra le differenze riga per riga e carattere per carattere(!),</li>﻿
+﻿      <li xml:lang="ka">აჩვენებს განსხვავებებს სიმბოლოებით და ხაზებით,</li>﻿
+﻿      <li xml:lang="ko">줄과 문자 단위로(!)로 다른 줄을 표시하며,</li>﻿
+﻿      <li xml:lang="nl">toont de verschillen regel voor regel en teken voor teken(!),</li>﻿
+﻿      <li xml:lang="pl">pokazuje różnice wiersz po wierszu i znak po znaku(!),</li>﻿
+﻿      <li xml:lang="pt">mostra as diferenças linha-a-linha e carácter-a-carácter(!),</li>﻿
+﻿      <li xml:lang="pt-BR">mostra as diferenças linha por linha e caractere por caractere(!),</li>﻿
+﻿      <li xml:lang="ru">позволяет просматривать различия построчно и посимвольно;</li>﻿
+﻿      <li xml:lang="sk">zobrazí rozdiely riadok po riadku a znak po znaku,</li>﻿
+﻿      <li xml:lang="sl">prikazuje razlike črto za črto in znak za znakom (!),</li>﻿
+﻿      <li xml:lang="sv">visar skillnaderna rad för rad och tecken för tecken (!),</li>﻿
+﻿      <li xml:lang="tr">ayrımları satır satır ve karakter karakter gösterir,</li>﻿
+﻿      <li xml:lang="uk">показує відмінності за рядками і за символами(!),</li>﻿
+﻿      <li xml:lang="x-test">xxshows the differences line by line and character by character(!),xx</li>﻿
+﻿      <li xml:lang="zh-CN">按单行或单字符显示差异(!)，</li>﻿
+﻿      <li xml:lang="zh-TW">能依行或是字元顯示差異，</li>﻿
+﻿      <li>provides an automatic merge-facility,</li>﻿
+﻿      <li xml:lang="bg">предоставя възможност за автоматично сливане,</li>﻿
+﻿      <li xml:lang="ca">proporciona la facilitat de la fusió automàtica,</li>﻿
+﻿      <li xml:lang="ca-valencia">proporciona la facilitat de la fusió automàtica,</li>﻿
+﻿      <li xml:lang="de">hat eine Funktion zum automatischen Zusammenführen,</li>﻿
+﻿      <li xml:lang="el">παρέχει μια αυτόματη υπηρεσία συγχώνευσης,</li>﻿
+﻿      <li xml:lang="en-GB">provides an automatic merge-facility,</li>﻿
+﻿      <li xml:lang="eo">disponigas aŭtomatan kunfand-instalaĵon,</li>﻿
+﻿      <li xml:lang="es">proporciona una utilidad de fusión automática,</li>﻿
+﻿      <li xml:lang="et">pakub automaatse ühendamise võimalust,</li>﻿
+﻿      <li xml:lang="eu">automatikoki bateratzeko erraztasuna ematen du,</li>﻿
+﻿      <li xml:lang="fi">tarjoaa automaattisen yhdistämistoiminnon</li>﻿
+﻿      <li xml:lang="fr">offre des fonctionnalités de fusion automatique,</li>﻿
+﻿      <li xml:lang="gl">fornece unha ferramenta de fusión automática,</li>﻿
+﻿      <li xml:lang="he">מספק מנגנון מיזוג אוטומטי,</li>﻿
+﻿      <li xml:lang="id">menyediakan sebuah fasilitas penggabungan otomatis,</li>﻿
+﻿      <li xml:lang="it">fornisce un servizio automatico per la fusione,</li>﻿
+﻿      <li xml:lang="ka">უზრუნველყოფს ავტომატურ შერწყმას,</li>﻿
+﻿      <li xml:lang="ko">자동 병합 기능을 제공하며,</li>﻿
+﻿      <li xml:lang="nl">een automatische samenvoegfunctie biedt,</li>﻿
+﻿      <li xml:lang="pl">zapewnia narzędzie do samoczynnego scalania,</li>﻿
+﻿      <li xml:lang="pt">oferece uma funcionalidade de junção automática,</li>﻿
+﻿      <li xml:lang="pt-BR">fornecendo a facilidade da mesclagem automática,</li>﻿
+﻿      <li xml:lang="ru">поддерживает автоматическое объединение;</li>﻿
+﻿      <li xml:lang="sk">poskytuje automatickú možnosť zlúčenia,</li>﻿
+﻿      <li xml:lang="sl">omogoča samodejno združitev,</li>﻿
+﻿      <li xml:lang="sv">tillhandahåller en automatisk sammanfogingsfunktion,</li>﻿
+﻿      <li xml:lang="tr">otomatik bir birleştirme ortamı sağlar,</li>﻿
+﻿      <li xml:lang="uk">надає можливість автоматичного об’єднання,</li>﻿
+﻿      <li xml:lang="x-test">xxprovides an automatic merge-facility,xx</li>﻿
+﻿      <li xml:lang="zh-CN">提供自动合并功能，</li>﻿
+﻿      <li xml:lang="zh-TW">提供自動合併功能，</li>﻿
+﻿      <li>has an editor for comfortable solving of merge-conflicts,</li>﻿
+﻿      <li xml:lang="bg">има редактор за удобно решаване на конфликти при сливане,</li>﻿
+﻿      <li xml:lang="ca">té un editor per a la solució còmoda dels conflictes de fusió,</li>﻿
+﻿      <li xml:lang="ca-valencia">té un editor per a la solució còmoda dels conflictes de fusió,</li>﻿
+﻿      <li xml:lang="de">enthält einen speziellen komfortablen Editor zum Auflösen von Konflikten beim Zusammenführen,</li>﻿
+﻿      <li xml:lang="el">έχει έναν κειμενογράφο για άνετη επίλυση των συγκρούσεων σε συγχωνεύσεις,</li>﻿
+﻿      <li xml:lang="en-GB">has an editor for comfortable solving of merge-conflicts,</li>﻿
+﻿      <li xml:lang="eo">havas redaktilon por komforta solvado de kunfandkonfliktoj,</li>﻿
+﻿      <li xml:lang="es">posee un editor para resolver confortablemente los conflictos de fusión,</li>﻿
+﻿      <li xml:lang="et">pakub redaktorit mugavaks ühendamisel tekkinud konfliktide lahendamiseks,</li>﻿
+﻿      <li xml:lang="eu">bateratze-gatazkak erosotasunez ebazteko editore bat dauka,</li>﻿
+﻿      <li xml:lang="fi">sisältää muokkaimen yhdistämisristiriitojen ratkaisemiseksi</li>﻿
+﻿      <li xml:lang="fr">dispose d'un éditeur pour résoudre confortablement les conflits lors de la fusion,</li>﻿
+﻿      <li xml:lang="gl">ten un editor para solucionar de maneira cómoda conflitos de fusión,</li>﻿
+﻿      <li xml:lang="he">כולל עורך לפתרון נוח של סתירות מיזוג,</li>﻿
+﻿      <li xml:lang="id">memiliki sebuah editor untuk pemecahan yang baik pada penggabungan yang bentrok</li>﻿
+﻿      <li xml:lang="it">dispone di un editor per risolvere comodamente i conflitti di fusione,</li>﻿
+﻿      <li xml:lang="ka">გააჩნია რედაქტორი, რომ ადვილად გადაწყვიტოთ შერწყმის კონფლიქტები,</li>﻿
+﻿      <li xml:lang="ko">병합 충돌을 원만하게 해결할 수 있는 편집기가 있으며,</li>﻿
+﻿      <li xml:lang="nl">een editor heeft voor het comfortabel oplossen van samenvoegconflicten,</li>﻿
+﻿      <li xml:lang="pl">ma edytor do wygodnego rozwiązywania sprzeczności przy scalaniu,</li>﻿
+﻿      <li xml:lang="pt">tem um editor para resolver confortavelmente os conflitos de junção,</li>﻿
+﻿      <li xml:lang="pt-BR">tem um editor para resolver confortavelmente os conflitos de mesclagem,</li>﻿
+﻿      <li xml:lang="ru">предоставляет редактор для комфортного разрешения конфликтов объединения;</li>﻿
+﻿      <li xml:lang="sk">má editor na pohodlné riešenie konfliktov zlučovania,</li>﻿
+﻿      <li xml:lang="sl">ima urejevalnik za udobno reševanje sporov med spajanjem,</li>﻿
+﻿      <li xml:lang="sv">har en editor för bekväm lösning av sammanfogningskonflikter,</li>﻿
+﻿      <li xml:lang="tr">birleştirme çakışmalarını çözmek için kolay kullanılabilir bir düzenleyicisi vardır,</li>﻿
+﻿      <li xml:lang="uk">містить редактор для полегшення розв’язання конфліктів під час об’єднання,</li>﻿
+﻿      <li xml:lang="x-test">xxhas an editor for comfortable solving of merge-conflicts,xx</li>﻿
+﻿      <li xml:lang="zh-CN">有一个舒适的编辑器来解决合并冲突，</li>﻿
+﻿      <li xml:lang="zh-TW">提供能夠輕鬆解決合併衝突的編輯器，</li>﻿
+﻿      <li>provides network transparency via KIO,</li>﻿
+﻿      <li xml:lang="bg">предоставя мрежова прозрачност чрез KIO,</li>﻿
+﻿      <li xml:lang="ca">proporciona transparència de xarxa a través del KIO,</li>﻿
+﻿      <li xml:lang="ca-valencia">proporciona transparència de xarxa a través de KIO,</li>﻿
+﻿      <li xml:lang="de">ist mit Hilfe von KIO Netzwerktransparent,</li>﻿
+﻿      <li xml:lang="el">παρέχει δικτυακή διαφάνεια μέσα από το KIO,</li>﻿
+﻿      <li xml:lang="en-GB">provides network transparency via KIO,</li>﻿
+﻿      <li xml:lang="eo">provizas retan travideblecon per KIO,</li>﻿
+﻿      <li xml:lang="es">proporciona transparencia de red mediante el uso de KIO,</li>﻿
+﻿      <li xml:lang="et">võimaldab KIO vahendusel võrgu läbipaistvust,</li>﻿
+﻿      <li xml:lang="eu">KIO bidez sarearekiko gardentasuna hornitzen du,</li>﻿
+﻿      <li xml:lang="fi">tarjoaa läpinäkyvän verkon KIOn kautta</li>﻿
+﻿      <li xml:lang="fr">fournit une transparence réseau via KIO,</li>﻿
+﻿      <li xml:lang="gl">fornece transparencia de rede mediante KIO,</li>﻿
+﻿      <li xml:lang="he">מספק שקיפות רשת דרך KIO,</li>﻿
+﻿      <li xml:lang="id">menyediakan transparan jaringan via KIO</li>﻿
+﻿      <li xml:lang="it">fornisce trasparenza di rete tramite KIO,</li>﻿
+﻿      <li xml:lang="ka">ქსელი გამჭვირვალეა, KIO-ს გავლით,</li>﻿
+﻿      <li xml:lang="ko">KIO를 통한 네트워크 투명성을 제공하며,</li>﻿
+﻿      <li xml:lang="nl">netwerktransparantie biedt via KIO,</li>﻿
+﻿      <li xml:lang="pl">zapewnia przejrzystość sieciową przez KIO,</li>﻿
+﻿      <li xml:lang="pt">oferece a transparência na rede com o KIO,</li>﻿
+﻿      <li xml:lang="pt-BR">fornece transparência de rede via KIO,</li>﻿
+﻿      <li xml:lang="ru">с помощью KIO поддерживает работу с файлами, расположенными на сетевых ресурсах;</li>﻿
+﻿      <li xml:lang="sk">poskytuje sieťovú transparentnosť cez KIO,</li>﻿
+﻿      <li xml:lang="sl">zagotavlja preglednost omrežja prek KIO,</li>﻿
+﻿      <li xml:lang="sv">tillhandahåller nätverkstransparens via KIO,</li>﻿
+﻿      <li xml:lang="tr">KIO ile ağ saydamlığı sağlar,</li>﻿
+﻿      <li xml:lang="uk">забезпечує мережеву прозорість за допомогою KIO,</li>﻿
+﻿      <li xml:lang="x-test">xxprovides network transparency via KIO,xx</li>﻿
+﻿      <li xml:lang="zh-CN">通过 KIO 提供网络文件透明访问，</li>﻿
+﻿      <li xml:lang="zh-TW">透過 KIO 提供「網路透明」，</li>﻿
+﻿      <li>has options to highlight or hide changes in white-space or comments,</li>﻿
+﻿      <li xml:lang="bg">има опции за akcentirane или скриване на промените в бялото пространство или коментарите,</li>﻿
+﻿      <li xml:lang="ca">té opcions per a ressaltar o ocultar els canvis en els espais en blanc o els comentaris,</li>﻿
+﻿      <li xml:lang="ca-valencia">té opcions per a ressaltar o ocultar els canvis en els espais en blanc o els comentaris,</li>﻿
+﻿      <li xml:lang="de">kann Unterschiede in Leerraum-Zeichen oder Kommentaren besonders hervorheben oder ausblenden,</li>﻿
+﻿      <li xml:lang="el">έχει επιλογές τονισμού ή απόκρυψης αλλαγών σε κενά ή σχόλια,</li>﻿
+﻿      <li xml:lang="en-GB">has options to highlight or hide changes in white-space or comments,</li>﻿
+﻿      <li xml:lang="eo">havas eblojn por reliefigi aŭ kaŝi ŝanĝojn en blanka spaco aŭ komentoj,</li>﻿
+﻿      <li xml:lang="es">contiene opciones para resaltar u ocultar cambios en espacios en blanco y en comentarios,</li>﻿
+﻿      <li xml:lang="et">võib esile tõsta või peita erinevusi tühimärkides või kommentaarides,</li>﻿
+﻿      <li xml:lang="eu">zuriune edo iruzkinetako aldaketak nabarmentzeko edo ezkutatzeko aukerak ditu,</li>﻿
+﻿      <li xml:lang="fi">osaa korostaa tai piilottaa muutokset tyhjemerkeissä ja kommenteissa</li>﻿
+﻿      <li xml:lang="fr">dispose d'options permettant de surligner ou de cacher les différences d'espaces ou de commentaires,</li>﻿
+﻿      <li xml:lang="gl">ten opcións para salientar ou agochar cambios en espazos en branco ou comentarios,</li>﻿
+﻿      <li xml:lang="he">יש לו אפשרויות להדגשת או הסתרת השינויים ברווחים או הערות,</li>﻿
+﻿      <li xml:lang="id">memiliki opsi untuk menyorot atau menyembunyikan perubahan dalam spasi putih atau komentar,</li>﻿
+﻿      <li xml:lang="it">ha opzioni per evidenziare o per nascondere le modifiche negli spazi o nei commenti,</li>﻿
+﻿      <li xml:lang="ka">აქვს პარამეტრები, რომ გამოკვეთოს ან დამალოს ცვლილებები ცარიელი ადგილებით ან კომენტარებში,</li>﻿
+﻿      <li xml:lang="ko">공백이나 주석의 변경 사항을 강조 표시하거나 숨길 수 있는 옵션이 있고,</li>﻿
+﻿      <li xml:lang="nl">opties heeft voor het accentueren of verbergen van wijzigingen in witruimte of commentaar,</li>﻿
+﻿      <li xml:lang="pl">ma opcje do podświetlenia i ukrycia zmian w białych znakach lub komentarzach,</li>﻿
+﻿      <li xml:lang="pt">tem opções para realçar ou esconder as alterações nos espaços em branco ou comentários,</li>﻿
+﻿      <li xml:lang="pt-BR">tem opção para realçar ou ocultar alterações nos espaços em branco ou comentários,</li>﻿
+﻿      <li xml:lang="ru">предоставляет возможность подсветки или скрытия изменений в пробельных символах или в комментариях;</li>﻿
+﻿      <li xml:lang="sk">má voľby na zvýraznenie alebo skrytie zmien v bielych znakoch alebo komentároch,</li>﻿
+﻿      <li xml:lang="sl">ima možnosti za označevanje ali skrivanje sprememb v prostoru presledkov ali komentarjih,</li>﻿
+﻿      <li xml:lang="sv">har alternativ för att markera eller dölja ändringar av blanktecken eller kommentarer,</li>﻿
+﻿      <li xml:lang="tr">boşluk veya yorum değişikliklerini vurgulamak veya gizlemek için seçenekleri vardır,</li>﻿
+﻿      <li xml:lang="uk">може підсвічувати або ховати зміни у пробілах або коментарях,</li>﻿
+﻿      <li xml:lang="x-test">xxhas options to highlight or hide changes in white-space or comments,xx</li>﻿
+﻿      <li xml:lang="zh-CN">有选项可以设置高亮或隐藏空白字符和代码注释的更改，</li>﻿
+﻿      <li xml:lang="zh-TW">可以突顯或隱藏空白字元或註解的變更，</li>﻿
+﻿      <li>supports Unicode, UTF-8 and other file encodings,</li>﻿
+﻿      <li xml:lang="bg">поддържа Unicode, UTF-8 и други файлови кдорания,</li>﻿
+﻿      <li xml:lang="ca">admet Unicode, UTF-8 i altres codificacions de fitxer,</li>﻿
+﻿      <li xml:lang="ca-valencia">admet Unicode, UTF-8 i altres codificacions de fitxer,</li>﻿
+﻿      <li xml:lang="cs">podporuje Unicode, UTF-8 a další kódování souborů.</li>﻿
+﻿      <li xml:lang="de">unterstützt Unicode, UTF-8 und weitere Dateikodierungen,</li>﻿
+﻿      <li xml:lang="el">υποστηρίζει Unicode, UTF-8 και άλλες κωδικοποιήσεις αρχείων,</li>﻿
+﻿      <li xml:lang="en-GB">supports Unicode, UTF-8 and other file encodings,</li>﻿
+﻿      <li xml:lang="eo">subtenas Unikodon, UTF-8 kaj aliajn dosierkodigojn,</li>﻿
+﻿      <li xml:lang="es">permite el uso de Unicode, UTF-8 y de otras codificaciones de archivos,</li>﻿
+﻿      <li xml:lang="et">toetab Unicode'i, UTF-8 ja teisi failikodeeringuid,</li>﻿
+﻿      <li xml:lang="eu">Unicode, UTF-8 eta beste fitxategi kodeketa batzuk onartzen ditu,</li>﻿
+﻿      <li xml:lang="fi">tukee Unicodea, UTF-8:aa ja muita merkistökoodauksia</li>﻿
+﻿      <li xml:lang="fr">prend en charge Unicode, UTF-8 et d'autres encodages de fichiers,</li>﻿
+﻿      <li xml:lang="gl">é compatíbel con Unicode, UTF-8 e outras codificacións de ficheiros,s</li>﻿
+﻿      <li xml:lang="he">תמיכה ביוניקוד, UTF-8 וקידודי קבצים נוספים,</li>﻿
+﻿      <li xml:lang="id">dukungan Unicode, UTF-8 dan pengenkodean file lain</li>﻿
+﻿      <li xml:lang="it">supporta Unicode, UTF-8 e altre codifiche di file,</li>﻿
+﻿      <li xml:lang="ka">მხარს უჭერს Unicode, UTF-8 და სხვა ფაილის კოდირებას,</li>﻿
+﻿      <li xml:lang="ko">유니코드, UTF-8 및 기타 파일 인코딩을 지원하며,</li>﻿
+﻿      <li xml:lang="nl">Unicode, UTF-8 en andere bestandscoderingen ondersteunt,</li>﻿
+﻿      <li xml:lang="pl">obsługuje Unikod, UTF-8 i inne kodowania plików,</li>﻿
+﻿      <li xml:lang="pt">suporta o Unicode, o UTF-8 e outras codificações de ficheiros,</li>﻿
+﻿      <li xml:lang="pt-BR">suporta o Unicode, UTF-8 e outras codificações de arquivos,</li>﻿
+﻿      <li xml:lang="ru">поддерживает Юникод, UTF-8 и другие кодировки файлов;</li>﻿
+﻿      <li xml:lang="sk">podporuje Unicode, UTF-8 a iné kódovania súborov,</li>﻿
+﻿      <li xml:lang="sl">podpira Unicode, UTF-8 in drugo kodiranje datotek,</li>﻿
+﻿      <li xml:lang="sv">stöder Unicode, UTF-8 och andra filkodningar,</li>﻿
+﻿      <li xml:lang="tr">Unicode, UTF-8 ve diğer dosya kodlamalarını destekler,</li>﻿
+﻿      <li xml:lang="uk">підтримує Unicode, UTF-8 та інші кодування текстів файлів,</li>﻿
+﻿      <li xml:lang="x-test">xxsupports Unicode, UTF-8 and other file encodings,xx</li>﻿
+﻿      <li xml:lang="zh-CN">支持 Unicode, UTF-8 和其他文件编码,</li>﻿
+﻿      <li xml:lang="zh-TW">支援 Unicode、UTF-8 及其他檔案編碼，</li>﻿
+﻿      <li>prints differences,</li>﻿
+﻿      <li xml:lang="bg">отпечатва разликите,</li>﻿
+﻿      <li xml:lang="ca">imprimeix les diferències,</li>﻿
+﻿      <li xml:lang="ca-valencia">imprimix les diferències,</li>﻿
+﻿      <li xml:lang="cs">vypíše rozdíly,</li>﻿
+﻿      <li xml:lang="de">druckt Abweichungen,</li>﻿
+﻿      <li xml:lang="el">εκτυπώνει διαφορές,</li>﻿
+﻿      <li xml:lang="en-GB">prints differences,</li>﻿
+﻿      <li xml:lang="eo">presas diferencojn,</li>﻿
+﻿      <li xml:lang="es">imprime las diferencias,</li>﻿
+﻿      <li xml:lang="et">trükib erinevusi,</li>﻿
+﻿      <li xml:lang="eu">ezberdintasunak inprimatzen ditu,</li>﻿
+﻿      <li xml:lang="fi">tulostaa eroavuudet</li>﻿
+﻿      <li xml:lang="fr">affiche les différences,</li>﻿
+﻿      <li xml:lang="gl">imprime diferenzas,</li>﻿
+﻿      <li xml:lang="he">מציג הבדלים,</li>﻿
+﻿      <li xml:lang="id">cetakan yang berbeda</li>﻿
+﻿      <li xml:lang="it">stampa le differenze,</li>﻿
+﻿      <li xml:lang="ka">სხვაობების დაბეჭდვა,</li>﻿
+﻿      <li xml:lang="ko">차이점을 인쇄하고,</li>﻿
+﻿      <li xml:lang="nl">verschillen in regels afdrukt,</li>﻿
+﻿      <li xml:lang="pl">drukuje różnice,</li>﻿
+﻿      <li xml:lang="pt">imprime as diferenças,</li>﻿
+﻿      <li xml:lang="pt-BR">imprime as diferenças,</li>﻿
+﻿      <li xml:lang="ru">показывает различия;</li>﻿
+﻿      <li xml:lang="sk">vytlačí rozdiely,</li>﻿
+﻿      <li xml:lang="sl">tiska razlike,</li>﻿
+﻿      <li xml:lang="sv">skriver ut skillnader,</li>﻿
+﻿      <li xml:lang="tr">ayrımları yazdırır,</li>﻿
+﻿      <li xml:lang="uk">може надсилати на друк різницю,</li>﻿
+﻿      <li xml:lang="x-test">xxprints differences,xx</li>﻿
+﻿      <li xml:lang="zh-CN">打印差异,</li>﻿
+﻿      <li xml:lang="zh-TW">可印出差異，</li>﻿
+﻿      <li>supports version control keyword and history merging.</li>﻿
+﻿      <li xml:lang="bg">поддържа контрол на версиите с ключови думи и сливане на историята.</li>﻿
+﻿      <li xml:lang="ca">admet la paraula clau per al control de versions i un historial de les fusions.</li>﻿
+﻿      <li xml:lang="ca-valencia">admet la paraula clau per al control de versions i un historial de les fusions.</li>﻿
+﻿      <li xml:lang="de">unterstützt Schlüsselwörter für Versionsverwaltung und Verlauf-Zusammenführung.</li>﻿
+﻿      <li xml:lang="el">υποστηρίζει συγχώνευση λέξεων κλειδιών και ιστορικού με έλεγχο εκδόσεων.</li>﻿
+﻿      <li xml:lang="en-GB">supports version control keyword and history merging.</li>﻿
+﻿      <li xml:lang="eo">subtenas versio-kontrolan ŝlosilvorton kaj historiokunfandadon.</li>﻿
+﻿      <li xml:lang="es">permite el uso de palabras clave de control de versiones y de fusión de historial.</li>﻿
+﻿      <li xml:lang="et">toetab versioonihalduse võtmesõnade ja ajaloo ühendamist.</li>﻿
+﻿      <li xml:lang="eu">bertsio-kontrolerako gako-hitzak eta historia bateratzea onartzen du.</li>﻿
+﻿      <li xml:lang="fi">tukee versionhallinnan avainsanoja ja historian yhdistämistä.</li>﻿
+﻿      <li xml:lang="fr">prend en charge les mots clés de contrôle de version et la fusion des historiques.</li>﻿
+﻿      <li xml:lang="gl">e permite fusionar historiais e palabras clave de control de versión.</li>﻿
+﻿      <li xml:lang="he">תומך במילות מפתח ומיזוג היסטוריה בבקרת גרסאות.</li>﻿
+﻿      <li xml:lang="id">dukungan katakunci kendali versi dan histori penggabungan.</li>﻿
+﻿      <li xml:lang="it">supporta le parole chiave per il controllo di versione e la fusione della cronologia.</li>﻿
+﻿      <li xml:lang="ka">აქვს ვერსიების კონტროლისა და ისტორიის შერწყმის მხარდაჭერა.</li>﻿
+﻿      <li xml:lang="ko">버전 관리 키워드 및 기록 병합을 지원합니다.</li>﻿
+﻿      <li xml:lang="nl">versiebeheersleutelwoorden ondersteunt en samenvoegen van geschiedenis.</li>﻿
+﻿      <li xml:lang="pl">obsługuje scalanie słów kluczowych i historii zarządzania wersjami</li>﻿
+﻿      <li xml:lang="pt">suporta as palavras-chave de controlo de versões e de junção do histórico.</li>﻿
+﻿      <li xml:lang="pt-BR">suporta palavras-chave de controle de versão e mesclagem de histórico.</li>﻿
+﻿      <li xml:lang="ru">поддерживает ключевые слова систем контроля версий и объединение их историй.</li>﻿
+﻿      <li xml:lang="sk">podporuje kľúčové slová na správu verzií a zlučovanie histórie.</li>﻿
+﻿      <li xml:lang="sl">podpira združevanje ključnih besed in zgodovine za nadzor verzij.</li>﻿
+﻿      <li xml:lang="sv">stöder nyckelord för versionskontroll och sammanfogning av historik.</li>﻿
+﻿      <li xml:lang="tr">sürüm denetimi anahtar sözcüklerini ve geçmiş birleştirmesini destekler.</li>﻿
+﻿      <li xml:lang="uk">підтримує об’єднання за ключовими словами і журналом інструментів керування версіями.</li>﻿
+﻿      <li xml:lang="x-test">xxsupports version control keyword and history merging.xx</li>﻿
+﻿      <li xml:lang="zh-CN">支持版本控制关键词和历史合并。</li>﻿
+﻿      <li xml:lang="zh-TW">支援版本控制關鍵字與歷史合併。</li>﻿
+﻿    </ul>﻿
+﻿  </description>﻿
+﻿  <screenshots>﻿
+﻿    <screenshot type="default">﻿
+﻿      <image>https://cdn.kde.org/screenshots/kdiff3/diffscreen_two_way.png</image>﻿
+﻿    </screenshot>﻿
+﻿    <screenshot>﻿
+﻿      <image>https://cdn.kde.org/screenshots/kdiff3/ManualMerdge.png</image>﻿
+﻿    </screenshot>﻿
+﻿  </screenshots>﻿
+﻿  <url type="homepage">https://apps.kde.org/kdiff3</url>﻿
+﻿  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=kdiff3</url>﻿
+﻿  <url type="help">https://docs.kde.org/?application=kdiff3</url>﻿
+﻿  <url type="donation">https://www.kde.org/community/donations/?app=kdiff3</url>﻿
+﻿  <provides>﻿
+﻿    <binary>kdiff3</binary>﻿
+﻿  </provides>﻿
+﻿  <launchable type="desktop-id">org.kde.kdiff3.desktop</launchable>﻿
+﻿  <releases>﻿
+﻿    <release version="1.11.1" date="2024-05-18"/>﻿
+﻿    <release version="1.11.0" date="2024-04-21"/>﻿
+﻿    <release version="1.10.7" date="2023-12-29"/>﻿
+﻿    <release version="1.10.6" date="2023-09-25"/>﻿
+﻿    <release version="1.10.5" date="2023-06-09"/>﻿
+﻿    <release version="1.10.4" date="2023-05-18"/>﻿
+﻿    <release version="1.10.3" date="2023-05-17"/>﻿
+﻿    <release version="1.10.2" date="2023-05-3"/>﻿
+﻿    <release version="1.10.1" date="2023-03-27"/>﻿
+﻿    <release version="1.10.0" date="2023-01-5"/>﻿
+﻿    <release version="1.9.6" date="2022-06-23"/>﻿
+﻿    <release version="1.9.5" date="2022-03-02"/>﻿
+﻿    <release version="1.9.4" date="2021-11-17"/>﻿
+﻿    <release version="1.9.3" date="2021-07-15"/>﻿
+﻿    <release version="1.9.2" date="2021-05-16"/>﻿
+﻿    <release version="1.9.1" date="2021-05-13"/>﻿
+﻿    <release version="1.9.0" date="2021-04-29"/>﻿
+﻿    <release version="1.8.5" date="2021-01-10"/>﻿
+﻿    <release version="1.8.4" date="2020-08-25"/>﻿
+﻿    <release version="1.8.3" date="2020-06-24"/>﻿
+﻿    <release version="1.8.2" date="2020-03-29"/>﻿
+﻿    <release version="1.8.1" date="2019-03-23"/>﻿
+﻿    <release version="1.8.0" date="2019-03-22"/>﻿
+﻿  </releases>﻿
+﻿  <content_rating type="oars-1.1"/>﻿
+﻿</component>﻿
