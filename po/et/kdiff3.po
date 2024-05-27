@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 00:40+0000\n"
+"POT-Creation-Date: 2024-05-27 00:40+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -1133,32 +1133,32 @@ msgstr "Ühenda B-sse"
 msgid "Merge to A && B"
 msgstr "Ühenda A-sse ja B-sse"
 
-#: fileaccess.cpp:513
+#: fileaccess.cpp:525
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr "Täieliku URL-i tuvastamine nurjus. Eellast pole määratud."
 
-#: fileaccess.cpp:784
+#: fileaccess.cpp:796
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Faili lugemine: %1"
 
-#: fileaccess.cpp:924
+#: fileaccess.cpp:936
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "%1 ajutise koopia loomine nurjus."
 
-#: fileaccess.cpp:932 fileaccess.cpp:937
+#: fileaccess.cpp:944 fileaccess.cpp:949
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "%1 avamine nurjus. %2"
 
-#: fileaccess.cpp:956 fileaccess.cpp:964
+#: fileaccess.cpp:968 fileaccess.cpp:976
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Viga %1 lugemisel. %2"
 
-#: fileaccess.cpp:1093
+#: fileaccess.cpp:1105
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1167,7 +1167,7 @@ msgstr ""
 "Varukoopia tegemisel nurjus vanema varukoopia kustutamine.\n"
 "Faili nimi: %1"
 
-#: fileaccess.cpp:1100
+#: fileaccess.cpp:1112
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
