@@ -294,7 +294,9 @@ public Q_SLOTS:
 
     void setHScrollBarRange();
 
-    void slotFocusChanged(QWidget *old, QWidget *now);
+    void slotFocusChanged(QWidget* old, QWidget* now);
+    void slotScrollToH(qsizetype p);
+
   Q_SIGNALS:
     void updateAvailabilities();
 

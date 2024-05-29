@@ -294,6 +294,8 @@ class MergeResultWindow: public QWidget
     void updateAvailabilities();
     void showPopupMenu(const QPoint& point);
     void noRelevantChangesDetected();
+
+    void scrollToH(qsizetype pos);
 };
 
 class QLineEdit;

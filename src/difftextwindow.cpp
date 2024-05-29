@@ -361,6 +361,8 @@ void DiffTextWindow::setupConnections(const KDiff3App* app)
     chk_connect_a(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
     chk_connect_a(app, &KDiff3App::copy, this, &DiffTextWindow::slotCopy);
 
+    chk_connect_a(this, &DiffTextWindow::scrollToH, app, &KDiff3App::slotScrollToH);
+
     connections.push_back(StandardMenus::allowCopy.connect(boost::bind(&DiffTextWindow::canCopy, this)));
     connections.push_back(KDiff3App::getSelection.connect(boost::bind(&DiffTextWindow::getSelection, this)));
 }
@@ -373,12 +375,9 @@ void DiffTextWindow::slotRefresh()
 
 void DiffTextWindow::slotSelectAll()
 {
-    LineRef l;
-    qsizetype p = 0; // needed as dummy return values
-
     if(hasFocus())
     {
-        setSelection(0, 0, getNofLines(), 0, l, p);
+        setSelection(0, 0, getNofLines(), 0);
     }
 }
 
@@ -1514,6 +1513,11 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, qsizetype& p
             {
                 d3vLine = it;
                 posInLine = pos;
+
+                setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
+                mVScrollBar->setValue(d->m_selection.beginLine() - DiffTextWindow::mVScrollBar->pageStep() / 2);
+
+                scrollToH(d->m_selection.beginPos());
                 return true;
             }
 
@@ -1564,7 +1568,7 @@ void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, qsizetype pos, L
     }
 }
 
-void DiffTextWindow::setSelection(LineRef firstLine, qsizetype startPos, LineRef lastLine, qsizetype endPos, LineRef& l, qsizetype& p)
+void DiffTextWindow::setSelection(LineRef firstLine, qsizetype startPos, LineRef lastLine, qsizetype endPos)
 {
     d->m_selection.reset();
     if(lastLine >= getNofLines())
@@ -1604,8 +1608,6 @@ void DiffTextWindow::setSelection(LineRef firstLine, qsizetype startPos, LineRef
 
         d->m_selection.start(firstWrapLine, wrapStartPos);
         d->m_selection.end(lastWrapLine, wrapEndPos);
-        l = firstWrapLine;
-        p = wrapStartPos;
     }
     else
     {
@@ -1613,10 +1615,9 @@ void DiffTextWindow::setSelection(LineRef firstLine, qsizetype startPos, LineRef
         {
             d->m_selection.start(firstLine, startPos);
             d->m_selection.end(lastLine, endPos);
-            l = firstLine;
-            p = startPos;
         }
     }
+
     update();
 }
 
@@ -2026,7 +2027,8 @@ void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
 
         LineRef topVisiableLine = pDTW->calcTopLineInFile(firstLine);
 
-        qint32 w = m_pTopLine->fontMetrics().horizontalAdvance(s + ' ' + QString().fill('0', lineNumberWidth));
+        const QString widthString = QString().fill('0', lineNumberWidth);
+        qint32 w = m_pTopLine->fontMetrics().horizontalAdvance(s + ' ' + widthString);
         m_pTopLine->setMinimumWidth(w);
 
         if(!topVisiableLine.isValid())

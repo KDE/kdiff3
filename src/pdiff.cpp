@@ -1618,6 +1618,12 @@ void KDiff3App::slotEditFind()
     }
 }
 
+void KDiff3App::slotScrollToH(qsizetype p)
+{
+    QString s = m_pFindDialog->m_pSearchString->text();
+    m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
+}
+
 void KDiff3App::slotEditFindNext()
 {
     QString s = m_pFindDialog->m_pSearchString->text();
@@ -1632,16 +1638,12 @@ void KDiff3App::slotEditFindNext()
 
     LineRef d3vLine = m_pFindDialog->currentLine;
     qsizetype posInLine = m_pFindDialog->currentPos;
-    LineRef l;
-    qsizetype p = 0;
+
     if(m_pFindDialog->getCurrentWindow() == eWindowIndex::A)
     {
         if(m_pFindDialog->m_pSearchInA->isChecked() && m_pDiffTextWindow1 != nullptr &&
            m_pDiffTextWindow1->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
-            m_pDiffTextWindow1->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
-            DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1656,9 +1658,6 @@ void KDiff3App::slotEditFindNext()
         if(m_pFindDialog->m_pSearchInB->isChecked() && m_pDiffTextWindow2 != nullptr &&
            m_pDiffTextWindow2->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
-            m_pDiffTextWindow2->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
-            DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1674,9 +1673,6 @@ void KDiff3App::slotEditFindNext()
         if(m_pFindDialog->m_pSearchInC->isChecked() && m_pDiffTextWindow3 != nullptr &&
            m_pDiffTextWindow3->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
-            m_pDiffTextWindow3->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
-            DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -1692,9 +1688,6 @@ void KDiff3App::slotEditFindNext()
         if(m_pFindDialog->m_pSearchInOutput->isChecked() && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() &&
            m_pMergeResultWindow->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
-            m_pMergeResultWindow->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
-            MergeResultWindow::mVScrollBar->setValue(d3vLine - MergeResultWindow::mVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max<SafeInt<qint32>>(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;

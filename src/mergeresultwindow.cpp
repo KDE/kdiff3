@@ -195,6 +195,8 @@ void MergeResultWindow::setupConnections(const KDiff3App* app)
 
     chk_connect_a(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
 
+    chk_connect_a(this, &MergeResultWindow::scrollToH, app, &KDiff3App::slotScrollToH);
+
     connections.push_back(StandardMenus::allowCut.connect(boost::bind(&MergeResultWindow::canCut, this)));
     connections.push_back(StandardMenus::allowCopy.connect(boost::bind(&MergeResultWindow::canCopy, this)));
     connections.push_back(KDiff3App::getSelection.connect(boost::bind(&MergeResultWindow::getSelection, this)));
@@ -2729,6 +2731,11 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, qsizetype
             {
                 d3vLine = it;
                 posInLine = pos;
+
+                setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
+                mVScrollBar->setValue(d3vLine - MergeResultWindow::mVScrollBar->pageStep() / 2);
+                scrollToH(pos);
+
                 return true;
             }
 

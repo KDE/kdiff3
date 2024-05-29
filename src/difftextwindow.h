@@ -87,7 +87,7 @@ class DiffTextWindow: public QWidget
     void convertSelectionToD3LCoords() const;
 
     bool findString(const QString& s, LineRef& d3vLine, qsizetype& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(LineRef firstLine, qsizetype startPos, LineRef lastLine, qsizetype endPos, LineRef& l, qsizetype& p);
+    void setSelection(LineRef firstLine, qsizetype startPos, LineRef lastLine, qsizetype endPos);
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType) const;
 
     void setPaintingAllowed(bool bAllowPainting);
@@ -129,6 +129,7 @@ class DiffTextWindow: public QWidget
     void finishDrop();
 
     void firstLineChanged(const LineRef firstLine);
+    void scrollToH(qsizetype pos);
   public Q_SLOTS:
     void setFirstLine(LineRef line);
     void setHorizScrollOffset(qint32 horizScrollOffset);
