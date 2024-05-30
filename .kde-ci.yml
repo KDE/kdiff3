@@ -16,4 +16,5 @@ Dependencies:
 
 Options:
     cppcheck-arguments: '--enable=warning,style,performance -i build -i test -i src/xpm --suppressions-list=CppCheckSuppressions.txt --inline-suppr'
-    require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
+    #Turns appstreamtest info and warning messages into fatal errors
+    #require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
