@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:40+0000\n"
+"POT-Creation-Date: 2024-05-30 00:40+0000\n"
 "PO-Revision-Date: 2013-07-13 11:52+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -113,88 +113,88 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Súlyos belső hiba történt"
 
-#: difftextwindow.cpp:632
+#: difftextwindow.cpp:631
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:634
+#: difftextwindow.cpp:633
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "A sor nem elérhető"
 
-#: difftextwindow.cpp:1963
+#: difftextwindow.cpp:1964
 #, kde-format
 msgid "Encoding:"
 msgstr "Kódolás:"
 
-#: difftextwindow.cpp:1967 mergeresultwindow.cpp:2796 optiondialog.cpp:795
+#: difftextwindow.cpp:1968 mergeresultwindow.cpp:2803 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Sorvég stílus:"
 
-#: difftextwindow.cpp:1992
+#: difftextwindow.cpp:1993
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (alap):"
 
-#: difftextwindow.cpp:1994
+#: difftextwindow.cpp:1995
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding: %1"
 msgstr "Kódolás:"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2842
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2841
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2848
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:1996
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "Sorvég stílus:"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2024 kdiff3.cpp:1066
+#: difftextwindow.cpp:2025 kdiff3.cpp:1066
 #, kde-format
 msgid "Top line"
 msgstr "Felső sor"
 
-#: difftextwindow.cpp:2033
+#: difftextwindow.cpp:2035
 #, kde-format
 msgid "End"
 msgstr "Vég"
 
-#: difftextwindow.cpp:2089 smalldialogs.cpp:163
+#: difftextwindow.cpp:2091 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Fájlok megnyitása..."
 
-#: difftextwindow.cpp:2141 optiondialog.cpp:389
+#: difftextwindow.cpp:2143 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2142
+#: difftextwindow.cpp:2144
 #, fuzzy, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2158
+#: difftextwindow.cpp:2160
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -401,7 +401,7 @@ msgstr ""
 "szakítani a műveletet és újra be szeretné olvasni a könyvtár tartalmát?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:923 kdiff3.cpp:933 kdiff3.cpp:945
-#: mergeresultwindow.cpp:313 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
+#: mergeresultwindow.cpp:315 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -2088,14 +2088,14 @@ msgstr "B kiválasztása az összes feloldatlan elválasztókarakter-ütközésh
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "C kiválasztása az összes feloldatlan elválasztókarakter-ütközéshez"
 
-#: mergeresultwindow.cpp:247
+#: mergeresultwindow.cpp:249
 #, fuzzy, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "\n"
 "A fel nem oldott ütközések száma: "
 
-#: mergeresultwindow.cpp:311
+#: mergeresultwindow.cpp:313
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2104,29 +2104,29 @@ msgstr ""
 "A kimenet megváltozott.\n"
 "Ha továbblép, a módosítások elvesznek."
 
-#: mergeresultwindow.cpp:754 pdiff.cpp:593
+#: mergeresultwindow.cpp:756 pdiff.cpp:593
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Az összes bemeneti fájl megegyezik (bináris módban)."
 
-#: mergeresultwindow.cpp:756
+#: mergeresultwindow.cpp:758
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Az összes bemeneti fájl megegyezik (szöveges módban)."
 
-#: mergeresultwindow.cpp:760 mergeresultwindow.cpp:764
-#: mergeresultwindow.cpp:768 pdiff.cpp:599 pdiff.cpp:603 pdiff.cpp:607
+#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:770 pdiff.cpp:599 pdiff.cpp:603 pdiff.cpp:607
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "B és C binárisan megegyezik.\n"
 
-#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
-#: mergeresultwindow.cpp:770
+#: mergeresultwindow.cpp:764 mergeresultwindow.cpp:768
+#: mergeresultwindow.cpp:772
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "A és B szövege megegyezik.\n"
 
-#: mergeresultwindow.cpp:774
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2135,27 +2135,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:780
+#: mergeresultwindow.cpp:782
 #, kde-format
 msgid "Conflicts"
 msgstr "Ütközések"
 
-#: mergeresultwindow.cpp:1521
+#: mergeresultwindow.cpp:1523
 #, kde-format
 msgid "<No src line>"
 msgstr "<Nincs forrássor>"
 
-#: mergeresultwindow.cpp:1529
+#: mergeresultwindow.cpp:1531
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Összeolvasztási ütközés (Csak whitespace)>"
 
-#: mergeresultwindow.cpp:1531 mergeresultwindow.cpp:2404
+#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2406
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Összeolvasztási ütközés>"
 
-#: mergeresultwindow.cpp:2626
+#: mergeresultwindow.cpp:2628
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2167,14 +2167,14 @@ msgstr ""
 "Még nincs feloldva az összes ütközés.\n"
 "A fájl nem lesz elmentve.\n"
 
-#: mergeresultwindow.cpp:2628 mergeresultwindow.cpp:2637
+#: mergeresultwindow.cpp:2630 mergeresultwindow.cpp:2639
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Megmaradt ütközések"
 
-#: mergeresultwindow.cpp:2635
+#: mergeresultwindow.cpp:2637
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2182,7 +2182,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2649
+#: mergeresultwindow.cpp:2651
 #, kde-format
 msgid ""
 "\n"
@@ -2190,51 +2190,51 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2693
+#: mergeresultwindow.cpp:2651 mergeresultwindow.cpp:2695
 #, kde-format
 msgid "File Save Error"
 msgstr "Fájlmentési hiba"
 
-#: mergeresultwindow.cpp:2693
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid "Error while writing."
 msgstr "Hiba történt írás közben."
 
-#: mergeresultwindow.cpp:2768
+#: mergeresultwindow.cpp:2775
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Kimenet"
 
-#: mergeresultwindow.cpp:2781 mergeresultwindow.cpp:2971
+#: mergeresultwindow.cpp:2788 mergeresultwindow.cpp:2978
 #, kde-format
 msgid "[Modified]"
 msgstr "[Módosítva]"
 
-#: mergeresultwindow.cpp:2788
+#: mergeresultwindow.cpp:2795
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgid "Encoding for saving:"
 msgstr "Kódolás:"
 
-#: mergeresultwindow.cpp:2888
+#: mergeresultwindow.cpp:2895
 #, kde-format
 msgid "Conflict"
 msgstr "Ütközés"
 
-#: mergeresultwindow.cpp:2918
+#: mergeresultwindow.cpp:2925
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "Kodek innen"
 
-#: mergeresultwindow.cpp:2920
+#: mergeresultwindow.cpp:2927
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "Kodek innen"
 
-#: mergeresultwindow.cpp:2922
+#: mergeresultwindow.cpp:2929
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
@@ -3567,22 +3567,22 @@ msgstr "Mentés és folytatás"
 msgid "Continue Without Saving"
 msgstr "Folytatás mentés nélkül"
 
-#: pdiff.cpp:1706
+#: pdiff.cpp:1699
 #, kde-format
 msgid "Search complete."
 msgstr "A keresés befejeződött."
 
-#: pdiff.cpp:1706
+#: pdiff.cpp:1699
 #, kde-format
 msgid "Search Complete"
 msgstr "A keresés befejeződött"
 
-#: pdiff.cpp:1887
+#: pdiff.cpp:1880
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:1887
+#: pdiff.cpp:1880
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Hiba történt egy könyvtár létrehozása közben."

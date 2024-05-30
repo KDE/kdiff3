@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-27 00:40+0000\n"
+"POT-Creation-Date: 2024-05-30 00:40+0000\n"
 "PO-Revision-Date: 2024-02-09 23:38+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -108,82 +108,82 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "심각한 내부 오류"
 
-#: difftextwindow.cpp:632
+#: difftextwindow.cpp:631
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "파일 %1: 줄 %2"
 
-#: difftextwindow.cpp:634
+#: difftextwindow.cpp:633
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "파일 %1: 줄을 사용할 수 없음"
 
-#: difftextwindow.cpp:1963
+#: difftextwindow.cpp:1964
 #, kde-format
 msgid "Encoding:"
 msgstr "인코딩:"
 
-#: difftextwindow.cpp:1967 mergeresultwindow.cpp:2796 optiondialog.cpp:795
+#: difftextwindow.cpp:1968 mergeresultwindow.cpp:2803 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "줄 끝 스타일:"
 
-#: difftextwindow.cpp:1992
+#: difftextwindow.cpp:1993
 #, kde-format
 msgid "A (Base)"
 msgstr "A(기반)"
 
-#: difftextwindow.cpp:1994
+#: difftextwindow.cpp:1995
 #, kde-format
 msgid "Encoding: %1"
 msgstr "인코딩: %1"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2842
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2841
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2848
 #, kde-format
 msgid "Unix"
 msgstr "유닉스"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:1996
 #, kde-format
 msgid "Line end style: %1"
 msgstr "줄 끝 스타일: %1"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: difftextwindow.cpp:2024 kdiff3.cpp:1066
+#: difftextwindow.cpp:2025 kdiff3.cpp:1066
 #, kde-format
 msgid "Top line"
 msgstr "맨 첫 줄"
 
-#: difftextwindow.cpp:2033
+#: difftextwindow.cpp:2035
 #, kde-format
 msgid "End"
 msgstr "끝"
 
-#: difftextwindow.cpp:2089 smalldialogs.cpp:163
+#: difftextwindow.cpp:2091 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "파일 열기"
 
-#: difftextwindow.cpp:2141 optiondialog.cpp:389
+#: difftextwindow.cpp:2143 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "유니코드, 8비트"
 
-#: difftextwindow.cpp:2142
+#: difftextwindow.cpp:2144
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "유니코드, 8비트(BOM)"
 
-#: difftextwindow.cpp:2158
+#: difftextwindow.cpp:2160
 #, kde-format
 msgid "Other"
 msgstr "기타"
@@ -359,7 +359,7 @@ msgstr ""
 "폴더를 합치고 있습니다. 합치기 작업을 중단하고 폴더를 다시 탐색하시겠습니까?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:923 kdiff3.cpp:933 kdiff3.cpp:945
-#: mergeresultwindow.cpp:313 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
+#: mergeresultwindow.cpp:315 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1927,12 +1927,12 @@ msgstr "모든 해결하지 않은 공백 문자 충돌 항목에서 B 선택"
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "모든 해결하지 않은 공백 문자 충돌 항목에서 C 선택"
 
-#: mergeresultwindow.cpp:247
+#: mergeresultwindow.cpp:249
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "남은 해결하지 않은 충돌 항목: %1(공백 %2개 포함)"
 
-#: mergeresultwindow.cpp:311
+#: mergeresultwindow.cpp:313
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -1941,29 +1941,29 @@ msgstr ""
 "출력 파일이 수정되었습니다.\n"
 "계속 진행하면 변경 사항을 저장하지 않습니다."
 
-#: mergeresultwindow.cpp:754 pdiff.cpp:593
+#: mergeresultwindow.cpp:756 pdiff.cpp:593
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "모든 입력 파일의 바이너리가 같습니다."
 
-#: mergeresultwindow.cpp:756
+#: mergeresultwindow.cpp:758
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "모든 입력 파일의 텍스트가 같습니다."
 
-#: mergeresultwindow.cpp:760 mergeresultwindow.cpp:764
-#: mergeresultwindow.cpp:768 pdiff.cpp:599 pdiff.cpp:603 pdiff.cpp:607
+#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:770 pdiff.cpp:599 pdiff.cpp:603 pdiff.cpp:607
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "파일 %1와(과) %2의 바이너리가 동일합니다.\n"
 
-#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
-#: mergeresultwindow.cpp:770
+#: mergeresultwindow.cpp:764 mergeresultwindow.cpp:768
+#: mergeresultwindow.cpp:772
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "파일 %1와(과) %2의 텍스트가 동일합니다.\n"
 
-#: mergeresultwindow.cpp:774
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1976,27 +1976,27 @@ msgstr ""
 "해결되지 않은 충돌 개수: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:780
+#: mergeresultwindow.cpp:782
 #, kde-format
 msgid "Conflicts"
 msgstr "충돌"
 
-#: mergeresultwindow.cpp:1521
+#: mergeresultwindow.cpp:1523
 #, kde-format
 msgid "<No src line>"
 msgstr "<원본 줄 없음>"
 
-#: mergeresultwindow.cpp:1529
+#: mergeresultwindow.cpp:1531
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<충돌 합치기(공백만>"
 
-#: mergeresultwindow.cpp:1531 mergeresultwindow.cpp:2404
+#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2406
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<충돌 합치기>"
 
-#: mergeresultwindow.cpp:2626
+#: mergeresultwindow.cpp:2628
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2005,13 +2005,13 @@ msgstr ""
 "모든 충돌 사항을 해결하지 않았습니다.\n"
 "파일이 저장되지 않았습니다."
 
-#: mergeresultwindow.cpp:2628 mergeresultwindow.cpp:2637
+#: mergeresultwindow.cpp:2630 mergeresultwindow.cpp:2639
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "충돌 사항 남음"
 
-#: mergeresultwindow.cpp:2635
+#: mergeresultwindow.cpp:2637
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2021,7 +2021,7 @@ msgstr ""
 "줄 끝 스타일이 충돌합니다. 줄 끝 스타일을 직접 선택하십시오.\n"
 "파일이 저장되지 않았습니다."
 
-#: mergeresultwindow.cpp:2649
+#: mergeresultwindow.cpp:2651
 #, kde-format
 msgid ""
 "\n"
@@ -2032,47 +2032,47 @@ msgstr ""
 "\n"
 "백업을 만들 수 없습니다. 파일을 저장하지 않았습니다."
 
-#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2693
+#: mergeresultwindow.cpp:2651 mergeresultwindow.cpp:2695
 #, kde-format
 msgid "File Save Error"
 msgstr "파일 저장 오류"
 
-#: mergeresultwindow.cpp:2693
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid "Error while writing."
 msgstr "쓰는 중 오류가 발생했습니다."
 
-#: mergeresultwindow.cpp:2768
+#: mergeresultwindow.cpp:2775
 #, kde-format
 msgid "Output:"
 msgstr "출력:"
 
-#: mergeresultwindow.cpp:2781 mergeresultwindow.cpp:2971
+#: mergeresultwindow.cpp:2788 mergeresultwindow.cpp:2978
 #, kde-format
 msgid "[Modified]"
 msgstr "[수정됨]"
 
-#: mergeresultwindow.cpp:2788
+#: mergeresultwindow.cpp:2795
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "저장용 인코딩:"
 
-#: mergeresultwindow.cpp:2888
+#: mergeresultwindow.cpp:2895
 #, kde-format
 msgid "Conflict"
 msgstr "충돌"
 
-#: mergeresultwindow.cpp:2918
+#: mergeresultwindow.cpp:2925
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "A의 코덱: %1"
 
-#: mergeresultwindow.cpp:2920
+#: mergeresultwindow.cpp:2927
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "B의 코덱: %1"
 
-#: mergeresultwindow.cpp:2922
+#: mergeresultwindow.cpp:2929
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "C의 코덱: %1"
@@ -3340,22 +3340,22 @@ msgstr "저장하고 계속"
 msgid "Continue Without Saving"
 msgstr "저장하지 않고 계속"
 
-#: pdiff.cpp:1706
+#: pdiff.cpp:1699
 #, kde-format
 msgid "Search complete."
 msgstr "검색이 완료되었습니다."
 
-#: pdiff.cpp:1706
+#: pdiff.cpp:1699
 #, kde-format
 msgid "Search Complete"
 msgstr "검색 완료"
 
-#: pdiff.cpp:1887
+#: pdiff.cpp:1880
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Diff 입력 창에서 아무것도 선택하지 않았습니다."
 
-#: pdiff.cpp:1887
+#: pdiff.cpp:1880
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "수동 Diff 범위 추가 중 오류 발생"
