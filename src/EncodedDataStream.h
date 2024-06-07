@@ -39,7 +39,7 @@ class EncodedDataStream: public QDataStream
         }
         else
         {
-            mGenerateBOM = inEncoding != "UTF-8";
+            mGenerateBOM = inEncoding.startsWith("UTF") && !inEncoding.endsWith("-8");
             mEncoding = inEncoding;
         }
     };
@@ -54,7 +54,7 @@ class EncodedDataStream: public QDataStream
         }
         else
         {
-            mGenerateBOM = inEncoding != "UTF-8";
+            mGenerateBOM = inEncoding.startsWith("UTF") && !inEncoding.endsWith("-8");
             mEncoding = inEncoding;
         }
     };
