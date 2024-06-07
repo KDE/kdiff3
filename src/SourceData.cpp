@@ -775,13 +775,13 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
         {
             QByteArray encoding = s.mid(apostrophPos + 1, encodingEnd - (apostrophPos + 1));
             if(QTextCodec::codecForName(encoding))
-                return encoding;
+                return encoding.toUpper();
         }
         else // e.g.: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         {
             QByteArray encoding = s.mid(encodingPos + encodingTag.length(), apostrophPos - (encodingPos + encodingTag.length()));
             if(QTextCodec::codecForName(encoding))
-                return encoding;
+                return encoding.toUpper();
         }
     }
     return {};
