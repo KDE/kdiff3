@@ -293,7 +293,7 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
 
 qint32 DiffTextWindow::getLineNumberWidth() const
 {
-    return (qint32)floor(log10((double)std::max(d->m_size, 1))) + 1;
+    return std::floor(std::log10(std::max(d->m_size, 1))) + 1;
 }
 
 DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
@@ -585,7 +585,7 @@ LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, Lin
         newFirstLine = std::max(0, (LineType)std::ceil(line - (visibleLines - nofLines) / 2));
     else
     {
-        qint32 numberPages = floor(nofLines / visibleLines);
+        qint32 numberPages = std::floor(nofLines / visibleLines);
         newFirstLine = std::max(0, line - (visibleLines * numberPages) / 3);
     }
     return newFirstLine;

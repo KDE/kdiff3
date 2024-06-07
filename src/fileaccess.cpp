@@ -786,7 +786,7 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
         }
         i += reallyRead;
 
-        ProgressProxy::setCurrent(floor(double(i) / maxLength * 100));
+        ProgressProxy::setCurrent(std::floor(i / maxLength * 100));
         if(ProgressProxy::wasCancelled())
             return false;
     }
