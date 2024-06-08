@@ -2,14 +2,14 @@
 # Author: Artnay
 # Author: Lliehu
 # Author: Niklas Laxström
-# Tommi Nieminen <translator@legisign.org>, 2012, 2013, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2012, 2013, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2012, 2013, 2014, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-19 03:14+0000\n"
-"PO-Revision-Date: 2023-11-19 19:19+0200\n"
+"PO-Revision-Date: 2024-03-11 15:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -3317,7 +3317,7 @@ msgstr "Rivi-diff: A <-> C"
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
-msgstr ""
+msgstr "Muisti ei riitä pyynnön viimeistelemiseen."
 
 #: pdiff.cpp:318
 #, kde-format
@@ -3624,8 +3624,7 @@ msgid "%1 is not a normal file."
 msgstr "%1 ei ole tavallinen tiedosto."
 
 #: SourceData.cpp:380
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Tiedosto %1 on liian iso käsiteltäväksi. Sivuutetaan."
