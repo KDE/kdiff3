@@ -573,7 +573,9 @@ LineRef DiffTextWindow::convertDiff3LineIdxToLine(const LineType d3lIdx) const
 */
 LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, LineType visibleLines)
 {
-    if(line < visibleLines) //well known result.
+    assert(visibleLines >= 0); // VisibleLines should not be < 0.
+
+    if(line < visibleLines || visibleLines == 0) //well known result.
         return 0;
 
     LineRef newFirstLine = firstLine;
@@ -1411,8 +1413,8 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
 LineType DiffTextWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
-
-    return height() / fm.lineSpacing() - 1;
+    //QWidget::height() may return 0 with certian configurations with 0 length input files loaded.
+    return std::max((LineType)ceil(height() / fm.lineSpacing()) - 1, 0);
 }
 
 qint32 DiffTextWindow::getVisibleTextAreaWidth() const

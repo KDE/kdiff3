@@ -454,7 +454,8 @@ qint32 MergeResultWindow::getVisibleTextAreaWidth() const
 qint32 MergeResultWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
-    return (height() - 3) / fm.lineSpacing() - 2;
+    //QWidget::height() may return 0 with certian configurations with 0 length input files loaded.
+    return std::max((qint32)ceil((height() - 3) / fm.lineSpacing()) - 2, 0);
 }
 
 qint32 MergeResultWindow::getTextXOffset() const
