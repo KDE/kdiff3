@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 03:14+0000\n"
+"POT-Creation-Date: 2024-07-05 03:08+0000\n"
 "PO-Revision-Date: 2023-06-18 14:16+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -123,83 +123,83 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "கடுமையான உள்ளக சிக்கல்."
 
-#: difftextwindow.cpp:632
+#: difftextwindow.cpp:634
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "கோப்பு %1: வரி %2"
 
-#: difftextwindow.cpp:634
+#: difftextwindow.cpp:636
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "கோப்பு %1: வரி கிடைக்கவில்லை"
 
-#: difftextwindow.cpp:1963
+#: difftextwindow.cpp:1965
 #, kde-format
 msgid "Encoding:"
 msgstr "குறியாக்கம்"
 
-#: difftextwindow.cpp:1967 mergeresultwindow.cpp:2815 optiondialog.cpp:795
+#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2816 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "வரிமுடிவுகளின் முறை:"
 
-#: difftextwindow.cpp:1992
+#: difftextwindow.cpp:1994
 #, kde-format
 msgid "A (Base)"
 msgstr "A (மூலம்)"
 
-#: difftextwindow.cpp:1994
+#: difftextwindow.cpp:1996
 #, kde-format
 msgid "Encoding: %1"
 msgstr "குறியாக்கம் %1"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2861
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2860
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2861
 #, kde-format
 msgid "Unix"
 msgstr "யுனிக்ஸ்"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Line end style: %1"
 msgstr "வரிமுடிவுகளின் முறை: %1"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1998
 #, kde-format
 msgid "Unknown"
 msgstr "தெரியாதது"
 
-#: difftextwindow.cpp:2024 kdiff3.cpp:943
+#: difftextwindow.cpp:2026 kdiff3.cpp:943
 #, kde-format
 msgid "Top line"
 msgstr "முதல் வரி"
 
-#: difftextwindow.cpp:2033
+#: difftextwindow.cpp:2035
 #, kde-format
 msgid "End"
 msgstr "முடிவு"
 
-#: difftextwindow.cpp:2089 smalldialogs.cpp:163
+#: difftextwindow.cpp:2091 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "கோப்பை திற"
 
-#: difftextwindow.cpp:2141 optiondialog.cpp:389
+#: difftextwindow.cpp:2143 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "8 பிட்டு யூனிகோடு"
 
-#: difftextwindow.cpp:2142
+#: difftextwindow.cpp:2144
 #, fuzzy, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
 msgstr "8 பிட்டு யூனிகோடு"
 
-#: difftextwindow.cpp:2158
+#: difftextwindow.cpp:2160
 #, kde-format
 msgid "Other"
 msgstr "வேறு"
@@ -2052,29 +2052,29 @@ msgid ""
 "If you continue your changes will be lost."
 msgstr "வெளீயிடு மாற்றப்பட்டுள்ளது. நீங்கள் தொடர்ந்தால் மாற்றங்களை இழந்து விடுவீர்கள்"
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:743
+#: mergeresultwindow.cpp:774 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "அனைத்து உள்ளிடு கோப்புகளும் இருநிலை சமம்"
 
-#: mergeresultwindow.cpp:775
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "அனைத்து உள்ளீட்டுக் கோப்புகளும் ஒரே உரையைக் கொண்டன."
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
+#: mergeresultwindow.cpp:788 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, fuzzy, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "கோப்புகள் B மற்றும் C இருநிலை சமம் உடையன.\n"
 
-#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
-#: mergeresultwindow.cpp:789
+#: mergeresultwindow.cpp:782 mergeresultwindow.cpp:786
+#: mergeresultwindow.cpp:790
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "கோப்புகள் A மற்றும் B சம உரை உடையன.\n"
 
-#: mergeresultwindow.cpp:793
+#: mergeresultwindow.cpp:794
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2083,27 +2083,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 #, kde-format
 msgid "Conflicts"
 msgstr "குழப்பங்கள்"
 
-#: mergeresultwindow.cpp:1540
+#: mergeresultwindow.cpp:1541
 #, kde-format
 msgid "<No src line>"
 msgstr "<No src line>"
 
-#: mergeresultwindow.cpp:1548
+#: mergeresultwindow.cpp:1549
 #, fuzzy, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<ஒன்றுசேர் குழப்பம்>"
 
-#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
+#: mergeresultwindow.cpp:1551 mergeresultwindow.cpp:2424
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<ஒன்றுசேர் குழப்பம்>"
 
-#: mergeresultwindow.cpp:2645
+#: mergeresultwindow.cpp:2646
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2115,14 +2115,14 @@ msgstr ""
 "அனைத்து குழப்பங்களும் இன்னும் தீரவில்லை.\n"
 "கோப்பினை சேமிக்கவில்லை \n"
 
-#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2648 mergeresultwindow.cpp:2657
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "குழப்பமான இடது"
 
-#: mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2655
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2130,7 +2130,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2668
+#: mergeresultwindow.cpp:2669
 #, kde-format
 msgid ""
 "\n"
@@ -2138,49 +2138,49 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2713
 #, kde-format
 msgid "File Save Error"
 msgstr "கோப்பின சேமிப்பு பிழை"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2713
 #, kde-format
 msgid "Error while writing."
 msgstr "எழுதும் பொழுது பிழை"
 
-#: mergeresultwindow.cpp:2787
+#: mergeresultwindow.cpp:2788
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr " வெளியீடு"
 
-#: mergeresultwindow.cpp:2800 mergeresultwindow.cpp:2990
+#: mergeresultwindow.cpp:2801 mergeresultwindow.cpp:2991
 #, kde-format
 msgid "[Modified]"
 msgstr "[திருத்தப்பட்டது]"
 
-#: mergeresultwindow.cpp:2807
+#: mergeresultwindow.cpp:2808
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2907
+#: mergeresultwindow.cpp:2908
 #, fuzzy, kde-format
 #| msgid "Conflicts"
 msgid "Conflict"
 msgstr "குழப்பங்கள்"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2938
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2940
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2941
+#: mergeresultwindow.cpp:2942
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""

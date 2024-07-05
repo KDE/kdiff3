@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 03:14+0000\n"
+"POT-Creation-Date: 2024-07-05 03:08+0000\n"
 "PO-Revision-Date: 2024-04-16 13:06+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -109,82 +109,82 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Сериозна вътрешна грешка"
 
-#: difftextwindow.cpp:632
+#: difftextwindow.cpp:634
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Файл %1: ред %2"
 
-#: difftextwindow.cpp:634
+#: difftextwindow.cpp:636
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Файл %1: ред не е наличен"
 
-#: difftextwindow.cpp:1963
+#: difftextwindow.cpp:1965
 #, kde-format
 msgid "Encoding:"
 msgstr "Кодова таблица:"
 
-#: difftextwindow.cpp:1967 mergeresultwindow.cpp:2815 optiondialog.cpp:795
+#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2816 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Край на ред:"
 
-#: difftextwindow.cpp:1992
+#: difftextwindow.cpp:1994
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Базов)"
 
-#: difftextwindow.cpp:1994
+#: difftextwindow.cpp:1996
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Кодиране: %1"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2861
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1995 mergeresultwindow.cpp:2860
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2861
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Стил на завършване на реда: %1"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1998
 #, kde-format
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: difftextwindow.cpp:2024 kdiff3.cpp:943
+#: difftextwindow.cpp:2026 kdiff3.cpp:943
 #, kde-format
 msgid "Top line"
 msgstr "Най-горен ред"
 
-#: difftextwindow.cpp:2033
+#: difftextwindow.cpp:2035
 #, kde-format
 msgid "End"
 msgstr "Край"
 
-#: difftextwindow.cpp:2089 smalldialogs.cpp:163
+#: difftextwindow.cpp:2091 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Отваряне на файл"
 
-#: difftextwindow.cpp:2141 optiondialog.cpp:389
+#: difftextwindow.cpp:2143 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 бита"
 
-#: difftextwindow.cpp:2142
+#: difftextwindow.cpp:2144
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 бита (BOM)"
 
-#: difftextwindow.cpp:2158
+#: difftextwindow.cpp:2160
 #, kde-format
 msgid "Other"
 msgstr "Друго"
@@ -2025,29 +2025,29 @@ msgstr ""
 "Изходът е променен.\n"
 "Ако продължите промените ще бъдат загубени."
 
-#: mergeresultwindow.cpp:773 pdiff.cpp:743
+#: mergeresultwindow.cpp:774 pdiff.cpp:743
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Всички входни файлове са двоично еднакви."
 
-#: mergeresultwindow.cpp:775
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Входните файлове съдържат еднакъв текст."
 
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:783
-#: mergeresultwindow.cpp:787 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
+#: mergeresultwindow.cpp:788 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Файлове %1 и %2 са двоично еднакви.\n"
 
-#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:785
-#: mergeresultwindow.cpp:789
+#: mergeresultwindow.cpp:782 mergeresultwindow.cpp:786
+#: mergeresultwindow.cpp:790
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Файлове %1 и %2 съдържат еднакъв текст. \n"
 
-#: mergeresultwindow.cpp:793
+#: mergeresultwindow.cpp:794
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2060,27 +2060,27 @@ msgstr ""
 "Брой нерешени конфликти: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 #, kde-format
 msgid "Conflicts"
 msgstr "Конфликти"
 
-#: mergeresultwindow.cpp:1540
+#: mergeresultwindow.cpp:1541
 #, kde-format
 msgid "<No src line>"
 msgstr "<Няма входен ред>"
 
-#: mergeresultwindow.cpp:1548
+#: mergeresultwindow.cpp:1549
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Сливане на конфликт (Само интервали)>"
 
-#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2423
+#: mergeresultwindow.cpp:1551 mergeresultwindow.cpp:2424
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Сливане на конфликт>"
 
-#: mergeresultwindow.cpp:2645
+#: mergeresultwindow.cpp:2646
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2089,13 +2089,13 @@ msgstr ""
 "Все още не всички конфликти са решени.\n"
 "Файлът не е запазен."
 
-#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2648 mergeresultwindow.cpp:2657
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Оставащи конфликти"
 
-#: mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2655
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2106,7 +2106,7 @@ msgstr ""
 "линията ръчно.\n"
 "Файлът не е запазен."
 
-#: mergeresultwindow.cpp:2668
+#: mergeresultwindow.cpp:2669
 #, kde-format
 msgid ""
 "\n"
@@ -2117,47 +2117,47 @@ msgstr ""
 "\n"
 "Създаването на резервно копие беше неуспешно. Файлът не е записан."
 
-#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2713
 #, kde-format
 msgid "File Save Error"
 msgstr "Грешка при запис на файл"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2713
 #, kde-format
 msgid "Error while writing."
 msgstr "Грешка по време на запис."
 
-#: mergeresultwindow.cpp:2787
+#: mergeresultwindow.cpp:2788
 #, kde-format
 msgid "Output:"
 msgstr "Изход:"
 
-#: mergeresultwindow.cpp:2800 mergeresultwindow.cpp:2990
+#: mergeresultwindow.cpp:2801 mergeresultwindow.cpp:2991
 #, kde-format
 msgid "[Modified]"
 msgstr "[Променено]"
 
-#: mergeresultwindow.cpp:2807
+#: mergeresultwindow.cpp:2808
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Кодиране за записване:"
 
-#: mergeresultwindow.cpp:2907
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Conflict"
 msgstr "Конфликт"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2938
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Кодек от A: %1"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2940
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Кодек от B: %1"
 
-#: mergeresultwindow.cpp:2941
+#: mergeresultwindow.cpp:2942
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Кодек от C: %1"
