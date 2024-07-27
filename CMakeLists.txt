@@ -70,7 +70,6 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 find_package(
     Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION}
-    CONFIG
     REQUIRED
     COMPONENTS
     Core
