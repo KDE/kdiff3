@@ -20,7 +20,7 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
-#required for flatpak
+#
 set(KF_MIN_VERSION "6.0.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
@@ -67,7 +67,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # Change this to 1.84 when its more widely available
-find_package(Boost 1.81 REQUIRED)
+find_package(Boost CONFIG 1.81 REQUIRED)
 #add_definitions()
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
