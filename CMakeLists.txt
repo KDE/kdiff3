@@ -63,7 +63,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # Change this to 1.84 when its more widely available
-find_package(Boost CONFIG 1.81 REQUIRED)
+find_package(Boost 1.81 REQUIRED)
 #add_definitions()
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
