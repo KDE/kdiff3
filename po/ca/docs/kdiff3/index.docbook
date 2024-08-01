@@ -154,8 +154,6 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword
 >sincronitza</keyword>
 <keyword
->kpart</keyword>
-<keyword
 >kio</keyword>
 <keyword
 >transparent a la xarxa</keyword>
@@ -1183,7 +1181,7 @@ Please at least include KDE, the KDE package it is in, the name
 >Carpeta</guilabel
 > en el diàleg de configuració, el fitxer existent serà reanomenat amb una extensió <literal role="extension"
 >.orig</literal
->, però si aquest fitxer existeix, s'eliminarà. Quan sortiu o comenceu una altra anàlisi de diferències i les dades encara no s'hagin desat, el &kdiff3; demanarà si les voleu desar, cancel·lar o continuar sense desar. (El &kdiff3; no capta cap senyal. Per tant, si «mateu» una instància del &kdiff3;, es perdran les vostres dades). </para
+>, però si aquest fitxer existeix, se suprimirà. Quan sortiu o comenceu una altra anàlisi de diferències i les dades encara no s'hagin desat, el &kdiff3; demanarà si les voleu desar, cancel·lar o continuar sense desar. (El &kdiff3; no capta cap senyal. Per tant, si «mateu» una instància del &kdiff3;, es perdran les vostres dades). </para
 ><para
 >Els finals de línia es desen d'acord amb el mètode normal en el sistema operatiu subjacent. Per als Unices, cada línia acaba amb un caràcter de salt de línia «<literal
 >\n</literal
@@ -1845,7 +1843,7 @@ Please at least include KDE, the KDE package it is in, the name
 >.orig</filename
 >. Si ja existeix un fitxer de còpia de seguretat antic amb l'extensió <filename class="extension"
 >.orig</filename
->, s'eliminarà sense fer còpia de seguretat. </para
+>, se suprimirà sense fer còpia de seguretat. </para
 ></listitem
 ></varlistentry>
 </variablelist>
