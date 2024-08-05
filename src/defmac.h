@@ -45,7 +45,7 @@
   However, in the release mode, unlike assert() function, test expression
   is not removed.
 */
-
+//NOLINTBEGIN(clang-analyzer-optin.core.EnumCastOutOfRange)
 #define chk_connect(SOURCE_, SIGNAL_, DEST_, SLOT_) \
     QCONNECT_ASSERT(QObject::connect(SOURCE_, SIGNAL_, DEST_, SLOT_));
 
@@ -71,6 +71,7 @@
 #define chk_connect_bq(SOURCE_, SIGNAL_, DEST_, SLOT_) \
     QCONNECT_ASSERT(QObject::connect(SOURCE_, SIGNAL_, DEST_, SLOT_, \
     Qt::ConnectionType(Qt::BlockingQueuedConnection | Qt::UniqueConnection)));
+//NOLINTEND(clang-analyzer-optin.core.EnumCastOutOfRange)
 
 #if defined(__MINGW32__) || defined(__MINGW64__)
 #define MINGW
