@@ -2849,7 +2849,7 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
     m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : u8" (" + unxUsers + u8")"));
     m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : u8" (" + dosUsers + u8")"));
 
-    e_LineEndStyle autoChoice = (e_LineEndStyle)gOptions->m_lineEndStyle;
+    e_LineEndStyle autoChoice = gOptions->m_lineEndStyle;
 
     if(gOptions->m_lineEndStyle == eLineEndStyleAutoDetect)
     {
