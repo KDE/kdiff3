@@ -112,12 +112,27 @@ bool KDiff3App::isDirComparison() const
 /*
     Don't call completeInit from here it will be called in KDiff3Shell as needed.
 */
-KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3Shell):
+KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3Shell, const FileNames& names):
     QMainWindow(pParent)
 {
     setWindowFlags(Qt::Widget);
     setObjectName(name);
     m_pKDiff3Shell = pKDiff3Shell;
+
+    //Get SourceData objects intalized as soon as possiable or wierd errors can happen on startup.
+    if(!names.fn1.isEmpty())
+    {
+        m_sd1->setFilename(names.fn1);
+        m_bDirCompare = m_sd1->isDir();
+    }
+    if(!names.fn2.isEmpty())
+    {
+        m_sd2->setFilename(names.fn2);
+    }
+    if(!names.fn3.isEmpty())
+    {
+        m_sd3->setFilename(names.fn3);
+    }
 
     m_pCentralWidget = new QWidget(this);
     QVBoxLayout* pCentralLayout = new QVBoxLayout(m_pCentralWidget);
@@ -595,24 +610,10 @@ void KDiff3App::doFileCompare()
     mainInit(m_totalDiffStatus);
 }
 
-void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
+void KDiff3App::completeInit()
 {
     bool openError = false;
     bool bSuccess = true;
-
-    if(!fn1.isEmpty())
-    {
-        m_sd1->setFilename(fn1);
-        m_bDirCompare = m_sd1->isDir();
-    }
-    if(!fn2.isEmpty())
-    {
-        m_sd2->setFilename(fn2);
-    }
-    if(!fn3.isEmpty())
-    {
-        m_sd3->setFilename(fn3);
-    }
 
     //Should not fail ever.
     assert(m_bDirCompare == m_sd1->isDir());
