@@ -26,7 +26,7 @@
 
 KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    m_widget = new KDiff3App(this, u8"KDiff3Part", this);
+    m_widget = new KDiff3App(this, u8"KDiff3Part", this, {fn1, fn2, fn3});
     assert(m_widget);
     setStandardToolBarMenuEnabled(true);
 
@@ -36,7 +36,7 @@ KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& 
 
     setCentralWidget(m_widget);
 
-    m_widget->completeInit(fn1, fn2, fn3);
+    m_widget->completeInit();
     chk_connect_a(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
 
     // apply the saved mainwindow settings, if any, and ask the mainwindow

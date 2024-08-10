@@ -101,6 +101,10 @@ class ReversibleScrollBar : public QScrollBar
     void valueChanged2(qint32);
 };
 
+struct FileNames {
+    const QString& fn1, fn2, fn3;
+};
+
 /*
   InitFlag
 */
@@ -124,7 +128,7 @@ class KDiff3App: public QMainWindow
   public:
     /** constructor of KDiff3App, calls all init functions to create the application.
      */
-    KDiff3App(QWidget* parent, const QString& name, KDiff3Shell* pKDiff3Shell);
+    KDiff3App(QWidget* parent, const QString& name, KDiff3Shell* pKDiff3Shell, const FileNames& names);
     ~KDiff3App() override;
 
     /** initializes the KActions of the application */
@@ -141,7 +145,7 @@ class KDiff3App: public QMainWindow
     void readOptions(KSharedConfigPtr);
 
     // Finish initialisation
-    void completeInit(const QString& fn1 = QString(), const QString& fn2 = QString(), const QString& fn3 = QString());
+    void completeInit();
     //Restore goementry and showMainWindow
     void showMainWindow();
 
