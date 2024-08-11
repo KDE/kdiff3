@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-05 00:40+0000\n"
+"POT-Creation-Date: 2024-08-11 00:42+0000\n"
 "PO-Revision-Date: 2021-05-15 15:37+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -166,7 +166,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1066
+#: difftextwindow.cpp:2027 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "Prima linie"
@@ -390,7 +390,7 @@ msgid ""
 "merge and rescan the folder?"
 msgstr ""
 
-#: directorymergewindow.cpp:692 kdiff3.cpp:923 kdiff3.cpp:933 kdiff3.cpp:945
+#: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
 #: mergeresultwindow.cpp:315 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -1156,91 +1156,91 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr ""
 
-#: kdiff3.cpp:166
+#: kdiff3.cpp:181
 #, kde-format
 msgid "Current Configuration:"
 msgstr "Configurație actuală:"
 
-#: kdiff3.cpp:171
+#: kdiff3.cpp:186
 #, kde-format
 msgid "Config Option Error:"
 msgstr "Eroare opțiune de configurare:"
 
-#: kdiff3.cpp:226
+#: kdiff3.cpp:241
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "Opțiunea --auto utilizată, dar niciun fișier de ieșire specificat."
 
-#: kdiff3.cpp:362
+#: kdiff3.cpp:377
 #, fuzzy, kde-format
 msgid "Directory merge"
 msgstr "Director"
 
-#: kdiff3.cpp:367
+#: kdiff3.cpp:382
 #, fuzzy, kde-format
 #| msgid "Merge to A"
 msgid "Merge info"
 msgstr "Îmbină cu A"
 
-#: kdiff3.cpp:621
+#: kdiff3.cpp:622
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr ""
 
-#: kdiff3.cpp:622
+#: kdiff3.cpp:623
 #, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr ""
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:632
 #, fuzzy, kde-format
 #| msgid "Option --auto ignored for directory comparison."
 msgid "Option --auto ignored for folder comparison."
 msgstr "Opțiunea --auto ignorată pentru compararea directoarelor."
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Saving failed."
 msgstr "Salvarea a eșuat."
 
-#: kdiff3.cpp:718 pdiff.cpp:783
+#: kdiff3.cpp:719 pdiff.cpp:783
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Deschiderea acestor fișiere a eșuat:"
 
-#: kdiff3.cpp:727 pdiff.cpp:792
+#: kdiff3.cpp:728 pdiff.cpp:792
 #, fuzzy, kde-format
 msgid "File open error"
 msgstr "Eroare la deschiderea fișierului"
 
-#: kdiff3.cpp:767
+#: kdiff3.cpp:768
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Activează/dezactivează bara de stare"
 
-#: kdiff3.cpp:770
+#: kdiff3.cpp:771
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Configurare KDiff3..."
 
-#: kdiff3.cpp:776
+#: kdiff3.cpp:777
 #, kde-format
 msgid "Search for a string"
 msgstr "Caută un șir"
 
-#: kdiff3.cpp:778
+#: kdiff3.cpp:779
 #, kde-format
 msgid "Search again for the string"
 msgstr ""
 
-#: kdiff3.cpp:797
+#: kdiff3.cpp:798
 #, kde-format
 msgid "Go to Current Delta"
 msgstr ""
 
-#: kdiff3.cpp:797
+#: kdiff3.cpp:798
 #, kde-format
 msgid ""
 "Current\n"
@@ -1249,12 +1249,12 @@ msgstr ""
 "Delta\n"
 "actuală"
 
-#: kdiff3.cpp:799
+#: kdiff3.cpp:800
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Mergi la prima delta"
 
-#: kdiff3.cpp:799
+#: kdiff3.cpp:800
 #, kde-format
 msgid ""
 "First\n"
@@ -1263,12 +1263,12 @@ msgstr ""
 "Prima\n"
 "delta"
 
-#: kdiff3.cpp:801
+#: kdiff3.cpp:802
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Mergi la ultima delta"
 
-#: kdiff3.cpp:801
+#: kdiff3.cpp:802
 #, kde-format
 msgid ""
 "Last\n"
@@ -1277,13 +1277,13 @@ msgstr ""
 "Ultima\n"
 "delta"
 
-#: kdiff3.cpp:803
+#: kdiff3.cpp:804
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:804
+#: kdiff3.cpp:805
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1291,12 +1291,12 @@ msgid ""
 "disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:806
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Mergi la delta precedentă"
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:806
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1305,12 +1305,12 @@ msgstr ""
 "Delta\n"
 "prec."
 
-#: kdiff3.cpp:807
+#: kdiff3.cpp:808
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Mergi la delta următoare"
 
-#: kdiff3.cpp:807
+#: kdiff3.cpp:808
 #, kde-format
 msgid ""
 "Next\n"
@@ -1319,12 +1319,12 @@ msgstr ""
 "Delta\n"
 "următ."
 
-#: kdiff3.cpp:809
+#: kdiff3.cpp:810
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Mergi la conflictul precedent"
 
-#: kdiff3.cpp:809
+#: kdiff3.cpp:810
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1333,12 +1333,12 @@ msgstr ""
 "Conflict\n"
 "precedent"
 
-#: kdiff3.cpp:811
+#: kdiff3.cpp:812
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Mergi la conflictul următor"
 
-#: kdiff3.cpp:811
+#: kdiff3.cpp:812
 #, kde-format
 msgid ""
 "Next\n"
@@ -1347,12 +1347,12 @@ msgstr ""
 "Conflict\n"
 "următor"
 
-#: kdiff3.cpp:813
+#: kdiff3.cpp:814
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Mergi la conflictul nerezolvat precedent"
 
-#: kdiff3.cpp:813
+#: kdiff3.cpp:814
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1361,12 +1361,12 @@ msgstr ""
 "Nerezolvat\n"
 "precedent"
 
-#: kdiff3.cpp:815
+#: kdiff3.cpp:816
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Mergi la conflictul nerezolvat următor"
 
-#: kdiff3.cpp:815
+#: kdiff3.cpp:816
 #, kde-format
 msgid ""
 "Next\n"
@@ -1375,14 +1375,14 @@ msgstr ""
 "Nerezolvat\n"
 "următor"
 
-#: kdiff3.cpp:817
+#: kdiff3.cpp:818
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Mergi la ultima delta"
 
-#: kdiff3.cpp:817
+#: kdiff3.cpp:818
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1391,21 +1391,21 @@ msgid ""
 "Line"
 msgstr "Linie"
 
-#: kdiff3.cpp:818
+#: kdiff3.cpp:819
 #, fuzzy, kde-format
 #| msgid "No program specified."
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Nu s-a specificat un program."
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:820
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Alege liniile din A"
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:820
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1418,14 +1418,14 @@ msgstr ""
 "Alege\n"
 "A"
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:821
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Alege liniile din B"
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:821
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1438,14 +1438,14 @@ msgstr ""
 "Alege\n"
 "B"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:822
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Alege liniile din C"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:822
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1458,14 +1458,14 @@ msgstr ""
 "Alege\n"
 "C"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:823
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "Mergi automat la următorul conflict nerezolvat după alegerea sursei"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:823
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1478,13 +1478,13 @@ msgstr ""
 "Următor\n"
 "automat"
 
-#: kdiff3.cpp:824
+#: kdiff3.cpp:825
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "Arată caracterele de spațiere și tabulare pentru diferențe"
 
-#: kdiff3.cpp:824
+#: kdiff3.cpp:825
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1497,12 +1497,12 @@ msgstr ""
 "Caractere\n"
 "albe"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:826
 #, kde-format
 msgid "Show White Space"
 msgstr "Arată spațiile albe"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:826
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1515,12 +1515,12 @@ msgstr ""
 "Delta\n"
 "albe"
 
-#: kdiff3.cpp:827
+#: kdiff3.cpp:828
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Arată numerele liniilor"
 
-#: kdiff3.cpp:827
+#: kdiff3.cpp:828
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1533,198 +1533,198 @@ msgstr ""
 "Numere\n"
 "de linii"
 
-#: kdiff3.cpp:829
+#: kdiff3.cpp:830
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Rezolvă automat conflictele simple"
 
-#: kdiff3.cpp:830
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Stabilește deltele la conflicte"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:832
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:832
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr ""
 
-#: kdiff3.cpp:833
+#: kdiff3.cpp:834
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Desparte Diff la selecție"
 
-#: kdiff3.cpp:834
+#: kdiff3.cpp:835
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr ""
 
-#: kdiff3.cpp:836
+#: kdiff3.cpp:837
 #, kde-format
 msgid "Show Window A"
 msgstr "Arată fereastra A"
 
-#: kdiff3.cpp:837
+#: kdiff3.cpp:838
 #, kde-format
 msgid "Show Window B"
 msgstr "Arată fereastra B"
 
-#: kdiff3.cpp:838
+#: kdiff3.cpp:839
 #, kde-format
 msgid "Show Window C"
 msgstr "Arată fereastra C"
 
-#: kdiff3.cpp:840
+#: kdiff3.cpp:841
 #, kde-format
 msgid "Normal Overview"
 msgstr "Sumar normal"
 
-#: kdiff3.cpp:841
+#: kdiff3.cpp:842
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Sumar A vs. B"
 
-#: kdiff3.cpp:842
+#: kdiff3.cpp:843
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Sumar A vs. C"
 
-#: kdiff3.cpp:843
+#: kdiff3.cpp:844
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Sumar B vs. C"
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:845
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr ""
 
-#: kdiff3.cpp:845
+#: kdiff3.cpp:846
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:846
+#: kdiff3.cpp:847
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:848
+#: kdiff3.cpp:849
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Focalizează fereastra următoare"
 
-#: kdiff3.cpp:849
+#: kdiff3.cpp:850
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Focalizează fereastra precedentă"
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:851
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Comută orientarea despărțirii"
 
-#: kdiff3.cpp:852
+#: kdiff3.cpp:853
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr ""
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:855
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr ""
 
-#: kdiff3.cpp:876 kdiff3.cpp:978 kdiff3.cpp:1003 kdiff3.cpp:1262 pdiff.cpp:802
+#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:802
 #: pdiff.cpp:871 pdiff.cpp:907 pdiff.cpp:916 pdiff.cpp:974 pdiff.cpp:982
 #, kde-format
 msgid "Ready."
 msgstr "Gata."
 
-#: kdiff3.cpp:922 pdiff.cpp:1505
+#: kdiff3.cpp:923 pdiff.cpp:1505
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "Rezultatul îmbinării nu a fost salvat."
 
-#: kdiff3.cpp:924
+#: kdiff3.cpp:925
 #, kde-format
 msgid "Save && Quit"
 msgstr "Salvează și ieși"
 
-#: kdiff3.cpp:925
+#: kdiff3.cpp:926
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Ieși fără a salva"
 
-#: kdiff3.cpp:933 pdiff.cpp:1516
+#: kdiff3.cpp:934 pdiff.cpp:1516
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Salvarea rezultatului îmbinării a eșuat."
 
-#: kdiff3.cpp:944 pdiff.cpp:717
+#: kdiff3.cpp:945 pdiff.cpp:717
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
 
-#: kdiff3.cpp:967
+#: kdiff3.cpp:968
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvare fișier..."
 
-#: kdiff3.cpp:984
+#: kdiff3.cpp:985
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Se salvează fișierul cu un nume nou..."
 
-#: kdiff3.cpp:986
+#: kdiff3.cpp:987
 #, kde-format
 msgid "Save As..."
 msgstr "Salvare ca..."
 
-#: kdiff3.cpp:1010
+#: kdiff3.cpp:1011
 #, fuzzy, kde-format
 #| msgid "Printing completed."
 msgid "Printing not implemented."
 msgstr "Tipărire încheiată"
 
-#: kdiff3.cpp:1050
+#: kdiff3.cpp:1051
 #, kde-format
 msgid "Printing..."
 msgstr "Se tipărește..."
 
-#: kdiff3.cpp:1148
+#: kdiff3.cpp:1149
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1196
+#: kdiff3.cpp:1197
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "Selecție"
 
-#: kdiff3.cpp:1225
+#: kdiff3.cpp:1226
 #, kde-format
 msgid "Printing completed."
 msgstr "Tipărire încheiată"
 
-#: kdiff3.cpp:1229
+#: kdiff3.cpp:1230
 #, kde-format
 msgid "Printing aborted."
 msgstr "Tipărire abandonată."
 
-#: kdiff3.cpp:1236
+#: kdiff3.cpp:1237
 #, kde-format
 msgid "Exiting..."
 msgstr "Ieșire..."
 
-#: kdiff3.cpp:1246
+#: kdiff3.cpp:1247
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Se comută bara de stare..."
