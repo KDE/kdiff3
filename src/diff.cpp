@@ -607,7 +607,7 @@ bool ManualDiffHelpEntry::isValidMove(LineRef line1, LineRef line2, e_SrcSelecto
 
 qint32 ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
 {
-    qsizetype i;
+    size_t i;
     for(i = 0; i < d3lv.size(); ++i)
     {
         const Diff3Line* d3l = d3lv[i];
@@ -1562,7 +1562,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
     d3lv.resize(SafeInt<qsizetype>(size()));
     Diff3LineList::iterator i;
-    qsizetype j = 0;
+    size_t j = 0;
     for(i = begin(); i != end(); ++i, ++j)
     {
         d3lv[j] = &(*i);

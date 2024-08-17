@@ -204,7 +204,7 @@ class ManualDiffHelpList; // A list of corresponding ranges
 class Diff3Line;
 class Diff3LineList;
 
-using Diff3LineVector = QVector<Diff3Line*>;
+using Diff3LineVector = std::vector<Diff3Line*>;
 
 class DiffBufferInfo
 {
