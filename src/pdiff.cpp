@@ -52,6 +52,28 @@
 #include <KMessageBox>
 #include <KShortcutsDialog>
 
+/**
+ * Clear all data that is specific to the current diff.
+ *
+ * This function is called when the application is reset, e.g. when a new diff is started.
+ */
+void KDiff3App::resetDiffData()
+{
+    //insure merge result window never has stale iterators/pointers.
+    if(m_pMergeResultWindow) m_pMergeResultWindow->reset();
+    //Clear stale pointers in DiffTextWindow.
+    if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
+    if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
+    if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
+
+    m_diffList12.clear();
+    m_diffList23.clear();
+    m_diffList13.clear();
+    m_diff3LineList.clear();
+    mDiff3LineVector.clear();
+    m_manualDiffHelpList.clear();
+}
+
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
     ProgressScope pp;
@@ -107,13 +129,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
     if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
     if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
-    m_diff3LineList.clear();
-    mDiff3LineVector.clear();
+    resetDiffData();
 
     if(bLoadFiles)
     {
-        m_manualDiffHelpList.clear();
-
         if(m_sd3->isEmpty())
             ProgressProxy::setMaxNofSteps(4); // Read 2 files, 1 comparison, 1 finediff
         else
@@ -302,9 +321,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         }
         catch(const std::bad_alloc&)
         {
-            m_manualDiffHelpList.clear();
-            m_diff3LineList.clear();
-            mDiff3LineVector.clear();
+            resetDiffData();
             m_sd1->reset();
             m_sd2->reset();
             m_sd3->reset();
@@ -334,7 +351,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         m_diff3LineList.calcWhiteDiff3Lines(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), gOptions->ignoreComments());
         m_diff3LineList.calcDiff3LineVector(mDiff3LineVector);
     }
-
+    assert(bLoadFiles || m_diff3LineList.empty());
     // Calc needed lines for display
     try
     {
