@@ -704,7 +704,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
         QString s;
         if(d->m_bWordWrap)
         {
-            if(!line.isValid() || line >= d->m_diff3WrapLineVector.size())
+            if(!line.isValid() || (size_t)line >= d->m_diff3WrapLineVector.size())
                 return;
             const Diff3WrapLine& d3wl = d->m_diff3WrapLineVector[line];
             s = d->getString(d3wl.diff3LineIndex).mid(d3wl.wrapLineOffset, d3wl.wrapLineLength);
@@ -911,7 +911,7 @@ void DiffTextWindow::convertToLinePos(qint32 x, qint32 y, LineRef& line, qint32&
     else
         line = LineRef::invalid;
 
-    if(line.isValid() && (!gOptions->wordWrapOn() || line < d->m_diff3WrapLineVector.count()))
+    if(line.isValid() && (!gOptions->wordWrapOn() || (size_t)line < d->m_diff3WrapLineVector.size()))
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
@@ -1379,9 +1379,10 @@ QString DiffTextWindowData::getString(const LineType d3lIdx) const
 
 QString DiffTextWindowData::getLineString(const LineType line) const
 {
+    //assert(line > 0);
     if(m_bWordWrap)
     {
-        if(line < m_diff3WrapLineVector.count())
+        if((size_t)line < m_diff3WrapLineVector.size())
         {
             LineType d3LIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(line);
             return getString(d3LIdx).mid(m_diff3WrapLineVector[line].wrapLineOffset, m_diff3WrapLineVector[line].wrapLineLength);

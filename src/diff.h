@@ -23,7 +23,6 @@
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>
-#include <QVector>
 
 class LineData;
 
@@ -459,7 +458,7 @@ struct Diff3WrapLine
     qint32 wrapLineLength = 0;
 };
 
-typedef QVector<Diff3WrapLine> Diff3WrapLineVector;
+typedef std::vector<Diff3WrapLine> Diff3WrapLineVector;
 
 class TotalDiffStatus
 {
