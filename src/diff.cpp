@@ -1218,6 +1218,8 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll,
 void Diff3LineList::calcWhiteDiff3Lines(
     const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, const bool bIgnoreComments)
 {
+    assert(empty() || (pldA != nullptr && pldB != nullptr && pldC != nullptr));
+    // Init white line flags
     for(Diff3Line& diff3Line: *this)
     {
         diff3Line.bWhiteLineA = (!diff3Line.getLineA().isValid() || (*pldA)[diff3Line.getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[diff3Line.getLineA()].isPureComment()));

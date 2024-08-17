@@ -78,6 +78,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     ProgressScope pp;
     mErrors.clear();
     bool bLoadFiles = inFlags & InitFlag::loadFiles;
+    bool bFirstRun = (m_sd1->isEmpty() && !m_sd1->hasData()) &&
+                     (m_sd2->isEmpty() && !m_sd2->hasData()) &&
+                     (m_sd3->isEmpty() && !m_sd3->hasData());
     bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;
     bool bAutoSolve = inFlags & InitFlag::autoSolve;
 
@@ -95,7 +98,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
 
     //Easier to do here then have all eleven of our call points do the check.
-    if(m_sd1->isEmpty() && m_sd2->isEmpty() && m_sd3->isEmpty())
+    if(bFirstRun)
         bLoadFiles = false;
 
     if(bGUI)
@@ -122,12 +125,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         setLockPainting(true);
     }
 
-    //insure merge result window never has stale iterators/pointers.
-    if(m_pMergeResultWindow) m_pMergeResultWindow->reset();
-    //Clear stale pointers in DiffTextWindow.
-    if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
-    if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
-    if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
     resetDiffData();
 
     if(bLoadFiles)
@@ -170,7 +167,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     pTotalDiffStatus->reset();
 
-    if(mErrors.isEmpty())
+    if(mErrors.isEmpty() && !bFirstRun)
     {
         try
         {
@@ -340,7 +337,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         ProgressProxy::clear();
     }
 
-    if(mErrors.isEmpty() && m_sd1->isText() && m_sd2->isText())
+    if(!bFirstRun && mErrors.isEmpty() && m_sd1->isText() && m_sd2->isText())
     {
         Diff3Line::m_pDiffBufferInfo->init(&m_diff3LineList,
                                            m_sd1->getLineDataForDiff(),
