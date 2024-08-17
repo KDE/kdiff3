@@ -52,7 +52,6 @@ Optimizations: Skip unneeded steps.
 #include <QString>
 #include <QTemporaryFile>
 #include <QTextCodec>
-#include <QVector>
 
 extern std::unique_ptr<Options> gOptions;
 
@@ -576,7 +575,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
     std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
 
     // detect line end style
-    QVector<e_LineEndStyle> vOrigDataLineEndStyle;
+    std::vector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
 
     QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes).value_or(encoding);
@@ -715,7 +714,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
         m_bIsText = true;
 
-        if(!vOrigDataLineEndStyle.isEmpty())
+        if(!vOrigDataLineEndStyle.empty())
             m_eLineEndStyle = vOrigDataLineEndStyle[0];
 
         mLineCount = lines;
