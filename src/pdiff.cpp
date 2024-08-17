@@ -58,12 +58,14 @@
  */
 void KDiff3App::resetDiffData()
 {
+    assert(m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow2 != nullptr && m_pDiffTextWindow3 != nullptr &&
+           m_pMergeResultWindow != nullptr);
     //insure merge result window never has stale iterators/pointers.
-    if(m_pMergeResultWindow) m_pMergeResultWindow->reset();
+    m_pMergeResultWindow->reset();
     //Clear stale pointers in DiffTextWindow.
-    if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
-    if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
-    if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
+    m_pDiffTextWindow1->reset();
+    m_pDiffTextWindow2->reset();
+    m_pDiffTextWindow3->reset();
 
     m_diffList12.clear();
     m_diffList23.clear();
