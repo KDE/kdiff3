@@ -77,14 +77,13 @@ void KDiff3App::resetDiffData()
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
     ProgressScope pp;
-    mErrors.clear();
     bool bLoadFiles = inFlags & InitFlag::loadFiles;
     bool bFirstRun = (m_sd1->isEmpty() && !m_sd1->hasData()) &&
                      (m_sd2->isEmpty() && !m_sd2->hasData()) &&
                      (m_sd3->isEmpty() && !m_sd3->hasData());
+    bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
     bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;
     bool bAutoSolve = inFlags & InitFlag::autoSolve;
-
     bool bGUI = (inFlags & InitFlag::initGUI);
 
     IgnoreFlags eIgnoreFlags = IgnoreFlag::none;
@@ -94,9 +93,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     if(gOptions->whiteSpaceIsEqual())
         eIgnoreFlags |= IgnoreFlag::ignoreWhiteSpace;
 
+    mErrors.clear();
     assert(pTotalDiffStatus != nullptr);
-
-    bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
 
     //Easier to do here then have all eleven of our call points do the check.
     if(bFirstRun)
