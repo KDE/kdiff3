@@ -552,7 +552,7 @@ LineType DiffTextWindow::getNofLines() const
 LineType DiffTextWindow::convertLineToDiff3LineIdx(const LineRef line) const
 {
     if(line.isValid() && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
-        return d->m_diff3WrapLineVector[std::min<qsizetype>(line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
+        return d->m_diff3WrapLineVector[std::min<size_t>(line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
     else
         return line;
 }
@@ -586,7 +586,7 @@ LineRef getBestFirstLine(LineRef line, LineType nofLines, LineRef firstLine, Lin
         newFirstLine = std::max(0, (LineType)std::ceil(line - (visibleLines - nofLines) / 2));
     else
     {
-        qint32 numberPages = std::floor(nofLines / visibleLines);
+        LineType numberPages = (LineType)std::floor(nofLines / visibleLines);
         newFirstLine = std::max(0, line - (visibleLines * numberPages) / 3);
     }
     return newFirstLine;
@@ -1706,7 +1706,7 @@ bool DiffTextWindow::startRunnables()
     }
 }
 
-void DiffTextWindow::recalcWordWrap(bool bWordWrap, qsizetype wrapLineVectorSize, qint32 visibleTextWidth)
+void DiffTextWindow::recalcWordWrap(bool bWordWrap, size_t wrapLineVectorSize, qint32 visibleTextWidth)
 {
     if(d->getDiff3LineVector() == nullptr || !isVisible())
     {
@@ -1759,7 +1759,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, qsizetype wrapLineVectorSize
     }
 }
 
-void DiffTextWindow::recalcWordWrapHelper(qsizetype wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx)
+void DiffTextWindow::recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx)
 {
     if(d->m_bWordWrap)
     {
@@ -1773,7 +1773,7 @@ void DiffTextWindow::recalcWordWrapHelper(qsizetype wrapLineVectorSize, qint32 v
         size_t wrapLineIdx = 0;
         size_t size = d->getDiff3LineVector()->size();
         LineType firstD3LineIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable);
-        LineType endIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? size : std::min<qsizetype>(firstD3LineIdx + s_linesPerRunnable, size));
+        LineType endIdx = SafeInt<LineType>(wrapLineVectorSize > 0 ? size : std::min<size_t>(firstD3LineIdx + s_linesPerRunnable, size));
         std::vector<WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
         size_t cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
@@ -1863,7 +1863,7 @@ void DiffTextWindow::recalcWordWrapHelper(qsizetype wrapLineVectorSize, qint32 v
         if(wrapLineVectorSize > 0)
         {
             assert(wrapLineVectorSize <= limits<LineType>::max()); //Posiable but unlikely starting in Qt6
-            d->m_firstLine = (LineType)std::min<SafeInt<LineType>>(d->m_firstLine, wrapLineVectorSize - 1);
+            d->m_firstLine = std::min<LineRef>(d->m_firstLine, wrapLineVectorSize - 1);
             d->m_horizScrollOffset = 0;
 
             Q_EMIT firstLineChanged(d->m_firstLine);
@@ -1874,7 +1874,7 @@ void DiffTextWindow::recalcWordWrapHelper(qsizetype wrapLineVectorSize, qint32 v
         if(ProgressProxy::wasCancelled())
             return;
 
-        qsizetype size = d->getDiff3LineVector()->size();
+        size_t size = d->getDiff3LineVector()->size();
         LineType firstD3LineIdx = SafeInt<LineType>(cacheListIdx * s_linesPerRunnable);
         LineType endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, (LineType)size);
 

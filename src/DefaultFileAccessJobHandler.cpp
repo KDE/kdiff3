@@ -126,7 +126,7 @@ void DefaultFileAccessJobHandler::slotGetData(KJob* pJob, const QByteArray& newD
     }
     else
     {
-        qint64 length = std::min(qint64(newData.size()), m_maxLength - m_transferredBytes);
+        qint64 length = std::min(newData.size(), m_maxLength - m_transferredBytes);
         ::memcpy(m_pTransferBuffer + m_transferredBytes, newData.data(), newData.size());
         m_transferredBytes += length;
     }

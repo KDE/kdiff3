@@ -675,7 +675,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t i
 
         if(empty())
         {
-            qint32 numofEquals = std::min(size1, size2);
+            LineType numofEquals = std::min(size1, size2);
             Diff d(numofEquals, size1 - numofEquals, size2 - numofEquals);
 
             push_back(d);
@@ -1560,7 +1560,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
 // Convert the list to a vector of pointers
 void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
-    d3lv.resize(SafeInt<qsizetype>(size()));
+    d3lv.resize(size());
     Diff3LineList::iterator i;
     size_t j = 0;
     for(i = begin(); i != end(); ++i, ++j)

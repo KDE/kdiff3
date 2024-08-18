@@ -91,8 +91,8 @@ class DiffTextWindow: public QWidget
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType) const;
 
     void setPaintingAllowed(bool bAllowPainting);
-    void recalcWordWrap(bool bWordWrap, qsizetype wrapLineVectorSize, qint32 visibleTextWidth);
-    void recalcWordWrapHelper(qsizetype wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
+    void recalcWordWrap(bool bWordWrap, size_t wrapLineVectorSize, qint32 visibleTextWidth);
+    void recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineType linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, qint32 firstLine, const LineType nofLinesPerPage);
