@@ -24,22 +24,9 @@ class LineRef
     static constexpr LineType invalid = -1;
     constexpr inline LineRef() = default;
     //cppcheck-suppress noExplicitConstructor
-    constexpr inline LineRef(const LineType i) { mLineNumber = i; }
-    //cppcheck-suppress noExplicitConstructor
-    constexpr inline LineRef(const quint64 i)
-    {
-        if(i <= limits<LineType>::max())
-            mLineNumber = (LineType)i;
-        else
-            mLineNumber = invalid;
-    }
-    //cppcheck-suppress noExplicitConstructor
     constexpr inline LineRef(const qint64 i)
     {
-        if(i <= limits<LineType>::max() && i >= 0)
-            mLineNumber = (LineType)i;
-        else
-            mLineNumber = invalid;
+        mLineNumber = i;
     }
 
     inline operator LineType() const noexcept { return mLineNumber; }
@@ -100,8 +87,8 @@ static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy 
 static_assert(std::is_copy_assignable<LineRef>::value, "LineRef must copy assignable.");
 static_assert(std::is_move_constructible<LineRef>::value, "LineRef must be move constructible.");
 static_assert(std::is_move_assignable<LineRef>::value, "LineRef must be move assignable.");
-static_assert(std::is_convertible<LineRef, int>::value, "Can not convert LineRef to int.");
-static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to LineRef.");
+static_assert(std::is_convertible<LineRef, qint64>::value, "Can not convert LineRef to qint64.");
+static_assert(std::is_convertible<qint64, LineRef>::value, "Can not convert qint64 to LineRef.");
 
 using LineType = LineRef::LineType;
 
