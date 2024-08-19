@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-10 03:29+0000\n"
+"POT-Creation-Date: 2024-08-19 03:14+0000\n"
 "PO-Revision-Date: 2024-01-15 20:39+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -104,7 +104,7 @@ msgstr "Leyendo carpeta: %1"
 msgid "Listing directory: %1"
 msgstr "Listando directorio: %1"
 
-#: diff.cpp:1594 diff.cpp:1610
+#: diff.cpp:1596 diff.cpp:1612
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -113,7 +113,7 @@ msgstr ""
 "Error de pérdida de datos:\n"
 "Si puede volver a producirlo, contacte con el autor.\n"
 
-#: diff.cpp:1596 diff.cpp:1612
+#: diff.cpp:1598 diff.cpp:1614
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Error interno grave"
@@ -370,7 +370,7 @@ msgstr ""
 "interrumpir la fusión y volver a explorar la carpeta?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:332 pdiff.cpp:868 pdiff.cpp:1743 pdiff.cpp:1753
+#: mergeresultwindow.cpp:332 pdiff.cpp:880 pdiff.cpp:1755 pdiff.cpp:1765
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1209,12 +1209,12 @@ msgstr "Opción --auto ignorada para comparación de carpetas."
 msgid "Saving failed."
 msgstr "Fallo al guardar."
 
-#: kdiff3.cpp:566 pdiff.cpp:933
+#: kdiff3.cpp:566 pdiff.cpp:945
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Fallo al abrir estos archivos:"
 
-#: kdiff3.cpp:575 pdiff.cpp:942
+#: kdiff3.cpp:575 pdiff.cpp:954
 #, kde-format
 msgid "File open error"
 msgstr "Error al abrir el archivo"
@@ -1677,13 +1677,13 @@ msgstr "Vista de pantalla dividida en carpeta y texto"
 msgid "Toggle Between Folder && Text View"
 msgstr "Conmutar entre vista de carpeta y de texto"
 
-#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:952
-#: pdiff.cpp:1021 pdiff.cpp:1057 pdiff.cpp:1066 pdiff.cpp:1124 pdiff.cpp:1132
+#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:964
+#: pdiff.cpp:1033 pdiff.cpp:1069 pdiff.cpp:1078 pdiff.cpp:1136 pdiff.cpp:1144
 #, kde-format
 msgid "Ready."
 msgstr "Listo."
 
-#: kdiff3.cpp:799 pdiff.cpp:1742
+#: kdiff3.cpp:799 pdiff.cpp:1754
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultado de la fusión no se ha guardado."
@@ -1698,12 +1698,12 @@ msgstr "Guardar y salir"
 msgid "Quit Without Saving"
 msgstr "Salir sin guardar"
 
-#: kdiff3.cpp:810 pdiff.cpp:1753
+#: kdiff3.cpp:810 pdiff.cpp:1765
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Falló al guardar el resultado de la fusión."
 
-#: kdiff3.cpp:821 pdiff.cpp:867
+#: kdiff3.cpp:821 pdiff.cpp:879
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2038,7 +2038,7 @@ msgstr ""
 "La salida ha sido modificada.\n"
 "Si continúa, sus cambios se perderán."
 
-#: mergeresultwindow.cpp:774 pdiff.cpp:743
+#: mergeresultwindow.cpp:774 pdiff.cpp:755
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Todos los archivos de entrada son binariamente iguales."
@@ -2049,7 +2049,7 @@ msgid "All input files contain the same text."
 msgstr "Todos los archivos de entrada contienen el mismo texto."
 
 #: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788 pdiff.cpp:749 pdiff.cpp:753 pdiff.cpp:757
+#: mergeresultwindow.cpp:788 pdiff.cpp:761 pdiff.cpp:765 pdiff.cpp:769
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Los archivos %1 y %2 son binariamente iguales.\n"
@@ -3264,18 +3264,18 @@ msgstr ""
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Esto reestablece todas las opciones. No solo las de tema actual."
 
-#: pdiff.cpp:84
+#: pdiff.cpp:107
 #, kde-format
 msgid "PreprocessorCmd: "
 msgstr "Orden del preprocesador: "
 
-#: pdiff.cpp:86
+#: pdiff.cpp:109
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
 msgstr ""
 "La(s) siguiente(s) opcion(es) que ha seleccionado pueden cambiar datos:\n"
 
-#: pdiff.cpp:87
+#: pdiff.cpp:110
 #, kde-format
 msgid ""
 "\n"
@@ -3287,106 +3287,106 @@ msgstr ""
 "¿Desea desactivar estas preferencias o continuar con estas preferencias "
 "activadas?"
 
-#: pdiff.cpp:89
+#: pdiff.cpp:112
 #, kde-format
 msgid "Option Unsafe for Merging"
 msgstr "Opción insegura para la fusión"
 
-#: pdiff.cpp:90
+#: pdiff.cpp:113
 #, kde-format
 msgid "Use These Options During Merge"
 msgstr "Utilizar estas opciones durante la fusión"
 
-#: pdiff.cpp:91
+#: pdiff.cpp:114
 #, kde-format
 msgid "Disable Unsafe Options"
 msgstr "Desactivar opciones inseguras"
 
-#: pdiff.cpp:123
+#: pdiff.cpp:137
 #, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "Cargando A: %1"
 
-#: pdiff.cpp:133
+#: pdiff.cpp:147
 #, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Cargando B: %1"
 
-#: pdiff.cpp:166 pdiff.cpp:206
+#: pdiff.cpp:180 pdiff.cpp:220
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Dif: A <-> B"
 
-#: pdiff.cpp:172 pdiff.cpp:252 pdiff.cpp:275
+#: pdiff.cpp:186 pdiff.cpp:266 pdiff.cpp:289
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "Dif. línea: A <-> B"
 
-#: pdiff.cpp:191
+#: pdiff.cpp:205
 #, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "Cargando C: %1"
 
-#: pdiff.cpp:217
+#: pdiff.cpp:231
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Dif: A <-> C"
 
-#: pdiff.cpp:230
+#: pdiff.cpp:244
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Dif: B <-> C"
 
-#: pdiff.cpp:258 pdiff.cpp:280
+#: pdiff.cpp:272 pdiff.cpp:294
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "Dif. línea: B <-> C"
 
-#: pdiff.cpp:264 pdiff.cpp:285
+#: pdiff.cpp:278 pdiff.cpp:299
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Dif. línea: A <-> C"
 
-#: pdiff.cpp:311
+#: pdiff.cpp:323
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
 msgstr "No hay memoria suficiente para completar la solicitud."
 
-#: pdiff.cpp:318
+#: pdiff.cpp:330
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr "Ha ocurrido un error interno: %1"
 
-#: pdiff.cpp:345
+#: pdiff.cpp:357
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Hay demasiadas líneas diferentes. Se omite el archivo."
 
-#: pdiff.cpp:745
+#: pdiff.cpp:757
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Todos los archivos de entrada contienen el mismo texto, pero no son "
 "binariamente iguales."
 
-#: pdiff.cpp:751 pdiff.cpp:755 pdiff.cpp:759
+#: pdiff.cpp:763 pdiff.cpp:767 pdiff.cpp:771
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Los archivos %1 y %2 tienen el mismo texto, pero no son binariamente "
 "iguales. \n"
 
-#: pdiff.cpp:769
+#: pdiff.cpp:781
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3397,17 +3397,17 @@ msgstr ""
 "Tenga en cuenta que la fusión de KDiff3 no se creó para datos binarios.\n"
 "Continúe bajo su propia responsabilidad."
 
-#: pdiff.cpp:779
+#: pdiff.cpp:791
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:781
+#: pdiff.cpp:793
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:783
+#: pdiff.cpp:795
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3422,85 +3422,85 @@ msgstr ""
 "responsabilidad.\n"
 "Los archivos de entrada afectados están en %1."
 
-#: pdiff.cpp:869
+#: pdiff.cpp:881
 #, kde-format
 msgid "Abort"
 msgstr "Interrumpir"
 
-#: pdiff.cpp:870
+#: pdiff.cpp:882
 #, kde-format
 msgid "Continue Merging"
 msgstr "Continuar fusionando"
 
-#: pdiff.cpp:875 pdiff.cpp:966
+#: pdiff.cpp:887 pdiff.cpp:978
 #, kde-format
 msgid "Opening files..."
 msgstr "Abriendo archivos..."
 
-#: pdiff.cpp:1055
+#: pdiff.cpp:1067
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Cortando selección..."
 
-#: pdiff.cpp:1062
+#: pdiff.cpp:1074
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Copiando la selección al portapapeles..."
 
-#: pdiff.cpp:1071
+#: pdiff.cpp:1083
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Insertando el contenido del portapapeles..."
 
-#: pdiff.cpp:1191
+#: pdiff.cpp:1203
 #, kde-format
 msgid "Ok"
 msgstr "Aceptar"
 
-#: pdiff.cpp:1207
+#: pdiff.cpp:1219
 #, kde-format
 msgid "Go to Line"
 msgstr "Ir a línea"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1533
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajuste de línea («Cancelar» desactiva el ajuste de línea)"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1533
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "Calculando la anchura máxima para la barra de desplazamiento horizontal"
 
-#: pdiff.cpp:1744
+#: pdiff.cpp:1756
 #, kde-format
 msgid "Save && Continue"
 msgstr "Guardar y continuar"
 
-#: pdiff.cpp:1745
+#: pdiff.cpp:1757
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continuar sin guardar"
 
-#: pdiff.cpp:1943
+#: pdiff.cpp:1955
 #, kde-format
 msgid "Search complete."
 msgstr "Búsqueda completada."
 
-#: pdiff.cpp:1943
+#: pdiff.cpp:1955
 #, kde-format
 msgid "Search Complete"
 msgstr "Búsqueda completada"
 
-#: pdiff.cpp:2124
+#: pdiff.cpp:2136
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 "No hay nada seleccionado en ninguna de las ventanas de entradas de "
 "diferencias."
 
-#: pdiff.cpp:2124
+#: pdiff.cpp:2136
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Error al añadir un intervalo de diferencia manual"
