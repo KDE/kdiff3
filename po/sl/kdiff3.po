@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-11 00:42+0000\n"
+"POT-Creation-Date: 2024-08-19 00:41+0000\n"
 "PO-Revision-Date: 2023-12-07 10:31+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -97,7 +97,7 @@ msgstr "Branje mape: %1"
 msgid "Listing directory: %1"
 msgstr "Seznam predmetov v mapi: %1"
 
-#: diff.cpp:1594 diff.cpp:1610
+#: diff.cpp:1596 diff.cpp:1612
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -106,7 +106,7 @@ msgstr ""
 "Napaka izgube podatkov:\n"
 "Če se to zgodi znova, stopite v stik z avtorjem.\n"
 
-#: diff.cpp:1596 diff.cpp:1612
+#: diff.cpp:1598 diff.cpp:1614
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Številne notranje napake"
@@ -121,72 +121,72 @@ msgstr "Datoteka %1: Vrstica %2"
 msgid "File %1: Line not available"
 msgstr "Datoteka %1: Vrstica ni na voljo"
 
-#: difftextwindow.cpp:1966
+#: difftextwindow.cpp:1967
 #, kde-format
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1970 mergeresultwindow.cpp:2804 optiondialog.cpp:795
+#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Slog konca vrstice:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:1996
 #, kde-format
 msgid "A (Base)"
 msgstr "A (osnova)"
 
-#: difftextwindow.cpp:1997
+#: difftextwindow.cpp:1998
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kodiranje: %1"
 
-#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:1999
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Slog konca vrstice: %1"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "Unknown"
 msgstr "Neznano"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1067
+#: difftextwindow.cpp:2028 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "Zgornja vrstica"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2038
 #, kde-format
 msgid "End"
 msgstr "Konec"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2094 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Odpri datoteko"
 
-#: difftextwindow.cpp:2145 optiondialog.cpp:389
+#: difftextwindow.cpp:2146 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2146
+#: difftextwindow.cpp:2147
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "Ostalo"
@@ -363,7 +363,7 @@ msgstr ""
 "združevanje in ponovno preiskati mapo?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:718 pdiff.cpp:1506 pdiff.cpp:1516
+#: mergeresultwindow.cpp:315 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1195,12 +1195,12 @@ msgstr "Za primerjave map je bila prezrta možnost --auto."
 msgid "Saving failed."
 msgstr "Shranjevanje je spodletelo."
 
-#: kdiff3.cpp:719 pdiff.cpp:783
+#: kdiff3.cpp:719 pdiff.cpp:797
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Odpiranje teh datotek je spodletelo:"
 
-#: kdiff3.cpp:728 pdiff.cpp:792
+#: kdiff3.cpp:728 pdiff.cpp:806
 #, kde-format
 msgid "File open error"
 msgstr "Napaka med odpiranjem datoteke"
@@ -1605,13 +1605,13 @@ msgstr "Razdeljeni pogled map in besedila"
 msgid "Toggle Between Folder && Text View"
 msgstr "Preklopi med pogledom map in besedila"
 
-#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:802
-#: pdiff.cpp:871 pdiff.cpp:907 pdiff.cpp:916 pdiff.cpp:974 pdiff.cpp:982
+#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:816
+#: pdiff.cpp:885 pdiff.cpp:921 pdiff.cpp:930 pdiff.cpp:988 pdiff.cpp:996
 #, kde-format
 msgid "Ready."
 msgstr "Pripravljen."
 
-#: kdiff3.cpp:923 pdiff.cpp:1505
+#: kdiff3.cpp:923 pdiff.cpp:1519
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Rezultat združevanja ni bil shranjen."
@@ -1626,12 +1626,12 @@ msgstr "Shrani in končaj"
 msgid "Quit Without Saving"
 msgstr "Končaj brez shranjevanja"
 
-#: kdiff3.cpp:934 pdiff.cpp:1516
+#: kdiff3.cpp:934 pdiff.cpp:1530
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Shranjevanje rezultata združevanja je spodletelo."
 
-#: kdiff3.cpp:945 pdiff.cpp:717
+#: kdiff3.cpp:945 pdiff.cpp:731
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1960,7 +1960,7 @@ msgstr ""
 "Izhod je bil spremenjen.\n"
 "Če nadaljujete, bodo vaše spremembe izgubljene."
 
-#: mergeresultwindow.cpp:757 pdiff.cpp:593
+#: mergeresultwindow.cpp:757 pdiff.cpp:607
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Vse vhodne datoteke so dvojiško enake."
@@ -1971,7 +1971,7 @@ msgid "All input files contain the same text."
 msgstr "Vse vhodne datoteke vsebujejo enako besedilo."
 
 #: mergeresultwindow.cpp:763 mergeresultwindow.cpp:767
-#: mergeresultwindow.cpp:771 pdiff.cpp:599 pdiff.cpp:603 pdiff.cpp:607
+#: mergeresultwindow.cpp:771 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Datoteki %1 in %2 sta dvojiško enaki.\n"
@@ -3169,17 +3169,17 @@ msgstr ""
 msgid "This resets all options. Not only those of the current topic."
 msgstr "To ponastavi vse možnosti, ne samo tiste za trenutno temo."
 
-#: pdiff.cpp:83
+#: pdiff.cpp:108
 #, kde-format
 msgid "PreprocessorCmd: "
 msgstr "Ukaz predobdelovalnika: "
 
-#: pdiff.cpp:85
+#: pdiff.cpp:110
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
 msgstr "Naslednje izbrane možnosti bodo morda spremenile podatke:\n"
 
-#: pdiff.cpp:86
+#: pdiff.cpp:111
 #, kde-format
 msgid ""
 "\n"
@@ -3190,104 +3190,104 @@ msgstr ""
 "Med združevanjem to najverjetneje ni zaželeno.\n"
 "Ali želite onemogočiti te nastavitve ali nadaljevati z omogočenimi?"
 
-#: pdiff.cpp:88
+#: pdiff.cpp:113
 #, kde-format
 msgid "Option Unsafe for Merging"
 msgstr "Možnost ni varna za združevanje"
 
-#: pdiff.cpp:89
+#: pdiff.cpp:114
 #, kde-format
 msgid "Use These Options During Merge"
 msgstr "Uporabi te možnosti med združevanjem"
 
-#: pdiff.cpp:90
+#: pdiff.cpp:115
 #, kde-format
 msgid "Disable Unsafe Options"
 msgstr "Onemogoči nevarne možnosti"
 
-#: pdiff.cpp:122
+#: pdiff.cpp:138
 #, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "Nalaganje A: %1"
 
-#: pdiff.cpp:132
+#: pdiff.cpp:148
 #, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Nalaganje B: %1"
 
-#: pdiff.cpp:165 pdiff.cpp:205
+#: pdiff.cpp:181 pdiff.cpp:221
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Diff: A <-> B"
 
-#: pdiff.cpp:171 pdiff.cpp:251 pdiff.cpp:274
+#: pdiff.cpp:187 pdiff.cpp:267 pdiff.cpp:290
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "Linediff: A <-> B"
 
-#: pdiff.cpp:190
+#: pdiff.cpp:206
 #, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "Nalaganje C: %1"
 
-#: pdiff.cpp:216
+#: pdiff.cpp:232
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Diff: A <-> C"
 
-#: pdiff.cpp:229
+#: pdiff.cpp:245
 #, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Diff: B <-> C"
 
-#: pdiff.cpp:257 pdiff.cpp:279
+#: pdiff.cpp:273 pdiff.cpp:295
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "Linediff: B <-> C"
 
-#: pdiff.cpp:263 pdiff.cpp:284
+#: pdiff.cpp:279 pdiff.cpp:300
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
-#: pdiff.cpp:310
+#: pdiff.cpp:324
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
 msgstr "Ni dovolj pomnilnika za dokončanje zahteve."
 
-#: pdiff.cpp:317
+#: pdiff.cpp:331
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr "Pojavila se je notranja napaka: %1"
 
-#: pdiff.cpp:344
+#: pdiff.cpp:358
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Preveč vrstic v razliki. Preskakujem datoteko."
 
-#: pdiff.cpp:595
+#: pdiff.cpp:609
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Vse vhodne datoteke vsebujejo enako besedilo, ampak niso dvojiško enake."
 
-#: pdiff.cpp:601 pdiff.cpp:605 pdiff.cpp:609
+#: pdiff.cpp:615 pdiff.cpp:619 pdiff.cpp:623
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Datoteki %1 in %2 vsebujeta enako besedilo, ampak nista dvojiško enaki. \n"
 
-#: pdiff.cpp:619
+#: pdiff.cpp:633
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3299,17 +3299,17 @@ msgstr ""
 "podatke.\n"
 "Nadaljujte na lastno odgovornost."
 
-#: pdiff.cpp:629
+#: pdiff.cpp:643
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:631
+#: pdiff.cpp:645
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:633
+#: pdiff.cpp:647
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3323,82 +3323,82 @@ msgstr ""
 "odgovornost.\n"
 "Prizadete vhodne datoteke so v %1."
 
-#: pdiff.cpp:719
+#: pdiff.cpp:733
 #, kde-format
 msgid "Abort"
 msgstr "Prekini"
 
-#: pdiff.cpp:720
+#: pdiff.cpp:734
 #, kde-format
 msgid "Continue Merging"
 msgstr "Nadaljuj z združevanjem"
 
-#: pdiff.cpp:725 pdiff.cpp:816
+#: pdiff.cpp:739 pdiff.cpp:830
 #, kde-format
 msgid "Opening files..."
 msgstr "Odpiranje datotek ..."
 
-#: pdiff.cpp:905
+#: pdiff.cpp:919
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Izrezovanje izbora ..."
 
-#: pdiff.cpp:912
+#: pdiff.cpp:926
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Kopiranje izbora v odložišče ..."
 
-#: pdiff.cpp:921
+#: pdiff.cpp:935
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Vstavljanje vsebine odložišča ..."
 
-#: pdiff.cpp:1006
+#: pdiff.cpp:1020
 #, kde-format
 msgid "Ok"
 msgstr "V redu"
 
-#: pdiff.cpp:1022
+#: pdiff.cpp:1036
 #, kde-format
 msgid "Go to Line"
 msgstr "Pojdi na vrstico"
 
-#: pdiff.cpp:1284
+#: pdiff.cpp:1298
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Preplet besed (Prekliči onemogoči preplet besed)"
 
-#: pdiff.cpp:1284
+#: pdiff.cpp:1298
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Izračun največje širine za vodoravni drsnik"
 
-#: pdiff.cpp:1507
+#: pdiff.cpp:1521
 #, kde-format
 msgid "Save && Continue"
 msgstr "Shrani in nadaljuj"
 
-#: pdiff.cpp:1508
+#: pdiff.cpp:1522
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Nadaljuj brez shranjevanja"
 
-#: pdiff.cpp:1699
+#: pdiff.cpp:1713
 #, kde-format
 msgid "Search complete."
 msgstr "Iskanje je zaključeno."
 
-#: pdiff.cpp:1699
+#: pdiff.cpp:1713
 #, kde-format
 msgid "Search Complete"
 msgstr "Iskanje je zaključeno"
 
-#: pdiff.cpp:1880
+#: pdiff.cpp:1894
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Nič ni izbrano v nobenem izmed oken z vhodi diff."
 
-#: pdiff.cpp:1880
+#: pdiff.cpp:1894
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Napaka med dodajanjem ročnega obsega diff"
@@ -3552,33 +3552,33 @@ msgstr "Ujemanje je spodletelo."
 msgid "Opening and closing parentheses do not match in regular expression."
 msgstr "Uklepaj in zaklepaj se ne ujemata v regularnem izrazu."
 
-#: SourceData.cpp:151
+#: SourceData.cpp:150
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Zapisovanje podatkov iz odložišča v začasno datoteko je spodletelo."
 
-#: SourceData.cpp:156
+#: SourceData.cpp:155
 #, kde-format
 msgid "From Clipboard"
 msgstr "Iz odložišča"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:343
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 ni običajna datoteka."
 
-#: SourceData.cpp:379
+#: SourceData.cpp:378
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Datoteka %1 je prevelika za obdelavo. Preskok te."
 
-#: SourceData.cpp:408
+#: SourceData.cpp:407
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Začasna datoteka je: %1"
 
-#: SourceData.cpp:446
+#: SourceData.cpp:445
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3593,7 +3593,7 @@ msgstr ""
 "\n"
 "Ukaz za predobdelavo bo sedaj onemogočen."
 
-#: SourceData.cpp:509
+#: SourceData.cpp:508
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3608,7 +3608,7 @@ msgstr ""
 "\n"
 "Ukaz za predobdelavo ujemanja vrstic bo sedaj onemogočen."
 
-#: SourceData.cpp:515
+#: SourceData.cpp:514
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
