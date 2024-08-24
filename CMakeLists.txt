@@ -4,7 +4,9 @@
 
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
-cmake_minimum_required(VERSION 3.22...3.30 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.22...3.29 FATAL_ERROR)
+#compatibailty shim remove when craft build issues are resolved
+cmake_policy(SET CMP0167 OLD)
 
 project(kdiff3 VERSION 1.11.70)
 
@@ -64,7 +66,6 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # Change this to 1.84 when its more widely available
 find_package(Boost 1.82 REQUIRED)
-#add_definitions()
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
 
