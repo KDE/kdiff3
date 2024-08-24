@@ -63,7 +63,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # Change this to 1.84 when its more widely available
-find_package(Boost 1.81 REQUIRED)
+find_package(Boost CONFIG 1.81 REQUIRED)
 #add_definitions()
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
@@ -165,7 +165,7 @@ add_definitions(
     #KF5 5.64+ flags
     #Don't warn for API depreciated after 6.0.0 (below as hex.hex.hex number)
     -DKF_DISABLE_DEPRECATED_BEFORE=0x060000#disable deprecated api for KF 6.0.
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x060200
     -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060000
     -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x060000
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
