@@ -47,7 +47,6 @@
 #include <QRegularExpression>
 #include <QResizeEvent>
 #include <QStatusBar>
-#include <QTextCodec>
 #include <QTextLayout>
 #include <QTextStream>
 #include <QTimerEvent>
@@ -2912,15 +2911,8 @@ e_LineEndStyle WindowTitleWidget::getLineEndStyle()
 
 void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecForB, const char* pCodecForC)
 {
+    QList<QString> names = Utils::availableCodecs();
     m_pEncodingSelector->clear();
-
-    //Gather unique codecs not aliases
-    const QList<qint32> mibs = QTextCodec::availableMibs();
-    QList<QByteArray> names;
-    for(const qint32 mib: mibs)
-    {
-        names.append(QTextCodec::codecForMib(mib)->name());
-    }
 
     if(pCodecForA != nullptr)
         m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA)), QVariant::fromValue(QByteArray(pCodecForA)));
@@ -2932,9 +2924,9 @@ void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecF
     m_pEncodingSelector->addItem("UTF 8", QVariant::fromValue(QByteArray("UTF-8")));
     m_pEncodingSelector->addItem("UTF 8 (BOM)", QVariant::fromValue(QByteArray("UTF-8-BOM")));
 
-    for(const QByteArray& name: names)
+    for(const QString& name: names)
     {
-        m_pEncodingSelector->addItem(QString::fromUtf8(name), QVariant::fromValue(name));
+        m_pEncodingSelector->addItem(name, QVariant::fromValue(name));
     }
     m_pEncodingSelector->setMinimumSize(m_pEncodingSelector->sizeHint());
 

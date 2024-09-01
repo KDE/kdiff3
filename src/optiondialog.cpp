@@ -16,6 +16,7 @@
 #include "defmac.h"
 #include "smalldialogs.h"
 #include "TypeUtils.h"
+#include "Utils.h"
 
 #include <map>
 
@@ -42,7 +43,6 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QScrollArea>
-#include <QTextCodec>
 
 extern std::unique_ptr<Options> gOptions;
 
@@ -387,19 +387,13 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     {
         mVarCodec = inVarCodec;
         insertCodec(i18n("Unicode, 8 bit"), "UTF-8");
-        insertCodec(i18n("Unicode"), "iso-10646-UCS-2");
         insertCodec(i18n("Latin1"), "iso 8859-1");
 
-        const QList<qint32> mibs = QTextCodec::availableMibs();
-        QList<QByteArray> names;
-        for(const qint32 mib: mibs)
-        {
-            names.append(QTextCodec::codecForMib(mib)->name());
-        }
+        QStringList names = Utils::availableCodecs();
 
-        for(const QByteArray& name: names)
+        for(const QString& name: names)
         {
-            insertCodec("", name);
+            insertCodec("", name.toLatin1());
         }
 
         setToolTip(i18nc("Tool Tip",
@@ -1319,7 +1313,7 @@ void OptionDialog::setupRegionalPage()
         "Disable this if different individual settings are needed."));
     ++line;
 
-    label = new QLabel(i18n("Note: Local Encoding is \"%1\"", QLatin1String(QTextCodec::codecForLocale()->name())), page);
+    label = new QLabel(i18n("Note: Local Encoding is \"%1\"", QLatin1String(QStringDecoder::nameForEncoding(QStringDecoder::System))), page);
     gbox->addWidget(label, line, 0);
     ++line;
 

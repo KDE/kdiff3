@@ -51,7 +51,6 @@ Optimizations: Skip unneeded steps.
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
-#include <QTextCodec>
 
 extern std::unique_ptr<Options> gOptions;
 
@@ -143,7 +142,8 @@ void SourceData::setData(const QString& data)
         m_tempInputFileName = m_tempFile.fileName();
     }
     m_fileAccess = FileAccess(m_tempInputFileName);
-    QByteArray ba = QTextCodec::codecForName("UTF-8")->fromUnicode(data);
+    auto fromString = QStringEncoder(QStringEncoder::Utf8);
+    QByteArray ba = fromString(data);
     bool bSuccess = m_fileAccess.writeFile(ba.constData(), ba.length());
     if(!bSuccess)
     {
@@ -773,13 +773,15 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
         if(encodingEnd >= 0) // e.g.: <meta charset="utf-8"> or <?xml version="1.0" encoding="ISO-8859-1"?>
         {
             QByteArray encoding = s.mid(apostrophPos + 1, encodingEnd - (apostrophPos + 1));
-            if(QTextCodec::codecForName(encoding))
+            QStringDecoder decoder = QStringDecoder(encoding);
+            if(decoder.isValid())
                 return encoding.toUpper();
         }
         else // e.g.: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         {
             QByteArray encoding = s.mid(encodingPos + encodingTag.length(), apostrophPos - (encodingPos + encodingTag.length()));
-            if(QTextCodec::codecForName(encoding))
+            QStringDecoder decoder = QStringDecoder(encoding);
+            if(decoder.isValid())
                 return encoding.toUpper();
         }
     }
@@ -855,13 +857,11 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
 
 std::optional<const QByteArray> SourceData::detectUTF8(const QByteArray& data)
 {
-    QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
+    QStringDecoder decoder = QStringDecoder(QStringDecoder::Utf8);
+    QString s = decoder(data);
 
-    QTextCodec::ConverterState state;
-    utf8->toUnicode(data.constData(), SafeInt<qint32>(data.size()), &state);
-
-    if(state.invalidChars == 0)
-        for (qint32 i = 0; i < data.size()-state.remainingChars; i++)
+    if(!decoder.hasError())
+        for (qint32 i = 0; i < data.size(); i++)
             if ((unsigned)data.at(i) > 127)
                 return "UTF-8";
 

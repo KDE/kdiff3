@@ -14,7 +14,7 @@
 #include <QByteArray>
 #include <QDataStream>
 #include <QString>
-#include <QTextDecoder>
+#include <QStringDecoder>
 
 class EncodedDataStream: public QDataStream
 {
@@ -39,7 +39,7 @@ class EncodedDataStream: public QDataStream
         }
         else
         {
-            mGenerateBOM = inEncoding != "UTF-16" && inEncoding != "UTF-32";;
+            mGenerateBOM = inEncoding != "UTF-16" && inEncoding != "UTF-32";
             mEncoding = inEncoding;
         }
     };
@@ -54,7 +54,7 @@ class EncodedDataStream: public QDataStream
         }
         else
         {
-            mGenerateBOM =  inEncoding != "UTF-16" && inEncoding != "UTF-32";;
+            mGenerateBOM =  inEncoding != "UTF-16" && inEncoding != "UTF-32";
             mEncoding = inEncoding;
         }
     };
@@ -62,17 +62,26 @@ class EncodedDataStream: public QDataStream
     inline qint32 readChar(QChar& c)
     {
         char curByte;
-        qint32 len = 0;
+        qint32 len = 0, nullCount = 0;
         QString s;
-        QTextDecoder decoder = QTextDecoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
+        QStringDecoder decoder = QStringDecoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
+        assert(decoder.isValid());
+        if(!decoder.isValid()) return 0;
 
         do
         {
             len += readRawData(&curByte, 1);
-            s = decoder.toUnicode(&curByte, 1);
-        } while(!decoder.hasFailure() && decoder.needsMoreData() && !atEnd());
+            //Work around a bug in QStringDecoder when handling null bytes
+            if(curByte == QChar::Null) ++nullCount;
+            else nullCount = 0;
 
-        mError = decoder.hasFailure();
+            s = decoder(QByteArray(sizeof(curByte), curByte));
+        } while(!decoder.hasError() && s.isEmpty() && !atEnd() && nullCount < 4);
+
+        mError = decoder.hasError();
+        if(nullCount != 0)
+            c = QChar::Null;
+
         if(!mError)
             c = s[0];
         else
@@ -83,9 +92,10 @@ class EncodedDataStream: public QDataStream
 
     EncodedDataStream &operator<<(const QString &s)
     {
-        QTextEncoder encoder(QTextCodec::codecForName(mEncoding), mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
-        QByteArray data = encoder.fromUnicode(s);
-        mError = encoder.hasFailure();
+        QStringEncoder encoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
+        QByteArray data = encoder(s);
+        assert(encoder.isValid());
+        mError = encoder.hasError();
 
         return *this << data;
     };

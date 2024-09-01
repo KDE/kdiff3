@@ -82,8 +82,6 @@ find_package(
     Core5Compat
 )
 
-set(COMPATLIB Qt6::Core5Compat)
-
 find_package(
     KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION}
     REQUIRED

@@ -15,7 +15,6 @@
 
 #include <QTemporaryFile>
 #include <QTest>
-#include <QTextCodec>
 
 std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
@@ -125,15 +124,15 @@ class DataReadTest: public QObject
 
         QVERIFY(simData.getLineEndStyle() == eLineEndStyleDos);
 
-        QTextCodec *codec = QTextCodec::codecForName("UTF-16");
+        QStringEncoder encoder = QStringEncoder("UTF-16");
         testFile.resize(0);
 
         testFile.open();
-        testFile.write(codec->fromUnicode(u8"\r\n\r\n7\r\n"));
+        testFile.write(encoder(u8"\r\n\r\n7\r\n"));
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec->name(), true);
+        simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -142,26 +141,26 @@ class DataReadTest: public QObject
 
         testFile.resize(0);
         testFile.open();
-        testFile.write(codec->fromUnicode(u8"\n\n7\n"));
+        testFile.write(encoder(u8"\n\n7\n"));
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec->name(), true);
+        simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleUnix);
 
-        codec = QTextCodec::codecForName("UTF-16LE");
+        encoder = QStringEncoder("UTF-16LE");
         testFile.resize(0);
 
         testFile.open();
-        testFile.write(codec->fromUnicode(u8"\r\n\r\n7\r\n"));
+        testFile.write(encoder(u8"\r\n\r\n7\r\n"));
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec->name(), true);
+        simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -171,26 +170,26 @@ class DataReadTest: public QObject
         testFile.resize(0);
 
         testFile.open();
-        testFile.write(codec->fromUnicode(u8"\n\n7\n"));
+        testFile.write(encoder(u8"\n\n7\n"));
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec->name(), true);
+        simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleUnix);
 
-        codec = QTextCodec::codecForName("UTF-16BE");
+        encoder = QStringEncoder("UTF-16BE");
         testFile.resize(0);
 
         testFile.open();
-        testFile.write(codec->fromUnicode(u8"\r\n\r\n7\r\n"));
+        testFile.write(encoder(u8"\r\n\r\n7\r\n"));
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec->name(), true);
+        simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
@@ -200,11 +199,11 @@ class DataReadTest: public QObject
         testFile.resize(0);
 
         testFile.open();
-        testFile.write(codec->fromUnicode(u8"\n\n7\n"));
+        testFile.write(encoder(u8"\n\n7\n"));
         testFile.close();
 
         simData.setFilename(testFile.fileName());
-        simData.readAndPreprocess(codec->name(), true);
+        simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());

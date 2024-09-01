@@ -48,7 +48,6 @@
 #include <QRunnable>
 #include <QScrollBar>
 #include <QStatusBar>
-#include <QTextCodec>
 #include <QTextLayout>
 #include <QThread>
 #include <QtMath>
@@ -2134,21 +2133,12 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
 
         const QByteArray& currentTextCodec = m_pSourceData->getEncoding(); // the codec that will be checked in the context menu
 
-        const QList<int> mibs = QTextCodec::availableMibs();
-        QList<QByteArray> names;
+        const QStringList names= Utils::availableCodecs();
         QList<QByteArray> codecNameList;
-        for(const qint32 mib: mibs)
-        {
-            names.append(QTextCodec::codecForMib(mib)->name());
-        }
-
         // Adding "main" encodings
         insertCodec(i18n("Unicode, 8 bit"), "UTF-8", codecNameList, m_pContextEncodingMenu, currentTextCodec);
         insertCodec(i18n("Unicode, 8 bit (BOM)"), "UTF-8-BOM", codecNameList, m_pContextEncodingMenu, currentTextCodec);
-        if(QTextCodec::codecForName("System"))
-        {
-            insertCodec(QString(), "System", codecNameList, m_pContextEncodingMenu, currentTextCodec);
-        }
+        insertCodec(i18n("System"), QStringConverter::nameForEncoding(QStringConverter::System), codecNameList, m_pContextEncodingMenu, currentTextCodec);
 
         // Adding recent encodings
         if(gOptions != nullptr)
@@ -2161,9 +2151,9 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         }
         // Submenu to add the rest of available encodings
         pContextEncodingSubMenu->setTitle(i18n("Other"));
-        for(const QByteArray& name: names)
+        for(const QString& name: names)
         {
-            insertCodec("", name, codecNameList, pContextEncodingSubMenu, currentTextCodec);
+            insertCodec("", name.toLatin1(), codecNameList, pContextEncodingSubMenu, currentTextCodec);
         }
 
         m_pContextEncodingMenu->addMenu(pContextEncodingSubMenu);

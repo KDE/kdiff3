@@ -9,8 +9,6 @@ find_package(
     Core5Compat
 )
 
-set(COMPATLIB Qt6::Core5Compat)
-
 add_definitions(-DAUTOTEST)
 
 ecm_add_test(connectiontest.cpp
@@ -50,12 +48,12 @@ ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Uti
 
 ecm_add_test(datareadtest.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "datareadtest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets ${COMPATLIB} KF${KF_MAJOR_VERSION}::ConfigCore
+    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
 )
 
 ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
     TEST_NAME "difftest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets ${COMPATLIB} KF${KF_MAJOR_VERSION}::ConfigCore
+    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets  KF${KF_MAJOR_VERSION}::ConfigCore
 )
 
 ecm_add_test(Diff3LineTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp

@@ -13,6 +13,8 @@
 #include "fileaccess.h"
 #include "TypeUtils.h"
 
+#include <set>
+
 #include <QString>
 #include <QStringList>
 #include <QHash>
@@ -182,4 +184,20 @@ QString Utils::urlToString(const QUrl &url)
 
     return result;
 }
-
+/*
+    QStringConverter::availableCodecs() returns codecs that are from our perspective duplicates or
+    are specialized single purpose codecs. Additionally Qt un-helpfully adds "Locale" to the list.
+    A part of this the nature of how ICU handles coniguration for codecs.
+*/
+QStringList Utils::availableCodecs()
+{
+    const std::set<QString> ignored = { "Adobe-Standard-Encoding", "IMAP-mailbox-name", "x11-compound-text","UTF-7", "Locale" };
+    const QRegularExpression regExp(",|_");
+    QStringList result = QStringConverter::availableCodecs();
+    regExp.optimize();
+    auto filter = [&regExp, &ignored](const QString& name) {
+        return name.contains(regExp) || ignored.find(name) != ignored.cend();
+    };
+    result.erase(std::remove_if(result.begin(), result.end(), filter), result.end());
+    return result;
+}

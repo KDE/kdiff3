@@ -21,7 +21,6 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QString>
-#include <QTextCodec>
 
 #include <KLocalizedString>
 
@@ -177,7 +176,7 @@ class OptionCodec : public OptionString
     [[nodiscard]] qint32 getDefaultIndex() const { return defaultIndex; }
 
   private:
-    const QString mDefaultName = QLatin1String(QTextCodec::codecForLocale()->name());
+    const QString mDefaultName = QLatin1String(QStringDecoder::nameForEncoding(QStringDecoder::System));
     qint32 defaultIndex = 0;
     Q_DISABLE_COPY(OptionCodec)
 };
