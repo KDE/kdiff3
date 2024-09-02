@@ -4,7 +4,7 @@
   SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "fileaccess.h"
+#include "../src/fileaccess.h"
 
 #include <QString>
 

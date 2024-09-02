@@ -3,12 +3,11 @@
   SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
   SPDX-License-Identifier: GPL-2.0-or-later
 */
-#include "diff.h"
-#include "gnudiff_diff.h"
-#include "LineRef.h"
-#include "options.h"
-#include "progress.h"
-#include "SourceData.h"
+#include "../src/diff.h"
+#include "../src/gnudiff_diff.h"
+#include "../src/LineRef.h"
+#include "../src/options.h"
+#include "../src/SourceData.h"
 
 #include <iostream>
 #include <memory>
@@ -16,11 +15,12 @@
 
 #include <QDirIterator>
 #include <QRegularExpression>
-#include <QTextCodec>
 #include <QTextStream>
 
 
 #define i18n(s) s
+
+using Qt::endl;
 
 bool verbose = false;
 std::unique_ptr<Options> gOptions = nullptr;
@@ -252,11 +252,11 @@ bool dataIsConsistent(LineRef line1, QString &line1Text, LineRef line2, QString 
    return consistent;
 }
 
-bool runTest(QString file1, QString file2, QString file3, QString expectedResultFile, QString actualResultFile, int maxLength)
+bool runTest(QString file1, QString file2, QString file3, QString expectedResultFile, QString actualResultFile, qsizetype maxLength)
 {
-   gOptions = std::make_unique < Options();
+   gOptions = std::make_unique <Options>();
    Diff3LineList actualDiff3LineList, expectedDiff3LineList;
-   QTextCodec *p_codec = QTextCodec::codecForName("UTF-8");
+   QByteArray encoding="UTF-8";
    QTextStream out(stdout);
 
    gOptions->m_bIgnoreCase = false;
@@ -275,13 +275,13 @@ bool runTest(QString file1, QString file2, QString file3, QString expectedResult
    out.flush();
 
    m_sd1.setFilename(file1);
-   m_sd1.readAndPreprocess(p_codec, false);
+   m_sd1.readAndPreprocess(encoding, false);
 
    m_sd2.setFilename(file2);
-   m_sd2.readAndPreprocess(p_codec, false);
+   m_sd2.readAndPreprocess(encoding, false);
 
    m_sd3.setFilename(file3);
-   m_sd3.readAndPreprocess(p_codec, false);
+   m_sd3.readAndPreprocess(encoding, false);
 
    determineFileAlignment(m_sd1, m_sd2, m_sd3, actualDiff3LineList);
 
@@ -440,7 +440,7 @@ QStringList gettestdatafiles(QString testdir)
 int main(int argc, char *argv[])
 {
    bool allOk = true;
-   int maxLength = 0;
+   qsizetype maxLength = 0;
    QTextStream out(stdout);
    QDir testdatadir("testdata");
 
@@ -453,9 +453,9 @@ int main(int argc, char *argv[])
    QStringList baseFiles = gettestdatafiles("testdata");
    QListIterator<QString> it(baseFiles);
 
-   for (int i = 0; i < baseFiles.size(); i++)
+   for (qsizetype i = 0; i < baseFiles.size(); i++)
    {
-      maxLength = std::max(baseFiles.at(i).length(), maxLength);
+      maxLength = std::max<qsizetype>(baseFiles.at(i).length(), maxLength);
    }
    maxLength += testdatadir.path().length() + 1;
 
