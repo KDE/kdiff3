@@ -6,7 +6,7 @@
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
-project(kdiff3 VERSION 1.11.2)
+project(kdiff3 VERSION 1.11.3)
 
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
