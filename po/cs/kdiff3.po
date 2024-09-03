@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-19 00:41+0000\n"
+"POT-Creation-Date: 2024-09-03 00:41+0000\n"
 "PO-Revision-Date: 2024-01-19 15:54+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -109,82 +109,87 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Závažná interní chyba"
 
-#: difftextwindow.cpp:633
+#: difftextwindow.cpp:632
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Soubor %1: Řádek %2"
 
-#: difftextwindow.cpp:635
+#: difftextwindow.cpp:634
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Soubor %1: Řádek není dostupný"
 
-#: difftextwindow.cpp:1967
+#: difftextwindow.cpp:1966
 #, kde-format
 msgid "Encoding:"
 msgstr "Kódování:"
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:795
+#: difftextwindow.cpp:1970 mergeresultwindow.cpp:2803 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "Styl konce řádku:"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1995
 #, kde-format
 msgid "A (Base)"
 msgstr "A (základní)"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kódování: %1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2848
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:1998
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Styl konce řádku: %1"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:1999
 #, kde-format
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: difftextwindow.cpp:2028 kdiff3.cpp:1067
+#: difftextwindow.cpp:2027 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "Horní řádek"
 
-#: difftextwindow.cpp:2038
+#: difftextwindow.cpp:2037
 #, kde-format
 msgid "End"
 msgstr "Konec"
 
-#: difftextwindow.cpp:2094 smalldialogs.cpp:163
+#: difftextwindow.cpp:2093 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Otevřít soubor"
 
-#: difftextwindow.cpp:2146 optiondialog.cpp:389
+#: difftextwindow.cpp:2139 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2147
+#: difftextwindow.cpp:2140
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2163
+#: difftextwindow.cpp:2141
+#, kde-format
+msgid "System"
+msgstr ""
+
+#: difftextwindow.cpp:2153
 #, kde-format
 msgid "Other"
 msgstr "Jiné"
@@ -361,7 +366,7 @@ msgstr ""
 "prohledat složku?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
+#: mergeresultwindow.cpp:314 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1884,58 +1889,58 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Porovnávám soubory..."
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:144
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "Všude zvolit A"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "Všude zvolit B"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "Všude zvolit C"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "Zvolit A pro všechny nevyřešené konflikty"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "Zvolit B pro všechny nevyřešené konflikty"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "Zvolit C pro všechny nevyřešené konflikty"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "Zvolit A pro všechny nevyřešené konflikty s mezerami"
 
-#: mergeresultwindow.cpp:152
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "Zvolit B pro všechny nevyřešené konflikty s mezerami"
 
-#: mergeresultwindow.cpp:153
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Zvolit C pro všechny nevyřešené konflikty s mezerami"
 
-#: mergeresultwindow.cpp:249
+#: mergeresultwindow.cpp:248
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Počet zbývajících nevyřešených konfliktů: %1 (z nichž počet mezer je %2)"
 
-#: mergeresultwindow.cpp:313
+#: mergeresultwindow.cpp:312
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -1944,29 +1949,29 @@ msgstr ""
 "Výstup byl pozměněn.\n"
 "Pokud budete pokračovat, vaše změny budou ztraceny."
 
-#: mergeresultwindow.cpp:757 pdiff.cpp:607
+#: mergeresultwindow.cpp:756 pdiff.cpp:607
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Všechny vstupní soubory jsou binárně shodné."
 
-#: mergeresultwindow.cpp:759
+#: mergeresultwindow.cpp:758
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Všechny vstupní soubory obsahují shodný text."
 
-#: mergeresultwindow.cpp:763 mergeresultwindow.cpp:767
-#: mergeresultwindow.cpp:771 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
+#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:770 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Soubor %1 a %2 je binárně shodný.\n"
 
-#: mergeresultwindow.cpp:765 mergeresultwindow.cpp:769
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:764 mergeresultwindow.cpp:768
+#: mergeresultwindow.cpp:772
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Soubory %1 a %2 mají shodný text.\n"
 
-#: mergeresultwindow.cpp:777
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1979,27 +1984,27 @@ msgstr ""
 "Počet nevyřešených konfliktů: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:782
 #, kde-format
 msgid "Conflicts"
 msgstr "Konflikty"
 
-#: mergeresultwindow.cpp:1524
+#: mergeresultwindow.cpp:1523
 #, kde-format
 msgid "<No src line>"
 msgstr "<Žádný řádek ve frontě>"
 
-#: mergeresultwindow.cpp:1532
+#: mergeresultwindow.cpp:1531
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Konflikt sloučení (pouze mezery)>"
 
-#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2406
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Konflikt sloučení>"
 
-#: mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2628
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2008,13 +2013,13 @@ msgstr ""
 "Všechny konflikty nejsou vyřešeny.\n"
 "Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
+#: mergeresultwindow.cpp:2630 mergeresultwindow.cpp:2639
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Zbývající konflikty"
 
-#: mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2637
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2024,7 +2029,7 @@ msgstr ""
 "Konflikt druhu konce řádku. Zvolte prosím druh konce řádku ručně.\n"
 "Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2651
 #, kde-format
 msgid ""
 "\n"
@@ -2035,47 +2040,47 @@ msgstr ""
 "\n"
 "Vytvoření zálohy selhalo. Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2651 mergeresultwindow.cpp:2695
 #, kde-format
 msgid "File Save Error"
 msgstr "Chyba ukládání souboru"
 
-#: mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid "Error while writing."
 msgstr "Chyba při zápisu."
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2775
 #, kde-format
 msgid "Output:"
 msgstr "Výstup:"
 
-#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2979
+#: mergeresultwindow.cpp:2788 mergeresultwindow.cpp:2971
 #, kde-format
 msgid "[Modified]"
 msgstr "[Pozměněno]"
 
-#: mergeresultwindow.cpp:2796
+#: mergeresultwindow.cpp:2795
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kódování pro uložení:"
 
-#: mergeresultwindow.cpp:2896
+#: mergeresultwindow.cpp:2895
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2926
+#: mergeresultwindow.cpp:2918
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodek od A: %1"
 
-#: mergeresultwindow.cpp:2928
+#: mergeresultwindow.cpp:2920
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodek od B: %1"
 
-#: mergeresultwindow.cpp:2930
+#: mergeresultwindow.cpp:2922
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodek od C: %1"
@@ -2155,123 +2160,118 @@ msgstr ""
 
 #: optiondialog.cpp:390
 #, kde-format
-msgid "Unicode"
-msgstr "Unicode"
-
-#: optiondialog.cpp:391
-#, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:406
+#: optiondialog.cpp:400
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr ""
 "Pokud nejsou jiné než ASCII znaky správně zobrazeny, změňte tuto hodnotu."
 
-#: optiondialog.cpp:490
+#: optiondialog.cpp:484
 #, kde-format
 msgid "Configure"
 msgstr "Nastavit"
 
-#: optiondialog.cpp:529
+#: optiondialog.cpp:523
 #, kde-format
 msgid "Font"
 msgstr "Písmo"
 
-#: optiondialog.cpp:531
+#: optiondialog.cpp:525
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Výstupní písmo editoru & porovnávání"
 
-#: optiondialog.cpp:549
+#: optiondialog.cpp:543
 #, kde-format
 msgid "Application font"
 msgstr "Písmo aplikace"
 
-#: optiondialog.cpp:554
+#: optiondialog.cpp:548
 #, kde-format
 msgid "File view font"
 msgstr "Písmo pro prohlížení souborů"
 
-#: optiondialog.cpp:573
+#: optiondialog.cpp:567
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Barva"
 
-#: optiondialog.cpp:574
+#: optiondialog.cpp:568
 #, kde-format
 msgid "Colors Settings"
 msgstr "Nastavení barev"
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:593
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Zobrazení editoru a porovnávání:"
 
-#: optiondialog.cpp:607
+#: optiondialog.cpp:601
 #, kde-format
 msgid "Foreground color:"
 msgstr "Barva popředí:"
 
-#: optiondialog.cpp:615
+#: optiondialog.cpp:609
 #, kde-format
 msgid "Background color:"
 msgstr "Barva pozadí:"
 
-#: optiondialog.cpp:625
+#: optiondialog.cpp:619
 #, kde-format
 msgid "Diff background color:"
 msgstr "Barva pozadí rozdílů:"
 
-#: optiondialog.cpp:634
+#: optiondialog.cpp:628
 #, kde-format
 msgid "Color A:"
 msgstr "Barva A:"
 
-#: optiondialog.cpp:643
+#: optiondialog.cpp:637
 #, kde-format
 msgid "Color B:"
 msgstr "Barva B:"
 
-#: optiondialog.cpp:652
+#: optiondialog.cpp:646
 #, kde-format
 msgid "Color C:"
 msgstr "Barva C:"
 
-#: optiondialog.cpp:660
+#: optiondialog.cpp:654
 #, kde-format
 msgid "Conflict color:"
 msgstr "Barva konfliktů:"
 
-#: optiondialog.cpp:669
+#: optiondialog.cpp:663
 #, kde-format
 msgid "Current range background color:"
 msgstr "Barva pozadí rozdílů v aktuální oblasti:"
 
-#: optiondialog.cpp:678
+#: optiondialog.cpp:672
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Barva pozadí aktuální oblasti:"
 
-#: optiondialog.cpp:686
+#: optiondialog.cpp:680
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Barva pro ručně upravené rozdíly oblasti:"
 
-#: optiondialog.cpp:693
+#: optiondialog.cpp:687
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "Pohle na porovnávání složek:"
 
-#: optiondialog.cpp:699
+#: optiondialog.cpp:693
 #, kde-format
 msgid "Newest file color:"
 msgstr "Barva nejnovějšího souboru:"
 
-#: optiondialog.cpp:704
+#: optiondialog.cpp:698
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
@@ -2279,37 +2279,37 @@ msgid ""
 msgstr ""
 "Změna této barvy je účinná pouze při spuštění porovnávání následující složky."
 
-#: optiondialog.cpp:709
+#: optiondialog.cpp:703
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Barva nejstaršího souboru:"
 
-#: optiondialog.cpp:718
+#: optiondialog.cpp:712
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Barva středně starého souboru:"
 
-#: optiondialog.cpp:727
+#: optiondialog.cpp:721
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Barva chybějících souborů:"
 
-#: optiondialog.cpp:741
+#: optiondialog.cpp:735
 #, kde-format
 msgid "Editor"
 msgstr "Editor"
 
-#: optiondialog.cpp:742
+#: optiondialog.cpp:736
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Chování editoru"
 
-#: optiondialog.cpp:764
+#: optiondialog.cpp:758
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "Tabulátor vloží mezery"
 
-#: optiondialog.cpp:768
+#: optiondialog.cpp:762
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2319,28 +2319,28 @@ msgstr ""
 "Vyp: Stisknutí tabulátoru vygeneruje příslušný počet míst.\n"
 "Vyp: Bude vložen znak tabulátoru."
 
-#: optiondialog.cpp:773
+#: optiondialog.cpp:767
 #, kde-format
 msgid "Tab size:"
 msgstr "Velikost tabulátoru:"
 
-#: optiondialog.cpp:780
+#: optiondialog.cpp:774
 #, kde-format
 msgid "Auto indentation"
 msgstr "Automaticky odsadit"
 
-#: optiondialog.cpp:784
+#: optiondialog.cpp:778
 #, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "Zap: Odsazení z předchozího řádku bude použito pro nový řádek.\n"
 
-#: optiondialog.cpp:787
+#: optiondialog.cpp:781
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Automaticky zkopírovat výběr"
 
-#: optiondialog.cpp:791
+#: optiondialog.cpp:785
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2350,25 +2350,25 @@ msgstr ""
 "Zap: Celý výběr je ihned vložen do schránky.\n"
 "Vyp: Musíte explicitně zkopírovat např.: pomocí Ctrl-C."
 
-#: optiondialog.cpp:801
+#: optiondialog.cpp:795
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:802
+#: optiondialog.cpp:796
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "Dos/Windows"
 
-#: optiondialog.cpp:803
+#: optiondialog.cpp:797
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Automaticky detekovat"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:800
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2378,22 +2378,22 @@ msgstr ""
 "Zvolte kódování konce řádku při uložení editovaného souboru.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
 
-#: optiondialog.cpp:816
+#: optiondialog.cpp:810
 #, kde-format
 msgid "Diff"
 msgstr "Porovnávání"
 
-#: optiondialog.cpp:817
+#: optiondialog.cpp:811
 #, kde-format
 msgid "Diff Settings"
 msgstr "Nastavení porovnávání"
 
-#: optiondialog.cpp:840
+#: optiondialog.cpp:834
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "Ignorovat čísla (zacházet jako s prázdným místem)"
 
-#: optiondialog.cpp:844
+#: optiondialog.cpp:838
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2405,23 +2405,23 @@ msgstr ""
 "Ignorovat prázdná místa.)\n"
 "Může pomoci porovnávat soubory s číselnými znaky."
 
-#: optiondialog.cpp:848
+#: optiondialog.cpp:842
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "Ignorovat komentáře C-C++ (zacházet jako s prázdným místem)"
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:845
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "Považuje komentáře C/C++ za prázdné místo."
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:848
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "Ignorovat velikost písmen (zacházet jako s prázdným místem)"
 
-#: optiondialog.cpp:858
+#: optiondialog.cpp:852
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
@@ -2429,12 +2429,12 @@ msgstr ""
 "Nakládá s rozdíly malých a VELKÝCH písmen jako se změnami prázdných míst. "
 "('a'<=>'A')"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:855
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Příkaz předběžného zpracování:"
 
-#: optiondialog.cpp:866
+#: optiondialog.cpp:860
 #, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
@@ -2442,12 +2442,12 @@ msgstr ""
 "Uživatelsky nastavené předběžné zpracování. (Podrobnosti získáte v "
 "dokumentaci.)"
 
-#: optiondialog.cpp:869
+#: optiondialog.cpp:863
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Příkaz předběžného zpracování shody řádku:"
 
-#: optiondialog.cpp:874
+#: optiondialog.cpp:868
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2457,12 +2457,12 @@ msgstr ""
 "Toto předběžné zpracování je použito pouze při shodě řádku.\n"
 "(Podrobnosti získáte v dokumentaci.)"
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:871
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "Důkladné hledání (pomalejší)"
 
-#: optiondialog.cpp:881
+#: optiondialog.cpp:875
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2472,12 +2472,12 @@ msgstr ""
 "Pro externí porovnávání přidá parametr --minimal.\n"
 "Analýza velkých souborů bude mnohem pomalejší."
 
-#: optiondialog.cpp:885
+#: optiondialog.cpp:879
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "Přizpůsobit B a C pro 3 vstupní soubory"
 
-#: optiondialog.cpp:889
+#: optiondialog.cpp:883
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2491,23 +2491,23 @@ msgstr ""
 "komplikací.\n"
 "(Výchozí ve vypnuto.)"
 
-#: optiondialog.cpp:900
+#: optiondialog.cpp:894
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Sloučení"
 
-#: optiondialog.cpp:901
+#: optiondialog.cpp:895
 #, kde-format
 msgid "Merge Settings"
 msgstr "Nastavení sloučení"
 
-#: optiondialog.cpp:924
+#: optiondialog.cpp:918
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Zpoždění pro automatický posun:"
 
-#: optiondialog.cpp:930
+#: optiondialog.cpp:924
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2517,28 +2517,28 @@ msgstr ""
 "V režimu automatického posunu bude před přechodem na následující konflikt \n"
 "zobrazen aktuální výběr po zadaný počet sekund. Rozsah: 0-2000ms"
 
-#: optiondialog.cpp:934
+#: optiondialog.cpp:928
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Zobrazit informační dialogy"
 
-#: optiondialog.cpp:937
+#: optiondialog.cpp:931
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "Zobrazí dialog s informacemi o počtu konfliktů."
 
-#: optiondialog.cpp:940
+#: optiondialog.cpp:934
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Výchozí (hodnota) pro mezery při sloučení dvou souborů:"
 
-#: optiondialog.cpp:945 optiondialog.cpp:958
+#: optiondialog.cpp:939 optiondialog.cpp:952
 #, kde-format
 msgid "Manual Choice"
 msgstr "Zvolit ručně"
 
-#: optiondialog.cpp:949 optiondialog.cpp:963
+#: optiondialog.cpp:943 optiondialog.cpp:957
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2548,27 +2548,27 @@ msgstr ""
 "Umožní slučovacímu algoritmu automaticky zvolit vstup pouze pro změny "
 "prázdných míst."
 
-#: optiondialog.cpp:953
+#: optiondialog.cpp:947
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Výchozí (hodnota) pro mezery při sloučení třech souborů:"
 
-#: optiondialog.cpp:967
+#: optiondialog.cpp:961
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Automatické sloučení regulárních výrazů"
 
-#: optiondialog.cpp:975 smalldialogs.cpp:372
+#: optiondialog.cpp:969 smalldialogs.cpp:372
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Automaticky sloučit regulární výraz:"
 
-#: optiondialog.cpp:983
+#: optiondialog.cpp:977
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "Spustit regulární výraz automatického sloučení při spuštění sloučení"
 
-#: optiondialog.cpp:986
+#: optiondialog.cpp:980
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2578,71 +2578,71 @@ msgstr ""
 "Spustí automatické sloučení regulárních výrazů\n"
 "ihned při spuštění sloučení.\n"
 
-#: optiondialog.cpp:991
+#: optiondialog.cpp:985
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Sloučení historie správy verzí"
 
-#: optiondialog.cpp:999 smalldialogs.cpp:399
+#: optiondialog.cpp:993 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Historie spuštění regulárních výrazů:"
 
-#: optiondialog.cpp:1007 smalldialogs.cpp:427
+#: optiondialog.cpp:1001 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Regulární výraz pro záznamy historie spouštění:"
 
-#: optiondialog.cpp:1023
+#: optiondialog.cpp:1017
 #, kde-format
 msgid "History merge sorting"
 msgstr "Seřadit historii sloučení"
 
-#: optiondialog.cpp:1026
+#: optiondialog.cpp:1020
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "Seřadit historii správy verzí podle klíče."
 
-#: optiondialog.cpp:1036
+#: optiondialog.cpp:1030
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "Klíč k setřídění záznamů historie spuštění:"
 
-#: optiondialog.cpp:1046
+#: optiondialog.cpp:1040
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "Při spuštění sloučení sloučit historii správy verzí"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1043
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr ""
 "Při spuštění sloučení spustí automatické sloučení historie správy verzí."
 
-#: optiondialog.cpp:1053
+#: optiondialog.cpp:1047
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Maximální počet záznamů historie:"
 
-#: optiondialog.cpp:1057
+#: optiondialog.cpp:1051
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr "Po zadaném čísle odstřihnout. Číslo -1 znamená nekonečno položek."
 
-#: optiondialog.cpp:1061
+#: optiondialog.cpp:1055
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Vyzkoušet vaše regulární výrazy"
 
-#: optiondialog.cpp:1066
+#: optiondialog.cpp:1060
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Příkaz při irelevantním sloučení:"
 
-#: optiondialog.cpp:1071
+#: optiondialog.cpp:1065
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2654,12 +2654,12 @@ msgstr ""
 "pokud nebudou zjištěny další relevantní změny.\n"
 "Voláno s parametry: NázevSouboru1 NázevSouboru3 NázevSouboru3"
 
-#: optiondialog.cpp:1076
+#: optiondialog.cpp:1070
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "Automaticky uložit a ukončit při sloučení bez konfliktů"
 
-#: optiondialog.cpp:1080
+#: optiondialog.cpp:1074
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2673,29 +2673,29 @@ msgstr ""
 "automatické.\n"
 "(Podobně jako volba příkazového řádku \"--auto\".)"
 
-#: optiondialog.cpp:1091 optiondialog.cpp:1092
+#: optiondialog.cpp:1085 optiondialog.cpp:1086
 #, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "Složka"
 
-#: optiondialog.cpp:1112
+#: optiondialog.cpp:1106
 #, kde-format
 msgid "Recursive folders"
 msgstr "Rekurzivně prohledávat složky"
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1109
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "Zda analyzovat podsložky nebo nikoliv."
 
-#: optiondialog.cpp:1117
+#: optiondialog.cpp:1111
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Maska souborů:"
 
-#: optiondialog.cpp:1123
+#: optiondialog.cpp:1117
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2707,12 +2707,12 @@ msgstr ""
 "Zástupné znaky: '*' a '?'\n"
 " Více šablon lze zadat při použití oddělovače: ';'"
 
-#: optiondialog.cpp:1128
+#: optiondialog.cpp:1122
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Anti-maska souborů:"
 
-#: optiondialog.cpp:1134
+#: optiondialog.cpp:1128
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2724,12 +2724,12 @@ msgstr ""
 "Zástupné znaky: '*' a '?'\n"
 " Více šablon lze zadat při použití oddělovače: ';'"
 
-#: optiondialog.cpp:1139
+#: optiondialog.cpp:1133
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "Anti-maska složek:"
 
-#: optiondialog.cpp:1145
+#: optiondialog.cpp:1139
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2741,12 +2741,12 @@ msgstr ""
 "Zástupné znaky: '*' a '?'\n"
 "Více šablon lze zadat při použití oddělovače: ';'"
 
-#: optiondialog.cpp:1150
+#: optiondialog.cpp:1144
 #, kde-format
 msgid "Use Ignore File"
 msgstr "Použít soubor s ignoracemi"
 
-#: optiondialog.cpp:1154
+#: optiondialog.cpp:1148
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2757,23 +2757,23 @@ msgstr ""
 "Rozšiřuje antimasku na vše co by CVS ignoroval.\n"
 "Pomocí lokálních souborů s ignoracemi může být zvolena složka."
 
-#: optiondialog.cpp:1158
+#: optiondialog.cpp:1152
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "Najít skryté soubory a složky"
 
-#: optiondialog.cpp:1161
+#: optiondialog.cpp:1155
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "Prohledat skryté soubory a složky."
 
-#: optiondialog.cpp:1164
+#: optiondialog.cpp:1158
 #, kde-format
 msgid "Follow file links"
 msgstr "Sledovat odkazy souborů"
 
-#: optiondialog.cpp:1168
+#: optiondialog.cpp:1162
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2783,12 +2783,12 @@ msgstr ""
 "Zap: Porovná soubor na který odkaz ukazuje.\n"
 "Vyp: Porovná odkazy."
 
-#: optiondialog.cpp:1172
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Follow folder links"
 msgstr "Sledovat odkazy složek"
 
-#: optiondialog.cpp:1176
+#: optiondialog.cpp:1170
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2798,12 +2798,12 @@ msgstr ""
 "Zap: Porovná složku na kterou odkaz ukazuje.\n"
 "Vyp: Porovná odkazy."
 
-#: optiondialog.cpp:1185
+#: optiondialog.cpp:1179
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "Při porovnávání rozlišovat VELKÁ/malá písmena v názvu souboru"
 
-#: optiondialog.cpp:1189
+#: optiondialog.cpp:1183
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2816,12 +2816,12 @@ msgstr ""
 "Volbu nastavte, pokud se názvy musí shodovat. (Výchozí pro Windows je Vyp., "
 "v ostatních případech Zap.)"
 
-#: optiondialog.cpp:1193
+#: optiondialog.cpp:1187
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "Rozbalit při načtení všechny podsložky"
 
-#: optiondialog.cpp:1197
+#: optiondialog.cpp:1191
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2831,12 +2831,12 @@ msgstr ""
 "Zap: Rozbalit všechny podsložky při spuštění porovnání složek.\n"
 "Vyp.: Ponechat podsložky sbalené."
 
-#: optiondialog.cpp:1201
+#: optiondialog.cpp:1195
 #, kde-format
 msgid "Skip folder status report"
 msgstr "Přeskočit hlášení stavu složky"
 
-#: optiondialog.cpp:1205
+#: optiondialog.cpp:1199
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2846,28 +2846,28 @@ msgstr ""
 "Zap.: Nezobrazovat stav porovnání složky.\n"
 "Vyp.: Zobrazit stavový dialog při spuštění."
 
-#: optiondialog.cpp:1209
+#: optiondialog.cpp:1203
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Režim porovnávání souborů"
 
-#: optiondialog.cpp:1214
+#: optiondialog.cpp:1208
 #, kde-format
 msgid "Binary comparison"
 msgstr "Binární porovnávání"
 
-#: optiondialog.cpp:1216
+#: optiondialog.cpp:1210
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "Binárně porovnává každý soubor. (Výchozí)"
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1213
 #, kde-format
 msgid "Full analysis"
 msgstr "Důkladná analýza"
 
-#: optiondialog.cpp:1221
+#: optiondialog.cpp:1215
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2878,12 +2878,12 @@ msgstr ""
 "sloupcích.\n"
 "(Pomalejší než binární porovnávání, mnohem pomalejší pro binární soubory.)"
 
-#: optiondialog.cpp:1225
+#: optiondialog.cpp:1219
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Důvěřovat velikosti a datu změny (nejisté)"
 
-#: optiondialog.cpp:1227
+#: optiondialog.cpp:1221
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2899,7 +2899,7 @@ msgstr ""
 "rozdílné.\n"
 "Vhodné pro velké složky, nebo pomalé sítě."
 
-#: optiondialog.cpp:1232
+#: optiondialog.cpp:1226
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -2908,7 +2908,7 @@ msgstr ""
 "Důvěřovat velikosti a datu, ale pokud se datum neshoduje, porovnat binárně "
 "(nejisté)"
 
-#: optiondialog.cpp:1234
+#: optiondialog.cpp:1228
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2923,12 +2923,12 @@ msgstr ""
 "porovnávání.\n"
 "Vhodné pro velké složky, nebo pomalé sítě."
 
-#: optiondialog.cpp:1239
+#: optiondialog.cpp:1233
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Důvěřovat velikosti (nejisté)"
 
-#: optiondialog.cpp:1241
+#: optiondialog.cpp:1235
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2940,12 +2940,12 @@ msgstr ""
 "Vhodné pro velké složky, nebo pomalé sítě, pokud bude datum upraven při "
 "stahování."
 
-#: optiondialog.cpp:1248
+#: optiondialog.cpp:1242
 #, kde-format
 msgid "Synchronize folders"
 msgstr "Synchronizovat složky"
 
-#: optiondialog.cpp:1252
+#: optiondialog.cpp:1246
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2957,12 +2957,12 @@ msgstr ""
 "takže jsou potom obě složky stejné.\n"
 "Funguje pouze při porovnávání dvou složek bez určení cíle."
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1252
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Při rozdílech v mezerách pokládat za shodné"
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1256
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2972,12 +2972,12 @@ msgstr ""
 "Pokud se soubory liší pouze v mezerách, považují se za shodné.\n"
 "Aktivní pouze pokud je vybrána volba Důkladná analýza."
 
-#: optiondialog.cpp:1268
+#: optiondialog.cpp:1262
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Kopírovat novější namísto sloučení (nejisté)"
 
-#: optiondialog.cpp:1272
+#: optiondialog.cpp:1266
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2989,12 +2989,12 @@ msgstr ""
 "(Použít jen pokud víte co děláte.)\n"
 "Účinné pouze při porovnávání dvou složek."
 
-#: optiondialog.cpp:1277
+#: optiondialog.cpp:1271
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Zálohovat soubory (.orig)"
 
-#: optiondialog.cpp:1281
+#: optiondialog.cpp:1275
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3004,17 +3004,17 @@ msgstr ""
 "Pokud by byl soubor uložen přes starý soubor, pak bude původní soubor\n"
 "uložen s příponou '.orig' místo toho, aby byl smazán."
 
-#: optiondialog.cpp:1290 optiondialog.cpp:1291
+#: optiondialog.cpp:1284 optiondialog.cpp:1285
 #, kde-format
 msgid "Regional Settings"
 msgstr "Místní nastavení"
 
-#: optiondialog.cpp:1314
+#: optiondialog.cpp:1308
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "Použít stejné kódování pro všechny:"
 
-#: optiondialog.cpp:1318
+#: optiondialog.cpp:1312
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3025,17 +3025,17 @@ msgstr ""
 "prvního.\n"
 "Vypnout, pokud je požadováno rozdílné nastavení."
 
-#: optiondialog.cpp:1322
+#: optiondialog.cpp:1316
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Pozn.: Místní kódování je \"%1\""
 
-#: optiondialog.cpp:1326
+#: optiondialog.cpp:1320
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "Kódování souboru A:"
 
-#: optiondialog.cpp:1333
+#: optiondialog.cpp:1327
 #, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
@@ -3048,32 +3048,32 @@ msgstr ""
 "použito jako náhradní.\n"
 "(Detekce Unicode závisí na prvních bajtech souboru.)"
 
-#: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
+#: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
 #, kde-format
 msgid "Auto Detect"
 msgstr "Automatická detekce"
 
-#: optiondialog.cpp:1342
+#: optiondialog.cpp:1336
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "Kódování souboru B:"
 
-#: optiondialog.cpp:1353
+#: optiondialog.cpp:1347
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "Kódování souboru C:"
 
-#: optiondialog.cpp:1364
+#: optiondialog.cpp:1358
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Kódování souboru pro výstup sloučení a uložení:"
 
-#: optiondialog.cpp:1369
+#: optiondialog.cpp:1363
 #, kde-format
 msgid "Auto Select"
 msgstr "Automaticky vybrat"
 
-#: optiondialog.cpp:1373
+#: optiondialog.cpp:1367
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3085,17 +3085,17 @@ msgstr ""
 "V nejasných případech bude uživatel dotázán dialogem na výběr kódování pro "
 "uložení."
 
-#: optiondialog.cpp:1376
+#: optiondialog.cpp:1370
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Kódování souboru pro soubory předběžného zpracování:"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1382
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Jazyky čtené zprava doleva"
 
-#: optiondialog.cpp:1392
+#: optiondialog.cpp:1386
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3105,22 +3105,22 @@ msgstr ""
 "Některé jazyky se čtou zprava doleva.\n"
 "Tato volba podle toho upraví prohlížeč a editor."
 
-#: optiondialog.cpp:1402
+#: optiondialog.cpp:1396
 #, kde-format
 msgid "Integration"
 msgstr "Integrace"
 
-#: optiondialog.cpp:1403
+#: optiondialog.cpp:1397
 #, kde-format
 msgid "Integration Settings"
 msgstr "Nastavení integrace"
 
-#: optiondialog.cpp:1424
+#: optiondialog.cpp:1418
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Ignorovat volby příkazového řádku:"
 
-#: optiondialog.cpp:1430
+#: optiondialog.cpp:1424
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3134,12 +3134,12 @@ msgstr ""
 "Může být použito několik hodnot pokud jsou odděleny ';'\n"
 "Tímto bude potlačena chyba  \"Unknown option\"."
 
-#: optiondialog.cpp:1435
+#: optiondialog.cpp:1429
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Ukončit také klávesou Escape"
 
-#: optiondialog.cpp:1439
+#: optiondialog.cpp:1433
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3149,7 +3149,7 @@ msgstr ""
 "Rychlý způsob ukončení.\n"
 "Pro ty, kteří jsou zvyklí používat klávesu Escape."
 
-#: optiondialog.cpp:1497
+#: optiondialog.cpp:1491
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Budou obnovena všechna nastavení. Nikoliv pouze aktuální téma."
@@ -3651,22 +3651,25 @@ msgstr "Vloží současný obsah schránky na aktuální pozici"
 msgid "Select everything in current window"
 msgstr "Vybrat vše v aktuálním okně"
 
-#: Utils.cpp:69
+#: Utils.cpp:71
 #, kde-format
 msgid "Expecting space after closing quote."
 msgstr "Očekávána mezera po ukončující uvozovce."
 
-#: Utils.cpp:72
+#: Utils.cpp:74
 #, kde-format
 msgid "Unmatched quote."
 msgstr "Neodpovídají si uvozovky."
 
-#: Utils.cpp:81
+#: Utils.cpp:83
 #, kde-format
 msgid "Unexpected quote character within argument."
 msgstr "Neočekávaná uvozovka uvnitř argumentu."
 
-#: Utils.cpp:88
+#: Utils.cpp:90
 #, kde-format
 msgid "No program specified."
 msgstr "Nebyl zadán program."
+
+#~ msgid "Unicode"
+#~ msgstr "Unicode"

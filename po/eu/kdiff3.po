@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-19 00:41+0000\n"
+"POT-Creation-Date: 2024-09-03 00:41+0000\n"
 "PO-Revision-Date: 2023-12-08 13:35+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -110,82 +110,87 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Barneko errore larria"
 
-#: difftextwindow.cpp:633
+#: difftextwindow.cpp:632
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "%1 fitxategia: %2 lerroa"
 
-#: difftextwindow.cpp:635
+#: difftextwindow.cpp:634
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "%1 fitxategia: Lerro ez erabilgarri"
 
-#: difftextwindow.cpp:1967
+#: difftextwindow.cpp:1966
 #, kde-format
 msgid "Encoding:"
 msgstr "Kodeketa:"
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:795
+#: difftextwindow.cpp:1970 mergeresultwindow.cpp:2803 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "Lerro amaiera estiloa:"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1995
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Oinarria)"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kodeketa: %1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2848
 #, kde-format
 msgid "Unix"
 msgstr "UNIX"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:1998
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Lerro amaiera estiloa: %1"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:1999
 #, kde-format
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: difftextwindow.cpp:2028 kdiff3.cpp:1067
+#: difftextwindow.cpp:2027 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "Goiko lerroa"
 
-#: difftextwindow.cpp:2038
+#: difftextwindow.cpp:2037
 #, kde-format
 msgid "End"
 msgstr "Amaiera"
 
-#: difftextwindow.cpp:2094 smalldialogs.cpp:163
+#: difftextwindow.cpp:2093 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Ireki fitxategia"
 
-#: difftextwindow.cpp:2146 optiondialog.cpp:389
+#: difftextwindow.cpp:2139 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2147
+#: difftextwindow.cpp:2140
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2163
+#: difftextwindow.cpp:2141
+#, kde-format
+msgid "System"
+msgstr ""
+
+#: difftextwindow.cpp:2153
 #, kde-format
 msgid "Other"
 msgstr "Bestelakoak"
@@ -362,7 +367,7 @@ msgstr ""
 "bateratzea galarazi eta karpeta berriz aztertu nahi duzula?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
+#: mergeresultwindow.cpp:314 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1910,58 +1915,58 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Fitxategia alderatzen..."
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:144
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "Hautatu A leku guztietan"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "Hautatu B leku guztietan"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "Hautatu C leku guztietan"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "Hautatu A ebatzi gabeko gatazka guztiekin"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "Hautatu B ebatzi gabeko gatazka guztiekin"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "Hautatu C ebatzi gabeko gatazka guztiekin"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "Hautatu A ebatzi gabeko zuriune gatazka guztiekin"
 
-#: mergeresultwindow.cpp:152
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "Hautatu B ebatzi gabeko zuriune gatazka guztiekin"
 
-#: mergeresultwindow.cpp:153
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Hautatu C ebatzi gabeko zuriune gatazka guztiekin"
 
-#: mergeresultwindow.cpp:249
+#: mergeresultwindow.cpp:248
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Ebatzi gabe gelditzen den gatazka kopurua: %1 (haietatik %2 zuriuneak dira)"
 
-#: mergeresultwindow.cpp:313
+#: mergeresultwindow.cpp:312
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -1970,29 +1975,29 @@ msgstr ""
 "Irteerakoa aldatu egin da.\n"
 "Jarraitzen baduzu zure aldaketak galduko dira."
 
-#: mergeresultwindow.cpp:757 pdiff.cpp:607
+#: mergeresultwindow.cpp:756 pdiff.cpp:607
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Sarrerako fitxategi guztiak bitarrean berdinak dira."
 
-#: mergeresultwindow.cpp:759
+#: mergeresultwindow.cpp:758
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Sarrerako fitxategi guztiek testu bera dute."
 
-#: mergeresultwindow.cpp:763 mergeresultwindow.cpp:767
-#: mergeresultwindow.cpp:771 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
+#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:770 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "%1 eta %2 fitxategiak bitarrean berdinak dira.\n"
 
-#: mergeresultwindow.cpp:765 mergeresultwindow.cpp:769
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:764 mergeresultwindow.cpp:768
+#: mergeresultwindow.cpp:772
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "%1 eta %2 fitxategiek testu bera dute.\n"
 
-#: mergeresultwindow.cpp:777
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2005,27 +2010,27 @@ msgstr ""
 "Ebatzi gabeko gatazka kopurua: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:782
 #, kde-format
 msgid "Conflicts"
 msgstr "Gatazkak"
 
-#: mergeresultwindow.cpp:1524
+#: mergeresultwindow.cpp:1523
 #, kde-format
 msgid "<No src line>"
 msgstr "<Ez sorburu lerroa>"
 
-#: mergeresultwindow.cpp:1532
+#: mergeresultwindow.cpp:1531
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Bateratze gatazka (zuriunea soilik)>"
 
-#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2406
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Bateratze gatazka>"
 
-#: mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2628
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2034,13 +2039,13 @@ msgstr ""
 "Gatazka guztiak ez dira konpondu oraindik.\n"
 "Fitxategia ez da gorde."
 
-#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
+#: mergeresultwindow.cpp:2630 mergeresultwindow.cpp:2639
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Konpondu gabeko gatazkak"
 
-#: mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2637
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2051,7 +2056,7 @@ msgstr ""
 "eskuz.\n"
 "Fitxategia ez da gorde."
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2651
 #, kde-format
 msgid ""
 "\n"
@@ -2062,47 +2067,47 @@ msgstr ""
 "\n"
 "Babes-kopia sortzea huts egin du. Fitxategia ez da gorde."
 
-#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2651 mergeresultwindow.cpp:2695
 #, kde-format
 msgid "File Save Error"
 msgstr "Fitxategi gordetze errorea"
 
-#: mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid "Error while writing."
 msgstr "Errorea idaztean."
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2775
 #, kde-format
 msgid "Output:"
 msgstr "Irteerakoa:"
 
-#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2979
+#: mergeresultwindow.cpp:2788 mergeresultwindow.cpp:2971
 #, kde-format
 msgid "[Modified]"
 msgstr "[Aldatua]"
 
-#: mergeresultwindow.cpp:2796
+#: mergeresultwindow.cpp:2795
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Gordetzeko kodeketa:"
 
-#: mergeresultwindow.cpp:2896
+#: mergeresultwindow.cpp:2895
 #, kde-format
 msgid "Conflict"
 msgstr "Gatazka"
 
-#: mergeresultwindow.cpp:2926
+#: mergeresultwindow.cpp:2918
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Aren kodeka: %1"
 
-#: mergeresultwindow.cpp:2928
+#: mergeresultwindow.cpp:2920
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Bren kodeka: %1"
 
-#: mergeresultwindow.cpp:2930
+#: mergeresultwindow.cpp:2922
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Cren kodeka: %1"
@@ -2182,122 +2187,117 @@ msgstr ""
 
 #: optiondialog.cpp:390
 #, kde-format
-msgid "Unicode"
-msgstr "Unicode"
-
-#: optiondialog.cpp:391
-#, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:406
+#: optiondialog.cpp:400
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Aldatu hori, ASCII ez diren karaktereak ondo azaltzen ez badira."
 
-#: optiondialog.cpp:490
+#: optiondialog.cpp:484
 #, kde-format
 msgid "Configure"
 msgstr "Konfiguratu"
 
-#: optiondialog.cpp:529
+#: optiondialog.cpp:523
 #, kde-format
 msgid "Font"
 msgstr "Letra-tipoa"
 
-#: optiondialog.cpp:531
+#: optiondialog.cpp:525
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Editore eta ezberdintasun irteerako letra-tipoa"
 
-#: optiondialog.cpp:549
+#: optiondialog.cpp:543
 #, kde-format
 msgid "Application font"
 msgstr "Aplikazioaren letra-tipoa"
 
-#: optiondialog.cpp:554
+#: optiondialog.cpp:548
 #, kde-format
 msgid "File view font"
 msgstr "Fitxategi ikuspegiaren letra-tipoa"
 
-#: optiondialog.cpp:573
+#: optiondialog.cpp:567
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Kolorea"
 
-#: optiondialog.cpp:574
+#: optiondialog.cpp:568
 #, kde-format
 msgid "Colors Settings"
 msgstr "Koloreen ezarpenak"
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:593
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Editore eta ezberdintasun ikuspegiak:"
 
-#: optiondialog.cpp:607
+#: optiondialog.cpp:601
 #, kde-format
 msgid "Foreground color:"
 msgstr "Aurrealdeko kolorea:"
 
-#: optiondialog.cpp:615
+#: optiondialog.cpp:609
 #, kde-format
 msgid "Background color:"
 msgstr "Atzealdeko kolorea:"
 
-#: optiondialog.cpp:625
+#: optiondialog.cpp:619
 #, kde-format
 msgid "Diff background color:"
 msgstr "Ezberdintasun atzealdeko kolorea:"
 
-#: optiondialog.cpp:634
+#: optiondialog.cpp:628
 #, kde-format
 msgid "Color A:"
 msgstr "A kolorea:"
 
-#: optiondialog.cpp:643
+#: optiondialog.cpp:637
 #, kde-format
 msgid "Color B:"
 msgstr "B kolorea:"
 
-#: optiondialog.cpp:652
+#: optiondialog.cpp:646
 #, kde-format
 msgid "Color C:"
 msgstr "C kolorea:"
 
-#: optiondialog.cpp:660
+#: optiondialog.cpp:654
 #, kde-format
 msgid "Conflict color:"
 msgstr "Gatazka kolorea:"
 
-#: optiondialog.cpp:669
+#: optiondialog.cpp:663
 #, kde-format
 msgid "Current range background color:"
 msgstr "Uneko barrutiaren atzealdeko kolorea:"
 
-#: optiondialog.cpp:678
+#: optiondialog.cpp:672
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Uneko barrutiko ezberdintasunen atzealdeko kolorea:"
 
-#: optiondialog.cpp:686
+#: optiondialog.cpp:680
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Eskuz lerrokatutako ezberdintasun barrutien kolorea:"
 
-#: optiondialog.cpp:693
+#: optiondialog.cpp:687
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "Karpetak alderatzeko ikuspegia:"
 
-#: optiondialog.cpp:699
+#: optiondialog.cpp:693
 #, kde-format
 msgid "Newest file color:"
 msgstr "Fitxategi berrienaren kolorea:"
 
-#: optiondialog.cpp:704
+#: optiondialog.cpp:698
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
@@ -2305,37 +2305,37 @@ msgid ""
 msgstr ""
 "Kolore hau aldatzea indarrean egongo da karpeten hurrengo alderatzea hastean."
 
-#: optiondialog.cpp:709
+#: optiondialog.cpp:703
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Fitxategi zaharrenaren kolorea:"
 
-#: optiondialog.cpp:718
+#: optiondialog.cpp:712
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Adin ertaineko fitxategiaren kolorea:"
 
-#: optiondialog.cpp:727
+#: optiondialog.cpp:721
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Falta diren fitxategientzako kolorea:"
 
-#: optiondialog.cpp:741
+#: optiondialog.cpp:735
 #, kde-format
 msgid "Editor"
 msgstr "Editorea"
 
-#: optiondialog.cpp:742
+#: optiondialog.cpp:736
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Editorearen jokabidea"
 
-#: optiondialog.cpp:764
+#: optiondialog.cpp:758
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "Tabulatzeak zuriuneak txertatzen ditu"
 
-#: optiondialog.cpp:768
+#: optiondialog.cpp:762
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2345,28 +2345,28 @@ msgstr ""
 "Piztuta: Tab sakatzea zuriune kopuru egokia sortzen du.\n"
 "Itzalita: Tab karaktere bat txertatuko da."
 
-#: optiondialog.cpp:773
+#: optiondialog.cpp:767
 #, kde-format
 msgid "Tab size:"
 msgstr "Tabulatze neurria:"
 
-#: optiondialog.cpp:780
+#: optiondialog.cpp:774
 #, kde-format
 msgid "Auto indentation"
 msgstr "Koskatze automatikoa"
 
-#: optiondialog.cpp:784
+#: optiondialog.cpp:778
 #, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "Piztuta: Aurreko lerroaren koska lerro berri baterako erabiltzen da.\n"
 
-#: optiondialog.cpp:787
+#: optiondialog.cpp:781
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Hautapena automatikoki kopiatu"
 
-#: optiondialog.cpp:791
+#: optiondialog.cpp:785
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2376,25 +2376,25 @@ msgstr ""
 "Piztuta: Hautapen guztiak berehala kopiatzen dira arbelera.\n"
 "Itzalita: Esplizituki kopiatu behar duzu, Ktrl-C bidez adib."
 
-#: optiondialog.cpp:801
+#: optiondialog.cpp:795
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:802
+#: optiondialog.cpp:796
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "Dos/Windows"
 
-#: optiondialog.cpp:803
+#: optiondialog.cpp:797
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Auto-antzeman"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:800
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2404,22 +2404,22 @@ msgstr ""
 "Lerro amaierak ezartzen ditu, editatutako fitxategi bat gordetzen denerako.\n"
 "DOS/Windows: CR+LF; UNIX: LF; non CR=0D, LF=0A"
 
-#: optiondialog.cpp:816
+#: optiondialog.cpp:810
 #, kde-format
 msgid "Diff"
 msgstr "Ezberdintasuna"
 
-#: optiondialog.cpp:817
+#: optiondialog.cpp:811
 #, kde-format
 msgid "Diff Settings"
 msgstr "Ezberdintasun ezarpenak"
 
-#: optiondialog.cpp:840
+#: optiondialog.cpp:834
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "Ez-ikusi zenbakiak (tratatu zuriuneak bailiran)"
 
-#: optiondialog.cpp:844
+#: optiondialog.cpp:838
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2431,35 +2431,35 @@ msgstr ""
 "zuriuneak» aukeraren antzekoa)\n"
 "Zenbakizko datuak dituzten lerroak alderatzen lagun lezake."
 
-#: optiondialog.cpp:848
+#: optiondialog.cpp:842
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "Ez-ikusi C/C++ iruzkinak (tratatu zuriuneak bailiran)"
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:845
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "Tratatu C/C++ iruzkinak zuriuneak bailiran."
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:848
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "Ez bereizi maiuskulak (tratatu zuriuneak bailiran)"
 
-#: optiondialog.cpp:858
+#: optiondialog.cpp:852
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
 "Tratatu maius/minus ezberdintasunak zuriune aldaketak bailiran.  ('a'<=>'A')"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:855
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Aurre-prozesatzailearen komandoa:"
 
-#: optiondialog.cpp:866
+#: optiondialog.cpp:860
 #, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
@@ -2467,12 +2467,12 @@ msgstr ""
 "Erabiltzaileak definitutako aurre-prozesatzea (Begiratu dokumentuak "
 "zehaztasun bila)."
 
-#: optiondialog.cpp:869
+#: optiondialog.cpp:863
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Lerro bat-etortze aurre-prozesatzailearen komandoa:"
 
-#: optiondialog.cpp:874
+#: optiondialog.cpp:868
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2482,12 +2482,12 @@ msgstr ""
 "Aurre-prozesatzaile hau lerroak parekatzean bakarrik erabiltzen da.\n"
 "(Begiratu dokumentuak zehaztasun bila)"
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:871
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "Saiatu gogor (motelagoa)"
 
-#: optiondialog.cpp:881
+#: optiondialog.cpp:875
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2497,12 +2497,12 @@ msgstr ""
 "Kanpoko ezberdintasunerako  --minimal  aukera gaitzen du.\n"
 "Fitxategi handien azterketa askoz motelagoa izango da."
 
-#: optiondialog.cpp:885
+#: optiondialog.cpp:879
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "Lerrokatu B eta C sarrerako 3 fitxategietarako"
 
-#: optiondialog.cpp:889
+#: optiondialog.cpp:883
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2515,23 +2515,23 @@ msgstr ""
 "Ez da gomendatzen bateratzeko, bateratzea zaildu dezakeelako.\n"
 "(Lehenetsian itzalita)"
 
-#: optiondialog.cpp:900
+#: optiondialog.cpp:894
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Bateratu"
 
-#: optiondialog.cpp:901
+#: optiondialog.cpp:895
 #, kde-format
 msgid "Merge Settings"
 msgstr "Bateratze ezarpenak"
 
-#: optiondialog.cpp:924
+#: optiondialog.cpp:918
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Automatikoki aurreratze atzerapena (ms):"
 
-#: optiondialog.cpp:930
+#: optiondialog.cpp:924
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2542,29 +2542,29 @@ msgstr ""
 "denboran\n"
 "erakusten da, hurrengo gatazkara jauzi egin aurretik. Barrutia: 0-2000 ms"
 
-#: optiondialog.cpp:934
+#: optiondialog.cpp:928
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Erakutsi informazio elkarrizketa-koadroak"
 
-#: optiondialog.cpp:937
+#: optiondialog.cpp:931
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr ""
 "Erakutsi gatazka kopuruari buruzko informazioa duen elkarrizketa-koadro bat."
 
-#: optiondialog.cpp:940
+#: optiondialog.cpp:934
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Zuriuneen 2-fitxategiren bateratze lehenetsia:"
 
-#: optiondialog.cpp:945 optiondialog.cpp:958
+#: optiondialog.cpp:939 optiondialog.cpp:952
 #, kde-format
 msgid "Manual Choice"
 msgstr "Hautapena eskuz"
 
-#: optiondialog.cpp:949 optiondialog.cpp:963
+#: optiondialog.cpp:943 optiondialog.cpp:957
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2574,27 +2574,27 @@ msgstr ""
 "Utzi bateratzeko algoritmoari zuriuneen aldaketa soilerako automatikoki "
 "sarrerako bat hautatzen."
 
-#: optiondialog.cpp:953
+#: optiondialog.cpp:947
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Zuriuneen 3-fitxategiren bateratze lehenetsia:"
 
-#: optiondialog.cpp:967
+#: optiondialog.cpp:961
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Automatikoki bateratzeko adierazpen erregularra"
 
-#: optiondialog.cpp:975 smalldialogs.cpp:372
+#: optiondialog.cpp:969 smalldialogs.cpp:372
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Auto-bateratze adierazpen erregularra:"
 
-#: optiondialog.cpp:983
+#: optiondialog.cpp:977
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "Exekutatu adierazpen erregularraren auto-bateratzea bateratzea hastean"
 
-#: optiondialog.cpp:986
+#: optiondialog.cpp:980
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2604,43 +2604,43 @@ msgstr ""
 "Exekutatu bateratzea auto-bateratze adirazpen erregularretarako\n"
 "berehala bateratze bat hasten denean.\n"
 
-#: optiondialog.cpp:991
+#: optiondialog.cpp:985
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Bertsio-kontroleko historia bateratzea"
 
-#: optiondialog.cpp:999 smalldialogs.cpp:399
+#: optiondialog.cpp:993 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Historia hasierako adierazpen erregularra:"
 
-#: optiondialog.cpp:1007 smalldialogs.cpp:427
+#: optiondialog.cpp:1001 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Historia sarrera hasierako adierazpen erregularra:"
 
-#: optiondialog.cpp:1023
+#: optiondialog.cpp:1017
 #, kde-format
 msgid "History merge sorting"
 msgstr "Historia bateratze sailkapena"
 
-#: optiondialog.cpp:1026
+#: optiondialog.cpp:1020
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "Sailkatu bertsio kontroleko historia gako baten arabera."
 
-#: optiondialog.cpp:1036
+#: optiondialog.cpp:1030
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "Historiako sarrera hasiera sailkatzeko gakoen ordena:"
 
-#: optiondialog.cpp:1046
+#: optiondialog.cpp:1040
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "Bateratu bertsio-kontroleko historia bateratzea hastean"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1043
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
@@ -2648,12 +2648,12 @@ msgstr ""
 "Exekutatu bertsio-kontroleko historiako bateratze automatikoa bateratzea "
 "hastean."
 
-#: optiondialog.cpp:1053
+#: optiondialog.cpp:1047
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Historiako gehienezko sarrera kopurua:"
 
-#: optiondialog.cpp:1057
+#: optiondialog.cpp:1051
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
@@ -2661,17 +2661,17 @@ msgstr ""
 "Moztu adierazitako kopuruaren ondoren. Erabili -1 sarrera kopuru "
 "mugagaberako."
 
-#: optiondialog.cpp:1061
+#: optiondialog.cpp:1055
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Probatu zure adierazpen erregularrak"
 
-#: optiondialog.cpp:1066
+#: optiondialog.cpp:1060
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Bateratze komando hutsala:"
 
-#: optiondialog.cpp:1071
+#: optiondialog.cpp:1065
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2683,12 +2683,12 @@ msgstr ""
 "beste aipatzeko aldaketarik antzeman ez denean.\n"
 "Parametro hauekin deitua: fitxategiIzena1 fitxategiIzena2 fitxategiIzena3"
 
-#: optiondialog.cpp:1076
+#: optiondialog.cpp:1070
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "Auto-gorde eta irten gatazkarik gabeko bateratzeetan"
 
-#: optiondialog.cpp:1080
+#: optiondialog.cpp:1074
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2702,29 +2702,29 @@ msgstr ""
 "automatikoki gorde eta irten.\n"
 "(\"--auto\" komando-lerroko aukeraren antzekoa)"
 
-#: optiondialog.cpp:1091 optiondialog.cpp:1092
+#: optiondialog.cpp:1085 optiondialog.cpp:1086
 #, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "Karpeta"
 
-#: optiondialog.cpp:1112
+#: optiondialog.cpp:1106
 #, kde-format
 msgid "Recursive folders"
 msgstr "-Karpeta errekurtsiboak"
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1109
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "Azpikarpetak aztertu ala ez."
 
-#: optiondialog.cpp:1117
+#: optiondialog.cpp:1111
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Fitxategi eredua(k):"
 
-#: optiondialog.cpp:1123
+#: optiondialog.cpp:1117
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2736,12 +2736,12 @@ msgstr ""
 "Zernahitarako karaktereak: '*' eta '?'\n"
 "Hainbat eredu zehaztu daitezke banatzekoa erabiliz: ';'"
 
-#: optiondialog.cpp:1128
+#: optiondialog.cpp:1122
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Fitxategien alderantzizko eredua(k):"
 
-#: optiondialog.cpp:1134
+#: optiondialog.cpp:1128
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2753,12 +2753,12 @@ msgstr ""
 "Zernahitarako karaktereak: '*' eta '?'\n"
 "Hainbat eredu zehaztu daitezke bereiztekoa erabiliz: ';'"
 
-#: optiondialog.cpp:1139
+#: optiondialog.cpp:1133
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "Karpeten alderantzizko eredua(k):"
 
-#: optiondialog.cpp:1145
+#: optiondialog.cpp:1139
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2770,12 +2770,12 @@ msgstr ""
 "Zernahitarako karaktereak: '*' eta '?'\n"
 "Hainbat eredu zehaztu daitezke bereiztekoa erabiliz: ';'"
 
-#: optiondialog.cpp:1150
+#: optiondialog.cpp:1144
 #, kde-format
 msgid "Use Ignore File"
 msgstr "Erabili «ignore» fitxategia"
 
-#: optiondialog.cpp:1154
+#: optiondialog.cpp:1148
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2787,23 +2787,23 @@ msgstr ""
 "guztiari.\n"
 "«ignore» fitxategi lokalen bidez karpetena berariazkoa izan daiteke."
 
-#: optiondialog.cpp:1158
+#: optiondialog.cpp:1152
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "Aurkitu ezkutuko fitxategiak eta karpetak"
 
-#: optiondialog.cpp:1161
+#: optiondialog.cpp:1155
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "Ezkutuko fitxategiak eta karpetak aurkitzen ditu."
 
-#: optiondialog.cpp:1164
+#: optiondialog.cpp:1158
 #, kde-format
 msgid "Follow file links"
 msgstr "Jarraitu fitxategien estekei"
 
-#: optiondialog.cpp:1168
+#: optiondialog.cpp:1162
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2813,12 +2813,12 @@ msgstr ""
 "Piztuta: Alderatu estekak erakusten duen fitxategia.\n"
 "Itzalita: Alderatu estekak."
 
-#: optiondialog.cpp:1172
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Follow folder links"
 msgstr "Jarraitu karpeten estekei"
 
-#: optiondialog.cpp:1176
+#: optiondialog.cpp:1170
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2828,12 +2828,12 @@ msgstr ""
 "Gaituta: Alderatu estekak erakusten duen karpeta.\n"
 "Ezgaituta: Alderatu estekak."
 
-#: optiondialog.cpp:1185
+#: optiondialog.cpp:1179
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "Fitxategi-izen alderatzea maiuskulak bereiziz"
 
-#: optiondialog.cpp:1189
+#: optiondialog.cpp:1183
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2846,12 +2846,12 @@ msgstr ""
 "Ezarri aukera hau izenetan maiuskulak/minuskula bereizi behar direnean. "
 "(Windows-erako lehenetsia itzalita da, bestela piztuta)."
 
-#: optiondialog.cpp:1193
+#: optiondialog.cpp:1187
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "Zamatzean, zabaldu azpikarpeta guztiak"
 
-#: optiondialog.cpp:1197
+#: optiondialog.cpp:1191
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2861,12 +2861,12 @@ msgstr ""
 "Gaituta: Zabaldu azpikarpeta guztiak karpeta alderatzea abiatzean.\n"
 "Ezgaituta: Utzi azpikarpetak tolestuta."
 
-#: optiondialog.cpp:1201
+#: optiondialog.cpp:1195
 #, kde-format
 msgid "Skip folder status report"
 msgstr "Sahiestu karpeta-egoera txostena"
 
-#: optiondialog.cpp:1205
+#: optiondialog.cpp:1199
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2876,28 +2876,28 @@ msgstr ""
 "Gaituta: Ez erakutsi karpeten alderatze egoera.\n"
 "Ezgaituta: Erakutsi egoera elkarrizketa-koadroa abiatzean."
 
-#: optiondialog.cpp:1209
+#: optiondialog.cpp:1203
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Fitxategi alderatze modua"
 
-#: optiondialog.cpp:1214
+#: optiondialog.cpp:1208
 #, kde-format
 msgid "Binary comparison"
 msgstr "Alderatze bitarra"
 
-#: optiondialog.cpp:1216
+#: optiondialog.cpp:1210
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "Fitxategi bakoitzaren alderatze bitarra. (lehenetsia)"
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1213
 #, kde-format
 msgid "Full analysis"
 msgstr "Azterketa osoa"
 
-#: optiondialog.cpp:1221
+#: optiondialog.cpp:1215
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2908,12 +2908,12 @@ msgstr ""
 "gehigarrian.\n"
 "(Alderatze bitar bat baino motelagoa, askoz motelagoa fitxategi bitarrekin)"
 
-#: optiondialog.cpp:1225
+#: optiondialog.cpp:1219
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Fidatu neurriaz eta aldaketa dataz (ez segurua)"
 
-#: optiondialog.cpp:1227
+#: optiondialog.cpp:1221
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2929,7 +2929,7 @@ msgstr ""
 "agertuko dira.\n"
 "Baliagarria karpeta handietarako edo sare mantsoetarako."
 
-#: optiondialog.cpp:1232
+#: optiondialog.cpp:1226
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -2938,7 +2938,7 @@ msgstr ""
 "Fidatu neurriaz eta dataz, baino erabili alderatze bitarra datak ez badatoz "
 "bat (ez segurua)"
 
-#: optiondialog.cpp:1234
+#: optiondialog.cpp:1228
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2952,12 +2952,12 @@ msgstr ""
 "Datak ez badatoz bat baino neurriak bai, erabili alderatze bitarra.\n"
 "Baliagarria karpeta handietarako edo sare mantsoetarako."
 
-#: optiondialog.cpp:1239
+#: optiondialog.cpp:1233
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Fidatu neurriaz (ez segurua)"
 
-#: optiondialog.cpp:1241
+#: optiondialog.cpp:1235
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2970,12 +2970,12 @@ msgstr ""
 "Baliagarria karpeta handietarako edo sare mantsoetarako, zama-jaistean data "
 "aldatzen denerako."
 
-#: optiondialog.cpp:1248
+#: optiondialog.cpp:1242
 #, kde-format
 msgid "Synchronize folders"
 msgstr "Sinkronizatu karpetak"
 
-#: optiondialog.cpp:1252
+#: optiondialog.cpp:1246
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2987,12 +2987,12 @@ msgstr ""
 "ondoren bi karpetak berdinak izan daitezen.\n"
 "Bi karpeta, jomuga zehaztu gabe, alderatzean baino ez dabil."
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1252
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Zuriuneen ezberdintasunak berdin gisa hartuak"
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1256
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3003,12 +3003,12 @@ msgstr ""
 "direla.\n"
 "Hau aktibo dago soilik «azterketa osoa» hautatzen denean."
 
-#: optiondialog.cpp:1268
+#: optiondialog.cpp:1262
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Kopiatu berriagoa bateratu ordez (ez segurua)"
 
-#: optiondialog.cpp:1272
+#: optiondialog.cpp:1266
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3020,12 +3020,12 @@ msgstr ""
 "(erabili hau soilik zertan ari zaren badakizu!)\n"
 "Eraginkorra soilik bi karpeta alderatzean."
 
-#: optiondialog.cpp:1277
+#: optiondialog.cpp:1271
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Babes-kopia fitxategiak (.orig)"
 
-#: optiondialog.cpp:1281
+#: optiondialog.cpp:1275
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3035,17 +3035,17 @@ msgstr ""
 "Fitxategi bat fitxategi zahar batean gordeko balitz, fitxategi zaharra\n"
 "ezabatu ordez, «.orig» luzapen batekin gordeko litzateke."
 
-#: optiondialog.cpp:1290 optiondialog.cpp:1291
+#: optiondialog.cpp:1284 optiondialog.cpp:1285
 #, kde-format
 msgid "Regional Settings"
 msgstr "Eskualde ezarpenak"
 
-#: optiondialog.cpp:1314
+#: optiondialog.cpp:1308
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "Erabili kodeketa bera denerako:"
 
-#: optiondialog.cpp:1318
+#: optiondialog.cpp:1312
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3055,17 +3055,17 @@ msgstr ""
 "Hau gaituta aurreneko kodeketa aldatzean guztiak aldatzen laguntzen du.\n"
 "Hau ezgaitu banakako ezarpen ezberdinak behar direnean."
 
-#: optiondialog.cpp:1322
+#: optiondialog.cpp:1316
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Oharra: Bertako kodeketa \"%1\" da"
 
-#: optiondialog.cpp:1326
+#: optiondialog.cpp:1320
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "Aren fitxategi kodeketa:"
 
-#: optiondialog.cpp:1333
+#: optiondialog.cpp:1327
 #, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
@@ -3078,32 +3078,32 @@ msgstr ""
 "kodeketa erreserbako gisa erabiliko da.\n"
 "(Unicode antzematea fitxategi bateko lehenengo byten araberakoa da)"
 
-#: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
+#: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
 #, kde-format
 msgid "Auto Detect"
 msgstr "Auto-antzeman"
 
-#: optiondialog.cpp:1342
+#: optiondialog.cpp:1336
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "Bren fitxategi kodeketa:"
 
-#: optiondialog.cpp:1353
+#: optiondialog.cpp:1347
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "Cren fitxategi kodeketa:"
 
-#: optiondialog.cpp:1364
+#: optiondialog.cpp:1358
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Bateratzearen irteerako eta gordetzeko fitxategi kodeketa:"
 
-#: optiondialog.cpp:1369
+#: optiondialog.cpp:1363
 #, kde-format
 msgid "Auto Select"
 msgstr "Auto-hautatu"
 
-#: optiondialog.cpp:1373
+#: optiondialog.cpp:1367
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3115,17 +3115,17 @@ msgstr ""
 "Zalantzazko kasuetan erabiltzaileari elkarrizketa bidez eskatuko zaio "
 "gordetzeko kodeketa hautatzeko."
 
-#: optiondialog.cpp:1376
+#: optiondialog.cpp:1370
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Fitxategi kodeketa aurre-prozesatzaile fitxategietarako:"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1382
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Eskuinetik ezkerrerako hizkuntza"
 
-#: optiondialog.cpp:1392
+#: optiondialog.cpp:1386
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3135,22 +3135,22 @@ msgstr ""
 "Hizkuntza batzuk eskuinetik ezkerrera irakurtzen dira.\n"
 "Ezarpen honek erakuslea eta editorea horren arabera aldatuko ditu."
 
-#: optiondialog.cpp:1402
+#: optiondialog.cpp:1396
 #, kde-format
 msgid "Integration"
 msgstr "Bateratzea"
 
-#: optiondialog.cpp:1403
+#: optiondialog.cpp:1397
 #, kde-format
 msgid "Integration Settings"
 msgstr "Bateratze ezarpenak"
 
-#: optiondialog.cpp:1424
+#: optiondialog.cpp:1418
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Ez-ikusi beharreko komando lerroko aukerak:"
 
-#: optiondialog.cpp:1430
+#: optiondialog.cpp:1424
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3164,12 +3164,12 @@ msgstr ""
 "Hainbat balio zehaztu daitezke «;» bidez banatuz gera\n"
 "Honek «Aukera ezezaguna» errorea ekidingo du."
 
-#: optiondialog.cpp:1435
+#: optiondialog.cpp:1429
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Irten ere «ihes» teklaren bidez"
 
-#: optiondialog.cpp:1439
+#: optiondialog.cpp:1433
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3179,7 +3179,7 @@ msgstr ""
 "Irteteko metodo azkarra.\n"
 "«Ihes» tekla erabiltzen ohituak daudenentzat."
 
-#: optiondialog.cpp:1497
+#: optiondialog.cpp:1491
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Honek aukera guztiak berrezartzen ditu. Ez soilik uneko gaikoak."
@@ -3688,25 +3688,28 @@ msgstr "Arbelaren edukia itsasten du uneko kokalekuan"
 msgid "Select everything in current window"
 msgstr "Hautatu uneko leihoko guztia"
 
-#: Utils.cpp:69
+#: Utils.cpp:71
 #, kde-format
 msgid "Expecting space after closing quote."
 msgstr "Zuriunea espero zen itxierako komatxoaren atzetik."
 
-#: Utils.cpp:72
+#: Utils.cpp:74
 #, kde-format
 msgid "Unmatched quote."
 msgstr "Itxi gabeko komatxoa."
 
-#: Utils.cpp:81
+#: Utils.cpp:83
 #, kde-format
 msgid "Unexpected quote character within argument."
 msgstr "Espero ez ziren komatxoak daude argumentuan."
 
-#: Utils.cpp:88
+#: Utils.cpp:90
 #, kde-format
 msgid "No program specified."
 msgstr "Ez da programarik zehaztu."
+
+#~ msgid "Unicode"
+#~ msgstr "Unicode"
 
 #~ msgctxt "Read error message. %1 = filepath"
 #~ msgid "File %1 too large to process. Skipping."

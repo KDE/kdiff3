@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-19 00:41+0000\n"
+"POT-Creation-Date: 2024-09-03 00:41+0000\n"
 "PO-Revision-Date: 2024-01-22 16:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -110,82 +110,87 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "嚴重內部錯誤"
 
-#: difftextwindow.cpp:633
+#: difftextwindow.cpp:632
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "檔案 %1：行 %2"
 
-#: difftextwindow.cpp:635
+#: difftextwindow.cpp:634
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "檔案 %1：無法取得行"
 
-#: difftextwindow.cpp:1967
+#: difftextwindow.cpp:1966
 #, kde-format
 msgid "Encoding:"
 msgstr "編碼："
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:795
+#: difftextwindow.cpp:1970 mergeresultwindow.cpp:2803 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "行結尾樣式："
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:1995
 #, kde-format
 msgid "A (Base)"
 msgstr "A(基底)"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:1997
 #, kde-format
 msgid "Encoding: %1"
 msgstr "編碼：%1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1998 mergeresultwindow.cpp:2848
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:1998
 #, kde-format
 msgid "Line end style: %1"
 msgstr "行結尾樣式：%1"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:1999
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
 
-#: difftextwindow.cpp:2028 kdiff3.cpp:1067
+#: difftextwindow.cpp:2027 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "頂端行"
 
-#: difftextwindow.cpp:2038
+#: difftextwindow.cpp:2037
 #, kde-format
 msgid "End"
 msgstr "結束"
 
-#: difftextwindow.cpp:2094 smalldialogs.cpp:163
+#: difftextwindow.cpp:2093 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: difftextwindow.cpp:2146 optiondialog.cpp:389
+#: difftextwindow.cpp:2139 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 位元"
 
-#: difftextwindow.cpp:2147
+#: difftextwindow.cpp:2140
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 位元 (BOM)"
 
-#: difftextwindow.cpp:2163
+#: difftextwindow.cpp:2141
+#, kde-format
+msgid "System"
+msgstr ""
+
+#: difftextwindow.cpp:2153
 #, kde-format
 msgid "Other"
 msgstr "其他"
@@ -360,7 +365,7 @@ msgid ""
 msgstr "您正在進行資料夾合併。您確定要中止合併並重新掃描資料夾嗎？"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
+#: mergeresultwindow.cpp:314 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1863,57 +1868,57 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "正在比對檔案..."
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:144
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "在所有地方選擇 A"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "在所有地方選擇 B"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "在所有地方選擇 C"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "為所有未解決的衝突選擇 A"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "為所有未解決的衝突選擇 B"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "為所有未解決的衝突選擇 C"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "為所有未解決的空白衝突選擇 A"
 
-#: mergeresultwindow.cpp:152
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "為所有未解決的空白衝突選擇 B"
 
-#: mergeresultwindow.cpp:153
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "為所有未解決的空白衝突選擇 C"
 
-#: mergeresultwindow.cpp:249
+#: mergeresultwindow.cpp:248
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "剩餘未解決衝突數量：%1（其中 %2 個是空白衝突）"
 
-#: mergeresultwindow.cpp:313
+#: mergeresultwindow.cpp:312
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -1922,29 +1927,29 @@ msgstr ""
 "輸出已被變更。\n"
 "若您繼續，您的變更將會遺失。"
 
-#: mergeresultwindow.cpp:757 pdiff.cpp:607
+#: mergeresultwindow.cpp:756 pdiff.cpp:607
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "所有輸入檔都有相同的內容。"
 
-#: mergeresultwindow.cpp:759
+#: mergeresultwindow.cpp:758
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "所有輸入檔都有相同的文字內容。"
 
-#: mergeresultwindow.cpp:763 mergeresultwindow.cpp:767
-#: mergeresultwindow.cpp:771 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
+#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:770 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "檔案 %1 與 %2 內容完全相同。\n"
 
-#: mergeresultwindow.cpp:765 mergeresultwindow.cpp:769
-#: mergeresultwindow.cpp:773
+#: mergeresultwindow.cpp:764 mergeresultwindow.cpp:768
+#: mergeresultwindow.cpp:772
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "檔案 %1 與 %2 內容文字完全相同。\n"
 
-#: mergeresultwindow.cpp:777
+#: mergeresultwindow.cpp:776
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1957,27 +1962,27 @@ msgstr ""
 "未解決衝突數：%3\n"
 "%4"
 
-#: mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:782
 #, kde-format
 msgid "Conflicts"
 msgstr "衝突"
 
-#: mergeresultwindow.cpp:1524
+#: mergeresultwindow.cpp:1523
 #, kde-format
 msgid "<No src line>"
 msgstr "<沒有來源行>"
 
-#: mergeresultwindow.cpp:1532
+#: mergeresultwindow.cpp:1531
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<合併衝突（僅空白）>"
 
-#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2406
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<合併衝突>"
 
-#: mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2628
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -1986,13 +1991,13 @@ msgstr ""
 "還有未解決的衝突。\n"
 "檔案未儲存。"
 
-#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
+#: mergeresultwindow.cpp:2630 mergeresultwindow.cpp:2639
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "剩餘衝突"
 
-#: mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2637
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2002,7 +2007,7 @@ msgstr ""
 "有行結尾樣式的衝突。請手動選擇行結尾樣式。\n"
 "檔案未儲存。"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2651
 #, kde-format
 msgid ""
 "\n"
@@ -2013,49 +2018,49 @@ msgstr ""
 "\n"
 "建立備份時失敗。檔案未儲存。"
 
-#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2651 mergeresultwindow.cpp:2695
 #, kde-format
 msgid "File Save Error"
 msgstr "檔案儲存錯誤"
 
-#: mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid "Error while writing."
 msgstr "寫入時發生錯誤。"
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2775
 #, kde-format
 msgid "Output:"
 msgstr "輸出："
 
-#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2979
+#: mergeresultwindow.cpp:2788 mergeresultwindow.cpp:2971
 #, kde-format
 msgid "[Modified]"
 msgstr "[已修改]"
 
-#: mergeresultwindow.cpp:2796
+#: mergeresultwindow.cpp:2795
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "儲存用的編碼："
 
-#: mergeresultwindow.cpp:2896
+#: mergeresultwindow.cpp:2895
 #, kde-format
 msgid "Conflict"
 msgstr "衝突"
 
-#: mergeresultwindow.cpp:2926
+#: mergeresultwindow.cpp:2918
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2928
+#: mergeresultwindow.cpp:2920
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2930
+#: mergeresultwindow.cpp:2922
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
@@ -2136,159 +2141,154 @@ msgstr ""
 
 #: optiondialog.cpp:390
 #, kde-format
-msgid "Unicode"
-msgstr "萬國碼"
-
-#: optiondialog.cpp:391
-#, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:406
+#: optiondialog.cpp:400
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "如果非 ASCII 字元無法正確顯示，請變更這個選項。"
 
-#: optiondialog.cpp:490
+#: optiondialog.cpp:484
 #, kde-format
 msgid "Configure"
 msgstr "設定"
 
-#: optiondialog.cpp:529
+#: optiondialog.cpp:523
 #, kde-format
 msgid "Font"
 msgstr "字型"
 
-#: optiondialog.cpp:531
+#: optiondialog.cpp:525
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "編輯器與差異輸出字型"
 
-#: optiondialog.cpp:549
+#: optiondialog.cpp:543
 #, kde-format
 msgid "Application font"
 msgstr "應用程式字型"
 
-#: optiondialog.cpp:554
+#: optiondialog.cpp:548
 #, kde-format
 msgid "File view font"
 msgstr "檔案檢視字型"
 
-#: optiondialog.cpp:573
+#: optiondialog.cpp:567
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "顏色"
 
-#: optiondialog.cpp:574
+#: optiondialog.cpp:568
 #, kde-format
 msgid "Colors Settings"
 msgstr "顏色設定"
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:593
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "編輯器與差異檢視："
 
-#: optiondialog.cpp:607
+#: optiondialog.cpp:601
 #, kde-format
 msgid "Foreground color:"
 msgstr "前景顏色："
 
-#: optiondialog.cpp:615
+#: optiondialog.cpp:609
 #, kde-format
 msgid "Background color:"
 msgstr "背景顏色："
 
-#: optiondialog.cpp:625
+#: optiondialog.cpp:619
 #, kde-format
 msgid "Diff background color:"
 msgstr "差異背景顏色："
 
-#: optiondialog.cpp:634
+#: optiondialog.cpp:628
 #, kde-format
 msgid "Color A:"
 msgstr "顏色 A："
 
-#: optiondialog.cpp:643
+#: optiondialog.cpp:637
 #, kde-format
 msgid "Color B:"
 msgstr "顏色 B："
 
-#: optiondialog.cpp:652
+#: optiondialog.cpp:646
 #, kde-format
 msgid "Color C:"
 msgstr "顏色 C："
 
-#: optiondialog.cpp:660
+#: optiondialog.cpp:654
 #, kde-format
 msgid "Conflict color:"
 msgstr "衝突顏色："
 
-#: optiondialog.cpp:669
+#: optiondialog.cpp:663
 #, kde-format
 msgid "Current range background color:"
 msgstr "目前範圍的背景顏色："
 
-#: optiondialog.cpp:678
+#: optiondialog.cpp:672
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "目前範圍的差異背景顏色："
 
-#: optiondialog.cpp:686
+#: optiondialog.cpp:680
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "手動對齊的差異範圍的顏色："
 
-#: optiondialog.cpp:693
+#: optiondialog.cpp:687
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "資料夾比對檢視："
 
-#: optiondialog.cpp:699
+#: optiondialog.cpp:693
 #, kde-format
 msgid "Newest file color:"
 msgstr "最新的檔案的顏色："
 
-#: optiondialog.cpp:704
+#: optiondialog.cpp:698
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
 "comparison."
 msgstr "對於這個顏色的變更在下次開始資料夾比對的時候才會生效。"
 
-#: optiondialog.cpp:709
+#: optiondialog.cpp:703
 #, kde-format
 msgid "Oldest file color:"
 msgstr "最舊的檔案的顏色："
 
-#: optiondialog.cpp:718
+#: optiondialog.cpp:712
 #, kde-format
 msgid "Middle age file color:"
 msgstr "年齡居中的檔案的顏色："
 
-#: optiondialog.cpp:727
+#: optiondialog.cpp:721
 #, kde-format
 msgid "Color for missing files:"
 msgstr "缺失檔案的顏色："
 
-#: optiondialog.cpp:741
+#: optiondialog.cpp:735
 #, kde-format
 msgid "Editor"
 msgstr "編輯器"
 
-#: optiondialog.cpp:742
+#: optiondialog.cpp:736
 #, kde-format
 msgid "Editor Behavior"
 msgstr "編輯器行為"
 
-#: optiondialog.cpp:764
+#: optiondialog.cpp:758
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "Tab 鍵輸入空格"
 
-#: optiondialog.cpp:768
+#: optiondialog.cpp:762
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2298,28 +2298,28 @@ msgstr ""
 "開啟：按下 Tab 會產生合適數量的空格。\n"
 "關閉：按下 Tab 會輸入 tab 字元（定位字元）。"
 
-#: optiondialog.cpp:773
+#: optiondialog.cpp:767
 #, kde-format
 msgid "Tab size:"
 msgstr "定位字元寬度："
 
-#: optiondialog.cpp:780
+#: optiondialog.cpp:774
 #, kde-format
 msgid "Auto indentation"
 msgstr "自動縮排"
 
-#: optiondialog.cpp:784
+#: optiondialog.cpp:778
 #, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "開啟：前一行的縮排會用在新的行上面。\n"
 
-#: optiondialog.cpp:787
+#: optiondialog.cpp:781
 #, kde-format
 msgid "Auto copy selection"
 msgstr "自動複製選取"
 
-#: optiondialog.cpp:791
+#: optiondialog.cpp:785
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2329,25 +2329,25 @@ msgstr ""
 "開啟：選取後會馬上將選取內容寫入剪貼簿。\n"
 "關閉：您必須明確透過例如 Ctrl-C 來進行複製。"
 
-#: optiondialog.cpp:801
+#: optiondialog.cpp:795
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:802
+#: optiondialog.cpp:796
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "Dos/Windows"
 
-#: optiondialog.cpp:803
+#: optiondialog.cpp:797
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "自動偵測"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:800
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2357,22 +2357,22 @@ msgstr ""
 "設定儲存編輯後檔案時要使用的行結尾。\n"
 "DOS/Windows：CR+LF；UNIX：LF；其中 CR 字元為 0D，LF 為 0A"
 
-#: optiondialog.cpp:816
+#: optiondialog.cpp:810
 #, kde-format
 msgid "Diff"
 msgstr "比較"
 
-#: optiondialog.cpp:817
+#: optiondialog.cpp:811
 #, kde-format
 msgid "Diff Settings"
 msgstr "Diff 設定"
 
-#: optiondialog.cpp:840
+#: optiondialog.cpp:834
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "忽略數字（把它們當作空白）"
 
-#: optiondialog.cpp:844
+#: optiondialog.cpp:838
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2383,45 +2383,45 @@ msgstr ""
 "在比對行的階段時忽略數字字元（類似忽略空白字元）。\n"
 "可能可以幫助比對包含數字資料的檔案。"
 
-#: optiondialog.cpp:848
+#: optiondialog.cpp:842
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "忽略 C/C++ 註解（當作是空白）"
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:845
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "把 C/C++ 註解當作是空白。"
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:848
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "忽略大小寫（當作是空白）"
 
-#: optiondialog.cpp:858
+#: optiondialog.cpp:852
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "把大小寫差異（'a' <=> 'A'）當作是空白差異。"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:855
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "前置處理器命令："
 
-#: optiondialog.cpp:866
+#: optiondialog.cpp:860
 #, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "使用者定義的前置處理。（詳情請見說明文件。）"
 
-#: optiondialog.cpp:869
+#: optiondialog.cpp:863
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "逐行比對前置處理指令："
 
-#: optiondialog.cpp:874
+#: optiondialog.cpp:868
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2431,12 +2431,12 @@ msgstr ""
 "這個前置處理器只會在比對行時使用。\n"
 "（詳情請見說明文件。）"
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:871
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "找出更細微的差異（比較慢）"
 
-#: optiondialog.cpp:881
+#: optiondialog.cpp:875
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2446,12 +2446,12 @@ msgstr ""
 "會啟用外部 diff 的 --minimal 選項。\n"
 "大檔案的分析會變得慢很多。"
 
-#: optiondialog.cpp:885
+#: optiondialog.cpp:879
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "有 3 個輸入檔時將 B 與 C 對齊"
 
-#: optiondialog.cpp:889
+#: optiondialog.cpp:883
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2463,23 +2463,23 @@ msgstr ""
 "不建議用於合併，因為合併可能會變得更複雜。\n"
 "（預設關閉。）"
 
-#: optiondialog.cpp:900
+#: optiondialog.cpp:894
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "合併"
 
-#: optiondialog.cpp:901
+#: optiondialog.cpp:895
 #, kde-format
 msgid "Merge Settings"
 msgstr "合併設定"
 
-#: optiondialog.cpp:924
+#: optiondialog.cpp:918
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "自動前進延遲（毫秒）："
 
-#: optiondialog.cpp:930
+#: optiondialog.cpp:924
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2490,28 +2490,28 @@ msgstr ""
 "會跳到\n"
 "下一個衝突。範圍：0-2000 毫秒"
 
-#: optiondialog.cpp:934
+#: optiondialog.cpp:928
 #, kde-format
 msgid "Show info dialogs"
 msgstr "顯示資訊對話框"
 
-#: optiondialog.cpp:937
+#: optiondialog.cpp:931
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "顯示包含衝突數量資訊的對話框。"
 
-#: optiondialog.cpp:940
+#: optiondialog.cpp:934
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "空白字元 2 檔案合併預設值："
 
-#: optiondialog.cpp:945 optiondialog.cpp:958
+#: optiondialog.cpp:939 optiondialog.cpp:952
 #, kde-format
 msgid "Manual Choice"
 msgstr "手動選擇"
 
-#: optiondialog.cpp:949 optiondialog.cpp:963
+#: optiondialog.cpp:943 optiondialog.cpp:957
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2519,27 +2519,27 @@ msgid ""
 "only changes."
 msgstr "讓合併演算法自動為只有空白的變更選取輸入。"
 
-#: optiondialog.cpp:953
+#: optiondialog.cpp:947
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "空白字元 3 檔案合併預設值："
 
-#: optiondialog.cpp:967
+#: optiondialog.cpp:961
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "自動合併的正則表達式"
 
-#: optiondialog.cpp:975 smalldialogs.cpp:372
+#: optiondialog.cpp:969 smalldialogs.cpp:372
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "自動合併正規表示式："
 
-#: optiondialog.cpp:983
+#: optiondialog.cpp:977
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "在開始合併時執行正則表達式自動合併"
 
-#: optiondialog.cpp:986
+#: optiondialog.cpp:980
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2547,70 +2547,70 @@ msgid ""
 "immediately when a merge starts.\n"
 msgstr "開始合併時馬上為自動合併正則表達式執行合併。\n"
 
-#: optiondialog.cpp:991
+#: optiondialog.cpp:985
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "版本控制歷史合併"
 
-#: optiondialog.cpp:999 smalldialogs.cpp:399
+#: optiondialog.cpp:993 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
 msgstr "歷史開始的正則表達式："
 
-#: optiondialog.cpp:1007 smalldialogs.cpp:427
+#: optiondialog.cpp:1001 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "歷史項目開始的正則表達式："
 
-#: optiondialog.cpp:1023
+#: optiondialog.cpp:1017
 #, kde-format
 msgid "History merge sorting"
 msgstr "歷史合併排序方式"
 
-#: optiondialog.cpp:1026
+#: optiondialog.cpp:1020
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "以鍵值為版本控制歷史排序。"
 
-#: optiondialog.cpp:1036
+#: optiondialog.cpp:1030
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "歷史項目開始的鍵值排序依據："
 
-#: optiondialog.cpp:1046
+#: optiondialog.cpp:1040
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "開始合併時合併版本控制歷史"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1043
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr "在開始合併時執行版本控制歷史自動合併。"
 
-#: optiondialog.cpp:1053
+#: optiondialog.cpp:1047
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "歷史紀錄最高項目數："
 
-#: optiondialog.cpp:1057
+#: optiondialog.cpp:1051
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr "在指定數量後切斷。使用 -1 來指定無限個項目。"
 
-#: optiondialog.cpp:1061
+#: optiondialog.cpp:1055
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "測試您的正則表達式"
 
-#: optiondialog.cpp:1066
+#: optiondialog.cpp:1060
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "無關合併命令："
 
-#: optiondialog.cpp:1071
+#: optiondialog.cpp:1065
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2621,12 +2621,12 @@ msgstr ""
 "指定時，自動合併若沒有偵測到其他相關的變更，就會在完成後執行這個文稿。\n"
 "執行時的參數為：檔名1 檔名2 檔名3"
 
-#: optiondialog.cpp:1076
+#: optiondialog.cpp:1070
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "合併後沒有衝突時自動儲存並離開"
 
-#: optiondialog.cpp:1080
+#: optiondialog.cpp:1074
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2639,29 +2639,29 @@ msgstr ""
 "即可自動解決的話，則自動解決、儲存並離開。\n"
 "（類似命令列選項 \"--auto\"。）"
 
-#: optiondialog.cpp:1091 optiondialog.cpp:1092
+#: optiondialog.cpp:1085 optiondialog.cpp:1086
 #, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "資料夾"
 
-#: optiondialog.cpp:1112
+#: optiondialog.cpp:1106
 #, kde-format
 msgid "Recursive folders"
 msgstr "遞迴資料夾"
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1109
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "是否要分析子資料夾。"
 
-#: optiondialog.cpp:1117
+#: optiondialog.cpp:1111
 #, kde-format
 msgid "File pattern(s):"
 msgstr "檔案樣式："
 
-#: optiondialog.cpp:1123
+#: optiondialog.cpp:1117
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2673,12 +2673,12 @@ msgstr ""
 "萬用字元：'*' 與 '?'\n"
 "可以使用分隔符 ';' 來指定多個樣式"
 
-#: optiondialog.cpp:1128
+#: optiondialog.cpp:1122
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "檔案排除樣式："
 
-#: optiondialog.cpp:1134
+#: optiondialog.cpp:1128
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2690,12 +2690,12 @@ msgstr ""
 "萬用字元：'*' 與 '?'\n"
 "可以使用分隔符 ';' 來指定多個樣式"
 
-#: optiondialog.cpp:1139
+#: optiondialog.cpp:1133
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "資料夾排除樣式："
 
-#: optiondialog.cpp:1145
+#: optiondialog.cpp:1139
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2707,12 +2707,12 @@ msgstr ""
 "萬用字元：'*' 與 '?'\n"
 "可以使用分隔符 ';' 來指定多個樣式"
 
-#: optiondialog.cpp:1150
+#: optiondialog.cpp:1144
 #, kde-format
 msgid "Use Ignore File"
 msgstr "使用忽略檔案"
 
-#: optiondialog.cpp:1154
+#: optiondialog.cpp:1148
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2723,23 +2723,23 @@ msgstr ""
 "也排除版本控制工具在 .gitignore 等檔案中所忽略的檔案。\n"
 "在有本地忽略檔案時，排除的檔案可能依資料夾而不同。"
 
-#: optiondialog.cpp:1158
+#: optiondialog.cpp:1152
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "尋找隱藏檔案和資料夾"
 
-#: optiondialog.cpp:1161
+#: optiondialog.cpp:1155
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "尋找隱藏檔案和資料夾。"
 
-#: optiondialog.cpp:1164
+#: optiondialog.cpp:1158
 #, kde-format
 msgid "Follow file links"
 msgstr "跟隨檔案連結"
 
-#: optiondialog.cpp:1168
+#: optiondialog.cpp:1162
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2749,12 +2749,12 @@ msgstr ""
 "開啟：比對連結所指向的檔案。\n"
 "關閉：比對連結本身。"
 
-#: optiondialog.cpp:1172
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Follow folder links"
 msgstr "跟隨資料夾連結"
 
-#: optiondialog.cpp:1176
+#: optiondialog.cpp:1170
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2764,12 +2764,12 @@ msgstr ""
 "開啟：比對連結所指向的資料夾。\n"
 "關閉：比對連結本身。"
 
-#: optiondialog.cpp:1185
+#: optiondialog.cpp:1179
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "比對檔案名稱時區分大小寫"
 
-#: optiondialog.cpp:1189
+#: optiondialog.cpp:1183
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2781,12 +2781,12 @@ msgstr ""
 "設定這個選項來讓大小寫也必須一致。（預設是在 Windows 上關閉，其他平台則開"
 "啟。）"
 
-#: optiondialog.cpp:1193
+#: optiondialog.cpp:1187
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "載入時展開所有子資料夾"
 
-#: optiondialog.cpp:1197
+#: optiondialog.cpp:1191
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2796,12 +2796,12 @@ msgstr ""
 "開啟：開始進行資料夾比對時展開所有子資料夾。\n"
 "關閉：讓子資料夾繼續收起。"
 
-#: optiondialog.cpp:1201
+#: optiondialog.cpp:1195
 #, kde-format
 msgid "Skip folder status report"
 msgstr "跳過資料夾狀態回報"
 
-#: optiondialog.cpp:1205
+#: optiondialog.cpp:1199
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2811,28 +2811,28 @@ msgstr ""
 "開啟：不要顯示資料夾比對狀態。\n"
 "關閉：開啟時顯示狀態對話框。"
 
-#: optiondialog.cpp:1209
+#: optiondialog.cpp:1203
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "檔案比對模式"
 
-#: optiondialog.cpp:1214
+#: optiondialog.cpp:1208
 #, kde-format
 msgid "Binary comparison"
 msgstr "二進制比對"
 
-#: optiondialog.cpp:1216
+#: optiondialog.cpp:1210
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "各個檔案的二進制比對。（預設）"
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1213
 #, kde-format
 msgid "Full analysis"
 msgstr "完整分析"
 
-#: optiondialog.cpp:1221
+#: optiondialog.cpp:1215
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2842,12 +2842,12 @@ msgstr ""
 "進行完整分析，並在額外欄位顯示統計資訊。\n"
 "（比二進制比對還要慢，尤其是在二進制檔案上面會更慢）"
 
-#: optiondialog.cpp:1225
+#: optiondialog.cpp:1219
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "信任大小和變更日期（不安全）"
 
-#: optiondialog.cpp:1227
+#: optiondialog.cpp:1221
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2861,14 +2861,14 @@ msgstr ""
 "內容相同但變更時間不同的檔案會被當成不同的檔案。\n"
 "在透過較慢的網路進行比對，或是比對大資料夾的時候很有用。"
 
-#: optiondialog.cpp:1232
+#: optiondialog.cpp:1226
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
 "(unsafe)"
 msgstr "信任檔案大小和更新時間，而時間不符時使用二進制比對（不安全）"
 
-#: optiondialog.cpp:1234
+#: optiondialog.cpp:1228
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2881,12 +2881,12 @@ msgstr ""
 "變更時間不同而大小相同的時候，會嘗試使用二進制比對。\n"
 "在透過較慢的網路進行比對，或是比對大資料夾的時候很有用。"
 
-#: optiondialog.cpp:1239
+#: optiondialog.cpp:1233
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "信任大小（不安全）"
 
-#: optiondialog.cpp:1241
+#: optiondialog.cpp:1235
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2897,12 +2897,12 @@ msgstr ""
 "檔案大小相同就將它們當作相同。\n"
 "在透過較慢的網路進行比對（下載時日期被變更），或是比對大資料夾的時候很有用。"
 
-#: optiondialog.cpp:1248
+#: optiondialog.cpp:1242
 #, kde-format
 msgid "Synchronize folders"
 msgstr "同步資料夾"
 
-#: optiondialog.cpp:1252
+#: optiondialog.cpp:1246
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2913,12 +2913,12 @@ msgstr ""
 "提議在雙方資料夾儲存檔案，讓兩個資料夾在完成後內容會相符。\n"
 "只在不指定目的地，比對兩個資料夾時有用。"
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1252
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "忽略空白字元差異"
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1256
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2928,12 +2928,12 @@ msgstr ""
 "如果檔案只有空格上的差異，將它們當作是相同的。\n"
 "這只在選取完整分析的時候有用。"
 
-#: optiondialog.cpp:1268
+#: optiondialog.cpp:1262
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "複製新的，而非合併（不安全）"
 
-#: optiondialog.cpp:1272
+#: optiondialog.cpp:1266
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2945,12 +2945,12 @@ msgstr ""
 "（請只在您確定自己要使用這個選項時才利用它！）\n"
 "只在比對兩個資料夾時有用。"
 
-#: optiondialog.cpp:1277
+#: optiondialog.cpp:1271
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "備份檔案 (.orig)"
 
-#: optiondialog.cpp:1281
+#: optiondialog.cpp:1275
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2960,17 +2960,17 @@ msgstr ""
 "儲存檔案時如果會覆寫原有的舊檔案，會將舊檔案重新命名，加上「.orig」副檔名，而"
 "非實際刪除。"
 
-#: optiondialog.cpp:1290 optiondialog.cpp:1291
+#: optiondialog.cpp:1284 optiondialog.cpp:1285
 #, kde-format
 msgid "Regional Settings"
 msgstr "區域設定"
 
-#: optiondialog.cpp:1314
+#: optiondialog.cpp:1308
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "為所有項目使用同一個編碼："
 
-#: optiondialog.cpp:1318
+#: optiondialog.cpp:1312
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2980,17 +2980,17 @@ msgstr ""
 "啟用這個選項讓您只要變更第一個編碼就能變更全部的編碼。\n"
 "如果需要個別設定不同的編碼，則請停用此選項。"
 
-#: optiondialog.cpp:1322
+#: optiondialog.cpp:1316
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "注意：本地編碼是「%1」"
 
-#: optiondialog.cpp:1326
+#: optiondialog.cpp:1320
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "A 的檔案編碼："
 
-#: optiondialog.cpp:1333
+#: optiondialog.cpp:1327
 #, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
@@ -2999,32 +2999,32 @@ msgid ""
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 
-#: optiondialog.cpp:1336 optiondialog.cpp:1347 optiondialog.cpp:1358
+#: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
 #, kde-format
 msgid "Auto Detect"
 msgstr "自動偵測"
 
-#: optiondialog.cpp:1342
+#: optiondialog.cpp:1336
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "B 的檔案編碼："
 
-#: optiondialog.cpp:1353
+#: optiondialog.cpp:1347
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "C 的檔案編碼："
 
-#: optiondialog.cpp:1364
+#: optiondialog.cpp:1358
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "合併輸出和儲存用的檔案編碼："
 
-#: optiondialog.cpp:1369
+#: optiondialog.cpp:1363
 #, kde-format
 msgid "Auto Select"
 msgstr "自動選取"
 
-#: optiondialog.cpp:1373
+#: optiondialog.cpp:1367
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3033,17 +3033,17 @@ msgid ""
 "saving."
 msgstr ""
 
-#: optiondialog.cpp:1376
+#: optiondialog.cpp:1370
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "前置處理檔案的檔案編碼："
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1382
 #, kde-format
 msgid "Right To Left Language"
 msgstr "右到左語言"
 
-#: optiondialog.cpp:1392
+#: optiondialog.cpp:1386
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3053,22 +3053,22 @@ msgstr ""
 "某些語言的閱讀方向是右到左。\n"
 "這個設定會為右到左語言變更檢視器和編輯器。"
 
-#: optiondialog.cpp:1402
+#: optiondialog.cpp:1396
 #, kde-format
 msgid "Integration"
 msgstr "整合"
 
-#: optiondialog.cpp:1403
+#: optiondialog.cpp:1397
 #, kde-format
 msgid "Integration Settings"
 msgstr "整合設定"
 
-#: optiondialog.cpp:1424
+#: optiondialog.cpp:1418
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "要忽略的命令列選項："
 
-#: optiondialog.cpp:1430
+#: optiondialog.cpp:1424
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3081,12 +3081,12 @@ msgstr ""
 "可以用 ';' 來分開複數個數值。\n"
 "這會消除「未知選項」的錯誤。"
 
-#: optiondialog.cpp:1435
+#: optiondialog.cpp:1429
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "也透過 Escape 按鍵離開"
 
-#: optiondialog.cpp:1439
+#: optiondialog.cpp:1433
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3096,7 +3096,7 @@ msgstr ""
 "最快的離開方式。\n"
 "給習慣使用 Escape 鍵的人用。"
 
-#: optiondialog.cpp:1497
+#: optiondialog.cpp:1491
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "這會重設所有選項，不只是目前主題的選項。"
@@ -3587,25 +3587,28 @@ msgstr "貼上剪貼簿內容到目前位置"
 msgid "Select everything in current window"
 msgstr "選取目前視窗中的全部"
 
-#: Utils.cpp:69
+#: Utils.cpp:71
 #, kde-format
 msgid "Expecting space after closing quote."
 msgstr "在關閉引號後面應該要有空白。"
 
-#: Utils.cpp:72
+#: Utils.cpp:74
 #, kde-format
 msgid "Unmatched quote."
 msgstr "未配對的引號。"
 
-#: Utils.cpp:81
+#: Utils.cpp:83
 #, kde-format
 msgid "Unexpected quote character within argument."
 msgstr "在參數內有未預期中的引號。"
 
-#: Utils.cpp:88
+#: Utils.cpp:90
 #, kde-format
 msgid "No program specified."
 msgstr "沒有指定程式。"
+
+#~ msgid "Unicode"
+#~ msgstr "萬國碼"
 
 #~ msgid "Toggling toolbar..."
 #~ msgstr "切換工具列..."
