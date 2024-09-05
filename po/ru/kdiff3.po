@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-19 03:14+0000\n"
+"POT-Creation-Date: 2024-09-05 03:11+0000\n"
 "PO-Revision-Date: 2024-02-09 22:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -394,7 +394,7 @@ msgstr ""
 "хотите отменить все изменения и обновить содержание папок?"
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:332 pdiff.cpp:880 pdiff.cpp:1755 pdiff.cpp:1765
+#: mergeresultwindow.cpp:332 pdiff.cpp:863 pdiff.cpp:1738 pdiff.cpp:1748
 #, fuzzy, kde-format
 #| msgctxt "Error dialog caption"
 #| msgid "Warning"
@@ -1277,12 +1277,12 @@ msgstr "Ключ --auto игнорируется при сравнении па�
 msgid "Saving failed."
 msgstr "Не удалось произвести сохранение."
 
-#: kdiff3.cpp:566 pdiff.cpp:945
+#: kdiff3.cpp:566 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Не удалось открыть файлы:"
 
-#: kdiff3.cpp:575 pdiff.cpp:954
+#: kdiff3.cpp:575 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
 msgstr "Ошибка открытия файла"
@@ -1767,13 +1767,13 @@ msgstr "Режим папки/текст"
 msgid "Toggle Between Folder && Text View"
 msgstr "Папки/текст"
 
-#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:964
-#: pdiff.cpp:1033 pdiff.cpp:1069 pdiff.cpp:1078 pdiff.cpp:1136 pdiff.cpp:1144
+#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:947
+#: pdiff.cpp:1016 pdiff.cpp:1052 pdiff.cpp:1061 pdiff.cpp:1119 pdiff.cpp:1127
 #, kde-format
 msgid "Ready."
 msgstr "Готово."
 
-#: kdiff3.cpp:799 pdiff.cpp:1754
+#: kdiff3.cpp:799 pdiff.cpp:1737
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1789,12 +1789,12 @@ msgstr "Сохранить и выйти"
 msgid "Quit Without Saving"
 msgstr "Выйти без сохранения"
 
-#: kdiff3.cpp:810 pdiff.cpp:1765
+#: kdiff3.cpp:810 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Не удалось сохранить результат объединения"
 
-#: kdiff3.cpp:821 pdiff.cpp:879
+#: kdiff3.cpp:821 pdiff.cpp:862
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -2135,7 +2135,7 @@ msgstr ""
 "Вывод был изменён.\n"
 "Если вы продолжите, изменения будут утеряны."
 
-#: mergeresultwindow.cpp:774 pdiff.cpp:755
+#: mergeresultwindow.cpp:774 pdiff.cpp:738
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Все входные файлы одинаковы на двоичном уровне."
@@ -2146,7 +2146,7 @@ msgid "All input files contain the same text."
 msgstr "Все входные файлы содержат одинаковый текст."
 
 #: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788 pdiff.cpp:761 pdiff.cpp:765 pdiff.cpp:769
+#: mergeresultwindow.cpp:788 pdiff.cpp:744 pdiff.cpp:748 pdiff.cpp:752
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Файлы %1 и %2 одинаковы на двоичном уровне.\n"
@@ -3510,17 +3510,17 @@ msgstr ""
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Это сбросит абсолютно все параметры, а не только текущей вкладки."
 
-#: pdiff.cpp:107
+#: pdiff.cpp:85
 #, kde-format
 msgid "PreprocessorCmd: "
 msgstr "Предварительная команда:"
 
-#: pdiff.cpp:109
+#: pdiff.cpp:87
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
 msgstr "Следующие опции, которые вы выбрали, могут изменить данные:\n"
 
-#: pdiff.cpp:110
+#: pdiff.cpp:88
 #, kde-format
 msgid ""
 "\n"
@@ -3532,111 +3532,111 @@ msgstr ""
 "Вы хотите отключить эти параметры или продолжить с включенными этими "
 "параметрами?"
 
-#: pdiff.cpp:112
+#: pdiff.cpp:90
 #, kde-format
 msgid "Option Unsafe for Merging"
 msgstr "Опция небезопасна для объединения"
 
-#: pdiff.cpp:113
+#: pdiff.cpp:91
 #, kde-format
 msgid "Use These Options During Merge"
 msgstr "Использовать эти опции в процессе объединения"
 
-#: pdiff.cpp:114
+#: pdiff.cpp:92
 #, kde-format
 msgid "Disable Unsafe Options"
 msgstr "Отключить небезопасные"
 
-#: pdiff.cpp:137
+#: pdiff.cpp:118
 #, fuzzy, kde-format
 #| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "Загрузка A"
 
-#: pdiff.cpp:147
+#: pdiff.cpp:128
 #, fuzzy, kde-format
 #| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Загрузка A"
 
-#: pdiff.cpp:180 pdiff.cpp:220
+#: pdiff.cpp:161 pdiff.cpp:201
 #, fuzzy, kde-format
 #| msgid "Diff: A <-> B"
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Различие: A <-> B"
 
-#: pdiff.cpp:186 pdiff.cpp:266 pdiff.cpp:289
+#: pdiff.cpp:167 pdiff.cpp:247 pdiff.cpp:270
 #, fuzzy, kde-format
 #| msgid "Linediff: A <-> B"
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "Построчное сравнение: A <-> B"
 
-#: pdiff.cpp:205
+#: pdiff.cpp:186
 #, fuzzy, kde-format
 #| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "Загрузка A"
 
-#: pdiff.cpp:231
+#: pdiff.cpp:212
 #, fuzzy, kde-format
 #| msgid "Diff: A <-> C"
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Различие: A <-> C"
 
-#: pdiff.cpp:244
+#: pdiff.cpp:225
 #, fuzzy, kde-format
 #| msgid "Diff: B <-> C"
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Различие: B <-> C"
 
-#: pdiff.cpp:272 pdiff.cpp:294
+#: pdiff.cpp:253 pdiff.cpp:275
 #, fuzzy, kde-format
 #| msgid "Linediff: B <-> C"
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "Построчное сравнение: B <-> C"
 
-#: pdiff.cpp:278 pdiff.cpp:299
+#: pdiff.cpp:259 pdiff.cpp:280
 #, fuzzy, kde-format
 #| msgid "Linediff: A <-> C"
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Построчное сравнение: A <-> C"
 
-#: pdiff.cpp:323
+#: pdiff.cpp:306
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
 msgstr "Недостаточно памяти для завершения этой операции."
 
-#: pdiff.cpp:330
+#: pdiff.cpp:313
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr "Произошла внутренняя ошибка: %1"
 
-#: pdiff.cpp:357
+#: pdiff.cpp:340
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr "Файл различий содержит слишком много строк и будет пропущен."
 
-#: pdiff.cpp:757
+#: pdiff.cpp:740
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "Все входные файлы содержат одинаковый текст, но двоично не совпадают."
 
-#: pdiff.cpp:763 pdiff.cpp:767 pdiff.cpp:771
+#: pdiff.cpp:746 pdiff.cpp:750 pdiff.cpp:754
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "Файлы %1 и %2 имеют одинаковый текст, но двоично не совпадают.\n"
 
-#: pdiff.cpp:781
+#: pdiff.cpp:764
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some inputfiles don't seem to be pure textfiles.\n"
@@ -3651,17 +3651,17 @@ msgstr ""
 "Заметим, что объединение в KDiff3 не предназначено для двоичных данных.\n"
 "Продолжайте на свой страх и риск."
 
-#: pdiff.cpp:791
+#: pdiff.cpp:774
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:793
+#: pdiff.cpp:776
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:795
+#: pdiff.cpp:778
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some input characters could not be converted to valid unicode.\n"
@@ -3681,83 +3681,83 @@ msgstr ""
 "Не сохраняйте результат, если не уверены. Продолжайте на свой страх и риск.\n"
 "Сообщение касается файлов в %1."
 
-#: pdiff.cpp:881
+#: pdiff.cpp:864
 #, kde-format
 msgid "Abort"
 msgstr "Стоп"
 
-#: pdiff.cpp:882
+#: pdiff.cpp:865
 #, kde-format
 msgid "Continue Merging"
 msgstr "Продолжить"
 
-#: pdiff.cpp:887 pdiff.cpp:978
+#: pdiff.cpp:870 pdiff.cpp:961
 #, kde-format
 msgid "Opening files..."
 msgstr "Открытие файлов..."
 
-#: pdiff.cpp:1067
+#: pdiff.cpp:1050
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Вырезание в буфер обмена..."
 
-#: pdiff.cpp:1074
+#: pdiff.cpp:1057
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Копирование в буфер обмена..."
 
-#: pdiff.cpp:1083
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Вставка из буфера обмена..."
 
-#: pdiff.cpp:1203
+#: pdiff.cpp:1186
 #, kde-format
 msgid "Ok"
 msgstr "Ok"
 
-#: pdiff.cpp:1219
+#: pdiff.cpp:1202
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Перейти к последнему различию"
 
-#: pdiff.cpp:1533
+#: pdiff.cpp:1516
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1533
+#: pdiff.cpp:1516
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1756
+#: pdiff.cpp:1739
 #, kde-format
 msgid "Save && Continue"
 msgstr "Сохранить и продолжить"
 
-#: pdiff.cpp:1757
+#: pdiff.cpp:1740
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Продолжить без сохранения"
 
-#: pdiff.cpp:1955
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search complete."
 msgstr "Поиск завершён."
 
-#: pdiff.cpp:1955
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search Complete"
 msgstr "Поиск завершён"
 
-#: pdiff.cpp:2136
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ничего не выбрано ни в одном из входных окон diff."
 
-#: pdiff.cpp:2136
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Ошибка при добавлении вручную заданной области diff"

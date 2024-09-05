@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-19 03:14+0000\n"
+"POT-Creation-Date: 2024-09-05 03:11+0000\n"
 "PO-Revision-Date: 2009-03-20 10:56+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -391,7 +391,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:688 kdiff3.cpp:800 kdiff3.cpp:810 kdiff3.cpp:822
-#: mergeresultwindow.cpp:332 pdiff.cpp:880 pdiff.cpp:1755 pdiff.cpp:1765
+#: mergeresultwindow.cpp:332 pdiff.cpp:863 pdiff.cpp:1738 pdiff.cpp:1748
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1221,12 +1221,12 @@ msgstr "विकल्प --auto ल डिरेक्टरी तुलन�
 msgid "Saving failed."
 msgstr "सहेजे मं फेल."
 
-#: kdiff3.cpp:566 pdiff.cpp:945
+#: kdiff3.cpp:566 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "ए फाइल मन ल खोलना फेल:"
 
-#: kdiff3.cpp:575 pdiff.cpp:954
+#: kdiff3.cpp:575 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
 msgstr "फाइल खोले मं गलती"
@@ -1691,13 +1691,13 @@ msgstr "डिरेक्टरी अउ पाठ स्प्लिट स�
 msgid "Toggle Between Folder && Text View"
 msgstr "डिरेक्टरी अउ पाठ दृस्य के बीच टागल करव"
 
-#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:964
-#: pdiff.cpp:1033 pdiff.cpp:1069 pdiff.cpp:1078 pdiff.cpp:1136 pdiff.cpp:1144
+#: kdiff3.cpp:753 kdiff3.cpp:855 kdiff3.cpp:880 kdiff3.cpp:1140 pdiff.cpp:947
+#: pdiff.cpp:1016 pdiff.cpp:1052 pdiff.cpp:1061 pdiff.cpp:1119 pdiff.cpp:1127
 #, kde-format
 msgid "Ready."
 msgstr "तैयार."
 
-#: kdiff3.cpp:799 pdiff.cpp:1754
+#: kdiff3.cpp:799 pdiff.cpp:1737
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1713,12 +1713,12 @@ msgstr "सहेजव अउ बाहिर हों"
 msgid "Quit Without Saving"
 msgstr "सहेजे बिना बाहिर हों"
 
-#: kdiff3.cpp:810 pdiff.cpp:1765
+#: kdiff3.cpp:810 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "सम्मिलित करे जाय के परिनाम सहेजना फेल."
 
-#: kdiff3.cpp:821 pdiff.cpp:879
+#: kdiff3.cpp:821 pdiff.cpp:862
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2046,7 +2046,7 @@ msgstr ""
 "आउटपुट सुधारे जा गे हे.\n"
 "यदि आप मन जारी रखथो तहां आप मन के बदलाव खो जाही."
 
-#: mergeresultwindow.cpp:774 pdiff.cpp:755
+#: mergeresultwindow.cpp:774 pdiff.cpp:738
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "सब्बो इनपुट फाइल बाइनरी समान हे."
@@ -2057,7 +2057,7 @@ msgid "All input files contain the same text."
 msgstr "सब्बो इनपुट फाइल मन ल एके पाठ रखे हे."
 
 #: mergeresultwindow.cpp:780 mergeresultwindow.cpp:784
-#: mergeresultwindow.cpp:788 pdiff.cpp:761 pdiff.cpp:765 pdiff.cpp:769
+#: mergeresultwindow.cpp:788 pdiff.cpp:744 pdiff.cpp:748 pdiff.cpp:752
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr ""
@@ -3170,17 +3170,17 @@ msgstr ""
 msgid "This resets all options. Not only those of the current topic."
 msgstr "ये सब्बो विकल्प मन ल रीसेट करथे . सिरिफ उनको ही नइ जऊन अभी हाल के विसय मं हे. "
 
-#: pdiff.cpp:107
+#: pdiff.cpp:85
 #, kde-format
 msgid "PreprocessorCmd: "
 msgstr "प्री-प्रोसेसर-कमांड:"
 
-#: pdiff.cpp:109
+#: pdiff.cpp:87
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
 msgstr "निम्न विकल्प जऊन आप मन चुने हेओ मन डाटा ल बदल सकथो :\n"
 
-#: pdiff.cpp:110
+#: pdiff.cpp:88
 #, kde-format
 msgid ""
 "\n"
@@ -3188,111 +3188,111 @@ msgid ""
 "Do you want to disable these settings or continue with these settings active?"
 msgstr ""
 
-#: pdiff.cpp:112
+#: pdiff.cpp:90
 #, kde-format
 msgid "Option Unsafe for Merging"
 msgstr "सम्मिलित करे बर विकल्प असुरक्छित हे"
 
-#: pdiff.cpp:113
+#: pdiff.cpp:91
 #, kde-format
 msgid "Use These Options During Merge"
 msgstr "ए विकल्प मन के उपयोग सम्मिलित करे के समय करव"
 
-#: pdiff.cpp:114
+#: pdiff.cpp:92
 #, kde-format
 msgid "Disable Unsafe Options"
 msgstr "असुरक्छित विकल्प अक्छम करव"
 
-#: pdiff.cpp:137
+#: pdiff.cpp:118
 #, fuzzy, kde-format
 #| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "अ लोड करत हे"
 
-#: pdiff.cpp:147
+#: pdiff.cpp:128
 #, fuzzy, kde-format
 #| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "अ लोड करत हे"
 
-#: pdiff.cpp:180 pdiff.cpp:220
+#: pdiff.cpp:161 pdiff.cpp:201
 #, fuzzy, kde-format
 #| msgid "Diff: A <-> B"
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "डिफ: अ <-> ब"
 
-#: pdiff.cpp:186 pdiff.cpp:266 pdiff.cpp:289
+#: pdiff.cpp:167 pdiff.cpp:247 pdiff.cpp:270
 #, fuzzy, kde-format
 #| msgid "Linediff: A <-> B"
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "लाइनडिफ: अ <-> ब"
 
-#: pdiff.cpp:205
+#: pdiff.cpp:186
 #, fuzzy, kde-format
 #| msgid "Loading A"
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "अ लोड करत हे"
 
-#: pdiff.cpp:231
+#: pdiff.cpp:212
 #, fuzzy, kde-format
 #| msgid "Diff: A <-> C"
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "डिफ: अ <-> स"
 
-#: pdiff.cpp:244
+#: pdiff.cpp:225
 #, fuzzy, kde-format
 #| msgid "Diff: B <-> C"
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "डिफ: ब <-> स"
 
-#: pdiff.cpp:272 pdiff.cpp:294
+#: pdiff.cpp:253 pdiff.cpp:275
 #, fuzzy, kde-format
 #| msgid "Linediff: B <-> C"
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "लाइनडिफ: ब <-> स"
 
-#: pdiff.cpp:278 pdiff.cpp:299
+#: pdiff.cpp:259 pdiff.cpp:280
 #, fuzzy, kde-format
 #| msgid "Linediff: A <-> C"
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "लाइनडिफ: अ <-> स"
 
-#: pdiff.cpp:323
+#: pdiff.cpp:306
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
 msgstr ""
 
-#: pdiff.cpp:330
+#: pdiff.cpp:313
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr ""
 
-#: pdiff.cpp:357
+#: pdiff.cpp:340
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr ""
 
-#: pdiff.cpp:757
+#: pdiff.cpp:740
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 
-#: pdiff.cpp:763 pdiff.cpp:767 pdiff.cpp:771
+#: pdiff.cpp:746 pdiff.cpp:750 pdiff.cpp:754
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 
-#: pdiff.cpp:781
+#: pdiff.cpp:764
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3300,17 +3300,17 @@ msgid ""
 "Continue at your own risk."
 msgstr ""
 
-#: pdiff.cpp:791
+#: pdiff.cpp:774
 #, kde-format
 msgid ", B"
 msgstr ""
 
-#: pdiff.cpp:793
+#: pdiff.cpp:776
 #, kde-format
 msgid ", C"
 msgstr ""
 
-#: pdiff.cpp:795
+#: pdiff.cpp:778
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3319,83 +3319,83 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 
-#: pdiff.cpp:881
+#: pdiff.cpp:864
 #, kde-format
 msgid "Abort"
 msgstr "छोड़व"
 
-#: pdiff.cpp:882
+#: pdiff.cpp:865
 #, kde-format
 msgid "Continue Merging"
 msgstr "मिलाय जाना जारी रखव"
 
-#: pdiff.cpp:887 pdiff.cpp:978
+#: pdiff.cpp:870 pdiff.cpp:961
 #, kde-format
 msgid "Opening files..."
 msgstr "फाइल मन ल खोलत हे..."
 
-#: pdiff.cpp:1067
+#: pdiff.cpp:1050
 #, kde-format
 msgid "Cutting selection..."
 msgstr "चयन ल काटत हे..."
 
-#: pdiff.cpp:1074
+#: pdiff.cpp:1057
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "चुने हुए के नकल क्लिपबोर्ड मं बनात हे..."
 
-#: pdiff.cpp:1083
+#: pdiff.cpp:1066
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "क्लिपबोर्ड के चीज मन ल घुसात हे..."
 
-#: pdiff.cpp:1203
+#: pdiff.cpp:1186
 #, kde-format
 msgid "Ok"
 msgstr "ठीक"
 
-#: pdiff.cpp:1219
+#: pdiff.cpp:1202
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "आखरी डेल्टा मं जाव"
 
-#: pdiff.cpp:1533
+#: pdiff.cpp:1516
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1533
+#: pdiff.cpp:1516
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1756
+#: pdiff.cpp:1739
 #, kde-format
 msgid "Save && Continue"
 msgstr "सहेजव अउ जारी रखव"
 
-#: pdiff.cpp:1757
+#: pdiff.cpp:1740
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "सहेजे बिना जारी रखव"
 
-#: pdiff.cpp:1955
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search complete."
 msgstr "ढूंढना पूरा"
 
-#: pdiff.cpp:1955
+#: pdiff.cpp:1938
 #, kde-format
 msgid "Search Complete"
 msgstr "ढूंढना पूरा"
 
-#: pdiff.cpp:2136
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2136
+#: pdiff.cpp:2119
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr ""
