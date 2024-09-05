@@ -125,10 +125,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         setLockPainting(true);
     }
 
-    resetDiffData();
-
     if(bLoadFiles)
     {
+        resetDiffData();
         if(m_sd3->isEmpty())
             ProgressProxy::setMaxNofSteps(4); // Read 2 files, 1 comparison, 1 finediff
         else
@@ -159,6 +158,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     }
     else
     {
+        m_diff3LineList.clear();
+        mDiff3LineVector.clear();
+
         if(m_sd3->isEmpty())
             ProgressProxy::setMaxNofSteps(2); // 1 comparison, 1 finediff
         else
@@ -347,7 +349,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         m_diff3LineList.calcWhiteDiff3Lines(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), gOptions->ignoreComments());
         m_diff3LineList.calcDiff3LineVector(mDiff3LineVector);
     }
-    assert(bLoadFiles || m_diff3LineList.empty());
+
     // Calc needed lines for display
     try
     {
