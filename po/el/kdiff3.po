@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-03 00:41+0000\n"
+"POT-Creation-Date: 2024-09-06 00:42+0000\n"
 "PO-Revision-Date: 2021-06-14 16:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -400,7 +400,7 @@ msgstr ""
 "την εγκατάλειψη της συγχώνευσης και την επανασάρωση του φακέλου;"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:314 pdiff.cpp:732 pdiff.cpp:1520 pdiff.cpp:1530
+#: mergeresultwindow.cpp:314 pdiff.cpp:734 pdiff.cpp:1522 pdiff.cpp:1532
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1277,12 +1277,12 @@ msgstr "Η επιλογή --auto αγνοήθηκε για τη σύγκριση
 msgid "Saving failed."
 msgstr "Η αποθήκευση απέτυχε."
 
-#: kdiff3.cpp:719 pdiff.cpp:797
+#: kdiff3.cpp:719 pdiff.cpp:799
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Το άνοιγμα αυτών των αρχείων απέτυχε:"
 
-#: kdiff3.cpp:728 pdiff.cpp:806
+#: kdiff3.cpp:728 pdiff.cpp:808
 #, kde-format
 msgid "File open error"
 msgstr "Σφάλμα ανοίγματος αρχείου"
@@ -1719,13 +1719,13 @@ msgstr "Διαίρεση προβολής φακέλου && κειμένου"
 msgid "Toggle Between Folder && Text View"
 msgstr "Εναλλαγή μεταξύ προβολής φακέλου && κειμένου"
 
-#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:816
-#: pdiff.cpp:885 pdiff.cpp:921 pdiff.cpp:930 pdiff.cpp:988 pdiff.cpp:996
+#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:818
+#: pdiff.cpp:887 pdiff.cpp:923 pdiff.cpp:932 pdiff.cpp:990 pdiff.cpp:998
 #, kde-format
 msgid "Ready."
 msgstr "Έτοιμο."
 
-#: kdiff3.cpp:923 pdiff.cpp:1519
+#: kdiff3.cpp:923 pdiff.cpp:1521
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Το αποτέλεσμα της συγχώνευσης δεν έχει αποθηκευτεί."
@@ -1740,12 +1740,12 @@ msgstr "Αποθήκευση && έξοδος"
 msgid "Quit Without Saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-#: kdiff3.cpp:934 pdiff.cpp:1530
+#: kdiff3.cpp:934 pdiff.cpp:1532
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Αποτυχία αποθήκευσης του αποτελέσματος συγχώνευσης."
 
-#: kdiff3.cpp:945 pdiff.cpp:731
+#: kdiff3.cpp:945 pdiff.cpp:733
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2081,7 +2081,7 @@ msgstr ""
 "Η έξοδος έχει τροποποιηθεί.\n"
 "Αν συνεχίσετε οι αλλαγές σας θα χαθούν."
 
-#: mergeresultwindow.cpp:756 pdiff.cpp:607
+#: mergeresultwindow.cpp:756 pdiff.cpp:609
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Όλα τα αρχεία εισόδου είναι δυαδικά ίσα."
@@ -2092,7 +2092,7 @@ msgid "All input files contain the same text."
 msgstr "Όλα τα αρχεία εισόδου περιέχουν το ίδιο κείμενο."
 
 #: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
-#: mergeresultwindow.cpp:770 pdiff.cpp:613 pdiff.cpp:617 pdiff.cpp:621
+#: mergeresultwindow.cpp:770 pdiff.cpp:615 pdiff.cpp:619 pdiff.cpp:623
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Τα αρχεία %1 και %2 είναι δυαδικά ίσα.\n"
@@ -3487,98 +3487,98 @@ msgstr "Χρήση αυτών των επιλογών κατά τη συγχών
 msgid "Disable Unsafe Options"
 msgstr "Απενεργοποίηση μη ασφαλών επιλογών"
 
-#: pdiff.cpp:138
+#: pdiff.cpp:137
 #, fuzzy, kde-format
 #| msgid "Loading A: %1"
 msgctxt "Status message"
 msgid "Loading A: %1"
 msgstr "Φόρτωση του Α: %1"
 
-#: pdiff.cpp:148
+#: pdiff.cpp:147
 #, fuzzy, kde-format
 #| msgid "Loading B: %1"
 msgctxt "Status message"
 msgid "Loading B: %1"
 msgstr "Φόρτωση του Β: %1"
 
-#: pdiff.cpp:181 pdiff.cpp:221
+#: pdiff.cpp:183 pdiff.cpp:223
 #, fuzzy, kde-format
 #| msgid "Diff: A <-> B"
 msgctxt "Status message"
 msgid "Diff: A <-> B"
 msgstr "Διαφορά: Α <-> Β"
 
-#: pdiff.cpp:187 pdiff.cpp:267 pdiff.cpp:290
+#: pdiff.cpp:189 pdiff.cpp:269 pdiff.cpp:292
 #, fuzzy, kde-format
 #| msgid "Linediff: A <-> B"
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
 msgstr "Διαφορά γραμμής: Α <-> Β"
 
-#: pdiff.cpp:206
+#: pdiff.cpp:208
 #, fuzzy, kde-format
 #| msgid "Loading C: %1"
 msgctxt "Status message"
 msgid "Loading C: %1"
 msgstr "Φόρτωση του Γ: %1"
 
-#: pdiff.cpp:232
+#: pdiff.cpp:234
 #, fuzzy, kde-format
 #| msgid "Diff: A <-> C"
 msgctxt "Status message"
 msgid "Diff: A <-> C"
 msgstr "Διαφορά: Α <-> Γ"
 
-#: pdiff.cpp:245
+#: pdiff.cpp:247
 #, fuzzy, kde-format
 #| msgid "Diff: B <-> C"
 msgctxt "Status message"
 msgid "Diff: B <-> C"
 msgstr "Διαφορά: Β <-> Γ"
 
-#: pdiff.cpp:273 pdiff.cpp:295
+#: pdiff.cpp:275 pdiff.cpp:297
 #, fuzzy, kde-format
 #| msgid "Linediff: B <-> C"
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
 msgstr "Διαφορά γραμμής: Β <-> Γ"
 
-#: pdiff.cpp:279 pdiff.cpp:300
+#: pdiff.cpp:281 pdiff.cpp:302
 #, fuzzy, kde-format
 #| msgid "Linediff: A <-> C"
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
 msgstr "Διαφορά γραμμής: Α <-> Γ"
 
-#: pdiff.cpp:324
+#: pdiff.cpp:326
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
 msgstr ""
 
-#: pdiff.cpp:331
+#: pdiff.cpp:333
 #, kde-format
 msgid "An internal error occurred: %1"
 msgstr ""
 
-#: pdiff.cpp:358
+#: pdiff.cpp:360
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
 msgstr ""
 
-#: pdiff.cpp:609
+#: pdiff.cpp:611
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr ""
 "Όλα τα αρχεία εισόδου περιέχουν το ίδιο κείμενο, αλλά δεν είναι δυαδικά ίσα."
 
-#: pdiff.cpp:615 pdiff.cpp:619 pdiff.cpp:623
+#: pdiff.cpp:617 pdiff.cpp:621 pdiff.cpp:625
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "Τα αρχεία %1 και %2 περιέχουν το ίδιο κείμενο, αλλά δεν είναι δυαδικά ίσα.\n"
 
-#: pdiff.cpp:633
+#: pdiff.cpp:635
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3589,17 +3589,17 @@ msgstr ""
 "Σημειώστε ότι το KDiff3-merge δε φτιάχτηκε για δυαδικά δεδομένα.\n"
 "Αν συνεχίσετε θα είναι με δική σας ευθύνη."
 
-#: pdiff.cpp:643
+#: pdiff.cpp:645
 #, kde-format
 msgid ", B"
 msgstr ", Β"
 
-#: pdiff.cpp:645
+#: pdiff.cpp:647
 #, kde-format
 msgid ", C"
 msgstr ", Γ"
 
-#: pdiff.cpp:647
+#: pdiff.cpp:649
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3615,83 +3615,83 @@ msgstr ""
 "ευθύνη.\n"
 "Τα επηρεαζόμενα αρχεία εισόδου είναι στο %1."
 
-#: pdiff.cpp:733
+#: pdiff.cpp:735
 #, kde-format
 msgid "Abort"
 msgstr "Εγκατάλειψη"
 
-#: pdiff.cpp:734
+#: pdiff.cpp:736
 #, kde-format
 msgid "Continue Merging"
 msgstr "Συνέχεια συγχώνευσης"
 
-#: pdiff.cpp:739 pdiff.cpp:830
+#: pdiff.cpp:741 pdiff.cpp:832
 #, kde-format
 msgid "Opening files..."
 msgstr "Άνοιγμα αρχείων..."
 
-#: pdiff.cpp:919
+#: pdiff.cpp:921
 #, kde-format
 msgid "Cutting selection..."
 msgstr "Αποκοπή επιλογής..."
 
-#: pdiff.cpp:926
+#: pdiff.cpp:928
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "Αντιγραφή της επιλογής στο πρόχειρο..."
 
-#: pdiff.cpp:935
+#: pdiff.cpp:937
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "Εισαγωγή των περιεχομένων του προχείρου..."
 
-#: pdiff.cpp:1020
+#: pdiff.cpp:1022
 #, kde-format
 msgid "Ok"
 msgstr "Εντάξει"
 
-#: pdiff.cpp:1036
+#: pdiff.cpp:1038
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgid "Go to Line"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: pdiff.cpp:1298
+#: pdiff.cpp:1300
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Αναδίπλωση λέξεων (Η ακύρωση απενεργοποιεί την αναδίπλωση λέξεων)"
 
-#: pdiff.cpp:1298
+#: pdiff.cpp:1300
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Υπολογισμός μέγιστου πλάτους για την οριζόντια γραμμήκύλισης"
 
-#: pdiff.cpp:1521
+#: pdiff.cpp:1523
 #, kde-format
 msgid "Save && Continue"
 msgstr "Αποθήκευση && συνέχεια"
 
-#: pdiff.cpp:1522
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Συνέχεια χωρίς αποθήκευση"
 
-#: pdiff.cpp:1713
+#: pdiff.cpp:1715
 #, kde-format
 msgid "Search complete."
 msgstr "Η αναζήτηση ολοκληρώθηκε."
 
-#: pdiff.cpp:1713
+#: pdiff.cpp:1715
 #, kde-format
 msgid "Search Complete"
 msgstr "Η αναζήτηση ολοκληρώθηκε"
 
-#: pdiff.cpp:1894
+#: pdiff.cpp:1896
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Δεν έχει επιλεγεί τίποτα σε κανένα παράθυρο εισαγωγής διαφορών."
 
-#: pdiff.cpp:1894
+#: pdiff.cpp:1896
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Σφάλμα κατά την προσθήκη χειροκίνητου εύρους διαφορών"
