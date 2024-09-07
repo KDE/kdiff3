@@ -149,11 +149,12 @@ class DiffTextWindowData
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList)
     {
+        //wait for all helper threads to finish
+        reset();
         m_filename = filename;
         m_pLineData = pLineData;
         m_size = size;
         mDiff3LineVector = pDiff3LineVector;
-        m_diff3WrapLineVector.clear();
         m_pManualDiffHelpList = pManualDiffHelpList;
 
         mTextEncoding = QString::fromLatin1(encoding);
