@@ -341,7 +341,7 @@ void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
             files[0].changed[files[0].realindexes[xoff++]] = true;
     else
     {
-        GNULineRef c;
+        [[maybe_unused]] GNULineRef c;
         partition part;
 
         /* Find a point of correspondence in the middle of the files.  */
