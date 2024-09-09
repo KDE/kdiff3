@@ -4,11 +4,7 @@
 
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
-cmake_minimum_required(VERSION 3.22...3.29 FATAL_ERROR)
-if(POLICY CMP0167)
-    #compatibailty shim remove when craft build issues are resolved
-    cmake_policy(SET CMP0167 OLD)
-endif()
+cmake_minimum_required(VERSION 3.22...3.30 FATAL_ERROR)
 
 project(kdiff3 VERSION 1.11.70)
 
