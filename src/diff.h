@@ -18,6 +18,7 @@
 
 #include <list>
 #include <memory>
+#include <optional>
 #include <vector>
 
 #include <QSharedPointer>
@@ -167,6 +168,13 @@ class LineData
     bool bSkipable = false;//TODO: Move me
 
   public:
+    //Enable default copy and move constructors.
+    LineData(const LineData&) = default;
+    LineData(LineData&&) = default;
+    LineData& operator=(const LineData&) = default;
+    LineData& operator=(LineData&&) = default;
+
+
     inline LineData(const QSharedPointer<QString>& buffer, const QtSizeType inOffset, QtSizeType inSize = 0, QtSizeType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
@@ -327,21 +335,18 @@ class Diff3Line
                bWhiteLineA == d3l.bWhiteLineA && bWhiteLineB == d3l.bWhiteLineB && bWhiteLineC == d3l.bWhiteLineC;
     }
 
-    [[nodiscard]] const LineData& getLineData(e_SrcSelector src) const
-    {
-        assert(m_pDiffBufferInfo != nullptr);
-        assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
-        //Use at() here not [] to avoid using really weird syntax
-        if(src == e_SrcSelector::A && lineA.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineA);
-        if(src == e_SrcSelector::B && lineB.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineB);
-        return m_pDiffBufferInfo->getLineData(src)->at(lineC);
-    }
-
     [[nodiscard]] const QString getString(const e_SrcSelector src) const
     {
-        const LineData& pld = getLineData(src);
+        try
+        {
+            const LineData pld = getLineData(src).value();
 
-        return pld.getLine();
+            return pld.getLine();
+        }
+        catch(const std::bad_optional_access& e)
+        {
+            return QString();
+        }
     }
 
     [[nodiscard]] LineRef getLineInFile(e_SrcSelector src) const
@@ -363,6 +368,18 @@ class Diff3Line
                      ChangeFlags& changed, ChangeFlags& changed2) const;
 
   private:
+    [[nodiscard]]  std::optional<const LineData> getLineData(e_SrcSelector src) const
+    {
+        assert(m_pDiffBufferInfo != nullptr);
+        assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
+        //Use at() here not [] to avoid using really weird syntax
+        if(src == e_SrcSelector::A && lineA.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineA);
+        if(src == e_SrcSelector::B && lineB.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineB);
+        if(src == e_SrcSelector::C && lineC.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineC);
+
+        return {};
+    }
+
     void setFineDiff(const e_SrcSelector selector, const std::shared_ptr<DiffList>& pDiffList)
     {
         assert(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);

@@ -22,6 +22,7 @@
 #include "Utils.h"
 
 #include <memory>
+#include <optional>
 
 #include <QAction>
 #include <QApplication>
@@ -1040,7 +1041,7 @@ void MergeResultWindow::collectHistoryInformation(
     Diff3LineList::const_iterator id3l = historyRange.start;
     QString historyLead;
 
-    historyLead = Utils::calcHistoryLead(id3l->getLineData(src).getLine());
+    historyLead = Utils::calcHistoryLead(id3l->getString(src));
 
     QRegularExpression historyStart(gOptions->m_historyStartRegExp);
     if(id3l == historyRange.end)
@@ -1058,8 +1059,8 @@ void MergeResultWindow::collectHistoryInformation(
 
     for(; id3l != historyRange.end; ++id3l)
     {
-        const LineData& pld = id3l->getLineData(src);
-        const QString& oriLine = pld.getLine();
+        const QString& oriLine = id3l->getString(src);
+
         if(historyLead.isEmpty()) historyLead = Utils::calcHistoryLead(oriLine);
         QString sLine = oriLine.mid(historyLead.length());
         match = newHistoryEntry.match(sLine);
