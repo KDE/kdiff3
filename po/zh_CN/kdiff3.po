@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-08 00:41+0000\n"
+"POT-Creation-Date: 2024-09-09 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 15:59\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -122,7 +122,7 @@ msgstr "文件 %1：行不可用"
 msgid "Encoding:"
 msgstr "编码："
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2803 optiondialog.cpp:789
+#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "行尾格式："
@@ -137,12 +137,12 @@ msgstr "A (被比较)"
 msgid "Encoding: %1"
 msgstr "编码：%1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2848
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -362,7 +362,7 @@ msgid ""
 msgstr "您正在合并文件夹，确定要放弃合并并重新扫描文件夹吗？"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:314 pdiff.cpp:730 pdiff.cpp:1518 pdiff.cpp:1528
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1518 pdiff.cpp:1528
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1868,57 +1868,57 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "正在比较文件"
 
-#: mergeresultwindow.cpp:144
+#: mergeresultwindow.cpp:145
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "总是选择 A"
 
-#: mergeresultwindow.cpp:145
+#: mergeresultwindow.cpp:146
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "总是选择 B"
 
-#: mergeresultwindow.cpp:146
+#: mergeresultwindow.cpp:147
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "总是选择 C"
 
-#: mergeresultwindow.cpp:147
+#: mergeresultwindow.cpp:148
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "所有未解决冲突均选择 A"
 
-#: mergeresultwindow.cpp:148
+#: mergeresultwindow.cpp:149
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "所有未解决冲突均选择 B"
 
-#: mergeresultwindow.cpp:149
+#: mergeresultwindow.cpp:150
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "所有未解决冲突均选择 C"
 
-#: mergeresultwindow.cpp:150
+#: mergeresultwindow.cpp:151
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "所有未解决空白字符冲突均选择 A"
 
-#: mergeresultwindow.cpp:151
+#: mergeresultwindow.cpp:152
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "所有未解决空白字符冲突均选择 B"
 
-#: mergeresultwindow.cpp:152
+#: mergeresultwindow.cpp:153
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "所有未解决空白字符冲突均选择 C"
 
-#: mergeresultwindow.cpp:248
+#: mergeresultwindow.cpp:249
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "剩余冲突数：%1(其中 %2 项为空白字符)"
 
-#: mergeresultwindow.cpp:312
+#: mergeresultwindow.cpp:313
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -1927,29 +1927,29 @@ msgstr ""
 "已修改输出。\n"
 "如果您继续您的更改将丢失。"
 
-#: mergeresultwindow.cpp:756 pdiff.cpp:605
+#: mergeresultwindow.cpp:757 pdiff.cpp:605
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "全部输入文件二进制数据相同。"
 
-#: mergeresultwindow.cpp:758
+#: mergeresultwindow.cpp:759
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "全部输入文件包含相同文本。"
 
-#: mergeresultwindow.cpp:762 mergeresultwindow.cpp:766
-#: mergeresultwindow.cpp:770 pdiff.cpp:611 pdiff.cpp:615 pdiff.cpp:619
+#: mergeresultwindow.cpp:763 mergeresultwindow.cpp:767
+#: mergeresultwindow.cpp:771 pdiff.cpp:611 pdiff.cpp:615 pdiff.cpp:619
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "文件 %1 和 %2 二进制数据相同。\n"
 
-#: mergeresultwindow.cpp:764 mergeresultwindow.cpp:768
-#: mergeresultwindow.cpp:772
+#: mergeresultwindow.cpp:765 mergeresultwindow.cpp:769
+#: mergeresultwindow.cpp:773
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "文件 %1 和 %2 文本相同。\n"
 
-#: mergeresultwindow.cpp:776
+#: mergeresultwindow.cpp:777
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -1962,27 +1962,27 @@ msgstr ""
 "未解决冲突数：%3\n"
 "%4"
 
-#: mergeresultwindow.cpp:782
+#: mergeresultwindow.cpp:783
 #, kde-format
 msgid "Conflicts"
 msgstr "冲突"
 
-#: mergeresultwindow.cpp:1523
+#: mergeresultwindow.cpp:1524
 #, kde-format
 msgid "<No src line>"
 msgstr "<此行无源文件中的内容>"
 
-#: mergeresultwindow.cpp:1531
+#: mergeresultwindow.cpp:1532
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<合并冲突 (仅空白字符)>"
 
-#: mergeresultwindow.cpp:1533 mergeresultwindow.cpp:2406
+#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<合并冲突>"
 
-#: mergeresultwindow.cpp:2628
+#: mergeresultwindow.cpp:2629
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -1991,13 +1991,13 @@ msgstr ""
 "尚未解决全部冲突。\n"
 "文件未保存。"
 
-#: mergeresultwindow.cpp:2630 mergeresultwindow.cpp:2639
+#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr ""
 
-#: mergeresultwindow.cpp:2637
+#: mergeresultwindow.cpp:2638
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2007,7 +2007,7 @@ msgstr ""
 "有一处换行符冲突，请手动选择一种换行符风格。\n"
 "文件未保存。"
 
-#: mergeresultwindow.cpp:2651
+#: mergeresultwindow.cpp:2652
 #, kde-format
 msgid ""
 "\n"
@@ -2018,47 +2018,47 @@ msgstr ""
 "\n"
 "创建备份失败，文件未保存。"
 
-#: mergeresultwindow.cpp:2651 mergeresultwindow.cpp:2695
+#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
 #, kde-format
 msgid "File Save Error"
 msgstr "文件保存错误"
 
-#: mergeresultwindow.cpp:2695
+#: mergeresultwindow.cpp:2696
 #, kde-format
 msgid "Error while writing."
 msgstr "写入时出错。"
 
-#: mergeresultwindow.cpp:2775
+#: mergeresultwindow.cpp:2776
 #, kde-format
 msgid "Output:"
 msgstr "输出："
 
-#: mergeresultwindow.cpp:2788 mergeresultwindow.cpp:2971
+#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2972
 #, kde-format
 msgid "[Modified]"
 msgstr "[已修改]"
 
-#: mergeresultwindow.cpp:2795
+#: mergeresultwindow.cpp:2796
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "保存所用编码："
 
-#: mergeresultwindow.cpp:2895
+#: mergeresultwindow.cpp:2896
 #, kde-format
 msgid "Conflict"
 msgstr "冲突"
 
-#: mergeresultwindow.cpp:2918
+#: mergeresultwindow.cpp:2919
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "解码 A：%1"
 
-#: mergeresultwindow.cpp:2920
+#: mergeresultwindow.cpp:2921
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "解码 B：%1"
 
-#: mergeresultwindow.cpp:2922
+#: mergeresultwindow.cpp:2923
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "解码 C：%1"
