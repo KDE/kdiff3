@@ -1,3 +1,13 @@
+Version 1.11.4 - 2024
+===========================
+*fix BOM handling regression.
+*fix crash in  Diff3Line::getLineData when doing history check for nonexistent lines.
+*fix crash on some setups that create 0 height widgets when no data is loaded.
+
+Version 1.11.3 - 2024
+===========================
+--aborted broken BOM handling
+
 Version 1.11.2 - 2024
 ===========================
 *Fixed encoding handling for non-UTF encodings

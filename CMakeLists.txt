@@ -5,8 +5,9 @@
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
+cmake_policy(VERSION 3.19...3.30)
 
-project(kdiff3 VERSION 1.11.3)
+project(kdiff3 VERSION 1.11.4)
 
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
