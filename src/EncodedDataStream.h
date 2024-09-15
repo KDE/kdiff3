@@ -28,23 +28,7 @@ class EncodedDataStream: public QDataStream
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
 
-    //Let the compiler choose the optimal solution based on c++ rules.
     inline void setEncoding(const QByteArray &inEncoding) noexcept
-    {
-        assert(!inEncoding.isEmpty());
-        if(inEncoding == "UTF-8-BOM")
-        {
-            mGenerateBOM = true;
-            mEncoding = "UTF-8";
-        }
-        else
-        {
-            mGenerateBOM = inEncoding.startsWith("UTF") && !inEncoding.endsWith("-8");
-            mEncoding = inEncoding;
-        }
-    };
-
-    inline void setEncoding(const QByteArray &&inEncoding) noexcept
     {
         assert(!inEncoding.isEmpty());
         if(inEncoding == "UTF-8-BOM")
