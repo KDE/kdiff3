@@ -6,7 +6,6 @@ find_package(
     REQUIRED
     COMPONENTS
     Test
-    Core5Compat
 )
 
 add_definitions(-DAUTOTEST)
@@ -23,12 +22,12 @@ ecm_add_test(commentparser.cpp ../CommentParser.cpp
 
 ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CompositeIgnoreList.cpp ../Logging.cpp
     TEST_NAME "cvsignorelisttest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets
+    LINK_LIBRARIES ICU::uc Qt::Test Qt::Gui Qt::Widgets
 )
 
 ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp ../Logging.cpp
     TEST_NAME "fileaccesstest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets
+    LINK_LIBRARIES ICU::uc Qt::Test Qt::Gui Qt::Widgets
 )
 
 ecm_add_test(combinertest.cpp
@@ -43,25 +42,25 @@ ecm_add_test(CompositeIgnoreListTest.cpp ../CompositeIgnoreList.cpp
 
 ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "GitIgnoreListTest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets
+    LINK_LIBRARIES ICU::uc Qt::Test Qt::Gui Qt::Widgets
 )
 
 ecm_add_test(datareadtest.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "datareadtest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
+    LINK_LIBRARIES ICU::uc Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
 )
 
 ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
     TEST_NAME "difftest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets  KF${KF_MAJOR_VERSION}::ConfigCore
+    LINK_LIBRARIES  ICU::uc Qt::Test Qt::Gui Qt::Widgets  KF${KF_MAJOR_VERSION}::ConfigCore
 )
 
 ecm_add_test(Diff3LineTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp
     TEST_NAME "diff3linetest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
+    LINK_LIBRARIES ICU::uc Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
 )
 
 ecm_add_test(ManualDiffHelpListTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp
     TEST_NAME "manualdiffhelplisttest"
-    LINK_LIBRARIES Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
+    LINK_LIBRARIES ICU::uc Qt::Test Qt::Gui Qt::Widgets KF${KF_MAJOR_VERSION}::ConfigCore
 )

@@ -14,6 +14,9 @@
 #include "TypeUtils.h"
 
 #include <set>
+#include <unicode/ucnv.h>
+//#include <unicode/ucnv_cb.h>
+#include <unicode/ucnv_err.h>
 
 #include <QString>
 #include <QStringList>
@@ -187,17 +190,31 @@ QString Utils::urlToString(const QUrl &url)
 /*
     QStringConverter::availableCodecs() returns codecs that are from our perspective duplicates or
     are specialized single purpose codecs. Additionally Qt un-helpfully adds "Locale" to the list.
-    A part of this the nature of how ICU handles coniguration for codecs.
+
 */
-QStringList Utils::availableCodecs()
-{
-    const std::set<QString> ignored = { "Adobe-Standard-Encoding", "IMAP-mailbox-name", "x11-compound-text","UTF-7", "Locale" };
-    const QRegularExpression regExp(",|_");
-    QStringList result = QStringConverter::availableCodecs();
+QStringList Utils::availableCodecs(){
+    const std::set<QString> ignored = { "Adobe-Standard-Encoding", "Extended_UNIX_Code_Packed_Format_for_Japanese","UTF-7" };
+    const QRegularExpression regExp(",");
+    qint32 codecCount = ucnv_countAvailable();
+    QStringList result;
+
     regExp.optimize();
-    auto filter = [&regExp, &ignored](const QString& name) {
-        return name.contains(regExp) || ignored.find(name) != ignored.cend();
-    };
-    result.erase(std::remove_if(result.begin(), result.end(), filter), result.end());
+    result.reserve(codecCount);
+    for(qint32 i = 0; i < codecCount; ++i)
+    {
+        UErrorCode status = U_ZERO_ERROR;
+        const char* icuName = ucnv_getAvailableName(i);
+        const char* standardName = ucnv_getStandardName(icuName, "IANA", &status);
+
+        if(U_FAILURE(status) || !standardName) {
+            continue;
+        }
+
+        const QString name = QString::fromLatin1(standardName);
+        if(ignored.find(name) != ignored.cend())
+            continue;
+
+        result.push_back(name);
+    }
     return result;
 }

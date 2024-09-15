@@ -67,6 +67,8 @@ find_package(Boost 1.82 REQUIRED)
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
 
+find_package(ICU 70.0 COMPONENTS uc i18n REQUIRED)
+
 find_package(
     Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION}
     REQUIRED
