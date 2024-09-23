@@ -360,10 +360,6 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
 
             fileNameIn1 = m_tempInputFileName;
         }
-        if(bAutoDetect)
-        {
-            mEncoding = detectEncoding(fileNameIn1).value_or(encoding);
-        }
     }
     else // The input was set via setData(), probably from clipboard.
     {
@@ -375,6 +371,12 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
         fileNameIn1 = m_tempInputFileName;
         mEncoding = "UTF-8";
     }
+
+    if(bAutoDetect)
+    {
+        mEncoding = detectEncoding(fileNameIn1).value_or(encoding);
+    }
+
     QByteArray pEncoding1 = getEncoding();
     QByteArray pEncoding2 = getEncoding();
     const QString overSizedFile = i18nc("Error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1);
