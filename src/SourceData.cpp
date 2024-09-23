@@ -579,8 +579,6 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
     m_eLineEndStyle = eLineEndStyleUndefined;
 
     QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes).value_or(encoding);
-    if(pCodec != encoding)
-        skipBytes = 0;
 
     if(mDataSize - skipBytes > limits<qint32>::max())
     {
@@ -595,7 +593,6 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
         mHasBOM = skipBytes != 0;
         ds.setEncoding(encoding);
-        ds.setGenerateByteOrderMark(skipBytes != 0);
 
         m_bIncompleteConversion = false;
         m_unicodeBuf->clear();
