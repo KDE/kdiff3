@@ -76,7 +76,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 
 qint32 main(qint32 argc, char* argv[])
 {
-    constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
+    constexpr QLatin1String appName("kdiff3");
     //Syncronize qt HDPI behavoir on all versions/platforms
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
