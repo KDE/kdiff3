@@ -91,7 +91,7 @@ qint32 main(qint32 argc, char* argv[])
     appVersion += i18nc("Program version info.", " (64 bit)");
 
     const QString description = i18n("Tool for Comparison and Merge of Files and Folders");
-    const QString copyright = i18n("(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port");
+    const QString copyright = i18n(u8"©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port");
     const QString homePage = QStringLiteral("https://apps.kde.org/kdiff3");
 
     KAboutData aboutData(appName, i18nName,
