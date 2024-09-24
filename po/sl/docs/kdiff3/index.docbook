@@ -1,0 +1,4018 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Slovenian "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Priročnik za &kdiff3;</title>
+
+<authorgroup>
+  <othercredit role="developer"
+><firstname
+>Michael</firstname
+> <surname
+>Reeves</surname
+> <affiliation
+><address
+> <email
+>reeves.87@gmail.com</email>
+    </address
+></affiliation>
+  </othercredit>
+  <othercredit role="developer"
+><firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+> <affiliation
+><address
+> <email
+>joachim.eibl at gmx.de</email>
+    </address
+></affiliation>
+  </othercredit>
+<othercredit role="translator"
+><firstname
+>Matjaž</firstname
+><surname
+>Jeran</surname
+><affiliation
+><address
+><email
+>matjaz.jeran@amis.net</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2002-2007</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<copyright>
+<year
+>2017-2019</year>
+<holder
+>Michael Reeves</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>23.12.2023</date>
+<releaseinfo
+>1.11.0</releaseinfo>
+
+
+<abstract>
+<para
+>&kdiff3; je orodje za razlikovanje in spajanje datotek in map, ki <itemizedlist>
+<listitem
+><para
+>primerja in združuje dve ali tri datoteke ali mape za vnos besedil,</para
+></listitem>
+<listitem
+><para
+>prikazuje razlike vrstico po vrstici in znak po znaku (!),</para
+></listitem>
+<listitem
+><para
+>zagotavlja samodejno zlivanje,</para
+></listitem>
+<listitem
+><para
+>ima urejevalnik za udobno reševanje sporov zlivanja,</para
+></listitem>
+<listitem
+><para
+>zagotavlja preglednost omrežja prek KIO,</para
+></listitem>
+<listitem
+><para
+>ima možnosti za označevanje ali skrivanje sprememb v belem prostoru ali komentarjih,</para
+></listitem>
+<listitem
+><para
+>podpira Unicode, UTF-8 in druga kodiranja datotek,</para
+></listitem>
+<listitem
+><para
+>natisne razlike,</para
+></listitem>
+<listitem
+><para
+>podpira združevanje ključnih besed in zgodovine nadzora različic.</para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Ta dokument opisuje &kdiff3;-različico 1.12. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>diff</keyword>
+<keyword
+>zlivanje</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>trojna diff</keyword>
+<keyword
+>primerjava</keyword>
+<keyword
+>datoteke</keyword>
+<keyword
+>mape</keyword>
+<keyword
+>imeniki</keyword>
+<keyword
+>nadzor različic</keyword>
+<keyword
+>trosmerno zlivanje</keyword>
+<keyword
+>razlike v vrstici</keyword>
+<keyword
+>sinhroniziranje</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>pregledno omrežje</keyword>
+<keyword
+>urejevalnik</keyword>
+<keyword
+>beli prostor</keyword>
+<keyword
+>komentarji</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Uvod</title>
+<sect1 id="why"
+><title
+>Še eno začelje Diffa?</title>
+<para
+>Obstaja več grafičnih orodij za razlikovanje. Zakaj izbrati &kdiff3;? Naj povem, zakaj sem ga napisal. </para
+><para
+>&kdiff3; se je začel, ker sem moral opraviti težko zlivanje. Zlivanje je potrebno, kadar več ljudi dela na istih datotekah v projektu. Zlivanje je lahko nekoliko avtomatizirano, ko ima orodje za spajanje ne le nove spremenjene datoteke (imenovane "veje"), temveč tudi izvirno datoteko (imenovano "osnova"). Orodje za zlivanje bo samodejno izbralo vse spremembe, ki so bile izvedene samo v eni veji. Ko več sodelujočih spremeni iste vrstice, potem orodje za spajanje zazna konflikt, ki ga je treba rešiti ročno. </para
+><para
+>Zlivanje je bilo takrat težko, ker je en sodelujoči spremenil marsikaj in popravil zamik na mnogih mestih. Drugi sodelavec je prav tako spremenil veliko besedila v isti datoteki, kar je povzročilo več sporov pri zlivanju. </para
+><para
+>Orodje, ki sem ga takrat uporabil, je pokazalo samo spremenjene vrstice, ne pa tudi tega, kar se je spremenilo v teh vrsticah. In ni bilo nobenih informacij o tem, kje je bila spremenjen le zamik. Zlivanje je bilo majhna nočna mora. </para
+><para
+>To je bil torej začetek. Prva različica je lahko pokazala razlike znotraj vrstice in je pokazala razlike v praznem prostoru. Kasneje so bile dodane številne druge funkcije za povečanje uporabnosti. </para
+><para
+>Na primer, če želite hitro primerjati nekaj besedila, ga lahko kopirate v odložišče in prilepite v katero koli okno diff. </para
+><para
+>Funkcija, ki je zahtevala veliko truda, je primerjava in zlivanje map, ki je program spremenila skoraj v popoln brskalnik datotek. </para
+><para
+>Upam, da &kdiff3; deluje tudi za vas. Uživajte! </para
+><para
+>Joachim Eibl (2003) </para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Posnetki zaslona in zmožnosti</title>
+<para
+>Ta posnetek zaslona prikazuje razliko med dvema besedilnima datotekama (z uporabo zgodnje različice &kdiff3;):</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>3-smerno zlivanje je v celoti podprto. To je uporabno, če dve osebi neodvisno spreminjata kodo. Izvirna datoteka (osnova) se uporablja za pomoč &kdiff3; za samodejno izbiro pravilnih sprememb. Urejevalnik zlivanja pod oknidiff vam omogoča reševanje sporov, hkrati pa vam prikazuje rezultat, ki ga boste dobili. Izpis lahko celo urejate. Ta posnetek zaslona prikazuje zlivanje treh vhodnih datotek: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+
+<para id="dirmergebigscreenshot"
+>&kdiff3; pomaga tudi pri primerjavi in zlivanju celotnih map. Ta posnetek zaslona prikazuje &kdiff3; med zlivanjem map: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+</sect1>
+
+<sect1 id="features"
+><title
+>Več zmožnosti</title>
+<sect2
+><title
+>Pregledovalnik razlik vrstica po vrstici in znak po znaku</title>
+<para
+>Z uporabo možnosti grafičnega barvnega prikaza &kdiff3; točno pokaže v čem je razlika. Ko boste morali opraviti veliko pregledov kode, vam bo to všeč. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Oglejte si razlike v belem prostoru v enem samem pogledu</title>
+<para
+>Presledki in zavihki, ki se razlikujejo, so vidni. Ko se vrstice razlikujejo le po količini praznega prostora, je to mogoče videti v enem samem pogledu v stolpcu s povzetkom na levi strani. (Nič več skrbi, ko ljudje spremenijo zamik.) </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Trojni dif</title>
+<para
+>Analizirajte tri datoteke in ugotovite, kje se razlikujejo. </para
+><para
+>Levo/srednje/desno okno se imenuje <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> in ima barvo modro/zeleno/magenta. </para
+><para
+>Če je ena datoteka v vrstici enaka in ena drugačna, potem barva prikazuje, katera datoteka je drugačna. Rdeča barva pomeni, da sta obe drugi datoteki različni. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Udobno zlivanje dveh ali treh vhodnih datotek</title>
+<para
+>&kdiff3; se lahko uporablja za združevanje dveh ali treh vhodnih datotek in samodejno zlije čim več. Rezultat je predstavljen v oknu, ki ga je mogoče urejati, kjer je večino konfliktov mogoče rešiti z enim samim klikom miške: izberite ustrezne gumbe <guibutton
+>...</guibutton
+> pri <guilabel
+>A</guilabel
+>/ <guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> za izbiro vira, ki naj bo uporabljen. Izberete lahko tudi več kot en vir. Ker je to izhodno okno urejevalnik, lahko tudi konflikte, ki potrebujejo nadaljnje popravke, rešite tukaj, ne da bi potrebovali drugo orodje. </para>
+</sect2>
+
+<sect2
+><title
+>in ...</title>
+<itemizedlist>
+   <listitem
+><para
+>Hitra navigacija prek gumbov.</para
+></listitem>
+   <listitem
+><para
+>Klik z miško na stolpec s povzetkom sinhronizira vsa okna, da prikažejo isti položaj.</para
+></listitem>
+   <listitem
+><para
+>Izberite in kopirajte iz katerega koli okna ter prilepite v okno z rezultati zlivanja.</para
+></listitem>
+   <listitem
+><para
+>Pregledni stolpec, ki prikazuje, kje so spremembe in koflikti.</para
+></listitem>
+   <listitem
+><para
+>Barve so prilagodljive vašim preferencam.</para
+></listitem>
+   <listitem
+><para
+>Nastavljiva velikost zavihka.</para
+></listitem>
+   <listitem
+><para
+>Možnost vstavljanja presledkov namesto tabulatorjev.</para
+></listitem>
+   <listitem
+><para
+>Udobno odprite datoteke prek pogovornega okna ali jih določite v ukazni vrstici.</para
+></listitem>
+   <listitem
+><para
+>Poiščite nize v vseh besedilnih oknih z <menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Najdi</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) in <menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Najdi naslednje</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>) menijske elemente.</para
+></listitem>
+   <listitem
+><para
+>Pokaže številke vrstic za vsako vrstico. </para
+></listitem>
+   <listitem
+><para
+>Prilepi odložišče ali povleče besedilo v okno vnosa razlike.</para
+></listitem>
+   <listitem
+><para
+>Preglednost omrežja prek KIO.</para
+></listitem>
+   <listitem
+><para
+>Lahko se uporablja kot pregledovalnik razlik iz &kdevelop; 3.</para
+></listitem>
+   <listitem
+><para
+>Prelom besed za dolge vrstice.</para
+></listitem>
+   <listitem
+><para
+>Podpora za Unicode, UTF-8 in druge kodeke.</para
+></listitem>
+   <listitem
+><para
+>Podpora za jezike od desne proti levi.</para
+></listitem>
+   <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Primerjava in zlivanje datotek</title>
+
+<sect1 id="commandline"
+><title
+>Možnosti ukazne vrstice</title>
+
+<sect2
+><title
+>Primerjava dveh datotek: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datoteka1 datoteka2</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Zlivanje 2 datotek: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datoteka1 datoteka2</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>datoteka1 datoteka2</replaceable
+> -o <replaceable
+>izhodnadatoteka</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Primerjava 3 datotek: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datoteka1 datoteka2 datoteka3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Zlivanje 3 datotek: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datoteka1 datoteka2 datoteka3</replaceable
+> -m
+<command
+>kdiff3</command
+> <replaceable
+>datoteka1 datoteka2 datoteka3</replaceable
+> -o <replaceable
+>izhodnadatoteka</replaceable
+>
+</screen>
+<para
+>Upoštevajte, da bo <replaceable
+>datoteka1</replaceable
+> obravnavana kot osnova <replaceable
+>datoteka2</replaceable
+> in <replaceable
+>datoteka3</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Poseben primer: datoteke z enakim imenom </title>
+<para
+>Če imajo vse datoteke enako ime, vendar so v različnih mapah, lahko zmanjšate tipkanje tako, da določite ime datoteke samo za prvo datoteko, &eg;: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>mapa1/imedatoteke mapa2 mapa3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Ukazna vrstica za začetek primerjave ali zlivanje map: </title>
+<para
+>To je zelo podobno, vendar gre zdaj za mape.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>folder1 folder2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>folder1 folder2</replaceable
+> -o <replaceable
+>destdir</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>folder1 folder2 folder3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>folder1 folder2 folder3</replaceable
+> -o <replaceable
+>destdir</replaceable
+>
+</screen>
+<para
+>Za primerjavo in združevanje map lahko nadaljujete z branjem <link linkend="dirmerge"
+>tukaj</link
+>.</para>
+</sect2>
+
+<sect2
+><title
+>Druge možnosti ukazne vrstice</title>
+<para
+>Če želite videti vse razpoložljive možnosti ukazne vrstice, vnesite</para>
+<screen
+><command
+>kdiff3</command
+> --help
+</screen>
+<para
+>Primer izhoda:</para>
+<screen
+>Options:
+  -m, --merge               Zlij input.
+  -b, --base file           Eksplicitna datoteka osnova. Zaradi združjivosti z določenimi orodji.
+  -o, --output file         Output datoteka. Pomeni -m. Npr.: -o newfile.txt
+  --out file                Spet output datoteka. (Zaradi združjivosti z določenimi orodji.)
+  --noauto                  Prezri --auto in vedno pokaži uporabniški vmesnik.
+  --auto                    Brez grafičnega vmesnika, če so vsi konflikti samodejno rešljivi. (Potrebuje -o datoteka)
+  --L1 alias1               Vidna zamenjava imena za vhodno datoteko 1 (osnova).
+  --L2 alias2               Vidna zamenjava imena za vhodno datoteko 2.
+  --L3 alias3               Vidna zamenjava imena za vhodno datoteko 3.
+  -L, --fname alias         Alternativna vidna zamenjava imena. Ena omemba za vsak input.
+  --cs string               Preglasi nastavitev config. Uporaba enkratno za vsako nastavitev. npr.: --cs "AutoAdvance=1"
+  --confighelp              Prikaži seznam nastavitev konfiguracije in trenutne vrednosti.
+  --config file             Uporabi drugo datoteko config.
+</screen>
+<para
+>Možnost <option
+>--cs</option
+> vam omogoča prilagoditev konfiguracijske vrednosti, ki je sicer nastavljiva samo prek konfiguracijskih pogovornih oken. Vendar se zavedajte, da ko se &kdiff3; nato prekine, bo spremenjena vrednost  shranjena skupaj z drugimi nastavitvami. Z <option
+>--confighelp</option
+> lahko izveste imena razpoložljivih elementov in trenutne vrednosti.</para>
+<para
+>Z <option
+>--config</option
+> lahko določite drugo konfiguracijsko datoteko. Ko pogosto uporabljate &kdiff3; s popolnoma različnimi nastavitvami vam to omogoča enostavno preklapljanje med njimi.</para>
+</sect2>
+<sect2
+><title
+>Zanemarljive možnosti ukazne vrstice</title>
+<para
+>Veliko ljudi želi uporabljati &kdiff3; z nekim sistemom za nadzor različic. Ko pa sistem za nadzor različic pokliče &kdiff3; z uporabo parametrov ukazne vrstice, ki &kdiff3; ne prepozna, se potem &kdiff3; zaključi z napako. Element <guilabel
+>Integracija</guilabel
+> v pogovornem oknu z nastavitvami omogoča podajanje parametrov ukazne vrstice, ki naj jih &kdiff3; prezre. Prikazali se bodo v pomoči za uporabo, kot v tem primeru:</para>
+<screen
+>--<replaceable
+>foo</replaceable
+> Prezrto. (Uporabnik definiran.)
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Možnosti ukazne vrstice, ki jih je treba prezreti:</guilabel
+></term
+><listitem
+><para
+>Seznam možnosti, ločenih s podpičjem ';'. Ko se ena od teh možnosti prikaže v ukazni vrstici, potem ga bo &kdiff3; prezrl in zagnal brez poročanja o napaki. (Privzeto je "<literal
+>u;query;html;abort</literal
+>").</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Ko to ni dovolj, je priporočljivo napisati skript lupine, ki prevede to možnost.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Odpri pogovorno okno</title>
+<para
+>Ker mora biti možno izbirati veliko vhodnih datotek, ima program posebno pogovorno okno za odpiranje: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Pogovorno okno za odpiranje vam omogoča ročno urejanje imen datotek, izbiro datoteke v brskalniku datotek prek gumba <guibutton
+>Datoteka...</guibutton
+> ali vam omogoča izbiro nedavnih datotek s spustnih seznamov. Če znova odprete pogovorno okno, bodo trenutna imena še vedno tam. Tretja vhodna datoteka ni potrebna. Če vnos za <guilabel
+>C</guilabel
+> ostane prazen, bo opravljena le analiza razlike v dveh datotekah. </para
+><para
+>Prav tako lahko izberete mapo z gumbom <guibutton
+>Mapa...</guibutton
+>. Če je za <guilabel
+>A</guilabel
+> podana mapa, se začne primerjava /združevanje map. Če <guilabel
+>A</guilabel
+> določa datoteko, vendar <guilabel
+>B</guilabel
+>, <guilabel
+>C</guilabel
+> ali izhod določa mapo, potem &kdiff3; uporablja ime datoteke iz <guilabel
+>A</guilabel
+> v navedenih mapah. </para
+><para
+>Če je izbrano potrditveno polje <guilabel
+>Združi</guilabel
+>, postane vrstica <guilabel
+>Izhod</guilabel
+> možna za urejanje. Vendar ni treba takoj določiti imena izhodne datoteke. To lahko tudi odložite do shranjevanja. </para
+><para
+>Gumb <guibutton
+>Konfiguriraj...</guibutton
+> odpre pogovorno okno z nastavitvami, tako da lahko nastavite možnosti, preden zaženete analizo. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Prilepi in spusti vnos</title>
+<para
+>Včasih želite primerjati dele besedila, ki ni lastna datoteka. &kdiff3; omogoča tudi lepljenje besedila iz odložišča v okno za vnos razlike, ki ima fokus. Analiza diff se zgodi takoj. V odprtem pogovornem oknu vam takrat ni treba določiti datotek, ampak ga samo zaprete z gumbom <guibutton
+>Prekliči</guibutton
+>. </para
+><para
+>Uporabite lahko tudi povleci in spusti: povlecite datoteko iz upravljalnika datotek ali izbrano besedilo iz urejevalnika in ga spustite v okno za vnos razlike. </para
+><para
+>Kaj je ideja? Včasih datoteka vsebuje dve podobni funkciji, vendar je preverjanje, kako podobni sta v resnici, velik napor, če morate najprej ustvariti dve datoteki in ju nato naložiti. Zdaj lahko preprosto kopirate, prilepite in primerjate ustrezne razdelke. </para
+><note
+><para
+>Trenutno ne morete vleči ničesar iz &kdiff3;. Podprto je samo spuščanje vnosa razlike. </para
+></note
+><warning
+><para
+>Nekateri urejevalniki si še vedno razlagajo tehniko povleci in spusti v drug program kot izreži (namesto kopiraj) in prilepi. Vaši izvirni podatki bodo takrat morda izgubljeni. </para
+></warning>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Primerjava datotek in razlaga informacij v vnosnih oknih</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<sect2
+><title
+>Vrstica informacij</title
+><para
+>Na vrhu vsakega besedilnega okna je njegova "vrstica informacij". Vrstice informacij vnosnih oken vsebujejo črko <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ali <guilabel
+>C</guilabel
+>, ime datoteke, ki ga je mogoče urejati, gumb za brskanje in številko vrstice prve vidne vrstice v oknu. (Upoštevajte, da okno <guilabel
+>C</guilabel
+> ni obvezno.) Vsaka informacijska vrstica je prikazana v drugi barvi. </para
+><para
+>Ko izberete drugo datoteko z brskanjem ali dokončate urejanje imena datoteke tukaj s pritiskom na &Enter;, se bo nova datoteka naložila in primerjala z že naloženimi datotekami. </para
+></sect2
+><sect2
+><title
+>Barvanje</title
+><para
+>Trem vnosnim oknom so dodeljene črke <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+>. <guilabel
+>A</guilabel
+> ima modro barvo, <guilabel
+>B</guilabel
+> zeleno in <guilabel
+>C</guilabel
+> škrlatno. (To so privzete vrednosti, vendar jih lahko spremenite v elementu <guilabel
+>Barva</guilabel
+> v pogovornem oknu z nastavitvami.) </para
+><para
+>Ko je zaznana razlika, barva pokaže, katera vhodna datoteka se razlikuje. Če se obe drugi vhodni datoteki razlikujeta, je barva uporabljena za izražanje tega, privzeto rdeča (možnost <guilabel
+>Barva spora</guilabel
+> v elementu <guilabel
+>Barva</guilabel
+> v pogovornem oknu z nastavitvami). Ta barvna shema je še posebej uporabna v primeru treh vhodnih datotek, kar bo prikazano v naslednjem razdelku (<link linkend="merging"
+>Zlivanje</link
+>). </para
+></sect2
+><sect2
+><title
+>Stolpec povzetka</title
+><para
+>Levo od vsakega besedila je stolpec "povzetek". Če so se v vrstici pojavile razlike, bo stolpec s povzetkom prikazal ustrezno barvo. Za razliko v presledku je povzetek označen. Za programske jezike, kjer prazen prostor ni tako pomemben, je to koristno, da na en pogled vidite, ali je bilo kaj pomembnega spremenjeno. (V C/C++ je prazen prostor zanimiv le znotraj nizov, komentarjev, za predprocesor in v nekaterih le zelo ezoteričnih situacijah.) </para
+><para
+>Navpična črta, ki ločuje stolpec s povzetkom in besedilo, je prekinjena, če vhodna datoteka tam ni imela vrstic. Ko je prelom besed omogočen, je ta navpična črta prikazana s pikami za prelite vrstice. </para
+></sect2
+><sect2
+><title
+>Pregledni stolpec</title
+><para
+>Na desni strani je levo od navpičnega drsnika viden stolpec »pregled«. Prikazuje stisnjen stolpec povzetka vnosa <guilabel
+>A</guilabel
+>. Vse razlike in konflikti so vidni na en pogled. Ko sta uporabljeni samo dve vnosni okni, so vse razlike tukaj rdeče, ker je vsaka razlika tudi konflikt. Črn pravokotnik uokvirja vidni del vnosov. Pri zelo dolgih vhodnih datotekah, ko je število vhodnih vrstic večje od višine preglednega stolpca v slikovnih pikah, si več vhodnih vrstic deli eno pregledno vrstico. Konflikt ima potem glavno prednost pred preprostimi razlikami, ki imajo prednost pred nespremembami, tako da se tu ne izgubi nobena razlika ali konflikt. S klikom na ta pregledni stolpec se prikaže ustrezno besedilo. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Ročno poravnavanje črt</title
+><para
+>Včasih algoritem postavi napačne vrstice eno poleg druge. Ali pa želite primerjati en del besedila z besedilom na povsem drugem mestu v drugi datoteki. Za te situacije lahko ročno naročite &kdiff3; za poravnavo določenih vrstic. Z miško označite besedilo, za katerega želite izboljšati poravnavo, kot bi to naredili za kopiranje in lepljenje v prvem pogledu diff, nato pa izberite <menuchoice
+><guimenu
+>Diffview</guimenu
+><guimenuitem
+>Dodaj ročno diff alignment</guimenuitem 
+></menuchoice
+> element menija (<keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+>). V stolpcu s povzetkom se poleg izbranega besedila prikaže oranžna vrstica. To ponovite za drugi in (če je na voljo) tretji pogled razlike. &kdiff3; bo takoj znova izračunal razlike vsakič, ko boste to storili, in bo poravnal izbrane črte. Seveda se nekatere od prej ujemajočih se vmesnih vrstic morda ne bodo več ujemale. </para
+><para
+>Trenutno zlivanje ne podpira uporabe pomoči za ročno razlikovanje. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Ročno združevanje in ločevanje razlik</title
+><para
+>V nekaterih primerih &kdiff3; bo videl preveč ali premalo razlik za združevanje. V tem primeru lahko združite ali razdelite obstoječe razdelke. </para
+><para
+>Dodajte nove razdelke tako, da najprej izberete besedilo v vrsticah, ki sodijo skupaj v katerem koli oknu za vnos (kot pri kopiranju v odložišče). Nato izberite menijski element <menuchoice
+><guimenu
+>Zlij</guimenu
+><guimenuitem
+>Razdeli razliko pri izbiri</guimenuitem
+></menuchoice
+>. Razdeli bodo dodani nad prvo vrstico in pod zadnjo vrstico izbranega besedila. Če želite dodati samo en razdelek, izberite besedilo, ki se začne pri drugem razdelku razdelka. </para
+><para
+>Za združevanje odsekov v katerem koli vnosnem oknu izberite nekaj v vrsticah iz odsekov, ki jih želite zliti skupaj. (Lahko tudi združite več razdelkov v enem koraku.) Nato izberite menijski element <menuchoice
+><guimenu
+>Zlij</guimenu
+><guimenuitem
+>Zlij izbrane razlike</guimenuitem
+></menuchoice
+>. </para
+></sect2>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Spajanje in okno urejevalnika spajanja izhodnih podatkov</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Okno urejevalnika zlitih izhodov (pod okni za vnos razlike) ima na vrhu tudi informacijsko vrstico, ki prikazuje <guilabel
+>Izhod:</guilabel
+>, ime datoteke in oznako <replaceable
+>[Modified]</replaceable
+>, če ste nekaj uredili. Običajno bo vseboval nekaj besedila prek možnosti samodejnega združevanja, pogosto pa bo vseboval tudi spore. </para
+><para
+>!!! Shranjevanje je onemogočeno, dokler niso razrešeni vsi konflikti !!! (Uporabite gumb <guibutton
+>Pojdi na prejšnji/naslednji nerešeni spor</guibutton
+>, da poiščete preostale spore.) </para
+><para
+>Pri samo dveh vhodnih datotekah je vsaka razlika tudi konflikt, ki ga je treba rešiti ročno. </para
+><para
+>Pri treh vhodnih datotekah se prva datoteka obravnava kot osnovna, medtem ko druga in tretja vhodna datoteka vsebujeta spremembe. Če se v kateri koli vrstici spremeni samo vhod <guilabel
+>B</guilabel
+> ali vhod <guilabel
+>C</guilabel
+>, vendar ne oba, bo spremenjeni vir samodejno izbran. Samo ko sta <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+> spremenjena v istih vrsticah, orodje zazna konflikt, ki ga je treba rešiti ročno. Če sta <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+> enaka, vendar ne enaka <guilabel
+>A</guilabel
+>, je izbran <guilabel
+>C</guilabel
+>. </para
+><sect2
+><title
+>Stolpec s povzetkom</title
+><para
+>Okno urejevalnika zlitih izhodov ima na levi tudi stolpec s povzetkom. Prikazuje črko vnosa, iz katerega je bila izbrana vrstica, ali nič, če so vsi trije viri enaki v vrstici. Za spore prikaže vprašaj "?" in vrstica prikazuje "&lt;Konflikt združevanja&gt;", vse rdeče. Ker bi reševanje konfliktov vrstico za vrstico trajalo zelo dolgo, so vrstice združene v skupine, ki imajo enake razlike in značilnosti konflikta. Toda konflikti samo-belega-prostora so ločeni od sporov, ki niso-belega-prostora, da bi olajšali združevanje datotek, če se je zamik spremenil za veliko vrstic. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>Nastavitev trenutne skupine in sinhronizacija položaja pogleda zlivanja in razlike</title
+><para
+>Ko kliknete na stolpec s povzetkom z &LMB; v katerem koli oknu, bo začetek skupine, ki pripada tej vrstici, prikazan v vseh oknih. Ta skupina nato postane "Trenutna skupina". Označeno je z možnostjo <guilabel
+>Barva ozadja razlike v trenutnem območju</guilabel
+> elementa <guilabel
+>Integracija</guilabel
+> v pogovornem oknu z nastavitvami, na levi strani besedila pa se prikaže črna vrstica. </para
+></sect2
+><sect2
+><title
+>Izbira vnosov A, B ali C za trenutni konflikt in urejanje</title
+><para
+>Vrstica z gumbi pod menijsko vrstico vsebuje tri gumbe za izbiro vnosa, ki vsebujejo črke <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+>. Kliknite gumb za izbiro vnosa, da vstavite (ali odstranite, če so že vstavljene) vrstice iz ustreznega vira. Če želite izbrati vrstice iz več vnosov, kliknite ustrezne gumbe v želenem vrstnem redu. Na primer, če želite, da se vrstice iz <guilabel
+>B</guilabel
+> prikažejo pred vrsticami iz <guilabel
+>A</guilabel
+> v izpisu, najprej kliknite <guilabel
+>B</guilabel
+>, nato <guilabel
+>A </guilabel
+>. </para
+><para
+>Če uporabljate gumb <guibutton
+>Samodejno pojdi na naslednji nerešeni spor po izbiri vira</guibutton
+> (glejte razdelek <link linkend="autoadvance"
+>Samodejno napredovanje</link
+>), to onemogočite, preden izberete vrstice iz več vnose ali če želite urediti vrstice po vaši izbiri. V nasprotnem primeru &kdiff3; bo po izbiri prvega vnosa skočil na naslednji konflikt. </para
+><para
+>Pogosto je koristno neposredno urediti zliti izhod. Stolpec s povzetkom bo pokazal "m" za vsako vrstico, ki je bila ročno spremenjena. Ko so na primer razlike poravnane tako, da preprosto izbiranje vnosov ne bo zadovoljivo, potem lahko označite potrebno besedilo in uporabite običajno <link linkend="selections"
+>kopiraj in prilepi</link
+>, da ga vstavite v izhod zlivanja. </para
+><para
+>Včasih, ko je vrstica odstranjena s samodejnim zlivanjem ali urejanjem in v tej skupini ne ostane nobena druga vrstica, se besedilo &lt;Brez izvorne vrstice&gt; se prikaže v tej vrstici. To je samo nadomestni znak za skupino, ko si morda premislite in znova izberete vir. To besedilo ne bo prikazano v shranjeni datoteki ali v nobenem izboru, ki ga želite kopirati in prilepiti. </para
+><para
+>Besedilo "&lt;Conflikt zlivanja&gt;" se prikaže v odložišču, če kopirate in prilepite besedilo, ki vsebuje takšno vrstico. Vendar bodite pri tem previdni. </para
+></sect2
+><sect2
+><title
+>Izbira vnosa A, B ali C za vse konflikte</title
+><para
+>Običajno združevanje se bo začelo s samodejnim reševanjem preprostih sporov. Toda meni <guimenu
+>Združi</guimenu
+> ponuja nekaj dejanj za druge pogoste potrebe. Če morate za večino sporov izbrati isti vir, potem lahko povsod izberete <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ali <guilabel
+>C</guilabel
+> ali samo za preostale nerešene konflikte ali za nerešene konflikte praznega prostora. Če želite sami določiti vsako posamezno delto, lahko <guimenuitem
+>nastavite delte na konflikte</guimenuitem
+>. Ali če se želite vrniti na samodejne izbire &kdiff3; nato izberite <guimenuitem
+>Samodejno razreši preproste spore</guimenuitem
+>. &kdiff3; nato znova zažene združevanje. Za dejanja, ki spremenijo vaše prejšnje spremembe &kdiff3; bo pred nadaljevanjem zahteval vašo potrditev. </para
+><note
+><para
+>Pri izbiri katerega koli vira za nerešene konflikte praznega prostora in možnosti <guilabel
+>Prezri številke (obravnavaj kot presledek)</guilabel
+> ali <guilabel
+>Prezri komentarje C/C++ (obravnavaj kot presledek)</guilabel
+> na <guilabel
+> Diff</guilabel
+> v pogovornem oknu z nastavitvami se uporabijo, potem bodo spremembe v številkah ali komentarjih prav tako obravnavane kot prazen prostor. </para
+></note
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Samodejno spajanje ključnih besed in zgodovine nadzora različic (dnevnik)</title
+><para
+>Mnogi sistemi za nadzor različic podpirajo posebne ključne besede v datoteki. (&eg; "<literal
+>&#36;Datum&#36;</literal
+>", "<literal
+>&#36;Glava&#36;</literal
+>", "<literal
+>&#36;Avtor&#36;</literal
+>", "<literal
+>&#36;Dnevnik&#36;</literal
+>", &etc;) Med prijavo sistem za nadzor različic (VCS) spremeni te vrstice. Na primer "<literal
+>&#36;Datum&#36;</literal
+>" se bo spremenil v "<literal
+>&#36;Datum: 2005/03/22 18:45:01 &#36;</literal
+>". Ker bo ta vrstica v vsaki različici datoteke drugačna, bo med združevanjem zahtevala ročno interakcijo. </para
+><para
+>&kdiff3; ponuja samodejno združevanje za te elemente pri elementu <guilabel
+>Združi</guilabel
+> v pogovornem oknu z nastavitvami. Za preproste vrstice, ki se ujemajo z možnostjo <guilabel
+>Samodejno združevanje regularnega izraza</guilabel
+> v vseh vhodnih datotekah &kdiff3; bo izbral vrstico iz <guilabel
+>B</guilabel
+> ali - če je na voljo - iz <guilabel
+>C</guilabel
+>. (Poleg tega je potrebno, da se zadevne vrstice pri primerjavi ujemajo in da prejšnja vrstica ne vsebuje spora.) To samodejno združevanje je mogoče zagnati takoj po začetku združevanja (aktivirajte možnost <guilabel
+>Zaženi samodejno združevanje regularnega izraza ob združevanju zagon</guilabel
+>) ali pozneje prek menijske postavke <menuchoice
+><guimenu
+>Združi</guimenu
+><guimenuitem
+>Zaženi samodejno združevanje regularnega izraza</guimenuitem
+></menuchoice
+>. </para
+><para
+>Podprto je tudi samodejno združevanje za zgodovino nadzora različic (imenovano tudi "dnevnik"). Samodejno združevanje zgodovine se lahko zažene takoj, ko se združevanje začne, tako da aktivirate možnost <guilabel
+>Združi zgodovino nadzora različic ob začetku združevanja</guilabel
+> pri elementu <guilabel
+>Združi</guilabel
+> v pogovornem oknu z nastavitvami ali pozneje prek <menuchoice
+><guimenu
+>Združi</guimenu
+><guimenuitem
+>Samodejno razreši zgodovinske konflikte</guimenuitem
+></menuchoice
+> menijski element. </para
+><para
+>Običajno se zgodovina nadzora različic začne z vrstico, ki vsebuje ključno besedo "<literal
+>&#36;Log&#36;</literal
+>". To se mora ujemati z možnostjo <guilabel
+>Regularni izraz za začetek zgodovine:</guilabel
+>. &kdiff3; zazna, katere naslednje vrstice so v zgodovini, tako da analizira glavne znake, ki so bili pred ključno besedo "<literal
+>&#36;Log&#36;</literal
+>". Če se v naslednjih vrsticah pojavijo isti znaki "vodilnega komentarja", so prav tako vključeni v zgodovino. </para
+><para
+>Med vsako prijavo VCS zapiše edinstveno vrstico, ki določa podatke o različici, datumu in času, ki jim sledijo vrstice s komentarji uporabnikov. Te vrstice tvorijo en vnos zgodovine. Ta razdelek z zgodovino se poveča z vsako prijavo in najnovejši vnosi so prikazani na vrhu (za začetno vrstico zgodovine). </para
+><para
+>Ko za vzporedni razvoj dva ali več razvijalcev prijavi vejo datoteke, bo zgodovina združevanja vsebovala več vnosov, ki se med združevanjem vej prikažejo kot spori. Ker lahko njihovo združevanje postane zelo dolgočasno, &kdiff3; ponuja podporo z dvema možnima strategijama: samo vstavite podatke o zgodovini obeh sodelavcev na vrh ali razvrstite informacije o zgodovini po uporabniško določenem ključu. </para
+><para
+>Metodo samo vstavi vse vnose je lažje konfigurirati. &kdiff3; potrebuje le metodo za odkrivanje, katere vrstice pripadajo enemu vnosu v zgodovino. Večina VCS vstavi prazno vrstico za vsakim vnosom v zgodovino. Če ni drugih praznih vrstic, je to zadosten kriterij za &kdiff3;. Samo nastavite prazen <guilabel
+>regularni izraz za začetek vnosa v zgodovino</guilabel
+> pri elementu <guilabel
+>Spoji</guilabel
+> v pogovornem oknu z nastavitvami. Če kriterij prazne vrstice ne zadostuje, lahko podate regularni izraz za zaznavanje začetka vnosa v zgodovino. </para
+><para
+>Upoštevajte, da bo &kdiff3; odstranil podvojene vnose v zgodovino. Če se zgodovinski vnos pojavi večkrat v zgodovini vhodne datoteke, bo v izhodu ostal samo en vnos. </para
+><para
+>Če želite razvrstiti zgodovino, morate določiti, kako naj bo ključ za razvrščanje zgrajen. Uporabite oklepaje v <guilabel
+>Začetek regularnega izraza v zgodovini</guilabel
+> pri elementu <guilabel
+>Spoji</guilabel
+> v pogovornem oknu z nastavitvami, da združite dele regularnega izraza, ki naj se pozneje uporabijo za ključ za razvrščanje. Nato določite možnost <guilabel
+>Začetek vrstnega reda razvrščanja vnosa v zgodovino</guilabel
+> z navedbo z vejico "," ločenega seznama številk, ki se nanašajo na položaj skupine v regularnem izrazu. </para
+><para
+>Ker tega ni tako enostavno narediti takoj, lahko preizkusite in izboljšate regularne izraze in generiranje ključev v namenskem pogovornem oknu s pritiskom na gumb <guibutton
+>Preizkusite svoje regularne izraze</guibutton
+>. </para
+><para
+>Primer: Predpostavimo, da je zgodovina videti takole: </para>
+<screen
+>/**************************************************************************
+** HISTORY:    &#36;Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp &#36;
+**
+**     \main\integration_branch_12   2 Apr 2001 10:45:41   tom
+**  Merged branch simon_branch_15.
+**
+**     \main\henry_bugfix_branch_7\1   30 Mar 2001 19:22:05   henry
+**  Improved the speed for subroutine convertToMesh().
+**  Fixed crash.
+**************************************************************************/
+</screen>
+<para
+>Začetna vrstica zgodovine se ujema z regularnim izrazom "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>". Nato sledi vnosom v zgodovino. </para
+><para
+>Vrstica s ključno besedo »<literal
+>&#36;Log&#36;</literal
+>« se začne z dvema »*«, ki jima sledi presledek. &kdiff3; uporablja prvi niz brez presledka kot "uvodni komentar" in predpostavlja, da se zgodovina konča v prvi vrstici brez tega uvodnega komentarja. V tem primeru se zadnja vrstica konča z nizom, ki se prav tako začne z dvema "*", vendar namesto presledka sledi več "*". Zato ta vrstica konča zgodovino. </para
+><para
+>Če razvrščanje zgodovine ni potrebno, bi lahko regularni izraz začetne vrstice vnosa zgodovine izgledal takole. (Ta vrstica je razdeljena na dva dela, ker drugače ne bi ustrezala.) </para>
+<screen
+>\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen>
+<para
+>Za podrobnosti o regularnih izrazih glejte <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>dokumentacijo o regularnih izrazih</ulink
+>. Upoštevajte, da se "<literal
+>\s</literal
+>" (z malimi črkami "<literal
+>s</literal
+>") ujema s katerim koli presledkom in "<literal
+>\S</literal
+>" (z velikimi črkami "<literal
+>S</literal
+>") se ujema s katerim koli ne-belim prostorom. V našem primeru začetek vnosa zgodovine vsebuje najprej informacije o različici z reg. exp. "<literal
+>\\main\\\S+</literal
+>, datum, sestavljen iz dneva "<literal
+>[0-9]+</literal
+>", meseca "<literal
+>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal
+>" in leto "<literal
+>[0-9][0-9][0-9][ 0-9]</literal
+>", čas "<literal
+>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal
+>" in končno prijavno ime razvijalca "<literal
+>.*</literal
+>". </para
+><para
+>Upoštevajte, da bodo znaki "uvodnega komentarja" (v primeru "<literal
+>**</literal
+>") že odstranjeni s &kdiff3; pred poskusom ujemanja, se zato regularni izraz začne z ujemanjem za nobenega ali več znakov belega prostora"<literal
+>\s*</literal
+>". Ker se znaki komentarjev lahko razlikujejo v vsaki datoteki (&eg; C/C++ uporablja druge znake komentarjev kot skript Perl), &kdiff3; skrbi za glavne znake komentarjev in jih ne bi smeli podajati v regularnem izrazu. </para
+><para
+>Če potrebujete urejeno zgodovino. Nato je treba izračunati sortkey. Za to morajo biti ustrezni deli v regularnem izrazu združeni v oklepaje. (Dodatni oklepaji lahko tudi ostanejo, če je razvrščanje zgodovine onemogočeno.) </para>
+<screen
+>\s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen>
+<para
+>Oklepaji zdaj vsebujejo <literal
+>1</literal
+>. informacije o različici, <literal
+>2</literal
+>. dan, <literal
+>3</literal
+>. mesec, <literal
+>4</literal
+>. leto, <literal
+>5</literal
+>. čas, <literal
+>6</literal
+>. ime. Če pa želimo razvrščati po datumu in času, moramo sestaviti ključ z elementi v drugačnem vrstnem redu: najprej leto, sledijo mesec, dan, čas, informacije o različici in ime. Zato je vrstni red ključev za razvrščanje, ki ga je treba določiti, "<literal
+>4,3,2,5,1,6</literal
+>". </para
+><para
+>Ker imena mesecev niso dobra za razvrščanje ("<literal
+>Apr</literal
+>" bi bil prvi) &kdiff3; zazna, v katerem vrstnem redu so bila navedena imena mesecev, in namesto tega uporabi to številko ("<literal
+>Apr</literal
+>" -&gt; "<literal
+>04</literal
+>"). In če je najdeno čisto število, bo pretvorjeno v 4-mestno vrednost z začetnimi ničlami za razvrščanje. Končno bo dobljeni ključ za razvrščanje za prvo začetno vrstico vnosa v zgodovino: </para>
+<screen
+>2001 04 0002 10:45:41 integracija_veja_12 tom
+</screen>
+<para
+>Za več informacij glejte tudi razdelek <link linkend="mergeoptions"
+>Nastavitve združevanja</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navigacija in urejanje</title>
+<para
+>Večino navigacije boste opravili z drsniki in miško, vendar lahko krmarite tudi s tipkami. Če kliknete katero koli okno, lahko uporabite bližnjice &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;, &Home;, &End;, <keycombo
+>&Ctrl;&Home;</keycombo
+> in <keycombo
+>&Ctrl;&End;</keycombo
+> kot bi v drugih programih. Pregledni stolpec polegnavpičnega drsnika vhodnih datotek lahko uporabite tudi za navigacijo s klikom vanjo. </para
+><para
+>Uporabite lahko tudi <mousebutton
+>kolesce</mousebutton
+> miške za pomikanje navzgor in navzdol. </para
+><para
+>V urejevalniku spajanja izhodov lahko za urejanje uporabite tudi druge tipke. Lahko preklapljate med načinoma vstavljanja in prepisovanja s tipko &Ins;. (Privzete jenačin vstavljanja.) </para
+><para
+>Klik z &LMB; v kateri koli stolpec povzetka bo sinhroniziral vsa oknaza prikaz začetka iste skupine vrstic (kot je razloženo v razdelku<link linkend="synchronise_views"
+>Nastavitev trenutne skupine insinhroniziranje položaja pogleda združevanja in razlikovanja</link
+>).​ </para
+><para
+>Vrstica z gumbi vsebuje tudi devet navigacijskih gumbov, s katerimi lahko skačetena trenutno/prvo/zadnjo razliko, na prejšnjo/naslednjo razliko (<keycombo
+>&Ctrl;&Down;</keycombo
+>/<keycombo
+>&Ctrl;&Up;</keycombo
+>), naprejšnji/naslednji konflikt (<keycombo
+>&Ctrl;&PgDn;</keycombo
+>/<keycombo
+>&Ctrl;&PgUp;</keycombo
+>) ali prejšnji/naslednji nerešen konflikt. Upoštevajte, da za &kdiff3; "konflikt", ki ni bil samodejno rešen na začetku spajanja, ostane "konflikt", tudi če je rešen. Zato je potreba po razlikovanju "nerešenih konfliktov". </para>
+<sect2 id="autoadvance"
+><title
+>Samodejno napredovanje</title>
+<para
+>Obstaja tudi gumb <guibutton
+>Samodejno pojdi na naslednji nerešeni spor po izbiri vira</guibutton
+> (Samodejno napredovanje). Če to omogočite, potem ko je izbran en vir, &kdiff3; samodejno skoči na in izbere naslednji nerešen konflikt. To lahko pomaga, ko želite vedno izbrati samo en vir. Ko potrebujete oba vira ali želite urediti po izbiri, boste to verjetno želeli izklopiti. Preden nadaljujete do naslednjega nerešenega spora &kdiff3; vam za kratek čas pokaže učinek vaše izbire. Ta zakasnitev je nastavljiva v elementu <guilabel
+>Združi</guilabel
+> v pogovornem oknu z nastavitvami: Določite lahko <guilabel
+>Zakasnitev samodejnega napredovanja (ms):</guilabel
+> v milisekundah med 0 in 2000. Namig: Utrujen od veliko klikov? - Uporabite majhen zamik samodejnega napredovanja in bližnjice <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+>, da izberete <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> za številne konflikte. </para>
+</sect2>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Izberi, kopiraj in prilepi</title>
+<para
+>Okna za vnos ne prikazujejo kazalca, zato je treba izbire opraviti z miško s klikom z &RMB; na začetku, držite tipko miške in se pomaknite do konca, kjer znova spustite tipko miške. Besedo lahko izberete tudi tako, da jo dvakrat kliknete. V urejevalniku spajanja izpisov lahko izberete tudi prek tipkovnice tako, da držite &Shift; in navigacijo s smernimi tipkami. </para
+><para
+>Če izbor presega vidni obseg, lahko premaknete miško čez meje okna, kar povzroči &kdiff3; da se pomakne v to smer. </para
+><para
+>Za zelo velike izbire lahko uporabite tudi navigacijske tipke, medtem ko držite miško. Npr. uporabite &PgUp; in &PgDn; za hiter prehod na določen položaj. Na končnem položaju spustite gumb miške. </para
+><para
+>Če želite izbrati vse v trenutnem oknu, uporabite menijski element <menuchoice
+><guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Izberi vse</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>A</keycap
+> </keycombo
+>). </para
+><para
+>Za kopiranje v odložišče morate pritisniti gumb <guibutton
+>Kopiraj</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> ali <keycombo
+>&Ctrl;&Ins;</keycombo
+>). Obstaja pa možnost <guilabel
+>Izbira samodejnega kopiranja</guilabel
+> pri elementu <guilabel
+>Urejevalnik</guilabel
+> v pogovornem oknu z nastavitvami. Če je to omogočeno, se vse, kar izberete, takoj kopira in vam ni treba izrecno kopirati. Toda pri uporabi bodite pozorni, ker se lahko vsebina odložišča po nesreči uniči. </para
+><para
+><guibutton
+>Izreži</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> ali <keycombo
+>&Shift;&Del;</keycombo
+>) kopira v odložišče in izbriše izbrano besedilo. </para
+><para
+><guibutton
+>Prilepi</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> ali <keycombo
+>&Shift;&Ins;</keycombo
+>) vstavi besedilo v odložišče na položaj kazalca ali čez trenutni izbor. Če prilepite v katero koli okno za vnos razlike, bo vsebina odložišča prikazana v tem oknu in primerjava se bo takoj znova začela. To je uporabno, če želite od nekje hitro zagrabiti del besedila in ga primerjati z nečim drugim, ne da bi prej ustvarili datoteke. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Shranjevanje</title>
+<para
+>Shranjevanje bo dovoljeno šele, ko bodo rešeni vsi konflikti. Če datoteka že obstaja in je možnost <guilabel
+>Varnostne kopije datotek</guilabel
+> omogočena pri elementu <guilabel
+>Mapa</guilabel
+> v pogovornem oknu z nastavitvami, bo obstoječa datoteka preimenovana s <literal role="extension"
+> pripono .orig</literal
+>, če pa takšna datoteka obstaja, bo izbrisana. Ko zaprete ali začnete drugo diff-analizo in podatki še niso bili shranjeni, potem vas bo &kdiff3; vprašal, ali želite shraniti, preklicati ali nadaljevati brez shranjevanja. (&kdiff3; ne lovi nobenih signalov. Torej, če "ubijete" pojavek &kdiff3;, bodo vaši podatki izgubljeni.) </para
+><para
+>Konci vrstic se shranijo v skladu z običajno metodo v osnovnem operacijskem sistemu. Za Unixe se vsaka vrstica konča z znakom za začetek vrstice "<literal
+>\n</literal
+>", medtem ko se pri sistemih, ki temeljijo na Win32, vsaka vrstica konča s povratnim znakom + znak za začetek vrstice "<literal
+>\r\n</literal
+>". &kdiff3; ne ohrani končnic vrstic vhodnih datotek, kar tudi pomeni, da ne smete uporabljati &kdiff3; z binarnimi datotekami. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Iskanje nizov</title>
+<para
+>Niz lahko iščete v katerem koli besedilnem oknu &kdiff3;. Element menija <menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Najdi...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) pogovorno okno, v katerem lahko določite niz za iskanje. Izberete lahko tudi okna, ki jih želite preiskati. Iskanje se vedno začne na vrhu. Uporabite element menija <menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Najdi naprej ...</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>), da nadaljujete do naslednjega pojava. Če izberete iskanje po več oknih, bo prvo okno preiskano od vrha do dna, preden se bo iskanje spet začelo v naslednjem oknu na vrhu &etc; </para>
+</sect1>
+
+<sect1 id="printing"
+><title
+>Tiskanje</title>
+<para
+>&kdiff3; podpira tiskanje za razlike besedilnih datotek. Element menija <menuchoice
+><guimenu
+>Datoteka</guimenu
+><guimenuitem
+>Natisni...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+>) odpre pogovorno okno, v katerem lahko izberete tiskalnik in prilagodite druge možnosti. </para
+><para
+>Obstaja več možnosti za prilagajanje obsega. Zaradi različnih pogovornih oken za tiskanje v različnih operacijskih sistemih se način doseganja določenih izbir obsega razlikuje. </para>
+<variablelist>
+   <varlistentry
+><term
+>Vse:</term
+><listitem
+><para
+>Natisni vse.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Trenutno:</term
+><listitem
+><para
+>Natisni stran, ki se začne pri prvi vidni vrstici v oknu. (V sistemih brez te možnosti je to mogoče doseči z določitvijo številke strani 10000 za tiskanje.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Izbira:</term
+><listitem
+><para
+>Preden se odločite za tiskanje, izberite besedilo z miško (kot pri kopiranju in lepljenju) v enem od oken za vnos razlike, da določite začetno in končno vrstico. Če v enem od oken za vnos razlike ni bilo izbrano nobeno besedilo, potem to ne bo na voljo. (V sistemih brez te možnosti je to mogoče doseči z določitvijo številke strani 9999 za tiskanje.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Obseg:</term
+><listitem
+><para
+>Določite prvo in zadnjo stran. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Druge pomembne možnosti za tiskanje bodo vzete iz običajnih možnosti: </para
+><itemizedlist>
+   <listitem
+><para
+>Pisava, velikost pisave</para
+></listitem>
+   <listitem
+><para
+>Pokaži številke vrstic</para
+></listitem>
+   <listitem
+><para
+>Prelom besed</para
+></listitem>
+   <listitem
+><para
+>Barve</para
+></listitem>
+   <listitem
+><para
+>&etc;</para
+></listitem>
+</itemizedlist>
+<para
+>Za tiskanje je priporočljivo tudi ležeče oblikovanje. </para>
+</sect1>
+
+<sect1 id="options"
+><title
+>Možnosti</title>
+<para
+>Možnosti in seznam nedavnih datotek bodo shranjeni, ko zapustite program, in znova naloženi, ko ga zaženete. (<menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Konfiguriraj &kdiff3;...</guimenuitem
+></menuchoice
+> menijski element). </para>
+<sect2
+><title
+>Pisava</title>
+<para
+>Izberite pisavo s fiksno širino. (V nekaterih sistemih bo to pogovorno okno predstavilo tudi pisave spremenljive širine, vendar jih ne smete uporabljati.) </para>
+</sect2>
+
+<sect2
+><title
+>Barve</title>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Pogled urejevalnika in razlike:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Barva ospredja:</guilabel
+></term
+><listitem
+><para
+>Ponavadi črna. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva ozadja:</guilabel
+></term
+><listitem
+><para
+>Ponavadi bela. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Različna barva ozadja:</guilabel
+></term
+><listitem
+><para
+>Ponavadi svetlo siva. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva A:</guilabel
+></term
+><listitem
+><para
+>Ponavadi temno modra. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva B:</guilabel
+></term
+><listitem
+><para
+>Ponavadi temno zelena. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva C:</guilabel
+></term
+><listitem
+><para
+>Ponavadi temna magenta. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva spora:</guilabel
+></term
+><listitem
+><para
+>Običajno rdeče.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva ozadja trenutnega obsega:</guilabel
+></term
+><listitem
+><para
+>Ponavadi svetlo rumena.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva ozadja razlike v trenutnem območju:</guilabel
+></term
+><listitem
+><para
+>Običajno temno rumena.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva za ročno poravnane razpone razlik:</guilabel
+></term
+><listitem
+><para
+>Običajno oranžna.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Primerjalni pogled mape:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Najnovejša barva datoteke:</guilabel
+></term
+><listitem
+><para
+>Običajno zelena.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva najstarejše datoteke:</guilabel
+></term
+><listitem
+><para
+>Običajno rdeče.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva datoteke srednjih let:</guilabel
+></term
+><listitem
+><para
+>Običajno močno rumena.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Barva za manjkajoče datoteke:</guilabel
+></term
+><listitem
+><para
+>Ponavadi črna.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Spreminjanje barv za primerjavo map bo učinkovito šele ob začetku naslednje primerjave map. </para>
+<para
+>Pri sistemih s samo 16 ali 256 barvami nekatere barve niso na voljo v čisti obliki. V takih sistemih bo gumb <guibutton
+>Privzeto</guibutton
+> izbral čisto barvo. </para>
+</sect2>
+
+<sect2
+><title
+>Nastavitve urejevalnika</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Tab vstavi presledke</guilabel
+></term
+><listitem
+><para
+>Če je to onemogočeno in pritisnete &Tab; tipko, se vstavi tabulator, sicer pa ustrezno število znakov.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Velikost tabulatorja:</guilabel
+></term
+><listitem
+><para
+>Lahko se prilagodi vašim posebnim potrebam. Privzeto je <literal
+>8</literal
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Samodejno zamikanje</guilabel
+></term
+><listitem
+><para
+>Ko pritisnete &Enter; ali <keycap
+>Return</keycap
+> se za novo vrstico uporabi zamik prejšnje vrstice.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Izbira samodejnega kopiranja</guilabel
+></term
+><listitem
+><para
+>Vsak izbor se takoj kopira v odložišče, ko je aktiven, in vam ga ni treba izrecno kopirati.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Slog konca vrstice:</guilabel
+></term
+><listitem
+><para
+>Pri shranjevanju lahko izberete želeni slog konca črte. Privzeta nastavitev je običajna izbira za uporabljeni operacijski sistem.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="diffoptions"
+><title
+>Diff Settings</title>
+<para
+>Pri primerjavi datotek &kdiff3; najprej poskuša ujemati vrstice, ki so enake v vseh vhodnih datotekah. Samo med tem korakom lahko prezre prazen prostor. Drugi korak primerja vsako vrstico. V tem koraku prazen prostor ne bo prezrt. Tudi med združevanjem prazen prostor ne bo prezrt. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ignoriraj številke (obravnavaj kot presledek)</guilabel
+></term
+><listitem
+><para
+>Privzeto je izklopljeno. Številski znaki ('0'-'9', '.', '-') bodo prezrti v prvem delu analize, v katerem se izvede ujemanje vrstic. V rezultatu bodo razlike kljub temu prikazane, vendar se obravnavajo kot prazen prostor. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Prezri komentarje C/C++ (obravnavaj kot prazen prostor)</guilabel
+></term
+><listitem
+><para
+>Privzeto je izklopljeno. Spremembe komentarjev bodo obravnavane kot spremembe praznega prostora. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignoriraj velike in male črke (obravnavaj kot beli prostor)</guilabel
+></term
+><listitem
+><para
+>Privzeto je izklopljeno. Razlike med velikimi in malimi črkami (kot je 'A' proti 'a') bodo obravnavane kot spremembe v belem prostoru. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ukaz predprocesorja:</guilabel
+></term
+><listitem
+><para
+>Glejte <link linkend="preprocessors"
+>naslednji razdelek</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ukaz predprocesorja za ujemanje vrstic:</guilabel
+></term
+><listitem
+><para
+>Glejte <link linkend="preprocessors"
+>naslednji razdelek</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Potrudi se (počasneje)</guilabel
+></term
+><listitem
+><para
+>Poskusite najti še manjšo delto. (Privzeto je vklopljeno.) To bo verjetno učinkovito za zapletene in velike datoteke. In počasno za zelo velike datoteke. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Poravnajte B in C za 3 vhodne datoteke</guilabel
+></term
+><listitem
+><para
+>Poskusite poravnati <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+>, ko primerjate ali združujete tri vhodne datoteke. Ni priporočljivo za združevanje, ker je združevanje lahko bolj zapleteno. (Privzeto je izklopljeno.) </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Nastavitve združevanja</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Zakasnitev samodejnega napredovanja (ms):</guilabel
+></term
+><listitem
+><para
+>Ko je v načinu samodejnega napredovanja, ta nastavitev določa, kako dolgo naj bo prikazan rezultat izbire, preden skoči na naslednji nerešen konflikt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Prikaži pogovorna okna z informacijami</guilabel
+></term
+><listitem
+><para
+>Prikaži pogovorno okno z informacijami o številu sporov. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Privzeto združevanje datotek praznega prostora 2/3:</guilabel
+></term
+><listitem
+><para
+>Samodejno reši vse konflikte praznega prostora z izbiro navedene datoteke. (Privzeta je ročna izbira.) Uporabno, če prazen prostor v mnogih datotekah res ni pomemben. Če to potrebujete le občasno, bolje uporabite <guilabel
+>Izberi A/B/C za vse nerešene spore belega prostora</guilabel
+> v meniju <guimenu
+>Združi</guimenu
+>. Upoštevajte, da če omogočite <guilabel
+>Prezri številke (obravnavaj kot presledek)</guilabel
+> ali <guilabel
+>Prezri komentarje C/C++ (obravnavaj kot presledek)</guilabel
+>, potem ta samodejna izbira velja tudi za spore v številke ali komentarje. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Samodejno združevanje regularnega izraza:</guilabel
+></term
+><listitem
+><para
+>Regularni izraz za vrstice, kjer &kdiff3; mora samodejno izbrati en vir. Glejte tudi <link linkend="vcskeywordsmergesupport"
+>Samodejno združevanje...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Zaženi samodejno združevanje regularnih izrazov ob začetku združevanja</guilabel
+></term
+><listitem
+><para
+>Če je aktivirano &kdiff3; zažene samodejno spajanje z možnostjo <guilabel
+>Regularni izraz samodejnega združevanja:</guilabel
+>, ko se združevanje začne. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Začetek vnosa v zgodovino regularnega izraza</guilabel
+></term
+><listitem
+><para
+>Regularni izraz za začetek vnosa v zgodovino združevanja. Običajno ta vrstica vsebuje ključno besedo "<literal
+>&#36;Log&#36;</literal
+>". Privzeta vrednost: "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>" </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Začetek vnosa v zgodovino regularnega izraza</guilabel
+></term
+><listitem
+><para
+>Vnos v zgodovino spajanja je sestavljen iz več vrstic. Podajte regularni izraz za zaznavanje prve vrstice (brez uvodnega komentarja). Z oklepaji združite ključe, ki jih želite uporabiti za razvrščanje. Če ostane prazno, potem &kdiff3; predpostavlja, da prazne vrstice ločujejo vnose zgodovine. Glejte tudi <link linkend="vcskeywordsmergesupport"
+>Samodejno združevanje...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Razvrščanje združevanja zgodovine</guilabel
+></term
+><listitem
+><para
+>Omogoči razvrščanje zgodovine nadzora različic. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Vrstni red ključa za začetek vnosa v zgodovino:</guilabel
+></term
+><listitem
+><para
+>Vsak par oklepajev, uporabljen v regularnem izrazu za začetni vnos zgodovine, združuje ključ, ki se lahko uporablja za razvrščanje. Podajte seznam ključev (ki so oštevilčeni po vrstnem redu pojavljanja, začenši z <literal
+>1</literal
+>) z uporabo ',' kot ločilo (&eg; "<literal
+>4,5,6,1,2,3,7 </literal
+>"). Če polje ostane prazno, razvrščanje ne bo izvedeno. Glejte tudi <link linkend="vcskeywordsmergesupport"
+>Samodejno združevanje...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Zgodovina nadzora različic združevanja ob začetku združevanja</guilabel
+></term
+><listitem
+><para
+>Če je aktivirano, &kdiff3; zažene samodejno združevanje zgodovine z uporabo zgoraj omenjenih možnosti, ko se združevanje začne. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Največje število vnosov v zgodovino:</guilabel
+></term
+><listitem
+><para
+>&kdiff3; obreže seznam zgodovine po podanem številu vnosov. Uporabite <literal
+>-1</literal
+>, da preprečite obrezovanje. (Privzeto je <literal
+>-1</literal
+>). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preizkusite svoje regularne izraze</guilabel
+></term
+><listitem
+><para
+>Ta gumb prikaže pogovorno okno, ki vam omogoča izboljšanje in testiranje zgornjih regularnih izrazov. Preprosto kopirajte ustrezne podatke iz svojih datotek v vzorčne vrstice. Možnost <guilabel
+>Rezultat ujemanja:</guilabel
+> bo takoj pokazala, ali je ujemanje uspelo ali ne. <guilabel
+>Rezultat ključa za razvrščanje:</guilabel
+> bo prikazal ključ, uporabljen za razvrščanje zgodovine združevanja. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Nepomemben ukaz združevanja:</guilabel
+></term
+><listitem
+><para
+>Določite lasten ukaz, ki naj se kliče, ko &kdiff3; zazna, da pri združevanju treh datotek datoteka iz <guilabel
+>B</guilabel
+> ne prispeva nobenih ustreznih podatkov, ki jih že ne vsebuje datoteka iz <guilabel
+>C</guilabel
+>. Ukaz se kliče s tremi imeni datotek kot parametri. Podatki, ki se ujemajo z <guilabel
+>regularnim izrazom za samodejno združevanje</guilabel
+> ali v zgodovini, se ne štejejo za pomembne. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Samodejno shranjevanje in zapiranje ob združevanju brez sporov</guilabel
+></term
+><listitem
+><para
+>Če je bil &kdiff3; zagnan za združevanje datotek iz ukazne vrstice in vsi konflikti so rešljivi brez interakcije uporabnika, nato pa se samodejno shranijo in zaprejo. (Podobno možnosti ukazne vrstice <option
+>--auto</option
+>.) </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Združevanje map</title>
+<para
+>Te možnosti se nanašajo na prečesavanje mape in obravnavo združevanja: Za podrobnosti glejte <link linkend="dirmergeoptions"
+>Primerjava map/dokumentov o združevanju</link
+>. </para
+><para
+>Obstaja pa ena možnost, ki je pomembna tudi za shranjevanje posameznih datotek: </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Varnostne kopije datotek (.orig)</guilabel
+></term
+><listitem
+><para
+>Ko je datoteka shranjena in že obstaja starejša različica, bo prvotna različica preimenovana s pripono <literal role="extension"
+>.orig</literal
+>. Če stara datoteka varnostne kopije s končnico <literal role="extension"
+>.orig</literal
+> že obstaja, bo ta izbrisana brez varnostne kopije. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Regionalne in jezikovne možnosti</title>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Uporabite isto kodiranje za vse</guilabel
+></term
+><listitem
+><para
+>Naslednje možnosti kodiranja je mogoče prilagoditi ločeno za vsak element ali če je ta možnost nastavljena, bodo vse vrednosti prevzele prvo vrednost. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Opomba: lokalno kodiranje je "..."</guilabel
+></term
+><listitem
+><para
+>Nad izbirniki kodekov se prikaže ta opomba, ki vam pove, kakšno je lokalno kodiranje. (To ni nastavljivo, ampak za vašo informacijo, če ne poznate svojega lokalnega kodiranja, vendar ga morate izbrati.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Samodejno zaznavanje</guilabel
+></term
+><listitem
+><para
+>Ta možnost poskuša uporabiti BOM ali meta podatke iz dokumentov XML/HTML za zaznavanje kodiranja. Če tega ne stori, bo preveril, ali je kratek vzorec z začetka datoteke mogoče interpretirati kot UTF-8. Če je to preverjanje uspešno, bo uporabljen UTF-8. V nasprotnem primeru se bo vrnil na uporabniško izbrani kodek. Podprt je samo UTF-8 brez BOM ali metapodatkov. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kodiranje datoteke za A/B/C:</guilabel
+></term
+><listitem
+><para
+>Prilagodite kodiranje datoteke za vhodne datoteke. To vpliva na interpretacijo posebnih znakov. Ker lahko prilagodite vsak kodek posebej, lahko celo primerjate in združite datoteke, ki so bile shranjene z uporabo različnih kodekov. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kodiranje datoteke za spajanje in shranjevanje:</guilabel
+></term
+><listitem
+><para
+>Ko uredite datoteko, lahko prilagodite, katero kodiranje bo uporabljeno pri shranjevanju na disk. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kodiranje datoteke za datoteke predprocesorja:</guilabel
+></term
+><listitem
+><para
+>Ko definirate predprocesorje, morda ne bodo mogli delovati na vašemkodek. (&eg;: vaše datoteke so 16-bitne unicode in vaš predprocesor lahko samo vzame 8-bitni &ASCII;.) S to možnostjo lahko določite kodiranjeizhod predprocesorja. </para
+></listitem
+></varlistentry>
+	<varlistentry
+><term
+><guilabel
+>Jezik od desne proti levi:</guilabel
+></term
+><listitem
+><para
+>Nekateri jeziki pišejo z desne proti levi. Ko je ta možnost omogočena, &kdiff3; nariše besedilo od desne proti levi v oknih za vnos razlike in v oknu za spajanje izhodov. Upoštevajte, da če zaženete &kdiff3; z možnostjo ukazne vrstice <option
+>--reverse</option
+> bo tudi vsa postavitev izvedena od desne proti levi. (To je zmožnost, ki jo ponuja &Qt;.) </para
+><note
+><para
+>Ta dokumentacija je bila napisana ob predpostavki, da sta ta možnost ali obratna postavitev onemogočeni. Zato je treba nekatere sklice na "levo" ali "desno" nadomestiti z ustreznim primerkom, če uporabljate te možnosti. </para
+></note
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Razno</title>
+<para
+>(Te možnosti in dejanja so na voljo v menijih ali vrstici z gumbi.)</para>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Možnosti pregleda:</emphasis
+></term
+><listitem
+><para
+>Te možnosti so na voljo le, če primerjate tri datoteke. V običajnem načinu so vse razlike prikazane v enem barvno kodiranem preglednem stolpcu. Toda včasih vas še posebej zanimajo razlike med samo dvema od teh treh datotek. Če izberete pregled "A proti B", "A proti C" ali "B proti C", bo prikazan drugi stolpec pregleda z zahtevanimi informacijami poleg običajnega pregleda. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Okna preloma besed razlik</guimenuitem
+></term
+><listitem
+><para
+>Zavihajte vrste, ko bi njihova dolžina presegla širino okna. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Pokaži okno A/B/C:</guibutton
+></term
+><listitem
+><para
+>Včasih želite bolje izkoristiti prostor na zaslonu za dolge vrste. Skrijte okna, ki niso pomembna. (V meniju oken.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Preklopi razdeljeno usmerjenost</guibutton
+></term
+><listitem
+><para
+>Preklapljajte med okni za razlikovanje, ki so prikazana eno poleg drugega (<guilabel
+>A</guilabel
+> levo od <guilabel
+>B</guilabel
+> levo od <guilabel
+>C</guilabel
+>) ali eno nad drugim (<guilabel
+>A</guilabel
+> nad <guilabel
+>B</guilabel
+> nad <guilabel
+>C</guilabel
+>). To bi moralo pomagati tudi pri dolgih vrstah. (V meniju <guimenu
+>Okno</guimenu
+>.) </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Združi trenutno datoteko</guibutton
+></term
+><listitem
+><para
+>Deluje, če primerjate samo dve datoteki. En sam klik zažene združevanje in uporabi ime zadnje vhodne datoteke kot privzeto ime izhodne datoteke. (Ko se to uporabi za ponovni zagon združevanja, bo ime izhodne datoteke ohranjeno.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Prikaži beli prostor</guibutton
+></term
+><listitem
+><para
+>To izklopite, če želite onemogočiti označevanje sprememb samo s presledki v besedilu ali preglednih stolpcih. (Upoštevajte, da to velja tudi za spremembe v številkah ali komentarjih, če sta možnosti <guilabel
+>Prezri številke (obravnavaj kot presledek)</guilabel
+> ali <guilabel
+>Prezri komentarje C/C++ (obravnavaj kot presledek)</guilabel
+> aktivno.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Prikaz prostora &amp;&amp; Znaki tabulatorja</guibutton
+></term
+><listitem
+><para
+>Včasih so vidni prostori in zavihki moteči. To lahko izklopite.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Prikazuj številke vrstic</guibutton
+></term
+><listitem
+><para
+>Izberete lahko, ali naj bodo prikazane številke vrstic za vhodne datoteke.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Konfiguriranje bližnjic na tipkovnici</title>
+<para
+>Trenutno samo &frameworks; različica podpira uporabniško nastavljive bližnjice na tipkovnici. (Meni <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj bližnjice...</guimenuitem
+></menuchoice
+>) </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Ukazi predprocesorja</title>
+<para
+>&kdiff3; podpira dve možnosti predprocesorja. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ukaz predprocesorja:</guilabel
+></term
+><listitem
+><para
+>Ko je katera koli datoteka prebrana, bo posredovana skozi ta zunanji ukaz. Izhod tega ukaza bo viden namesto izvirne datoteke. Napišete lahko svoj predprocesor, ki bo ustrezal vašim posebnim potrebam. Uporabite to, da odrežete moteče dele datoteke ali samodejno popravite zamik &etc; </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ukaz predprocesorja za ujemanje vrstic:</guilabel
+></term
+><listitem
+><para
+>Ko je katera koli datoteka prebrana, bo posredovana skozi ta zunanji ukaz. Če je podan tudi ukaz predprocesorja (glejte zgoraj), je izhod predprocesorja vhod predprocesorja za ujemanje vrstic. Izhod bo uporabljen le med fazo analize ujemanja vrstic. Napišete lahko svoj predprocesor, ki bo ustrezal vašim posebnim potrebam. Vsaka vhodna vrstica mora imeti ustrezno izhodno vrstico. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>Ideja je omogočiti uporabniku večjo prilagodljivost med konfiguriranjem rezultata razlik.  Toda to zahteva zunanji program in mnogi uporabniki ga ne želijo napisati sami. Dobra novica je, da zelo pogosto <command
+>sed</command
+> ali <command
+>perl</command
+> opravita to delo. </para>
+<para
+>Primer: Preprost testni primer: Razmislite o datoteki a.txt (6 vrstic): </para>
+<screen
+>aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen>
+<para
+>In datoteka b.txt (3 vrstice): </para>
+<screen
+>cg
+      dg
+      eg
+</screen>
+<para
+>Brez predprocesorja bi bile naslednje vrstice postavljene ena poleg druge:  </para>
+<screen
+>aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen>
+<para
+>To verjetno ni zaželeno, saj je v prvi črki dejansko zanimiv podatek. Da algoritmu za ujemanje pomagamo prezreti drugo črko, lahko uporabimo ukaz predprocesorja za ujemanje vrstic, ki nadomesti 'g' z 'a': </para>
+<screen
+><command
+>sed</command
+> 's/g/a/'
+</screen>
+<para
+>S tem ukazom bi bil rezultat primerjave: </para>
+<screen
+>aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen>
+<para
+>Notranji algoritem za ujemanje vidi datoteke po zagonu predprocesorja za ujemanje vrstic, toda na zaslonu je datoteka nespremenjena. (Običajni predprocesor bi spremenil podatke tudi na zaslonu.) </para>
+
+<sect2 id="sedbasics"
+><title
+><command
+>sed</command
+> Osnove</title>
+<para
+>Ta razdelek predstavlja le nekaj zelo osnovnih funkcij <command
+>sed</command
+>. Za več informacij glejte <ulink url="info:/sed"
+>info:/sed</ulink
+> ali <ulink url="https://www.gnu.org/software/sed/manual/html_mono/sed.html "
+> https://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Vnaprej prevedena različica za &Windows; najdete na <ulink url="http://unxutils.sourceforge.net"
+> http://unxutils.sourceforge.net</ulink
+>. Upoštevajte, da naslednji primeri predpostavljajo, da je ukaz <command
+>sed</command
+> v neki mapi v spremenljivki okolja <envar
+>PATH</envar
+>. Če temu ni tako, morate podati celotno absolutno pot za ukaz. </para>
+<para
+>V tem kontekstu se uporablja samo nadomestni ukaz <command
+>sed</command
+>: </para>
+<screen
+><command
+>sed</command
+> 's/<replaceable
+>REGEXP</replaceable
+>/<replaceable
+>REPLACEMENT</replaceable
+>/<replaceable
+>FLAGS</replaceable
+>'
+</screen>
+<para
+>Preden uporabite nov ukaz znotraj &kdiff3;, ga najprej preizkusite v konzoli. Tukaj je uporaben ukaz <command
+>echo</command
+>. Primer: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/' -> abrakadabra
+</screen>
+<para
+>Ta primer prikazuje zelo preprost ukaz sed, ki zamenja prvo pojavitev "a" z "o". Če želite zamenjati vse pojavitve, potem potrebujete zastavico "g": </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g' -> obrokodobro
+</screen>
+<para
+>Simbol "|" je cevni ukaz, ki prenese izhod prejšnjega ukaza na vhod naslednjega ukaza. Če želite preizkusiti z daljšo datoteko, lahko uporabite <command
+>cat</command
+> na sistemu &UNIX; ali <command
+>type</command
+> v sistemu &Windows;. <command
+>sed</command
+> bo izvedel zamenjavo za vsako vrstico. <screen
+><command
+>cat</command
+> <replaceable
+>imedatoteke</replaceable
+> | <command
+>sed</command
+> <replaceable
+>možnosti</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Primeri uporabe <command
+>sed</command
+> v &kdiff3;</title>
+<sect3
+><title
+>Ignoriranje drugih vrst komentarjev</title>
+<para
+>Trenutno &kdiff3; razume le komentarje C/C++. Z možnostjo <guilabel
+>Ukaz predprocesorja za ujemanje vrstic:</guilabel
+> lahko tudi prezrete druge vrste komentarjev, tako da jih pretvorite v komentarje C/C++. </para>
+<para
+>Primer: Če želite prezreti komentarje, ki se začnejo z "<literal
+>#</literal
+>", jih želite pretvoriti v "<literal
+>//</literal
+>". Upoštevajte, da morate za učinek omogočiti tudi možnost <guilabel
+>Prezri komentarje C/C++ (obravnavaj kot presledek)</guilabel
+>. Ustrezen <guilabel
+>Ukaz predprocesorja za ujemanje vrstic:</guilabel
+> bi bil: </para>
+<screen
+><command
+>sed</command
+> 's/#/\/\//'
+</screen>
+<para
+>Ker ima za <command
+>sed</command
+> znak "<literal
+>/</literal
+>" poseben pomen, je treba znak  "<literal
+>\</literal
+>" postaviti pred vsak "<literal
+>/</literal
+>" v nadomestnem nizu. Včasih je  "<literal
+>\</literal
+>" potreben za dodajanje ali odstranjevanje posebnega pomena določenih znakov. Enojni narekovaji (') so pomembni samo pri testiranju na ukazni lupini, saj bo drugače poskušala obdelati nekatere znake. &kdiff3; tega ne naredi, razen za ubežna zaporedja '<literal
+>\"</literal
+>' in '<literal
+>\\</literal
+>'. </para>
+</sect3>
+<sect3
+><title
+>Razlika pri razlikovanju velikih/malih črk</title>
+<para
+>Uporabite naslednji <guilabel
+>ukaz predprocesorja za ujemanje vrstic:</guilabel
+> za pretvorbo vseh vnosov v velike črke: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen>
+<para
+>Tu je  "<literal
+>.*</literal
+>" regularni izraz, ki se ujema s katerim koli nizom in se v tem kontekstu ujema z vsemi znaki v vrstici. "<literal
+>\1</literal
+>" v nadomestnem nizu se nanaša na ujemajoče se besedilo v prvem paru "<literal
+>\(</literal
+>" and "<literal
+>\)</literal
+>". "<literal
+>\U</literal
+>" pretvori vstavljeno besedilo v velike črke. </para>
+</sect3>
+
+<sect3
+><title
+>Ignoriranje ključnih besed za nadzor različic</title>
+<para
+>CVS in drugi sistemi za nadzor različic uporabljajo več ključnih besed za vstavljanje samodejno ustvarjenih nizov (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Vsi sledijo vzorcu "<replaceable
+>$KEYWORD generirano besedilo$</replaceable
+>". Zdaj potrebujemo ukaz predprocesorja za ujemanje vrstic, ki odstrani samo generirano besedilo: </para>
+<screen
+><command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen>
+<para
+>"<literal
+>\|</literal
+>" ločuje možne ključne besede. Ta seznam boste morda želeli spremeniti glede na svoje potrebe. "<literal
+>\</literal
+>" pred "<literal
+>$</literal
+>" je potreben, ker se drugače "<literal
+>$</literal
+>" ujema s koncem vrstice. </para>
+<para
+>Med eksperimentiranjem z <command
+>sed</command
+> boste morda razumeli in vam bodo celo všeč ti regularni izrazi. Uporabni so, ker obstaja veliko drugih programov, ki prav tako podpirajo podobne stvari. </para>
+</sect3>
+
+<sect3
+><title
+>Ignoriranje številk</title>
+<para
+>Ignoriranje številk je pravzaprav vgrajena možnost. Toda kot drug primer, takole bi bil videti ukaz predprocesorja za ujemanje vrstic. </para>
+<screen
+><command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen>
+<para
+>Vsak znak znotraj '<literal
+>[</literal
+>' in '<literal
+>]</literal
+>' se ujema in ne bo zamenjan z ničemer. </para>
+</sect3>
+
+<sect3
+><title
+>Ignoriranje določenih stolpcev</title>
+<para
+>Včasih je besedilo zelo strogo oblikovano in vsebuje stolpce, ki jih želite vedno prezreti, medtem ko obstajajo drugi stolpci, ki jih želite ohraniti za analizo. V naslednjem primeru je prvih pet stolpcev (znakov) prezrtih, naslednjih deset stolpcev je ohranjenih, nato je spet pet stolpcev prezrtih in preostala vrstica je ohranjena. </para>
+<screen
+><command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen>
+<para
+>Vsaka pika '<literal
+>.</literal
+>' se ujema s katerim koli posameznim znakom. "<literal
+>\1</literal
+>" in "<literal
+>\2</literal
+>" v nadomestnem nizu se nanašata na ujemajoče se besedilo znotraj prvega in drugega para "<literal
+>\(</literal
+>" in "<literal
+>\)</literal
+>", ki označujeta besedilo, ki ga je treba ohraniti. </para>
+</sect3>
+
+<sect3
+><title
+>Kombinacija več zamenjav</title>
+<para
+>Včasih želite uporabiti več zamenjav hkrati. Nato jih lahko ločite med seboj s podpičjem '<literal
+>;</literal
+>'. Primer: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</sect3>
+
+<sect3
+><title
+>Uporaba <command
+>perl</command
+> namesto <command
+>sed</command
+></title>
+<para
+>Namesto <command
+>sed</command
+> boste morda želeli uporabiti nekaj drugega, kot je <command
+>perl</command
+>. </para>
+<screen
+><command
+>perl</command
+> -p -e 's/<replaceable
+>REGEXP</replaceable
+>/<replaceable
+>REPLACEMENT</replaceable
+>/<replaceable
+>FLAGS</replaceable
+>'
+</screen>
+<para
+>Toda nekatere podrobnosti so drugačne v <command
+>perl</command
+>. Upoštevajte, da kjer <command
+>sed</command
+> potrebuje "<literal
+>\(</literal
+>" in "<literal
+>\)</literal
+>", <command
+>perl</command
+> zahteva enostavnejši "<literal
+>(</literal
+>" in "<literal
+>)</literal
+>" brez '<literal
+>\</literal
+>'. Primer: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Vrstni red izvajanja predprocesorja</title>
+<para
+>Podatki se prenašajo skozi vse notranje in zunanje predprocesorje v naslednjem vrstnem redu: </para>
+<itemizedlist>
+<listitem
+><para
+>Običajni predprocesor,</para
+></listitem>
+<listitem
+><para
+>Predprocesor za ujemanje vrstic,</para
+></listitem>
+<listitem
+><para
+>Ignoriraj velike črke (obravnavaj kot presledek) (pretvorba v velike črke),</para
+></listitem>
+<listitem
+><para
+>Zaznavanje komentarjev C/C++,</para
+></listitem>
+<listitem
+><para
+>Ignoriraj številke (obravnavaj kot beli prostor),</para
+></listitem>
+<listitem
+><para
+>Ignoriraj beli prostor</para
+></listitem>
+</itemizedlist>
+<para
+>Podatki po običajnem predprocesorju bodo ohranjeni za prikaz in združevanje. Druge operacije spreminjajo le podatke, ki jih vidi algoritem za ujemanje razlik med vrsticami. </para
+><para
+>V redkih primerih, ko uporabljate običajni predprocesor, upoštevajte, da predprocesor za ujemanje vrstic vidi izhod običajnega predprocesorja kot vhod. </para>
+</sect2>
+
+<sect2
+><title
+>Opozorilo</title>
+<para
+>Ukazi predprocesorja so pogosto zelo uporabni, a kot pri vsaki možnosti, ki spremeni vaša besedila ali samodejno skrije določene razlike, lahko pomotoma spregledate določene razlike in v najslabšem primeru uničite pomembne podatke. </para
+><para
+>Iz tega razloga med združevanjem, če se uporablja običajen predprocesorski ukaz, vam bo &kdiff3; to povedal in vas vprašal, ali naj bo onemogočeno ali ne. Vendar vas ne bo opozoril, če je aktivna možnost <guilabel
+>Ukaz predprocesorja za ujemanje vrstic:</guilabel
+>. Združevanje se ne bo dokončalo, dokler niso razrešeni vsi spori. Če ste onemogočili menijski element <menuchoice
+><guimenu
+>Diffview</guimenu
+><guimenuitem
+>Pokaži prazen prostor</guimenuitem
+></menuchoice
+>, bodo razlike, ki so bile odstranjene z <guilabel
+>ukazom predprocesorja za ujemanje vrstic:</guilabel 
+> možnost bo prav tako nevidna. Če gumb <guibutton
+>Shrani</guibutton
+> ostane onemogočen med združevanjem (zaradi preostalih sporov), se prepričajte, da ste omogočili elelent menija <menuchoice
+><guimenu
+>Diffview</guimenu
+><guimenuitem
+>Pokaži prazen prostor</guimenuitem
+></menuchoice
+>. Če teh manj pomembnih razlik ne želite združiti ročno, lahko izberete <menuchoice
+><guimenu
+>Združi</guimenu
+><guimenuitem
+>Izberi [A|B|C] za vse nerešene spore presledkov</guimenuitem
+></menuchoice 
+> element menija. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Primerjava map in združevanje s &kdiff3;</title>
+<sect1 id="dirmergeintro"
+><title
+>Uvod v primerjavo in združevanje map</title>
+<para
+>Programerji morajo pogosto spremeniti veliko datotek v mapi, da dosežejo svoj namen. Za ta &kdiff3; omogoča tudi primerjavo in rekurzivno združevanje celotnih map! </para
+><para
+>Čeprav se zdi, da sta primerjava in združevanje map povsem očitna, morate vedeti več podrobnosti. Najpomembnejše je seveda dejstvo, da zdaj lahko vsaka operacija vpliva na veliko datotek. Če nimate varnostne kopije izvirnih podatkov, se je lahko zelo težko ali celo nemogoče vrniti v prvotno stanje. Zato se pred začetkom združevanja prepričajte, da so vaši podatki varni in da je vrnitev možna. Ali boste naredili arhiv ali uporabili kakšen sistem za nadzor različic, je vaša odločitev, a tudi izkušeni programerji in integratorji tu in tam potrebujejo stare vire. In upoštevajte, da čeprav se jaz (avtor &kdiff3;) trudim po svojih najboljših močeh, ne morem zagotoviti, da ne bo nobenih napak. Glede na &GNU; GPL za ta program NI nikakršnega JAMSTVA. Zato bodite ponižni in vedno imejte v mislih: </para>
+<blockquote
+><para>
+   <emphasis
+>Motiti se je človeško, a če želite stvari zares zamočiti, potrebujete računalnik.</emphasis>
+</para
+></blockquote>
+<para
+>In to lahko naredi ta program za vas: &kdiff3; ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... rekurzivno bere in primerja dve ali tri mape,</para
+></listitem>
+     <listitem
+><para
+>... še posebej skrbi za simbolne povezave,</para
+></listitem>
+     <listitem
+><para
+>... vam omogoča brskanje po datotekah z dvojnim klikom miške,</para
+></listitem>
+     <listitem
+><para
+>... za vsak element predlaga operacijo združevanja, ki jo lahko spremenite pred začetkom združevanja map,</para
+></listitem>
+     <listitem
+><para
+>... vam omogoča simulacijo združevanja in navede dejanja, ki bi se zgodila, ne da bi jih dejansko izvedli,</para
+></listitem>
+     <listitem
+><para
+>... vam omogoča resnično združevanje in vam omogoča interakcijo, kadar koli je potrebna ročna interakcija,</para
+></listitem>
+     <listitem
+><para
+>... omogoča zagon izbrane operacije za vse elemente (tipka <keycap
+>F7</keycap
+>) ali izbrani element (tipka <keycap
+>F6</keycap
+>),</para
+></listitem>
+     <listitem
+><para
+>... omogoča nadaljevanje združevanja po ročni interakciji s tipko <keycap
+>F7</keycap
+>,</para
+></listitem>
+     <listitem
+><para
+>... po želji ustvari varnostne kopije z razširitvijo <literal role="extension"
+>.orig</literal
+>,</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Začetek primerjave ali spajanja map</title>
+<para
+>To je zelo podobno spajanju in primerjavi posamezne datoteke. Določiti morate samo mape v ukazni vrstici ali v pogovornem oknu za odpiranje datoteke. </para>
+<sect2
+><title
+>Primerjaj/združi dve mapi: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>mapa1 mapa2</replaceable
+> <command
+>kdiff3</command
+> <replaceable
+>mapa1 mapa2</replaceable
+> -o <replaceable
+>destdir</replaceable
+>
+</screen>
+<para
+>Če ciljna mapa ni navedena, potem &kdiff3; bo uporabil <replaceable
+>mapo2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Primerjaj/združi tri mape: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>mapa1 folder2 folder3</replaceable>
+<command
+>kdiff3</command
+> <replaceable
+>folder1 folder2 folder3</replaceable
+> -o <replaceable
+>destdir</replaceable
+>
+</screen>
+<para
+>Ko se združijo tri mape, se kot osnova za združevanje uporabi <replaceable
+>mapa1</replaceable
+>. Če ciljna mapa ni navedena, potem bo &kdiff3; kot ciljno mapo za združevanje uporabil <replaceable
+>mapo3</replaceable
+>. </para>
+
+<para
+>Upoštevajte, da se samodejno začne samo primerjava, ne pa tudi združevanje. Za to morate najprej izbrati vnos v meniju ali tipko <keycap
+>F7</keycap
+>. (Več podrobnosti pozneje.) </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Vidne informacije o združevanju map</title>
+<para
+>Med branjem map se prikaže okno s sporočilom, ki vas obvešča o napredku. Če prekinete pregled mape, bodo prikazane samo datoteke, ki so bile do takrat primerjane. </para
+><para
+>Ko je pregled mape končan, &kdiff3; bo prikazalo seznamsko polje z rezultati na levi, ... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the folder browser."-->
+</mediaobject
+></screenshot>
+<para
+>... in podrobnosti o trenutno izbranem artiklu na desni: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>Stolpec z imenom</title>
+<para
+>Vsaka datoteka in mapa, ki je bila najdena med prečesavanjem, je prikazana tukaj v drevesu. Predmet lahko izberete tako, da ga enkrat kliknete z miško. </para
+><para
+>Mape so privzeto strnjene. Lahko jih razširite in strnete s klikom na "+"/"-" ali z dvojnim klikom na element ali z uporabo smerne tipke &Left;/&Right;. Meni <guimenu
+>Mapa</guimenu
+> vsebuje tudi dve dejanji <guimenuitem
+>Zloži vse podmape</guimenuitem
+> in <guimenuitem
+>Razgrni vse podmape</guimenuitem
+>, s katerima lahko strnete ali razširite vse mape hkrati. </para
+><para
+>Če dvokliknete element datoteke, se začne primerjava datotek in prikaže se okno razlik datotek. </para>
+<para
+>Slika v stolpcu z imenom odraža vrsto datoteke v prvi mapi (<guilabel
+>A</guilabel
+>). Lahko je eno od teh: </para>
+<itemizedlist>
+     <listitem
+><para
+>Normalna datoteka</para
+></listitem>
+     <listitem
+><para
+>Običajna mapa (slika mape)</para
+></listitem>
+     <listitem
+><para
+>Povezava do datoteke (slika datoteke s puščico povezave)</para
+></listitem>
+     <listitem
+><para
+>Povezava do mape (slika mape s puščico povezave)</para
+></listitem>
+</itemizedlist>
+<para
+>Če je vrsta datoteke v drugih mapah drugačna, je to vidno v stolpcih <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> in v oknu, ki prikazuje podrobnosti o izbranem predmetu. Upoštevajte, da v tem primeru ni mogoče samodejno izbrati operacije združevanja. Ob začetku spajanja bo uporabnik obveščen o tovrstnih težavah. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>Stolpci A/B/C in barvna shema</title>
+<para
+>Kot lahko vidite na zgornji sliki, so v stolpcih <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> uporabljene barve rdeča, zelena, rumena in črna. </para>
+<itemizedlist>
+     <listitem
+><para
+>Črna: ta element ne obstaja v tej mapi.</para
+></listitem>
+     <listitem
+><para
+>Zelena: najnovejši predmet.</para
+></listitem>
+     <listitem
+><para
+>Rumena: Starejša od zelene, novejše od rdeče.</para
+></listitem>
+     <listitem
+><para
+>Rdeča: Najstarejši predmet.</para
+></listitem>
+</itemizedlist>
+<para
+>Toda pri predmetih, ki so bili v primerjavi enaki, je tudi njihova barva enaka, tudi če starost ni enaka. </para
+><para
+>Mape veljajo za enake, če so vsi elementi, ki jih vsebujejo, enaki. Potem bodo tudi enake barve. Toda starost mape se ne upošteva pri njeni barvi. </para
+><para
+>Na idejo za to barvno shemo sem naletel v <ulink url="https://www.samba.org/ftp/paulus/"
+><command
+>dirdiff</command
+> ukazu</ulink
+>. Barve so podobne barvam lista, ki je zelen, ko je nov, postane kasneje rumen in rdeč, ko je star. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>Stolpec operacij</title>
+<para
+>Po primerjavi map &kdiff3; oceni tudi predlog združitve. To je prikazano v stolpcu <guilabel
+>Operacija</guilabel
+>. Operacijo lahko spremenite s klikom na operacijo, ki jo želite spremeniti. Odpre se majhen meni, v katerem lahko izberete operacijo za ta element. (Najbolj potrebne operacije lahko izberete tudi s tipkovnico. <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+>/<keycap 
+>4</keycap
+>/&Del; bo izbral <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>/<guilabel
+>Združi</guilabel
+>/ <guilabel
+> Izbriši</guilabel
+>, če je na voljo.) Ta operacija bo izvedena med združevanjem. Katere operacije so na voljo, je odvisno od predmeta in načina združevanja, v katerem ste. Način združevanja je le en izmed </para>
+<itemizedlist>
+     <listitem
+><para
+>Spajanje treh map (<guilabel
+>A</guilabel
+> se obravnava kot starejša osnova obeh).</para
+></listitem>
+     <listitem
+><para
+>Spajanje dveh map.</para
+></listitem>
+     <listitem
+><para
+>Način sinhronizacije dveh map (aktivirajte prek možnosti <guilabel
+>Sinhroniziraj mape</guilabel
+>).</para
+></listitem>
+</itemizedlist>
+<para
+>Pri spajanju treh map bo predlog operacije: Če za element... </para>
+<itemizedlist>
+     <listitem
+><para
+>.. vse tri mape so enake: Kopiraj iz <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> in <guilabel
+>C</guilabel
+> sta enaka, vendar <guilabel
+>B</guilabel
+> ni: Kopiraj iz <guilabel
+>B</guilabel
+> (ali če <guilabel
+> B</guilabel
+> ne obstaja, izbriši cilj, če obstaja) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> in <guilabel
+>B</guilabel
+> sta enaka, <guilabel
+>C</guilabel
+> pa ni: Kopiraj iz <guilabel
+>C</guilabel
+> (ali če <guilabel
+> C</guilabel
+> ne obstaja, izbriši cilj, če obstaja) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+> sta enaka, vendar <guilabel
+>A</guilabel
+> ni: Kopiraj iz <guilabel
+>C</guilabel
+> (ali če <guilabel
+> C</guilabel
+> ne obstaja, izbriši cilj, če obstaja) </para
+></listitem>
+     <listitem
+><para
+>... obstaja samo <guilabel
+>A</guilabel
+>: Izbriši cilj (če obstaja) </para
+></listitem>
+     <listitem
+><para
+>... obstaja samo <guilabel
+>B</guilabel
+>: Kopiraj iz <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... obstaja samo <guilabel
+>C</guilabel
+>: Kopiraj iz <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+> niso enaki: Združi </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+> nimajo iste vrste datoteke (&eg; <guilabel
+>A</guilabel
+> je mapa, <guilabel
+>B</guilabel
+> je datoteka): "Napaka: Vrste datotek v nasprotju". Medtem ko taki elementi obstajajo, se združevanje map ne more začeti. </para
+></listitem>
+</itemizedlist>
+<para
+>Pri spajanju dveh map bo predlog operacije: Če za element ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... obe mapi sta enaki: Kopiraj iz <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> obstaja, vendar ne <guilabel
+>B</guilabel
+>: Kopiraj iz <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> obstaja, vendar ne <guilabel
+>A</guilabel
+>: Kopiraj iz <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> in <guilabel
+>B</guilabel
+> obstajata, vendar nista enaka: Spoji </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> in <guilabel
+>B</guilabel
+> nimata iste vrste datoteke (&eg; <guilabel
+>A</guilabel
+> je mapa, <guilabel
+>B</guilabel
+> 
+> je datoteka): "Napaka: Vrste datotek v nasprotju". Medtem ko taki elementi obstajajo, se združevanje map ne more začeti. </para
+></listitem>
+</itemizedlist>
+<para
+>Način sinhronizacije je aktiven, če sta bili podani samo dve mapi in noben izrecni cilj in če je aktivna možnost <guilabel
+>Sinhroniziraj mape</guilabel
+>. &kdiff3; nato izbere privzeto operacijo, tako da sta pozneje obe mapi enaki. Če za artikel ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... obe mapi sta enakovredni: Ne bo narejeno ničesar. </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> obstaja, vendar ne <guilabel
+>B</guilabel
+>: Kopiraj <guilabel
+>A</guilabel
+> v <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> obstaja, vendar ne <guilabel
+>A</guilabel
+>: Kopiraj <guilabel
+>B</guilabel
+> v <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> in <guilabel
+>B</guilabel
+> obstajata, vendar nista enaka: Spoji in shrani rezultat v obe mapi. (Za uporabnika je vidno ime shranjevalne datoteke <guilabel
+>B</guilabel
+>, potem pa &kdiff3; prekopira <guilabel
+>B</guilabel
+> tudi v <guilabel
+>A</guilabel
+>.) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> in <guilabel
+>B</guilabel
+> nimata iste vrste datoteke (&eg; <guilabel
+>A</guilabel
+> je mapa, <guilabel
+>B</guilabel
+> 
+> je datoteka): "Napaka: Vrste datotek v nasprotju". Medtem ko taki elementi obstajajo, se združevanje map ne more začeti. </para
+></listitem>
+</itemizedlist>
+<para
+>Ko sta dve mapi združeni in je izbrana možnost <guilabel
+>Kopiraj novejše namesto združevanja (nevarno)</guilabel
+>, potem &kdiff3; pogleda datume in predlaga izbiro novejše datoteke. Če datoteke niso enake, vendar imajo enake datume, bo operacija vsebovala "Napaka: Datumi so enaki, datoteke pa ne." Medtem ko taki elementi obstajajo, se združevanje map ne more začeti. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>Stolpec stanja</title>
+<para
+>Med združevanjem bodo obdelane ena datoteka za drugo. V stolpcu stanja bo prikazano <guilabel
+>Končano</guilabel
+> za elemente, pri katerih je bila operacija združevanja uspešna, in druga besedila, če se zgodi kaj nepričakovanega. Ko je združevanje končano, morate opraviti zadnji pregled, da vidite, ali je stanje za vse elemente sprejemljivo. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Statistični stolpci</title>
+<para
+>Ko je v možnostih omogočen način primerjave datotek <guilabel
+>Popolna analiza</guilabel
+>, &kdiff3; bodo prikazani dodatni stolpci s številom nerešenih, rešenih, nebelih in belo prostornih sporov. (Stolpec <guilabel
+>Rešeno</guilabel
+> bo prikazan samo pri primerjavi ali združevanju treh map.) </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Izbira navedenih datotek</title>
+<para
+>Več možnosti vpliva na to, katere datoteke so tukaj navedene. Nekateri so dostopni v <link linkend="dirmergeoptions"
+>pogovornem oknu z nastavitvami</link
+>. Meni <guilabel
+>Mapa</guilabel
+> vsebuje vnose: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+><guilabel
+>Pokaži enake datoteke</guilabel
+>: Datoteke, ki so bile zaznane kot enake v vseh vhodnih mapah. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Pokaži različne datoteke</guilabel
+>: Datoteke, ki obstajajo v dveh ali več mapah, vendar niso enake. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Prikaži datoteke samo v A</guilabel
+>: datoteke, ki obstajajo samo v <guilabel
+>A</guilabel
+>, ne pa tudi v <guilabel
+>B</guilabel
+> ali <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Prikaži datoteke samo v B</guilabel
+>: datoteke, ki obstajajo samo v <guilabel
+>B</guilabel
+>, ne pa tudi v <guilabel
+>A</guilabel
+> ali <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Prikaži datoteke samo v C</guilabel
+>: datoteke, ki obstajajo samo v <guilabel
+>C</guilabel
+>, ne pa tudi v <guilabel
+>A</guilabel
+> ali <guilabel
+>B</guilabel
+>. </para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Aktivirajte samo možnosti <guilabel
+>Pokaži</guilabel
+> za elemente, ki jih želite na seznamu. Če na primer želite navesti samo vse elemente, ki obstajajo v <guilabel
+>A</guilabel
+> ali v <guilabel
+>B</guilabel
+>, vendar ne v obeh, boste morali aktivirati <guilabel
+>Prikaži datoteke samo v A</guilabel
+> in <guilabel
+>Pokaži datoteke samo v B</guilabel
+> in deaktiviraj vse druge (<guilabel
+>Pokaži enake datoteke</guilabel
+>, <guilabel
+>Pokaži različne datoteke</guilabel
+>, <guilabel
+>Pokaži datoteke samo v C</guilabel
+>). Seznam bo takoj posodobljen, da bo odražal spremembo. </para
+><para
+>Te možnosti veljajo tudi za mape z eno izjemo: Če onemogočite <guilabel
+> Pokaži različne datoteke</guilabel
+>, ne boste skrili nobene celotne mape. To bo delovalo samo za datoteke znotraj. </para
+><para
+>Upoštevajte, da je od teh samo možnost <guilabel
+>Pokaži enake datoteke</guilabel
+> obstojna. Drugi so omogočeni ob zagonu &kdiff3;. </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Izvajanje združevanja map</title>
+<para
+>Združujete lahko trenutno izbrani element (datoteko ali mapo) ali vse elemente. Ko izberete vse svoje operacije (tudi v vseh podmapah), lahko začnete združevanje. </para
+><para
+>Zavedajte se, da če ciljne mape niste izrecno določili, bo cilj <guilabel
+>C</guilabel
+> v načinu treh map, <guilabel
+>B</guilabel
+> v načinu združevanja dveh map in v sinhronizacijski način bo <guilabel
+>A</guilabel
+> ali/in <guilabel
+>B</guilabel
+>. </para
+><para
+>Če ste določili ciljno mapo, preverite tudi, ali so vsi elementi, ki bi morali biti v izhodu, v drevesu. Obstaja nekaj možnosti, zaradi katerih so nekateri elementi izpuščeni iz primerjave in združevanja map. Preverite te možnosti, da se izognete neprijetnim presenečenjem: </para>
+<itemizedlist>
+     <listitem
+><para
+><guilabel
+>Rekurzivne mape</guilabel
+>: če je to izklopljeno, elementov v podmapah ne bo mogoče najti.</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Vzorec</guilabel
+>/<guilabel
+>Protivzorec</guilabel
+>: Vključi/izključi elemente, ki se ujemajo</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Izključi skrite datoteke</guilabel
+></para
+></listitem>
+     <listitem
+><para
+><link linkend="selectingvisiblefiles"
+>Pokaži možnosti</link
+> (<guilabel
+>Pokaži enake/različne datoteke</guilabel
+>, <guilabel
+>Datoteke samo v A/B/C</guilabel
+>)</para
+></listitem>
+</itemizedlist>
+<para
+>Če spremenite nastavitve, da prikažete seznam več datotek, morate sami opraviti ponovno prečesavanje prek menija <menuchoice
+><guimenu
+>Mapa</guimenu
+><guimenuitem
+>Ponovno skeniranje</guimenuitem
+> </menuchoice
+>. (Razlog za to je, da zaradi hitrejše primerjave hitrosti &kdiff3; izpusti primerjavo za datoteke, ki jih ti kriteriji zavrnejo.) Če ste spremenili vzorce datotek in map, da izključite datoteke, bo seznam datotek takoj posodobljen, ko zaprete dialog možnosti. </para
+><para
+>Upoštevajte, da ko pišete v popolnoma novo mapo, običajno želite kopirati tudi enake datoteke. V tem primeru omogočite možnost <guilabel
+>Pokaži enake datoteke</guilabel
+>. Če je vaša ciljna mapa eden od vnosov, potem to ni potrebno, ker je datoteka že tam. </para
+><para
+>Če ste do sedaj zadovoljni, je ostalo enostavno. </para
+><para
+>Če želite združiti vse elemente: izberite <guimenuitem
+>Začni/Nadaljuj združevanje mape</guimenuitem
+> v meniju <guimenu
+>Mapa</guimenu
+> ali pritisnite <keycap
+>F7</keycap
+> (kar je privzeta bližnjica). Če želite združiti samo trenutni element: izberite <guilabel
+>Zaženi operacijo za trenutnem elementu</guilabel
+> ali pritisnite <keycap
+>F6</keycap
+>. </para
+><para
+>Če zaradi nasprotujočih si vrst datotek nekateri elementi z neveljavnimi operacijami še vedno obstajajo, se bo prikazalo sporočilo in ti elementi bodo označeni, tako da lahko izberete veljavno operacijo za element. </para
+><para
+>Če združujete vse elemente, se prikaže pogovorno okno z možnostmi <guilabel
+>Naredi</guilabel
+>, <guilabel
+>Simuliraj</guilabel
+> in <guilabel
+>Prekliči</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Izberite <guilabel
+>Simuliraj</guilabel
+>, če želite videti, kaj bi naredili, ne da bi tega dejansko storili. Prikazan bo podroben seznam vseh operacij.</para
+></listitem>
+     <listitem
+><para
+>V nasprotnem primeru izberite <guilabel
+>Naredi to</guilabel
+>, da resnično začnete združevati.</para
+></listitem>
+</itemizedlist>
+<para
+>Nato bo &kdiff3; izvedel navedeno operacijo za vse elemente. Če je potrebna ročna interakcija (združitev ene datoteke), se odpre okno za združevanje (<link linkend="dirmergebigscreenshot"
+>glejte velik posnetek zaslona</link
+>). </para
+><para
+>Ko končate z ročnim združevanjem datoteke, ponovno izberite <guimenuitem
+>Začni/Nadaljuj združevanje map</guimenuitem
+> ali tipko <keycap
+>F7</keycap
+>. Če ga še niste shranili, vas bo pogovorno okno pozvalo, da to storite. Nato bo &kdiff3; nadaljeval z naslednjim elementom. </para
+><para
+>Ko &kdiff3; naleti na napako, vam bo to povedal in prikazal verbose-status-information. Na dnu tega seznama bo nekaj sporočil o napakah, ki vam bodo pomagali razumeti vzrok težave. Ko nadaljujete z združevanjem (tipka <keycap
+>F7</keycap
+>) &kdiff3; vam bo ponudil možnost, da poskusite znova ali preskočite element, ki je povzročil težavo. To pomeni, da lahko pred nadaljevanjem izberete drugo operacijo ali rešite težavo na drug način. </para
+><para
+>Ko je združevanje končano, vas bo &kdiff3; obvestil preko sporočilnega polja. </para
+><para
+>Če so bili nekateri elementi združeni posamezno pred zagonom directorymerge, potem &kdiff3; si to zapomni (medtem ko teče ta združevalna seja) in jih ne združi znova, ko se pozneje izvede združevanje za vse elemente. Tudi če je bilo spajanje preskočeno ali ni bilo nič shranjeno, se ti elementi štejejo kot dokončani. Šele ko spremenite operacijo spajanja, bo status <guilabel
+>Končano</guilabel
+> elementa odstranjen in ga bo mogoče znova združiti. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Možnosti za primerjavo in združevanje map</title>
+<para
+>&kdiff3; nastavitve (meni <menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Konfiguriraj &kdiff3;...</guimenuitem
+></menuchoice
+>) ima razdelek z imenom "Združevanje map" s temi možnostmi: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Rekurzivne mape</guilabel
+></term
+><listitem
+><para
+>Izberite, ali želite po mapah iskati rekurzivno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Vzorci datotek:</guilabel
+></term
+><listitem
+><para
+>V drevo bodo postavljene samo datoteke, ki se ujemajo s katerim koli vzorcem tukaj. Tukaj lahko določite več kot en vzorec z uporabo podpičja ";" kot ločilo. Veljavni nadomestni znaki: '*' in '?'. (&eg;. "<literal
+>*.cpp;*.h</literal
+>"). Privzeto je "*". Ta vzorec se ne uporablja za mape.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Datotečni proti-vzorci:</guilabel
+></term
+><listitem
+><para
+>Datoteke, ki ustrezajo temu vzorcu, bodo izključene iz drevesa. Tukaj lahko določite več kot en vzorec z uporabo podpičja ";" kot ločila. Veljavni nadomestni znaki: '*' in '?'. Privzeto je "<literal
+>*.orig;*.o;*.obj</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Anti-vzorci map:</guilabel
+></term
+><listitem
+><para
+>Mape, ki se ujemajo s tem vzorcem, bodo izključene iz drevesa. Tukaj lahko določite več kot en vzorec z uporabo podpičja ";" kot ločila. Veljavni nadomestni znaki: '*' in '?'. Privzeto je "<literal
+>CVS;deps;.svn</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Uporabite Prezri datoteko</guilabel
+></term
+><listitem
+><para
+>Prezrite datoteke in mape, ki bi jih prezrl tudi vaš nadzor vira. Številne samodejno ustvarjene datoteke so prezrte s seznami prezrtih. Velika prednost je, da je to lahko specifično za mapo prek lokalne datoteke za prezrtje. (Za več podrobnosti si oglejte dokumente za nadzor različic.) </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Poiščite skrite datoteke in mape</guilabel
+></term
+><listitem
+><para
+>V nekaterih datotečnih sistemih imajo datoteke atribut "Skrita (Hidden)". Na drugih sistemih ime datoteke, ki se začne s piko "." povzroči, da se skrije. Ta možnostvam omogoča, da se odločite, ali želite te datoteke vključiti v drevo ali ne.Privzeto je vklopljeno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sledite povezavam datotek</guilabel
+></term
+><listitem
+><para
+>Za povezave do datotek: Ko je onemogočeno, se primerjajo simbolične povezave. Ko je omogočeno, se primerjajo datoteke za povezavami. Privzeto je izklopljeno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sledite povezavam map</guilabel
+></term
+><listitem
+><para
+>Za povezave do map: Ko je onemogočeno, bodo simbolične povezave primerjane. Ko je omogočeno, bo povezava obravnavana kot mapa in bo pregledana rekurzivno. (Upoštevajte, da program ne preveri, ali je povezava "rekurzivna". Tako bi na primer mapa, ki vsebuje povezavo do mape, povzročila neskončno zanko in čez nekaj časa, ko se sklad prelije ali je ves pomnilnik porabljen, zruši program.) Privzeto je izklopljeno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Primerjava imen datotek, občutljiva na velike in male črke</guilabel
+></term
+><listitem
+><para
+>Privzeta vrednost je false v &Windows;, true za druge operacijske sisteme.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Način primerjave datotek:</guilabel
+></term
+><listitem
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Binarna primerjava</guilabel
+></term
+><listitem
+><para
+>To je privzeti način primerjave datotek. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Popolna analiza</guilabel
+></term
+><listitem
+><para
+>Izvedite popolno analizo vsake datoteke in prikažite stolpce s statističnimi informacijami. (Število <guilabel
+>rešenih</guilabel
+>, <guilabel
+>nerešenih</guilabel
+>, <guilabel
+>nebelih</guilabel
+> in <guilabel
+>belih</guilabel
+> konfliktov.) Popolna analiza je počasnejša od preproste dvojiške analiza in veliko počasnejši pri uporabi v datotekah, ki ne vsebujejo besedila. (Določite ustrezne protivzorce datotek.) </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Zaupaj velikosti in datumu spremembe (nevarno)</guilabel
+></term
+><listitem
+><para
+>Če primerjate velike mape prek počasnega omrežja, bo morda hitreje primerjati samo datume sprememb in dolžino datoteke. Toda to izboljšanje hitrosti prihaja s ceno majhne negotovosti. To možnost uporabljajte previdno. Privzeto je izklopljeno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Zaupajte velikosti (nevarno)</guilabel
+></term
+><listitem
+><para
+>Podobno kot pri zaupanju v datum spremembe. Tu do prave primerjave ne pride. Dve datoteki veljata za enaki, če sta njuni velikosti datotek enaki. To je uporabno, če operacija kopiranja datoteke ni ohranila datuma spremembe. To možnost uporabljajte previdno. Privzeto je izklopljeno.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><guilabel
+>Sinhronizirajte mape</guilabel
+></term
+><listitem
+><para
+>Aktivira sinhronizacijski način, ko se primerjata dve mapi in ni bila določena izrecna ciljna mapa. V tem načinu bodo predlagane operacije izbrane tako, da sta obe izvorni mapi pozneje enaki. Tudi rezultat združevanja bo zapisan v obe mapi. Privzeto je izklopljeno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Kopiraj novejše namesto združevanja (nevarno)</guilabel
+></term
+><listitem
+><para
+>Namesto združevanja bo predlagana operacija kopirala novejši vir, če pride do sprememb. (Šteje za nevarno, ker pomeni, da veste, da tudi druga datoteka ni bila urejena. V vsakem primeru preverite, da se prepričate.) Privzeto je izklopljeno.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Varnostne kopije datotek (.orig)</guilabel
+></term
+><listitem
+><para
+>Če je datoteka ali celotna mapa zamenjana z drugo ali je izbrisana, bo prvotna različica preimenovana s pripono <literal role="extension"
+>.orig</literal
+>. Če stara datoteka varnostne kopije s končnico <literal role="extension"
+>.orig</literal
+> že obstaja, bo ta izbrisana brez varnostne kopije. To vpliva tudi na običajno združevanje posameznih datotek, ne samo v načinu združevanja map. Privzeto je vklopljeno.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Druge funkcije v oknu za združevanje map</title>
+<sect2
+><title
+>Razdeljeni/celozaslonski način</title>
+<para
+>Običajno pogled seznama z združevanjem map ostane viden, medtem ko se ena datoteka primerja ali združuje. Z miško lahko premikate razdelilno vrstico, ki ločuje seznam datotek od oken za razlikovanje besedila. Če tega ne želite, lahko onemogočite <menuchoice
+><guimenu
+>Mapa</guimenu
+><guimenuitem
+>Mapa &amp;&amp; Element menija Pogled razdeljenega zaslona besedila</guimenuitem
+></menuchoice
+>. Nato lahko uporabite element menija <menuchoice
+><guimenu
+>Mapa</guimenu
+><guimenuitem
+>Preklopi pogled</guimenuitem
+></menuchoice
+>, da preklapljate med seznamom datotek in pogledom besedilne razlike, ki nato zavzameta celoten zaslon. </para>
+</sect2>
+<sect2
+><title
+>Primerjava ali združevanje ene datoteke</title>
+<para
+>Verjetno vam bo ljubši preprost dvojni klik na datoteko, da jo primerjate. Kljub temu obstaja tudi vnos v meniju <guimenu
+>Mapa</guimenu
+>. Posamezno datoteko lahko tudi neposredno združite tako, da jo izberete in izberete menijsko postavko <menuchoice
+><guimenu
+>Združi</guimenu
+><guimenuitem
+>Združi trenutno datoteko</guimenuitem
+></menuchoice
+>. Ko shranite rezultat, bo status nastavljen na dokončano in datoteka ne bo ponovno združena, če se začne združevanje map. </para
+><para
+>Vendar upoštevajte, da bodo te informacije o stanju izgubljene, ko znova zaženete prečesavanje mape: <menuchoice
+><guimenu
+>Mapa</guimenu
+><guimenuitem
+>Ponovno prečesavanje</guimenuitem
+></menuchoice
+> </para>
+</sect2>
+<sect2
+><title
+>Primerjava ali združevanje datotek z različnimi imeni</title>
+<para
+>Včasih morate primerjati ali združiti datoteke z različnimi imeni (&eg; trenutno datoteko in varnostno kopijo v isti mapi). </para
+><para
+>Izberite točno datoteko s klikom na ikono v stolpcu <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ali <guilabel
+>C</guilabel
+>. Tako izbrana prva datoteka bo označena z <guilabel
+>A</guilabel
+>, druga in tretja pa z <guilabel
+>B</guilabel
+> in <guilabel
+>C</guilabel
+> ne glede na to, v katerem stolpcu sta. tako lahko izberete do tri datoteke. </para
+><para
+>Nadaljujte z izbiro <menuchoice
+><guimenu
+>Mapa</guimenu
+><guimenuitem
+>Primerjaj izrecno izbrane datoteke</guimenuitem
+></menuchoice
+> ali <menuchoice
+><guimenu
+>Mapa</guimenu
+><guimenuitem
+>Združi izrecno izbrane datoteke</guimenuitem
+></menuchoice
+> element menija. Za vaše udobje se ti vnosi menija prikažejo tudi kot kontekstni meni, ko z desno miškino tipko kliknete zadnjo izbrano datoteko. </para
+><para
+>Primerjava ali združitev datoteke se bo zgodila v istem oknu. Če ta način uporabite za mape, se odpre novo okno. </para
+></sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Razne teme</title>
+<sect1 id="networktransparency">
+<title
+>Preglednost omrežja preko KIO</title>
+<sect2
+><title
+>KIO-Sužnji</title>
+<para
+>Knjižnica KIO iz &frameworks; podpira preglednost omrežja prek podrejenih KIO. &kdiff3; uporablja to za branje vhodnih datotek in za preiskovanje map. To pomeni, da lahko določite datoteke in mape na lokalnih in oddaljenih virih prek &URL;s. </para
+><para
+>Primer: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> test.cpp ftp://ftp.faraway.org/test.cpp
+<command
+>kdiff3</command
+> tar:/home/hacker/archive.tar.gz/folder ./folder
+</screen>
+</para>
+<para
+>Prva vrstica primerja lokalno datoteko z datoteko na &FTP; strežniku. Druga vrstica primerja mapo znotraj stisnjenega arhiva z lokalno mapo. </para
+><para
+>Drugi KIO-sužnji, ki so zanimivi, so: </para>
+<itemizedlist>
+<listitem
+><para
+>Datoteke iz WWW (http:),</para
+></listitem>
+<listitem
+><para
+>Datoteke iz &FTP; (ftp:),</para
+></listitem>
+<listitem
+><para
+>Šifriran prenos datotek (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>&Windows; viri (smb:),</para
+></listitem>
+<listitem
+><para
+>Lokalne datoteke (datoteka:),</para
+></listitem>
+</itemizedlist>
+<para
+>Druge stvari, ki so možne, a verjetno manj uporabne, so: </para>
+<itemizedlist>
+<listitem
+><para
+>Man-strani (man:),</para
+></listitem>
+<listitem
+><para
+>Info-strani (info:),</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Kako napisati &URL;s</title>
+<para
+>&URL; ima drugačno sintakso v primerjavi s potmi za lokalne datoteke in mape. Nekaj stvari je treba upoštevati: </para>
+<itemizedlist>
+<listitem
+><para
+>Pot je lahko relativna in lahko vsebuje "." ali "..". To ni mogoče za &URL;, ki so vedno absolutni. </para
+></listitem
+><listitem
+><para
+>Posebni znaki morajo biti zapisani s "pobegom". ("<literal
+>#</literal
+>" -&gt; "<literal
+>%23</literal
+>", presledek -&gt;"<literal
+>%20</literal
+>", itd.) Npr. datoteka z imenom "<literal
+>#</literal
+>foo<literal
+>#</literal
+>" bi imela &URL; "datoteka:/<literal
+>%23</literal
+>foo<literal
+>%23</literal
+>". </para
+></listitem
+><listitem
+><para
+>Ko &URL;-ji ne delujejo po pričakovanjih, jih poskusite najprej odpreti v &konqueror;. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Zmogljivosti KIO-Slaves</title>
+<para
+>Preglednost omrežja ima eno pomanjkljivost: vsi viri nimajo enakih zmogljivosti. </para
+><para
+>Včasih je to posledica datotečnega sistema strežnika, včasih zaradi protokola. Tukaj je kratek seznam omejitev: </para>
+<itemizedlist>
+<listitem
+><para
+>Včasih ni podpore za povezave. </para
+></listitem
+><listitem
+><para
+>Ali pa ni mogoče razločiti, ali povezava kaže na datoteko ali mapo; vedno predpostavlja datoteko. (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>Velikosti datoteke ni mogoče vedno določiti. </para
+></listitem
+><listitem
+><para
+>Omejena podpora za dovoljenja. </para
+></listitem
+><listitem
+><para
+>Ni možnosti spreminjanja dovoljenj ali časa spreminjanja, zato se bodo dovoljenja ali čas kopije razlikovali od izvirnika. (Glejte možnost <guilabel
+>Zaupajte velikosti (nevarno)</guilabel
+>.) (Spreminjanje dovoljenj ali časa spreminjanja je možno samo za lokalne datoteke.) </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="git">
+<title
+>Uporaba &kdiff3; kot &git; Orodje za razlikovanje in spajanje</title>
+<para
+>&kdiff3; se lahko uporablja kot <ulink url="https://git-scm.com/"
+>&git;</ulink
+> orodje za razlikovanje in spajanje. </para>
+<para
+>Samo dodajte naslednje vrstice v datoteko <filename
+>gitconfig</filename
+>. </para>
+<programlisting
+>[diff]
+        tool = kdiff3
+[difftool "kdiff3"]
+        path = &lt;path to kdiff3 binary in your system>
+[difftool]
+        prompt = false
+        keepBackup = false
+        trustExitCode = false
+[merge]
+        tool = kdiff3
+[mergetool]
+        prompt = false
+        keepBackup = false
+        keepTemporaries = false
+[mergetool "kdiff3"]
+        path = &lt;path to kdiff3 binary in your system
+>
+</programlisting>
+<para
+>Če želite nato videti razliko med dvema objavama, uporabite <userinput
+>git difftool <replaceable
+>first_hash</replaceable
+> <replaceable
+>second_hash</replaceable
+> --tool=kdiff3 --cc <replaceable
+>some_file_in_the_git_tree</replaceable
+></userinput
+> </para>
+<para
+>Za združitev veje z &kdiff3; uporabite <userinput
+>git merge <replaceable
+>branch_name</replaceable
+> &amp;&amp; git mergetool --tool=kdiff3</userinput
+> </para>
+<para
+>Po razrešitvi sporov pri združevanju na <link linkend="synchronise_views"
+>običajen način</link
+> je dovolj, da odobrite spremembe, da opravite delo. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Vprašanja in odgovori</title
+>&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Zakaj se imenuje "&kdiff3;"? </para
+></question
+><answer
+><para
+>Orodja z imenom <application
+>KDiff</application
+> in <application
+>KDiff2</application
+> (zdaj imenovana &kompare;) že obstajata. Tudi &kdiff3; bi moralo predlagati, da se lahko združi kot orodje <command
+>diff3</command
+> v zbirki Diff-Tool. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Zakaj sem ga izdal pod GPL? </para
+></question
+><answer
+><para
+>Programe GPL uporabljam že zelo dolgo in sem se veliko naučil, ko sem si ogledal številne vire. Zato je to moja "hvala" vsem programerjem, ki so prav tako storili ali bodo storili enako. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Nekateri gumbi in funkcije manjkajo. Kaj je narobe? </para
+></question
+><answer
+><para
+>Prevedli ste iz izvorne kode, vendar verjetno niste navedli pravilne predpone za namestitev. Privzeto <command
+>cmake</command
+> želi namestiti v <filename class="directory"
+>/usr/local</filename
+>, nato pa datoteko virov uporabniškega vmesnika (&ie; <filename
+>kdiff3ui.rc</filename 
+>) ni mogoče najti. Datoteka <filename
+>README</filename
+> vsebuje več informacij o pravilni predponi. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Pogosto se vrstice, ki so podobne, vendar ne enake, pojavijo ena poleg druge, včasih pa tudi ne. Zakaj? </para
+></question
+><answer
+><para
+>Vrstice, kjer je različna le količina presledkov, se najprej obravnavajo kot "enake", medtem ko samo en drugačen nebel znak povzroči, da so vrstice "različne". Če se podobne črte pojavljajo druga zraven druge, je to pravzaprav naključje, vendar je na srečo pogosto tako. Glejte tudi <link linkend="manualdiffhelp"
+>Pomoč za ročno razlikovanje</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Zakaj je treba rešiti vse spore, preden je mogoče shraniti rezultat spajanja? </para
+></question
+><answer
+><para
+>Za vsak enak ali različen razdelek si urejevalnik v oknu rezultatov združevanja zapomni, kje se začne ali konča. To je potrebno, da se spori lahko rešijo ročno s preprosto izbiro gumba vira (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ali <guilabel
+>C</guilabel
+>). Te informacije se med shranjevanjem kot besedilo izgubijo in ustvarjanje posebnega formata datoteke, ki podpira shranjevanje in obnavljanje vseh potrebnih informacij, je preveč naporno. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Kako lahko sinhroniziram pogled razlik in združevanja, tako da vsi pogledi prikazujejo isti položaj besedila? </para
+></question
+><answer
+><para
+>Kliknite na stolpec s povzetkom levo od besedila. (<link linkend="synchronise_views"
+>Glejte tudi tukaj.</link
+>) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Zakaj <userinput
+>git difftool --dir-diff</userinput
+> pri uporabi KDiff3 kot difftool prikaže "Napaka mešanice povezav in običajnih datotek"? </para
+></question
+><answer
+><para
+>To je stranski učinek notranjega delovanja gita. Če poskušate primerjati prejšnjo revizijo s trenutnim delovnim drevesom, bo git dejansko primerjal datoteke, ki predstavljajo preteklo objavo, s simbolnimi povezavami, ki kažejo na delovno drevo. Od 1.9 dalje ima KDiff3 privzeto vključeno <guilabel
+>Sledi povezavam datotek</guilabel
+> in <guilabel
+>Sledi povezavam map</guilabel
+>. Pred tem so bili privzeto izklopljeni. To ni bilo pomembno, če ne delate, če je bila tudi "Popolna analiza" izklopljena. Vendar bi s <guilabel
+>Popolno analizo</guilabel
+> na KDiff3 sprva poskušal primerjati pot, na katero kaže povezava, namesto da bi ji sledil. Pred 1.8 je bila nastala napaka prezrta. Vendar je 1.8 začel poročati o napaki. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Zakaj urejevalnik v oknu z rezultati spajanja nima funkcije "razveljavi"? </para
+></question
+><answer
+><para
+>To je bil do sedaj preveč truda. Vedno lahko obnovite različico iz enega vira (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ali <guilabel
+>C</guilabel
+>), tako da kliknete ustrezni gumb. Za veliko urejanja je vseeno priporočljiva uporaba drugega urejevalnika. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Ko sem odstranil nekaj besedila, se je nenadoma pojavilo "&lt;Ni izvorne vrstice&gt;" in ga ni mogoče izbrisati. Kaj to pomeni in kako to odstraniti? </para
+></question
+><answer
+><para
+>Za vsak enak ali različen razdelek si urejevalnik v oknu rezultatov spajanja zapomni, kje se začne ali konča. "&lt;Ni izvorne vrstice&gt;" pomeni, da v razdelku ni več ničesar, niti znaka za novo vrstico. To se lahko zgodi med samodejnim združevanjem ali z urejanjem. To ni problem, saj se ta namig ne bo pojavil v shranjeni datoteki. Če želite nazaj izvirni vir, preprosto izberite razdelek (kliknite levi stolpec s povzetkom) in nato kliknite gumb vira s potrebno vsebino (<guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+> ali <guilabel 
+>C</guilabel
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Zakaj &kdiff3; ne podpira označevanje sintakse? </para
+></question
+><answer
+><para
+>&kdiff3; že uporablja veliko barv za poudarjanje razlik. Več poudarjanja bi bilo zmedeno. Za to uporabite drug urejevalnik. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Ali lahko uporabim &kdiff3; za primerjavo <application
+>LibreOffice</application
+>/<trademark class="registered"
+>OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, &PDF;, &etc;. datotek? </para
+></question
+><answer
+><para
+>Čeprav &kdiff3; bo analiziral katero koli vrsto datoteke, rezultat za vas verjetno ne bo zelo zadovoljiv. </para
+><para
+>&kdiff3; je bil narejen za primerjavo čistih besedilnih datotek. <application
+>LibreOffice</application
+>/<trademark class="registered"
+> OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>
+> &etc;. shrani veliko več informacij v datoteke (o pisavah, slikah, straneh, barvah &etc;), ki jih &kdiff3; ne pozna. Torej &kdiff3; vam bo prikazal vsebino datoteke, interpretirano kot čisto besedilo, vendar je to morda neberljivo ali pa bo vsaj videti zelo čudno. </para
+><para
+>Ker večina današnjih programov shranjuje svojo vsebino v &XML; formatu, ga boste morda lahko prebrali kot čisto besedilo. Torej, če je bila sprememba le majhna, vam &kdiff3; še vedno lahko pomaga. </para
+><para
+>Najboljša rešitev, če želite primerjati samo besedilo (brez vdelanih predmetov, kot so slike), je uporaba <menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Izberi vse</guimenuitem
+></menuchoice
+> in <menuchoice
+><guimenu
+>Uredi</guimenu
+><guimenuitem
+>Kopiraj</guimenuitem
+></menuchoice
+> menijske elemente v vašem programu, da kopirate zanimivo besedilo v odložišče in nato v &kdiff3; prilepite besedilo v katero koli okno za vnos razlike. (Glejte tudi <link linkend="selections"
+>Izberi, kopiraj in prilepi</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Kam je izginila možnost mape <guimenuitem
+>Seznam samo razlik</guimenuitem
+>? </para
+></question
+><answer
+><para
+>Zdaj je na voljo več <link linkend="selectingvisiblefiles"
+>možnosti »Pokaži«</link
+> v meniju <guimenu
+>Mapa</guimenu
+>. Če onemogočite <guimenuitem
+>Pokaži enake datoteke</guimenuitem
+>, boste dosegli tisto, kar je prej omogočalo <guimenuitem
+>Seznam samo razlik</guimenuitem
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Kako lahko naredim velik izbor v oknu za vnos razlike, ker drsenje traja tako dolgo? </para
+></question
+><answer
+><para
+>Zaženite izbiro kot običajno (kliknite in držite &LMB;). Nato uporabite navigacijske tipke (&eg; &PgUp;, &PgDn;), medtem ko držite &LMB; navzdol. (Glejte tudi <link linkend="selections"
+>Izberi, kopiraj in prilepi</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Tukaj je toliko informacij, a na vaše vprašanje še vedno ni odgovora? </para
+></question
+><answer
+><para
+>Prosim, pošljite mi svoje vprašanje. Cenim vsak komentar. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Zasluge in licenca</title>
+
+<para
+>&kdiff3; - Orodje za primerjavo in združevanje datotek in map </para>
+<para
+>Avtorske pravice za program 2002-2007 Joachim Eibl <email
+>joachim.eibl na gmx.de</email
+> </para>
+<para
+>Nekaj odličnih idej in poročil o napakah je prišlo od kolegov in mnogih ljudi iz Wild Wild Weba. Hvala vam! </para>
+
+<para
+>Dokumentacija Copyright &copy; 2002-2007 Joachim Eibl <email
+>joachim.eibl na gmx.de</email
+> </para>
+
+<para
+>Dokumentacija Copyright &copy; 2017-2019 Michael Reeves <email
+>reeves.87 na gmail.com</email
+> </para>
+
+<para
+>Prevod: Matjaž Jeran<email
+>matjaz.jeran@amis.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->
