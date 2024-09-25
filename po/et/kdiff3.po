@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 00:41+0000\n"
+"POT-Creation-Date: 2024-09-25 00:41+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -1859,8 +1859,9 @@ msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Failide ja kataloogide võrdlemise ning ühendamise vahend"
 
 #: main.cpp:94
-#, kde-format
-msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+#, fuzzy, kde-format
+#| msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014: Joachim Eibl, (c) 2017: Michael Reeves KF5/Qt5 port"
 
 #: main.cpp:114
@@ -3814,19 +3815,19 @@ msgstr "Lõikepuhvrist"
 msgid "%1 is not a normal file."
 msgstr "%1 ei ole tavaline fail."
 
-#: SourceData.cpp:378
+#: SourceData.cpp:380
 #, fuzzy, kde-format
 #| msgid "File %1 too large to process. Skipping."
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Fail %1 on töötlemiseks liiga suur. Jäetakse vahele."
 
-#: SourceData.cpp:407
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Ajutine fail on: %1"
 
-#: SourceData.cpp:445
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3841,7 +3842,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:508
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3856,7 +3857,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse reasobivuse eeltöötluse käsu rakendamine välja."
 
-#: SourceData.cpp:514
+#: SourceData.cpp:516
 #, fuzzy, kde-format
 #| msgid "Failed to read file: %1"
 msgctxt "Read error message. %1 = filepath"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 00:41+0000\n"
+"POT-Creation-Date: 2024-09-25 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 15:59\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1739,8 +1739,9 @@ msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "用于比较、合并文件和文件夹的工具"
 
 #: main.cpp:94
-#, kde-format
-msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+#, fuzzy, kde-format
+#| msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
 #: main.cpp:114
@@ -3456,18 +3457,18 @@ msgstr "从剪贴板"
 msgid "%1 is not a normal file."
 msgstr "%1 不是一个正常的文件。"
 
-#: SourceData.cpp:378
+#: SourceData.cpp:380
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:407
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    临时文件是：%1"
 
-#: SourceData.cpp:445
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3482,7 +3483,7 @@ msgstr ""
 "\n"
 "预处理命令将会被禁用。"
 
-#: SourceData.cpp:508
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3496,7 +3497,7 @@ msgstr ""
 "\n"
 "行匹配处理命令将会被禁用。"
 
-#: SourceData.cpp:514
+#: SourceData.cpp:516
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-16 00:41+0000\n"
+"POT-Creation-Date: 2024-09-25 00:41+0000\n"
 "PO-Revision-Date: 2024-09-03 12:04+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1784,8 +1784,9 @@ msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Eina per a comparar i fusionar fitxers i carpetes"
 
 #: main.cpp:94
-#, kde-format
-msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+#, fuzzy, kde-format
+#| msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves adaptació a KF5/Qt5"
 
@@ -3612,18 +3613,18 @@ msgstr "Des del porta-retalls"
 msgid "%1 is not a normal file."
 msgstr "%1 no és un fitxer normal."
 
-#: SourceData.cpp:378
+#: SourceData.cpp:380
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "El fitxer %1 és massa gran per a processar. S'omet."
 
-#: SourceData.cpp:407
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    El fitxer temporal és: %1"
 
-#: SourceData.cpp:445
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3638,7 +3639,7 @@ msgstr ""
 "\n"
 "L'ordre de preprocessament es desactivarà ara."
 
-#: SourceData.cpp:508
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3654,7 +3655,7 @@ msgstr ""
 "\n"
 "Ara es desactivarà l'ordre de preprocessament d'encaix de línies."
 
-#: SourceData.cpp:514
+#: SourceData.cpp:516
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
