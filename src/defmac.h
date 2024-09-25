@@ -1,7 +1,7 @@
 // clang-format off
 /*****************************************************************************
 
-  SPDX-FileCopyrightText: Copyright © 2010 Pavel Karelin (hkarel), <hkarel@yandex.ru>
+  SPDX-FileCopyrightText: Copyright ©2010 Pavel Karelin (hkarel), <hkarel@yandex.ru>
   SPDX-License-Identifier: MIT
   ---
 

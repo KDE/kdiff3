@@ -270,7 +270,7 @@ void KDiff3FileItemAction::slotClearList()
 
 void KDiff3FileItemAction::slotAbout()
 {
-    QString s = i18n(u8"KDiff3 File Item Action Plugin: Copyright © 2011 Joachim Eibl\n");
+    QString s = i18n(u8"KDiff3 File Item Action Plugin: Copyright ©2011 Joachim Eibl\n");
     s += i18n("Using the context menu extension:\n"
               "For simple comparison of two selected files choose \"Compare\".\n"
               "If the other file is somewhere else \"Save\" the first file for later. "
