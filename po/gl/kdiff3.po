@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-10 03:14+0000\n"
-"PO-Revision-Date: 2024-03-02 17:24+0100\n"
+"PO-Revision-Date: 2024-09-25 22:32+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -95,7 +95,7 @@ msgstr "Lendo o cartafol: %1"
 #: DefaultFileAccessJobHandler.cpp:455
 #, kde-format
 msgid "Listing directory: %1"
-msgstr "Listando o directorio: %1"
+msgstr "Listando o cartafol: %1"
 
 #: diff.cpp:1596 diff.cpp:1612
 #, kde-format
@@ -104,7 +104,7 @@ msgid ""
 "If it is reproducible please contact the author.\n"
 msgstr ""
 "Erro de perda de datos:\n"
-"Se fose reproducíbel, contacte co autor.\n"
+"Se fose reproducíbel, contacte coa persoa autora.\n"
 
 #: diff.cpp:1598 diff.cpp:1614
 #, kde-format
@@ -197,6 +197,7 @@ msgctxt "Operation column message"
 msgid "Copy A to B"
 msgstr "Copiar A en B"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:419
 #, kde-format
 msgctxt "Operation column message"
@@ -221,6 +222,7 @@ msgctxt "Operation column message"
 msgid "Delete A & B"
 msgstr "Eliminar A e B"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:431
 #, kde-format
 msgctxt "Operation column message"
@@ -233,6 +235,7 @@ msgctxt "Operation column message"
 msgid "Merge to B"
 msgstr "Xuntar en B"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:437
 #, kde-format
 msgctxt "Operation column message"
@@ -341,12 +344,14 @@ msgctxt "Column title"
 msgid "Solved"
 msgstr "Resolvido"
 
+# skip-rule: trasno-empty2_reverse
 #: directorymergewindow.cpp:542
 #, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
 msgstr "Non baleiro"
 
+# skip-rule: trasno-empty2_reverse
 #: directorymergewindow.cpp:544
 #, kde-format
 msgctxt "Column title"
@@ -507,7 +512,7 @@ msgstr ""
 #: directorymergewindow.cpp:1370 directorymergewindow.cpp:1374
 #, kde-format
 msgid "Some files could not be processed."
-msgstr "Algúns ficheiros non puideron procesarse."
+msgstr "Non foi posíbel procesar algúns ficheiros."
 
 #: directorymergewindow.cpp:1377
 #, kde-format
@@ -616,7 +621,8 @@ msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr ""
-"Esta operación non é posíbel de momento porque se está a fundir o cartafol."
+"Esta operación non é posíbel de momento porque se está a executar unha "
+"fusión de cartafol."
 
 #: directorymergewindow.cpp:2252
 #, kde-format
@@ -672,7 +678,7 @@ msgstr "Produciuse un erro. Prema Aceptar para ver información detallada."
 #: directorymergewindow.cpp:2432
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
-msgstr "Erro: Eliminando %1: A creación da salvagarda fallou."
+msgstr "Erro: Eliminando %1: Produciuse un erro ao crear a salvagarda."
 
 #: directorymergewindow.cpp:2439
 #, kde-format
@@ -684,6 +690,7 @@ msgstr "eliminar recursivamente os cartafoles (%1)"
 msgid "delete( %1 )"
 msgstr "eliminar (%1)"
 
+# skip-rule: trasno-expression-gl_fallo ao
 #: directorymergewindow.cpp:2457
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
@@ -715,7 +722,9 @@ msgstr "     Nota: Despois dunha unión manual debe continuar premendo F7."
 #: directorymergewindow.cpp:2540
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
-msgstr "Erro: copiar(%1 -> %2) fallou. Non se eliminou o destino existente."
+msgstr ""
+"Erro: copiar(%1 -> %2) fallou. Produciuse un erro ao eliminar o destino "
+"existente."
 
 #: directorymergewindow.cpp:2549
 #, kde-format
@@ -741,7 +750,7 @@ msgstr "copia(%1 -> %2)"
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
-"Produciuse un erro ao renomear (%1 → %2): Non se pode eliminar o destino "
+"Produciuse un erro ao renomear (%1 → %2): Non é posíbel eliminar o destino "
 "existente."
 
 #: directorymergewindow.cpp:2624
@@ -757,7 +766,8 @@ msgstr "Erro: o renomeamento fallou."
 #: directorymergewindow.cpp:2651
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
-msgstr "Erro durante makeDir de %1. Non se pode eliminar o ficheiro existente."
+msgstr ""
+"Erro durante makeDir de %1. Non é posíbel eliminar o ficheiro existente."
 
 #: directorymergewindow.cpp:2668
 #, kde-format
@@ -918,6 +928,7 @@ msgstr "Expandir todos os subcartafoles"
 msgid "Rescan"
 msgstr "Analizar de novo"
 
+# skip-rule: proposta-contracción-de
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
 #: directorymergewindow.cpp:2954
@@ -966,11 +977,13 @@ msgstr ""
 msgid "Show Different Files"
 msgstr "Amosar os ficheiros distintos"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:2965
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Amosar os ficheiros só en A"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:2965
 #, kde-format
 msgid ""
@@ -1025,7 +1038,7 @@ msgstr "Non facer ren"
 #: directorymergewindow.cpp:2978 opendialog.ui:68
 #, kde-format
 msgid "Merge"
-msgstr "Xuntar"
+msgstr "Xuntar."
 
 #: directorymergewindow.cpp:2979
 #, kde-format
@@ -1057,6 +1070,7 @@ msgstr "Eliminar B"
 msgid "Delete A && B"
 msgstr "Eliminar A e B"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Merge to A"
@@ -1067,6 +1081,7 @@ msgstr "Xuntar en A"
 msgid "Merge to B"
 msgstr "Xuntar en B"
 
+# skip-rule: proposta-contracción-en
 #: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Merge to A && B"
@@ -1090,7 +1105,7 @@ msgstr "Fallou a creación da copia temporal de %1."
 #: fileaccess.cpp:932 fileaccess.cpp:937
 #, kde-format
 msgid "Opening %1 failed. %2"
-msgstr "Fallou a abertura de %1. %2"
+msgstr "Fallou a apertura de %1. %2"
 
 #: fileaccess.cpp:956 fileaccess.cpp:964
 #, kde-format
@@ -1103,8 +1118,8 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"A eliminación dunha salvagarda anterior fallou ao intentar facer unha "
-"salvagarda.\n"
+"Produciuse un erro ao eliminar unha salvagarda anterior cando se intentaba "
+"facer unha salvagarda.\n"
 "Ficheiro: %1"
 
 #: fileaccess.cpp:1100
@@ -1113,7 +1128,7 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"O renomeamento fallou ao intentar facer unha salvagarda.\n"
+"Produciuse un erro ao renomear cando se intentaba facer unha salvagarda.\n"
 "Ficheiros: %1 → %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -1154,7 +1169,7 @@ msgstr "Erro da opción de configuración:"
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr ""
-"Indicouse a opción --auto, pero non se especificou ningún ficheiro de saída."
+"Indicouse a opción --auto, pero non se indicou ningún ficheiro de saída."
 
 #: kdiff3.cpp:350
 #, kde-format
@@ -1186,12 +1201,12 @@ msgstr "A opción --auto é ignorada para a comparación de cartafoles."
 #: kdiff3.cpp:532
 #, kde-format
 msgid "Saving failed."
-msgstr "A garda fallou."
+msgstr "Produciuse un erro ao gardar."
 
 #: kdiff3.cpp:566 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
-msgstr "Fallou o acceso a estes ficheiros:"
+msgstr "Produciuse un erro ao abrir estes ficheiros:"
 
 #: kdiff3.cpp:575 pdiff.cpp:937
 #, kde-format
@@ -1316,6 +1331,7 @@ msgstr ""
 "Último\n"
 "delta"
 
+# skip-rule: proposta-gl-punto-final
 #: kdiff3.cpp:680
 #, kde-format
 msgctxt "Tooltip explanation text"
@@ -1324,6 +1340,7 @@ msgstr ""
 "(Ignora as diferenzas de espazos se «Amosar os espazos en branco» está "
 "desactivado.)"
 
+# skip-rule: proposta-gl-punto-final
 #: kdiff3.cpp:681
 #, kde-format
 msgctxt "Tooltip explanation text"
@@ -1434,6 +1451,7 @@ msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Ir á liña indicada."
 
+# skip-rule: proposta-contracción-de
 #: kdiff3.cpp:696
 #, kde-format
 msgctxt "Title for menu item"
@@ -1674,7 +1692,7 @@ msgstr "Saír sen gardar"
 #: kdiff3.cpp:810 pdiff.cpp:1748
 #, kde-format
 msgid "Saving the merge result failed."
-msgstr "A garda do resultado da fusión fallou."
+msgstr "Produciuse un erro ao gardar o resultado da fusión."
 
 #: kdiff3.cpp:821 pdiff.cpp:862
 #, kde-format
@@ -1795,7 +1813,7 @@ msgstr "Barra de ferramentas Principal"
 #: main.cpp:68 main.cpp:72
 #, kde-format
 msgid "Ignored. (User defined.)"
-msgstr "Ignorado. (Definido polo usuario.)"
+msgstr "Ignorado. (Definido pola persoa usuaria.)"
 
 #: main.cpp:91
 #, kde-format
@@ -1832,7 +1850,7 @@ msgstr ""
 #: main.cpp:119
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
-msgstr "Ficheiro de saída. Implica -m. P.ex.: -o novoficheiro.txt"
+msgstr "Ficheiro de saída. Implica -m. P. ex.: -o novoficheiro.txt"
 
 #: main.cpp:120
 #, kde-format
@@ -1844,8 +1862,8 @@ msgstr ""
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
-"Sen interface se todos os conflitos son resolvidos automaticamente. (Precisa "
-"de -o ficheiro)"
+"Sen GUI se todos os conflitos son resolvidos automaticamente. (Precisa de -o "
+"ficheiro)"
 
 #: main.cpp:123
 #, kde-format
@@ -1884,29 +1902,32 @@ msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
-"Substitúe unha opción de configuración. Use unha vez para cada opción. P."
-"ex.: --cs \" AutoAdvance=1\""
+"Sobredefinir unha opción. Use unha vez para cada opción. P. ex.: --cs \" "
+"AutoAdvance=1\""
 
 #: main.cpp:133
 #, kde-format
 msgid "Show list of config settings and current values."
-msgstr "Mostra unha lista das opcións de configuración e os valores actuais."
+msgstr "Amosar unha lista das opcións e os valores actuais."
 
 #: main.cpp:134
 #, kde-format
 msgid "Use a different config file."
 msgstr "Usar un ficheiro de configuración distinto."
 
+# skip-rule: trasno-file_reverse
 #: main.cpp:137
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "o ficheiro 1 a abrir (base, se non se indicou mediante --base)"
 
+# skip-rule: trasno-file_reverse
 #: main.cpp:138
 #, kde-format
 msgid "file2 to open"
 msgstr "o ficheiro 2 a abrir"
 
+# skip-rule: trasno-file_reverse
 #: main.cpp:139
 #, kde-format
 msgid "file3 to open"
@@ -2097,7 +2118,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"A creación da salvagarda fallou. O ficheiro non se gardou."
+"Produciuse un erro ao crear a salvagarda. O ficheiro non se gardou."
 
 #: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2714
 #, kde-format
@@ -2129,6 +2150,7 @@ msgstr "Codificación para gardar:"
 msgid "Conflict"
 msgstr "Conflito"
 
+# skip-rule: proposta-contracción-de
 #: mergeresultwindow.cpp:2939
 #, kde-format
 msgid "Codec from A: %1"
@@ -2371,7 +2393,7 @@ msgstr "Comportamento do editor"
 #: optiondialog.cpp:764
 #, kde-format
 msgid "Tab inserts spaces"
-msgstr "O tabulador insire espazos"
+msgstr "Tab insire espazos"
 
 #: optiondialog.cpp:768
 #, kde-format
@@ -2439,7 +2461,7 @@ msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
 msgstr ""
-"Escolle as fins de liña para cando un ficheiro editado se garda.\n"
+"Define as fins de liña para cando un ficheiro editado se garda.\n"
 "DOS/Windows: CR+LF; UNIX: LF; con CR=0D, LF=0A"
 
 #: optiondialog.cpp:816
@@ -2503,8 +2525,8 @@ msgstr "Orde do preprocesador:"
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
-"Preprocesamento definido polo usuario. (Consulte a documentación para máis "
-"detalles)."
+"Preprocesamento definido pola persoa usuaria. (Consulte a documentación para "
+"máis detalles)."
 
 #: optiondialog.cpp:869
 #, kde-format
@@ -2589,7 +2611,7 @@ msgstr "Amosar os diálogos de información"
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
-msgstr "Mostra un diálogo con información sobre o número de conflitos."
+msgstr "Amosar un diálogo con información sobre o número de conflitos."
 
 #: optiondialog.cpp:940
 #, kde-format
@@ -2707,6 +2729,7 @@ msgstr "Verificar as expresións regulares"
 msgid "Irrelevant merge command:"
 msgstr "Orde de fusión irrelevante:"
 
+# skip-rule: trasno-file_reverse
 #: optiondialog.cpp:1071
 #, kde-format
 msgctxt "Tool Tip"
@@ -2715,7 +2738,7 @@ msgid ""
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
-"De indicarse, este script é executado despois da fusión automática,\n"
+"De indicarse, este guión é executado despois da fusión automática,\n"
 "cando non se detecten máis cambios relevantes.\n"
 "É invocado cos parámetros: ficheiro1 ficheiro2 ficheiro3"
 
@@ -2734,7 +2757,8 @@ msgid ""
 "(Similar to command line option \"--auto\".)"
 msgstr ""
 "Se KDiff3 se iniciou desde a liña de ordes para fusionar\n"
-"ficheiros e todos os conflitos sexan resolúbeis sen interacción do usuario,\n"
+"ficheiros e todos os conflitos sexan resolúbeis sen interacción da persoa "
+"usuaria,\n"
 "entón garda automaticamente e sae.\n"
 "(Similar á opción da liña de ordes «--auto»)."
 
@@ -2944,7 +2968,7 @@ msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
-"Fai unha análise completa e mostra informacións estatísticas en columnas "
+"Fai unha análise completa e amosa información estatística en columnas "
 "adicionais.\n"
 "(Máis lento que a comparación binaria, moito máis lento para ficheiros "
 "binarios.)"
@@ -3071,8 +3095,7 @@ msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
 msgstr ""
-"Cando un ficheiro vaia gardarse substituíndo a outro anterior, entón "
-"renomearase\n"
+"Cando un ficheiro vaia gardarse sobre o anterior, entón renomearase\n"
 "o ficheiro anterior cunha extensión «.orig» en vez de eliminalo."
 
 #: optiondialog.cpp:1290 optiondialog.cpp:1291
@@ -3114,7 +3137,8 @@ msgid ""
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Se se activa a codificación detectarase automaticamente.\n"
+"Se escolle esta opción, actívase a codificación detectarase "
+"automaticamente.\n"
 "Se a codificación do ficheiro no pode atoparse automaticamente, usarase a "
 "codificación escollida a xeito de reserva.\n"
 "(A detección de Unicode depende dos primeiros bytes do ficheiro.)"
@@ -3152,8 +3176,7 @@ msgid ""
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
-"Se activa esta opción entón ha usarse a codificación dos ficheiros de "
-"entrada.\n"
+"Se escolle esta opción, usarase a codificación dos ficheiros de entrada.\n"
 "En casos ambiguos un diálogo requiriralle que escolla a codificación."
 
 #: optiondialog.cpp:1376
@@ -3202,8 +3225,8 @@ msgid ""
 msgstr ""
 "Unha lista das opcións da liña de ordes que deberán ignorarse, cando KDiff3 "
 "o usen outras ferramentas.\n"
-"Se desexa indicar varios valores, sepáreos por «;»\n"
-"Isto elimina o erro de «Opción descoñecida»."
+"Se quere indicar varios valores, sepáreos por «;»\n"
+"Isto suprime o erro de «Opción descoñecida»."
 
 #: optiondialog.cpp:1435
 #, kde-format
@@ -3225,7 +3248,7 @@ msgstr ""
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Isto repón todas as opcións, non só as do tema actual."
 
-# skip-rule: PT-2010-dual_command
+# skip-rule: trasno-command_reverse
 #: pdiff.cpp:85
 #, kde-format
 msgid "PreprocessorCmd: "
@@ -3376,7 +3399,7 @@ msgid ""
 "Affected input files are in %1."
 msgstr ""
 "Non foi posíbel converter algúns caracteres de entrada a Unicode correcto.\n"
-"Poida que estea a usar un códec incorrecto. (p.ex. UTF-8 para ficheiros que "
+"Pode que estea a usar un códec incorrecto. (p.ex. UTF-8 para ficheiros que "
 "non son UTF-8).\n"
 "Non garde o resultado se non está seguro. Continúe baixo a súa "
 "responsabilidade.\n"
@@ -3612,12 +3635,13 @@ msgstr "A correspondencia fallou."
 #: smalldialogs.cpp:532
 #, kde-format
 msgid "Opening and closing parentheses do not match in regular expression."
-msgstr "Os parénteses de abertura e peche non casan na expresión regular."
+msgstr "Os parénteses de apertura e peche non casan na expresión regular."
 
 #: SourceData.cpp:152
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
-msgstr "A escritura dos datos do portapapeis no ficheiro temporal fallou."
+msgstr ""
+"Produciuse un erro ao escribir os datos do portapapeis no ficheiro temporal."
 
 #: SourceData.cpp:157
 #, kde-format
@@ -3640,6 +3664,7 @@ msgstr "O ficheiro %1 é grande de máis para procesalo. Saltarase."
 msgid "    Temp file is: %1"
 msgstr "    O ficheiro temporal é: %1"
 
+# skip-rule: trasno-expression_failed.
 #: SourceData.cpp:447
 #, kde-format
 msgid ""
@@ -3649,7 +3674,7 @@ msgid ""
 "\n"
 "The preprocessing command will be disabled now."
 msgstr ""
-"O preprocesamento posibelmente fallou. Revise esta orde:\n"
+"Pode que se producise un erro ao preprocesar. Revise esta orde:\n"
 "\n"
 "  %1\n"
 "\n"
@@ -3664,8 +3689,8 @@ msgid ""
 "\n"
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
-"O preprocesamento para atopar coincidencias en liñas probabelmente fallou. "
-"Revise esta orde:\n"
+"Produciuse un erro ao preprocesar para atopar coincidencias en liñas "
+"probabelmente. Revise esta orde:\n"
 "\n"
 "  %1\n"
 "\n"
@@ -3696,7 +3721,7 @@ msgstr "Carácter de comiña inesperado dentro do argumento."
 #: Utils.cpp:88
 #, kde-format
 msgid "No program specified."
-msgstr "Non se especificou o programa."
+msgstr "Non se indicou o programa."
 
 #~ msgid "A"
 #~ msgstr "A"
