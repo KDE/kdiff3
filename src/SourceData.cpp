@@ -593,12 +593,12 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (qsizetype)(mDataSize - skipBytes));
         EncodedDataStream ds(ba);
 
-        mHasBOM = skipBytes != 0;
         ds.setEncoding(encoding);
-
+        mHasBOM = ds.hasBOM();
         m_bIncompleteConversion = false;
         m_unicodeBuf->clear();
 
+        assert(mHasBOM == skipBytes > 0);
         assert(m_unicodeBuf->length() == 0);
 
         mHasEOLTermination = false;
