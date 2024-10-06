@@ -1,3 +1,9 @@
+Version 1.11.5 - 2024
+===========================
+*Fix false memory error when using "admin://" protocol
+*Cleanup BOM handling lock detection to only known UTF-* encodings that use it.
+*Fix bugged connection to non-existent signal (This is why we now use new style connections only.)
+
 Version 1.11.4 - 2024
 ===========================
 *fix BOM handling regression.
@@ -7,7 +13,8 @@ Version 1.11.4 - 2024
 Version 1.11.3 - 2024
 ===========================
 --aborted broken BOM handling
-
+Version 1.11.4 - 2024
+===========================
 Version 1.11.2 - 2024
 ===========================
 *Fixed encoding handling for non-UTF encodings

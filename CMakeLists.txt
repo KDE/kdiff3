@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 cmake_policy(VERSION 3.19...3.30)
 
-project(kdiff3 VERSION 1.11.4)
+project(kdiff3 VERSION 1.11.5)
 
 #Avaliable as QtVersionOption starting in ECM 5.82.
 option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
