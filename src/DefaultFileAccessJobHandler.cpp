@@ -106,7 +106,7 @@ bool DefaultFileAccessJobHandler::get(void* pDestBuffer, long maxLength)
         chk_connect(pJob, &KIO::TransferJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, &KIO::TransferJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
         chk_connect(pJob, &KIO::TransferJob::data, this, &DefaultFileAccessJobHandler::slotGetData);
-        chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
+        chk_connect(pJob, &KIO::TransferJob::percentChanged, &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob, i18nc("Message for progress dialog %1 = path to file", "Reading file: %1", mFileAccess->prettyAbsPath()));
 #endif
@@ -150,7 +150,7 @@ bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bo
         chk_connect(pJob, &KIO::TransferJob::result, this, &DefaultFileAccessJobHandler::slotPutJobResult);
         chk_connect(pJob, &KIO::TransferJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
         chk_connect(pJob, &KIO::TransferJob::dataReq, this, &DefaultFileAccessJobHandler::slotPutData);
-        chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
+        chk_connect(pJob, &KIO::TransferJob::percentChanged, &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob, i18nc("Message for progress dialog %1 = path to file", "Writing file: %1", mFileAccess->prettyAbsPath()));
 #endif
@@ -317,7 +317,7 @@ bool DefaultFileAccessJobHandler::rename(const FileAccess& destFile)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(mFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
         chk_connect(pJob, &KIO::FileCopyJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
-        chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
+        chk_connect(pJob, &KIO::FileCopyJob::percentChanged, &pp, &ProgressProxyExtender::slotPercent);
         chk_connect(pJob, &KIO::FileCopyJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
         ProgressProxy::enterEventLoop(pJob,
