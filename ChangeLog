@@ -22,7 +22,7 @@ Version 1.11.2 - 2024
 Version 1.11.1 - 2024
 ===========================
 *Fix handling of KIO jobs for non-file urls.
--Actually wait for secondary event loop to end (Not sure if this is documention bug in qt or behavior bug.)
+-Actually wait for secondary event loop to end (Not sure if this is a documentation or behavioral bug in qt.)
 -Don't arbitrarily kill jobs when progress dialog is hidden.
 *Fix possible invalid line given by mousedown in Overview pane. (Caught by SafeInt range checking)
 *Fix bad algorithm in getBestFirstLine.
