@@ -823,10 +823,10 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     else
     {
         success = mJobHandler->get(pDestBuffer, maxLength);
+        close();
     }
 
-    close();
-    assert(!realFile->isOpen() && !tmpFile->isOpen());
+    assert((realFile == nullptr || !realFile->isOpen()) && !tmpFile->isOpen());
     return success;
 }
 
@@ -866,6 +866,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
             }
 
             realFile->close();
+            assert((realFile == nullptr || !realFile->isOpen()) && !tmpFile->isOpen());
             return true;
         }
     }
@@ -874,12 +875,11 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
         bool success = mJobHandler->put(pSrcBuffer, length, true /*overwrite*/);
         close();
 
-        assert(!realFile->isOpen() && !tmpFile->isOpen());
-
+        assert((realFile == nullptr || !realFile->isOpen()) && !tmpFile->isOpen());
         return success;
     }
-    close();
-    assert(!realFile->isOpen() && !tmpFile->isOpen());
+
+    assert((realFile == nullptr || !realFile->isOpen()) && !tmpFile->isOpen());
     return false;
 }
 
