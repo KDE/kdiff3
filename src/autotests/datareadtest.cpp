@@ -124,7 +124,7 @@ class DataReadTest: public QObject
 
         QVERIFY(simData.getLineEndStyle() == eLineEndStyleDos);
 
-        QStringEncoder encoder = QStringEncoder("UTF-16");
+        QStringEncoder encoder = QStringEncoder("UTF-16", QStringEncoder::Flag::WriteBom);
         testFile.resize(0);
 
         testFile.open();
@@ -139,6 +139,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleDos);
 
+        encoder.resetState();
         testFile.resize(0);
         testFile.open();
         testFile.write(encoder(u8"\n\n7\n"));
@@ -152,7 +153,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleUnix);
 
-        encoder = QStringEncoder("UTF-16LE");
+        encoder = QStringEncoder("UTF-16LE", QStringEncoder::Flag::WriteBom);
         testFile.resize(0);
 
         testFile.open();
@@ -167,12 +168,14 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleDos);
 
+        encoder.resetState();
         testFile.resize(0);
 
         testFile.open();
         testFile.write(encoder(u8"\n\n7\n"));
         testFile.close();
 
+        encoder.resetState();
         simData.setFilename(testFile.fileName());
         simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
@@ -181,13 +184,14 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleUnix);
 
-        encoder = QStringEncoder("UTF-16BE");
+        encoder = QStringEncoder("UTF-16BE", QStringEncoder::Flag::WriteBom);
         testFile.resize(0);
 
         testFile.open();
         testFile.write(encoder(u8"\r\n\r\n7\r\n"));
         testFile.close();
 
+        encoder.resetState();
         simData.setFilename(testFile.fileName());
         simData.readAndPreprocess(encoder.name(), true);
         QVERIFY(simData.getErrors().isEmpty());
@@ -196,6 +200,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleDos);
 
+        encoder.resetState();
         testFile.resize(0);
 
         testFile.open();
