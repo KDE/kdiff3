@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-10 03:14+0000\n"
+"POT-Creation-Date: 2024-10-07 03:15+0000\n"
 "PO-Revision-Date: 2024-09-25 22:32+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -48,51 +48,51 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Escribindo o ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:198
+#: DefaultFileAccessJobHandler.cpp:200
 #, kde-format
 msgid "Out of memory"
 msgstr "Esgotou a memoria"
 
-#: DefaultFileAccessJobHandler.cpp:237
+#: DefaultFileAccessJobHandler.cpp:240
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Creando o cartafol: %1"
 
-#: DefaultFileAccessJobHandler.cpp:261
+#: DefaultFileAccessJobHandler.cpp:264
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Eliminando o cartafol: %1"
 
-#: DefaultFileAccessJobHandler.cpp:279
+#: DefaultFileAccessJobHandler.cpp:282
 #, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "Eliminando o ficheiro. %1"
 
-#: DefaultFileAccessJobHandler.cpp:301
+#: DefaultFileAccessJobHandler.cpp:304
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Creando a ligazón simbólica: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:331
+#: DefaultFileAccessJobHandler.cpp:334
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "Renomeando o ficheiro: %1 → %2"
 
-#: DefaultFileAccessJobHandler.cpp:372
+#: DefaultFileAccessJobHandler.cpp:375
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "Copiando o ficheiro: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:394
+#: DefaultFileAccessJobHandler.cpp:397
 #, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "Lendo o cartafol: %1"
 
-#: DefaultFileAccessJobHandler.cpp:455
+#: DefaultFileAccessJobHandler.cpp:458
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "Listando o cartafol: %1"
@@ -3653,19 +3653,19 @@ msgstr "Do portapapeis"
 msgid "%1 is not a normal file."
 msgstr "%1 non é un ficheiro normal."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "O ficheiro %1 é grande de máis para procesalo. Saltarase."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    O ficheiro temporal é: %1"
 
 # skip-rule: trasno-expression_failed.
-#: SourceData.cpp:447
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3680,7 +3680,7 @@ msgstr ""
 "\n"
 "A orde de preprocesamento vai desactivarse."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3697,7 +3697,7 @@ msgstr ""
 "A orde de preprocesamento para atopar coincidencias en liñas vai "
 "desactivarse."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

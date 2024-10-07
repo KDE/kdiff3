@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-10 03:14+0000\n"
+"POT-Creation-Date: 2024-10-07 03:15+0000\n"
 "PO-Revision-Date: 2022-01-21 22:23+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -45,55 +45,55 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "جاري كتابة الملف: %1"
 
-#: DefaultFileAccessJobHandler.cpp:198
+#: DefaultFileAccessJobHandler.cpp:200
 #, kde-format
 msgid "Out of memory"
 msgstr "نفذت الذّاكرة"
 
-#: DefaultFileAccessJobHandler.cpp:237
+#: DefaultFileAccessJobHandler.cpp:240
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "جاري قراءة الملف: %1"
 
-#: DefaultFileAccessJobHandler.cpp:261
+#: DefaultFileAccessJobHandler.cpp:264
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "جاري قراءة الملف: %1"
 
-#: DefaultFileAccessJobHandler.cpp:279
+#: DefaultFileAccessJobHandler.cpp:282
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "جاري قراءة الملف: %1"
 
-#: DefaultFileAccessJobHandler.cpp:301
+#: DefaultFileAccessJobHandler.cpp:304
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr ""
 
-#: DefaultFileAccessJobHandler.cpp:331
+#: DefaultFileAccessJobHandler.cpp:334
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "إعادة تسمية الملف: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:372
+#: DefaultFileAccessJobHandler.cpp:375
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "نسخ الملف: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:394
+#: DefaultFileAccessJobHandler.cpp:397
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "جاري قراءة الملف: %1"
 
-#: DefaultFileAccessJobHandler.cpp:455
+#: DefaultFileAccessJobHandler.cpp:458
 #, kde-format
 msgid "Listing directory: %1"
 msgstr ""
@@ -3430,18 +3430,18 @@ msgstr "من الحافظة"
 msgid "%1 is not a normal file."
 msgstr ""
 
-#: SourceData.cpp:380
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:409
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:447
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3456,7 +3456,7 @@ msgstr ""
 "\n"
 "سيتم تعطيل الإجراء التمهيدي الآن."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3466,7 +3466,7 @@ msgid ""
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:516
+#: SourceData.cpp:518
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"

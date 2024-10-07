@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-10 03:14+0000\n"
+"POT-Creation-Date: 2024-10-07 03:15+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -48,55 +48,55 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "正在寫入檔案：%1"
 
-#: DefaultFileAccessJobHandler.cpp:198
+#: DefaultFileAccessJobHandler.cpp:200
 #, kde-format
 msgid "Out of memory"
 msgstr "記憶體不足"
 
-#: DefaultFileAccessJobHandler.cpp:237
+#: DefaultFileAccessJobHandler.cpp:240
 #, fuzzy, kde-format
 #| msgid "Making directory: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "產生目錄中：%1"
 
-#: DefaultFileAccessJobHandler.cpp:261
+#: DefaultFileAccessJobHandler.cpp:264
 #, fuzzy, kde-format
 #| msgid "Removing file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "移除檔案中：%1"
 
-#: DefaultFileAccessJobHandler.cpp:279
+#: DefaultFileAccessJobHandler.cpp:282
 #, fuzzy, kde-format
 #| msgid "Removing file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "移除檔案中：%1"
 
-#: DefaultFileAccessJobHandler.cpp:301
+#: DefaultFileAccessJobHandler.cpp:304
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "建立符號連結中：%1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:331
+#: DefaultFileAccessJobHandler.cpp:334
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "重新命名檔案中：%1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:372
+#: DefaultFileAccessJobHandler.cpp:375
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "正在複製檔案中：%1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:394
+#: DefaultFileAccessJobHandler.cpp:397
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "正在讀取檔案：%1"
 
-#: DefaultFileAccessJobHandler.cpp:455
+#: DefaultFileAccessJobHandler.cpp:458
 #, kde-format
 msgid "Listing directory: %1"
 msgstr ""
@@ -3501,18 +3501,18 @@ msgstr "從剪貼簿"
 msgid "%1 is not a normal file."
 msgstr "連結與一般檔案混合。"
 
-#: SourceData.cpp:380
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:409
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:447
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3527,7 +3527,7 @@ msgstr ""
 "\n"
 "預處理指令將會被關閉。"
 
-#: SourceData.cpp:510
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3542,7 +3542,7 @@ msgstr ""
 "\n"
 "逐行比對預處理指令將被關閉。"
 
-#: SourceData.cpp:516
+#: SourceData.cpp:518
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-10 03:14+0000\n"
+"POT-Creation-Date: 2024-10-07 03:15+0000\n"
 "PO-Revision-Date: 2020-06-30 11:35+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -60,55 +60,55 @@ msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "A escrever o ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:198
+#: DefaultFileAccessJobHandler.cpp:200
 #, kde-format
 msgid "Out of memory"
 msgstr "Sem memória"
 
-#: DefaultFileAccessJobHandler.cpp:237
+#: DefaultFileAccessJobHandler.cpp:240
 #, fuzzy, kde-format
 #| msgid "Making directory: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "A criar a pasta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:261
+#: DefaultFileAccessJobHandler.cpp:264
 #, fuzzy, kde-format
 #| msgid "Removing file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "A remover o ficheiro. %1"
 
-#: DefaultFileAccessJobHandler.cpp:279
+#: DefaultFileAccessJobHandler.cpp:282
 #, fuzzy, kde-format
 #| msgid "Removing file: %1"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "A remover o ficheiro. %1"
 
-#: DefaultFileAccessJobHandler.cpp:301
+#: DefaultFileAccessJobHandler.cpp:304
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "A criar a ligação simbólica: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:331
+#: DefaultFileAccessJobHandler.cpp:334
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "A mudar o nome do ficheiro: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:372
+#: DefaultFileAccessJobHandler.cpp:375
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "A copiar o ficheiro: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:394
+#: DefaultFileAccessJobHandler.cpp:397
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "A ler o ficheiro: %1"
 
-#: DefaultFileAccessJobHandler.cpp:455
+#: DefaultFileAccessJobHandler.cpp:458
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "A analisar a pasta: %1"
@@ -3991,19 +3991,19 @@ msgstr "Da Área de Transferência"
 msgid "%1 is not a normal file."
 msgstr "O %1 não é um ficheiro normal."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:382
 #, fuzzy, kde-format
 #| msgid "File %1 too large to process. Skipping."
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "O ficheiro %1 é demasiado grande para ser processado. Será ignorado."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    O ficheiro temporário é: %1"
 
-#: SourceData.cpp:447
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -4016,7 +4016,7 @@ msgstr ""
 "  %1\n"
 "O comando de pré-processamento vai ser desactivado."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -4030,7 +4030,7 @@ msgstr ""
 "  %1\n"
 "O comando de pré-processamento com procura de linhas vai ser desactivado."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:518
 #, fuzzy, kde-format
 #| msgid "Failed to read file: %1"
 msgctxt "Read error message. %1 = filepath"
