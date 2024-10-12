@@ -15,7 +15,6 @@
 
 #include <set>
 #include <unicode/ucnv.h>
-//#include <unicode/ucnv_cb.h>
 #include <unicode/ucnv_err.h>
 
 #include <QString>
@@ -187,10 +186,10 @@ QString Utils::urlToString(const QUrl &url)
 
     return result;
 }
+
 /*
     QStringConverter::availableCodecs() returns codecs that are from our perspective duplicates or
     are specialized single purpose codecs. Additionally Qt un-helpfully adds "Locale" to the list.
-
 */
 QStringList Utils::availableCodecs(){
     const std::set<QString> ignored = { "Adobe-Standard-Encoding", "Extended_UNIX_Code_Packed_Format_for_Japanese","UTF-7" };
