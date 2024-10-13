@@ -49,8 +49,8 @@ class EncodedDataStream: public QDataStream
 
     inline qint32 readChar(QChar& c)
     {
-        char curByte;
-        qint32 len = 0, nullCount = 0;
+        char curData = QChar::Null;
+        qint32 len = 0;
         QString s;
         QStringDecoder decoder = QStringDecoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
         assert(decoder.isValid());
@@ -58,18 +58,12 @@ class EncodedDataStream: public QDataStream
 
         do
         {
-            len += readRawData(&curByte, 1);
-            //Work around a bug in QStringDecoder when handling null bytes
-            if(curByte == QChar::Null) ++nullCount;
-            else nullCount = 0;
+            len += readRawData(&curData, 1);
 
-            s = decoder(QByteArray(sizeof(curByte), curByte));
-        } while(!decoder.hasError() && s.isEmpty() && !atEnd() && nullCount < 4);
+            s = decoder(QByteArray::fromRawData(&curData, sizeof(curData)));
+        } while(!decoder.hasError() && s.isEmpty() && !atEnd());
 
-        mError = decoder.hasError();
-        if(nullCount != 0)
-            c = QChar::Null;
-
+        mError = decoder.hasError() || (s.isEmpty() && atEnd());
         if(!mError)
             c = s[0];
         else
