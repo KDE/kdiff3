@@ -214,6 +214,21 @@ class DataReadTest: public QObject
         QVERIFY(!simData.isEmpty());
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getLineEndStyle(), eLineEndStyleUnix);
+
+        encoder.resetState();
+        testFile.resize(0);
+
+        testFile.open();
+        testFile.write(encoder(u8"\r\r7\r"));
+        testFile.close();
+
+        simData.setFilename(testFile.fileName());
+        simData.readAndPreprocess(encoder.name(), true);
+        QVERIFY(simData.getErrors().isEmpty());
+        QVERIFY(!simData.isFromBuffer());
+        QVERIFY(!simData.isEmpty());
+        QVERIFY(simData.hasData());
+        QCOMPARE(simData.getLineEndStyle(), eLineEndStyleOldMac);
     }
 
     void trailingEOLTest()
