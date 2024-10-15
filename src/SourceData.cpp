@@ -582,6 +582,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes).value_or(encoding);
 
+    //skipBytes = 0;
     if(mDataSize - skipBytes > limits<qint32>::max())
     {
         reset();
@@ -598,7 +599,6 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         m_bIncompleteConversion = false;
         m_unicodeBuf->clear();
 
-        assert(mHasBOM == skipBytes > 0);
         assert(m_unicodeBuf->length() == 0);
 
         mHasEOLTermination = false;
