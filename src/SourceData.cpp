@@ -602,7 +602,6 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         assert(m_unicodeBuf->length() == 0);
 
         mHasEOLTermination = false;
-        bool skipNextRead = false;
         while(!ds.atEnd())
         {
             line.clear();
@@ -612,13 +611,8 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                 return false;
             }
 
-            if(!skipNextRead)
-            {
-                prevChar = curChar;
-                ds.readChar(curChar);
-            }
-            else
-                skipNextRead = false;
+            prevChar = curChar;
+            ds.readChar(curChar);
 
             qsizetype firstNonwhite = 0;
             bool foundNonWhite = false;
@@ -656,16 +650,18 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                 case '\r':
                     if((FileOffset)lastOffset < mDataSize)
                     {
-                        prevChar = curChar;
-                        ds.readChar(curChar);
+                        QChar nextChar;
+                        quint64 i = ds.peekChar(nextChar);
+                        if(i == 0)
+                            break;
 
-                        if(curChar == '\n')
+                        if(nextChar == '\n')
                         {
+                            prevChar = curChar;
+                            ds.readChar(curChar);
                             vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
                             break;
                         }
-                        //work around for lack of seek API in QDataStream
-                        skipNextRead = true;
                     }
 
                     //old mac style ending.

@@ -13,6 +13,7 @@
 
 #include <QByteArray>
 #include <QDataStream>
+#include <QIODevice>
 #include <QString>
 #include <QStringDecoder>
 
@@ -69,6 +70,25 @@ class EncodedDataStream: public QDataStream
         else
             c = QChar::ReplacementCharacter;
 
+        return len;
+    }
+
+    quint64 peekChar(QChar &c)
+    {
+        QStringDecoder decoder = QStringDecoder(mEncoding);
+        QIODevice *d = device();
+        char buf[4];
+        qint64 len = d->peek(buf, sizeof(buf));
+
+        if(len > 0)
+        {
+            QString s = decoder(QByteArray::fromRawData(buf, sizeof(buf)));
+            if(s.isEmpty()) return 0;
+
+            c = s[0];
+        }
+        else
+            c = QChar::Null;
         return len;
     }
 
