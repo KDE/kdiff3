@@ -70,7 +70,7 @@ class SourceData
                              const QString& fileNameOut, const QByteArray& pCodecOut);
 
     [[nodiscard]] static std::optional<const QByteArray> detectUTF8(const QByteArray& data);
-    [[nodiscard]] static std::optional<const QByteArray> detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
+    [[nodiscard]] static std::optional<const QByteArray> detectEncoding(const char* buf, qint64 size);
     [[nodiscard]] static std::optional<const QByteArray> getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
     std::optional<const QByteArray> detectEncoding(const QString& fileName);

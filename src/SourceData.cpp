@@ -315,8 +315,7 @@ std::optional<const QByteArray> SourceData::detectEncoding(const QString& fileNa
         char buf[400];
 
         qint64 size = f.read(buf, sizeof(buf));
-        FileOffset skipBytes = 0;
-        return detectEncoding(buf, size, skipBytes);
+        return detectEncoding(buf, size);
     }
     return {};
 }
@@ -575,17 +574,15 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
     QChar curChar, prevChar = '\0';
     LineType lines = 0;
     qsizetype lastOffset = 0;
-    FileOffset skipBytes = 0;
     std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
 
     // detect line end style
     std::vector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
 
-    QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes).value_or(encoding);
+    QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize).value_or(encoding);
 
-    //skipBytes = 0;
-    if(mDataSize - skipBytes > limits<qint32>::max())
+    if(mDataSize > limits<qint32>::max())
     {
         reset();
         return false;
@@ -593,7 +590,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     try
     {
-        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (qsizetype)(mDataSize - skipBytes));
+        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
         EncodedDataStream ds(ba);
 
         ds.setEncoding(encoding);
@@ -785,19 +782,17 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
     return {};
 }
 
-std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes)
+std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint64 size)
 {
     if(size >= 2)
     {
         if(buf[0] == '\xFF' && buf[1] == '\xFE')
         {
-            skipBytes = 2;
             return "UTF-16LE";
         }
 
         if(buf[0] == '\xFE' && buf[1] == '\xFF')
         {
-            skipBytes = 2;
             return "UTF-16BE";
         }
     }
@@ -805,11 +800,10 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
     {
         if(buf[0] == '\xEF' && buf[1] == '\xBB' && buf[2] == '\xBF')
         {
-            skipBytes = 3;
             return "UTF-8-BOM";
         }
     }
-    skipBytes = 0;
+
     QByteArray s;
     /*
         We don't need the whole file here just the header.
