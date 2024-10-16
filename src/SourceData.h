@@ -48,7 +48,7 @@ class SourceData
     [[nodiscard]] bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
-    void readAndPreprocess(const char* encoding, bool bAutoDetectUnicode);
+    void readAndPreprocess(const QByteArray& encoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
     [[nodiscard]] bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
@@ -119,7 +119,7 @@ class SourceData
     };
     FileData m_normalData;
     FileData m_lmppData;
-    QByteArray mEncoding = u8"UTF-8";
+    QByteArray mEncoding;
 };
 
 #endif // !SOURCEDATA_H

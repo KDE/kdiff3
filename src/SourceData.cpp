@@ -321,7 +321,7 @@ std::optional<const QByteArray> SourceData::detectEncoding(const QString& fileNa
     return {};
 }
 
-void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
+void SourceData::readAndPreprocess(const QByteArray& encoding, bool bAutoDetect)
 {
     QTemporaryFile fileIn1, fileOut1;
     QString fileNameIn1;
@@ -330,6 +330,8 @@ void SourceData::readAndPreprocess(const char* encoding, bool bAutoDetect)
     QString fileNameOut2;
 
     mEncoding = encoding;
+    if(mEncoding.isEmpty())
+        mEncoding = u8"UTF-8";
 
     // Detect the input for the preprocessing operations
     if(!mFromClipBoard)
