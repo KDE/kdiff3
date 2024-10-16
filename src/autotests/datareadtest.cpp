@@ -92,7 +92,26 @@ class DataReadTest: public QObject
         QCOMPARE(simData.getSizeBytes(), file.size());
 
         //write out test file
-        QStringEncoder encoder = QStringEncoder("UTF-16LE", QStringEncoder::Flag::WriteBom);
+        QStringEncoder encoder = QStringEncoder("UTF-8", QStringEncoder::Flag::WriteBom);
+        testFile.open();
+        testFile.write(encoder(u"//\n //\n     \t\n  D//   \t\n"));
+        testFile.close();
+        file = FileAccess(testFile.fileName());
+        QVERIFY(file.size() > 0);
+
+        simData.setFilename(testFile.fileName());
+        simData.readAndPreprocess("UTF-8-BOM", true);
+        QVERIFY(simData.getErrors().isEmpty());
+        QVERIFY(!simData.isFromBuffer());
+        QVERIFY(!simData.isEmpty());
+        QVERIFY(simData.hasData());
+        QVERIFY(simData.hasBOM());
+        QVERIFY(!simData.getEncoding().isEmpty());
+        QCOMPARE(simData.getSizeLines(), 5);
+        QCOMPARE(simData.getSizeBytes(), file.size());
+
+        //write out test file
+        encoder = QStringEncoder("UTF-16LE", QStringEncoder::Flag::WriteBom);
         testFile.open();
         testFile.write(encoder(u"//\n //\n     \t\n  D//   \t\n"));
         testFile.close();
