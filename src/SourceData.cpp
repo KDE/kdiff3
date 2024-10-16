@@ -60,7 +60,7 @@ extern std::unique_ptr<Options> gOptions;
 void SourceData::reset()
 {
     mFromClipBoard = false;
-    mEncoding = u8"UTF-8";
+    mEncoding = QByteArray();
     m_fileAccess = FileAccess();
     m_normalData.reset();
     m_lmppData.reset();
@@ -331,15 +331,15 @@ void SourceData::readAndPreprocess(const QByteArray& encoding, bool bAutoDetect)
     QString fileNameIn2;
     QString fileNameOut2;
 
-    mEncoding = encoding;
-    if(mEncoding.isEmpty())
-        mEncoding = u8"UTF-8";
-
     // Detect the input for the preprocessing operations
     if(!mFromClipBoard)
     {
         //Routine result of directory compare finding a file that isn't in all locations.
         if(!m_fileAccess.isValid()) return;
+
+        mEncoding = encoding;
+        if(mEncoding.isEmpty())
+            mEncoding = u8"UTF-8";
 
         assert(!m_fileAccess.exists() || !m_fileAccess.isDir());
         if(!m_fileAccess.isNormal())
