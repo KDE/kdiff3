@@ -324,7 +324,7 @@ class WindowTitleWidget: public QWidget
     const char* getEncoding();
     void setFileName(const QString& fileName);
     QString getFileName();
-    void setEncodings(const char* pCodecForA, const char* pCodecForB, const char* pCodecForC);
+    void setEncodings(const QByteArray& pCodecForA, const QByteArray& pCodecForB, const QByteArray& pCodecForC);
     void setEncoding(const char* encoding);
     void setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC);
     e_LineEndStyle getLineEndStyle();

@@ -2812,7 +2812,7 @@ WindowTitleWidget::WindowTitleWidget()
     m_pEncodingSelector = new QComboBox();
     m_pEncodingSelector->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     pHLayout->addWidget(m_pEncodingSelector, 2);
-    setEncodings(nullptr, nullptr, nullptr);
+    setEncodings(QByteArray(), QByteArray(), QByteArray());
 
     m_pLineEndStyleLabel = new QLabel(i18n("Line end style:"));
     pHLayout->addWidget(m_pLineEndStyleLabel);
@@ -2923,7 +2923,7 @@ e_LineEndStyle WindowTitleWidget::getLineEndStyle()
         return eLineEndStyleConflict;
 }
 
-void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecForB, const char* pCodecForC)
+void WindowTitleWidget::setEncodings(const QByteArray& pCodecForA, const QByteArray& pCodecForB, const QByteArray& pCodecForC)
 {
     m_pEncodingSelector->clear();
 
@@ -2935,11 +2935,11 @@ void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecF
         names.append(QTextCodec::codecForMib(mib)->name());
     }
 
-    if(pCodecForA != nullptr)
+    if(!pCodecForA.isEmpty())
         m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA)), QVariant::fromValue(QByteArray(pCodecForA)));
-    if(pCodecForB != nullptr)
+    if(!pCodecForB.isEmpty())
         m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB)), QVariant::fromValue(QByteArray(pCodecForB)));
-    if(pCodecForC != nullptr)
+    if(!pCodecForC.isEmpty())
         m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC)), QVariant::fromValue(QByteArray(pCodecForC)));
 
     m_pEncodingSelector->addItem("UTF 8", QVariant::fromValue(QByteArray("UTF-8")));
@@ -2951,14 +2951,14 @@ void WindowTitleWidget::setEncodings(const char* pCodecForA, const char* pCodecF
     }
     m_pEncodingSelector->setMinimumSize(m_pEncodingSelector->sizeHint());
 
-    if(pCodecForC != nullptr && pCodecForB != nullptr && pCodecForA != nullptr)
+    if(!pCodecForC.isEmpty() && !pCodecForB.isEmpty() && !pCodecForA.isEmpty())
     {
         if(pCodecForA == pCodecForC)
             m_pEncodingSelector->setCurrentIndex(1); // B
         else
             m_pEncodingSelector->setCurrentIndex(2); // C
     }
-    else if(pCodecForA != nullptr && pCodecForB != nullptr)
+    else if(!pCodecForA.isEmpty() && !pCodecForB.isEmpty())
         m_pEncodingSelector->setCurrentIndex(1); // B
     else
         m_pEncodingSelector->setCurrentIndex(0);
