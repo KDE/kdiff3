@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 00:41+0000\n"
+"POT-Creation-Date: 2024-10-17 00:42+0000\n"
 "PO-Revision-Date: 2024-09-25 22:32+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -3593,24 +3593,24 @@ msgstr ""
 msgid "From Clipboard"
 msgstr "Do portapapeis"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 non é un ficheiro normal."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "O ficheiro %1 é grande de máis para procesalo. Saltarase."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    O ficheiro temporal é: %1"
 
 # skip-rule: trasno-expression_failed.
-#: SourceData.cpp:447
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3625,7 +3625,7 @@ msgstr ""
 "\n"
 "A orde de preprocesamento vai desactivarse."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3642,7 +3642,7 @@ msgstr ""
 "A orde de preprocesamento para atopar coincidencias en liñas vai "
 "desactivarse."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
