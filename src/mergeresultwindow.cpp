@@ -2149,6 +2149,11 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 mbIt->list().insert(melIt, mel);
             }
             x = indentation.length();
+            /*
+                m_nofLines will be properly adjusted during repaint but its used as an upper bound for y here.
+                Add one to account for the new line.
+            */
+            ++m_nofLines;
             ++y;
             break;
         }
