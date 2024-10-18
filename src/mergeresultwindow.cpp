@@ -2031,6 +2031,12 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                         else
                             melIt1->setRemoved();
                     }
+                    else
+                    {
+                        assert(mbIt->lineCount() == 1);
+                        // Remove the current line
+                        melIt->setRemoved();
+                    }
                 }
             }
             else
@@ -2065,6 +2071,12 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
 
                         --y;
                         x = str.length();
+                    }
+                    else
+                    {
+                        assert(mbIt->lineCount() == 1);
+                        // Remove the current line
+                        melIt->setRemoved();
                     }
                 }
             }
@@ -2116,8 +2128,6 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                     }
                 }
             }
-            MergeEditLine mel(mbIt->id3l()); // Associate every mel with an id3l, even if not really valid.
-            mel.setString(indentation + str.mid(x));
 
             if(x < str.length()) // Cut off the old line.
             {
@@ -2126,8 +2136,18 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 melIt->setString(temp);
             }
 
-            ++melIt;
-            mbIt->list().insert(melIt, mel);
+            if(melIt->isRemoved())
+            {
+                assert(mbIt->lineCount() == 1);
+                melIt->setString(indentation + str.mid(x));
+            }
+            else
+            {
+                MergeEditLine mel(mbIt->id3l()); // Associate every mel with an id3l, even if not really valid.
+                mel.setString(indentation + str.mid(x));
+                ++melIt;
+                mbIt->list().insert(melIt, mel);
+            }
             x = indentation.length();
             ++y;
             break;
