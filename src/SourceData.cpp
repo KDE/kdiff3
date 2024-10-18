@@ -784,24 +784,15 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
 
 std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint64 size)
 {
-    if(size >= 2)
+    std::optional<QStringConverter::Encoding> qtEnum = QStringConverter::encodingForData(buf, size);
+    if(qtEnum.has_value())
     {
-        if(buf[0] == '\xFF' && buf[1] == '\xFE')
-        {
-            return "UTF-16LE";
-        }
+        QByteArray encoding = QByteArray(QStringConverter::nameForEncoding(qtEnum.value())).toUpper();
+        //Only unambigious encodings are returned by QStringConverter::encodingForData this means UTF-8 with BOM.
+        if(encoding == "UTF-8")
+            encoding = "UTF-8-BOM";
 
-        if(buf[0] == '\xFE' && buf[1] == '\xFF')
-        {
-            return "UTF-16BE";
-        }
-    }
-    if(size >= 3)
-    {
-        if(buf[0] == '\xEF' && buf[1] == '\xBB' && buf[2] == '\xBF')
-        {
-            return "UTF-8-BOM";
-        }
+        return encoding;
     }
 
     QByteArray s;
