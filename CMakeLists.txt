@@ -17,7 +17,7 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
 
-set(KF_MIN_VERSION "6.0.0")
+set(KF_MIN_VERSION "6.2.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -156,17 +156,17 @@ add_definitions(
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060700#warn if deprecated at 6.7 or before. Qt default setting is not useful for kdiff3.
+    -DQT_DEPRECATED_WARNINGS_SINCE=0x060800#warn if deprecated at 6.8 or before. Qt default setting is not useful for kdiff3.
     -DQT_DISABLE_DEPRECATED_BEFORE=0x060600#disable deprecated api for Qt<6.6.
     #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 6.0.0 (below as hex.hex.hex number)
-    -DKF_DISABLE_DEPRECATED_BEFORE=0x060000#disable deprecated api for KF 6.0.
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060000
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060000
-    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x060000
+    #Don't warn for API depreciated after 6.6.0 (below as hex.hex.hex number)
+    -DKF_DISABLE_DEPRECATED_BEFORE=0x060200#disable deprecated api for KF 6.2.
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x060600
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060600
+    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x060600
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
