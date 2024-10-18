@@ -2522,7 +2522,7 @@ void MergeResultWindow::deleteSelection()
                     melItFirst.value()->setString(firstLineString);
                 }
 
-                if(line != firstLine || (m_selection.endPos() - m_selection.beginPos()) == lineString.length())
+                if(line != firstLine)
                 {
                     // Remove the line
                     if(mb.lineCount() > 1)
