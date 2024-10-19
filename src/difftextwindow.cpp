@@ -187,7 +187,7 @@ class DiffTextWindowData
     [[nodiscard]] QString getLineString(const qint32 line) const;
 
     void writeLine(
-        RLPainter& p, const LineData* pld,
+        RLPainter& p,
         const std::shared_ptr<const DiffList>& pLineDiff1, const std::shared_ptr<const DiffList>& pLineDiff2, const LineRef& line,
         const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
         qint32 wrapLineOffset, qint32 wrapLineLength, bool bWrapLine, const QRect& invalidRect);
@@ -1061,6 +1061,7 @@ void DiffTextWindowData::writeLine(
     bool bWrapLine,
     const QRect& invalidRect)
 {
+    const LineData* pld = !srcLineIdx.isValid() ? nullptr : &(*m_pLineData)[srcLineIdx]; // Text in this line;
     QFont normalFont = p.font();
 
     const QFontMetrics& fm = p.fontMetrics();
@@ -1346,8 +1347,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint
         d3l->getLineInfo(getWindowIndex(), KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
         writeLine(
-            p,                                                             // QPainter
-            !srcLineIdx.isValid() ? nullptr : &(*m_pLineData)[srcLineIdx], // Text in this line
+            p, // QPainter
             pFineDiff1,
             pFineDiff2,
             line, // Line on the screen
