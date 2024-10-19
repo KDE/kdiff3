@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-17 00:42+0000\n"
+"POT-Creation-Date: 2024-10-19 00:42+0000\n"
 "PO-Revision-Date: 2024-09-27 11:46+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -124,7 +124,7 @@ msgstr "Soubor %1: Řádek není dostupný"
 msgid "Encoding:"
 msgstr "Kódování:"
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:789
+#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2829 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "Styl konce řádku:"
@@ -139,12 +139,12 @@ msgstr "A (základní)"
 msgid "Encoding: %1"
 msgstr "Kódování: %1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2874
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -1999,12 +1999,12 @@ msgstr "<Žádný řádek ve frontě>"
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Konflikt sloučení (pouze mezery)>"
 
-#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2432
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Konflikt sloučení>"
 
-#: mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2013,13 +2013,13 @@ msgstr ""
 "Všechny konflikty nejsou vyřešeny.\n"
 "Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
+#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2665
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Zbývající konflikty"
 
-#: mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2663
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2029,7 +2029,7 @@ msgstr ""
 "Konflikt druhu konce řádku. Zvolte prosím druh konce řádku ručně.\n"
 "Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2677
 #, kde-format
 msgid ""
 "\n"
@@ -2040,47 +2040,47 @@ msgstr ""
 "\n"
 "Vytvoření zálohy selhalo. Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2721
 #, kde-format
 msgid "File Save Error"
 msgstr "Chyba ukládání souboru"
 
-#: mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2721
 #, kde-format
 msgid "Error while writing."
 msgstr "Chyba při zápisu."
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2801
 #, kde-format
 msgid "Output:"
 msgstr "Výstup:"
 
-#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2972
+#: mergeresultwindow.cpp:2814 mergeresultwindow.cpp:2997
 #, kde-format
 msgid "[Modified]"
 msgstr "[Pozměněno]"
 
-#: mergeresultwindow.cpp:2796
+#: mergeresultwindow.cpp:2821
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kódování pro uložení:"
 
-#: mergeresultwindow.cpp:2896
+#: mergeresultwindow.cpp:2921
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2919
+#: mergeresultwindow.cpp:2944
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodek od A: %1"
 
-#: mergeresultwindow.cpp:2921
+#: mergeresultwindow.cpp:2946
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodek od B: %1"
 
-#: mergeresultwindow.cpp:2923
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodek od C: %1"
@@ -3544,23 +3544,23 @@ msgstr "Zápis dat schránky do dočasného souboru selhal."
 msgid "From Clipboard"
 msgstr "Ze schránky"
 
-#: SourceData.cpp:345
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 není místní soubor."
 
-#: SourceData.cpp:382
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Soubor %1 je pro zpracování moc velký. Přeskakuji."
 
-#: SourceData.cpp:411
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Dočasný soubor je: %1"
 
-#: SourceData.cpp:449
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3575,7 +3575,7 @@ msgstr ""
 "\n"
 "Příkaz předběžného zpracování bude nyní vypnut."
 
-#: SourceData.cpp:512
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3590,7 +3590,7 @@ msgstr ""
 "\n"
 "Příkaz předběžného zpracování shody řádku bude nyní vypnut."
 
-#: SourceData.cpp:518
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

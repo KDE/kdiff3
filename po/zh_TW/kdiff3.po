@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-17 00:42+0000\n"
+"POT-Creation-Date: 2024-10-19 00:42+0000\n"
 "PO-Revision-Date: 2024-01-22 16:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -125,7 +125,7 @@ msgstr "檔案 %1：無法取得行"
 msgid "Encoding:"
 msgstr "編碼："
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:789
+#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2829 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "行結尾樣式："
@@ -140,12 +140,12 @@ msgstr "A(基底)"
 msgid "Encoding: %1"
 msgstr "編碼：%1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2874
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -1978,12 +1978,12 @@ msgstr "<沒有來源行>"
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<合併衝突（僅空白）>"
 
-#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2432
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<合併衝突>"
 
-#: mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -1992,13 +1992,13 @@ msgstr ""
 "還有未解決的衝突。\n"
 "檔案未儲存。"
 
-#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
+#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2665
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "剩餘衝突"
 
-#: mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2663
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2008,7 +2008,7 @@ msgstr ""
 "有行結尾樣式的衝突。請手動選擇行結尾樣式。\n"
 "檔案未儲存。"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2677
 #, kde-format
 msgid ""
 "\n"
@@ -2019,49 +2019,49 @@ msgstr ""
 "\n"
 "建立備份時失敗。檔案未儲存。"
 
-#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2721
 #, kde-format
 msgid "File Save Error"
 msgstr "檔案儲存錯誤"
 
-#: mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2721
 #, kde-format
 msgid "Error while writing."
 msgstr "寫入時發生錯誤。"
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2801
 #, kde-format
 msgid "Output:"
 msgstr "輸出："
 
-#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2972
+#: mergeresultwindow.cpp:2814 mergeresultwindow.cpp:2997
 #, kde-format
 msgid "[Modified]"
 msgstr "[已修改]"
 
-#: mergeresultwindow.cpp:2796
+#: mergeresultwindow.cpp:2821
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "儲存用的編碼："
 
-#: mergeresultwindow.cpp:2896
+#: mergeresultwindow.cpp:2921
 #, kde-format
 msgid "Conflict"
 msgstr "衝突"
 
-#: mergeresultwindow.cpp:2919
+#: mergeresultwindow.cpp:2944
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2921
+#: mergeresultwindow.cpp:2946
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2923
+#: mergeresultwindow.cpp:2948
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
@@ -3481,23 +3481,23 @@ msgstr "將剪貼簿資料寫入暫存檔失敗。"
 msgid "From Clipboard"
 msgstr "從剪貼簿"
 
-#: SourceData.cpp:345
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 不是一般檔案。"
 
-#: SourceData.cpp:382
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "檔案 %1 太大而無法處理。正在跳過。"
 
-#: SourceData.cpp:411
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    暫存檔是：%1"
 
-#: SourceData.cpp:449
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3512,7 +3512,7 @@ msgstr ""
 "\n"
 "前置處理指令將會被關閉。"
 
-#: SourceData.cpp:512
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3527,7 +3527,7 @@ msgstr ""
 "\n"
 "逐行比對預處理指令將被關閉。"
 
-#: SourceData.cpp:518
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

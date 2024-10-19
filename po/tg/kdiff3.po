@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-17 00:42+0000\n"
+"POT-Creation-Date: 2024-10-19 00:42+0000\n"
 "PO-Revision-Date: 2019-09-29 12:43+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -137,7 +137,7 @@ msgstr "дастрас нест"
 msgid "Encoding:"
 msgstr ""
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2804 optiondialog.cpp:789
+#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2829 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr ""
@@ -152,12 +152,12 @@ msgstr "A (баромад): "
 msgid "Encoding: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2850
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2849
+#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2874
 #, kde-format
 msgid "Unix"
 msgstr ""
@@ -2068,25 +2068,25 @@ msgstr ""
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2407
+#: mergeresultwindow.cpp:1534 mergeresultwindow.cpp:2432
 #, fuzzy, kde-format
 msgid "<Merge Conflict>"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:2629
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2631 mergeresultwindow.cpp:2640
+#: mergeresultwindow.cpp:2656 mergeresultwindow.cpp:2665
 #, fuzzy, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:2638
+#: mergeresultwindow.cpp:2663
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2094,7 +2094,7 @@ msgid ""
 "File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2677
 #, kde-format
 msgid ""
 "\n"
@@ -2102,47 +2102,47 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2652 mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2721
 #, fuzzy, kde-format
 msgid "File Save Error"
 msgstr "Хатогӣ дар кушодани файл"
 
-#: mergeresultwindow.cpp:2696
+#: mergeresultwindow.cpp:2721
 #, fuzzy, kde-format
 msgid "Error while writing."
 msgstr "Хатогӣ дар вақти эҷод кардани каталог."
 
-#: mergeresultwindow.cpp:2776
+#: mergeresultwindow.cpp:2801
 #, kde-format
 msgid "Output:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2789 mergeresultwindow.cpp:2972
+#: mergeresultwindow.cpp:2814 mergeresultwindow.cpp:2997
 #, kde-format
 msgid "[Modified]"
 msgstr "[Тағйирёфта]"
 
-#: mergeresultwindow.cpp:2796
+#: mergeresultwindow.cpp:2821
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2896
+#: mergeresultwindow.cpp:2921
 #, fuzzy, kde-format
 msgid "Conflict"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:2919
+#: mergeresultwindow.cpp:2944
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2921
+#: mergeresultwindow.cpp:2946
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2923
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
@@ -3487,24 +3487,24 @@ msgstr "Дар силули мухобиротӣ навиштани таърих
 msgid "From Clipboard"
 msgstr "Аз буфери иваз"
 
-#: SourceData.cpp:345
+#: SourceData.cpp:344
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "Мувофиқкунии ишораҳо бо файлҳои оддӣ."
 
-#: SourceData.cpp:382
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:411
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:449
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3519,7 +3519,7 @@ msgstr ""
 "\n"
 "Фармони пеш-коркардкуни ҳоло аз кор мемонад."
 
-#: SourceData.cpp:512
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3535,7 +3535,7 @@ msgstr ""
 "\n"
 "Хати-ҷамъ кунии- пешкоркардкунии фармон ҳоло аз кор мемонад."
 
-#: SourceData.cpp:518
+#: SourceData.cpp:517
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"
