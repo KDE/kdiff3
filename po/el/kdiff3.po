@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 03:22+0000\n"
+"POT-Creation-Date: 2024-10-19 03:24+0000\n"
 "PO-Revision-Date: 2021-06-14 16:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -130,7 +130,7 @@ msgstr "Αρχείο %1: Μη διαθέσιμη γραμμή"
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
-#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2817 optiondialog.cpp:795
+#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2842 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Στιλ τέλους γραμμής:"
@@ -145,12 +145,12 @@ msgstr "Α (Βάση)"
 msgid "Encoding: %1"
 msgstr "Κωδικοποίηση %1"
 
-#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2888
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2887
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2183,12 +2183,12 @@ msgstr "<Χωρίς γραμμή πηγής>"
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Σύγκρουση συγχώνευσης (μόνο κενών)>"
 
-#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2425
+#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2450
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Σύγκρουση συγχώνευσης>"
 
-#: mergeresultwindow.cpp:2647
+#: mergeresultwindow.cpp:2672
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2197,14 +2197,14 @@ msgstr ""
 "Δεν έχουν επιλυθεί ακόμη όλες οι συγκρούσεις.\n"
 "Το αρχείο δεν αποθηκεύτηκε."
 
-#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2658
+#: mergeresultwindow.cpp:2674 mergeresultwindow.cpp:2683
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Συγκρούσεις που απομένουν"
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2215,7 +2215,7 @@ msgstr ""
 "χειροκίνητα.\n"
 "Το αρχείο δεν αποθηκεύτηκε."
 
-#: mergeresultwindow.cpp:2670
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid ""
 "\n"
@@ -2226,47 +2226,47 @@ msgstr ""
 "\n"
 "Αποτυχία δημιουργίας εφεδρικού αντιγράφου. Το αρχείο δεν αποθηκεύτηκε."
 
-#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2714
+#: mergeresultwindow.cpp:2695 mergeresultwindow.cpp:2739
 #, kde-format
 msgid "File Save Error"
 msgstr "Σφάλμα εγγραφής αρχείου"
 
-#: mergeresultwindow.cpp:2714
+#: mergeresultwindow.cpp:2739
 #, kde-format
 msgid "Error while writing."
 msgstr "Σφάλμα κατά την εγγραφή."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2814
 #, kde-format
 msgid "Output:"
 msgstr "Έξοδος:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2992
+#: mergeresultwindow.cpp:2827 mergeresultwindow.cpp:3017
 #, kde-format
 msgid "[Modified]"
 msgstr "[Τροποποιημένο]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Κωδικοποίηση για την αποθήκευση:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2934
 #, kde-format
 msgid "Conflict"
 msgstr "Σύγκρουση"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2964
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Κωδικοποιητής από Α: %1"
 
-#: mergeresultwindow.cpp:2941
+#: mergeresultwindow.cpp:2966
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Κωδικοποιητής από Β: %1"
 
-#: mergeresultwindow.cpp:2943
+#: mergeresultwindow.cpp:2968
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Κωδικοποιητής από Γ: %1"

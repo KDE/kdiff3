@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 03:22+0000\n"
+"POT-Creation-Date: 2024-10-19 03:24+0000\n"
 "PO-Revision-Date: 2024-02-09 23:38+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -123,7 +123,7 @@ msgstr "파일 %1: 줄을 사용할 수 없음"
 msgid "Encoding:"
 msgstr "인코딩:"
 
-#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2817 optiondialog.cpp:795
+#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2842 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "줄 끝 스타일:"
@@ -138,12 +138,12 @@ msgstr "A(기반)"
 msgid "Encoding: %1"
 msgstr "인코딩: %1"
 
-#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2888
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2887
 #, kde-format
 msgid "Unix"
 msgstr "유닉스"
@@ -2046,12 +2046,12 @@ msgstr "<원본 줄 없음>"
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<충돌 합치기(공백만>"
 
-#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2425
+#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2450
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<충돌 합치기>"
 
-#: mergeresultwindow.cpp:2647
+#: mergeresultwindow.cpp:2672
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2060,13 +2060,13 @@ msgstr ""
 "모든 충돌 사항을 해결하지 않았습니다.\n"
 "파일이 저장되지 않았습니다."
 
-#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2658
+#: mergeresultwindow.cpp:2674 mergeresultwindow.cpp:2683
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "충돌 사항 남음"
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2076,7 +2076,7 @@ msgstr ""
 "줄 끝 스타일이 충돌합니다. 줄 끝 스타일을 직접 선택하십시오.\n"
 "파일이 저장되지 않았습니다."
 
-#: mergeresultwindow.cpp:2670
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid ""
 "\n"
@@ -2087,47 +2087,47 @@ msgstr ""
 "\n"
 "백업을 만들 수 없습니다. 파일을 저장하지 않았습니다."
 
-#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2714
+#: mergeresultwindow.cpp:2695 mergeresultwindow.cpp:2739
 #, kde-format
 msgid "File Save Error"
 msgstr "파일 저장 오류"
 
-#: mergeresultwindow.cpp:2714
+#: mergeresultwindow.cpp:2739
 #, kde-format
 msgid "Error while writing."
 msgstr "쓰는 중 오류가 발생했습니다."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2814
 #, kde-format
 msgid "Output:"
 msgstr "출력:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2992
+#: mergeresultwindow.cpp:2827 mergeresultwindow.cpp:3017
 #, kde-format
 msgid "[Modified]"
 msgstr "[수정됨]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "저장용 인코딩:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2934
 #, kde-format
 msgid "Conflict"
 msgstr "충돌"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2964
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "A의 코덱: %1"
 
-#: mergeresultwindow.cpp:2941
+#: mergeresultwindow.cpp:2966
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "B의 코덱: %1"
 
-#: mergeresultwindow.cpp:2943
+#: mergeresultwindow.cpp:2968
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "C의 코덱: %1"

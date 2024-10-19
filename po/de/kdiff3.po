@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-16 03:22+0000\n"
+"POT-Creation-Date: 2024-10-19 03:24+0000\n"
 "PO-Revision-Date: 2023-12-27 22:26+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -126,7 +126,7 @@ msgstr "Datei %1: Zeile nicht vorhanden"
 msgid "Encoding:"
 msgstr "Kodierung:"
 
-#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2817 optiondialog.cpp:795
+#: difftextwindow.cpp:1969 mergeresultwindow.cpp:2842 optiondialog.cpp:795
 #, kde-format
 msgid "Line end style:"
 msgstr "Zeilenende-Kodierung:"
@@ -141,12 +141,12 @@ msgstr "A (Basis)"
 msgid "Encoding: %1"
 msgstr "Kodierung: %1"
 
-#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2888
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1997 mergeresultwindow.cpp:2887
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2082,12 +2082,12 @@ msgstr "<Keine Zeile in der Quelle>"
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Zusammenführungskonflikt (nur Leerräume)>"
 
-#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2425
+#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2450
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Zusammenführungskonflikt>"
 
-#: mergeresultwindow.cpp:2647
+#: mergeresultwindow.cpp:2672
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2096,13 +2096,13 @@ msgstr ""
 "Noch sind nicht alle Konflikte aufgelöst.\n"
 "Die Datei wurde nicht gespeichert."
 
-#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2658
+#: mergeresultwindow.cpp:2674 mergeresultwindow.cpp:2683
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Ungelöste Konflikte"
 
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2113,7 +2113,7 @@ msgstr ""
 "Zeilenende.\n"
 "Die Datei wurde nicht gespeichert."
 
-#: mergeresultwindow.cpp:2670
+#: mergeresultwindow.cpp:2695
 #, kde-format
 msgid ""
 "\n"
@@ -2125,47 +2125,47 @@ msgstr ""
 "Anlegen der Sicherungskopie ist fehlgeschlagen. Die Datei wurde nicht "
 "gespeichert."
 
-#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2714
+#: mergeresultwindow.cpp:2695 mergeresultwindow.cpp:2739
 #, kde-format
 msgid "File Save Error"
 msgstr "Fehler beim Speichern der Datei"
 
-#: mergeresultwindow.cpp:2714
+#: mergeresultwindow.cpp:2739
 #, kde-format
 msgid "Error while writing."
 msgstr "Fehler beim Schreiben."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2814
 #, kde-format
 msgid "Output:"
 msgstr "Ausgabe:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2992
+#: mergeresultwindow.cpp:2827 mergeresultwindow.cpp:3017
 #, kde-format
 msgid "[Modified]"
 msgstr "[Geändert]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Dateikodierung zum Speichern:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2934
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2964
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Codec von A: %1"
 
-#: mergeresultwindow.cpp:2941
+#: mergeresultwindow.cpp:2966
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Codec von B: %1"
 
-#: mergeresultwindow.cpp:2943
+#: mergeresultwindow.cpp:2968
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Codec von C: %1"
