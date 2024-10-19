@@ -205,6 +205,39 @@ class DiffTextWindowData
     [[nodiscard]] const QString& getFileName() const { return m_filename; }
 
     [[nodiscard]] const Diff3LineVector* getDiff3LineVector() const { return mDiff3LineVector; }
+
+    [[nodiscard]] const Diff3WrapLineVector& getDiff3WrapLineVector() { return m_diff3WrapLineVector; }
+    [[nodiscard]] bool hasLineData() const { return m_pLineData != nullptr && !m_pLineData->empty(); }
+
+    void initColors()
+    {
+        if(getWindowIndex() == e_SrcSelector::A)
+        {
+            m_cThis = gOptions->aColor();
+            m_cDiff1 = gOptions->bColor();
+            m_cDiff2 = gOptions->cColor();
+        }
+        else if(getWindowIndex() == e_SrcSelector::B)
+        {
+            m_cThis = gOptions->bColor();
+            m_cDiff1 = gOptions->cColor();
+            m_cDiff2 = gOptions->aColor();
+        }
+        else if(getWindowIndex() == e_SrcSelector::C)
+        {
+            m_cThis = gOptions->cColor();
+            m_cDiff1 = gOptions->aColor();
+            m_cDiff2 = gOptions->bColor();
+        }
+        m_cDiffBoth = gOptions->conflictColor(); // Conflict color
+    }
+
+    QColor thisColor() const { return m_cThis; }
+    QColor diff1Color() const { return m_cDiff1; }
+    QColor diff2Color() const { return m_cDiff2; }
+    QColor diffBothColor() const { return m_cDiffBoth; }
+    const Diff3LineVector* diff3LineVector() { return mDiff3LineVector; }
+
   private:
     friend DiffTextWindow;
     e_SrcSelector getWindowIndex() const { return m_pDiffTextWindow->getWindowIndex(); }
@@ -1049,7 +1082,6 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, qint32 visib
 */
 void DiffTextWindowData::writeLine(
     RLPainter& p,
-    const LineData* pld,
     const std::shared_ptr<const DiffList>& pLineDiff1,
     const std::shared_ptr<const DiffList>& pLineDiff2,
     const LineRef& line,
@@ -1096,15 +1128,15 @@ void DiffTextWindowData::writeLine(
     p.setPen(penColor);
     if(changed == BChanged)
     {
-        penColor = m_cDiff2;
+        penColor = diff2Color();
     }
     else if(changed == AChanged)
     {
-        penColor = m_cDiff1;
+        penColor = diff1Color();
     }
     else if(changed == Both)
     {
-        penColor = m_cDiffBoth;
+        penColor = diffBothColor();
     }
 
     if(pld != nullptr)
@@ -1294,31 +1326,12 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, qint32 firstLine, const L
 
 void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine)
 {
-    if(m_pLineData == nullptr || m_pLineData->empty()) return;
+    if(!hasLineData()) return;
     //TODO: Fix after line number area is converted to a QWidget.
     m_lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
-    if(getWindowIndex() == e_SrcSelector::A)
-    {
-        m_cThis = gOptions->aColor();
-        m_cDiff1 = gOptions->bColor();
-        m_cDiff2 = gOptions->cColor();
-    }
-    else if(getWindowIndex() == e_SrcSelector::B)
-    {
-        m_cThis = gOptions->bColor();
-        m_cDiff1 = gOptions->cColor();
-        m_cDiff2 = gOptions->aColor();
-    }
-    else if(getWindowIndex() == e_SrcSelector::C)
-    {
-        m_cThis = gOptions->cColor();
-        m_cDiff1 = gOptions->aColor();
-        m_cDiff2 = gOptions->bColor();
-    }
-    m_cDiffBoth = gOptions->conflictColor(); // Conflict color
-
-    p.setPen(m_cThis);
+    initColors();
+    p.setPen(thisColor());
 
     for(qint32 line = beginLine; line < endLine; ++line)
     {
@@ -1328,15 +1341,15 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint
         bool bWrapLine = false;
         if(m_bWordWrap)
         {
-            Diff3WrapLine& d3wl = m_diff3WrapLineVector[line];
+            const Diff3WrapLine& d3wl = getDiff3WrapLineVector()[line];
             wrapLineOffset = d3wl.wrapLineOffset;
             wrapLineLength = d3wl.wrapLineLength;
             d3l = d3wl.pD3L;
-            bWrapLine = line > 0 && m_diff3WrapLineVector[line - 1].pD3L == d3l;
+            bWrapLine = line > 0 && getDiff3WrapLineVector()[line - 1].pD3L == d3l;
         }
         else
         {
-            d3l = (*mDiff3LineVector)[line];
+            d3l = (*diff3LineVector())[line];
         }
         std::shared_ptr<const DiffList> pFineDiff1;
         std::shared_ptr<const DiffList> pFineDiff2;
