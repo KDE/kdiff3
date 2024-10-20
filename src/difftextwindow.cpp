@@ -173,7 +173,6 @@ class DiffTextWindowData
         m_bMyUpdate = false;
         m_fastSelectorLine1 = 0;
         m_fastSelectorNofLines = 0;
-        m_lineNumberWidth = 0;
         m_maxTextWidth = -1;
 
         m_pLineData = nullptr;
@@ -196,7 +195,8 @@ class DiffTextWindowData
 
     void myUpdate(qint32 afterMilliSecs);
 
-    [[nodiscard]] qint32 leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
+    //TODO: Fix after line number area is converted to a QWidget.
+    [[nodiscard]] qint32 leftInfoWidth() const { return 4 + (gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0); } // Number of information columns on left side
     [[nodiscard]] LineRef convertLineOnScreenToLineInSource(const qint32 lineOnScreen, const e_CoordType coordType, const bool bFirstLine) const;
 
     void prepareTextLayout(QTextLayout& textLayout, qint32 visibleTextWidth = -1);
@@ -268,7 +268,6 @@ class DiffTextWindowData
     LineRef m_firstLine = 0;
     LineRef m_oldFirstLine;
     qint32 m_horizScrollOffset = 0;
-    qint32 m_lineNumberWidth = 0;
     QAtomicInt m_maxTextWidth = -1;
 
     Selection m_selection;
@@ -1093,6 +1092,9 @@ void DiffTextWindowData::writeLine(
     bool bWrapLine,
     const QRect& invalidRect)
 {
+    //TODO: Fix after line number area is converted to a QWidget.
+    const qint32 lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
+
     const LineData* pld = !srcLineIdx.isValid() ? nullptr : &(*m_pLineData)[srcLineIdx]; // Text in this line;
     QFont normalFont = p.font();
 
@@ -1228,8 +1230,8 @@ void DiffTextWindowData::writeLine(
     p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, gOptions->backgroundColor());
 
     //TODO: Fix after line number area is converted to a QWidget.
-    xOffset = (m_lineNumberWidth + 2) * fontWidth;
-    qint32 xLeft = m_lineNumberWidth * fontWidth;
+    xOffset = (lineNumberWidth + 2) * fontWidth;
+    qint32 xLeft = lineNumberWidth * fontWidth;
     p.setPen(gOptions->foregroundColor());
     if(pld != nullptr)
     {
@@ -1327,8 +1329,6 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, qint32 firstLine, const L
 void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine)
 {
     if(!hasLineData()) return;
-    //TODO: Fix after line number area is converted to a QWidget.
-    m_lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
     initColors();
     p.setPen(thisColor());
@@ -1732,9 +1732,6 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, size_t wrapLineVectorSize, q
 
     if(bWordWrap)
     {
-        //TODO: Fix after line number area is converted to a QWidget.
-        d->m_lineNumberWidth = gOptions->m_bShowLineNumbers ? getLineNumberWidth() : 0;
-
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
 
         if(wrapLineVectorSize == 0)
