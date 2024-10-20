@@ -230,15 +230,15 @@ class DiffTextWindowData
         m_cDiffBoth = gOptions->conflictColor(); // Conflict color
     }
 
-    QColor thisColor() const { return m_cThis; }
-    QColor diff1Color() const { return m_cDiff1; }
-    QColor diff2Color() const { return m_cDiff2; }
-    QColor diffBothColor() const { return m_cDiffBoth; }
-    const Diff3LineVector* diff3LineVector() { return mDiff3LineVector; }
+    [[nodiscard]] QColor thisColor() const { return m_cThis; }
+    [[nodiscard]] QColor diff1Color() const { return m_cDiff1; }
+    [[nodiscard]] QColor diff2Color() const { return m_cDiff2; }
+    [[nodiscard]] QColor diffBothColor() const { return m_cDiffBoth; }
+    [[nodiscard]] const Diff3LineVector* diff3LineVector() { return mDiff3LineVector; }
 
   private:
     friend DiffTextWindow;
-    e_SrcSelector getWindowIndex() const { return m_pDiffTextWindow->getWindowIndex(); }
+    [[nodiscard]] e_SrcSelector getWindowIndex() const { return m_pDiffTextWindow->getWindowIndex(); }
 
     QPointer<DiffTextWindow> m_pDiffTextWindow;
     QString mTextEncoding;
