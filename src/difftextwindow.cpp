@@ -191,8 +191,6 @@ class DiffTextWindowData
         const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
         qint32 wrapLineOffset, qint32 wrapLineLength, bool bWrapLine, const QRect& invalidRect);
 
-    void draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine);
-
     void myUpdate(qint32 afterMilliSecs);
 
     //TODO: Fix after line number area is converted to a QWidget.
@@ -1304,7 +1302,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     p.setFont(font());
     p.QPainter::fillRect(invalidRect, gOptions->backgroundColor());
 
-    d->draw(p, invalidRect, d->m_firstLine, endLine);
+    draw(p, invalidRect, d->m_firstLine, endLine);
     p.end();
 
     d->m_oldFirstLine = d->m_firstLine;
@@ -1321,17 +1319,17 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, qint32 firstLine, const L
     d->m_firstLine = firstLine;
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
     gOptions->beginPrint();
-    d->draw(p, invalidRect, firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
+    draw(p, invalidRect, firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
     gOptions->endPrint();
     d->m_firstLine = oldFirstLine;
 }
 
-void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine)
+void DiffTextWindow::draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine)
 {
-    if(!hasLineData()) return;
+    if(!d->hasLineData()) return;
 
-    initColors();
-    p.setPen(thisColor());
+    d->initColors();
+    p.setPen(d->thisColor());
 
     for(qint32 line = beginLine; line < endLine; ++line)
     {
@@ -1339,17 +1337,17 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint
         qint32 wrapLineLength = 0;
         const Diff3Line* d3l = nullptr;
         bool bWrapLine = false;
-        if(m_bWordWrap)
+        if(d->m_bWordWrap)
         {
-            const Diff3WrapLine& d3wl = getDiff3WrapLineVector()[line];
+            const Diff3WrapLine& d3wl = d->getDiff3WrapLineVector()[line];
             wrapLineOffset = d3wl.wrapLineOffset;
             wrapLineLength = d3wl.wrapLineLength;
             d3l = d3wl.pD3L;
-            bWrapLine = line > 0 && getDiff3WrapLineVector()[line - 1].pD3L == d3l;
+            bWrapLine = line > 0 && d->getDiff3WrapLineVector()[line - 1].pD3L == d3l;
         }
         else
         {
-            d3l = (*diff3LineVector())[line];
+            d3l = (*d->diff3LineVector())[line];
         }
         std::shared_ptr<const DiffList> pFineDiff1;
         std::shared_ptr<const DiffList> pFineDiff2;
@@ -1359,7 +1357,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const qint
         LineRef srcLineIdx;
         d3l->getLineInfo(getWindowIndex(), KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
-        writeLine(
+        d->writeLine(
             p, // QPainter
             pFineDiff1,
             pFineDiff2,

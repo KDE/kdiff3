@@ -97,6 +97,8 @@ class DiffTextWindow: public QWidget
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineType linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, qint32 firstLine, const LineType nofLinesPerPage);
 
+    void draw(RLPainter& p, const QRect& invalidRect, const qint32 beginLine, const LineRef& endLine);
+
     static bool startRunnables();
 
     [[nodiscard]] bool isThreeWay() const;
