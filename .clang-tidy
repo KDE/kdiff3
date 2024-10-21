@@ -2,8 +2,7 @@
 Checks:          '-clang-analyzer-optin.cplusplus.VirtualCall,-clang-analyzer-optin.performance.Padding'
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'
-AnalyzeTemporaryDtors: false
-CheckOptions:    
+CheckOptions:
   - key:             google-readability-braces-around-statements.ShortStatementLines
     value:           '1'
   - key:             google-readability-function-size.StatementThreshold
