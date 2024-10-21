@@ -175,6 +175,11 @@ class FileAccessTest: public QObject
         bool r = fileData.readFile(buf, 1);
         QVERIFY(r);
         QVERIFY(fileData.getStatusText().isEmpty());
+
+        r = fileData.open(QFile::ReadOnly);
+        QVERIFY(r);
+        QVERIFY(fileData.getStatusText().isEmpty());
+        fileData.close();
     }
 };
 
