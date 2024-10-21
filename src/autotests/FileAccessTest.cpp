@@ -163,10 +163,18 @@ class FileAccessTest: public QObject
         QVERIFY(fileData.isNormal());
         QVERIFY(fileData.isReadable());
         QVERIFY(fileData.isWritable());
+        QVERIFY(fileData.getStatusText().isEmpty());
         //sanity check
         QVERIFY(!fileData.isSymLink());
         QVERIFY(!fileData.isDir());
         QVERIFY(fileData.isFile());
+
+        testFile.write("\n\n7\n");
+        testFile.close();
+        char buf[4] = {0, 0, 0, 0};
+        bool r = fileData.readFile(buf, 1);
+        QVERIFY(r);
+        QVERIFY(fileData.getStatusText().isEmpty());
     }
 };
 

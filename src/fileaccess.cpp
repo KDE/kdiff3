@@ -929,12 +929,14 @@ bool FileAccess::open(const QFile::OpenMode flags)
     {
         bool r = realFile->open(flags);
 
-        setStatusText(i18n("Opening %1 failed. %2", absoluteFilePath(), realFile->errorString()));
+        if(!r)
+            setStatusText(i18n("Opening %1 failed. %2", absoluteFilePath(), realFile->errorString()));
         return r;
     }
 
     bool r = tmpFile->open();
-    setStatusText(i18n("Opening %1 failed. %2", tmpFile->fileName(), tmpFile->errorString()));
+    if(!r)
+        setStatusText(i18n("Opening %1 failed. %2", tmpFile->fileName(), tmpFile->errorString()));
     return r;
 }
 
