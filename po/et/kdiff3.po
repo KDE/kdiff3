@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-19 00:42+0000\n"
+"POT-Creation-Date: 2024-10-22 00:41+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -115,88 +115,88 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Tõsine seesmine viga"
 
-#: difftextwindow.cpp:633
+#: difftextwindow.cpp:663
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Fail %1: Rida %2"
 
-#: difftextwindow.cpp:635
+#: difftextwindow.cpp:665
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Fail %1: Rida pole kättesaadav"
 
-#: difftextwindow.cpp:1967
+#: difftextwindow.cpp:1975
 #, kde-format
 msgid "Encoding:"
 msgstr "Kodeering:"
 
-#: difftextwindow.cpp:1971 mergeresultwindow.cpp:2829 optiondialog.cpp:789
+#: difftextwindow.cpp:1979 mergeresultwindow.cpp:2829 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "Realõpu stiil:"
 
-#: difftextwindow.cpp:1996
+#: difftextwindow.cpp:2004
 #, kde-format
 msgid "A (Base)"
 msgstr "A (baas)"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2006
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Kodeering: %1"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1999 mergeresultwindow.cpp:2874
+#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2874
 #, kde-format
 msgid "Unix"
 msgstr "UNIX"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2007
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Realõpu stiil: %1"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:2008
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2028 kdiff3.cpp:1067
+#: difftextwindow.cpp:2036 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "Ülarida"
 
-#: difftextwindow.cpp:2038
+#: difftextwindow.cpp:2046
 #, kde-format
 msgid "End"
 msgstr "Lõpp"
 
-#: difftextwindow.cpp:2094 smalldialogs.cpp:163
+#: difftextwindow.cpp:2102 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Faili avamine"
 
-#: difftextwindow.cpp:2140 optiondialog.cpp:389
+#: difftextwindow.cpp:2148 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode (8-bitine)"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2149
 #, fuzzy, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode (8-bitine)"
 
-#: difftextwindow.cpp:2142
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "System"
 msgstr ""
 
-#: difftextwindow.cpp:2154
+#: difftextwindow.cpp:2162
 #, kde-format
 msgid "Other"
 msgstr "Muu"
@@ -1153,17 +1153,17 @@ msgstr "Faili lugemine: %1"
 msgid "Creating temp copy of %1 failed."
 msgstr "%1 ajutise koopia loomine nurjus."
 
-#: fileaccess.cpp:944 fileaccess.cpp:949
+#: fileaccess.cpp:945 fileaccess.cpp:951
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "%1 avamine nurjus. %2"
 
-#: fileaccess.cpp:968 fileaccess.cpp:976
+#: fileaccess.cpp:970 fileaccess.cpp:978
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Viga %1 lugemisel. %2"
 
-#: fileaccess.cpp:1105
+#: fileaccess.cpp:1107
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1172,7 +1172,7 @@ msgstr ""
 "Varukoopia tegemisel nurjus vanema varukoopia kustutamine.\n"
 "Faili nimi: %1"
 
-#: fileaccess.cpp:1112
+#: fileaccess.cpp:1114
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
