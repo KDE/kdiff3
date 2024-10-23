@@ -395,7 +395,7 @@ void DIFF_EXT::diff(const tstring& arguments)
     PROCESS_INFORMATION pi;
     bool bError = true;
     tstring command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), true); //look in user registry first so it can be overidden
-    if(command.empty()) Scommand = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), false);
+    if(command.empty()) command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), false);
     tstring commandLine = TEXT("\"") + command + TEXT("\" ") + arguments;
     if(!command.empty())
     {
