@@ -44,14 +44,14 @@ DEFINE_GUID( CLSID_DIFF_EXT, 0x34471FFB, 0x4002, 0x438b, 0x89, 0x52, 0xE4, 0x58,
 #error unsupported configuration
 #endif
 
-tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& value )
+tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& value, bool isUserKey /*= true*/ )
 {
    tstring keyName = m_registryBaseName;
    if (!subKey.empty())
       keyName += TEXT("\\")+subKey;
 
    HKEY key;
-   HKEY baseKey = HKEY_CURRENT_USER;
+   HKEY baseKey = isUserKey ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE;
    tstring result;
    for(;;)
    {

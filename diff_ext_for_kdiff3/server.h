@@ -48,7 +48,7 @@ class SERVER {
   public:
     virtual ~SERVER();
 
-    tstring getRegistryKeyString( const tstring& subKey, const tstring& value );
+    tstring getRegistryKeyString( const tstring& subKey, const tstring& value, bool isUserKey = true );
 
     HINSTANCE handle() const;
 
