@@ -2941,11 +2941,11 @@ void WindowTitleWidget::setEncodings(const QByteArray& pCodecForA, const QByteAr
     m_pEncodingSelector->clear();
 
     if(!pCodecForA.isEmpty())
-        m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA)), QVariant::fromValue(QByteArray(pCodecForA)));
+        m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA)), QVariant::fromValue(pCodecForA));
     if(!pCodecForB.isEmpty())
-        m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB)), QVariant::fromValue(QByteArray(pCodecForB)));
+        m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB)), QVariant::fromValue(pCodecForB));
     if(!pCodecForC.isEmpty())
-        m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC)), QVariant::fromValue(QByteArray(pCodecForC)));
+        m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC)), QVariant::fromValue(pCodecForC));
 
     m_pEncodingSelector->addItem("UTF 8", QVariant::fromValue(QByteArray("UTF-8")));
     m_pEncodingSelector->addItem("UTF 8 (BOM)", QVariant::fromValue(QByteArray("UTF-8-BOM")));
