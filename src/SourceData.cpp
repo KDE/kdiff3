@@ -819,9 +819,9 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
         We don't need the whole file here just the header.
     */
     if(size <= 5000)
-        s = QByteArray(buf, (QtSizeType)size);
+        s = QByteArray::fromRawData(buf, (QtSizeType)size);
     else
-        s = QByteArray(buf, 5000);
+        s = QByteArray::fromRawData(buf, 5000);
 
     QtSizeType xmlHeaderPos = s.indexOf("<?xml");
     if(xmlHeaderPos >= 0)
@@ -829,7 +829,7 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
         QtSizeType xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
         if(xmlHeaderEnd >= 0)
         {
-            std::optional<const char*> encoding = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
+            std::optional<QByteArray> encoding = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
             if(encoding.has_value())
                 return encoding;
         }
@@ -842,7 +842,7 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
             QtSizeType metaHeaderEnd = s.indexOf(">", metaHeaderPos);
             if(metaHeaderEnd >= 0)
             {
-                std::optional<const char*> encoding = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");
+                std::optional<QByteArray> encoding = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");
                 if(encoding.has_value())
                     return encoding;
 
