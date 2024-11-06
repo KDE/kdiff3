@@ -1175,38 +1175,38 @@ void DiffTextWindowData::writeLine(
 
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
-            penColor = gOptions->foregroundColor();
+            QColor penColor2 = gOptions->foregroundColor();
             ChangeFlags cchanged = charChanged[i] | whatChanged;
 
             if(cchanged == BChanged)
             {
-                penColor = m_cDiff2;
+                penColor2 = m_cDiff2;
             }
             else if(cchanged == AChanged)
             {
-                penColor = m_cDiff1;
+                penColor2 = m_cDiff1;
             }
             else if(cchanged == Both)
             {
-                penColor = m_cDiffBoth;
+                penColor2 = m_cDiffBoth;
             }
 
-            if(penColor != gOptions->foregroundColor() && whatChanged2 == NoChange && !gOptions->m_bShowWhiteSpace)
+            if(penColor2 != gOptions->foregroundColor() && whatChanged2 == NoChange && !gOptions->m_bShowWhiteSpace)
             {
                 // The user doesn't want to see highlighted white space.
-                penColor = gOptions->foregroundColor();
+                penColor2 = gOptions->foregroundColor();
             }
 
             frh.setBackground(bgColor);
             if(!m_selection.within(line, outPos))
             {
-                if(penColor != gOptions->foregroundColor())
+                if(penColor2 != gOptions->foregroundColor())
                 {
                     frh.setBackground(diffBgColor);
                     // Setting italic font here doesn't work: Changing the font only when drawing is too late
                 }
 
-                frh.setPen(penColor);
+                frh.setPen(penColor2);
                 frh.next();
                 frh.setFont(normalFont);
             }
