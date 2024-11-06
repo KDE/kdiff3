@@ -3,6 +3,9 @@ Version 1.11.5 - 2024
 *Fix false memory error when using "admin://" protocol
 *Cleanup BOM handling lock detection to only known UTF-* encodings that use it.
 *Fix bugged connection to non-existent signal (This is why we now use new style connections only.)
+*fix regression in diff margin color.
+*fix crash on deleting first line in diff block
+*fix merge encoding detection.
 
 Version 1.11.4 - 2024
 ===========================
