@@ -157,7 +157,7 @@ class FileAccessTest: public QObject
         QTemporaryFile testFile;
         QVERIFY(testFile.open());
         FileAccess fileData(testFile.fileName());
-
+        QCOMPARE(fileData.prettyAbsPath(), testFile.fileName());
         QVERIFY(fileData.isValid());
         QVERIFY(fileData.isLocal());
         QVERIFY(fileData.isNormal());
@@ -180,6 +180,17 @@ class FileAccessTest: public QObject
         QVERIFY(r);
         QVERIFY(fileData.getStatusText().isEmpty());
         fileData.close();
+
+        fileData.setFile("xyz");
+        QCOMPARE(fileData.fileName(), "xyz");
+        r = fileData.open(QFile::ReadOnly);
+        QVERIFY(!r);
+        QVERIFY(!fileData.getStatusText().isEmpty());
+
+        fileData.setFile(testFile.fileName());
+        r = fileData.open(QFile::ReadOnly);
+        QVERIFY(r);
+        QVERIFY(fileData.getStatusText().isEmpty());
     }
 };
 

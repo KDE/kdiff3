@@ -250,6 +250,7 @@ void FileAccess::reset()
 
     m_pParent = nullptr;
     m_bValidData = false;
+    setStatusText("");
 }
 
 /*
@@ -787,6 +788,9 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
     const qint64 maxChunkSize = 100000;
     qint64 i = 0;
     ProgressProxy::setMaxNofSteps(maxLength / maxChunkSize + 1);
+
+    setStatusText("");
+
     while(i < maxLength)
     {
         qint64 nextLength = std::min(maxLength - i, maxChunkSize);
@@ -808,6 +812,8 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
 bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 {
     bool success = false;
+
+    setStatusText("");
     //Avoid hang on linux for special files.
     if(!isNormal())
         return true;
@@ -833,6 +839,8 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
 {
     ProgressScope pp;
+
+    setStatusText("");
     if(isLocal())
     {
         if(realFile->open(QIODevice::WriteOnly))
@@ -930,6 +938,9 @@ const QString& FileAccess::errorString() const
 bool FileAccess::open(const QFile::OpenMode flags)
 {
     bool result;
+
+    setStatusText("");
+
     result = createLocalCopy();
     if(!result)
     {
@@ -954,10 +965,11 @@ bool FileAccess::open(const QFile::OpenMode flags)
 
 qint64 FileAccess::read(char* data, const qint64 maxlen)
 {
+    setStatusText("");
+
     if(!isNormal())
     {
         //This is not an error special files should be skipped
-        setStatusText(QString());
         return 0;
     }
 
@@ -1094,6 +1106,8 @@ QString FileAccess::cleanPath(const QString& path) // static
 
 bool FileAccess::createBackup(const QString& bakExtension)
 {
+    setStatusText("");
+
     if(exists())
     {
         // First rename the existing file to the bak-file. If a bak-file file exists, delete that.
