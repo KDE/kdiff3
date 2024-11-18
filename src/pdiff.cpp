@@ -1222,10 +1222,6 @@ void KDiff3App::postRecalcWordWrap()
         m_firstD3LIdx = -1;
         Q_EMIT sigRecalcWordWrap();
     }
-    else
-    {
-        g_pProgressDialog->cancel(ProgressDialog::eResize);
-    }
 }
 
 void KDiff3App::slotRecalcWordWrap()
