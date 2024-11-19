@@ -1132,8 +1132,8 @@ bool FileAccess::createBackup(const QString& bakExtension)
         bool bSuccess = rename(bakFile); // krazy:exclude=syscalls
         if(!bSuccess)
         {
-            setStatusText(i18n("@info %1 is the current path, %2 is the failed path", "While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
-                               absoluteFilePath(), bakName));
+            setStatusText(i18nc("@info %1 is the current path, %2 is the failed path", "While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
+                                absoluteFilePath(), bakName));
             return false;
         }
     }
