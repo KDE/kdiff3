@@ -523,7 +523,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
              node supplied.
              This is a bug if it happens and should be logged. However it is a recoverable error.
             */
-            qCCritical(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
+            qCCritical(kdiffFileAccess) << i18nc("@info:shell", "Unable to determine full url. No parent specified.");
             return;
         }
         /*
@@ -535,11 +535,11 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
         if(Q_UNLIKELY(m_url == parent->url()))
         {
             m_url.clear();
-            qCCritical(kdiffFileAccess) << "Parent and child could not be distinguished.";
+            qCCritical(kdiffFileAccess) << i18nc("@info:shell", "Parent and child could not be distinguished.");
             return;
         }
 
-        qCDebug(kdiffFileAccess) << "Computed url is: " << m_url;
+        qCDebug(kdiffFileAccess) << i18nc("@info:shell", "Computed url is: ") << m_url;
         //Verify that the scheme doesn't change.
         assert(m_url.scheme() == parent->url().scheme());
     }
@@ -797,14 +797,17 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
         qint64 reallyRead = read((char*)pDestBuffer + i, nextLength);
         if(reallyRead != nextLength)
         {
-            setStatusText(i18n("Failed to read file: %1", absoluteFilePath()));
+            setStatusText(i18nc("@info %1 is a path", "Failed to read file: %1", absoluteFilePath()));
             return false;
         }
         i += reallyRead;
 
         ProgressProxy::setCurrent(std::floor(i / maxLength * 100));
         if(ProgressProxy::wasCancelled())
+        {
+            setStatusText(i18nc("@info %1 is a path", "User cancelled read opertation on %1", absoluteFilePath()));
             return false;
+        }
     }
     return true;
 }
@@ -829,6 +832,9 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     else
     {
         success = mJobHandler->get(pDestBuffer, maxLength);
+        if(ProgressProxy::wasCancelled())
+            setStatusText(i18nc("@info %1 is a path", "User cancelled read opertation on %1", absoluteFilePath()));
+
         close();
     }
 
@@ -863,6 +869,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
                 if(ProgressProxy::wasCancelled())
                 {
                     realFile->close();
+                    setStatusText(i18nc("@info:status", "User cancelled write opertation."));
                     return false;
                 }
             }
@@ -944,7 +951,7 @@ bool FileAccess::open(const QFile::OpenMode flags)
     result = createLocalCopy();
     if(!result)
     {
-        setStatusText(i18n("Creating temp copy of %1 failed.", absoluteFilePath()));
+        setStatusText(i18nc("@info:status %1 is the destination path", "Creating temp copy of %1 failed.", absoluteFilePath()));
         return result;
     }
 
@@ -953,13 +960,13 @@ bool FileAccess::open(const QFile::OpenMode flags)
         bool r = realFile->open(flags);
 
         if(!r)
-            setStatusText(i18n("Opening %1 failed. %2", absoluteFilePath(), realFile->errorString()));
+            setStatusText(i18nc("@info:status %1 is the path, %2 is the error message", "Opening %1 failed. %2", absoluteFilePath(), realFile->errorString()));
         return r;
     }
 
     bool r = tmpFile->open();
     if(!r)
-        setStatusText(i18n("Opening %1 failed. %2", tmpFile->fileName(), tmpFile->errorString()));
+        setStatusText(i18nc("@info:status %1 is the path, %2 is the error message", "Opening %1 failed. %2", tmpFile->fileName(), tmpFile->errorString()));
     return r;
 }
 
@@ -979,7 +986,7 @@ qint64 FileAccess::read(char* data, const qint64 maxlen)
         len = realFile->read(data, maxlen);
         if(len != maxlen)
         {
-            setStatusText(i18n("Error reading from %1. %2", absoluteFilePath(), realFile->errorString()));
+            setStatusText(i18nc("@info:status %1 is the path, %2 is the error message", "Error reading from %1. %2", absoluteFilePath(), realFile->errorString()));
         }
     }
     else
@@ -987,7 +994,7 @@ qint64 FileAccess::read(char* data, const qint64 maxlen)
         len = tmpFile->read(data, maxlen);
         if(len != maxlen)
         {
-            setStatusText(i18n("Error reading from %1. %2", absoluteFilePath(), tmpFile->errorString()));
+            setStatusText(i18nc("@info:status %1 is the path, %2 is the error message", "Error reading from %1. %2", absoluteFilePath(), tmpFile->errorString()));
         }
     }
 
@@ -1118,14 +1125,14 @@ bool FileAccess::createBackup(const QString& bakExtension)
             bool bSuccess = bakFile.removeFile();
             if(!bSuccess)
             {
-                setStatusText(i18n("While trying to make a backup, deleting an older backup failed.\nFilename: %1", bakName));
+                setStatusText(i18nc("@info %1 is the path that failed", "While trying to make a backup, deleting an older backup failed.\nFilename: %1", bakName));
                 return false;
             }
         }
         bool bSuccess = rename(bakFile); // krazy:exclude=syscalls
         if(!bSuccess)
         {
-            setStatusText(i18n("While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
+            setStatusText(i18n("@info %1 is the current path, %2 is the failed path", "While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
                                absoluteFilePath(), bakName));
             return false;
         }
