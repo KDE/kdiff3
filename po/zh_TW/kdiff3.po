@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 00:41+0000\n"
+"POT-Creation-Date: 2024-11-19 00:42+0000\n"
 "PO-Revision-Date: 2024-01-22 16:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -365,7 +365,7 @@ msgid ""
 msgstr "您正在進行資料夾合併。您確定要中止合併並重新掃描資料夾嗎？"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1518 pdiff.cpp:1528
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1582,7 +1582,7 @@ msgstr "在資料夾與文字檢視之間切換"
 msgid "Ready."
 msgstr "已就緒。"
 
-#: kdiff3.cpp:923 pdiff.cpp:1517
+#: kdiff3.cpp:923 pdiff.cpp:1513
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "合併結果尚未儲存。"
@@ -1597,7 +1597,7 @@ msgstr "儲存並離開"
 msgid "Quit Without Saving"
 msgstr "離開但不儲存"
 
-#: kdiff3.cpp:934 pdiff.cpp:1528
+#: kdiff3.cpp:934 pdiff.cpp:1524
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "儲存合併結果時失敗。"
@@ -3288,42 +3288,42 @@ msgstr "確定"
 msgid "Go to Line"
 msgstr "跳至行數"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1292
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "文字折行（取消會停用文字折行）"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1292
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "正在計算水平捲軸列的最大寬度"
 
-#: pdiff.cpp:1519
+#: pdiff.cpp:1515
 #, kde-format
 msgid "Save && Continue"
 msgstr "儲存並繼續"
 
-#: pdiff.cpp:1520
+#: pdiff.cpp:1516
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "不儲存但繼續"
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1707
 #, kde-format
 msgid "Search complete."
 msgstr "搜尋完成。"
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1707
 #, kde-format
 msgid "Search Complete"
 msgstr "搜尋完成"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1888
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "雙方差異輸入視窗中都沒有選取任何東西。"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1888
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "新增手動比對範圍時發生錯誤"

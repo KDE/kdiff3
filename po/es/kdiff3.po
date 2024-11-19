@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 00:41+0000\n"
+"POT-Creation-Date: 2024-11-19 00:42+0000\n"
 "PO-Revision-Date: 2024-09-26 22:53+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -373,7 +373,7 @@ msgstr ""
 "interrumpir la fusión y volver a explorar la carpeta?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1518 pdiff.cpp:1528
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1630,7 +1630,7 @@ msgstr "Conmutar entre vista de carpeta y de texto"
 msgid "Ready."
 msgstr "Listo."
 
-#: kdiff3.cpp:923 pdiff.cpp:1517
+#: kdiff3.cpp:923 pdiff.cpp:1513
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultado de la fusión no se ha guardado."
@@ -1645,7 +1645,7 @@ msgstr "Guardar y salir"
 msgid "Quit Without Saving"
 msgstr "Salir sin guardar"
 
-#: kdiff3.cpp:934 pdiff.cpp:1528
+#: kdiff3.cpp:934 pdiff.cpp:1524
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Falló al guardar el resultado de la fusión."
@@ -3404,45 +3404,45 @@ msgstr "Aceptar"
 msgid "Go to Line"
 msgstr "Ir a línea"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1292
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajuste de línea («Cancelar» desactiva el ajuste de línea)"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1292
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "Calculando la anchura máxima para la barra de desplazamiento horizontal"
 
-#: pdiff.cpp:1519
+#: pdiff.cpp:1515
 #, kde-format
 msgid "Save && Continue"
 msgstr "Guardar y continuar"
 
-#: pdiff.cpp:1520
+#: pdiff.cpp:1516
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continuar sin guardar"
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1707
 #, kde-format
 msgid "Search complete."
 msgstr "Búsqueda completada."
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1707
 #, kde-format
 msgid "Search Complete"
 msgstr "Búsqueda completada"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1888
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 "No hay nada seleccionado en ninguna de las ventanas de entradas de "
 "diferencias."
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1888
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Error al añadir un intervalo de diferencia manual"
