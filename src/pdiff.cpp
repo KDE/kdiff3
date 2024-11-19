@@ -1222,6 +1222,15 @@ void KDiff3App::postRecalcWordWrap()
         m_firstD3LIdx = -1;
         Q_EMIT sigRecalcWordWrap();
     }
+    else
+    {
+        /*
+            Clear exiting wordwrap threads and prevent recal signals from completing.
+            This honors the intent of the old cancel call without the risk of aborting file I/O.
+        */
+        QSignalBlocker blocker(m_pDiffTextWindow1), blocker2(m_pDiffTextWindow2), blocker3(m_pDiffTextWindow3), blocker4(m_pMergeResultWindow);
+        while(DiffTextWindow::maxThreads() > 0) {} //Clear wordwrap threads.
+    }
 }
 
 void KDiff3App::slotRecalcWordWrap()
