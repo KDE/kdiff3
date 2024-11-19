@@ -480,6 +480,7 @@ bool ProgressDialog::wasCancelled()
 
 void ProgressDialog::clearCancelState()
 {
+    m_eCancelReason = eNone;
     m_bWasCancelled = false;
 }
 
@@ -496,6 +497,7 @@ void ProgressDialog::cancel(e_CancelReason eCancelReason)
 
 ProgressDialog::e_CancelReason ProgressDialog::cancelReason()
 {
+    assert((m_bWasCancelled && m_eCancelReason != eNone) || (m_bWasCancelled && m_eCancelReason == eNone));
     return m_eCancelReason;
 }
 

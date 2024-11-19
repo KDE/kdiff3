@@ -61,9 +61,9 @@ class ProgressDialog: public QDialog
     bool wasCancelled();
     enum e_CancelReason
     {
+        eNone,
         eExit,
-        eUserAbort,
-        eResize
+        eUserAbort
     };
     void cancel(e_CancelReason);
     e_CancelReason cancelReason();
@@ -113,7 +113,7 @@ class ProgressDialog: public QDialog
     QElapsedTimer m_t1;
     QElapsedTimer m_t2;
     bool m_bWasCancelled = false;
-    e_CancelReason m_eCancelReason = eUserAbort;
+    e_CancelReason m_eCancelReason = eNone;
     KJob* m_pJob = nullptr;
     QString m_currentJobInfo; // Needed if the job doesn't stop after a reasonable time.
     bool m_bStayHidden = false;
