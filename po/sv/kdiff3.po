@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 00:41+0000\n"
+"POT-Creation-Date: 2024-11-20 02:35+0000\n"
 "PO-Revision-Date: 2024-09-25 17:29+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -365,7 +365,7 @@ msgstr ""
 "du vill avbryta den och avsöka katalogen igen?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1518 pdiff.cpp:1528
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1081,33 +1081,33 @@ msgstr "Sammanfoga till B"
 msgid "Merge to A && B"
 msgstr "Sammanfoga till A och B"
 
-#: fileaccess.cpp:525
+#: fileaccess.cpp:526
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
 "Kan inte bestämma fullständig webbadress. Inget överliggande objekt angivet."
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:800
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Misslyckades läsa fil: %1"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:947
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Att skapa tillfällig kopia av %1 misslyckades."
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
+#: fileaccess.cpp:956 fileaccess.cpp:962
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "Öppna %1 misslyckades: %2"
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
+#: fileaccess.cpp:982 fileaccess.cpp:990
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Fel vid läsning från %1. %2"
 
-#: fileaccess.cpp:1107
+#: fileaccess.cpp:1121
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1117,7 +1117,7 @@ msgstr ""
 "säkerhetskopia.\n"
 "Filnamn: %1"
 
-#: fileaccess.cpp:1114
+#: fileaccess.cpp:1128
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -1614,7 +1614,7 @@ msgstr "Byt mellan katalog och textvy"
 msgid "Ready."
 msgstr "Klar."
 
-#: kdiff3.cpp:923 pdiff.cpp:1517
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Sammanfogningsresultatet har inte sparats."
@@ -1629,7 +1629,7 @@ msgstr "Spara och avsluta"
 msgid "Quit Without Saving"
 msgstr "Avsluta utan att spara"
 
-#: kdiff3.cpp:934 pdiff.cpp:1528
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Misslyckades spara sammanfogningsresultatet."
@@ -3355,42 +3355,42 @@ msgstr "Ok"
 msgid "Go to Line"
 msgstr "Gå till rad"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Radbrytning (Avbryt inaktiverar radbrytning)"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Beräknar maximal bredd för horisontell rullningslist"
 
-#: pdiff.cpp:1519
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Save && Continue"
 msgstr "Spara och fortsätt"
 
-#: pdiff.cpp:1520
+#: pdiff.cpp:1525
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Fortsätt utan att spara"
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search complete."
 msgstr "Sökning färdig."
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search Complete"
 msgstr "Sökning färdig"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ingenting är markerad i något indatafönster med jämförelse."
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Fel vid tillägg av manuellt jämförelseintervall"

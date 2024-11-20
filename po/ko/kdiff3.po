@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-22 00:41+0000\n"
+"POT-Creation-Date: 2024-11-20 02:35+0000\n"
 "PO-Revision-Date: 2024-02-09 23:38+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -364,7 +364,7 @@ msgstr ""
 "폴더를 합치고 있습니다. 합치기 작업을 중단하고 폴더를 다시 탐색하시겠습니까?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1518 pdiff.cpp:1528
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1072,32 +1072,32 @@ msgstr "B로 합치기"
 msgid "Merge to A && B"
 msgstr "A와 B로 합치기"
 
-#: fileaccess.cpp:525
+#: fileaccess.cpp:526
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr "전체 URL을 결정할 수 없습니다. 부모를 지정하지 않았습니다."
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:800
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "파일을 읽을 수 없음: %1"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:947
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "%1의 임시 복사본을 만들지 못했습니다."
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
+#: fileaccess.cpp:956 fileaccess.cpp:962
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "%1을(를) 열 수 없습니다. %2"
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
+#: fileaccess.cpp:982 fileaccess.cpp:990
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "%1에서 읽는 중 오류가 발생했습니다. %2"
 
-#: fileaccess.cpp:1107
+#: fileaccess.cpp:1121
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1106,7 +1106,7 @@ msgstr ""
 "백업을 만드는 동안 이전 백업을 삭제하지 못했습니다.\n"
 "파일 이름: %1"
 
-#: fileaccess.cpp:1114
+#: fileaccess.cpp:1128
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -1599,7 +1599,7 @@ msgstr "폴더와 텍스트 보기 간 전환"
 msgid "Ready."
 msgstr "준비."
 
-#: kdiff3.cpp:923 pdiff.cpp:1517
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "합친 결과가 저장되지 않았습니다."
@@ -1614,7 +1614,7 @@ msgstr "저장하고 끝내기"
 msgid "Quit Without Saving"
 msgstr "저장하지 않고 끝내기"
 
-#: kdiff3.cpp:934 pdiff.cpp:1528
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "합친 결과를 저장할 수 없습니다."
@@ -3321,42 +3321,42 @@ msgstr "확인"
 msgid "Go to Line"
 msgstr "줄로 이동"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "자동 줄 바꿈(취소하면 자동으로 줄 바꾸지 않음)"
 
-#: pdiff.cpp:1296
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "가로 스크롤 막대의 최대 너비 계산"
 
-#: pdiff.cpp:1519
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Save && Continue"
 msgstr "저장하고 계속"
 
-#: pdiff.cpp:1520
+#: pdiff.cpp:1525
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "저장하지 않고 계속"
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search complete."
 msgstr "검색이 완료되었습니다."
 
-#: pdiff.cpp:1711
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search Complete"
 msgstr "검색 완료"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Diff 입력 창에서 아무것도 선택하지 않았습니다."
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "수동 Diff 범위 추가 중 오류 발생"
