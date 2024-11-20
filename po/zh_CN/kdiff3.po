@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 00:42+0000\n"
+"POT-Creation-Date: 2024-11-20 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:59\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -362,7 +362,7 @@ msgid ""
 msgstr "您正在合并文件夹，确定要放弃合并并重新扫描文件夹吗？"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1058,33 +1058,72 @@ msgstr "合并到 B"
 msgid "Merge to A && B"
 msgstr "合并到 A 和 B"
 
-#: fileaccess.cpp:525
-#, kde-format
+#: fileaccess.cpp:526
+#, fuzzy, kde-format
+#| msgid "Unable to determine full url. No parent specified."
+msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr "无法确定完整 URL。没有指定父目录。"
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:538
 #, kde-format
+msgctxt "@info:shell"
+msgid "Parent and child could not be distinguished."
+msgstr ""
+
+#: fileaccess.cpp:542
+#, kde-format
+msgctxt "@info:shell"
+msgid "Computed url is: "
+msgstr ""
+
+#: fileaccess.cpp:800
+#, fuzzy, kde-format
+#| msgid "Failed to read file: %1"
+msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "读取文件失败 %1"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
+msgctxt "@info %1 is a path"
+msgid "User cancelled read opertation on %1"
+msgstr ""
+
+#: fileaccess.cpp:872
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
+msgctxt "@info:status"
+msgid "User cancelled write opertation."
+msgstr "这将影响所有合并操作。"
+
+#: fileaccess.cpp:954
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
+msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "创建 %1 的临时副本失败。"
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
-#, kde-format
+#: fileaccess.cpp:963 fileaccess.cpp:969
+#, fuzzy, kde-format
+#| msgid "Opening %1 failed. %2"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "打开 %1 失败。%2"
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
-#, kde-format
+#: fileaccess.cpp:989 fileaccess.cpp:997
+#, fuzzy, kde-format
+#| msgid "Error reading from %1. %2"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "读取 %1 出错。%2"
 
-#: fileaccess.cpp:1107
-#, kde-format
+#: fileaccess.cpp:1128
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, deleting an older backup failed.\n"
+#| "Filename: %1"
+msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
@@ -1092,8 +1131,12 @@ msgstr ""
 "试图备份时，删除旧备份失败。\n"
 "文件名：%1"
 
-#: fileaccess.cpp:1114
-#, kde-format
+#: fileaccess.cpp:1135
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, renaming failed.\n"
+#| "Filenames: %1 -> %2"
+msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
@@ -1581,7 +1624,7 @@ msgstr "切换文件夹和文本视图"
 msgid "Ready."
 msgstr "就绪。"
 
-#: kdiff3.cpp:923 pdiff.cpp:1513
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "合并结果未保存。"
@@ -1596,7 +1639,7 @@ msgstr "保存并退出"
 msgid "Quit Without Saving"
 msgstr "退出且不保存"
 
-#: kdiff3.cpp:934 pdiff.cpp:1524
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "保存合并结果失败。"
@@ -3258,42 +3301,42 @@ msgstr "确定"
 msgid "Go to Line"
 msgstr "跳转到行"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "文本换行"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "计算水平滚动条的最大宽度"
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Save && Continue"
 msgstr "保存并继续"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1525
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "继续并不保存"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search complete."
 msgstr "搜索完成。"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search Complete"
 msgstr "搜索完成"
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "比较输入窗口没有选择内容。"
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "添加手动比较区域时出错"

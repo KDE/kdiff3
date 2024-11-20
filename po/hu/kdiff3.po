@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 00:42+0000\n"
+"POT-Creation-Date: 2024-11-20 00:42+0000\n"
 "PO-Revision-Date: 2013-07-13 11:52+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -406,7 +406,7 @@ msgstr ""
 "szakítani a műveletet és újra be szeretné olvasni a könyvtár tartalmát?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1178,39 +1178,71 @@ msgstr "Beolvasztás B-be"
 msgid "Merge to A && B"
 msgstr "Beolvasztás A és B-be"
 
-#: fileaccess.cpp:525
+#: fileaccess.cpp:526
 #, kde-format
+msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:538
+#, kde-format
+msgctxt "@info:shell"
+msgid "Parent and child could not be distinguished."
+msgstr ""
+
+#: fileaccess.cpp:542
+#, kde-format
+msgctxt "@info:shell"
+msgid "Computed url is: "
+msgstr ""
+
+#: fileaccess.cpp:800
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
+msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Fájl beolvasása: %1"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
+msgctxt "@info %1 is a path"
+msgid "User cancelled read opertation on %1"
+msgstr ""
+
+#: fileaccess.cpp:872
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
+msgctxt "@info:status"
+msgid "User cancelled write opertation."
+msgstr "Ez minden összeolvasztási műveletet érint."
+
+#: fileaccess.cpp:954
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
+msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Nem sikerült ideiglenes másolatot készíteni a(z) %1 fájlról."
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
+#: fileaccess.cpp:963 fileaccess.cpp:969
 #, fuzzy, kde-format
 #| msgid "Opening %1 failed."
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "%1 megnyitása nem sikerült."
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
+#: fileaccess.cpp:989 fileaccess.cpp:997
 #, fuzzy, kde-format
 #| msgid "Error reading from %1"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "%1 olvasása közben hiba történt"
 
-#: fileaccess.cpp:1107
+#: fileaccess.cpp:1128
 #, fuzzy, kde-format
 #| msgid ""
 #| "While trying to make a backup, deleting an older backup failed. \n"
 #| "Filename: "
+msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
@@ -1219,11 +1251,12 @@ msgstr ""
 "sikerült törölni. \n"
 "Fájlnév: "
 
-#: fileaccess.cpp:1114
+#: fileaccess.cpp:1135
 #, fuzzy, kde-format
 #| msgid ""
 #| "While trying to make a backup, renaming failed. \n"
 #| "Filenames: "
+msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
@@ -1744,7 +1777,7 @@ msgstr "Váltás a könyvtár- és szöveges nézet között"
 msgid "Ready."
 msgstr "Kész."
 
-#: kdiff3.cpp:923 pdiff.cpp:1513
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1760,7 +1793,7 @@ msgstr "Mentés és kilépés"
 msgid "Quit Without Saving"
 msgstr "Kilépés mentés nélkül"
 
-#: kdiff3.cpp:934 pdiff.cpp:1524
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Az összeolvasztás eredményét nem sikerült elmenteni."
@@ -3547,42 +3580,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Ugrás az utolsó deltára"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Save && Continue"
 msgstr "Mentés és folytatás"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1525
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Folytatás mentés nélkül"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search complete."
 msgstr "A keresés befejeződött."
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search Complete"
 msgstr "A keresés befejeződött"
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Hiba történt egy könyvtár létrehozása közben."

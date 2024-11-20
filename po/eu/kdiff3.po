@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 00:42+0000\n"
+"POT-Creation-Date: 2024-11-20 00:42+0000\n"
 "PO-Revision-Date: 2024-10-13 09:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -367,7 +367,7 @@ msgstr ""
 "bateratzea galarazi eta karpeta berriz aztertu nahi duzula?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1086,33 +1086,72 @@ msgstr "Bateratu  -> B"
 msgid "Merge to A && B"
 msgstr "Bateratu A eta B"
 
-#: fileaccess.cpp:525
-#, kde-format
+#: fileaccess.cpp:526
+#, fuzzy, kde-format
+#| msgid "Unable to determine full url. No parent specified."
+msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Ezin da zehaztu URL osoa. Ez da gurasorik zehaztu."
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:538
 #, kde-format
+msgctxt "@info:shell"
+msgid "Parent and child could not be distinguished."
+msgstr ""
+
+#: fileaccess.cpp:542
+#, kde-format
+msgctxt "@info:shell"
+msgid "Computed url is: "
+msgstr ""
+
+#: fileaccess.cpp:800
+#, fuzzy, kde-format
+#| msgid "Failed to read file: %1"
+msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Ezin izan da fitxategia irakurri: %1"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
+msgctxt "@info %1 is a path"
+msgid "User cancelled read opertation on %1"
+msgstr ""
+
+#: fileaccess.cpp:872
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
+msgctxt "@info:status"
+msgid "User cancelled write opertation."
+msgstr "Honek bateratze eragiketa guztiei eragiten die."
+
+#: fileaccess.cpp:954
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
+msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Aldi baterako %1(r)en kopia sortzea huts egin du."
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
-#, kde-format
+#: fileaccess.cpp:963 fileaccess.cpp:969
+#, fuzzy, kde-format
+#| msgid "Opening %1 failed. %2"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "%1 irekitzea huts egin du. %2"
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
-#, kde-format
+#: fileaccess.cpp:989 fileaccess.cpp:997
+#, fuzzy, kde-format
+#| msgid "Error reading from %1. %2"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Errorea %1(e)tik irakurtzean. %2"
 
-#: fileaccess.cpp:1107
-#, kde-format
+#: fileaccess.cpp:1128
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, deleting an older backup failed.\n"
+#| "Filename: %1"
+msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
@@ -1121,8 +1160,12 @@ msgstr ""
 "egin du.\n"
 "Fitxategi-izena: %1"
 
-#: fileaccess.cpp:1114
-#, kde-format
+#: fileaccess.cpp:1135
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, renaming failed.\n"
+#| "Filenames: %1 -> %2"
+msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
@@ -1621,7 +1664,7 @@ msgstr "Txandakatu karpeta eta testu ikuspegien artean"
 msgid "Ready."
 msgstr "Prest."
 
-#: kdiff3.cpp:923 pdiff.cpp:1513
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Bateratzearen emaitza ez da gorde."
@@ -1636,7 +1679,7 @@ msgstr "Gorde eta irten"
 msgid "Quit Without Saving"
 msgstr "Irten gorde gabe"
 
-#: kdiff3.cpp:934 pdiff.cpp:1524
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Bateratzearen emaitza gordetzea huts egin du."
@@ -3378,42 +3421,42 @@ msgstr "Ados"
 msgid "Go to Line"
 msgstr "Joan lerrora"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Itzulbira («Utzi»k itzulbiratzea desgaitzen du)"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Labaintze-barra horizontalaren gehieneko zabalera kalkulatzen"
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Save && Continue"
 msgstr "Gorde eta jarraitu"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1525
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Jarraitu gorde gabe"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search complete."
 msgstr "Bilaketa osatu da."
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search Complete"
 msgstr "Bilaketa osatua"
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Ez dago ezer hautatuta diff sarrerako leihoetan."
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Errorea eskuz «diff» barrutia gehitzean"

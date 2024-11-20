@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 00:42+0000\n"
+"POT-Creation-Date: 2024-11-20 00:42+0000\n"
 "PO-Revision-Date: 2019-09-29 12:43+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -409,7 +409,7 @@ msgstr ""
 "нав кунед?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1154,39 +1154,71 @@ msgstr "Пайваст кардан ба В"
 msgid "Merge to A && B"
 msgstr "Пайваст кардан ба A & В"
 
-#: fileaccess.cpp:525
+#: fileaccess.cpp:526
 #, kde-format
+msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:538
+#, kde-format
+msgctxt "@info:shell"
+msgid "Parent and child could not be distinguished."
+msgstr ""
+
+#: fileaccess.cpp:542
+#, kde-format
+msgctxt "@info:shell"
+msgid "Computed url is: "
+msgstr ""
+
+#: fileaccess.cpp:800
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
+msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Хониши файл: %1"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
+msgctxt "@info %1 is a path"
+msgid "User cancelled read opertation on %1"
+msgstr ""
+
+#: fileaccess.cpp:872
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
+msgctxt "@info:status"
+msgid "User cancelled write opertation."
+msgstr "Ин ба ҳамаи якҷошавӣ таъсир мерасонад."
+
+#: fileaccess.cpp:954
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
+msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Наметавонам нусхаи яквақтаро эҷод кунам %1."
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
+#: fileaccess.cpp:963 fileaccess.cpp:969
 #, fuzzy, kde-format
 #| msgid "Opening %1 failed."
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Кушодан %1 нашуд."
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
+#: fileaccess.cpp:989 fileaccess.cpp:997
 #, fuzzy, kde-format
 #| msgid "Error reading from %1"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Хатогӣ дар вақти хониш аз %1"
 
-#: fileaccess.cpp:1107
+#: fileaccess.cpp:1128
 #, fuzzy, kde-format
 #| msgid ""
 #| "While trying to make a backup, deleting an older backup failed. \n"
 #| "Filename: "
+msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
@@ -1194,11 +1226,12 @@ msgstr ""
 "Наметавонам нусхаи кӯҳнаи захираро нест кунам. \n"
 "Номи файл: "
 
-#: fileaccess.cpp:1114
+#: fileaccess.cpp:1135
 #, fuzzy, kde-format
 #| msgid ""
 #| "While trying to make a backup, renaming failed. \n"
 #| "Filenames: "
+msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
@@ -1674,7 +1707,7 @@ msgstr "Дигаркунӣ байни феҳристҳо && намоиши ма�
 msgid "Ready."
 msgstr "Тайёр аст."
 
-#: kdiff3.cpp:923 pdiff.cpp:1513
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1690,7 +1723,7 @@ msgstr "Нигоҳ доштан && баромадан"
 msgid "Quit Without Saving"
 msgstr "Бе нигоҳдорӣ баромадан"
 
-#: kdiff3.cpp:934 pdiff.cpp:1524
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Натиҷаи якҷоя кардан,нигоҳ дошта нашуд."
@@ -3294,42 +3327,42 @@ msgstr ""
 msgid "Go to Line"
 msgstr "Равед ба Делтаи Охирон"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1524
 #, fuzzy, kde-format
 msgid "Save && Continue"
 msgstr "Нигоҳ доштан && баромадан"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1525
 #, fuzzy, kde-format
 msgid "Continue Without Saving"
 msgstr "Бе нигоҳдорӣ баромадан"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, fuzzy, kde-format
 msgid "Search complete."
 msgstr "Ҷустуҷу дар ҷамъбаст"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, fuzzy, kde-format
 msgid "Search Complete"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Хатогӣ дар вақти эҷод кардани каталог."

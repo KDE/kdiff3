@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-19 00:42+0000\n"
+"POT-Creation-Date: 2024-11-20 00:42+0000\n"
 "PO-Revision-Date: 2023-12-27 22:26+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -368,7 +368,7 @@ msgstr ""
 "Operation abbrechen und den Ordner erneut einlesen möchten?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
-#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1514 pdiff.cpp:1524
+#: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1089,35 +1089,74 @@ msgstr "Zusammenführen nach B"
 msgid "Merge to A && B"
 msgstr "Nach A && B zusammenführen"
 
-#: fileaccess.cpp:525
-#, kde-format
+#: fileaccess.cpp:526
+#, fuzzy, kde-format
+#| msgid "Unable to determine full url. No parent specified."
+msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
 "Die vollständige URL kann nicht ermittelt werden. Es wurde kein Pfad "
 "angegeben."
 
-#: fileaccess.cpp:796
+#: fileaccess.cpp:538
 #, kde-format
+msgctxt "@info:shell"
+msgid "Parent and child could not be distinguished."
+msgstr ""
+
+#: fileaccess.cpp:542
+#, kde-format
+msgctxt "@info:shell"
+msgid "Computed url is: "
+msgstr ""
+
+#: fileaccess.cpp:800
+#, fuzzy, kde-format
+#| msgid "Failed to read file: %1"
+msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Datei %1 kann nicht gelesen werden"
 
-#: fileaccess.cpp:936
+#: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
+msgctxt "@info %1 is a path"
+msgid "User cancelled read opertation on %1"
+msgstr ""
+
+#: fileaccess.cpp:872
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
+msgctxt "@info:status"
+msgid "User cancelled write opertation."
+msgstr "Dies beeinflusst alle Zusammenführungsaktionen."
+
+#: fileaccess.cpp:954
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
+msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Erstellung einer temporären Kopie von %1 ist fehlgeschlagen."
 
-#: fileaccess.cpp:945 fileaccess.cpp:951
-#, kde-format
+#: fileaccess.cpp:963 fileaccess.cpp:969
+#, fuzzy, kde-format
+#| msgid "Opening %1 failed. %2"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Öffnen von %1 ist fehlgeschlagen. %2"
 
-#: fileaccess.cpp:970 fileaccess.cpp:978
-#, kde-format
+#: fileaccess.cpp:989 fileaccess.cpp:997
+#, fuzzy, kde-format
+#| msgid "Error reading from %1. %2"
+msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Fehler beim Lesen von %1. %2"
 
-#: fileaccess.cpp:1107
-#, kde-format
+#: fileaccess.cpp:1128
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, deleting an older backup failed.\n"
+#| "Filename: %1"
+msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
@@ -1126,8 +1165,12 @@ msgstr ""
 "vorhandene Sicherungskopie nicht gelöscht worden.\n"
 "Datei:  %1"
 
-#: fileaccess.cpp:1114
-#, kde-format
+#: fileaccess.cpp:1135
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, renaming failed.\n"
+#| "Filenames: %1 -> %2"
+msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
@@ -1624,7 +1667,7 @@ msgstr "Zwischen Ordner- && Textansicht umschalten"
 msgid "Ready."
 msgstr "Bereit."
 
-#: kdiff3.cpp:923 pdiff.cpp:1513
+#: kdiff3.cpp:923 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Das Ergebnis der Zusammenführung wurde nicht gespeichert."
@@ -1639,7 +1682,7 @@ msgstr "Speichern && Beenden"
 msgid "Quit Without Saving"
 msgstr "Ohne zu speichern beenden"
 
-#: kdiff3.cpp:934 pdiff.cpp:1524
+#: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Speichern des Ergebnisses der Zusammenführung ist fehlgeschlagen."
@@ -3408,42 +3451,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Gehe zu Zeile"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Zeilenumbruch (Abbrechen deaktiviert den Zeilenumbruch)"
 
-#: pdiff.cpp:1292
+#: pdiff.cpp:1301
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Maximale Breite wird für horizontale Bildlaufleiste berechnet"
 
-#: pdiff.cpp:1515
+#: pdiff.cpp:1524
 #, kde-format
 msgid "Save && Continue"
 msgstr "Speichern && Fortsetzen"
 
-#: pdiff.cpp:1516
+#: pdiff.cpp:1525
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Fortsetzen ohne zu speichern"
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search complete."
 msgstr "Suche abgeschlossen."
 
-#: pdiff.cpp:1707
+#: pdiff.cpp:1716
 #, kde-format
 msgid "Search Complete"
 msgstr "Suche abgeschlossen"
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "In keinem der Unterschiedsfenster ist eine Auswahl markiert."
 
-#: pdiff.cpp:1888
+#: pdiff.cpp:1897
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Fehler beim Hinzufügen einer manuellen Ausrichtung."
