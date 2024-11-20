@@ -805,7 +805,7 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
         ProgressProxy::setCurrent(std::floor(i / maxLength * 100));
         if(ProgressProxy::wasCancelled())
         {
-            setStatusText(i18nc("@info %1 is a path", "User cancelled read opertation on %1", absoluteFilePath()));
+            setStatusText(i18nc("@info %1 is a path", "User cancelled read operation on %1", absoluteFilePath()));
             return false;
         }
     }
@@ -833,7 +833,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     {
         success = mJobHandler->get(pDestBuffer, maxLength);
         if(ProgressProxy::wasCancelled())
-            setStatusText(i18nc("@info %1 is a path", "User cancelled read opertation on %1", absoluteFilePath()));
+            setStatusText(i18nc("@info %1 is a path", "User cancelled read operation on %1", absoluteFilePath()));
 
         close();
     }
@@ -869,7 +869,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
                 if(ProgressProxy::wasCancelled())
                 {
                     realFile->close();
-                    setStatusText(i18nc("@info:status", "User cancelled write opertation."));
+                    setStatusText(i18nc("@info:status", "User cancelled write operation."));
                     return false;
                 }
             }
