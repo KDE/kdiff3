@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-20 00:42+0000\n"
+"POT-Creation-Date: 2024-11-21 00:43+0000\n"
 "PO-Revision-Date: 2024-01-22 16:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1087,16 +1087,17 @@ msgid "Failed to read file: %1"
 msgstr "無法讀取檔案：%1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
 msgctxt "@info %1 is a path"
-msgid "User cancelled read opertation on %1"
-msgstr ""
+msgid "User cancelled read operation on %1"
+msgstr "這會影響所有的合併操作。"
 
 #: fileaccess.cpp:872
 #, fuzzy, kde-format
 #| msgid "This affects all merge operations."
 msgctxt "@info:status"
-msgid "User cancelled write opertation."
+msgid "User cancelled write operation."
 msgstr "這會影響所有的合併操作。"
 
 #: fileaccess.cpp:954

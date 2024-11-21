@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-20 00:42+0000\n"
-"PO-Revision-Date: 2024-09-26 22:53+0100\n"
+"POT-Creation-Date: 2024-11-21 00:43+0000\n"
+"PO-Revision-Date: 2024-11-20 20:14+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1094,72 +1094,66 @@ msgid "Merge to A && B"
 msgstr "Fusionar a A y B"
 
 #: fileaccess.cpp:526
-#, fuzzy, kde-format
-#| msgid "Unable to determine full url. No parent specified."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
-"No se ha podido determinar la URL completa. No se ha especificado ningún "
-"padre."
+"No se puede determinar la URL completa. No se ha especificado ningún padre."
 
 #: fileaccess.cpp:538
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "No se puede distinguir el padre del hijo."
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "La URL calculada es: "
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Ha fallado la lectura del archivo: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info %1 is a path"
+#| msgid "User cancelled read opertation on %1"
 msgctxt "@info %1 is a path"
-msgid "User cancelled read opertation on %1"
-msgstr ""
+msgid "User cancelled read operation on %1"
+msgstr "El usuario ha cancelado la operación de lectura en %1"
 
 #: fileaccess.cpp:872
 #, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#| msgctxt "@info:status"
+#| msgid "User cancelled write opertation."
 msgctxt "@info:status"
-msgid "User cancelled write opertation."
-msgstr "Esto afecta a todas las operaciones de fusión."
+msgid "User cancelled write operation."
+msgstr "El usuario ha cancelado la operación de escritura."
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Falló la creación de la copia temporal de %1."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "La apertura de %1 ha fallado. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Error al leer de %1. %2"
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed.\n"
-#| "Filename: %1"
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1170,10 +1164,7 @@ msgstr ""
 "Nombre del archivo:  %1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed.\n"
-#| "Filenames: %1 -> %2"
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"

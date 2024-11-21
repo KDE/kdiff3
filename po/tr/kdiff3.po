@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-20 00:42+0000\n"
+"POT-Creation-Date: 2024-11-21 00:43+0000\n"
 "PO-Revision-Date: 2024-09-25 19:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1111,16 +1111,17 @@ msgid "Failed to read file: %1"
 msgstr "Dosya okunumadı: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
 msgctxt "@info %1 is a path"
-msgid "User cancelled read opertation on %1"
-msgstr ""
+msgid "User cancelled read operation on %1"
+msgstr "Bu, tüm birleştirme işlemlerini etkiler."
 
 #: fileaccess.cpp:872
 #, fuzzy, kde-format
 #| msgid "This affects all merge operations."
 msgctxt "@info:status"
-msgid "User cancelled write opertation."
+msgid "User cancelled write operation."
 msgstr "Bu, tüm birleştirme işlemlerini etkiler."
 
 #: fileaccess.cpp:954
