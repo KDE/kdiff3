@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-21 00:43+0000\n"
-"PO-Revision-Date: 2024-11-20 20:14+0100\n"
+"PO-Revision-Date: 2024-11-21 11:29+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -1119,17 +1119,13 @@ msgid "Failed to read file: %1"
 msgstr "Ha fallado la lectura del archivo: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgctxt "@info %1 is a path"
-#| msgid "User cancelled read opertation on %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
 msgstr "El usuario ha cancelado la operación de lectura en %1"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgctxt "@info:status"
-#| msgid "User cancelled write opertation."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
 msgstr "El usuario ha cancelado la operación de escritura."

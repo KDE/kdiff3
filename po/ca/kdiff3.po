@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-21 00:43+0000\n"
-"PO-Revision-Date: 2024-11-20 11:23+0100\n"
+"PO-Revision-Date: 2024-11-21 09:27+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1112,17 +1112,13 @@ msgid "Failed to read file: %1"
 msgstr "Ha fallat en llegir el fitxer: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgctxt "@info %1 is a path"
-#| msgid "User cancelled read opertation on %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
 msgstr "L'usuari ha cancel·lat l'operació de lectura a %1"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgctxt "@info:status"
-#| msgid "User cancelled write opertation."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
 msgstr "L'usuari ha cancel·lat l'operació d'escriptura."

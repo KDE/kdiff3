@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-21 00:43+0000\n"
-"PO-Revision-Date: 2024-11-20 07:07+0100\n"
+"PO-Revision-Date: 2024-11-21 07:20+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -1108,17 +1108,13 @@ msgid "Failed to read file: %1"
 msgstr "Ni bilo mogoče brati datoteke: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgctxt "@info %1 is a path"
-#| msgid "User cancelled read opertation on %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
 msgstr "Uporabnik je preklical operacijo branja na %1"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgctxt "@info:status"
-#| msgid "User cancelled write opertation."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
 msgstr "Uporabnik je preklical operacijo pisanja."
