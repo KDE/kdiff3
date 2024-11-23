@@ -20,6 +20,7 @@
 class EncodedDataStream: public QDataStream
 {
   private:
+    QStringEncoder mEncoder = QStringEncoder("UTF-8", QStringEncoder::Flag::ConvertInitialBom);
     QByteArray mEncoding = "UTF-8";
     bool mGenerateBOM = false;
     bool mError = false;
@@ -34,6 +35,7 @@ class EncodedDataStream: public QDataStream
     inline void setEncoding(const QByteArray &inEncoding) noexcept
     {
         assert(!inEncoding.isEmpty());
+
         if(inEncoding == "UTF-8-BOM")
         {
             mGenerateBOM = true;
@@ -44,6 +46,8 @@ class EncodedDataStream: public QDataStream
             mGenerateBOM = inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32");
             mEncoding = inEncoding;
         }
+
+        mEncoder = QStringEncoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
 
         assert(!mGenerateBOM || ((inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32")) || inEncoding == "UTF-8-BOM"));
     };
@@ -94,12 +98,12 @@ class EncodedDataStream: public QDataStream
 
     EncodedDataStream &operator<<(const QString &s)
     {
-        QStringEncoder encoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
-        QByteArray data = encoder(s);
-        assert(encoder.isValid());
-        mError = encoder.hasError();
+        QByteArray data = mEncoder(s);
 
-        return *this << data;
+        assert(mEncoder.isValid());
+        mError = mEncoder.hasError();
+        writeRawData(data.constData(), data.length());
+        return *this;
     };
 
     inline bool hasError() noexcept { return mError; }
