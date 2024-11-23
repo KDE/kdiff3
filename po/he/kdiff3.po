@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-21 00:43+0000\n"
-"PO-Revision-Date: 2024-11-20 20:57+0200\n"
+"PO-Revision-Date: 2024-11-22 09:19+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1086,17 +1086,13 @@ msgid "Failed to read file: %1"
 msgstr "קריאת הקובץ נכשלה: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgctxt "@info %1 is a path"
-#| msgid "User cancelled read opertation on %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
 msgstr "המשתמש ביטל את פעולת הקריאה על %1"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgctxt "@info:status"
-#| msgid "User cancelled write opertation."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
 msgstr "המשתמש ביטול את פעולת הכתיבה."

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-21 00:43+0000\n"
-"PO-Revision-Date: 2024-09-26 08:35+0200\n"
+"PO-Revision-Date: 2024-11-21 09:14+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.3\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -1100,8 +1100,7 @@ msgid "Merge to A && B"
 msgstr "Fusionner vers A et B"
 
 #: fileaccess.cpp:526
-#, fuzzy, kde-format
-#| msgid "Unable to determine full url. No parent specified."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Impossible de déterminer l'URL complète. Aucun parent renseigné."
@@ -1110,17 +1109,16 @@ msgstr "Impossible de déterminer l'URL complète. Aucun parent renseigné."
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "Le parent et le fils n'ont pas pu être distingués."
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "L'URL calculée est :"
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Impossible de lire le fichier : %1"
@@ -1140,52 +1138,43 @@ msgid "User cancelled write operation."
 msgstr "Ce paramètre affecte toutes les opérations de fusion."
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Impossible de créer la copie temporaire de %1."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Impossible d'ouvrir %1. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Erreur de lecture depuis %1. %2"
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed.\n"
-#| "Filename: %1"
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"La suppression d'une sauvegarde précédente a échoué pendant la tentative de "
-"sauvegarde.\n"
+"La suppression d'une sauvegarde plus ancienne a échoué pendant la tentative "
+"de sauvegarde.\n"
 "Nom du fichier : %1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed.\n"
-#| "Filenames: %1 -> %2"
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
 "Le renommage a échoué pendant la tentative de sauvegarde.\n"
-"Noms des fichiers : %1 ==> %2"
+"Noms des fichiers : %1 vers %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
