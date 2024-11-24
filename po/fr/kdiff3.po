@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-21 00:43+0000\n"
-"PO-Revision-Date: 2024-11-21 09:14+0100\n"
+"PO-Revision-Date: 2024-11-22 09:59+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.11.80\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -1124,18 +1124,16 @@ msgid "Failed to read file: %1"
 msgstr "Impossible de lire le fichier : %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "Ce paramètre affecte toutes les opérations de fusion."
+msgstr "L'utilisateur a annulé l'opération de lecture sur %1."
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "Ce paramètre affecte toutes les opérations de fusion."
+msgstr "L'utilisateur a annulé l'opération d'écriture."
 
 #: fileaccess.cpp:954
 #, kde-format
