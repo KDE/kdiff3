@@ -20,6 +20,7 @@
 class EncodedDataStream: public QDataStream
 {
   private:
+    QStringDecoder mDecoder = QStringDecoder("UTF-8", QStringConverter::Flag::ConvertInitialBom);
     QStringEncoder mEncoder = QStringEncoder("UTF-8", QStringEncoder::Flag::ConvertInitialBom);
     QByteArray mEncoding = "UTF-8";
     bool mGenerateBOM = false;
@@ -47,8 +48,10 @@ class EncodedDataStream: public QDataStream
             mEncoding = inEncoding;
         }
 
+        mDecoder = QStringDecoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
         mEncoder = QStringEncoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
 
+        assert(mDecoder.isValid() && mEncoder.isValid());
         assert(!mGenerateBOM || ((inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32")) || inEncoding == "UTF-8-BOM"));
     };
 
@@ -57,18 +60,17 @@ class EncodedDataStream: public QDataStream
         char curData = QChar::Null;
         qint32 len = 0;
         QString s;
-        QStringDecoder decoder = QStringDecoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
-        assert(decoder.isValid());
-        if(!decoder.isValid()) return 0;
+
+        if(!mDecoder.isValid()) return 0;
 
         do
         {
             len += readRawData(&curData, 1);
 
-            s = decoder(QByteArray::fromRawData(&curData, sizeof(curData)));
-        } while(!decoder.hasError() && s.isEmpty() && !atEnd());
+            s = mDecoder(QByteArray::fromRawData(&curData, sizeof(curData)));
+        } while(!mDecoder.hasError() && s.isEmpty() && !atEnd());
 
-        mError = decoder.hasError() || (s.isEmpty() && atEnd());
+        mError = mDecoder.hasError() || (s.isEmpty() && atEnd());
         if(!mError)
             c = s[0];
         else
@@ -100,7 +102,6 @@ class EncodedDataStream: public QDataStream
     {
         QByteArray data = mEncoder(s);
 
-        assert(mEncoder.isValid());
         mError = mEncoder.hasError();
         writeRawData(data.constData(), data.length());
         return *this;
