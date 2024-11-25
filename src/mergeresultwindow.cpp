@@ -2708,13 +2708,15 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
                     isFirstLine = mel.isRemoved();
 
                 textOutStream << str;
+                if(textOutStream.hasError()) goto fail;
             }
         }
     }
 
+fail:
     bool bSuccess = !textOutStream.hasError();
     if(bSuccess)
-        bSuccess = file.writeFile(dataArray.data(), dataArray.size());
+        bSuccess = file.writeFile(dataArray.constData(), dataArray.size());
 
     if(!bSuccess)
     {
