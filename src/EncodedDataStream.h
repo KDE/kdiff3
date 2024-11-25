@@ -20,6 +20,8 @@
 class EncodedDataStream: public QDataStream
 {
   private:
+    Q_DISABLE_COPY(EncodedDataStream);
+
     QStringDecoder mDecoder = QStringDecoder("UTF-8", QStringConverter::Flag::ConvertInitialBom);
     QStringEncoder mEncoder = QStringEncoder("UTF-8", QStringEncoder::Flag::ConvertInitialBom);
     QByteArray mEncoding = "UTF-8";
