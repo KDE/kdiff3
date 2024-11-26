@@ -29,7 +29,6 @@ class EncodedDataStream: public QIODeviceBase
     QByteArray mEncoding = "UTF-8";
     bool mGenerateBOM = false;
     bool mError = false;
-    bool mAtEnd = false;
 
   public:
     EncodedDataStream(QIODevice *d)
@@ -82,15 +81,14 @@ class EncodedDataStream: public QIODeviceBase
     inline qint64 readChar(QChar& c)
     {
         char curData = QChar::Null;
-        qint64 len = 0, act = 1;
+        qint64 len = 0;
         QString s;
 
         if(!mDecoder.isValid()) return 0;
 
         do
         {
-            len += act = dev->read(&curData, 1);
-            mAtEnd = (act == 1);
+            len += dev->read(&curData, 1);
             s = mDecoder(QByteArray::fromRawData(&curData, sizeof(curData)));
         } while(!mDecoder.hasError() && s.isEmpty() && !atEnd());
 
@@ -135,7 +133,7 @@ class EncodedDataStream: public QIODeviceBase
 
     inline QString errorString() { return dev->errorString(); }
     inline bool hasError() const noexcept { return mError; }
-    inline bool atEnd() const noexcept { return mAtEnd; }
+    inline bool atEnd() const noexcept { return dev->atEnd(); }
 
     EncodedDataStream &operator<<(const QByteArray &bytes)
     {
