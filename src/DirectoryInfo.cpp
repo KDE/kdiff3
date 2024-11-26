@@ -12,10 +12,9 @@
 #include "CompositeIgnoreList.h"
 #include "CvsIgnoreList.h"
 #include "GitIgnoreList.h"
+#include "options.h"
 
 #include <memory>
-
-extern std::unique_ptr<Options> gOptions;
 
 //Intialize with a dummy default DirectoryInfo so we don't crash on first run.
 QSharedPointer<DirectoryInfo>  gDirInfo = QSharedPointer<DirectoryInfo>::create();

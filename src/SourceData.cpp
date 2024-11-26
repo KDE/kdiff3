@@ -38,6 +38,7 @@ Optimizations: Skip unneeded steps.
 #include "EncodedDataStream.h"
 #include "LineRef.h"
 #include "Logging.h"
+#include "options.h"
 #include "Utils.h"
 
 #include <algorithm>         // for min
@@ -51,8 +52,6 @@ Optimizations: Skip unneeded steps.
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
-
-extern std::unique_ptr<Options> gOptions;
 
 void SourceData::reset()
 {

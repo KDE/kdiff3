@@ -26,7 +26,6 @@
 #include <QStringList>
 
 #include <KSharedConfig>
-#include <qcolor.h>
 
 class ValueMap;
 
@@ -248,5 +247,7 @@ class Options
     QString m_ignorableCmdLineOptions = QString("-u;-query;-html;-abort");
     bool m_bEscapeKeyQuits = false;
 };
+
+extern std::unique_ptr<Options> gOptions;
 
 #endif

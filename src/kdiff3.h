@@ -459,6 +459,4 @@ public Q_SLOTS:
     std::list<boost::signals2::scoped_connection> connections;
 };
 
-extern std::unique_ptr<Options> gOptions;
-
 #endif // KDIFF3_H

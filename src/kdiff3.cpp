@@ -73,11 +73,7 @@ std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
 
-/*
-    To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
-    Otherwise it calls strlen which is not a constexpr.
-*/
-constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar", sizeof("mainToolBar") - 1);
+constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar");
 
 KActionCollection* KDiff3App::actionCollection() const
 {

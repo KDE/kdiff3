@@ -14,6 +14,7 @@
 #include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "Logging.h"
+#include "options.h"
 #include "progress.h"
 
 #include <map>
@@ -22,8 +23,6 @@
 #include <QString>
 
 #include <KLocalizedString>
-
-extern std::unique_ptr<Options> gOptions;
 
 MergeFileInfos::MergeFileInfos() = default;
 

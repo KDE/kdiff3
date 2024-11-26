@@ -34,8 +34,6 @@
 #include <QSharedPointer>
 #include <QTextStream>
 
-extern std::unique_ptr<Options> gOptions;
-
 constexpr bool g_bIgnoreWhiteSpace = true;
 
 QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create();

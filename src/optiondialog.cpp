@@ -44,8 +44,6 @@
 #include <QRadioButton>
 #include <QScrollArea>
 
-extern std::unique_ptr<Options> gOptions;
-
 class OptionCheckBox: public QCheckBox, public OptionBool
 {
   public:
