@@ -11,25 +11,47 @@
 
 #include "TypeUtils.h"
 
+#include <QBuffer>
 #include <QByteArray>
-#include <QDataStream>
 #include <QIODevice>
+#include <QPointer>
 #include <QString>
 #include <QStringDecoder>
 
-class EncodedDataStream: public QDataStream
+class EncodedDataStream: public QIODeviceBase
 {
   private:
     Q_DISABLE_COPY(EncodedDataStream);
+    QPointer<QIODevice> dev;
 
     QStringDecoder mDecoder = QStringDecoder("UTF-8", QStringConverter::Flag::ConvertInitialBom);
     QStringEncoder mEncoder = QStringEncoder("UTF-8", QStringEncoder::Flag::ConvertInitialBom);
     QByteArray mEncoding = "UTF-8";
     bool mGenerateBOM = false;
     bool mError = false;
+    bool mAtEnd = false;
 
   public:
-    using QDataStream::QDataStream;
+    EncodedDataStream(QIODevice *d)
+    {
+        //For simplicty we assume ownership of the device as does QTextStream
+        dev = d;
+    }
+
+    EncodedDataStream(const QByteArray &a, OpenMode flags = QIODevice::ReadOnly)
+    {
+        QBuffer *buf = new QBuffer();
+        buf->setData(a);
+        buf->open(flags);
+        dev = buf;
+    }
+
+    EncodedDataStream(QByteArray *ba, OpenMode flags = QIODevice::ReadOnly)
+    {
+        assert(ba != nullptr && !dev.isNull());
+        dev = new QBuffer(ba);
+        dev->open(flags);
+    }
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
 
@@ -57,18 +79,18 @@ class EncodedDataStream: public QDataStream
         assert(!mGenerateBOM || ((inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32")) || inEncoding == "UTF-8-BOM"));
     };
 
-    inline qint32 readChar(QChar& c)
+    inline qint64 readChar(QChar& c)
     {
         char curData = QChar::Null;
-        qint32 len = 0;
+        qint64 len = 0, act = 1;
         QString s;
 
         if(!mDecoder.isValid()) return 0;
 
         do
         {
-            len += readRawData(&curData, 1);
-
+            len += act = dev->read(&curData, 1);
+            mAtEnd = (act == 1);
             s = mDecoder(QByteArray::fromRawData(&curData, sizeof(curData)));
         } while(!mDecoder.hasError() && s.isEmpty() && !atEnd());
 
@@ -84,9 +106,8 @@ class EncodedDataStream: public QDataStream
     quint64 peekChar(QChar &c)
     {
         QStringDecoder decoder = QStringDecoder(mEncoding);
-        QIODevice *d = device();
         char buf[4];
-        qint64 len = d->peek(buf, sizeof(buf));
+        qint64 len = dev->peek(buf, sizeof(buf));
 
         if(len > 0)
         {
@@ -105,28 +126,26 @@ class EncodedDataStream: public QDataStream
         QByteArray data = mEncoder(s);
 
         mError = mEncoder.hasError();
-        writeRawData(data.constData(), data.length());
+        qint64 len = dev->write(data.constData(), data.length());
+        if(len != data.length())
+            mError = true;
+
         return *this;
     };
 
-    inline bool hasError() noexcept { return mError; }
-
-    //Not implemented but may be inherieted from QDataStream
-    EncodedDataStream &operator<<(const QChar &) = delete;
-    EncodedDataStream &operator<<(const char *&) = delete;
-    EncodedDataStream &operator<<(const char &) = delete;
+    inline QString errorString() { return dev->errorString(); }
+    inline bool hasError() const noexcept { return mError; }
+    inline bool atEnd() const noexcept { return mAtEnd; }
 
     EncodedDataStream &operator<<(const QByteArray &bytes)
     {
-        writeRawData(bytes.constData(), bytes.length());
+        qint64 len = dev->write(bytes.constData(), bytes.length());
+
+        if(len != bytes.length())
+            mError = true;
+
         return *this;
     };
-
-    EncodedDataStream &operator>>(QByteArray &) = delete;
-    EncodedDataStream &operator>>(QString &) = delete;
-    EncodedDataStream &operator>>(QChar &) = delete;
-    EncodedDataStream &operator>>(char *&) = delete;
-    EncodedDataStream &operator>>(char &) = delete;
 };
 
 #endif /* ENCODEDDATASTREAM_H */
