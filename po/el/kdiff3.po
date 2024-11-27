@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-21 00:43+0000\n"
+"POT-Creation-Date: 2024-11-27 00:42+0000\n"
 "PO-Revision-Date: 2024-09-19 17:53+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -96,7 +96,7 @@ msgstr "Ανάγνωση φακέλου: %1"
 msgid "Listing directory: %1"
 msgstr "Εμφάνιση καταλόγου: %1"
 
-#: diff.cpp:1596 diff.cpp:1612
+#: diff.cpp:1594 diff.cpp:1610
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -105,7 +105,7 @@ msgstr ""
 "Σφάλμα απώλειας δεδομένων:\n"
 "Αν αναπαράγεται το σφάλμα, παρακαλώ επικοινωνήστε με τον συγγραφέα.\n"
 
-#: diff.cpp:1598 diff.cpp:1614
+#: diff.cpp:1596 diff.cpp:1612
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Σοβαρό εσωτερικό σφάλμα"
@@ -125,7 +125,7 @@ msgstr "Αρχείο %1: Μη διαθέσιμη γραμμή"
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
-#: difftextwindow.cpp:1979 mergeresultwindow.cpp:2829 optiondialog.cpp:789
+#: difftextwindow.cpp:1979 mergeresultwindow.cpp:2831 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Στιλ τέλους γραμμής:"
@@ -140,12 +140,12 @@ msgstr "Α (Βάση)"
 msgid "Encoding: %1"
 msgstr "Κωδικοποίηση %1"
 
-#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2877
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2874
+#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -160,7 +160,7 @@ msgstr "Στιλ τέλους γραμμής: %1"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1067
+#: difftextwindow.cpp:2036 kdiff3.cpp:1063
 #, kde-format
 msgid "Top line"
 msgstr "Πρώτη γραμμή"
@@ -175,7 +175,7 @@ msgstr "Τέλος"
 msgid "Open File"
 msgstr "Άνοιγμα αρχείων"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:389
+#: difftextwindow.cpp:2148 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
@@ -367,7 +367,7 @@ msgstr ""
 "Αυτή τη στιγμή κάνετε μια συγχώνευση φακέλου. Είστε σίγουροι ότι επιθυμείτε "
 "την εγκατάλειψη της συγχώνευσης και την επανασάρωση του φακέλου;"
 
-#: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
+#: directorymergewindow.cpp:692 kdiff3.cpp:920 kdiff3.cpp:930 kdiff3.cpp:942
 #: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
@@ -1196,92 +1196,92 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Αλλαγή γραμματοσειράς"
 
-#: kdiff3.cpp:181
+#: kdiff3.cpp:177
 #, kde-format
 msgid "Current Configuration:"
 msgstr "Τρέχουσα διαμόρφωση:"
 
-#: kdiff3.cpp:186
+#: kdiff3.cpp:182
 #, kde-format
 msgid "Config Option Error:"
 msgstr "Σφάλμα διαμόρφωσης επιλογής:"
 
-#: kdiff3.cpp:241
+#: kdiff3.cpp:237
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "Χρησιμοποιήθηκε η επιλογή --auto, αλλά δεν καθορίστηκε αρχείο εξόδου."
 
-#: kdiff3.cpp:377
+#: kdiff3.cpp:373
 #, kde-format
 msgid "Directory merge"
 msgstr "Συγχώνευση καταλόγου"
 
-#: kdiff3.cpp:382
+#: kdiff3.cpp:378
 #, fuzzy, kde-format
 #| msgid "Merge to A"
 msgid "Merge info"
 msgstr "Συγχώνευση στο Α"
 
-#: kdiff3.cpp:622
+#: kdiff3.cpp:618
 #, fuzzy, kde-format
 #| msgid "Unable to compare non-normal file with normal file."
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr "Αδυναμία σύγκρισης μη-κανονικού αρχείου με κανονικό."
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:619
 #, fuzzy, kde-format
 #| msgid "Binary comparison"
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr "Δυαδική σύγκριση"
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "Η επιλογή --auto αγνοήθηκε για τη σύγκριση φακέλων."
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Saving failed."
 msgstr "Η αποθήκευση απέτυχε."
 
-#: kdiff3.cpp:719 pdiff.cpp:795
+#: kdiff3.cpp:715 pdiff.cpp:795
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Το άνοιγμα αυτών των αρχείων απέτυχε:"
 
-#: kdiff3.cpp:728 pdiff.cpp:804
+#: kdiff3.cpp:724 pdiff.cpp:804
 #, kde-format
 msgid "File open error"
 msgstr "Σφάλμα ανοίγματος αρχείου"
 
-#: kdiff3.cpp:768
+#: kdiff3.cpp:764
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Ενεργοποιεί/απενεργοποιεί τη γραμμή κατάστασης"
 
-#: kdiff3.cpp:771
+#: kdiff3.cpp:767
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Διαμόρφωση του KDiff3..."
 
-#: kdiff3.cpp:777
+#: kdiff3.cpp:773
 #, kde-format
 msgid "Search for a string"
 msgstr "Αναζήτηση για μια συμβολοσειρά"
 
-#: kdiff3.cpp:779
+#: kdiff3.cpp:775
 #, kde-format
 msgid "Search again for the string"
 msgstr "Αναζήτηση ξανά για μια συμβολοσειρά"
 
-#: kdiff3.cpp:798
+#: kdiff3.cpp:794
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Μετάβαση στην τρέχουσα διαφορά"
 
-#: kdiff3.cpp:798
+#: kdiff3.cpp:794
 #, kde-format
 msgid ""
 "Current\n"
@@ -1290,12 +1290,12 @@ msgstr ""
 "Τρέχουσα\n"
 "διαφορά"
 
-#: kdiff3.cpp:800
+#: kdiff3.cpp:796
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Μετάβαση στη πρώτη διαφορά"
 
-#: kdiff3.cpp:800
+#: kdiff3.cpp:796
 #, kde-format
 msgid ""
 "First\n"
@@ -1304,12 +1304,12 @@ msgstr ""
 "Πρώτη\n"
 "διαφορά"
 
-#: kdiff3.cpp:802
+#: kdiff3.cpp:798
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: kdiff3.cpp:802
+#: kdiff3.cpp:798
 #, kde-format
 msgid ""
 "Last\n"
@@ -1318,7 +1318,7 @@ msgstr ""
 "Τελευταία\n"
 "διαφορά"
 
-#: kdiff3.cpp:804
+#: kdiff3.cpp:800
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1326,7 +1326,7 @@ msgstr ""
 "(Παράλειψη των διαφορών στα κενά όταν είναι απενεργοποιημένη η \"Εμφάνιση "
 "κενών\")"
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:801
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1336,12 +1336,12 @@ msgstr ""
 "(Μη παράλειψη των διαφορών στα κενά ακόμη και αν είναι απενεργοποιημένη η "
 "\"Εμφάνιση κενών\")"
 
-#: kdiff3.cpp:806
+#: kdiff3.cpp:802
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Μετάβαση στη προηγούμενη διαφορά"
 
-#: kdiff3.cpp:806
+#: kdiff3.cpp:802
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1350,12 +1350,12 @@ msgstr ""
 "Προηγούμενη\n"
 "διαφορά"
 
-#: kdiff3.cpp:808
+#: kdiff3.cpp:804
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Μετάβαση στην επόμενη διαφορά"
 
-#: kdiff3.cpp:808
+#: kdiff3.cpp:804
 #, kde-format
 msgid ""
 "Next\n"
@@ -1364,12 +1364,12 @@ msgstr ""
 "Επόμενη\n"
 "διαφορά"
 
-#: kdiff3.cpp:810
+#: kdiff3.cpp:806
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Μετάβαση στην προηγούμενη σύγκρουση"
 
-#: kdiff3.cpp:810
+#: kdiff3.cpp:806
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1378,12 +1378,12 @@ msgstr ""
 "Προηγούμενη\n"
 "σύγκρουση"
 
-#: kdiff3.cpp:812
+#: kdiff3.cpp:808
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Μετάβαση στην επόμενη σύγκρουση"
 
-#: kdiff3.cpp:812
+#: kdiff3.cpp:808
 #, kde-format
 msgid ""
 "Next\n"
@@ -1392,12 +1392,12 @@ msgstr ""
 "Επόμενη\n"
 "σύγκρουση"
 
-#: kdiff3.cpp:814
+#: kdiff3.cpp:810
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Μετάβαση στην προηγούμενη μη λυμένη σύγκρουση"
 
-#: kdiff3.cpp:814
+#: kdiff3.cpp:810
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1406,12 +1406,12 @@ msgstr ""
 "Προηγούμενη\n"
 "μη λυμένη"
 
-#: kdiff3.cpp:816
+#: kdiff3.cpp:812
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Μετάβαση στην επόμενη μη λυμένη σύγκρουση"
 
-#: kdiff3.cpp:816
+#: kdiff3.cpp:812
 #, kde-format
 msgid ""
 "Next\n"
@@ -1420,14 +1420,14 @@ msgstr ""
 "Επόμενη\n"
 "μη λυμένη"
 
-#: kdiff3.cpp:818
+#: kdiff3.cpp:814
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: kdiff3.cpp:818
+#: kdiff3.cpp:814
 #, fuzzy, kde-format
 #| msgid "Line"
 msgctxt "Text used for toolbar button."
@@ -1436,20 +1436,20 @@ msgid ""
 "Line"
 msgstr "Γραμμή"
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:815
 #, fuzzy, kde-format
 #| msgid "No program specified."
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "Δεν έχει προσδιοριστεί πρόγραμμα."
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:816
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Επιλογή γραμμής(ών) από το Α"
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:816
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1459,13 +1459,13 @@ msgstr ""
 "Επιλογή\n"
 "A"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:817
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Επιλογή γραμμής(ών) από το Β"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:817
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1475,13 +1475,13 @@ msgstr ""
 "Επιλογή\n"
 "B"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:818
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Επιλογή γραμμής(ών) από το Γ"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:818
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1491,14 +1491,14 @@ msgstr ""
 "Επιλογή\n"
 "Γ"
 
-#: kdiff3.cpp:823
+#: kdiff3.cpp:819
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 "Αυτόματη μετάβαση στην επόμενη μη λυμένη σύγκρουση μετά την επιλογή πηγής"
 
-#: kdiff3.cpp:823
+#: kdiff3.cpp:819
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1508,12 +1508,12 @@ msgstr ""
 "Αυτόματα\n"
 "επόμενο"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:821
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Εμφάνιση κενών && χαρακτήρων οριοθέτησης"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:821
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1523,12 +1523,12 @@ msgstr ""
 "Κενοί\n"
 "χαρακτήρες"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:822
 #, kde-format
 msgid "Show White Space"
 msgstr "Εμφάνιση κενών"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:822
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1538,12 +1538,12 @@ msgstr ""
 "Κενές\n"
 "διαφορές"
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:824
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Εμφάνιση αριθμών γραμμής"
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:824
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1553,138 +1553,138 @@ msgstr ""
 "Αριθμοί\n"
 "γραμμών"
 
-#: kdiff3.cpp:830
+#: kdiff3.cpp:826
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Αυτόματη επίλυση απλών συγκρούσεων"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:827
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Ορισμός διαφορών στις συγκρούσεις"
 
-#: kdiff3.cpp:832
+#: kdiff3.cpp:828
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Εκτέλεση κανονικής έκφρασης αυτόματης συγχώνευσης"
 
-#: kdiff3.cpp:833
+#: kdiff3.cpp:829
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Αυτόματη επίλυση συγκρούσεων ιστορικού"
 
-#: kdiff3.cpp:834
+#: kdiff3.cpp:830
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Διαίρεση διαφορών στην επιλογή"
 
-#: kdiff3.cpp:835
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Ένωση των επιλεγμένων διαφορών"
 
-#: kdiff3.cpp:837
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Show Window A"
 msgstr "Εμφάνιση του παραθύρου Α"
 
-#: kdiff3.cpp:838
+#: kdiff3.cpp:834
 #, kde-format
 msgid "Show Window B"
 msgstr "Εμφάνιση του παραθύρου Β"
 
-#: kdiff3.cpp:839
+#: kdiff3.cpp:835
 #, kde-format
 msgid "Show Window C"
 msgstr "Εμφάνιση του παραθύρου Γ"
 
-#: kdiff3.cpp:841
+#: kdiff3.cpp:837
 #, kde-format
 msgid "Normal Overview"
 msgstr "Κανονική επισκόπηση"
 
-#: kdiff3.cpp:842
+#: kdiff3.cpp:838
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Επισκόπηση Α με το Β"
 
-#: kdiff3.cpp:843
+#: kdiff3.cpp:839
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Επισκόπηση Α με το Γ"
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:840
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Επισκόπηση Β με το Γ"
 
-#: kdiff3.cpp:845
+#: kdiff3.cpp:841
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Αναδίπλωση λέξεων στα παράθυρα διαφοράς"
 
-#: kdiff3.cpp:846
+#: kdiff3.cpp:842
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Προσθήκη χειροκίνητης στοίχισης διαφορών"
 
-#: kdiff3.cpp:847
+#: kdiff3.cpp:843
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Καθαρισμός όλων των χειροκίνητων στοιχίσεων διαφορών"
 
-#: kdiff3.cpp:849
+#: kdiff3.cpp:845
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Εστίαση στο επόμενο παράθυρο"
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:846
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Εστίαση στο προηγούμενο παράθυρο"
 
-#: kdiff3.cpp:851
+#: kdiff3.cpp:847
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Εναλλαγή προσανατολισμού διαίρεσης"
 
-#: kdiff3.cpp:853
+#: kdiff3.cpp:849
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Διαίρεση προβολής φακέλου && κειμένου"
 
-#: kdiff3.cpp:855
+#: kdiff3.cpp:851
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Εναλλαγή μεταξύ προβολής φακέλου && κειμένου"
 
-#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:814
+#: kdiff3.cpp:873 kdiff3.cpp:975 kdiff3.cpp:1000 kdiff3.cpp:1259 pdiff.cpp:814
 #: pdiff.cpp:883 pdiff.cpp:919 pdiff.cpp:928 pdiff.cpp:986 pdiff.cpp:994
 #, kde-format
 msgid "Ready."
 msgstr "Έτοιμο."
 
-#: kdiff3.cpp:923 pdiff.cpp:1522
+#: kdiff3.cpp:919 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Το αποτέλεσμα της συγχώνευσης δεν έχει αποθηκευτεί."
 
-#: kdiff3.cpp:925
+#: kdiff3.cpp:921
 #, kde-format
 msgid "Save && Quit"
 msgstr "Αποθήκευση && έξοδος"
 
-#: kdiff3.cpp:926
+#: kdiff3.cpp:922
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-#: kdiff3.cpp:934 pdiff.cpp:1533
+#: kdiff3.cpp:930 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Αποτυχία αποθήκευσης του αποτελέσματος συγχώνευσης."
 
-#: kdiff3.cpp:945 pdiff.cpp:729
+#: kdiff3.cpp:941 pdiff.cpp:729
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1692,58 +1692,58 @@ msgstr ""
 "Αυτή τη στιγμή εκτελείται μια συγχώνευση φακέλων. Είστε σίγουροι ότι "
 "επιθυμείτε να την εγκαταλείψετε;"
 
-#: kdiff3.cpp:968
+#: kdiff3.cpp:964
 #, kde-format
 msgid "Saving file..."
 msgstr "Αποθήκευση αρχείου..."
 
-#: kdiff3.cpp:985
+#: kdiff3.cpp:981
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Αποθήκευση αρχείου με ένα νέο όνομα..."
 
-#: kdiff3.cpp:987
+#: kdiff3.cpp:983
 #, kde-format
 msgid "Save As..."
 msgstr "Αποθήκευση ως..."
 
-#: kdiff3.cpp:1011
+#: kdiff3.cpp:1007
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Η εκτύπωση δεν πραγματοποιήθηκε."
 
-#: kdiff3.cpp:1051
+#: kdiff3.cpp:1047
 #, kde-format
 msgid "Printing..."
 msgstr "Εκτύπωση..."
 
-#: kdiff3.cpp:1149
+#: kdiff3.cpp:1145
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Εκτύπωση σελίδας %1 από %2"
 
-#: kdiff3.cpp:1197
+#: kdiff3.cpp:1193
 #, kde-format
 msgid " (Selection)"
 msgstr " (Επιλογή)"
 
-#: kdiff3.cpp:1226
+#: kdiff3.cpp:1222
 #, kde-format
 msgid "Printing completed."
 msgstr "Η εκτύπωση ολοκληρώθηκε."
 
-#: kdiff3.cpp:1230
+#: kdiff3.cpp:1226
 #, kde-format
 msgid "Printing aborted."
 msgstr "Εγκατάλειψη εκτύπωσης."
 
-#: kdiff3.cpp:1237
+#: kdiff3.cpp:1233
 #, kde-format
 msgid "Exiting..."
 msgstr "Έξοδος..."
 
-#: kdiff3.cpp:1247
+#: kdiff3.cpp:1243
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Εναλλαγή της γραμμής κατάστασης..."
@@ -1926,32 +1926,32 @@ msgstr "αρχείο3 για άνοιγμα"
 msgid "See kdiff3 --help for supported options."
 msgstr "Δείτε με kdiff3 --help τις επιλογές που υποστηρίζονται."
 
-#: MergeFileInfos.cpp:394
+#: MergeFileInfos.cpp:393
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
 msgstr "Αδυναμία σύγκρισης μη-κανονικού αρχείου με κανονικό."
 
-#: MergeFileInfos.cpp:417
+#: MergeFileInfos.cpp:416
 #, kde-format
 msgid "Mix of links and normal files."
 msgstr "Ανάμιξη δεσμών και κανονικών αρχείων."
 
-#: MergeFileInfos.cpp:425
+#: MergeFileInfos.cpp:424
 #, kde-format
 msgid "Link: "
 msgstr "Σύνδεσμος: "
 
-#: MergeFileInfos.cpp:435
+#: MergeFileInfos.cpp:434
 #, kde-format
 msgid "Size. "
 msgstr "Μέγεθος. "
 
-#: MergeFileInfos.cpp:451 MergeFileInfos.cpp:461
+#: MergeFileInfos.cpp:450 MergeFileInfos.cpp:460
 #, kde-format
 msgid "Date & Size: "
 msgstr "Ημερομηνία & μέγεθος: "
 
-#: MergeFileInfos.cpp:482
+#: MergeFileInfos.cpp:481
 #, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
@@ -2110,47 +2110,47 @@ msgstr ""
 "\n"
 "Αποτυχία δημιουργίας εφεδρικού αντιγράφου. Το αρχείο δεν αποθηκεύτηκε."
 
-#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2721
+#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2723
 #, kde-format
 msgid "File Save Error"
 msgstr "Σφάλμα εγγραφής αρχείου"
 
-#: mergeresultwindow.cpp:2721
+#: mergeresultwindow.cpp:2723
 #, kde-format
 msgid "Error while writing."
 msgstr "Σφάλμα κατά την εγγραφή."
 
-#: mergeresultwindow.cpp:2801
+#: mergeresultwindow.cpp:2803
 #, kde-format
 msgid "Output:"
 msgstr "Έξοδος:"
 
-#: mergeresultwindow.cpp:2814 mergeresultwindow.cpp:2997
+#: mergeresultwindow.cpp:2816 mergeresultwindow.cpp:2999
 #, kde-format
 msgid "[Modified]"
 msgstr "[Τροποποιημένο]"
 
-#: mergeresultwindow.cpp:2821
+#: mergeresultwindow.cpp:2823
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Κωδικοποίηση για την αποθήκευση:"
 
-#: mergeresultwindow.cpp:2921
+#: mergeresultwindow.cpp:2923
 #, kde-format
 msgid "Conflict"
 msgstr "Σύγκρουση"
 
-#: mergeresultwindow.cpp:2944
+#: mergeresultwindow.cpp:2946
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Κωδικοποιητής από Α: %1"
 
-#: mergeresultwindow.cpp:2946
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Κωδικοποιητής από Β: %1"
 
-#: mergeresultwindow.cpp:2948
+#: mergeresultwindow.cpp:2950
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Κωδικοποιητής από Γ: %1"
@@ -2210,13 +2210,13 @@ msgstr "Γ (Προαιρετικό):"
 msgid "Folder..."
 msgstr "Φάκελος..."
 
-#: optiondialog.cpp:107 optiondialog.cpp:119
+#: optiondialog.cpp:105 optiondialog.cpp:117
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
 msgstr ""
 
-#: optiondialog.cpp:109 optiondialog.cpp:121
+#: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2228,119 +2228,119 @@ msgstr ""
 "\n"
 "Παράδειγμα:"
 
-#: optiondialog.cpp:390
+#: optiondialog.cpp:388
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:400
+#: optiondialog.cpp:398
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Τροποποιήστε αυτό αν οι μη ASCII χαρακτήρες δεν εμφανίζονται σωστά."
 
-#: optiondialog.cpp:484
+#: optiondialog.cpp:482
 #, kde-format
 msgid "Configure"
 msgstr "Διαμόρφωση"
 
-#: optiondialog.cpp:523
+#: optiondialog.cpp:521
 #, kde-format
 msgid "Font"
 msgstr "Γραμματοσειρά"
 
-#: optiondialog.cpp:525
+#: optiondialog.cpp:523
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Γραμματοσειρά επεξεργαστή & εξόδου διαφορών"
 
-#: optiondialog.cpp:543
+#: optiondialog.cpp:541
 #, kde-format
 msgid "Application font"
 msgstr "Γραμματοσειρά εφαρμογής"
 
-#: optiondialog.cpp:548
+#: optiondialog.cpp:546
 #, kde-format
 msgid "File view font"
 msgstr "Γραμματοσειρά προβολής αρχείου"
 
-#: optiondialog.cpp:567
+#: optiondialog.cpp:565
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Χρώμα"
 
-#: optiondialog.cpp:568
+#: optiondialog.cpp:566
 #, kde-format
 msgid "Colors Settings"
 msgstr "Ρυθμίσεις χρωμάτων"
 
-#: optiondialog.cpp:593
+#: optiondialog.cpp:591
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Προβολές επεξεργαστή και διαφορών:"
 
-#: optiondialog.cpp:601
+#: optiondialog.cpp:599
 #, kde-format
 msgid "Foreground color:"
 msgstr "Χρώμα προσκηνίου:"
 
-#: optiondialog.cpp:609
+#: optiondialog.cpp:607
 #, kde-format
 msgid "Background color:"
 msgstr "Χρώμα φόντου:"
 
-#: optiondialog.cpp:619
+#: optiondialog.cpp:617
 #, kde-format
 msgid "Diff background color:"
 msgstr "Χρώμα φόντου διαφορών:"
 
-#: optiondialog.cpp:628
+#: optiondialog.cpp:626
 #, kde-format
 msgid "Color A:"
 msgstr "Χρώμα Α:"
 
-#: optiondialog.cpp:637
+#: optiondialog.cpp:635
 #, kde-format
 msgid "Color B:"
 msgstr "Χρώμα Β:"
 
-#: optiondialog.cpp:646
+#: optiondialog.cpp:644
 #, kde-format
 msgid "Color C:"
 msgstr "Χρώμα Γ:"
 
-#: optiondialog.cpp:654
+#: optiondialog.cpp:652
 #, kde-format
 msgid "Conflict color:"
 msgstr "Χρώμα σύγκρουσης:"
 
-#: optiondialog.cpp:663
+#: optiondialog.cpp:661
 #, kde-format
 msgid "Current range background color:"
 msgstr "Τρέχον εύρος χρώματος φόντου:"
 
-#: optiondialog.cpp:672
+#: optiondialog.cpp:670
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Τρέχον εύρος χρώματος φόντου διαφορών:"
 
-#: optiondialog.cpp:680
+#: optiondialog.cpp:678
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Χρώμα για χειροκίνητα στοιχισμένα εύρη διαφορών:"
 
-#: optiondialog.cpp:687
+#: optiondialog.cpp:685
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "Προβολή σύγκρισης φακέλων:"
 
-#: optiondialog.cpp:693
+#: optiondialog.cpp:691
 #, kde-format
 msgid "Newest file color:"
 msgstr "Χρώμα νεότερου αρχείου:"
 
-#: optiondialog.cpp:698
+#: optiondialog.cpp:696
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
@@ -2349,37 +2349,37 @@ msgstr ""
 "Η τροποποίηση αυτού του χρώματος θα έχει ισχύ κατά την επόμενη σύγκριση "
 "φακέλων."
 
-#: optiondialog.cpp:703
+#: optiondialog.cpp:701
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Χρώμα παλαιότερου αρχείου:"
 
-#: optiondialog.cpp:712
+#: optiondialog.cpp:710
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Χρώμα μέσου αρχείου:"
 
-#: optiondialog.cpp:721
+#: optiondialog.cpp:719
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Χρώμα αρχείων που λείπουν:"
 
-#: optiondialog.cpp:735
+#: optiondialog.cpp:733
 #, kde-format
 msgid "Editor"
 msgstr "Επεξεργαστής"
 
-#: optiondialog.cpp:736
+#: optiondialog.cpp:734
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Συμπεριφορά επεξεργαστή"
 
-#: optiondialog.cpp:758
+#: optiondialog.cpp:756
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "Το Tab εισάγει κενά"
 
-#: optiondialog.cpp:762
+#: optiondialog.cpp:760
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2389,17 +2389,17 @@ msgstr ""
 "Ενεργοποιημένο: Πατώντας το tab εισάγεται ο κατάλληλος αριθμός κενών.\n"
 "Απενεργοποιημένο: Θα εισαχθεί ο χαρακτήρας στηλοθέτη (tab)."
 
-#: optiondialog.cpp:767
+#: optiondialog.cpp:765
 #, kde-format
 msgid "Tab size:"
 msgstr "Μέγεθος στηλοθέτη:"
 
-#: optiondialog.cpp:774
+#: optiondialog.cpp:772
 #, kde-format
 msgid "Auto indentation"
 msgstr "Αυτόματη χρήση εσοχών"
 
-#: optiondialog.cpp:778
+#: optiondialog.cpp:776
 #, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
@@ -2407,12 +2407,12 @@ msgstr ""
 "Ενεργοποιημένο: Η εσοχή της προηγούμενης γραμμής θα χρησιμοποιηθεί για μια "
 "νέα γραμμή.\n"
 
-#: optiondialog.cpp:781
+#: optiondialog.cpp:779
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Αυτόματη αντιγραφή επιλογής"
 
-#: optiondialog.cpp:785
+#: optiondialog.cpp:783
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2422,25 +2422,25 @@ msgstr ""
 "Ενεργοποιημένο: Οποιαδήποτε επιλογή γράφεται άμεσα στο πρόχειρο.\n"
 "Απενεργοποιημένο: Θα πρέπει να την αντιγράψετε εσείς π.χ. μέσω του Ctrl-C."
 
-#: optiondialog.cpp:795
+#: optiondialog.cpp:793
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:796
+#: optiondialog.cpp:794
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "Dos/Windows"
 
-#: optiondialog.cpp:797
+#: optiondialog.cpp:795
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Αυτόματη ανίχνευση"
 
-#: optiondialog.cpp:800
+#: optiondialog.cpp:798
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2451,22 +2451,22 @@ msgstr ""
 "αρχείο.\n"
 "DOS/Windows: CR+LF; UNIX: LF; με τα CR=0D, LF=0A"
 
-#: optiondialog.cpp:810
+#: optiondialog.cpp:808
 #, kde-format
 msgid "Diff"
 msgstr "Diff"
 
-#: optiondialog.cpp:811
+#: optiondialog.cpp:809
 #, kde-format
 msgid "Diff Settings"
 msgstr "Ρυθμίσεις του Diff"
 
-#: optiondialog.cpp:834
+#: optiondialog.cpp:832
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "Αγνόηση αριθμών (να θεωρούνται κενά)"
 
-#: optiondialog.cpp:838
+#: optiondialog.cpp:836
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2478,34 +2478,34 @@ msgstr ""
 "παράβλεψη κενών).\n"
 "Μπορεί να φανεί χρήσιμο κατά τη σύγκριση αρχείων με αριθμητικά δεδομένα."
 
-#: optiondialog.cpp:842
+#: optiondialog.cpp:840
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "Θεώρηση των σχολίων C/C++ σαν κενά."
 
-#: optiondialog.cpp:845
+#: optiondialog.cpp:843
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "Θεώρηση των σχολίων C/C++ σαν κενά."
 
-#: optiondialog.cpp:848
+#: optiondialog.cpp:846
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "Αγνόηση διάκρισης πεζών κεφαλαίων (να θεωρούνται κενά)"
 
-#: optiondialog.cpp:852
+#: optiondialog.cpp:850
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "Χειρισμός των διαφορών σε πεζά/κεφαλαία ως αλλαγές κενών. ('α'<=>'Α')"
 
-#: optiondialog.cpp:855
+#: optiondialog.cpp:853
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Εντολή προεπεξεργαστή:"
 
-#: optiondialog.cpp:860
+#: optiondialog.cpp:858
 #, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
@@ -2513,12 +2513,12 @@ msgstr ""
 "Προεπεξεργασία ορισμένη από το χρήστη. (Δείτε τα εγχειρίδια για "
 "λεπτομέρειες)."
 
-#: optiondialog.cpp:863
+#: optiondialog.cpp:861
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Εντολή προεπεξεργαστή για ταίριασμα γραμμών:"
 
-#: optiondialog.cpp:868
+#: optiondialog.cpp:866
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2528,12 +2528,12 @@ msgstr ""
 "Ο προεπεξεργαστής χρησιμοποιείται μόνο κατά το ταίριασμα γραμμών.\n"
 "(Δείτε τα εγχειρίδια για λεπτομέρειες)."
 
-#: optiondialog.cpp:871
+#: optiondialog.cpp:869
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "Εις βάθος ανάλυση (πιο αργό)"
 
-#: optiondialog.cpp:875
+#: optiondialog.cpp:873
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2543,12 +2543,12 @@ msgstr ""
 "Ενεργοποιεί την επιλογή --minimal για το εξωτερικό diff.\n"
 "Η ανάλυση μεγάλων αρχείων θα είναι αισθητά πιο αργή."
 
-#: optiondialog.cpp:879
+#: optiondialog.cpp:877
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "Στοίχιση Β και Γ για 3 αρχεία εισόδου"
 
-#: optiondialog.cpp:883
+#: optiondialog.cpp:881
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2562,23 +2562,23 @@ msgstr ""
 "διαδικασία.\n"
 " (Προκαθορισμένα ανενεργό.)"
 
-#: optiondialog.cpp:894
+#: optiondialog.cpp:892
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Συγχώνευση"
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:893
 #, kde-format
 msgid "Merge Settings"
 msgstr "Ρυθμίσεις συγχώνευσης"
 
-#: optiondialog.cpp:918
+#: optiondialog.cpp:916
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Καθυστέρηση αυτόματης μετάβασης (ms):"
 
-#: optiondialog.cpp:924
+#: optiondialog.cpp:922
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2590,29 +2590,29 @@ msgstr ""
 "για τον καθορισμένο χρόνο, πριν την μεταπήδηση στην επόμενη σύγκρουση. "
 "Εύρος: 0-2000 ms"
 
-#: optiondialog.cpp:928
+#: optiondialog.cpp:926
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Εμφάνιση παραθύρων διαλόγου πληροφοριών"
 
-#: optiondialog.cpp:931
+#: optiondialog.cpp:929
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr ""
 "Εμφανίζει ένα παράθυρο διαλόγου με πληροφορία για τον αριθμό των συγκρούσεων."
 
-#: optiondialog.cpp:934
+#: optiondialog.cpp:932
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Προκαθορισμός κενών διαφορών συγχώνευσης 2 αρχείων:"
 
-#: optiondialog.cpp:939 optiondialog.cpp:952
+#: optiondialog.cpp:937 optiondialog.cpp:950
 #, kde-format
 msgid "Manual Choice"
 msgstr "Χειροκίνητη επιλογή"
 
-#: optiondialog.cpp:943 optiondialog.cpp:957
+#: optiondialog.cpp:941 optiondialog.cpp:955
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2622,28 +2622,28 @@ msgstr ""
 "Επιτρέπει στον αλγόριθμο συγχώνευσης την αυτόματη επιλογή μιας εισόδου για "
 "διαφορές μόνο κενών."
 
-#: optiondialog.cpp:947
+#: optiondialog.cpp:945
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Προκαθορισμός κενών διαφορών συγχώνευσης 3 αρχείων:"
 
-#: optiondialog.cpp:961
+#: optiondialog.cpp:959
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Κανονική έκφραση αυτόματης συγχώνευσης"
 
-#: optiondialog.cpp:969 smalldialogs.cpp:372
+#: optiondialog.cpp:967 smalldialogs.cpp:372
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Κανονική έκφραση αυτόματης συγχώνευσης:"
 
-#: optiondialog.cpp:977
+#: optiondialog.cpp:975
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
 "Εκτέλεση κανονικής έκφρασης αυτόματης συγχώνευσης στην αρχή της συγχώνευσης"
 
-#: optiondialog.cpp:980
+#: optiondialog.cpp:978
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2653,55 +2653,55 @@ msgstr ""
 "Εκτέλεση της συγχώνευσης για κανονικές εκφράσεις αυτόματης συγχώνευσης\n"
 "αμέσως μετά την έναρξη της συγχώνευσης.\n"
 
-#: optiondialog.cpp:985
+#: optiondialog.cpp:983
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Συγχώνευση ιστορικού ελέγχου έκδοσης"
 
-#: optiondialog.cpp:993 smalldialogs.cpp:399
+#: optiondialog.cpp:991 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Κανονική έκφραση έναρξης ιστορικού:"
 
-#: optiondialog.cpp:1001 smalldialogs.cpp:427
+#: optiondialog.cpp:999 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Κανονική έκφραση για την έναρξη της καταχώρησης ιστορικού:"
 
-#: optiondialog.cpp:1017
+#: optiondialog.cpp:1015
 #, kde-format
 msgid "History merge sorting"
 msgstr "Ταξινόμηση ιστορικού συγχώνευσης"
 
-#: optiondialog.cpp:1020
+#: optiondialog.cpp:1018
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "Ταξινόμηση ιστορικού ελέγχου εκδόσεων κατά ένα κλειδί."
 
-#: optiondialog.cpp:1030
+#: optiondialog.cpp:1028
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "Σειρά ταξινόμησης ιστορικού ελέγχου εκδόσεων:"
 
-#: optiondialog.cpp:1040
+#: optiondialog.cpp:1038
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "Συγχώνευση ιστορικού ελέγχου έκδοσης κατά την έναρξη συγχώνευσης"
 
-#: optiondialog.cpp:1043
+#: optiondialog.cpp:1041
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr ""
 "Εκτέλεση συγχώνευσης ιστορικού ελέγχου έκδοσης κατά την έναρξη συγχώνευσης."
 
-#: optiondialog.cpp:1047
+#: optiondialog.cpp:1045
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Μέγιστος αριθμός καταχωρήσεων ιστορικού:"
 
-#: optiondialog.cpp:1051
+#: optiondialog.cpp:1049
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
@@ -2709,17 +2709,17 @@ msgstr ""
 "Αφαίρεση μετά από καθορισμένο αριθμό. Χρησιμοποιήστε το -1 για απεριόριστο "
 "αριθμό καταχωρήσεων."
 
-#: optiondialog.cpp:1055
+#: optiondialog.cpp:1053
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Δοκιμή των κανονικών εκφράσεών σας"
 
-#: optiondialog.cpp:1060
+#: optiondialog.cpp:1058
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Εντολή συγχώνευσης με σχετικού:"
 
-#: optiondialog.cpp:1065
+#: optiondialog.cpp:1063
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2731,12 +2731,12 @@ msgstr ""
 "όταν δεν εντοπιστούν άλλες σχετικές τροποποιήσεις.\n"
 "Καλείται με παραμέτρους τα: όνομααρχείου1 όνομααρχείου2 όνομααρχείου3"
 
-#: optiondialog.cpp:1070
+#: optiondialog.cpp:1068
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "Αυτόματη αποθήκευση και έξοδος κατά τη συγχώνευση χωρίς συγκρούσεις"
 
-#: optiondialog.cpp:1074
+#: optiondialog.cpp:1072
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2751,29 +2751,29 @@ msgstr ""
 "γίνεται αυτόματη αποθήκευση και έξοδος.\n"
 "(Παρόμοιο με την επιλογή της γραμμής εντολών \"--auto\"."
 
-#: optiondialog.cpp:1085 optiondialog.cpp:1086
+#: optiondialog.cpp:1083 optiondialog.cpp:1084
 #, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "Φάκελος"
 
-#: optiondialog.cpp:1106
+#: optiondialog.cpp:1104
 #, kde-format
 msgid "Recursive folders"
 msgstr "Αναδρομικά στους φακέλους"
 
-#: optiondialog.cpp:1109
+#: optiondialog.cpp:1107
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "Αν θα αναλυθούν οι υποφάκελοι ή όχι."
 
-#: optiondialog.cpp:1111
+#: optiondialog.cpp:1109
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Μοτίβα αρχείου:"
 
-#: optiondialog.cpp:1117
+#: optiondialog.cpp:1115
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2785,12 +2785,12 @@ msgstr ""
 "Σύμβολα υποκατάστασης: '*' και '?'\n"
 "Μπορούν να οριστούν πολλαπλά μοτίβα χρησιμοποιώντας το διαχωριστικό: ';'"
 
-#: optiondialog.cpp:1122
+#: optiondialog.cpp:1120
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Αντίστροφα μοτίβα αρχείου:"
 
-#: optiondialog.cpp:1128
+#: optiondialog.cpp:1126
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2802,12 +2802,12 @@ msgstr ""
 "Σύμβολα υποκατάστασης: '*' και '?'\n"
 "Μπορούν να οριστούν πολλαπλά μοτίβα χρησιμοποιώντας το διαχωριστικό: ';'"
 
-#: optiondialog.cpp:1133
+#: optiondialog.cpp:1131
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "Αντίστροφα μοτίβα φακέλου:"
 
-#: optiondialog.cpp:1139
+#: optiondialog.cpp:1137
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2819,12 +2819,12 @@ msgstr ""
 "Σύμβολα υποκατάστασης: '*' και '?'\n"
 "Μπορούν να οριστούν πολλαπλά μοτίβα χρησιμοποιώντας το διαχωριστικό: ';'"
 
-#: optiondialog.cpp:1144
+#: optiondialog.cpp:1142
 #, kde-format
 msgid "Use Ignore File"
 msgstr "Χρήση Ignore αρχείου"
 
-#: optiondialog.cpp:1148
+#: optiondialog.cpp:1146
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2836,23 +2836,23 @@ msgstr ""
 "εκδόσεων.\n"
 "Μέσω των τοπικών ignore αρχείων αυτό μπορεί να αφορά κάποιον φάκελο."
 
-#: optiondialog.cpp:1152
+#: optiondialog.cpp:1150
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "Αναζήτηση κρυφών αρχείων και φακέλων"
 
-#: optiondialog.cpp:1155
+#: optiondialog.cpp:1153
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "Βρίσκει κρυφά αρχεία και φακέλους."
 
-#: optiondialog.cpp:1158
+#: optiondialog.cpp:1156
 #, kde-format
 msgid "Follow file links"
 msgstr "Ακολούθηση δεσμών αρχείων"
 
-#: optiondialog.cpp:1162
+#: optiondialog.cpp:1160
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2862,12 +2862,12 @@ msgstr ""
 "Ενεργοποιημένο: Σύγκριση του αρχείου στο οποίο δείχνει ο δεσμός.\n"
 "Απενεργοποιημένο: Σύγκριση των δεσμών."
 
-#: optiondialog.cpp:1166
+#: optiondialog.cpp:1164
 #, kde-format
 msgid "Follow folder links"
 msgstr "Ακολούθηση δεσμών φακέλων"
 
-#: optiondialog.cpp:1170
+#: optiondialog.cpp:1168
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2877,12 +2877,12 @@ msgstr ""
 "Ενεργοποιημένο: Σύγκριση του φακέλου στον οποίο δείχνει ο δεσμός.\n"
 "Απενεργοποιημένο: Σύγκριση των δεσμών."
 
-#: optiondialog.cpp:1179
+#: optiondialog.cpp:1177
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "Σύγκριση αρχείων με ευαισθησία κεφαλαίων/πεζών"
 
-#: optiondialog.cpp:1183
+#: optiondialog.cpp:1181
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2896,12 +2896,12 @@ msgstr ""
 "ταιριάζουν. (Προκαθορισμένο για τα Windows είναι ανενεργό, ενώ σε άλλη "
 "περίπτωση είναι ενεργό.)"
 
-#: optiondialog.cpp:1187
+#: optiondialog.cpp:1185
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "Ανάπτυξη όλων των υποφακέλων στη φόρτωση"
 
-#: optiondialog.cpp:1191
+#: optiondialog.cpp:1189
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2912,12 +2912,12 @@ msgstr ""
 "φακέλους.\n"
 "Απενεργοποιημένο: Οι υποφάκελοι να παραμείνουν συμπτυγμένοι."
 
-#: optiondialog.cpp:1195
+#: optiondialog.cpp:1193
 #, kde-format
 msgid "Skip folder status report"
 msgstr "Να παραλείπεται η αναφορά κατάστασης φακέλων"
 
-#: optiondialog.cpp:1199
+#: optiondialog.cpp:1197
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2927,28 +2927,28 @@ msgstr ""
 "Ενεργοποιημένο: Να μην εμφανίζεται η κατάσταση σύγκρισης φακέλων.\n"
 "Απενεργοποιημένο: Να εμφανίζεται ο διάλογος κατάστασης στην έναρξη."
 
-#: optiondialog.cpp:1203
+#: optiondialog.cpp:1201
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Λειτουργία σύγκρισης αρχείου"
 
-#: optiondialog.cpp:1208
+#: optiondialog.cpp:1206
 #, kde-format
 msgid "Binary comparison"
 msgstr "Δυαδική σύγκριση"
 
-#: optiondialog.cpp:1210
+#: optiondialog.cpp:1208
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "Δυαδική σύγκριση του κάθε αρχείου (προκαθορισμένο)"
 
-#: optiondialog.cpp:1213
+#: optiondialog.cpp:1211
 #, kde-format
 msgid "Full analysis"
 msgstr "Πλήρης ανάλυση"
 
-#: optiondialog.cpp:1215
+#: optiondialog.cpp:1213
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2958,12 +2958,12 @@ msgstr ""
 "Πραγματοποιεί πλήρη ανάλυση και εμφανίζει στατιστικά σε επιπλέον στήλες.\n"
 "(Πιο αργό από τη δυαδική σύγκριση, και πολύ πιο αργό για δυαδικά αρχεία)."
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1217
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Εμπιστοσύνη στο μέγεθος και την ημερομηνία τροποποίησης (μη ασφαλές)"
 
-#: optiondialog.cpp:1221
+#: optiondialog.cpp:1219
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2979,7 +2979,7 @@ msgstr ""
 "εμφανίζονται ως διαφορετικά.\n"
 "Χρήσιμο για μεγάλους φακέλους ή αργά δίκτυα."
 
-#: optiondialog.cpp:1226
+#: optiondialog.cpp:1224
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -2988,7 +2988,7 @@ msgstr ""
 "Δείξτε εμπιστοσύνη στο μέγεθος και στην ημερομηνία, αλλά χρησιμοποιήστε "
 "δυαδική σύγκριση αν η ημερομηνία δεν είναι ίδια (μη ασφαλές)"
 
-#: optiondialog.cpp:1228
+#: optiondialog.cpp:1226
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3003,12 +3003,12 @@ msgstr ""
 "δυαδικής σύγκρισης.\n"
 "Χρήσιμο για μεγάλους φακέλους ή αργά δίκτυα."
 
-#: optiondialog.cpp:1233
+#: optiondialog.cpp:1231
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Δείξτε εμπιστοσύνη στο μέγεθος (μη ασφαλές)"
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1233
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3020,12 +3020,12 @@ msgstr ""
 "Χρήσιμο για μεγάλους φακέλους ή αργά δίκτυα όπου η ημερομηνία τροποποιείται "
 "κατά τη λήψη."
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1240
 #, kde-format
 msgid "Synchronize folders"
 msgstr "Συγχρονισμός φακέλλων"
 
-#: optiondialog.cpp:1246
+#: optiondialog.cpp:1244
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3038,12 +3038,12 @@ msgstr ""
 "Δουλεύει μόνο κατά τη σύγκριση δύο φακέλων χωρίς να έχει καθοριστεί "
 "προορισμός."
 
-#: optiondialog.cpp:1252
+#: optiondialog.cpp:1250
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Οι διαφορές των κενών θεωρούνται ίσες"
 
-#: optiondialog.cpp:1256
+#: optiondialog.cpp:1254
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3053,12 +3053,12 @@ msgstr ""
 "Αν τα αρχεία διαφέρουν μόνο σε κενούς χαρακτήρες θεωρούνται ότι είναι ίσα.\n"
 "Αυτό είναι ενεργοποιημένο μόνο όταν επιλεγεί η πλήρης ανάλυση."
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1260
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Αντιγραφή του νεότερου αντί για συγχώνευση (μη ασφαλές)"
 
-#: optiondialog.cpp:1266
+#: optiondialog.cpp:1264
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3070,12 +3070,12 @@ msgstr ""
 "(Χρησιμοποιήστε το μόνο αν ξέρετε τι κάνετε!)\n"
 "Δουλεύει μόνο όταν συγκρίνονται δύο φάκελοι."
 
-#: optiondialog.cpp:1271
+#: optiondialog.cpp:1269
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Δημιουργία εφεδρικών αντιγράφων (.orig)"
 
-#: optiondialog.cpp:1275
+#: optiondialog.cpp:1273
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3085,17 +3085,17 @@ msgstr ""
 "Όταν ένα αρχείο αποθηκευτεί με το όνομα ενός υπάρχοντος αρχείου, το υπάρχον "
 "αρχείο θα μετονομαστεί με επέκταση '.orig' αντί να διαγραφεί."
 
-#: optiondialog.cpp:1284 optiondialog.cpp:1285
+#: optiondialog.cpp:1282 optiondialog.cpp:1283
 #, kde-format
 msgid "Regional Settings"
 msgstr "Τοπικές ρυθμίσεις"
 
-#: optiondialog.cpp:1308
+#: optiondialog.cpp:1306
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "Χρήση της ίδιας κωδικοποίησης παντού:"
 
-#: optiondialog.cpp:1312
+#: optiondialog.cpp:1310
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3107,17 +3107,17 @@ msgstr ""
 "Απενεργοποιήστε αυτή την επιλογή αν χρειάζεστε διαφορετικές επί μέρους "
 "επιλογές."
 
-#: optiondialog.cpp:1316
+#: optiondialog.cpp:1314
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Σημείωση: Η τοπική κωδικοποίηση είναι «%1»"
 
-#: optiondialog.cpp:1320
+#: optiondialog.cpp:1318
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "Κωδικοποίηση αρχείου για το Α:"
 
-#: optiondialog.cpp:1327
+#: optiondialog.cpp:1325
 #, fuzzy, kde-format
 #| msgid ""
 #| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3135,34 +3135,34 @@ msgstr ""
 "Αν το αρχείο δεν είναι Unicode θα χρησιμοποιηθεί η επιλεγμένη κωδικοποίηση.\n"
 "(Η ανίχνευση του Unicode εξαρτάται από τα πρώτα byte του αρχείου.)"
 
-#: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
+#: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, fuzzy, kde-format
 #| msgctxt "Automatically detected line ending"
 #| msgid "Autodetect"
 msgid "Auto Detect"
 msgstr "Αυτόματη ανίχνευση"
 
-#: optiondialog.cpp:1336
+#: optiondialog.cpp:1334
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "Κωδικοποίηση αρχείου για το Β:"
 
-#: optiondialog.cpp:1347
+#: optiondialog.cpp:1345
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "Κωδικοποίηση αρχείου για το Γ:"
 
-#: optiondialog.cpp:1358
+#: optiondialog.cpp:1356
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Κωδικοποίηση αρχείου για την έξοδο συγχώνευσης και την αποθήκευση:"
 
-#: optiondialog.cpp:1363
+#: optiondialog.cpp:1361
 #, kde-format
 msgid "Auto Select"
 msgstr "Αυτόματη επιλογή"
 
-#: optiondialog.cpp:1367
+#: optiondialog.cpp:1365
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3174,17 +3174,17 @@ msgstr ""
 "Σε περίπτωση αμφιβολίας θα εμφανιστεί ένα παράθυρο διαλόγου όπου ο χρήστης "
 "θα πρέπει να επιλέξει την κωδικοποίηση για την αποθήκευση."
 
-#: optiondialog.cpp:1370
+#: optiondialog.cpp:1368
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Κωδικοποίηση για τα αρχεία του προεπεξεργαστή:"
 
-#: optiondialog.cpp:1382
+#: optiondialog.cpp:1380
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Γλώσσας αναγνώσιμη από δεξιά στα  αριστερά"
 
-#: optiondialog.cpp:1386
+#: optiondialog.cpp:1384
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3194,22 +3194,22 @@ msgstr ""
 "Μερικές γλώσσες διαβάζονται από δεξιά στα αριστερά.\n"
 "Αυτή η ρύθμιση θα τροποποίηση τον προβολέα και τον επεξεργαστή κατάλληλα."
 
-#: optiondialog.cpp:1396
+#: optiondialog.cpp:1394
 #, kde-format
 msgid "Integration"
 msgstr "Ενσωμάτωση"
 
-#: optiondialog.cpp:1397
+#: optiondialog.cpp:1395
 #, kde-format
 msgid "Integration Settings"
 msgstr "Ρυθμίσεις ενσωμάτωσης"
 
-#: optiondialog.cpp:1418
+#: optiondialog.cpp:1416
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Επιλογές γραμμής εντολών για αγνόηση:"
 
-#: optiondialog.cpp:1424
+#: optiondialog.cpp:1422
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3223,12 +3223,12 @@ msgstr ""
 "Μπορούν να ορισθούν πολλές τιμές διαχωρισμένες με το ';'\n"
 "Αυτό καταστέλλει το σφάλμα \"Άγνωστης επιλογής\"."
 
-#: optiondialog.cpp:1429
+#: optiondialog.cpp:1427
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Έξοδος επίσης και με το πλήκτρο Esc"
 
-#: optiondialog.cpp:1433
+#: optiondialog.cpp:1431
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3238,7 +3238,7 @@ msgstr ""
 "Γρήγορη μέθοδος εξόδου.\n"
 " Γι' αυτούς που έχουν συνηθίσει τη χρήση του πλήκτρου Esc."
 
-#: optiondialog.cpp:1491
+#: optiondialog.cpp:1489
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr ""
@@ -3635,33 +3635,33 @@ msgstr ""
 "Αδυναμία ταιριάσματος παρενθέσεων ανοίγματος και κλεισίματος στην κανονική "
 "έκφραση."
 
-#: SourceData.cpp:150
+#: SourceData.cpp:149
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "Η εγγραφή δεδομένων στο προσωρινό αρχείο απέτυχε."
 
-#: SourceData.cpp:155
+#: SourceData.cpp:154
 #, kde-format
 msgid "From Clipboard"
 msgstr "Από το πρόχειρο"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:343
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "Το %1 δεν είναι κανονικό αρχείο."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:380
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Το αρχείο %1 είναι πολύ μεγάλο για επεξεργασία. Παραλείπεται."
 
-#: SourceData.cpp:410
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Προσωρινό αρχείο είναι το: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3676,7 +3676,7 @@ msgstr ""
 "\n"
 "Η εντολή προεπεξεργασίας θα απενεργοποιηθεί τώρα."
 
-#: SourceData.cpp:511
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3692,7 +3692,7 @@ msgstr ""
 "\n"
 "Η δυνατότητα προεπεξεργασίας αντιστοίχησης γραμμών θα απενεργοποιηθεί τώρα."
 
-#: SourceData.cpp:517
+#: SourceData.cpp:516
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-21 00:43+0000\n"
+"POT-Creation-Date: 2024-11-27 00:42+0000\n"
 "PO-Revision-Date: 2024-11-21 05:11+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -94,7 +94,7 @@ msgstr "საქაღალდის კითხვა: %1"
 msgid "Listing directory: %1"
 msgstr "საქაღალდის სია: %1"
 
-#: diff.cpp:1596 diff.cpp:1612
+#: diff.cpp:1594 diff.cpp:1610
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -103,7 +103,7 @@ msgstr ""
 "მონაცემების კარგვის შეცდომა:\n"
 "თუ ეს განმეორებადია, ავტორს დაუკავშირდით.\n"
 
-#: diff.cpp:1598 diff.cpp:1614
+#: diff.cpp:1596 diff.cpp:1612
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "მძიმე შიდა შეცდომა"
@@ -123,7 +123,7 @@ msgstr "ფაილი %1: ხაზი მიუწდომელია"
 msgid "Encoding:"
 msgstr "კოდირება:"
 
-#: difftextwindow.cpp:1979 mergeresultwindow.cpp:2829 optiondialog.cpp:789
+#: difftextwindow.cpp:1979 mergeresultwindow.cpp:2831 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "ხაზის დასრულების სტილი:"
@@ -138,12 +138,12 @@ msgstr "A (ბაზა)"
 msgid "Encoding: %1"
 msgstr "კოდირება: %1"
 
-#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2877
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2874
+#: difftextwindow.cpp:2007 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -158,7 +158,7 @@ msgstr "ხაზის დასრულების სტილი: %1"
 msgid "Unknown"
 msgstr "უცნობი"
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1067
+#: difftextwindow.cpp:2036 kdiff3.cpp:1063
 #, kde-format
 msgid "Top line"
 msgstr "ზედა ხაზი"
@@ -173,7 +173,7 @@ msgstr "დასასრული"
 msgid "Open File"
 msgstr "ფაილის გახსნა"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:389
+#: difftextwindow.cpp:2148 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "8-ბიტიანი უნიკოდი"
@@ -364,7 +364,7 @@ msgstr ""
 "ამჟამად საქაღალდეების შერწყმით ხარ დაკავებული. დარწმუნებული ბრძანდებით, რომ "
 "გნებავთ, გააუქმოთ შერწყმა და თავიდან დაასკანიროთ საქაღალე?"
 
-#: directorymergewindow.cpp:692 kdiff3.cpp:924 kdiff3.cpp:934 kdiff3.cpp:946
+#: directorymergewindow.cpp:692 kdiff3.cpp:920 kdiff3.cpp:930 kdiff3.cpp:942
 #: mergeresultwindow.cpp:315 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
@@ -1177,89 +1177,89 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr "ფონტის შეცვლა"
 
-#: kdiff3.cpp:181
+#: kdiff3.cpp:177
 #, kde-format
 msgid "Current Configuration:"
 msgstr "მიმდინარე კონფიგურაცია:"
 
-#: kdiff3.cpp:186
+#: kdiff3.cpp:182
 #, kde-format
 msgid "Config Option Error:"
 msgstr "კონფიგურაციის პარამეტრის შეცდომა:"
 
-#: kdiff3.cpp:241
+#: kdiff3.cpp:237
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "გამოყენებულია პარამეტრი --auto, გამოტანის ფაილი კი მითითებული არაა."
 
-#: kdiff3.cpp:377
+#: kdiff3.cpp:373
 #, kde-format
 msgid "Directory merge"
 msgstr "საქაღალდის შერწყმა"
 
-#: kdiff3.cpp:382
+#: kdiff3.cpp:378
 #, kde-format
 msgid "Merge info"
 msgstr "შერწყმის ინფორმაცია"
 
-#: kdiff3.cpp:622
+#: kdiff3.cpp:618
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
 msgstr "ფაილს საქაღალდეს ვერ შევადარებ."
 
-#: kdiff3.cpp:623
+#: kdiff3.cpp:619
 #, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
 msgstr "შედარების ცუდი მცდელობა"
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "პარამეტრი --auto საქაღალდეების შედარებისას არ მუშაობს."
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Saving failed."
 msgstr "შენახვის შეცდომა."
 
-#: kdiff3.cpp:719 pdiff.cpp:795
+#: kdiff3.cpp:715 pdiff.cpp:795
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "ჩავარდა გახსნა შემდეგი ფაილებისთვის:"
 
-#: kdiff3.cpp:728 pdiff.cpp:804
+#: kdiff3.cpp:724 pdiff.cpp:804
 #, kde-format
 msgid "File open error"
 msgstr "ფაილის გახსნის შეცდომა"
 
-#: kdiff3.cpp:768
+#: kdiff3.cpp:764
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "სტატუსის ზოლის ჩართ/გამორთ"
 
-#: kdiff3.cpp:771
+#: kdiff3.cpp:767
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "KDiff3-ის მორგება..."
 
-#: kdiff3.cpp:777
+#: kdiff3.cpp:773
 #, kde-format
 msgid "Search for a string"
 msgstr "სტრიქონის ძებნა"
 
-#: kdiff3.cpp:779
+#: kdiff3.cpp:775
 #, kde-format
 msgid "Search again for the string"
 msgstr "სტრიქონის კიდევ მოძებნა"
 
-#: kdiff3.cpp:798
+#: kdiff3.cpp:794
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "მიმდინარე დელტაზე"
 
-#: kdiff3.cpp:798
+#: kdiff3.cpp:794
 #, kde-format
 msgid ""
 "Current\n"
@@ -1268,12 +1268,12 @@ msgstr ""
 "მიმდინარე\n"
 "დელტა"
 
-#: kdiff3.cpp:800
+#: kdiff3.cpp:796
 #, kde-format
 msgid "Go to First Delta"
 msgstr "პირველ დელტაზე"
 
-#: kdiff3.cpp:800
+#: kdiff3.cpp:796
 #, kde-format
 msgid ""
 "First\n"
@@ -1282,12 +1282,12 @@ msgstr ""
 "პირველი\n"
 "დელტა"
 
-#: kdiff3.cpp:802
+#: kdiff3.cpp:798
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "ბოლო დელტაზე"
 
-#: kdiff3.cpp:802
+#: kdiff3.cpp:798
 #, kde-format
 msgid ""
 "Last\n"
@@ -1296,7 +1296,7 @@ msgstr ""
 "ბოლო\n"
 "დელტა"
 
-#: kdiff3.cpp:804
+#: kdiff3.cpp:800
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
@@ -1304,7 +1304,7 @@ msgstr ""
 "(გადაახტება გამოტოვებების სხვაობებს, როცა \"გამოტოვებების ჩვენება\" "
 "გამორთულია.)"
 
-#: kdiff3.cpp:805
+#: kdiff3.cpp:801
 #, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
@@ -1314,12 +1314,12 @@ msgstr ""
 "(არ გადაახტება გამოტოვებების სხვაობებს მაშინაც კი, როცა \"გამოტოვებების "
 "ჩვენება\" გამორთულია.)"
 
-#: kdiff3.cpp:806
+#: kdiff3.cpp:802
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "წინა დელტაზე"
 
-#: kdiff3.cpp:806
+#: kdiff3.cpp:802
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1328,12 +1328,12 @@ msgstr ""
 "წინა\n"
 "დელტა"
 
-#: kdiff3.cpp:808
+#: kdiff3.cpp:804
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "შემდეგ დელტაზე"
 
-#: kdiff3.cpp:808
+#: kdiff3.cpp:804
 #, kde-format
 msgid ""
 "Next\n"
@@ -1342,12 +1342,12 @@ msgstr ""
 "შემდეგი\n"
 "დელტა"
 
-#: kdiff3.cpp:810
+#: kdiff3.cpp:806
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "წინა კონფლიქტზე"
 
-#: kdiff3.cpp:810
+#: kdiff3.cpp:806
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1356,12 +1356,12 @@ msgstr ""
 "წინა\n"
 "კონფლიქტი"
 
-#: kdiff3.cpp:812
+#: kdiff3.cpp:808
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "შემდეგ კონფლიქტზე"
 
-#: kdiff3.cpp:812
+#: kdiff3.cpp:808
 #, kde-format
 msgid ""
 "Next\n"
@@ -1370,12 +1370,12 @@ msgstr ""
 "შემდეგი\n"
 "კონფლიქტი"
 
-#: kdiff3.cpp:814
+#: kdiff3.cpp:810
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "წინა გადაუჭრელ კონფლიქტზე"
 
-#: kdiff3.cpp:814
+#: kdiff3.cpp:810
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1384,12 +1384,12 @@ msgstr ""
 "წინა\n"
 "გადაუჭრელი"
 
-#: kdiff3.cpp:816
+#: kdiff3.cpp:812
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "შემდეგ გადაუჭრელ კონფლიქტზე"
 
-#: kdiff3.cpp:816
+#: kdiff3.cpp:812
 #, kde-format
 msgid ""
 "Next\n"
@@ -1398,13 +1398,13 @@ msgstr ""
 "შემდეგი\n"
 "გადაუჭრელი"
 
-#: kdiff3.cpp:818
+#: kdiff3.cpp:814
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "ხაზზე გადასვლა"
 
-#: kdiff3.cpp:818
+#: kdiff3.cpp:814
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1414,19 +1414,19 @@ msgstr ""
 "ხაზზე \n"
 "გადასვლა"
 
-#: kdiff3.cpp:819
+#: kdiff3.cpp:815
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
 msgstr "მითითებულ ხაზზე გადასვლა."
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:816
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "ხაზების არჩევა A-დან"
 
-#: kdiff3.cpp:820
+#: kdiff3.cpp:816
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1436,13 +1436,13 @@ msgstr ""
 "A-ის\n"
 "არჩევა"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:817
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "ხაზების არჩევა B-დან"
 
-#: kdiff3.cpp:821
+#: kdiff3.cpp:817
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1452,13 +1452,13 @@ msgstr ""
 "B-ის\n"
 "არჩევა"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:818
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "ხაზების არჩევა C-დან"
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:818
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1468,14 +1468,14 @@ msgstr ""
 "C-ის\n"
 "არჩევა"
 
-#: kdiff3.cpp:823
+#: kdiff3.cpp:819
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 "ავტომატურად გადასვლა შემდეგ გადაუწყვეტ კონფლიქტზე წყაროს არჩევის შემდეგ"
 
-#: kdiff3.cpp:823
+#: kdiff3.cpp:819
 #, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
@@ -1485,12 +1485,12 @@ msgstr ""
 "ავტომატური\n"
 "შემდეგი"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:821
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "გამოტოვების && ტაბულაციის სიმბოლოების ჩვენება"
 
-#: kdiff3.cpp:825
+#: kdiff3.cpp:821
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1500,12 +1500,12 @@ msgstr ""
 "თეთრი\n"
 "სიმბოლოები"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:822
 #, kde-format
 msgid "Show White Space"
 msgstr "გამოტოვების სიმბოლოს ჩვენება"
 
-#: kdiff3.cpp:826
+#: kdiff3.cpp:822
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1515,12 +1515,12 @@ msgstr ""
 "თეთრი\n"
 "დელტები"
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:824
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "ხაზის ნომრების ჩვენება"
 
-#: kdiff3.cpp:828
+#: kdiff3.cpp:824
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1530,138 +1530,138 @@ msgstr ""
 "ხაზის\n"
 "ნომრები"
 
-#: kdiff3.cpp:830
+#: kdiff3.cpp:826
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "მარტივი კონფლიქტების ავტომატური ამოხსნა"
 
-#: kdiff3.cpp:831
+#: kdiff3.cpp:827
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "დელტების დაყენება კონფლიქტებისთვის"
 
-#: kdiff3.cpp:832
+#: kdiff3.cpp:828
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "რეგულარული გამოსახულებით ავტომატური შერწყმით გაშვება"
 
-#: kdiff3.cpp:833
+#: kdiff3.cpp:829
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "ისტორიის კონფლიქტების ავტომატური ამოხსნა"
 
-#: kdiff3.cpp:834
+#: kdiff3.cpp:830
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Diff-ის გაყოფა მონიშნულთან"
 
-#: kdiff3.cpp:835
+#: kdiff3.cpp:831
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "მონიშნული Diff-ების შერწყმა"
 
-#: kdiff3.cpp:837
+#: kdiff3.cpp:833
 #, kde-format
 msgid "Show Window A"
 msgstr "მაჩვენე ფანჯარა A"
 
-#: kdiff3.cpp:838
+#: kdiff3.cpp:834
 #, kde-format
 msgid "Show Window B"
 msgstr "მაჩვენე ფანჯარა B"
 
-#: kdiff3.cpp:839
+#: kdiff3.cpp:835
 #, kde-format
 msgid "Show Window C"
 msgstr "მაჩვენე ფანჯარა C"
 
-#: kdiff3.cpp:841
+#: kdiff3.cpp:837
 #, kde-format
 msgid "Normal Overview"
 msgstr "ნორმალური მიმოხილვა"
 
-#: kdiff3.cpp:842
+#: kdiff3.cpp:838
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A vs B მიმოხილვა"
 
-#: kdiff3.cpp:843
+#: kdiff3.cpp:839
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A vs C მიმოხილვა"
 
-#: kdiff3.cpp:844
+#: kdiff3.cpp:840
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B vs C მიმოხილვა"
 
-#: kdiff3.cpp:845
+#: kdiff3.cpp:841
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "სიტყვების გადატანა Diff-ის ფანჯრებში"
 
-#: kdiff3.cpp:846
+#: kdiff3.cpp:842
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Diff-ის ხელით გასწორების დამატება"
 
-#: kdiff3.cpp:847
+#: kdiff3.cpp:843
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "ყველა Diff-ის ხელით გასწორების გასუფთავება"
 
-#: kdiff3.cpp:849
+#: kdiff3.cpp:845
 #, kde-format
 msgid "Focus Next Window"
 msgstr "ფოკუსი შემდეგ ფანჯარაზე"
 
-#: kdiff3.cpp:850
+#: kdiff3.cpp:846
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "ფოკუსი წინა ფანჯარაზე"
 
-#: kdiff3.cpp:851
+#: kdiff3.cpp:847
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "გაყოფის ორიენტაციის გადართვა"
 
-#: kdiff3.cpp:853
+#: kdiff3.cpp:849
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "საქაღალდის && ტექსტის გაყოფილი ეკრანის ხედი"
 
-#: kdiff3.cpp:855
+#: kdiff3.cpp:851
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "გადართვა საქაღალდის && ტექსტის ხედებს შორის"
 
-#: kdiff3.cpp:877 kdiff3.cpp:979 kdiff3.cpp:1004 kdiff3.cpp:1263 pdiff.cpp:814
+#: kdiff3.cpp:873 kdiff3.cpp:975 kdiff3.cpp:1000 kdiff3.cpp:1259 pdiff.cpp:814
 #: pdiff.cpp:883 pdiff.cpp:919 pdiff.cpp:928 pdiff.cpp:986 pdiff.cpp:994
 #, kde-format
 msgid "Ready."
 msgstr "მზადაა."
 
-#: kdiff3.cpp:923 pdiff.cpp:1522
+#: kdiff3.cpp:919 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "შერწყმის შედეგი შენახული არაა."
 
-#: kdiff3.cpp:925
+#: kdiff3.cpp:921
 #, kde-format
 msgid "Save && Quit"
 msgstr "შენახვა და გასვლა"
 
-#: kdiff3.cpp:926
+#: kdiff3.cpp:922
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "შენახვის გარეშე გასვლა"
 
-#: kdiff3.cpp:934 pdiff.cpp:1533
+#: kdiff3.cpp:930 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "შერწყმის შედეგის შენახვა ჩავარდა."
 
-#: kdiff3.cpp:945 pdiff.cpp:729
+#: kdiff3.cpp:941 pdiff.cpp:729
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -1669,58 +1669,58 @@ msgstr ""
 "ამჟამად საქაღალდეების შერწყმით ხარ დაკავებული. დარწმუნებული ბრძანდებით, რომ "
 "გნებავთ, გააუქმოთ ის?"
 
-#: kdiff3.cpp:968
+#: kdiff3.cpp:964
 #, kde-format
 msgid "Saving file..."
 msgstr "ფაილის შენახვა..."
 
-#: kdiff3.cpp:985
+#: kdiff3.cpp:981
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "ფაილის ახალი სახელით შენახვა..."
 
-#: kdiff3.cpp:987
+#: kdiff3.cpp:983
 #, kde-format
 msgid "Save As..."
 msgstr "შენახვა, როგორც..."
 
-#: kdiff3.cpp:1011
+#: kdiff3.cpp:1007
 #, kde-format
 msgid "Printing not implemented."
 msgstr "ბეჭდვა განხორციელებული არაა."
 
-#: kdiff3.cpp:1051
+#: kdiff3.cpp:1047
 #, kde-format
 msgid "Printing..."
 msgstr "დაბეჭდვა..."
 
-#: kdiff3.cpp:1149
+#: kdiff3.cpp:1145
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "იბეჭდება გვერდი %1 %2-დან"
 
-#: kdiff3.cpp:1197
+#: kdiff3.cpp:1193
 #, kde-format
 msgid " (Selection)"
 msgstr " (მონიშნული)"
 
-#: kdiff3.cpp:1226
+#: kdiff3.cpp:1222
 #, kde-format
 msgid "Printing completed."
 msgstr "დაბეჭდვა დასრულდა."
 
-#: kdiff3.cpp:1230
+#: kdiff3.cpp:1226
 #, kde-format
 msgid "Printing aborted."
 msgstr "დაბეჭდვა გაუქმდა."
 
-#: kdiff3.cpp:1237
+#: kdiff3.cpp:1233
 #, kde-format
 msgid "Exiting..."
 msgstr "გასვლა..."
 
-#: kdiff3.cpp:1247
+#: kdiff3.cpp:1243
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "სტატუსის ზოლის გადართვა..."
@@ -1902,32 +1902,32 @@ msgstr "გასახსნელი ფაილი3"
 msgid "See kdiff3 --help for supported options."
 msgstr "ხელმისაწვდომი პარამეტრების სანახავად გამოიყენეთ kdiff3--help ."
 
-#: MergeFileInfos.cpp:394
+#: MergeFileInfos.cpp:393
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
 msgstr "არანორმალური და ნორმალური ფაილების შედარება შეუძლებელია."
 
-#: MergeFileInfos.cpp:417
+#: MergeFileInfos.cpp:416
 #, kde-format
 msgid "Mix of links and normal files."
 msgstr "ბმულებისა და ნორმალური ფაილების ნარევი."
 
-#: MergeFileInfos.cpp:425
+#: MergeFileInfos.cpp:424
 #, kde-format
 msgid "Link: "
 msgstr "ბმული: "
 
-#: MergeFileInfos.cpp:435
+#: MergeFileInfos.cpp:434
 #, kde-format
 msgid "Size. "
 msgstr "ზომა. "
 
-#: MergeFileInfos.cpp:451 MergeFileInfos.cpp:461
+#: MergeFileInfos.cpp:450 MergeFileInfos.cpp:460
 #, kde-format
 msgid "Date & Size: "
 msgstr "თარიღი და ზომა: "
 
-#: MergeFileInfos.cpp:482
+#: MergeFileInfos.cpp:481
 #, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
@@ -2084,47 +2084,47 @@ msgstr ""
 "\n"
 "მარქაფის შექმნა ჩავარდა. ფაილი შენახული არაა."
 
-#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2721
+#: mergeresultwindow.cpp:2677 mergeresultwindow.cpp:2723
 #, kde-format
 msgid "File Save Error"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: mergeresultwindow.cpp:2721
+#: mergeresultwindow.cpp:2723
 #, kde-format
 msgid "Error while writing."
 msgstr "შეცდომა ჩაწერისას."
 
-#: mergeresultwindow.cpp:2801
+#: mergeresultwindow.cpp:2803
 #, kde-format
 msgid "Output:"
 msgstr "გამოტანა:"
 
-#: mergeresultwindow.cpp:2814 mergeresultwindow.cpp:2997
+#: mergeresultwindow.cpp:2816 mergeresultwindow.cpp:2999
 #, kde-format
 msgid "[Modified]"
 msgstr "[შეცვლილია]"
 
-#: mergeresultwindow.cpp:2821
+#: mergeresultwindow.cpp:2823
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "კოდირება შენახვისთვის:"
 
-#: mergeresultwindow.cpp:2921
+#: mergeresultwindow.cpp:2923
 #, kde-format
 msgid "Conflict"
 msgstr "კონფლიქტი"
 
-#: mergeresultwindow.cpp:2944
+#: mergeresultwindow.cpp:2946
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "კოდეკი A-დან: %1"
 
-#: mergeresultwindow.cpp:2946
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "კოდეკი B-დან: %1"
 
-#: mergeresultwindow.cpp:2948
+#: mergeresultwindow.cpp:2950
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "კოდეკი C-დან: %1"
@@ -2184,13 +2184,13 @@ msgstr "C (არასავალდებულო):"
 msgid "Folder..."
 msgstr "საქაღალდე..."
 
-#: optiondialog.cpp:107 optiondialog.cpp:119
+#: optiondialog.cpp:105 optiondialog.cpp:117
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
 msgstr "არა"
 
-#: optiondialog.cpp:109 optiondialog.cpp:121
+#: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2202,156 +2202,156 @@ msgstr ""
 "\n"
 "მაგალითი:"
 
-#: optiondialog.cpp:390
+#: optiondialog.cpp:388
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:400
+#: optiondialog.cpp:398
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "შეცვალეთ, თუ არა-ACII სიმბოლოები არასწორად ჩანს."
 
-#: optiondialog.cpp:484
+#: optiondialog.cpp:482
 #, kde-format
 msgid "Configure"
 msgstr "მორგება"
 
-#: optiondialog.cpp:523
+#: optiondialog.cpp:521
 #, kde-format
 msgid "Font"
 msgstr "შრიფტი"
 
-#: optiondialog.cpp:525
+#: optiondialog.cpp:523
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "რედაქტორის და სხვაობის გამოტანის ფონტი"
 
-#: optiondialog.cpp:543
+#: optiondialog.cpp:541
 #, kde-format
 msgid "Application font"
 msgstr "აპლიკაციის ფონტი"
 
-#: optiondialog.cpp:548
+#: optiondialog.cpp:546
 #, kde-format
 msgid "File view font"
 msgstr "ფაილის ხედის ფონტი"
 
-#: optiondialog.cpp:567
+#: optiondialog.cpp:565
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "ფერი"
 
-#: optiondialog.cpp:568
+#: optiondialog.cpp:566
 #, kde-format
 msgid "Colors Settings"
 msgstr "ფერის მორგება"
 
-#: optiondialog.cpp:593
+#: optiondialog.cpp:591
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "რედაქტორის და სხვაობის ხედები:"
 
-#: optiondialog.cpp:601
+#: optiondialog.cpp:599
 #, kde-format
 msgid "Foreground color:"
 msgstr "წინა პლანის ფერი:"
 
-#: optiondialog.cpp:609
+#: optiondialog.cpp:607
 #, kde-format
 msgid "Background color:"
 msgstr "ფონის ფერი:"
 
-#: optiondialog.cpp:619
+#: optiondialog.cpp:617
 #, kde-format
 msgid "Diff background color:"
 msgstr "სხვაობის ფონის ფერი:"
 
-#: optiondialog.cpp:628
+#: optiondialog.cpp:626
 #, kde-format
 msgid "Color A:"
 msgstr "ფერი A:"
 
-#: optiondialog.cpp:637
+#: optiondialog.cpp:635
 #, kde-format
 msgid "Color B:"
 msgstr "ფერი B:"
 
-#: optiondialog.cpp:646
+#: optiondialog.cpp:644
 #, kde-format
 msgid "Color C:"
 msgstr "ფერი C:"
 
-#: optiondialog.cpp:654
+#: optiondialog.cpp:652
 #, kde-format
 msgid "Conflict color:"
 msgstr "კონფლიქტის ფერი:"
 
-#: optiondialog.cpp:663
+#: optiondialog.cpp:661
 #, kde-format
 msgid "Current range background color:"
 msgstr "ფონის ფერის მიმდინარე შუალედი:"
 
-#: optiondialog.cpp:672
+#: optiondialog.cpp:670
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "სხვაობის ფონის ფერის მიმდინარე შუალედი:"
 
-#: optiondialog.cpp:680
+#: optiondialog.cpp:678
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "ხელით გასწორებული განსხვავებული შუალედის ფერი:"
 
-#: optiondialog.cpp:687
+#: optiondialog.cpp:685
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "საქაღალდის შედარების ხედი:"
 
-#: optiondialog.cpp:693
+#: optiondialog.cpp:691
 #, kde-format
 msgid "Newest file color:"
 msgstr "უახლესი ფაილის ფერი:"
 
-#: optiondialog.cpp:698
+#: optiondialog.cpp:696
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
 "comparison."
 msgstr "ამ ფერის შეცვლა, მხოლოდ, შემდეგი საქაღალდის შედარებისას მოხდება."
 
-#: optiondialog.cpp:703
+#: optiondialog.cpp:701
 #, kde-format
 msgid "Oldest file color:"
 msgstr "უძველესი ფაილის ფერი:"
 
-#: optiondialog.cpp:712
+#: optiondialog.cpp:710
 #, kde-format
 msgid "Middle age file color:"
 msgstr "საშუალო ასაკის ფერი:"
 
-#: optiondialog.cpp:721
+#: optiondialog.cpp:719
 #, kde-format
 msgid "Color for missing files:"
 msgstr "ნაკლული ფაილების ფერი:"
 
-#: optiondialog.cpp:735
+#: optiondialog.cpp:733
 #, kde-format
 msgid "Editor"
 msgstr "რედაქტორი"
 
-#: optiondialog.cpp:736
+#: optiondialog.cpp:734
 #, kde-format
 msgid "Editor Behavior"
 msgstr "რედაქტორის ქცევა"
 
-#: optiondialog.cpp:758
+#: optiondialog.cpp:756
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "ტაბულაცია გამოტოვებას ჩასვამს"
 
-#: optiondialog.cpp:762
+#: optiondialog.cpp:760
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2361,28 +2361,28 @@ msgstr ""
 "ჩართ: tab-ის დაწოლა შესაბამისი რაოდენობის გამოტოვებას ჩასვამს.\n"
 "გამორთ: ჩაისმება ტაბულაციის სიმბოლო."
 
-#: optiondialog.cpp:767
+#: optiondialog.cpp:765
 #, kde-format
 msgid "Tab size:"
 msgstr "ტაბულაციის ზომა:"
 
-#: optiondialog.cpp:774
+#: optiondialog.cpp:772
 #, kde-format
 msgid "Auto indentation"
 msgstr "ავტომატური სწორება"
 
-#: optiondialog.cpp:778
+#: optiondialog.cpp:776
 #, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "ჩართ: ახალი ხაზისთვის წინა ხაზის შეწევა იქნება გამოყენებული.\n"
 
-#: optiondialog.cpp:781
+#: optiondialog.cpp:779
 #, kde-format
 msgid "Auto copy selection"
 msgstr "მონიშნულის ავტომატური კოპირება"
 
-#: optiondialog.cpp:785
+#: optiondialog.cpp:783
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2392,25 +2392,25 @@ msgstr ""
 "ჩართ: ნებისმიერი მონიშნული ბუფერში ავტომატურად იწერება.\n"
 "გამორთ: დაკოპირება, მხოლოდ, ხელით. მაგ: Ctrl-C."
 
-#: optiondialog.cpp:795
+#: optiondialog.cpp:793
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:796
+#: optiondialog.cpp:794
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "Dos/Windows"
 
-#: optiondialog.cpp:797
+#: optiondialog.cpp:795
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "ავტოამოცნობა"
 
-#: optiondialog.cpp:800
+#: optiondialog.cpp:798
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2420,22 +2420,22 @@ msgstr ""
 "აყენებს ხაზის ბოლოებს, როცა ჩასწორებული ფაილის შენახვა მოხდება.\n"
 "DOS/Windows: CR+LF, UNIX: LF. მნიშვნელობებია CR=0D, LF=0A"
 
-#: optiondialog.cpp:810
+#: optiondialog.cpp:808
 #, kde-format
 msgid "Diff"
 msgstr "Diff"
 
-#: optiondialog.cpp:811
+#: optiondialog.cpp:809
 #, kde-format
 msgid "Diff Settings"
 msgstr "Diff -ის მორგება"
 
-#: optiondialog.cpp:834
+#: optiondialog.cpp:832
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "რიცხვების გამოტოვება (გამოტოვებად აღქმა)"
 
-#: optiondialog.cpp:838
+#: optiondialog.cpp:836
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2447,34 +2447,34 @@ msgstr ""
 "მსგავსად.)\n"
 "შეიძლება, დაგეხმაროთ რიცხვითი მონაცემების შემცველი ფაილების შედარებისას."
 
-#: optiondialog.cpp:842
+#: optiondialog.cpp:840
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "C/C++ კომენტარების გამოტოვება (გამოტოვებად აღქმა)"
 
-#: optiondialog.cpp:845
+#: optiondialog.cpp:843
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++ კომენტარების გამოტოვებად აღქმა."
 
-#: optiondialog.cpp:848
+#: optiondialog.cpp:846
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "რეგისტრის გამოტოვება (გამოტოვებად აღქმა)"
 
-#: optiondialog.cpp:852
+#: optiondialog.cpp:850
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "რეგისტრის სხვაობების გამოტოვების სხვაობად აღქმა. ('a' <=> 'A')"
 
-#: optiondialog.cpp:855
+#: optiondialog.cpp:853
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "პრეპროცესორის ბრძანება:"
 
-#: optiondialog.cpp:860
+#: optiondialog.cpp:858
 #, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
@@ -2482,12 +2482,12 @@ msgstr ""
 "მომხმარებლის მიერ აღწერილი პრეპროცესინგი. (დეტალებისთვის იხილეთ "
 "დოკუმენტაცია.)"
 
-#: optiondialog.cpp:863
+#: optiondialog.cpp:861
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "ხაზის დამთხვევის პრეპროცესორის ბრძანება:"
 
-#: optiondialog.cpp:868
+#: optiondialog.cpp:866
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2497,12 +2497,12 @@ msgstr ""
 "ეს პრეპროცესორი, მხოლოდ, ხაზის დამთხვევისას გამოიყენება.\n"
 "(დეტალებისთვის იხილეთ დოკუმენტაცია.)"
 
-#: optiondialog.cpp:871
+#: optiondialog.cpp:869
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "კარგად ცდა (უფრო ნელია)"
 
-#: optiondialog.cpp:875
+#: optiondialog.cpp:873
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2512,12 +2512,12 @@ msgstr ""
 "ჩართვს --minimal პარამეტრს გარე diff-სთვის.\n"
 "დიდი ფაილების ანალიზისას ეს, ძალიან, ნელი იქნება."
 
-#: optiondialog.cpp:879
+#: optiondialog.cpp:877
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "B-ის და C-ის სწორება 3 შეყვანის ფაილისთვის"
 
-#: optiondialog.cpp:883
+#: optiondialog.cpp:881
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2529,23 +2529,23 @@ msgstr ""
 "რეკომენდებული არაა შერწყმისთვის, რადგან პროცესი უფრო გართულდება.\n"
 "(ნაგულისხმევად გამორთულია.)"
 
-#: optiondialog.cpp:894
+#: optiondialog.cpp:892
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "შერწყმა"
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:893
 #, kde-format
 msgid "Merge Settings"
 msgstr "შერწყმის მორგება"
 
-#: optiondialog.cpp:918
+#: optiondialog.cpp:916
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "ავტომატური წინასწარი დაყოვნება (მწმ):"
 
-#: optiondialog.cpp:924
+#: optiondialog.cpp:922
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2556,28 +2556,28 @@ msgstr ""
 "ნაჩვენები,\n"
 "სანამ შემდეგ კონფლიქტზე გადავა. შუალედია 0-20000 მწმ"
 
-#: optiondialog.cpp:928
+#: optiondialog.cpp:926
 #, kde-format
 msgid "Show info dialogs"
 msgstr "საინფორმაციო ფანჯრების ჩვენება"
 
-#: optiondialog.cpp:931
+#: optiondialog.cpp:929
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "კონფლიქტების რაოდენობის შემცველი ინფორმაციის დიალოგის ჩვენება."
 
-#: optiondialog.cpp:934
+#: optiondialog.cpp:932
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "გამოტოვებების ორფაილიანი შერწყმის ნაგულისხმევი:"
 
-#: optiondialog.cpp:939 optiondialog.cpp:952
+#: optiondialog.cpp:937 optiondialog.cpp:950
 #, kde-format
 msgid "Manual Choice"
 msgstr "ხელით არჩევა"
 
-#: optiondialog.cpp:943 optiondialog.cpp:957
+#: optiondialog.cpp:941 optiondialog.cpp:955
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2587,27 +2587,27 @@ msgstr ""
 "უფლებას მისცემს შერწყმის ალგორითმს, ავტომატურად აირჩიოს შეყვანა მხოლოდ-"
 "გამოტოვებების ცვლილებებისთვის."
 
-#: optiondialog.cpp:947
+#: optiondialog.cpp:945
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "გამოტოვებების სამფაილიანი შერწყმის ნაგულისხმევი:"
 
-#: optiondialog.cpp:961
+#: optiondialog.cpp:959
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "ავტომატური შერწყმის რეგულარული გამოსახულება"
 
-#: optiondialog.cpp:969 smalldialogs.cpp:372
+#: optiondialog.cpp:967 smalldialogs.cpp:372
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "ავტოშერწყმის რეგულარული გამოსახულება:"
 
-#: optiondialog.cpp:977
+#: optiondialog.cpp:975
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "შერწყმის დაწყებისას რეგულარული გამოსახულებით ავტოშერწყმის გაშვება"
 
-#: optiondialog.cpp:980
+#: optiondialog.cpp:978
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2617,54 +2617,54 @@ msgstr ""
 "შერწყმის გაშვება ავტოშერწყმის რეგულარული გამოსახულებებისთვის\n"
 "მაშინვე, როცა შერწყმა დაიწყება.\n"
 
-#: optiondialog.cpp:985
+#: optiondialog.cpp:983
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "ვერსიის კონტროლის ისტორიის შერწყმა"
 
-#: optiondialog.cpp:993 smalldialogs.cpp:399
+#: optiondialog.cpp:991 smalldialogs.cpp:399
 #, kde-format
 msgid "History start regular expression:"
 msgstr "ისტორიის დასაწყისის რეგულარული გამოსახულება:"
 
-#: optiondialog.cpp:1001 smalldialogs.cpp:427
+#: optiondialog.cpp:999 smalldialogs.cpp:427
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "ისტორიის ჩანაწერის დასაწყისის რეგულარული გამოსახულება:"
 
-#: optiondialog.cpp:1017
+#: optiondialog.cpp:1015
 #, kde-format
 msgid "History merge sorting"
 msgstr "ისტორიის შერწყმის დალაგება"
 
-#: optiondialog.cpp:1020
+#: optiondialog.cpp:1018
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "ვერსიის კონტროლის ისტორიის დალაგება გასაღებით."
 
-#: optiondialog.cpp:1030
+#: optiondialog.cpp:1028
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "ისტორიის ჩანაწერის დასაწყისის დალაგების გასაღების მიმდევრობა:"
 
-#: optiondialog.cpp:1040
+#: optiondialog.cpp:1038
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "ვერსიის კონტროლის ისტორიის შერწყმა შერწყმის დაწყებისას"
 
-#: optiondialog.cpp:1043
+#: optiondialog.cpp:1041
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr "ვერსიის კონტროლის ავტოშერწყმის გაშვება შერწყმის გაშვებისას."
 
-#: optiondialog.cpp:1047
+#: optiondialog.cpp:1045
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "ისტორიის ჩანაწერების მაქსიმალური რაოდენობა:"
 
-#: optiondialog.cpp:1051
+#: optiondialog.cpp:1049
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
@@ -2672,17 +2672,17 @@ msgstr ""
 "ამოჭრა მითითებული რაოდენობის შემდეგ. გამოიყენეთ -1 ჩანაწერების უსასრულო "
 "რაოდენობისთვის."
 
-#: optiondialog.cpp:1055
+#: optiondialog.cpp:1053
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "გამოსცადეთ რეგულარული გამოსახულებები"
 
-#: optiondialog.cpp:1060
+#: optiondialog.cpp:1058
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "შეუსაბამო შერწყმის ბრძანება:"
 
-#: optiondialog.cpp:1065
+#: optiondialog.cpp:1063
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2694,12 +2694,12 @@ msgstr ""
 "როცა სხვა შესაბამისი ცვლილებები ნაპოვნი არ იქნება.\n"
 "გამოიძახება პარამეტრებით: ფაილისსახელი1 ფაილისსახელი2 ფაილისსახელი3"
 
-#: optiondialog.cpp:1070
+#: optiondialog.cpp:1068
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "ავტოშენახვა და გასვლა კონფლიქტებგარეშე შერწყმებისას"
 
-#: optiondialog.cpp:1074
+#: optiondialog.cpp:1072
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2713,29 +2713,29 @@ msgstr ""
 "შეინახავს და გავა.\n"
 "(ბრძანების სტრიქონის პარამეტრის, \"--auto\" მსგავსად.)"
 
-#: optiondialog.cpp:1085 optiondialog.cpp:1086
+#: optiondialog.cpp:1083 optiondialog.cpp:1084
 #, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
 msgstr "საქაღალდე"
 
-#: optiondialog.cpp:1106
+#: optiondialog.cpp:1104
 #, kde-format
 msgid "Recursive folders"
 msgstr "საქაღალდეების რეკურსია"
 
-#: optiondialog.cpp:1109
+#: optiondialog.cpp:1107
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
 msgstr "მოხდება თუ არა ქვესაქაღალდეების ანალიზი."
 
-#: optiondialog.cpp:1111
+#: optiondialog.cpp:1109
 #, kde-format
 msgid "File pattern(s):"
 msgstr "ფაილის ნიმუშები:"
 
-#: optiondialog.cpp:1117
+#: optiondialog.cpp:1115
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2747,12 +2747,12 @@ msgstr ""
 "ვაიდკარდები: '*' და '?'\n"
 "რამდენიმე ნიმუშის მითითება გამყოფით ';' შეგიძლიათ"
 
-#: optiondialog.cpp:1122
+#: optiondialog.cpp:1120
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "ფაილის-ანტი-ნიმუშები:"
 
-#: optiondialog.cpp:1128
+#: optiondialog.cpp:1126
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2764,12 +2764,12 @@ msgstr ""
 "ვაილდკარდები: '*' და '?'\n"
 "რამდენიმე ნიმუშის მითითება გამყოფით, ';' შეგიძლიათ"
 
-#: optiondialog.cpp:1133
+#: optiondialog.cpp:1131
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "საქაღალდის-ანტი-ნიმუშები:"
 
-#: optiondialog.cpp:1139
+#: optiondialog.cpp:1137
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2781,12 +2781,12 @@ msgstr ""
 "ვაილდკარდები: '*' და '?'\n"
 "რამდენიმე ნიმუშის მითითება გამყოფით, ';' შეგიძლიათ"
 
-#: optiondialog.cpp:1144
+#: optiondialog.cpp:1142
 #, kde-format
 msgid "Use Ignore File"
 msgstr "იგნორის ფაილის გამოყენება"
 
-#: optiondialog.cpp:1148
+#: optiondialog.cpp:1146
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2798,23 +2798,23 @@ msgstr ""
 "გამოტოვებული.\n"
 "ლოკალური გამოტოვების ფაილები, შეიძლება, თითოეულ საქაღალდეს თავისი ჰქონდს."
 
-#: optiondialog.cpp:1152
+#: optiondialog.cpp:1150
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "დამალული ფაილებისა და საქაღალდეების პოვნა"
 
-#: optiondialog.cpp:1155
+#: optiondialog.cpp:1153
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
 msgstr "იპოვის დამალულ ფაილებსა და საქაღალდეებს."
 
-#: optiondialog.cpp:1158
+#: optiondialog.cpp:1156
 #, kde-format
 msgid "Follow file links"
 msgstr "ფაილის ბმულებზე მიყოლა"
 
-#: optiondialog.cpp:1162
+#: optiondialog.cpp:1160
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2824,12 +2824,12 @@ msgstr ""
 "ჩართ: ფაილების შედარება, რომელზეც ბმული მიუთითებს.\n"
 "გამორთ: ბმულების შედარება."
 
-#: optiondialog.cpp:1166
+#: optiondialog.cpp:1164
 #, kde-format
 msgid "Follow folder links"
 msgstr "საქაღალდის ბმულებზე მიყოლა"
 
-#: optiondialog.cpp:1170
+#: optiondialog.cpp:1168
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2839,12 +2839,12 @@ msgstr ""
 "ჩართ: საქაღალდეების შედარება, რომელზეც ბმული მიუთითებს.\n"
 "გამორთ: ბმულების შედარება."
 
-#: optiondialog.cpp:1179
+#: optiondialog.cpp:1177
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "რეგისტრზე დამოკიდებული ფაილის სახელების შედარება"
 
-#: optiondialog.cpp:1183
+#: optiondialog.cpp:1181
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2857,12 +2857,12 @@ msgstr ""
 "ჩართეთ ეს პარამეტრი იმ შემთხვევაში, თუ სახელის რეგისტრიც გნებავთ, "
 "ემთხვეოდეს. (ნაგულისხმევად Windows-ზე გამორთულია, სხვა ყველგან კი - ჩართული.)"
 
-#: optiondialog.cpp:1187
+#: optiondialog.cpp:1185
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "ყველა ქვესაქაღალდის ამოკეცვა ჩატვირთვისას"
 
-#: optiondialog.cpp:1191
+#: optiondialog.cpp:1189
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2872,12 +2872,12 @@ msgstr ""
 "ჩართ: ყველა საქაღალდის ამოკეცვა საქაღალდის შედარების დაწყებისას.\n"
 "გამორთ. საქაღალდეების ჩაკეცილად დატოვება."
 
-#: optiondialog.cpp:1195
+#: optiondialog.cpp:1193
 #, kde-format
 msgid "Skip folder status report"
 msgstr "საქაღალდის მდგომარეობის ანგარიშის გამოტოვება"
 
-#: optiondialog.cpp:1199
+#: optiondialog.cpp:1197
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2887,28 +2887,28 @@ msgstr ""
 "ჩართ: არ მაჩვენო საქაღალდის შედარების მდგომარეობა.\n"
 "გამორთ: მაჩვენე მდგომარეობის დიალოგი დაწყებისას."
 
-#: optiondialog.cpp:1203
+#: optiondialog.cpp:1201
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "ფაილის შედარების რეჟიმი"
 
-#: optiondialog.cpp:1208
+#: optiondialog.cpp:1206
 #, kde-format
 msgid "Binary comparison"
 msgstr "ბინარული შედარება"
 
-#: optiondialog.cpp:1210
+#: optiondialog.cpp:1208
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
 msgstr "თითოეული ფაილის ბინარული შედარება. (ნაგულისხმევი)"
 
-#: optiondialog.cpp:1213
+#: optiondialog.cpp:1211
 #, kde-format
 msgid "Full analysis"
 msgstr "სრული ანალიზი"
 
-#: optiondialog.cpp:1215
+#: optiondialog.cpp:1213
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2920,12 +2920,12 @@ msgstr ""
 "(უფრო ნელია, ვიდრე ბინარული შედარება და გაცილებით ნელია ბინარული "
 "ფაილებისთვის.)"
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1217
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "ზომისა და ცვლილების თარიღის ნდობა (სახიფათო)"
 
-#: optiondialog.cpp:1221
+#: optiondialog.cpp:1219
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2940,7 +2940,7 @@ msgstr ""
 "სხვადასხვად გამოჩნდება.\n"
 "სასარგებლოა დიდი საქაღალდეებისთვის ან ნელი ქსელებისთვის."
 
-#: optiondialog.cpp:1226
+#: optiondialog.cpp:1224
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -2949,7 +2949,7 @@ msgstr ""
 "ზომის და თარიღის ნდობა, მაგრამ ბინარული შედარება, თუ თარიღი არ ემთხვევა "
 "(სახიფათო)"
 
-#: optiondialog.cpp:1228
+#: optiondialog.cpp:1226
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2962,12 +2962,12 @@ msgstr ""
 "თუ თარიღები არ ემთხვევა, ზომები კი - კი, მოხდება ბინარული შედარება.\n"
 "სასარგებლოა დიდი საქაღალდეებისთვის და ნელი ქსელებისთვის."
 
-#: optiondialog.cpp:1233
+#: optiondialog.cpp:1231
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "ზომის ნდობა (სახიფათო)"
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1233
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2979,12 +2979,12 @@ msgstr ""
 "გამოგადგებათ დიდი საქაღალდეებისთვის ან ნელი ქსელებისთვის, როცა გადმოწერისას "
 "თარიღი იცვლება."
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1240
 #, kde-format
 msgid "Synchronize folders"
 msgstr "საქაღალდეების სინქრონიზაცია"
 
-#: optiondialog.cpp:1246
+#: optiondialog.cpp:1244
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -2996,12 +2996,12 @@ msgstr ""
 "რის შემდეგაც საქაღალდეები ტოლი გახდება.\n"
 "მუშაობს, მხოლოდ, მაშინ, როცა ადარებთ ორ საქაღალდეს სამიზნის მითითების გარეშე."
 
-#: optiondialog.cpp:1252
+#: optiondialog.cpp:1250
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "გამოტოვებების სხვაობები აღქმულია, როგორც ტოლი"
 
-#: optiondialog.cpp:1256
+#: optiondialog.cpp:1254
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3011,12 +3011,12 @@ msgstr ""
 "თუ ფაილები განსხვავდება, მხოლოდ, გამოტოვებებით, მათი ტოლად ჩათვლა.\n"
 "ეს, მხოლოდ, მაშინაა აქტიური, როცა სრულ ანალიზს აირჩევთ."
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1260
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "უფრო ახლის კოპირება შერწყმის მაგიერ (სახიფათო)"
 
-#: optiondialog.cpp:1266
+#: optiondialog.cpp:1264
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3028,12 +3028,12 @@ msgstr ""
 "(გამოიყენეთ, მხოლოდ, მაშინ, თუ იცით, რას აკეთებთ!)\n"
 "მხოლოდ, ეფექტურია, როცა ორ საქაღალდეს ადარებთ."
 
-#: optiondialog.cpp:1271
+#: optiondialog.cpp:1269
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "ფაილების მარქაფი (>orig)"
 
-#: optiondialog.cpp:1275
+#: optiondialog.cpp:1273
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3043,17 +3043,17 @@ msgstr ""
 "თუ ფაილი ძველ ფაილს თავზე უნდა გადაეწეროს,\n"
 "ძველი ფაილის სახელი შეიცვლება '.orig' გაფართოებით, წაშლის მაგიერ."
 
-#: optiondialog.cpp:1284 optiondialog.cpp:1285
+#: optiondialog.cpp:1282 optiondialog.cpp:1283
 #, kde-format
 msgid "Regional Settings"
 msgstr "რეგიონის მორგება"
 
-#: optiondialog.cpp:1308
+#: optiondialog.cpp:1306
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "იგივე კოდირების გამოყენება ყველაფრისთვის:"
 
-#: optiondialog.cpp:1312
+#: optiondialog.cpp:1310
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3064,17 +3064,17 @@ msgstr ""
 "შეცვლით.\n"
 "გამორთეთ, თუ გნებავთ, სხვადასხვა პარამეტრები იქნიოთ."
 
-#: optiondialog.cpp:1316
+#: optiondialog.cpp:1314
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "შენიშვნა: ლოკალური კოდირებაა \"%1\""
 
-#: optiondialog.cpp:1320
+#: optiondialog.cpp:1318
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "ფაილის კოდირება A-სთვის:"
 
-#: optiondialog.cpp:1327
+#: optiondialog.cpp:1325
 #, kde-format
 msgid ""
 "If enabled then encoding will be automaticly detected.\n"
@@ -3087,32 +3087,32 @@ msgstr ""
 "იქნება გამოყენებული.\n"
 "(უნიკოდის ამოცნობა ფაილის პირველ ბაიტებაზეა დამოკიდებული.)"
 
-#: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
+#: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
 msgid "Auto Detect"
 msgstr "ავტოამოცნობა"
 
-#: optiondialog.cpp:1336
+#: optiondialog.cpp:1334
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "ფაილის კოდირება B-სთვის:"
 
-#: optiondialog.cpp:1347
+#: optiondialog.cpp:1345
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "ფაილის კოდირება C-სთვის:"
 
-#: optiondialog.cpp:1358
+#: optiondialog.cpp:1356
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "ფაილის კოდირება გამოტანის შერწყმისა და შენახვისთვის:"
 
-#: optiondialog.cpp:1363
+#: optiondialog.cpp:1361
 #, kde-format
 msgid "Auto Select"
 msgstr "ავტომატური არჩევა"
 
-#: optiondialog.cpp:1367
+#: optiondialog.cpp:1365
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3124,17 +3124,17 @@ msgstr ""
 "გაურკვეველ შემთხვევებში ნაჩვენები იქნება დიალოგი, სადაც მომხმარებელს "
 "კოდირებას ვკითხავთ."
 
-#: optiondialog.cpp:1370
+#: optiondialog.cpp:1368
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "ფაილის კოდირება პრეპროცესორის ფაილებისთვის:"
 
-#: optiondialog.cpp:1382
+#: optiondialog.cpp:1380
 #, kde-format
 msgid "Right To Left Language"
 msgstr "ენა მარჯვნიდან-მარცხნივ"
 
-#: optiondialog.cpp:1386
+#: optiondialog.cpp:1384
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3144,22 +3144,22 @@ msgstr ""
 "ზოგიერთი ენა მარჯვნიდან მარცხნივ იკითხება.\n"
 "ეს პარამეტრი დამთვალიერებელს და რედაქტორს შესაბამისად შეცვლის."
 
-#: optiondialog.cpp:1396
+#: optiondialog.cpp:1394
 #, kde-format
 msgid "Integration"
 msgstr "ინტეგრაცია"
 
-#: optiondialog.cpp:1397
+#: optiondialog.cpp:1395
 #, kde-format
 msgid "Integration Settings"
 msgstr "ინტეგრაციის მორგება"
 
-#: optiondialog.cpp:1418
+#: optiondialog.cpp:1416
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "გამოსატოვებელი ბრძანების სტრიქონის პარამეტრები:"
 
-#: optiondialog.cpp:1424
+#: optiondialog.cpp:1422
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3173,12 +3173,12 @@ msgstr ""
 "რამდენიმე მნიშვნელობის მითითება გამყოფად ';'-ის მითითებით შეგიძლიათ.\n"
 "ეს დაადუმებს 'უცნობი პარამეტრის' შეცდომას."
 
-#: optiondialog.cpp:1429
+#: optiondialog.cpp:1427
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "გასვლა ღილაკით Escape"
 
-#: optiondialog.cpp:1433
+#: optiondialog.cpp:1431
 #, kde-format
 msgctxt "Tool Tip"
 msgid ""
@@ -3188,7 +3188,7 @@ msgstr ""
 "გასვლის სწრაფი მეტოდი.\n"
 "მათთვის, ვინც Escape ღილაკის გამოყენებასაა შეჩვეული."
 
-#: optiondialog.cpp:1491
+#: optiondialog.cpp:1489
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "ეს ჩამოყრის ყველა პარამეტრს და არა მხოლოდ მიმდინარე ჩანართში მყოფს."
@@ -3580,33 +3580,33 @@ msgstr ""
 "რეგულარულ გამოსახულებაში გახსნის და დახურვის ფრჩხილების რაოდენობა ერთმანეთს "
 "არ ემთხვევა."
 
-#: SourceData.cpp:150
+#: SourceData.cpp:149
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "ბუფერის მონაცემების დროებით ფაილში შენახვა ჩავარდა."
 
-#: SourceData.cpp:155
+#: SourceData.cpp:154
 #, kde-format
 msgid "From Clipboard"
 msgstr "გაცვლის ბუფერიდან"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:343
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 ნორმალური ფაილი არაა."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:380
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "გამოტოვებულია ფაილი, რომელიც მეტისმეტად დიდია: %1."
 
-#: SourceData.cpp:410
+#: SourceData.cpp:409
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    დროებითი ფაილია: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:447
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3621,7 +3621,7 @@ msgstr ""
 "\n"
 "პრეპროცესინგის ბრძანება ახლა გაითიშება."
 
-#: SourceData.cpp:511
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3636,7 +3636,7 @@ msgstr ""
 "\n"
 "ხაზის დამთხვევის პრეპროცესინგის ბრძანება ახლა გაითიშება."
 
-#: SourceData.cpp:517
+#: SourceData.cpp:516
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
