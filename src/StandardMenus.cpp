@@ -12,11 +12,6 @@
 #include <KActionCollection>
 #include <KStandardAction>
 
-boost::signals2::signal<bool(), or_> StandardMenus::allowSave;
-boost::signals2::signal<bool(), or_> StandardMenus::allowSaveAs;
-boost::signals2::signal<bool(), or_> StandardMenus::allowCopy;
-boost::signals2::signal<bool(), or_> StandardMenus::allowCut;
-
 void StandardMenus::setup(KDiff3App* app, KActionCollection* ac)
 {
     fileOpen = KStandardAction::open(app, &KDiff3App::slotFileOpen, ac);

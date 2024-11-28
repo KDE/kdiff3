@@ -59,17 +59,6 @@
 #include <KMessageBox>
 #include <KToggleAction>
 
-QPointer<QScrollBar> MergeResultWindow::mVScrollBar = nullptr;
-QPointer<QAction> MergeResultWindow::chooseAEverywhere;
-QPointer<QAction> MergeResultWindow::chooseBEverywhere;
-QPointer<QAction> MergeResultWindow::chooseCEverywhere;
-QPointer<QAction> MergeResultWindow::chooseAForUnsolvedConflicts;
-QPointer<QAction> MergeResultWindow::chooseBForUnsolvedConflicts;
-QPointer<QAction> MergeResultWindow::chooseCForUnsolvedConflicts;
-QPointer<QAction> MergeResultWindow::chooseAForUnsolvedWhiteSpaceConflicts;
-QPointer<QAction> MergeResultWindow::chooseBForUnsolvedWhiteSpaceConflicts;
-QPointer<QAction> MergeResultWindow::chooseCForUnsolvedWhiteSpaceConflicts;
-
 MergeResultWindow::MergeResultWindow(
     QWidget* pParent,
     QStatusBar* pStatusBar):

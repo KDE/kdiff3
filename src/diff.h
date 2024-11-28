@@ -274,7 +274,7 @@ class Diff3Line
     qint32 mLinesNeededForDisplay = 1;    // Due to wordwrap
     qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
   public:
-    static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo; // Needed by this class and only this but inited directly from KDiff3App::mainInit
+    inline static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create(); // Needed by this class and only this but inited from KDiff3App::mainInit
 
     [[nodiscard]] inline bool hasFineDiffAB() const { return pFineAB != nullptr; }
     [[nodiscard]] inline bool hasFineDiffBC() const { return pFineBC != nullptr; }

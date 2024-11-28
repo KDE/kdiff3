@@ -50,7 +50,7 @@ class DiffTextWindow: public QWidget
     Q_OBJECT
   public:
     //Using this as a scoped global
-    static QPointer<QScrollBar> mVScrollBar;
+    inline static QPointer<QScrollBar> mVScrollBar = nullptr;
     static QAtomicInteger<size_t> maxThreads();
 
     DiffTextWindow(DiffTextWindowFrame* pParent, e_SrcSelector winIdx, KDiff3App& app);
@@ -161,7 +161,8 @@ class DiffTextWindow: public QWidget
     void timerEvent(QTimerEvent*) override;
 
   private:
-    static std::vector<RecalcWordWrapThread*> s_runnables;
+    //Used in startRunnables and recalWordWrap
+    inline static std::vector<RecalcWordWrapThread*> s_runnables;
     static constexpr qint32 s_linesPerRunnable = 2000;
 
     /*

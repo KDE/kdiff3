@@ -54,9 +54,6 @@
 #include <QToolTip>
 #include <QUrl>
 
-QPointer<QScrollBar> DiffTextWindow::mVScrollBar = nullptr;
-std::vector<RecalcWordWrapThread*> DiffTextWindow::s_runnables; //Used in startRunnables and recalWordWrap
-
 /*
     QRunnable is not enough here. It may appear to work depending on configuration.
     That is an artifact of the threads being short-lived. Never the less such code is

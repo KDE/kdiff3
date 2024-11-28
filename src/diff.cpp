@@ -36,8 +36,6 @@
 
 constexpr bool g_bIgnoreWhiteSpace = true;
 
-QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create();
-
 qint32 LineData::width(qint32 tabSize) const
 {
     const QString pLine = getLine();

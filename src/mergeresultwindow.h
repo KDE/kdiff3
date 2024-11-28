@@ -44,7 +44,7 @@ class MergeResultWindow: public QWidget
 {
     Q_OBJECT
   public:
-    static QPointer<QScrollBar> mVScrollBar;
+    inline static QPointer<QScrollBar> mVScrollBar = nullptr;
 
     MergeResultWindow(QWidget* pParent, QStatusBar* pStatusBar);
 
@@ -89,15 +89,15 @@ class MergeResultWindow: public QWidget
     void slotUpdateAvailabilities();
 
   private:
-    static QPointer<QAction> chooseAEverywhere;
-    static QPointer<QAction> chooseBEverywhere;
-    static QPointer<QAction> chooseCEverywhere;
-    static QPointer<QAction> chooseAForUnsolvedConflicts;
-    static QPointer<QAction> chooseBForUnsolvedConflicts;
-    static QPointer<QAction> chooseCForUnsolvedConflicts;
-    static QPointer<QAction> chooseAForUnsolvedWhiteSpaceConflicts;
-    static QPointer<QAction> chooseBForUnsolvedWhiteSpaceConflicts;
-    static QPointer<QAction> chooseCForUnsolvedWhiteSpaceConflicts;
+    inline static QPointer<QAction> chooseAEverywhere;
+    inline static QPointer<QAction> chooseBEverywhere;
+    inline static QPointer<QAction> chooseCEverywhere;
+    inline static QPointer<QAction> chooseAForUnsolvedConflicts;
+    inline static QPointer<QAction> chooseBForUnsolvedConflicts;
+    inline static QPointer<QAction> chooseCForUnsolvedConflicts;
+    inline static QPointer<QAction> chooseAForUnsolvedWhiteSpaceConflicts;
+    inline static QPointer<QAction> chooseBForUnsolvedWhiteSpaceConflicts;
+    inline static QPointer<QAction> chooseCForUnsolvedWhiteSpaceConflicts;
 
     struct HistoryMapEntry {
         MergeEditLineList mellA;

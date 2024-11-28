@@ -163,7 +163,7 @@ class KDiff3App: public QMainWindow
 
     [[nodiscard]] KActionCollection* actionCollection() const;
 
-    static boost::signals2::signal<QString(), FirstNonEmpty<QString>> getSelection;
+    inline static boost::signals2::signal<QString(), FirstNonEmpty<QString>> getSelection;
 
     bool canContinue();
 
@@ -402,7 +402,7 @@ public Q_SLOTS:
 
     MergeResultWindow* m_pMergeResultWindow = nullptr;
     WindowTitleWidget* m_pMergeResultWindowTitle = nullptr;
-    static bool m_bTripleDiff;
+    inline static bool m_bTripleDiff = false;
 
     QDockWidget* m_pDirectoryMergeDock = nullptr;
     DirectoryMergeWindow* m_pDirectoryMergeWindow = nullptr;

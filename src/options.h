@@ -46,15 +46,15 @@ enum e_LineEndStyle
 class Options
 {
   public:
-    static boost::signals2::signal<void()> apply;
-    static boost::signals2::signal<void()> resetToDefaults;
-    static boost::signals2::signal<void()> setToCurrent;
-    static boost::signals2::signal<void(ValueMap*)> read;
-    static boost::signals2::signal<void(ValueMap*)> write;
+    inline static boost::signals2::signal<void()> apply;
+    inline static boost::signals2::signal<void()> resetToDefaults;
+    inline static boost::signals2::signal<void()> setToCurrent;
+    inline static boost::signals2::signal<void(ValueMap*)> read;
+    inline static boost::signals2::signal<void(ValueMap*)> write;
 
-    static boost::signals2::signal<void()> preserve;
-    static boost::signals2::signal<void()> unpreserve;
-    static boost::signals2::signal<bool(const QString&, const QString&), find> accept;
+    inline static boost::signals2::signal<void()> preserve;
+    inline static boost::signals2::signal<void()> unpreserve;
+    inline static boost::signals2::signal<bool(const QString&, const QString&), find> accept;
 
     void init();
 

@@ -68,10 +68,6 @@
 #include <KToggleAction>
 #include <KToolBar>
 
-bool KDiff3App::m_bTripleDiff = false;
-
-boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
-
 constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar");
 
 KActionCollection* KDiff3App::actionCollection() const

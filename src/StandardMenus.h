@@ -22,10 +22,10 @@ class KActionCollection;
 class StandardMenus
 {
   public:
-    static boost::signals2::signal<bool(), or_> allowSave;
-    static boost::signals2::signal<bool(), or_> allowSaveAs;
-    static boost::signals2::signal<bool(), or_> allowCopy;
-    static boost::signals2::signal<bool(), or_> allowCut;
+    inline static boost::signals2::signal<bool(), or_> allowSave;
+    inline static boost::signals2::signal<bool(), or_> allowSaveAs;
+    inline static boost::signals2::signal<bool(), or_> allowCopy;
+    inline static boost::signals2::signal<bool(), or_> allowCut;
 
     void setup(KDiff3App* app, KActionCollection* ac);
     void updateAvailabilities();

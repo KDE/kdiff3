@@ -17,33 +17,11 @@
 #include <QDialog>
 #include <QString>
 
-namespace signals2 = boost::signals2;
 /*
     Using boost allows ProgessProxy to be disconnected during auto testing.
     This prevents uneeded UI calls from being made in an evironment were they
     cann't function properly.
 */
-signals2::signal<void()> ProgressProxy::startBackgroundTask;
-signals2::signal<void()> ProgressProxy::endBackgroundTask;
-
-signals2::signal<void()> ProgressProxy::push;
-signals2::signal<void(bool)> ProgressProxy::pop;
-signals2::signal<void()> ProgressProxy::clear;
-
-signals2::signal<void(KJob*, const QString&)> ProgressProxy::enterEventLoop;
-signals2::signal<void()> ProgressProxy::exitEventLoop;
-
-signals2::signal<void(quint64, bool)> ProgressProxy::setCurrentSig;
-signals2::signal<void(quint64)> ProgressProxy::setMaxNofSteps;
-signals2::signal<void(quint64)> ProgressProxy::addNofSteps;
-signals2::signal<void(bool)> ProgressProxy::stepSig;
-
-signals2::signal<void(double, double)> ProgressProxy::setRangeTransformation;
-signals2::signal<void(double, double)> ProgressProxy::setSubRangeTransformation;
-
-signals2::signal<bool(), find> ProgressProxy::wasCancelled;
-
-signals2::signal<void(const QString&, bool)> ProgressProxy::setInformationSig;
 
 ProgressScope::ProgressScope()
 {

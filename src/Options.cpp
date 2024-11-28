@@ -19,17 +19,6 @@
 
 #include <KSharedConfig>
 
-boost::signals2::signal<void ()> Options::apply;
-boost::signals2::signal<void ()> Options::resetToDefaults;
-boost::signals2::signal<void ()> Options::setToCurrent;
-boost::signals2::signal<void (ValueMap*)> Options::read;
-boost::signals2::signal<void (ValueMap*)> Options::write;
-
-boost::signals2::signal<void ()> Options::preserve;
-boost::signals2::signal<void ()> Options::unpreserve;
-
-boost::signals2::signal<bool (const QString&, const QString&), find> Options::accept;
-
 OptionItemBase::OptionItemBase(const QString& saveName)
 {
     m_saveName = saveName;
