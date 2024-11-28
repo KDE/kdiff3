@@ -16,8 +16,6 @@
 #include <QObject>
 #include <QTest>
 
-std::unique_ptr<Options> gOptions = std::make_unique<Options>();
-
 class Diff3LineTest: public QObject
 {
     Q_OBJECT;

@@ -5,8 +5,6 @@
 #include <QObject>
 #include <QTest>
 
-std::unique_ptr<Options> gOptions = std::make_unique<Options>();
-
 class ManualDiffHelpListTest: public QObject
 {
     Q_OBJECT

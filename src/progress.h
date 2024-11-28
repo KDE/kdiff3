@@ -128,6 +128,6 @@ class ProgressDialog: public QDialog
     std::list<boost::signals2::scoped_connection> connections;
 };
 
-extern QPointer<ProgressDialog> g_pProgressDialog;
+inline QPointer<ProgressDialog> g_pProgressDialog = nullptr;
 
 #endif

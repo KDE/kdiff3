@@ -69,7 +69,6 @@
 #include <KToolBar>
 
 bool KDiff3App::m_bTripleDiff = false;
-std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
 

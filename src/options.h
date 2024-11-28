@@ -248,6 +248,6 @@ class Options
     bool m_bEscapeKeyQuits = false;
 };
 
-extern std::unique_ptr<Options> gOptions;
+inline std::unique_ptr<Options> gOptions = std::make_unique<Options>();
 
 #endif

@@ -60,6 +60,7 @@ class DirectoryInfo
     FileAccess m_dirDest;
 };
 
-extern QSharedPointer<DirectoryInfo> gDirInfo;
+//Intialize with a dummy default DirectoryInfo so we don't crash on first run.
+inline QSharedPointer<DirectoryInfo> gDirInfo = QSharedPointer<DirectoryInfo>::create();
 
 #endif
