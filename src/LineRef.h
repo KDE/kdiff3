@@ -33,45 +33,45 @@ class LineRef
 
     operator SafeInt<LineType>() const noexcept { return mLineNumber; }
 
-    LineRef& operator=(const LineType lineIn) noexcept
+    LineRef& operator=(const LineType lineIn)
     {
         mLineNumber = lineIn;
         return *this;
     }
 
-    LineRef& operator+=(const LineType& inLine) noexcept
+    LineRef& operator+=(const LineType& inLine)
     {
         mLineNumber += inLine;
         return *this;
     };
 
-    LineRef& operator++() noexcept
+    LineRef& operator++()
     {
         ++mLineNumber;
         return *this;
     };
 
-    const LineRef operator++(int) noexcept
+    const LineRef operator++(int)
     {
         LineRef line(*this);
         ++mLineNumber;
         return line;
     };
 
-    LineRef& operator--() noexcept
+    LineRef& operator--()
     {
         --mLineNumber;
         return *this;
     };
 
-    const LineRef operator--(int) noexcept
+    const LineRef operator--(int)
     {
         LineRef line(*this);
         --mLineNumber;
         return line;
     };
-    void invalidate() noexcept { mLineNumber = invalid; }
-    [[nodiscard]] bool isValid() const noexcept { return mLineNumber != invalid; }
+    void invalidate() { mLineNumber = invalid; }
+    [[nodiscard]] bool isValid() const { return mLineNumber != invalid; }
 
   private:
     SafeSignedRange<LineType, invalid> mLineNumber = invalid;
