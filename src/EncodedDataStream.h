@@ -54,9 +54,9 @@ class EncodedDataStream: public QIODeviceBase
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
 
-    inline bool hasBOM() const noexcept { return mGenerateBOM; }
+    bool hasBOM() const noexcept { return mGenerateBOM; }
 
-    inline void setEncoding(const QByteArray &inEncoding) noexcept
+    void setEncoding(const QByteArray &inEncoding) noexcept
     {
         assert(!inEncoding.isEmpty());
 
@@ -78,7 +78,7 @@ class EncodedDataStream: public QIODeviceBase
         assert(!mGenerateBOM || ((inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32")) || inEncoding == "UTF-8-BOM"));
     };
 
-    inline qint64 readChar(QChar& c)
+    qint64 readChar(QChar &c)
     {
         char curData = QChar::Null;
         qint64 len = 0;
@@ -131,9 +131,9 @@ class EncodedDataStream: public QIODeviceBase
         return *this;
     };
 
-    inline QString errorString() { return dev->errorString(); }
-    inline bool hasError() const noexcept { return mError; }
-    inline bool atEnd() const noexcept { return dev->atEnd(); }
+    [[nodiscard]] QString errorString() { return dev->errorString(); }
+    [[nodiscard]] bool hasError() const noexcept { return mError; }
+    [[nodiscard]] bool atEnd() const noexcept { return dev->atEnd(); }
 
     EncodedDataStream &operator<<(const QByteArray &bytes)
     {

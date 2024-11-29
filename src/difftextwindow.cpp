@@ -960,7 +960,7 @@ class FormatRangeHelper
     QVector<QTextLayout::FormatRange> m_formatRanges;
 
   public:
-    inline operator QVector<QTextLayout::FormatRange>() { return m_formatRanges; }
+    operator QVector<QTextLayout::FormatRange>() { return m_formatRanges; }
     FormatRangeHelper()
     {
         m_pen = QColor(Qt::black);

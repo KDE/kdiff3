@@ -47,7 +47,7 @@ class KDiff3Shell: public KXmlGuiWindow
     bool queryExit();
     void closeEvent(QCloseEvent* e) override;
 
-    static inline std::unique_ptr<QCommandLineParser>& getParser()
+    static std::unique_ptr<QCommandLineParser>& getParser()
     {
         static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
         return parser;

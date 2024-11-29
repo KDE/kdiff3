@@ -21,13 +21,13 @@ class RecentItems: public QStringList
   public:
     using QStringList::QStringList;
 
-    inline void push_back(const QString &s) = delete;
-    inline void append(const QString &) = delete;
+    void push_back(const QString &s) = delete;
+    void append(const QString &) = delete;
 
     //since prepend is non-virual we must override push_front as well
-    inline void push_front(const QString &s) { prepend(s); };
+    void push_front(const QString &s) { prepend(s); };
 
-    inline void prepend(const QString &s)
+    void prepend(const QString &s)
     {
         // If an item exist, remove it from the list and reinsert it at the beginning.
         removeAll(s);

@@ -22,24 +22,24 @@ class LineRef
     typedef qint32 LineType;
 
     static constexpr LineType invalid = -1;
-    constexpr inline LineRef() = default;
+    constexpr LineRef() = default;
     //cppcheck-suppress noExplicitConstructor
-    constexpr inline LineRef(const qint64 i)
+    constexpr LineRef(const qint64 i)
     {
         mLineNumber = i;
     }
 
-    inline operator LineType() const noexcept { return mLineNumber; }
+    operator LineType() const noexcept { return mLineNumber; }
 
-    inline operator SafeInt<LineType>() const noexcept { return mLineNumber; }
+    operator SafeInt<LineType>() const noexcept { return mLineNumber; }
 
-    inline LineRef& operator=(const LineType lineIn) noexcept
+    LineRef& operator=(const LineType lineIn) noexcept
     {
         mLineNumber = lineIn;
         return *this;
     }
 
-    inline LineRef& operator+=(const LineType& inLine) noexcept
+    LineRef& operator+=(const LineType& inLine) noexcept
     {
         mLineNumber += inLine;
         return *this;
@@ -70,8 +70,8 @@ class LineRef
         --mLineNumber;
         return line;
     };
-    inline void invalidate() noexcept { mLineNumber = invalid; }
-    [[nodiscard]] inline bool isValid() const noexcept { return mLineNumber != invalid; }
+    void invalidate() noexcept { mLineNumber = invalid; }
+    [[nodiscard]] bool isValid() const noexcept { return mLineNumber != invalid; }
 
   private:
     SafeSignedRange<LineType, invalid> mLineNumber = invalid;

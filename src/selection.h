@@ -31,18 +31,18 @@ class Selection
     LineRef oldLastLine;
 
   public:
-    [[nodiscard]] inline LineRef getFirstLine() const { return firstLine; };
-    [[nodiscard]] inline LineRef getLastLine() const { return lastLine; };
+    [[nodiscard]] LineRef getFirstLine() const { return firstLine; };
+    [[nodiscard]] LineRef getLastLine() const { return lastLine; };
 
-    [[nodiscard]] inline qsizetype getFirstPos() const { return firstPos; };
-    [[nodiscard]] inline qsizetype getLastPos() const { return lastPos; };
+    [[nodiscard]] qsizetype getFirstPos() const { return firstPos; };
+    [[nodiscard]] qsizetype getLastPos() const { return lastPos; };
 
-    [[nodiscard]] inline bool isValidFirstLine() const { return firstLine.isValid(); }
-    inline void clearOldSelection() { oldLastLine.invalidate(), oldFirstLine.invalidate(); };
+    [[nodiscard]] bool isValidFirstLine() const { return firstLine.isValid(); }
+    void clearOldSelection() { oldLastLine.invalidate(), oldFirstLine.invalidate(); };
 
-    [[nodiscard]] inline LineRef getOldLastLine() const { return oldLastLine; };
-    [[nodiscard]] inline LineRef getOldFirstLine() const { return oldFirstLine; };
-    [[nodiscard]] inline bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos); }
+    [[nodiscard]] LineRef getOldLastLine() const { return oldLastLine; };
+    [[nodiscard]] LineRef getOldFirstLine() const { return oldFirstLine; };
+    [[nodiscard]] bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos); }
 
     void reset()
     {

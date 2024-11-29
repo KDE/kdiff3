@@ -96,7 +96,7 @@ class FindDialog: public QDialog
     void setVisible(bool) override;
 
     void restartFind();
-    inline void nextWindow()
+    void nextWindow()
     {
         currentLine = 0;
         currentPos = 0;

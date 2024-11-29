@@ -76,8 +76,8 @@ class Options
     [[nodiscard]] bool isStatusBarVisible() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
-    [[nodiscard]] inline const QFont& defaultFont() { return mFont; };
-    [[nodiscard]] inline const QFont& appFont() { return mAppFont; };
+    [[nodiscard]] const QFont& defaultFont() { return mFont; };
+    [[nodiscard]] const QFont& appFont() { return mAppFont; };
 
     [[nodiscard]] bool wordWrapOn() const { return m_bWordWrap; }
     void setWordWrap(const bool enabled) { m_bWordWrap = enabled; }
@@ -109,16 +109,16 @@ class Options
 
     [[nodiscard]] RecentItems<maxNofRecentFiles>& getRecentOutputFiles() { return m_recentOutputFiles; }
 
-    inline void beginPrint() { mPrintMode = true; }
-    inline void endPrint() { mPrintMode = false; }
+    void beginPrint() { mPrintMode = true; }
+    void endPrint() { mPrintMode = false; }
 
-    [[nodiscard]] inline const QColor& getCurrentRangeBgColor() const { return m_currentRangeBgColor; };
-    [[nodiscard]] inline const QColor& getCurrentRangeDiffBgColor() const { return m_currentRangeDiffBgColor; };
-    [[nodiscard]] inline const QColor& oldestFileColor() const { return m_oldestFileColor; }
-    [[nodiscard]] inline const QColor& midAgeFileColor() const { return m_midAgeFileColor; }
-    [[nodiscard]] inline const QColor& newestFileColor() const { return m_newestFileColor; }
-    [[nodiscard]] inline const QColor& missingFileColor() const { return m_missingFileColor; }
-    [[nodiscard]] inline const QColor& manualHelpRangeColor() const { return m_manualHelpRangeColor; }
+    [[nodiscard]] const QColor& getCurrentRangeBgColor() const { return m_currentRangeBgColor; };
+    [[nodiscard]] const QColor& getCurrentRangeDiffBgColor() const { return m_currentRangeDiffBgColor; };
+    [[nodiscard]] const QColor& oldestFileColor() const { return m_oldestFileColor; }
+    [[nodiscard]] const QColor& midAgeFileColor() const { return m_midAgeFileColor; }
+    [[nodiscard]] const QColor& newestFileColor() const { return m_newestFileColor; }
+    [[nodiscard]] const QColor& missingFileColor() const { return m_missingFileColor; }
+    [[nodiscard]] const QColor& manualHelpRangeColor() const { return m_manualHelpRangeColor; }
 
   private:
     void addOptionItem(std::shared_ptr<OptionItemBase> inItem);

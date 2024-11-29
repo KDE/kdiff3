@@ -38,7 +38,7 @@ class MergeEditLine
         mChanged = false;
         mStr = QString();
     }
-    [[nodiscard]] inline bool isConflict() const { return mSrc == e_SrcSelector::None && !mLineRemoved && !mChanged; }
+    [[nodiscard]] bool isConflict() const { return mSrc == e_SrcSelector::None && !mLineRemoved && !mChanged; }
 
     void setRemoved(e_SrcSelector src = e_SrcSelector::None)
     {
@@ -47,9 +47,9 @@ class MergeEditLine
         mStr = QString();
         mChanged = (src == e_SrcSelector::None);
     }
-    [[nodiscard]] inline bool isRemoved() const { return mLineRemoved; }
+    [[nodiscard]] bool isRemoved() const { return mLineRemoved; }
 
-    [[nodiscard]] inline bool isEditableText() const { return !isConflict(); }
+    [[nodiscard]] bool isEditableText() const { return !isConflict(); }
 
     void setString(const QString& s)
     {
@@ -59,7 +59,7 @@ class MergeEditLine
         mChanged = true;
     }
     [[nodiscard]] QString getString(const std::shared_ptr<const LineDataVector>& pLineDataA, const std::shared_ptr<const LineDataVector>& pLineDataB, const std::shared_ptr<const LineDataVector>& pLineDataC) const;
-    [[nodiscard]] inline bool isModified() const { return mChanged; }
+    [[nodiscard]] bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
     {
@@ -74,8 +74,8 @@ class MergeEditLine
         }
     }
 
-    [[nodiscard]] inline e_SrcSelector src() const { return mSrc; }
-    [[nodiscard]] inline Diff3LineList::const_iterator id3l() const { return m_id3l; }
+    [[nodiscard]] e_SrcSelector src() const { return mSrc; }
+    [[nodiscard]] Diff3LineList::const_iterator id3l() const { return m_id3l; }
 
   private:
     Diff3LineList::const_iterator m_id3l;
@@ -101,27 +101,27 @@ class MergeBlock
     MergeEditLineList mMergeEditLineList;
 
   public:
-    [[nodiscard]] inline const MergeEditLineList& list() const { return mMergeEditLineList; }
-    [[nodiscard]] inline MergeEditLineList& list() { return mMergeEditLineList; }
+    [[nodiscard]] const MergeEditLineList& list() const { return mMergeEditLineList; }
+    [[nodiscard]] MergeEditLineList& list() { return mMergeEditLineList; }
 
-    [[nodiscard]] inline e_SrcSelector source() const { return srcSelect; }
+    [[nodiscard]] e_SrcSelector source() const { return srcSelect; }
 
-    [[nodiscard]] inline LineType getIndex() const { return d3lLineIdx; }
-    [[nodiscard]] inline LineType sourceRangeLength() const { return srcRangeLength; }
+    [[nodiscard]] LineType getIndex() const { return d3lLineIdx; }
+    [[nodiscard]] LineType sourceRangeLength() const { return srcRangeLength; }
 
-    [[nodiscard]] inline bool isConflict() const { return bConflict; }
-    [[nodiscard]] inline bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
-    [[nodiscard]] inline bool isDelta() const { return bDelta; }
-    [[nodiscard]] inline bool hasModfiedText()
+    [[nodiscard]] bool isConflict() const { return bConflict; }
+    [[nodiscard]] bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
+    [[nodiscard]] bool isDelta() const { return bDelta; }
+    [[nodiscard]] bool hasModfiedText()
     {
         return std::any_of(list().cbegin(), list().cend(), [](const MergeEditLine& mel) { return mel.isModified(); });
     }
 
-    [[nodiscard]] inline Diff3LineList::const_iterator id3l() const { return mId3l; }
+    [[nodiscard]] Diff3LineList::const_iterator id3l() const { return mId3l; }
 
-    [[nodiscard]] inline e_MergeDetails details() const { return mergeDetails; }
+    [[nodiscard]] e_MergeDetails details() const { return mergeDetails; }
 
-    [[nodiscard]] inline LineType lineCount() const { return SafeInt<qint32>(list().size()); }
+    [[nodiscard]] LineType lineCount() const { return SafeInt<qint32>(list().size()); }
 
     void split(MergeBlock& mb2, LineType d3lLineIdx2) // The caller must insert the mb2 after this mb in the m_mergeLineList
     {

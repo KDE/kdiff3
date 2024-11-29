@@ -111,16 +111,16 @@ class Diff
 
     [[nodiscard]] bool isEmpty() const { return nofEquals == 0 && mDiff1 == 0 && mDiff2 == 0;}
 
-    [[nodiscard]] inline qint32 numberOfEquals() const { return nofEquals; };
+    [[nodiscard]] qint32 numberOfEquals() const { return nofEquals; };
 
-    [[nodiscard]] inline quint64 diff1() const { return mDiff1; };
-    [[nodiscard]] inline quint64 diff2() const { return mDiff2; };
+    [[nodiscard]] quint64 diff1() const { return mDiff1; };
+    [[nodiscard]] quint64 diff2() const { return mDiff2; };
 
-    inline void setNumberOfEquals(const qint32 inNumOfEquals) { nofEquals = inNumOfEquals; }
+    void setNumberOfEquals(const qint32 inNumOfEquals) { nofEquals = inNumOfEquals; }
 
-    inline void adjustNumberOfEquals(const qint64 delta) { nofEquals += delta; }
-    inline void adjustDiff1(const qint64 delta) { mDiff1 += delta; }
-    inline void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
+    void adjustNumberOfEquals(const qint64 delta) { nofEquals += delta; }
+    void adjustDiff1(const qint64 delta) { mDiff1 += delta; }
+    void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
 
     bool operator==(const Diff& b) const
     {
@@ -132,7 +132,7 @@ class Diff
         return !(*this == b);
     };
 
-    inline void refine()
+    void refine()
     {
         if(nofEquals < 4 && (mDiff1 > 0 || mDiff2 > 0))
         {
@@ -173,8 +173,7 @@ class LineData
     LineData& operator=(const LineData&) = default;
     LineData& operator=(LineData&&) = default;
 
-
-    inline LineData(const QSharedPointer<QString>& buffer, const qsizetype inOffset, qsizetype inSize = 0, qsizetype inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
+    LineData(const QSharedPointer<QString>& buffer, const qsizetype inOffset, qsizetype inSize = 0, qsizetype inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
@@ -183,25 +182,25 @@ class LineData
         bSkipable = inIsSkipable;
         mFirstNonWhiteChar = inFirstNonWhiteChar;
     }
-    [[nodiscard]] inline qsizetype size() const { return mSize; }
-    [[nodiscard]] inline qsizetype getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
+    [[nodiscard]] qsizetype size() const { return mSize; }
+    [[nodiscard]] qsizetype getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
     /*
         QString::fromRawData allows us to create a light weight QString backed by the buffer memory.
     */
-    [[nodiscard]] inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
-    [[nodiscard]] inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
+    [[nodiscard]] const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
+    [[nodiscard]] const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
 
-    [[nodiscard]] inline qsizetype getOffset() const { return mOffset; }
+    [[nodiscard]] qsizetype getOffset() const { return mOffset; }
     [[nodiscard]] qint32 width(qint32 tabSize) const; // Calcs width considering tabs.
 
-    [[nodiscard]] inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
+    [[nodiscard]] bool whiteLine() const { return mFirstNonWhiteChar == 0; }
 
-    [[nodiscard]] inline bool isPureComment() const { return bContainsPureComment; }
-    inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
+    [[nodiscard]] bool isPureComment() const { return bContainsPureComment; }
+    void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
 
-    [[nodiscard]] inline bool isSkipable() const { return bSkipable; }
-    inline void setSkipable(const bool inSkipable) { bSkipable = inSkipable; }
+    [[nodiscard]] bool isSkipable() const { return bSkipable; }
+    void setSkipable(const bool inSkipable) { bSkipable = inSkipable; }
 
     [[nodiscard]] static bool equal(const LineData& l1, const LineData& l2);
 };
@@ -225,7 +224,7 @@ class DiffBufferInfo
     void init(Diff3LineList* d3ll,
               const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC);
 
-    [[nodiscard]] inline std::shared_ptr<LineDataVector> getLineData(e_SrcSelector srcIndex) const
+    [[nodiscard]] std::shared_ptr<LineDataVector> getLineData(e_SrcSelector srcIndex) const
     {
         switch(srcIndex)
         {
@@ -276,11 +275,11 @@ class Diff3Line
   public:
     inline static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create(); // Needed by this class and only this but inited from KDiff3App::mainInit
 
-    [[nodiscard]] inline bool hasFineDiffAB() const { return pFineAB != nullptr; }
-    [[nodiscard]] inline bool hasFineDiffBC() const { return pFineBC != nullptr; }
-    [[nodiscard]] inline bool hasFineDiffCA() const { return pFineCA != nullptr; }
+    [[nodiscard]] bool hasFineDiffAB() const { return pFineAB != nullptr; }
+    [[nodiscard]] bool hasFineDiffBC() const { return pFineBC != nullptr; }
+    [[nodiscard]] bool hasFineDiffCA() const { return pFineCA != nullptr; }
 
-    [[nodiscard]] inline LineType getLineIndex(e_SrcSelector src) const
+    [[nodiscard]] LineType getLineIndex(e_SrcSelector src) const
     {
         switch(src)
         {
@@ -300,15 +299,15 @@ class Diff3Line
     [[nodiscard]] LineRef getLineB() const { return lineB; }
     [[nodiscard]] LineRef getLineC() const { return lineC; }
 
-    inline void setLineA(const LineRef& line) { lineA = line; }
-    inline void setLineB(const LineRef& line) { lineB = line; }
-    inline void setLineC(const LineRef& line) { lineC = line; }
+    void setLineA(const LineRef& line) { lineA = line; }
+    void setLineB(const LineRef& line) { lineB = line; }
+    void setLineC(const LineRef& line) { lineC = line; }
 
-    [[nodiscard]] inline bool isEqualAB() const { return bAEqB; }
-    [[nodiscard]] inline bool isEqualAC() const { return bAEqC; }
-    [[nodiscard]] inline bool isEqualBC() const { return bBEqC; }
+    [[nodiscard]] bool isEqualAB() const { return bAEqB; }
+    [[nodiscard]] bool isEqualAC() const { return bAEqC; }
+    [[nodiscard]] bool isEqualBC() const { return bBEqC; }
 
-    [[nodiscard]] inline bool isWhiteLine(e_SrcSelector src) const
+    [[nodiscard]] bool isWhiteLine(e_SrcSelector src) const
     {
         assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
@@ -356,9 +355,9 @@ class Diff3Line
         return LineRef();
     }
 
-    [[nodiscard]] inline qint32 sumLinesNeededForDisplay() const { return mSumLinesNeededForDisplay; }
+    [[nodiscard]] qint32 sumLinesNeededForDisplay() const { return mSumLinesNeededForDisplay; }
 
-    [[nodiscard]] inline qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
+    [[nodiscard]] qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
 
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
     [[nodiscard]] bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector>& v1, const std::shared_ptr<LineDataVector>& v2, const IgnoreFlags eIgnoreFlags);
@@ -480,7 +479,7 @@ typedef std::vector<Diff3WrapLine> Diff3WrapLineVector;
 class TotalDiffStatus
 {
   public:
-    inline void reset()
+    void reset()
     {
         bBinaryAEqC = false;
         bBinaryBEqC = false;
@@ -493,16 +492,16 @@ class TotalDiffStatus
         nofWhitespaceConflicts = 0;
     }
 
-    [[nodiscard]] inline qint32 getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
-    inline void setUnsolvedConflicts(const qint32 unsolved) { nofUnsolvedConflicts = unsolved; }
+    [[nodiscard]] qint32 getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
+    void setUnsolvedConflicts(const qint32 unsolved) { nofUnsolvedConflicts = unsolved; }
 
-    [[nodiscard]] inline qint32 getSolvedConflicts() const { return nofSolvedConflicts; }
-    inline void setSolvedConflicts(const qint32 solved) { nofSolvedConflicts = solved; }
+    [[nodiscard]] qint32 getSolvedConflicts() const { return nofSolvedConflicts; }
+    void setSolvedConflicts(const qint32 solved) { nofSolvedConflicts = solved; }
 
-    [[nodiscard]] inline qint32 getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
-    inline void setWhitespaceConflicts(const qint32 wintespace) { nofWhitespaceConflicts = wintespace; }
+    [[nodiscard]] qint32 getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
+    void setWhitespaceConflicts(const qint32 wintespace) { nofWhitespaceConflicts = wintespace; }
 
-    [[nodiscard]] inline qint32 getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
+    [[nodiscard]] qint32 getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
 
     [[nodiscard]] bool isBinaryEqualAC() const { return bBinaryAEqC; }
     [[nodiscard]] bool isBinaryEqualBC() const { return bBinaryBEqC; }
@@ -607,8 +606,10 @@ class ManualDiffHelpEntry
         }
     }
 
-    [[nodiscard]] inline const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA1 : winIdx == e_SrcSelector::B ? lineB1 : lineC1;}
-    [[nodiscard]] inline const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA2 : winIdx == e_SrcSelector::B ? lineB2 : lineC2;}
+    [[nodiscard]] const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA1 : winIdx == e_SrcSelector::B ? lineB1 :
+                                                                                                                                                        lineC1; }
+    [[nodiscard]] const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA2 : winIdx == e_SrcSelector::B ? lineB2 :
+                                                                                                                                                        lineC2; }
     [[nodiscard]] bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
 };
 

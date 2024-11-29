@@ -91,11 +91,11 @@ class MergeFileInfos
     [[nodiscard]] bool conflictingFileTypes() const;
 
     void sort(Qt::SortOrder order);
-    [[nodiscard]] inline MergeFileInfos* parent() const { return m_pParent; }
-    inline void setParent(MergeFileInfos* inParent) { m_pParent = inParent; }
-    [[nodiscard]] inline const QList<MergeFileInfos*>& children() const { return m_children; }
-    inline void addChild(MergeFileInfos* child) { m_children.push_back(child); }
-    inline void clear() { m_children.clear(); }
+    [[nodiscard]] MergeFileInfos* parent() const { return m_pParent; }
+    void setParent(MergeFileInfos* inParent) { m_pParent = inParent; }
+    [[nodiscard]] const QList<MergeFileInfos*>& children() const { return m_children; }
+    void addChild(MergeFileInfos* child) { m_children.push_back(child); }
+    void clear() { m_children.clear(); }
 
     [[nodiscard]] FileAccess* getFileInfoA() const { return m_pFileInfoA; }
     [[nodiscard]] FileAccess* getFileInfoB() const { return m_pFileInfoB; }
@@ -110,26 +110,26 @@ class MergeFileInfos
     [[nodiscard]] QString fullNameC() const;
     [[nodiscard]] QString fullNameDest() const;
 
-    [[nodiscard]] inline QString getDirNameA() const { return gDirInfo->dirA().prettyAbsPath(); }
-    [[nodiscard]] inline QString getDirNameB() const { return gDirInfo->dirB().prettyAbsPath(); }
-    [[nodiscard]] inline QString getDirNameC() const { return gDirInfo->dirC().prettyAbsPath(); }
-    [[nodiscard]] inline QString getDirNameDest() const { return gDirInfo->destDir().prettyAbsPath(); }
+    [[nodiscard]] QString getDirNameA() const { return gDirInfo->dirA().prettyAbsPath(); }
+    [[nodiscard]] QString getDirNameB() const { return gDirInfo->dirB().prettyAbsPath(); }
+    [[nodiscard]] QString getDirNameC() const { return gDirInfo->dirC().prettyAbsPath(); }
+    [[nodiscard]] QString getDirNameDest() const { return gDirInfo->destDir().prettyAbsPath(); }
 
-    [[nodiscard]] inline TotalDiffStatus& diffStatus() { return m_totalDiffStatus; }
+    [[nodiscard]] TotalDiffStatus& diffStatus() { return m_totalDiffStatus; }
 
-    [[nodiscard]] inline e_MergeOperation getOperation() const { return m_eMergeOperation; }
-    inline void setOperation(const e_MergeOperation op) { m_eMergeOperation = op; }
+    [[nodiscard]] e_MergeOperation getOperation() const { return m_eMergeOperation; }
+    void setOperation(const e_MergeOperation op) { m_eMergeOperation = op; }
 
-    [[nodiscard]] inline e_OperationStatus getOpStatus() const { return m_eOpStatus; }
-    inline void setOpStatus(const e_OperationStatus eOpStatus) { m_eOpStatus = eOpStatus; }
+    [[nodiscard]] e_OperationStatus getOpStatus() const { return m_eOpStatus; }
+    void setOpStatus(const e_OperationStatus eOpStatus) { m_eOpStatus = eOpStatus; }
 
-    [[nodiscard]] inline e_Age getAgeA() const { return m_ageA; }
-    [[nodiscard]] inline e_Age getAgeB() const { return m_ageB; }
-    [[nodiscard]] inline e_Age getAgeC() const { return m_ageC; }
+    [[nodiscard]] e_Age getAgeA() const { return m_ageA; }
+    [[nodiscard]] e_Age getAgeB() const { return m_ageB; }
+    [[nodiscard]] e_Age getAgeC() const { return m_ageC; }
 
-    [[nodiscard]] inline bool isEqualAB() const { return m_bEqualAB; }
-    [[nodiscard]] inline bool isEqualAC() const { return m_bEqualAC; }
-    [[nodiscard]] inline bool isEqualBC() const { return m_bEqualBC; }
+    [[nodiscard]] bool isEqualAB() const { return m_bEqualAB; }
+    [[nodiscard]] bool isEqualAC() const { return m_bEqualAC; }
+    [[nodiscard]] bool isEqualBC() const { return m_bEqualBC; }
     bool compareFilesAndCalcAges(QStringList& errors, DirectoryMergeWindow* pDMW);
 
     void updateAge();
@@ -137,26 +137,26 @@ class MergeFileInfos
     void updateParents();
 
     void updateDirectoryOrLink();
-    inline void startSimOp() { m_bSimOpComplete = false; }
-    [[nodiscard]] inline bool isSimOpRunning() const { return !m_bOperationComplete; }
-    inline void endSimOp() { m_bSimOpComplete = true; }
+    void startSimOp() { m_bSimOpComplete = false; }
+    [[nodiscard]] bool isSimOpRunning() const { return !m_bOperationComplete; }
+    void endSimOp() { m_bSimOpComplete = true; }
 
-    inline void startOperation() { m_bOperationComplete = false; };
-    [[nodiscard]] inline bool isOperationRunning() const { return !m_bOperationComplete; }
-    inline void endOperation() { m_bOperationComplete = true; };
+    void startOperation() { m_bOperationComplete = false; };
+    [[nodiscard]] bool isOperationRunning() const { return !m_bOperationComplete; }
+    void endOperation() { m_bOperationComplete = true; };
 
-    [[nodiscard]] inline static bool isThreeWay()
+    [[nodiscard]] static bool isThreeWay()
     {
         if(gDirInfo == nullptr) return false;
         return gDirInfo->dirC().isValid();
     }
-    [[nodiscard]] inline bool existsEveryWhere() const { return existsInA() && existsInB() && (existsInC() || !isThreeWay()); }
+    [[nodiscard]] bool existsEveryWhere() const { return existsInA() && existsInB() && (existsInC() || !isThreeWay()); }
 
-    [[nodiscard]] inline qint32 existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
+    [[nodiscard]] qint32 existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
 
-    [[nodiscard]] inline bool onlyInA() const { return existsInA() && !existsInB() && !existsInC(); }
-    [[nodiscard]] inline bool onlyInB() const { return !existsInA() && existsInB() && !existsInC(); }
-    [[nodiscard]] inline bool onlyInC() const { return !existsInA() && !existsInB() && existsInC(); }
+    [[nodiscard]] bool onlyInA() const { return existsInA() && !existsInB() && !existsInC(); }
+    [[nodiscard]] bool onlyInB() const { return !existsInA() && existsInB() && !existsInC(); }
+    [[nodiscard]] bool onlyInC() const { return !existsInA() && !existsInB() && existsInC(); }
 
     [[nodiscard]] bool conflictingAges() const { return m_bConflictingAges; }
 
@@ -180,9 +180,9 @@ class MergeFileInfos
     }
 
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status);
-    inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
-    inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
-    inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
+    void setAgeA(const e_Age inAge) { m_ageA = inAge; }
+    void setAgeB(const e_Age inAge) { m_ageB = inAge; }
+    void setAgeC(const e_Age inAge) { m_ageC = inAge; }
 
     MergeFileInfos* m_pParent = nullptr;
     QList<MergeFileInfos*> m_children;

@@ -59,8 +59,8 @@ class SourceData
 
     [[nodiscard]] const QByteArray getEncoding() const { return mEncoding; }
     [[nodiscard]] e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
-    [[nodiscard]] inline bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
-    [[nodiscard]] inline bool hasBOM() const { return m_normalData.hasBOM(); }
+    [[nodiscard]] bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
+    [[nodiscard]] bool hasBOM() const { return m_normalData.hasBOM(); }
     [[nodiscard]] const QStringList& getErrors() const { return mErrors; }
 
     void setEncoding(const QByteArray& encoding);
@@ -111,11 +111,11 @@ class SourceData
         [[nodiscard]] bool isEmpty() const { return mDataSize == 0; }
 
         [[nodiscard]] bool isText() const { return m_bIsText || isEmpty(); }
-        [[nodiscard]] inline bool hasEOLTermiantion() const { return m_bIsText && mHasEOLTermination; }
-        [[nodiscard]] inline bool hasBOM() const { return mHasBOM; }
+        [[nodiscard]] bool hasEOLTermiantion() const { return m_bIsText && mHasEOLTermination; }
+        [[nodiscard]] bool hasBOM() const { return mHasBOM; }
 
-        [[nodiscard]] inline qint64 lineCount() const { return mLineCount; }
-        [[nodiscard]] inline qint64 byteCount() const { return mDataSize; }
+        [[nodiscard]] qint64 lineCount() const { return mLineCount; }
+        [[nodiscard]] qint64 byteCount() const { return mDataSize; }
     };
     FileData m_normalData;
     FileData m_lmppData;

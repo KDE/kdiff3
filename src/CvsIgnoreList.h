@@ -52,9 +52,9 @@ private:
         kdiff will handle this through a user settings.
         For now just return the same thing as gerIngoreName. That works
     */
-    [[nodiscard]] inline virtual const QString getGlobalIgnoreName() const { return getIgnoreName(); }
-    [[nodiscard]] inline const char* getVarName() const { return "CVSIGNORE"; }
-    [[nodiscard]] inline const QString getIgnoreName() const { return QStringLiteral(".cvsignore"); }
+    [[nodiscard]] virtual const QString getGlobalIgnoreName() const { return getIgnoreName(); }
+    [[nodiscard]] const char* getVarName() const { return "CVSIGNORE"; }
+    [[nodiscard]] const QString getIgnoreName() const { return QStringLiteral(".cvsignore"); }
 };
 
 #endif /* CVSIGNORELIST_H */

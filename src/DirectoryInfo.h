@@ -29,10 +29,10 @@ class DirectoryInfo
         m_dirListC.clear();
     }
 
-    inline const FileAccess& dirA() const { return m_dirA; }
-    inline const FileAccess& dirB() const { return m_dirB; }
-    inline const FileAccess& dirC() const { return m_dirC; }
-    inline const FileAccess& destDir() const
+    const FileAccess& dirA() const { return m_dirA; }
+    const FileAccess& dirB() const { return m_dirB; }
+    const FileAccess& dirC() const { return m_dirC; }
+    const FileAccess& destDir() const
     {
         if(m_dirDest.isValid())
             return m_dirDest;
@@ -40,7 +40,7 @@ class DirectoryInfo
             return m_dirC.isValid() ? m_dirC : m_dirB;
     }
 
-    inline bool allowSyncMode() { return !m_dirC.isValid() && !m_dirDest.isValid(); }
+    bool allowSyncMode() { return !m_dirC.isValid() && !m_dirDest.isValid(); }
 
     bool listDirA();
     bool listDirB();

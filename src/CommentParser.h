@@ -34,9 +34,9 @@ class DefaultCommentParser : public CommentParser
     typedef enum {none, singleLine, multiLine}CommentType;
   public:
     void processLine(const QString &line) override;
-    [[nodiscard]] inline bool inComment() const override { return mCommentType != none; };
-    [[nodiscard]] inline bool isPureComment() const override { return mIsPureComment; };
-    [[nodiscard]] inline bool isSkipable() const override { return mIsCommentOrWhite; };
+    [[nodiscard]] bool inComment() const override { return mCommentType != none; };
+    [[nodiscard]] bool isPureComment() const override { return mIsPureComment; };
+    [[nodiscard]] bool isSkipable() const override { return mIsCommentOrWhite; };
 
     void removeComment(QString &line) override;
   protected:
@@ -44,8 +44,9 @@ class DefaultCommentParser : public CommentParser
 
     void processChar(const QString &line, const QChar &inChar) override;
     //For tests only.
-    [[nodiscard]] inline bool isEscaped() const{ return bIsEscaped; }
-    [[nodiscard]] inline bool inString() const{ return bInString; }
+    [[nodiscard]] bool isEscaped() const { return bIsEscaped; }
+    [[nodiscard]] bool inString() const { return bInString; }
+
   private:
     QChar mLastChar, mStartChar;
 
