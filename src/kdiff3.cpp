@@ -305,10 +305,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
 
     //initView does first time setup for ui.
     initView();
-    ///////////////////////////////////////////////////////////////////
-    //
-    // Warning: Call initActions before connecting KDiff3App::slotUpdateAvailabilities or
-    //  calling KXMLGUIClient::setXMLFile or KXMLGUIClient::createGUI
+    /*
+      Warning: Call initActions before connecting KDiff3App::slotUpdateAvailabilities or
+      calling KXMLGUIClient::setXMLFile or KXMLGUIClient::createGUI
+    */
     initActions(actionCollection());
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
@@ -862,8 +862,6 @@ void KDiff3App::showPopupMenu(const QPoint& point)
 
 void KDiff3App::initStatusBar()
 {
-    ///////////////////////////////////////////////////////////////////
-    // STATUSBAR
     if(statusBar() != nullptr)
         statusBar()->showMessage(i18n("Ready."));
 }
@@ -944,9 +942,9 @@ bool KDiff3App::queryClose()
     return true;
 }
 
-/////////////////////////////////////////////////////////////////////
-// SLOT IMPLEMENTATION
-/////////////////////////////////////////////////////////////////////
+/*
+ SLOT IMPLEMENTATION
+*/
 
 void KDiff3App::slotFileSave()
 {
@@ -1237,8 +1235,7 @@ void KDiff3App::slotViewStatusBar()
 {
     slotStatusMsg(i18n("Toggle the statusbar..."));
     gOptions->setStatusBarState(viewStatusBar->isChecked());
-    ///////////////////////////////////////////////////////////////////
-    //turn Statusbar on or off
+
     if(statusBar() != nullptr)
     {
         if(!viewStatusBar->isChecked())
@@ -1256,8 +1253,6 @@ void KDiff3App::slotViewStatusBar()
 
 void KDiff3App::slotStatusMsg(const QString& text)
 {
-    ///////////////////////////////////////////////////////////////////
-    // change status message permanently
     if(statusBar() != nullptr)
     {
         statusBar()->clearMessage();

@@ -379,9 +379,6 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     m_cursorYPos = 0;
     m_maxTextWidth = -1;
 
-    //m_firstLine = 0; // Must not set line/column without scrolling there
-    //m_horizScrollOffset = 0;
-
     setModified(false);
 
     m_currentMergeBlockIt = m_mergeBlockList.begin();

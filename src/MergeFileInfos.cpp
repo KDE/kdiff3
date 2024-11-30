@@ -512,7 +512,6 @@ bool MergeFileInfos::fastFileComparison(
             return bEqual;
         }
         sizeLeft -= len;
-        //ProgressProxy::setCurrent(double(fullSize-sizeLeft)/fullSize, false );
         ProgressProxy::step();
     }
     fi1.close();

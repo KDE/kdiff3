@@ -146,7 +146,6 @@ class DiffTextWindowData
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList)
     {
-        //wait for all helper threads to finish
         reset();
         m_filename = filename;
         m_pLineData = pLineData;
@@ -160,6 +159,7 @@ class DiffTextWindowData
 
     void reset()
     {
+        //wait for all helper threads to finish
         while(DiffTextWindow::maxThreads() > 0) {} //Clear word wrap threads.
 
         m_firstLine = 0;
