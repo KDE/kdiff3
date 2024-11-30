@@ -47,7 +47,7 @@ class EncodedDataStream: public QIODeviceBase
 
     EncodedDataStream(QByteArray *ba, OpenMode flags = QIODevice::ReadOnly)
     {
-        assert(ba != nullptr && !dev.isNull());
+        assert(ba != nullptr);
         dev = new QBuffer(ba);
         dev->open(flags);
     }
