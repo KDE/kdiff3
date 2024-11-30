@@ -23,8 +23,6 @@ class Utils
   public:
     // QStringConverter::availableCodecs() is too broad for our needs.
     static QStringList availableCodecs();
-
-    static bool isLocalFile(const QUrl& url);
     /*
       QUrl::toLocalFile does some special handling for locally visable windows network drives.
       HOwever if QUrl::isLocal returns false we get an empty string back.
