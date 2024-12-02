@@ -33,6 +33,7 @@
 #include <QDropEvent>
 #include <QEvent>
 #include <QFile>
+#include <QFileDialog>
 #include <QFocusEvent>
 #include <QHBoxLayout>
 #include <QInputEvent>
@@ -2795,9 +2796,9 @@ WindowTitleWidget::WindowTitleWidget()
     m_pFileNameLineEdit->setAcceptDrops(true);
     m_pFileNameLineEdit->setReadOnly(true);
 
-    //m_pBrowseButton = new QPushButton("...");
-    //pHLayout->addWidget( m_pBrowseButton, 0 );
-    //chk_connect_a( m_pBrowseButton, &QPushButton::clicked), this, &MergeResultWindow::slotBrowseButtonClicked);
+    m_pBrowseButton = new QPushButton("...");
+    pHLayout->addWidget(m_pBrowseButton, 0);
+    chk_connect_a(m_pBrowseButton, &QPushButton::clicked, this, &WindowTitleWidget::slotBrowseButtonClicked);
 
     m_pModifiedLabel = new QLabel(i18n("[Modified]"));
     pHLayout->addWidget(m_pModifiedLabel);
@@ -2969,16 +2970,14 @@ void WindowTitleWidget::setEncoding(const char* encoding)
         m_pEncodingSelector->setCurrentIndex(idx);
 }
 
-//void WindowTitleWidget::slotBrowseButtonClicked()
-//{
-//   QString current = m_pFileNameLineEdit->text();
-//
-//   QUrl newURL = KFileDialog::getSaveUrl( current, 0, this, i18n("Select file (not saving yet)"));
-//   if ( !newURL.isEmpty() )
-//   {
-//      m_pFileNameLineEdit->setText( newURL.url() );
-//   }
-//}
+void WindowTitleWidget::slotBrowseButtonClicked()
+{
+    QString current = m_pFileNameLineEdit->text();
+
+    QUrl newURL = QFileDialog::getSaveFileUrl(this, i18n("Select file (not saving yet)"), QUrl::fromLocalFile(QDir::currentPath()));
+    if(!newURL.isEmpty())
+        m_pFileNameLineEdit->setText(Utils::urlToString(newURL));
+}
 
 void WindowTitleWidget::slotSetModified(bool bModified)
 {

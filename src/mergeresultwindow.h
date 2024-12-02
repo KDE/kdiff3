@@ -25,6 +25,7 @@
 
 #include <QLineEdit>
 #include <QPointer>
+#include <QPushButton>
 #include <QSharedPointer>
 #include <QStatusBar>
 #include <QTextLayout>
@@ -313,7 +314,7 @@ class WindowTitleWidget: public QWidget
 
     QLabel*      m_pLabel;
     FileNameLineEdit*   m_pFileNameLineEdit;
-    //QPushButton* m_pBrowseButton;
+    QPushButton* m_pBrowseButton;
     QLabel*      m_pModifiedLabel;
     QLabel*      m_pLineEndStyleLabel;
     QComboBox*   m_pLineEndStyleSelector;
@@ -333,8 +334,8 @@ class WindowTitleWidget: public QWidget
     bool eventFilter(QObject* o, QEvent* e) override;
   public Q_SLOTS:
     void slotSetModified(bool bModified);
-    //private Q_SLOTS:
-    //   void slotBrowseButtonClicked();
+  private Q_SLOTS:
+    void slotBrowseButtonClicked();
 };
 
 #endif
