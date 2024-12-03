@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-30 00:42+0000\n"
+"POT-Creation-Date: 2024-12-03 00:42+0000\n"
 "PO-Revision-Date: 2024-10-05 12:40+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -106,7 +106,7 @@ msgstr "Czytanie katalogu: %1"
 msgid "Listing directory: %1"
 msgstr "Wyświetlenie zawartości katalogu: %1"
 
-#: diff.cpp:1592 diff.cpp:1608
+#: diff.cpp:1591 diff.cpp:1607
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -115,7 +115,7 @@ msgstr ""
 "Błąd utraty danych:\n"
 "Jeśli jest powtarzalny, to skontaktuj się z autorem programu.\n"
 
-#: diff.cpp:1594 diff.cpp:1610
+#: diff.cpp:1593 diff.cpp:1609
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Poważny błąd wewnętrzny"
@@ -135,7 +135,7 @@ msgstr "Plik %1: Wiersz jest niedostępny"
 msgid "Encoding:"
 msgstr "Kodowanie:"
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2820 optiondialog.cpp:787
+#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2818 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Wygląd końca wiersza:"
@@ -150,12 +150,12 @@ msgstr "A (podstawa)"
 msgid "Encoding: %1"
 msgstr "Kodowanie: %1"
 
-#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2866
+#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2865
+#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -170,7 +170,7 @@ msgstr "Wygląd końca wiersza: %1"
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: difftextwindow.cpp:2033 kdiff3.cpp:1058
+#: difftextwindow.cpp:2033 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Szczytowy wiersz"
@@ -376,8 +376,8 @@ msgstr ""
 "Obecnie wykonywane jest scalanie katalogów. Jesteś pewny że chcesz przerwać "
 "to działanie i ponownie przeszukać katalog?"
 
-#: directorymergewindow.cpp:692 kdiff3.cpp:915 kdiff3.cpp:925 kdiff3.cpp:937
-#: mergeresultwindow.cpp:304 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
+#: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1661,90 +1661,90 @@ msgstr "Widok dzielony katalogu i tekstu"
 msgid "Toggle Between Folder && Text View"
 msgstr "Przełącz pomiędzy widokiem katalogu i tekstu"
 
-#: kdiff3.cpp:868 kdiff3.cpp:970 kdiff3.cpp:995 kdiff3.cpp:1254 pdiff.cpp:814
+#: kdiff3.cpp:866 kdiff3.cpp:968 kdiff3.cpp:993 kdiff3.cpp:1251 pdiff.cpp:814
 #: pdiff.cpp:883 pdiff.cpp:919 pdiff.cpp:928 pdiff.cpp:986 pdiff.cpp:994
 #, kde-format
 msgid "Ready."
 msgstr "Gotowe."
 
-#: kdiff3.cpp:914 pdiff.cpp:1522
+#: kdiff3.cpp:912 pdiff.cpp:1522
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Wynik scalania nie został zapisany."
 
-#: kdiff3.cpp:916
+#: kdiff3.cpp:914
 #, kde-format
 msgid "Save && Quit"
 msgstr "Zapisz i wyjdź"
 
-#: kdiff3.cpp:917
+#: kdiff3.cpp:915
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Zakończ bez zapisywania"
 
-#: kdiff3.cpp:925 pdiff.cpp:1533
+#: kdiff3.cpp:923 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Nieudany zapis wyniku scalania."
 
-#: kdiff3.cpp:936 pdiff.cpp:729
+#: kdiff3.cpp:934 pdiff.cpp:729
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Trwa scalanie katalogów. Czy na pewno je przerwać?"
 
-#: kdiff3.cpp:959
+#: kdiff3.cpp:957
 #, kde-format
 msgid "Saving file..."
 msgstr "Zapisywanie pliku..."
 
-#: kdiff3.cpp:976
+#: kdiff3.cpp:974
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Zapisywanie pliku pod nową nazwą..."
 
-#: kdiff3.cpp:978
+#: kdiff3.cpp:976
 #, kde-format
 msgid "Save As..."
 msgstr "Zapisz jako..."
 
-#: kdiff3.cpp:1002
+#: kdiff3.cpp:1000
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Drukowanie niezaimplementowane."
 
-#: kdiff3.cpp:1042
+#: kdiff3.cpp:1040
 #, kde-format
 msgid "Printing..."
 msgstr "Drukowanie..."
 
-#: kdiff3.cpp:1140
+#: kdiff3.cpp:1138
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr "Drukowanie strony %1 z %2"
 
-#: kdiff3.cpp:1188
+#: kdiff3.cpp:1186
 #, kde-format
 msgid " (Selection)"
 msgstr " (Zaznaczenie)"
 
-#: kdiff3.cpp:1217
+#: kdiff3.cpp:1215
 #, kde-format
 msgid "Printing completed."
 msgstr "Drukowanie zakończone."
 
-#: kdiff3.cpp:1221
+#: kdiff3.cpp:1219
 #, kde-format
 msgid "Printing aborted."
 msgstr "Drukowanie przerwane."
 
-#: kdiff3.cpp:1228
+#: kdiff3.cpp:1226
 #, kde-format
 msgid "Exiting..."
 msgstr "Kończenie..."
 
-#: kdiff3.cpp:1238
+#: kdiff3.cpp:1236
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Przełącz pasek stanu..."
@@ -1961,59 +1961,59 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Porównywanie pliku..."
 
-#: mergeresultwindow.cpp:134
+#: mergeresultwindow.cpp:135
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "Wybierz wszędzie A"
 
-#: mergeresultwindow.cpp:135
+#: mergeresultwindow.cpp:136
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "Wybierz wszędzie B"
 
-#: mergeresultwindow.cpp:136
+#: mergeresultwindow.cpp:137
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "Wybierz wszędzie C"
 
-#: mergeresultwindow.cpp:137
+#: mergeresultwindow.cpp:138
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "Wybierz A dla wszystkich nierozwiązanych sprzeczności"
 
-#: mergeresultwindow.cpp:138
+#: mergeresultwindow.cpp:139
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "Wybierz B dla wszystkich nierozwiązanych sprzeczności"
 
-#: mergeresultwindow.cpp:139
+#: mergeresultwindow.cpp:140
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "Wybierz C dla wszystkich nierozwiązanych sprzeczności"
 
-#: mergeresultwindow.cpp:140
+#: mergeresultwindow.cpp:141
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "Wybierz A dla wszystkich nierozwiązanych sprzeczności białych znaków"
 
-#: mergeresultwindow.cpp:141
+#: mergeresultwindow.cpp:142
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "Wybierz B dla wszystkich nierozwiązanych sprzeczności białych znaków"
 
-#: mergeresultwindow.cpp:142
+#: mergeresultwindow.cpp:143
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Wybierz C dla wszystkich nierozwiązanych sprzeczności białych znaków"
 
-#: mergeresultwindow.cpp:238
+#: mergeresultwindow.cpp:239
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Liczba pozostałych nierozwiązanych sprzeczności: %1 (z których %2 dotyczy "
 "znaków odstępu)"
 
-#: mergeresultwindow.cpp:302
+#: mergeresultwindow.cpp:303
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2022,29 +2022,29 @@ msgstr ""
 "Plik wyjściowy został zmieniony.\n"
 "Jeśli będziesz kontynuować zmiany zostaną utracone."
 
-#: mergeresultwindow.cpp:746 pdiff.cpp:605
+#: mergeresultwindow.cpp:744 pdiff.cpp:605
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Wszystkie pliki wejściowe są dwójkowo takie same."
 
-#: mergeresultwindow.cpp:748
+#: mergeresultwindow.cpp:746
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Wszystkie wejściowe pliki zawierając ten sam tekst."
 
-#: mergeresultwindow.cpp:752 mergeresultwindow.cpp:756
-#: mergeresultwindow.cpp:760 pdiff.cpp:611 pdiff.cpp:615 pdiff.cpp:619
+#: mergeresultwindow.cpp:750 mergeresultwindow.cpp:754
+#: mergeresultwindow.cpp:758 pdiff.cpp:611 pdiff.cpp:615 pdiff.cpp:619
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Pliki %1 i %2 są dwójkowo takie same.\n"
 
-#: mergeresultwindow.cpp:754 mergeresultwindow.cpp:758
-#: mergeresultwindow.cpp:762
+#: mergeresultwindow.cpp:752 mergeresultwindow.cpp:756
+#: mergeresultwindow.cpp:760
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Pliki %1 i %2 mają ten sam tekst.\n"
 
-#: mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:764
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2057,27 +2057,27 @@ msgstr ""
 "Liczba nierozwiązanych sprzeczności: %3\n"
 "%4"
 
-#: mergeresultwindow.cpp:772
+#: mergeresultwindow.cpp:770
 #, kde-format
 msgid "Conflicts"
 msgstr "Sprzeczności"
 
-#: mergeresultwindow.cpp:1513
+#: mergeresultwindow.cpp:1511
 #, kde-format
 msgid "<No src line>"
 msgstr "<Brak wiersza źr.>"
 
-#: mergeresultwindow.cpp:1521
+#: mergeresultwindow.cpp:1519
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Sprzeczność przy scalaniu (tylko białe znaki)>"
 
-#: mergeresultwindow.cpp:1523 mergeresultwindow.cpp:2421
+#: mergeresultwindow.cpp:1521 mergeresultwindow.cpp:2419
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<Sprzeczność przy scalaniu>"
 
-#: mergeresultwindow.cpp:2643
+#: mergeresultwindow.cpp:2641
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2086,13 +2086,13 @@ msgstr ""
 "Nie rozwiązano wszystkich sprzeczności.\n"
 "Plik nie został zapisany."
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2643 mergeresultwindow.cpp:2652
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Pozostałe sprzeczności"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2650
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2103,7 +2103,7 @@ msgstr ""
 "ręcznie.\n"
 "Plik nie został zapisany."
 
-#: mergeresultwindow.cpp:2666
+#: mergeresultwindow.cpp:2664
 #, kde-format
 msgid ""
 "\n"
@@ -2114,50 +2114,55 @@ msgstr ""
 "\n"
 "Tworzenie pliku zapasowego nie powiodło się. Plik nie został zapisany."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2664 mergeresultwindow.cpp:2710
 #, kde-format
 msgid "File Save Error"
 msgstr "Błąd zapisu pliku"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2710
 #, kde-format
 msgid "Error while writing."
 msgstr "Błąd w czasie zapisu."
 
-#: mergeresultwindow.cpp:2792
+#: mergeresultwindow.cpp:2790
 #, kde-format
 msgid "Output:"
 msgstr "Wyjście:"
 
-#: mergeresultwindow.cpp:2805 mergeresultwindow.cpp:2988
+#: mergeresultwindow.cpp:2803 mergeresultwindow.cpp:2984
 #, kde-format
 msgid "[Modified]"
 msgstr "[zmieniony]"
 
-#: mergeresultwindow.cpp:2812
+#: mergeresultwindow.cpp:2810
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kodowanie dla zapisu:"
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2910
 #, kde-format
 msgid "Conflict"
 msgstr "Sprzeczność"
 
-#: mergeresultwindow.cpp:2935
+#: mergeresultwindow.cpp:2933
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodek z A: %1"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2935
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodek z B: %1"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2937
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodek z C: %1"
+
+#: mergeresultwindow.cpp:2977
+#, kde-format
+msgid "Select file (not saving yet)"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)

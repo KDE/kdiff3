@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-30 00:42+0000\n"
+"POT-Creation-Date: 2024-12-03 00:42+0000\n"
 "PO-Revision-Date: 2017-09-28 17:57+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -102,7 +102,7 @@ msgstr "Čitam fajl: %1"
 msgid "Listing directory: %1"
 msgstr "Listam fasciklu: %1"
 
-#: diff.cpp:1592 diff.cpp:1608
+#: diff.cpp:1591 diff.cpp:1607
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -111,7 +111,7 @@ msgstr ""
 "Greška, gubitak podataka:\n"
 "Ako je možete ponoviti, kontaktirajte autora.\n"
 
-#: diff.cpp:1594 diff.cpp:1610
+#: diff.cpp:1593 diff.cpp:1609
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Ozbiljna unutrašnja greška"
@@ -132,7 +132,7 @@ msgstr "red nedostupan"
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2820 optiondialog.cpp:787
+#: difftextwindow.cpp:1976 mergeresultwindow.cpp:2818 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Stil kraja redova:"
@@ -149,12 +149,12 @@ msgstr "A (baza):"
 msgid "Encoding: %1"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2866
+#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2864
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2865
+#: difftextwindow.cpp:2004 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -171,7 +171,7 @@ msgid "Unknown"
 msgstr ""
 
 # >! Merge whole string.
-#: difftextwindow.cpp:2033 kdiff3.cpp:1058
+#: difftextwindow.cpp:2033 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Prvi red"
@@ -418,8 +418,8 @@ msgstr ""
 "Trenutno stapate fascikle. Želite li zaista da prekinete stapanje i ponovo "
 "skenirate fasciklu?"
 
-#: directorymergewindow.cpp:692 kdiff3.cpp:915 kdiff3.cpp:925 kdiff3.cpp:937
-#: mergeresultwindow.cpp:304 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
+#: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1800,34 +1800,34 @@ msgstr "Podeljeni prikaz ekrana na fasciklu i tekst"
 msgid "Toggle Between Folder && Text View"
 msgstr "Prebaci prikaz fascikle i teksta"
 
-#: kdiff3.cpp:868 kdiff3.cpp:970 kdiff3.cpp:995 kdiff3.cpp:1254 pdiff.cpp:814
+#: kdiff3.cpp:866 kdiff3.cpp:968 kdiff3.cpp:993 kdiff3.cpp:1251 pdiff.cpp:814
 #: pdiff.cpp:883 pdiff.cpp:919 pdiff.cpp:928 pdiff.cpp:986 pdiff.cpp:994
 #, kde-format
 msgid "Ready."
 msgstr "Spreman."
 
-#: kdiff3.cpp:914 pdiff.cpp:1522
+#: kdiff3.cpp:912 pdiff.cpp:1522
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "Rezultat stapanja nije sačuvan."
 
-#: kdiff3.cpp:916
+#: kdiff3.cpp:914
 #, kde-format
 msgid "Save && Quit"
 msgstr "Sačuvaj i napusti"
 
-#: kdiff3.cpp:917
+#: kdiff3.cpp:915
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Napusti bez upisivanja"
 
-#: kdiff3.cpp:925 pdiff.cpp:1533
+#: kdiff3.cpp:923 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Upisivanje rezultata stapanja nije uspelo."
 
-#: kdiff3.cpp:936 pdiff.cpp:729
+#: kdiff3.cpp:934 pdiff.cpp:729
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1836,60 +1836,60 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "Trenutno stapate fascikle. Želite li zaista da obustavite ovo?"
 
-#: kdiff3.cpp:959
+#: kdiff3.cpp:957
 #, kde-format
 msgid "Saving file..."
 msgstr "Upisujem fajl..."
 
-#: kdiff3.cpp:976
+#: kdiff3.cpp:974
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "Upisujem fajl pod novim imenom..."
 
 # >> @title:window
-#: kdiff3.cpp:978
+#: kdiff3.cpp:976
 #, kde-format
 msgid "Save As..."
 msgstr "Upisivanje kao"
 
-#: kdiff3.cpp:1002
+#: kdiff3.cpp:1000
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Štampanje nije izvedeno."
 
-#: kdiff3.cpp:1042
+#: kdiff3.cpp:1040
 #, kde-format
 msgid "Printing..."
 msgstr "Štampam..."
 
-#: kdiff3.cpp:1140
+#: kdiff3.cpp:1138
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1188
+#: kdiff3.cpp:1186
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "Izbor"
 
-#: kdiff3.cpp:1217
+#: kdiff3.cpp:1215
 #, kde-format
 msgid "Printing completed."
 msgstr "Štampanje završeno."
 
-#: kdiff3.cpp:1221
+#: kdiff3.cpp:1219
 #, kde-format
 msgid "Printing aborted."
 msgstr "Štampanje obustavljeno."
 
-#: kdiff3.cpp:1228
+#: kdiff3.cpp:1226
 #, kde-format
 msgid "Exiting..."
 msgstr "Napuštam..."
 
-#: kdiff3.cpp:1238
+#: kdiff3.cpp:1236
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Prebacujem traku stanja..."
@@ -2103,57 +2103,57 @@ msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "Upoređujem fajl..."
 
-#: mergeresultwindow.cpp:134
+#: mergeresultwindow.cpp:135
 #, kde-format
 msgid "Choose A Everywhere"
 msgstr "Svuda izaberi A"
 
-#: mergeresultwindow.cpp:135
+#: mergeresultwindow.cpp:136
 #, kde-format
 msgid "Choose B Everywhere"
 msgstr "Svuda izaberi B"
 
-#: mergeresultwindow.cpp:136
+#: mergeresultwindow.cpp:137
 #, kde-format
 msgid "Choose C Everywhere"
 msgstr "Svuda izaberi C"
 
-#: mergeresultwindow.cpp:137
+#: mergeresultwindow.cpp:138
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "Izaberi A za sve nerešene sukobe"
 
-#: mergeresultwindow.cpp:138
+#: mergeresultwindow.cpp:139
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "Izaberi B za sve nerešene sukobe"
 
-#: mergeresultwindow.cpp:139
+#: mergeresultwindow.cpp:140
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "Izaberi C za sve nerešene sukobe"
 
-#: mergeresultwindow.cpp:140
+#: mergeresultwindow.cpp:141
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "Izaberi A za sve nerešene sukobe praznina"
 
-#: mergeresultwindow.cpp:141
+#: mergeresultwindow.cpp:142
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "Izaberi B za sve nerešene sukobe praznina"
 
-#: mergeresultwindow.cpp:142
+#: mergeresultwindow.cpp:143
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "Izaberi C za sve nerešene sukobe praznina"
 
-#: mergeresultwindow.cpp:238
+#: mergeresultwindow.cpp:239
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Broj preostalih nerešenih sukoba: %1 (od čega %2 praznine)."
 
-#: mergeresultwindow.cpp:302
+#: mergeresultwindow.cpp:303
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2162,29 +2162,29 @@ msgstr ""
 "Izlaz je izmenjen.\n"
 "Ako nastavite izmene će biti izgubljene."
 
-#: mergeresultwindow.cpp:746 pdiff.cpp:605
+#: mergeresultwindow.cpp:744 pdiff.cpp:605
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "Svi ulazni fajlovi binarno su jednaki."
 
-#: mergeresultwindow.cpp:748
+#: mergeresultwindow.cpp:746
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "Svi ulazni fajlovi sadrže isti tekst."
 
-#: mergeresultwindow.cpp:752 mergeresultwindow.cpp:756
-#: mergeresultwindow.cpp:760 pdiff.cpp:611 pdiff.cpp:615 pdiff.cpp:619
+#: mergeresultwindow.cpp:750 mergeresultwindow.cpp:754
+#: mergeresultwindow.cpp:758 pdiff.cpp:611 pdiff.cpp:615 pdiff.cpp:619
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "Fajlovi %1 i %2 binarno su jednaki.\n"
 
-#: mergeresultwindow.cpp:754 mergeresultwindow.cpp:758
-#: mergeresultwindow.cpp:762
+#: mergeresultwindow.cpp:752 mergeresultwindow.cpp:756
+#: mergeresultwindow.cpp:760
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "Fajlovi %1 i %2 sadrže isti tekst.\n"
 
-#: mergeresultwindow.cpp:766
+#: mergeresultwindow.cpp:764
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2193,27 +2193,27 @@ msgid ""
 "%4"
 msgstr ""
 
-#: mergeresultwindow.cpp:772
+#: mergeresultwindow.cpp:770
 #, kde-format
 msgid "Conflicts"
 msgstr "Sukobi"
 
-#: mergeresultwindow.cpp:1513
+#: mergeresultwindow.cpp:1511
 #, kde-format
 msgid "<No src line>"
 msgstr "<nema izvornog reda>"
 
-#: mergeresultwindow.cpp:1521
+#: mergeresultwindow.cpp:1519
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<sukob stapanja (samo praznine)>"
 
-#: mergeresultwindow.cpp:1523 mergeresultwindow.cpp:2421
+#: mergeresultwindow.cpp:1521 mergeresultwindow.cpp:2419
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<sukob stapanja>"
 
-#: mergeresultwindow.cpp:2643
+#: mergeresultwindow.cpp:2641
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2225,14 +2225,14 @@ msgstr ""
 "Još nisu rešeni svi sukobi.\n"
 "Fajl nije sačuvan.\n"
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2643 mergeresultwindow.cpp:2652
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Preostali sukobi"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2650
 #, fuzzy, kde-format
 #| msgid ""
 #| "There is a line end style conflict. Please choose the line end style "
@@ -2246,7 +2246,7 @@ msgstr ""
 "Sukob u stilu završetaka redova. Izaberite ručno stil završetka redova.\n"
 "Fajl nije sačuvan.\n"
 
-#: mergeresultwindow.cpp:2666
+#: mergeresultwindow.cpp:2664
 #, kde-format
 msgid ""
 "\n"
@@ -2257,58 +2257,63 @@ msgstr ""
 "\n"
 "Pravljenje rezerve nije uspelo. Fajl nije sačuvan."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2664 mergeresultwindow.cpp:2710
 #, kde-format
 msgid "File Save Error"
 msgstr "Greška upisivanja fajla"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2710
 #, kde-format
 msgid "Error while writing."
 msgstr "Greška pri pisanju."
 
-#: mergeresultwindow.cpp:2792
+#: mergeresultwindow.cpp:2790
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Izlaz"
 
-#: mergeresultwindow.cpp:2805 mergeresultwindow.cpp:2988
+#: mergeresultwindow.cpp:2803 mergeresultwindow.cpp:2984
 #, kde-format
 msgid "[Modified]"
 msgstr "[izmenjen]"
 
-#: mergeresultwindow.cpp:2812
+#: mergeresultwindow.cpp:2810
 #, fuzzy, kde-format
 #| msgid "Encoding for saving"
 msgid "Encoding for saving:"
 msgstr "Kodiranje za upisivanje"
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2910
 #, kde-format
 msgid "Conflict"
 msgstr "Sukob"
 
 # >! Merge sentence.
-#: mergeresultwindow.cpp:2935
+#: mergeresultwindow.cpp:2933
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "Kodiranje iz"
 
 # >! Merge sentence.
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2935
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "Kodiranje iz"
 
 # >! Merge sentence.
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2937
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
 msgstr "Kodiranje iz"
+
+#: mergeresultwindow.cpp:2977
+#, kde-format
+msgid "Select file (not saving yet)"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
