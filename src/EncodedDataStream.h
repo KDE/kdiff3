@@ -80,12 +80,16 @@ class EncodedDataStream: public QIODeviceBase
 
     qint64 readChar(QChar &c)
     {
-        char curData = QChar::Null;
+        char curData = '\0';
         qint64 len = 0;
         QString s;
 
         if(!mDecoder.isValid()) return 0;
 
+        /*
+            As long as the encoding is incomplete QStringDecoder returns an empty string and waits for more data.
+            This loop proceeds one byte at a time until we hit the end of input, get an encoded char and encounter an error.
+        */
         do
         {
             len += dev->read(&curData, 1);
@@ -96,7 +100,7 @@ class EncodedDataStream: public QIODeviceBase
         if(!mError)
             c = s[0];
         else
-            c = QChar::ReplacementCharacter;
+            c = QChar::SpecialCharacter::ReplacementCharacter;
 
         return len;
     }
