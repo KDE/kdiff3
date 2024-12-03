@@ -25,7 +25,6 @@
 #include <QEventLoop>
 #include <QPointer>
 #include <QScrollBar>
-#include <QSharedPointer>
 #include <QSplitter>
 
 // include files for KDE
@@ -416,9 +415,9 @@ public Q_SLOTS:
 
     TotalDiffStatus *m_totalDiffStatus = new TotalDiffStatus();
 
-    QSharedPointer<SourceData> m_sd1 = QSharedPointer<SourceData>::create();
-    QSharedPointer<SourceData> m_sd2 = QSharedPointer<SourceData>::create();
-    QSharedPointer<SourceData> m_sd3 = QSharedPointer<SourceData>::create();
+    std::shared_ptr<SourceData> m_sd1 = std::make_shared<SourceData>();
+    std::shared_ptr<SourceData> m_sd2 = std::make_shared<SourceData>();
+    std::shared_ptr<SourceData> m_sd3 = std::make_shared<SourceData>();
 
     QString m_outputFilename;
     bool m_bDefaultFilename = true;

@@ -208,7 +208,7 @@ bool SourceData::isFromBuffer() const
     return mFromClipBoard;
 }
 
-bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) const
+bool SourceData::isBinaryEqualWith(const std::shared_ptr<SourceData>& other) const
 {
     return m_fileAccess.exists() && other->m_fileAccess.exists() &&
            getSizeBytes() == other->getSizeBytes() &&

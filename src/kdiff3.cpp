@@ -641,7 +641,7 @@ void KDiff3App::completeInit()
 
             if(m_bAutoMode && m_totalDiffStatus->getUnsolvedConflicts() == 0)
             {
-                QSharedPointer<SourceData> pSD = nullptr;
+                std::shared_ptr<SourceData> pSD = nullptr;
                 if(m_sd3->isEmpty())
                 {
                     if(m_totalDiffStatus->isBinaryEqualAB())

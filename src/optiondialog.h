@@ -16,7 +16,6 @@
 
 #include <QFont>
 #include <QGroupBox>
-#include <QSharedPointer>
 #include <QStringList>
 
 #include <KLocalizedString>

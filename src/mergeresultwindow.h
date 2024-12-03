@@ -26,7 +26,6 @@
 #include <QLineEdit>
 #include <QPointer>
 #include <QPushButton>
-#include <QSharedPointer>
 #include <QStatusBar>
 #include <QTextLayout>
 #include <QTimer>

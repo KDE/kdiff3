@@ -19,7 +19,6 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QSharedPointer>
 #include <QTemporaryFile>
 #include <QUrl>
 
@@ -164,8 +163,8 @@ class FileAccess
     QString mDisplayName;
     QString m_localCopy;
     QString mPhysicalPath;
-    QSharedPointer<QTemporaryFile> tmpFile = QSharedPointer<QTemporaryFile>::create();
-    QSharedPointer<QFile> realFile = nullptr;
+    std::shared_ptr<QTemporaryFile> tmpFile = std::make_shared<QTemporaryFile>();
+    std::shared_ptr<QFile> realFile = nullptr;
 
     qint64 m_size = 0;
     QDateTime m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);

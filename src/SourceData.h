@@ -19,10 +19,9 @@
 #include <memory>
 #include <optional>
 
-#include <QTemporaryFile>
-#include <QSharedPointer>
 #include <QString>
 #include <QStringList>
+#include <QTemporaryFile>
 
 class SourceData
 {
@@ -51,7 +50,7 @@ class SourceData
     void readAndPreprocess(const QByteArray& encoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
-    [[nodiscard]] bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
+    [[nodiscard]] bool isBinaryEqualWith(const std::shared_ptr<SourceData>& other) const;
 
     void reset();
 
@@ -92,7 +91,7 @@ class SourceData
         std::unique_ptr<char[]> m_pBuf; //TODO: Phase out needlessly wastes memory and time by keeping second copy of file data.
         quint64 mDataSize = 0;
         qint64 mLineCount = 0; // Number of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
-        QSharedPointer<QString> m_unicodeBuf=QSharedPointer<QString>::create();
+        std::shared_ptr<QString> m_unicodeBuf = std::make_shared<QString>();
         std::shared_ptr<LineDataVector> m_v=std::make_shared<LineDataVector>();
         bool m_bIsText = false;
         bool m_bIncompleteConversion = false;

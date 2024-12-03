@@ -21,7 +21,6 @@
 #include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPointer>
-#include <QSharedPointer>
 #include <QString>
 #include <QWheelEvent>
 
@@ -112,7 +111,7 @@ class DiffTextWindow: public QWidget
 
     [[nodiscard]] qint32 getLineNumberWidth() const;
 
-    void setSourceData(const QSharedPointer<SourceData>& inData);
+    void setSourceData(const std::shared_ptr<SourceData>& inData);
 
     void scrollVertically(qint32 deltaY);
   Q_SIGNALS:
@@ -183,7 +182,7 @@ class DiffTextWindowFrame: public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app);
+    DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const std::shared_ptr<SourceData>& psd, KDiff3App& app);
     ~DiffTextWindowFrame() override;
     QPointer<DiffTextWindow> getDiffTextWindow();
     void init();
@@ -218,14 +217,14 @@ class DiffTextWindowFrame: public QWidget
     QPointer<DiffTextWindow> m_pDiffTextWindow;
     e_SrcSelector m_winIdx;
 
-    QSharedPointer<SourceData> mSourceData;
+    std::shared_ptr<SourceData> mSourceData;
 };
 
 class EncodingLabel: public QLabel
 {
     Q_OBJECT
   public:
-    EncodingLabel(const QString& text, const QSharedPointer<SourceData>& psd);
+    EncodingLabel(const QString& text, const std::shared_ptr<SourceData>& psd);
 
   protected:
     void mouseMoveEvent(QMouseEvent* ev) override;
@@ -239,7 +238,7 @@ class EncodingLabel: public QLabel
 
   private:
     QMenu* m_pContextEncodingMenu;
-    QSharedPointer<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
+    std::shared_ptr<SourceData> m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
 
     void insertCodec(const QString& visibleCodecName, const QByteArray& nameArray, QList<QByteArray>& codecEnumList, QMenu* pMenu, const QByteArray& currentTextCodecEnum) const;
 };

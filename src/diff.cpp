@@ -31,7 +31,6 @@
 #endif
 
 #include <QRegularExpression>
-#include <QSharedPointer>
 #include <QTextStream>
 
 constexpr bool g_bIgnoreWhiteSpace = true;

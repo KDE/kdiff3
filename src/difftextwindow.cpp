@@ -275,7 +275,7 @@ class DiffTextWindowData
     bool m_bSelectionInProgress = false;
     QPoint m_lastKnownMousePos;
 
-    QSharedPointer<SourceData> sourceData;
+    std::shared_ptr<SourceData> sourceData;
 };
 
 QAtomicInteger<size_t> DiffTextWindow::maxThreads()
@@ -283,7 +283,7 @@ QAtomicInteger<size_t> DiffTextWindow::maxThreads()
     return RecalcWordWrapThread::s_maxNofRunnables.loadAcquire();
 }
 
-void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData)
+void DiffTextWindow::setSourceData(const std::shared_ptr<SourceData>& inData)
 {
     d->sourceData = inData;
 }
@@ -1926,7 +1926,7 @@ void DiffTextWindow::recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visi
     }
 }
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App& app):
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx, const std::shared_ptr<SourceData>& psd, KDiff3App& app):
     QWidget(pParent)
 {
     m_winIdx = winIdx;
@@ -2109,7 +2109,7 @@ void DiffTextWindowFrame::slotEncodingChanged(const QByteArray& name)
     mSourceData->setEncoding(name);
 }
 
-EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD):
+EncodingLabel::EncodingLabel(const QString& text, const std::shared_ptr<SourceData>& pSD):
     QLabel(text)
 {
     m_pSourceData = pSD;

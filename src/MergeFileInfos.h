@@ -14,7 +14,6 @@
 #include "diff.h"
 #include "fileaccess.h"
 
-#include <QSharedPointer>
 #include <QString>
 
 enum e_MergeOperation

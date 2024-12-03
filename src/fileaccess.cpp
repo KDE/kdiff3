@@ -245,8 +245,8 @@ void FileAccess::reset()
     mPhysicalPath.clear();
     m_linkTarget.clear();
     //Cleanup temp file if any.
-    tmpFile = QSharedPointer<QTemporaryFile>::create();
-    realFile.clear();
+    tmpFile = std::make_shared<QTemporaryFile>();
+    realFile.reset();
 
     m_pParent = nullptr;
     m_bValidData = false;
@@ -369,7 +369,7 @@ void FileAccess::loadData()
             m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
     }
 
-    realFile = QSharedPointer<QFile>::create(absoluteFilePath());
+    realFile = std::make_shared<QFile>(absoluteFilePath());
     m_bValidData = true;
 }
 

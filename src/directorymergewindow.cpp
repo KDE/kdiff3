@@ -246,7 +246,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     bool mergeFLD(const QString& nameA, const QString& nameB, const QString& nameC,
                   const QString& nameDest, bool& bSingleFileMerge);
 
-    void buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo);
+    void buildMergeMap(const std::shared_ptr<DirectoryInfo>& dirInfo);
 
   private:
     class FileKey
@@ -733,7 +733,7 @@ bool DirectoryMergeWindow::init(
     return d->init(bDirectoryMerge, bReload);
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const std::shared_ptr<DirectoryInfo>& dirInfo)
 {
     if(dirInfo->dirA().isValid())
     {

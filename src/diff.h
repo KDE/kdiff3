@@ -21,7 +21,6 @@
 #include <optional>
 #include <vector>
 
-#include <QSharedPointer>
 #include <QString>
 #include <QStringList>
 
@@ -158,7 +157,7 @@ class DiffList: public std::list<Diff>
 class LineData
 {
   private:
-    QSharedPointer<QString> mBuffer;
+    std::shared_ptr<QString> mBuffer;
     qsizetype mFirstNonWhiteChar = 0;
     //This tracks the offset with-in our unicode buffer not the file offset
     qsizetype mOffset = 0;
@@ -173,7 +172,7 @@ class LineData
     LineData& operator=(const LineData&) = default;
     LineData& operator=(LineData&&) = default;
 
-    LineData(const QSharedPointer<QString>& buffer, const qsizetype inOffset, qsizetype inSize = 0, qsizetype inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
+    LineData(const std::shared_ptr<QString>& buffer, const qsizetype inOffset, qsizetype inSize = 0, qsizetype inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
@@ -189,7 +188,7 @@ class LineData
         QString::fromRawData allows us to create a light weight QString backed by the buffer memory.
     */
     [[nodiscard]] const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
-    [[nodiscard]] const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
+    [[nodiscard]] const std::shared_ptr<QString>& getBuffer() const { return mBuffer; }
 
     [[nodiscard]] qsizetype getOffset() const { return mOffset; }
     [[nodiscard]] qint32 width(qint32 tabSize) const; // Calcs width considering tabs.
@@ -273,7 +272,7 @@ class Diff3Line
     qint32 mLinesNeededForDisplay = 1;    // Due to wordwrap
     qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
   public:
-    inline static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create(); // Needed by this class and only this but inited from KDiff3App::mainInit
+    inline static std::shared_ptr<DiffBufferInfo> m_pDiffBufferInfo = std::make_shared<DiffBufferInfo>(); // Needed by this class and only this but inited from KDiff3App::mainInit
 
     [[nodiscard]] bool hasFineDiffAB() const { return pFineAB != nullptr; }
     [[nodiscard]] bool hasFineDiffBC() const { return pFineBC != nullptr; }
