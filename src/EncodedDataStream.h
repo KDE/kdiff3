@@ -54,13 +54,17 @@ class EncodedDataStream: public QDataStream
 
     inline qint32 readChar(QChar& c)
     {
-        char curData = QChar::Null;
+        char curData = '\0';
         qint32 len = 0;
         QString s;
         QStringDecoder decoder = QStringDecoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
         assert(decoder.isValid());
         if(!decoder.isValid()) return 0;
 
+        /*
+            As long as the encoding is incomplete QStringDecoder returns an empty string and waits for more data.
+            This loop proceeds one byte at a time until we hit the end of input, get an encoded char and encounter an error.
+        */
         do
         {
             len += readRawData(&curData, 1);
@@ -72,7 +76,7 @@ class EncodedDataStream: public QDataStream
         if(!mError)
             c = s[0];
         else
-            c = QChar::ReplacementCharacter;
+            c = QChar::SpecialCharacter::ReplacementCharacter;
 
         return len;
     }
