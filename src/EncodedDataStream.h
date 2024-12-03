@@ -30,9 +30,9 @@ class EncodedDataStream: public QDataStream
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
 
-    inline bool hasBOM() const noexcept { return mGenerateBOM; }
+    inline bool hasBOM() const { return mGenerateBOM; }
 
-    inline void setEncoding(const QByteArray &inEncoding) noexcept
+    inline void setEncoding(const QByteArray &inEncoding) 
     {
         assert(!inEncoding.isEmpty());
 
