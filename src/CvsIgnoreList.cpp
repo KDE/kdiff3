@@ -35,7 +35,7 @@ void CvsIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryL
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
                                    "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
     addEntriesFromString(dir, ignorestr);
-    addEntriesFromFile(dir, QDir::homePath() + '/' + getGlobalIgnoreName());
+    addEntriesFromFile(dir, QDir::homePath() + u'/' + getGlobalIgnoreName());
     const char* varname = getVarName();
     if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
     {
@@ -60,7 +60,7 @@ void CvsIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryL
 
 void CvsIgnoreList::addEntriesFromString(const QString& dir, const QString& str)
 {
-    const QStringList patternList = str.split(' ');
+    const QStringList patternList = str.split(u' ');
     for(const QString& pattern: patternList)
     {
         addEntry(dir, pattern);
@@ -108,7 +108,7 @@ void CvsIgnoreList::addEntry(const QString& dir, const QString& pattern)
         posEnd = pos + pattern.length();
         while(pos < posEnd)
         {
-            if(*pos == QChar('*') || *pos == QChar('?')) ++nofMetaCharacters;
+            if(*pos == QChar(u'*') || *pos == QChar(u'?')) ++nofMetaCharacters;
             ++pos;
         }
 
@@ -118,11 +118,11 @@ void CvsIgnoreList::addEntry(const QString& dir, const QString& pattern)
         }
         else if(nofMetaCharacters == 1)
         {
-            if(pattern.at(0) == QChar('*'))
+            if(pattern.at(0) == QChar(u'*'))
             {
                 m_ignorePatterns[dir].m_endPatterns.append(pattern.right(pattern.length() - 1));
             }
-            else if(pattern.at(pattern.length() - 1) == QChar('*'))
+            else if(pattern.at(pattern.length() - 1) == QChar(u'*'))
             {
                 m_ignorePatterns[dir].m_startPatterns.append(pattern.left(pattern.length() - 1));
             }

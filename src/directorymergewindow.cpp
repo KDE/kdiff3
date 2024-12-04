@@ -609,7 +609,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
                     thePainter->setPen(QPen(c, 0, Qt::DotLine));
                     thePainter->drawRect(x + 1, y + yOffset - 1, w + 2, h + 2);
                     thePainter->setPen(Qt::white);
-                    QString s(QChar('A' + i - 1));
+                    QString s(QChar(u'A' + i - 1));
 
                     thePainter->drawText(x + 2 + (w - thePainter->fontMetrics().horizontalAdvance(s)) / 2,
                                          y + yOffset + (h + thePainter->fontMetrics().ascent()) / 2 - 1,
@@ -933,7 +933,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         if(!bListDirSuccessA) s += "\nA: " + dirA.prettyAbsPath();
         if(!bListDirSuccessB) s += "\nB: " + dirB.prettyAbsPath();
         if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
-        s += '\n';
+        s += u'\n';
         s += i18nc("Warning text", "Check the permissions of the subfolders.");
         bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(mWindow, s);
     }
@@ -979,7 +979,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
                  nofDirs, nofEqualFiles, nofFiles - nofEqualFiles);
 
         if(dirC.isValid())
-            s += '\n' + i18n("Number of manual merges: %1", nofManualMerges);
+            s += u'\n' + i18n("Number of manual merges: %1", nofManualMerges);
         KMessageBox::information(mWindow, s);
         //
         //TODO
@@ -1334,7 +1334,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView()
             break;
 
         // Get dirname from fileName: Search for "/" from end:
-        qsizetype pos = fileName.lastIndexOf('/');
+        qsizetype pos = fileName.lastIndexOf(u'/');
         QString dirPart;
         QString filePart;
         if(pos == -1)
@@ -2503,7 +2503,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
 
     QStringList errors;
     // Make sure that the dir exists, into which we will save the file later.
-    qsizetype pos = nameDest.lastIndexOf('/');
+    qsizetype pos = nameDest.lastIndexOf(u'/');
     if(pos > 0)
     {
         QString parentName = nameDest.left(pos);
@@ -2584,7 +2584,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& s
         return bSuccess;
     }
 
-    qsizetype pos = destName.lastIndexOf('/');
+    qsizetype pos = destName.lastIndexOf(u'/');
     if(pos > 0)
     {
         QString parentName = destName.left(pos);
@@ -2660,7 +2660,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
         }
     }
 
-    qsizetype pos = name.lastIndexOf('/');
+    qsizetype pos = name.lastIndexOf(u'/');
     if(pos > 0)
     {
         QString parentName = name.left(pos);
@@ -2829,7 +2829,7 @@ void DirectoryMergeInfo::setInfo(
     addListViewItem(QStringLiteral("C"), dirC.prettyAbsPath(), mfi.getFileInfoC());
     if(!bHideDest)
     {
-        FileAccess fiDest(dirDest.prettyAbsPath() + '/' + mfi.subPath(), true);
+        FileAccess fiDest(dirDest.prettyAbsPath() + u'/' + mfi.subPath(), true);
         addListViewItem(i18n("Dest"), dirDest.prettyAbsPath(), &fiDest);
     }
     for(qint32 i = 0; i < m_pInfoList->columnCount(); ++i)

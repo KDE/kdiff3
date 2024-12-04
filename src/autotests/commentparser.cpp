@@ -203,28 +203,28 @@ class CommentParserTest : public QObject
         QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
-        test.processChar("\"", '"');
+        test.processChar("\"", u'"');
         QVERIFY(!test.isEscaped());
         QVERIFY(test.inString());
 
-        test.processChar("\"'", '\'');
+        test.processChar("\"'", u'\'');
         QVERIFY(test.inString());
-        test.processChar("\"'\"", '"');
+        test.processChar("\"'\"", u'"');
         QVERIFY(!test.inString());
 
         //test only escape sequence we care about
         test = DefaultCommentParser();
-        test.processChar("\"", '"');
+        test.processChar("\"", u'"');
 
-        test.processChar("\"", '\\');
+        test.processChar("\"", u'\\');
         QVERIFY(test.isEscaped());
         QVERIFY(test.inString());
 
-        test.processChar("\"\\\"", '"');
+        test.processChar("\"\\\"", u'"');
         QVERIFY(!test.isEscaped());
         QVERIFY(test.inString());
 
-        test.processChar("\"\\\"\"", '"');
+        test.processChar("\"\\\"\"", u'"');
         QVERIFY(!test.isEscaped());
         QVERIFY(!test.inString());
     }
@@ -233,13 +233,13 @@ class CommentParserTest : public QObject
     {
         DefaultCommentParser test;
 
-        test.processLine("'\"'");
+        test.processLine("u'\"'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isSkipable());
         QVERIFY(!test.isPureComment());
 
-        test.processLine("'a'");
+        test.processLine("u'a'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isSkipable());
@@ -251,13 +251,13 @@ class CommentParserTest : public QObject
         QVERIFY(!test.isSkipable());
         QVERIFY(!test.isPureComment());
 
-        test.processLine("'*'");
+        test.processLine("u'*'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isSkipable());
         QVERIFY(!test.isPureComment());
 
-        test.processLine("'/'");
+        test.processLine("u'/'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isSkipable());

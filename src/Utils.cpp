@@ -29,7 +29,7 @@
  * The first item in the list will be the command itself.
  * Returns the error reason as string or an empty string on success.
  * Eg. >"1" "2"<           => >1<, >2<
- * Eg. >'\'\\'<            => >'\<   backslash is a meta character
+ * Eg. >u'\'\\'<            => >'\<   backslash is a meta character
  * Eg. > "\\" <            => >\<
  * Eg. >"c:\sed" 's/a/\' /g'<  => >c:\sed<, >s/a/' /g<
  */
@@ -43,7 +43,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
         {
             ++i;
         }
-        if(cmd[i] == '"' || cmd[i] == '\'') // argument beginning with a quote
+        if(cmd[i] == u'"' || cmd[i] == u'\'') // argument beginning with a quote
         {
             QChar quoteChar = cmd[i];
             ++i;
@@ -56,13 +56,13 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
                     bSkip = false;
                     //Don't emulate bash here we are not talking to it.
                     //For us all quotes are the same.
-                    if(cmd[i] == '\\' || cmd[i] == '\'' || cmd[i] == '"')
+                    if(cmd[i] == u'\\' || cmd[i] == u'\'' || cmd[i] == u'"')
                     {
-                        cmd.remove(i - 1, 1); // remove the backslash '\'
+                        cmd.remove(i - 1, 1); // remove the backslash u'\'
                         continue;
                     }
                 }
-                else if(cmd[i] == '\\')
+                else if(cmd[i] == u'\\')
                     bSkip = true;
                 ++i;
             }
@@ -81,7 +81,7 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
             qsizetype argStart = i;
             while(i < cmd.length() && (!cmd[i].isSpace() /*|| bSkip*/))
             {
-                if(cmd[i] == '"' || cmd[i] == '\'')
+                if(cmd[i] == u'"' || cmd[i] == u'\'')
                     return i18n("Unexpected quote character within argument.");
                 ++i;
             }
@@ -102,7 +102,7 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
 {
     static QHash<QString, QRegularExpression> s_patternMap;
 
-    const QStringList regExpList = wildcard.split(QChar(';'));
+    const QStringList regExpList = wildcard.split(QChar(u';'));
 
     for(const QString& regExp : regExpList)
     {
@@ -123,9 +123,9 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
 //TODO: Only used by calcTokenPos.
 bool Utils::isCTokenChar(QChar c)
 {
-    return (c == '_') ||
-           (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
-           (c >= '0' && c <= '9');
+    return (c == u'_') ||
+           (c >= u'A' && c <= u'Z') || (c >= u'a' && c <= u'z') ||
+           (c >= u'0' && c <= u'9');
 }
 
 

@@ -202,11 +202,11 @@ void OpenDialog::inputFilenameChanged()
 void OpenDialog::fixCurrentText(QComboBox* pCB)
 {
     QString s = pCB->currentText();
-    qsizetype pos = s.indexOf('\n');
+    qsizetype pos = s.indexOf(u'\n');
 
     if(pos >= 0)
         s = s.left(pos);
-    pos = s.indexOf('\r');
+    pos = s.indexOf(u'\r');
     if(pos >= 0)
         s = s.left(pos);
 

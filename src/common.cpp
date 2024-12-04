@@ -45,7 +45,7 @@ QString ValueMap::getAsString()
     {
         const QString key = entry.first;
         const QString val = entry.second;
-        result += key + '=' + val + '\n';
+        result += key + u'=' + val + u'\n';
     }
     return result;
 }
@@ -55,7 +55,7 @@ void ValueMap::load(QTextStream& ts)
     while(!ts.atEnd())
     {                              // until end of file...
         QString s = ts.readLine(); // line of text excluding '\n'
-        qsizetype pos = s.indexOf('=');
+        qsizetype pos = s.indexOf(u'=');
         if(pos > 0) // seems not to have a tag
         {
             QString key = s.left(pos);
@@ -69,7 +69,7 @@ void ValueMap::load(QTextStream& ts)
 // safely, even if the individual strings in the list contain the separator character.
 QString safeStringJoin(const QStringList& sl, char sepChar, char metaChar)
 {
-    // Join the strings in the list, using the separator ','
+    // Join the strings in the list, using the separator u','
     // If a string contains the separator character, it will be replaced with "\,".
     // Any occurrences of "\" (one backslash) will be replaced with "\\" (2 backslashes)
 
@@ -184,9 +184,9 @@ QFont ValueMap::readFontEntry(const QString& k, const QFont* defaultVal)
     std::map<QString, QString>::iterator i = m_map.find(k);
     if(i != m_map.end())
     {
-        f.setFamily(i->second.split(',')[0]);
-        f.setPointSize(i->second.split(',')[1].toInt());
-        f.setBold(i->second.split(',')[2] == "bold");
+        f.setFamily(i->second.split(u',')[0]);
+        f.setPointSize(i->second.split(u',')[1].toInt());
+        f.setBold(i->second.split(u',')[2] == "bold");
     }
     return f;
 }
@@ -198,7 +198,7 @@ QColor ValueMap::readColorEntry(const QString& k, const QColor* defaultVal)
     if(i != m_map.end())
     {
         QString s = i->second;
-        c = QColor(s.split(',')[0].toInt(), s.split(',')[1].toInt(), s.split(',')[2].toInt());
+        c = QColor(s.split(u',')[0].toInt(), s.split(u',')[1].toInt(), s.split(u',')[2].toInt());
     }
 
     return c;
@@ -212,7 +212,7 @@ QSize ValueMap::readSizeEntry(const QString& k, const QSize* defaultVal)
     {
 
         QString s = i->second;
-        size = QSize(s.split(',')[0].toInt(), s.split(',')[1].toInt());
+        size = QSize(s.split(u',')[0].toInt(), s.split(u',')[1].toInt());
     }
 
     return size;
@@ -225,7 +225,7 @@ QPoint ValueMap::readPointEntry(const QString& k, const QPoint* defaultVal)
     if(i != m_map.end())
     {
         QString s = i->second;
-        point = QPoint(s.split(',')[0].toInt(), s.split(',')[1].toInt());
+        point = QPoint(s.split(u',')[0].toInt(), s.split(u',')[1].toInt());
     }
 
     return point;
@@ -238,7 +238,7 @@ bool ValueMap::readBoolEntry(const QString& k, bool bDefault)
     if(i != m_map.end())
     {
         QString s = i->second;
-        b = (s.split(',')[0].toInt() == 1);
+        b = (s.split(u',')[0].toInt() == 1);
     }
 
     return b;
@@ -251,7 +251,7 @@ qint32 ValueMap::readNumEntry(const QString& k, qint32 iDefault)
     if(i != m_map.end())
     {
         QString s = i->second;
-        ival = s.split(',')[0].toInt();
+        ival = s.split(u',')[0].toInt();
     }
 
     return ival;

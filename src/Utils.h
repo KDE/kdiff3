@@ -30,7 +30,7 @@ class Utils
     static QString urlToString(const QUrl& url);
     static bool wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive);
     static QString getArguments(QString cmd, QString& program, QStringList& args);
-    static bool isEndOfLine(QChar c) { return c == '\n'; } //interally all line endings are converted to '\n'
+    static bool isEndOfLine(QChar c) { return c == u'\n'; } //interally all line endings are converted to '\n'
 
     static void calcTokenPos(const QString& s, qint32 posOnScreen, qsizetype& pos1, qsizetype& pos2);
     static QString calcHistoryLead(const QString& s);

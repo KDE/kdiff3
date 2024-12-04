@@ -690,7 +690,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
         //TODO: Fix after line number area is converted to a QWidget.
-        qint32 fontWidth = fontMetrics().horizontalAdvance('0');
+        qint32 fontWidth = fontMetrics().horizontalAdvance(u'0');
         qint32 xOffset = d->leftInfoWidth() * fontWidth;
 
         if((!gOptions->m_bRightToLeftLanguage && e->pos().x() < xOffset) || (gOptions->m_bRightToLeftLanguage && e->pos().x() > width() - xOffset))
@@ -809,7 +809,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        qint32 fontWidth = fm.horizontalAdvance('0');
+        qint32 fontWidth = fm.horizontalAdvance(u'0');
         qint32 deltaX = 0;
         qint32 deltaY = 0;
         //TODO: Fix after line number area is converted to a QWidget.
@@ -1006,7 +1006,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, qint32 visib
 {
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * gOptions->tabSize());
+    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(u' ') * gOptions->tabSize());
 
     if(gOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
@@ -1036,7 +1036,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, qint32 visib
     qint32 leading = m_pDiffTextWindow->fontMetrics().leading();
     qint32 height = 0;
     //TODO: Fix after line number area is converted to a QWidget.
-    qint32 fontWidth = m_pDiffTextWindow->fontMetrics().horizontalAdvance('0');
+    qint32 fontWidth = m_pDiffTextWindow->fontMetrics().horizontalAdvance(u'0');
     qint32 xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
     qint32 textWidth = visibleTextWidth;
     if(textWidth < 0)
@@ -1096,7 +1096,7 @@ void DiffTextWindowData::writeLine(
     const QFontMetrics& fm = p.fontMetrics();
     qint32 fontHeight = fm.lineSpacing();
     qint32 fontAscent = fm.ascent();
-    qint32 fontWidth = fm.horizontalAdvance('0');
+    qint32 fontWidth = fm.horizontalAdvance(u'0');
 
     qint32 xOffset = 0;
     qint32 yOffset = (line - m_firstLine) * fontHeight;
@@ -1145,10 +1145,10 @@ void DiffTextWindowData::writeLine(
         {
             switch(lineString[lineString.length() - 1].unicode())
             {
-                case '\n':
+                case u'\n':
                     lineString[lineString.length() - 1] = QChar(0x00B6);
                     break; // "Pilcrow", "paragraph mark"
-                case '\r':
+                case u'\r':
                     lineString[lineString.length() - 1] = QChar(0x00A4);
                     break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
                            //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
@@ -1294,7 +1294,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     }
 
     LineRef endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
-    RLPainter p(this, gOptions->m_bRightToLeftLanguage, width(), fontMetrics().horizontalAdvance('0'));
+    RLPainter p(this, gOptions->m_bRightToLeftLanguage, width(), fontMetrics().horizontalAdvance(u'0'));
 
     p.setFont(font());
     p.QPainter::fillRect(invalidRect, gOptions->backgroundColor());
@@ -1410,7 +1410,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
     QFontMetrics fm = fontMetrics();
     LineType visibleLines = newSize.height() / fm.lineSpacing() - 2;
     //TODO: Fix after line number area is converted to a QWidget.
-    qint32 visibleColumns = newSize.width() / fm.horizontalAdvance('0') - d->leftInfoWidth();
+    qint32 visibleColumns = newSize.width() / fm.horizontalAdvance(u'0') - d->leftInfoWidth();
 
     if(e->size().height() != e->oldSize().height())
         Q_EMIT resizeHeightChangedSignal(visibleLines);
@@ -1431,7 +1431,7 @@ qint32 DiffTextWindow::getVisibleTextAreaWidth() const
     //TODO: Check after line number area is converted to a QWidget.
     QFontMetrics fm = fontMetrics();
 
-    return width() - d->leftInfoWidth() * fm.horizontalAdvance('0');
+    return width() - d->leftInfoWidth() * fm.horizontalAdvance(u'0');
 }
 
 QString DiffTextWindow::getSelection() const
@@ -1488,9 +1488,9 @@ QString DiffTextWindow::getSelection() const
                (!d->m_bWordWrap || it + 1 >= vectorSize || d3l != d->m_diff3WrapLineVector[it + 1].pD3L))
             {
 #if defined(Q_OS_WIN)
-                selectionString += '\r';
+                selectionString += u'\r';
 #endif
-                selectionString += '\n';
+                selectionString += u'\n';
             }
         }
 
@@ -1773,7 +1773,7 @@ void DiffTextWindow::recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visi
         if(visibleTextWidth < 0)
             visibleTextWidth = getVisibleTextAreaWidth();
         else //TODO: Drop after line number area is converted to a QWidget.
-            visibleTextWidth -= d->leftInfoWidth() * fontMetrics().horizontalAdvance('0');
+            visibleTextWidth -= d->leftInfoWidth() * fontMetrics().horizontalAdvance(u'0');
         LineType i;
         size_t wrapLineIdx = 0;
         size_t size = d->getDiff3LineVector()->size();
@@ -1999,7 +1999,7 @@ void DiffTextWindowFrame::init()
         QString s = QDir::toNativeSeparators(pDTW->getFileName());
         m_pFileSelection->setText(s);
         QString winId = pDTW->getWindowIndex() == e_SrcSelector::A ? (pDTW->isThreeWay() ? i18n("A (Base)") : QStringLiteral("A")) : (pDTW->getWindowIndex() == e_SrcSelector::B ? QStringLiteral("B") : QStringLiteral("C"));
-        m_pLabel->setText(winId + ':');
+        m_pLabel->setText(winId + u':');
         m_pEncoding->setText(i18n("Encoding: %1", pDTW->getEncodingDisplayString()));
         m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18n("Unix") :
                                                                                                                                                                        i18n("Unknown")));
@@ -2035,14 +2035,14 @@ void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
 
         LineRef topVisiableLine = pDTW->calcTopLineInFile(firstLine);
 
-        const QString widthString = QString().fill('0', lineNumberWidth);
-        qint32 w = m_pTopLine->fontMetrics().horizontalAdvance(s + ' ' + widthString);
+        const QString widthString = QString().fill(u'0', lineNumberWidth);
+        qint32 w = m_pTopLine->fontMetrics().horizontalAdvance(s + u' ' + widthString);
         m_pTopLine->setMinimumWidth(w);
 
         if(!topVisiableLine.isValid())
             s = i18n("End");
         else
-            s += ' ' + QString::number(topVisiableLine + 1);
+            s += u' ' + QString::number(topVisiableLine + 1);
 
         m_pTopLine->setText(s);
         m_pTopLine->repaint();

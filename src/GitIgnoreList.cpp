@@ -24,7 +24,7 @@ namespace {
 
 bool isComment(const QString& line)
 {
-    return line.startsWith(QChar('#'));
+    return line.startsWith(QChar(u'#'));
 }
 
 } // namespace

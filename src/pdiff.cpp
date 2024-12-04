@@ -101,7 +101,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     {
         if(bVisibleMergeResultWindow && !gOptions->m_PreProcessorCmd.isEmpty())
         {
-            QString msg = "- " + i18n("PreprocessorCmd: ") + gOptions->m_PreProcessorCmd + '\n';
+            QString msg = "- " + i18n("PreprocessorCmd: ") + gOptions->m_PreProcessorCmd + u'\n';
             KMessageBox::ButtonCode result = Compat::warningTwoActions(this,
                                                                        i18n("The following option(s) you selected might change data:\n") + msg +
                                                                            i18n("\nMost likely this is not wanted during a merge.\n"
@@ -437,11 +437,11 @@ void KDiff3App::createCaption()
     QString f3 = m_sd3->getAliasName();
     qsizetype p;
 
-    if((p = f1.lastIndexOf('/')) >= 0 || (p = f1.lastIndexOf('\\')) >= 0)
+    if((p = f1.lastIndexOf(u'/')) >= 0 || (p = f1.lastIndexOf(u'\\')) >= 0)
         f1 = f1.mid(p + 1);
-    if((p = f2.lastIndexOf('/')) >= 0 || (p = f2.lastIndexOf('\\')) >= 0)
+    if((p = f2.lastIndexOf(u'/')) >= 0 || (p = f2.lastIndexOf(u'\\')) >= 0)
         f2 = f2.mid(p + 1);
-    if((p = f3.lastIndexOf('/')) >= 0 || (p = f3.lastIndexOf('\\')) >= 0)
+    if((p = f3.lastIndexOf(u'/')) >= 0 || (p = f3.lastIndexOf(u'\\')) >= 0)
         f3 = f3.mid(p + 1);
 
     if(!f1.isEmpty())
@@ -503,7 +503,7 @@ void KDiff3App::setHScrollBarRange()
         rangeMax = wm - vm;
 
     m_pHScrollBar->setRange(0, rangeMax);
-    m_pHScrollBar->setSingleStep(fontMetrics().horizontalAdvance('0') * 10);
+    m_pHScrollBar->setSingleStep(fontMetrics().horizontalAdvance(u'0') * 10);
     m_pHScrollBar->setPageStep(pageStep);
 }
 // Inbound height should be in lines.
@@ -795,11 +795,11 @@ void KDiff3App::slotFileOpen()
                     QString text(i18n("Opening of these files failed:"));
                     text += "\n\n";
                     if(!m_sd1->getErrors().isEmpty())
-                        text += " - " + m_sd1->getAliasName() + '\n' + m_sd1->getErrors().join('\n') + '\n';
+                        text += " - " + m_sd1->getAliasName() + u'\n' + m_sd1->getErrors().join(u'\n') + u'\n';
                     if(!m_sd2->getErrors().isEmpty())
-                        text += " - " + m_sd2->getAliasName() + '\n' + m_sd2->getErrors().join('\n') + '\n';
+                        text += " - " + m_sd2->getAliasName() + u'\n' + m_sd2->getErrors().join(u'\n') + u'\n';
                     if(!m_sd3->getErrors().isEmpty())
-                        text += " - " + m_sd3->getAliasName() + '\n' + m_sd3->getErrors().join('\n') + '\n';
+                        text += " - " + m_sd3->getAliasName() + u'\n' + m_sd3->getErrors().join(u'\n') + u'\n';
 
                     KMessageBox::error(this, text, i18n("File open error"));
 
@@ -1624,7 +1624,7 @@ void KDiff3App::slotEditFind()
     // Use currently selected text:
     QString sCurSelection = getSelection();
 
-    if(!sCurSelection.isEmpty() && !sCurSelection.contains('\n'))
+    if(!sCurSelection.isEmpty() && !sCurSelection.contains(u'\n'))
     {
         m_pFindDialog->m_pSearchString->setText(sCurSelection);
     }

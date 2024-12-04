@@ -448,7 +448,7 @@ qint32 MergeResultWindow::getNofVisibleLines() const
 qint32 MergeResultWindow::getTextXOffset() const
 {
     QFontMetrics fm = fontMetrics();
-    return 3 * fm.horizontalAdvance('0');
+    return 3 * fm.horizontalAdvance(u'0');
 }
 
 void MergeResultWindow::resizeEvent(QResizeEvent* e)
@@ -928,16 +928,16 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
     qsizetype length = s.length();
     for(i = 0; i < length; ++i)
     {
-        if(s[i] == '\\' && i + 1 < length && (s[i + 1] == '\\' || s[i + 1] == '(' || s[i + 1] == ')'))
+        if(s[i] == u'\\' && i + 1 < length && (s[i + 1] == u'\\' || s[i + 1] == u'(' || s[i + 1] == u')'))
         {
             ++i;
             continue;
         }
-        if(s[i] == '(')
+        if(s[i] == u'(')
         {
             startPosStack.push_back(i);
         }
-        else if(s[i] == ')')
+        else if(s[i] == u')')
         {
             if(startPosStack.empty())
                 return false; // Parentheses don't match
@@ -951,7 +951,7 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
 
 QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& regExprMatch, const QStringList& parenthesesGroupList)
 {
-    const QStringList keyOrderList = keyOrder.split(',');
+    const QStringList keyOrderList = keyOrder.split(u',');
     QString key;
 
     for(const QString& keyIt : keyOrderList)
@@ -965,35 +965,35 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
         QString s = regExprMatch.captured(groupIdx);
         if(groupIdx == 0)
         {
-            key += s + ' ';
+            key += s + u' ';
             continue;
         }
 
         QString groupRegExp = parenthesesGroupList[groupIdx - 1];
-        if(groupRegExp.indexOf('|') < 0 || groupRegExp.indexOf('(') >= 0)
+        if(groupRegExp.indexOf(u'|') < 0 || groupRegExp.indexOf(u'(') >= 0)
         {
             bOk = false;
             qint32 i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
             {
-                s += QString(4 - s.size(), '0'); // This should help for correct sorting of numbers.
+                s += QString(4 - s.size(), u'0'); // This should help for correct sorting of numbers.
             }
-            key += s + ' ';
+            key += s + u' ';
         }
         else
         {
             // Assume that the groupRegExp consists of something like "Jan|Feb|Mar|Apr"
             // s is the string that managed to match.
             // Now we want to know at which position it occurred. e.g. Jan=0, Feb=1, Mar=2, etc.
-            QStringList sl = groupRegExp.split('|');
+            QStringList sl = groupRegExp.split(u'|');
             qsizetype idx = sl.indexOf(s);
             if(idx >= 0)
             {
                 QString sIdx;
                 sIdx.setNum(idx);
                 assert(sIdx.size() <= 2);
-                sIdx += QString(2 - sIdx.size(), '0'); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
-                key += sIdx + ' ';
+                sIdx += QString(2 - sIdx.size(), u'0'); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
+                key += sIdx + u' ';
             }
         }
     }
@@ -1400,7 +1400,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRe
     // tabs
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(font()).horizontalAdvance(' ') * gOptions->tabSize());
+    textOption.setTabStopDistance(QFontMetricsF(font()).horizontalAdvance(u' ') * gOptions->tabSize());
 
     if(gOptions->m_bShowWhiteSpaceCharacters)
     {
@@ -1464,9 +1464,9 @@ void MergeResultWindow::writeLine(
 
     yOffset += topLineYOffset;
 
-    QString srcName = QChar(' ');
+    QString srcName = QChar(u' ');
     if(bUserModified)
-        srcName = QChar('m');
+        srcName = QChar(u'm');
     else if(srcSelect == e_SrcSelector::A && mergeDetails != e_MergeDetails::eNoChange)
         srcName = QStringLiteral("A");
     else if(srcSelect == e_SrcSelector::B)
@@ -1525,7 +1525,7 @@ void MergeResultWindow::writeLine(
     else
         assert(false);
 
-    xOffset -= fm.horizontalAdvance('0');
+    xOffset -= fm.horizontalAdvance(u'0');
     p.setPen(gOptions->foregroundColor());
     if(rangeMark & RangeMark::begin) // begin mark
     {
@@ -1573,7 +1573,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         return;
 
     const QFontMetrics& fm = fontMetrics();
-    const qint32 fontWidth = fm.horizontalAdvance('0');
+    const qint32 fontWidth = fm.horizontalAdvance(u'0');
 
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
@@ -1868,7 +1868,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        const qint32 fontWidth = fm.horizontalAdvance('0');
+        const qint32 fontWidth = fm.horizontalAdvance(u'0');
         constexpr qint32 topLineYOffset = 0;
         qint32 deltaX = 0;
         qint32 deltaY = 0;
@@ -2077,7 +2077,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                         qsizetype i;
                         for(i = 0; i < s.length(); ++i)
                         {
-                            if(s[i] != ' ' && s[i] != '\t') break;
+                            if(s[i] != u' ' && s[i] != u'\t') break;
                         }
                         if(i < s.length())
                         {
@@ -2163,13 +2163,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 }
                 else
                 {
-                    while(x > 0 && (str[(qsizetype)x - 1] == ' ' || str[(qsizetype)x - 1] == '\t'))
+                    while(x > 0 && (str[(qsizetype)x - 1] == u' ' || str[(qsizetype)x - 1] == u'\t'))
                     {
                         qint32 newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
-                    while(x > 0 && (str[(qsizetype)x - 1] != ' ' && str[(qsizetype)x - 1] != '\t'))
+                    while(x > 0 && (str[(qsizetype)x - 1] != u' ' && str[(qsizetype)x - 1] != u'\t'))
                     {
                         qint32 newX = textLayoutOrig.previousCursorPosition(x);
                         if(newX == x) break;
@@ -2194,13 +2194,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 }
                 else
                 {
-                    while(x < str.length() && (str[(qsizetype)x] == ' ' || str[(qsizetype)x] == '\t'))
+                    while(x < str.length() && (str[(qsizetype)x] == u' ' || str[(qsizetype)x] == u'\t'))
                     {
                         qint32 newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
                         x = newX;
                     }
-                    while(x < str.length() && (str[(qsizetype)x] != ' ' && str[(qsizetype)x] != '\t'))
+                    while(x < str.length() && (str[(qsizetype)x] != u' ' && str[(qsizetype)x] != u'\t'))
                     {
                         qint32 newX = textLayoutOrig.nextCursorPosition(x);
                         if(newX == x) break;
@@ -2251,10 +2251,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
             setModified();
             // Characters to insert
             QString s = str;
-            if(t[0] == '\t' && gOptions->replaceTabs())
+            if(t[0] == u'\t' && gOptions->replaceTabs())
             {
                 qint32 spaces = (m_cursorXPos / gOptions->tabSize() + 1) * gOptions->tabSize() - m_cursorXPos;
-                t.fill(' ', spaces);
+                t.fill(u' ', spaces);
             }
             if(m_bInsertMode)
                 s.insert(x, t);
@@ -2401,7 +2401,7 @@ QString MergeResultWindow::getSelection() const
                     for(qsizetype i = 0; i < str.length(); ++i)
                     {
                         qint32 spaces = 1;
-                        if(str[i] == '\t')
+                        if(str[i] == u'\t')
                         {
                             spaces = tabber(outPos, gOptions->tabSize());
                         }
@@ -2422,9 +2422,9 @@ QString MergeResultWindow::getSelection() const
                 if(m_selection.within(line, outPos))
                 {
 #ifdef Q_OS_WIN
-                    selectionString += '\r';
+                    selectionString += u'\r';
 #endif
-                    selectionString += '\n';
+                    selectionString += u'\n';
                 }
             }
 
@@ -2588,7 +2588,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     for(i = 0; i < len; ++i)
     {
         QChar c = clipBoard[i];
-        if(c == '\n' || (c == '\r' && clipBoard[i + 1] != '\n'))
+        if(c == u'\n' || (c == u'\r' && clipBoard[i + 1] != u'\n'))
         {
             melIt->setString(currentLine);
             MergeEditLine mel(mbIt->id3l()); // Associate every mel with an id3l, even if not really valid.
@@ -2599,7 +2599,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
         }
         else
         {
-            if(c == '\r') continue;
+            if(c == u'\r') continue;
 
             currentLine += c;
             ++x;

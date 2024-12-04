@@ -55,7 +55,7 @@ class CvsIgnoreListTest : public QObject
         QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
         test.addEntriesFromString(testDir, testString);
         QVERIFY(!test.getExactMatchList(testDir).isEmpty());
-        QVERIFY(test.getExactMatchList(testDir) == testString.split(' '));
+        QVERIFY(test.getExactMatchList(testDir) == testString.split(u' '));
     }
 
     void matches()

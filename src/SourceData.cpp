@@ -438,7 +438,7 @@ void SourceData::readAndPreprocess(const QByteArray& encoding, bool bAutoDetect)
                     ppProcess.waitForFinished(-1);
                 }
                 else
-                    errorReason = "\n(" + errorReason + ')';
+                    errorReason = "\n(" + errorReason + u')';
 
                 bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
                 if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
@@ -501,7 +501,7 @@ void SourceData::readAndPreprocess(const QByteArray& encoding, bool bAutoDetect)
                 ppProcess.waitForFinished(-1);
             }
             else
-                errorReason = "\n(" + errorReason + ')';
+                errorReason = "\n(" + errorReason + u')';
 
             bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile(fileNameOut2);
             if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.byteCount() == 0))
@@ -570,7 +570,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         return true;
 
     QString line;
-    QChar curChar, prevChar = '\0';
+    QChar curChar, prevChar = u'\0';
     LineType lines = 0;
     qsizetype lastOffset = 0;
     std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
@@ -615,7 +615,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
             qsizetype firstNonwhite = 0;
             bool foundNonWhite = false;
 
-            while(curChar != '\n' && curChar != '\r')
+            while(curChar != u'\n' && curChar != u'\r')
             {
                 if(curChar.isNull() || curChar.isNonCharacter())
                 {
@@ -642,10 +642,10 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
             switch(curChar.unicode())
             {
-                case '\n':
+                case u'\n':
                     vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
                     break;
-                case '\r':
+                case u'\r':
                     if((FileOffset)lastOffset < mDataSize)
                     {
                         QChar nextChar;
@@ -653,7 +653,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                         if(i == 0)
                             break;
 
-                        if(nextChar == '\n')
+                        if(nextChar == u'\n')
                         {
                             prevChar = curChar;
                             ds.readChar(curChar);
@@ -680,10 +680,10 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
             m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
             //The last line may not have an EOL mark. In that case don't add one to our buffer.
             m_unicodeBuf->append(line);
-            if(curChar == '\n' || curChar == '\r' || prevChar == '\r')
+            if(curChar == u'\n' || curChar == u'\r' || prevChar == u'\r')
             {
                 //kdiff3 internally uses only unix style endings for simplicity.
-                m_unicodeBuf->append('\n');
+                m_unicodeBuf->append(u'\n');
             }
 
             assert(m_unicodeBuf->length() != lastOffset);
@@ -694,7 +694,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
             Process trailing new line as if there were a blank non-terminated line after it.
             But do nothing to the data buffer since this is a phantom line needed for internal purposes.
         */
-        if(curChar == '\n' || curChar == '\r')
+        if(curChar == u'\n' || curChar == u'\r')
         {
             mHasEOLTermination = true;
             ++lines;
@@ -753,12 +753,12 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
     qsizetype encodingPos = s.indexOf(encodingTag);
     if(encodingPos >= 0)
     {
-        qsizetype apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
-        qsizetype apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
-        char apostroph = '"';
+        qsizetype apostrophPos = s.indexOf(u'"', encodingPos + encodingTag.length());
+        qsizetype apostroph2Pos = s.indexOf(u'\'', encodingPos + encodingTag.length());
+        char apostroph = u'"';
         if(apostroph2Pos >= 0 && (apostrophPos < 0 || apostroph2Pos < apostrophPos))
         {
-            apostroph = '\'';
+            apostroph = u'\'';
             apostrophPos = apostroph2Pos;
         }
 

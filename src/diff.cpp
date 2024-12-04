@@ -42,7 +42,7 @@ qint32 LineData::width(qint32 tabSize) const
     qint32 j = 0;
     for(qsizetype i = 0; i < size(); ++i)
     {
-        if(pLine[i] == '\t')
+        if(pLine[i] == u'\t')
         {
             for(j %= tabSize; j < tabSize; ++j)
                 ++w;
@@ -503,7 +503,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
    {
       printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
          li, it->getLineA(), it->getLineB(), it->getLineC(),
-         it->isEqualAB() ? '=' : '!', it->isEqualAC() ? '=' : '!', it->isEqualBC() ? '=' : '!' );
+         it->isEqualAB() ? u'=' : u'!', it->isEqualAC() ? u'=' : u'!', it->isEqualBC() ? u'=' : u'!' );
    }
    printf("\n");*/
 }
@@ -1195,7 +1195,7 @@ void Diff3LineList::calcDiff3LineListTrim(
    {
       printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
          li, it->getLineA(), it->getLineB(), it->getLineC(),
-         it->isEqualAB() ? '=' : '!', it->isEqualAC() ? '=' : '!', it->isEqualBC() ? '=' : '!' );
+         it->isEqualAB() ? u'=' : u'!', it->isEqualAC() ? u'=' : u'!', it->isEqualBC() ? u'=' : u'!' );
 
    }
 */

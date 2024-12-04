@@ -710,11 +710,11 @@ void KDiff3App::completeInit()
             QString text(i18n("Opening of these files failed:"));
             text += "\n\n";
             if(!m_sd1->getErrors().isEmpty())
-                text += " - " + m_sd1->getAliasName() + '\n' + m_sd1->getErrors().join('\n') + '\n';
+                text += " - " + m_sd1->getAliasName() + u'\n' + m_sd1->getErrors().join(u'\n') + u'\n';
             if(!m_sd2->getErrors().isEmpty())
-                text += " - " + m_sd2->getAliasName() + '\n' + m_sd2->getErrors().join('\n') + '\n';
+                text += " - " + m_sd2->getAliasName() + u'\n' + m_sd2->getErrors().join(u'\n') + u'\n';
             if(!m_sd3->getErrors().isEmpty())
-                text += " - " + m_sd3->getAliasName() + '\n' + m_sd3->getErrors().join('\n') + '\n';
+                text += " - " + m_sd3->getAliasName() + u'\n' + m_sd3->getErrors().join(u'\n') + u'\n';
 
             KMessageBox::error(this, text, i18n("File open error"));
 
@@ -1039,7 +1039,7 @@ void KDiff3App::slotFilePrint()
     {
         slotStatusMsg(i18n("Printing..."));
         // create a painter to paint on the printer object
-        RLPainter painter(&printer, gOptions->m_bRightToLeftLanguage, width(), fontMetrics().horizontalAdvance('W'));
+        RLPainter painter(&printer, gOptions->m_bRightToLeftLanguage, width(), fontMetrics().horizontalAdvance(u'W'));
 
         QPaintDevice* pPaintDevice = painter.device();
         qint32 dpiy = pPaintDevice->logicalDpiY();
@@ -1181,8 +1181,7 @@ void KDiff3App::slotFilePrint()
 
                 painter.setPen(gOptions->foregroundColor());
                 painter.drawLine(0, view.bottom() + 3, view.width(), view.bottom() + 3);
-                QString s = bPrintCurrentPage ? QString("")
-                                              : QString::number(page) + '/' + QString::number(totalNofPages);
+                QString s = bPrintCurrentPage ? QString("") : QString::number(page) + u'/' + QString::number(totalNofPages);
                 if(bPrintSelection) s += i18n(" (Selection)");
                 painter.drawText((view.right() - painter.fontMetrics().horizontalAdvance(s)) / 2,
                                  view.bottom() + painter.fontMetrics().ascent() + 5, s);

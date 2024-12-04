@@ -355,7 +355,7 @@ void FileAccess::loadData()
         ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s.get(), PATH_MAX);
         if(len > 0)
         {
-            s[len] = '\0';
+            s[len] = u'\0';
             m_linkTarget = QFile::decodeName(s.get());
         }
 #endif
@@ -378,7 +378,7 @@ void FileAccess::addPath(const QString& txt, bool reinit)
     if(!isLocal())
     {
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
-        url.setPath(url.path() + '/' + txt);
+        url.setPath(url.path() + u'/' + txt);
         m_url = url;
 
         if(reinit)
@@ -386,7 +386,7 @@ void FileAccess::addPath(const QString& txt, bool reinit)
     }
     else
     {
-        QString slash = (txt.isEmpty() || txt[0] == '/') ? QString() : u8"/";
+        QString slash = (txt.isEmpty() || txt[0] == u'/') ? QString() : u8"/";
         setFile(absoluteFilePath() + slash + txt);
     }
 }
@@ -571,7 +571,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
     m_bSymLink = !m_linkTarget.isEmpty();
 
 #ifndef Q_OS_WIN
-    m_bHidden = m_name[0] == '.';
+    m_bHidden = m_name[0] == u'.';
 #endif
 }
 #endif
@@ -758,7 +758,7 @@ QString FileAccess::fileRelPath() const
         while(curEntry != nullptr)
         {
             if(curEntry->parent())
-                path.prepend(curEntry->fileName() + '/');
+                path.prepend(curEntry->fileName() + u'/');
             curEntry = curEntry->parent();
         }
         return path;

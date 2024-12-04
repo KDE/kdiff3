@@ -22,12 +22,12 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
     {
         switch(inChar.unicode())
         {
-            case '\\':
+            case u'\\':
                 if(bInString)
                     bIsEscaped = true;
                 break;
-            case '\'':
-            case '"':
+            case u'\'':
+            case u'"':
                 if(!inComment())
                 {
                     if(!bInString)
@@ -41,11 +41,11 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     }
                 }
                 break;
-            case '/':
+            case u'/':
                 if(bInString)
                     break;
 
-                if(!inComment() && mLastChar == '/')
+                if(!inComment() && mLastChar == u'/')
                 {
                     mCommentType = singleLine;
                     mIsPureComment = mIsCommentOrWhite = line.startsWith(u8"//");
@@ -55,7 +55,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                         mIsPureComment = false;
                     }
                 }
-                else if(mLastChar == '*' && mCommentType == multiLine)
+                else if(mLastChar == u'*' && mCommentType == multiLine)
                 {
                     //ending multi-line comment
                     mCommentType = none;
@@ -65,11 +65,11 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                         mIsPureComment = mIsCommentOrWhite = line.endsWith(u8"*/") ? true : mIsCommentOrWhite;
                 }
                 break;
-            case '*':
+            case u'*':
                 if(bInString)
                     break;
 
-                if(mLastChar == '/' && !inComment())
+                if(mLastChar == u'/' && !inComment())
                 {
                     mCommentType = multiLine;
                     mIsPureComment = mIsCommentOrWhite = line.startsWith(u8"/*") ? true : mIsCommentOrWhite;
@@ -81,7 +81,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     }
                 }
                 break;
-            case '\n':
+            case u'\n':
                 if(mCommentType == singleLine)
                 {
                     mCommentType = none;
@@ -153,7 +153,7 @@ void DefaultCommentParser::processLine(const QString &line)
     }
 
     //mIsPureComment = mIsPureComment && offset == 0;
-    processChar(trimmedLine, '\n');
+    processChar(trimmedLine, u'\n');
 }
 
 /*

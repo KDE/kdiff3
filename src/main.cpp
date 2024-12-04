@@ -45,7 +45,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             const QString line = ts.readLine();
             if(line.startsWith(u8"IgnorableCmdLineOptions="))
             {
-                const qsizetype pos = line.indexOf('=');
+                const qsizetype pos = line.indexOf(u'=');
                 if(pos >= 0)
                 {
                     ignorableOptionsLine = line.mid(pos + 1);
@@ -55,11 +55,11 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
         }
     }
 
-    const QStringList ignorableOptions = ignorableOptionsLine.split(';');
+    const QStringList ignorableOptions = ignorableOptionsLine.split(u';');
 
     for(QString ignorableOption: ignorableOptions)
     {
-        ignorableOption.remove('-');
+        ignorableOption.remove(u'-');
         if(!ignorableOption.isEmpty())
         {
             if(ignorableOption.length() == 1)
@@ -164,7 +164,7 @@ qint32 main(qint32 argc, char* argv[])
         if(cmdLineParser->isSet(QStringLiteral("version")))
         {
             KMessageBox::information(nullptr,
-                                    aboutData.displayName() + ' ' + aboutData.version(), aboutData.displayName());
+                                     aboutData.displayName() + u' ' + aboutData.version(), aboutData.displayName());
             exit(0);
         }
         if(cmdLineParser->isSet(QStringLiteral("help")))

@@ -141,7 +141,7 @@ QString MergeFileInfos::fullNameA() const
     if(existsInA())
         return getFileInfoA()->absoluteFilePath();
 
-    return gDirInfo->dirA().absoluteFilePath() + '/' + subPath();
+    return gDirInfo->dirA().absoluteFilePath() + u'/' + subPath();
 }
 
 QString MergeFileInfos::fullNameB() const
@@ -149,7 +149,7 @@ QString MergeFileInfos::fullNameB() const
     if(existsInB())
         return getFileInfoB()->absoluteFilePath();
 
-    return gDirInfo->dirB().absoluteFilePath() + '/' + subPath();
+    return gDirInfo->dirB().absoluteFilePath() + u'/' + subPath();
 }
 
 QString MergeFileInfos::fullNameC() const
@@ -157,7 +157,7 @@ QString MergeFileInfos::fullNameC() const
     if(existsInC())
         return getFileInfoC()->absoluteFilePath();
 
-    return gDirInfo->dirC().absoluteFilePath() + '/' + subPath();
+    return gDirInfo->dirC().absoluteFilePath() + u'/' + subPath();
 }
 
 void MergeFileInfos::sort(Qt::SortOrder order)
@@ -175,7 +175,7 @@ QString MergeFileInfos::fullNameDest() const
     else if(gDirInfo->destDir().prettyAbsPath() == gDirInfo->dirB().prettyAbsPath())
         return fullNameB();
     else
-        return gDirInfo->destDir().absoluteFilePath() + '/' + subPath();
+        return gDirInfo->destDir().absoluteFilePath() + u'/' + subPath();
 }
 
 bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, DirectoryMergeWindow* pDMW)

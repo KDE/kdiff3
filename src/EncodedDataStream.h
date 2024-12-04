@@ -80,7 +80,7 @@ class EncodedDataStream: public QIODeviceBase
 
     qint64 readChar(QChar &c)
     {
-        char curData = '\0';
+        char curData = u'\0';
         qint64 len = 0;
         QString s;
 
