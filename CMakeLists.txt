@@ -6,7 +6,7 @@
 #CMP0077 is defined in 3.13 or later
 cmake_minimum_required(VERSION 3.22...3.30 FATAL_ERROR)
 
-project(kdiff3 VERSION 1.11.70)
+project(kdiff3 VERSION 1.12.70)
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
     message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
