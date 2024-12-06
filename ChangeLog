@@ -1,4 +1,12 @@
+
+Version 1.12.0 - 2024
+=========================
+
 *Completed port away from Qt5, 6.6 now required version due to delayed ICU support in Qt
+*Fixed UTF-8-BOM output encoding issues mustly seen on windows.
+*horizontal scroll correctly comptuted for diff windows
+--Note due to changes in windows/Qt the scrollbars may be vary small or hidden on Windows 11. This cann't be controlled from kdiff3.
+*False errors on first launch with files selected should be fixed.
 
 Version 1.11.x - 2024
 ===========================
@@ -17,32 +25,6 @@ Version 1.11.x - 2024
 -Related regression also fixed (BUG:486909)
 *craft based builds are now Qt6/kf6.
 
-Version 1.10.x - 2023
-===========================
-
-*improved handling of oversized files
-*follows links to links to a maximum depth of 15.
-*8c14db62775d6233 Fix attempts to set out of range value for LineRef
- Follow symlinks recursively
-a038a3da250ee9683075a6742f33ac1312229e83 Make invalid calls to MergeBlock::split crash in debug mode
-Fix crash on exit.
-*Resolve thread safety issues in word wrap runner
-*Fix Bug: 471234
-*Fix horizontal scroll broken for first diff window
-*Fixed no UI shown for failed auto-merge.
-*Fix 469817 no text if word wrap is on.
-
-*Prevent false error due to faulty check when m_pOptions->m_bDiff3AlignBC = true
-*468492 fix crash when word wrap enabled
-*Rework KDiff3App::completeInit to avoid crash on exit in auto mode
-*467652 - "Escape" shortcut ignored if merge output in focus
-*466522 - save and restore dock states
-*439148 - Show UI before comparison start
-*466241 - Don't crash on broken links
-*466524 - Fix memory safety issues during reload.
-*Fix mishandling line count for files containing '0x0b'
-*Make DirectoryMergeWindow and DirecoryMergeInfo QDockWidgets.
-*Use Qt native saveState/restoreState
 
 
 See git history for complete log.
