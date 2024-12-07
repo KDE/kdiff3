@@ -369,16 +369,13 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     if(bGUI)
     {
         const ManualDiffHelpList* pMDHL = &m_manualDiffHelpList;
-        m_pDiffTextWindow1->init(m_sd1->getAliasName(), m_sd1->getEncoding(), m_sd1->getLineEndStyle(),
-                                 m_sd1->getLineDataForDisplay(), m_sd1->getSizeLines(), &mDiff3LineVector, pMDHL);
+        m_pDiffTextWindow1->init(m_sd1, &mDiff3LineVector, pMDHL);
         m_pDiffTextWindowFrame1->init();
 
-        m_pDiffTextWindow2->init(m_sd2->getAliasName(), m_sd2->getEncoding(), m_sd2->getLineEndStyle(),
-                                 m_sd2->getLineDataForDisplay(), m_sd2->getSizeLines(), &mDiff3LineVector, pMDHL);
+        m_pDiffTextWindow2->init(m_sd2, &mDiff3LineVector, pMDHL);
         m_pDiffTextWindowFrame2->init();
 
-        m_pDiffTextWindow3->init(m_sd3->getAliasName(), m_sd3->getEncoding(), m_sd3->getLineEndStyle(),
-                                 m_sd3->getLineDataForDisplay(), m_sd3->getSizeLines(), &mDiff3LineVector, pMDHL);
+        m_pDiffTextWindow3->init(m_sd3, &mDiff3LineVector, pMDHL);
         m_pDiffTextWindowFrame3->init();
 
         m_pDiffTextWindowFrame3->setVisible(m_bTripleDiff);
@@ -1450,19 +1447,19 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
             m_sd1->reset();
             if(m_pDiffTextWindow1 != nullptr)
             {
-                m_pDiffTextWindow1->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
+                m_pDiffTextWindow1->init(m_sd1, nullptr, nullptr);
                 m_pDiffTextWindowFrame1->init();
             }
             m_sd2->reset();
             if(m_pDiffTextWindow2 != nullptr)
             {
-                m_pDiffTextWindow2->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
+                m_pDiffTextWindow2->init(m_sd2, nullptr, nullptr);
                 m_pDiffTextWindowFrame2->init();
             }
             m_sd3->reset();
             if(m_pDiffTextWindow3 != nullptr)
             {
-                m_pDiffTextWindow3->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
+                m_pDiffTextWindow3->init(m_sd3, nullptr, nullptr);
                 m_pDiffTextWindowFrame3->init();
             }
         }

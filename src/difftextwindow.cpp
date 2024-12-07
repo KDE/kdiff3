@@ -138,23 +138,21 @@ class DiffTextWindowData
     }
 
     void init(
-        const QString& filename,
-        const char* encoding,
-        e_LineEndStyle eLineEndStyle,
-        const std::shared_ptr<LineDataVector>& pLineData,
-        LineType size,
+        const std::shared_ptr<SourceData> sd,
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList)
     {
         reset();
-        m_filename = filename;
-        m_pLineData = pLineData;
-        m_size = size;
+
+        mSourceData = sd;
+        m_filename = sd->getAliasName();
+        m_pLineData = sd->getLineDataForDisplay();
+        m_size = sd->getSizeLines();
         mDiff3LineVector = pDiff3LineVector;
         m_pManualDiffHelpList = pManualDiffHelpList;
 
-        mTextEncoding = QString::fromLatin1(encoding);
-        m_eLineEndStyle = eLineEndStyle;
+        mTextEncoding = QString::fromLatin1(sd->getEncoding());
+        m_eLineEndStyle = sd->getLineEndStyle();
     }
 
     void reset()
@@ -241,6 +239,7 @@ class DiffTextWindowData
     QString mTextEncoding;
     e_LineEndStyle m_eLineEndStyle;
 
+    std::shared_ptr<SourceData> mSourceData;
     std::shared_ptr<LineDataVector> m_pLineData;
     LineType m_size = 0;
     QString m_filename;
@@ -338,7 +337,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     setAcceptDrops(true);
     mWinIdx = winIdx;
 
-    init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr);
+    init(d->mSourceData, nullptr, nullptr);
 
     setMinimumSize(QSize(20, 20));
 
@@ -350,15 +349,12 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
 DiffTextWindow::~DiffTextWindow() = default;
 
 void DiffTextWindow::init(
-    const QString& filename,
-    const char* encoding,
-    e_LineEndStyle eLineEndStyle,
-    const std::shared_ptr<LineDataVector>& pLineData,
-    LineType size,
+    const std::shared_ptr<SourceData> sd,
+
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList)
 {
-    d->init(filename, encoding, eLineEndStyle, pLineData, size, pDiff3LineVector, pManualDiffHelpList);
+    d->init(sd, pDiff3LineVector, pManualDiffHelpList);
 
     update();
 }

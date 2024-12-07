@@ -55,11 +55,7 @@ class DiffTextWindow: public QWidget
     DiffTextWindow(DiffTextWindowFrame* pParent, e_SrcSelector winIdx, KDiff3App& app);
     ~DiffTextWindow() override;
     void init(
-        const QString& fileName,
-        const char* pTextCodec,
-        e_LineEndStyle eLineEndStyle,
-        const std::shared_ptr<LineDataVector>& pLineData,
-        LineType size,
+        const std::shared_ptr<SourceData> sd,
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList);
 
