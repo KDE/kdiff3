@@ -97,7 +97,7 @@ class DiffTextWindow: public QWidget
     static bool startRunnables();
 
     [[nodiscard]] bool isThreeWay() const;
-    [[nodiscard]] const QString& getFileName() const;
+    [[nodiscard]] const QString getFileName() const;
 
     [[nodiscard]] e_SrcSelector getWindowIndex() const;
 

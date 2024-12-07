@@ -130,11 +130,6 @@ class DiffTextWindowData
     explicit DiffTextWindowData(QPointer<DiffTextWindow> p)
     {
         m_pDiffTextWindow = p;
-#if defined(Q_OS_WIN)
-        m_eLineEndStyle = eLineEndStyleDos;
-#else
-        m_eLineEndStyle = eLineEndStyleUnix;
-#endif
     }
 
     void init(
@@ -145,14 +140,9 @@ class DiffTextWindowData
         reset();
 
         mSourceData = sd;
-        m_filename = sd->getAliasName();
-        m_pLineData = sd->getLineDataForDisplay();
-        m_size = sd->getSizeLines();
+        m_pLineData = mSourceData->getLineDataForDisplay();
         mDiff3LineVector = pDiff3LineVector;
         m_pManualDiffHelpList = pManualDiffHelpList;
-
-        mTextEncoding = QString::fromLatin1(sd->getEncoding());
-        m_eLineEndStyle = sd->getLineEndStyle();
     }
 
     void reset()
@@ -171,9 +161,7 @@ class DiffTextWindowData
         m_maxTextWidth = -1;
 
         m_pLineData = nullptr;
-        m_size = 0;
         mDiff3LineVector = nullptr;
-        m_filename = "";
         m_diff3WrapLineVector.clear();
     }
 
@@ -195,7 +183,7 @@ class DiffTextWindowData
     void prepareTextLayout(QTextLayout& textLayout, qint32 visibleTextWidth = -1);
 
     [[nodiscard]] bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
-    [[nodiscard]] const QString& getFileName() const { return m_filename; }
+    [[nodiscard]] const QString getFileName() const { return mSourceData->getAliasName(); }
 
     [[nodiscard]] const Diff3LineVector* getDiff3LineVector() const { return mDiff3LineVector; }
 
@@ -236,13 +224,9 @@ class DiffTextWindowData
     [[nodiscard]] e_SrcSelector getWindowIndex() const { return m_pDiffTextWindow->getWindowIndex(); }
 
     QPointer<DiffTextWindow> m_pDiffTextWindow;
-    QString mTextEncoding;
-    e_LineEndStyle m_eLineEndStyle;
 
     std::shared_ptr<SourceData> mSourceData;
     std::shared_ptr<LineDataVector> m_pLineData;
-    LineType m_size = 0;
-    QString m_filename;
     bool m_bWordWrap = false;
     qint32 m_delayedDrawTimer = 0;
 
@@ -292,7 +276,7 @@ bool DiffTextWindow::isThreeWay() const
     return d->isThreeWay();
 };
 
-const QString& DiffTextWindow::getFileName() const
+const QString DiffTextWindow::getFileName() const
 {
     return d->getFileName();
 }
@@ -304,12 +288,12 @@ e_SrcSelector DiffTextWindow::getWindowIndex() const
 
 const QString DiffTextWindow::getEncodingDisplayString() const
 {
-    return d->mTextEncoding;
+    return QString::fromLatin1(d->mSourceData->getEncoding());
 }
 
 e_LineEndStyle DiffTextWindow::getLineEndStyle() const
 {
-    return d->m_eLineEndStyle;
+    return d->mSourceData->getLineEndStyle();
 }
 
 const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
@@ -319,7 +303,7 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
 
 qint32 DiffTextWindow::getLineNumberWidth() const
 {
-    return std::floor(std::log10(std::max(d->m_size, 1))) + 1;
+    return std::floor(std::log10(std::max(d->mSourceData->getSizeLines(), 1))) + 1;
 }
 
 DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
@@ -555,7 +539,7 @@ qint32 DiffTextWindow::getMaxTextWidth() const
     {
         d->m_maxTextWidth = 0;
         QTextLayout textLayout(QString(), font(), this);
-        for(qint32 i = 0; i < d->m_size; ++i)
+        for(qint32 i = 0; i < d->mSourceData->getSizeLines(); ++i)
         {
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
@@ -1367,7 +1351,7 @@ void DiffTextWindow::draw(RLPainter& p, const QRect& invalidRect, const qint32 b
 
 QString DiffTextWindowData::getString(const LineType d3lIdx) const
 {
-    assert(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
+    assert(!(m_pLineData != nullptr && m_pLineData->empty() && mSourceData->getSizeLines() != 0));
 
     if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || (size_t)d3lIdx >= mDiff3LineVector->size())
         return QString();
