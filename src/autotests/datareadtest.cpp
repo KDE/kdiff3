@@ -86,7 +86,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QVERIFY(!simData.hasBOM());
         QVERIFY(!simData.getEncoding().isEmpty());
-        QCOMPARE(simData.getSizeLines(), 5);
+        QCOMPARE(simData.lineCount(), 5);
         QCOMPARE(simData.getSizeBytes(), file.size());
 
         //write out test file
@@ -105,7 +105,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QVERIFY(simData.hasBOM());
         QVERIFY(!simData.getEncoding().isEmpty());
-        QCOMPARE(simData.getSizeLines(), 5);
+        QCOMPARE(simData.lineCount(), 5);
         QCOMPARE(simData.getSizeBytes(), file.size());
 
         //write out test file
@@ -124,7 +124,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QVERIFY(simData.hasBOM());
         QVERIFY(!simData.getEncoding().isEmpty());
-        QCOMPARE(simData.getSizeLines(), 5);
+        QCOMPARE(simData.lineCount(), 5);
         QCOMPARE(simData.getSizeBytes(), file.size());
 
         //write out test file
@@ -143,7 +143,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.hasData());
         QVERIFY(simData.hasBOM());
         QVERIFY(!simData.getEncoding().isEmpty());
-        QCOMPARE(simData.getSizeLines(), 5);
+        QCOMPARE(simData.lineCount(), 5);
         QCOMPARE(simData.getSizeBytes(), file.size());
     }
 
@@ -306,7 +306,7 @@ class DataReadTest: public QObject
         QVERIFY(!simData.getEncoding().isEmpty());
 
         QVERIFY(simData.hasEOLTermiantion());
-        QCOMPARE(simData.getSizeLines(), 3);
+        QCOMPARE(simData.lineCount(), 3);
         QCOMPARE(simData.getSizeBytes(), FileAccess(eolTest.fileName()).size());
 
         const std::shared_ptr<LineDataVector> &lineData = simData.getLineDataForDisplay();
@@ -325,7 +325,7 @@ class DataReadTest: public QObject
         QVERIFY(simData.getErrors().isEmpty());
 
         QVERIFY(!simData.hasEOLTermiantion());
-        QCOMPARE(simData.getSizeLines(), 2);
+        QCOMPARE(simData.lineCount(), 2);
         QCOMPARE(simData.getSizeBytes(), FileAccess(eolTest.fileName()).size());
     }
 };

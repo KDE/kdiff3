@@ -178,7 +178,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 {
                     ProgressProxy::setInformation(i18nc("Status message", "Diff: A <-> B"));
                     qCInfo(kdiffMain) << "Diff: A <-> B";
-                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
+                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->lineCount(), m_sd2->getLineDataForDiff(), m_sd2->lineCount(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
 
                     ProgressProxy::step();
 
@@ -221,7 +221,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
                 if(m_sd1->isText() && m_sd2->isText())
                 {
-                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
+                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->lineCount(), m_sd2->getLineDataForDiff(), m_sd2->lineCount(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
 
                     m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
                 }
@@ -232,7 +232,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
                 if(m_sd1->isText() && m_sd3->isText())
                 {
-                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C);
+                    m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->lineCount(), m_sd3->getLineDataForDiff(), m_sd3->lineCount(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C);
 
                     m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
                     m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
@@ -245,7 +245,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
                 if(m_sd2->isText() && m_sd3->isText())
                 {
-                    m_manualDiffHelpList.runDiff(m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C);
+                    m_manualDiffHelpList.runDiff(m_sd2->getLineDataForDiff(), m_sd2->lineCount(), m_sd3->getLineDataForDiff(), m_sd3->lineCount(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C);
                     if(gOptions->m_bDiff3AlignBC)
                     {
                         m_diff3LineList.calcDiff3LineListUsingBC(&m_diffList23);
@@ -257,9 +257,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
                 if(!gOptions->m_bDiff3AlignBC)
                 {
-                    m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
-                    m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
-                    m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+                    m_diff3LineList.debugLineCheck(m_sd1->lineCount(), e_SrcSelector::A);
+                    m_diff3LineList.debugLineCheck(m_sd2->lineCount(), e_SrcSelector::B);
+                    m_diff3LineList.debugLineCheck(m_sd3->lineCount(), e_SrcSelector::C);
                 }
 
                 ProgressProxy::setInformation(i18nc("Status message", "Linediff: A <-> B"));
@@ -281,8 +281,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
                 if(!gOptions->m_bDiff3AlignBC)
                 {
-                    m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), e_SrcSelector::B);
-                    m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), e_SrcSelector::C);
+                    m_diff3LineList.debugLineCheck(m_sd2->lineCount(), e_SrcSelector::B);
+                    m_diff3LineList.debugLineCheck(m_sd3->lineCount(), e_SrcSelector::C);
                 }
 
                 ProgressProxy::setInformation(i18nc("Status message", "Linediff: A <-> B"));
@@ -384,9 +384,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     m_bOutputModified = bVisibleMergeResultWindow;
 
     m_pMergeResultWindow->init(
-        m_sd1->getLineDataForDisplay(), m_sd1->getSizeLines(),
-        m_sd2->getLineDataForDisplay(), m_sd2->getSizeLines(),
-        m_bTripleDiff ? m_sd3->getLineDataForDisplay() : nullptr, m_sd3->getSizeLines(),
+        m_sd1->getLineDataForDisplay(), m_sd1->lineCount(),
+        m_sd2->getLineDataForDisplay(), m_sd2->lineCount(),
+        m_bTripleDiff ? m_sd3->getLineDataForDisplay() : nullptr, m_sd3->lineCount(),
         &m_diff3LineList,
         pTotalDiffStatus, bAutoSolve);
     m_pMergeResultWindowTitle->setFileName(m_outputFilename.isEmpty() ? QString("unnamed.txt") : m_outputFilename);

@@ -303,7 +303,7 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
 
 qint32 DiffTextWindow::getLineNumberWidth() const
 {
-    return std::floor(std::log10(std::max(d->mSourceData->getSizeLines(), 1))) + 1;
+    return std::floor(std::log10(std::max(d->mSourceData->lineCount(), 1))) + 1;
 }
 
 DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
@@ -539,7 +539,7 @@ qint32 DiffTextWindow::getMaxTextWidth() const
     {
         d->m_maxTextWidth = 0;
         QTextLayout textLayout(QString(), font(), this);
-        for(qint32 i = 0; i < d->mSourceData->getSizeLines(); ++i)
+        for(qint32 i = 0; i < d->mSourceData->lineCount(); ++i)
         {
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
@@ -1351,7 +1351,7 @@ void DiffTextWindow::draw(RLPainter& p, const QRect& invalidRect, const qint32 b
 
 QString DiffTextWindowData::getString(const LineType d3lIdx) const
 {
-    assert(!(m_pLineData != nullptr && m_pLineData->empty() && mSourceData->getSizeLines() != 0));
+    assert(!(m_pLineData != nullptr && m_pLineData->empty() && mSourceData->lineCount() != 0));
 
     if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || (size_t)d3lIdx >= mDiff3LineVector->size())
         return QString();

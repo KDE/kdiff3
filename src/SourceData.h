@@ -26,7 +26,7 @@
 class SourceData
 {
   public:
-    [[nodiscard]] LineType getSizeLines() const;
+    [[nodiscard]] LineType lineCount() const;
     [[nodiscard]] qint64 getSizeBytes() const;
     [[nodiscard]] const char* getBuf() const;
     [[nodiscard]] const QString& getText() const;

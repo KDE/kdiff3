@@ -120,15 +120,15 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
    // Run the diff.
    if ( m_sd3.isEmpty() )
    {
-      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
+      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.lineCount(), m_sd2.getLineDataForDiff(), m_sd2.lineCount(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
       m_diff3LineList.calcDiff3LineListUsingAB( &m_diffList12);
       m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), IgnoreFlag::none);
    }
    else
    {
-      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
-      m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C);
-      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C);
+      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.lineCount(), m_sd2.getLineDataForDiff(), m_sd2.lineCount(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B);
+      m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.lineCount(), m_sd3.getLineDataForDiff(), m_sd3.lineCount(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C);
+      m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.lineCount(), m_sd3.getLineDataForDiff(), m_sd3.lineCount(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C);
 
       if (verbose)
       {
