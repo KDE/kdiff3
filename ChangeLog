@@ -3,9 +3,9 @@ Version 1.12.0 - 2024
 =========================
 
 *Completed port away from Qt5, 6.6 now required version due to delayed ICU support in Qt
-*Fixed UTF-8-BOM output encoding issues mustly seen on windows.
-*horizontal scroll correctly comptuted for diff windows
---Note due to changes in windows/Qt the scrollbars may be vary small or hidden on Windows 11. This cann't be controlled from kdiff3.
+*Fixed UTF-8-BOM output encoding issues mostly seen on windows.
+*horizontal scroll correctly computed for diff windows
+--Note due to changes in windows/Qt the scrollbars may be vary small or hidden on Windows 11. This can't be controlled from kdiff3.
 *False errors on first launch with files selected should be fixed.
 
 Version 1.11.x - 2024
@@ -18,7 +18,7 @@ Version 1.11.x - 2024
 *Fixed encoding handling for non-UTF encodings
 *Fixed encoding detection for lower case 'HTML' and 'XML' tags
 *Fix handling of KIO jobs for non-file urls.
--Actually wait for secondary event loop to end (Not sure if this is documention bug in qt or behavior bug.)
+-Actually wait for secondary event loop to end (Not sure if this is documentation bug in qt or behavior bug.)
 -Don't arbitrarily kill jobs when progress dialog is hidden.
 *Fix possible invalid line given by mousedown in Overview pane. (Caught by SafeInt range checking)
 *Fix bad algorithm in getBestFirstLine.
