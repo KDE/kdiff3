@@ -32,7 +32,7 @@ class EncodedDataStream: public QDataStream
 
     inline bool hasBOM() const { return mGenerateBOM; }
 
-    inline void setEncoding(const QByteArray &inEncoding) 
+    inline void setEncoding(const QByteArray &inEncoding)
     {
         assert(!inEncoding.isEmpty());
 
@@ -84,7 +84,7 @@ class EncodedDataStream: public QDataStream
     quint64 peekChar(QChar &c)
     {
         QStringDecoder decoder = QStringDecoder(mEncoding);
-        QIODevice *d = device();
+        QIODevice *d = device(); // GCC 13 false positives this as shadowing a memeber variable.
         char buf[4];
         qint64 len = d->peek(buf, sizeof(buf));
 
