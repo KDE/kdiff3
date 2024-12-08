@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-20 02:35+0000\n"
-"PO-Revision-Date: 2024-10-05 12:40+0200\n"
+"PO-Revision-Date: 2024-12-07 12:23+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1098,12 +1098,12 @@ msgstr ""
 #: fileaccess.cpp:800
 #, kde-format
 msgid "Failed to read file: %1"
-msgstr "Nie udało się odczytać pliku: %1 "
+msgstr "Nie udało się odczytać pliku: %1"
 
 #: fileaccess.cpp:947
 #, kde-format
 msgid "Creating temp copy of %1 failed."
-msgstr "Tworzenie tymczasowej kopii %1 nieudane."
+msgstr "Nie udało się utworzyć tymczasowej kopii %1."
 
 #: fileaccess.cpp:956 fileaccess.cpp:962
 #, kde-format
@@ -1113,7 +1113,7 @@ msgstr "Nie udało się otworzyć %1. %2"
 #: fileaccess.cpp:982 fileaccess.cpp:990
 #, kde-format
 msgid "Error reading from %1. %2"
-msgstr "Błąd czytania z %1. %2"
+msgstr "Wystąpił błąd przy odczycie z %1. %2"
 
 #: fileaccess.cpp:1121
 #, kde-format
@@ -2093,7 +2093,7 @@ msgstr "[zmieniony]"
 #: mergeresultwindow.cpp:2821
 #, kde-format
 msgid "Encoding for saving:"
-msgstr "Kodowanie dla zapisu:"
+msgstr "Kodowanie dla zapisywania:"
 
 #: mergeresultwindow.cpp:2921
 #, kde-format
