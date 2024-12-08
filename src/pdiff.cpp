@@ -1074,7 +1074,7 @@ void KDiff3App::slotSplitDiff()
 {
     LineRef firstLine;
     LineRef lastLine;
-    QPointer<DiffTextWindow> pDTW = nullptr;
+    QPointer<DiffTextWindow> pDTW = m_pDiffTextWindow1;
     pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
 
     if(!firstLine.isValid())
