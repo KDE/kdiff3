@@ -77,7 +77,6 @@ find_package(
     Gui
     Widgets
     PrintSupport
-    Core5Compat
 )
 
 find_package(
