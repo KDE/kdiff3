@@ -139,6 +139,8 @@ class DiffTextWindowData
     {
         reset();
 
+        assert(sd != nullptr);
+
         mSourceData = sd;
         m_pLineData = mSourceData->getLineDataForDisplay();
         mDiff3LineVector = pDiff3LineVector;
@@ -147,6 +149,7 @@ class DiffTextWindowData
 
     void reset()
     {
+        mSourceData.reset();
         //wait for all helper threads to finish
         while(DiffTextWindow::maxThreads() > 0) {} //Clear word wrap threads.
 
@@ -225,7 +228,7 @@ class DiffTextWindowData
 
     QPointer<DiffTextWindow> m_pDiffTextWindow;
 
-    std::shared_ptr<SourceData> mSourceData;
+    std::shared_ptr<SourceData> mSourceData = std::make_shared<SourceData>(); //Empty data for early init.
     std::shared_ptr<LineDataVector> m_pLineData;
     bool m_bWordWrap = false;
     qint32 m_delayedDrawTimer = 0;
@@ -321,6 +324,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     setAcceptDrops(true);
     mWinIdx = winIdx;
 
+    assert(d->mSourceData != nullptr);
     init(d->mSourceData, nullptr, nullptr);
 
     setMinimumSize(QSize(20, 20));
