@@ -324,9 +324,6 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     setAcceptDrops(true);
     mWinIdx = winIdx;
 
-    assert(d->mSourceData != nullptr);
-    init(d->mSourceData, nullptr, nullptr);
-
     setMinimumSize(QSize(20, 20));
 
     setUpdatesEnabled(true);
