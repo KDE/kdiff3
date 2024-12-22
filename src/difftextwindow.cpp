@@ -829,6 +829,7 @@ void DiffTextWindow::wheelEvent(QWheelEvent* pWheelEvent)
 {
     QPoint delta = pWheelEvent->angleDelta();
 
+    pWheelEvent->ignore();
     //Block diagonal scrolling easily generated unintentionally with track pads.
     if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && mVScrollBar != nullptr)
     {
