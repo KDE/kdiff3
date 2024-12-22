@@ -1930,6 +1930,8 @@ void MergeResultWindow::slotCursorUpdate()
 void MergeResultWindow::wheelEvent(QWheelEvent* pWheelEvent)
 {
     const QPoint delta = pWheelEvent->angleDelta();
+
+    pWheelEvent->ignore();
     //Block diagonal scrolling easily generated unintentionally with track pads.
     if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && mVScrollBar != nullptr)
     {
