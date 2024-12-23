@@ -355,7 +355,7 @@ void FileAccess::loadData()
         ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s.get(), PATH_MAX);
         if(len > 0)
         {
-            s[len] = u'\0';
+            s[len] = '\0';
             m_linkTarget = QFile::decodeName(s.get());
         }
 #endif

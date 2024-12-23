@@ -68,7 +68,7 @@ class ValueMap
     virtual QString     readStringEntry(const QString&, const QString&);
 };
 
-QStringList safeStringSplit(const QString& s, char sepChar = u';', char metaChar = u'\\');
-QString safeStringJoin(const QStringList& sl, char sepChar = u';', char metaChar = u'\\');
+QStringList safeStringSplit(const QString& s, char sepChar = ';', char metaChar = '\\');
+QString safeStringJoin(const QStringList& sl, char sepChar = ';', char metaChar = '\\');
 
 #endif

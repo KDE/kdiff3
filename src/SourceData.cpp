@@ -751,12 +751,12 @@ std::optional<const QByteArray> SourceData::getEncodingFromTag(const QByteArray&
     qsizetype encodingPos = s.indexOf(encodingTag);
     if(encodingPos >= 0)
     {
-        qsizetype apostrophPos = s.indexOf(u'"', encodingPos + encodingTag.length());
-        qsizetype apostroph2Pos = s.indexOf(u'\'', encodingPos + encodingTag.length());
-        char apostroph = u'"';
+        qsizetype apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
+        qsizetype apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
+        char apostroph = '"';
         if(apostroph2Pos >= 0 && (apostrophPos < 0 || apostroph2Pos < apostrophPos))
         {
-            apostroph = u'\'';
+            apostroph = '\'';
             apostrophPos = apostroph2Pos;
         }
 
