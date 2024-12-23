@@ -576,7 +576,6 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
     std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
 
     // detect line end style
-    std::vector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
 
     QByteArray pCodec = detectEncoding(m_pBuf.get(), mDataSize).value_or(encoding);
@@ -640,31 +639,34 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                 ds.readChar(curChar);
             }
 
-            switch(curChar.unicode())
+            if(m_eLineEndStyle == eLineEndStyleUndefined)
             {
-                case u'\n':
-                    vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
-                    break;
-                case u'\r':
-                    if((FileOffset)lastOffset < mDataSize)
-                    {
-                        QChar nextChar;
-                        quint64 i = ds.peekChar(nextChar);
-                        if(i == 0)
-                            break;
-
-                        if(nextChar == u'\n')
+                switch(curChar.unicode())
+                {
+                    case u'\n':
+                        m_eLineEndStyle = eLineEndStyleUnix;
+                        break;
+                    case u'\r':
+                        if((FileOffset)lastOffset < mDataSize)
                         {
-                            prevChar = curChar;
-                            ds.readChar(curChar);
-                            vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
-                            break;
-                        }
-                    }
+                            QChar nextChar;
+                            quint64 i = ds.peekChar(nextChar);
+                            if(i == 0)
+                                break;
 
-                    //old mac style ending.
-                    vOrigDataLineEndStyle.push_back(eLineEndStyleOldMac);
-                    break;
+                            if(nextChar == u'\n')
+                            {
+                                prevChar = curChar;
+                                ds.readChar(curChar);
+                                m_eLineEndStyle = eLineEndStyleDos;
+                                break;
+                            }
+                        }
+
+                        //old mac style ending.
+                        m_eLineEndStyle = eLineEndStyleOldMac;
+                        break;
+                }
             }
             parser->processLine(line);
             if(removeComments)
@@ -704,11 +706,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         }
 
         m_v->push_back(LineData(m_unicodeBuf, lastOffset));
-
         m_bIsText = true;
-
-        if(!vOrigDataLineEndStyle.empty())
-            m_eLineEndStyle = vOrigDataLineEndStyle[0];
 
         mLineCount = lines;
         return true;
