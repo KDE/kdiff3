@@ -995,10 +995,10 @@ void KDiff3App::slotFileSaveAs()
 
 void KDiff3App::slotFilePrint()
 {
-    assert(m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow2 == nullptr);
 #ifdef QT_NO_PRINTER
     slotStatusMsg(i18n("Printing not implemented."));
 #else
+    assert(m_pDiffTextWindow1 != nullptr && m_pDiffTextWindow2 != nullptr);
     QPrinter printer;
     QPointer<QPrintDialog> printDialog = QPointer<QPrintDialog>(new QPrintDialog(&printer, this));
 
