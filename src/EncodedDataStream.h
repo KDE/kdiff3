@@ -20,16 +20,19 @@
 #include <QStringDecoder>
 
 /*
-    EncodedDataStream needs to be lean and fast readChar maybe called thounds or even millions of times
+    EncodedDataStream needs to be lean and fast readChar maybe called thousands or even millions of times
     depending on the size of data.
 
     Using QIODevice/QBuffer for in memmory reads comes with speed penality I don't fully understand.
+
+    While both read and write are allowed this class is not designed with mixed raad/write in mind.
+    Changes to the array will invalidate the internal read interator.
+
+    Use the reset if the array is moddified to restart the read from the beginings.
 */
-class EncodedDataStream
+class EncodedDataStream: public QByteArray
 {
   private:
-    Q_DISABLE_COPY(EncodedDataStream);
-
     QStringDecoder mDecoder = QStringDecoder("UTF-8", QStringConverter::Flag::ConvertInitialBom);
     QStringEncoder mEncoder = QStringEncoder("UTF-8", QStringEncoder::Flag::ConvertInitialBom);
     QByteArray mEncoding = "UTF-8";
@@ -38,17 +41,18 @@ class EncodedDataStream
 
     char curData = u8'\0';
     QByteArray mBuf = QByteArray::fromRawData(&curData, sizeof(curData));
-    QByteArray &mFileData;
-    QByteArray::iterator it;
+    QByteArray::iterator it = end();
 
   public:
-    EncodedDataStream(QByteArray &a):
-        mFileData(a),
-        it(mFileData.begin())
+    using QByteArray::QByteArray;
+
+    EncodedDataStream(const QByteArray &a):
+        QByteArray(a)
     {
+        it = begin();
     }
 
-    void reset() { it = mFileData.begin(); }
+    void reset() { it = begin(); }
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
 
@@ -89,7 +93,7 @@ class EncodedDataStream
         */
         do
         {
-            if(it == mFileData.end())
+            if(it == end())
                 break;
 
             len++;
@@ -109,7 +113,7 @@ class EncodedDataStream
     quint64 peekChar(QChar &c)
     {
         QStringDecoder decoder = QStringDecoder(mEncoding);
-        qsizetype len = std::max<qsizetype>(4, mFileData.size());
+        qsizetype len = std::max<qsizetype>(4, size());
         QByteArray buf = QByteArray::fromRawData(it, len);
 
         if(len > 0)
@@ -130,18 +134,20 @@ class EncodedDataStream
 
         mError = mEncoder.hasError();
         if(!mError)
-            mFileData.append(data);
+            append(data);
 
+        it = end();
         return *this;
     };
 
     [[nodiscard]] bool hasError() const { return mError; }
-    [[nodiscard]] bool atEnd() const { return it == mFileData.end(); }
+    [[nodiscard]] bool atEnd() const { return it == end(); }
 
     EncodedDataStream &operator<<(const QByteArray &bytes)
     {
-        mFileData.append(bytes);
+        append(bytes);
 
+        it = end();
         return *this;
     };
 };

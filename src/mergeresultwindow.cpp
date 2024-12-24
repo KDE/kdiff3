@@ -2668,8 +2668,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
         }
     }
 
-    QByteArray dataArray;
-    EncodedDataStream textOutStream(dataArray);
+    EncodedDataStream textOutStream;
 
     textOutStream.setEncoding(encoding);
 
@@ -2697,15 +2696,13 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
                     isFirstLine = mel.isRemoved();
 
                 textOutStream << str;
-                if(textOutStream.hasError()) goto fail;
             }
         }
     }
 
-fail:
     bool bSuccess = !textOutStream.hasError();
     if(bSuccess)
-        bSuccess = file.writeFile(dataArray.constData(), dataArray.size());
+        bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
 
     if(!bSuccess)
     {

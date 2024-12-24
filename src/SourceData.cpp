@@ -588,18 +588,17 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     try
     {
-        QByteArray ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
-        EncodedDataStream ds(ba);
+        EncodedDataStream ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
 
-        ds.setEncoding(encoding);
-        mHasBOM = ds.hasBOM();
+        ba.setEncoding(encoding);
+        mHasBOM = ba.hasBOM();
         m_bIncompleteConversion = false;
         m_unicodeBuf->clear();
 
         assert(m_unicodeBuf->length() == 0);
 
         mHasEOLTermination = false;
-        while(!ds.atEnd())
+        while(!ba.atEnd())
         {
             line.clear();
             if(lines >= limits<LineType>::max() - 5)
@@ -609,7 +608,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
             }
 
             prevChar = curChar;
-            ds.readChar(curChar);
+            ba.readChar(curChar);
 
             qsizetype firstNonwhite = 0;
             bool foundNonWhite = false;
@@ -632,11 +631,11 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                     foundNonWhite = true;
                 }
 
-                if(ds.atEnd())
+                if(ba.atEnd())
                     break;
 
                 prevChar = curChar;
-                ds.readChar(curChar);
+                ba.readChar(curChar);
             }
 
             if(m_eLineEndStyle == eLineEndStyleUndefined)
@@ -650,14 +649,14 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                         if((FileOffset)lastOffset < mDataSize)
                         {
                             QChar nextChar;
-                            quint64 i = ds.peekChar(nextChar);
+                            quint64 i = ba.peekChar(nextChar);
                             if(i == 0)
                                 break;
 
                             if(nextChar == u'\n')
                             {
                                 prevChar = curChar;
-                                ds.readChar(curChar);
+                                ba.readChar(curChar);
                                 m_eLineEndStyle = eLineEndStyleDos;
                                 break;
                             }
