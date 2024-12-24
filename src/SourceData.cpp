@@ -588,7 +588,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     try
     {
-        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
+        QByteArray ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
         EncodedDataStream ds(ba);
 
         ds.setEncoding(encoding);
@@ -722,26 +722,25 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray& pCodecIn,
                                      const QString& fileNameOut, const QByteArray& pCodecOut)
 {
-    QFile in(fileNameIn);
+    EncodedFile in(fileNameIn);
     if(!in.open(QIODevice::ReadOnly))
         return false;
-    EncodedDataStream inStream(&in);
-    inStream.setEncoding(pCodecIn);
 
-    QFile out(fileNameOut);
+    in.setEncoding(pCodecIn);
+
+    EncodedFile out(fileNameOut);
     if(!out.open(QIODevice::WriteOnly))
         return false;
-    EncodedDataStream outStream(&out);
-    outStream.setEncoding(pCodecOut);
+    out.setEncoding(pCodecOut);
 
     QString data;
-    while(!inStream.atEnd())
+    while(!in.atEnd())
     {
         QChar c;
-        inStream.readChar(c);
+        in.readChar(c);
         data += c;
     }
-    outStream << data;
+    out << data;
 
     return true;
 }

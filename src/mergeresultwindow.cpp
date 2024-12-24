@@ -2669,7 +2669,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
     }
 
     QByteArray dataArray;
-    EncodedDataStream textOutStream(&dataArray, QIODevice::WriteOnly);
+    EncodedDataStream textOutStream(dataArray);
 
     textOutStream.setEncoding(encoding);
 
