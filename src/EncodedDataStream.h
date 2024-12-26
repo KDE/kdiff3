@@ -115,6 +115,8 @@ class EncodedDataStream: public QByteArray
         QStringDecoder decoder = QStringDecoder(mEncoding);
         qsizetype dis = std::distance(it, end());
         qsizetype len = std::min<qsizetype>(4, dis);
+        //This assumes EncodedDataStream is contigous.
+        //This is true for KDiff3's usage as we use QByteArray::fromRawData to make thin
         QByteArray buf = QByteArray::fromRawData(&(*it), len);
 
         if(len > 0)
@@ -198,7 +200,6 @@ class EncodedFile: public QFile
 
     qint64 readChar(QChar &c)
     {
-        //char curData = u8'\0';
         qint64 len = 0;
         QString s;
 
