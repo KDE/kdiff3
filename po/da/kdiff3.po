@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 00:43+0000\n"
+"POT-Creation-Date: 2024-12-26 00:43+0000\n"
 "PO-Revision-Date: 2011-09-03 19:27+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -132,7 +132,7 @@ msgstr "Linjen er ikke tilgængelig"
 msgid "Encoding:"
 msgstr "Tegnsæt:"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2820 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Linjeslut-stil:"
@@ -149,12 +149,12 @@ msgstr "A (Basis):"
 msgid "Encoding: %1"
 msgstr "Tegnsæt:"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2866
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2865
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -1827,7 +1827,7 @@ msgstr "Gemmer fil med nyt filnavn..."
 msgid "Save As..."
 msgstr "Gem som..."
 
-#: kdiff3.cpp:1000
+#: kdiff3.cpp:999
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Udskrift er ikke implementeret."
@@ -2236,57 +2236,57 @@ msgstr ""
 "\n"
 "Mislykkedes at oprette sikkerhedskopi. Filen blev ikke gemt."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
 #, kde-format
 msgid "File Save Error"
 msgstr "Fejl ved at gemme fil"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2709
 #, kde-format
 msgid "Error while writing."
 msgstr "Fejl ved skrivning."
 
-#: mergeresultwindow.cpp:2792
+#: mergeresultwindow.cpp:2789
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Uddata"
 
-#: mergeresultwindow.cpp:2805 mergeresultwindow.cpp:2986
+#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
 #, kde-format
 msgid "[Modified]"
 msgstr "[Ændret]"
 
-#: mergeresultwindow.cpp:2812
+#: mergeresultwindow.cpp:2809
 #, fuzzy, kde-format
 #| msgid "Encoding for saving"
 msgid "Encoding for saving:"
 msgstr "Filtegnsæt for at gemme"
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2935
+#: mergeresultwindow.cpp:2932
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "Koder fra"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2934
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "Koder fra"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2936
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
 msgstr "Koder fra"
 
-#: mergeresultwindow.cpp:2979
+#: mergeresultwindow.cpp:2976
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""

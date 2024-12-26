@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 00:43+0000\n"
-"PO-Revision-Date: 2024-12-24 20:39+0530\n"
+"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"PO-Revision-Date: 2024-12-25 19:45+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -124,7 +124,7 @@ msgstr "सञ्चिका %1: रेखा उपलब्धा नास�
 msgid "Encoding:"
 msgstr "एन्कोडिंग् :"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2820 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "रेखासमाप्तशैली :"
@@ -139,12 +139,12 @@ msgstr "क (आधारः)"
 msgid "Encoding: %1"
 msgstr "एन्कोडिंग्: %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2866
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "DOS"
 msgstr "OF THE"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2865
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "Unix"
 msgstr "यूनिक्स"
@@ -408,7 +408,7 @@ msgstr "पुटं C \"%1\" नास्ति अथवा पुटे न�
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
-msgstr "फोल्डर् उद्घाटने त्रुटिः"
+msgstr "समुच्चय उद्घाटने त्रुटिः"
 
 #: directorymergewindow.cpp:868
 #, kde-format
@@ -772,7 +772,7 @@ msgstr "हस्त"
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
-msgstr "फोल्डर"
+msgstr "समुच्चय"
 
 #: directorymergewindow.cpp:2727
 #, kde-format
@@ -808,7 +808,7 @@ msgstr "लिङ्क-गन्तव्य"
 #, kde-format
 msgctxt "Header label"
 msgid "File"
-msgstr "संचिका"
+msgstr "सञ्चिका"
 
 #: directorymergewindow.cpp:2755
 #, kde-format
@@ -1667,7 +1667,7 @@ msgstr "नूतनेन सञ्चिकानाम्ना सह सञ
 msgid "Save As..."
 msgstr "Save As..."
 
-#: kdiff3.cpp:1000
+#: kdiff3.cpp:999
 #, kde-format
 msgid "Printing not implemented."
 msgstr "मुद्रणं न कार्यान्वितम्।"
@@ -2064,52 +2064,52 @@ msgstr ""
 "\n"
 "बैकअपस्य निर्माणं विफलम् अभवत् । सञ्चिका न रक्षिता ।"
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
 #, kde-format
 msgid "File Save Error"
 msgstr "सञ्चिका रक्षणदोषः"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2709
 #, kde-format
 msgid "Error while writing."
 msgstr "लेखनकाले त्रुटिः।"
 
-#: mergeresultwindow.cpp:2792
+#: mergeresultwindow.cpp:2789
 #, kde-format
 msgid "Output:"
 msgstr "उत्पादनम् :"
 
-#: mergeresultwindow.cpp:2805 mergeresultwindow.cpp:2986
+#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
 #, kde-format
 msgid "[Modified]"
 msgstr "[संशोधितम्]"
 
-#: mergeresultwindow.cpp:2812
+#: mergeresultwindow.cpp:2809
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "रक्षणार्थं एन्कोडिंग् :"
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Conflict"
 msgstr "द्वंद"
 
-#: mergeresultwindow.cpp:2935
+#: mergeresultwindow.cpp:2932
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "A: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2934
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "B: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2936
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "C: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2979
+#: mergeresultwindow.cpp:2976
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr "सञ्चिकां चिनोतु (अद्यापि न रक्षितम्)"
@@ -2167,7 +2167,7 @@ msgstr "ग (वैकल्पिक):"
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
 #, kde-format
 msgid "Folder..."
-msgstr "फोल्डर..."
+msgstr "समुच्चय..."
 
 #: optiondialog.cpp:105 optiondialog.cpp:117
 #, kde-format
@@ -2292,7 +2292,7 @@ msgstr "मैन्युअल् रूपेण संरेखितान�
 #: optiondialog.cpp:685
 #, kde-format
 msgid "Folder Comparison View:"
-msgstr "फोल्डर् तुलनादृश्यम् :"
+msgstr "समुच्चय तुलनादृश्यम् :"
 
 #: optiondialog.cpp:691
 #, kde-format
@@ -2696,7 +2696,7 @@ msgstr ""
 #, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
-msgstr "फोल्डर"
+msgstr "समुच्चय"
 
 #: optiondialog.cpp:1104
 #, kde-format
@@ -2846,7 +2846,7 @@ msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
 "Off: Leave subfolders folded."
 msgstr ""
-"On: फोल्डर् diff आरभन्ते सति सर्वाणि उपपुटं विमोचयन्तु ।\n"
+"On: समुच्चय diff आरभन्ते सति सर्वाणि उपपुटं विमोचयन्तु ।\n"
 "Off: उपपुटं मुण्डितं त्यजन्तु।"
 
 #: optiondialog.cpp:1193

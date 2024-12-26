@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-23 00:43+0000\n"
+"POT-Creation-Date: 2024-12-26 00:43+0000\n"
 "PO-Revision-Date: 2024-01-22 16:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -125,7 +125,7 @@ msgstr "檔案 %1：無法取得行"
 msgid "Encoding:"
 msgstr "編碼："
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2820 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "行結尾樣式："
@@ -140,12 +140,12 @@ msgstr "A(基底)"
 msgid "Encoding: %1"
 msgstr "編碼：%1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2866
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2865
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -1661,7 +1661,7 @@ msgstr "正在用新檔名儲存檔案..."
 msgid "Save As..."
 msgstr "另存新檔..."
 
-#: kdiff3.cpp:1000
+#: kdiff3.cpp:999
 #, kde-format
 msgid "Printing not implemented."
 msgstr "列印尚未實作。"
@@ -2057,55 +2057,55 @@ msgstr ""
 "\n"
 "建立備份時失敗。檔案未儲存。"
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
 #, kde-format
 msgid "File Save Error"
 msgstr "檔案儲存錯誤"
 
-#: mergeresultwindow.cpp:2712
+#: mergeresultwindow.cpp:2709
 #, kde-format
 msgid "Error while writing."
 msgstr "寫入時發生錯誤。"
 
-#: mergeresultwindow.cpp:2792
+#: mergeresultwindow.cpp:2789
 #, kde-format
 msgid "Output:"
 msgstr "輸出："
 
-#: mergeresultwindow.cpp:2805 mergeresultwindow.cpp:2986
+#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
 #, kde-format
 msgid "[Modified]"
 msgstr "[已修改]"
 
-#: mergeresultwindow.cpp:2812
+#: mergeresultwindow.cpp:2809
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "儲存用的編碼："
 
-#: mergeresultwindow.cpp:2912
+#: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Conflict"
 msgstr "衝突"
 
-#: mergeresultwindow.cpp:2935
+#: mergeresultwindow.cpp:2932
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2937
+#: mergeresultwindow.cpp:2934
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2939
+#: mergeresultwindow.cpp:2936
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
 msgstr "編解碼器"
 
-#: mergeresultwindow.cpp:2979
+#: mergeresultwindow.cpp:2976
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""
