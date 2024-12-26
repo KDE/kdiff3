@@ -93,7 +93,7 @@ class EncodedDataStream: public QByteArray
         */
         do
         {
-            if(atEnd())
+            if(it == end())
                 break;
 
             len++;
@@ -113,9 +113,9 @@ class EncodedDataStream: public QByteArray
     quint64 peekChar(QChar &c)
     {
         QStringDecoder decoder = QStringDecoder(mEncoding);
-        qsizetype len = std::max<qsizetype>(4, size());
-        QByteArray buf = QByteArray(len, '\0');
-        std::copy(it, it + len, buf.begin());
+        qsizetype dis = std::distance(it, end());
+        qsizetype len = std::min<qsizetype>(4, dis);
+        QByteArray buf = QByteArray::fromRawData(&(*it), len);
 
         if(len > 0)
         {
