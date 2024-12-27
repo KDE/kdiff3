@@ -733,14 +733,12 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray
         return false;
     out.setEncoding(pCodecOut);
 
-    QString data;
     while(!in.atEnd())
     {
         QChar c;
         in.readChar(c);
-        data += c;
+        out << c;
     }
-    out << data;
 
     return true;
 }
