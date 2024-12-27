@@ -311,10 +311,11 @@ std::optional<const QByteArray> SourceData::detectEncoding(const QString& fileNa
     QFile f(fileName);
     if(f.open(QIODevice::ReadOnly))
     {
-        char buf[400];
+        char buf[400] = {0}; //trigger default intalization for buffer array
 
         qint64 size = f.read(buf, sizeof(buf));
-        return detectEncoding(buf, size);
+        if(size > 0)
+            return detectEncoding(buf, size);
     }
     return {};
 }
