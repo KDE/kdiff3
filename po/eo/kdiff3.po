@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-26 00:43+0000\n"
-"PO-Revision-Date: 2024-09-21 10:41+0200\n"
+"PO-Revision-Date: 2024-12-27 22:09+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1078,8 +1078,7 @@ msgid "Merge to A && B"
 msgstr "Kunfandi al A && B"
 
 #: fileaccess.cpp:526
-#, fuzzy, kde-format
-#| msgid "Unable to determine full url. No parent specified."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Ne eblas determini plenan URL. Neniu gepatro specifita."
@@ -1088,61 +1087,52 @@ msgstr "Ne eblas determini plenan URL. Neniu gepatro specifita."
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "Gepatron kaj idon ne distingeblis"
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "Kalkulita URL estas:"
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Malsukcesis legi dosieron: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "Ĉi tio influas ĉiujn kunfandajn operaciojn."
+msgstr "Uzanto nuligis leg-operacion en %1"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "Ĉi tio influas ĉiujn kunfandajn operaciojn."
+msgstr "Uzanto nuligis skrib-operacion."
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Kreado de provizora kopio de %1 malsukcesis."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Malfermo de %1 malsukcesis. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Eraro legante de %1. %2"
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed.\n"
-#| "Filename: %1"
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1152,16 +1142,13 @@ msgstr ""
 "Dosiernomo: %1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed.\n"
-#| "Filenames: %1 -> %2"
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"Dum provado fari sekurkopion, renomado malsukcesis.\n"
+"Dum provado fari sekurkopion, alinomado malsukcesis.\n"
 "Dosiernomoj: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -1197,7 +1184,7 @@ msgstr "Nuna Agordo:"
 #: kdiff3.cpp:177
 #, kde-format
 msgid "Config Option Error:"
-msgstr "Agorda Opcio Eraro:"
+msgstr "Eraro de Agord-Opcio:"
 
 #: kdiff3.cpp:232
 #, kde-format
@@ -1207,12 +1194,12 @@ msgstr "Opcio --aŭto uzata, sed neniu eligdosiero specifita."
 #: kdiff3.cpp:368
 #, kde-format
 msgid "Directory merge"
-msgstr "Dosierujo kunfandi"
+msgstr "Dosieruja kunfando"
 
 #: kdiff3.cpp:373
 #, kde-format
 msgid "Merge info"
-msgstr "Kunfandi informojn"
+msgstr "Kunfanda informo"
 
 #: kdiff3.cpp:613
 #, kde-format
@@ -1810,10 +1797,9 @@ msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Ilo por Komparo kaj Kunfandado de Dosieroj kaj Dosierujoj"
 
 #: main.cpp:94
-#, fuzzy, kde-format
-#| msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+#, kde-format
 msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
-msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5-portado"
+msgstr "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5-portado"
 
 #: main.cpp:114
 #, kde-format
@@ -3718,6 +3704,3 @@ msgstr "Neatendita citaĵo en argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Neniu programo specifita."
-
-#~ msgid "Unicode"
-#~ msgstr "Unikodo"
