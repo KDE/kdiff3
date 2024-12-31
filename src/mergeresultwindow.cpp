@@ -2689,13 +2689,13 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
                     // Put line feed between lines, but not for the first line
                     // or between lines that have been removed (because there
                     // isn't a line there).
-                    textOutStream << lineFeed;
+                    textOutStream.writeString(lineFeed);
                 }
 
                 if(isFirstLine)
                     isFirstLine = mel.isRemoved();
 
-                textOutStream << str;
+                textOutStream.writeString(str);
             }
         }
     }

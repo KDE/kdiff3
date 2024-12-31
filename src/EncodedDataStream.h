@@ -27,8 +27,6 @@
 
     While both read and write are allowed this class is not designed with mixed raad/write in mind.
     Changes to the array will invalidate the internal read interator.
-
-    Use the reset if the array is moddified to restart the read from the beginings.
 */
 class EncodedDataStream: public QByteArray
 {
@@ -51,8 +49,6 @@ class EncodedDataStream: public QByteArray
     {
         it = begin();
     }
-
-    void reset() { it = begin(); }
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
 
@@ -131,7 +127,7 @@ class EncodedDataStream: public QByteArray
         return len;
     }
 
-    EncodedDataStream &operator<<(const QString &s)
+    quint64 writeString(const QString &s)
     {
         QByteArray data = mEncoder(s);
 
@@ -140,19 +136,11 @@ class EncodedDataStream: public QByteArray
             append(data);
 
         it = end();
-        return *this;
+        return mError ? 0 : s.length();
     };
 
     [[nodiscard]] bool hasError() const { return mError; }
     [[nodiscard]] bool atEnd() const { return it == end(); }
-
-    EncodedDataStream &operator<<(const QByteArray &bytes)
-    {
-        append(bytes);
-
-        it = end();
-        return *this;
-    };
 };
 
 /*
@@ -247,6 +235,9 @@ class EncodedFile: public QFile
         QByteArray data = mEncoder(s);
 
         mError = mEncoder.hasError();
+        if(mError)
+            return *this;
+
         qint64 len = write(data.constData(), data.length());
         if(len != data.length())
             mError = true;
@@ -255,16 +246,6 @@ class EncodedFile: public QFile
     };
 
     [[nodiscard]] bool hasError() const { return mError; }
-
-    EncodedFile &operator<<(const QByteArray &bytes)
-    {
-        qint64 len = write(bytes.constData(), bytes.length());
-
-        if(len != bytes.length())
-            mError = true;
-
-        return *this;
-    };
 };
 
 #endif /* ENCODEDDATASTREAM_H */
