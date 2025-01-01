@@ -2690,16 +2690,21 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
                     // or between lines that have been removed (because there
                     // isn't a line there).
                     textOutStream.writeString(lineFeed);
+                    if(textOutStream.hasError())
+                        goto end_loop;
                 }
 
                 if(isFirstLine)
                     isFirstLine = mel.isRemoved();
 
                 textOutStream.writeString(str);
+                if(textOutStream.hasError())
+                    goto end_loop;
             }
         }
     }
 
+end_loop:
     bool bSuccess = !textOutStream.hasError();
     if(bSuccess)
         bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
