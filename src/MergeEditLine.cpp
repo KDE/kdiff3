@@ -17,6 +17,11 @@
 #include <optional>
 #include <vector>
 
+/*
+    This function returns the line from the file indicated by mSrc.
+    It returns an empty string if the line is not found.
+    Don't return the line from a different file.
+*/
 QString MergeEditLine::getString(const std::shared_ptr<const LineDataVector> &pLineDataA, const std::shared_ptr<const LineDataVector> &pLineDataB, const std::shared_ptr<const LineDataVector> &pLineDataC) const
 {
     //Triggered by resize event during early init. Ignore these calls.
