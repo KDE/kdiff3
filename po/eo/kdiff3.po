@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-26 02:37+0000\n"
-"PO-Revision-Date: 2024-09-21 10:41+0200\n"
+"PO-Revision-Date: 2024-12-28 17:41+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1030,7 +1030,7 @@ msgstr "Nenion fari"
 #: directorymergewindow.cpp:2983 opendialog.ui:68
 #, kde-format
 msgid "Merge"
-msgstr "Mergi"
+msgstr "Kunfandi"
 
 #: directorymergewindow.cpp:2984
 #, kde-format
@@ -1117,7 +1117,7 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"Dum provado fari sekurkopion, renomado malsukcesis.\n"
+"Dum provado fari sekurkopion, alinomado malsukcesis.\n"
 "Dosiernomoj: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -1153,7 +1153,7 @@ msgstr "Nuna Agordo:"
 #: kdiff3.cpp:186
 #, kde-format
 msgid "Config Option Error:"
-msgstr "Agorda Opcio Eraro:"
+msgstr "Eraro de Agord-Opcio:"
 
 #: kdiff3.cpp:241
 #, kde-format
@@ -1163,12 +1163,12 @@ msgstr "Opcio --aŭto uzata, sed neniu eligdosiero specifita."
 #: kdiff3.cpp:377
 #, kde-format
 msgid "Directory merge"
-msgstr "Dosierujo kunfandi"
+msgstr "Dosieruja kunfando"
 
 #: kdiff3.cpp:382
 #, kde-format
 msgid "Merge info"
-msgstr "Kunfandi informojn"
+msgstr "Kunfanda informo"
 
 #: kdiff3.cpp:622
 #, kde-format
@@ -1370,7 +1370,7 @@ msgstr ""
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr "Iru al Linio"
+msgstr "Iri al Linio"
 
 #: kdiff3.cpp:818
 #, kde-format
@@ -1766,10 +1766,9 @@ msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Ilo por Komparo kaj Kunfandado de Dosieroj kaj Dosierujoj"
 
 #: main.cpp:94
-#, fuzzy, kde-format
-#| msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+#, kde-format
 msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
-msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5-portado"
+msgstr "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5-portado"
 
 #: main.cpp:114
 #, kde-format
@@ -3669,6 +3668,3 @@ msgstr "Neatendita citaĵo en argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Neniu programo specifita."
-
-#~ msgid "Unicode"
-#~ msgstr "Unikodo"
