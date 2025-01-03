@@ -175,6 +175,11 @@ class MergeBlock
     void removeEmptySource();
 };
 
+/*
+    Note std::list has no virtual destructor.
+
+    This is a non-issue for classes that are not ussed in a generic(i.e. polymorphic) context.
+*/
 class MergeBlockList: public std::list<MergeBlock>
 {
   public:
