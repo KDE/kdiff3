@@ -7,9 +7,14 @@
     "finish-args": [
         "--device=dri",
         "--share=ipc",
+        "--share=network",
+        "--socket=cups",
         "--socket=fallback-x11",
+        "--socket=pulseaudio",
         "--socket=wayland",
-        "--filesystem=home"
+        "--filesystem=host",
+        "--filesystem=home",
+        "--filesystem=xdg-run/gvfs"
     ],
     "modules": [
         {
