@@ -29,7 +29,7 @@
  * The first item in the list will be the command itself.
  * Returns the error reason as string or an empty string on success.
  * Eg. >"1" "2"<           => >1<, >2<
- * Eg. >u'\'\\'<            => >'\<   backslash is a meta character
+ * Eg. >'\'\\'<            => >'\<   backslash is a meta character
  * Eg. > "\\" <            => >\<
  * Eg. >"c:\sed" 's/a/\' /g'<  => >c:\sed<, >s/a/' /g<
  */
