@@ -22,10 +22,11 @@
     It returns an empty string if the line is not found.
     Don't return the line from a different file.
 */
-QString MergeEditLine::getString(const std::shared_ptr<const LineDataVector> &pLineDataA, const std::shared_ptr<const LineDataVector> &pLineDataB, const std::shared_ptr<const LineDataVector> &pLineDataC) const
+QString MergeEditLine::getString() const
 {
+    std::shared_ptr<LineDataVector> lineVector = gLineVector[(int)mSrc];
     //Triggered by resize event during early init. Ignore these calls.
-    if((mSrc == e_SrcSelector::A && pLineDataA->empty()) || (mSrc == e_SrcSelector::B && pLineDataB->empty()) || (mSrc == e_SrcSelector::C && pLineDataC->empty()))
+    if(lineVector->empty())
         return QString();
 
     if(isRemoved() || (!isModified() && mSrc == e_SrcSelector::None))
@@ -39,11 +40,11 @@ QString MergeEditLine::getString(const std::shared_ptr<const LineDataVector> &pL
         assert(mSrc == e_SrcSelector::A || mSrc == e_SrcSelector::B || mSrc == e_SrcSelector::C);
 
         if(mSrc == e_SrcSelector::A && m_id3l->getLineA().isValid())
-            lineData = (*pLineDataA)[m_id3l->getLineA()];
+            lineData = (*lineVector)[m_id3l->getLineA()];
         else if(mSrc == e_SrcSelector::B && m_id3l->getLineB().isValid())
-            lineData = (*pLineDataB)[m_id3l->getLineB()];
+            lineData = (*lineVector)[m_id3l->getLineB()];
         else if(mSrc == e_SrcSelector::C && m_id3l->getLineC().isValid())
-            lineData = (*pLineDataC)[m_id3l->getLineC()];
+            lineData = (*lineVector)[m_id3l->getLineC()];
 
         //Not an error.
         if(!lineData.has_value())

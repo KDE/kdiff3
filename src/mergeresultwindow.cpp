@@ -102,9 +102,9 @@ void MergeResultWindow::init(
     m_scrollDeltaY = 0;
     setModified(false);
 
-    m_pldA = pLineDataA;
-    m_pldB = pLineDataB;
-    m_pldC = pLineDataC;
+    gLineVector[1] = pLineDataA;
+    gLineVector[2] = pLineDataB;
+    gLineVector[3] = pLineDataC;
     m_sizeA = sizeA;
     m_sizeB = sizeB;
     m_sizeC = sizeC;
@@ -282,9 +282,9 @@ void MergeResultWindow::reset()
     m_currentMergeBlockIt = m_mergeBlockList.end();
     m_pDiff3LineList = nullptr;
     m_pTotalDiffStatus = nullptr;
-    m_pldA = nullptr;
-    m_pldB = nullptr;
-    m_pldC = nullptr;
+    gLineVector[1] = nullptr;
+    gLineVector[2] = nullptr;
+    gLineVector[3] = nullptr;
     if(!m_persistentStatusMessage.isEmpty())
     {
         m_persistentStatusMessage = QString();
@@ -293,7 +293,7 @@ void MergeResultWindow::reset()
 
 void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly, bool bWhiteSpaceOnly)
 {
-    const bool lIsThreeWay = m_pldC != nullptr;
+    const bool lIsThreeWay = gLineVector[3] != nullptr;
 
     if(!bConflictsOnly)
     {
@@ -352,7 +352,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             slotMergeHistory();
         if(gOptions->m_bRunRegExpAutoMergeOnMergeStart)
             slotRegExpAutoMerge();
-        if(m_pldC != nullptr && !doRelevantChangesExist())
+        if(gLineVector[3] != nullptr && !doRelevantChangesExist())
             Q_EMIT noRelevantChangesDetected();
     }
 
@@ -411,7 +411,7 @@ qint32 MergeResultWindow::getMaxTextWidth()
         {
             for(const MergeEditLine& mel: mb.list())
             {
-                const QString s = mel.getString(m_pldA, m_pldB, m_pldC);
+                const QString s = mel.getString();
 
                 QTextLayout textLayout(s, font(), this);
                 textLayout.beginLayout();
@@ -1134,14 +1134,14 @@ void MergeResultWindow::slotMergeHistory()
     HistoryRange        historyRange;
 
     // Search for history start, history end in the diff3LineList
-    m_pDiff3LineList->findHistoryRange(QRegularExpression(gOptions->m_historyStartRegExp), m_pldC != nullptr, historyRange);
+    m_pDiff3LineList->findHistoryRange(QRegularExpression(gOptions->m_historyStartRegExp), gLineVector[3] != nullptr, historyRange);
     if(historyRange.start != m_pDiff3LineList->end())
     {
         mUndoRec.reset();
         // Now collect the historyMap information
         HistoryMap historyMap;
         std::list<HistoryMap::iterator> hitList;
-        if(m_pldC == nullptr)
+        if(gLineVector[3] == nullptr)
         {
             collectHistoryInformation(e_SrcSelector::A, historyRange, historyMap, hitList);
             collectHistoryInformation(e_SrcSelector::B, historyRange, historyMap, hitList);
@@ -1166,7 +1166,7 @@ void MergeResultWindow::slotMergeHistory()
                 while(!historyMap.empty())
                 {
                     HistoryMap::iterator hMapIt = historyMap.begin();
-                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, historyRange.end))
+                    if(hMapIt->second.staysInPlace(gLineVector[3] != nullptr, historyRange.end))
                         historyMap.erase(hMapIt);
                     else
                         break;
@@ -1177,7 +1177,7 @@ void MergeResultWindow::slotMergeHistory()
                 while(!hitList.empty())
                 {
                     HistoryMap::iterator hMapIt = hitList.back();
-                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, historyRange.end))
+                    if(hMapIt->second.staysInPlace(gLineVector[3] != nullptr, historyRange.end))
                         hitList.pop_back();
                     else
                         break;
@@ -1205,7 +1205,7 @@ void MergeResultWindow::slotMergeHistory()
         }
         iMBLStart->list().clear();
         // Now insert the complete history into the first MergeLine of the history
-        iMBLStart->list().push_back(MergeEditLine(historyRange.start, m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C));
+        iMBLStart->list().push_back(MergeEditLine(historyRange.start, gLineVector[3] == nullptr ? e_SrcSelector::B : e_SrcSelector::C));
         const QString lead = Utils::calcHistoryLead(historyRange.start->getString(e_SrcSelector::A));
         MergeEditLine mel(m_pDiff3LineList->end());
         mel.setString(lead);
@@ -1222,7 +1222,7 @@ void MergeResultWindow::slotMergeHistory()
                     break;
                 ++historyCount;
                 HistoryMapEntry& hme = hmit->second;
-                MergeEditLineList& mell = hme.choice(m_pldC != nullptr);
+                MergeEditLineList& mell = hme.choice(gLineVector[3] != nullptr);
                 if(!mell.empty())
                     iMBLStart->list().splice(iMBLStart->list().end(), mell, mell.begin(), mell.end());
             }
@@ -1237,15 +1237,15 @@ void MergeResultWindow::slotMergeHistory()
                     break;
                 ++historyCount;
                 HistoryMapEntry& hme = (*hlit)->second;
-                MergeEditLineList& mell = hme.choice(m_pldC != nullptr);
+                MergeEditLineList& mell = hme.choice(gLineVector[3] != nullptr);
                 if(!mell.empty())
                     iMBLStart->list().splice(iMBLStart->list().end(), mell, mell.begin(), mell.end());
             }
             // If the end of start is empty and the first line at the end is empty remove the last line of start
             if(!iMBLStart->list().empty() && !iMBLEnd->list().empty())
             {
-                const QString lastLineOfStart = iMBLStart->list().back().getString(m_pldA, m_pldB, m_pldC);
-                const QString firstLineOfEnd = iMBLEnd->list().front().getString(m_pldA, m_pldB, m_pldC);
+                const QString lastLineOfStart = iMBLStart->list().back().getString();
+                const QString firstLineOfEnd = iMBLEnd->list().front().getString();
                 if(lastLineOfStart.mid(lead.length()).trimmed().isEmpty() && firstLineOfEnd.mid(lead.length()).trimmed().isEmpty())
                     iMBLStart->list().pop_back();
             }
@@ -1271,10 +1271,10 @@ void MergeResultWindow::slotRegExpAutoMerge()
             Diff3LineList::const_iterator id3l = i->id3l();
             if(vcsKeywords.match(id3l->getString(e_SrcSelector::A)).hasMatch() &&
                vcsKeywords.match(id3l->getString(e_SrcSelector::B)).hasMatch() &&
-               (m_pldC == nullptr || vcsKeywords.match(id3l->getString(e_SrcSelector::C)).hasMatch()))
+               (gLineVector[3] == nullptr || vcsKeywords.match(id3l->getString(e_SrcSelector::C)).hasMatch()))
             {
                 MergeEditLine& mel = *i->list().begin();
-                mel.setSource(m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C, false);
+                mel.setSource(gLineVector[3] == nullptr ? e_SrcSelector::B : e_SrcSelector::C, false);
                 m_mergeBlockList.splitAtDiff3LineIdx(i->getIndex() + 1);
             }
         }
@@ -1289,7 +1289,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
 // Precondition: The VCS-keyword would also be C.
 bool MergeResultWindow::doRelevantChangesExist()
 {
-    if(m_pldC == nullptr || m_mergeBlockList.size() <= 1)
+    if(gLineVector[3] == nullptr || m_mergeBlockList.size() <= 1)
         return true;
 
     for(const MergeBlock& mergeBlock: m_mergeBlockList)
@@ -1617,7 +1617,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
                         if(mbIt == m_currentMergeBlockIt) rangeMark |= RangeMark::current; // Mark of the current line
 
-                        const QString s = mel.getString(m_pldA, m_pldB, m_pldC);
+                        const QString s = mel.getString();
 
                         writeLine(p, line, s, mel.src(), mb.details(), rangeMark,
                                   mel.isModified(), mel.isRemoved(), mb.isWhiteSpaceConflict());
@@ -1671,7 +1671,7 @@ void MergeResultWindow::updateSourceMask()
     }
     else
     {
-        enabledMask = m_pldC == nullptr ? 3 : 7;
+        enabledMask = gLineVector[3] == nullptr ? 3 : 7;
         MergeBlock& mb = *m_currentMergeBlockIt;
 
         srcMask = 0;
@@ -1954,7 +1954,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
         return;
     }
 
-    QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
+    QString str = melIt->getString();
     SafeInt<qint32> x = m_cursorXPos;
 
     QTextLayout textLayoutOrig(str, font(), this);
@@ -1993,7 +1993,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                     MergeEditLineList::iterator melIt1;
                     if(calcIteratorFromLineNr(y + 1, mbIt1, melIt1) && melIt1->isEditableText())
                     {
-                        const QString s2 = melIt1->getString(m_pldA, m_pldB, m_pldC);
+                        const QString s2 = melIt1->getString();
                         melIt->setString(str + s2);
 
                         // Remove the line
@@ -2031,7 +2031,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                     MergeEditLineList::iterator melIt1;
                     if(calcIteratorFromLineNr(y - 1, mbIt1, melIt1) && melIt1->isEditableText())
                     {
-                        QString s1 = melIt1->getString(m_pldA, m_pldB, m_pldC);
+                        QString s1 = melIt1->getString();
                         melIt1->setString(s1 + str);
 
                         // Remove the previous line
@@ -2073,7 +2073,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
                 MergeEditLineList::iterator melIt1 = melIt;
                 for(;;)
                 {
-                    const QString s = melIt1->getString(m_pldA, m_pldB, m_pldC);
+                    const QString s = melIt1->getString();
                     if(!s.isEmpty())
                     {
                         qsizetype i;
@@ -2272,7 +2272,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* keyEvent)
 
     y = qBound(0, y, m_nofLines - 1);
 
-    str = calcIteratorFromLineNr(y, mbIt, melIt) ? melIt->getString(m_pldA, m_pldB, m_pldC) : QString();
+    str = calcIteratorFromLineNr(y, mbIt, melIt) ? melIt->getString() : QString();
 
     x = qBound<qint32>(0, x, SafeInt<qint32>(str.length()));
 
@@ -2397,7 +2397,7 @@ QString MergeResultWindow::getSelection() const
                 qint32 outPos = 0;
                 if(mel.isEditableText())
                 {
-                    const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
+                    const QString str = mel.getString();
 
                     // Consider tabs
                     for(qsizetype i = 0; i < str.length(); ++i)
@@ -2455,7 +2455,7 @@ bool MergeResultWindow::deleteSelection2(QString& s, SafeInt<qint32>& x, qint32&
             assert(false);
         }
 
-        s = melIt->getString(m_pldA, m_pldB, m_pldC);
+        s = melIt->getString();
         return true;
     }
 
@@ -2513,7 +2513,7 @@ void MergeResultWindow::deleteSelection()
 
             if(mel.isEditableText() && m_selection.lineWithin(line))
             {
-                const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
+                const QString lineString = mel.getString();
                 qsizetype firstPosInLine = m_selection.firstPosInLine(line);
                 qsizetype lastPosInLine = m_selection.lastPosInLine(line);
 
@@ -2575,7 +2575,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     }
     melItAfter = melIt;
     ++melItAfter;
-    const QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
+    const QString str = melIt->getString();
     qint32 x = m_cursorXPos;
 
     if(!QApplication::clipboard()->supportsSelection())
@@ -2682,7 +2682,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
         {
             if(mel.isEditableText())
             {
-                const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
+                const QString str = mel.getString();
 
                 if(!isFirstLine && !mel.isRemoved())
                 {
@@ -2729,7 +2729,7 @@ QString MergeResultWindow::getString(qint32 lineIdx)
     {
         return QString();
     }
-    return melIt->getString(m_pldA, m_pldB, m_pldC);
+    return melIt->getString();
 }
 
 bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, qsizetype& posInLine, bool bDirDown, bool bCaseSensitive)
