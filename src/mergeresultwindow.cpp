@@ -2668,43 +2668,10 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
         }
     }
 
-    EncodedDataStream textOutStream;
-
-    textOutStream.setEncoding(encoding);
-
     // Determine the line feed for this file
-    const QString lineFeed(eLineEndStyle == eLineEndStyleDos ? QString("\r\n") : QString("\n"));
+    const QLatin1StringView lineFeed(eLineEndStyle == eLineEndStyleDos ? QLatin1StringView("\r\n") : QLatin1StringView("\n"));
+    EncodedDataStream textOutStream(m_mergeBlockList, lineFeed, encoding);
 
-    bool isFirstLine = true;
-    for(const MergeBlock& mb: m_mergeBlockList)
-    {
-        for(const MergeEditLine& mel: mb.list())
-        {
-            if(mel.isEditableText())
-            {
-                const QString str = mel.getString();
-
-                if(!isFirstLine && !mel.isRemoved())
-                {
-                    // Put line feed between lines, but not for the first line
-                    // or between lines that have been removed (because there
-                    // isn't a line there).
-                    textOutStream.writeString(lineFeed);
-                    if(textOutStream.hasError())
-                        goto end_loop;
-                }
-
-                if(isFirstLine)
-                    isFirstLine = mel.isRemoved();
-
-                textOutStream.writeString(str);
-                if(textOutStream.hasError())
-                    goto end_loop;
-            }
-        }
-    }
-
-end_loop:
     bool bSuccess = !textOutStream.hasError();
     if(bSuccess)
         bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());

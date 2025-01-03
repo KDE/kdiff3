@@ -9,6 +9,7 @@
 #ifndef ENCODEDDATASTREAM_H
 #define ENCODEDDATASTREAM_H
 
+#include "MergeEditLine.h"
 #include "TypeUtils.h"
 
 #include <QBuffer>
@@ -48,6 +49,40 @@ class EncodedDataStream: public QByteArray
         QByteArray(a)
     {
         it = begin();
+    }
+
+    EncodedDataStream(const MergeBlockList &mbl, const QString &lineFeed, const QByteArray &inEncoding)
+    {
+        setEncoding(inEncoding);
+        // Determine the line feed for this file
+        bool isFirstLine = true;
+        for(const MergeBlock &mb: mbl)
+        {
+            for(const MergeEditLine &mel: mb.list())
+            {
+                if(mel.isEditableText())
+                {
+                    const QString str = mel.getString();
+
+                    if(!isFirstLine && !mel.isRemoved())
+                    {
+                        // Put line feed between lines, but not for the first line
+                        // or between lines that have been removed (because there
+                        // isn't a line there).
+                        writeString(lineFeed);
+                        if(hasError())
+                            return;
+                    }
+
+                    if(isFirstLine)
+                        isFirstLine = mel.isRemoved();
+
+                    writeString(str);
+                    if(hasError())
+                        return;
+                }
+            }
+        }
     }
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
@@ -127,6 +162,10 @@ class EncodedDataStream: public QByteArray
         return len;
     }
 
+    [[nodiscard]] bool hasError() const { return mError; }
+    [[nodiscard]] bool atEnd() const { return it == end(); }
+
+  private:
     quint64 writeString(const QString &s)
     {
         QByteArray data = mEncoder(s);
@@ -138,9 +177,6 @@ class EncodedDataStream: public QByteArray
         it = end();
         return mError ? 0 : s.length();
     };
-
-    [[nodiscard]] bool hasError() const { return mError; }
-    [[nodiscard]] bool atEnd() const { return it == end(); }
 };
 
 /*
