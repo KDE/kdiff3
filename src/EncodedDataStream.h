@@ -83,6 +83,8 @@ class EncodedDataStream: public QByteArray
                 }
             }
         }
+
+        it = begin();
     }
 
     void setGenerateByteOrderMark(bool generate) { mGenerateBOM = generate; }
@@ -174,7 +176,6 @@ class EncodedDataStream: public QByteArray
         if(!mError)
             append(data);
 
-        it = end();
         return mError ? 0 : s.length();
     };
 };
