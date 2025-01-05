@@ -120,16 +120,13 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
     return false;
 }
 
-//TODO: Only used by calcTokenPos.
 bool Utils::isCTokenChar(QChar c)
 {
-    return (c == u'_') ||
-           (c >= u'A' && c <= u'Z') || (c >= u'a' && c <= u'z') ||
-           (c >= u'0' && c <= u'9');
+    //Locale aware but defaults to 'C' locale which is what we need.
+    //QChar::toLatin1() returns 0 if not a Latin-1 character.
+    return (c.toLatin1() == '_') || std::isalnum(c.toLatin1());
 }
 
-
-//TODO: Needed? Only user of isCTokenChar.
 /// Calculate where a token starts and ends, given the x-position on screen.
 void Utils::calcTokenPos(const QString& s, qint32 posOnScreen, qsizetype& pos1, qsizetype& pos2)
 {
