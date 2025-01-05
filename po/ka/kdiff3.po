@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-03 06:04+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -123,7 +123,7 @@ msgstr "ფაილი %1: ხაზი მიუწდომელია"
 msgid "Encoding:"
 msgstr "კოდირება:"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "ხაზის დასრულების სტილი:"
@@ -138,12 +138,12 @@ msgstr "A (ბაზა)"
 msgid "Encoding: %1"
 msgstr "კოდირება: %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2084,52 +2084,52 @@ msgstr ""
 "\n"
 "მარქაფის შექმნა ჩავარდა. ფაილი შენახული არაა."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "შეცდომა ჩაწერისას."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, kde-format
 msgid "Output:"
 msgstr "გამოტანა:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[შეცვლილია]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "კოდირება შენახვისთვის:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "კონფლიქტი"
 
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "კოდეკი A-დან: %1"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "კოდეკი B-დან: %1"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "კოდეკი C-დან: %1"
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr "აირჩეთ ფაილი (ჯერ შენახვა არ მოხდება)"
@@ -3595,23 +3595,23 @@ msgstr "ბუფერის მონაცემების დროებ�
 msgid "From Clipboard"
 msgstr "გაცვლის ბუფერიდან"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 ნორმალური ფაილი არაა."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "გამოტოვებულია ფაილი, რომელიც მეტისმეტად დიდია: %1."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    დროებითი ფაილია: %1"
 
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3626,7 +3626,7 @@ msgstr ""
 "\n"
 "პრეპროცესინგის ბრძანება ახლა გაითიშება."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3641,7 +3641,7 @@ msgstr ""
 "\n"
 "ხაზის დამთხვევის პრეპროცესინგის ბრძანება ახლა გაითიშება."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -127,7 +127,7 @@ msgstr "Linija nije na raspolaganju"
 msgid "Encoding:"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Stil završetka linije:"
@@ -144,12 +144,12 @@ msgstr "A (baza):"
 msgid "Encoding: %1"
 msgstr "Kodiranje:"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2237,57 +2237,57 @@ msgstr ""
 "\n"
 "Stvaranje rezerve nije uspjelo. Datoteka nije snimljena."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "Greška u snimanju datoteke"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "Greška prilikom pisanja."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Izlaz"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[Izmijenjen]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, fuzzy, kde-format
 #| msgid "Encoding for saving"
 msgid "Encoding for saving:"
 msgstr "Kodiranje za snimanje"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "Codec od"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "Codec od"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
 msgstr "Codec od"
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""
@@ -3929,24 +3929,24 @@ msgstr "Upisivanje podataka iz clipboarda u privremenu datoteku nije uspjelo."
 msgid "From Clipboard"
 msgstr "Iz clipboarda"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "Mješavina veza i normalnih datoteka."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3961,7 +3961,7 @@ msgstr ""
 "\n"
 "Naredba predobrade će sada biti isključena."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3977,7 +3977,7 @@ msgstr ""
 "\n"
 "Predobrada usklađivanja linija će sada biti isključena."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"

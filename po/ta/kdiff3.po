@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-08 13:23+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -127,7 +127,7 @@ msgstr "கோப்பு %1: வரி கிடைக்கவில்லை
 msgid "Encoding:"
 msgstr "குறியாக்கம்"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "வரிமுடிவுகளின் முறை:"
@@ -142,12 +142,12 @@ msgstr "A (மூலம்)"
 msgid "Encoding: %1"
 msgstr "குறியாக்கம் %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "யுனிக்ஸ்"
@@ -2102,54 +2102,54 @@ msgid ""
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "கோப்பின சேமிப்பு பிழை"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "எழுதும் பொழுது பிழை"
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr " வெளியீடு"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[திருத்தப்பட்டது]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr ""
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, fuzzy, kde-format
 #| msgid "Conflicts"
 msgid "Conflict"
 msgstr "குழப்பங்கள்"
 
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Codec from A: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Codec from B: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Codec from C: %1"
 msgstr ""
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""
@@ -3635,24 +3635,24 @@ msgstr "க்ளிப்போர்டின் எழுத்தின் �
 msgid "From Clipboard"
 msgstr "கிளிப் போர்டிலிருந்து."
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "இணைப்புகள் மற்றும் கோப்புகள் கலந்து உள்ளன."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3667,7 +3667,7 @@ msgstr ""
 "\n"
 "முன்செயலிகள் கட்டளையை இப்பொழுதே முடக்கு,"
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3682,7 +3682,7 @@ msgstr ""
 "\n"
 "வரிசெல்களின் கட்டளையை இப்பொழுதே முடக்கு,"
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"

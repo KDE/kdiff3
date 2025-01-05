@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-04 20:48+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -126,7 +126,7 @@ msgstr "Ficheiro %1: a liña non está dispoñíbel"
 msgid "Encoding:"
 msgstr "Codificación:"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Estilo do fin de liña:"
@@ -141,12 +141,12 @@ msgstr "A (base)"
 msgid "Encoding: %1"
 msgstr "Codificación: %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2101,53 +2101,53 @@ msgstr ""
 "\n"
 "Produciuse un erro ao crear a salvagarda. O ficheiro non se gardou."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "Erro ao gardar o ficheiro"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "Produciuse un erro ao gardar."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, kde-format
 msgid "Output:"
 msgstr "Saída:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[Modificado]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Codificación para gardar:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "Conflito"
 
 # skip-rule: proposta-contracción-de
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Códec de A: %1"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Códec de B: %1"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Códec de C: %1"
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr "Seleccionar o ficheiro (aínda non se gardará)"
@@ -3629,24 +3629,24 @@ msgstr ""
 msgid "From Clipboard"
 msgstr "Do portapapeis"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 non é un ficheiro normal."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "O ficheiro %1 é grande de máis para procesalo. Saltarase."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    O ficheiro temporal é: %1"
 
 # skip-rule: trasno-expression_failed.
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3661,7 +3661,7 @@ msgstr ""
 "\n"
 "A orde de preprocesamento vai desactivarse."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3678,7 +3678,7 @@ msgstr ""
 "A orde de preprocesamento para atopar coincidencias en liñas vai "
 "desactivarse."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

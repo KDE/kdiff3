@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2023-06-25 09:51+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -132,7 +132,7 @@ msgstr "File %1: Baris tidak tersedia"
 msgid "Encoding:"
 msgstr "Enkoding:"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Gaya akhir baris:"
@@ -147,12 +147,12 @@ msgstr "A (Dasar)"
 msgid "Encoding: %1"
 msgstr "Enkoding: %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2100,52 +2100,52 @@ msgstr ""
 "\n"
 "Pembuatan cadangan, gagal. File tidak disimpan."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "Galat Simpan File"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "Galat selagi menulis "
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, kde-format
 msgid "Output:"
 msgstr "Keluaran:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[Dimodifikasi]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Enkoding untuk menyimpan:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "Bentrok"
 
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodek dari A: %1"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodek dari B: %1"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodek dari C: %1"
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""
@@ -3518,23 +3518,23 @@ msgstr ""
 msgid "From Clipboard"
 msgstr "Dari Papan Klip"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr ""
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3544,7 +3544,7 @@ msgid ""
 "The preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3554,7 +3554,7 @@ msgid ""
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

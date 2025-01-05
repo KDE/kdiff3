@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2024-09-19 17:53+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -125,7 +125,7 @@ msgstr "Αρχείο %1: Μη διαθέσιμη γραμμή"
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Στιλ τέλους γραμμής:"
@@ -140,12 +140,12 @@ msgstr "Α (Βάση)"
 msgid "Encoding: %1"
 msgstr "Κωδικοποίηση %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2110,52 +2110,52 @@ msgstr ""
 "\n"
 "Αποτυχία δημιουργίας εφεδρικού αντιγράφου. Το αρχείο δεν αποθηκεύτηκε."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "Σφάλμα εγγραφής αρχείου"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "Σφάλμα κατά την εγγραφή."
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, kde-format
 msgid "Output:"
 msgstr "Έξοδος:"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[Τροποποιημένο]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Κωδικοποίηση για την αποθήκευση:"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "Σύγκρουση"
 
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Κωδικοποιητής από Α: %1"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Κωδικοποιητής από Β: %1"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Κωδικοποιητής από Γ: %1"
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""
@@ -3650,23 +3650,23 @@ msgstr "Η εγγραφή δεδομένων στο προσωρινό αρχε�
 msgid "From Clipboard"
 msgstr "Από το πρόχειρο"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "Το %1 δεν είναι κανονικό αρχείο."
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Το αρχείο %1 είναι πολύ μεγάλο για επεξεργασία. Παραλείπεται."
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Προσωρινό αρχείο είναι το: %1"
 
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3681,7 +3681,7 @@ msgstr ""
 "\n"
 "Η εντολή προεπεξεργασίας θα απενεργοποιηθεί τώρα."
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3697,7 +3697,7 @@ msgstr ""
 "\n"
 "Η δυνατότητα προεπεξεργασίας αντιστοίχησης γραμμών θα απενεργοποιηθεί τώρα."
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

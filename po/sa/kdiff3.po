@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-26 00:43+0000\n"
+"POT-Creation-Date: 2025-01-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:45+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -124,7 +124,7 @@ msgstr "सञ्चिका %1: रेखा उपलब्धा नास�
 msgid "Encoding:"
 msgstr "एन्कोडिंग् :"
 
-#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2817 optiondialog.cpp:787
+#: difftextwindow.cpp:1958 mergeresultwindow.cpp:2789 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "रेखासमाप्तशैली :"
@@ -139,12 +139,12 @@ msgstr "क (आधारः)"
 msgid "Encoding: %1"
 msgstr "एन्कोडिंग्: %1"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2863
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2835
 #, kde-format
 msgid "DOS"
 msgstr "OF THE"
 
-#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2862
+#: difftextwindow.cpp:1986 mergeresultwindow.cpp:2834
 #, kde-format
 msgid "Unix"
 msgstr "यूनिक्स"
@@ -2064,52 +2064,52 @@ msgstr ""
 "\n"
 "बैकअपस्य निर्माणं विफलम् अभवत् । सञ्चिका न रक्षिता ।"
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
 #, kde-format
 msgid "File Save Error"
 msgstr "सञ्चिका रक्षणदोषः"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2681
 #, kde-format
 msgid "Error while writing."
 msgstr "लेखनकाले त्रुटिः।"
 
-#: mergeresultwindow.cpp:2789
+#: mergeresultwindow.cpp:2761
 #, kde-format
 msgid "Output:"
 msgstr "उत्पादनम् :"
 
-#: mergeresultwindow.cpp:2802 mergeresultwindow.cpp:2983
+#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
 #, kde-format
 msgid "[Modified]"
 msgstr "[संशोधितम्]"
 
-#: mergeresultwindow.cpp:2809
+#: mergeresultwindow.cpp:2781
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "रक्षणार्थं एन्कोडिंग् :"
 
-#: mergeresultwindow.cpp:2909
+#: mergeresultwindow.cpp:2881
 #, kde-format
 msgid "Conflict"
 msgstr "द्वंद"
 
-#: mergeresultwindow.cpp:2932
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "A: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2906
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "B: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2908
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "C: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2976
+#: mergeresultwindow.cpp:2948
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr "सञ्चिकां चिनोतु (अद्यापि न रक्षितम्)"
@@ -3552,23 +3552,23 @@ msgstr "temp सञ्चिकायां क्लिप्बोर्डद
 msgid "From Clipboard"
 msgstr "क्लिप्बोर्डात्"
 
-#: SourceData.cpp:343
+#: SourceData.cpp:344
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 सामान्यसञ्चिका नास्ति ।"
 
-#: SourceData.cpp:380
+#: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "सञ्चिका %1 अतीव विशाला प्रक्रिया कर्तुं । लङ्घनम्।"
 
-#: SourceData.cpp:409
+#: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Temp सञ्चिका अस्ति: %1"
 
-#: SourceData.cpp:447
+#: SourceData.cpp:448
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3583,7 +3583,7 @@ msgstr ""
 "\n"
 "पूर्वसंसाधन आदेशः इदानीं निष्क्रियः भविष्यति ।"
 
-#: SourceData.cpp:510
+#: SourceData.cpp:511
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3598,7 +3598,7 @@ msgstr ""
 "\n"
 "line-matching-preprocessing आदेशः इदानीं निष्क्रियः भविष्यति ।"
 
-#: SourceData.cpp:516
+#: SourceData.cpp:517
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
