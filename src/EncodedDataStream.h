@@ -38,7 +38,7 @@ class EncodedDataStream: public QByteArray
     bool mGenerateBOM = false;
     bool mError = false;
 
-    char curData = u8'\0';
+    char curData = '\0';
     QByteArray mBuf = QByteArray::fromRawData(&curData, sizeof(curData));
     QByteArray::iterator it = end();
 
