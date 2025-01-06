@@ -20,14 +20,14 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 {
     if(!bIsEscaped)
     {
-        switch(inChar.unicode())
+        switch(inChar.toLatin1())
         {
-            case u'\\':
+            case '\\':
                 if(bInString)
                     bIsEscaped = true;
                 break;
-            case u'\'':
-            case u'"':
+            case '\'':
+            case '"':
                 if(!inComment())
                 {
                     if(!bInString)
@@ -41,14 +41,14 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     }
                 }
                 break;
-            case u'/':
+            case '/':
                 if(bInString)
                     break;
 
-                if(!inComment() && mLastChar == u'/')
+                if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsPureComment = mIsCommentOrWhite = line.startsWith(u8"//");
+                    mIsPureComment = mIsCommentOrWhite = line.startsWith("//");
                     lastComment.startOffset = offset - 1;
                     if(lastComment.startOffset != 0) //whitespace at begining
                     {
@@ -62,17 +62,17 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     lastComment.endOffset = offset + 1; //include last char in offset
                     comments.push_back(lastComment);
                     if(!isFirstLine)
-                        mIsPureComment = mIsCommentOrWhite = line.endsWith(u8"*/") ? true : mIsCommentOrWhite;
+                        mIsPureComment = mIsCommentOrWhite = line.endsWith("*/") ? true : mIsCommentOrWhite;
                 }
                 break;
-            case u'*':
+            case '*':
                 if(bInString)
                     break;
 
                 if(mLastChar == u'/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsPureComment = mIsCommentOrWhite = line.startsWith(u8"/*") ? true : mIsCommentOrWhite;
+                    mIsPureComment = mIsCommentOrWhite = line.startsWith("/*") ? true : mIsCommentOrWhite;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
                     if(lastComment.startOffset != 0) //whitespace at begining
@@ -81,7 +81,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     }
                 }
                 break;
-            case u'\n':
+            case '\n':
                 if(mCommentType == singleLine)
                 {
                     mCommentType = none;
@@ -152,8 +152,7 @@ void DefaultCommentParser::processLine(const QString &line)
         mIsPureComment = false;
     }
 
-    //mIsPureComment = mIsPureComment && offset == 0;
-    processChar(trimmedLine, u'\n');
+    processChar(trimmedLine, '\n');
 }
 
 /*
