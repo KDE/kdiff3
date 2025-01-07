@@ -35,7 +35,7 @@ Optimizations: Skip unneeded steps.
 #include "CommentParser.h"
 #include "compat.h"
 #include "diff.h"
-#include "EncodedDataStream.h"
+#include "EncodedData.h"
 #include "LineRef.h"
 #include "Logging.h"
 #include "options.h"
@@ -589,7 +589,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     try
     {
-        EncodedDataStream ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
+        EncodedData ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
 
         ba.setEncoding(encoding);
         mHasBOM = ba.hasBOM();

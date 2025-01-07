@@ -29,7 +29,7 @@
     While both read and write are allowed this class is not designed with mixed raad/write in mind.
     Changes to the array will invalidate the internal read interator.
 */
-class EncodedDataStream: public QByteArray
+class EncodedData: public QByteArray
 {
   private:
     QStringDecoder mDecoder = QStringDecoder("UTF-8", QStringConverter::Flag::ConvertInitialBom);
@@ -45,13 +45,13 @@ class EncodedDataStream: public QByteArray
   public:
     using QByteArray::QByteArray;
 
-    EncodedDataStream(const QByteArray &a):
+    EncodedData(const QByteArray &a):
         QByteArray(a)
     {
         it = begin();
     }
 
-    EncodedDataStream(const MergeBlockList &mbl, const QString &lineFeed, const QByteArray &inEncoding)
+    EncodedData(const MergeBlockList &mbl, const QString &lineFeed, const QByteArray &inEncoding)
     {
         setEncoding(inEncoding);
         // Determine the line feed for this file
@@ -66,9 +66,11 @@ class EncodedDataStream: public QByteArray
 
                     if(!isFirstLine && !mel.isRemoved())
                     {
-                        // Put line feed between lines, but not for the first line
-                        // or between lines that have been removed (because there
-                        // isn't a line there).
+                        /*
+                             Put line feed between lines, but not for the first line
+                            or between lines that have been removed (because there
+                            isn't a line there).
+                        */
                         writeString(lineFeed);
                         if(hasError())
                             return;

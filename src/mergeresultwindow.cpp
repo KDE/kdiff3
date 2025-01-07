@@ -12,7 +12,7 @@
 
 #include "compat.h"
 #include "defmac.h"
-#include "EncodedDataStream.h"
+#include "EncodedData.h"
 #include "guiutils.h"
 #include "kdiff3.h"
 #include "options.h"
@@ -2670,7 +2670,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
 
     // Determine the line feed for this file
     const QLatin1StringView lineFeed(eLineEndStyle == eLineEndStyleDos ? QLatin1StringView("\r\n") : QLatin1StringView("\n"));
-    EncodedDataStream textOutStream(m_mergeBlockList, lineFeed, encoding);
+    EncodedData textOutStream(m_mergeBlockList, lineFeed, encoding);
 
     bool bSuccess = !textOutStream.hasError();
     if(bSuccess)
