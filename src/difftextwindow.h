@@ -194,7 +194,6 @@ class DiffTextWindowFrame: public QWidget
 
   protected:
     bool eventFilter(QObject*, QEvent*) override;
-    //void paintEvent(QPaintEvent*);
   private Q_SLOTS:
     void slotReturnPressed();
     void slotBrowseButtonClicked();
