@@ -1229,8 +1229,8 @@ void DiffTextWindowData::writeLine(
     p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, gOptions->backgroundColor());
 
     //TODO: Fix after line number area is converted to a QWidget.
-    xOffset = (lineNumberWidth + 2) * fontWidth;
-    qint32 xLeft = lineNumberWidth * fontWidth;
+    xOffset = (lineNumberWidth + 2) * fontWidth + m_pDiffTextWindow->contentsMargins().left() + 2;
+    qint32 xLeft = lineNumberWidth * fontWidth + m_pDiffTextWindow->contentsMargins().left() + 2;
     p.setPen(gOptions->foregroundColor());
     if(pld != nullptr)
     {
@@ -1238,7 +1238,7 @@ void DiffTextWindowData::writeLine(
         {
             QString num = QString::number(srcLineIdx + 1);
             assert(!num.isEmpty());
-            p.drawText(0, yOffset + fontAscent, num);
+            p.drawText(m_pDiffTextWindow->contentsMargins().left(), yOffset + fontAscent, num);
         }
         if(!bWrapLine || wrapLineLength > 0)
         {
@@ -1951,6 +1951,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     chk_connect_a(m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
     m_pDiffTextWindow = new DiffTextWindow(this, winIdx, app);
+    m_pDiffTextWindow->setContentsMargins(4, 4, 4, 4); // (left, top, right, bottom)
     m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(m_pTopLineWidget);
     pVTopLayout->setContentsMargins(2, 2, 2, 2);
