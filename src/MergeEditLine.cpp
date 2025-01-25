@@ -24,10 +24,8 @@
 */
 QString MergeEditLine::getString() const
 {
+    assert(mSrc != e_SrcSelector::Invalid);
     std::shared_ptr<LineDataVector> lineVector = gLineVector[(int)mSrc];
-    //Triggered by resize event during early init. Ignore these calls.
-    if(lineVector->empty())
-        return QString();
 
     if(isRemoved() || (!isModified() && mSrc == e_SrcSelector::None))
     {
@@ -38,6 +36,10 @@ QString MergeEditLine::getString() const
     {
         std::optional<LineData> lineData;
         assert(mSrc == e_SrcSelector::A || mSrc == e_SrcSelector::B || mSrc == e_SrcSelector::C);
+        assert(lineVector != nullptr);
+        //Triggered by resize event during early init or file is empty. Ignore these calls.
+        if(lineVector->empty())
+            return QString();
 
         if(mSrc == e_SrcSelector::A && m_id3l->getLineA().isValid())
             lineData = (*lineVector)[m_id3l->getLineA()];
