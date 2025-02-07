@@ -2672,9 +2672,8 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
     const QLatin1StringView lineFeed(eLineEndStyle == eLineEndStyleDos ? QLatin1StringView("\r\n") : QLatin1StringView("\n"));
     EncodedData textOutStream(m_mergeBlockList, lineFeed, encoding);
 
-    bool bSuccess = !textOutStream.hasError();
-    if(bSuccess)
-        bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
+    bool bSuccess = true;
+    bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
 
     if(!bSuccess)
     {
