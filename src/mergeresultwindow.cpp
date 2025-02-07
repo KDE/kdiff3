@@ -2714,9 +2714,8 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
         }
     }
 
-    bool bSuccess = !textOutStream.hasError();
-    if(bSuccess)
-        bSuccess = file.writeFile(dataArray.data(), dataArray.size());
+    bool bSuccess = true;
+    bSuccess = file.writeFile(dataArray.data(), dataArray.size());
 
     if(!bSuccess)
     {
