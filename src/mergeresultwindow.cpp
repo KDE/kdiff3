@@ -2677,7 +2677,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
     bool bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
 
     if(textOutStream.hasError())
-        KMessageBox::information(this, i18n("Output file may contain replacement characters for unreconized code points."), "", warnName);
+        KMessageBox::information(this, i18n("Output file may contain replacement characters for unrecognized code points."), "", warnName);
 
     if(!bSuccess)
     {
