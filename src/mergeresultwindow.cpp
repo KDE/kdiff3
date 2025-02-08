@@ -2636,6 +2636,8 @@ void MergeResultWindow::setModified(bool bModified)
 /// Saves and returns true when successful.
 bool MergeResultWindow::saveDocument(const QString& fileName, const char* encoding, e_LineEndStyle eLineEndStyle)
 {
+    constexpr QLatin1StringView warnName("MergeEncodingErrorWarn");
+
     // Are still conflicts somewhere?
     if(getNumberOfUnsolvedConflicts() > 0)
     {
@@ -2672,8 +2674,10 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
     const QLatin1StringView lineFeed(eLineEndStyle == eLineEndStyleDos ? QLatin1StringView("\r\n") : QLatin1StringView("\n"));
     EncodedData textOutStream(m_mergeBlockList, lineFeed, encoding);
 
-    bool bSuccess = true;
-    bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
+    bool bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
+
+    if(textOutStream.hasError())
+        KMessageBox::information(this, i18n("Output file may contain replacement characters for unreconized code points."), "", warnName);
 
     if(!bSuccess)
     {
