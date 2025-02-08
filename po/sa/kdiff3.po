@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-17 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2024-12-25 19:45+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -124,7 +124,7 @@ msgstr "सञ्चिका %1: रेखा उपलब्धा नास�
 msgid "Encoding:"
 msgstr "एन्कोडिंग् :"
 
-#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2789 optiondialog.cpp:787
+#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2792 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "रेखासमाप्तशैली :"
@@ -139,12 +139,12 @@ msgstr "क (आधारः)"
 msgid "Encoding: %1"
 msgstr "एन्कोडिंग्: %1"
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2835
+#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "OF THE"
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2834
+#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "यूनिक्स"
@@ -2028,7 +2028,7 @@ msgstr "<विग्रहविग्रह (केवलं श्वेत�
 msgid "<Merge Conflict>"
 msgstr "<विग्रहविग्रह>"
 
-#: mergeresultwindow.cpp:2643
+#: mergeresultwindow.cpp:2645
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2037,13 +2037,13 @@ msgstr ""
 "अद्यापि सर्वे विग्रहाः समाधानं न प्राप्नुवन्ति।\n"
 "सञ्चिका न रक्षिता।"
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "विग्रहाः वाम"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2053,7 +2053,7 @@ msgstr ""
 "रेखा-अन्तशैली-विग्रहः अस्ति । कृपया रेखासमाप्तशैलीं स्वहस्तेन चिनोतु ।\n"
 "सञ्चिका न रक्षिता।"
 
-#: mergeresultwindow.cpp:2666
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2064,52 +2064,58 @@ msgstr ""
 "\n"
 "बैकअपस्य निर्माणं विफलम् अभवत् । सञ्चिका न रक्षिता ।"
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2684
 #, kde-format
 msgid "File Save Error"
 msgstr "सञ्चिका रक्षणदोषः"
 
-#: mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2680
+#, kde-format
+msgid ""
+"Output file may contain replacement characters for unreconized code points."
+msgstr ""
+
+#: mergeresultwindow.cpp:2684
 #, kde-format
 msgid "Error while writing."
 msgstr "लेखनकाले त्रुटिः।"
 
-#: mergeresultwindow.cpp:2761
+#: mergeresultwindow.cpp:2764
 #, kde-format
 msgid "Output:"
 msgstr "उत्पादनम् :"
 
-#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
+#: mergeresultwindow.cpp:2777 mergeresultwindow.cpp:2958
 #, kde-format
 msgid "[Modified]"
 msgstr "[संशोधितम्]"
 
-#: mergeresultwindow.cpp:2781
+#: mergeresultwindow.cpp:2784
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "रक्षणार्थं एन्कोडिंग् :"
 
-#: mergeresultwindow.cpp:2881
+#: mergeresultwindow.cpp:2884
 #, kde-format
 msgid "Conflict"
 msgstr "द्वंद"
 
-#: mergeresultwindow.cpp:2904
+#: mergeresultwindow.cpp:2907
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "A: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2906
+#: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "B: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2908
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "C: %1 तः कोडेकः"
 
-#: mergeresultwindow.cpp:2948
+#: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr "सञ्चिकां चिनोतु (अद्यापि न रक्षितम्)"

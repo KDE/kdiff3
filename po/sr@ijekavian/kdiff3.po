@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-17 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2017-09-28 17:57+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -132,7 +132,7 @@ msgstr "ред недоступан"
 msgid "Encoding:"
 msgstr "Кодирање:"
 
-#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2789 optiondialog.cpp:787
+#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2792 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Стил краја редова:"
@@ -149,12 +149,12 @@ msgstr "А (база):"
 msgid "Encoding: %1"
 msgstr "Кодирање:"
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2835
+#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "ДОС"
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2834
+#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Уникс"
@@ -2211,7 +2211,7 @@ msgstr "<сукоб стапања (само празнине)>"
 msgid "<Merge Conflict>"
 msgstr "<сукоб стапања>"
 
-#: mergeresultwindow.cpp:2643
+#: mergeresultwindow.cpp:2645
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all conflicts are solved yet.\n"
@@ -2223,14 +2223,14 @@ msgstr ""
 "Још нису решени сви сукоби.\n"
 "Фајл није сачуван.\n"
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, fuzzy, kde-format
 #| msgid "Conflicts Left"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Преостали сукоби"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2654
 #, fuzzy, kde-format
 #| msgid ""
 #| "There is a line end style conflict. Please choose the line end style "
@@ -2244,7 +2244,7 @@ msgstr ""
 "Сукоб у стилу завршетака редова. Изаберите ручно стил завршетка редова.\n"
 "Фајл није сачуван.\n"
 
-#: mergeresultwindow.cpp:2666
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2255,60 +2255,66 @@ msgstr ""
 "\n"
 "Прављење резерве није успело. Фајл није сачуван."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2684
 #, kde-format
 msgid "File Save Error"
 msgstr "Грешка уписивања фајла"
 
-#: mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2680
+#, kde-format
+msgid ""
+"Output file may contain replacement characters for unreconized code points."
+msgstr ""
+
+#: mergeresultwindow.cpp:2684
 #, kde-format
 msgid "Error while writing."
 msgstr "Грешка при писању."
 
-#: mergeresultwindow.cpp:2761
+#: mergeresultwindow.cpp:2764
 #, fuzzy, kde-format
 #| msgid "Output"
 msgid "Output:"
 msgstr "Излаз"
 
-#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
+#: mergeresultwindow.cpp:2777 mergeresultwindow.cpp:2958
 #, kde-format
 msgid "[Modified]"
 msgstr "[измењен]"
 
-#: mergeresultwindow.cpp:2781
+#: mergeresultwindow.cpp:2784
 #, fuzzy, kde-format
 #| msgid "Encoding for saving"
 msgid "Encoding for saving:"
 msgstr "Кодирање за уписивање"
 
-#: mergeresultwindow.cpp:2881
+#: mergeresultwindow.cpp:2884
 #, kde-format
 msgid "Conflict"
 msgstr "Сукоб"
 
 # >! Merge sentence.
-#: mergeresultwindow.cpp:2904
+#: mergeresultwindow.cpp:2907
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from A: %1"
 msgstr "Кодирање из"
 
 # >! Merge sentence.
-#: mergeresultwindow.cpp:2906
+#: mergeresultwindow.cpp:2909
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from B: %1"
 msgstr "Кодирање из"
 
 # >! Merge sentence.
-#: mergeresultwindow.cpp:2908
+#: mergeresultwindow.cpp:2911
 #, fuzzy, kde-format
 #| msgid "Codec from"
 msgid "Codec from C: %1"
 msgstr "Кодирање из"
 
-#: mergeresultwindow.cpp:2948
+#: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr ""

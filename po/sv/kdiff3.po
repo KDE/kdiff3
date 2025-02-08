@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-17 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2024-12-03 20:44+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -123,7 +123,7 @@ msgstr "Fil %1: Rad inte tillgänglig"
 msgid "Encoding:"
 msgstr "Kodning:"
 
-#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2789 optiondialog.cpp:787
+#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2792 optiondialog.cpp:787
 #, kde-format
 msgid "Line end style:"
 msgstr "Typ av radslut:"
@@ -138,12 +138,12 @@ msgstr "A (bas)"
 msgid "Encoding: %1"
 msgstr "Kodning: %1"
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2835
+#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2834
+#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2837
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2052,7 +2052,7 @@ msgstr "<Konflikt vid sammanfogning (bara blanktecken)>"
 msgid "<Merge Conflict>"
 msgstr "<Konflikter vid sammanfogning>"
 
-#: mergeresultwindow.cpp:2643
+#: mergeresultwindow.cpp:2645
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2061,13 +2061,13 @@ msgstr ""
 "Alla konflikter har inte lösts ännu.\n"
 "Filen har inte sparats."
 
-#: mergeresultwindow.cpp:2645 mergeresultwindow.cpp:2654
+#: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
 msgstr "Konflikter kvar"
 
-#: mergeresultwindow.cpp:2652
+#: mergeresultwindow.cpp:2654
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2077,7 +2077,7 @@ msgstr ""
 "Det finns konflikter i typ av radslut. Välj typ av radslut manuellt.\n"
 "Filen har inte sparats."
 
-#: mergeresultwindow.cpp:2666
+#: mergeresultwindow.cpp:2668
 #, kde-format
 msgid ""
 "\n"
@@ -2088,52 +2088,58 @@ msgstr ""
 "\n"
 "Misslyckades skapa säkerhetskopia. Filen sparades inte."
 
-#: mergeresultwindow.cpp:2666 mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2668 mergeresultwindow.cpp:2684
 #, kde-format
 msgid "File Save Error"
 msgstr "Fel vid spara fil"
 
-#: mergeresultwindow.cpp:2681
+#: mergeresultwindow.cpp:2680
+#, kde-format
+msgid ""
+"Output file may contain replacement characters for unreconized code points."
+msgstr ""
+
+#: mergeresultwindow.cpp:2684
 #, kde-format
 msgid "Error while writing."
 msgstr "Fel vid skrivning."
 
-#: mergeresultwindow.cpp:2761
+#: mergeresultwindow.cpp:2764
 #, kde-format
 msgid "Output:"
 msgstr "Utmatning:"
 
-#: mergeresultwindow.cpp:2774 mergeresultwindow.cpp:2955
+#: mergeresultwindow.cpp:2777 mergeresultwindow.cpp:2958
 #, kde-format
 msgid "[Modified]"
 msgstr "[Ändrad]"
 
-#: mergeresultwindow.cpp:2781
+#: mergeresultwindow.cpp:2784
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kodning för att spara:"
 
-#: mergeresultwindow.cpp:2881
+#: mergeresultwindow.cpp:2884
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2904
+#: mergeresultwindow.cpp:2907
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodare från A: %1"
 
-#: mergeresultwindow.cpp:2906
+#: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodare från B: %1"
 
-#: mergeresultwindow.cpp:2908
+#: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodare från C: %1"
 
-#: mergeresultwindow.cpp:2948
+#: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
 msgstr "Välj fil (spara inte ännu)"
