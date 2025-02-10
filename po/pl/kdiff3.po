@@ -1,7 +1,6 @@
 # translation of kdiff3.po to Polish
 # translation of pl.po to
 # Copyright (C) 2003, 2004, 2005, 2009, 2010, 2011 Free Software Foundation, Inc.
-#
 # Tomasz Waleµczak <tom@w.pl>, 2004.
 # Tomasz Waleńczak <tom@w.pl>, 2004.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2004.
@@ -9,13 +8,14 @@
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2005.
 # Robert Gomulka <rgom@o2.pl>, 2005.
 # Michał Smoczyk <msmoczyk@wp.pl>, 2009, 2010, 2011.
-# SPDX-FileCopyrightText: 2011, 2014, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2014, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-09 00:43+0000\n"
-"PO-Revision-Date: 2024-12-07 12:23+0100\n"
+"PO-Revision-Date: 2025-02-08 17:24+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2107,10 +2107,14 @@ msgid "File Save Error"
 msgstr "Błąd zapisu pliku"
 
 #: mergeresultwindow.cpp:2680
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Output file may contain replacement characters for unrecognized code "
+#| "points."
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
+"W pliku wynikowym pewne znaki mogą być zastąpione dla nierozpoznanych znaków."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
