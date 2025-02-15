@@ -35,7 +35,7 @@ Optimizations: Skip unneeded steps.
 #include "CommentParser.h"
 #include "compat.h"
 #include "diff.h"
-#include "EncodedDataStream.h"
+#include "EncodedData.h"
 #include "LineRef.h"
 #include "Logging.h"
 #include "Utils.h"
@@ -590,18 +590,17 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
     try
     {
-        const QByteArray ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
-        EncodedDataStream ds(ba);
+        EncodedData ba = QByteArray::fromRawData(m_pBuf.get(), (qsizetype)(mDataSize));
 
-        ds.setEncoding(encoding);
-        mHasBOM = ds.hasBOM();
+        ba.setEncoding(encoding);
+        mHasBOM = ba.hasBOM();
         m_bIncompleteConversion = false;
         m_unicodeBuf->clear();
 
         assert(m_unicodeBuf->length() == 0);
 
         mHasEOLTermination = false;
-        while(!ds.atEnd())
+        while(!ba.atEnd())
         {
             line.clear();
             if(lines >= limits<LineType>::max() - 5)
@@ -611,7 +610,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
             }
 
             prevChar = curChar;
-            ds.readChar(curChar);
+            ba.readChar(curChar);
 
             qsizetype firstNonwhite = 0;
             bool foundNonWhite = false;
@@ -634,11 +633,11 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                     foundNonWhite = true;
                 }
 
-                if(ds.atEnd())
+                if(ba.atEnd())
                     break;
 
                 prevChar = curChar;
-                ds.readChar(curChar);
+                ba.readChar(curChar);
             }
 
             switch(curChar.unicode())
@@ -650,14 +649,14 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                     if((FileOffset)lastOffset < mDataSize)
                     {
                         QChar nextChar;
-                        quint64 i = ds.peekChar(nextChar);
+                        quint64 i = ba.peekChar(nextChar);
                         if(i == 0)
                             break;
 
                         if(nextChar == '\n')
                         {
                             prevChar = curChar;
-                            ds.readChar(curChar);
+                            ba.readChar(curChar);
                             vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
                             break;
                         }
@@ -725,26 +724,23 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray& pCodecIn,
                                      const QString& fileNameOut, const QByteArray& pCodecOut)
 {
-    QFile in(fileNameIn);
+    EncodedFile in(fileNameIn);
     if(!in.open(QIODevice::ReadOnly))
         return false;
-    EncodedDataStream inStream(&in);
-    inStream.setEncoding(pCodecIn);
 
-    QFile out(fileNameOut);
+    in.setEncoding(pCodecIn);
+
+    EncodedFile out(fileNameOut);
     if(!out.open(QIODevice::WriteOnly))
         return false;
-    EncodedDataStream outStream(&out);
-    outStream.setEncoding(pCodecOut);
+    out.setEncoding(pCodecOut);
 
-    QString data;
-    while(!inStream.atEnd())
+    while(!in.atEnd())
     {
         QChar c;
-        inStream.readChar(c);
-        data += c;
+        in.readChar(c);
+        out << c;
     }
-    outStream << data;
 
     return true;
 }
