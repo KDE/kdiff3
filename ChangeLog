@@ -1,4 +1,12 @@
 
+Version 1.12.1 - 2024
+=========================
+*fixed horizontal scroll with track pad ignored.
+*reduce initial file load time
+*ignore encoding errors during merge this will become a warning.
+*adjust flatpak default flags.
+*drop unused Qt6Core5Compat depenancy check.
+
 Version 1.12.0 - 2024
 =========================
 
@@ -7,6 +15,8 @@ Version 1.12.0 - 2024
 *horizontal scroll correctly computed for diff windows
 --Note due to changes in windows/Qt the scrollbars may be vary small or hidden on Windows 11. This can't be controlled from kdiff3.
 *False errors on first launch with files selected should be fixed.
+
+
 
 Version 1.11.x - 2024
 ===========================
