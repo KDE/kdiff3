@@ -2685,13 +2685,8 @@ bool MergeResultWindow::saveDocument(const QString& fileName, const char* encodi
     const QLatin1StringView lineFeed(eLineEndStyle == eLineEndStyleDos ? QLatin1StringView("\r\n") : QLatin1StringView("\n"));
     EncodedData textOutStream(m_mergeBlockList, lineFeed, encoding);
     bool bSuccess = file.writeFile(textOutStream.constData(), textOutStream.size());
-    // String freeze prevents us from display a new user facing message for encoding errors as properly shouod be done.
-    // However we can not proceed in this case
-    if(textOutStream.hasError() && textOutStream.isEmpty())
-        qCritical(kdiffMain) << "Encoding failed empty data stream produced.";
 
-    // Not ideal but needed as we can not take furture chances of stable gernating blank or currput output on merge.
-    if(!bSuccess || textOutStream.hasError())
+    if(!bSuccess)
     {
         KMessageBox::error(this, i18n("Error while writing."), i18n("File Save Error"));
         return false;
