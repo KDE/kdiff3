@@ -17,10 +17,11 @@
 #include <optional>
 #include <vector>
 
-QString MergeEditLine::getString() const
+QString MergeEditLine::getString(const std::shared_ptr<const LineDataVector> &pLineDataA, const std::shared_ptr<const LineDataVector> &pLineDataB, const std::shared_ptr<const LineDataVector> &pLineDataC) const
 {
-    assert(mSrc != e_SrcSelector::Invalid);
-    std::shared_ptr<LineDataVector> lineVector = gLineVector[(int)mSrc];
+    //Triggered by resize event during early init. Ignore these calls.
+    if((mSrc == e_SrcSelector::A && pLineDataA->empty()) || (mSrc == e_SrcSelector::B && pLineDataB->empty()) || (mSrc == e_SrcSelector::C && pLineDataC->empty()))
+        return QString();
 
     if(isRemoved() || (!isModified() && mSrc == e_SrcSelector::None))
     {
@@ -31,17 +32,13 @@ QString MergeEditLine::getString() const
     {
         std::optional<LineData> lineData;
         assert(mSrc == e_SrcSelector::A || mSrc == e_SrcSelector::B || mSrc == e_SrcSelector::C);
-        assert(lineVector != nullptr);
-        //Triggered by resize event during early init. Ignore these calls.
-        if(lineVector->empty())
-            return QString();
 
         if(mSrc == e_SrcSelector::A && m_id3l->getLineA().isValid())
-            lineData = (*lineVector)[m_id3l->getLineA()];
+            lineData = (*pLineDataA)[m_id3l->getLineA()];
         else if(mSrc == e_SrcSelector::B && m_id3l->getLineB().isValid())
-            lineData = (*lineVector)[m_id3l->getLineB()];
+            lineData = (*pLineDataB)[m_id3l->getLineB()];
         else if(mSrc == e_SrcSelector::C && m_id3l->getLineC().isValid())
-            lineData = (*lineVector)[m_id3l->getLineC()];
+            lineData = (*pLineDataC)[m_id3l->getLineC()];
 
         //Not an error.
         if(!lineData.has_value())

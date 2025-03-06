@@ -58,7 +58,7 @@ class MergeEditLine
         mSrc = e_SrcSelector::None;
         mChanged = true;
     }
-    [[nodiscard]] QString getString() const;
+    [[nodiscard]] QString getString(const std::shared_ptr<const LineDataVector>& pLineDataA, const std::shared_ptr<const LineDataVector>& pLineDataB, const std::shared_ptr<const LineDataVector>& pLineDataC) const;
     [[nodiscard]] inline bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
@@ -186,5 +186,4 @@ class MergeBlockList: public std::list<MergeBlock>
     MergeBlockList::iterator splitAtDiff3LineIdx(qint32 d3lLineIdx);
 };
 
-inline std::shared_ptr<LineDataVector> gLineVector[4];
 #endif

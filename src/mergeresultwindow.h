@@ -134,6 +134,9 @@ class MergeResultWindow: public QWidget
 
     std::shared_ptr<UndoRecord> mUndoRec;
 
+    std::shared_ptr<LineDataVector> m_pldA = nullptr;
+    std::shared_ptr<LineDataVector> m_pldB = nullptr;
+    std::shared_ptr<LineDataVector> m_pldC = nullptr;
     LineRef m_sizeA = 0;
     LineRef m_sizeB = 0;
     LineRef m_sizeC = 0;
