@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-18 02:35+0000\n"
+"POT-Creation-Date: 2025-03-07 02:40+0000\n"
 "PO-Revision-Date: 2024-09-27 11:46+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -124,7 +124,7 @@ msgstr "Soubor %1: Řádek není dostupný"
 msgid "Encoding:"
 msgstr "Kódování:"
 
-#: difftextwindow.cpp:1981 mergeresultwindow.cpp:2799 optiondialog.cpp:789
+#: difftextwindow.cpp:1981 mergeresultwindow.cpp:2830 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "Styl konce řádku:"
@@ -139,12 +139,12 @@ msgstr "A (základní)"
 msgid "Encoding: %1"
 msgstr "Kódování: %1"
 
-#: difftextwindow.cpp:2009 mergeresultwindow.cpp:2845
+#: difftextwindow.cpp:2009 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2009 mergeresultwindow.cpp:2844
+#: difftextwindow.cpp:2009 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -2040,47 +2040,47 @@ msgstr ""
 "\n"
 "Vytvoření zálohy selhalo. Soubor nebyl uložen."
 
-#: mergeresultwindow.cpp:2679 mergeresultwindow.cpp:2691
+#: mergeresultwindow.cpp:2679 mergeresultwindow.cpp:2722
 #, kde-format
 msgid "File Save Error"
 msgstr "Chyba ukládání souboru"
 
-#: mergeresultwindow.cpp:2691
+#: mergeresultwindow.cpp:2722
 #, kde-format
 msgid "Error while writing."
 msgstr "Chyba při zápisu."
 
-#: mergeresultwindow.cpp:2771
+#: mergeresultwindow.cpp:2802
 #, kde-format
 msgid "Output:"
 msgstr "Výstup:"
 
-#: mergeresultwindow.cpp:2784 mergeresultwindow.cpp:2967
+#: mergeresultwindow.cpp:2815 mergeresultwindow.cpp:2998
 #, kde-format
 msgid "[Modified]"
 msgstr "[Pozměněno]"
 
-#: mergeresultwindow.cpp:2791
+#: mergeresultwindow.cpp:2822
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "Kódování pro uložení:"
 
-#: mergeresultwindow.cpp:2891
+#: mergeresultwindow.cpp:2922
 #, kde-format
 msgid "Conflict"
 msgstr "Konflikt"
 
-#: mergeresultwindow.cpp:2914
+#: mergeresultwindow.cpp:2945
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "Kodek od A: %1"
 
-#: mergeresultwindow.cpp:2916
+#: mergeresultwindow.cpp:2947
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "Kodek od B: %1"
 
-#: mergeresultwindow.cpp:2918
+#: mergeresultwindow.cpp:2949
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "Kodek od C: %1"
