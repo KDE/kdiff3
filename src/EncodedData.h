@@ -72,16 +72,12 @@ class EncodedData: public QByteArray
                             isn't a line there).
                         */
                         writeString(lineFeed);
-                        if(hasError())
-                            return;
                     }
 
                     if(isFirstLine)
                         isFirstLine = mel.isRemoved();
 
                     writeString(str);
-                    if(hasError())
-                        return;
                 }
             }
         }
@@ -172,13 +168,9 @@ class EncodedData: public QByteArray
   private:
     quint64 writeString(const QString &s)
     {
-        QByteArray data = mEncoder(s);
-
-        mError = mEncoder.hasError();
-        if(!mError)
-            append(data);
-
-        return mError ? 0 : s.length();
+        append(mEncoder(s)); //may contain replacement characters or errors but should be kept anyway
+        mError = mError || mEncoder.hasError(); //Once an error is seen we need to remember that even if the underlieing cedec clears it.
+        return s.length();
     };
 };
 
@@ -272,17 +264,13 @@ class EncodedFile: public QFile
     EncodedFile &operator<<(const QString &s)
     {
         QByteArray data = mEncoder(s);
-
-        mError = mEncoder.hasError();
-        if(mError)
-            return *this;
-
         qint64 len = write(data.constData(), data.length());
         if(len != data.length())
             mError = true;
 
         return *this;
     };
+    [[nodiscard]] bool encoderHasError() { return mEncoder.hasError(); }
 
     [[nodiscard]] bool hasError() const { return mError; }
 };
