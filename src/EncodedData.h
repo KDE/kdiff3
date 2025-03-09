@@ -185,6 +185,7 @@ class EncodedFile: public QFile
     QByteArray mEncoding = "UTF-8";
     bool mGenerateBOM = false;
     bool mError = false;
+    bool mIncomplete = false;
     char curData = u8'\0';
     QByteArray mBuf = QByteArray::fromRawData(&curData, sizeof(curData));
 
@@ -265,12 +266,14 @@ class EncodedFile: public QFile
     {
         QByteArray data = mEncoder(s);
         qint64 len = write(data.constData(), data.length());
+
+        mIncomplete = mIncomplete || mEncoder.hasError();
         if(len != data.length())
             mError = true;
 
         return *this;
     };
-    [[nodiscard]] bool encoderHasError() { return mEncoder.hasError(); }
+    [[nodiscard]] bool encoderHasError() { return mIncomplete; }
 
     [[nodiscard]] bool hasError() const { return mError; }
 };
