@@ -46,8 +46,6 @@ include(FeatureSummary)
 #we use the slightly less strict QT_RESTRICTED_CAST_FROM_ASCII
 #Disallowing implict cast from QByteArray doesn't make sense for this project
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
-#Causes multiple build errors related to the use QLatin1String
-remove_definitions(-DQT_USE_QSTRINGBUILDER)
 
 include(ECMInstallIcons)
 include(ECMAddAppIcon)

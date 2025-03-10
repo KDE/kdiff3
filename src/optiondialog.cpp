@@ -400,7 +400,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
 
     void insertCodec(const QString& visibleCodecName, const QByteArray& name)
     {
-        const QLatin1String codecName = QLatin1String(name);
+        const QString codecName = QString::fromLatin1(name);
 
         for(qsizetype i = 0; i < m_codecVec.size(); ++i)
         {
@@ -410,7 +410,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
         // The m_codecVec.size will at this point return the value we need for the index.
         if(codecName == defaultName())
             saveDefaultIndex(m_codecVec.size());
-        QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")";
+        QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + " (" + codecName + ")";
         addItem(itemText, m_codecVec.size());
         m_codecVec.push_back(name);
     }

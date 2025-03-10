@@ -2156,9 +2156,9 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, const QByteArra
     if(!codecList.contains(nameArray))
     {
         QAction* pAction = new QAction(pMenu); // menu takes ownership, so deleting the menu deletes the action too.
-        const QLatin1String codecName = QLatin1String(nameArray);
+        const QString codecName = QString::fromLatin1(nameArray);
 
-        pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")");
+        pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + " (" + codecName + ")");
         pAction->setData(nameArray);
         pAction->setCheckable(true);
         if(currentTextCodecName == nameArray)
