@@ -99,6 +99,7 @@ qint32 main(qint32 argc, char* argv[])
                          homePage);
 
     KAboutData::setApplicationData(aboutData);
+    QApplication::setWindowIcon(QIcon::fromTheme(appName));
 
     /*
         The QCommandLineParser is a static scoped unique ptr. This is safe given that.
