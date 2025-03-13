@@ -2,6 +2,9 @@
 #  SPDX-FileCopyrightText:  2018-2020 Michael Reeves reeves.87@gmail.com
 #  SPDX-License-Identifier: BSD-2-Clause
 
+#This does not work for our shell extension.
+remove_definitions(-DQT_USE_QSTRINGBUILDER)
+
 set(kdiff3ext_SRCS
     class_factory.cpp
     diff_ext.cpp
