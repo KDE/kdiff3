@@ -110,7 +110,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     endif()
     #Adjust clang specific  warnings
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -fexceptions")
-    set(CLANG_WARNING_FLAGS "-Wno-unknown-warning-option -Wno-undef -Wno-trigraphs -Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
+    set(CLANG_WARNING_FLAGS "-Wno-unknown-warning-option -Wundef -Wno-trigraphs  -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     #Make MSVC obey standard C++ exception handling by destroying all objects going out of scope as a result of the exception.
@@ -154,6 +154,7 @@ add_definitions(
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
+    -DQT_EXPLICIT_QFILE_CONSTRUCTION_FROM_PATH #pre-emptive for forward compatibility with Qt 6.9+
     -DQT_DEPRECATED_WARNINGS_SINCE=0x060800#warn if deprecated at 6.8 or before. Qt default setting is not useful for kdiff3.
     -DQT_DISABLE_DEPRECATED_BEFORE=0x060700#disable deprecated api for Qt<6.7.
     #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
