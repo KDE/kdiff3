@@ -1,5 +1,5 @@
-# Translation of kdiff3 to Spanish
-# Copyright (C) 2003,2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Spanish translations for kdiff3.po package.
+# Copyright (C) 2003-2025 Free Software Foundation, Inc.
 #
 # SPDX-FileCopyrightText: 2003 Miguel Revilla Rodríguez <yo@miguelrevilla.com>
 # SPDX-FileCopyrightText: 2003, 2004, 2005 Carlos Mayo Hernández <carlos.mayo@hispalinux.es>
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-11 00:43+0000\n"
-"PO-Revision-Date: 2025-02-11 01:15+0100\n"
+"PO-Revision-Date: 2025-03-19 01:19+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -313,7 +313,7 @@ msgstr "Sin guardar."
 #, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
-msgstr "En proceso..."
+msgstr "En proceso…"
 
 #: directorymergewindow.cpp:486
 #, kde-format
@@ -437,7 +437,7 @@ msgstr "Advertencia en el parámetro"
 #: directorymergewindow.cpp:875
 #, kde-format
 msgid "Scanning folders..."
-msgstr "Explorando carpetas..."
+msgstr "Explorando carpetas…"
 
 #: directorymergewindow.cpp:897
 #, kde-format
@@ -891,7 +891,7 @@ msgstr "Dest: "
 #: directorymergewindow.cpp:2843
 #, kde-format
 msgid "Save Folder Merge State As..."
-msgstr "Guardar estado de la fusión de carpetas como..."
+msgstr "Guardar estado de la fusión de carpetas como…"
 
 #: directorymergewindow.cpp:2950
 #, kde-format
@@ -1260,7 +1260,7 @@ msgstr "Activar/desactivar la barra de estado"
 #: kdiff3.cpp:762
 #, kde-format
 msgid "Configure KDiff3..."
-msgstr "Configurar KDiff3..."
+msgstr "Configurar KDiff3…"
 
 #: kdiff3.cpp:768
 #, kde-format
@@ -1691,17 +1691,17 @@ msgstr ""
 #: kdiff3.cpp:957
 #, kde-format
 msgid "Saving file..."
-msgstr "Guardando archivo..."
+msgstr "Guardando archivo…"
 
 #: kdiff3.cpp:974
 #, kde-format
 msgid "Saving file with a new filename..."
-msgstr "Guardando archivo con un nuevo nombre..."
+msgstr "Guardando archivo con un nuevo nombre…"
 
 #: kdiff3.cpp:976
 #, kde-format
 msgid "Save As..."
-msgstr "Guardar como..."
+msgstr "Guardar como…"
 
 #: kdiff3.cpp:999
 #, kde-format
@@ -1711,7 +1711,7 @@ msgstr "Impresión no implementada."
 #: kdiff3.cpp:1040
 #, kde-format
 msgid "Printing..."
-msgstr "Impriminendo..."
+msgstr "Impriminendo…"
 
 #: kdiff3.cpp:1138
 #, kde-format
@@ -1737,12 +1737,12 @@ msgstr "Impresión cancelada."
 #: kdiff3.cpp:1225
 #, kde-format
 msgid "Exiting..."
-msgstr "Saliendo..."
+msgstr "Saliendo…"
 
 #: kdiff3.cpp:1235
 #, kde-format
 msgid "Toggle the statusbar..."
-msgstr "Conmutar la barra de estado..."
+msgstr "Conmutar la barra de estado…"
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -1952,7 +1952,7 @@ msgstr "Fecha y tamaño: "
 #, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
-msgstr "Comparando archivo..."
+msgstr "Comparando archivo…"
 
 #: mergeresultwindow.cpp:135
 #, kde-format
@@ -2197,13 +2197,13 @@ msgstr "Salida (opcional):"
 #: opendialog.ui:75 opendialog.ui:202 opendialog.ui:246 opendialog.ui:257
 #, kde-format
 msgid "File..."
-msgstr "Archivo..."
+msgstr "Archivo…"
 
 #. i18n: ectx: property (text), widget (QPushButton, swapCopy)
 #: opendialog.ui:107
 #, kde-format
 msgid "Swap/Copy Names..."
-msgstr "Intercambiar/copiar nombres..."
+msgstr "Intercambiar/copiar nombres…"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: opendialog.ui:129
@@ -2218,7 +2218,7 @@ msgstr "C (Opcional):"
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
 #, kde-format
 msgid "Folder..."
-msgstr "Carpeta..."
+msgstr "Carpeta…"
 
 #: optiondialog.cpp:105 optiondialog.cpp:117
 #, kde-format
@@ -3420,22 +3420,22 @@ msgstr "Continuar fusionando"
 #: pdiff.cpp:734 pdiff.cpp:825
 #, kde-format
 msgid "Opening files..."
-msgstr "Abriendo archivos..."
+msgstr "Abriendo archivos…"
 
 #: pdiff.cpp:914
 #, kde-format
 msgid "Cutting selection..."
-msgstr "Cortando selección..."
+msgstr "Cortando selección…"
 
 #: pdiff.cpp:921
 #, kde-format
 msgid "Copying selection to clipboard..."
-msgstr "Copiando la selección al portapapeles..."
+msgstr "Copiando la selección al portapapeles…"
 
 #: pdiff.cpp:930
 #, kde-format
 msgid "Inserting clipboard contents..."
-msgstr "Insertando el contenido del portapapeles..."
+msgstr "Insertando el contenido del portapapeles…"
 
 #: pdiff.cpp:1015
 #, kde-format
@@ -3514,7 +3514,7 @@ msgstr "Intercambiar %1<->Salida"
 #: smalldialogs.cpp:108
 #, kde-format
 msgid "Configure..."
-msgstr "Configurar..."
+msgstr "Configurar…"
 
 #: smalldialogs.cpp:161
 #, kde-format
@@ -3711,7 +3711,7 @@ msgstr "La lectura del archivo ha fallado: %1"
 #: StandardMenus.cpp:18
 #, kde-format
 msgid "Opens documents for comparison..."
-msgstr "Abre documentos para comparación..."
+msgstr "Abre documentos para comparación…"
 
 #: StandardMenus.cpp:20
 #, kde-format
@@ -3727,7 +3727,7 @@ msgstr ""
 #: StandardMenus.cpp:25
 #, kde-format
 msgid "Saves the current document as..."
-msgstr "Guarda el documento actual como..."
+msgstr "Guarda el documento actual como…"
 
 #: StandardMenus.cpp:28
 #, kde-format
@@ -3783,581 +3783,3 @@ msgstr "Carácter de comilla no esperado dentro del argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "No se ha especificado ningún programa."
-
-#~ msgid "Unicode"
-#~ msgstr "Unicode"
-
-#~ msgctxt "Read error message. %1 = filepath"
-#~ msgid "File %1 too large to process. Skipping."
-#~ msgstr "El archivo %1 es demasiado grande para procesarlo. Se omite."
-
-#~ msgid "Auto Detect Unicode"
-#~ msgstr "Detección automática de Unicode"
-
-#~ msgid "Toggling toolbar..."
-#~ msgstr "Cambiando barra de herramientas..."
-
-#~ msgid ""
-#~ "Could not initialize KDiff3.\n"
-#~ "This usually happens due to an installation problem. Please read the "
-#~ "README-file in the source package for details."
-#~ msgstr ""
-#~ "No se ha podido inicializar KDiff3.\n"
-#~ "Esto suele deberse a un problema de instalación. Consulte el archivo "
-#~ "README del paquete de código fuente para más detalles."
-
-#~ msgid "Loading A"
-#~ msgstr "Cargando A"
-
-#~ msgid "Loading B"
-#~ msgstr "Cargando B"
-
-#~ msgid "Loading C"
-#~ msgstr "Cargando C"
-
-#~ msgid "Could not find files for comparison."
-#~ msgstr "No ha sido posible encontrar los archivos a comparar."
-
-#~ msgid "&KDiff3"
-#~ msgstr "&KDiff3"
-
-#~ msgid "Configure KDiff3"
-#~ msgstr "Configurar KDiff3"
-
-#~ msgid "KDiff3 Part"
-#~ msgstr "Parte de KDiff3"
-
-#~ msgid "A KPart for displaying diffs"
-#~ msgstr "Un KPart para mostrar diferencias"
-
-#~ msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-#~ msgstr "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
-
-#~ msgid "Joachim Eibl"
-#~ msgstr "Joachim Eibl"
-
-#~ msgid ""
-#~ "A version control history entry consists of several lines.\n"
-#~ "Specify the regular expression to detect the first line (without the "
-#~ "leading comment).\n"
-#~ "Use parentheses to group the keys you want to use for sorting.\n"
-#~ "If left empty, then KDiff3 assumes that empty lines separate history "
-#~ "entries.\n"
-#~ "See the documentation for details."
-#~ msgstr ""
-#~ "Una entrada del historial de control de versión está formada por varias "
-#~ "líneas.\n"
-#~ "Especifique la expresión regular utilizada para detectar la primera línea "
-#~ "(sin el comentario inicial).\n"
-#~ "Utilice paréntesis para agrupar las claves de ordenación que desee "
-#~ "utilizar.\n"
-#~ "Si lo deja vacío, KDiff3 supondrá que las líneas vacías separan las "
-#~ "entradas del historial.\n"
-#~ "Consulte la documentación para más detalles."
-
-#~ msgid ""
-#~ "Each pair of parentheses used in the regular expression for the history "
-#~ "start entry\n"
-#~ "groups a key that can be used for sorting.\n"
-#~ "Specify the list of keys (that are numbered in order of occurrence\n"
-#~ "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-#~ "If left empty, then no sorting will be done.\n"
-#~ "See the documentation for details."
-#~ msgstr ""
-#~ "Cada paréntesis utilizado en la expresión regular para la entrada de "
-#~ "inicio del historial\n"
-#~ "agrupa una clave que podrá utilizarse para la ordenación.\n"
-#~ "Especifique la lista de claves (están numeradas por orden de aparición\n"
-#~ "comenzando en 1) utilizando «,» como separador (p.ej. «4,5,6,1,2,3,7»).\n"
-#~ "Si se deja vacío, no se realizará ordenación.\n"
-#~ "Consulte la documentación para más detalles."
-
-#~ msgid ""
-#~ "Regular expression for lines where KDiff3 should automatically choose one "
-#~ "source.\n"
-#~ "When a line with a conflict matches the regular expression then\n"
-#~ "- if available - C, otherwise B will be chosen."
-#~ msgstr ""
-#~ "Expresión regular para las líneas en las que KDiff3 debería seleccionar "
-#~ "un tipo de letra de forma automática.\n"
-#~ "Cuando una línea con un conflicto coincide con la expresión regular se "
-#~ "elegirá\n"
-#~ "- si está disponible - C, sino B."
-
-#~ msgid ""
-#~ "Regular expression for the start of the version control history entry.\n"
-#~ "Usually this line contains the \"$Log$\" keyword.\n"
-#~ "Default value: \".*\\$Log.*\\$.*\""
-#~ msgstr ""
-#~ "Expresión regular para el inicio de la entrada del historial del control "
-#~ "de versión.\n"
-#~ "Esta línea suele contener la palabra clave «$Log$».\n"
-#~ "El valor predeterminado es: «.*\\$Log.*\\$.*»"
-
-#~ msgid "all/allfiles (*)"
-#~ msgstr "Todo/Todos los archivos (*)"
-
-#~ msgid "A"
-#~ msgstr "A"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "C"
-#~ msgstr "C"
-
-#~ msgid "A KPart for KDiff3"
-#~ msgstr "Un KPart para KDiff3"
-
-#~ msgid " (32 bit)"
-#~ msgstr " (32 bits)"
-
-#~ msgid "Severe Internal Error."
-#~ msgstr "Error interno grave."
-
-#~ msgid "Severe Internal Error.: "
-#~ msgstr "Error interno grave: "
-
-#~ msgid "Do not solve conflicts automatically."
-#~ msgstr "No resolver conflictos automáticamente."
-
-#~ msgid "Unable to determine full url. No file path/name specified."
-#~ msgstr ""
-#~ "No se ha podido determinar la URL completa. No se ha especificado ninguna "
-#~ "ruta o nombre de archivo."
-
-#~ msgid "Errors occurred during pre-processing of file A."
-#~ msgstr "Han ocurrido errores durante el procesamiento previo del archivo A."
-
-#~ msgid "Errors occurred during pre-processing of file B."
-#~ msgstr "Han ocurrido errores durante el procesamiento previo del archivo B."
-
-#~ msgid "Errors occurred during pre-processing of file C."
-#~ msgstr "Han ocurrido errores durante el procesamiento previo del archivo C."
-
-#~ msgid "File Open Error"
-#~ msgstr "Error de apertura de archivo"
-
-#~ msgid "Open Directory"
-#~ msgstr "Abrir directorio"
-
-#~ msgid "Directory Open Error"
-#~ msgstr "Error al abrir directorio"
-
-#~ msgid "Reading Directory A"
-#~ msgstr "Leyendo directorio A"
-
-#~ msgid "Reading Directory B"
-#~ msgstr "Leyendo directorio B"
-
-#~ msgid "Reading Directory C"
-#~ msgstr "Leyendo directorio C"
-
-#~ msgid "Dir"
-#~ msgstr "Dir"
-
-#~ msgid "Removing directory: %1"
-#~ msgstr "Eliminando directorio: %1"
-
-#~ msgid "Reading directory: %1"
-#~ msgstr "Leyendo directorio: %1"
-
-#~ msgid "&Directory"
-#~ msgstr "&Directorio"
-
-#~ msgid "Directory"
-#~ msgstr "Carpeta"
-
-#~ msgid "Dir-anti-pattern(s):"
-#~ msgstr "Patron(es) anti-directorio(s):"
-
-#~ msgid ""
-#~ "Pattern(s) of directories to be excluded from analysis. \n"
-#~ "Wildcards: '*' and '?'\n"
-#~ "Several Patterns can be specified by using the separator: ';'"
-#~ msgstr ""
-#~ "Patron(es) de directorios a excluir del análisis.\n"
-#~ "Comodines:  '*' y '?'\n"
-#~ "Se pueden especificar muchos patrones usando el separador: ';'"
-
-#~ msgid "Follow directory links"
-#~ msgstr "Seguir enlaces de directorios"
-
-#~ msgid ""
-#~ "On: Compare the directory the link points to.\n"
-#~ "Off: Compare the links."
-#~ msgstr ""
-#~ "On: Comparar el directorio al que apunta el enlace.\n"
-#~ "Off: Comparar los enlaces."
-
-#~ msgid "Dir..."
-#~ msgstr "Dir..."
-
-#~ msgid "Finds files and directories with the hidden attribute."
-#~ msgstr "Busca archivos de directorios con el atributo de oculto."
-
-#~ msgid "Finds files and directories starting with '.'."
-#~ msgstr "Busca archivos y directorios que comiencen por '.'."
-
-#, fuzzy
-#~| msgid "Comparing file..."
-#~ msgid "Compare failed"
-#~ msgstr "Comparando archivo..."
-
-#~ msgid "Not matching apostrophs."
-#~ msgstr "Apóstrofos no emparejados."
-
-#~ msgid ""
-#~ "Error during file copy operation: Opening file for reading failed. "
-#~ "Filename: %1"
-#~ msgstr ""
-#~ "Error durante la operación de copia de archivo. Falló al abrir archivo "
-#~ "para lectura. Nombre de archivo: %1"
-
-#~ msgid ""
-#~ "Error during file copy operation: Opening file for writing failed. "
-#~ "Filename: %1"
-#~ msgstr ""
-#~ "Error durante la operación de copia de archivo. Falló al abrir archivo "
-#~ "para escritura. Nombre de archivo: %1"
-
-#~ msgid "Error during file copy operation: Reading failed. Filename: %1"
-#~ msgstr ""
-#~ "Error durante la operación de copia de archivo. Falló al leer. Nombre de "
-#~ "archivo: %1"
-
-#~ msgid "Error during file copy operation: Writing failed. Filename: %1"
-#~ msgstr ""
-#~ "Error durante la operación de copia de archivo. Falló al escribir. Nombre "
-#~ "de archivo: %1"
-
-#~ msgid "Integrate with ClearCase"
-#~ msgstr "Integrar con ClearCase"
-
-#~ msgid ""
-#~ "Integrate with Rational ClearCase from IBM.\n"
-#~ "Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
-#~ "(Only enabled when ClearCase \"bin\" directory is in the path.)"
-#~ msgstr ""
-#~ "Integra con Racional ClearCase de IBM.\n"
-#~ "Modifica el archivo «map» en el subdirectorio «lib/mgrs» de ClearCase\n"
-#~ "(Solo está activado cuando la carpetaa «bin» de ClearCase se encuentra en "
-#~ "la ruta)."
-
-#~ msgid "Remove ClearCase Integration"
-#~ msgstr "Eliminar integración ClearCase"
-
-#~ msgid ""
-#~ "Restore the old \"map\" file from before doing the ClearCase integration."
-#~ msgstr "Restaura el archivo «map» anterior a la integración ClearCase."
-
-#~ msgid "&Merge"
-#~ msgstr "&Fusionar"
-
-#~ msgid "Directory Comparison Status"
-#~ msgstr "Estado de la comparación del directorio"
-
-#~ msgid "Number of subdirectories:"
-#~ msgstr "Número de subdirectorios:"
-
-#~ msgid "Number of equal files:"
-#~ msgstr "Número de archivos iguales:"
-
-#~ msgid "Number of different files:"
-#~ msgstr "Número de archivos diferentes:"
-
-#~ msgid "Total number of conflicts: "
-#~ msgstr "Número total de conflictos: "
-
-#~ msgid ""
-#~ "\n"
-#~ "Nr of automatically solved conflicts: "
-#~ msgstr ""
-#~ "\n"
-#~ "Nº de conflictos resueltos automáticamente: "
-
-#~ msgid ""
-#~ "\n"
-#~ "Nr of unsolved conflicts: "
-#~ msgstr ""
-#~ "\n"
-#~ "Nº de conflictos sin resolver: "
-
-#~ msgid "Ignore numbers"
-#~ msgstr "Ignorar números"
-
-#~ msgid "Ignore C/C++ comments"
-#~ msgstr "Ignorar comentarios de C/C++"
-
-#~ msgid "Ignore case"
-#~ msgstr "Ignorar mayúsculas"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgid "Help"
-#~ msgstr "Ayuda"
-
-#~ msgid "Defaults"
-#~ msgstr "Predeterminados"
-
-#~ msgid "&Edit"
-#~ msgstr "&Editar"
-
-#~ msgid "&Settings"
-#~ msgstr "Preferencia&s"
-
-#~ msgid "&Help"
-#~ msgstr "&Ayuda"
-
-#~ msgid "&About"
-#~ msgstr "&Acerca de"
-
-#~ msgid "A&uthor"
-#~ msgstr "A&utor"
-
-#~ msgid "&Thanks To"
-#~ msgstr "Agradecimien&tos a"
-
-#~ msgid "Open"
-#~ msgstr "Abrir"
-
-#~ msgid "Save"
-#~ msgstr "Guardar"
-
-#~ msgid "Print..."
-#~ msgstr "Imprimir..."
-
-#~ msgid "Quit"
-#~ msgstr "Salir"
-
-#~ msgid "Cut"
-#~ msgstr "Cortar"
-
-#~ msgid "Copy"
-#~ msgstr "Copiar"
-
-#~ msgid "Paste"
-#~ msgstr "Pegar"
-
-#~ msgid "Select All"
-#~ msgstr "Seleccionar todo"
-
-#~ msgid "Show Toolbar"
-#~ msgstr "Mostrar barra de herramientas"
-
-#~ msgid "Show &Status Bar"
-#~ msgstr "Mostrar barra de e&stado"
-
-#~ msgid "&Configure %1..."
-#~ msgstr "&Configurar %1..."
-
-#~ msgid "About"
-#~ msgstr "Acerca de"
-
-#~ msgid "Find"
-#~ msgstr "Buscar"
-
-#~ msgid "Find Next"
-#~ msgstr "Buscar siguiente"
-
-#~ msgid "For more documentation, see the help-menu or the subdirectory doc."
-#~ msgstr ""
-#~ "Para conseguir más documentación, consulte el menú ayuda o la subcarpeta "
-#~ "doc."
-
-#~ msgid "KDiff3-Usage"
-#~ msgstr "Uso de KDiff3"
-
-#~ msgid "Exit"
-#~ msgstr "Salir"
-
-#~ msgid "Continue"
-#~ msgstr "Continuar"
-
-#~ msgid "Language (restart required)"
-#~ msgstr "Idioma (requiere reiniciar)"
-
-#~ msgid ""
-#~ "Choose the language of the GUI strings or \"Auto\".\n"
-#~ "For a change of language to take place, quit and restart KDiff3."
-#~ msgstr ""
-#~ "Elija el idioma para las cadenas de la interfaz o «Auto».\n"
-#~ "Para que ocurra el cambio de lenguaje, salga y reinicie KDiff3."
-
-#~ msgid "kdiff3"
-#~ msgstr "kdiff3"
-
-#~ msgid "&OK"
-#~ msgstr "&Aceptar"
-
-#~ msgid "OK"
-#~ msgstr "Aceptar"
-
-#~ msgid "(c) 2002-2014 Joachim Eibl"
-#~ msgstr "© 2002-2014 Joachim Eibl"
-
-#~ msgid ""
-#~ "This should never happen: \n"
-#~ "\n"
-#~ "mergeResultSaved: m_pMFI=0\n"
-#~ "\n"
-#~ "If you know how to reproduce this, please contact the program author."
-#~ msgstr ""
-#~ "Esto nunca debe ocurrir: \n"
-#~ "\n"
-#~ "mergeResultSaved: m_pMFI=0\n"
-#~ "\n"
-#~ "Si sabe cómo reproducir esto, por favor contacte con el autor del "
-#~ "programa."
-
-#~ msgid "Program Error"
-#~ msgstr "Error de programa"
-
-#~ msgid "Error."
-#~ msgstr "Error."
-
-#~ msgid "Select Font"
-#~ msgstr "Seleccionar tipo de letra"
-
-#~ msgid ""
-#~ "You selected a variable width font.\n"
-#~ "\n"
-#~ "Because this program doesn't handle variable width fonts\n"
-#~ "correctly, you might experience problems while editing.\n"
-#~ "\n"
-#~ "Do you want to continue or do you want to select another font."
-#~ msgstr ""
-#~ "Seleccionó un tipo de letra de ancho variable.\n"
-#~ "\n"
-#~ "Debido a que este programa no manipula tipos de letra de ancho variables\n"
-#~ "correctamente, podrá experimentar problemas durante la edición.\n"
-#~ "\n"
-#~ "¿Desea continuar o desea seleccionar otro tipo de letra?"
-
-#~ msgid "Incompatible font."
-#~ msgstr "Tipo de letra incompatible."
-
-#~ msgid "Continue at my own risk"
-#~ msgstr "Continuar bajo mi propio riesgo"
-
-#~ msgid "Select another font"
-#~ msgstr "Seleccionar otro tipo de letra"
-
-#~ msgid "Eike Sauer"
-#~ msgstr "Eike Sauer"
-
-#~ msgid "Bugfixes, Debian package maintainer"
-#~ msgstr "Corrección de fallo, mantenedor del paquete Debian"
-
-#~ msgid "Sebastien Fricker"
-#~ msgstr "Sebastien Fricker"
-
-#~ msgid "Windows installer"
-#~ msgstr "Instalador de Windows"
-
-#~ msgid "Stephan Binner"
-#~ msgstr "Stephan Binner"
-
-#~ msgid "i18n-help"
-#~ msgstr "ayuda i18n"
-
-#~ msgid "Stefan Partheymueller"
-#~ msgstr "Stefan Partheymueller"
-
-#~ msgid "Clipboard-patch"
-#~ msgstr "Parche del portapapeles"
-
-#~ msgid "David Faure"
-#~ msgstr "David Faure"
-
-#~ msgid "KIO-Help"
-#~ msgstr "Ayuda KIO"
-
-#~ msgid "Bernd Gehrmann"
-#~ msgstr "Bernd Gehrmann"
-
-#~ msgid "Class CvsIgnoreList from Cervisia"
-#~ msgstr "Clase CvsIgnoreList para Cervisia"
-
-#~ msgid "Andre Woebbeking"
-#~ msgstr "Andre Woebbeking"
-
-#~ msgid "Class StringMatcher"
-#~ msgstr "Clase StringMatcher"
-
-#~ msgid "Michael Denio"
-#~ msgstr "Michael Denio"
-
-#~ msgid "Directory Equality-Coloring patch"
-#~ msgstr "Parche de corrección de color de carpeta"
-
-#~ msgid "Manfred Koehler"
-#~ msgstr "Manfred Koehler"
-
-#~ msgid "Fix for slow startup on Windows"
-#~ msgstr "Correcciones para el inicio lento en Windows"
-
-#~ msgid "Sergey Zorin"
-#~ msgstr "Sergey Zorin"
-
-#~ msgid "Diff Ext for Windows"
-#~ msgstr "Extensión Diff para Windows"
-
-#~ msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
-#~ msgstr "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
-
-#~ msgid "GNU-Diffutils"
-#~ msgstr "Utilidades Diff GNU"
-
-#~ msgid "Tino Boellsterling, Timothy Mee"
-#~ msgstr "Tino Boellsterling, Timothy Mee"
-
-#~ msgid "Intensive test, use and feedback"
-#~ msgstr "Prueba intensiva, uso, comentarios y sugerencias."
-
-#~ msgid "Michael Schmidt"
-#~ msgstr "Michael Schmidt"
-
-#~ msgid "Mac support"
-#~ msgstr "Soporte para Mac"
-
-#~ msgid "Valentin Rusu"
-#~ msgstr "Valentin Rusu"
-
-#~ msgid "KDE4 porting"
-#~ msgstr "Portado a KDE4"
-
-#~ msgid "Albert Astals Cid"
-#~ msgstr "Albert Astals Cid"
-
-#~ msgid "Silvan Scherrer"
-#~ msgstr "Silvan Scherrer"
-
-#~ msgid "OS2 port"
-#~ msgstr "Adaptación a OS2"
-
-#~ msgid "+ Many thanks to those who reported bugs and contributed ideas!"
-#~ msgstr ""
-#~ "+ ¡Muchas gracias a aquellos que han informado de errores y han "
-#~ "contribuido con ideas!"
-
-#~ msgid "Italic font for deltas"
-#~ msgstr "Fuenta cursiva para deltas"
-
-#~ msgid ""
-#~ "Selects the italic version of the font for differences.\n"
-#~ "If the font doesn't support italic characters, then this does nothing."
-#~ msgstr ""
-#~ "Selecciona la version cursiva de la letra para las diferencias.\n"
-#~ "Si el tipo de letra no admite caracteres cursivos, entonces esto no hace "
-#~ "nada."
-
-#~ msgid "Incompatible Font"
-#~ msgstr "Tipo de letra incompatible"
-
-#~ msgid "Continue at Own Risk"
-#~ msgstr "Continuar bajo nuestro riesgo"
-
-#~ msgid "Select Another Font"
-#~ msgstr "Seleccionar otro tipo de letra"
