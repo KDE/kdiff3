@@ -20,6 +20,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 {
     if(!bIsEscaped)
     {
+        // inChar.toLatin1() defaults to 0 for code points > 255. Which Works for our purposes.
         switch(inChar.toLatin1())
         {
             case '\\':
