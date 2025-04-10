@@ -4,20 +4,20 @@
 # Franklin Weng <franklin@goodhorse.idv.tw>, 2010, 2011, 2012.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2009.
 # pan93412 <pan93412@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 02:40+0000\n"
-"PO-Revision-Date: 2024-01-22 16:43+0900\n"
+"PO-Revision-Date: 2025-04-09 18:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -188,7 +188,7 @@ msgstr "Unicode, 8 位元 (BOM)"
 #: difftextwindow.cpp:2152
 #, kde-format
 msgid "System"
-msgstr ""
+msgstr "系統"
 
 #: difftextwindow.cpp:2164
 #, kde-format
@@ -416,6 +416,8 @@ msgid ""
 "merged.\n"
 "Check again before continuing."
 msgstr ""
+"合併三個資料夾的時候，目標資料夾不能跟 A 或 B 一樣。\n"
+"請再次檢查再繼續。"
 
 #: directorymergewindow.cpp:870
 #, kde-format
@@ -1091,6 +1093,8 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
+"嘗試進行備份時，刪除舊備份失敗了。\n"
+"檔案名稱：%1"
 
 #: fileaccess.cpp:1128
 #, kde-format
@@ -1098,6 +1102,8 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
+"嘗試進行備份時，重新命名失敗了。\n"
+"檔案名稱：%1 → %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
@@ -1740,10 +1746,9 @@ msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "用來比對或合併檔案與資料夾的工具"
 
 #: main.cpp:94
-#, fuzzy, kde-format
-#| msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
+#, kde-format
 msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
-msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 移植"
+msgstr "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 移植"
 
 #: main.cpp:114
 #, kde-format
@@ -1841,7 +1846,7 @@ msgstr "用 kdiff3 --help 來閱讀支援的選項。"
 #: MergeFileInfos.cpp:394
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
-msgstr ""
+msgstr "無法在非一般檔案與一般檔案之間做比對。"
 
 #: MergeFileInfos.cpp:417
 #, kde-format
@@ -2050,22 +2055,19 @@ msgid "Conflict"
 msgstr "衝突"
 
 #: mergeresultwindow.cpp:2945
-#, fuzzy, kde-format
-#| msgid "Codec from"
+#, kde-format
 msgid "Codec from A: %1"
-msgstr "編解碼器"
+msgstr "編碼 A：%1"
 
 #: mergeresultwindow.cpp:2947
-#, fuzzy, kde-format
-#| msgid "Codec from"
+#, kde-format
 msgid "Codec from B: %1"
-msgstr "編解碼器"
+msgstr "編碼 B：%1"
 
 #: mergeresultwindow.cpp:2949
-#, fuzzy, kde-format
-#| msgid "Codec from"
+#, kde-format
 msgid "Codec from C: %1"
-msgstr "編解碼器"
+msgstr "編碼 C：%1"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -2999,6 +3001,9 @@ msgid ""
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
+"若啟用，會自動偵測編碼。\n"
+"如果檔案編碼無法自動判斷，則會改為使用所選編碼。\n"
+"（Unicode 偵測依賴檔案最初的位元組們。）"
 
 #: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
 #, kde-format
@@ -3033,6 +3038,8 @@ msgid ""
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
+"若啟用，會使用來自各輸入檔案的編碼。\n"
+"在模糊而無法判斷的時候，會彈出對話框讓使用者選擇儲存時要使用的編碼。"
 
 #: optiondialog.cpp:1370
 #, kde-format
@@ -3160,7 +3167,7 @@ msgstr "差異：A <-> B"
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
-msgstr ""
+msgstr "行數差異：A <-> B"
 
 #: pdiff.cpp:204
 #, kde-format
@@ -3184,13 +3191,13 @@ msgstr "差異：B <-> C"
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
-msgstr ""
+msgstr "行數差異：B <-> C"
 
 #: pdiff.cpp:277 pdiff.cpp:298
 #, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
-msgstr ""
+msgstr "行數差異：A <-> C"
 
 #: pdiff.cpp:322
 #, kde-format
@@ -3232,12 +3239,12 @@ msgstr ""
 #: pdiff.cpp:641
 #, kde-format
 msgid ", B"
-msgstr ""
+msgstr "、B"
 
 #: pdiff.cpp:643
 #, kde-format
 msgid ", C"
-msgstr ""
+msgstr "、C"
 
 #: pdiff.cpp:645
 #, kde-format
@@ -3247,6 +3254,10 @@ msgid ""
 "Do not save the result if unsure. Continue at your own risk.\n"
 "Affected input files are in %1."
 msgstr ""
+"某些輸入字元無法轉換為有效的 Unicode 字元。\n"
+"您可能使用了錯誤的編碼。（例如：為不是 UTF-8 的檔案選擇了 UTF-8）。\n"
+"不確定的話請不要儲存結果！請瞭解風險之後再繼續。\n"
+"受影響的輸入檔案位於 %1。"
 
 #: pdiff.cpp:731
 #, kde-format
@@ -3413,7 +3424,7 @@ msgstr "範例自動合併行："
 #, kde-format
 msgctxt "Tool Tip"
 msgid "To test auto merge, copy a line as used in your files."
-msgstr ""
+msgstr "要測試自動合併，請複製如同您的檔案中所使用的行數。"
 
 #: smalldialogs.cpp:388 smalldialogs.cpp:416 smalldialogs.cpp:452
 #, kde-format
@@ -3432,6 +3443,8 @@ msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
 msgstr ""
+"複製如同您的檔案中所使用的歷史開始行，\n"
+"包含開頭的註解。"
 
 #: smalldialogs.cpp:435
 #, kde-format
@@ -3450,6 +3463,8 @@ msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
+"複製如同您的檔案中所使用的歷史開始行，\n"
+"但不要包含開頭的註解。"
 
 #: smalldialogs.cpp:459
 #, kde-format
