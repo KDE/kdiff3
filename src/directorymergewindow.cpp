@@ -2716,7 +2716,7 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent):
     grid->addWidget(m_pInfoC, line, 1);
     ++line;
 
-    m_pDest = new QLabel(i18n("Dest"), this);
+    m_pDest = new QLabel(i18nc("@label:textbox", "Dest: "), this);
     grid->addWidget(m_pDest, line, 0);
     m_pInfoDest = new QLabel(this);
     grid->addWidget(m_pInfoDest, line, 1);
@@ -2798,7 +2798,7 @@ void DirectoryMergeInfo::setInfo(
         m_pC->setText(i18n("C:    "));
     m_pInfoC->setText(dirC.prettyAbsPath());
 
-    m_pDest->setText(i18n("Dest: "));
+    m_pDest->setText(i18nc("@label:textbox", "Dest: "));
     m_pInfoDest->setText(dirDest.prettyAbsPath());
 
     if(!dirC.isValid())
@@ -2822,7 +2822,6 @@ void DirectoryMergeInfo::setInfo(
         m_pDest->show();
         m_pInfoDest->show();
     }
-
     m_pInfoList->clear();
     addListViewItem(QStringLiteral("A"), dirA.prettyAbsPath(), mfi.getFileInfoA());
     addListViewItem(QStringLiteral("B"), dirB.prettyAbsPath(), mfi.getFileInfoB());
@@ -2830,7 +2829,7 @@ void DirectoryMergeInfo::setInfo(
     if(!bHideDest)
     {
         FileAccess fiDest(dirDest.prettyAbsPath() + u'/' + mfi.subPath(), true);
-        addListViewItem(i18n("Dest"), dirDest.prettyAbsPath(), &fiDest);
+        addListViewItem(i18nc("@label:textbox", "Dest: "), dirDest.prettyAbsPath(), &fiDest);
     }
     for(qint32 i = 0; i < m_pInfoList->columnCount(); ++i)
         m_pInfoList->resizeColumnToContents(i);

@@ -1952,11 +1952,11 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, e_SrcSelector winIdx,
     pHL2->setContentsMargins(0, 0, 0, 0);
     pHL2->setSpacing(2);
     pHL2->addWidget(m_pTopLine, 0);
-    m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd);
+    m_pEncoding = new EncodingLabel(i18nc("@label:textbox Encoding for text", "Encoding:"), psd);
     //EncodeLabel::EncodingChanged should be handled asyncroniously.
     chk_connect_q((EncodingLabel*)m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged);
 
-    m_pLineEndStyle = new QLabel(i18n("Line end style:"));
+    m_pLineEndStyle = new QLabel(i18nc("@label:textbox", "Line end style:"));
     pHL2->addWidget(m_pEncoding);
     pHL2->addWidget(m_pLineEndStyle);
 
@@ -1983,9 +1983,9 @@ void DiffTextWindowFrame::init()
         m_pFileSelection->setText(s);
         QString winId = pDTW->getWindowIndex() == e_SrcSelector::A ? (pDTW->isThreeWay() ? i18n("A (Base)") : QStringLiteral("A")) : (pDTW->getWindowIndex() == e_SrcSelector::B ? QStringLiteral("B") : QStringLiteral("C"));
         m_pLabel->setText(winId + u':');
-        m_pEncoding->setText(i18n("Encoding: %1", pDTW->getEncodingDisplayString()));
-        m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18n("Unix") :
-                                                                                                                                                                       i18n("Unknown")));
+        m_pEncoding->setText(i18nc("@label:textbox Encoding for text, %1 = encoding name", "Encoding: %1", pDTW->getEncodingDisplayString()));
+        m_pLineEndStyle->setText(i18nc("@label:textbox %1 = line ending style", "Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18nc("@item:intext line ending type", "DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18nc("@item:intext line ending type", "Unix") :
+                                                                                                                                                                                                                                                   i18nc("@item:intext line ending style not recongized", "Unknown")));
     }
 }
 
@@ -2079,7 +2079,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
     QString current = m_pFileSelection->text();
 
-    QUrl newURL = QFileDialog::getOpenFileUrl(this, i18n("Open File"), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile));
+    QUrl newURL = QFileDialog::getOpenFileUrl(this, i18nc("", "Open File"), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile));
     if(!newURL.isEmpty())
     {
         Q_EMIT fileNameChanged(newURL.url(), m_pDiffTextWindow->getWindowIndex());
