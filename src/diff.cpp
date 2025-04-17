@@ -614,7 +614,7 @@ qint32 ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVecto
     return -1;
 }
 
-void DiffList::runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, const size_t index2, LineRef size2)
+void DiffList::runDiff(const std::shared_ptr<const LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<const LineDataVector>& p2, const size_t index2, LineRef size2)
 {
     ProgressScope pp;
     static GnuDiff gnuDiff; // All values are initialized with zeros.
@@ -922,7 +922,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
 
 // Fourth step
 void Diff3LineList::calcDiff3LineListTrim(
-    const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, ManualDiffHelpList* pManualDiffHelpList)
+    const std::shared_ptr<const LineDataVector>& pldA, const std::shared_ptr<const LineDataVector>& pldB, const std::shared_ptr<const LineDataVector>& pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
     const Diff3Line d3l_empty;
     remove(d3l_empty);
@@ -1202,7 +1202,7 @@ void Diff3LineList::calcDiff3LineListTrim(
 }
 
 void DiffBufferInfo::init(Diff3LineList* pD3ll,
-                          const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC)
+                          const std::shared_ptr<const LineDataVector>& pldA, const std::shared_ptr<const LineDataVector>& pldB, const std::shared_ptr<const LineDataVector>& pldC)
 {
     m_pDiff3LineList = pD3ll;
     mLineDataA = pldA;
@@ -1211,7 +1211,7 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll,
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(
-    const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, const bool bIgnoreComments)
+    const std::shared_ptr<const LineDataVector>& pldA, const std::shared_ptr<const LineDataVector>& pldB, const std::shared_ptr<const LineDataVector>& pldC, const bool bIgnoreComments)
 {
     assert(empty() || (pldA != nullptr && pldB != nullptr && pldC != nullptr));
     // Init white line flags

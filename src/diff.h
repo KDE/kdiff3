@@ -147,7 +147,7 @@ class DiffList: public std::list<Diff>
   public:
     using std::list<Diff>::list;
     void calcDiff(const QString& line1, const QString& line2, const qint32 maxSearchRange);
-    void runDiff(const std::shared_ptr<LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector>& p2, const size_t index2, LineRef size2);
+    void runDiff(const std::shared_ptr<const LineDataVector>& p1, const size_t index1, LineRef size1, const std::shared_ptr<const LineDataVector>& p2, const size_t index2, LineRef size2);
 #ifndef NDEBUG
     void verify(const LineRef size1, const LineRef size2);
 #endif
@@ -214,16 +214,16 @@ using Diff3LineVector = std::vector<Diff3Line*>;
 class DiffBufferInfo
 {
   private:
-    std::shared_ptr<LineDataVector> mLineDataA;
-    std::shared_ptr<LineDataVector> mLineDataB;
-    std::shared_ptr<LineDataVector> mLineDataC;
+    std::shared_ptr<const LineDataVector> mLineDataA;
+    std::shared_ptr<const LineDataVector> mLineDataB;
+    std::shared_ptr<const LineDataVector> mLineDataC;
     const Diff3LineList* m_pDiff3LineList = nullptr;
 
   public:
     void init(Diff3LineList* d3ll,
-              const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC);
+              const std::shared_ptr<const LineDataVector>& pldA, const std::shared_ptr<const LineDataVector>& pldB, const std::shared_ptr<const LineDataVector>& pldC);
 
-    [[nodiscard]] std::shared_ptr<LineDataVector> getLineData(e_SrcSelector srcIndex) const
+    [[nodiscard]] std::shared_ptr<const LineDataVector> getLineData(e_SrcSelector srcIndex) const
     {
         switch(srcIndex)
         {
@@ -405,7 +405,7 @@ class Diff3LineList: public std::list<Diff3Line>
     void findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles, HistoryRange& range) const;
     bool fineDiff(const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
-    void calcWhiteDiff3Lines(const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, const bool bIgnoreComments);
+    void calcWhiteDiff3Lines(const std::shared_ptr<const LineDataVector>& pldA, const std::shared_ptr<const LineDataVector>& pldB, const std::shared_ptr<const LineDataVector>& pldC, const bool bIgnoreComments);
 
     void calcDiff3LineListUsingAB(const DiffList* pDiffListAB);
     void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);
@@ -413,7 +413,7 @@ class Diff3LineList: public std::list<Diff3Line>
 
     void correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList);
 
-    void calcDiff3LineListTrim(const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, ManualDiffHelpList* pManualDiffHelpList);
+    void calcDiff3LineListTrim(const std::shared_ptr<const LineDataVector>& pldA, const std::shared_ptr<const LineDataVector>& pldB, const std::shared_ptr<const LineDataVector>& pldC, ManualDiffHelpList* pManualDiffHelpList);
 
     LineType recalcWordWrap(bool resetDisplayCount)
     {
