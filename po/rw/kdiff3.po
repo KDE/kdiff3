@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-11 00:43+0000\n"
+"POT-Creation-Date: 2025-04-18 00:43+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -127,11 +127,13 @@ msgstr "Ntibonetse"
 
 #: difftextwindow.cpp:1955
 #, fuzzy, kde-format
+msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Idosiye ya:  A : "
 
-#: difftextwindow.cpp:1959 mergeresultwindow.cpp:2792 optiondialog.cpp:787
+#: difftextwindow.cpp:1959
 #, fuzzy, kde-format
+msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Impera Imisusire : "
 
@@ -142,26 +144,31 @@ msgstr "A ( Base ) : "
 
 #: difftextwindow.cpp:1986
 #, fuzzy, kde-format
+msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Idosiye ya:  A : "
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2838
+#: difftextwindow.cpp:1987
 #, kde-format
+msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:1987 mergeresultwindow.cpp:2837
+#: difftextwindow.cpp:1987
 #, kde-format
+msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr ""
 
 #: difftextwindow.cpp:1987
 #, fuzzy, kde-format
+msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Impera Imisusire : "
 
 #: difftextwindow.cpp:1988
 #, kde-format
+msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr ""
 
@@ -175,8 +182,9 @@ msgstr "Umurongo: %1 "
 msgid "End"
 msgstr "Impera"
 
-#: difftextwindow.cpp:2082 smalldialogs.cpp:163
+#: difftextwindow.cpp:2082
 #, fuzzy, kde-format
+msgctxt ""
 msgid "Open File"
 msgstr "Mu Gufungura dosiye"
 
@@ -763,10 +771,12 @@ msgstr ""
 msgid "Error while creating folder."
 msgstr "Ikosa Kurema Ububiko . "
 
-#: directorymergewindow.cpp:2719 directorymergewindow.cpp:2833
+#: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
+#: directorymergewindow.cpp:2832
 #, fuzzy, kde-format
-msgid "Dest"
-msgstr "Kugogora"
+msgctxt "@label:textbox"
+msgid "Dest: "
+msgstr "Ibiro: %1"
 
 #: directorymergewindow.cpp:2727 directorymergewindow.cpp:2755
 #, fuzzy, kde-format
@@ -859,38 +869,33 @@ msgstr ""
 msgid "C:    "
 msgstr ""
 
-#: directorymergewindow.cpp:2801
-#, fuzzy, kde-format
-msgid "Dest: "
-msgstr "Ibiro: %1"
-
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2843
+#: directorymergewindow.cpp:2842
 #, fuzzy, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Seriveri y'ububiko:"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2949
 #, fuzzy, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Gutangira /Gukomeza "
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2950
 #, fuzzy, kde-format
 msgid "Run Operation for Current Item"
 msgstr "ya:  "
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2951
 #, fuzzy, kde-format
 msgid "Compare Selected File"
 msgstr "Idosiye "
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2952
 #, fuzzy, kde-format
 msgid "Merge Current File"
 msgstr "Idosiye "
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2952
 #, fuzzy, kde-format
 #| msgid "Merge"
 msgid ""
@@ -898,165 +903,165 @@ msgid ""
 "File"
 msgstr "Gukomatanya"
 
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2953
 #, fuzzy, kde-format
 msgid "Fold All Subfolders"
 msgstr "Amajwi Yose"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2954
 #, fuzzy, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Amajwi Yose"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2955
 #, fuzzy, kde-format
 msgid "Rescan"
 msgstr "Urukiramende"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2958
 #, fuzzy, kde-format
 msgid "Choose A for All Items"
 msgstr "A ya:  "
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2959
 #, fuzzy, kde-format
 msgid "Choose B for All Items"
 msgstr "ya:  "
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:2960
 #, fuzzy, kde-format
 msgid "Choose C for All Items"
 msgstr "ya:  "
 
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2961
 #, fuzzy, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "- ya:  "
 
-#: directorymergewindow.cpp:2963
+#: directorymergewindow.cpp:2962
 #, fuzzy, kde-format
 msgid "No Operation for All Items"
 msgstr "ya:  "
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid "Show Identical Files"
 msgstr ""
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2967
 #, kde-format
 msgid ""
 "Identical\n"
 "Files"
 msgstr ""
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2968
 #, fuzzy, kde-format
 msgid "Show Different Files"
 msgstr "Bya Idosiye : "
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Show Files only in A"
 msgstr ""
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid ""
 "Files\n"
 "only in A"
 msgstr ""
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid "Show Files only in B"
 msgstr ""
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid ""
 "Files\n"
 "only in B"
 msgstr ""
 
-#: directorymergewindow.cpp:2972
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Files only in C"
 msgstr ""
 
-#: directorymergewindow.cpp:2972
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid ""
 "Files\n"
 "only in C"
 msgstr ""
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:2975
 #, fuzzy, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Idosiye "
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:2976
 #, fuzzy, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Idosiye "
 
-#: directorymergewindow.cpp:2979 directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2978 directorymergewindow.cpp:2985
 #, kde-format
 msgid "Do Nothing"
 msgstr "Ntugire icyo Ukora"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2983 opendialog.ui:68
+#: directorymergewindow.cpp:2982 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Gukomatanya"
 
-#: directorymergewindow.cpp:2984
+#: directorymergewindow.cpp:2983
 #, fuzzy, kde-format
 msgid "Delete (if exists)"
 msgstr "( NIBA ) "
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2986
 #, fuzzy, kde-format
 msgid "Copy A to B"
 msgstr "A Kuri "
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2987
 #, fuzzy, kde-format
 msgid "Copy B to A"
 msgstr "Kuri A "
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2988
 #, fuzzy, kde-format
 msgid "Delete A"
 msgstr "A "
 
-#: directorymergewindow.cpp:2990
+#: directorymergewindow.cpp:2989
 #, fuzzy, kde-format
 msgid "Delete B"
 msgstr "Gusiba #"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2990
 #, fuzzy, kde-format
 msgid "Delete A && B"
 msgstr "A & & "
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:2991
 #, fuzzy, kde-format
 msgid "Merge to A"
 msgstr "Kuri A "
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2992
 #, fuzzy, kde-format
 msgid "Merge to B"
 msgstr "Kuri "
 
-#: directorymergewindow.cpp:2994
+#: directorymergewindow.cpp:2993
 #, fuzzy, kde-format
 msgid "Merge to A && B"
 msgstr "Kuri A & & "
@@ -2045,6 +2050,21 @@ msgstr "Byahinduwe"
 #, fuzzy, kde-format
 msgid "Encoding for saving:"
 msgstr "Idosiye ya:  : "
+
+#: mergeresultwindow.cpp:2792 optiondialog.cpp:787
+#, fuzzy, kde-format
+msgid "Line end style:"
+msgstr "Impera Imisusire : "
+
+#: mergeresultwindow.cpp:2837
+#, kde-format
+msgid "Unix"
+msgstr ""
+
+#: mergeresultwindow.cpp:2838
+#, kde-format
+msgid "DOS"
+msgstr ""
 
 #: mergeresultwindow.cpp:2884
 #, fuzzy, kde-format
@@ -3350,6 +3370,11 @@ msgstr "Mu Gufungura dosiye"
 msgid "Select Output File"
 msgstr ""
 
+#: smalldialogs.cpp:163
+#, fuzzy, kde-format
+msgid "Open File"
+msgstr "Mu Gufungura dosiye"
+
 #: smalldialogs.cpp:309
 #, fuzzy, kde-format
 msgid "Search text:"
@@ -3594,6 +3619,10 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Dest"
+#~ msgstr "Kugogora"
 
 #~ msgid "Unicode"
 #~ msgstr "Inikode"
