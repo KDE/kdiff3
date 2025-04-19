@@ -57,7 +57,13 @@
 /*
     QRunnable is not enough here. It may appear to work depending on configuration.
     That is an artifact of the threads being short-lived. Never the less such code is
-    not safe because of a potenial race condition on exit.
+    not safe because of a potenial race condition on exit. This problem is triggered
+    in practice on real systems in unpredictable ways.
+
+    In addition to the threads themselves remaining alive after the DiffTextWindow. They
+    also were not tied to the life of the RecalcWordWrapThread object they depended on.
+    Subclassing QThread allows us to guarantee RecalcWordWrapThread objects are cleared only after
+    the associated thread is finished.
 
     The use of Qt's parent system establishes order of destruction for QObjects.
     Allowing us to guarantee clearance of these helper threads and their accompanying
