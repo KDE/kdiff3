@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-18 00:43+0000\n"
-"PO-Revision-Date: 2025-02-09 08:15+0200\n"
+"PO-Revision-Date: 2025-04-19 18:24+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -119,18 +119,16 @@ msgid "File %1: Line not available"
 msgstr "קובץ %1: השורה לא זמינה"
 
 #: difftextwindow.cpp:1955
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "קידוד:"
 
 #: difftextwindow.cpp:1959
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
-msgstr "שורה וסגנון:"
+msgstr "סגנון סוף שורה:"
 
 #: difftextwindow.cpp:1984
 #, kde-format
@@ -138,36 +136,31 @@ msgid "A (Base)"
 msgstr "א (בסיס)"
 
 #: difftextwindow.cpp:1986
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "קידוד: %1"
 
 #: difftextwindow.cpp:1987
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:1987
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "יוניקס"
 
 #: difftextwindow.cpp:1987
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "סגנון סיומת שורה: %1"
 
 #: difftextwindow.cpp:1988
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -183,8 +176,7 @@ msgid "End"
 msgstr "סוף"
 
 #: difftextwindow.cpp:2082
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt ""
 msgid "Open File"
 msgstr "פתיחת קובץ"
@@ -774,8 +766,7 @@ msgstr "שגיאה ביצירת תיקייה."
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
 #: directorymergewindow.cpp:2832
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "יעד: "
