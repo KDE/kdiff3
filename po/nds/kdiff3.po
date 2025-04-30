@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2011-10-09 21:25+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -189,10 +189,9 @@ msgstr "Böverst Reeg"
 msgid "End"
 msgstr "Enn"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
-msgctxt ""
 msgid "Open File"
 msgstr "Dateien warrt opmaakt..."
 
@@ -3839,12 +3838,6 @@ msgstr "Dateien warrt opmaakt..."
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgid "Open File"
-msgstr "Dateien warrt opmaakt..."
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -4111,6 +4104,12 @@ msgstr "Argument bargt nich verwacht Hoochkomma"
 #, kde-format
 msgid "No program specified."
 msgstr "Keen Programm angeven"
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Dateien warrt opmaakt..."
 
 #~ msgid "Dest"
 #~ msgstr "Teel"

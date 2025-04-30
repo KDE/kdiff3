@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2023-06-14 12:13+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -205,10 +205,8 @@ msgstr "Linha de topo"
 msgid "End"
 msgstr "Fim"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Abrir um Ficheiro"
 
@@ -3576,11 +3574,6 @@ msgstr "Abrir a Pasta"
 msgid "Select Output File"
 msgstr "Seleccionar o Ficheiro de Resultado"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Abrir um Ficheiro"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3833,6 +3826,12 @@ msgstr "Detectaram-se aspas inesperadas dentro do argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Não foi indicado nenhum programa."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Abrir um Ficheiro"
 
 #~ msgid "Dest"
 #~ msgstr "Dest"

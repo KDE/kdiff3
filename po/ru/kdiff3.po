@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2024-02-09 22:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -189,10 +189,8 @@ msgstr "Первая строка"
 msgid "End"
 msgstr "Конец"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Открыть файл"
 
@@ -3549,11 +3547,6 @@ msgstr "Открыть папку"
 msgid "Select Output File"
 msgstr "Выбрать файл вывода"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Открыть файл"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3807,6 +3800,12 @@ msgstr "Непредвиденный символ кавычки в аргуме
 #, kde-format
 msgid "No program specified."
 msgstr "Не указана программа."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Открыть файл"
 
 #~ msgid "Dest"
 #~ msgstr "Назначение"

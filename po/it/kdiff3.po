@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2025-04-21 11:43+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -178,9 +178,8 @@ msgstr "Riga superiore"
 msgid "End"
 msgstr "Fine"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, kde-format
-msgctxt ""
 msgid "Open File"
 msgstr "Apri file"
 
@@ -3522,11 +3521,6 @@ msgstr "Apri cartella"
 msgid "Select Output File"
 msgstr "Seleziona il nome del file del risultato"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Apri file"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3778,6 +3772,10 @@ msgstr "Carattere di virgoletta inatteso all'interno dell'argomento."
 #, kde-format
 msgid "No program specified."
 msgstr "Nessun programma specificato."
+
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Apri file"
 
 #~ msgid "Dest"
 #~ msgstr "Destinazione"

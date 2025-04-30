@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2010-10-03 21:09-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -189,10 +189,9 @@ msgstr "上部行"
 msgid "End"
 msgstr "最後"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
-msgctxt ""
 msgid "Open File"
 msgstr "ファイルを開いています..."
 
@@ -3765,12 +3764,6 @@ msgstr "ファイルを開いています..."
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgid "Open File"
-msgstr "ファイルを開いています..."
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -4016,6 +4009,12 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "ファイルを開いています..."
 
 #~ msgid "Dest"
 #~ msgstr "先"

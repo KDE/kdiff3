@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2013-07-13 11:52+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -188,10 +188,9 @@ msgstr "Felső sor"
 msgid "End"
 msgstr "Vég"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
-msgctxt ""
 msgid "Open File"
 msgstr "Fájlok megnyitása..."
 
@@ -3694,12 +3693,6 @@ msgstr "Fájlok megnyitása..."
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgid "Open File"
-msgstr "Fájlok megnyitása..."
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3949,6 +3942,12 @@ msgstr "Nem várt aposztróf az argumentumon belül."
 #, kde-format
 msgid "No program specified."
 msgstr "Nincs program megadva."
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Fájlok megnyitása..."
 
 #~ msgid "Dest"
 #~ msgstr "Cél"

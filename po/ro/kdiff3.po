@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2021-05-15 15:37+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -187,10 +187,8 @@ msgstr "Prima linie"
 msgid "End"
 msgstr "Sfârșit"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Deschide fișier"
 
@@ -3421,11 +3419,6 @@ msgstr "Fișier"
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Deschide fișier"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3674,6 +3667,12 @@ msgstr "Apostrof neașteptat în argument."
 #, kde-format
 msgid "No program specified."
 msgstr "Nu s-a specificat un program."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Deschide fișier"
 
 #~ msgid "Dest"
 #~ msgstr "Dest"

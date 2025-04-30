@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -186,10 +186,9 @@ msgstr "Gornja linija"
 msgid "End"
 msgstr "Kraj"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
-msgctxt ""
 msgid "Open File"
 msgstr "Otvaram datoteke..."
 
@@ -3829,12 +3828,6 @@ msgstr "Otvaram datoteke..."
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgid "Open File"
-msgstr "Otvaram datoteke..."
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -4097,6 +4090,12 @@ msgstr "Neočekivan apostrof unutar argumenata."
 #, kde-format
 msgid "No program specified."
 msgstr "Nijedan program nije naveden."
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Otvaram datoteke..."
 
 #~ msgid "Dest"
 #~ msgstr "Odr."

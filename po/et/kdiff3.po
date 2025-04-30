@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2020-09-28 03:19+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -188,10 +188,8 @@ msgstr "Ülarida"
 msgid "End"
 msgstr "Lõpp"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Faili avamine"
 
@@ -3765,11 +3763,6 @@ msgstr "Kataloogi avamine"
 msgid "Select Output File"
 msgstr "Väljundfaili valimine"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Faili avamine"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -4027,6 +4020,12 @@ msgstr "Ootamatu tsitaadimärk argumendi sees."
 #, kde-format
 msgid "No program specified."
 msgstr "Programmi pole määratud."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Faili avamine"
 
 #~ msgid "Dest"
 #~ msgstr "Sihtkoht"

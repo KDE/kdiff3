@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2025-02-09 09:55+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -182,10 +182,8 @@ msgstr "Övre rad"
 msgid "End"
 msgstr "Slut"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Öppna fil"
 
@@ -3503,11 +3501,6 @@ msgstr "Öppna katalog"
 msgid "Select Output File"
 msgstr "Välj utdatafil"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Öppna fil"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3758,6 +3751,12 @@ msgstr "Oväntat citationstecken inne i argument."
 #, kde-format
 msgid "No program specified."
 msgstr "Inget program angivet."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Öppna fil"
 
 #~ msgid "Dest"
 #~ msgstr "Mål"

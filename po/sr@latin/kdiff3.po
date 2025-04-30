@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2017-09-28 17:57+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -192,10 +192,9 @@ msgstr "Prvi red"
 msgid "End"
 msgstr "Kraj"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
-msgctxt ""
 msgid "Open File"
 msgstr "Otvaram fajlove..."
 
@@ -3862,12 +3861,6 @@ msgstr "Otvaram fajlove..."
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgid "Open File"
-msgstr "Otvaram fajlove..."
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -4136,6 +4129,12 @@ msgstr "Neočekivan apostrof unutar argumenta."
 #, kde-format
 msgid "No program specified."
 msgstr "Naredba nije zadata."
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Otvaram fajlove..."
 
 #~ msgid "Dest"
 #~ msgstr "Odredište"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2024-09-27 11:46+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -183,10 +183,8 @@ msgstr "Horní řádek"
 msgid "End"
 msgstr "Konec"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Otevřít soubor"
 
@@ -3489,11 +3487,6 @@ msgstr "Otevřít složku"
 msgid "Select Output File"
 msgstr "Vyberte výstupní soubor"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Otevřít soubor"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3742,6 +3735,12 @@ msgstr "Neočekávaná uvozovka uvnitř argumentu."
 #, kde-format
 msgid "No program specified."
 msgstr "Nebyl zadán program."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Otevřít soubor"
 
 #~ msgid "Dest"
 #~ msgstr "Cíl"

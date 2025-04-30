@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2024-12-25 19:45+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -183,10 +183,8 @@ msgstr "शीर्ष रेखा"
 msgid "End"
 msgstr "अंत"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "सञ्चिकां उद्घाटयन्तु"
 
@@ -3465,11 +3463,6 @@ msgstr "Folder उद्घाटयन्तु"
 msgid "Select Output File"
 msgstr "Output File इति चिनोतु"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "सञ्चिकां उद्घाटयन्तु"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3718,6 +3711,12 @@ msgstr "तर्कस्य अन्तः अप्रत्याशित 
 #, kde-format
 msgid "No program specified."
 msgstr "कोऽपि कार्यक्रमः निर्दिष्टः नास्ति।"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "सञ्चिकां उद्घाटयन्तु"
 
 #~ msgid "Dest"
 #~ msgstr "हस्त"

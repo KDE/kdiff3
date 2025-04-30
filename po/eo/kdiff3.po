@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2024-12-28 17:41+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -183,10 +183,8 @@ msgstr "Supra linio"
 msgid "End"
 msgstr "Fino"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Malfermi Dosieron"
 
@@ -3490,11 +3488,6 @@ msgstr "Malfermi Dosierujon"
 msgid "Select Output File"
 msgstr "Elekti Eligo-Dosiero"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Malfermi Dosieron"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3744,6 +3737,12 @@ msgstr "Neatendita citaĵo en argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Neniu programo specifita."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Malfermi Dosieron"
 
 #~ msgid "Dest"
 #~ msgstr "Dest"

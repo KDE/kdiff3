@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2023-06-25 09:51+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -191,10 +191,8 @@ msgstr "Baris atas"
 msgid "End"
 msgstr "Akhir"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Buka File"
 
@@ -3436,11 +3434,6 @@ msgstr "Buka Folder"
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Buka File"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3674,6 +3667,12 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Buka File"
 
 #~ msgid "Dest"
 #~ msgstr "Tujuan"

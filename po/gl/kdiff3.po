@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2025-02-14 08:27+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -185,10 +185,8 @@ msgstr "Liña superior"
 msgid "End"
 msgstr "Fin"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Abrir un ficheiro"
 
@@ -3540,11 +3538,6 @@ msgstr "Abrir o cartafol"
 msgid "Select Output File"
 msgstr "Escoller o ficheiro de saída"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Abrir un ficheiro"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3801,6 +3794,12 @@ msgstr "Carácter de comiña inesperado dentro do argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Non se indicou o programa."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Abrir un ficheiro"
 
 #~ msgid "Dest"
 #~ msgstr "Dest"

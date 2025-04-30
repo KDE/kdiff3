@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2025-02-16 10:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -184,10 +184,8 @@ msgstr "Ylin rivi"
 msgid "End"
 msgstr "Loppu"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Avaa tiedosto"
 
@@ -3511,11 +3509,6 @@ msgstr "Avaa kansio"
 msgid "Select Output File"
 msgstr "Valitse tulostiedosto"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Avaa tiedosto"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3765,6 +3758,12 @@ msgstr "Odottamaton lainausmerkki parametrin sisällä."
 #, kde-format
 msgid "No program specified."
 msgstr "Ohjelmaa ei määritetty."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Avaa tiedosto"
 
 #~ msgid "Dest"
 #~ msgstr "Kohde"

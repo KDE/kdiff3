@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-devtools/kdiff3.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2008-04-18 14:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -183,10 +183,9 @@ msgstr ""
 msgid "End"
 msgstr "Deireadh"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "File"
-msgctxt ""
 msgid "Open File"
 msgstr "Comhad"
 
@@ -3332,12 +3331,6 @@ msgstr "Comhad"
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "File"
-msgid "Open File"
-msgstr "Comhad"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3571,6 +3564,12 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~| msgid "File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Comhad"
 
 #~ msgid "Unicode"
 #~ msgstr "Unicode"

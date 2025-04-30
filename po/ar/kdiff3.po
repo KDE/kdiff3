@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2022-01-21 22:23+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -181,10 +181,8 @@ msgstr "السطر الأعلى"
 msgid "End"
 msgstr "النهاية"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "افتح الملف"
 
@@ -3341,11 +3339,6 @@ msgstr "افتح مجلّد"
 msgid "Select Output File"
 msgstr "اختر ملفّ الخرج"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "افتح الملف"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3585,6 +3578,12 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "افتح الملف"
 
 #~ msgid "Dest"
 #~ msgstr "الهدف"

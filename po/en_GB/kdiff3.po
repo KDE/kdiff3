@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2024-11-23 12:05+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -184,10 +184,8 @@ msgstr "Top line"
 msgid "End"
 msgstr "End"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Open File"
 
@@ -3489,11 +3487,6 @@ msgstr "Open Folder"
 msgid "Select Output File"
 msgstr "Select Output File"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Open File"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3741,6 +3734,12 @@ msgstr "Unexpected quote character within argument."
 #, kde-format
 msgid "No program specified."
 msgstr "No program specified."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Open File"
 
 #~ msgid "Dest"
 #~ msgstr "Dest"

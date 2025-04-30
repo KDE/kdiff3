@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2011-09-04 22:27+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -183,12 +183,10 @@ msgstr "Øverste linje"
 msgid "End"
 msgstr "Slutt"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
-msgstr "Åpner filer …"
+msgstr ""
 
 #: difftextwindow.cpp:2134 optiondialog.cpp:387
 #, kde-format
@@ -3328,11 +3326,6 @@ msgstr ""
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr ""
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3577,3 +3570,9 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr "Ikke noe program oppgitt."
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Åpner filer …"

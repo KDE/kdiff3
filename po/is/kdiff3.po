@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2015-01-29 09:07+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -175,9 +175,8 @@ msgstr ""
 msgid "End"
 msgstr "Endir"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
-msgctxt ""
 msgid "Open File"
 msgstr "Skrá"
 
@@ -3263,11 +3262,6 @@ msgstr "Skrá"
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-msgid "Open File"
-msgstr "Skrá"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3501,6 +3495,11 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Skrá"
 
 #, fuzzy
 #~ msgid "Unicode"

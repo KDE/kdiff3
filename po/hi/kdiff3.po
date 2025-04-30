@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2021-09-17 20:07+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -181,10 +181,9 @@ msgstr "शीर्ष पंक्ति %1"
 msgid "End"
 msgstr "अंत"
 
-#: difftextwindow.cpp:2088
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
-msgctxt ""
 msgid "Open File"
 msgstr "फ़ाइलें खोली जा रही हैं..."
 
@@ -3405,12 +3404,6 @@ msgstr "फ़ाइलें खोली जा रही हैं..."
 msgid "Select Output File"
 msgstr ""
 
-#: smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
-msgid "Open File"
-msgstr "फ़ाइलें खोली जा रही हैं..."
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3647,6 +3640,12 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Opening files..."
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "फ़ाइलें खोली जा रही हैं..."
 
 #~ msgid "Dest"
 #~ msgstr "गंतव्य"

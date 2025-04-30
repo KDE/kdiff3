@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:44+0000\n"
+"POT-Creation-Date: 2025-04-30 00:44+0000\n"
 "PO-Revision-Date: 2025-02-14 21:58-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -194,10 +194,8 @@ msgstr "Linha superior"
 msgid "End"
 msgstr "Fim"
 
-#: difftextwindow.cpp:2088
-#, fuzzy, kde-format
-#| msgid "Open File"
-msgctxt ""
+#: difftextwindow.cpp:2088 smalldialogs.cpp:163
+#, kde-format
 msgid "Open File"
 msgstr "Abrir arquivo"
 
@@ -3539,11 +3537,6 @@ msgstr "Abrir pasta"
 msgid "Select Output File"
 msgstr "Selecionar arquivo de saída"
 
-#: smalldialogs.cpp:163
-#, kde-format
-msgid "Open File"
-msgstr "Abrir arquivo"
-
 #: smalldialogs.cpp:309
 #, kde-format
 msgid "Search text:"
@@ -3800,6 +3793,12 @@ msgstr "Apóstrofo inesperado dentro do argumento."
 #, kde-format
 msgid "No program specified."
 msgstr "Não foi especificado nenhum programa."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ msgid "Open File"
+#~ msgstr "Abrir arquivo"
 
 #~ msgid "Dest"
 #~ msgstr "Destino"
