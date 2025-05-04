@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-30 00:44+0000\n"
-"PO-Revision-Date: 2025-04-09 18:16+0900\n"
+"PO-Revision-Date: 2025-05-03 14:51+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -121,18 +121,16 @@ msgid "File %1: Line not available"
 msgstr "檔案 %1：無法取得行"
 
 #: difftextwindow.cpp:1961
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "編碼："
 
 #: difftextwindow.cpp:1965
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
-msgstr "行結尾樣式："
+msgstr "行尾樣式："
 
 #: difftextwindow.cpp:1990
 #, kde-format
@@ -140,36 +138,31 @@ msgid "A (Base)"
 msgstr "A(基底)"
 
 #: difftextwindow.cpp:1992
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "編碼：%1"
 
 #: difftextwindow.cpp:1993
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:1993
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:1993
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "行結尾樣式：%1"
+msgstr "行尾樣式：%1"
 
 #: difftextwindow.cpp:1994
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr "未知"
@@ -773,8 +766,7 @@ msgstr "建立資料夾時發生錯誤。"
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
 #: directorymergewindow.cpp:2832
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "目標："
