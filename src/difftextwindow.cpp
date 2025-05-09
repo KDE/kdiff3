@@ -1376,6 +1376,9 @@ void DiffTextWindow::draw(RLPainter& p, const QRect& invalidRect, const qint32 b
 QString DiffTextWindowData::getString(const LineType d3lIdx) const
 {
     assert(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
+    //Qt sends resize events pre-init under certian conditions. No good way to avoid this.
+    if(mDiff3LineVector == nullptr)
+        return QString();
 
     if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || (size_t)d3lIdx >= mDiff3LineVector->size())
         return QString();
