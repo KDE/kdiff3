@@ -554,7 +554,10 @@ void DiffTextWindow::setHorizScrollOffset(qint32 horizScrollOffset)
 
 qint32 DiffTextWindow::getMaxTextWidth() const
 {
-    if(d->m_bWordWrap)
+    /*
+        mDiff3LineVector is null when qt sends a resize event before init. Default to fixed size in this case.
+    */
+    if(d->mDiff3LineVector == nullptr || !d->m_bWordWrap)
     {
         return getVisibleTextAreaWidth();
     }
