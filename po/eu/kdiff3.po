@@ -1,7 +1,7 @@
 # Translation for kdiff3.po to Euskara/Basque (eu).
 # Copyright (C) 2018-2025 This file is copyright:
 # This file is distributed under the same license as the kdiff3 package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2020, 2021, 2022, 2023, 2024, 2025.
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-10 00:45+0000\n"
-"PO-Revision-Date: 2025-02-09 19:02+0100\n"
+"PO-Revision-Date: 2025-05-30 20:14+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -121,18 +121,16 @@ msgid "File %1: Line not available"
 msgstr "%1 fitxategia: Lerro ez erabilgarri"
 
 #: difftextwindow.cpp:1968
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Kodeketa:"
 
 #: difftextwindow.cpp:1972
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
-msgstr "Lerro amaiera estiloa:"
+msgstr "Lerro-amaiera estiloa:"
 
 #: difftextwindow.cpp:1997
 #, kde-format
@@ -140,36 +138,31 @@ msgid "A (Base)"
 msgstr "A (Oinarria)"
 
 #: difftextwindow.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Kodeketa: %1"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
-msgstr "UNIX"
+msgstr "Unix"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "Lerro amaiera estiloa: %1"
+msgstr "Lerro-amaiera estiloa: %1"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr "Ezezaguna"
@@ -797,8 +790,7 @@ msgstr "Errorea karpeta sortzean."
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
 #: directorymergewindow.cpp:2832
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Jomuga: "
