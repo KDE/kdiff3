@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-10 00:45+0000\n"
-"PO-Revision-Date: 2025-02-15 11:14+0100\n"
+"PO-Revision-Date: 2025-06-14 14:14+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -24,6 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -130,15 +131,13 @@ msgid "File %1: Line not available"
 msgstr "Plik %1: Wiersz jest niedostępny"
 
 #: difftextwindow.cpp:1968
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Kodowanie:"
 
 #: difftextwindow.cpp:1972
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Wygląd końca wiersza:"
@@ -149,36 +148,31 @@ msgid "A (Base)"
 msgstr "A (podstawa)"
 
 #: difftextwindow.cpp:1999
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Kodowanie: %1"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Wygląd końca wiersza: %1"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr "Nieznany"
@@ -799,8 +793,7 @@ msgstr "Błąd tworzenia katalogu."
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
 #: directorymergewindow.cpp:2832
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Docelowy: "
@@ -1369,7 +1362,7 @@ msgstr ""
 #: kdiff3.cpp:801
 #, kde-format
 msgid "Go to Previous Conflict"
-msgstr "Przejdź do poprzedniej sprzeczności"
+msgstr "Przejdź do poprzedniego błędu"
 
 #: kdiff3.cpp:801
 #, kde-format
@@ -1378,12 +1371,12 @@ msgid ""
 "Conflict"
 msgstr ""
 "Poprzedni\n"
-"sprzeczność"
+"błąd"
 
 #: kdiff3.cpp:803
 #, kde-format
 msgid "Go to Next Conflict"
-msgstr "Przejdź do następnej sprzeczności"
+msgstr "Przejdź do następnego błędu"
 
 #: kdiff3.cpp:803
 #, kde-format
@@ -1392,12 +1385,12 @@ msgid ""
 "Conflict"
 msgstr ""
 "Następny\n"
-"sprzeczność"
+"błąd"
 
 #: kdiff3.cpp:805
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
-msgstr "Przejdź do poprzedniej nierozwiązanej sprzeczności"
+msgstr "Przejdź do poprzedniego nierozwiązanego błędu"
 
 #: kdiff3.cpp:805
 #, kde-format
@@ -1411,7 +1404,7 @@ msgstr ""
 #: kdiff3.cpp:807
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
-msgstr "Przejdź do następnej nierozwiązanej sprzeczności"
+msgstr "Przejdź do następnego nierozwiązanego błędu"
 
 #: kdiff3.cpp:807
 #, kde-format
@@ -1496,8 +1489,7 @@ msgstr ""
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr ""
-"Sam przejdź do następnej nierozwiązanej sprzeczności po wybraniu źródła"
+msgstr "Sam przejdź do następnego nierozwiązanego błędu po wybraniu źródła"
 
 #: kdiff3.cpp:814
 #, kde-format
@@ -1557,12 +1549,12 @@ msgstr ""
 #: kdiff3.cpp:821
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
-msgstr "Sam rozwiąż proste sprzeczności"
+msgstr "Sam rozwiąż proste błędy"
 
 #: kdiff3.cpp:822
 #, kde-format
 msgid "Set Deltas to Conflicts"
-msgstr "Ustaw różnice na sprzecznościach"
+msgstr "Ustaw różnice na błędach"
 
 #: kdiff3.cpp:823
 #, kde-format
@@ -1572,7 +1564,7 @@ msgstr "Rozpocznij scalanie wyrażeniem regularnym"
 #: kdiff3.cpp:824
 #, kde-format
 msgid "Automatically Solve History Conflicts"
-msgstr "Sam rozwiąż sprzeczności historii"
+msgstr "Sam rozwiąż błędy historii"
 
 #: kdiff3.cpp:825
 #, kde-format
@@ -1854,8 +1846,7 @@ msgstr ""
 #: main.cpp:120
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
-msgstr ""
-"Brak GUI jeśli wszystkie sprzeczności mogą być rozwiązane. (Wymaga pliku -o)"
+msgstr "Brak GUI jeśli wszystkie błędy mogą być rozwiązane. (Wymaga pliku -o)"
 
 #: main.cpp:121
 #, kde-format
@@ -1977,39 +1968,39 @@ msgstr "Wybierz wszędzie C"
 #: mergeresultwindow.cpp:138
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
-msgstr "Wybierz A dla wszystkich nierozwiązanych sprzeczności"
+msgstr "Wybierz A dla wszystkich nierozwiązanych błędów"
 
 #: mergeresultwindow.cpp:139
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
-msgstr "Wybierz B dla wszystkich nierozwiązanych sprzeczności"
+msgstr "Wybierz B dla wszystkich nierozwiązanych błędów"
 
 #: mergeresultwindow.cpp:140
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
-msgstr "Wybierz C dla wszystkich nierozwiązanych sprzeczności"
+msgstr "Wybierz C dla wszystkich nierozwiązanych błędów"
 
 #: mergeresultwindow.cpp:141
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
-msgstr "Wybierz A dla wszystkich nierozwiązanych sprzeczności białych znaków"
+msgstr "Wybierz A dla wszystkich nierozwiązanych błędów białych znaków"
 
 #: mergeresultwindow.cpp:142
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
-msgstr "Wybierz B dla wszystkich nierozwiązanych sprzeczności białych znaków"
+msgstr "Wybierz B dla wszystkich nierozwiązanych błędów białych znaków"
 
 #: mergeresultwindow.cpp:143
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
-msgstr "Wybierz C dla wszystkich nierozwiązanych sprzeczności białych znaków"
+msgstr "Wybierz C dla wszystkich nierozwiązanych błędów białych znaków"
 
 #: mergeresultwindow.cpp:239
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
-"Liczba pozostałych nierozwiązanych sprzeczności: %1 (z których %2 dotyczy "
-"znaków odstępu)"
+"Liczba pozostałych nierozwiązanych błędów: %1 (z których %2 dotyczy znaków "
+"odstępu)"
 
 #: mergeresultwindow.cpp:303
 #, kde-format
@@ -2050,15 +2041,15 @@ msgid ""
 "Number of unsolved conflicts: %3\n"
 "%4"
 msgstr ""
-"Liczba sprzeczności: %1\n"
-"Liczba rozwiązanych sprzeczności: %2\n"
-"Liczba nierozwiązanych sprzeczności: %3\n"
+"Liczba błędów: %1\n"
+"Liczba rozwiązanych błędów: %2\n"
+"Liczba nierozwiązanych błędów: %3\n"
 "%4"
 
 #: mergeresultwindow.cpp:770
 #, kde-format
 msgid "Conflicts"
-msgstr "Sprzeczności"
+msgstr "Błędy"
 
 #: mergeresultwindow.cpp:1511
 #, kde-format
@@ -2068,12 +2059,12 @@ msgstr "<Brak wiersza źr.>"
 #: mergeresultwindow.cpp:1519
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
-msgstr "<Sprzeczność przy scalaniu (tylko białe znaki)>"
+msgstr "<Błąd przy scalaniu (tylko białe znaki)>"
 
 #: mergeresultwindow.cpp:1521 mergeresultwindow.cpp:2421
 #, kde-format
 msgid "<Merge Conflict>"
-msgstr "<Sprzeczność przy scalaniu>"
+msgstr "<Błąd scalania>"
 
 #: mergeresultwindow.cpp:2645
 #, kde-format
@@ -2081,14 +2072,14 @@ msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
-"Nie rozwiązano wszystkich sprzeczności.\n"
-"Plik nie został zapisany."
+"Nie rozwiązano wszystkich błędów.\n"
+"Nie zapisano pliku."
 
 #: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
 #, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
-msgstr "Pozostałe sprzeczności"
+msgstr "Pozostałe błędy"
 
 #: mergeresultwindow.cpp:2654
 #, kde-format
@@ -2097,9 +2088,8 @@ msgid ""
 "manually.\n"
 "File not saved."
 msgstr ""
-"Wystąpiła sprzeczność wyglądu końca wiersza. Wybierz wygląd końca wiersza "
-"ręcznie.\n"
-"Plik nie został zapisany."
+"Wystąpił błąd zapisu końca wiersza. Wybierz zapis końca wiersza ręcznie.\n"
+"Nie zapisano pliku."
 
 #: mergeresultwindow.cpp:2668
 #, kde-format
@@ -2162,7 +2152,7 @@ msgstr "DOS"
 #: mergeresultwindow.cpp:2884
 #, kde-format
 msgid "Conflict"
-msgstr "Sprzeczność"
+msgstr "Błąð"
 
 #: mergeresultwindow.cpp:2907
 #, kde-format
@@ -2342,7 +2332,7 @@ msgstr "Kolor C:"
 #: optiondialog.cpp:652
 #, kde-format
 msgid "Conflict color:"
-msgstr "Kolor dla sprzeczności:"
+msgstr "Kolor błędu:"
 
 #: optiondialog.cpp:661
 #, kde-format
@@ -2610,8 +2600,8 @@ msgid ""
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
 msgstr ""
 "W trybie okresowego przechodzenia wynik bieżącego zaznaczenia \n"
-"jest pokazywany przez podany czas zanim nastąpi przejście do następnej \n"
-"sprzeczności. Zakres: 0-2000 ms"
+"jest pokazywany przez podany czas zanim nastąpi przejście do następnego \n"
+"błędu. Zakres: 0-2000 ms"
 
 #: optiondialog.cpp:926
 #, kde-format
@@ -2622,7 +2612,7 @@ msgstr "Pokaż okno informacyjne"
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
-msgstr "Pokaż okno z liczbą sprzeczności."
+msgstr "Pokaż okno z liczbą błędów."
 
 #: optiondialog.cpp:932
 #, kde-format
@@ -2754,7 +2744,7 @@ msgstr ""
 #: optiondialog.cpp:1068
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
-msgstr "Sam zapisz i zakończ po scaleniu bez sprzeczności"
+msgstr "Sam zapisz i zakończ po scaleniu bez błędów"
 
 #: optiondialog.cpp:1072
 #, kde-format
@@ -2767,10 +2757,9 @@ msgid ""
 msgstr ""
 "Kiedy KDiff3 został uruchomiony dla scalenia plików z wiersza poleceń i "
 "wszystkie\n"
-"sprzeczności są rozwiązywalne bez potrzeby zadziałania użytkownika, wtedy "
-"sam\n"
+"błędy są rozwiązywalne bez potrzeby zadziałania użytkownika, wtedy sam\n"
 "zapisuje i kończy działanie programu.\n"
-"Działanie jest podobne do opcji wiersza poleceń \"--auto\"."
+"Działanie jest podobne do przełącznika \"--auto\" w wierszu poleceń."
 
 #: optiondialog.cpp:1083 optiondialog.cpp:1084
 #, kde-format
@@ -3721,7 +3710,7 @@ msgstr "Wczytaj ponownie"
 #: StandardMenus.cpp:23
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
-msgstr "Zapisuje wynik scalania. Należy rozwiązać wszystkie sprzeczności!"
+msgstr "Zapisuje wynik scalania. Należy rozwiązać wszystkie błędy!"
 
 #: StandardMenus.cpp:25
 #, kde-format
