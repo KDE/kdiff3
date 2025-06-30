@@ -557,12 +557,13 @@ qint32 DiffTextWindow::getMaxTextWidth() const
     /*
         mDiff3LineVector is null when qt sends a resize event before init. Default to fixed size in this case.
     */
-    if(d->mDiff3LineVector == nullptr || !d->m_bWordWrap)
+    if(d->mDiff3LineVector == nullptr || d->m_bWordWrap)
     {
         return getVisibleTextAreaWidth();
     }
     else if(d->m_maxTextWidth.loadRelaxed() < 0)
     {
+        //TODO: This appears to be broken in someway.
         d->m_maxTextWidth = 0;
         QTextLayout textLayout(QString(), font(), this);
         for(qint32 i = 0; i < d->m_size; ++i)
