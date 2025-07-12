@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-01 00:44+0000\n"
-"PO-Revision-Date: 2025-02-16 10:40+0200\n"
+"PO-Revision-Date: 2025-06-24 13:53+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -121,15 +121,13 @@ msgid "File %1: Line not available"
 msgstr "Tiedosto %1: Rivi ei saatavilla"
 
 #: difftextwindow.cpp:1969
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
-msgstr "Koodaus:"
+msgstr "Merkistö:"
 
 #: difftextwindow.cpp:1973
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Rivinlopetustapa:"
@@ -140,36 +138,31 @@ msgid "A (Base)"
 msgstr "A (perusta)"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr "Koodaus: %1"
+msgstr "Merkistö: %1"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Rivinlopetustapa: %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -790,8 +783,7 @@ msgstr "Virhe kansiota luotaessa."
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
 #: directorymergewindow.cpp:2832
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Kohde: "
