@@ -111,10 +111,9 @@ class EncodedData: public QByteArray
         assert(!mGenerateBOM || ((inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32")) || inEncoding == "UTF-8-BOM"));
     };
 
-    qint64 readChar(QChar &c)
+    qint64 readNext(QString &s)
     {
         qint64 len = 0;
-        QString s;
 
         if(!mDecoder.isValid()) return 0;
 
@@ -133,32 +132,44 @@ class EncodedData: public QByteArray
         } while(!mDecoder.hasError() && s.isEmpty() && !atEnd());
 
         mError = mDecoder.hasError() || (s.isEmpty() && atEnd());
-        if(!mError)
-            c = s[0];
-        else
-            c = QChar::SpecialCharacter::ReplacementCharacter;
+        if(mError)
+        {
+            s[0] = QChar::SpecialCharacter::ReplacementCharacter;
+            s[1] = QChar::SpecialCharacter::Null;
+        }
 
         return len;
     }
 
-    quint64 peekChar(QChar &c)
+    quint64 peekChar(QString &s)
     {
         QStringDecoder decoder = QStringDecoder(mEncoding);
         qsizetype dis = std::distance(it, end());
         qsizetype len = std::min<qsizetype>(4, dis);
-        //This assumes EncodedDataStream is contigous.
-        //This is true for KDiff3's usage as we use QByteArray::fromRawData to make thin
+        /*
+            This assumes EncodedDataStream is contigous.
+            This is true for KDiff3's usage as we use QByteArray::fromRawData to make a thin wrapper backed by a UTF-16 buffer.
+            I would expect most QByteArray's to be contigous I just don't know of any documentation that guarantees this.
+        */
         QByteArray buf = QByteArray::fromRawData(&(*it), len);
 
         if(len > 0)
         {
-            QString s = decoder(buf);
+            s = decoder(buf);
             if(s.isEmpty()) return 0;
 
-            c = s[0];
+            len = 1;
+            if(s[0].isSurrogate())
+            {
+                len ++;
+            }
+            s[len] = QChar::Null;
+
+            len *= sizeof(QChar);
         }
         else
-            c = QChar::Null;
+            s = QChar::Null;
+
         return len;
     }
 
@@ -168,9 +179,10 @@ class EncodedData: public QByteArray
   private:
     quint64 writeString(const QString &s)
     {
-        append(mEncoder(s)); //may contain replacement characters or errors but should be kept anyway
-        mError = mError || mEncoder.hasError(); //Once an error is seen we need to remember that even if the underlieing cedec clears it.
-        return s.length();
+        QByteArray ba = mEncoder(s);
+        append(ba); //may contain replacement characters or errors but should be kept anyway
+        mError = mError || mEncoder.hasError() || ba.isEmpty(); //Once an error is seen we need to remember that even if the underlieing cedec clears it.
+        return s.length() * sizeof(QChar);
     };
 };
 

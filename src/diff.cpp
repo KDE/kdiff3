@@ -638,6 +638,9 @@ void DiffList::runDiff(const std::shared_ptr<const LineDataVector>& p1, const si
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
+
+        //TODO: make this byte based as in the original gnu diff code and kdiff3.
+        //buffer QChar* so offset is in UFT-16 code points (i.e. sizeof(QChar)).
         comparisonInput.file[0].buffer = (*p1)[index1].getBuffer()->unicode() + (*p1)[index1].getOffset();                                         //ptr to buffer
         comparisonInput.file[0].buffered = ((*p1)[index1 + size1 - 1].getOffset() + (*p1)[index1 + size1 - 1].size() - (*p1)[index1].getOffset()); // size of buffer
         comparisonInput.file[1].buffer = (*p2)[index2].getBuffer()->unicode() + (*p2)[index2].getOffset();                                         //ptr to buffer
