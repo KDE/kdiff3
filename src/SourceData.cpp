@@ -571,7 +571,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
         return true;
 
     QString line;
-    QChar curChar, prevChar = '\0';
+    QString curChar, prevChar;
     LineType lines = 0;
     qsizetype lastOffset = 0;
     std::unique_ptr<CommentParser> parser(new DefaultCommentParser());
@@ -618,7 +618,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
 
             while(curChar != '\n' && curChar != '\r')
             {
-                if(curChar.isNull() || curChar.isNonCharacter())
+                if(curChar[0].isNull() || curChar[0].isNonCharacter())
                 {
                     m_v->clear();
                     return true;
@@ -628,7 +628,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                     m_bIncompleteConversion = true;
 
                 line.append(curChar);
-                if(!curChar.isSpace() && !foundNonWhite)
+                if(!curChar[0].isSpace() && !foundNonWhite)
                 {
                     firstNonwhite = line.length();
                     foundNonWhite = true;
@@ -641,7 +641,7 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                 ds.readChar(curChar);
             }
 
-            switch(curChar.unicode())
+            switch(curChar[0].unicode())
             {
                 case '\n':
                     vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
@@ -649,12 +649,12 @@ bool SourceData::FileData::preprocess(const QByteArray& encoding, bool removeCom
                 case '\r':
                     if((FileOffset)lastOffset < mDataSize)
                     {
-                        QChar nextChar;
+                        QString nextChar;
                         quint64 i = ds.peekChar(nextChar);
                         if(i == 0)
                             break;
 
-                        if(nextChar == '\n')
+                        if(nextChar[0] == '\n')
                         {
                             prevChar = curChar;
                             ds.readChar(curChar);
@@ -740,7 +740,7 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, const QByteArray
     QString data;
     while(!inStream.atEnd())
     {
-        QChar c;
+        QString c;
         inStream.readChar(c);
         data += c;
     }

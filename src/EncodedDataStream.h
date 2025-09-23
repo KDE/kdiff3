@@ -52,11 +52,10 @@ class EncodedDataStream: public QDataStream
         assert(!mGenerateBOM || ((inEncoding.startsWith("UTF-16") || inEncoding.startsWith("UTF-32")) || inEncoding == "UTF-8-BOM"));
     };
 
-    inline qint32 readChar(QChar& c)
+    inline qint32 readChar(QString& s)
     {
         char curData = '\0';
         qint32 len = 0;
-        QString s;
         QStringDecoder decoder = QStringDecoder(mEncoding, mGenerateBOM ? QStringConverter::Flag::WriteBom : QStringConverter::Flag::ConvertInitialBom);
         assert(decoder.isValid());
         if(!decoder.isValid()) return 0;
@@ -73,15 +72,16 @@ class EncodedDataStream: public QDataStream
         } while(!decoder.hasError() && s.isEmpty() && !atEnd());
 
         mError = decoder.hasError() || (s.isEmpty() && atEnd());
-        if(!mError)
-            c = s[0];
-        else
-            c = QChar::SpecialCharacter::ReplacementCharacter;
+        if(mError)
+        {
+            s[0] = QChar::SpecialCharacter::ReplacementCharacter;
+            s[1] = QChar::SpecialCharacter::Null;
+        }
 
         return len;
     }
 
-    quint64 peekChar(QChar &c)
+    quint64 peekChar(QString &s)
     {
         QStringDecoder decoder = QStringDecoder(mEncoding);
         QIODevice *d = device(); // GCC 13 false positives this as shadowing a memeber variable.
@@ -90,13 +90,22 @@ class EncodedDataStream: public QDataStream
 
         if(len > 0)
         {
-            QString s = decoder(QByteArray::fromRawData(buf, sizeof(buf)));
+            s = decoder(QByteArray::fromRawData(buf, sizeof(buf)));
             if(s.isEmpty()) return 0;
 
-            c = s[0];
+            len = 1;
+            if(s[0].isSurrogate())
+            {
+                len ++;
+            }
+            s[len] = QChar::Null;
+
+            len *= sizeof(QChar);
         }
         else
-            c = QChar::Null;
+        {
+            s = QChar::SpecialCharacter::Null;
+        }
         return len;
     }
 
