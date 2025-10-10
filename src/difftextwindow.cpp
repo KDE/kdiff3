@@ -830,7 +830,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         {
             d->m_scrollDeltaX = deltaX;
             d->m_scrollDeltaY = deltaY;
-            d->myUpdate(0);
+            d->myUpdate(16); // Throttle updates to ~60fps
         }
     }
 }
@@ -2042,7 +2042,7 @@ void DiffTextWindowFrame::setFirstLine(const LineRef firstLine)
             s += u' ' + QString::number(topVisiableLine + 1);
 
         m_pTopLine->setText(s);
-        m_pTopLine->repaint();
+        m_pTopLine->update();
     }
 }
 

@@ -1864,7 +1864,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
         if(!m_selection.isEmpty() && selectionWasEmpty)
             Q_EMIT newSelection();
 
-        myUpdate(0);
+        myUpdate(16); // Throttle updates to ~60fps
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
