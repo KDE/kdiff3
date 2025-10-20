@@ -24,7 +24,7 @@ class KDiff3App;
 
 /**
  * This is the application "Shell".  It has a menubar, toolbar, and
- * statusbar but relies on the "Part" to do all the real work.
+ * statusbar and a central widget.
  *
  * @short Application Shell
  * @author Joachim Eibl <joachim.eibl at gmx.de>
