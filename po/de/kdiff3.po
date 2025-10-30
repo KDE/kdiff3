@@ -4,21 +4,21 @@
 # SPDX-FileCopyrightText: 2004, 2006 Thomas Reitelbach <tr@erdfunkstelle.de>
 # SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2018, 2020, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2008, 2009, 2011, 2012, 2013, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
-# SPDX-FileCopyrightText: 2022 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-15 00:45+0000\n"
-"PO-Revision-Date: 2023-12-27 22:26+0100\n"
-"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
+"PO-Revision-Date: 2025-10-20 23:02+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.01.85\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -122,15 +122,13 @@ msgid "File %1: Line not available"
 msgstr "Datei %1: Zeile nicht vorhanden"
 
 #: difftextwindow.cpp:1969
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Kodierung:"
 
 #: difftextwindow.cpp:1973
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Zeilenende-Kodierung:"
@@ -141,36 +139,31 @@ msgid "A (Base)"
 msgstr "A (Basis)"
 
 #: difftextwindow.cpp:2000
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Kodierung: %1"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:2001
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Zeilenende-Kodierung: %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recongized"
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -203,7 +196,7 @@ msgstr "Unicode, 8 Bit (BOM)"
 #: difftextwindow.cpp:2144
 #, kde-format
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: difftextwindow.cpp:2156
 #, kde-format
@@ -800,8 +793,7 @@ msgstr "Fehler beim Erstellen des Ordners."
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
 #: directorymergewindow.cpp:2832
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Ziel: "
@@ -1102,8 +1094,7 @@ msgid "Merge to A && B"
 msgstr "Nach A && B zusammenführen"
 
 #: fileaccess.cpp:526
-#, fuzzy, kde-format
-#| msgid "Unable to determine full url. No parent specified."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
@@ -1114,83 +1105,71 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "Über- und untergeordnete Elemente konnten nicht unterschieden werden."
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "Berechnete Adresse lautet: "
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Datei %1 kann nicht gelesen werden"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "Dies beeinflusst alle Zusammenführungsaktionen."
+msgstr "Der Benutzer hat den Lesevorgang von %1 abgebrochen"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "Dies beeinflusst alle Zusammenführungsaktionen."
+msgstr "Der Benutzer hat den Schreibvorgang abgebrochen."
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Erstellung einer temporären Kopie von %1 ist fehlgeschlagen."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Öffnen von %1 ist fehlgeschlagen. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Fehler beim Lesen von %1. %2"
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed.\n"
-#| "Filename: %1"
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"Bei dem Versuch, eine Sicherungskopie zu erstellen, ist eine bereits "
-"vorhandene Sicherungskopie nicht gelöscht worden.\n"
-"Datei:  %1"
+"Bei dem Versuch, eine Sicherungskopie zu erstellen, ist das Löschen einer "
+"bereits vorhandenen Sicherungskopie fehlgeschlagen.\n"
+"Dateiname: %1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed.\n"
-#| "Filenames: %1 -> %2"
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"Als versucht wurde eine Sicherungskopie zu erstellen, ist das Umbenennen "
+"Bei dem Versuch, eine Sicherungskopie zu erstellen, ist das Umbenennen "
 "fehlgeschlagen:\n"
-"Dateien:  %1 -> %2"
+"Dateinamen: %1 → %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
@@ -2137,6 +2116,8 @@ msgstr "Fehler beim Speichern der Datei"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
+"Die Ausgabedatei enthält möglicherweise Ersatzzeichen für nicht erkannte "
+"Codepoints."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2196,7 +2177,7 @@ msgstr "Codec von C: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr ""
+msgstr "Datei auswählen (wird noch nicht gespeichert)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
