@@ -4,21 +4,21 @@
 # SPDX-FileCopyrightText: 2004, 2006 Thomas Reitelbach <tr@erdfunkstelle.de>
 # SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2018, 2020, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2008, 2009, 2011, 2012, 2013, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
-# SPDX-FileCopyrightText: 2022 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-01 02:39+0000\n"
-"PO-Revision-Date: 2023-12-27 22:26+0100\n"
-"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
+"PO-Revision-Date: 2025-10-20 23:02+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.01.85\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -189,7 +189,7 @@ msgstr "Unicode, 8 Bit (BOM)"
 #: difftextwindow.cpp:2159
 #, kde-format
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: difftextwindow.cpp:2171
 #, kde-format
@@ -1122,9 +1122,9 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"Bei dem Versuch, eine Sicherungskopie zu erstellen, ist eine bereits "
-"vorhandene Sicherungskopie nicht gelöscht worden.\n"
-"Datei:  %1"
+"Bei dem Versuch, eine Sicherungskopie zu erstellen, ist das Löschen einer "
+"bereits vorhandenen Sicherungskopie fehlgeschlagen.\n"
+"Dateiname: %1"
 
 #: fileaccess.cpp:1128
 #, kde-format
@@ -1132,9 +1132,9 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"Als versucht wurde eine Sicherungskopie zu erstellen, ist das Umbenennen "
+"Bei dem Versuch, eine Sicherungskopie zu erstellen, ist das Umbenennen "
 "fehlgeschlagen:\n"
-"Dateien:  %1 -> %2"
+"Dateinamen: %1 → %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
