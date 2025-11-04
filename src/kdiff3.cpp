@@ -160,20 +160,20 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     m_pOptionDialog->readOptions(KSharedConfig::openConfig());
 
     // Option handling.
-    qsizetype argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
+    qsizetype argCount = KDiff3Shell::parser->optionNames().count() + KDiff3Shell::parser->positionalArguments().count();
     bool hasArgs = argCount > 0;
     if(hasArgs)
     {
         QString s;
         QString title;
-        if(KDiff3Shell::getParser()->isSet("confighelp"))
+        if(KDiff3Shell::parser->isSet("confighelp"))
         {
             s = m_pOptionDialog->calcOptionHelp();
             title = i18n("Current Configuration:");
         }
         else
         {
-            s = m_pOptionDialog->parseOptions(KDiff3Shell::getParser()->values("cs"));
+            s = m_pOptionDialog->parseOptions(KDiff3Shell::parser->values("cs"));
             title = i18n("Config Option Error:");
         }
         if(!s.isEmpty())
@@ -209,7 +209,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     }
 
 #ifdef ENABLE_AUTO
-    m_bAutoFlag = hasArgs && KDiff3Shell::getParser()->isSet("auto") && !KDiff3Shell::getParser()->isSet("noauto");
+    m_bAutoFlag = hasArgs && KDiff3Shell::parser->isSet("auto") && !KDiff3Shell::parser->isSet("noauto");
 #else
     m_bAutoFlag = false;
 #endif
@@ -217,10 +217,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     m_bAutoMode = m_bAutoFlag || gOptions->m_bAutoSaveAndQuitOnMergeWithoutConflicts;
     if(hasArgs)
     {
-        m_outputFilename = KDiff3Shell::getParser()->value("output");
+        m_outputFilename = KDiff3Shell::parser->value("output");
 
         if(m_outputFilename.isEmpty())
-            m_outputFilename = KDiff3Shell::getParser()->value("out");
+            m_outputFilename = KDiff3Shell::parser->value("out");
 
         if(!m_outputFilename.isEmpty())
             m_outputFilename = FileAccess(m_outputFilename, true).absoluteFilePath();
@@ -234,7 +234,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
             m_bAutoMode = false;
         }
 
-        if(m_outputFilename.isEmpty() && KDiff3Shell::getParser()->isSet("merge"))
+        if(m_outputFilename.isEmpty() && KDiff3Shell::parser->isSet("merge"))
         {
             m_outputFilename = "unnamed.txt";
             m_bDefaultFilename = true;
@@ -244,9 +244,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
             m_bDefaultFilename = false;
         }
 
-        QStringList args = KDiff3Shell::getParser()->positionalArguments();
+        QStringList args = KDiff3Shell::parser->positionalArguments();
 
-        m_sd1->setFilename(KDiff3Shell::getParser()->value("base"));
+        m_sd1->setFilename(KDiff3Shell::parser->value("base"));
         if(m_sd1->isEmpty())
         {
             if(args.count() > 0) m_sd1->setFilename(args[0]); // args->arg(0)
@@ -261,10 +261,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
         //Set m_bDirCompare flag
         m_bDirCompare = m_sd1->isDir();
 
-        QStringList aliasList = KDiff3Shell::getParser()->values("fname");
+        QStringList aliasList = KDiff3Shell::parser->values("fname");
         QStringList::Iterator ali = aliasList.begin();
 
-        QString an1 = KDiff3Shell::getParser()->value("L1");
+        QString an1 = KDiff3Shell::parser->value("L1");
         if(!an1.isEmpty())
         {
             m_sd1->setAliasName(an1);
@@ -275,7 +275,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
             ++ali;
         }
 
-        QString an2 = KDiff3Shell::getParser()->value("L2");
+        QString an2 = KDiff3Shell::parser->value("L2");
         if(!an2.isEmpty())
         {
             m_sd2->setAliasName(an2);
@@ -286,7 +286,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
             ++ali;
         }
 
-        QString an3 = KDiff3Shell::getParser()->value("L3");
+        QString an3 = KDiff3Shell::parser->value("L3");
         if(!an3.isEmpty())
         {
             m_sd3->setAliasName(an3);

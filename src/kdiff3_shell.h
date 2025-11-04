@@ -46,12 +46,6 @@ class KDiff3Shell: public KXmlGuiWindow
     bool queryClose() override;
     bool queryExit();
     void closeEvent(QCloseEvent* e) override;
-
-    static std::unique_ptr<QCommandLineParser>& getParser()
-    {
-        static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
-        return parser;
-    };
   private Q_SLOTS:
     void optionsShowToolbar();
     void optionsShowStatusbar();
@@ -61,7 +55,10 @@ class KDiff3Shell: public KXmlGuiWindow
     void applyNewToolbarConfig();
     void slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
 
+  public:
+    inline static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
   private:
+
     QPointer<KDiff3App> m_widget;
 
     KToggleAction* m_toolbarAction;

@@ -105,7 +105,7 @@ qint32 main(qint32 argc, char* argv[])
         The QCommandLineParser is a static scoped unique ptr. This is safe given that.
         As the distuctor will not be fired until main exits.
     */
-    QCommandLineParser* cmdLineParser = KDiff3Shell::getParser().get();
+    QCommandLineParser* cmdLineParser = KDiff3Shell::parser.get();
     cmdLineParser->setApplicationDescription(aboutData.shortDescription());
 
     aboutData.setupCommandLine(cmdLineParser);
