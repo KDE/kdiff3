@@ -183,17 +183,16 @@ qint32 main(qint32 argc, char* argv[])
         after the main event loop starts. Thus allowing us to avoid std::exit as much as
         possible. Makes for a cleaner exit.
     */
-    QPointer<KDiff3Shell> p;
     QMetaObject::invokeMethod(
-        qApp, [&p] {
+        qApp, [] {
             /*
-              Do not attempt to call show here that will be done later.
-              This variable exists solely to insure the KDiff3Shell is deleted on exit.
+                KDiff3Shell inherits KMainWindow, which by default sets the Qt::WA_DeleteOnClose attribute.
+                This causes the KDiff3Shell window to be deleted automatically when it is closed.
             */
-            p = new KDiff3Shell();
+            new KDiff3Shell();
         },
         Qt::QueuedConnection);
     qint32 retVal = QApplication::exec();
-    delete p;
+
     return retVal;
 }

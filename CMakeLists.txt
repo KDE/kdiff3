@@ -2,8 +2,7 @@
 # SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-#cmake < 3.1 has no sane way of checking C++11 features and needed flags
-#CMP0077 is defined in 3.13 or later
+# Turn off policy change notices from CMake 3.30 and earlier
 cmake_minimum_required(VERSION 3.22...3.30 FATAL_ERROR)
 
 project(kdiff3 VERSION 1.12.70)
