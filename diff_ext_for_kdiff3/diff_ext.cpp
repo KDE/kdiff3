@@ -394,7 +394,7 @@ void DIFF_EXT::diff(const tstring& arguments)
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
     bool bError = true;
-    tstring command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), true); //look in user registry first so it can be overidden
+    tstring command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), true); //look in user registry first so it can be overridden
     if(command.empty()) command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), false);
     tstring commandLine = TEXT("\"") + command + TEXT("\" ") + arguments;
     if(!command.empty())

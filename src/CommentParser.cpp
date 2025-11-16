@@ -51,7 +51,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     mCommentType = singleLine;
                     mIsPureComment = mIsCommentOrWhite = line.startsWith("//");
                     lastComment.startOffset = offset - 1;
-                    if(lastComment.startOffset != 0) //whitespace at begining
+                    if(lastComment.startOffset != 0) //whitespace at beginning
                     {
                         mIsPureComment = false;
                     }
@@ -76,7 +76,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     mIsPureComment = mIsCommentOrWhite = line.startsWith("/*") ? true : mIsCommentOrWhite;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
-                    if(lastComment.startOffset != 0) //whitespace at begining
+                    if(lastComment.startOffset != 0) //whitespace at beginning
                     {
                         mIsPureComment = false;
                     }

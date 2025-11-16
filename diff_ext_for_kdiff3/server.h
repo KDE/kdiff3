@@ -6,7 +6,7 @@
 #ifndef server_h
 #define server_h
 
-//This option is not compatible with our shell extention.
+//This option is not compatible with our shell extension.
 #undef WIN32_LEAN_AND_MEAN
 
 #include <list>   // std::list

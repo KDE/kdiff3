@@ -19,8 +19,8 @@
 
 /*
     Using boost allows ProgessProxy to be disconnected during auto testing.
-    This prevents uneeded UI calls from being made in an evironment were they
-    cann't function properly.
+    This prevents unneeded UI calls from being made in an environment where
+    they can't function properly.
 */
 
 ProgressScope::ProgressScope()

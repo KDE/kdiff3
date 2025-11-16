@@ -20,7 +20,7 @@ namespace PixMapUtils
 QPixmap colorToPixmap(const QColor &inColor);
 /*
     Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
-    Opactiy controls wheather or not pm1 will show through.
+    Opacity controls whether or not pm1 will show through.
 */
 QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2, const qreal inOpacity = 1);
 

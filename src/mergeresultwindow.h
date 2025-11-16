@@ -188,7 +188,7 @@ class MergeResultWindow: public QWidget
     void keyPressEvent(QKeyEvent* e) override;
     void wheelEvent(QWheelEvent* pWheelEvent) override;
     void focusInEvent(QFocusEvent* e) override;
-    //Costum functions
+    // Custom functions
     void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
     QString getString(qint32 lineIdx);
     void showUnsolvedConflictsStatusMessage();

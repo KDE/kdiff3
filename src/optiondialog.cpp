@@ -1322,8 +1322,8 @@ void OptionDialog::setupRegionalPage()
     gbox->addWidget(m_pEncodingAComboBox, line, 1);
 
     QString autoDetectToolTip = i18n(
-        "If enabled then encoding will be automaticly detected.\n"
-        "If the file's encoding can not be found automaticly then the selected encoding will be used as fallback.\n"
+        "If enabled then encoding will be automatically detected.\n"
+        "If the file's encoding can not be found automatically then the selected encoding will be used as fallback.\n"
         "(Unicode detection depends on the first bytes of a file.)");
     mAutoDetectA = new OptionCheckBox(i18n("Auto Detect"), true, "AutoDetectUnicodeA", &gOptions->mAutoDetectA, page);
     gbox->addWidget(mAutoDetectA, line, 2);

@@ -47,7 +47,7 @@ void GitIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryL
 bool GitIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const
 {
     /*
-        Unknown compiler/library bug is triggering a warning from valgring about an unitialized with no useful stack trace.
+        Unknown compiler/library bug is triggering a warning from valgrind about an uninitialized with no useful stacktrace.
         Isolated to:
             for(auto& dirPattern: m_patterns).
 

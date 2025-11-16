@@ -595,7 +595,7 @@ bool FileAccess::isNormal() const
     if(!mVisited && depth < 15 && isLocal() && isSymLink())
     {
         /*
-            wierd psudo-name created from commandline input redirection from output of another command.
+            weird pseudo-name created from commandline input redirection from output of another command.
             KIO/Qt does not handle it as a normal file but presents it as such.
         */
         if(m_linkTarget.startsWith("pipe:"))

@@ -55,7 +55,7 @@ class RLPainter: public QPainter
     {
         qint32 len = SafeInt<qint32>(s.length());
         Qt::LayoutDirection ld = (!bRightToLeft || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
-        // Qt will automaticly reverse the text as needed just set the layout direction
+        // Qt will automatically reverse the text as needed just set the layout direction
         QPainter::setLayoutDirection(ld);
         if(ld == Qt::RightToLeft)
         {

@@ -42,6 +42,6 @@ using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, K
 constexpr static qint32 maxNofRecentFiles = 10;
 constexpr static qint32 maxNofRecentCodecs = 5;
 
-static_assert(sizeof(FileOffset) >= sizeof(qsizetype), "Size mis-match this configuration is not supported."); //Assumed in SourceData.
+static_assert(sizeof(FileOffset) >= sizeof(qsizetype), "Size mismatch this configuration is not supported."); //Assumed in SourceData.
 
 #endif

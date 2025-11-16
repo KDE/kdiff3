@@ -8,7 +8,7 @@
 #ifndef diff_ext_h
 #define diff_ext_h
 
-//This option is not compatible with our shell extention.
+//This option is not compatible with our shell extension.
 #undef WIN32_LEAN_AND_MEAN
 
 #include <windows.h>

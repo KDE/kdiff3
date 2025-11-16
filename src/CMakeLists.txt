@@ -54,7 +54,7 @@ ki18n_wrap_ui(kdiff3_SRCS
 
 ecm_optional_add_subdirectory( autotests )
 
-#cann't use add_subdirectory because it changes the scope.
+# can't use add_subdirectory because it changes the scope.
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 

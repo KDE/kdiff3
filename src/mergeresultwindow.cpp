@@ -389,7 +389,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     update();
 }
 
-void MergeResultWindow::setFirstLine(LineRef firstLine) //connected to qt controled signal
+void MergeResultWindow::setFirstLine(LineRef firstLine) //connected to qt controlled signal
 {
     m_firstLine = std::max<LineRef>(0, firstLine);
     update();
@@ -441,7 +441,7 @@ qint32 MergeResultWindow::getVisibleTextAreaWidth() const
 qint32 MergeResultWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
-    //QWidget::height() may return 0 with certian configurations with 0 length input files loaded.
+    //QWidget::height() may return 0 with certain configurations with 0 length input files loaded.
     return std::max((qint32)ceil((height() - 3) / fm.lineSpacing()) - 2, 0);
 }
 

@@ -782,7 +782,7 @@ std::optional<const QByteArray> SourceData::detectEncoding(const char* buf, qint
     if(qtEnum.has_value())
     {
         QByteArray encoding = QByteArray(QStringConverter::nameForEncoding(qtEnum.value())).toUpper();
-        //Only unambigious encodings are returned by QStringConverter::encodingForData this means UTF-8 with BOM.
+        //Only unambiguous encodings are returned by QStringConverter::encodingForData this means UTF-8 with BOM.
         if(encoding == "UTF-8")
             encoding = "UTF-8-BOM";
 

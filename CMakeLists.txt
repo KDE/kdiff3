@@ -9,13 +9,13 @@ cmake_minimum_required(VERSION 3.22...3.30 FATAL_ERROR)
 project(kdiff3 VERSION 1.12.70)
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
-    message(WARNING "gcc < 9.2 is not recomended support is best effort-only.")
+    message(WARNING "gcc < 9.2 is not recommended support is best effort-only.")
 endif()
 
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
-set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
+set(CMAKE_CXX_EXTENSIONS ON ) #Disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CXX_STANDARD_REQUIRED ON)#Force early fail if we cann't get c++17.
+set(CXX_STANDARD_REQUIRED ON) #Force early fail if we can't get c++17.
 
 set(KF_MIN_VERSION "6.2.0")
 
@@ -42,9 +42,9 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 
-#Full QT_NO_CAST_FROM_ASCII is not compatiable with kdiff3 code and not worth inforcing
-#we use the slightly less strict QT_RESTRICTED_CAST_FROM_ASCII
-#Disallowing implict cast from QByteArray doesn't make sense for this project
+# Full QT_NO_CAST_FROM_ASCII is not compatible with kdiff3 code and not worth inforcing
+# we use the slightly less strict QT_RESTRICTED_CAST_FROM_ASCII
+# Disallowing implicit cast from QByteArray doesn't make sense for this project
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
 
 include(ECMInstallIcons)
@@ -107,19 +107,19 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     if(ENABLE_CLAZY)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -plugin-arg-clazy -Xclang level0,level1,no-overloaded-signal,auto-unexpected-qstringbuilder,unused-non-trivial-variable,returning-void-expression,isempty-vs-count,container-inside-loop,assert-with-side-effects")
     endif()
-    #Adjust clang specific  warnings
+    # Adjust clang specific warnings
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -fexceptions")
     set(CLANG_WARNING_FLAGS "-Wno-unknown-warning-option -Wundef -Wno-trigraphs  -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    #Make MSVC obey standard C++ exception handling by destroying all objects going out of scope as a result of the exception.
-    #This also separates a Microsoft specific exention SEH which catches non-c++ asynchronous exceptions.
+    # Make MSVC obey standard C++ exception handling by destroying all objects going out of scope as a result of the exception.
+    # This also separates a Microsoft specific extension SEH which catches non-c++ asynchronous exceptions.
     add_compile_options("/EHsc")
-    #Suppress MSVCs min/max macros
+    # Suppress MSVCs min/max macros
     add_definitions(-DNOMINMAX)
-    #Suppress Microsoft specific C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
+    # Suppress Microsoft specific C4996 "deprecation" warnings. Not helpful for code intended to run on any other platform.
     add_definitions(-D_CRT_NONSTDC_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS_GLOBALS)
-    #force compliant use of __cplusplus
+    # force compliant use of __cplusplus
     add_compile_options("/Zc:__cplusplus")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-trigraphs -Wduplicated-cond -Wduplicated-branches -Wshadow -fexceptions")
@@ -145,22 +145,22 @@ if(ENABLE_AUTO)
 endif()
 
 add_definitions(
-    -DBOOST_NO_CXX98_FUNCTION_BASE #since we use the header only portion of boost we can hard code this. This forces c+17 compliance inside boost-headers.
+    -DBOOST_NO_CXX98_FUNCTION_BASE # since we use the header only portion of boost we can hardcode this. This forces c+17 compliance inside boost-headers.
     -DQT_NO_CONTEXTLESS_CONNECT
-    -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
+    -DQT_DEPRECATED_WARNINGS # Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
-    -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
+    -DQT_RESTRICTED_CAST_FROM_ASCII # casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
-    -DQT_EXPLICIT_QFILE_CONSTRUCTION_FROM_PATH #pre-emptive for forward compatibility with Qt 6.9+
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060800#warn if deprecated at 6.8 or before. Qt default setting is not useful for kdiff3.
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x060700#disable deprecated api for Qt<6.7.
-    #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
-    #the warning useless.
+    -DQT_EXPLICIT_QFILE_CONSTRUCTION_FROM_PATH # preemptive for forward compatibility with Qt 6.9+
+    -DQT_DEPRECATED_WARNINGS_SINCE=0x060800    # warn if deprecated at 6.8 or before. Qt default setting is not useful for kdiff3.
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x060700    # disable deprecated api for Qt<6.7.
+    # Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
+    # the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
-    #KF5 5.64+ flags
-    #Don't warn for API depreciated after 6.6.0 (below as hex.hex.hex number)
+    # KF5 5.64+ flags
+    # Don't warn for API depreciated after 6.6.0 (below as hex.hex.hex number)
     -DKF_DISABLE_DEPRECATED_BEFORE=0x060200#disable deprecated api for KF 6.2.
     -DKF_DEPRECATED_WARNINGS_SINCE=0x060900
     -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060900
@@ -170,7 +170,8 @@ add_definitions(
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
 )
 
-#The CMake boolean value is not properly translated if we assign the variable directly to a C/C++ define. clangd will catch this in sytax hightlighting other language servers may not.
+# The CMake boolean value is not properly translated if we assign the variable directly to a C/C++ define. 
+# clangd will catch this in syntax highlighting other language servers may not.
 if(KF${KF_MAJOR_VERSION}KIO_FOUND)
     add_definitions(
         -DHAS_KFKIO=1

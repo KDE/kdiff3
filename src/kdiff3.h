@@ -149,7 +149,7 @@ class KDiff3App: public QMainWindow
     void showMainWindow();
 
     /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
-     * default implementation (only returns true), this calles saveModified() on the document object to ask if the document shall
+     * default implementation (only returns true), this calls saveModified() on the document object to ask if the document shall
      * be saved if Modified; on cancel the closeEvent is rejected.
      * @see KMainWindow#queryClose
      * @see KMainWindow#closeEvent

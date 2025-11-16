@@ -60,7 +60,7 @@ class DirectoryInfo
     FileAccess m_dirDest;
 };
 
-//Intialize with a dummy default DirectoryInfo so we don't crash on first run.
+// Initialize with a dummy default DirectoryInfo so we don't crash on first run.
 inline std::shared_ptr<DirectoryInfo> gDirInfo = std::make_unique<DirectoryInfo>();
 
 #endif

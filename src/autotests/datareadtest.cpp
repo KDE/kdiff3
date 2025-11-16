@@ -64,7 +64,7 @@ class DataReadTest: public QObject
     }
 
     /*
-        Check basic ablity to read data in.
+        Check basic ability to read data in.
     */
     void testRead()
     {

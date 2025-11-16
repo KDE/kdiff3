@@ -77,7 +77,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 qint32 main(qint32 argc, char* argv[])
 {
     constexpr QLatin1String appName("kdiff3");
-    //Syncronize qt HDPI behavoir on all versions/platforms
+    //Synchronize qt HiDPI behavior on all versions/platforms
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
@@ -181,7 +181,7 @@ qint32 main(qint32 argc, char* argv[])
     /*
         This short segment is wrapped in a lambda to delay KDiff3Shell construction until
         after the main event loop starts. Thus allowing us to avoid std::exit as much as
-        possiable. Makes for a cleaner exit.
+        possible. Makes for a cleaner exit.
     */
     QPointer<KDiff3Shell> p;
     QMetaObject::invokeMethod(

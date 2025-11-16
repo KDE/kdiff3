@@ -27,7 +27,7 @@ class MocIgnoreFile: public FileAccess
     {
         mJobHandler.reset(new FileAccessJobHandlerMoc(this));
         /*
-          FileAccess set file calls our overriden loadData to actually get file meta data.
+          FileAccess set file calls our overridden loadData to actually get file meta data.
           This way we can avoid making any actual FileSystem checks on the simulated file.
         */
         setFile(QUrl("/test/ui/.cvsignore"));

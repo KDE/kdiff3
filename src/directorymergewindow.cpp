@@ -206,7 +206,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     }
 
     /*
-        returns whether or not we doing three way directory comparision
+        returns whether or not we're doing three way directory comparison
 
         This will return false when comparing three files.
         Use KDiff3App::isTripleDiff() if this is a problem.

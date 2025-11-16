@@ -110,7 +110,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     setObjectName(name);
     m_pKDiff3Shell = pKDiff3Shell;
 
-    //Get SourceData objects intalized as soon as possiable or wierd errors can happen on startup.
+    //Get SourceData objects initialized as soon as possible or weird errors can happen on startup.
     if(!names.fn1.isEmpty())
     {
         m_sd1->setFilename(names.fn1);
@@ -346,7 +346,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Shell* pKDiff3
     }
 
     slotRefresh();
-    //Connect singals that may depend on KDiff3App being setup.
+    //Connect signals that may depend on KDiff3App being setup.
     m_pMergeResultWindow->setupConnections(this);
     m_pDirectoryMergeWindow->setupConnections(this);
 
@@ -591,7 +591,7 @@ void KDiff3App::showMainWindow()
     m_pKDiff3Shell->show();
 }
 
-// Do file comparision.
+// Do file comparison.
 void KDiff3App::doFileCompare()
 {
     improveFilenames();

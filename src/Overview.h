@@ -52,7 +52,7 @@ class Overview : public QWidget
   private:
     const Diff3LineList* m_pDiff3LineList;
     LineRef m_firstLine;
-    LineType m_pageHeight; //hieght in lines  for each page
+    LineType m_pageHeight; // height in lines  for each page
     QPixmap m_pixmap;
     e_OverviewMode mOverviewMode;
     LineType m_nofLines;

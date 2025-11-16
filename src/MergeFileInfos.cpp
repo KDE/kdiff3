@@ -406,7 +406,7 @@ bool MergeFileInfos::fastFileComparison(
         qCInfo(kdiffMergeFileInfo) << "Have: \'" << fi2.fileName() << "\' , isSymLink = " << fi2.isSymLink();
         /*
             "git difftool --dir-diff"
-            sets up directory comparsions with symlinks to the current work tree being compared with real files.
+            sets up directory comparisons with symlinks to the current work tree being compared with real files.
 
             m_bAllowMismatch is a compatibility work around.
         */

@@ -1222,7 +1222,7 @@ void KDiff3App::postRecalcWordWrap()
     else
     {
         /*
-            Clear exiting wordwrap threads and prevent recal signals from completing.
+            Clear exiting wordwrap threads and prevent recall signals from completing.
             This honors the intent of the old cancel call without the risk of aborting file I/O.
         */
         QSignalBlocker blocker(m_pDiffTextWindow1), blocker2(m_pDiffTextWindow2), blocker3(m_pDiffTextWindow3), blocker4(m_pMergeResultWindow);
@@ -1470,7 +1470,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
     return true;
 }
 /*
-    If A is targetted to an existing file and the paths point to directories attempt to find that file in the corresponding
+    If A is targeted to an existing file and the paths point to directories attempt to find that file in the corresponding
     directory. If it exists then the filename from A will be appended to the path.
 */
 void KDiff3App::improveFilenames()

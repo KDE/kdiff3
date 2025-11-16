@@ -1228,7 +1228,7 @@ void Diff3LineList::calcWhiteDiff3Lines(
 
 // My own diff-invention:
 /*
-    Builds DiffList for scratch. Automaticly clears all previous data in list.
+    Builds DiffList from scratch. Automatically clears all previous data in list.
 */
 void DiffList::calcDiff(const QString& line1, const QString& line2, const qint32 maxSearchRange)
 {
@@ -1242,7 +1242,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const qint32
     /*
         This loop should never reach the exit condition specified here. However it must have a hard wired
         stopping point to prevent runaway allocation if something unexpected happens.
-        diffList is therefor hard capped at aprox 50 MB in size.
+        diffList is therefor hard capped at approx. 50 MB in size.
      */
     for(; size() * sizeof(Diff) + sizeof(DiffList) < (50 << 20);)
     {

@@ -24,10 +24,10 @@
     EncodedDataStream needs to be lean and fast readChar maybe called thousands or even millions of times
     depending on the size of data.
 
-    Using QIODevice/QBuffer for in memmory reads comes with speed penality I don't fully understand.
+    Using QIODevice/QBuffer for in memory reads comes with speed penalty I don't fully understand.
 
     While both read and write are allowed this class is not designed with mixed raad/write in mind.
-    Changes to the array will invalidate the internal read interator.
+    Changes to the array will invalidate the internal read iterator.
 */
 class EncodedData: public QByteArray
 {
@@ -147,9 +147,9 @@ class EncodedData: public QByteArray
         qsizetype dis = std::distance(it, end());
         qsizetype len = std::min<qsizetype>(4, dis);
         /*
-            This assumes EncodedDataStream is contigous.
+            This assumes EncodedDataStream is contiguous.
             This is true for KDiff3's usage as we use QByteArray::fromRawData to make a thin wrapper backed by a UTF-16 buffer.
-            I would expect most QByteArray's to be contigous I just don't know of any documentation that guarantees this.
+            I would expect most QByteArray's to be contiguous I just don't know of any documentation that guarantees this.
         */
         QByteArray buf = QByteArray::fromRawData(&(*it), len);
 

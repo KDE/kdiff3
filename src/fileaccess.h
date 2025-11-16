@@ -182,7 +182,7 @@ class FileAccess
 
   private:
     /*
-    These two variables are used to prevent infinate/long running loops when a symlinks true target
+    These two variables are used to prevent infinite/long running loops when a symlinks true target
     must be found. isNormal is right now the only place this is needed.
 
     Never expose these outside FileAccess as they are internal values.

@@ -57,7 +57,7 @@
 /*
     QRunnable is not enough here. It may appear to work depending on configuration.
     That is an artifact of the threads being short-lived. Never the less such code is
-    not safe because of a potenial race condition on exit. This problem is triggered
+    not safe because of a potential race condition on exit. This problem is triggered
     in practice on real systems in unpredictable ways.
 
     In addition to the threads themselves remaining alive after the DiffTextWindow. They
@@ -87,7 +87,7 @@ class RecalcWordWrapThread: public QThread
     }
     void run() override
     {
-        //safe thanks to Qt memory mangement
+        //safe thanks to Qt memory management
         DiffTextWindow* pDTW = qobject_cast<DiffTextWindow*>(parent());
 
         pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
@@ -1365,7 +1365,7 @@ QString DiffTextWindowData::getString(const LineType d3lIdx) const
 {
 
     assert(!(m_pLineData != nullptr && m_pLineData->empty() && mSourceData->lineCount() != 0));
-    //Qt sends resize events pre-init under certian conditions. No good way to avoid this.
+    //Qt sends resize events pre-init under certain conditions. No good way to avoid this.
     if(mDiff3LineVector == nullptr)
         return QString();
 
@@ -1418,7 +1418,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
 LineType DiffTextWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
-    //QWidget::height() may return 0 with certian configurations with 0 length input files loaded.
+    //QWidget::height() may return 0 with certain configurations with 0 length input files loaded.
     return std::max((LineType)ceil(height() / fm.lineSpacing()) - 1, 0);
 }
 
@@ -1512,7 +1512,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, qsizetype& p
             //TODO: Provide error message when failsafe is triggered.
             if(Q_UNLIKELY(pos > limits<qint32>::max()))
             {
-                qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
+                qCWarning(kdiffMain) << "Skip possible match line offset to large.";
                 continue;
             }
 
@@ -1999,7 +1999,7 @@ void DiffTextWindowFrame::init()
         m_pLabel->setText(winId + u':');
         m_pEncoding->setText(i18nc("@label:textbox Encoding for text, %1 = encoding name", "Encoding: %1", pDTW->getEncodingDisplayString()));
         m_pLineEndStyle->setText(i18nc("@label:textbox %1 = line ending style", "Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18nc("@item:intext line ending type", "DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18nc("@item:intext line ending type", "Unix") :
-                                                                                                                                                                                                                                                   i18nc("@item:intext line ending style not recongized", "Unknown")));
+                                                                                                                                                                                                                                                   i18nc("@item:intext line ending style not recognized", "Unknown")));
     }
 }
 
