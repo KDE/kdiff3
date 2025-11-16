@@ -160,7 +160,7 @@ add_definitions(
     # the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     # KF5 5.64+ flags
-    # Don't warn for API depreciated after 6.6.0 (below as hex.hex.hex number)
+    # Don't warn for API deprecated after 6.6.0 (below as hex.hex.hex number)
     -DKF_DISABLE_DEPRECATED_BEFORE=0x060200#disable deprecated api for KF 6.2.
     -DKF_DEPRECATED_WARNINGS_SINCE=0x060900
     -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060900
