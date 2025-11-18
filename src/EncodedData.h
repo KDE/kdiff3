@@ -21,7 +21,7 @@
 #include <QStringDecoder>
 
 /*
-    EncodedDataStream needs to be lean and fast readChar maybe called thousands or even millions of times
+    EncodedData needs to be lean and fast readChar maybe called thousands or even millions of times
     depending on the size of data.
 
     Using QIODevice/QBuffer for in memory reads comes with speed penalty I don't fully understand.
@@ -134,8 +134,7 @@ class EncodedData: public QByteArray
         mError = mDecoder.hasError() || (s.isEmpty() && atEnd());
         if(mError)
         {
-            s[0] = QChar::SpecialCharacter::ReplacementCharacter;
-            s[1] = QChar::SpecialCharacter::Null;
+            s = QChar::SpecialCharacter::ReplacementCharacter;
         }
 
         return len;
@@ -161,9 +160,12 @@ class EncodedData: public QByteArray
             len = 1;
             if(s[0].isSurrogate())
             {
-                len ++;
+                len++;
             }
-            s[len] = QChar::Null;
+
+            //truncate to single character
+            if(s.size() > len)
+                s[len] = QChar::Null;
 
             len *= sizeof(QChar);
         }
