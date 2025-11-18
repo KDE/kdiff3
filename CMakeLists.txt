@@ -45,6 +45,8 @@ include(FeatureSummary)
 # we use the slightly less strict QT_RESTRICTED_CAST_FROM_ASCII
 # Disallowing implicit cast from QByteArray doesn't make sense for this project
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
+#new in QT 6.10+ apparently our auto tests trigger this warning.
+add_definitions(-DQT_NO_USE_NODISCARD_FILE_OPEN)
 
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
