@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-11-18 00:46+0000\n"
 "PO-Revision-Date: 2025-10-30 19:44+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -175,7 +175,7 @@ msgstr "Тип завершения строки: %1"
 #: difftextwindow.cpp:2002
 #, fuzzy, kde-format
 #| msgid "Unknown"
-msgctxt "@item:intext line ending style not recongized"
+msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Неизвестный"
 
@@ -3159,10 +3159,15 @@ msgid "File Encoding for A:"
 msgstr "Кодировка файлов для A:"
 
 #: optiondialog.cpp:1325
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then encoding will be automaticly detected.\n"
+#| "If the file's encoding can not be found automaticly then the selected "
+#| "encoding will be used as fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
-"If enabled then encoding will be automaticly detected.\n"
-"If the file's encoding can not be found automaticly then the selected "
+"If enabled then encoding will be automatically detected.\n"
+"If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""

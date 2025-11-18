@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-11-18 00:46+0000\n"
 "PO-Revision-Date: 2024-12-25 19:45+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -169,7 +169,7 @@ msgstr "रेखासमाप्तशैली: %1"
 #: difftextwindow.cpp:2002
 #, fuzzy, kde-format
 #| msgid "Unknown"
-msgctxt "@item:intext line ending style not recongized"
+msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "अज्ञात"
 
@@ -3080,10 +3080,15 @@ msgid "File Encoding for A:"
 msgstr "A कृते सञ्चिकासङ्केतनम् :"
 
 #: optiondialog.cpp:1325
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then encoding will be automaticly detected.\n"
+#| "If the file's encoding can not be found automaticly then the selected "
+#| "encoding will be used as fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
-"If enabled then encoding will be automaticly detected.\n"
-"If the file's encoding can not be found automaticly then the selected "
+"If enabled then encoding will be automatically detected.\n"
+"If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
