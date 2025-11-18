@@ -41,7 +41,7 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 
-# Full QT_NO_CAST_FROM_ASCII is not compatible with kdiff3 code and not worth inforcing
+# Full QT_NO_CAST_FROM_ASCII is not compatible with kdiff3 code and not worth enforcing
 # we use the slightly less strict QT_RESTRICTED_CAST_FROM_ASCII
 # Disallowing implicit cast from QByteArray doesn't make sense for this project
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
@@ -60,7 +60,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 find_package(Boost 1.84 REQUIRED)
-#needed on craft and possiablely other custom setups.
+#needed on craft and possibly other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
 
 find_package(ICU 70.0 COMPONENTS uc i18n REQUIRED)
@@ -169,7 +169,7 @@ add_definitions(
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
 )
 
-# The CMake boolean value is not properly translated if we assign the variable directly to a C/C++ define. 
+# The CMake boolean value is not properly translated if we assign the variable directly to a C/C++ define.
 # clangd will catch this in syntax highlighting other language servers may not.
 if(KF${KF_MAJOR_VERSION}KIO_FOUND)
     add_definitions(

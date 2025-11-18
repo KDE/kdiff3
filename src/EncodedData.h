@@ -26,7 +26,7 @@
 
     Using QIODevice/QBuffer for in memory reads comes with speed penalty I don't fully understand.
 
-    While both read and write are allowed this class is not designed with mixed raad/write in mind.
+    While both read and write are allowed this class is not designed with mixed read/write in mind.
     Changes to the array will invalidate the internal read iterator.
 */
 class EncodedData: public QByteArray
