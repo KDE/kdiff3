@@ -127,7 +127,7 @@ OpenDialog::OpenDialog(
         On some systems it may fail to do anything at all.
 
         This is not what we want. So manually replace the each QLineEdit object with a FileNameLineEdit.
-        This makes behavior consitent with the main window.
+        This makes behavior consistent with the main window.
 
         On windows this step also needed to bypasses Qt's quirky behavior when converting from QUrl
         to QString. Specifically % encoding is handled differently on windows. This is explicitly documented

@@ -307,7 +307,7 @@ public Q_SLOTS:
     void setLockPainting(bool bLock);
     void createCaption();
     void initDirectoryMergeActions();
-    /** sets up the statusbar for the main window by initialzing a statuslabel. */
+    /** sets up the statusbar for the main window by initializing a statuslabel. */
     void initStatusBar();
 
     /** creates the centerwidget of the KMainWindow instance and sets it as the view */

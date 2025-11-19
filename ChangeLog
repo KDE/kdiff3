@@ -10,7 +10,7 @@ Version 1.11.x - 2024
 *Fixed encoding handling for non-UTF encodings
 *Fixed encoding detection for lower case 'HTML' and 'XML' tags
 *Fix handling of KIO jobs for non-file urls.
--Actually wait for secondary event loop to end (Not sure if this is documention bug in qt or behavior bug.)
+-Actually wait for secondary event loop to end (Not sure if this is a documentation bug in qt or behavior bug.)
 -Don't arbitrarily kill jobs when progress dialog is hidden.
 *Fix possible invalid line given by mousedown in Overview pane. (Caught by SafeInt range checking)
 *Fix bad algorithm in getBestFirstLine.
