@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-18 00:46+0000\n"
-"PO-Revision-Date: 2025-04-18 03:30+0200\n"
+"PO-Revision-Date: 2025-11-19 05:34+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -160,9 +160,7 @@ msgid "Line end style: %1"
 msgstr "ხაზის დასრულების სტილი: %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgctxt "@item:intext line ending style not recongized"
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "უცნობი"
@@ -3109,22 +3107,17 @@ msgid "File Encoding for A:"
 msgstr "ფაილის კოდირება A-სთვის:"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"თუ ჩართულია, კოდირებას ავტომატურად ამოვიცნობ.\n"
-"თუ ფაილის კოდირებას ავტომატურად ვერ ვიპოვი, ნაგულისხმევად არჩეული კოდირება "
-"იქნება გამოყენებული.\n"
-"(უნიკოდის ამოცნობა ფაილის პირველ ბაიტებაზეა დამოკიდებული.)"
+"თუ ჩართულია, კოდირების ამოცნობა ავტომატურად მოხდება.\n"
+"თუ ფაილის კოდირების ამოცნობა ავტომატურად ვერ მოხდება, გამოყენებული იქნება "
+"არჩეული კოდირება.\n"
+"(უნიკოდის ამოცნობა ფაილის პირველ ბაიტებზეა დამოკიდებული.)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
