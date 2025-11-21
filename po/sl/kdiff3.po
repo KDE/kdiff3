@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-18 00:46+0000\n"
-"PO-Revision-Date: 2025-04-18 06:56+0200\n"
+"PO-Revision-Date: 2025-11-20 07:26+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -163,9 +163,7 @@ msgid "Line end style: %1"
 msgstr "Slog konca vrstice: %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgctxt "@item:intext line ending style not recongized"
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Neznano"
@@ -3115,20 +3113,15 @@ msgid "File Encoding for A:"
 msgstr "Kodiranje datoteke A:"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Če je to omogočeno, bo kodiranje samodejno zaznano.\n"
-"Če kodiranja datoteka ni mogoče samodejno dognati, potem bo izbrano "
+"Če je omogočeno, bo kodiranje samodejno zaznano.\n"
+"Če kodiranja datoteke ni mogoče samodejno dognati, potem bo izbrano "
 "kodiranje izbrano kot zasilna možnost.\n"
 "(Zaznavanje Unicode temelji na prvih bajtih datoteke.)"
 

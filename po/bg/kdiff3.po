@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-18 00:46+0000\n"
-"PO-Revision-Date: 2025-04-19 11:42+0200\n"
+"PO-Revision-Date: 2025-11-20 10:57+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -161,9 +161,7 @@ msgid "Line end style: %1"
 msgstr "Стил на завършване на реда: %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgctxt "@item:intext line ending style not recongized"
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -3130,12 +3128,7 @@ msgid "File Encoding for A:"
 msgstr "Файлова кодова таблица за А:"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
@@ -3144,7 +3137,7 @@ msgid ""
 msgstr ""
 "Ако е разрешено, кодирането ще се открива автоматично.\n"
 "Ако кодирането на файла не може да бъде намерено автоматично, тогава "
-"избранотокодиране ще бъде използвано като резервно.\n"
+"избраното кодиране ще бъде използвано като резервно.\n"
 "(Откриването на Unicode зависи от първите байтове на файла.)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
