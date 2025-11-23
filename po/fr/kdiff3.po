@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-18 00:46+0000\n"
-"PO-Revision-Date: 2025-04-19 09:35+0200\n"
+"PO-Revision-Date: 2025-11-19 10:11+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.11.80\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -168,9 +168,7 @@ msgid "Line end style: %1"
 msgstr "Style de fin de ligne : %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgctxt "@item:intext line ending style not recongized"
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Inconnu"
@@ -3167,12 +3165,7 @@ msgid "File Encoding for A:"
 msgstr "Encodage du fichier pour A :"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
@@ -3181,8 +3174,8 @@ msgid ""
 msgstr ""
 "Si cette option est sélectionnée, alors l'encodage sera automatiquement "
 "détecté.\n"
-"Si l'encodage du fichier ne peut être trouvé automatiquement, alors "
-"l'encodage sélectionné sera utilisée en mode de repli.\n"
+"S'il est impossible de trouver automatiquement l'encodage du fichier, alors "
+"l'encodage sélectionné sera utilisée en solution de repli.\n"
 "(La détection « Unicode » repose sur les premiers octets d'un fichier)."
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
