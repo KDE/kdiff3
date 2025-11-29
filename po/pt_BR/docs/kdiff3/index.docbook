@@ -1,0 +1,4013 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Brazilian-Portuguese "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Manual do &kdiff3;</title>
+
+<authorgroup>
+  <othercredit role="developer"
+><firstname
+>Michael</firstname
+> <surname
+>Reeves</surname
+> <affiliation
+><address
+> <email
+>reeves.87@gmail.com</email>
+    </address
+></affiliation>
+  </othercredit>
+  <othercredit role="developer"
+><firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+> <affiliation
+><address
+> <email
+>joachim.eibl at gmx.de</email>
+    </address
+></affiliation>
+  </othercredit>
+<othercredit role="translator"
+><firstname
+>Marcus</firstname
+><surname
+>Gama</surname
+><affiliation
+><address
+><email
+>marcus.gama@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2002-2007</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<copyright>
+<year
+>2017-2019</year>
+<holder
+>Michael Reeves</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>23/12/2023</date>
+<releaseinfo
+>1.11.0</releaseinfo>
+
+
+<abstract>
+<para
+>O &kdiff3; é uma ferramenta de diferenças e mesclagem para arquivos e pastas que <itemizedlist>
+<listitem
+><para
+>compara e mescla dois ou três arquivos de texto ou pastas de entrada,</para
+></listitem>
+<listitem
+><para
+>mostra as diferenças linha-a-linha e caractere-a-caractere(!),</para
+></listitem>
+<listitem
+><para
+>oferece uma funcionalidade de mesclagem automática,</para
+></listitem>
+<listitem
+><para
+>tem um editor para resolver confortavelmente os conflitos de mesclagem,</para
+></listitem>
+<listitem
+><para
+>oferece transparência de rede através do KIO,</para
+></listitem>
+<listitem
+><para
+>tem opções para realçar ou ocultar as alterações nos espaços em branco ou comentários,</para
+></listitem>
+<listitem
+><para
+>suporta o Unicode, o UTF-8 e outras codificações de arquivos,</para
+></listitem>
+<listitem
+><para
+>imprime as diferenças,</para
+></listitem>
+<listitem
+><para
+>suporta as palavras-chave de controle de versões e de mesclagem do histórico.</para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Este documento descreve o &kdiff3; versão 1.12. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>diferenças</keyword>
+<keyword
+>mesclar</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>'diff' triplo</keyword>
+<keyword
+>comparar</keyword>
+<keyword
+>arquivos</keyword>
+<keyword
+>pastas</keyword>
+<keyword
+>diretórios</keyword>
+<keyword
+>controle de versão</keyword>
+<keyword
+>mesclagem-por-três-vias</keyword>
+<keyword
+>diferenças-nas-linhas</keyword>
+<keyword
+>sincronizar</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>transparência de rede</keyword>
+<keyword
+>editor</keyword>
+<keyword
+>espaço em branco</keyword>
+<keyword
+>comentário</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Introdução</title>
+<sect1 id="why"
+><title
+>Outra Interface para o Diff?</title>
+<para
+>Existem várias ferramentas de detecção de diferenças. Porquê escolher o &kdiff3;? Deixe que o autor diga porque ele o escreveu. </para
+><para
+>O &kdiff3; começou porque eu tinha que fazer uma mesclagem difícil. A mesclagem é necessária quando várias pessoas trabalham nos mesmos arquivos de um projeto. Uma mesclagem poderá de alguma forma ser automatizada, quando a ferramenta de mesclagem não só tem os novos arquivos modificados (chamados de 'ramificações' ou 'branches'), mas também o arquivo original (chamado de 'base'). A ferramenta de mesclagem irá escolher automaticamente as modificações que só foram feitas numa das ramificações. Quando vários contribuintes alteram as mesmas linhas, então a ferramenta de mesclagem detecta um conflito que terá que ser resolvido manualmente. </para
+><para
+>A mesclagem foi então difícil porque um dos colaboradores alterou várias coisas e corrigiu o recuo em vários locais. Outro também alterou muito texto, o que resultou em vários conflitos de mesclagem. </para
+><para
+>A ferramenta que eu usei então só mostrava as linhas modificadas, mas não o que tinha sido alterado dentro dessas linhas. E não havia nenhuma informação sobre os locais em que só o recuo tinha sido alterado. A mesclagem foi um pequeno pesadelo por isso. </para
+><para
+>Assim, foi este o início. A primeira versão podia mostrar as diferenças dentro de uma linha e mostrava as diferenças de espaços em branco. Depois, muitas outras funcionalidades foram adicionada para aumentar a utilidade. </para
+><para
+>Por exemplo, se você quiser comparar algum texto rapidamente, então poderá copiá-lo para a área de transferência e colá-lo noutra janela de diferenças. </para
+><para
+>Uma funcionalidade que precisou de um grande esforço foi a comparação de pastas e a funcionalidade de mesclagem, o que transformou o programa quase num navegador de arquivos completo. </para
+><para
+>Espero que o &kdiff3; funcione para você também. Divirta-se! </para
+><para
+>Joachim Eibl (2003) </para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Imagens e Funcionalidades</title>
+<para
+>Esta imagem mostra a diferença entre dois arquivos de texto (usando uma versão antiga do &kdiff3;):</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>A mesclagem por 3-vias é totalmente suportada. Isto é útil se duas pessoas alterarem o código independentemente. O arquivo original (a base) é usado para ajudar o &kdiff3; a selecionar automaticamente as alterações corretas. O editor de mesclagens abaixo das janelas de diferenças permite-lhe resolver os conflitos, enquanto lhe mostra o resultado que você irá obter. Você até poderá editar o resultado. Esta imagem mostra três arquivos de entrada sendo mesclados: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+
+<para id="dirmergebigscreenshot"
+>O &kdiff3; também o ajuda a comparar e a mesclar pastas completas. Esta imagem mostra o &kdiff3; durante a mesclagem de pastas: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+</sect1>
+
+<sect1 id="features"
+><title
+>Mais Funcionalidades</title>
+<sect2
+><title
+>Visualizador de Diferenças Linha-a-Linha e Caractere-a-Caractere</title>
+<para
+>Usando as possibilidades de um ambiente gráfico a cores, o &kdiff3; mostra exatamente o que é a diferença. Quando você tiver que fazer várias revisões de código, irá gostar disto. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Ver as Diferenças de Espaços em Branco de uma Vez</title>
+<para
+>Os espaços e as tabulações que são diferentes aparecem visivelmente. Quando as linhas diferem apenas pelo número de espaços em branco, isto poderá ser visto num instante se olhar para a coluna do resumo do lado esquerdo. (Não há mais problemas quando as pessoas mudam o recuo). </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Diferenças Triplas</title>
+<para
+>Analise três arquivos e veja no que eles diferem. </para
+><para
+>As janelas da esquerda/meio/direita são intituladas <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> e têm as cores azul/verde/magenta, respectivamente. </para
+><para
+>Se um dos arquivos for igual e o outro for diferente numa linha, então a cor mostra qual o arquivo que é diferente. A cor vermelha indica que ambos os arquivos são diferentes. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Mesclagem Confortável de Dois ou Três Arquivos de Entrada</title>
+<para
+>O &kdiff3; pode ser usado para mesclar dois ou três arquivos de entrada e mesclar automaticamente o máximo possível. O resultado é apresentado numa janela editável em que a maioria dos conflitos poderá ser resolvida com um simples clique do mouse: Selecione os respectivos botões <guibutton
+>...</guibutton
+> nas janelas <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> para selecionar a origem que deverá ser usada. Uma vez que esta janela de resultado é um editor, até mesmo os conflitos que necessitem de mais correções poderão ser resolvidos aqui sem necessitarem de outra ferramenta. </para>
+</sect2>
+
+<sect2
+><title
+>E ...</title>
+<itemizedlist>
+   <listitem
+><para
+>Navegação rápida através de botões.</para
+></listitem>
+   <listitem
+><para
+>Um clique do mouse numa coluna de resumo sincroniza todas as janelas para mostrarem a mesma posição.</para
+></listitem>
+   <listitem
+><para
+>Selecionar e copiar de qualquer janela para colar na janela do resultado da mesclagem.</para
+></listitem>
+   <listitem
+><para
+>Uma coluna de visão geral que mostra onde estão as alterações e os conflitos.</para
+></listitem>
+   <listitem
+><para
+>As cores são ajustáveis de acordo com as suas preferências específicas.</para
+></listitem>
+   <listitem
+><para
+>Um tamanho de tabulação ajustável.</para
+></listitem>
+   <listitem
+><para
+>Uma opção para inserir espaço em vez de tabulações.</para
+></listitem>
+   <listitem
+><para
+>Abertura confortável dos arquivos através de uma janela ou da linha de comando.</para
+></listitem>
+   <listitem
+><para
+>Pesquise strings em todas as janelas de texto com os itens de menu <menuchoice
+><guimenu
+>Editar</guimenu
+><guimenuitem
+>Localizar</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) e <menuchoice
+><guimenu
+>Editar</guimenu
+><guimenuitem
+>Localizar Próximo</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>).</para
+></listitem>
+   <listitem
+><para
+>Mostrar os números de linha para cada linha. </para
+></listitem>
+   <listitem
+><para
+>Colar o conteúdo da área de transferência e arrastar o texto para uma janela de inserção de diferenças.</para
+></listitem>
+   <listitem
+><para
+>Transparência de rede através do KIO.</para
+></listitem>
+   <listitem
+><para
+>Pode ser usado como visualizador de diferenças no &kdevelop; 3.</para
+></listitem>
+   <listitem
+><para
+>Quebra de linhas para linhas compridas.</para
+></listitem>
+   <listitem
+><para
+>Suporte para o Unicode, UTF-8 e outras codificações.</para
+></listitem>
+   <listitem
+><para
+>Suporte para as línguas escritas da direita-para-esquerda.</para
+></listitem>
+   <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Comparação e Mesclagem de Arquivos</title>
+
+<sect1 id="commandline"
+><title
+>Opções da Linha de Comando</title>
+
+<sect2
+><title
+>Comparar 2 arquivos: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>arquivo1 arquivo2</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Mesclar 2 arquivos: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>arquivo1 arquivo2</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>arquivo1 arquivo2</replaceable
+> -o <replaceable
+>resultado</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Comparar 3 arquivos: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>arquivo1 arquivo2 arquivo3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Mesclar 3 arquivos: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>arquivo1 arquivo2 arquivo3</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>arquivo1 arquivo2 arquivo3</replaceable
+> -o <replaceable
+>resultado</replaceable
+>
+</screen>
+<para
+>Repare que o <replaceable
+>arquivo1</replaceable
+> será tratado como base para o <replaceable
+>arquivo2</replaceable
+> e o <replaceable
+>arquivo3</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Caso especial: Arquivos com o mesmo nome </title>
+<para
+>Se todos os arquivos tiverem o mesmo nome mas estiverem em pastas diferentes, você poderá reduzir o trabalho de escrita se indicar apenas o nome do arquivo para o primeiro parâmetro. Por exemplo: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1/arquivo pasta2 pasta3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Linha de comando para iniciar uma comparação ou mesclagem de pastas: </title>
+<para
+>É bastante semelhante, mas diz respeito agora apenas às pastas.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable
+> -o <replaceable
+>destino</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable
+> -o <replaceable
+>destino</replaceable
+>
+</screen>
+<para
+>Para a comparação e mesclagem de pastas, você poderá continuar a ler <link linkend="dirmerge"
+>aqui</link
+>.</para>
+</sect2>
+
+<sect2
+><title
+>Outras opções da linha de comando</title>
+<para
+>Para mais informações sobre as opções da linha de comando use</para>
+<screen
+><command
+>kdiff3</command
+> --help
+</screen>
+<para
+>Exemplo do resultado:</para>
+<screen
+>Opções:
+  -m, --merge               Mescla o resultado.
+  -b, --base arquivo        Arquivo de base explícito. Para compatibilidade com certas ferramentas.
+  -o, --output arquivo      Arquivo de resultado. O -m é implícito. P.ex.: -o novo_arquivo.txt
+  --out arquivo             O arquivo de resultado, mais uma vez. (Para compatibilidade com certas ferramentas.)
+  --noauto                  Ignorar --auto e sempre mostrar a interface.
+  --auto                    Sem interface gráfica se todos os conflitos são resolúveis. (Necessita do -o)
+  --L1 nome1                Substituto visível do nome do arquivo 1 (base).
+  --L2 nome2                Substituto visível do nome do arquivo 2.
+  --L3 nome3                Substituto visível do nome do arquivo 3.
+  -L, --fname nome          Um substituto visível alternativo para o nome. Use este uma vez para cada arquivo de entrada.
+  --cs texto                Substitui uma opção de configuração. Use uma vez para cada opção. P.ex. --cs "AutoAdvance=1"
+  --confighelp              Mostra uma lista com as opções de configuração e os valores atuais.
+  --config arquivo          Usa um arquivo de configuração diferente.
+</screen>
+<para
+>A opção <option
+>--cs</option
+> permite-lhe ajustar um valor de configuração que, de outro modo, só é ajustável através das janelas de configuração. Mas tenha em mente que, quando o &kdiff3; terminar, o valor alterado será gravado com as outras opções. Com o <option
+>--confighelp</option
+>, você poderá descobrir os nomes dos itens disponíveis e dos valores atuais.</para>
+<para
+>Através do <option
+>--config</option
+>, você poderá indicar um arquivo de configuração diferente. Quando usar frequentemente o &kdiff3; com opções completamente diferentes, isto permitirá mudar rapidamente entre elas.</para>
+</sect2>
+<sect2
+><title
+>Ignorar as opções da linha de comando</title>
+<para
+>Muitas pessoas querem usar o &kdiff3; com alguns sistemas de controles de versões. Mas quando esse sistema de controle de versões chama o &kdiff3;, usando os parâmetros da linha de comando que o &kdiff3; não reconhece, então o &kdiff3; termina com um erro. O item <guilabel
+>Integração</guilabel
+> na janela de configurações permite indicar parâmetros da linha de comando que deverão ser ignorados pelo &kdiff3;. Eles irão aparecer na ajuda de uso, como neste exemplo:</para>
+<screen
+>--<replaceable
+>xpto</replaceable
+>                     Ignorado. (Definido pelo usuário.)
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Opções da linha de comando a ignorar:</guilabel
+></term
+><listitem
+><para
+>Uma lista de opções, separadas pelo ponto e vírgula ';'. Quando alguma destas opções aparecer na linha de comando, então o &kdiff3; irá ignorá-la e irá executar sem indicar qualquer erro. (Por padrão é "<literal
+>u;query;html;abort</literal
+>").</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Quando isto não for suficiente, então recomenda-se que crie um programa que faça a tradução das opções.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Janela de Abertura</title>
+<para
+>Uma vez que é necessário selecionar vários arquivos, o programa tem uma janela de abertura especial: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>A janela de abertura permite editar os nomes dos arquivos à mão, selecionando um arquivo através do navegador dos arquivos pelo botão <guibutton
+>Arquivo...</guibutton
+> ou permite escolher os arquivos recentes a partir das listas respectivas. Se abrir a janela de novo, então os nomes atuais irão permanecer nela. O terceiro arquivo de entrada não é obrigatório. Se a entrada para <guilabel
+>C</guilabel
+> continuar em branco, então só será efetuada uma análise de diferenças com dois arquivos. </para
+><para
+>Você poderá também selecionar uma pasta com o botão <guibutton
+>Pasta...</guibutton
+>. Se for indicado <guilabel
+>A</guilabel
+> como uma pasta, então será iniciada uma comparação/mesclagem de pastas. Se o <guilabel
+>A</guilabel
+> se referir a um arquivo, mas o <guilabel
+>B</guilabel
+>, o <guilabel
+>C</guilabel
+> ou o destino corresponderem a pastas, então o &kdiff3; usa o nome do arquivo em <guilabel
+>A</guilabel
+> nas pastas indicadas. </para
+><para
+>Se a <guilabel
+>Mesclagem</guilabel
+> estiver selecionada, então o campo <guilabel
+>Resultado</guilabel
+> fica editável. Mas não é obrigatório indicar o nome do arquivo do resultado imediatamente. Você poderá também adiar isto até o salvamento. </para
+><para
+>O botão <guibutton
+>Configurar...</guibutton
+> abre a janela de configurações, para que você possa definir as opções antes de executar a análise. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Colar e Arrastar Dados</title>
+<para
+>Em algumas ocasiões, você poderá querer comparar partes de um texto que não está em nenhum arquivo próprio. O &kdiff3; também lhe permite colar texto da área de transferência para a janela de inserção de diferenças que esteja em primeiro plano. A análise de diferenças irá ocorrer então. Na janela de abertura, você não irá necessitar de indicar arquivos, fechando-a então com o <guibutton
+>Cancelar</guibutton
+>. </para
+><para
+>Você também poderá usar o 'arrastar e soltar': Arraste um arquivo de um gerenciador de arquivos ou o texto selecionado de um editor e solte-o em uma janela de inserção de diferenças. </para
+><para
+>Qual é a ideia? Algumas vezes um arquivo contém duas funções semelhantes, mas a verificação sobre as semelhanças entre elas é um grande esforço, se você precisar criar primeiro dois arquivos e depois carregá-los. Assim, poderá simplesmente copiar, colar e comparar as seções relevantes. </para
+><note
+><para
+>Atualmente, você não poderá arrastar nada a partir do &kdiff3;. Só é permitido soltar dados nas janelas de inserção de diferenças. </para
+></note
+><warning
+><para
+>Alguns editores ainda interpretam o 'arrastar e soltar' em outro programa como o Cortar (em vez do Copiar) e Colar. Os seus dados originais poderão deste modo perder-se. </para
+></warning>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Comparar os Arquivos e Interpretar a Informação nas Janelas de Entrada</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<sect2
+><title
+>Linha de Informação</title
+><para
+>No topo de cada janela de texto existe a sua "linha de informação". As linhas de informação das janelas de inserção de diferenças contêm uma letra <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>, o nome do arquivo e o número da primeira linha visível da janela. (Lembre-se que a janela <guilabel
+>C</guilabel
+> é opcional). Cada linha de informação aparece com uma cor diferente. (Se as localizações forem muito extensas para caberem, você poderá mover o cursor do mouse para cima da linha de informação, de modo a que apareça uma dica com o nome completo). </para
+><para
+>Quando tiver selecionado outro arquivo através de navegação ou acabar de editar o nome do arquivo aqui, pressionando &Enter;, o novo arquivo será carregado e comparado com os arquivos já carregados previamente. </para
+></sect2
+><sect2
+><title
+>Coloração</title
+><para
+>As três janelas de entrada têm atribuídas as letras <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+>. O <guilabel
+>A</guilabel
+> tem uma cor azul, o <guilabel
+>B</guilabel
+> verde e o <guilabel
+>C</guilabel
+> magenta. (Estas são as cores padrão, mas podem ser alteradas no menu de configuração). </para
+><para
+>Quando é detectada uma diferença, então a cor mostra qual o arquivo de entrada que é diferente. Quando todos os outros arquivos de entrada diferem, então a cor usada para exprimir isto é a vermelha por padrão (opção <guilabel
+>Cor do conflito</guilabel
+> no item <guilabel
+>Cor</guilabel
+> na janela de configurações). Este esquema de cores é particularmente útil no caso de três arquivos de entrada, os quais serão vistos na próxima seção (<link linkend="merging"
+>Mesclar</link
+>). </para
+></sect2
+><sect2
+><title
+>Coluna de Resumo</title
+><para
+>À esquerda de cada texto está a coluna "resumo". Se ocorrerem diferenças numa linha, então a coluna do resumo mostra a cor respectiva. Para uma diferença por espaços em branco, o resumo fica em xadrez. Para as linguagens de programação em que os espaços em branco não são muito importantes, isto é útil para ver de um modo geral se existe algo de importante modificado. (No C/C++, os espaços em branco só são importantes dentro de cadeias de caracteres, comentários, pré-processador e em algumas outras situações esotéricas.) </para
+><para
+>A linha vertical que separa a coluna do resumo e o texto é interrompida (tracejada), se o arquivo de entrada não tiver aí nenhuma linha. Quando a mudança de linha estiver ativa, então esta linha vertical aparece ponteada para as linhas repartidas. </para
+></sect2
+><sect2
+><title
+>Coluna de Resumo</title
+><para
+>Do lado direito, aparece uma coluna de "resumo" à esquerda da barra de rolagem vertical. Ela mostra a coluna de resumo comprimida dos dados de <guilabel
+>A</guilabel
+>. Todas as diferenças e conflitos ficam visíveis numa vista rápida. Quando só são usadas duas janelas de entrada, então todas as diferenças aparecem em vermelho, uma vez que cada diferença é também um conflito. Um retângulo preto delimita a parte visível dos dados de entrada. Para as linhas de dados muito compridas, quando o número de linhas de dados é maior do que a altura da coluna de resumo em pixels, então várias linhas de dados de entrada irão compartilhar uma linha de resumo. Um conflito, neste caso, terá então uma prioridade elevada sobre as diferenças simples, que por sua vez têm prioridade sobre a ausência de alterações, assim não se perde nenhuma diferença ou conflito neste caso. Se clicar nesta coluna de resumo, será mostrado o texto correspondente. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Alinhar Manualmente as Linhas</title
+><para
+>Em alguns casos, o algoritmo coloca as linhas erradas após umas às outras. Ou se deseja comparar um pedaço de texto com outro que se encontra numa posição completamente diferente no outro arquivo. Para esses casos, você poderá indicar manualmente ao &kdiff3; para alinhar certas linhas. Marque o texto para o qual deseja melhorar o alinhamento com o mouse, como faria para copiar e colar na primeira visualização de diferenças e, em seguida, escolha o item de menu (<keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+>). Irá aparecer uma barra laranja na coluna do resumo, após o texto escolhido. Repita isto para a segunda e (se disponível) a terceira janela de diferenças. O &kdiff3; irá calcular imediatamente de novo as diferenças sempre que fizer isto, alinhando as linhas escolhidas. Obviamente, algumas das linhas anteriormente correspondentes poderão não corresponder mais. </para
+><para
+>Atualmente, a mesclagem não suporta a utilização da ajuda de diferenças manual. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Mesclar e Dividir Manualmente Seções de Diferenças</title
+><para
+>Em alguns casos, o &kdiff3; irá ver seções de diferenças a mais ou a menos para a mesclagem. Nesse caso, você poderá mesclar ou dividir as seções existentes. </para
+><para
+>Adicione seções novas, selecionando primeiro o texto nas linhas que pertencem em conjunto a qualquer uma das janelas de entrada (como acontece na cópia para a área de transferência). Depois, selecione o item <menuchoice
+><guimenu
+>Mesclar</guimenu
+><guimenuitem
+>Dividir a diferença na seleção</guimenuitem
+></menuchoice
+>, do menu. Serão adicionadas divisões antes da primeira linha e depois da última linha do texto selecionado. Se você só quiser adicionar uma seção, então selecione o texto que começa noutra divisão de seção. </para
+><para
+>Para juntar as seções, selecione algo nas linhas das seções a juntar, em qualquer uma das janelas de entrada. (Você poderá também juntar diversas seções de uma vez). Depois, selecione o item <menuchoice
+><guimenu
+>Mesclar</guimenu
+><guimenuitem
+>Juntar as diferenças selecionadas</guimenuitem
+></menuchoice
+> do menu. </para
+></sect2>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Mesclar e a Janela do Editor do Resultado da Mesclagem</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>A janela do editor do resultado da mesclagem (abaixo das janelas de inserção de diferenças) também tem uma linha de informação no topo que mostra <guilabel
+>Resultado:</guilabel
+>, o nome do arquivo e <replaceable
+>[Modificado]</replaceable
+> se você tiver alterado alguma coisa. Normalmente irá conter algum texto resultante das funcionalidades de mesclagem automática, mas frequentemente irá conter também conflitos. </para
+><para
+>O salvamento está desativado até que todos os conflitos estejam resolvidos. (Use os botões para <guibutton
+>Ir para o conflito não resolvido anterior/seguinte</guibutton
+> para descobrir os conflitos que faltam.) </para
+><para
+>Com apenas dois arquivos de entrada, todas as diferenças são também conflitos que necessitam ser resolvidos manualmente. </para
+><para
+>Com três arquivos de entrada, o primeiro arquivo é tratado como a base, enquanto que o segundo e o terceiro contêm as modificações. Quando, em qualquer linha, só o arquivo <guilabel
+>B</guilabel
+> ou o <guilabel
+>C</guilabel
+> tiverem sido alterados mas não ambos, então será selecionada a origem alterada. Só quando o <guilabel
+>B</guilabel
+> e o <guilabel
+>C</guilabel
+> alteraram as mesmas linhas é que a ferramenta detecta um conflito que deverá ser resolvido manualmente. Quando o <guilabel
+>B</guilabel
+> e o <guilabel
+>C</guilabel
+> são iguais mas não são o mesmo que o <guilabel
+>A</guilabel
+>, é selecionado o <guilabel
+>C</guilabel
+>. </para
+><sect2
+><title
+>A Coluna de Resumo</title
+><para
+>A janela do editor do resultado da mesclagem também tem uma coluna de resumo à esquerda. Ela mostra a letra do arquivo de entrada para o qual foi selecionada a linha ou nada, se todas as três origens são iguais nessa linha. Para os conflitos, ela mostra um ponto de interrogação "?" e a linha mostra "&lt;Conflito na Mesclagem&gt;", tudo em vermelho. Uma vez que a resolução de conflitos linha a linha poderá levar bastante tempo, as linhas são reunidas em grupos com as mesmas características de diferenças e conflitos. Mas os conflitos só com espaços em branco são separados dos outros conflitos para facilitar a mesclagem dos arquivos em que o recuo foi alterado em várias linhas. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>Configurar o Grupo Atual e Sincronizar a Posição de Visualização da Mesclagem e Diferenças</title
+><para
+>Ao clicar na coluna do resumo com o &LMB; em ambas as janelas, o grupo que pertença a essa linha será selecionado em todas as janelas e o início desse grupo será mostrado. Este grupo fica então o "grupo atual". Fica realçado com a opção <guilabel
+>Cor de fundo do intervalo atual</guilabel
+> do item <guilabel
+>Integração</guilabel
+> na janela de configurações e aparece uma barra preta do lado esquerdo do texto. </para
+></sect2
+><sect2
+><title
+>Escolher as Entras A, B ou C para os Conflitos e Edições Atuais</title
+><para
+>A barra de botões abaixo do menu contém três botões de seleção que contêm as letras <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+>. Clique no seletor de entrada para inserir (ou remover se já estiver inserido) as linhas da origem respectiva. Para escolher as linhas de várias entradas, clique nos botões respectivos na ordem necessária. Por exemplo, se quiser que as linhas de <guilabel
+>B</guilabel
+> apareçam antes das linhas de <guilabel
+>A</guilabel
+> no resultado, clique primeiro em <guilabel
+>B</guilabel
+> e depois em <guilabel
+>A</guilabel
+>. </para
+><para
+>Se você usar o botão <guibutton
+>Ir automaticamente para o próximo conflito não resolvido após a seleção da fonte</guibutton
+> (veja a seção <link linkend="autoadvance"
+>Avanço automático</link
+>), deverá desativar isto antes de escolher as linhas de várias entradas ou se quiser editar as linhas após a sua escolha. Caso contrário, o &kdiff3; irá saltar para o próximo conflito após a seleção da primeira entrada. </para
+><para
+>Normalmente é útil editar diretamente o resultado da mesclagem. A coluna de resumo irá mostrar "m" para cada linha modificada manualmente. Quando, por exemplo, as diferenças estão alinhadas de forma que não seja satisfatório escolher simplesmente as entradas, então poderá marcar o texto necessário e usar a <link linkend="selections"
+>cópia e colagem</link
+> normais para colocar no resultado da junção. </para
+><para
+>Algumas vezes, quando uma linha é removida tanto por mesclagem automática como por edição e não fica mais nenhuma linha nesse grupo, então o texto "&lt;Sem linha de origem&gt;" irá aparecer nessa linha. Isto é apenas um substituto para o grupo, quando decidir mudar de ideia e selecionar algum texto de origem de novo. Este texto não irá aparecer no arquivo salvo ou em qualquer seleção que deseje copiar e colar. </para
+><para
+>O texto "&lt;Conflito na Mesclagem&gt;" irá aparecer na área de transferência se copiar e colar algum texto que tenha uma dessas linhas. Mas ainda tenha cuidado ao fazer isso. </para
+></sect2
+><sect2
+><title
+>Escolher a Entrada A, B ou C para Todos os Conflitos</title
+><para
+>A mesclagem normal irá começar por resolver os conflitos simples automaticamente. Mas o menu <guimenu
+>Mesclar</guimenu
+> oferece algumas ações para outros usos comuns. Se você tiver que selecionar a mesma origem para a maioria dos conflitos, então poderá escolher <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+> em qualquer lado ou apenas para os conflitos que continuem ainda por resolver ou então para os conflitos de espaços em branco por resolver. Se quiser decidir cada um dos deltas por si próprio, poderá <guimenuitem
+>Passar os deltas para conflitos</guimenuitem
+>. Ou, se preferir voltar às escolhas automáticas do &kdiff3;, selecione então a opção <guimenuitem
+>Resolver automaticamente os conflitos simples</guimenuitem
+>. Nesse caso, o &kdiff3; irá reiniciar a mesclagem. Para as ações que alteram as suas modificações anteriores, o &kdiff3; pedirá uma confirmação antes de prosseguir. </para
+><note
+><para
+>Ao escolher uma das origens para os conflitos que não sejam de espaços em branco e as opções <guilabel
+>Ignorar os números (tratar como espaço em branco)</guilabel
+> ou <guilabel
+>Ignorar os comentários de C/C++ (tratar como espaço em branco)</guilabel
+> forem usadas, então as alterações nos números ou comentários serão tratadas como espaços em branco também. </para
+></note
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Mesclagem Automática das Palavras-Chave e do Histórico do Controle de Versões (Registro)</title
+><para
+>Muitos sistemas de controle de versões tem suporte a palavras-chave especiais no arquivo. (&eg; "<literal
+>&#36;Date&#36;</literal
+>", "<literal
+>&#36;Header&#36;</literal
+>", "<literal
+>&#36;Author&#36;</literal
+>", "<literal
+>&#36;Log&#36;</literal
+>" &etc;) Durante o envio de novas versões, o sistema de controle de versões (SCV) muda essas linhas. Por exemplo, o "<literal
+>&#36;Date&#36;</literal
+>" passará a "<literal
+>&#36;Date: 2005/03/22 18:45:01 &#36;</literal
+>". Uma vez que esta linha será diferente em cada versão do arquivo, seria necessário intervenção manual durante a mesclagem. </para
+><para
+>O &kdiff3; oferece mesclagem automática para esses itens no item <guilabel
+>Mesclar</guilabel
+> da janela de configurações. Para linhas simples que correspondam à opção <guilabel
+>Mesclar expressão regular automaticamente</guilabel
+> em todos os arquivos de entrada, o &kdiff3; escolherá a linha de <guilabel
+>B</guilabel
+> ou - se disponível - de <guilabel
+>C</guilabel
+>. (Além disso, é necessário que as linhas em questão estejam alinhadas na comparação e que a linha anterior não contenha conflitos.) Essa mesclagem automática pode ser executada imediatamente após o início de uma mesclagem (ative a opção <guilabel
+>Executar mesclagem automática por expressão regular no início da mesclagem</guilabel
+>) ou posteriormente por meio do item de menu <menuchoice
+><guimenu
+>Mesclar</guimenu
+><guimenuitem
+>Executar mesclagem automática por expressão regular</guimenuitem
+></menuchoice
+>. </para
+><para
+>A mesclagem automática para o histórico do controle de versões (também chamado de "registro") é também suportada. A mesclagem automática do histórico tanto poderá rodar automaticamente quando iniciar a mesclagem, ativando para tal a opção <guilabel
+>Mesclar o histórico do controle de versões no início da mesclagem</guilabel
+> no item <guilabel
+>Mesclar</guilabel
+> na janela de configurações ou mais tarde através do item do menu <menuchoice
+><guimenu
+>Mesclar</guimenu
+><guimenuitem
+>Resolver automaticamente os conflitos do histórico</guimenuitem
+></menuchoice
+>. </para
+><para
+>Normalmente, o histórico do controle de versões começa por uma linha que contém a palavra-chave "<literal
+>&#36;Log&#36;</literal
+>". Isto deverá corresponder à opção <guilabel
+>Expressão regular do início do histórico</guilabel
+>. O &kdiff3; detecta quais as linhas subsequentes no histórico, analisando os caracteres iniciais que aparecem antes da palavra-chave "<literal
+>&#36;Log&#36;</literal
+>". Se também aparecer o mesmo "comentário inicial" nas linhas seguintes, então estas também serão incluídas no histórico. </para
+><para
+>Durante o envio de cada nova versão, o SCV grava uma linha única que indica a versão, a data e a hora, seguida de linhas com os comentários dos usuários. Essas linhas formam um item de histórico. Esta seção do histórico vai crescendo com o envio de versões novas e os itens mais recentes aparecem no topo (após a linha inicial do histórico). </para
+><para
+>Quando, em desenvolvimentos paralelos, dois ou mais programadores enviam versões em ramificações diferentes, o histórico da mesclagem irá conter vários itens que aparecem como conflitos na mesclagem das ramificações. Uma vez que a mesclagem deles poderá se tornar muito aborrecida, o &kdiff3; oferece o suporte com duas estratégias possíveis: basta inserir a informação de histórico de ambas as contribuições no topo ou ordenar a informação de histórico do usuário, usando uma chave definida pelo mesmo. </para
+><para
+>O método basta-inserir-todos-os-itens é mais fácil de configurar. O &kdiff3; só precisa de um método para detectar as linhas que pertencem a um item de histórico. A maioria dos SCV inserem uma linha em branco, após cada item do histórico. Se não existirem mais linhas em branco, então este será um critério suficiente para o &kdiff3;. Basta inserir uma <guilabel
+>Expressão regular do início do item de histórico</guilabel
+> em branco no item <guilabel
+>Mesclar</guilabel
+> na janela de configurações. Se o critério da linha vazia não for suficiente, você poderá indicar uma expressão regular para detectar o início do item do histórico. </para
+><para
+>Lembre-se que o &kdiff3; irá remover os itens de histórico duplicados. Se um item de histórico aparecer várias vezes no histórico de um arquivo de entrada, só um irá aparecer no resultado. </para
+><para
+>Se você quiser ordenar o histórico, então terá que indicar como deverá ser gerada a chave de ordenação. Use parênteses na <guilabel
+>Expressão regular do início do item de histórico</guilabel
+> no item <guilabel
+>Mesclar</guilabel
+> na janela de configurações para agrupar as partes da expressão regular que deverão mais tarde ser usadas na chave de ordenação. Indique depois a <guilabel
+>Ordem da chave de ordenação do início do item de histórico</guilabel
+>, indicando para isso uma lista de números separados por ",", referentes à posição do grupo na expressão regular. </para
+><para
+>Uma vez que isto não é tão simples de colocar funcionando de início, você poderá testar e melhorar as expressões regulares e gerar as chaves, numa janela dedicada, se clicar no botão <guibutton
+>Testar as suas expressões regulares</guibutton
+>. </para
+><para
+>Exemplo: Considere um histórico como este: </para>
+<screen
+>/**************************************************************************
+** HISTORY:    &#36;Log: \janela_do_tom\Aplicacao\src\algoritmo-complexo.cpp &#36;
+**
+**     \principal\ramo_integracao_12   2 Abr 2001 10:45:41   ze
+**  Juntou-se a ramificação simao_versao_15.
+**
+**     \principal\ramo_correcao_erros_7\1   30 Mar 2001 19:22:05   pedro
+**  Melhorias na velocidade da sub-rotina convertToMesh().
+**  Correção do estoiro.
+**************************************************************************/
+</screen>
+<para
+>A linha inicial do histórico corresponde à expressão regular "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>". Em seguida, seguem as entradas do histórico. </para
+><para
+>A linha com a palavra-chave "<literal
+>&#36;Log&#36;</literal
+>" começa com dois "*", após os quais se segue um espaço. O &kdiff3; usa o primeiro texto não-branco como "comentários iniciais" e assume que o histórico termina na primeira linha sem esse comentário inicial. Neste exemplo, a última linha termina com um texto que também começa por dois "*" mas, em vez de um espaço, seguem-se mais "*". Como tal, esta linha termina o histórico. </para
+><para
+>Se a ordenação do histórico não for necessária, a expressão regular da linha inicial da entrada do histórico poderia ser assim. (Esta linha está dividida em duas porque não caberia de outra forma.) </para>
+<screen
+>\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen>
+<para
+>Para mais detalhes sobre as expressões regulares, veja por favor a <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>documentação da Trolltech sobre expressões regulares</ulink
+>. Repare que o "<literal
+>\s</literal
+>" (com o "<literal
+>s</literal
+>" minúsculo) corresponde a qualquer espaço em branco e o "<literal
+>\S</literal
+>" (com o "<literal
+>S</literal
+>" maiúsculo) corresponde a qualquer caractere que não seja espaço em branco. No nosso exemplo, o início do item de histórico, contém primeiro a informação da versão com a expressão regular "<literal
+>\\principal\\\S+</literal
+>", a data consiste no dia "<literal
+>[0-9]+</literal
+>", mês "<literal
+>(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)</literal
+>" e no ano "<literal
+>[0-9][0-9][0-9][0-9]</literal
+>", a hora "<literal
+>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal
+>" e, finalmente, o nome de login do programador "<literal
+>.*</literal
+>". </para
+><para
+>Repare nos caracteres do "comentário inicial" (no exemplo "<literal
+>**</literal
+>"), que terão já sido removidos pelo &kdiff3; antes de tentar a correspondência; assim, a expressão regular começa com uma correspondência a zero ou mais espaços em branco "<literal
+>\s*</literal
+>". Uma vez que os caracteres de comentários poderão ser diferentes para cada arquivo (&eg; o C/C++ usa caracteres de comentários diferentes de um programa em Perl), o &kdiff3; toma conta dos caracteres de comentário iniciais e você não os deverá definir na expressão regular. </para
+><para
+>Se você precisar de um histórico ordenado, a chave de classificação deverá ser calculada. Para isso, as partes relevantes da expressão regular devem ser agrupadas por parênteses. (Os parênteses extras também podem permanecer se a classificação do histórico estiver desativada.) </para>
+<screen
+>\s*\\main\\(\S+)\s+([0-9]+) (Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen>
+<para
+>Os parênteses contêm agora <literal
+>1</literal
+>. a informação de versão, <literal
+>2</literal
+>. dia, <literal
+>3</literal
+>. mês, <literal
+>4</literal
+>. ano, <literal
+>5</literal
+>. hora, <literal
+>6</literal
+>. nome. Mas, se pretender ordenar por data e hora, é necessário construir uma chave com os elementos por uma ordem de aparência diferente: Primeiro o ano, seguido do mês, dia, hora, informação de versão e nome. Daí, a ordem da chave de ordenação será "<literal
+>4,3,2,5,1,6</literal
+>". </para
+><para
+>Uma vez que os nomes dos meses não são bons para ordenar (o "<literal
+>Abr</literal
+>" viria em primeiro lugar), o &kdiff3; detecta em que ordem os nomes dos meses foram fornecidos e usa esse número em alternativa ("<literal
+>Abr</literal
+>"-&gt;"<literal
+>04</literal
+>"). E, se for encontrado um número puro, será transformado num valor de 4 algarismos com zeros iniciais para ordenar. Finalmente, a chave de ordenação resultante da linha inicial do primeiro item de histórico será: </para>
+<screen
+>2001 04 0002 10:45:41 ramo_integracao_12   tom
+</screen>
+<para
+>Para mais informações, veja também a seção <link linkend="mergeoptions"
+>Opções de mesclagem</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navegação e Edição</title>
+<para
+>Muita da navegação será feita com as barras de rolagem e com o mouse, mas você poderá também navegar com as teclas. Se clicar em uma das janelas, então poderá usar ps ataçjps &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;, <keycap
+>Home</keycap
+>, <keycap
+>End</keycap
+>, <keycombo
+>&Ctrl;<keycap
+>Home</keycap
+></keycombo
+> e <keycombo
+>&Ctrl;<keycap
+>End</keycap
+></keycombo
+> como usaria em outros programas. A coluna de resumo ao lado da barra de rolagem vertical dos arquivos de entrada poderá também ser usada para navegar se clicar nela. </para
+><para
+>Você poderá também usar a <mousebutton
+>roda</mousebutton
+> do mouse para subir ou descer. </para
+><para
+>No editor do resultado da mesclagem, você poderá também usar as outras teclas para editar. Poderá alternar entre o modo de inserção ou sobreposição com a tecla &Ins;. (Por padrão, está no modo de inserção). </para
+><para
+>Um clique com o &LMB; em qualquer coluna de resumo irá sincronizar todas as janelas para mostrar o início do mesmo grupo de linhas (tal como é explicado em <link linkend="synchronise_views"
+>Configurar o grupo atual e sincronizar a posição da janela de mesclagem e diferença</link
+>). </para
+><para
+>A barra de botões também contém sete botões de navegação com os quais poderá saltar para a primeira/última/atual diferença, para a diferença seguinte/anterior (<keycombo
+>&Ctrl;&Down;</keycombo
+>/<keycombo
+>&Ctrl;&Up;</keycombo
+>),  para o conflito seguinte/anterior (<keycombo
+>&Ctrl;&PgDn;</keycombo
+>/<keycombo
+>&Ctrl;&PgUp;</keycombo
+>) ou para o conflito seguinte/anterior não resolvido. Repare que, para o &kdiff3;, um "conflito" que não foi resolvido automaticamente no início da mesclagem irá permanecer como "conflito", mesmo que resolvido. Daí a necessidade de distinguir os "conflitos não resolvidos". </para>
+<sect2 id="autoadvance"
+><title
+>Avanço automático</title>
+<para
+>Existe também um botão <guibutton
+>Ir automaticamente para o próximo conflito não resolvido após a seleção do código</guibutton
+> (Avanço Automático). Se ativar esta opção, então sempre que selecionar uma origem, o &kdiff3; irá saltar para o próximo conflito por resolver automaticamente. Isto poderá ajudar quando quiser sempre escolher apenas uma origem. Quando precisar de ambas as origens, ou se quiser editar depois de selecionar, então provavelmente irá querer desligar esta opção. Antes de prosseguir para o próximo conflito por resolver, o &kdiff3; mostra-lhe o efeito da sua escolha durante algum tempo. Este atraso é ajustável no item <guilabel
+>Mesclar</guilabel
+> na janela de configurações: Você poderá indicar o <guilabel
+>Atraso no avanço automático</guilabel
+> num valor entre 0 e 2 000 milissegundos. Sugestão: Cansado de muitos cliques? - Use um atraso de avanço automático reduzido e os atalhos <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+> para selecionar o <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> em muitos conflitos. </para>
+</sect2>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Selecionar, Copiar e Colar</title>
+<para
+>As janelas de entrada não mostram nenhum cursor, assim as seleções precisam ser feitas com o mouse, ao clicar com o &RMB; no início, mantendo o botão do mouse pressionado e indo até ao fim, momento em que solta o botão do mouse de novo. Você poderá também selecionar uma palavra se fizer duplo-clique nela. No editor do resultado da mesclagem poderá também selecionar com o teclado se mantiver a tecla &Shift; pressionada enquanto navega com as teclas de cursores. </para
+><para
+>Se a seleção ultrapassar o intervalo visível, você poderá passar o mouse por cima das bordas da janela, o que fará com que o &kdiff3; se desloque nessa direção. </para
+><para
+>Para as seleções muito grandes, você poderá também usar as teclas de navegação, enquanto mantém pressionado o mouse. Por exemplo, use o &PgUp; e o &PgDn; para ir rapidamente para uma dada posição. Na posição final, solte o botão do mouse. </para
+><para
+>Para selecionar tudo na janela atual, use o item de menu <menuchoice
+><guimenu
+>Editar</guimenu
+> <guimenuitem
+>Selecionar tudo</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>). </para
+><para
+>Para copiar para a área de transferência, você precisa pressionar o botão <guibutton
+>Copiar</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> ou <keycombo
+>&Ctrl;&Ins;</keycombo
+>). Porém, existe uma opção para <guilabel
+>Copiar automaticamente a seleção</guilabel
+> no item <guilabel
+>Editor</guilabel
+> na janela de configurações. Se esta estiver ativa, então tudo o que selecionar será copiado imediatamente, sem que você tenha de copiar explicitamente. Todavia, preste atenção ao usar isto, uma vez que o conteúdo da área de transferência poderá ser destruído por acidente. </para
+><para
+><guibutton
+>Cortar</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> ou <keycombo
+>&Shift;&Del;</keycombo
+>) copia para a área de transferência e apaga o texto selecionado. </para
+><para
+><guibutton
+>Colar</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> ou <keycombo
+>&Shift;&Ins;</keycombo
+>) insere o texto da área de transferência na posição do cursor ou na seleção atual. Se colar numa das janelas de entrada de diferenças, o conteúdo da área de transferência será mostrado nessa janela e a comparação irá reiniciar imediatamente. Isto é útil se quiser pegar rapidamente num pedaço de texto de qualquer local e compará-lo com outra coisa, sem ter que criar arquivos primeiro. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Salvando</title>
+<para
+>O salvamento só será permitido quando todos os conflitos tiverem sido resolvidos. Se o arquivo já existir e a opção <guilabel
+>Arquivos de backup</guilabel
+> estiver ativa no item <guilabel
+>Pasta</guilabel
+> na janela de configurações, então o arquivo existente terá o seu nome mudado de modo a ter uma extensão <literal role="extension"
+>.orig</literal
+>, mas se existir um destes arquivos ele será removido. Quando você sair ou iniciar outra análise de diferenças e os dados não tiverem sido salvos ainda, então o &kdiff3; irá perguntar se você deseja salvar, cancelar ou prosseguir sem salvar. (O &kdiff3; não lida com nenhum sinal ('signals') do sistema. Por isso, se fizer um "kill" da instância do &kdiff3;, então os seus dados serão perdidos.) </para
+><para
+>Os fins de linha são salvos de acordo com o método normal do sistema operacional subjacente. Para os UNIXes, cada linha é terminada com um caractere de 'linefeed' "<literal
+>\n</literal
+>", enquanto que nos sistemas baseados em Win32, cada linha termina com um 'carriage-return' + um 'linefeed' "<literal
+>\r\n</literal
+>". O &kdiff3; não preserva os fins de linha dos arquivos de entrada, o que também significa que você não deverá usar o &kdiff3; com arquivos binários. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Procurar strings</title>
+<para
+>Você pode pesquisar uma sequência de caracteres em qualquer janela de texto do &kdiff3;. O item de menu <menuchoice
+><guimenu
+>Editar</guimenu
+><guimenuitem
+>Localizar...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) abre uma janela que permite especificar a sequência de caracteres a ser pesquisada. Você também pode selecionar as janelas que devem ser pesquisadas. A pesquisa sempre começará no topo. Use o item de menu <menuchoice
+><guimenu
+>Editar</guimenu
+><guimenuitem
+>Localizar próximo...</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>) para prosseguir para a próxima ocorrência. Se você selecionar a opção para pesquisar em várias janelas, a primeira janela será pesquisada de cima para baixo antes que a pesquisa comece na próxima janela novamente no topo, e assim por diante. </para>
+</sect1>
+
+<sect1 id="printing"
+><title
+>Impressão</title>
+<para
+>O &kdiff3; suporta a impressão das diferenças do arquivo de texto. O menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Imprimir...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+>) abre uma janela que lhe permite selecionar a impressora e ajustar as outras opções. </para
+><para
+>Existem várias possibilidades para ajustar o intervalo. Devido às diferentes janelas de impressão nos diferentes sistemas operacionais, o método para obter certas seleções de intervalos varia. </para>
+<variablelist>
+   <varlistentry
+><term
+>Todos:</term
+><listitem
+><para
+>Imprime tudo.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Atual:</term
+><listitem
+><para
+>Imprime uma página que começa na primeira linha visível da janela. (Nos sistemas sem esta opção, isto poderá ser obtido se indicar o número de página 10000 na impressão.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Seleção:</term
+><listitem
+><para
+>Antes de optar por imprimir, selecione o texto com o mouse (como acontece na cópia e colagem) numa das janelas de entrada das diferenças, para definir a linha inicial e final. Se não foi selecionado nenhum texto numa das janelas de entrada, então esta opção não estará disponível. (Nos sistemas sem esta opção, isto poderá ser conseguido se indicar para imprimir a página 9999.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Intervalo:</term
+><listitem
+><para
+>Indica a primeira e última página. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>As outras opções importantes serão retiradas das opções normais: </para
+><itemizedlist>
+   <listitem
+><para
+>Fonte, tamanho da fonte</para
+></listitem>
+   <listitem
+><para
+>Mostrar números de linha</para
+></listitem>
+   <listitem
+><para
+>Quebra de linha</para
+></listitem>
+   <listitem
+><para
+>Cores</para
+></listitem>
+   <listitem
+><para
+>&etc;</para
+></listitem>
+</itemizedlist>
+<para
+>A formatação em paisagem (na horizontal) também é recomendada na impressão. </para>
+</sect1>
+
+<sect1 id="options"
+><title
+>Opções</title>
+<para
+>As opções e a lista de arquivos recentes serão salvas quando você sair do programa e serão carregadas de novo quando o iniciar. (Menu <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Configurar &kdiff3;...</guimenuitem
+></menuchoice
+>). </para>
+<sect2
+><title
+>Fonte</title>
+<para
+>Selecione uma fonte monoespaçada. (Em alguns sistemas, esta janela irá também apresentar os tipos de fonte de tamanho variável, mas você não deverá usá-los.) </para>
+</sect2>
+
+<sect2
+><title
+>Cores</title>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Editor e visualização das diferenças:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Cor principal:</guilabel
+></term
+><listitem
+><para
+>Normalmente preto. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor do plano de fundo:</guilabel
+></term
+><listitem
+><para
+>Normalmente branco. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor do plano de fundo das diferenças:</guilabel
+></term
+><listitem
+><para
+>Normalmente cinza claro. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor A:</guilabel
+></term
+><listitem
+><para
+>Normalmente azul escuro. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor B:</guilabel
+></term
+><listitem
+><para
+>Normalmente verde escuro. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor C:</guilabel
+></term
+><listitem
+><para
+>Normalmente magenta escuro. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor de conflito:</guilabel
+></term
+><listitem
+><para
+>Normalmente vermelho.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor de fundo do intervalo atual:</guilabel
+></term
+><listitem
+><para
+>Normalmente amarelo claro.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor de fundo da diferença do intervalo atual:</guilabel
+></term
+><listitem
+><para
+>Normalmente amarelo escuro.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor dos intervalos de diferenças alinhados manualmente:</guilabel
+></term
+><listitem
+><para
+>Normalmente laranja.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Área de comparação de pasta:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Cor do arquivo mais recente:</guilabel
+></term
+><listitem
+><para
+>Normalmente verde.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor do arquivo mais antigo:</guilabel
+></term
+><listitem
+><para
+>Normalmente vermelho.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor dos arquivos de tempo intermediário:</guilabel
+></term
+><listitem
+><para
+>Normalmente amarelo escuro.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Cor dos arquivos faltantes:</guilabel
+></term
+><listitem
+><para
+>Normalmente preto.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>A mudança das cores na comparação das pastas só terá efeito quando iniciar a próxima comparação de pastas. </para>
+<para
+>Nos sistemas com apenas 16 ou 256 cores, alguns dos tons acima descritos não estão disponíveis de forma pura. Nesses sistemas, o botão <guibutton
+>Padrões</guibutton
+> irá escolher uma cor pura. </para>
+</sect2>
+
+<sect2
+><title
+>Configuração do Editor</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Tab insere espaços</guilabel
+></term
+><listitem
+><para
+>Se isto estiver desativado e você pressionar a tecla &Tab;, será inserido um caractere de tabulação, caso contrário serão inseridos os espaços com a quantidade apropriada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Tamanho das tabulações:</guilabel
+></term
+><listitem
+><para
+>Poderá ser ajustado de acordo com as suas necessidades específicas. Por padrão é igual a <literal
+>8</literal
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Recuo automático</guilabel
+></term
+><listitem
+><para
+>Ao pressionar &Enter; ou <keycap
+>Return</keycap
+>, o recuo da linha anterior é usada para uma nova linha.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Copiar a seleção automaticamente</guilabel
+></term
+><listitem
+><para
+>Quando ativo, qualquer seleção é copiada automaticamente para a área de transferência e você não precisa copiá-la explicitamente.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Estilo de fim de linha:</guilabel
+></term
+><listitem
+><para
+>Ao salvar, o usuário poderá selecionar o estilo do fim de linha que prefere.O valor padrão é a escolha comum para o sistema operacional usado.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="diffoptions"
+><title
+>Configuração das Diferenças</title>
+<para
+>Ao comparar os arquivos, o &kdiff3; tenta primeiro corresponder as linhas iguais em todos os arquivos de entrada. Só durante este passo é que você poderá ignorar os espaços em branco. O segundo passo compara cada uma das linhas. Neste passo, os espaços em branco não serão ignorados. Também durante a mesclagem os espaços em branco não serão ignorados. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ignorar números (tratar como espaço em branco)</guilabel
+></term
+><listitem
+><para
+>Por padrão está desligado. Os caracteres dos números ('0'-'9', '.', '-') serão ignorados na primeira parte da análise, na qual é feita a correspondência de linhas. No resultado, as diferenças serão mostradas de qualquer forma, mas serão tratadas como espaços em branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorar comentários C/C++ (tratar como espaço em branco)</guilabel
+></term
+><listitem
+><para
+>Por padrão está desligado. As alterações nos comentários serão tratadas como as alterações nos espaços em branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorar maiúsculas/minúsculas (tratar como espaço em branco)</guilabel
+></term
+><listitem
+><para
+>Por padrão está desligado. As diferenças de capitalização dos caracteres (como o 'A' vs. 'a') serão tratadas como alterações de espaços em branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando do pré-processamento:</guilabel
+></term
+><listitem
+><para
+>Veja a <link linkend="preprocessors"
+>próxima seção</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando de pré-processamento para correspondência de linhas:</guilabel
+></term
+><listitem
+><para
+>Veja a <link linkend="preprocessors"
+>próxima seção</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Tentar com persistência (lento)</guilabel
+></term
+><listitem
+><para
+>Tenta com mais afinco encontrar um delta ainda menor. (Por padrão está ligado). Isto irá ser efetivo provavelmente para os arquivos grandes e complicados. Será também lento para os arquivos muito grandes. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Alinhar B e C para 3 arquivos de entrada</guilabel
+></term
+><listitem
+><para
+>Tenta alinhar o <guilabel
+>B</guilabel
+> e o <guilabel
+>C</guilabel
+> ao comparar ou mesclar três arquivos de entrada. Não é recomendado para mesclar porque isto pode ser mais complicado. (Desativado por padrão). </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Configuração da Mesclagem</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Atraso no avanço automático (ms):</guilabel
+></term
+><listitem
+><para
+>Quando estiver no modo de avanço automático esta opção indica o intervalo de tempo durante o qual mostrar o resultado da seleção antes de saltar para o próximo conflito não resolvido. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Exibir janela de informação</guilabel
+></term
+><listitem
+><para
+>Exibe uma janela com informações sobre o número de conflitos. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Padrão da mesclagem de espaço em branco com 2/3 arquivos:</guilabel
+></term
+><listitem
+><para
+>Resolve automaticamente todos os conflitos de espaços em branco, selecionando o arquivo indicado. (Por padrão, é com uma escolha manual). É útil se os espaços em branco não são importantes em muitos dos arquivos. Se você precisar disto apenas ocasionalmente, é melhor usar o <guilabel
+>Escolher A/B/C nos conflitos de espaços em branco não resolvidos</guilabel
+> no menu <guimenu
+>Mesclar</guimenu
+>. Lembre-se que, se ativar o <guilabel
+>Ignorar números (tratar como espaço em branco)</guilabel
+> ou o <guilabel
+>Ignorar comentários de C/C++ (tratar como espaço em branco</guilabel
+>, então esta escolha automática também se aplica para os conflitos nos números ou nos comentários. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Expressão regular de mesclagem automática:</guilabel
+></term
+><listitem
+><para
+>A expressão regular para as linhas onde o &kdiff3; deverá escolher automaticamente uma origem. Veja também a <link linkend="vcskeywordsmergesupport"
+>Mesclagem Automática ...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Executar a mesclagem automática via expressão regular ao iniciar a mesclagem</guilabel
+></term
+><listitem
+><para
+>Se for ativado, o &kdiff3; executa a mesclagem automática com a <guilabel
+>Expressão regular da mesclagem automática:</guilabel
+>, quando for iniciada uma mesclagem. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Expressão regular do início do item de histórico:</guilabel
+></term
+><listitem
+><para
+>A expressão regular do início do item de histórico. Normalmente, esta linha contém a palavra-chave "<literal
+>&#36;Log&#36;</literal
+>". Valor padrão: "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>" </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Expressão regular do início do item de histórico:</guilabel
+></term
+><listitem
+><para
+>Um item de mesclagem do histórico consiste em várias linhas. Indique a expressão regular que detecta a primeira linha (sem o comentário inicial). Use os parênteses para agrupar as chaves que deseja usar na ordenação. Se for deixado em branco, o &kdiff3; assume que as linhas em branco separam os itens de histórico. Veja também a <link linkend="vcskeywordsmergesupport"
+>Mesclagem automática ...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordenação da mesclagem do histórico</guilabel
+></term
+><listitem
+><para
+>Ativa a ordenação do histórico do controle de versões. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordem da chave de ordenação do início do item de histórico:</guilabel
+></term
+><listitem
+><para
+>Cada par de parênteses usado na expressão regular do item de início de histórico agrupa uma chave que poderá ser usada na ordenação. Indique a lista de chaves (que são numeradas na ordem de ocorrência, a começar em 1), usando o ',' como separador (&eg; "<literal
+>4,5,6,1,2,3,7</literal
+>"). Se for deixado em branco, então não será feita nenhuma ordenação. Veja também a <link linkend="vcskeywordsmergesupport"
+>Mesclagem automática ...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Mesclar histórico do controle de versões ao iniciar a mesclagem</guilabel
+></term
+><listitem
+><para
+>Se estiver ativado, o &kdiff3; executa a mesclagem automática do histórico, usando as opções acima mencionadas, quando for iniciada uma junção. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Número máximo de itens do histórico:</guilabel
+></term
+><listitem
+><para
+>O &kdiff3; limita a lista do histórico ao número de itens indicado. Use <literal
+>-1</literal
+> para evitar a limitação. (Por padrão, é igual a <literal
+>-1</literal
+>). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Testar as suas expressões regulares</guilabel
+></term
+><listitem
+><para
+>Este botão mostra uma janela que lhe permite melhorar e testar as expressões regulares acima. Basta copiar os dados respectivos dos seus arquivos para as linhas de exemplo. O <guilabel
+>Resultado da correspondência:</guilabel
+> irá mostrar imediatamente se a correspondência é bem sucedida ou não. O <guilabel
+>Resultado da chave de ordenação:</guilabel
+> irá mostrar a chave usada no histórico da mesclagem do histórico. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando de mesclagem irrelevante:</guilabel
+></term
+><listitem
+><para
+>Indique um comando próprio, que deverá ser chamado quando o &kdiff3; detectar que, numa mesclagem de três arquivos, o arquivo de <guilabel
+>B</guilabel
+> não contribui com dados relevantes que não estivessem já contidos no arquivo em <guilabel
+>C</guilabel
+>. O comando é chamado com os três nomes de arquivos como parâmetros. Os dados correspondentes à <guilabel
+>Expressão regular da mesclagem automática</guilabel
+> ou no histórico não são considerados relevantes. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Salvar e sair automaticamente na mesclagem sem conflitos</guilabel
+></term
+><listitem
+><para
+>Se o &kdiff3; foi iniciado para mesclar arquivos a partir da linha de comando e todos os conflitos puderem ser resolvidos sem interação do usuário, salve e encerre automaticamente. (Semelhante à opção de linha de comando <option
+>--auto</option
+>.) </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Mesclagem de pasta</title>
+<para
+>Estas opções dizem respeito à análise da pasta e ao tratamento da mesclagem: Veja em <link linkend="dirmergeoptions"
+>Comparação de pastas/Mesclar documentos</link
+> para mais detalhes. </para
+><para
+>Existe aqui ainda uma opção que também é relevante para salvar os arquivos únicos: </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Arquivos de backup (.orig)</guilabel
+></term
+><listitem
+><para
+>Quando um arquivo é salvo e já existe uma versão anterior, então a versão original irá mudar para um nome com uma extensão <literal role="extension"
+>.orig</literal
+>. Se já existir um arquivo de cópia de segurança antigo com uma extensão <literal role="extension"
+>.orig</literal
+>, então ele será removido sem ficar nenhuma cópia de segurança. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Opções Regionais e da Língua</title>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Usar a mesma codificação para tudo</guilabel
+></term
+><listitem
+><para
+>As seguintes opções de codificação poderão ser ajustadas separadamente para cada item ou, se esta opção for verdadeira, todos os valores irão usar o primeiro valor. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Nota: A codificação local é "..."</guilabel
+></term
+><listitem
+><para
+>Acima dos seletores de codificação, aparece uma nota que lhe indica a sua codificação local. (Ela não é ajustável, mas está aqui apenas para informá-lo, no caso de não saber qual é a sua codificação local e tiver que selecioná-la). </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Detectar automaticamente</guilabel
+></term
+><listitem
+><para
+>Esta opção tenta usar o BOM ou metadados de documentos XML/HTML para detectar a codificação. Caso contrário, verificará se uma pequena amostra do início do arquivo pode ser interpretada como UTF-8. Se essa verificação for bem-sucedida, UTF-8 será usado. Caso contrário, o codec selecionado pelo usuário será utilizado. Somente UTF-8 é suportado sem a presença de BOM ou metadados. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação do Arquivo para o A/B/C:</guilabel
+></term
+><listitem
+><para
+>Ajuste a codificação do arquivo para os arquivos de entrada. Isto provoca algum efeito na forma como os caracteres especiais são interpretados. Uma vez que poderá ajustar cada codificação em separado, você poderá até comparar e mesclar arquivos que foram salvos com codificações diferentes. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação do Arquivo para Mesclagem de Resultado e Salvamento:</guilabel
+></term
+><listitem
+><para
+>Quando tiver editado um arquivo, você poderá então ajustar a codificação que será usada ao salvar para o disco. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação do Arquivo para os Arquivos de Pré-processador:</guilabel
+></term
+><listitem
+><para
+>Quando definir pré-processadores, eles poderão não ser capazes de lidar com a sua codificação. (por exemplo: Os seus arquivos estão em Unicode de 16 bits e o seu pré-processador só consegue lidar com &ASCII;de 8 bits). Com esta opção, você poderá definir a codificação do resultado do pré-processador. </para
+></listitem
+></varlistentry>
+	<varlistentry
+><term
+><guilabel
+>Idioma da Esquerda-para-a-Direita:</guilabel
+></term
+><listitem
+><para
+>Algumas línguas são escritas da direita para a esquerda. Quando esta opção está ativa, o &kdiff3; desenha o texto da direita para a esquerda nas janelas de diferenças dos arquivos de entrada e na janela do resultado da junção. Repare que, se iniciar o &kdiff3; com a opção da linha de comando <option
+>--reverse</option
+>, então toda a disposição será feita também da direita para a esquerda. (Esta é uma funcionalidade oferecida pelo &Qt;.) </para
+><note
+><para
+>Esta documentação foi escrita assumindo que esta opção ou o layout inverso estão desativados. Portanto, algumas referências a "esquerda" ou "direita" devem ser substituídas por seus respectivos equivalentes se você usar essas opções. </para
+></note
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Diversos</title>
+<para
+>(Estas opções e ações estão disponíveis nos menus ou na barra de botões.)</para>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Opções da vista geral:</emphasis
+></term
+><listitem
+><para
+>Estas opções só estão disponíveis quando você compara três arquivos. No modo normal, todas as diferenças são mostradas na coluna de resumo codificada a cores. Mas, em alguns casos, você está especialmente interessado nas diferenças entre apenas dois desses três arquivos. Se selecionar "A vs. B", "A vs. C" ou "B vs. C" na coluna de resumo irá aparecer uma segunda coluna com a informação necessária ao lado do resumo normal. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Quebrar linhas nas exibições de diferenças</guimenuitem
+></term
+><listitem
+><para
+>Quebra as linhas quando o seu tamanho exceder a largura de uma janela. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Mostrar a Janela A/B/C:</guibutton
+></term
+><listitem
+><para
+>Em algumas vezes, você poderá usar melhor o espaço na tela para as linhas compridas. Oculte as janelas que não são importantes. (No menu "Janelas".)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Alternar a orientação da separação</guibutton
+></term
+><listitem
+><para
+>Define se as janelas de diferenças são mostradas uma ao lado da outra (a <guilabel
+>A</guilabel
+> à esquerda da <guilabel
+>B</guilabel
+>, que está à esquerda da <guilabel
+>C</guilabel
+>) ou uma por cima da outra (a <guilabel
+>A</guilabel
+> sobre a <guilabel
+>B</guilabel
+>, que está sobre a <guilabel
+>C</guilabel
+>). Isto também deverá ajudar para as linhas compridas (No menu <guimenu
+>Janela</guimenu
+>). </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Mesclar arquivo atual</guibutton
+></term
+><listitem
+><para
+>Funciona se você só comparar dois arquivos. Um único clique começa a mesclagem e usa o nome do último arquivo de entrada como nome do arquivo do resultado por padrão. (Quando isto for usado para reiniciar uma mesclagem, então o nome do arquivo do resultado será mantido.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Exibir espaço em branco</guibutton
+></term
+><listitem
+><para
+>Desligue isto para suprimir o realce das alterações apenas nos espaços em branco no texto ou nas colunas de vista geral. (Lembre-se que isto também se aplica às alterações nos números ou comentários se as opções <guilabel
+>Ignorar números (tratar como espaço em branco)</guilabel
+> ou <guilabel
+>Ignorar comentários de C/C++ (tratar como espaço em branco)</guilabel
+> estiverem ativas.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Exibir caracteres de espaço e tabulação</guibutton
+></term
+><listitem
+><para
+>Algumas vezes os espaços e tabulações visíveis são incômodos. Você poderá com isto desativar esta funcionalidade.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Exibir números de linha</guibutton
+></term
+><listitem
+><para
+>O usuário pode selecionar se os números de linhas são mostrados para os arquivos de entrada.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Configurar os Atalhos de Teclado</title>
+<para
+>Atualmente, só a versão para &frameworks; suporta os atalhos de teclado configuráveis pelo usuário. (No menu <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar atalhos...</guimenuitem
+></menuchoice
+>) </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Comandos do Pré-processador</title>
+<para
+>O &kdiff3; suporta duas opções do pré-processador. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Comando do pré-processamento:</guilabel
+></term
+><listitem
+><para
+>Quando for lido qualquer arquivo, ele será encaminhado através deste comando externo. O resultado deste comando será visível em vez do arquivo original. O usuário poderá criar o seu próprio pré-processador que corresponda às suas necessidades específicas. Use isto para cortar partes desnecessárias do arquivo ou para corrigir automaticamente o recuo, &etc; </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando de pré-processamento para correspondência de linhas:</guilabel
+></term
+><listitem
+><para
+>Quando for lido qualquer arquivo, ele será encaminhado através deste comando externo. Se um comando de pré-processador (ver acima) for também indicado, então o resultado do pré-processador é a entrada para o pré-processador de correspondência de linhas. O resultado só será usado durante a fase de correspondência de linhas da análise. Você poderá escrever o seu próprio pré-processador que corresponda às suas necessidades específicas. Cada linha de entrada terá que ter uma linha de resultado correspondente. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>A ideia é permitir ao usuário uma maior flexibilidade ao configurar o resultado das diferenças. Mas isto necessita de um programa externo e muitos dos usuários não querem escrever um. As boas notícias são que, muitas das vezes, o <command
+>sed</command
+> ou o <command
+>perl</command
+> se encarregarão disso. </para>
+<para
+>Exemplo: Caso de teste simples: Considere o arquivo a.txt (6 linhas): </para>
+<screen
+>aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen>
+<para
+>E o arquivo b.txt (3 linhas): </para>
+<screen
+>cg
+      dg
+      eg
+</screen>
+<para
+>Sem um pré-processador, as seguintes linhas seriam colocadas lado a lado: </para>
+<screen
+>aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen>
+<para
+>Isso provavelmente não é desejado, já que a primeira letra contém a informação realmente interessante. Para ajudar o algoritmo de correspondência a ignorar a segunda letra, podemos usar um comando de pré-processador de correspondência de linhas que substitui 'g' por 'a': </para>
+<screen
+><command
+>sed</command
+> 's/g/a/'
+</screen>
+<para
+>Com esse comando, o resultado da comparação seria: </para>
+<screen
+>aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen>
+<para
+>Internamente, o algoritmo de correspondência vê os arquivos após executar a linha de correspondência do pré-processador , mas na tela o arquivo permanece inalterado. (O pré-processador normal também alteraria os dados na tela.) </para>
+
+<sect2 id="sedbasics"
+><title
+>Fundamentos do <command
+>sed</command
+></title>
+<para
+>Esta seção só introduz algumas funcionalidades muito básicas do <command
+>sed</command
+>. Para mais informações veja as páginas <ulink url="info:/sed"
+>info:/sed</ulink
+> ou <ulink url="https://www.gnu.org/software/sed/manual/html_mono/sed.html"
+> https://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Existe uma versão pré-compilada para o &Windows; em <ulink url="http://unxutils.sourceforge.net"
+> http://unxutils.sourceforge.net</ulink
+>. Repare no fato de que os exemplos a seguir assumem que o comando <command
+>sed</command
+> está numa pasta referida pela sua variável de ambiente <envar
+>PATH</envar
+>. Se não for este o caso, você terá que indicar a localização absoluta completa para o comando. </para>
+<para
+>Neste contexto, apenas o comando substituto <command
+>sed</command
+> é usado: </para>
+<screen
+><command
+>sed</command
+> 's/<replaceable
+>EXPRESSÃO REGULAR</replaceable
+>/<replaceable
+>SUBSTITUIÇÃO</replaceable
+>/<replaceable
+>FLAGS</replaceable
+>'
+</screen>
+<para
+>Antes de usar um novo comando no &kdiff3;, você deve primeiro testá-lo em um console. Aqui, o comando <command
+>echo</command
+> é útil. Exemplo: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen>
+<para
+>Este exemplo mostra um comando sed muito simples que substitui a primeira ocorrência de "a" por "o". Se você quiser substituir todas as ocorrências, você precisa da flag "g": </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen>
+<para
+>O símbolo "|" é o comando de pipe que transfere a saída do comando anterior para a entrada do comando seguinte. Se você quiser testar com um arquivo mais longo, pode usar <command
+>cat</command
+> em sistemas como o &UNIX; ou <command
+>type</command
+> em sistemas como o &Windows;. O comando <command
+>sed</command
+> fará a substituição para cada linha. <screen
+><command
+>cat</command
+> <replaceable
+>arquivo</replaceable
+> | <command
+>sed</command
+> <replaceable
+>opções</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Exemplos de uso do <command
+>sed</command
+> no &kdiff3;</title>
+<sect3
+><title
+>Ignorar Outros Tipos de Comentários</title>
+<para
+>Atualmente, o &kdiff3; entende apenas comentários C/C++. Usando a opção <guilabel
+>Comando de pré-processador de correspondência de linha:</guilabel
+> você também pode ignorar outros tipos de comentários, convertendo-os em comentários C/C++. </para>
+<para
+>Exemplo: Para ignorar comentários que começam com "<literal
+>#</literal
+>", você gostaria de convertê-los para "<literal
+>//</literal
+>". Observe que você também deve habilitar a opção <guilabel
+>Ignorar comentários C/C++ (tratar como espaço em branco)</guilabel
+> para obter o efeito desejado. Um comando de pré-processador apropriado para <guilabel
+>correspondência de linhas</guilabel
+> seria: </para>
+<screen
+><command
+>sed</command
+> 's/#/\/\//'
+</screen>
+<para
+>Como para o comando <command
+>sed</command
+> o caractere "<literal
+>/</literal
+>" tem um significado especial, é necessário colocar o caractere "<literal
+>\</literal
+>" antes de cada "<literal
+>/</literal
+>" na string de substituição. Às vezes, o caractere "<literal
+>\</literal
+>" é necessário para adicionar ou remover um significado especial de certos caracteres. As aspas simples (') são importantes apenas ao testar no shell de comando, pois, caso contrário, ele tentará processar alguns caracteres. O &kdiff3; não faz isso, exceto para as sequências de escape '<literal
+>\"</literal
+>' e '<literal
+>\\</literal
+>'. </para>
+</sect3>
+<sect3
+><title
+>Diff sem Distinguir Capitalização</title>
+<para
+>Use o seguinte <guilabel
+>Comando de pré-processador de correspondência de linhas:</guilabel
+> para converter toda a entrada em maiúsculas: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen>
+<para
+>Aqui o "<literal
+>.*</literal
+>" é uma expressão regular que corresponde a qualquer texto e, no seu contexto, irá corresponder a todos os caracteres da linha. O "<literal
+>\1</literal
+>" no texto de substituição refere-se ao texto correspondente ao primeiro par de "<literal
+>\(</literal
+>" e "<literal
+>\)</literal
+>". O "<literal
+>\U</literal
+>" converte o texto inserido para maiúsculas. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar palavras-Chave do controle de versões</title>
+<para
+>O CVS e outros sistemas de controle de versões usam várias palavras-chave para inserir texto gerado automaticamente (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Todas elas seguem o padrão "<replaceable
+>$PALAVRACHAVE texto gerado$</replaceable
+>". É preciso agora um comando pré-processador de correspondência de linhas que remova apenas o texto gerado: </para>
+<screen
+><command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen>
+<para
+>O "<literal
+>\|</literal
+>" separa as possíveis palavras-chave. Você pode querer modificar esta lista de acordo com suas necessidades. O "<literal
+>\</literal
+>" antes do "<literal
+>$</literal
+>" é necessário porque, caso contrário, o "<literal
+>$</literal
+>" corresponde ao final da linha. </para>
+<para
+>Ao experimentar com o <command
+>sed</command
+>, você poderá vir a compreender e até a gostar destas expressões regulares. Elas são úteis porque existem muitos outros programas que suportam algumas coisas desse gênero. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar os Números</title>
+<para
+>A indiferença em relação aos números é de fato uma opção incorporada. Mas, como outro exemplo, seria assim como iria ficar como um comando do pré-processador da correspondência de linhas. </para>
+<screen
+><command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen>
+<para
+>Qualquer caractere entre '<literal
+>[</literal
+>' e '<literal
+>]</literal
+>' é uma correspondência e será substituído por nada. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar Certas Colunas</title>
+<para
+>Em algumas ocasiões um determinado texto tem uma formatação muito restrita e contém colunas que deseja sempre ignorar, enquanto que existem outras colunas que deseje preservar para análise. No exemplo a seguir, as primeiras cinco colunas (caracteres) são ignoradas, as próximas dez são preservadas, depois as próximas cinco colunas serão ignoradas de novo e o resto da linha é preservada. </para>
+<screen
+><command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen>
+<para
+>Cada ponto '<literal
+>.</literal
+>' corresponde a qualquer caractere individual. Os "<literal
+>\1</literal
+>" e "<literal
+>\2</literal
+>" na string de substituição referem-se ao texto correspondente dentro do primeiro e segundo par de "<literal
+>\(</literal
+>" e "<literal
+>\)</literal
+>", denotando o texto a ser preservado. </para>
+</sect3>
+
+<sect3
+><title
+>Combinar várias substituições</title>
+<para
+>Em algumas situações você deseja aplicar várias substituições de uma vez. Você poderá então usar o ponto e vírgula '<literal
+>;</literal
+>' para separar uma da outra. Exemplo: </para>
+<screen
+><command
+>echo</command
+> abracadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROCODOBRO
+</screen>
+</sect3>
+
+<sect3
+><title
+>Usar o <command
+>perl</command
+> em vez do <command
+>sed</command
+></title>
+<para
+>Em vez de <command
+>sed</command
+> você pode querer usar algo como <command
+>perl</command
+>. </para>
+<screen
+><command
+>perl</command
+> -p -e 's/<replaceable
+>EXPRESSÃO REGULAR</replaceable
+>/<replaceable
+>SUBSTITUIÇÃO</replaceable
+>/<replaceable
+>FLAGS</replaceable
+>'
+</screen>
+<para
+>Mas alguns detalhes são diferentes em <command
+>perl</command
+>. Observe que, enquanto <command
+>sed</command
+> exigia "<literal
+>\(</literal
+>" e "<literal
+>\)</literal
+>", <command
+>perl</command
+> requer o mais simples "<literal
+>(</literal
+>" e "<literal
+>)</literal
+>" sem o prefixo '<literal
+>\</literal
+>'. Exemplo: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Ordem de Execução de Pré-processadores</title>
+<para
+>Os dados são encaminhados através de todos os pré-processadores internos e externos na seguinte ordem: </para>
+<itemizedlist>
+<listitem
+><para
+>Pré-processador normal,</para
+></listitem>
+<listitem
+><para
+>Pré-processador de correspondência de linhas,</para
+></listitem>
+<listitem
+><para
+>Ignorar capitalização (tratar como espaço em branco) (conversão para maiúsculas),</para
+></listitem>
+<listitem
+><para
+>Detecção de Comentários de C/C++,</para
+></listitem>
+<listitem
+><para
+>Ignorar números (tratar como espaço em branco),</para
+></listitem>
+<listitem
+><para
+>Ignorar os espaços em branco</para
+></listitem>
+</itemizedlist>
+<para
+>Os dados após o pré-processador normal serão preservados para a apresentação e para a mesclagem. As outras operações só modificam os dados que o algoritmo para a correspondência de linhas nas diferenças vê. </para
+><para
+>Nos casos raros em que você usa um pré-processador normal, repare que o pré-processador da correspondência de linhas vê o resultado no pré-processador normal como dados de entrada. </para>
+</sect2>
+
+<sect2
+><title
+>Aviso</title>
+<para
+>Os comandos do pré-processador são normalmente muito úteis, mas como acontece com qualquer opção que modifica os seus textos ou oculta algumas diferenças automaticamente, você poderá ignorar certas diferenças e, no pior dos casos, destruir dados importantes. </para
+><para
+>Por esse motivo, durante uma mesclagem, se um comando de pré-processador normal estiver sendo usado, o &kdiff3; informará isso e perguntará se ele deve ser desativado ou não. Mas ele não avisará se a opção <guilabel
+>Comando de pré-processador de correspondência de linhas:</guilabel
+> estiver ativa. A mesclagem não será concluída até que todos os conflitos sejam resolvidos. Se você desativou o item de menu <menuchoice
+><guimenu
+>Visualização de diferenças</guimenu
+><guimenuitem
+>Mostrar espaços em branco</guimenuitem
+></menuchoice
+>, as diferenças que foram removidas com a opção <guilabel
+>Comando de pré-processador de correspondência de linhas:</guilabel
+> também ficarão invisíveis. Se o botão <guibutton
+>Salvar</guibutton
+> permanecer desativado durante uma mesclagem (devido a conflitos restantes), certifique-se de ativar o item de menu <menuchoice
+><guimenu
+>Visualização de diferenças</guimenu
+><guimenuitem
+>Mostrar espaços em branco</guimenuitem
+></menuchoice
+>. Se você não quiser mesclar essas diferenças menos importantes manualmente, você pode selecionar o item de menu <menuchoice
+><guimenu
+>Mesclar</guimenu
+><guimenuitem
+>Escolher [A|B|C] para todos os conflitos de espaços em branco não resolvidos</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Comparação e mesclagem de pastas com o &kdiff3;</title>
+<sect1 id="dirmergeintro"
+><title
+>Introdução à comparação ou mesclagem de pastas</title>
+<para
+>Normalmente, os programadores precisam de modificar vários arquivos numa pasta para atingir os seus fins. Para isso, o &kdiff3; também lhe permite comparar e mesclar várias pastas de forma recursiva! </para
+><para
+>Ainda que a comparação e mesclagem de pastas pareça ser bastante óbvia, existem vários detalhes que o usuário deverá conhecer. O mais importante é, obviamente, o fato de que vários arquivos poderão ser afetados por cada operação. Se você não tiver cópias de segurança dos seus dados originais, então poderá ser muito difícil ou mesmo impossível voltar ao estado original. Por isso, antes de começar uma junção, certifique-se de que os seus dados estão a salvo e que é possível voltar atrás. Se cria um pacote ou usa um sistema de controle de versões é uma decisão sua, mas mesmo os programadores experientes e os integradores precisam do código antigo e do novo. E repare que até ao autor do &kdiff3; tenta fazer o seu melhor, mas não pode garantir que não existam erros. De acordo com a GPL da &GNU;, não existe NENHUMA GARANTIA de qualquer forma para este programa. Por isso, seja humilde e tenha sempre em mente: </para>
+<blockquote
+><para>
+   <emphasis
+>Errar é humano, mas para realmente piorar as coisas é preciso um computador.</emphasis>
+</para
+></blockquote>
+<para
+>Por isso, este é o programa que poderá fazer isto por você: o &kdiff3; ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... lê e compara duas ou três pastas recursivamente,</para
+></listitem>
+     <listitem
+><para
+>... toma um cuidado especial com as ligações simbólicas,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe navegar nos arquivos com um duplo-clique do mouse,</para
+></listitem>
+     <listitem
+><para
+>... propõe para cada item uma operação de mesclagem, que poderá alterar antes de iniciar a mesclagem de pastas,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe simular a mesclagem e lista as ações que iriam acontecer, sem fazer nada de fato,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe fazer realmente a mesclagem, possibilitando também a você interagir nas situações em que é necessária uma interação manual,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe executar a operação selecionada para todos os itens (tecla <keycap
+>F7</keycap
+>) ou para o item selecionado (tecla <keycap
+>F6</keycap
+>),</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe continuar a mesclagem depois de uma interação manual com a tecla <keycap
+>F7</keycap
+>,</para
+></listitem>
+     <listitem
+><para
+>... cria opcionalmente cópias de segurança com a extensão <literal role="extension"
+>.orig</literal
+>,</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Iniciar a comparação ou mesclagem de pastas</title>
+<para
+>Isto é bastante semelhante à mesclagem e comparação simples com arquivos únicos. O usuário apenas terá que indicar nomes de pastas na linha de comando ou na janela de abertura de arquivos. </para>
+<sect2
+><title
+>Comparar/Mesclar duas pastas: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable
+> -o <replaceable
+>destino</replaceable
+>
+</screen>
+<para
+>Se não for indicada nenhuma pasta de destino, então o &kdiff3; irá usar a <replaceable
+>pasta2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Comparar/Mesclar estas pastas: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable
+> -o <replaceable
+>destino</replaceable
+>
+</screen>
+<para
+>Quando forem mescladas três pastas, então a <replaceable
+>pasta1</replaceable
+> será usada como a base para a mesclagem. Se não for indicada nenhuma pasta de destino, então o &kdiff3; irá usar a <replaceable
+>pasta3</replaceable
+> como pasta de destino para a mesclagem. </para>
+
+<para
+>Repare que só a comparação é que começa automaticamente, não a mesclagem. Para isso, você terá que selecionar primeiro um item do menu ou a tecla <keycap
+>F7</keycap
+>. (Mais detalhes posteriormente.) </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Informação visível da mesclagem de pastas</title>
+<para
+>Ao ler as pastas, aparece uma mensagem que o informa do progresso. Se você interromper a pesquisa das pastas, então só os arquivos que tenham sido comparados até então serão listados. </para
+><para
+>Quando a pesquisa de pastas estiver completa, então o &kdiff3; irá mostrar uma lista com os resultados restantes, ... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the folder browser."-->
+</mediaobject
+></screenshot>
+<para
+>... e os detalhes sobre o item selecionado atualmente à direita: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>A Coluna do Nome</title>
+<para
+>Cada arquivo e pasta encontrado durante a pesquisa é aqui mostrado numa árvore. Você poderá selecionar um item se clicar nele uma vez com o mouse. </para
+><para
+>As pastas estão fechadas por padrão. Você poderá expandi-las e fechá-las se clicar no "+"/"-" ou se fizer duplo-clique no item ou ainda usando as teclas de cursores &Left;/&Right;. O menu <guimenu
+>Pasta</guimenu
+> também contém duas ações <guimenuitem
+>Fechar todas as subpastas</guimenuitem
+> e <guimenuitem
+>Expandir todas as subpastas</guimenuitem
+>, com as quais poderá fechar ou abrir todas as subpastas de uma vez. </para
+><para
+>Se fizer duplo-clique num item de um arquivo, então a comparação do arquivo irá começar e irá aparecer a janela de diferenças do arquivo. </para>
+<para
+>A imagem na coluna do nome reflete o tio de arquivo na primeira pasta (<guilabel
+>A</guilabel
+>). Poderá ser um dos seguintes: </para>
+<itemizedlist>
+     <listitem
+><para
+>Arquivo normal</para
+></listitem>
+     <listitem
+><para
+>Pasta normal (imagem de pasta)</para
+></listitem>
+     <listitem
+><para
+>Ligação para um arquivo (imagem de arquivo com uma seta de ligação)</para
+></listitem>
+     <listitem
+><para
+>Ligação para uma pasta (imagem de pasta com uma seta de ligação)</para
+></listitem>
+</itemizedlist>
+<para
+>Se o tipo de arquivo for diferente nas outras pastas, então isso é visível nas colunas <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> e na janela que mostra os detalhes sobre o item selecionado. Repare que, neste caso, não poderá ser selecionada nenhuma operação de mesclagem automaticamente. Ao iniciar a junção, então o usuário será informado dos problemas desse tipo. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>As Colunas A/B/C e o Esquema de Cores</title>
+<para
+>Como pode ser visto na imagem acima, as cores vermelha, verde, amarela e preta são usadas nas colunas <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Preto: O item não existe nesta pasta.</para
+></listitem>
+     <listitem
+><para
+>Verde: Item mais recente.</para
+></listitem>
+     <listitem
+><para
+>Amarelo: Mais antigo que o verde, mais recente que o vermelho.</para
+></listitem>
+     <listitem
+><para
+>Vermelho: O item mais antigo.</para
+></listitem>
+</itemizedlist>
+<para
+>Contudo, para os itens que forem idênticos na comparação, a sua cor é também idêntica mesmo que a idade seja diferente. </para
+><para
+>As pastas são consideradas iguais se todos os itens que contêm forem idênticos. Nesse caso, elas terão a mesma cor. Porém, a idade de uma pasta não é levada em consideração de acordo com a sua cor. </para
+><para
+>A ideia do autor para este esquema de coloração veio do <ulink url="https://www.samba.org/ftp/paulus/"
+><command
+>dirdiff</command
+></ulink
+>. As cores lembram as cores de uma folha que é verde quando é nova, vai-se tornando amarela com o tempo e é vermelha quando é antiga. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>A Coluna de Operação</title>
+<para
+>Depois de comparar as patas, o &kdiff3; avalia também uma proposta para uma operação de mesclagem. Ela é mostrada na coluna de <guilabel
+>Operação</guilabel
+>. O usuário poderá modificar a operação se clicar na operação que deseja alterar. Irá aparecer um pequeno menu que lhe permite selecionar uma operação para esse item (Você poderá também selecionar as operações mais necessárias através do teclado. O <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+>/<keycap
+>4</keycap
+>/&Del; irá selecionar o <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>/<guilabel
+>Mesclar</guilabel
+>/<guilabel
+>Remover</guilabel
+>, respectivamente, se estiver disponível.) Esta operação será executada durante a junção. Depende do item e do modo de mesclagem em que se encontra e de que operações estão disponíveis. O modo de mesclagem é um dos seguintes </para>
+<itemizedlist>
+     <listitem
+><para
+>Mesclagem de três pastas (a <guilabel
+>A</guilabel
+> é tratada como a base mais antiga de ambas).</para
+></listitem>
+     <listitem
+><para
+>Mesclagem de duas pastas.</para
+></listitem>
+     <listitem
+><para
+>Modo de sincronização de duas pastas (ativado com a opção <guilabel
+>Sincronizar pastas</guilabel
+>).</para
+></listitem>
+</itemizedlist>
+<para
+>Na mesclagem de três pastas, a proposta de operação será: Se para um item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... todas as três pastas forem iguais: Copiar do <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>A</guilabel
+> e o <guilabel
+>C</guilabel
+> são iguais mas o <guilabel
+>B</guilabel
+> não: Copiar a partir do <guilabel
+>B</guilabel
+> (ou se o <guilabel
+>B</guilabel
+> não existir, remover o destino se existir) </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>A</guilabel
+> e o <guilabel
+>B</guilabel
+> são iguais mas o <guilabel
+>C</guilabel
+> não: Copiar a partir do <guilabel
+>C</guilabel
+> (ou se o <guilabel
+>C</guilabel
+> não existir, remover o destino se existir) </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>B</guilabel
+> e o <guilabel
+>C</guilabel
+> são iguais mas o <guilabel
+>A</guilabel
+> não: Copiar a partir do <guilabel
+>C</guilabel
+> (ou se o <guilabel
+>C</guilabel
+> não existir, remover o destino se existir) </para
+></listitem>
+     <listitem
+><para
+>... só o <guilabel
+>A</guilabel
+> existir: Remover o destino (se existir) </para
+></listitem>
+     <listitem
+><para
+>... só <guilabel
+>B</guilabel
+> existir: Copiar de <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... só <guilabel
+>C</guilabel
+> existir: Copiar de <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> não são iguais: Mesclar </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>A</guilabel
+>, o <guilabel
+>B</guilabel
+> e o <guilabel
+>C</guilabel
+> não tiverem o mesmo tipo de arquivo (&eg;, o <guilabel
+>A</guilabel
+> é uma pasta e o <guilabel
+>B</guilabel
+> um arquivo): "Erro: Tipo de arquivos em conflito". Enquanto existirem itens nesta situação, a mesclagem de pastas não poderá começar. </para
+></listitem>
+</itemizedlist>
+<para
+>Na mesclagem de duas pastas, a proposta de operação será: Se para um item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... ambas as pastas forem iguais: Copiar de <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> existe, mas não <guilabel
+>B</guilabel
+>: Copiar de <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> existe, mas não <guilabel
+>A</guilabel
+>: Copiar de <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> e <guilabel
+>B</guilabel
+> existem mas não são iguais: Mesclar </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>A </guilabel
+>e o <guilabel
+>B</guilabel
+> não tiverem o mesmo tipo de arquivo (&eg; o <guilabel
+>A</guilabel
+> é uma pasta e o <guilabel
+>B</guilabel
+> um arquivo): "Erro: Tipos de arquivo em conflito". Enquanto existirem itens nesta situação, a mesclagem de pastas não poderá começar. </para
+></listitem>
+</itemizedlist>
+<para
+>O modo de sincronização só está ativo se forem indicadas duas pastas e não se não for indicado nenhum destino explícito, assim como a opção <guilabel
+>Sincronizar pastas</guilabel
+> terá que estar ativa. Nesse caso, o &kdiff3; irá selecionar uma operação padrão, de modo a que ambas as pastas fiquem iguais no fim. Se, para um item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... ambas as pastas forem iguais: Não será feito nada. </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> existe, mas não <guilabel
+>B</guilabel
+>: Copiar <guilabel
+>A</guilabel
+> para <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> existe, mas não <guilabel
+>A</guilabel
+>: Copiar <guilabel
+>B</guilabel
+> para <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>A</guilabel
+> e o <guilabel
+>B</guilabel
+> existirem, mas não forem iguais: Mesclar e guardar o resultado em ambas as pastas. (Para o usuário, o nome do arquivo salvo visível será o <guilabel
+>B</guilabel
+>, mas o &kdiff3; irá copiar o <guilabel
+>B</guilabel
+> também para o <guilabel
+>A</guilabel
+>.) </para
+></listitem>
+     <listitem
+><para
+>... o <guilabel
+>A </guilabel
+>e o <guilabel
+>B</guilabel
+> não tiverem o mesmo tipo de arquivo (&eg; o <guilabel
+>A</guilabel
+> é uma pasta e o <guilabel
+>B</guilabel
+> um arquivo): "Erro: Tipos de arquivo em conflito". Enquanto existirem itens nesta situação, a mesclagem de pastas não poderá começar. </para
+></listitem>
+</itemizedlist>
+<para
+>Quando duas pastas forem reunidas e a opção <guilabel
+>Copiar o mais recente em vez de mesclar</guilabel
+> estiver selecionada, então o &kdiff3; irá olhar para as datas e irá optar por escolher o arquivo mais recente. Se os arquivos não forem iguais mas tiverem datas iguais, então a operação irá conter "Erro: As datas são iguais mas os arquivos não.". Enquanto esses itens existirem a mesclagem de pastas não poderá começar. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>A Coluna de Estado</title>
+<para
+>Durante a mesclagem, os arquivos serão processados um após o outro. A coluna de estado irá mostrar <guilabel
+>Terminado</guilabel
+> para os itens em que a operação de mesclagem foi bem sucedida e outros textos se algo ocorreu de inesperado. Quando se terminar uma junção, o usuário deverá então fazer uma última verificação para confirmar se o estado de todos os itens é aceitável. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Colunas de Estatísticas</title>
+<para
+>Quando o modo de comparação de arquivos <guilabel
+>Análise completa</guilabel
+> estiver ativo nas opções, então o &kdiff3; irá mostrar colunas extra que contêm o número de conflitos não resolvidos, de espaços em branco e dos outros conflitos. (A coluna de <guilabel
+>Resolvido</guilabel
+> só irá aparecer ao comparar ou ao mesclar três pastas.) </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Selecionar os Arquivos Listados</title>
+<para
+>Diversas opções influenciam os arquivos que são listados aqui. Algumas estão acessíveis na <link linkend="dirmergeoptions"
+>janela de configuração</link
+>. O menu <guilabel
+>Pasta</guilabel
+> contém os itens: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+><guilabel
+>Mostrar arquivos idênticos</guilabel
+>: Os arquivos que foram detectados como iguais em todas as pastas de entrada. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostrar arquivos diferentes</guilabel
+>: Os arquivos que existem em duas ou mais pastas, mas que não são iguais entre si. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostrar arquivos apenas em A</guilabel
+>: Os arquivos que existem apenas em <guilabel
+>A</guilabel
+>, mas não em <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostrar arquivos apenas em B</guilabel
+>: Os arquivos que existem apenas em <guilabel
+>B</guilabel
+>, mas não em <guilabel
+>A</guilabel
+> ou <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostrar arquivos apenas em C</guilabel
+>: Os arquivos que existem apenas em <guilabel
+>C</guilabel
+>, mas não em <guilabel
+>A</guilabel
+> ou <guilabel
+>B</guilabel
+>. </para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Ative apenas as opções <guilabel
+>Mostrar</guilabel
+> para os itens que deseja listar. Se, por exemplo, quiser listar apenas os itens que existem ou em <guilabel
+>A</guilabel
+> ou em <guilabel
+>B</guilabel
+>, mas não em ambos, você terá de ativar o <guilabel
+>Mostrar arquivos apenas em A</guilabel
+> e <guilabel
+>Mostrar arquivos apenas em B</guilabel
+> e desativar todos os outros (<guilabel
+>Mostrar arquivos idênticos</guilabel
+>, <guilabel
+>Mostrar arquivos diferentes</guilabel
+>, <guilabel
+>Mostrar arquivos apenas em C</guilabel
+>). A lista será atualizada imediatamente para refletir as alterações. </para
+><para
+>Estas opções também se aplicam nas pastas, com uma exceção: Se desativar o <guilabel
+>Mostrar arquivos diferentes</guilabel
+> não irá ocultar as pastas por completo. Isto só irá funcionar para os arquivos dentro delas. </para
+><para
+>Lembre-se que, destas opções, só a <guilabel
+>Mostrar arquivos idênticos</guilabel
+> é persistente. As outras ficam ativas ao iniciar o &kdiff3;. </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Fazer uma mesclagem de pastas</title>
+<para
+>O usuário tanto poderá reunir o item selecionado no momento (arquivo ou pasta) ou todos os itens. Quando tiver feito todas as suas opções de operação (em todas as subpastas também), aí então poderá iniciar a mesclagem. </para
+><para
+>Observe que, se não tiver indicado explicitamente uma pasta de destino, então o destino será o <guilabel
+>C</guilabel
+> no modo de três pastas, o <guilabel
+>B</guilabel
+> no modo de mesclagem de duas pastas e no modo de sincronização será o <guilabel
+>A</guilabel
+> e/ou o <guilabel
+>B</guilabel
+>. </para
+><para
+>Se você tiver indicado uma pasta de destino, certifique-se também de que todos os itens que deverão estar no resultado, estão na árvore respectiva. Existem algumas opções que fazem com que certos itens sejam omitidos na comparação e mesclagem de pastas. Assinale estas opções para evitar surpresas desagradáveis: </para>
+<itemizedlist>
+     <listitem
+><para
+><guilabel
+>Pastas recursivas</guilabel
+>: Se estiver desligada, então os itens em todas as subpastas não serão tratados.</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Padrão</guilabel
+>/<guilabel
+>Anti-padrão</guilabel
+>: Inclui/exclui os itens que correspondam ao padrão</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Excluir arquivos ocultos</guilabel
+></para
+></listitem>
+     <listitem
+><para
+><link linkend="selectingvisiblefiles"
+>Mostrar opções</link
+> (<guilabel
+>Mostrar arquivos iguais/diferentes</guilabel
+>, <guilabel
+>Arquivos apenas em A/B/C</guilabel
+>)</para
+></listitem>
+</itemizedlist>
+<para
+>Se você mudar a configuração, para mostrar mais arquivos, é preciso fazer uma nova pesquisa, com o menu <menuchoice
+><guimenu
+>Pasta</guimenu
+><guimenuitem
+>Pesquisar de novo</guimenuitem
+></menuchoice
+>. (A razão para isso é que o &kdiff3; omite a comparação dos arquivos suprimidos por estes critérios.) Se você mudou os seus padrões de arquivos e pastas para excluir os arquivos, então a lista de arquivos será imediatamente atualizada, ao fechar a janela de opções. </para
+><para
+>Lembre-se que, quando gravar numa pasta completamente nova, normalmente também irá querer copiar os arquivos iguais. Nesse caso, ative a opção <guilabel
+>Mostrar arquivos iguais</guilabel
+>. Se a sua pasta de destino é uma das entradas, então não será necessário, porque o arquivo já estará lá. </para
+><para
+>Se estiver satisfeito até agora, o resto é simples. </para
+><para
+>Para mesclar todos os itens: Selecione <guimenuitem
+>Iniciar/Continuar a mesclagem da pasta</guimenuitem
+> no menu <guimenu
+>Pasta</guimenu
+> ou pressione <keycap
+>F7</keycap
+> (que é o atalho). Para mesclar apenas o item atual: Selecione <guilabel
+>Executar operação no item atual</guilabel
+> ou pressione <keycap
+>F6</keycap
+>. </para
+><para
+>Se, devido à existência de tipos de arquivo em conflito, ainda permanecerem alguns itens com operações inválidas, então irá aparecer uma mensagem onde serão evidenciados esses itens, para que possa selecionar uma operação válida para cada item. </para
+><para
+>Se você mesclar todos os itens, irá aparecer uma janela que lhe apresenta as opções <guilabel
+>Fazê-lo</guilabel
+>, <guilabel
+>Simulá-lo</guilabel
+> e <guilabel
+>Cancelar</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Selecione <guilabel
+>Simulá-lo</guilabel
+> se quiser ver o que seria feito sobre o item sem aplicar de fato as modificações. Será apresentada uma lista descritiva com todas as operações.</para
+></listitem>
+     <listitem
+><para
+>Caso contrário, selecione <guilabel
+>Fazê-lo</guilabel
+> para iniciar de fato a mesclagem.</para
+></listitem>
+</itemizedlist>
+<para
+>Nesse caso, o &kdiff3; irá executar a operação indicada para todos os itens. Se for necessária alguma intervenção manual (na mesclagem de arquivos simples), então irá aparecer uma janela de mesclagem (<link linkend="dirmergebigscreenshot"
+>ver a imagem grande</link
+>). </para
+><para
+>Quando tiver terminado um arquivo, selecione de novo <guimenuitem
+>Iniciar/Continuar a mesclagem da pasta</guimenuitem
+> ou a tecla <keycap
+>F7</keycap
+>. Se não tiver ainda salvo nada, irá aparecer uma janela pedindo-lhe isso. Aí, o &kdiff3; irá passar ao próximo item. </para
+><para
+>Quando o &kdiff3; encontrar um erro, ele indicará tal facto e irá mostrar a informação descritiva do estado. No fundo desta lista, existirão algumas mensagens de erro que deverão ajudá-lo a compreender a causa do problema. Quando continuar a mesclagem (com a tecla <keycap
+>F7</keycap
+>), o &kdiff3; indicará a opção para repetir ou saltar o item que causou o problema. Isto significa que, antes de continuar, você poderá escolher outra operação ou resolver o problema por outros meios. </para
+><para
+>Quando a mesclagem estiver completa, o &kdiff3; informará então com uma mensagem. </para
+><para
+>Se alguns dos itens foram mesclados individualmente, então o &kdiff3; irá recordar isto (enquanto esta sessão de mesclagem prosseguir) e não os juntará de novo, até que a mesclagem para todos os itens tenha sido executada. Mesmo quando a mesclagem tenha sido ignorada ou não tenha sido salvo nada, estes itens irão contar como completos. Só quando tiver alterado a operação de mesclagem é que o estado de <guilabel
+>Pronto</guilabel
+> do item será removido e ele poderá ser mesclado de novo. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Opções para comparar e mesclar pastas</title>
+<para
+>As preferências do &kdiff3; (no menu <menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Configurar &kdiff3;...</guimenuitem
+></menuchoice
+>) têm agora uma seção intitulada "Mesclagem de Pastas" com as seguintes opções: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Pastas recursivas</guilabel
+></term
+><listitem
+><para
+>Indica se você deseja pesquisar as pastas de forma recursiva.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Padrão(ões) de arquivos:</guilabel
+></term
+><listitem
+><para
+>Somente os arquivos que correspondam ao padrão ou padrões aqui indicados é que serão colocados na árvore. Poderá ser indicado mais de um padrão através do separador ponto e vírgula ";". São considerados caracteres especiais válidos o '*' e o '?'. (&eg; "<literal
+>*.cpp;*.h</literal
+>"). Por padrão, este campo é igual a "*". As pastas não precisam corresponder a este padrão.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Anti-padrão(ões) de arquivos:</guilabel
+></term
+><listitem
+><para
+>Os arquivos que correspondam ao padrão ou padrões aqui indicados serão excluídos da árvore. Poderá ser indicado mais de um padrão através do separador ponto e vírgula ";". São considerados caracteres especiais válidos o '*' e o '?'. Por padrão, este campo é igual a "<literal
+>*.orig;*.o;*.obj</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Anti-padrão(ões) de pastas:</guilabel
+></term
+><listitem
+><para
+>As pastas que correspondam ao padrão ou padrões aqui indicados serão excluídas da árvore. Poderá ser indicado mais de um padrão através do separador ponto e vírgula ";". São considerados caracteres especiais válidos o '*' e o '?'. Por padrão, este campo é igual a "<literal
+>CVS;deps;.svn</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Usar arquivo ignorar</guilabel
+></term
+><listitem
+><para
+>Ignora os arquivos e pastas que são também ignorados pelo seu sistema de controle de versões. Muitos dos arquivos gerados automaticamente são ignorados usando listas específicas. A grande vantagem é que esta funcionalidade é específica para cada pasta através de um arquivo de configuração local. (Veja a documentação do sistema de controle de versão para mais detalhes.) </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Encontrar arquivos e pastas ocultos</guilabel
+></term
+><listitem
+><para
+>Em alguns sistemas de arquivos, existe um atributo "Oculto". Em outros sistemas, um nome de arquivo que comece por "." faz com que ele seja considerado oculto. Esta opção permite-lhe decidir se deve incluir estes arquivos na árvore ou não. Por padrão, são incluídos.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Seguir links para arquivos</guilabel
+></term
+><listitem
+><para
+>Para as ligações aos arquivos: Quando a opção estiver desativada, as ligações simbólicas serão comparadas. Caso contrário, serão comparados os arquivos para os quais apontam as ligações. Por padrão, a opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Seguir links para pasta</guilabel
+></term
+><listitem
+><para
+>Para as ligações a pastas: Quando a opção estiver desativada, as ligações simbólicas serão comparadas. Se estiver ativa, então a ligação será tratada como uma pasta e será pesquisada recursivamente. (Lembre-se que o programa não verifica se a ligação é "recursiva". Por isso, se uma pasta contiver por exemplo uma ligação para ela própria irá causar um ciclo infinito, pelo que ao fim de algum tempo a pilha estoura ou toda a memória será usada e o programa irá estourar deste modo). Por padrão, a opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Distinguir maiúsculas/minúsculas na comparação de nomes de arquivos</guilabel
+></term
+><listitem
+><para
+>Por padrão, é falso no &Windows; e verdadeiro nos outros sistemas operacionais.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Modo de Comparação de Arquivos:</guilabel
+></term
+><listitem
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Comparação binária</guilabel
+></term
+><listitem
+><para
+>Este é o modo de comparação de arquivos padrão. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Análise completa</guilabel
+></term
+><listitem
+><para
+>Faz uma análise completa de cada arquivo e mostra os resultados nas colunas de informação das estatísticas. (O número de conflitos <guilabel
+>Resolvido</guilabel
+>, <guilabel
+>Não resolvido</guilabel
+>, <guilabel
+>Não em branco</guilabel
+> e <guilabel
+>Em branco</guilabel
+>). A análise completa é mais lenta que uma simples comparação binária e é muito mais lenta se for usada em arquivos que não contenham texto. (Indique os tipos de anti-padrões necessários.) </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Confiar no tamanho e na data de modificação (inseguro)</guilabel
+></term
+><listitem
+><para
+>Se comparar pastas grandes numa rede lenta, poderá ser mais rápido comparar somente as datas de modificação e os tamanhos dos arquivos. Porém, este melhoramento de velocidade traz alguma incerteza. Use esta opção com cuidado. Por padrão, está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Confiar no tamanho (inseguro)</guilabel
+></term
+><listitem
+><para
+>É semelhante à comparação da data de modificação. Não ocorre nenhuma comparação em si. Dois arquivos quaisquer são considerados iguais se os seus tamanhos de arquivos forem iguais. Isto é útil quando a operação de cópia de arquivos não preservar a data de modificação. Use esta opção com cuidado. Por padrão, está desligada.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><guilabel
+>Sincronizar pastas</guilabel
+></term
+><listitem
+><para
+>Ativa o modo de sincronização em que duas pastas são comparadas e não foi indicada nenhuma pasta de destino. Neste modo, as operações propostas serão escolhidas de modo a que ambas as pastas de origem fiquem iguais no fim. Do mesmo modo, o resultado da mesclagem será salvo em ambas as pastas. Por padrão, esta opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Copiar mais novo ao invés de mesclar (inseguro)</guilabel
+></term
+><listitem
+><para
+>Em vez de mesclar, a operação proposta irá copiar os arquivos mais recentes se ocorreram algumas alterações. (É considerado inseguro, porque implica saber se o outro arquivo não foi também alterado. Verifique para se certificar em qualquer um dos casos.). Por padrão, a opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Arquivos de backup (.orig)</guilabel
+></term
+><listitem
+><para
+>Se um arquivo ou uma pasta completa for substituído por outro ou for removido, então a versão original mudará para um nome com uma extensão <literal role="extension"
+>.orig</literal
+>. Se já existir um arquivo antigo com uma extensão <literal role="extension"
+>.orig</literal
+>, então este será removido sem ser criada nenhuma cópia de segurança. Isto também afeta a mesclagem normal de arquivos simples, não só no modo de mesclagem de pastas. Por padrão, a opção está ativa.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Outras funções na janela de mesclagem de pastas</title>
+<sect2
+><title
+>Modo de Tela Repartido/Completo</title>
+<para
+>Normalmente a lista de mesclagem da pasta fica visível enquanto um único arquivo é comparado ou reunido. Com o mouse, o usuário poderá mover a barra separadora que delimita a lista de arquivos das janelas de diferenças do texto. Se você não a quiser, poderá desativar o item de menu <menuchoice
+><guimenu
+>Pasta</guimenu
+><guimenuitem
+>Pasta &amp;&amp; Vista da tela dividida do texto</guimenuitem
+></menuchoice
+>. Aí, poderá usar o item de menu <menuchoice
+><guimenu
+>Pasta</guimenu
+><guimenuitem
+>Alternar vista</guimenuitem
+></menuchoice
+> para alternar entre a lista de arquivos e a janela de diferenças no texto que irá então ocupar toda a tela. </para>
+</sect2>
+<sect2
+><title
+>Comparar ou Mesclar um Único Arquivo</title>
+<para
+>Provavelmente, você irá preferir um duplo-clique do mouse simples sobre um arquivo para poder compará-lo. Contudo, existe também um item no menu <guimenu
+>Pasta</guimenu
+>. Você poderá também mesclar diretamente um único arquivo sem iniciar a mesclagem de pastas, através do item de menu <menuchoice
+><guimenu
+>Mesclar</guimenu
+><guimenuitem
+>Mesclar arquivo atual</guimenuitem
+></menuchoice
+>. Ao salvar o resultado, o estado ficará como terminado e o arquivo não será mesclado de novo se for iniciada uma mesclagem de pastas. </para
+><para
+>Mas repare que esta informação de estado será perdida quando voltar a executar uma pesquisa de pastas: <menuchoice
+><guimenu
+>Pasta</guimenu
+><guimenuitem
+>Pesquisar de novo</guimenuitem
+></menuchoice
+> </para>
+</sect2>
+<sect2
+><title
+>Comparar ou Mesclar Arquivos com Nomes Diferentes</title>
+<para
+>Em alguns casos, você terá que comparar ou mesclar arquivos com nomes diferentes (&eg;, o arquivo atual e a cópia de segurança na mesma pasta). </para
+><para
+>Selecione o arquivo exato, clicando no ícone na coluna <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>. O primeiro arquivo selecionado será então marcado com um <guilabel
+>A</guilabel
+>, enquanto o segundo e o terceiro ficará com um <guilabel
+>B</guilabel
+> e um <guilabel
+>C</guilabel
+>, independentemente da coluna em que se encontram. Você só poderá escolher até três arquivos desta forma. </para
+><para
+>Siga com a escolha de <menuchoice
+><guimenu
+>Pasta</guimenu
+><guimenuitem
+>Comparar arquivos explicitamente selecionados</guimenuitem
+></menuchoice
+> ou <menuchoice
+><guimenu
+>Pasta</guimenu
+><guimenuitem
+>Mesclar arquivos explicitamente selecionados</guimenuitem
+></menuchoice
+>. Por conveniência, estes itens de menu também aparecem como um menu de contexto, quando clicar com o botão direito no último arquivo selecionado. </para
+><para
+>A comparação ou mesclagem de um arquivo irá acontecer na mesma janela. Se este método for usado para as pastas, será aberta uma nova janela. </para
+></sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Tópicos Diversos</title>
+<sect1 id="networktransparency">
+<title
+>Transparência de rede através do KIO</title>
+<sect2
+><title
+>KIO-Slaves</title>
+<para
+>A biblioteca KIO do &frameworks; suporta a transparência de rede através dos 'KIO-slaves'. O &kdiff3; usa isto para ler os arquivos de entrada e para pesquisar as pastas. Isto significa que você poderá indicar arquivos e pastas em recursos locais e remotos através dos &URL;s. </para
+><para
+>Exemplo: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> teste.cpp  ftp://ftp.longe.org/teste.cpp
+   <command
+>kdiff3</command
+> tar:/home/eu/pacote.tar.gz/pasta ./pasta
+</screen>
+</para>
+<para
+>A primeira linha compara um arquivo local com outro arquivo num servidor de &FTP;. A segunda linha compara uma pasta dentro de um pacote comprimido com uma pasta local. </para
+><para
+>Outros 'KIO-slaves' que serão interessantes: </para>
+<itemizedlist>
+<listitem
+><para
+>Arquivos da WWW (http:),</para
+></listitem>
+<listitem
+><para
+>Arquivos de &FTP; (ftp:),</para
+></listitem>
+<listitem
+><para
+>Transferência de arquivos criptografada (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>Recursos do &Windows; (smb:),</para
+></listitem>
+<listitem
+><para
+>Arquivos locais (file:),</para
+></listitem>
+</itemizedlist>
+<para
+>Outras coisas que são possíveis, mas provavelmente serão menos interessantes: </para>
+<itemizedlist>
+<listitem
+><para
+>Páginas do 'man' (man:),</para
+></listitem>
+<listitem
+><para
+>Páginas do 'info' (info:),</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Como escrever &URL;s</title>
+<para
+>Um &URL; tem uma sintaxe diferente, em comparação com as localizações dos arquivos e pastas locais. Alguns fatores terão que ser considerados: </para>
+<itemizedlist>
+<listitem
+><para
+>Uma localização poderá ser relativa e conter "." ou "..". Isto não é possível para os &URL;s, uma vez que eles são sempre absolutos. </para
+></listitem
+><listitem
+><para
+>Caracteres especiais devem ser escritos com "escape". ("<literal
+>#</literal
+>" -&gt; "<literal
+>%23</literal
+>", espaço -&gt;"<literal
+>%20</literal
+>", &etc;) Por exemplo, um arquivo com o nome "<literal
+>#</literal
+>foo<literal
+>#</literal
+>" teria a &URL; "file:/<literal
+>%23</literal
+>foo<literal
+>%23</literal
+>". </para
+></listitem
+><listitem
+><para
+>Quando os &URL;s não funcionarem como seria de esperar, tente abri-los primeiro no &konqueror;. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Capacidades dos 'KIO-Slaves'</title>
+<para
+>A transparência de rede tem um senão: nem todos os recursos têm as mesmas capacidades. </para
+><para
+>Algumas das vezes isto é devido ao sistema de arquivos do servidor, enquanto que em outras ocasiões poderá ser devido ao protocolo. Aqui está uma pequena lista das restrições: </para>
+<itemizedlist>
+<listitem
+><para
+>Em alguns casos não existe o suporte para ligações simbólicas. </para
+></listitem
+><listitem
+><para
+>Ou não existe forma de distinguir se uma ligação aponta para um arquivo ou uma pasta; é assumido sempre um arquivo. (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>Não é sempre possível determinar o tamanho do arquivo. </para
+></listitem
+><listitem
+><para
+>Existe um suporte de permissões limitado. </para
+></listitem
+><listitem
+><para
+>Não existe a possibilidade de modificar as permissões ou a data de modificação, assim as permissões ou a data de uma cópia poderão ser diferentes do original. (Veja a opção <guilabel
+>Confiar no tamanho (inseguro)</guilabel
+>.) (A modificação de permissões ou das datas só é possível para os arquivos locais.) </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="git">
+<title
+>Usando o &kdiff3; como uma ferramenta de comparação e mesclagem do &git;</title>
+<para
+>&kdiff3; pode ser usado como uma ferramenta de comparação e mesclagem do <ulink url="https://git-scm.com/"
+>&git;</ulink
+> </para>
+<para
+>Basta adicionar as seguintes linhas ao seu arquivo <filename
+>gitconfig</filename
+>. </para>
+<programlisting
+>[diff]
+        tool = kdiff3
+[difftool "kdiff3"]
+        path = &lt;caminho para o binário do kdiff3 no seu sistema>
+[difftool]
+        prompt = false
+        keepBackup = false
+        trustExitCode = false
+[merge]
+        tool = kdiff3
+[mergetool]
+        prompt = false
+        keepBackup = false
+        keepTemporaries = false
+[mergetool "kdiff3"]
+        path = &lt;caminho para o binário do kdiff3 no seu sistema
+>
+</programlisting>
+<para
+>Para ver a diferença entre dois commits, use <userinput
+>git difftool <replaceable
+>primeiro_hash</replaceable
+> <replaceable
+>segundo_hash</replaceable
+> --tool=kdiff3 --cc <replaceable
+>algum_arquivo_na_árvore_git</replaceable
+></userinput
+> </para>
+<para
+>Para mesclar uma branch com o kdiff3, use <userinput
+>git merge <replaceable
+>nome_da_branch</replaceable
+> &amp;&amp; git mergetool --tool=kdiff3</userinput
+> </para>
+<para
+>Após resolver os conflitos de mesclagem da <link linkend="synchronise_views"
+>maneira usual</link
+>, basta confirmar as alterações para que o trabalho seja concluído. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Perguntas e respostas</title
+>&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Porque é que se chama "&kdiff3;"? </para
+></question
+><answer
+><para
+>As ferramentas <application
+>KDiff</application
+> e <application
+>KDiff2</application
+> (agora chamada &kompare;) já existiam. Além disso, o &kdiff3; deveria sugerir que consegue juntar arquivos como a ferramenta <command
+>diff</command
+>" da coleção de ferramentas do Diff. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque foi lançado segundo a GPL? </para
+></question
+><answer
+><para
+>O autor usou programas GPL durante muito tempo até agora e aprendeu bastante ao olhar para muito código. Daí, este é o "Muito Obrigado" para todos os programadores que também o fizeram ou irão fazer no futuro. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Faltam alguns botões e funções. O que está errado? </para
+></question
+><answer
+><para
+>Você compilou a partir do código mas não indicou provavelmente o prefixo correto para instalação. Por padrão, o <command
+>cmake</command
+> prefere insalar em <filename class="directory"
+>/usr/local</filename
+>, mas então o arquivo de recursos da interface do usuário (&ie;, o <filename
+>kdiff3ui.rc</filename
+>). O arquivo <filename
+>README</filename
+> contém mais informações sobre o prefixo correto. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Muitas das vezes as linhas que são semelhantes mas não idênticas aparecem umas ao lado das outras mas noutros casos não. Porquê? </para
+></question
+><answer
+><para
+>As linhas em que apenas a quantidade de espaços em branco é diferente são tratadas como "iguais" à primeira vista, embora apenas um caractere que não seja um espaço em branco faça com que as linhas sejam "diferentes". Se as linhas semelhantes aparecerem uma ao lado da outra, isto poderá ser de fato uma coincidência, mas é felizmente o caso mais frequente. Veja também em <link linkend="manualdiffhelp"
+>Ajuda das Diferenças Manuais</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque todos os conflitos deverão ser resolvidos para que o resultado da mesclagem possa ser salvo? </para
+></question
+><answer
+><para
+>Para cada seção igual ou diferente, o editor na janela do resultado da mesclagem recorda onde ela começa ou termina. Isto é necessário para que os conflitos possam ser resolvidos manualmente ao selecionar simplesmente o botão da origem (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>). Esta informação é perdida durante a gravação como texto e corresponde a muito esforço criar um formato de arquivo especial que suporte o salvamento e a restauração de toda a informação necessária. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Como eu posso sincronizar as janelas de diferenças e mesclagem, de modo que todas mostrem a mesma posição de texto? </para
+></question
+><answer
+><para
+>Clique na coluna de resumo à esquerda do texto. (<link linkend="synchronise_views"
+>Veja também aqui.</link
+>) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Por que <userinput
+>git difftool --dir-diff</userinput
+> retorna o erro "Mix of links and normal files error" ao usar o KDiff3 como ferramenta de comparação? </para
+></question
+><answer
+><para
+>Este é um efeito colateral do funcionamento interno do Git. Se você tentar comparar uma revisão anterior com a árvore de trabalho atual, o Git comparará, na verdade, arquivos que representam o commit anterior com links simbólicos que apontam para a árvore de trabalho. A partir da versão 1.9, o KDiff3 tem ativado por padrão as opções <guilabel
+>Seguir links de arquivos</guilabel
+> e <guilabel
+>Seguir links de pastas</guilabel
+>. Antes disso, elas estavam desativadas por padrão. Isso não importava se a opção "Análise completa" também estivesse desativada. No entanto, com a opção <guilabel
+>Análise completa</guilabel
+> ativada, o KDiff3 inicialmente tentaria comparar o caminho apontado por um link em vez de segui-lo. Antes da versão 1.8, o erro resultante era ignorado. No entanto, a versão 1.8 começou a reportar o erro. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque o editor na janela do resultado da mesclagem não tem uma função para "desfazer"? </para
+></question
+><answer
+><para
+>Isso era muito difícil até agora. Você poderá sempre restaurar uma versão de uma origem (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>) se clicar no botão respectivo. Para uma edição extensa, recomenda-se a utilização de outro editor, de qualquer forma. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Quando eu removi algum texto, apareceu de repente "&lt;Sem linha de origem&gt;" e esta não pode ser removida. O que significa e como é possível removê-la? </para
+></question
+><answer
+><para
+>Para cada seção igual ou diferente, o editor na janela do resultado da mesclagem recorda onde ela começa ou termina. O "&lt;Sem linha de origem&gt;" significa que não existe mais nada livre numa seção, nem mesmo um caractere de mudança de linha. Isto poderá acontecer durante a mesclagem automática ou durante a edição. Isto não é nenhum problema, uma vez que esta dica não irá aparecer no arquivo salvo. Se você quiser os dados originais de volta, basta selecionar a seção (clique na coluna de resumo à esquerda) e depois no botão da origem com o conteúdo necessário (<guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque o &kdiff3; não suporta o realce de sintaxe? </para
+></question
+><answer
+><para
+>O &kdiff3; já usa muitas cores para o realce das diferenças. Se suportasse o realce de sintaxe, tornar-se-ia confuso. Use outro editor para esse efeito. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Posso usar o &kdiff3; para comparar arquivos <application
+>LibreOffice</application
+>/<trademark class="registered"
+>OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, &PDF;, &etc;? </para
+></question
+><answer
+><para
+>Ainda que o &kdiff3; analise qualquer tipo de arquivo, o resultado poderá não ser muito satisfatório para você. </para
+><para
+>O &kdiff3; foi feito para comparar arquivos de texto puros. O <application
+>LibreOffice</application
+>/<trademark class="registered"
+>OpenOffice</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, &etc; gravam muito mais informação nos arquivos (sobre os tipos de fonte, imagens, páginas, cores, &etc;), que o &kdiff3; não conhece. Deste modo, o &kdiff3; mostrará o conteúdo do arquivo interpretado como texto puro, mas ele poderá estar ilegível ou, pelo menos, ficará muito esquisito. </para
+><para
+>Uma vez que a maioria dos programas, nos dias de hoje, gravam o seu conteúdo no formato &XML;, você poderá ser capaz de lê-los como texto puro. Por isso, se a alteração foi pequena, o &kdiff3; ainda poderá ajudá-lo. </para
+><para
+>A melhor solução, se quiser apenas comparar o texto (sem as imagens incorporadas, como as imagens), é usar o <menuchoice
+><guimenu
+>Editar</guimenu
+><guimenuitem
+>Selecionar tudo</guimenuitem
+></menuchoice
+> e o <menuchoice
+><guimenu
+>Editar</guimenu
+><guimenuitem
+>Copiar</guimenuitem
+></menuchoice
+> no seu programa, para copiar o texto interessante para a área de transferência e depois, no &kdiff3;, colar o texto em qualquer uma das janelas de entrada. (Veja também o <link linkend="selections"
+>Selecionar, Copiar e Colar</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Para onde foi a opção de pastas <guimenuitem
+>Listar apenas os deltas</guimenuitem
+>? </para
+></question
+><answer
+><para
+>Existem agora várias <link linkend="selectingvisiblefiles"
+>opções "Mostrar"</link
+> no menu <guimenu
+>Pastas</guimenu
+>. Se desativar o <guimenuitem
+>Mostrar arquivos iguais</guimenuitem
+>, irá obter o mesmo resultado do <guimenuitem
+>Listar apenas os deltas</guimenuitem
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Como eu faço uma grande seleção na janela de entrada de diferenças, uma vez que o deslocamento leva tanto tempo? </para
+></question
+><answer
+><para
+>Comece a seleção da forma normal (clique e mantenha o &LMB; pressionado). Depois, use as teclas de navegação (&eg;, o &PgUp;, &PgDn;), enquanto mantém pressionado o &LMB;. (Veja também em <link linkend="selections"
+>Selecionar, Copiar e Colar</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Existe muita informação aqui, mas a sua dúvida ainda não foi respondida? </para
+></question
+><answer
+><para
+>Por favor envie ao autor a sua dúvida. Ele agradece qualquer comentário. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Créditos e licença</title>
+
+<para
+>&kdiff3; - Ferramenta de comparação e mesclagem de arquivos e pastas </para>
+<para
+>Direitos autorais do programa 2002-2007 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+<para
+>Vieram várias ideias legais e relatórios de erros dos colegas do autor e de pessoas da Wild Wild Web. Muito obrigado! </para>
+
+<para
+>Direitos autorais da documentação &copy; 2002-2007 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+
+<para
+>Direitos autorais da documentação &copy; 2017-2019 Michael Reeves <email
+>reeves.87 at gmail.com</email
+> </para>
+
+<para
+>Tradução de Marcus Gama <email
+>marcus.gama@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->

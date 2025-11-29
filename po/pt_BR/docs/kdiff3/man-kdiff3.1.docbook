@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Brazilian-Portuguese "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual do Usuário do KDiff3</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>Página man do KDiff3.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>22/02/2019</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Ferramenta para comparação e mesclagem de arquivos e pastas</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>arquivo</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>arquivo</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>arquivo</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Arquivo1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Arquivo2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Arquivo3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descrição</title>
+<para
+>Compara dois ou três arquivos ou pastas de entrada.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Opções</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Ignorado. (definido pelo usuário.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Ignorado. (definido pelo usuário.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Ignorado. (definido pelo usuário.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Ignorado. (definido pelo usuário.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Mescla a entrada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>arquivo</replaceable
+></term>
+<listitem
+><para
+>Arquivo base explícito. Para compatibilidade com certas ferramentas. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>arquivo</replaceable
+></term>
+<listitem
+><para
+>Arquivo de saída Implica -m. Por exemplo: -o novoarquivo.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>arquivo</replaceable
+></term>
+<listitem
+><para
+>Arquivo de saída, novamente. (Para compatibilidade com certas ferramentas.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>Sem interface gráfica se todos os conflitos forem resolvidos automaticamente. (Requer <option
+>-o</option
+> <replaceable
+>arquivo</replaceable
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>Ignorar --auto e sempre mostrar a interface. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></term>
+<listitem
+><para
+>Substituição do nome visível para arquivo de entrada 1 (base). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></term>
+<listitem
+><para
+>Substituição do nome visível para arquivo de entrada 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></term>
+<listitem
+><para
+>Substituição do nome visível para arquivo de entrada 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></term>
+<listitem
+><para
+>Substituição alternativa do nome visível. Forneça um para cada entrada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></term>
+<listitem
+><para
+>Substitui uma opção de configuração. Use uma vez para cada opção. Por exemplo: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Mostra uma lista das opções de configuração e os valores atuais. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>arquivo</replaceable
+></term>
+<listitem
+><para
+>Usar um arquivo de configuração diferente. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Arquivo1</replaceable
+></option
+></term>
+<listitem
+><para
+>arquivo 1 a abrir (base, se não especificado via --<option
+>base</option
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Arquivo2</replaceable
+></option
+></term>
+<listitem
+><para
+>arquivo 2 a abrir </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Arquivo3</replaceable
+></option
+></term>
+<listitem
+><para
+>arquivo 3 a abrir </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Veja também</title>
+<simplelist>
+<member
+>Documentação mais detalhada para o usuário está disponível em <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (insira este &URL; no &konqueror; ou execute <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>).</member>
+<member
+>kf6options(7)</member>
+<member
+>qt6options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Autores</title>
+<para
+>Esta página de manual foi escrita por &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>
