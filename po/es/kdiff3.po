@@ -7,15 +7,15 @@
 # SPDX-FileCopyrightText: 2005, 2006, 2007 santi <santi@kde-es.org>
 # SPDX-FileCopyrightText: 2006, 2008 Santiago Fernandez Sancho <santi@kde-es.org>
 # SPDX-FileCopyrightText: 2010, 2011 Israel Garcia Garcia <israelgarcia86@gmail.com>
-# SPDX-FileCopyrightText: 2011, 2014, 2018, 2019, 2020, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2011, 2014, 2018, 2019, 2020, 2021, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-18 00:46+0000\n"
-"PO-Revision-Date: 2025-11-19 00:59+0100\n"
-"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
+"PO-Revision-Date: 2025-12-15 02:51+0100\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -940,7 +940,7 @@ msgstr "Desplegar todas las subcarpetas"
 #: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Rescan"
-msgstr "Volver a buscar"
+msgstr "Volver a explorar"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
@@ -1061,12 +1061,12 @@ msgstr "Borrar (si existe)"
 #: directorymergewindow.cpp:2986
 #, kde-format
 msgid "Copy A to B"
-msgstr "Copiar A a B"
+msgstr "Copiar A en B"
 
 #: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Copy B to A"
-msgstr "Copiar B a A"
+msgstr "Copiar B en A"
 
 #: directorymergewindow.cpp:2988
 #, kde-format
@@ -1086,12 +1086,12 @@ msgstr "Borrar A y B"
 #: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Merge to A"
-msgstr "Fusionar a A"
+msgstr "Fusionar en A"
 
 #: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Merge to B"
-msgstr "Fusionar a B"
+msgstr "Fusionar en B"
 
 #: directorymergewindow.cpp:2993
 #, kde-format
@@ -1121,7 +1121,7 @@ msgstr "La URL calculada es: "
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
-msgstr "Ha fallado la lectura del archivo: %1"
+msgstr "La lectura del archivo ha fallado: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
@@ -1663,7 +1663,7 @@ msgstr "Conmutar entre vista de carpeta y de texto"
 #: pdiff.cpp:880 pdiff.cpp:916 pdiff.cpp:925 pdiff.cpp:983 pdiff.cpp:991
 #, kde-format
 msgid "Ready."
-msgstr "Listo."
+msgstr "Preparado."
 
 #: kdiff3.cpp:912 pdiff.cpp:1519
 #, kde-format
