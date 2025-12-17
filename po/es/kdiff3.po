@@ -6,15 +6,15 @@
 # SPDX-FileCopyrightText: 2003, 2004, 2005 Carlos Mayo Hernández <carlos.mayo@hispalinux.es>
 # SPDX-FileCopyrightText: 2004, 2006, 2007, 2008 Santiago Fernandez Sancho <santi@kde-es.org>
 # SPDX-FileCopyrightText: 2010, 2011 Israel Garcia Garcia <israelgarcia86@gmail.com>
-# SPDX-FileCopyrightText: 2011, 2014, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2011, 2014, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-09-29 19:30+0200\n"
-"Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
+"PO-Revision-Date: 2025-12-15 02:51+0100\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -935,7 +935,7 @@ msgstr "Desplegar todas las subcarpetas"
 #: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Rescan"
-msgstr "Volver a buscar"
+msgstr "Volver a explorar"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
@@ -1056,12 +1056,12 @@ msgstr "Borrar (si existe)"
 #: directorymergewindow.cpp:2987
 #, kde-format
 msgid "Copy A to B"
-msgstr "Copiar A a B"
+msgstr "Copiar A en B"
 
 #: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Copy B to A"
-msgstr "Copiar B a A"
+msgstr "Copiar B en A"
 
 #: directorymergewindow.cpp:2989
 #, kde-format
@@ -1081,12 +1081,12 @@ msgstr "Borrar A y B"
 #: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Merge to A"
-msgstr "Fusionar a A"
+msgstr "Fusionar en A"
 
 #: directorymergewindow.cpp:2993
 #, kde-format
 msgid "Merge to B"
-msgstr "Fusionar a B"
+msgstr "Fusionar en B"
 
 #: directorymergewindow.cpp:2994
 #, kde-format
@@ -1102,7 +1102,7 @@ msgstr ""
 #: fileaccess.cpp:800
 #, kde-format
 msgid "Failed to read file: %1"
-msgstr "Ha fallado la lectura del archivo: %1"
+msgstr "La lectura del archivo ha fallado: %1"
 
 #: fileaccess.cpp:947
 #, kde-format
@@ -1627,7 +1627,7 @@ msgstr "Conmutar entre vista de carpeta y de texto"
 #: pdiff.cpp:883 pdiff.cpp:919 pdiff.cpp:928 pdiff.cpp:986 pdiff.cpp:994
 #, kde-format
 msgid "Ready."
-msgstr "Listo."
+msgstr "Preparado."
 
 #: kdiff3.cpp:923 pdiff.cpp:1522
 #, kde-format
