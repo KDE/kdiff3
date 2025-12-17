@@ -350,7 +350,7 @@ void FileAccess::loadData()
         m_linkTarget = m_fileInfo.symLinkTarget();
 
 #ifndef Q_OS_WIN
-        // Unfortunately Qt5 symLinkTarget/readLink always return an absolute path, even if the link is relative
+        // Unfortunately Qt's symLinkTarget/readLink always return an absolute path, even if the link is relative
         std::unique_ptr<char[]> s = std::make_unique<char[]>(PATH_MAX + 1);
         ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s.get(), PATH_MAX);
         if(len > 0)
@@ -361,7 +361,7 @@ void FileAccess::loadData()
 #endif
 
         m_bBrokenLink = !QFileInfo::exists(m_linkTarget);
-        //We want to know if the link itself exists
+        //We want to know if the link itself exists not the target.
         if(m_bBrokenLink)
             m_bExists = true;
 
@@ -1150,7 +1150,7 @@ void FileAccess::filterList(const QString& dir, DirectoryList* pDirList, const Q
                             const QString& fileAntiPattern, const QString& dirAntiPattern,
                             const IgnoreList& ignoreList)
 {
-    //TODO: Ask os for this information don't hard code it.
+    // bCaseSensitive controls case matching in the ignoreList comparison
 #if defined(Q_OS_WIN)
     bool bCaseSensitive = false;
 #else

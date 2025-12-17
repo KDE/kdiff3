@@ -21,12 +21,12 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
     assert(event->mimeData()->hasUrls());//Debugging aid in case FileNameLineEdit::dragEnterEvent is changed to accept other types.
 
     qCDebug(kdiffMain) << "Enter FileNameLineEdit::dropEvent";
-    QList<QUrl> lst = event->mimeData()->urls();
+    const QList<QUrl> lst = event->mimeData()->urls();
 
     if(lst.count() > 0)
     {
         /*
-            Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
+            Do not use QUrl::toString() here. Sadly the Qt5+ version does not permit Qt4 style
             fullydecoded conversions. It also treats empty schemes as non-local.
         */
         qCDebug(kdiffMain) << "Received Drop Event";
