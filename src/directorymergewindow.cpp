@@ -2184,6 +2184,7 @@ void DirectoryMergeWindow::slotRunOperationForAllItems()
     {
         QModelIndex miBegin = d->rowCount() > 0 ? d->index(0, 0, QModelIndex()) : QModelIndex();
 
+        miBegin = d->treeIterator(miBegin); // find first visible item
         d->prepareMergeStart(miBegin, QModelIndex(), bVerbose);
         d->mergeContinue(true, bVerbose);
     }
@@ -2360,7 +2361,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
             if(m_bSimulatedMergeStarted)
             {
                 m_bSimulatedMergeStarted = false;
-                QModelIndex mi = rowCount() > 0 ? index(0, 0, QModelIndex()) : QModelIndex();
+                // Start at first visible item.
+                QModelIndex mi = treeIterator(rowCount() > 0 ? index(0, 0, QModelIndex()) : QModelIndex());
                 for(; mi.isValid(); mi = treeIterator(mi))
                 {
                     getMFI(mi)->startSimOp();
