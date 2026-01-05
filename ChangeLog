@@ -1,4 +1,13 @@
-Version 1.12.3 - 2024
+Version 1.12.4 - 2025
+=========================\
+- Fix handling of non-BMP UTF-16 characters
+  - Commit: `10451d18` (2025-09-23) — Michael Reeves
+
+- Revert unintended condition change (regression fix)
+  - Commit: `1f86fde4` (2025-06-30) — Michael Reeves
+
+
+Version 1.12.3 - 2025
 =========================\
 *fix install bug prevent install for all users
 *fix crash on directory compare seen on windows 11 with context menu but theoretically possible on other platforms
