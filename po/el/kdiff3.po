@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-07 00:47+0000\n"
 "PO-Revision-Date: 2024-09-19 17:53+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -539,7 +539,7 @@ msgid "This operation is currently not possible."
 msgstr "Αυτή η λειτουργία δεν είναι δυνατή αυτή τη στιγμή."
 
 #: directorymergewindow.cpp:1869 directorymergewindow.cpp:1894
-#: directorymergewindow.cpp:1919 directorymergewindow.cpp:2200
+#: directorymergewindow.cpp:1919 directorymergewindow.cpp:2201
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Μη δυνατή λειτουργία"
@@ -549,7 +549,7 @@ msgstr "Μη δυνατή λειτουργία"
 msgid "An error occurred while copying."
 msgstr "Ένα σφάλμα παρουσιάστηκε κατά την αντιγραφή."
 
-#: directorymergewindow.cpp:1967 directorymergewindow.cpp:2405
+#: directorymergewindow.cpp:1967 directorymergewindow.cpp:2407
 #, kde-format
 msgid "Merge Error"
 msgstr "Σφάλμα συγχώνευσης"
@@ -631,7 +631,7 @@ msgstr ""
 "Το τονισμένο αντικείμενο άλλαξε σε έναν φάκελο και διαγράφτηκε σε έναν άλλο. "
 "Επιλέξτε τι θέλετε να κάνετε."
 
-#: directorymergewindow.cpp:2200
+#: directorymergewindow.cpp:2201
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
@@ -640,7 +640,7 @@ msgstr ""
 "Αυτή η λειτουργία δεν είναι αυτή τη στιγμή δυνατή γιατί η συγχώνευση φακέλων "
 "εκτελείται αυτήν τη στιγμή."
 
-#: directorymergewindow.cpp:2257
+#: directorymergewindow.cpp:2258
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -651,35 +651,35 @@ msgstr ""
 "Επιθυμείτε τη συνέχεια με το αντικείμενο που προκάλεσε το σφάλμα ή "
 "επιθυμείτε την παράλειψή του;"
 
-#: directorymergewindow.cpp:2259
+#: directorymergewindow.cpp:2260
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Συνέχεια συγχώνευσης μετά από ένα σφάλμα"
 
-#: directorymergewindow.cpp:2260
+#: directorymergewindow.cpp:2261
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Συνέχεια με το τελευταίο αντικείμενο"
 
-#: directorymergewindow.cpp:2261
+#: directorymergewindow.cpp:2262
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Παράλειψη αντικειμένου"
 
-#: directorymergewindow.cpp:2355
+#: directorymergewindow.cpp:2356
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Η λειτουργία συγχώνευσης ολοκληρώθηκε."
 
-#: directorymergewindow.cpp:2355 directorymergewindow.cpp:2358
+#: directorymergewindow.cpp:2356 directorymergewindow.cpp:2359
 #, kde-format
 msgid "Merge Complete"
 msgstr "Η συγχώνευση ολοκληρώθηκε"
 
-#: directorymergewindow.cpp:2368
+#: directorymergewindow.cpp:2370
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -687,52 +687,52 @@ msgstr ""
 "Η εξομοίωση συγχώνευσης ολοκληρώθηκε: Ελέγξτε αν συμφωνείτε με τις "
 "προτεινόμενες ενέργειες."
 
-#: directorymergewindow.cpp:2404
+#: directorymergewindow.cpp:2406
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr ""
 "Παρουσιάστηκε ένα σφάλμα. Πατήστε το Εντάξει για να δείτε λεπτομερείς "
 "πληροφορίες."
 
-#: directorymergewindow.cpp:2437
+#: directorymergewindow.cpp:2439
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr ""
 "Σφάλμα: Κατά τη διαγραφή του %1: Αποτυχία δημιουργίας εφεδρικού αντιγράφου."
 
-#: directorymergewindow.cpp:2444
+#: directorymergewindow.cpp:2446
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "αναδρομική διαγραφή φακέλου( %1 )"
 
-#: directorymergewindow.cpp:2446
+#: directorymergewindow.cpp:2448
 #, kde-format
 msgid "delete( %1 )"
 msgstr "διαγραφή ( %1 )"
 
-#: directorymergewindow.cpp:2462
+#: directorymergewindow.cpp:2464
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr ""
 "Σφάλμα: η διαγραφή φακέλου απέτυχε κατά την προσπάθεια ανάγνωσης του "
 "καταλόγου."
 
-#: directorymergewindow.cpp:2478
+#: directorymergewindow.cpp:2480
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Σφάλμα: η λειτουργία rmdir( %1 ) απέτυχε."
 
-#: directorymergewindow.cpp:2488
+#: directorymergewindow.cpp:2490
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Σφάλμα: η διαγραφή απέτυχε."
 
-#: directorymergewindow.cpp:2515
+#: directorymergewindow.cpp:2517
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "χειροκίνητη συγχώνευση( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2518
+#: directorymergewindow.cpp:2520
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
@@ -740,193 +740,193 @@ msgstr ""
 "     Σημείωση: Μετά από μία χειροκίνητη συγχώνευση ο χρήστης θα πρέπει να "
 "συνεχίσει πατώντας F7."
 
-#: directorymergewindow.cpp:2545
+#: directorymergewindow.cpp:2547
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Σφάλμα: η αντιγραφή ( %1 -> %2 ) απέτυχε. Η διαγραφή του υπάρχοντος "
 "προορισμού απέτυχε."
 
-#: directorymergewindow.cpp:2554
+#: directorymergewindow.cpp:2556
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "Αντιγραφή δεσμού( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2563
+#: directorymergewindow.cpp:2565
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Σφάλμα: η αντιγραφή δεσμού απέτυχε: Οι απομακρυσμένοι δεσμοί δεν "
 "υποστηρίζονται ακόμα."
 
-#: directorymergewindow.cpp:2573
+#: directorymergewindow.cpp:2575
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Σφάλμα: η αντιγραφή δεσμού απέτυχε."
 
-#: directorymergewindow.cpp:2596
+#: directorymergewindow.cpp:2598
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "αντιγραφή ( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2622
+#: directorymergewindow.cpp:2624
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Σφάλμα κατά την μετονομασία( %1 -> %2 ): Αδυναμία διαγραφής του υπάρχοντος "
 "προορισμού."
 
-#: directorymergewindow.cpp:2629
+#: directorymergewindow.cpp:2631
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "μετονομασία ( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2638
+#: directorymergewindow.cpp:2640
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Σφάλμα: Η μετονομασία απέτυχε."
 
-#: directorymergewindow.cpp:2656
+#: directorymergewindow.cpp:2658
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "Σφάλμα κατά τη δημιουργία του καταλόγου %1. Αδύνατη η διαγραφή υπάρχοντος "
 "αρχείου."
 
-#: directorymergewindow.cpp:2673
+#: directorymergewindow.cpp:2675
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "Δημιουργία καταλόγου( %1 )"
 
-#: directorymergewindow.cpp:2683
+#: directorymergewindow.cpp:2685
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Σφάλμα κατά τη δημιουργία του φακέλου."
 
-#: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
-#: directorymergewindow.cpp:2832
+#: directorymergewindow.cpp:2721 directorymergewindow.cpp:2803
+#: directorymergewindow.cpp:2834
 #, fuzzy, kde-format
 #| msgid "Dest: "
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Προορ: "
 
-#: directorymergewindow.cpp:2727 directorymergewindow.cpp:2755
+#: directorymergewindow.cpp:2729 directorymergewindow.cpp:2757
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Φάκελος"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2729
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Τύπος"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2729
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: directorymergewindow.cpp:2728
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Ιδιοτ"
 
-#: directorymergewindow.cpp:2728
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Τελευταία τροποποίηση"
 
-#: directorymergewindow.cpp:2728
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Δεσμός-προορισμός"
 
-#: directorymergewindow.cpp:2755
+#: directorymergewindow.cpp:2757
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "Αρχείο"
 
-#: directorymergewindow.cpp:2755
+#: directorymergewindow.cpp:2757
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Δεσμός"
 
-#: directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2763
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "μη διαθέσιμο"
 
-#: directorymergewindow.cpp:2775
+#: directorymergewindow.cpp:2777
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (Προορ): "
 
-#: directorymergewindow.cpp:2779
+#: directorymergewindow.cpp:2781
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2779
+#: directorymergewindow.cpp:2781
 #, kde-format
 msgid "A (Base): "
 msgstr "Α (Βάση): "
 
-#: directorymergewindow.cpp:2785
+#: directorymergewindow.cpp:2787
 #, kde-format
 msgid "B (Dest): "
 msgstr "Β (Προορ): "
 
-#: directorymergewindow.cpp:2789
+#: directorymergewindow.cpp:2791
 #, kde-format
 msgid "B:    "
 msgstr "Β:    "
 
-#: directorymergewindow.cpp:2794
+#: directorymergewindow.cpp:2796
 #, kde-format
 msgid "C (Dest): "
 msgstr "Γ (Προορ): "
 
-#: directorymergewindow.cpp:2798
+#: directorymergewindow.cpp:2800
 #, kde-format
 msgid "C:    "
 msgstr "Γ:    "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2842
+#: directorymergewindow.cpp:2844
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Αποθήκευση κατάστασης συγχώνευσης φακέλου ως..."
 
-#: directorymergewindow.cpp:2949
+#: directorymergewindow.cpp:2951
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Έναρξη/συνέχεια συγχώνευσης φακέλου"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2952
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Εκτέλεση της λειτουργίας για το τρέχον αντικείμενο"
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2953
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Σύγκριση του επιλεγμένου αρχείου"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Merge Current File"
 msgstr "Συγχώνευση του επιλεγμένου αρχείου"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid ""
 "Merge\n"
@@ -935,56 +935,56 @@ msgstr ""
 "Συγχώνευση\n"
 "αρχείου"
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Αναδίπλωση όλων των υποφακέλων"
 
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Ανάπτυξη όλων των υποφακέλων"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Rescan"
 msgstr "Επανασάρωση"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2960
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Επιλογή του Α για όλα τα αντικείμενα"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2961
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Επιλογή του Β για όλα τα αντικείμενα"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Επιλογή του Γ για Όλα τα αντικείμενα"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Λειτουργία αυτόματης επιλογής για όλα τα αντικείμενα"
 
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2964
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Καμία λειτουργία για όλα τα αντικείμενα"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Εμφάνιση ταυτόσημων αρχείων"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid ""
 "Identical\n"
@@ -993,17 +993,17 @@ msgstr ""
 "Ταυτόσημα\n"
 "αρχεία"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid "Show Different Files"
 msgstr "Εμφάνιση διαφορετικών αρχείων"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Εμφάνιση αρχείων μόνο στο Α"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid ""
 "Files\n"
@@ -1012,12 +1012,12 @@ msgstr ""
 "Αρχεία\n"
 "μόνο στο Α"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Εμφάνιση αρχείων μόνο στο Β"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid ""
 "Files\n"
@@ -1026,12 +1026,12 @@ msgstr ""
 "Αρχεία\n"
 "μόνο στο Β"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Εμφάνιση αρχείων μόνο στο Γ"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid ""
 "Files\n"
@@ -1040,68 +1040,68 @@ msgstr ""
 "Αρχεία\n"
 "μόνο στο Γ"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2977
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Σύγκριση άμεσα επιλεγμένων αρχείων"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:2978
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Συγχώνευση άμεσα επιλεγμένων αρχείων"
 
-#: directorymergewindow.cpp:2978 directorymergewindow.cpp:2985
+#: directorymergewindow.cpp:2980 directorymergewindow.cpp:2987
 #, kde-format
 msgid "Do Nothing"
 msgstr "Να μη γίνει τίποτα"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2982 opendialog.ui:68
+#: directorymergewindow.cpp:2984 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Συγχώνευση"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2985
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Διαγραφή (αν υπάρχει)"
 
-#: directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Copy A to B"
 msgstr "Αντιγραφή του Α στο Β"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Copy B to A"
 msgstr "Αντιγραφή του Β στο Α"
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2990
 #, kde-format
 msgid "Delete A"
 msgstr "Διαγραφή του Α"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Delete B"
 msgstr "Διαγραφή του Β"
 
-#: directorymergewindow.cpp:2990
+#: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Delete A && B"
 msgstr "Διαγραφή των A && B"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2993
 #, kde-format
 msgid "Merge to A"
 msgstr "Συγχώνευση στο Α"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Merge to B"
 msgstr "Συγχώνευση στο Β"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Συγχώνευση σε A && B"

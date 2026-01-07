@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-07 00:47+0000\n"
 "PO-Revision-Date: 2025-11-20 10:57+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -530,7 +530,7 @@ msgid "This operation is currently not possible."
 msgstr "Това действие в момента не е възможно."
 
 #: directorymergewindow.cpp:1869 directorymergewindow.cpp:1894
-#: directorymergewindow.cpp:1919 directorymergewindow.cpp:2200
+#: directorymergewindow.cpp:1919 directorymergewindow.cpp:2201
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Действието не е възможно"
@@ -540,7 +540,7 @@ msgstr "Действието не е възможно"
 msgid "An error occurred while copying."
 msgstr "По време на копирането е възникнала грешка."
 
-#: directorymergewindow.cpp:1967 directorymergewindow.cpp:2405
+#: directorymergewindow.cpp:1967 directorymergewindow.cpp:2407
 #, kde-format
 msgid "Merge Error"
 msgstr "Грешка при сливане"
@@ -620,7 +620,7 @@ msgstr ""
 "Подчертаният елемент е променен в едната папка, а е изтрит в другата. "
 "Изберете какво да направите."
 
-#: directorymergewindow.cpp:2200
+#: directorymergewindow.cpp:2201
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
@@ -629,7 +629,7 @@ msgstr ""
 "Тази операция в момента не е възможна, тъй като в момента се извършва "
 "сливане на папки."
 
-#: directorymergewindow.cpp:2257
+#: directorymergewindow.cpp:2258
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -640,35 +640,35 @@ msgstr ""
 "Искате ли да продължите с елемента, който е причинил тази грешка или ще го "
 "прескочите?"
 
-#: directorymergewindow.cpp:2259
+#: directorymergewindow.cpp:2260
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Продължаване на сливането след грешката"
 
-#: directorymergewindow.cpp:2260
+#: directorymergewindow.cpp:2261
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Продължаване с последния елемент"
 
-#: directorymergewindow.cpp:2261
+#: directorymergewindow.cpp:2262
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Прескачане на елемент"
 
-#: directorymergewindow.cpp:2355
+#: directorymergewindow.cpp:2356
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Операцията по сливане завърши."
 
-#: directorymergewindow.cpp:2355 directorymergewindow.cpp:2358
+#: directorymergewindow.cpp:2356 directorymergewindow.cpp:2359
 #, kde-format
 msgid "Merge Complete"
 msgstr "Сливането завърши"
 
-#: directorymergewindow.cpp:2368
+#: directorymergewindow.cpp:2370
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -676,51 +676,51 @@ msgstr ""
 "Симулацията на сливане завърши: Проверете дали сте съгласни с предложените "
 "действия."
 
-#: directorymergewindow.cpp:2404
+#: directorymergewindow.cpp:2406
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "Възникна грешка. Натиснете OK, за да видите подробна информация."
 
-#: directorymergewindow.cpp:2437
+#: directorymergewindow.cpp:2439
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr ""
 "Грешка: По време на изтриването на %1: Създаването на резервно копие беше "
 "неуспешно."
 
-#: directorymergewindow.cpp:2444
+#: directorymergewindow.cpp:2446
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "изтриване на папка рекурсивно( %1 )"
 
-#: directorymergewindow.cpp:2446
+#: directorymergewindow.cpp:2448
 #, kde-format
 msgid "delete( %1 )"
 msgstr "изтриване( %1 )"
 
-#: directorymergewindow.cpp:2462
+#: directorymergewindow.cpp:2464
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr ""
 "Грешка: операцията за изтриване на папка се провали, докато се опитваше да "
 "прочете папката."
 
-#: directorymergewindow.cpp:2478
+#: directorymergewindow.cpp:2480
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Грешка: операцията по изтриване на директория( %1 ) беше неуспешна."
 
-#: directorymergewindow.cpp:2488
+#: directorymergewindow.cpp:2490
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Грешка: операцията по изтриване беше неуспешна."
 
-#: directorymergewindow.cpp:2515
+#: directorymergewindow.cpp:2517
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "ръчно сливане( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2518
+#: directorymergewindow.cpp:2520
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
@@ -728,192 +728,192 @@ msgstr ""
 "     Забележка: След ръчно сливане, потребителят трябва да натисне клавиш "
 "F7, за да продължи."
 
-#: directorymergewindow.cpp:2545
+#: directorymergewindow.cpp:2547
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Грешка: копирането на ( %1 -> %2 ) беше неуспешно. Изтриването на "
 "съществуващото местоназначение е неуспешно."
 
-#: directorymergewindow.cpp:2554
+#: directorymergewindow.cpp:2556
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "копиране на препратка( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2563
+#: directorymergewindow.cpp:2565
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Грешка: копирането на препратка беше неуспешно: Отдалечени препратки не се "
 "поддържат."
 
-#: directorymergewindow.cpp:2573
+#: directorymergewindow.cpp:2575
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Грешка: копирането на препратка беше неуспешно."
 
-#: directorymergewindow.cpp:2596
+#: directorymergewindow.cpp:2598
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "копиране( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2622
+#: directorymergewindow.cpp:2624
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Грешка по време на преименуване( %1 -> %2 ): Изтриването на съществуващото "
 "местоназначение беше неуспешно."
 
-#: directorymergewindow.cpp:2629
+#: directorymergewindow.cpp:2631
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "преименуване( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2638
+#: directorymergewindow.cpp:2640
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Грешка: Преименуването беше неуспешно."
 
-#: directorymergewindow.cpp:2656
+#: directorymergewindow.cpp:2658
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "Грешка по време на създаване на директория %1. Не може да се изтрие "
 "съществуващ файл."
 
-#: directorymergewindow.cpp:2673
+#: directorymergewindow.cpp:2675
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "създаване на директория( %1 )"
 
-#: directorymergewindow.cpp:2683
+#: directorymergewindow.cpp:2685
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Грешка при създаването на папка."
 
-#: directorymergewindow.cpp:2719 directorymergewindow.cpp:2801
-#: directorymergewindow.cpp:2832
+#: directorymergewindow.cpp:2721 directorymergewindow.cpp:2803
+#: directorymergewindow.cpp:2834
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Местоназначение: "
 
-#: directorymergewindow.cpp:2727 directorymergewindow.cpp:2755
+#: directorymergewindow.cpp:2729 directorymergewindow.cpp:2757
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Папка"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2729
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Вид"
 
-#: directorymergewindow.cpp:2727
+#: directorymergewindow.cpp:2729
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Размер"
 
-#: directorymergewindow.cpp:2728
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Атрибути"
 
-#: directorymergewindow.cpp:2728
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Последна промяна"
 
-#: directorymergewindow.cpp:2728
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Местоназначение на препратката"
 
-#: directorymergewindow.cpp:2755
+#: directorymergewindow.cpp:2757
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "Файл"
 
-#: directorymergewindow.cpp:2755
+#: directorymergewindow.cpp:2757
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Препратка"
 
-#: directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2763
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "не е наличен"
 
-#: directorymergewindow.cpp:2775
+#: directorymergewindow.cpp:2777
 #, kde-format
 msgid "A (Dest): "
 msgstr "А (местоназначение): "
 
-#: directorymergewindow.cpp:2779
+#: directorymergewindow.cpp:2781
 #, kde-format
 msgid "A:    "
 msgstr "A: "
 
-#: directorymergewindow.cpp:2779
+#: directorymergewindow.cpp:2781
 #, kde-format
 msgid "A (Base): "
 msgstr "А (основно): "
 
-#: directorymergewindow.cpp:2785
+#: directorymergewindow.cpp:2787
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (местоназначение): "
 
-#: directorymergewindow.cpp:2789
+#: directorymergewindow.cpp:2791
 #, kde-format
 msgid "B:    "
 msgstr "B: "
 
-#: directorymergewindow.cpp:2794
+#: directorymergewindow.cpp:2796
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (местоназначение): "
 
-#: directorymergewindow.cpp:2798
+#: directorymergewindow.cpp:2800
 #, kde-format
 msgid "C:    "
 msgstr "C: "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2842
+#: directorymergewindow.cpp:2844
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Запазване на състоянието на сливане на папки като..."
 
-#: directorymergewindow.cpp:2949
+#: directorymergewindow.cpp:2951
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Стартиране/Продължаване на сливането на папки"
 
-#: directorymergewindow.cpp:2950
+#: directorymergewindow.cpp:2952
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Стартиране на операцията за текущия елемент"
 
-#: directorymergewindow.cpp:2951
+#: directorymergewindow.cpp:2953
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Сравняване на маркираните файлове"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Merge Current File"
 msgstr "Сливане на текущия файл"
 
-#: directorymergewindow.cpp:2952
+#: directorymergewindow.cpp:2954
 #, kde-format
 msgid ""
 "Merge\n"
@@ -922,56 +922,56 @@ msgstr ""
 "Сливане\n"
 "на файл"
 
-#: directorymergewindow.cpp:2953
+#: directorymergewindow.cpp:2955
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Сгънете всички подпапки"
 
-#: directorymergewindow.cpp:2954
+#: directorymergewindow.cpp:2956
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Разгъване на всички подпапки"
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2957
 #, kde-format
 msgid "Rescan"
 msgstr "Ново сканиране"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2960
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Изберете А за всички елементи"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2961
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Изберете B за всички елементи"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2962
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Изберете C за всички елементи"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:2963
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Автоматично избиране на операция за всички елементи"
 
-#: directorymergewindow.cpp:2962
+#: directorymergewindow.cpp:2964
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Без операция за всички елементи"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Показване на идентични файлове"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:2969
 #, kde-format
 msgid ""
 "Identical\n"
@@ -980,17 +980,17 @@ msgstr ""
 "Идентични\n"
 "файлове"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:2970
 #, kde-format
 msgid "Show Different Files"
 msgstr "Показване на различните файлове"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Показване на файлове само в A"
 
-#: directorymergewindow.cpp:2969
+#: directorymergewindow.cpp:2971
 #, kde-format
 msgid ""
 "Files\n"
@@ -999,12 +999,12 @@ msgstr ""
 "Файлове\n"
 "само в A"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Показване на файлове само в B"
 
-#: directorymergewindow.cpp:2970
+#: directorymergewindow.cpp:2972
 #, kde-format
 msgid ""
 "Files\n"
@@ -1013,12 +1013,12 @@ msgstr ""
 "Файлове\n"
 "само в B"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Показване на файлове само в C"
 
-#: directorymergewindow.cpp:2971
+#: directorymergewindow.cpp:2973
 #, kde-format
 msgid ""
 "Files\n"
@@ -1027,68 +1027,68 @@ msgstr ""
 "Файлове\n"
 "само в C"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:2977
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Сравняване на маркираните файлове"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:2978
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Сливане на маркираните файлове"
 
-#: directorymergewindow.cpp:2978 directorymergewindow.cpp:2985
+#: directorymergewindow.cpp:2980 directorymergewindow.cpp:2987
 #, kde-format
 msgid "Do Nothing"
 msgstr "Да не се прави нищо"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2982 opendialog.ui:68
+#: directorymergewindow.cpp:2984 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Сливане"
 
-#: directorymergewindow.cpp:2983
+#: directorymergewindow.cpp:2985
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Изтриване (ако съществува)"
 
-#: directorymergewindow.cpp:2986
+#: directorymergewindow.cpp:2988
 #, kde-format
 msgid "Copy A to B"
 msgstr "Копиране на А в B"
 
-#: directorymergewindow.cpp:2987
+#: directorymergewindow.cpp:2989
 #, kde-format
 msgid "Copy B to A"
 msgstr "Копиране на B в А"
 
-#: directorymergewindow.cpp:2988
+#: directorymergewindow.cpp:2990
 #, kde-format
 msgid "Delete A"
 msgstr "Изтриване на А"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:2991
 #, kde-format
 msgid "Delete B"
 msgstr "Изтриване на B"
 
-#: directorymergewindow.cpp:2990
+#: directorymergewindow.cpp:2992
 #, kde-format
 msgid "Delete A && B"
 msgstr "Изтриване на А и B"
 
-#: directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:2993
 #, kde-format
 msgid "Merge to A"
 msgstr "Сливане с А"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Merge to B"
 msgstr "Сливане с B"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Сливане в А и B"
