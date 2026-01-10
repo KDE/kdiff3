@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 # Turn off policy change notices from CMake 3.30 and earlier
-cmake_minimum_required(VERSION 3.22...3.30 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.22...3.30)
 
 project(kdiff3 VERSION 1.12.70)
 
