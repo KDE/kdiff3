@@ -1,23 +1,23 @@
 # Translation of kdiff3.po to Catalan (Valencian)
-# Copyright (C) 2011-2024 This_file_is_part_of_KDE
+# Copyright (C) 2011-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later
 #
 # SPDX-FileCopyrightText: 2011 Joan Maspons <joanmaspons@gmail.com>
 # SPDX-FileCopyrightText: 2014, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2024-10-25 19:43+0200\n"
+"PO-Revision-Date: 2026-01-09 11:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -389,7 +389,7 @@ msgstr "Continua fusionant"
 #: directorymergewindow.cpp:843
 #, kde-format
 msgid "Opening of folders failed:"
-msgstr "No s'ha pogut obrir les carpetes:"
+msgstr "Ha fallat mentre s'obrien les carpetes:"
 
 #: directorymergewindow.cpp:847
 #, kde-format
@@ -410,7 +410,7 @@ msgstr "La carpeta C «%1» no existix o no és una carpeta.\n"
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
-msgstr "S'ha produït un error en obrir la carpeta"
+msgstr "S'ha produït un error mentre s'obria la carpeta"
 
 #: directorymergewindow.cpp:868
 #, kde-format
@@ -534,7 +534,7 @@ msgstr "Operació no possible"
 #: directorymergewindow.cpp:1966
 #, kde-format
 msgid "An error occurred while copying."
-msgstr "S'ha produït un error en copiar."
+msgstr "S'ha produït un error mentre es copiava."
 
 #: directorymergewindow.cpp:1967 directorymergewindow.cpp:2405
 #, kde-format
@@ -633,7 +633,7 @@ msgid ""
 "Do you want to continue with the item that caused the error or do you want "
 "to skip this item?"
 msgstr ""
-"S'ha produït un error en l'últim pas.\n"
+"S'ha produït un error durant l'últim pas.\n"
 "Voleu continuar amb l'element que ha causat l'error o voleu ometre'l?"
 
 #: directorymergewindow.cpp:2259
@@ -682,8 +682,8 @@ msgstr ""
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr ""
-"S'ha produït un error: En suprimir %1: No s'ha pogut crear una còpia de "
-"seguretat."
+"S'ha produït un error: En suprimir %1: Ha fallat mentre es creava una còpia "
+"de seguretat."
 
 #: directorymergewindow.cpp:2444
 #, kde-format
@@ -699,8 +699,8 @@ msgstr "suprimix (%1)"
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr ""
-"S'ha produït un error: L'operació de supressió de la carpeta ha fallat en "
-"intentar llegir-la."
+"S'ha produït un error: L'operació de supressió de la carpeta ha fallat "
+"mentre s'intentava llegir."
 
 #: directorymergewindow.cpp:2478
 #, kde-format
@@ -760,8 +760,8 @@ msgstr "copia (%1 -> %2)"
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
-"S'ha produït un error en canviar de nom (%1 -> %2): No es pot suprimir la "
-"destinació existent."
+"S'ha produït un error mentre es canviava de nom (%1 -> %2): No es pot "
+"suprimir la destinació existent."
 
 #: directorymergewindow.cpp:2629
 #, kde-format
@@ -777,8 +777,8 @@ msgstr "S'ha produït un error: El canvi de nom ha fallat."
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
-"S'ha produït un error en crear la carpeta de %1. No es pot suprimir el "
-"fitxer existent."
+"S'ha produït un error mentre es creava la carpeta de %1. No es pot suprimir "
+"el fitxer existent."
 
 #: directorymergewindow.cpp:2673
 #, kde-format
@@ -788,7 +788,7 @@ msgstr "crea la carpeta (%1)"
 #: directorymergewindow.cpp:2683
 #, kde-format
 msgid "Error while creating folder."
-msgstr "S'ha produït un error en crear la carpeta."
+msgstr "S'ha produït un error mentre es creava la carpeta."
 
 #: directorymergewindow.cpp:2719 directorymergewindow.cpp:2833
 #, kde-format
@@ -1103,7 +1103,7 @@ msgstr "No s'ha pogut determinar l'URL complet. No s'ha especificat cap pare."
 #: fileaccess.cpp:800
 #, kde-format
 msgid "Failed to read file: %1"
-msgstr "No s'ha pogut llegir el fitxer: %1"
+msgstr "Ha fallat mentre es llegia el fitxer: %1"
 
 #: fileaccess.cpp:947
 #, kde-format
@@ -1118,7 +1118,7 @@ msgstr "No s'ha pogut fer l'obertura de %1. %2"
 #: fileaccess.cpp:982 fileaccess.cpp:990
 #, kde-format
 msgid "Error reading from %1. %2"
-msgstr "S'ha produït un error en llegir des de %1. %2"
+msgstr "S'ha produït un error mentre es llegia des de %1. %2"
 
 #: fileaccess.cpp:1121
 #, kde-format
@@ -1126,8 +1126,8 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"No s'ha pogut suprimir una còpia de seguretat quan s'intentava fer-ne una de "
-"nova.\n"
+"Ha fallat mentre se suprimia una còpia de seguretat quan s'intentava fer-ne "
+"una de nova.\n"
 "Nom de fitxer: %1"
 
 #: fileaccess.cpp:1128
@@ -1215,12 +1215,12 @@ msgstr "La guardada ha fallat."
 #: kdiff3.cpp:719 pdiff.cpp:795
 #, kde-format
 msgid "Opening of these files failed:"
-msgstr "No s'ha pogut obrir estos fitxers:"
+msgstr "Ha fallat mentre s'obrien estos fitxers:"
 
 #: kdiff3.cpp:728 pdiff.cpp:804
 #, kde-format
 msgid "File open error"
-msgstr "S'ha produït un error en obrir el fitxer"
+msgstr "S'ha produït un error mentre s'obria el fitxer"
 
 #: kdiff3.cpp:768
 #, kde-format
@@ -1650,7 +1650,7 @@ msgstr "Ix sense guardar"
 #: kdiff3.cpp:934 pdiff.cpp:1533
 #, kde-format
 msgid "Saving the merge result failed."
-msgstr "No s'ha pogut guardar el resultat de la fusió."
+msgstr "Ha fallat mentre es guardava el resultat de la fusió."
 
 #: kdiff3.cpp:945 pdiff.cpp:729
 #, kde-format
@@ -2082,12 +2082,12 @@ msgstr ""
 #: mergeresultwindow.cpp:2679 mergeresultwindow.cpp:2722
 #, kde-format
 msgid "File Save Error"
-msgstr "S'ha produït un error en guardar el fitxer"
+msgstr "S'ha produït un error mentre es guardava el fitxer"
 
 #: mergeresultwindow.cpp:2722
 #, kde-format
 msgid "Error while writing."
-msgstr "S'ha produït un error en escriure."
+msgstr "S'ha produït un error mentre s'escrivia."
 
 #: mergeresultwindow.cpp:2802
 #, kde-format
@@ -3452,7 +3452,8 @@ msgstr "No hi ha res seleccionat en cap de les finestres de diferències."
 #: pdiff.cpp:1897
 #, kde-format
 msgid "Error while adding manual diff range"
-msgstr "S'ha produït un error en afegir un interval manual de diferències"
+msgstr ""
+"S'ha produït un error mentre s'afegia un interval manual de diferències"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
 #: progress.cpp:56 progressdialog.ui:100
@@ -3672,7 +3673,7 @@ msgstr ""
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
-msgstr "No s'ha pogut llegir el fitxer: %1"
+msgstr "Ha fallat mentre es llegia el fitxer: %1"
 
 #: StandardMenus.cpp:23
 #, kde-format
@@ -3737,7 +3738,7 @@ msgstr "S'esperava un espai després de tancar una cometa."
 #: Utils.cpp:76
 #, kde-format
 msgid "Unmatched quote."
-msgstr "Cometa sense emparellar."
+msgstr "Cometa sense aparellar."
 
 #: Utils.cpp:85
 #, kde-format
