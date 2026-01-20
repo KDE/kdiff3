@@ -2,7 +2,7 @@
 # Author: Artnay
 # Author: Lliehu
 # Author: Niklas Laxström
-# SPDX-FileCopyrightText: 2012, 2013, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2012, 2013, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2012, 2013, 2014, 2016.
 # Tommi Nieminen <translator@legisign.org>, 2024.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-07 00:47+0000\n"
-"PO-Revision-Date: 2025-06-24 13:53+0300\n"
+"PO-Revision-Date: 2026-01-10 20:52+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -162,9 +162,7 @@ msgid "Line end style: %1"
 msgstr "Rivinlopetustapa: %1"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgctxt "@item:intext line ending style not recongized"
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -3113,12 +3111,7 @@ msgid "File Encoding for A:"
 msgstr "A-tiedoston koodaus:"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
@@ -3126,8 +3119,7 @@ msgid ""
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 "Jos asetettu, merkistö tunnistetaan automaattisesti.\n"
-"Ellei merkistö löydy automaattissti, tässä tehtyä valintaa käytetään "
-"varalla.\n"
+"Ellei merkistöä löydy automaattisesti, tässä valittua käytetään varalla.\n"
 "(Unicode-tunnistus tapahtuu tiedoston ensitavuista.)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
