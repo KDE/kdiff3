@@ -61,7 +61,7 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
-# 1.84 drops problematic pre-c++11.
+# 1.84+ drops problematic pre-c++11 support and is preferred on linux and required for OS X.
 # KDiff3 has hard coded BOOST_NO_CXX98_FUNCTION_BASE to compensate for a known issue.
 # While this allows compiling with older boost versions we can not use pre-built binaries from boost only the headers.
 find_package(Boost 1.83 REQUIRED)
