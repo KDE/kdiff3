@@ -57,17 +57,9 @@
 QPointer<QScrollBar> DiffTextWindow::mVScrollBar = nullptr;
 std::vector<RecalcWordWrapThread*> DiffTextWindow::s_runnables; //Used in startRunnables and recalWordWrap
 
-/*
-    QRunnable is not enough here. It may appear to work depending on configuration.
-    That is an artifact of the threads being short-lived. Never the less such code is
-    not safe because of a potenial race condition on exit.
-
-    The use of Qt's parent system establishes order of destruction for QObjects.
-    Allowing us to guarantee clearance of these helper threads and their accompanying
-    objects before the associated DiffTextWindow begins teardown.
-*/
-class RecalcWordWrapThread: public QThread
+class RecalcWordWrapRunner : public QObject
 {
+    Q_OBJECT
   private:
     static QAtomicInteger<size_t> s_runnableCount;
 
@@ -76,40 +68,38 @@ class RecalcWordWrapThread: public QThread
 
   public:
     static QAtomicInteger<size_t> s_maxNofRunnables;
-    RecalcWordWrapThread(DiffTextWindow* parent, qint32 visibleTextWidth, SafeInt<size_t> cacheIdx):
-        QThread(parent), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
+    Q_SIGNAL void recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
+    Q_SIGNAL void finishRecalcWordWrap(qint32 visibleTextWidthForPrinting);
+
+    RecalcWordWrapRunner(DiffTextWindow* parent, qint32 visibleTextWidth, SafeInt<size_t> cacheIdx) : QObject(parent), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
-        setTerminationEnabled(true);
         s_runnableCount.fetchAndAddOrdered(1);
     }
-    void run() override
+    void connect()
     {
-        //safe thanks to Qt memory mangement
         DiffTextWindow* pDTW = qobject_cast<DiffTextWindow*>(parent());
 
-        pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
+        chk_connect_a(this, &RecalcWordWrapRunner::recalcWordWrapHelper, pDTW, &DiffTextWindow::recalcWordWrapHelper);
+        chk_connect_a(this, &RecalcWordWrapRunner::finishRecalcWordWrap, pDTW, &DiffTextWindow::fwdFinishRecalcWordWrap);
+    }
+    void run()
+    {
+        Q_EMIT recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         size_t newValue = s_runnableCount.fetchAndSubOrdered(1) - 1;
         ProgressProxy::setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
-            Q_EMIT pDTW->finishRecalcWordWrap(m_visibleTextWidth);
+            Q_EMIT finishRecalcWordWrap(m_visibleTextWidth);
 
             s_maxNofRunnables.storeRelease(0);
         }
         //Cleanup our object to avoid a memory leak
         deleteLater();
     }
-
-    ~RecalcWordWrapThread() override
-    {
-        //Wait for thread to finish.
-        if(isRunning())
-            wait();
-    }
 };
 
-QAtomicInteger<size_t> RecalcWordWrapThread::s_runnableCount = 0;
-QAtomicInteger<size_t> RecalcWordWrapThread::s_maxNofRunnables = 0;
+QAtomicInteger<size_t> RecalcWordWrapRunner::s_runnableCount = 0;
+QAtomicInteger<size_t> RecalcWordWrapRunner::s_maxNofRunnables = 0;
 
 class WrapLineCacheData
 {
@@ -283,7 +273,7 @@ class DiffTextWindowData
 
 QAtomicInteger<size_t> DiffTextWindow::maxThreads()
 {
-    return RecalcWordWrapThread::s_maxNofRunnables.loadAcquire();
+    return RecalcWordWrapRunner::s_maxNofRunnables.loadAcquire();
 }
 
 void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData)
@@ -422,6 +412,11 @@ void DiffTextWindow::slotCopy()
     {
         QApplication::clipboard()->setText(curSelection, QClipboard::Clipboard);
     }
+}
+
+void DiffTextWindow::fwdFinishRecalcWordWrap(qint32 visibleTextWidthForPrinting)
+{
+    Q_EMIT finishRecalcWordWrap(visibleTextWidthForPrinting);
 }
 
 void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)
@@ -1701,7 +1696,7 @@ void DiffTextWindow::convertSelectionToD3LCoords() const
 
 bool DiffTextWindow::startRunnables()
 {
-    assert(RecalcWordWrapThread::s_maxNofRunnables == 0);
+    assert(RecalcWordWrapRunner::s_maxNofRunnables == 0);
 
     if(s_runnables.size() == 0)
     {
@@ -1712,12 +1707,12 @@ bool DiffTextWindow::startRunnables()
         g_pProgressDialog->setStayHidden(true);
         ProgressProxy::startBackgroundTask();
         g_pProgressDialog->setMaxNofSteps(s_runnables.size());
-        RecalcWordWrapThread::s_maxNofRunnables = s_runnables.size();
+        RecalcWordWrapRunner::s_maxNofRunnables = s_runnables.size();
         g_pProgressDialog->setCurrent(0);
 
         for(size_t i = 0; i < s_runnables.size(); ++i)
         {
-            s_runnables[i]->start();
+            s_runnables[i]->run();
         }
 
         s_runnables.clear();
@@ -1746,8 +1741,11 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, size_t wrapLineVectorSize, q
             setUpdatesEnabled(false);
             for(size_t i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
+                RecalcWordWrapRunner* p = new RecalcWordWrapRunner(this, visibleTextWidth, j);
+                p->connect();
+
                 d->m_wrapLineCacheList.push_back(std::vector<WrapLineCacheData>());
-                s_runnables.push_back(new RecalcWordWrapThread(this, visibleTextWidth, j));
+                s_runnables.push_back(p);
             }
         }
         else
@@ -1765,7 +1763,10 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, size_t wrapLineVectorSize, q
             setUpdatesEnabled(false);
             for(size_t i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
-                s_runnables.push_back(new RecalcWordWrapThread(this, visibleTextWidth, j));
+                RecalcWordWrapRunner* p = new RecalcWordWrapRunner(this, visibleTextWidth, j);
+                p->connect();
+
+                s_runnables.push_back(p);
             }
         }
         else
@@ -2214,3 +2215,5 @@ void EncodingLabel::slotSelectEncoding()
         Q_EMIT encodingChanged(codecName);
     }
 }
+
+#include "difftextwindow.moc"

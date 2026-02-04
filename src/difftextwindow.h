@@ -34,7 +34,7 @@ class QMenu;
 class QPushButton;
 class QScrollBar;
 class QStatusBar;
-class RecalcWordWrapThread;
+class RecalcWordWrapRunner;
 class Options;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
@@ -92,7 +92,6 @@ class DiffTextWindow: public QWidget
 
     void setPaintingAllowed(bool bAllowPainting);
     void recalcWordWrap(bool bWordWrap, size_t wrapLineVectorSize, qint32 visibleTextWidth);
-    void recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, qint32 line, const LineType linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, qint32 firstLine, const LineType nofLinesPerPage);
@@ -142,6 +141,9 @@ class DiffTextWindow: public QWidget
     void slotSelectAll();
 
     void slotCopy();
+
+    void fwdFinishRecalcWordWrap(qint32 visibleTextWidthForPrinting);
+    void recalcWordWrapHelper(size_t wrapLineVectorSize, qint32 visibleTextWidth, size_t cacheListIdx);
 
   protected:
     void mousePressEvent(QMouseEvent*) override;
