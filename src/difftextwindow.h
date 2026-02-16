@@ -163,7 +163,7 @@ class DiffTextWindow: public QWidget
     void timerEvent(QTimerEvent*) override;
 
   private:
-    static std::vector<RecalcWordWrapThread*> s_runnables;
+    static std::vector<RecalcWordWrapRunner*> s_runnables;
     static constexpr qint32 s_linesPerRunnable = 2000;
 
     /*
