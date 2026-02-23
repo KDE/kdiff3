@@ -80,16 +80,7 @@ if(APPLE)
   set(MACOSX_BUNDLE_COPYRIGHT "2003- The KDiff3 Authors")
 endif()
 
-if(ENABLE_GDBINDEX AND "${CMAKE_SYSTEM_NAME}" MATCHES "Linux" AND "${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-    find_program(GDBINDEX "gdb-add-index")
-    if(GDBINDEX)
-        add_custom_command(TARGET kdiff3 POST_BUILD
-            COMMAND "${GDBINDEX}" kdiff3
-            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-            COMMENT "Running GDB indexing..."
-        )
-    endif()
-endif()
+
 
 install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
