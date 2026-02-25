@@ -63,9 +63,9 @@ target_link_libraries(kdiff3 ICU::uc Qt::PrintSupport KF${KF_MAJOR_VERSION}::Con
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)
-  set_target_properties(kdiff3 PROPERTIES
-    MACOSX_BUNDLE TRUE
-    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in
+  set_property(
+    TARGET kdiff3
+    PROPERTY MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in
   )
 
   # These are substituted by CMake into plist.in.
