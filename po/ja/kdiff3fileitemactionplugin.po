@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: kdiff3fileitemactionplugin\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2011-05-06 23:50-0700\n"
-"Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2026-03-19 00:19+0900\n"
+"Last-Translator: coolvitto\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -13,71 +13,72 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
+"X-Generator: Poedit 3.8\n"
 
 #: kdiff3fileitemaction.cpp:81
 #, kde-format
 msgctxt "Contexualmenu title"
 msgid "KDiff3..."
-msgstr ""
+msgstr "KDiff3..."
 
 #: kdiff3fileitemaction.cpp:106
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "Compare with %1"
-msgstr ""
+msgstr "%1 と比較"
 
 #: kdiff3fileitemaction.cpp:112
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "Merge with %1"
-msgstr ""
+msgstr "%1 とマージ"
 
 #: kdiff3fileitemaction.cpp:118
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "Save '%1' for later"
-msgstr ""
+msgstr "'%1' を後で使用用に保存"
 
 #: kdiff3fileitemaction.cpp:124
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "3-way merge with base"
-msgstr ""
+msgstr "ベースとの 3方向マージ"
 
 #: kdiff3fileitemaction.cpp:131
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "Compare with..."
-msgstr ""
+msgstr "比較対象..."
 
 #: kdiff3fileitemaction.cpp:144
 #, kde-format
 msgctxt "Contexualmenu option to cleat comparison list"
 msgid "Clear list"
-msgstr ""
+msgstr "リストを消去"
 
 #: kdiff3fileitemaction.cpp:152
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "Compare"
-msgstr ""
+msgstr "比較"
 
 #: kdiff3fileitemaction.cpp:158
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "3 way comparison"
-msgstr ""
+msgstr "3方向比較"
 
 #: kdiff3fileitemaction.cpp:162
 #, kde-format
 msgctxt "Contexualmenu option"
 msgid "About KDiff3 menu plugin..."
-msgstr ""
+msgstr "KDiff3 メニュープラグインについて..."
 
 #: kdiff3fileitemaction.cpp:273
 #, kde-format
 msgid "KDiff3 File Item Action Plugin: Copyright ©2011 Joachim Eibl\n"
-msgstr ""
+msgstr "KDiff3 File Item Action Plugin: Copyright ©2011 Joachim Eibl\n"
 
 #: kdiff3fileitemaction.cpp:274
 #, kde-format
@@ -92,8 +93,18 @@ msgid ""
 "destination.\n"
 "Same also applies to folder comparison and merge."
 msgstr ""
+"コンテキストメニュー拡張機能の使用方法 :\n"
+"2ファイルの簡単比較 : 選択した2つのファイルで「比較」を選択してください。\n"
+"もう一方のファイルが別にある場合 : 1番目のファイルを「保存」してください(後で"
+"使用用)。「比較対象...」サブメニューに表示されます。\n"
+"2番目のファイルで「...と比較」を使用してください。\n"
+"3方向マージの場合 :\n"
+"ベースファイルを「保存」\n"
+"マージするブランチを「保存」\n"
+"宛先ブランチで「ベース付き3方向マージ」を選択\n"
+"フォルダーの比較/マージも同様です。"
 
 #: kdiff3fileitemaction.cpp:282
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
-msgstr ""
+msgstr "KDiff3 エクスプローラー統合プラグインについて"
