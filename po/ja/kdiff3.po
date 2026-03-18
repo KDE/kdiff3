@@ -2,13 +2,14 @@
 # SATOH Satoru <ss@kde.gr.jp>, 2004.
 # Yukiko Bando <ybando@k6.dion.ne.jp>, 2008.
 # Fumiaki Okushi <okushi@kde.gr.jp>, 2010.
+# coolvitto. 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-27 00:47+0000\n"
-"PO-Revision-Date: 2010-10-03 21:09-0700\n"
-"Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
+"PO-Revision-Date: 2026-03-19 02:54+0900\n"
+"Last-Translator: coolvitto\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "SATOH Satoru,Yukiko Bando"
+msgstr "SATOH Satoru,Yukiko Bando,Fumiaki Okushi,coolvitto"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -34,15 +36,13 @@ msgid "Getting file status: %1"
 msgstr "ファイルの状態を取得中: %1"
 
 #: DefaultFileAccessJobHandler.cpp:111
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "ファイルを読み込み中: %1"
 
 #: DefaultFileAccessJobHandler.cpp:155
-#, fuzzy, kde-format
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "ファイルに書き込み中: %1"
@@ -53,22 +53,19 @@ msgid "Out of memory"
 msgstr "メモリが足りません"
 
 #: DefaultFileAccessJobHandler.cpp:233
-#, fuzzy, kde-format
-#| msgid "Making directory: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr "ディレクトリを作成中: %1"
+msgstr "フォルダーを作成中: %1"
 
 #: DefaultFileAccessJobHandler.cpp:257
-#, fuzzy, kde-format
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "ファイルを削除中: %1"
 
 #: DefaultFileAccessJobHandler.cpp:275
-#, fuzzy, kde-format
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "ファイルを削除中: %1"
@@ -89,8 +86,7 @@ msgid "Copying file: %1 -> %2"
 msgstr "ファイルをコピー中: %1 -> %2"
 
 #: DefaultFileAccessJobHandler.cpp:390
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading folder: %1"
 msgstr "ファイルを読み込み中: %1"
@@ -98,7 +94,7 @@ msgstr "ファイルを読み込み中: %1"
 #: DefaultFileAccessJobHandler.cpp:448
 #, kde-format
 msgid "Listing directory: %1"
-msgstr "ディレクトリの内容一覧を作成中: %1"
+msgstr "フォルダーの内容一覧を作成中: %1"
 
 #: diff.cpp:1594 diff.cpp:1610
 #, kde-format
@@ -117,72 +113,64 @@ msgstr "深刻な内部エラー"
 #: difftextwindow.cpp:640
 #, kde-format
 msgid "File %1: Line %2"
-msgstr ""
+msgstr "ファイル %1: 行 %2"
 
 #: difftextwindow.cpp:642
-#, fuzzy, kde-format
-#| msgid "Line not available"
+#, kde-format
 msgid "File %1: Line not available"
-msgstr "行がありません"
+msgstr "ファイル %1: 行がありません"
 
 #: difftextwindow.cpp:1964
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "エンコーディング:"
 
 #: difftextwindow.cpp:1968
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "改行コード:"
 
 #: difftextwindow.cpp:1993
-#, fuzzy, kde-format
-#| msgid "A (Base):"
+#, kde-format
 msgid "A (Base)"
 msgstr "A (ベース):"
 
 #: difftextwindow.cpp:1995
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr "エンコーディング:"
+msgstr "エンコーディング: %1"
 
 #: difftextwindow.cpp:1996
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:1996
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:1996
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "改行コード:"
+msgstr "改行コード: %1"
 
 #: difftextwindow.cpp:1997
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 #: difftextwindow.cpp:2025 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
-msgstr "上部行"
+msgstr "先頭行"
 
 #: difftextwindow.cpp:2035
 #, kde-format
@@ -190,10 +178,9 @@ msgid "End"
 msgstr "最後"
 
 #: difftextwindow.cpp:2091 smalldialogs.cpp:163
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgid "Open File"
-msgstr "ファイルを開いています..."
+msgstr "ファイルを開く"
 
 #: difftextwindow.cpp:2137 optiondialog.cpp:387
 #, kde-format
@@ -201,339 +188,291 @@ msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 ビット"
 
 #: difftextwindow.cpp:2138
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
-msgstr "Unicode, 8 ビット"
+msgstr "Unicode, 8 bit (BOM)"
 
 #: difftextwindow.cpp:2139
 #, kde-format
 msgid "System"
-msgstr ""
+msgstr "システム"
 
 #: difftextwindow.cpp:2151
 #, kde-format
 msgid "Other"
-msgstr ""
+msgstr "その他"
 
 #: directorymergewindow.cpp:416
-#, fuzzy, kde-format
-#| msgid "Copy A to B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
 msgstr "A を B にコピー"
 
 #: directorymergewindow.cpp:419
-#, fuzzy, kde-format
-#| msgid "Copy B to A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
 msgstr "B を A にコピー"
 
 #: directorymergewindow.cpp:422
-#, fuzzy, kde-format
-#| msgid "Delete A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
 msgstr "A を削除"
 
 #: directorymergewindow.cpp:425
-#, fuzzy, kde-format
-#| msgid "Delete B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
 msgstr "B を削除"
 
 #: directorymergewindow.cpp:428
-#, fuzzy, kde-format
-#| msgid "Delete A & B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete A & B"
 msgstr "A と B を削除"
 
 #: directorymergewindow.cpp:431
-#, fuzzy, kde-format
-#| msgid "Merge to A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
 msgstr "A にマージ"
 
 #: directorymergewindow.cpp:434
-#, fuzzy, kde-format
-#| msgid "Merge to B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
 msgstr "B にマージ"
 
 #: directorymergewindow.cpp:437
-#, fuzzy, kde-format
-#| msgid "Merge to A & B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A & B"
 msgstr "A と B にマージ"
 
 #: directorymergewindow.cpp:449
-#, fuzzy, kde-format
-#| msgid "Delete (if exists)"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
-msgstr "(存在すれば) 削除"
+msgstr "削除 (存在すれば)"
 
 #: directorymergewindow.cpp:453
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
 msgstr "マージ"
 
 #: directorymergewindow.cpp:453
-#, fuzzy, kde-format
-#| msgid "Merge (manual)"
+#, kde-format
 msgctxt "Operation column message (File merge)"
 msgid "Merge (manual)"
-msgstr "マージ (手作業)"
+msgstr "マージ (手動)"
 
 #: directorymergewindow.cpp:456
-#, fuzzy, kde-format
-#| msgid "Error: Conflicting File Types"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Error: Conflicting File Types"
-msgstr "エラー: ファイルタイプが衝突しています"
+msgstr "エラー: ファイルタイプの競合"
 
 #: directorymergewindow.cpp:459
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Changed and Deleted"
-msgstr ""
+msgstr "エラー: 変更および削除"
 
 #: directorymergewindow.cpp:462
-#, fuzzy, kde-format
-#| msgid "Error: Dates are equal but files are not."
+#, kde-format
 msgctxt "Operation column message"
 msgid "Error: Dates are equal but files are not."
 msgstr "エラー: 日付は同じですが、ファイルは等しくありません。"
 
 #: directorymergewindow.cpp:476
-#, fuzzy, kde-format
-#| msgid "Done."
+#, kde-format
 msgctxt "Status column message"
 msgid "Done"
 msgstr "完了"
 
 #: directorymergewindow.cpp:478
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgctxt "Status column message"
 msgid "Error"
 msgstr "エラー"
 
 #: directorymergewindow.cpp:480
-#, fuzzy, kde-format
-#| msgid "Skipped."
+#, kde-format
 msgctxt "Status column message"
 msgid "Skipped."
 msgstr "スキップしました。"
 
 #: directorymergewindow.cpp:482
-#, fuzzy, kde-format
-#| msgid "Not saved."
+#, kde-format
 msgctxt "Status column message"
 msgid "Not saved."
-msgstr "未保存"
+msgstr "未保存。"
 
 #: directorymergewindow.cpp:484
-#, fuzzy, kde-format
-#| msgid "In progress..."
+#, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
 msgstr "進行中..."
 
 #: directorymergewindow.cpp:486
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Status column message"
 msgid "To do."
 msgstr "To do."
 
 #: directorymergewindow.cpp:526
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "Column title"
 msgid "Name"
 msgstr "名前"
 
 #: directorymergewindow.cpp:534
-#, fuzzy, kde-format
-#| msgid "Operation"
+#, kde-format
 msgctxt "Column title"
 msgid "Operation"
 msgstr "操作"
 
 #: directorymergewindow.cpp:536
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "Column title"
 msgid "Status"
 msgstr "状態"
 
 #: directorymergewindow.cpp:538
-#, fuzzy, kde-format
-#| msgid "Unsolved"
+#, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
 msgstr "未解決"
 
 #: directorymergewindow.cpp:540
-#, fuzzy, kde-format
-#| msgid "Solved"
+#, kde-format
 msgctxt "Column title"
 msgid "Solved"
 msgstr "解決済み"
 
 #: directorymergewindow.cpp:542
-#, fuzzy, kde-format
-#| msgid "Nonwhite"
+#, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr "ホワイトスペース以外"
+msgstr "空白以外"
 
 #: directorymergewindow.cpp:544
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "Column title"
 msgid "White"
-msgstr "ホワイトスペース"
+msgstr "空白"
 
 #: directorymergewindow.cpp:691
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are currently doing a directory merge. Are you sure, you want to "
-#| "abort the merge and rescan the directory?"
+#, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort the "
 "merge and rescan the folder?"
 msgstr ""
-"ディレクトリマージを実行中です。本当にマージを中止し、ディレクトリを再スキャ"
-"ンしますか？"
+"フォルダーマージを実行中です。本当にマージを中止し、フォルダーを再スキャンし"
+"ますか？"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
 #: mergeresultwindow.cpp:305 pdiff.cpp:727 pdiff.cpp:1520 pdiff.cpp:1530
-#, fuzzy, kde-format
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "警告"
 
 #: directorymergewindow.cpp:693
-#, fuzzy, kde-format
-#| msgid "Rescan"
+#, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "再スキャン"
 
 #: directorymergewindow.cpp:694
-#, fuzzy, kde-format
-#| msgid "Continue Merging"
+#, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "マージを続行"
 
 #: directorymergewindow.cpp:843
-#, fuzzy, kde-format
-#| msgid "Opening of directories failed:"
+#, kde-format
 msgid "Opening of folders failed:"
-msgstr "ディレクトリを開けませんでした:"
+msgstr "フォルダーを開けませんでした:"
 
 #: directorymergewindow.cpp:847
-#, fuzzy, kde-format
-#| msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+#, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
-msgstr "ディレクトリ A ‘%1’ は存在しないか、ディレクトリではありません。\n"
+msgstr "フォルダー A ‘%1’ は存在しないか、フォルダーではありません。\n"
 
 #: directorymergewindow.cpp:852
-#, fuzzy, kde-format
-#| msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+#, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
-msgstr "ディレクトリ B ‘%1’ は存在しないか、ディレクトリではありません。\n"
+msgstr "フォルダー B ‘%1’ は存在しないか、フォルダーではありません。\n"
 
 #: directorymergewindow.cpp:857
-#, fuzzy, kde-format
-#| msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+#, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
-msgstr "ディレクトリ C ‘%1’ は存在しないか、ディレクトリではありません。\n"
+msgstr "フォルダー C ‘%1’ は存在しないか、フォルダーではありません。\n"
 
 #: directorymergewindow.cpp:860
-#, fuzzy, kde-format
-#| msgid "File Open Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "ファイルのオープンエラー"
 
 #: directorymergewindow.cpp:868
-#, fuzzy, kde-format
-#| msgid ""
-#| "The destination directory must not be the same as A or B when three "
-#| "directories are merged.\n"
-#| "Check again before continuing."
+#, kde-format
 msgid ""
 "The destination folder must not be the same as A or B when three folders are "
 "merged.\n"
 "Check again before continuing."
 msgstr ""
-"3 つのディレクトリをマージする場合、マージ先ディレクトリは A や B と同じで"
-"あってはいけません。\n"
+"3 つのフォルダーをマージする場合、マージ先フォルダーは A や B と同じであって"
+"はいけません。\n"
 "続行する前にもう一度確認してください。"
 
 #: directorymergewindow.cpp:870
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "パラメータ警告"
 
 #: directorymergewindow.cpp:875
-#, fuzzy, kde-format
-#| msgid "Scanning directories..."
+#, kde-format
 msgid "Scanning folders..."
-msgstr "ディレクトリをスキャン中..."
+msgstr "フォルダーをスキャン中..."
 
 #: directorymergewindow.cpp:897
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder A"
-msgstr "ファイルを読み込み中: %1"
+msgstr "フォルダー A を読み込み中"
 
 #: directorymergewindow.cpp:906
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder B"
-msgstr "ファイルを読み込み中: %1"
+msgstr "フォルダー B を読み込み中"
 
 #: directorymergewindow.cpp:916
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Status message"
 msgid "Reading Folder C"
-msgstr "ファイルを読み込み中: %1"
+msgstr "フォルダー C を読み込み中"
 
 #: directorymergewindow.cpp:932
-#, fuzzy, kde-format
-#| msgid "Some subdirectories were not readable in"
+#, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
-msgstr "いくつかのサブディレクトリが読み込み不可でした"
+msgstr "いくつかのサブフォルダーが読み込み不可でした"
 
 #: directorymergewindow.cpp:937
-#, fuzzy, kde-format
-#| msgid "Check the permissions of the subdirectories."
+#, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
-msgstr "サブディレクトリのパーミッションを確認してください。"
+msgstr "サブフォルダーのパーミッションを確認してください。"
 
 #: directorymergewindow.cpp:960
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "準備完了。"
@@ -547,12 +486,16 @@ msgid ""
 "Number of equal files: %2\n"
 "Number of different files: %3"
 msgstr ""
+"フォルダー比較状況\n"
+"\n"
+"サブフォルダー数：%1\n"
+"同一ファイル数：%2\n"
+"異なるファイル数：%3"
 
 #: directorymergewindow.cpp:982
-#, fuzzy, kde-format
-#| msgid "Number of manual merges:"
+#, kde-format
 msgid "Number of manual merges: %1"
-msgstr "手作業でのマージ数:"
+msgstr "手作業でのマージ数: %1"
 
 #: directorymergewindow.cpp:1250
 #, kde-format
@@ -565,22 +508,23 @@ msgid "Changing All Merge Operations"
 msgstr "すべてのマージ操作を更新中"
 
 #: directorymergewindow.cpp:1328
-#, fuzzy, kde-format
-#| msgid "Processing "
+#, kde-format
 msgid ""
 "Processing %1 / %2\n"
 "%3"
-msgstr "処理中"
+msgstr ""
+"処理中 %1 / %2\n"
+"%3"
 
 #: directorymergewindow.cpp:1374 directorymergewindow.cpp:1378
 #, kde-format
 msgid "Some files could not be processed."
-msgstr ""
+msgstr "一部のファイルは処理できませんでした。"
 
 #: directorymergewindow.cpp:1381
 #, kde-format
 msgid "Aborting due to too many errors."
-msgstr ""
+msgstr "エラーが多すぎるため、処理を中止します。"
 
 #: directorymergewindow.cpp:1869 directorymergewindow.cpp:1894
 #: directorymergewindow.cpp:1919
@@ -595,10 +539,9 @@ msgid "Operation Not Possible"
 msgstr "操作不可"
 
 #: directorymergewindow.cpp:1966
-#, fuzzy, kde-format
-#| msgid "An error occurred while copying.\n"
+#, kde-format
 msgid "An error occurred while copying."
-msgstr "コピー中にエラーが発生しました。\n"
+msgstr "コピー中にエラーが発生しました。"
 
 #: directorymergewindow.cpp:1967 directorymergewindow.cpp:2407
 #, kde-format
@@ -637,37 +580,31 @@ msgstr ""
 "さい!重要なデータはバックアップを取ってください!"
 
 #: directorymergewindow.cpp:2108
-#, fuzzy, kde-format
-#| msgid "Starting Merge"
+#, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "マージ開始"
 
 #: directorymergewindow.cpp:2109
-#, fuzzy, kde-format
-#| msgid "Do It"
+#, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "実行"
 
 #: directorymergewindow.cpp:2110
-#, fuzzy, kde-format
-#| msgid "Simulate It"
+#, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "試行"
 
 #: directorymergewindow.cpp:2136
-#, fuzzy, kde-format
-#| msgid ""
-#| "The highlighted item has a different type in the different directories. "
-#| "Select what to do."
+#, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
 "what to do."
 msgstr ""
-"強調表示された項目はディレクトリによってタイプが違います。どうするか選択して"
-"ください。"
+"強調表示された項目はフォルダーによってタイプが違います。どうするか選択してく"
+"ださい。"
 
 #: directorymergewindow.cpp:2140
 #, kde-format
@@ -679,26 +616,20 @@ msgstr ""
 "てください。"
 
 #: directorymergewindow.cpp:2144
-#, fuzzy, kde-format
-#| msgid ""
-#| "The highlighted item was changed in one directory and deleted in the "
-#| "other. Select what to do."
+#, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
 "Select what to do."
 msgstr ""
-"強調表示された項目は一方のディレクトリで変更され、他方のディレクトリで削除さ"
-"れました。どうするか選択してください。"
+"強調表示された項目は一方のフォルダーで変更され、他方のフォルダーで削除されま"
+"した。どうするか選択してください。"
 
 #: directorymergewindow.cpp:2201
-#, fuzzy, kde-format
-#| msgid ""
-#| "This operation is currently not possible because directory merge is "
-#| "currently running."
+#, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
-msgstr "ディレクトリマージ中なのでこの操作を実行することはできません。"
+msgstr "フォルダーマージ中なのでこの操作を実行することはできません。"
 
 #: directorymergewindow.cpp:2258
 #, kde-format
@@ -712,22 +643,19 @@ msgstr ""
 
 # @title:window?
 #: directorymergewindow.cpp:2260
-#, fuzzy, kde-format
-#| msgid "Continue merge after an error"
+#, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "エラー後のマージ続行"
 
 #: directorymergewindow.cpp:2261
-#, fuzzy, kde-format
-#| msgid "Continue With Last Item"
+#, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "最後の項目について続行"
 
 #: directorymergewindow.cpp:2262
-#, fuzzy, kde-format
-#| msgid "Skip Item"
+#, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "項目をスキップ"
@@ -749,11 +677,9 @@ msgid ""
 msgstr "マージ試行完了: この操作をしてもよいか確認してください。"
 
 #: directorymergewindow.cpp:2406
-#, fuzzy, kde-format
-#| msgid "An error occurred. Press OK to see detailed information.\n"
+#, kde-format
 msgid "An error occurred. Press OK to see detailed information."
-msgstr ""
-"エラーが発生しました。詳細情報を見るには「OK」をクリックしてください。\n"
+msgstr "エラーが発生しました。詳細情報を見るには「OK」をクリックしてください。"
 
 #: directorymergewindow.cpp:2439
 #, kde-format
@@ -761,10 +687,9 @@ msgid "Error: While deleting %1: Creating backup failed."
 msgstr "エラー: %1 の削除中にバックアップファイルを作成できませんでした。"
 
 #: directorymergewindow.cpp:2446
-#, fuzzy, kde-format
-#| msgid "delete directory recursively( %1 )"
+#, kde-format
 msgid "delete folder recursively( %1 )"
-msgstr "再帰的にディレクトリを削除 (%1)"
+msgstr "再帰的にフォルダーを削除 ( %1 )"
 
 #: directorymergewindow.cpp:2448
 #, kde-format
@@ -772,16 +697,14 @@ msgid "delete( %1 )"
 msgstr "削除 (%1)"
 
 #: directorymergewindow.cpp:2464
-#, fuzzy, kde-format
-#| msgid ""
-#| "Error: delete dir operation failed while trying to read the directory."
+#, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
-msgstr "エラー: ディレクトリの削除がディレクトリの読み込み中に失敗しました。"
+msgstr "エラー: フォルダーの削除がフォルダーの読み込み中に失敗しました。"
 
 #: directorymergewindow.cpp:2480
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
-msgstr "エラー: ディレクトリの削除 (%1) に失敗しました。"
+msgstr "エラー: フォルダーの削除 (%1) に失敗しました。"
 
 #: directorymergewindow.cpp:2490
 #, kde-format
@@ -845,87 +768,76 @@ msgstr "エラー: 名前変更に失敗しました。"
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
-"ディレクトリの作成 (%1) 中にエラーが発生しました。既存のファイルを削除できま"
-"せん。"
+"フォルダーの作成 (%1) 中にエラーが発生しました。既存のファイルを削除できませ"
+"ん。"
 
 #: directorymergewindow.cpp:2675
 #, kde-format
 msgid "makeDir( %1 )"
-msgstr "ディレクトリを作成 (%1)"
+msgstr "フォルダーを作成 (%1)"
 
 #: directorymergewindow.cpp:2685
-#, fuzzy, kde-format
-#| msgid "Error while creating directory."
+#, kde-format
 msgid "Error while creating folder."
-msgstr "ディレクトリの作成中にエラーが発生しました。"
+msgstr "フォルダーの作成中にエラーが発生しました。"
 
 #: directorymergewindow.cpp:2721 directorymergewindow.cpp:2803
 #: directorymergewindow.cpp:2834
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
-msgstr "先: "
+msgstr "対象: "
 
 #: directorymergewindow.cpp:2729 directorymergewindow.cpp:2757
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgctxt "Header label"
 msgid "Folder"
-msgstr "ファイルを開いています..."
+msgstr "フォルダー"
 
 #: directorymergewindow.cpp:2729
-#, fuzzy, kde-format
-#| msgid "Type"
+#, kde-format
 msgctxt "Header label"
 msgid "Type"
-msgstr "タイプ"
+msgstr "種類"
 
 #: directorymergewindow.cpp:2729
-#, fuzzy, kde-format
-#| msgid "Size"
+#, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "サイズ"
 
 #: directorymergewindow.cpp:2730
-#, fuzzy, kde-format
-#| msgid "Attr"
+#, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "属性"
 
 #: directorymergewindow.cpp:2730
-#, fuzzy, kde-format
-#| msgid "Last Modification"
+#, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
-msgstr "最終更新"
+msgstr "最終更新日時"
 
 #: directorymergewindow.cpp:2730
-#, fuzzy, kde-format
-#| msgid "Link-Destination"
+#, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "リンク先"
 
 #: directorymergewindow.cpp:2757
-#, fuzzy, kde-format
-#| msgid "File"
+#, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "ファイル"
 
 #: directorymergewindow.cpp:2757
-#, fuzzy, kde-format
-#| msgid "Link: "
+#, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
-msgstr "リンク: "
+msgstr "-リンク"
 
 #: directorymergewindow.cpp:2763
-#, fuzzy, kde-format
-#| msgid "not available"
+#, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "利用不可"
@@ -938,7 +850,7 @@ msgstr "A (先): "
 #: directorymergewindow.cpp:2781
 #, kde-format
 msgid "A:    "
-msgstr ""
+msgstr "A:    "
 
 #: directorymergewindow.cpp:2781
 #, kde-format
@@ -953,7 +865,7 @@ msgstr "B (先): "
 #: directorymergewindow.cpp:2791
 #, kde-format
 msgid "B:    "
-msgstr ""
+msgstr "B:    "
 
 #: directorymergewindow.cpp:2796
 #, kde-format
@@ -963,20 +875,18 @@ msgstr "C (先): "
 #: directorymergewindow.cpp:2800
 #, kde-format
 msgid "C:    "
-msgstr ""
+msgstr "C:    "
 
 #. i18n("Saving Directory Merge State ..."));
 #: directorymergewindow.cpp:2844
-#, fuzzy, kde-format
-#| msgid "Save Directory Merge State As..."
+#, kde-format
 msgid "Save Folder Merge State As..."
-msgstr "ディレクトリマージの状態を保存..."
+msgstr "フォルダーマージの状態を保存..."
 
 #: directorymergewindow.cpp:2951
-#, fuzzy, kde-format
-#| msgid "Start/Continue Directory Merge"
+#, kde-format
 msgid "Start/Continue Folder Merge"
-msgstr "ディレクトリマージを開始/続行"
+msgstr "フォルダーマージを開始/続行"
 
 #: directorymergewindow.cpp:2952
 #, kde-format
@@ -986,12 +896,12 @@ msgstr "現在の項目について操作を実行"
 #: directorymergewindow.cpp:2953
 #, kde-format
 msgid "Compare Selected File"
-msgstr "選択ファイルを比較 "
+msgstr "選択ファイルを比較"
 
 #: directorymergewindow.cpp:2954
 #, kde-format
 msgid "Merge Current File"
-msgstr "現在のファイルをマージ "
+msgstr "現在のファイルをマージ"
 
 #: directorymergewindow.cpp:2954
 #, kde-format
@@ -1003,16 +913,14 @@ msgstr ""
 "をマージ"
 
 #: directorymergewindow.cpp:2955
-#, fuzzy, kde-format
-#| msgid "Fold All Subdirs"
+#, kde-format
 msgid "Fold All Subfolders"
-msgstr "すべてのサブディレクトリをたたむ"
+msgstr "すべてのサブフォルダーをたたむ"
 
 #: directorymergewindow.cpp:2956
-#, fuzzy, kde-format
-#| msgid "Unfold All Subdirs"
+#, kde-format
 msgid "Unfold All Subfolders"
-msgstr "すべてのサブディレクトリを展開"
+msgstr "すべてのサブフォルダーを展開"
 
 #: directorymergewindow.cpp:2957
 #, kde-format
@@ -1179,93 +1087,81 @@ msgstr "A と B にマージ"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
-msgstr ""
+msgstr "完全なURLを特定できませんでした。親要素が指定されていません。"
 
 #: fileaccess.cpp:538
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "親と子の区別がつかなかった。"
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "計算されたURL:"
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
-msgstr "ファイルを読み込み中: %1"
+msgstr "ファイルの読み取りに失敗: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "これはすべてのマージ操作に影響します。"
+msgstr "ユーザーが読み取り操作をキャンセルしました %1"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "これはすべてのマージ操作に影響します。"
+msgstr "ユーザーが書き込み操作をキャンセルしました。"
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "%1 の一時コピーの作成に失敗しました。"
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
-msgstr "%1 を開けませんでした。"
+msgstr "%1 を開けませんでした。 %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
-msgstr "%1 からの読み込みエラー"
+msgstr "%1 からの読み込みエラー。 %2"
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed. \n"
-#| "Filename: "
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
 "バックアップの作成中に古いバックアップを削除できませんでした。\n"
-"ファイル名: "
+"ファイル名: %1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed. \n"
-#| "Filenames: "
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
 "バックアップの作成中に名前変更に失敗しました。\n"
-"ファイル名: "
+"ファイル名: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "テキストラベル"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
@@ -1275,13 +1171,16 @@ msgid ""
 "but the little red hen escapes with a shiver\n"
 ":-)\n"
 msgstr ""
+"The quick brown fox jumps over the river\n"
+"but the little red hen escapes with a shiver\n"
+":-)\n"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:49
 #, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
-msgstr ""
+msgstr "フォントの変更"
 
 #: kdiff3.cpp:172
 #, kde-format
@@ -1300,35 +1199,31 @@ msgstr ""
 "オプション --auto を使用していますが、出力ファイルが指定されていません。"
 
 #: kdiff3.cpp:368
-#, fuzzy, kde-format
-#| msgid "History merge sorting"
+#, kde-format
 msgid "Directory merge"
-msgstr "履歴マージのソート"
+msgstr "フォルダーのマージ"
 
 #: kdiff3.cpp:373
-#, fuzzy, kde-format
-#| msgid "Merge to A"
+#, kde-format
 msgid "Merge info"
-msgstr "A にマージ"
+msgstr "マージ情報"
 
 #: kdiff3.cpp:613
 #, kde-format
 msgctxt "Error message"
 msgid "Can't compare file with folder."
-msgstr ""
+msgstr "ファイルとフォルダーを比較できません。"
 
 #: kdiff3.cpp:614
-#, fuzzy, kde-format
-#| msgid "Binary comparison"
+#, kde-format
 msgctxt "Title error message box"
 msgid "Bad comparison attempt"
-msgstr "バイナリ比較"
+msgstr "不適切な比較の試み"
 
 #: kdiff3.cpp:623
-#, fuzzy, kde-format
-#| msgid "Option --auto ignored for directory comparison."
+#, kde-format
 msgid "Option --auto ignored for folder comparison."
-msgstr "オプション --auto はディレクトリ比較時には無視されます。"
+msgstr "オプション --auto はフォルダー比較時には無視されます。"
 
 #: kdiff3.cpp:676
 #, kde-format
@@ -1364,12 +1259,12 @@ msgstr "文字列を検索します"
 #: kdiff3.cpp:770
 #, kde-format
 msgid "Search again for the string"
-msgstr "文字列の次のマッチを検索します"
+msgstr "文字列を再検索"
 
 #: kdiff3.cpp:789
 #, kde-format
 msgid "Go to Current Delta"
-msgstr "現在の異なる部分に移動"
+msgstr "現在の差分に移動"
 
 #: kdiff3.cpp:789
 #, kde-format
@@ -1378,12 +1273,12 @@ msgid ""
 "Delta"
 msgstr ""
 "現在の\n"
-"異なる部分"
+"差分"
 
 #: kdiff3.cpp:791
 #, kde-format
 msgid "Go to First Delta"
-msgstr "最初の異なる部分に移動"
+msgstr "最初の差分に移動"
 
 #: kdiff3.cpp:791
 #, kde-format
@@ -1392,12 +1287,12 @@ msgid ""
 "Delta"
 msgstr ""
 "最初の\n"
-"異なる部分"
+"差分"
 
 #: kdiff3.cpp:793
 #, kde-format
 msgid "Go to Last Delta"
-msgstr "最後の異なる部分に移動"
+msgstr "最後の差分に移動"
 
 #: kdiff3.cpp:793
 #, kde-format
@@ -1406,33 +1301,26 @@ msgid ""
 "Delta"
 msgstr ""
 "最後の\n"
-"異なる部分"
+"差分"
 
 #: kdiff3.cpp:795
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Skips white space differences when \"Show White Space\" is disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
-msgstr ""
-"(ホワイトスペースの表示が無効なときはホワイトスペースの差異をスキップする)"
+msgstr "(空白の表示が無効なときは空白の差異をスキップする)"
 
 #: kdiff3.cpp:796
-#, fuzzy, kde-format
-#| msgid ""
-#| "(Does not skip white space differences even when \"Show White Space\" is "
-#| "disabled.)"
+#, kde-format
 msgctxt "Tooltip explanation text"
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
-msgstr ""
-"(ホワイトスペースの表示が無効なときもホワイトスペースの差異をスキップしない)"
+msgstr "(空白の表示が無効なときも空白の差異をスキップしない)"
 
 #: kdiff3.cpp:797
 #, kde-format
 msgid "Go to Previous Delta"
-msgstr "前の異なる部分に移動"
+msgstr "前の差分に移動"
 
 #: kdiff3.cpp:797
 #, kde-format
@@ -1441,12 +1329,12 @@ msgid ""
 "Delta"
 msgstr ""
 "前の\n"
-"異なる部分"
+"差分"
 
 #: kdiff3.cpp:799
 #, kde-format
 msgid "Go to Next Delta"
-msgstr "次の異なる部分に移動"
+msgstr "次の差分に移動"
 
 #: kdiff3.cpp:799
 #, kde-format
@@ -1455,12 +1343,12 @@ msgid ""
 "Delta"
 msgstr ""
 "次の\n"
-"異なる部分"
+"差分"
 
 #: kdiff3.cpp:801
 #, kde-format
 msgid "Go to Previous Conflict"
-msgstr "前の衝突に移動"
+msgstr "前の競合に移動"
 
 #: kdiff3.cpp:801
 #, kde-format
@@ -1469,12 +1357,12 @@ msgid ""
 "Conflict"
 msgstr ""
 "前の\n"
-"衝突"
+"競合"
 
 #: kdiff3.cpp:803
 #, kde-format
 msgid "Go to Next Conflict"
-msgstr "次の衝突に移動"
+msgstr "次の競合に移動"
 
 #: kdiff3.cpp:803
 #, kde-format
@@ -1483,12 +1371,12 @@ msgid ""
 "Conflict"
 msgstr ""
 "次の\n"
-"衝突"
+"競合"
 
 #: kdiff3.cpp:805
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
-msgstr "前の未解決の衝突に移動"
+msgstr "前の未解決の競合に移動"
 
 #: kdiff3.cpp:805
 #, kde-format
@@ -1502,7 +1390,7 @@ msgstr ""
 #: kdiff3.cpp:807
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
-msgstr "次の未解決の衝突に移動"
+msgstr "次の未解決の競合に移動"
 
 #: kdiff3.cpp:807
 #, kde-format
@@ -1514,39 +1402,35 @@ msgstr ""
 "未解決"
 
 #: kdiff3.cpp:809
-#, fuzzy, kde-format
-#| msgid "Go to Last Delta"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr "最後の異なる部分に移動"
+msgstr "行に移動"
 
 #: kdiff3.cpp:809
-#, fuzzy, kde-format
-#| msgid "Go to Last Delta"
+#, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
 "Go\n"
 "Line"
-msgstr "最後の異なる部分に移動"
+msgstr ""
+"移動\n"
+"行"
 
 #: kdiff3.cpp:810
 #, kde-format
 msgctxt "Tooltip Text"
 msgid "Goto specified line."
-msgstr ""
+msgstr "指定した行に移動します。"
 
 #: kdiff3.cpp:811
-#, fuzzy, kde-format
-#| msgid "Select Line(s) From A"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "A からの選択行"
 
 #: kdiff3.cpp:811
-#, fuzzy, kde-format
-#| msgid ""
-#| "Choose\n"
-#| "A"
+#, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
 "Choose\n"
@@ -1556,17 +1440,13 @@ msgstr ""
 "A"
 
 #: kdiff3.cpp:812
-#, fuzzy, kde-format
-#| msgid "Select Line(s) From B"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "B からの選択行"
 
 #: kdiff3.cpp:812
-#, fuzzy, kde-format
-#| msgid ""
-#| "Choose\n"
-#| "B"
+#, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
 "Choose\n"
@@ -1576,17 +1456,13 @@ msgstr ""
 "B"
 
 #: kdiff3.cpp:813
-#, fuzzy, kde-format
-#| msgid "Select Line(s) From C"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "C からの選択行"
 
 #: kdiff3.cpp:813
-#, fuzzy, kde-format
-#| msgid ""
-#| "Choose\n"
-#| "C"
+#, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
 "Choose\n"
@@ -1596,59 +1472,50 @@ msgstr ""
 "C"
 
 #: kdiff3.cpp:814
-#, fuzzy, kde-format
-#| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr "ソース選択後に自動的に次の未解決の衝突に移動"
+msgstr "ソース選択後に自動的に次の未解決の競合に移動"
 
 #: kdiff3.cpp:814
-#, fuzzy, kde-format
-#| msgid ""
-#| "Auto\n"
-#| "Next"
+#, kde-format
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
 "Next"
-msgstr "自動"
+msgstr ""
+"自動\n"
+"次"
 
 #: kdiff3.cpp:816
-#, fuzzy, kde-format
-#| msgid "Show Space && Tabulator Characters for Differences"
+#, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "スペースとタブ文字を表示"
 
 #: kdiff3.cpp:816
-#, fuzzy, kde-format
-#| msgid ""
-#| "White\n"
-#| "Characters"
+#, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
 "White\n"
 "Characters"
 msgstr ""
-"ホワイト\n"
-"スペース文字"
+"空白\n"
+"文字"
 
 #: kdiff3.cpp:817
 #, kde-format
 msgid "Show White Space"
-msgstr "ホワイトスペースを表示"
+msgstr "空白を表示"
 
 #: kdiff3.cpp:817
-#, fuzzy, kde-format
-#| msgid ""
-#| "White\n"
-#| "Deltas"
+#, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
 "White\n"
 "Deltas"
 msgstr ""
-"ホワイト\n"
-"スペース"
+"空白\n"
+"差分"
 
 #: kdiff3.cpp:819
 #, kde-format
@@ -1656,25 +1523,24 @@ msgid "Show Line Numbers"
 msgstr "行番号を表示"
 
 #: kdiff3.cpp:819
-#, fuzzy, kde-format
-#| msgid ""
-#| "Line\n"
-#| "Numbers"
+#, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
 "Line\n"
 "Numbers"
-msgstr "行番号"
+msgstr ""
+"行\n"
+"番号"
 
 #: kdiff3.cpp:821
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
-msgstr "単純な衝突を自動的に解決"
+msgstr "単純な競合を自動的に解決"
 
 #: kdiff3.cpp:822
 #, kde-format
 msgid "Set Deltas to Conflicts"
-msgstr "異なる部分を衝突として設定"
+msgstr "差分を競合として設定"
 
 #: kdiff3.cpp:823
 #, kde-format
@@ -1684,7 +1550,7 @@ msgstr "正規表現による自動マージを実行"
 #: kdiff3.cpp:824
 #, kde-format
 msgid "Automatically Solve History Conflicts"
-msgstr "履歴の衝突を自動的に解決"
+msgstr "履歴の競合を自動的に解決"
 
 #: kdiff3.cpp:825
 #, kde-format
@@ -1739,12 +1605,12 @@ msgstr "Diff ウィンドウで行を折り返す"
 #: kdiff3.cpp:837
 #, kde-format
 msgid "Add Manual Diff Alignment"
-msgstr ""
+msgstr "手動差分アライメントを追加"
 
 #: kdiff3.cpp:838
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
-msgstr ""
+msgstr "すべての手動差分アライメントをクリア"
 
 #: kdiff3.cpp:840
 #, kde-format
@@ -1762,16 +1628,14 @@ msgid "Toggle Split Orientation"
 msgstr "分割方向を切り替え"
 
 #: kdiff3.cpp:844
-#, fuzzy, kde-format
-#| msgid "Dir && Text Split Screen View"
+#, kde-format
 msgid "Folder && Text Split Screen View"
-msgstr "ディレクトリ/テキスト分割画面表示"
+msgstr "フォルダー/テキスト分割画面表示"
 
 #: kdiff3.cpp:846
-#, fuzzy, kde-format
-#| msgid "Toggle Between Dir && Text View"
+#, kde-format
 msgid "Toggle Between Folder && Text View"
-msgstr "ディレクトリ表示/テキスト表示を切り替え"
+msgstr "フォルダー表示/テキスト表示を切り替え"
 
 #: kdiff3.cpp:866 kdiff3.cpp:968 kdiff3.cpp:993 kdiff3.cpp:1250 pdiff.cpp:811
 #: pdiff.cpp:880 pdiff.cpp:916 pdiff.cpp:925 pdiff.cpp:983 pdiff.cpp:991
@@ -1780,8 +1644,7 @@ msgid "Ready."
 msgstr "準備完了。"
 
 #: kdiff3.cpp:912 pdiff.cpp:1519
-#, fuzzy, kde-format
-#| msgid "The merge result hasn't been saved."
+#, kde-format
 msgid "The merge result has not been saved."
 msgstr "マージ結果は保存されていません。"
 
@@ -1801,13 +1664,10 @@ msgid "Saving the merge result failed."
 msgstr "マージ結果の保存に失敗しました。"
 
 #: kdiff3.cpp:934 pdiff.cpp:726
-#, fuzzy, kde-format
-#| msgid ""
-#| "You are currently doing a directory merge. Are you sure, you want to "
-#| "abort?"
+#, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
-msgstr "ディレクトリマージを実行中です。本当に中止しますか？"
+msgstr "フォルダーマージを実行中です。本当に中止しますか？"
 
 #: kdiff3.cpp:957
 #, kde-format
@@ -1825,10 +1685,9 @@ msgid "Save As..."
 msgstr "名前を付けて保存..."
 
 #: kdiff3.cpp:999
-#, fuzzy, kde-format
-#| msgid "Printing completed."
+#, kde-format
 msgid "Printing not implemented."
-msgstr "印刷完了。"
+msgstr "印刷は実装されていません。"
 
 #: kdiff3.cpp:1040
 #, kde-format
@@ -1839,13 +1698,12 @@ msgstr "印刷中..."
 #, kde-format
 msgctxt "Status message"
 msgid "Printing page %1 of %2"
-msgstr ""
+msgstr "印刷中のページ %1 / %2"
 
 #: kdiff3.cpp:1185
-#, fuzzy, kde-format
-#| msgid "Selection"
+#, kde-format
 msgid " (Selection)"
-msgstr "選択"
+msgstr " (選択)"
 
 #: kdiff3.cpp:1214
 #, kde-format
@@ -1877,7 +1735,7 @@ msgstr "ファイル(&F)"
 #: kdiff3_shell.rc:7
 #, kde-format
 msgid "F&older"
-msgstr ""
+msgstr "フォルダー(&O)"
 
 #. i18n: ectx: Menu (dir_current_merge_menu)
 #: kdiff3_shell.rc:30
@@ -1893,10 +1751,9 @@ msgstr "現在の項目の同期操作"
 
 #. i18n: ectx: Menu (movement)
 #: kdiff3_shell.rc:50
-#, fuzzy, kde-format
-#| msgid "&Movement"
+#, kde-format
 msgid "M&ovement"
-msgstr "移動(&M)"
+msgstr "移動(&O)"
 
 #. i18n: ectx: Menu (diff)
 #: kdiff3_shell.rc:61
@@ -1906,10 +1763,9 @@ msgstr "Diff ビュー(&I)"
 
 #. i18n: ectx: Menu (merge)
 #: kdiff3_shell.rc:73
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgid "M&erge"
-msgstr "マージ"
+msgstr "マージ(&E)"
 
 #. i18n: ectx: Menu (window)
 #: kdiff3_shell.rc:95
@@ -1926,7 +1782,7 @@ msgstr "メインツールバー"
 #: main.cpp:67 main.cpp:71
 #, kde-format
 msgid "Ignored. (User defined.)"
-msgstr ""
+msgstr "無視。(ユーザー定義。)"
 
 #: main.cpp:88
 #, kde-format
@@ -1937,23 +1793,22 @@ msgstr "KDiff3"
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
-msgstr ""
+msgstr " (64 bit)"
 
 #: main.cpp:93
-#, fuzzy, kde-format
-#| msgid "Tool for Comparison and Merge of Files and Directories"
+#, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
-msgstr "ファイルとディレクトリを比較/マージするためのツール"
+msgstr "ファイルとフォルダーを比較/マージするためのツール"
 
 #: main.cpp:94
 #, kde-format
 msgid "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
-msgstr ""
+msgstr "©2002-2014 Joachim Eibl, ©2017 Michael Reeves KF5/Qt5 port"
 
 #: main.cpp:115
 #, kde-format
 msgid "Merge the input."
-msgstr "入力をマージ"
+msgstr "入力をマージ。"
 
 #: main.cpp:116
 #, kde-format
@@ -1973,32 +1828,32 @@ msgstr "出力ファイルを指定 (一部のツールとの互換性のため)
 #: main.cpp:120
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
-msgstr "すべての衝突を自動解決できる場合は GUI を使用しない (-o file が必要)"
+msgstr "すべての競合を自動解決できる場合は GUI を使用しない (-o file が必要)"
 
 #: main.cpp:121
 #, kde-format
 msgid "Ignore --auto and always show GUI."
-msgstr ""
+msgstr "--autoオプションを無視して、常にGUIを表示する。"
 
 #: main.cpp:123 main.cpp:124
 #, kde-format
 msgid "Ignored."
-msgstr ""
+msgstr "無視。"
 
 #: main.cpp:126
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
-msgstr "入力ファイル 1 (ベース) の代替表示名"
+msgstr "入力ファイル 1 (ベース) の代替表示名。"
 
 #: main.cpp:127
 #, kde-format
 msgid "Visible name replacement for input file 2."
-msgstr "入力ファイル 2 の代替表示名"
+msgstr "入力ファイル 2 の代替表示名。"
 
 #: main.cpp:128
 #, kde-format
 msgid "Visible name replacement for input file 3."
-msgstr "入力ファイル 3 の代替表示名"
+msgstr "入力ファイル 3 の代替表示名。"
 
 #: main.cpp:129
 #, kde-format
@@ -2011,16 +1866,17 @@ msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
+"設定を上書き。設定ごとに一度だけ使用してください。例：--cs \"AutoAdvance=1\""
 
 #: main.cpp:131
 #, kde-format
 msgid "Show list of config settings and current values."
-msgstr "設定項目と現在の値を一覧表示"
+msgstr "設定項目と現在の値を一覧表示。"
 
 #: main.cpp:132
 #, kde-format
 msgid "Use a different config file."
-msgstr "使用する設定ファイルを指定"
+msgstr "他の設定ファイルを使用。"
 
 #: main.cpp:135
 #, kde-format
@@ -2041,11 +1897,12 @@ msgstr "開く file3"
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr ""
+"サポートされているオプションについては、kdiff3 --help を参照してください。"
 
 #: MergeFileInfos.cpp:393
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
-msgstr ""
+msgstr "異常なファイルと正常なファイルを比較できません。"
 
 #: MergeFileInfos.cpp:416
 #, kde-format
@@ -2060,7 +1917,7 @@ msgstr "リンク: "
 #: MergeFileInfos.cpp:434
 #, kde-format
 msgid "Size. "
-msgstr "サイズ"
+msgstr "サイズ."
 
 #: MergeFileInfos.cpp:450 MergeFileInfos.cpp:460
 #, kde-format
@@ -2068,8 +1925,7 @@ msgid "Date & Size: "
 msgstr "日付とサイズ: "
 
 #: MergeFileInfos.cpp:481
-#, fuzzy, kde-format
-#| msgid "Comparing file..."
+#, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
 msgstr "ファイルを比較中..."
@@ -2092,37 +1948,37 @@ msgstr "常に C を選択"
 #: mergeresultwindow.cpp:138
 #, kde-format
 msgid "Choose A for All Unsolved Conflicts"
-msgstr "未解決の衝突について常に A を選択"
+msgstr "未解決の競合について常に A を選択"
 
 #: mergeresultwindow.cpp:139
 #, kde-format
 msgid "Choose B for All Unsolved Conflicts"
-msgstr "未解決の衝突について常に B を選択"
+msgstr "未解決の競合について常に B を選択"
 
 #: mergeresultwindow.cpp:140
 #, kde-format
 msgid "Choose C for All Unsolved Conflicts"
-msgstr "未解決の衝突について常に C を選択"
+msgstr "未解決の競合について常に C を選択"
 
 #: mergeresultwindow.cpp:141
 #, kde-format
 msgid "Choose A for All Unsolved Whitespace Conflicts"
-msgstr "未解決のホワイトスペースの衝突について常に A を選択"
+msgstr "未解決の空白の競合について常に A を選択"
 
 #: mergeresultwindow.cpp:142
 #, kde-format
 msgid "Choose B for All Unsolved Whitespace Conflicts"
-msgstr "未解決のホワイトスペースの衝突について常に B を選択"
+msgstr "未解決の空白の競合について常に B を選択"
 
 #: mergeresultwindow.cpp:143
 #, kde-format
 msgid "Choose C for All Unsolved Whitespace Conflicts"
-msgstr "未解決のホワイトスペースの衝突について常に C を選択"
+msgstr "未解決の空白の競合について常に C を選択"
 
 #: mergeresultwindow.cpp:239
 #, kde-format
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-msgstr "未解決の衝突の数: %1 (内 %2 はホワイトスペース)"
+msgstr "未解決の競合の数: %1 (内 %2 は空白)"
 
 #: mergeresultwindow.cpp:303
 #, kde-format
@@ -2163,11 +2019,15 @@ msgid ""
 "Number of unsolved conflicts: %3\n"
 "%4"
 msgstr ""
+"競合の総数：%1\n"
+"自動的に解決された競合の数：%2\n"
+"未解決の競合の数：%3\n"
+"%4"
 
 #: mergeresultwindow.cpp:770
 #, kde-format
 msgid "Conflicts"
-msgstr "衝突"
+msgstr "競合"
 
 #: mergeresultwindow.cpp:1511
 #, kde-format
@@ -2177,31 +2037,27 @@ msgstr "<ソース行なし>"
 #: mergeresultwindow.cpp:1519
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
-msgstr "<マージ衝突 (ホワイトスペースのみ)>"
+msgstr "<マージ競合 (空白のみ)>"
 
 #: mergeresultwindow.cpp:1521 mergeresultwindow.cpp:2421
 #, kde-format
 msgid "<Merge Conflict>"
-msgstr "<マージ衝突>"
+msgstr "<マージ競合>"
 
 #: mergeresultwindow.cpp:2645
-#, fuzzy, kde-format
-#| msgid ""
-#| "Not all conflicts are solved yet.\n"
-#| "File not saved.\n"
+#, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved."
 msgstr ""
-"未解決の衝突がまだ残っています。\n"
-"ファイルは保存されていません。\n"
+"未解決の競合がまだ残っています。\n"
+"ファイルは保存されていません。"
 
 #: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
-#, fuzzy, kde-format
-#| msgid "Conflicts Left"
+#, kde-format
 msgctxt "Dialog title"
 msgid "Conflicts Left"
-msgstr "未解決の衝突があります"
+msgstr "未解決の競合があります"
 
 #: mergeresultwindow.cpp:2654
 #, kde-format
@@ -2210,6 +2066,9 @@ msgid ""
 "manually.\n"
 "File not saved."
 msgstr ""
+"行末スタイルに競合があります。行末スタイルを手動で選択してください。\n"
+"\n"
+"ファイルは保存されませんでした。"
 
 #: mergeresultwindow.cpp:2668
 #, kde-format
@@ -2232,6 +2091,8 @@ msgstr "ファイルの保存エラー"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
+"出力ファイルには、認識されないコードポイントの代替文字が含まれている場合があ"
+"ります。"
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2239,10 +2100,9 @@ msgid "Error while writing."
 msgstr "書き込み中にエラーが発生しました。"
 
 #: mergeresultwindow.cpp:2764
-#, fuzzy, kde-format
-#| msgid "Output"
+#, kde-format
 msgid "Output:"
-msgstr "出力"
+msgstr "出力:"
 
 #: mergeresultwindow.cpp:2777 mergeresultwindow.cpp:2958
 #, kde-format
@@ -2250,10 +2110,9 @@ msgid "[Modified]"
 msgstr "[更新]"
 
 #: mergeresultwindow.cpp:2784
-#, fuzzy, kde-format
-#| msgid "Encoding for saving"
+#, kde-format
 msgid "Encoding for saving:"
-msgstr "保存時のエンコーディング"
+msgstr "保存時のエンコーディング:"
 
 #: mergeresultwindow.cpp:2792 optiondialog.cpp:787
 #, kde-format
@@ -2273,41 +2132,40 @@ msgstr "DOS"
 #: mergeresultwindow.cpp:2884
 #, kde-format
 msgid "Conflict"
-msgstr "衝突"
+msgstr "競合"
 
 #: mergeresultwindow.cpp:2907
 #, kde-format
 msgid "Codec from A: %1"
-msgstr ""
+msgstr "Aからのコーデック: %1"
 
 #: mergeresultwindow.cpp:2909
 #, kde-format
 msgid "Codec from B: %1"
-msgstr ""
+msgstr "Bからのコーデック: %1"
 
 #: mergeresultwindow.cpp:2911
 #, kde-format
 msgid "Codec from C: %1"
-msgstr ""
+msgstr "Cからのコーデック: %1"
 
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr ""
+msgstr "ファイルを選択 (未保存)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
 #: opendialog.ui:24 progressdialog.ui:23
 #, kde-format
 msgid "Dialog"
-msgstr ""
+msgstr "Dialog"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: opendialog.ui:47
-#, fuzzy, kde-format
-#| msgid "B"
+#, kde-format
 msgid "B:"
-msgstr "B"
+msgstr "B:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: opendialog.ui:54
@@ -2317,10 +2175,9 @@ msgstr "A (ベース):"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: opendialog.ui:61
-#, fuzzy, kde-format
-#| msgid "Output (optional):"
+#, kde-format
 msgid "Output (Optional):"
-msgstr "出力 (オプション):"
+msgstr "出力 (任意):"
 
 #. i18n: ectx: property (text), widget (QPushButton, fileSelectC)
 #. i18n: ectx: property (text), widget (QPushButton, fileSelectB)
@@ -2333,10 +2190,9 @@ msgstr "ファイル..."
 
 #. i18n: ectx: property (text), widget (QPushButton, swapCopy)
 #: opendialog.ui:107
-#, fuzzy, kde-format
-#| msgid "Swap/Copy Names ..."
+#, kde-format
 msgid "Swap/Copy Names..."
-msgstr "名前を交換/コピー..."
+msgstr "名前の入れ替え/コピー..."
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: opendialog.ui:129
@@ -2349,16 +2205,15 @@ msgstr "C (オプション):"
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectA)
 #. i18n: ectx: property (text), widget (QPushButton, selectOutputFolder)
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgid "Folder..."
-msgstr "ファイルを開いています..."
+msgstr "フォルダー..."
 
 #: optiondialog.cpp:105 optiondialog.cpp:117
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "なし"
 
 #: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
@@ -2368,6 +2223,9 @@ msgid ""
 "\n"
 "Example:"
 msgstr ""
+"フォント: %1, %2, %3\n"
+"\n"
+"例:"
 
 #: optiondialog.cpp:388
 #, kde-format
@@ -2375,8 +2233,7 @@ msgid "Latin1"
 msgstr "Latin1"
 
 #: optiondialog.cpp:398
-#, fuzzy, kde-format
-#| msgid "Change this if non-ASCII characters are not displayed correctly."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "ASCII 以外の文字が適切に表示されなければ、これを変更してください。"
@@ -2399,17 +2256,15 @@ msgstr "エディタ/Diff 出力のフォント"
 #: optiondialog.cpp:541
 #, kde-format
 msgid "Application font"
-msgstr ""
+msgstr "アプリケーションフォント"
 
 #: optiondialog.cpp:546
-#, fuzzy, kde-format
-#| msgid "File Save Error"
+#, kde-format
 msgid "File view font"
-msgstr "ファイルの保存エラー"
+msgstr "ファイル表示のフォント"
 
 #: optiondialog.cpp:565
-#, fuzzy, kde-format
-#| msgid "Color"
+#, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "色"
@@ -2457,7 +2312,7 @@ msgstr "色 (C):"
 #: optiondialog.cpp:652
 #, kde-format
 msgid "Conflict color:"
-msgstr "色 (衝突):"
+msgstr "色 (競合):"
 
 #: optiondialog.cpp:661
 #, kde-format
@@ -2472,13 +2327,12 @@ msgstr "現在の範囲の diff 背景色:"
 #: optiondialog.cpp:678
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
-msgstr ""
+msgstr "手動で調整した差分範囲の色分け："
 
 #: optiondialog.cpp:685
-#, fuzzy, kde-format
-#| msgid "Directory Comparison View:"
+#, kde-format
 msgid "Folder Comparison View:"
-msgstr "ディレクトリ比較ビュー:"
+msgstr "フォルダー比較ビュー:"
 
 #: optiondialog.cpp:691
 #, kde-format
@@ -2486,14 +2340,11 @@ msgid "Newest file color:"
 msgstr "最も新しいファイルの色:"
 
 #: optiondialog.cpp:696
-#, fuzzy, kde-format
-#| msgid ""
-#| "Changing this color will only be effective when starting the next "
-#| "directory comparison."
+#, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
 "comparison."
-msgstr "色の変更は次回ディレクトリ比較を開始したときに有効になります。"
+msgstr "色の変更は次回フォルダー比較を開始したときに有効になります。"
 
 #: optiondialog.cpp:701
 #, kde-format
@@ -2526,10 +2377,7 @@ msgid "Tab inserts spaces"
 msgstr "タブでスペースを挿入する"
 
 #: optiondialog.cpp:760
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Pressing tab generates the appropriate number of spaces.\n"
-#| "Off: A tab character will be inserted."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2549,8 +2397,7 @@ msgid "Auto indentation"
 msgstr "自動字下げ"
 
 #: optiondialog.cpp:776
-#, fuzzy, kde-format
-#| msgid "On: The indentation of the previous line is used for a new line.\n"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "オン: 新しい改行に前の行の字下げを使います。\n"
@@ -2561,10 +2408,7 @@ msgid "Auto copy selection"
 msgstr "選択を自動的にコピーする"
 
 #: optiondialog.cpp:783
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Any selection is immediately written to the clipboard.\n"
-#| "Off: You must explicitely copy e.g. via Ctrl-C."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
@@ -2574,31 +2418,26 @@ msgstr ""
 "オフ: Ctrl+C などで明示的にコピーする必要があります。"
 
 #: optiondialog.cpp:793
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
 #: optiondialog.cpp:794
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "&Window"
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
-msgstr "ウィンドウ(&W)"
+msgstr "Dos/Windows"
 
 #: optiondialog.cpp:795
-#, fuzzy, kde-format
-#| msgid "Auto Select"
+#, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
-msgstr "自動選択"
+msgstr "自動検出"
 
 #: optiondialog.cpp:798
-#, fuzzy, kde-format
-#| msgid ""
-#| "Sets the line endings for when an edited file is saved.\n"
-#| "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2610,62 +2449,52 @@ msgstr ""
 #: optiondialog.cpp:808
 #, kde-format
 msgid "Diff"
-msgstr "Diff"
+msgstr "差分"
 
 #: optiondialog.cpp:809
 #, kde-format
 msgid "Diff Settings"
-msgstr "Diff の設定"
+msgstr "差分の設定"
 
 # 「...を無視する」オプションの補足説明として括弧内に表示される
 #: optiondialog.cpp:832
-#, fuzzy, kde-format
-#| msgid "Treat as white space."
+#, kde-format
 msgid "Ignore numbers (treat as white space)"
-msgstr "ホワイトスペースとして扱う"
+msgstr "数字を無視する (空白として扱う)"
 
 #: optiondialog.cpp:836
-#, fuzzy, kde-format
-#| msgid ""
-#| "Ignore number characters during line matching phase. (Similar to Ignore "
-#| "white space.)\n"
-#| "Might help to compare files with numeric data."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
 "white space.)\n"
 "Might help to compare files with numeric data."
 msgstr ""
-"行マッチ時に数字の違いを無視します。(ホワイトスペースの違いを無視に類似)\n"
-"数字データファイルを比較する際に有効です。"
+"行一致フェーズで数字を無視します。(空白を無視するに似ています。)\n"
+"数値データを使用してファイルを比較するのに役立つ場合があります。"
 
 #: optiondialog.cpp:840
-#, fuzzy, kde-format
-#| msgid "Treat C/C++ comments like white space."
+#, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
-msgstr "C/C++ コメントをホワイトスペースとして扱います。"
+msgstr "C/C++コメントを無視する (空白として扱う)"
 
 #: optiondialog.cpp:843
-#, fuzzy, kde-format
-#| msgid "Treat C/C++ comments like white space."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat C/C++ comments like white space."
-msgstr "C/C++ コメントをホワイトスペースとして扱います。"
+msgstr "C/C++コメントを空白のように扱います。"
 
 # 「...を無視する」オプションの補足説明として括弧内に表示される
 #: optiondialog.cpp:846
-#, fuzzy, kde-format
-#| msgid "Treat as white space."
+#, kde-format
 msgid "Ignore case (treat as white space)"
-msgstr "ホワイトスペースとして扱う"
+msgstr "大文字と小文字を区別しない (空白として扱う)"
 
 #: optiondialog.cpp:850
-#, fuzzy, kde-format
-#| msgid "Treat case differences like white space changes. ('a'<=>'A')"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
-msgstr ""
-"大文字と小文字の違いをホワイトスペースの違いと同様に扱います。('a'<=>'A')"
+msgstr "大文字と小文字の違いを空白の変更と同様に扱います。('a'←→'A')"
 
 #: optiondialog.cpp:853
 #, kde-format
@@ -2673,8 +2502,7 @@ msgid "Preprocessor command:"
 msgstr "プリプロセッサコマンド:"
 
 #: optiondialog.cpp:858
-#, fuzzy, kde-format
-#| msgid "User defined pre-processing. (See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "ユーザ定義プリプロセッサ (詳細についてはドキュメントを参照)"
@@ -2685,10 +2513,7 @@ msgid "Line-matching preprocessor command:"
 msgstr "行マッチプリプロセッサコマンド:"
 
 #: optiondialog.cpp:866
-#, fuzzy, kde-format
-#| msgid ""
-#| "This pre-processor is only used during line matching.\n"
-#| "(See the docs for details.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2703,22 +2528,19 @@ msgid "Try hard (slower)"
 msgstr "より小さい差分を見つける (遅い)"
 
 #: optiondialog.cpp:873
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enables the --minimal option for the external diff.\n"
-#| "The analysis of big files will be much slower."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
 msgstr ""
-"外部 diff コマンドについて --minimal オプションを有効にします。\n"
+"外部差分コマンドについて --minimal オプションを有効にします。\n"
 "大きなファイルでは処理速度が非常に遅くなります。"
 
 #: optiondialog.cpp:877
 #, kde-format
 msgid "Align B and C for 3 input files"
-msgstr ""
+msgstr "3つの入力ファイルでBとCをアライメント"
 
 #: optiondialog.cpp:881
 #, kde-format
@@ -2728,10 +2550,12 @@ msgid ""
 "Not recommended for merging because merge might get more complicated.\n"
 "(Default is off.)"
 msgstr ""
+"3つの入力ファイルの比較またはマージ時にBとCのアライメントを試みる\n"
+"マージがより複雑になる可能性があるため、マージ時の使用は推奨されません。\n"
+"（デフォルトはオフ）"
 
 #: optiondialog.cpp:892
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "マージ"
@@ -2747,18 +2571,14 @@ msgid "Auto advance delay (ms):"
 msgstr "自動前進の遅延 (ミリ秒):"
 
 #: optiondialog.cpp:922
-#, fuzzy, kde-format
-#| msgid ""
-#| "When in Auto-Advance mode the result of the current selection is shown \n"
-#| "for the specified time, before jumping to the next conflict. Range: "
-#| "0-2000 ms"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
 msgstr ""
-"自動前進モードでは、指定した時間 (0-2000 ミリ秒) ごとに自動的に次の衝突に移動"
-"します。"
+"オートアドバンスモード時、現在の選択結果が指定された時間表示されてから、\n"
+"次のコンフリクトにジャンプします。範囲：0〜2000ミリ秒"
 
 #: optiondialog.cpp:926
 #, kde-format
@@ -2769,12 +2589,12 @@ msgstr "情報ダイアログを表示"
 #, kde-format
 msgctxt "Tool Tip"
 msgid "Show a dialog with information about the number of conflicts."
-msgstr ""
+msgstr "競合の数に関する情報を含むダイアログを表示する。"
 
 #: optiondialog.cpp:932
 #, kde-format
 msgid "White space 2-file merge default:"
-msgstr "ホワイトスペース 2 ファイルマージのデフォルト:"
+msgstr "空白 2 ファイルマージのデフォルト:"
 
 #: optiondialog.cpp:937 optiondialog.cpp:950
 #, kde-format
@@ -2782,22 +2602,19 @@ msgid "Manual Choice"
 msgstr "手作業で選択"
 
 #: optiondialog.cpp:941 optiondialog.cpp:955
-#, fuzzy, kde-format
-#| msgid ""
-#| "Allow the merge algorithm to automatically select an input for white-"
-#| "space-only changes."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
 "only changes."
 msgstr ""
-"差異がホワイトスペースのみの場合にマージアルゴリズムが自動的に入力を選択する"
-"ようにできます。"
+"空白のみの変更に対して、マージアルゴリズムが自動的に入力を選択することを許可"
+"します。"
 
 #: optiondialog.cpp:945
 #, kde-format
 msgid "White space 3-file merge default:"
-msgstr "ホワイトスペース 3 ファイルマージのデフォルト:"
+msgstr "空白 3 ファイルマージのデフォルト:"
 
 #: optiondialog.cpp:959
 #, kde-format
@@ -2815,15 +2632,14 @@ msgid "Run regular expression auto merge on merge start"
 msgstr "マージ開始時に正規表現による自動マージを実行する"
 
 #: optiondialog.cpp:978
-#, fuzzy, kde-format
-#| msgid ""
-#| "Run the merge for auto merge regular expressions\n"
-#| "immediately when a merge starts.\n"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
-msgstr "マージ開始時に正規表現による自動マージを実行します。\n"
+msgstr ""
+"マージ開始時に、オートマージ用正規表現による\n"
+"マージを直ちに実行します。\n"
 
 #: optiondialog.cpp:983
 #, kde-format
@@ -2846,8 +2662,7 @@ msgid "History merge sorting"
 msgstr "履歴マージのソート"
 
 #: optiondialog.cpp:1018
-#, fuzzy, kde-format
-#| msgid "Sort version control history by a key."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Sort version control history by a key."
 msgstr "バージョンコントロール履歴をキーでソートします。"
@@ -2855,7 +2670,7 @@ msgstr "バージョンコントロール履歴をキーでソートします。
 #: optiondialog.cpp:1028
 #, kde-format
 msgid "History entry start sort key order:"
-msgstr ""
+msgstr "履歴エントリの開始ソートキー順序："
 
 #: optiondialog.cpp:1038
 #, kde-format
@@ -2863,8 +2678,7 @@ msgid "Merge version control history on merge start"
 msgstr "マージ開始時にバージョン履歴をマージする"
 
 #: optiondialog.cpp:1041
-#, fuzzy, kde-format
-#| msgid "Run version control history automerge on merge start."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Run version control history auto-merge on merge start."
 msgstr "マージ開始時に自動的にバージョン履歴をマージします。"
@@ -2875,9 +2689,7 @@ msgid "Max number of history entries:"
 msgstr "履歴の最大エントリ数:"
 
 #: optiondialog.cpp:1049
-#, fuzzy, kde-format
-#| msgid ""
-#| "Cut off after specified number. Use -1 for infinite number of entries."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
@@ -2892,7 +2704,7 @@ msgstr "正規表現をテスト"
 #: optiondialog.cpp:1058
 #, kde-format
 msgid "Irrelevant merge command:"
-msgstr ""
+msgstr "関連性のないマージコマンド："
 
 #: optiondialog.cpp:1063
 #, kde-format
@@ -2902,19 +2714,17 @@ msgid ""
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
+"指定された場合、このスクリプトはオートマージ後に実行されます。\n"
+"その他の関連する変更が検出されなかった場合に限ります。\n"
+"呼び出し時のパラメータ：ファイル名1 ファイル名2 ファイル名3"
 
 #: optiondialog.cpp:1068
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
-msgstr "衝突がなければマージ後に自動的に保存して終了する"
+msgstr "競合がなければマージ後に自動的に保存して終了する"
 
 #: optiondialog.cpp:1072
-#, fuzzy, kde-format
-#| msgid ""
-#| "If KDiff3 was started for a file-merge from the command line and all\n"
-#| "conflicts are solvable without user interaction then automatically save "
-#| "and quit.\n"
-#| "(Similar to command line option \"--auto\".)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2923,28 +2733,25 @@ msgid ""
 "(Similar to command line option \"--auto\".)"
 msgstr ""
 "ファイルマージのために KDiff3 がコマンドラインから起動された場合、\n"
-"すべての衝突が自動解決できるときは、自動的に保存して終了します。\n"
+"すべての競合が自動解決できるときは、自動的に保存して終了します。\n"
 "(コマンドラインオプションの --auto に類似)"
 
 #: optiondialog.cpp:1083 optiondialog.cpp:1084
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgctxt "Tab title label"
 msgid "Folder"
-msgstr "ファイルを開いています..."
+msgstr "フォルダー"
 
 #: optiondialog.cpp:1104
-#, fuzzy, kde-format
-#| msgid "Recursive directories"
+#, kde-format
 msgid "Recursive folders"
-msgstr "ディレクトリを再帰的に解析する"
+msgstr "再帰フォルダー"
 
 #: optiondialog.cpp:1107
-#, fuzzy, kde-format
-#| msgid "Whether to analyze subdirectories or not."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Whether to analyze subfolders or not."
-msgstr "サブディレクトリを解析するかどうかを指定します。"
+msgstr "サブフォルダーを解析するかどうかを指定します。"
 
 #: optiondialog.cpp:1109
 #, kde-format
@@ -2952,11 +2759,7 @@ msgid "File pattern(s):"
 msgstr "ファイルパターン:"
 
 #: optiondialog.cpp:1115
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be analyzed. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2970,14 +2773,10 @@ msgstr ""
 #: optiondialog.cpp:1120
 #, kde-format
 msgid "File-anti-pattern(s):"
-msgstr "ファイル否定パターン:"
+msgstr "ファイル除外パターン:"
 
 #: optiondialog.cpp:1126
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be excluded from analysis. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2989,17 +2788,12 @@ msgstr ""
 "複数のパターンを指定する場合はセミコロン (;) で区切ります。"
 
 #: optiondialog.cpp:1131
-#, fuzzy, kde-format
-#| msgid "File-anti-pattern(s):"
+#, kde-format
 msgid "Folder-anti-pattern(s):"
-msgstr "ファイル否定パターン:"
+msgstr "フォルダー除外パターン："
 
 #: optiondialog.cpp:1137
-#, fuzzy, kde-format
-#| msgid ""
-#| "Pattern(s) of files to be excluded from analysis. \n"
-#| "Wildcards: '*' and '?'\n"
-#| "Several Patterns can be specified by using the separator: ';'"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -3011,37 +2805,31 @@ msgstr ""
 "複数のパターンを指定する場合はセミコロン (;) で区切ります。"
 
 #: optiondialog.cpp:1142
-#, fuzzy, kde-format
-#| msgid "Use .cvsignore"
+#, kde-format
 msgid "Use Ignore File"
-msgstr ".cvsignore を使う"
+msgstr "無視ファイルを使用する"
 
 #: optiondialog.cpp:1146
-#, fuzzy, kde-format
-#| msgid ""
-#| "Extends the antipattern to anything that would be ignored by CVS.\n"
-#| "Via local \".cvsignore\" files this can be directory specific."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Extends the anti-pattern to anything that would be ignored by source "
 "control.\n"
 "Via local ignore files this can be folder-specific."
 msgstr ""
-"CVS で無視されるすべてについて否定パターンを拡張します。\n"
-"ローカルの ‘.cvsignore’ ファイルによってディレクトリ固有に利用できます。"
+"CVS で無視されるすべてについて除外パターンを拡張します。\n"
+"ローカルの ‘.cvsignore’ ファイルによってフォルダー固有に利用できます。"
 
 #: optiondialog.cpp:1150
-#, fuzzy, kde-format
-#| msgid "Find hidden files and directories"
+#, kde-format
 msgid "Find hidden files and folders"
-msgstr "隠しファイル/ディレクトリを検索する"
+msgstr "隠しファイル/フォルダーを検索する"
 
 #: optiondialog.cpp:1153
-#, fuzzy, kde-format
-#| msgid "Find hidden files and directories"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Finds hidden files and folders."
-msgstr "隠しファイル/ディレクトリを検索する"
+msgstr "隠しファイル/フォルダーを検索する。"
 
 #: optiondialog.cpp:1156
 #, kde-format
@@ -3049,10 +2837,7 @@ msgid "Follow file links"
 msgstr "ファイルリンクを追跡する"
 
 #: optiondialog.cpp:1160
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Compare the file the link points to.\n"
-#| "Off: Compare the links."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -3062,16 +2847,12 @@ msgstr ""
 "オフ: リンクを比較します。"
 
 #: optiondialog.cpp:1164
-#, fuzzy, kde-format
-#| msgid "Follow file links"
+#, kde-format
 msgid "Follow folder links"
-msgstr "ファイルリンクを追跡する"
+msgstr "フォルダーリンクをたどる"
 
 #: optiondialog.cpp:1168
-#, fuzzy, kde-format
-#| msgid ""
-#| "On: Compare the file the link points to.\n"
-#| "Off: Compare the links."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "On: Compare the folder the link points to.\n"
@@ -3086,28 +2867,22 @@ msgid "Case sensitive filename comparison"
 msgstr "大文字と小文字を区別してファイル名を比較する"
 
 #: optiondialog.cpp:1181
-#, fuzzy, kde-format
-#| msgid ""
-#| "The directory comparison will compare files or directories when their "
-#| "names match.\n"
-#| "Set this option if the case of the names must match. (Default for Windows "
-#| "is off, otherwise on.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
 "Set this option if the case of the names must match. (Default for Windows is "
 "off, otherwise on.)"
 msgstr ""
-"ディレクトリ比較は名前が一致するファイルおよびディレクトリを比較します。\n"
-"名前の大文字/小文字も一致しなければならない場合は、このオプションを有効にして"
-"ください。\n"
-"(Windows の標準はオフ、その他ではオンです)"
+"フォルダー比較では、ファイルまたはフォルダーの名前が一致した場合に比較が行わ"
+"れます。\n"
+"名前の大文字と小文字を区別する必要がある場合は、このオプションを設定してくだ"
+"さい。(Windowsのデフォルトはオフ、それ以外の環境ではオンです。)"
 
 #: optiondialog.cpp:1185
-#, fuzzy, kde-format
-#| msgid "Unfold All Subdirs"
+#, kde-format
 msgid "Unfold all subfolders on load"
-msgstr "すべてのサブディレクトリを展開"
+msgstr "読み込み時にすべてのサブフォルダーを展開"
 
 #: optiondialog.cpp:1189
 #, kde-format
@@ -3116,11 +2891,13 @@ msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
 "Off: Leave subfolders folded."
 msgstr ""
+"オン：フォルダー比較開始時にすべてのサブフォルダーを展開します。\n"
+"オフ：サブフォルダーは折りたたんだままにします。"
 
 #: optiondialog.cpp:1193
 #, kde-format
 msgid "Skip folder status report"
-msgstr ""
+msgstr "フォルダーの状態レポートをスキップ"
 
 #: optiondialog.cpp:1197
 #, kde-format
@@ -3129,6 +2906,8 @@ msgid ""
 "On: Do not show the Folder Comparison Status.\n"
 "Off: Show the status dialog on start."
 msgstr ""
+"オン：フォルダー比較ステータスを表示しません。\n"
+"オフ：開始時にステータスダイアログを表示します。"
 
 #: optiondialog.cpp:1201
 #, kde-format
@@ -3141,11 +2920,10 @@ msgid "Binary comparison"
 msgstr "バイナリ比較"
 
 #: optiondialog.cpp:1208
-#, fuzzy, kde-format
-#| msgid "Binary comparison of each file. (Default)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid "Binary comparison of each file. (Default)"
-msgstr "それぞれのファイルをバイナリ比較します。(標準)"
+msgstr "各ファイルのバイナリ比較。(デフォルト)"
 
 #: optiondialog.cpp:1211
 #, kde-format
@@ -3153,17 +2931,14 @@ msgid "Full analysis"
 msgstr "完全分析"
 
 #: optiondialog.cpp:1213
-#, fuzzy, kde-format
-#| msgid ""
-#| "Do a full analysis and show statistics information in extra columns.\n"
-#| "(Slower than a binary comparison, much slower for binary files.)"
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
-"完全な比較を実行し、統計情報を別のカラムに表示します。\n"
-"(バイナリ比較より遅く、バイナリファイルの場合は非常に時間がかかります)"
+"完全な分析を実行し、統計情報を追加の列に表示します。\n"
+"(バイナリ比較より遅く、バイナリファイルの場合はさらに遅くなります。)"
 
 #: optiondialog.cpp:1217
 #, kde-format
@@ -3171,13 +2946,7 @@ msgid "Trust the size and modification date (unsafe)"
 msgstr "サイズと更新日時を信用する (危険)"
 
 #: optiondialog.cpp:1219
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if the modification date and file length are "
-#| "equal.\n"
-#| "Files with equal contents but different modification dates will appear as "
-#| "different.\n"
-#| "Useful for big directories or slow networks."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3186,9 +2955,9 @@ msgid ""
 "different.\n"
 "Useful for big folders or slow networks."
 msgstr ""
-"ファイルのサイズと更新日時が等しければ、同一のファイルと見なします。\n"
-"内容が同じで更新日時が異なるファイルは、異なるファイルとして示されます。\n"
-"大きなディレクトリや遅いネットワークで有用です。"
+"ファイルのサイズと更新日時が同じ場合、ファイルは等しいとみなします。\n"
+"内容が同じでも更新日時が異なるファイルは、異なるものとして表示されます。\n"
+"大きなフォルダーや低速なネットワークで有用です。"
 
 #: optiondialog.cpp:1224
 #, kde-format
@@ -3198,12 +2967,7 @@ msgid ""
 msgstr "サイズと更新日時を信用し、日時が異なる場合はバイナリ比較する (危険)"
 
 #: optiondialog.cpp:1226
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if the modification date and file length are "
-#| "equal.\n"
-#| "If the dates are not equal but the sizes are, use binary comparison.\n"
-#| "Useful for big directories or slow networks."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3211,9 +2975,9 @@ msgid ""
 "If the dates are not equal but the sizes are, use binary comparison.\n"
 "Useful for big folders or slow networks."
 msgstr ""
-"ファイルのサイズと更新日時が等しければ、同一のファイルと見なします。\n"
-"サイズが同じで日時が異なる場合は、バイナリ比較を行います。\n"
-"大きなディレクトリや遅いネットワークで有用です。"
+"ファイルのサイズと更新日時が同じ場合、ファイルは等しいとみなします。\n"
+"更新日時は異なるがサイズが同じ場合は、バイナリ比較を使用します。\n"
+"大きなフォルダーや低速なネットワークで有用です。"
 
 #: optiondialog.cpp:1231
 #, kde-format
@@ -3221,60 +2985,48 @@ msgid "Trust the size (unsafe)"
 msgstr "サイズを信用する (危険)"
 
 #: optiondialog.cpp:1233
-#, fuzzy, kde-format
-#| msgid ""
-#| "Assume that files are equal if their file lengths are equal.\n"
-#| "Useful for big directories or slow networks when the date is modified "
-#| "during download."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big folders or slow networks when the date is modified during "
 "download."
 msgstr ""
-"ファイルのサイズが等しければ、同一のファイルと見なします。\n"
-"大きなディレクトリやダウンロード中に更新日時が変わってしまうような遅いネット"
-"ワークで有用です。"
+"ファイルのサイズが同じ場合、ファイルは等しいとみなします。\n"
+"ダウンロード中に日付が変更されるような、大きなフォルダーや低速なネットワーク"
+"で有用です。"
 
 #: optiondialog.cpp:1240
-#, fuzzy, kde-format
-#| msgid "Synchronize directories"
+#, kde-format
 msgid "Synchronize folders"
-msgstr "ディレクトリを同期する"
+msgstr "フォルダーを同期する"
 
 #: optiondialog.cpp:1244
-#, fuzzy, kde-format
-#| msgid ""
-#| "Offers to store files in both directories so that\n"
-#| "both directories are the same afterwards.\n"
-#| "Works only when comparing two directories without specifying a "
-#| "destination."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Offers to store files in both folders so that\n"
 "both folders are the same afterwards.\n"
 "Works only when comparing two folders without specifying a destination."
 msgstr ""
-"両方のディレクトリが同じになるようにファイルを配置します。\n"
-"方向を指定せずに二つのディレクトリをマージする場合にのみ機能します。"
+"両方のフォルダーが後で同じになるように、\n"
+"両方のフォルダーにファイルを保存するオプションを提供します。\n"
+"宛先を指定せずに2つのフォルダーを比較している場合にのみ機能します。"
 
 #: optiondialog.cpp:1250
 #, kde-format
 msgid "White space differences considered equal"
-msgstr "ホワイトスペースの違いを無視する"
+msgstr "空白の違いを無視する"
 
 #: optiondialog.cpp:1254
-#, fuzzy, kde-format
-#| msgid ""
-#| "If files differ only by white space consider them equal.\n"
-#| "This is only active when full analysis is chosen."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
 msgstr ""
-"ファイルの差異がホワイトスペースだけの場合は等しいものと見なします。\n"
-"このオプションは完全分析が選択されているときにのみアクティブになります。"
+"ファイルが空白のみ異なる場合は、等しいものとみなします。\n"
+"これは完全分析が選択されている場合にのみ有効です。"
 
 #: optiondialog.cpp:1260
 #, kde-format
@@ -3282,20 +3034,16 @@ msgid "Copy newer instead of merging (unsafe)"
 msgstr "マージではなく、より新しいものをコピー (危険)"
 
 #: optiondialog.cpp:1264
-#, fuzzy, kde-format
-#| msgid ""
-#| "Don't look inside, just take the newer file.\n"
-#| "(Use this only if you know what you are doing!)\n"
-#| "Only effective when comparing two directories."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Do not look inside, just take the newer file.\n"
 "(Use this only if you know what you are doing!)\n"
 "Only effective when comparing two folders."
 msgstr ""
-"内容を調べずに単により新しいファイルを取ります。\n"
-"(何をしているのか分かっている場合にのみ使用してください)\n"
-"二つのディレクトリを比較しているときのみ有効です。"
+"内部を確認せず、新しい方のファイルを採用します。\n"
+"（何をしているか理解している場合のみ使用してください！）\n"
+"2つのフォルダーを比較している場合のみ有効です。"
 
 #: optiondialog.cpp:1269
 #, kde-format
@@ -3303,16 +3051,14 @@ msgid "Backup files (.orig)"
 msgstr "バックアップファイル (.orig) を残す"
 
 #: optiondialog.cpp:1273
-#, fuzzy, kde-format
-#| msgid ""
-#| "If a file would be saved over an old file, then the old file\n"
-#| "will be renamed with a '.orig' extension instead of being deleted."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
 msgstr ""
-"ファイルを上書き保存する際に、‘.orig’ 拡張子を付けて元のファイルを残します。"
+"古いファイルを上書きして保存する場合、その古いファイルは削除されずに、\n"
+"「.orig」拡張子を付けて名前変更されます。"
 
 #: optiondialog.cpp:1282 optiondialog.cpp:1283
 #, kde-format
@@ -3325,24 +3071,20 @@ msgid "Use the same encoding for everything:"
 msgstr "すべてに同じエンコーディングを使う:"
 
 #: optiondialog.cpp:1310
-#, fuzzy, kde-format
-#| msgid ""
-#| "Enable this allows to change all encodings by changing the first only.\n"
-#| "Disable this if different individual settings are needed."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
-"このオプションを有効にすると、最初を変更するだけですべてのエンコーディングを"
-"同時に変更できます。\n"
-"それぞれに個別に設定する必要がある場合は、無効にしてください。"
+"これを有効にすると、最初のエンコーディングを変更することで、すべてのエンコー"
+"ディングを変更できるようになります。\n"
+"個別に異なる設定が必要な場合は、これを無効にしてください。"
 
 #: optiondialog.cpp:1314
-#, fuzzy, kde-format
-#| msgid "Note: Local Encoding is "
+#, kde-format
 msgid "Note: Local Encoding is \"%1\""
-msgstr "現在のロカールエンコーディング: "
+msgstr "注：ローカルエンコーディング : \"%1\""
 
 #: optiondialog.cpp:1318
 #, kde-format
@@ -3350,28 +3092,22 @@ msgid "File Encoding for A:"
 msgstr "A のファイルのエンコーディング:"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-#| "If the file is not Unicode then the selected encoding will be used as "
-#| "fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"これを有効にすると、Unicode (UTF-16 または UTF-8) を自動検出します。\n"
-"ファイルのエンコーディングが Unicode でない場合は、選択されたエンコーディング"
-"を使います。\n"
-"(Unicode 自動検出はファイルの最初の数バイトを調べます)"
+"有効にすると、エンコーディングが自動検出されます。\n"
+"ファイルのエンコーディングが自動的に見つけられなかった場合は、選択されたエン"
+"コーディングがフォールバックとして使用されます。\n"
+"（Unicodeの検出はファイルの先頭バイトに依存します。）"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
-#, fuzzy, kde-format
-#| msgid "Auto Select"
+#, kde-format
 msgid "Auto Detect"
-msgstr "自動選択"
+msgstr "自動検出"
 
 #: optiondialog.cpp:1334
 #, kde-format
@@ -3394,20 +3130,16 @@ msgid "Auto Select"
 msgstr "自動選択"
 
 #: optiondialog.cpp:1365
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then the encoding from the input files is used.\n"
-#| "In ambiguous cases a dialog will ask the user to choose the encoding for "
-#| "saving."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
-"これを有効にすると、入力ファイルのエンコーディングが使われます。\n"
-"不確かな場合はダイアログが表示され、保存時のエンコーディングを選択するよう促"
-"されます。"
+"有効にすると、入力ファイルのエンコーディングが使用されます。\n"
+"曖昧なケースでは、保存用のエンコーディングを選択するようユーザーに促すダイア"
+"ログが表示されます。"
 
 #: optiondialog.cpp:1368
 #, kde-format
@@ -3420,17 +3152,14 @@ msgid "Right To Left Language"
 msgstr "右から左に読む言語"
 
 #: optiondialog.cpp:1384
-#, fuzzy, kde-format
-#| msgid ""
-#| "Some languages are read from right to left.\n"
-#| "This setting will change the viewer and editor accordingly."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
-"右から左に読む言語で有効にします。\n"
-"この設定によってビューアとエディタの表示が変わります。"
+"一部の言語は右から左に読みます。\n"
+"この設定により、ビューアとエディタがそれに応じて変更されます。"
 
 #: optiondialog.cpp:1394
 #, kde-format
@@ -3448,12 +3177,7 @@ msgid "Command line options to ignore:"
 msgstr "無視するコマンドラインオプション:"
 
 #: optiondialog.cpp:1422
-#, fuzzy, kde-format
-#| msgid ""
-#| "List of command line options that should be ignored when KDiff3 is used "
-#| "by other tools.\n"
-#| "Several values can be specified if separated via ';'\n"
-#| "This will suppress the \"Unknown option\" error."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3461,15 +3185,15 @@ msgid ""
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\" error."
 msgstr ""
-"KDiff3 が他のツールによって使用されるときに無視すべきコマンドラインオプション"
-"のリストです。\n"
-"複数のオプションはセミコロン (;) で区切って指定してください。\n"
-"これによって \"不明なオプション\" エラーを抑制できます。"
+"KDiff3が他のツールから使用される際に無視すべきコマンドラインオプションのリス"
+"トです。\n"
+"複数の値は「;」で区切って指定できます。\n"
+"これにより「不明なオプション」エラーが抑制されます。"
 
 #: optiondialog.cpp:1427
 #, kde-format
 msgid "Quit also via Escape key"
-msgstr ""
+msgstr "Escキーでも終了できます"
 
 #: optiondialog.cpp:1431
 #, kde-format
@@ -3478,6 +3202,8 @@ msgid ""
 "Fast method to exit.\n"
 "For those who are used to using the Escape key."
 msgstr ""
+"素早く終了する方法。\n"
+"Escキーを使うことに慣れている方向け。"
 
 #: optiondialog.cpp:1489
 #, kde-format
@@ -3522,83 +3248,74 @@ msgid "Disable Unsafe Options"
 msgstr "危険なオプションを無効にする"
 
 #: pdiff.cpp:133
-#, fuzzy, kde-format
-#| msgid "Loading A"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading A: %1"
-msgstr "A を読み込み中"
+msgstr "A を読み込み中: %1"
 
 #: pdiff.cpp:143
-#, fuzzy, kde-format
-#| msgid "Loading B"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading B: %1"
-msgstr "B を読み込み中"
+msgstr "B を読み込み中: %1"
 
 #: pdiff.cpp:179 pdiff.cpp:219
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> B"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> B"
-msgstr "Diff: A <-> B"
+msgstr "差分: A <-> B"
 
 #: pdiff.cpp:185 pdiff.cpp:265 pdiff.cpp:288
-#, fuzzy, kde-format
-#| msgid "Linediff: A <-> B"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> B"
-msgstr "Linediff: A <-> B"
+msgstr "行の差分: A <-> B"
 
 #: pdiff.cpp:204
-#, fuzzy, kde-format
-#| msgid "Loading A"
+#, kde-format
 msgctxt "Status message"
 msgid "Loading C: %1"
-msgstr "A を読み込み中"
+msgstr "C を読み込み中: %1"
 
 #: pdiff.cpp:230
-#, fuzzy, kde-format
-#| msgid "Diff: A <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: A <-> C"
-msgstr "Diff: A <-> C"
+msgstr "差分: A <-> C"
 
 #: pdiff.cpp:243
-#, fuzzy, kde-format
-#| msgid "Diff: B <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Diff: B <-> C"
-msgstr "Diff: B <-> C"
+msgstr "差分: B <-> C"
 
 #: pdiff.cpp:271 pdiff.cpp:293
-#, fuzzy, kde-format
-#| msgid "Linediff: B <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: B <-> C"
-msgstr "Linediff: B <-> C"
+msgstr "行の差分: B <-> C"
 
 #: pdiff.cpp:277 pdiff.cpp:298
-#, fuzzy, kde-format
-#| msgid "Linediff: A <-> C"
+#, kde-format
 msgctxt "Status message"
 msgid "Linediff: A <-> C"
-msgstr "Linediff: A <-> C"
+msgstr "行の差分: A <-> C"
 
 #: pdiff.cpp:322
 #, kde-format
 msgctxt "Error message"
 msgid "Not enough memory to complete request."
-msgstr ""
+msgstr "リクエストを完了するためのメモリが不足しています。"
 
 #: pdiff.cpp:329
 #, kde-format
 msgid "An internal error occurred: %1"
-msgstr ""
+msgstr "内部エラーが発生しました: %1"
 
 #: pdiff.cpp:356
 #, kde-format
 msgid "Too many lines in diff. Skipping file."
-msgstr ""
+msgstr "差分データの行数が多すぎます。ファイルをスキップします。"
 
 #: pdiff.cpp:604
 #, kde-format
@@ -3613,29 +3330,25 @@ msgstr ""
 "ファイル %1 と %2 のテキストは同じですが、バイナリ的に等しくありません。\n"
 
 #: pdiff.cpp:628
-#, fuzzy, kde-format
-#| msgid ""
-#| "Some inputfiles don't seem to be pure textfiles.\n"
-#| "Note that the KDiff3-merge was not meant for binary data.\n"
-#| "Continue at your own risk."
+#, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
 "Note that the KDiff3 merge was not meant for binary data.\n"
 "Continue at your own risk."
 msgstr ""
-"入力ファイルのいくつかはテキストファイルではないようです。\n"
-"KDiff3 のマージはバイナリデータでの使用を想定していません。\n"
+"一部の入力ファイルが純粋なテキストファイルではないようです。\n"
+"KDiff3のマージ機能はバイナリデータを想定していませんのでご注意ください。\n"
 "自己責任で続行してください。"
 
 #: pdiff.cpp:638
 #, kde-format
 msgid ", B"
-msgstr ""
+msgstr ", B"
 
 #: pdiff.cpp:640
 #, kde-format
 msgid ", C"
-msgstr ""
+msgstr ", C"
 
 #: pdiff.cpp:642
 #, kde-format
@@ -3645,6 +3358,11 @@ msgid ""
 "Do not save the result if unsure. Continue at your own risk.\n"
 "Affected input files are in %1."
 msgstr ""
+"一部の入力文字を有効なユニコードに変換できませんでした。\n"
+"誤ったコーデックを使用している可能性があります（例：UTF-8以外のファイルに"
+"UTF-8を使用）。\n"
+"不明な場合は結果を保存しないでください。自己責任で続行してください。\n"
+"影響を受ける入力ファイルは %1 にあります。"
 
 #: pdiff.cpp:728
 #, kde-format
@@ -3682,20 +3400,19 @@ msgid "Ok"
 msgstr "OK"
 
 #: pdiff.cpp:1031
-#, fuzzy, kde-format
-#| msgid "Go to Last Delta"
+#, kde-format
 msgid "Go to Line"
-msgstr "最後の異なる部分に移動"
+msgstr "行に移動"
 
 #: pdiff.cpp:1298
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
-msgstr ""
+msgstr "行の折り返し (「キャンセル」を選択すると行の折り返しが無効になります)"
 
 #: pdiff.cpp:1298
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
-msgstr ""
+msgstr "水平スクロールバーの最大幅を計算する"
 
 #: pdiff.cpp:1521
 #, kde-format
@@ -3720,12 +3437,12 @@ msgstr "検索完了"
 #: pdiff.cpp:1894
 #, kde-format
 msgid "Nothing is selected in either diff input window."
-msgstr ""
+msgstr "どちらの差分入力ウィンドウにも何も選択されていません。"
 
 #: pdiff.cpp:1894
-#, fuzzy, kde-format
+#, kde-format
 msgid "Error while adding manual diff range"
-msgstr "ディレクトリ作成中にエラー"
+msgstr "手動差分範囲の追加中にエラーが発生しました"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
 #: progress.cpp:54 progressdialog.ui:100
@@ -3754,15 +3471,14 @@ msgid "Configure..."
 msgstr "設定..."
 
 #: smalldialogs.cpp:161
-#, fuzzy, kde-format
-#| msgid "Opening files..."
+#, kde-format
 msgid "Open Folder"
-msgstr "ファイルを開いています..."
+msgstr "フォルダーを開く"
 
 #: smalldialogs.cpp:162
 #, kde-format
 msgid "Select Output File"
-msgstr ""
+msgstr "出力ファイルを選択"
 
 #: smalldialogs.cpp:309
 #, kde-format
@@ -3810,8 +3526,7 @@ msgid "Example auto merge line:"
 msgstr "自動マージのテスト行:"
 
 #: smalldialogs.cpp:382
-#, fuzzy, kde-format
-#| msgid "To test auto merge, copy a line as used in your files."
+#, kde-format
 msgctxt "Tool Tip"
 msgid "To test auto merge, copy a line as used in your files."
 msgstr "自動マージをテストするために、既存のファイルから 1 行コピーします。"
@@ -3819,7 +3534,7 @@ msgstr "自動マージをテストするために、既存のファイルから
 #: smalldialogs.cpp:388 smalldialogs.cpp:416 smalldialogs.cpp:452
 #, kde-format
 msgid "Match result:"
-msgstr "マッチ結果:"
+msgstr "一致結果:"
 
 #: smalldialogs.cpp:407
 #, kde-format
@@ -3827,15 +3542,14 @@ msgid "Example history start line (with leading comment):"
 msgstr "履歴開始行の例 (先行するコメントを含めて):"
 
 #: smalldialogs.cpp:409
-#, fuzzy, kde-format
-#| msgid ""
-#| "Copy a history start line as used in your files,\n"
-#| "including the leading comment."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
-msgstr "履歴の開始行を先行するコメントを含めて既存のファイルからコピーします。"
+msgstr ""
+"先頭のコメントを含め、ファイルで使用されている\n"
+"履歴開始行をコピーしてください。"
 
 #: smalldialogs.cpp:435
 #, kde-format
@@ -3848,17 +3562,14 @@ msgid "Example history entry start line (without leading comment):"
 msgstr "履歴エントリ開始行の例 (先行するコメントを含めずに):"
 
 #: smalldialogs.cpp:445
-#, fuzzy, kde-format
-#| msgid ""
-#| "Copy a history entry start line as used in your files,\n"
-#| "but omit the leading comment."
+#, kde-format
 msgctxt "Tool Tip"
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
-"履歴エントリの開始行を先行するコメントを含めずに既存のファイルからコピーしま"
-"す。"
+"先頭のコメントは除き、ファイルで使用されている\n"
+"履歴エントリ開始行をコピーしてください。"
 
 #: smalldialogs.cpp:459
 #, kde-format
@@ -3868,12 +3579,12 @@ msgstr "ソートキーの結果:"
 #: smalldialogs.cpp:509 smalldialogs.cpp:521 smalldialogs.cpp:542
 #, kde-format
 msgid "Match success."
-msgstr "マッチ成功"
+msgstr "一致成功。"
 
 #: smalldialogs.cpp:513 smalldialogs.cpp:525 smalldialogs.cpp:548
 #, kde-format
 msgid "Match failed."
-msgstr "マッチ失敗"
+msgstr "一致失敗。"
 
 #: smalldialogs.cpp:532
 #, kde-format
@@ -3891,21 +3602,20 @@ msgid "From Clipboard"
 msgstr "クリップボードから"
 
 #: SourceData.cpp:344
-#, fuzzy, kde-format
-#| msgid "Mix of links and normal files."
+#, kde-format
 msgid "%1 is not a normal file."
-msgstr "リンクと普通のファイルが混在しています。"
+msgstr "%1 は通常のファイルではありません。"
 
 #: SourceData.cpp:381
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr ""
+msgstr "ファイル%1は大きすぎて処理できません。スキップします。"
 
 #: SourceData.cpp:410
 #, kde-format
 msgid "    Temp file is: %1"
-msgstr ""
+msgstr "    一時ファイル: %1"
 
 #: SourceData.cpp:448
 #, kde-format
@@ -3916,6 +3626,11 @@ msgid ""
 "\n"
 "The preprocessing command will be disabled now."
 msgstr ""
+"前処理が失敗した可能性があります。以下のコマンドを確認してください:\n"
+"\n"
+"  %1\n"
+"\n"
+"プリプロセッシングコマンドは無効になります。"
 
 #: SourceData.cpp:511
 #, kde-format
@@ -3926,13 +3641,18 @@ msgid ""
 "\n"
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
+"行マッチング前処理が失敗した可能性があります。以下のコマンドを確認してくださ"
+"い。:\n"
+"\n"
+"  %1\n"
+"\n"
+"行マッチング前処理コマンドは今後無効になります。"
 
 #: SourceData.cpp:517
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
-msgstr "ファイルを読み込み中: %1"
+msgstr "ファイルの読み取りに失敗: %1"
 
 #: StandardMenus.cpp:18
 #, kde-format
@@ -3947,7 +3667,7 @@ msgstr "再読み込み"
 #: StandardMenus.cpp:23
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
-msgstr "マージ結果を保存します。すべての衝突を解決しなければなりません。"
+msgstr "マージ結果を保存します。すべての競合を解決しなければなりません!"
 
 #: StandardMenus.cpp:25
 #, kde-format
@@ -3967,7 +3687,7 @@ msgstr "アプリケーションを終了します"
 #: StandardMenus.cpp:35
 #, kde-format
 msgid "Undo last action."
-msgstr ""
+msgstr "最後の操作を取り消す。"
 
 #: StandardMenus.cpp:39
 #, kde-format
@@ -3980,8 +3700,7 @@ msgid "Copies the selected section to the clipboard"
 msgstr "選択範囲をコピーし、クリップボードに格納します"
 
 #: StandardMenus.cpp:44
-#, fuzzy, kde-format
-#| msgid "Pastes the clipboard contents to actual position"
+#, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "クリップボードの内容を現在の位置に貼り付けます"
 
@@ -3993,28 +3712,28 @@ msgstr "現在のウィンドウのすべてを選択します"
 #: Utils.cpp:73
 #, kde-format
 msgid "Expecting space after closing quote."
-msgstr ""
+msgstr "閉じ引用符の後にスペースが必要です。"
 
 #: Utils.cpp:76
 #, kde-format
 msgid "Unmatched quote."
-msgstr ""
+msgstr "引用符が一致していません。"
 
 #: Utils.cpp:85
 #, kde-format
 msgid "Unexpected quote character within argument."
-msgstr ""
+msgstr "引数内に予期しない引用符があります。"
 
 #: Utils.cpp:92
 #, kde-format
 msgid "No program specified."
-msgstr ""
+msgstr "プログラムが指定されていません。"
 
 #, fuzzy
 #~| msgid "Opening files..."
 #~ msgctxt ""
 #~ msgid "Open File"
-#~ msgstr "ファイルを開いています..."
+#~ msgstr "ファイルを開く"
 
 #~ msgid "Dest"
 #~ msgstr "先"
