@@ -13,26 +13,29 @@
 
 #include "TypeUtils.h"
 
-#include <QStringList>
+#include <QList>
 
-template <unsigned int N>
-class RecentItems: public QStringList
+template <unsigned int N, typename T = QString>
+class RecentItems: public QList<T>
 {
   public:
-    using QStringList::QStringList;
+    using QList<T>::QList;
+    using QList<T>::removeAll;
+    using QList<T>::size;
+    using QList<T>::removeLast;
 
-    void push_back(const QString &s) = delete;
-    void append(const QString &) = delete;
+    void push_back(const T &s) = delete;
+    void append(const T &) = delete;
 
     //since prepend is non-virual we must override push_front as well
-    void push_front(const QString &s) { prepend(s); };
+    void push_front(const T &s) { prepend(s); };
 
-    void prepend(const QString &s)
+    void prepend(const T &s)
     {
         // If an item exist, remove it from the list and reinsert it at the beginning.
         removeAll(s);
 
-        if(!s.isEmpty()) QStringList::prepend(s);
+        if(!s.isEmpty()) QList<T>::prepend(s);
         if(size() > maxNofRecent) removeLast();
         assert(size() <= maxNofRecent);
     }
