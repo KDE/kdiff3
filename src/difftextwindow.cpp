@@ -463,7 +463,7 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
     QFontMetrics fm = painter.fontMetrics();
     {
         qint32 lineHeight = fm.height() + fm.ascent();
-        const QRectF headerRect(0, 5, view.width(), 3 * (lineHeight));
+        const QRectF headerRect(0, 5, view.width(), 3 * lineHeight);
         QTextOption options;
         options.setWrapMode(QTextOption::WordWrap);
         // TODO: transition to Qt::LayoutDirectionAuto

@@ -728,7 +728,7 @@ QString FileAccess::absoluteFilePath() const
 const QString& FileAccess::fileName(bool needTmp) const
 {
     if(!isLocal())
-        return (needTmp) ? m_localCopy : m_name;
+        return needTmp ? m_localCopy : m_name;
     else
         return m_name;
 }

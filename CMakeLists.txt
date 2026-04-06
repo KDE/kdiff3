@@ -149,8 +149,8 @@ if(ENABLE_AUTO)
 endif()
 
 add_definitions(
-    -DBOOST_NO_CXX98_FUNCTION_BASE # since we use the header only portion of boost we can hardcode this. This forces c++17 compliance inside boost-headers.
-    -DQT_NO_CONTEXTLESS_CONNECT
+    -DBOOST_NO_CXX98_FUNCTION_BASE # since we use the header only portion of boost we can hardcode this. This forces boost to avoid long depricated Cxx98 processing functions (i.e. std::unary_function and friends).
+    -DQT_NO_CONTEXTLESS_CONNECT # Avoid this confusing unexpected static overload
     -DQT_DEPRECATED_WARNINGS # Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII # casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
