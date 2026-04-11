@@ -102,10 +102,10 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
         for(; ; p1.next(), p2.next())
         {
             // Advance to the next non-whitespace character or EOL. We use ASCII/Latin1 rules for this
-            while (p1.hasPeek() && isspace(p1.tryPeek()->toLatin1())) {
+            while (p1.hasPeek() && isspace((unsigned char)p1.tryPeek()->toLatin1())) {
                 p1.next();
             }
-            while (p2.hasPeek() && isspace(p2.tryPeek()->toLatin1())) {
+            while (p2.hasPeek() && isspace((unsigned char)p2.tryPeek()->toLatin1())) {
                 p2.next();
             }
 
