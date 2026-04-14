@@ -1,24 +1,25 @@
-# SPDX-FileCopyrightText: 2023 Johannes Obermayr <johannesobermayr@gmx.de>
-# SPDX-FileCopyrightText: 2003, 2004 Thomas Diehl <thd@kde.org>
-# SPDX-FileCopyrightText: 2004, 2005, 2006 Joachim Eibl <joachim.eibl@gmx.de>
+# SPDX-FileCopyrightText: 2003-2004 Thomas Diehl <thd@kde.org>
 # SPDX-FileCopyrightText: 2004, 2006 Thomas Reitelbach <tr@erdfunkstelle.de>
-# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2018, 2020, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
-# SPDX-FileCopyrightText: 2008, 2009, 2011, 2012, 2013, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2004-2006 Joachim Eibl <joachim.eibl@gmx.de>
+# SPDX-FileCopyrightText: 2008-2009, 2011-2013, 2018-2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2008-2012, 2018, 2020, 2022-2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2022, 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2023 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2026 Alexander Becker <alex-at-kde-l10n-de@freenet.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-17 02:42+0000\n"
-"PO-Revision-Date: 2025-10-20 23:02+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2026-04-13 20:36+0200\n"
+"Last-Translator: Alexander Becker <alex-at-kde-l10n-de@freenet.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -73,17 +74,17 @@ msgstr "Datei wird gelöscht: %1"
 #: DefaultFileAccessJobHandler.cpp:297
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
-msgstr "Symbolische Verknüpfung wird erstellt: %1 -> %2"
+msgstr "Symbolische Verknüpfung wird erstellt: %1 → %2"
 
 #: DefaultFileAccessJobHandler.cpp:327
 #, kde-format
 msgid "Renaming file: %1 -> %2"
-msgstr "Datei wird umbenannt: %1 -> %2"
+msgstr "Datei wird umbenannt: %1 → %2"
 
 #: DefaultFileAccessJobHandler.cpp:368
 #, kde-format
 msgid "Copying file: %1 -> %2"
-msgstr "Datei wird kopiert: %1 -> %2"
+msgstr "Datei wird kopiert: %1 → %2"
 
 #: DefaultFileAccessJobHandler.cpp:390
 #, kde-format
@@ -308,7 +309,7 @@ msgstr "Nicht gespeichert."
 #, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
-msgstr "In Bearbeitung ..."
+msgstr "In Bearbeitung …"
 
 #: directorymergewindow.cpp:486
 #, kde-format
@@ -432,7 +433,7 @@ msgstr "Parameter-Warnung"
 #: directorymergewindow.cpp:875
 #, kde-format
 msgid "Scanning folders..."
-msgstr "Ordner werden eingelesen ..."
+msgstr "Ordner werden eingelesen …"
 
 #: directorymergewindow.cpp:897
 #, kde-format
@@ -714,7 +715,7 @@ msgstr "Fehler: Löschoperation fehlgeschlagen."
 #: directorymergewindow.cpp:2517
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr "Manuelles Zusammenführen( %1, %2, %3 -> %4)"
+msgstr "Manuelles Zusammenführen( %1, %2, %3 → %4)"
 
 #: directorymergewindow.cpp:2520
 #, kde-format
@@ -726,13 +727,13 @@ msgstr "     Hinweis: Nach manuellem Zusammenführen mit F7 fortsetzen."
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
-"Fehler: Kopie( %1 -> %2 ) fehlgeschlagen. Das existierende Ziel kann nicht "
+"Fehler: Kopie( %1 → %2 ) fehlgeschlagen. Das existierende Ziel kann nicht "
 "gelöscht werden."
 
 #: directorymergewindow.cpp:2556
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
-msgstr "Verknüpfung kopieren( %1 -> %2 )"
+msgstr "Verknüpfung kopieren( %1 → %2 )"
 
 #: directorymergewindow.cpp:2565
 #, kde-format
@@ -749,19 +750,19 @@ msgstr "Fehler: Verknüpfung kopieren fehlgeschlagen."
 #: directorymergewindow.cpp:2598
 #, kde-format
 msgid "copy( %1 -> %2 )"
-msgstr "kopieren( %1 -> %2 )"
+msgstr "kopieren( %1 → %2 )"
 
 #: directorymergewindow.cpp:2624
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
-"Fehler beim Umbenennen( %1 -> %2 ): Das existierende Ziel kann nicht "
-"gelöscht werden."
+"Fehler beim Umbenennen( %1 → %2 ): Das existierende Ziel kann nicht gelöscht "
+"werden."
 
 #: directorymergewindow.cpp:2631
 #, kde-format
 msgid "rename( %1 -> %2 )"
-msgstr "Umbenennen( %1 -> %2 )"
+msgstr "Umbenennen( %1 → %2 )"
 
 #: directorymergewindow.cpp:2640
 #, kde-format
@@ -887,7 +888,7 @@ msgstr "Ziel: "
 #: directorymergewindow.cpp:2845
 #, kde-format
 msgid "Save Folder Merge State As..."
-msgstr "Status der Ordnerzusammenführung speichern unter ..."
+msgstr "Status der Ordnerzusammenführung speichern unter …"
 
 #: directorymergewindow.cpp:2952
 #, kde-format
@@ -1226,7 +1227,7 @@ msgstr "Blendet die Statusleiste ein/aus"
 #: kdiff3.cpp:771
 #, kde-format
 msgid "Configure KDiff3..."
-msgstr "KDiff3 einrichten ..."
+msgstr "KDiff3 einrichten …"
 
 #: kdiff3.cpp:777
 #, kde-format
@@ -1655,17 +1656,17 @@ msgstr ""
 #: kdiff3.cpp:968
 #, kde-format
 msgid "Saving file..."
-msgstr "Datei wird gespeichert ..."
+msgstr "Datei wird gespeichert …"
 
 #: kdiff3.cpp:985
 #, kde-format
 msgid "Saving file with a new filename..."
-msgstr "Datei wird unter neuem Namen gespeichert ..."
+msgstr "Datei wird unter neuem Namen gespeichert …"
 
 #: kdiff3.cpp:987
 #, kde-format
 msgid "Save As..."
-msgstr "Speichern unter ..."
+msgstr "Speichern unter …"
 
 #: kdiff3.cpp:1010
 #, kde-format
@@ -1675,7 +1676,7 @@ msgstr "Eine Druckfunktion ist zurzeit noch nicht verfügbar."
 #: kdiff3.cpp:1051
 #, kde-format
 msgid "Printing..."
-msgstr "Druckvorgang läuft ..."
+msgstr "Druckvorgang läuft …"
 
 #: kdiff3.cpp:1149
 #, kde-format
@@ -1701,12 +1702,12 @@ msgstr "Drucken abgebrochen."
 #: kdiff3.cpp:1237
 #, kde-format
 msgid "Exiting..."
-msgstr "Wird beendet ..."
+msgstr "Wird beendet …"
 
 #: kdiff3.cpp:1247
 #, kde-format
 msgid "Toggle the statusbar..."
-msgstr "Statusleiste anzeigen/ausblenden ..."
+msgstr "Statusleiste anzeigen/ausblenden …"
 
 #. i18n: ectx: Menu (file)
 #: kdiff3_shell.rc:4
@@ -1915,7 +1916,7 @@ msgstr "Datum & Größe: "
 #, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
-msgstr "Datei wird verglichen ..."
+msgstr "Datei wird verglichen …"
 
 #: mergeresultwindow.cpp:145
 #, kde-format
@@ -2148,13 +2149,13 @@ msgstr "Ziel (optional):"
 #: opendialog.ui:75 opendialog.ui:202 opendialog.ui:246 opendialog.ui:257
 #, kde-format
 msgid "File..."
-msgstr "Datei ..."
+msgstr "Datei …"
 
 #. i18n: ectx: property (text), widget (QPushButton, swapCopy)
 #: opendialog.ui:107
 #, kde-format
 msgid "Swap/Copy Names..."
-msgstr "Namen tauschen/kopieren ..."
+msgstr "Namen tauschen/kopieren …"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: opendialog.ui:129
@@ -2169,7 +2170,7 @@ msgstr "C (Optional):"
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
 #, kde-format
 msgid "Folder..."
-msgstr "Ordner ..."
+msgstr "Ordner …"
 
 #: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
@@ -3378,22 +3379,22 @@ msgstr "Zusammenführung fortsetzen"
 #: pdiff.cpp:737 pdiff.cpp:828
 #, kde-format
 msgid "Opening files..."
-msgstr "Dateien werden geöffnet ..."
+msgstr "Dateien werden geöffnet …"
 
 #: pdiff.cpp:917
 #, kde-format
 msgid "Cutting selection..."
-msgstr "Auswahl wird ausgeschnitten ..."
+msgstr "Auswahl wird ausgeschnitten …"
 
 #: pdiff.cpp:924
 #, kde-format
 msgid "Copying selection to clipboard..."
-msgstr "Auswahl wird in Zwischenablage kopiert ..."
+msgstr "Auswahl wird in Zwischenablage kopiert …"
 
 #: pdiff.cpp:933
 #, kde-format
 msgid "Inserting clipboard contents..."
-msgstr "Inhalt der Zwischenablage wird eingefügt ..."
+msgstr "Inhalt der Zwischenablage wird eingefügt …"
 
 #: pdiff.cpp:1018
 #, kde-format
@@ -3469,7 +3470,7 @@ msgstr "%1<->Ziel tauschen"
 #: smalldialogs.cpp:108
 #, kde-format
 msgid "Configure..."
-msgstr "Einrichten ..."
+msgstr "Einrichten …"
 
 #: smalldialogs.cpp:161
 #, kde-format
@@ -3664,7 +3665,7 @@ msgstr "Datei %1 kann nicht gelesen werden"
 #: StandardMenus.cpp:23
 #, kde-format
 msgid "Opens documents for comparison..."
-msgstr "Dateien für Vergleich öffnen ..."
+msgstr "Dateien für Vergleich öffnen …"
 
 #: StandardMenus.cpp:25
 #, kde-format
@@ -3681,7 +3682,7 @@ msgstr ""
 #: StandardMenus.cpp:30
 #, kde-format
 msgid "Saves the current document as..."
-msgstr "Speichert das aktuelle Dokument als ..."
+msgstr "Speichert das aktuelle Dokument unter …"
 
 #: StandardMenus.cpp:33
 #, kde-format
