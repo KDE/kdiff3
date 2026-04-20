@@ -369,9 +369,9 @@ void ProgressDialog::recalc(bool bUpdate)
 
                     ++i;
                     if(i != m_progressStack.end())
-                        dialogUi.subProgressBar->setValue((qint32)lround(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin)));
+                        dialogUi.subProgressBar->setValue((qint32)std::llround(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin)));
                     else
-                        dialogUi.subProgressBar->setValue((qint32)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
+                        dialogUi.subProgressBar->setValue((qint32)std::llround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }
 
                 if(!m_bStayHidden)
