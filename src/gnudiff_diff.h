@@ -41,6 +41,11 @@ typedef qint64 GNULineRef;
 #define GNULINEREF_MAX std::numeric_limits<GNULineRef>::max()
 static_assert(std::is_signed<GNULineRef>::value, "GNULineRef must be signed.");
 static_assert(sizeof(GNULineRef) >= sizeof(size_t), "GNULineRef must be able to receive size_t values.");
+static_assert(sizeof(GNULineRef) >= sizeof(ptrdiff_t), "GNULineRef must be able to receive ptrdiff_t values.");
+//generally true from flat memory layouts such those in x86-64 but not technically guaranteed by the standard.
+//Platforms failing this test are not offically supported by KDiff3.
+static_assert(sizeof(size_t) == sizeof(ptrdiff_t), "size_t must be match size of ptrdiff_t as this is assumed.");
+
 
 class GnuDiff
 {
