@@ -96,6 +96,7 @@ void ProgressDialog::initConnections()
     connections.push_back(ProgressProxy::wasCancelled.connect(boost::bind(&ProgressDialog::wasCancelled, this)));
 
     connections.push_back(ProgressProxy::setInformationSig.connect(boost::bind(
+        //NOLINTNEXTLINE(readability-redundant-casting): overload resolution requires this explicit conversion.
         static_cast<void (ProgressDialog::*)(const QString&, bool)>(&ProgressDialog::setInformation),
         this,
         placeholders::_1, placeholders::_2)));
