@@ -980,6 +980,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
         if(dirC.isValid())
             s += u'\n' + i18n("Number of manual merges: %1", nofManualMerges);
+
+        // To hide unneeded already progress dialog
+        pp.finishManually();
+
         KMessageBox::information(mWindow, s);
         //
         //TODO

@@ -30,7 +30,21 @@ ProgressScope::ProgressScope()
 
 ProgressScope::~ProgressScope()
 {
-    ProgressProxy::pop(false);
+    finish();
+}
+
+void ProgressScope::finish()
+{
+    if (m_autoPop) {
+        ProgressProxy::pop(false);
+    }
+}
+
+void ProgressScope::finishManually()
+{
+    finish();
+
+    m_autoPop = false;
 }
 
 void ProgressProxy::setInformation(const QString& info, bool bRedrawUpdate)
