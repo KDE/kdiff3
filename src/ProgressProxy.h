@@ -29,6 +29,14 @@ class ProgressScope
   public:
     ProgressScope();
     ~ProgressScope();
+
+    void finishManually();
+
+  private:
+    void finish();
+
+  private:
+    bool m_autoPop = true;
 };
 
 class ProgressProxy
