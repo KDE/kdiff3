@@ -2972,6 +2972,9 @@ msgid ""
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
+"如果启用，将自动检测编码。\n"
+"如果无法自动找到文件的编码，则选中上一次使用的编码。\n"
+" (Unicode 检测取决于文件的前几个字节。)"
 
 #: optiondialog.cpp:1330 optiondialog.cpp:1341 optiondialog.cpp:1352
 #, kde-format
