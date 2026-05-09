@@ -1093,7 +1093,9 @@ void DiffTextWindowData::writeLine(
     //TODO: Fix after line number area is converted to a QWidget.
     const qint32 lineNumberWidth = gOptions->m_bShowLineNumbers ? m_pDiffTextWindow->getLineNumberWidth() : 0;
 
-    const LineData* pld = !srcLineIdx.isValid() ? nullptr : &(*m_pLineData)[srcLineIdx]; // Text in this line;
+    const LineData* pld = (srcLineIdx.isValid() && (size_t)srcLineIdx < m_pLineData->size())
+        ? &(*m_pLineData)[srcLineIdx]
+        : nullptr; // Text in this line;
     QFont normalFont = p.font();
 
     const QFontMetrics& fm = p.fontMetrics();
