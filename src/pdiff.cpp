@@ -119,6 +119,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         // Because of the progress dialog paint events can occur, but data is invalid,
         // so painting must be suppressed
         setLockPainting(true);
+        if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
+        if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
+        if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
     }
 
     if(bLoadFiles)
