@@ -751,7 +751,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(fileRecord)];
 
-            mfi.setFileInfoB(&(fileRecord));
+            mfi.setFileInfoB(&fileRecord);
         }
     }
 
@@ -761,7 +761,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(fileRecord)];
 
-            mfi.setFileInfoC(&(fileRecord));
+            mfi.setFileInfoC(&fileRecord);
         }
     }
 }
