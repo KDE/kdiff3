@@ -74,8 +74,7 @@ class EncodedDataStream: public QDataStream
         mError = decoder.hasError() || (s.isEmpty() && atEnd());
         if(mError)
         {
-            s[0] = QChar::SpecialCharacter::ReplacementCharacter;
-            s[1] = QChar::SpecialCharacter::Null;
+            s = QChar::SpecialCharacter::ReplacementCharacter;
         }
 
         return len;
