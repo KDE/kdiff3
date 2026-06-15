@@ -97,7 +97,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
     button2 = dialogUi.selectOutputFolder;
     chk_connect_a(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
-    chk_connect_a(dialogUi.mergeCheckBox, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
+    chk_connect_a(dialogUi.mergeCheckBox, &QCheckBox::checkStateChanged, this, &OpenDialog::internalSlot);
     chk_connect_a(this, &OpenDialog::internalSignal, dialogUi.lineOut, &QComboBox::setEnabled);
     chk_connect_a(this, &OpenDialog::internalSignal, button, &QPushButton::setEnabled);
     chk_connect_a(this, &OpenDialog::internalSignal, button2, &QPushButton::setEnabled);

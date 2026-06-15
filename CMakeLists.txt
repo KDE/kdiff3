@@ -158,17 +158,17 @@ add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
     -DQT_EXPLICIT_QFILE_CONSTRUCTION_FROM_PATH # preemptive for forward compatibility with Qt 6.9+
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060800    # warn if deprecated at 6.8 or before. Qt default setting is not useful for kdiff3.
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x060700    # disable deprecated api for Qt<6.7.
+    -DQT_DEPRECATED_WARNINGS_SINCE=0x060B00    # warn if deprecated at 6.11 or before. Qt default setting is not useful for kdiff3.
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x060900    # disable deprecated api for Qt<6.9.
     # Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     # the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     # KF5 5.64+ flags
-    # Don't warn for API deprecated after 6.6.0 (below as hex.hex.hex number)
-    -DKF_DISABLE_DEPRECATED_BEFORE=0x060200#disable deprecated api for KF 6.2.
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060900
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060900
-    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x060900
+    # Don't warn for API deprecated after 6.15.0 (below as hex.hex.hex number)
+    -DKF_DISABLE_DEPRECATED_BEFORE=0x060400#disable deprecated api for KF 6.4.
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x060F00
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060F00
+    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x060F00
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
