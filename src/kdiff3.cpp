@@ -815,7 +815,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     mGoPrevUnsolvedConflict->setToolTip(mGoPrevUnsolvedConflict->text() + includeWhitespace);
     mGoNextUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Unsolved Conflict"), QIcon(QPixmap(nextunsolved)), i18n("Next\nUnsolved"), QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_PageDown), this, &KDiff3App::slotGoNextUnsolvedConflict, ac, "go_next_unsolved_conflict");
     mGoNextUnsolvedConflict->setToolTip(mGoNextUnsolvedConflict->text() + includeWhitespace);
-    mGotoLine = GuiUtils::createAction<QAction>(i18nc("Title for menu item", "Go to Line"), QIcon(QPixmap(gotoline)), i18nc("Text used for toolbar button.", "Go\nLine"), QKeySequence(Qt::CTRL | Qt::Key_G), this, &KDiff3App::slotGoToLine, ac, "go_to_line");
+    mGotoLine = GuiUtils::createAction<QAction>(i18nc("Title for menu item", "Go to Line"), QIcon(QPixmap(gotoline)), i18nc("Text used for toolbar button.", "Go\nLine"), QKeySequence(Qt::CTRL | Qt::Key_G, Qt::CTRL | Qt::Key_L), this, &KDiff3App::slotGoToLine, ac, "go_to_line");
     mGotoLine->setToolTip(mGoNextUnsolvedConflict->text() + ".\n" + i18nc("Tooltip Text", "Goto specified line."));
     chooseA = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From A"), QIcon(QPixmap(iconA)), i18nc("Text used for select A toolbar button.", "Choose\nA"), QKeySequence(Qt::CTRL | Qt::Key_1), this, [this]{choose(e_SrcSelector::A);}, ac, "merge_choose_a");
     chooseB = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From B"), QIcon(QPixmap(iconB)), i18nc("Text used for select B when toolbar button.", "Choose\nB"), QKeySequence(Qt::CTRL | Qt::Key_2), this, [this]{choose(e_SrcSelector::B);}, ac, "merge_choose_b");
