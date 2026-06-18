@@ -176,6 +176,7 @@ const std::shared_ptr<LineDataVector>& SourceData::getLineDataForDisplay() const
 
 LineType SourceData::getSizeLines() const
 {
+    assert(m_normalData.m_pBuf != nullptr);
     return SafeInt<LineType>(m_normalData.lineCount());
 }
 
