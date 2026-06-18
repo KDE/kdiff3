@@ -296,6 +296,7 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
 
 qint32 DiffTextWindow::getLineNumberWidth() const
 {
+    assert(d->mSourceData != nullptr);
     return std::floor(std::log10(std::max(d->mSourceData->lineCount(), 1))) + 1;
 }
 
@@ -1393,16 +1394,20 @@ QString DiffTextWindowData::getLineString(const LineType line) const
 
 void DiffTextWindow::resizeEvent(QResizeEvent* e)
 {
-    QSize newSize = e->size();
-    QFontMetrics fm = fontMetrics();
-    LineType visibleLines = newSize.height() / fm.lineSpacing() - 2;
-    //TODO: Fix after line number area is converted to a QWidget.
-    qint32 visibleColumns = newSize.width() / fm.horizontalAdvance(u'0') - d->leftInfoWidth();
+    //Qt sends resize events before init under certain conditions. No good way to avoid this so just tell Qt to handle it.
+    if(d->mSourceData != nullptr)
+    {
+        QSize newSize = e->size();
+        QFontMetrics fm = fontMetrics();
+        LineType visibleLines = newSize.height() / fm.lineSpacing() - 2;
+        //TODO: Fix after line number area is converted to a QWidget.
+        qint32 visibleColumns = newSize.width() / fm.horizontalAdvance(u'0') - d->leftInfoWidth();
 
-    if(e->size().height() != e->oldSize().height())
-        Q_EMIT resizeHeightChangedSignal(visibleLines);
-    if(e->size().width() != e->oldSize().width())
-        Q_EMIT resizeWidthChangedSignal(visibleColumns);
+        if(e->size().height() != e->oldSize().height())
+            Q_EMIT resizeHeightChangedSignal(visibleLines);
+        if(e->size().width() != e->oldSize().width())
+            Q_EMIT resizeWidthChangedSignal(visibleColumns);
+    }
     QWidget::resizeEvent(e);
 }
 
