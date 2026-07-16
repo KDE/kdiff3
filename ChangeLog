@@ -1,5 +1,18 @@
-Version 1.12.4 - 2025
-=========================\
+Version 1.12.5 - 2026
+=========================
+    - 77444e89 Michael Reeves reeves.87@gmail.com FIx crash when dealing with encoder errors.
+    - 7a2bb375 Ari Zulan git@zulan.net Fix paste crash while diff data is reinitialized
+    - 391cb01b Michael Reeves reeves.87@gmail.com Remove unneeded '(' nd ')'
+    - 72523562 Michael Reeves reeves.87@gmail.com Fix minor standard conformance issue.
+    - 28603631 Michael Reeves reeves.87@gmail.com Update inline linting suppression
+    - 815b5c7c Michael Reeves reeves.87@gmail.com Fix incorrect copy size in - DefaultFileAccessJobHandler::slotGetData
+    - 9c2f7ca7 Michael Reeves reeves.87@gmail.com restore clang-analyzer-cplusplus.NewDeleteLeaks no longer trigering in Qt headers as of Qt6
+    - a6d86377 Michael Reeves reeves.87@gmail.com Fix unintended narrowing cast
+    - 9aa5cc21 Igor Mironchik igor.mironchik@gmail.com Hide progress dialog during folders comparing before status message is shown.
+    - d708a466 Thomas Klausner wiz@gatalith.at Fix ctype(3) abuse. Avoids crashes on certain systems
+
+Version 1.12.4 - 2026
+=========================
 - Fix handling of non-BMP UTF-16 characters
   - Commit: `10451d18` (2025-09-23) — Michael Reeves
 
@@ -8,17 +21,14 @@ Version 1.12.4 - 2025
 
 
 Version 1.12.3 - 2025
-=========================\
+=========================
 *fix install bug prevent install for all users
 *fix crash on directory compare seen on windows 11 with context menu but theoretically possible on other platforms
 
-
-
-Version 1.12.1 - 2024
+Version 1.12.2 - 2024
 =========================
 *revert to old file load/save code due to missing data issues.
 *audit code and remove encoding error fail points - this will not remove the encoding errors themselves.
-
 
 
 Version 1.12.1 - 2024
