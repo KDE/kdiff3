@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 02:40+0000\n"
+"POT-Creation-Date: 2026-07-16 02:42+0000\n"
 "PO-Revision-Date: 2025-04-09 18:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -110,87 +110,87 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "嚴重內部錯誤"
 
-#: difftextwindow.cpp:662
+#: difftextwindow.cpp:663
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "檔案 %1：行 %2"
 
-#: difftextwindow.cpp:664
+#: difftextwindow.cpp:665
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "檔案 %1：無法取得行"
 
-#: difftextwindow.cpp:1987
+#: difftextwindow.cpp:1992
 #, kde-format
 msgid "Encoding:"
 msgstr "編碼："
 
-#: difftextwindow.cpp:1991 mergeresultwindow.cpp:2830 optiondialog.cpp:789
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2830 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "行結尾樣式："
 
-#: difftextwindow.cpp:2016
+#: difftextwindow.cpp:2021
 #, kde-format
 msgid "A (Base)"
 msgstr "A(基底)"
 
-#: difftextwindow.cpp:2018
+#: difftextwindow.cpp:2023
 #, kde-format
 msgid "Encoding: %1"
 msgstr "編碼：%1"
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2876
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2019
+#: difftextwindow.cpp:2024
 #, kde-format
 msgid "Line end style: %1"
 msgstr "行結尾樣式：%1"
 
-#: difftextwindow.cpp:2020
+#: difftextwindow.cpp:2025
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
 
-#: difftextwindow.cpp:2048 kdiff3.cpp:1067
+#: difftextwindow.cpp:2053 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "頂端行"
 
-#: difftextwindow.cpp:2058
+#: difftextwindow.cpp:2063
 #, kde-format
 msgid "End"
 msgstr "結束"
 
-#: difftextwindow.cpp:2114 smalldialogs.cpp:163
+#: difftextwindow.cpp:2119 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: difftextwindow.cpp:2160 optiondialog.cpp:389
+#: difftextwindow.cpp:2165 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 位元"
 
-#: difftextwindow.cpp:2161
+#: difftextwindow.cpp:2166
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 位元 (BOM)"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2167
 #, kde-format
 msgid "System"
 msgstr "系統"
 
-#: difftextwindow.cpp:2174
+#: difftextwindow.cpp:2179
 #, kde-format
 msgid "Other"
 msgstr "其他"
@@ -3496,23 +3496,23 @@ msgstr "將剪貼簿資料寫入暫存檔失敗。"
 msgid "From Clipboard"
 msgstr "從剪貼簿"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 不是一般檔案。"
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "檔案 %1 太大而無法處理。正在跳過。"
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    暫存檔是：%1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3527,7 +3527,7 @@ msgstr ""
 "\n"
 "前置處理指令將會被關閉。"
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3542,7 +3542,7 @@ msgstr ""
 "\n"
 "逐行比對預處理指令將被關閉。"
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

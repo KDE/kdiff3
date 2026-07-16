@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 02:40+0000\n"
+"POT-Creation-Date: 2026-07-16 02:42+0000\n"
 "PO-Revision-Date: 2021-09-17 20:07+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -110,90 +110,90 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "गंभीर आंतरिक त्रुटि"
 
-#: difftextwindow.cpp:662
+#: difftextwindow.cpp:663
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:664
+#: difftextwindow.cpp:665
 #, fuzzy, kde-format
 msgid "File %1: Line not available"
 msgstr "उपलब्ध नहीं"
 
-#: difftextwindow.cpp:1987
+#: difftextwindow.cpp:1992
 #, kde-format
 msgid "Encoding:"
 msgstr ""
 
-#: difftextwindow.cpp:1991 mergeresultwindow.cpp:2830 optiondialog.cpp:789
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2830 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "पंक्ति ख़त्म होने की शैलीः"
 
-#: difftextwindow.cpp:2016
+#: difftextwindow.cpp:2021
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "अ (बेस):"
 
-#: difftextwindow.cpp:2018
+#: difftextwindow.cpp:2023
 #, kde-format
 msgid "Encoding: %1"
 msgstr ""
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2876
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "DOS"
 msgstr ""
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "Unix"
 msgstr ""
 
-#: difftextwindow.cpp:2019
+#: difftextwindow.cpp:2024
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgid "Line end style: %1"
 msgstr "पंक्ति ख़त्म होने की शैलीः"
 
-#: difftextwindow.cpp:2020
+#: difftextwindow.cpp:2025
 #, kde-format
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2048 kdiff3.cpp:1067
+#: difftextwindow.cpp:2053 kdiff3.cpp:1067
 #, fuzzy, kde-format
 msgid "Top line"
 msgstr "शीर्ष पंक्ति %1"
 
-#: difftextwindow.cpp:2058
+#: difftextwindow.cpp:2063
 #, kde-format
 msgid "End"
 msgstr "अंत"
 
-#: difftextwindow.cpp:2114 smalldialogs.cpp:163
+#: difftextwindow.cpp:2119 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "फ़ाइलें खोली जा रही हैं..."
 
-#: difftextwindow.cpp:2160 optiondialog.cpp:389
+#: difftextwindow.cpp:2165 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr ""
 
-#: difftextwindow.cpp:2161
+#: difftextwindow.cpp:2166
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr ""
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2167
 #, kde-format
 msgid "System"
 msgstr ""
 
-#: difftextwindow.cpp:2174
+#: difftextwindow.cpp:2179
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -3454,24 +3454,24 @@ msgstr "क्लिपबोर्ड डाटा को अस्थाई �
 msgid "From Clipboard"
 msgstr "क्लिपबोर्ड से"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "कड़ियों की मिलावटें तथा सामान्य फ़ाइलें."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr ""
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3481,7 +3481,7 @@ msgid ""
 "The preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3491,7 +3491,7 @@ msgid ""
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"

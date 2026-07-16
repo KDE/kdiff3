@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 02:40+0000\n"
+"POT-Creation-Date: 2026-07-16 02:42+0000\n"
 "PO-Revision-Date: 2025-04-27 21:01+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -112,87 +112,87 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "கடுமையான உள்ளக சிக்கல்."
 
-#: difftextwindow.cpp:662
+#: difftextwindow.cpp:663
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "கோப்பு %1: வரி %2"
 
-#: difftextwindow.cpp:664
+#: difftextwindow.cpp:665
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "கோப்பு %1: வரி கிடைக்கவில்லை"
 
-#: difftextwindow.cpp:1987
+#: difftextwindow.cpp:1992
 #, kde-format
 msgid "Encoding:"
 msgstr "குறியாக்கம்"
 
-#: difftextwindow.cpp:1991 mergeresultwindow.cpp:2830 optiondialog.cpp:789
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2830 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "வரிமுடிவுகளின் முறை:"
 
-#: difftextwindow.cpp:2016
+#: difftextwindow.cpp:2021
 #, kde-format
 msgid "A (Base)"
 msgstr "A (மூலம்)"
 
-#: difftextwindow.cpp:2018
+#: difftextwindow.cpp:2023
 #, kde-format
 msgid "Encoding: %1"
 msgstr "குறியாக்கம் %1"
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2876
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "DOS"
 msgstr "டோஸ்"
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "Unix"
 msgstr "யுனிக்ஸ்"
 
-#: difftextwindow.cpp:2019
+#: difftextwindow.cpp:2024
 #, kde-format
 msgid "Line end style: %1"
 msgstr "வரிமுடிவுகளின் முறை: %1"
 
-#: difftextwindow.cpp:2020
+#: difftextwindow.cpp:2025
 #, kde-format
 msgid "Unknown"
 msgstr "தெரியாதது"
 
-#: difftextwindow.cpp:2048 kdiff3.cpp:1067
+#: difftextwindow.cpp:2053 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "முதல் வரி"
 
-#: difftextwindow.cpp:2058
+#: difftextwindow.cpp:2063
 #, kde-format
 msgid "End"
 msgstr "முடிவு"
 
-#: difftextwindow.cpp:2114 smalldialogs.cpp:163
+#: difftextwindow.cpp:2119 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "கோப்பை திற"
 
-#: difftextwindow.cpp:2160 optiondialog.cpp:389
+#: difftextwindow.cpp:2165 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "8 பிட்டு யூனிகோடு"
 
-#: difftextwindow.cpp:2161
+#: difftextwindow.cpp:2166
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "8 பிட்டு யூனிகோடு (BOM)"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2167
 #, kde-format
 msgid "System"
 msgstr ""
 
-#: difftextwindow.cpp:2174
+#: difftextwindow.cpp:2179
 #, kde-format
 msgid "Other"
 msgstr "வேறு"
@@ -3635,24 +3635,24 @@ msgstr "க்ளிப்போர்டின் எழுத்தின் �
 msgid "From Clipboard"
 msgstr "கிளிப் போர்டிலிருந்து."
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, fuzzy, kde-format
 #| msgid "Mix of links and normal files."
 msgid "%1 is not a normal file."
 msgstr "இணைப்புகள் மற்றும் கோப்புகள் கலந்து உள்ளன."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    தற்காலிக கோப்பு: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3667,7 +3667,7 @@ msgstr ""
 "\n"
 "முன்செயலிகள் கட்டளையை இப்பொழுதே முடக்கு,"
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3682,7 +3682,7 @@ msgstr ""
 "\n"
 "வரிசெல்களின் கட்டளையை இப்பொழுதே முடக்கு,"
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgctxt "Read error message. %1 = filepath"

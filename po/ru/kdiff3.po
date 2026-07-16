@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 02:40+0000\n"
+"POT-Creation-Date: 2026-07-16 02:42+0000\n"
 "PO-Revision-Date: 2025-10-30 19:44+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -115,87 +115,87 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Критическая внутренняя ошибка"
 
-#: difftextwindow.cpp:662
+#: difftextwindow.cpp:663
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Файл %1: Строка %2"
 
-#: difftextwindow.cpp:664
+#: difftextwindow.cpp:665
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Файл %1: строка недоступна"
 
-#: difftextwindow.cpp:1987
+#: difftextwindow.cpp:1992
 #, kde-format
 msgid "Encoding:"
 msgstr "Кодировка:"
 
-#: difftextwindow.cpp:1991 mergeresultwindow.cpp:2830 optiondialog.cpp:789
+#: difftextwindow.cpp:1996 mergeresultwindow.cpp:2830 optiondialog.cpp:789
 #, kde-format
 msgid "Line end style:"
 msgstr "Тип завершения строки:"
 
-#: difftextwindow.cpp:2016
+#: difftextwindow.cpp:2021
 #, kde-format
 msgid "A (Base)"
 msgstr "A (базовый):"
 
-#: difftextwindow.cpp:2018
+#: difftextwindow.cpp:2023
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Кодировка: %1"
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2876
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2876
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2019 mergeresultwindow.cpp:2875
+#: difftextwindow.cpp:2024 mergeresultwindow.cpp:2875
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2019
+#: difftextwindow.cpp:2024
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Тип завершения строки: %1"
 
-#: difftextwindow.cpp:2020
+#: difftextwindow.cpp:2025
 #, kde-format
 msgid "Unknown"
 msgstr "Неизвестный"
 
-#: difftextwindow.cpp:2048 kdiff3.cpp:1067
+#: difftextwindow.cpp:2053 kdiff3.cpp:1067
 #, kde-format
 msgid "Top line"
 msgstr "Первая строка"
 
-#: difftextwindow.cpp:2058
+#: difftextwindow.cpp:2063
 #, kde-format
 msgid "End"
 msgstr "Конец"
 
-#: difftextwindow.cpp:2114 smalldialogs.cpp:163
+#: difftextwindow.cpp:2119 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: difftextwindow.cpp:2160 optiondialog.cpp:389
+#: difftextwindow.cpp:2165 optiondialog.cpp:389
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 бит"
 
-#: difftextwindow.cpp:2161
+#: difftextwindow.cpp:2166
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 бит (BOM)"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2167
 #, kde-format
 msgid "System"
 msgstr "Система"
 
-#: difftextwindow.cpp:2174
+#: difftextwindow.cpp:2179
 #, kde-format
 msgid "Other"
 msgstr "Другое"
@@ -3590,23 +3590,23 @@ msgstr "Не удалось записать данные из буфера об
 msgid "From Clipboard"
 msgstr "Из буфера обмена"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 не является обычным файлом."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Файл %1 слишком велик для обработки. Пропускается."
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Временный файл: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3621,7 +3621,7 @@ msgstr ""
 "\n"
 "Команда препроцессора будет отключена."
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3637,7 +3637,7 @@ msgstr ""
 "\n"
 "Команда препроцессора для проверки соответствия строк будет отключена."
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
