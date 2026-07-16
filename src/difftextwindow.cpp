@@ -313,7 +313,7 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const
 
 qint32 DiffTextWindow::getLineNumberWidth() const
 {
-    assert(d->mSourceData != nullptr);
+    assert(d->sourceData != nullptr);
     return std::floor(std::log10(std::max(d->m_size, 1))) + 1;
 }
 
@@ -1416,7 +1416,7 @@ QString DiffTextWindowData::getLineString(const LineType line) const
 void DiffTextWindow::resizeEvent(QResizeEvent* e)
 {
     //Qt sends resize events before init under certain conditions. No good way to avoid this so just tell Qt to handle it.
-    if(d->mSourceData != nullptr)
+    if(d->sourceData != nullptr)
     {
         QSize newSize = e->size();
         QFontMetrics fm = fontMetrics();
