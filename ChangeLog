@@ -1,4 +1,39 @@
+
+
+Version 1.12.x - 2026
+=========================
+    - 77444e89 Michael Reeves reeves.87@gmail.com Fix crash when dealing with encoder errors.
+    - 7a2bb375 Ari Zulan git@zulan.net Fix paste crash while diff data is reinitialized
+    - 391cb01b Michael Reeves reeves.87@gmail.com Remove unneeded '(' nd ')'
+    - 72523562 Michael Reeves reeves.87@gmail.com Fix minor standard conformance issue.
+    - 28603631 Michael Reeves reeves.87@gmail.com Update inline linting suppression
+    - 815b5c7c Michael Reeves reeves.87@gmail.com Fix incorrect copy size in - DefaultFileAccessJobHandler::slotGetData
+    - 9c2f7ca7 Michael Reeves reeves.87@gmail.com restore clang-analyzer-cplusplus.NewDeleteLeaks no longer trigering in Qt headers as of Qt6
+    - a6d86377 Michael Reeves reeves.87@gmail.com Fix unintended narrowing cast
+    - 9aa5cc21 Igor Mironchik igor.mironchik@gmail.com Hide progress dialog during folders comparing before status message is shown.
+    - d708a466 Thomas Klausner wiz@gatalith.at Fix ctype(3) abuse. Avoids crashes on certain systems
+
+- Fix handling of non-BMP UTF-16 characters
+  - Commit: `10451d18` (2025-09-23) — Michael Reeves
+
+- Revert unintended condition change (regression fix)
+  - Commit: `1f86fde4` (2025-06-30) — Michael Reeves
+
+*fix install bug prevent install for all users
+*fix crash on directory compare seen on windows 11 with context menu but theoretically possible on other platforms
+*revert to old file load/save code due to missing data issues.
+*audit code and remove encoding error fail points - this will not remove the encoding errors themselves.
+*fixed horizontal scroll with track pad ignored.
+*reduce initial file load time
+*ignore encoding errors during merge this will become a warning.
+*adjust flatpak default flags.
+*drop unused Qt6Core5Compat depenancy check.
 *Completed port away from Qt5, 6.6 now required version due to delayed ICU support in Qt
+*Fixed UTF-8-BOM output encoding issues mostly seen on windows.
+*horizontal scroll correctly computed for diff windows
+--Note due to changes in windows/Qt the scrollbars may be vary small or hidden on Windows 11. This can't be controlled from kdiff3.
+*False errors on first launch with files selected should be fixed.
+
 
 Version 1.11.x - 2024
 ===========================
