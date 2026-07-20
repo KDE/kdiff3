@@ -5,7 +5,7 @@
 # Turn off policy change notices from CMake 3.30 and earlier
 cmake_minimum_required(VERSION 3.22...3.30)
 
-project(kdiff3 VERSION 1.12.70)
+project(kdiff3 VERSION 1.13.70)
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
     message(WARNING "gcc < 9.2 is not recommended support is best effort-only.")
