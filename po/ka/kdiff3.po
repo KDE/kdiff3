@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
+"POT-Creation-Date: 2026-07-21 00:46+0000\n"
 "PO-Revision-Date: 2025-11-19 05:34+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -108,94 +108,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "მძიმე შიდა შეცდომა"
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "ფაილი: %1: ხაზი: %2"
 
-#: difftextwindow.cpp:642
+#: difftextwindow.cpp:643
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "ფაილი %1: ხაზი მიუწდომელია"
 
-#: difftextwindow.cpp:1966
+#: difftextwindow.cpp:1971
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "კოდირება:"
 
-#: difftextwindow.cpp:1970
+#: difftextwindow.cpp:1975
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "ხაზის დასრულების სტილი:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr "A (ბაზა)"
 
-#: difftextwindow.cpp:1997
+#: difftextwindow.cpp:2002
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "კოდირება: %1"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "ხაზის დასრულების სტილი: %1"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2004
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "უცნობი"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "ზედა ხაზი"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
 msgstr "დასასრული"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "ფაილის გახსნა"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "8-ბიტიანი უნიკოდი"
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "უნიკოდი, 8-ბიტიანი (BOM)"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
 msgstr "სისტემა"
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
 msgstr "სხვა"
@@ -3622,23 +3622,23 @@ msgstr "ბუფერის მონაცემების დროებ�
 msgid "From Clipboard"
 msgstr "გაცვლის ბუფერიდან"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 ნორმალური ფაილი არაა."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "გამოტოვებულია ფაილი, რომელიც მეტისმეტად დიდია: %1."
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    დროებითი ფაილია: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3653,7 +3653,7 @@ msgstr ""
 "\n"
 "პრეპროცესინგის ბრძანება ახლა გაითიშება."
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3668,7 +3668,7 @@ msgstr ""
 "\n"
 "ხაზის დამთხვევის პრეპროცესინგის ბრძანება ახლა გაითიშება."
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

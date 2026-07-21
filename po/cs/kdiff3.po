@@ -3,31 +3,32 @@
 # SPDX-FileCopyrightText: 2010, 2011, 2013, 2014, 2015, 2017, 2018, 2019, 2020, 2023, 2024 Vít Pelčák <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
-"PO-Revision-Date: 2024-09-27 11:46+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"POT-Creation-Date: 2026-07-21 00:46+0000\n"
+"PO-Revision-Date: 2026-07-20 19:03+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Zdeněk Pech"
+msgstr "Zdeněk Pech,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "dom.toretto@seznam.cz"
+msgstr "dom.toretto@seznam.cz,libor.filipek@gmail.com"
 
 #: DefaultFileAccessJobHandler.cpp:56
 #, kde-format
@@ -109,94 +110,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Závažná interní chyba"
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Soubor %1: Řádek %2"
 
-#: difftextwindow.cpp:642
+#: difftextwindow.cpp:643
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Soubor %1: Řádek není dostupný"
 
-#: difftextwindow.cpp:1966
+#: difftextwindow.cpp:1971
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
-msgstr ""
+msgstr "Kódování:"
 
-#: difftextwindow.cpp:1970
+#: difftextwindow.cpp:1975
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
-msgstr ""
+msgstr "Styl konce řádku:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr "A (základní)"
 
-#: difftextwindow.cpp:1997
+#: difftextwindow.cpp:2002
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr ""
+msgstr "Kódování: %1"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
-msgstr ""
+msgstr "DOS"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr ""
+msgstr "Styl konce řádku: %1"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2004
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámý"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Horní řádek"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
 msgstr "Konec"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Otevřít soubor"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
 msgstr "Systém"
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
 msgstr "Jiné"
@@ -778,7 +779,7 @@ msgstr "Chyba při vytváření složky."
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
-msgstr ""
+msgstr "Cíl: "
 
 #: directorymergewindow.cpp:2733 directorymergewindow.cpp:2761
 #, kde-format
@@ -1079,55 +1080,55 @@ msgstr "Sloučit do A a B"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
-msgstr ""
+msgstr "Nelze zjistit plnou URL. Nebyl zadán rodič."
 
 #: fileaccess.cpp:538
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "Nebylo možné rozlišit nadřazené a podřazené."
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "Vypočítaná URL je:"
 
 #: fileaccess.cpp:800
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "Soubor nelze přečíst: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr ""
+msgstr "Uživatel zrušil operaci čtení v %1"
 
 #: fileaccess.cpp:872
 #, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr ""
+msgstr "Uživatel zrušil operaci zápisu."
 
 #: fileaccess.cpp:954
 #, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
-msgstr ""
+msgstr "Vytváření dočasné kopie %1 selhalo."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
 #, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
-msgstr ""
+msgstr "Otevření %1 selhalo. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
 #, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
-msgstr ""
+msgstr "Chyba při čtení z %1. %2"
 
 #: fileaccess.cpp:1128
 #, kde-format
@@ -1136,6 +1137,8 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
+"Při pokusu o vytvoření zálohy selhalo odstraňování staré zálohy. \n"
+"Název souboru: %1"
 
 #: fileaccess.cpp:1135
 #, kde-format
@@ -1144,6 +1147,8 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
+"Při pokusu o vytvoření zálohy selhalo přejmenování. \n"
+"Název souboru: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
@@ -2081,6 +2086,7 @@ msgstr "Chyba ukládání souboru"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
+"Výstupní soubor může obsahovat náhradní znaky za nerozpoznané kódové body."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2140,7 +2146,7 @@ msgstr "Kodek od C: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr ""
+msgstr "Vybrat soubor (zatím se neukládá)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3100,6 +3106,10 @@ msgid ""
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
+"Je-li tato možnost zapnutá, kódování se rozpozná automaticky.\n"
+"Pokud se kódování souboru nepodaří automaticky zjistit, použije se jako "
+"náhradní řešení vybrané kódování.\n"
+"(Rozpoznání Unicode závisí na prvních bajtech souboru.)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
@@ -3597,23 +3607,23 @@ msgstr "Zápis dat schránky do dočasného souboru selhal."
 msgid "From Clipboard"
 msgstr "Ze schránky"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 není místní soubor."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "Soubor %1 je pro zpracování moc velký. Přeskakuji."
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    Dočasný soubor je: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3628,7 +3638,7 @@ msgstr ""
 "\n"
 "Příkaz předběžného zpracování bude nyní vypnut."
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3643,7 +3653,7 @@ msgstr ""
 "\n"
 "Příkaz předběžného zpracování shody řádku bude nyní vypnut."
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"

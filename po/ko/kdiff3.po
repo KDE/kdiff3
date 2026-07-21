@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
+"POT-Creation-Date: 2026-07-21 00:46+0000\n"
 "PO-Revision-Date: 2026-04-26 21:39+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -108,94 +108,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "심각한 내부 오류"
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "파일 %1: 줄 %2"
 
-#: difftextwindow.cpp:642
+#: difftextwindow.cpp:643
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "파일 %1: 줄을 사용할 수 없음"
 
-#: difftextwindow.cpp:1966
+#: difftextwindow.cpp:1971
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "인코딩:"
 
-#: difftextwindow.cpp:1970
+#: difftextwindow.cpp:1975
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "줄 끝 스타일:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr "A(기반)"
 
-#: difftextwindow.cpp:1997
+#: difftextwindow.cpp:2002
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "인코딩: %1"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "유닉스"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "줄 끝 스타일: %1"
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2004
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "맨 첫 줄"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
 msgstr "끝"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "파일 열기"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "유니코드, 8비트"
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "유니코드, 8비트(BOM)"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
 msgstr "시스템"
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
 msgstr "기타"
@@ -3578,23 +3578,23 @@ msgstr "클립보드 데이터를 임시 파일로 저장할 수 없습니다."
 msgid "From Clipboard"
 msgstr "클립보드에서"
 
-#: SourceData.cpp:344
+#: SourceData.cpp:345
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1은(는) 일반 파일이 아닙니다."
 
-#: SourceData.cpp:381
+#: SourceData.cpp:382
 #, kde-format
 msgctxt "Error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr "%1 파일이 너무 커서 처리할 수 없습니다. 건너뜁니다."
 
-#: SourceData.cpp:410
+#: SourceData.cpp:411
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    임시 파일: %1"
 
-#: SourceData.cpp:448
+#: SourceData.cpp:449
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3609,7 +3609,7 @@ msgstr ""
 "\n"
 "전처리 명령을 비활성화합니다."
 
-#: SourceData.cpp:511
+#: SourceData.cpp:512
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3624,7 +3624,7 @@ msgstr ""
 "\n"
 "줄 일치 전처리 명령을 비활성화합니다."
 
-#: SourceData.cpp:517
+#: SourceData.cpp:518
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
