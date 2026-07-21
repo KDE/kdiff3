@@ -88,7 +88,7 @@ class SourceData
         friend SourceData;
         bool mHasBOM = false;
 
-        std::unique_ptr<char[]> m_pBuf; //TODO: Phase out needlessly wastes memory and time by keeping second copy of file data.
+        std::unique_ptr<char[]> m_pBuf = std::make_unique<char[]>(0); // TODO: Phase out needlessly wastes memory and time by keeping second copy of file data.
         quint64 mDataSize = 0;
         qint64 mLineCount = 0; // Number of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
         std::shared_ptr<QString> m_unicodeBuf = std::make_shared<QString>();
