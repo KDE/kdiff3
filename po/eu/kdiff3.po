@@ -1,16 +1,16 @@
 # Translation for kdiff3.po to Euskara/Basque (eu).
-# Copyright (C) 2018-2025 This file is copyright:
+# Copyright (C) 2018-2024 This file is copyright:
 # This file is distributed under the same license as the kdiff3 package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2020, 2021, 2022, 2023, 2024, 2025.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
-"PO-Revision-Date: 2025-12-06 11:05+0100\n"
+"POT-Creation-Date: 2026-07-24 02:41+0000\n"
+"PO-Revision-Date: 2024-10-13 09:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -110,94 +110,101 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Barneko errore larria"
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "%1 fitxategia: %2 lerroa"
 
-#: difftextwindow.cpp:642
+#: difftextwindow.cpp:643
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "%1 fitxategia: Lerro ez erabilgarri"
 
-#: difftextwindow.cpp:1966
-#, kde-format
+#: difftextwindow.cpp:1971
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Kodeketa:"
 
-#: difftextwindow.cpp:1970
-#, kde-format
+#: difftextwindow.cpp:1975
+#, fuzzy, kde-format
+#| msgid "Line end style:"
 msgctxt "@label:textbox"
 msgid "Line end style:"
-msgstr "Lerro-amaiera estiloa:"
+msgstr "Lerro amaiera estiloa:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Oinarria)"
 
-#: difftextwindow.cpp:1997
-#, kde-format
+#: difftextwindow.cpp:2002
+#, fuzzy, kde-format
+#| msgid "Encoding: %1"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Kodeketa: %1"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "Unix"
 msgctxt "@item:intext line ending type"
 msgid "Unix"
-msgstr "Unix"
+msgstr "UNIX"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "Line end style: %1"
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "Lerro-amaiera estiloa: %1"
+msgstr "Lerro amaiera estiloa: %1"
 
-#: difftextwindow.cpp:1999
-#, kde-format
+#: difftextwindow.cpp:2004
+#, fuzzy, kde-format
+#| msgid "Unknown"
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Goiko lerroa"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
 msgstr "Amaiera"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Ireki fitxategia"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
 msgstr "Sistema"
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
 msgstr "Bestelakoak"
@@ -790,7 +797,8 @@ msgstr "Errorea karpeta sortzean."
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
 #: directorymergewindow.cpp:2838
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Dest: "
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Jomuga: "
@@ -1091,61 +1099,70 @@ msgid "Merge to A && B"
 msgstr "Bateratu A eta B"
 
 #: fileaccess.cpp:526
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to determine full url. No parent specified."
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
-msgstr "Ezin du URL osoa zehaztu. Ez da gurasorik zehaztu."
+msgstr "Ezin da zehaztu URL osoa. Ez da gurasorik zehaztu."
 
 #: fileaccess.cpp:538
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr "Gurasoa eta haurra ezin ditu ezberdindu."
+msgstr ""
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr "Kalkulatutako URLa: "
+msgstr ""
 
 #: fileaccess.cpp:800
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Failed to read file: %1"
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
-msgstr "Fitxategia irakurtzea huts egin du: %1"
+msgstr "Ezin izan da fitxategia irakurri: %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "Erabiltzaileak %1 irakurtzeko eragiketa bertan behera utzi du"
+msgstr ""
 
 #: fileaccess.cpp:872
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "Erabiltzaileak idazteko eragiketa bertan behera utzi du."
+msgstr "Honek bateratze eragiketa guztiei eragiten die."
 
 #: fileaccess.cpp:954
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
-msgstr "%1(r)en aldi baterako kopia sortzea huts egin du."
+msgstr "Aldi baterako %1(r)en kopia sortzea huts egin du."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Opening %1 failed. %2"
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "%1 irekitzea huts egin du. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Error reading from %1. %2"
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Errorea %1(e)tik irakurtzean. %2"
 
 #: fileaccess.cpp:1128
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, deleting an older backup failed.\n"
+#| "Filename: %1"
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1156,14 +1173,17 @@ msgstr ""
 "Fitxategi-izena: %1"
 
 #: fileaccess.cpp:1135
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, renaming failed.\n"
+#| "Filenames: %1 -> %2"
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
 "Babes-kopia bat egiten saiatzean, berrizendatzea huts egin du.\n"
-"Fitxategi-izenak: %1 -> %2"
+"Fitxategi-izena: %1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
@@ -2112,7 +2132,6 @@ msgstr "Fitxategi gordetze errorea"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
-"Irteerako fitxategiak kode-puntu ezezagunen ordezko karaktereak izan ditzake."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2172,7 +2191,7 @@ msgstr "Cren kodeka: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr "Hautatu fitxategia (ez gorde oraindik)"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3128,7 +3147,12 @@ msgid "File Encoding for A:"
 msgstr "Aren fitxategi kodeketa:"
 
 #: optiondialog.cpp:1325
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then encoding will be automaticly detected.\n"
+#| "If the file's encoding can not be found automaticly then the selected "
+#| "encoding will be used as fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
@@ -3138,7 +3162,7 @@ msgstr ""
 "Gaitzen bada kodeketa automatikoki antzemango da.\n"
 "Fitxategiaren kodeketa automatikoki aurkitzerik ez badago, hautatutako "
 "kodeketa erreserbako gisa erabiliko da.\n"
-"(Unicode antzematea fitxategi bateko lehenengo byteen araberakoa da.)"
+"(Unicode antzematea fitxategi bateko lehenengo byten araberakoa da)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
@@ -3769,12 +3793,6 @@ msgstr "Espero ez ziren komatxoak daude argumentuan."
 #, kde-format
 msgid "No program specified."
 msgstr "Ez da programarik zehaztu."
-
-#, fuzzy
-#~| msgid "Open File"
-#~ msgctxt ""
-#~ msgid "Open File"
-#~ msgstr "Ireki fitxategia"
 
 #~ msgid "Dest"
 #~ msgstr "Jomuga"

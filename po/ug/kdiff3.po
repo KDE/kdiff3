@@ -7,26 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
-"PO-Revision-Date: 2026-05-31 18:25-0400\n"
-"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"POT-Creation-Date: 2026-07-24 02:41+0000\n"
+"PO-Revision-Date: 2013-09-08 07:04+0900\n"
+"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahranbay@gmail.com, gheyret@gmail.com"
+msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
 
 #: DefaultFileAccessJobHandler.cpp:56
 #, kde-format
@@ -34,16 +33,18 @@ msgid "Getting file status: %1"
 msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:111
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: DefaultFileAccessJobHandler.cpp:156
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: DefaultFileAccessJobHandler.cpp:192
 #, kde-format
@@ -51,22 +52,25 @@ msgid "Out of memory"
 msgstr "ئەسلەك يېتىشمىدى"
 
 #: DefaultFileAccessJobHandler.cpp:232
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: DefaultFileAccessJobHandler.cpp:256
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: DefaultFileAccessJobHandler.cpp:274
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Message for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: DefaultFileAccessJobHandler.cpp:296
 #, kde-format
@@ -84,10 +88,11 @@ msgid "Copying file: %1 -> %2"
 msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Status message"
 msgid "Reading folder: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: DefaultFileAccessJobHandler.cpp:447
 #, kde-format
@@ -106,97 +111,102 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr ""
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:642
-#, kde-format
+#: difftextwindow.cpp:643
+#, fuzzy, kde-format
+#| msgid "not available"
 msgid "File %1: Line not available"
-msgstr ""
+msgstr "ئىشلەتكىلى بولمايدۇ"
 
-#: difftextwindow.cpp:1966
-#, kde-format
+#: difftextwindow.cpp:1971
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "كودلاش:"
 
-#: difftextwindow.cpp:1970
+#: difftextwindow.cpp:1975
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr ""
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr ""
 
-#: difftextwindow.cpp:1997
-#, kde-format
+#: difftextwindow.cpp:2002
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr ""
+msgstr "كودلاش:"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
-msgstr ""
+msgstr "DOS"
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr ""
 
-#: difftextwindow.cpp:1998
+#: difftextwindow.cpp:2003
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr ""
 
-#: difftextwindow.cpp:1999
+#: difftextwindow.cpp:2004
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
-msgstr "يوچۇن"
+msgstr ""
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr ""
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
-msgstr "ئاخىر"
+msgstr "تامام"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
-#, kde-format
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
+#, fuzzy, kde-format
+#| msgid "File"
 msgid "Open File"
-msgstr "ھۆججەت ئاچ"
+msgstr "ھۆججەت"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr ""
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr ""
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
-msgstr "سىستېما"
+msgstr ""
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
-msgstr "باشقا"
+msgstr ""
 
 #: directorymergewindow.cpp:416
 #, kde-format
@@ -229,16 +239,18 @@ msgid "Delete A & B"
 msgstr ""
 
 #: directorymergewindow.cpp:431
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge"
 msgctxt "Operation column message"
 msgid "Merge to A"
-msgstr ""
+msgstr "بىرىكتۈر"
 
 #: directorymergewindow.cpp:434
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge"
 msgctxt "Operation column message"
 msgid "Merge to B"
-msgstr ""
+msgstr "بىرىكتۈر"
 
 #: directorymergewindow.cpp:437
 #, kde-format
@@ -253,10 +265,11 @@ msgid "Delete (if exists)"
 msgstr ""
 
 #: directorymergewindow.cpp:453
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge"
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
-msgstr "بىرلەشتۈر"
+msgstr "بىرىكتۈر"
 
 #: directorymergewindow.cpp:453
 #, kde-format
@@ -283,13 +296,15 @@ msgid "Error: Dates are equal but files are not."
 msgstr ""
 
 #: directorymergewindow.cpp:476
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Done."
 msgctxt "Status column message"
 msgid "Done"
-msgstr "تامام"
+msgstr "تامام."
 
 #: directorymergewindow.cpp:478
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Error"
 msgctxt "Status column message"
 msgid "Error"
 msgstr "خاتالىق"
@@ -319,19 +334,22 @@ msgid "To do."
 msgstr ""
 
 #: directorymergewindow.cpp:526
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Name"
 msgctxt "Column title"
 msgid "Name"
 msgstr "ئاتى"
 
 #: directorymergewindow.cpp:534
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Operation"
 msgctxt "Column title"
 msgid "Operation"
 msgstr "مەشغۇلات"
 
 #: directorymergewindow.cpp:536
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Status"
 msgctxt "Column title"
 msgid "Status"
 msgstr "ھالىتى"
@@ -349,13 +367,15 @@ msgid "Solved"
 msgstr ""
 
 #: directorymergewindow.cpp:542
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "White"
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr ""
+msgstr "ئاق"
 
 #: directorymergewindow.cpp:544
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "White"
 msgctxt "Column title"
 msgid "White"
 msgstr "ئاق"
@@ -369,22 +389,25 @@ msgstr ""
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
 #: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Warning"
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "ئاگاھلاندۇرۇش"
 
 #: directorymergewindow.cpp:693
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Rescan"
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "قايتا تەكشۈر"
 
 #: directorymergewindow.cpp:694
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Continue"
 msgctxt "Title for continue button"
 msgid "Continue Merging"
-msgstr ""
+msgstr "داۋاملاشتۇر"
 
 #: directorymergewindow.cpp:843
 #, kde-format
@@ -427,27 +450,31 @@ msgid "Parameter Warning"
 msgstr ""
 
 #: directorymergewindow.cpp:875
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Saving file..."
 msgid "Scanning folders..."
-msgstr ""
+msgstr "ھۆججەت ساقلاۋاتىدۇ…"
 
 #: directorymergewindow.cpp:897
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Status message"
 msgid "Reading Folder A"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: directorymergewindow.cpp:906
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Status message"
 msgid "Reading Folder B"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: directorymergewindow.cpp:916
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "Status message"
 msgid "Reading Folder C"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: directorymergewindow.cpp:932
 #, kde-format
@@ -462,7 +489,8 @@ msgid "Check the permissions of the subfolders."
 msgstr ""
 
 #: directorymergewindow.cpp:960
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ready."
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "تەييار."
@@ -493,11 +521,12 @@ msgid "Changing All Merge Operations"
 msgstr ""
 
 #: directorymergewindow.cpp:1332
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Processing "
 msgid ""
 "Processing %1 / %2\n"
 "%3"
-msgstr ""
+msgstr "بىر تەرەپ قىلىۋاتىدۇ "
 
 #: directorymergewindow.cpp:1378 directorymergewindow.cpp:1382
 #, kde-format
@@ -751,19 +780,22 @@ msgid "Dest: "
 msgstr ""
 
 #: directorymergewindow.cpp:2733 directorymergewindow.cpp:2761
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File"
 msgctxt "Header label"
 msgid "Folder"
-msgstr "قىسقۇچ"
+msgstr "ھۆججەت"
 
 #: directorymergewindow.cpp:2733
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Type"
 msgctxt "Header label"
 msgid "Type"
-msgstr "تۈرى"
+msgstr "تىپى"
 
 #: directorymergewindow.cpp:2733
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Size"
 msgctxt "Header label"
 msgid "Size"
 msgstr "چوڭلۇقى"
@@ -787,7 +819,8 @@ msgid "Link-Destination"
 msgstr ""
 
 #: directorymergewindow.cpp:2761
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File"
 msgctxt "Header label"
 msgid "File"
 msgstr "ھۆججەت"
@@ -799,7 +832,8 @@ msgid "-Link"
 msgstr ""
 
 #: directorymergewindow.cpp:2767
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "not available"
 msgctxt "Header label"
 msgid "not available"
 msgstr "ئىشلەتكىلى بولمايدۇ"
@@ -988,7 +1022,7 @@ msgstr "ھېچقانداق قىلما"
 #: directorymergewindow.cpp:2988 opendialog.ui:68
 #, kde-format
 msgid "Merge"
-msgstr "بىرلەشتۈر"
+msgstr "بىرىكتۈر"
 
 #: directorymergewindow.cpp:2989
 #, kde-format
@@ -1054,10 +1088,11 @@ msgid "Computed url is: "
 msgstr ""
 
 #: fileaccess.cpp:800
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
@@ -1109,7 +1144,7 @@ msgstr ""
 #: FontChooser.ui:23
 #, kde-format
 msgid "TextLabel"
-msgstr "تېكىستلىك ئەن"
+msgstr ""
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:36
@@ -1143,14 +1178,16 @@ msgid "Option --auto used, but no output file specified."
 msgstr ""
 
 #: kdiff3.cpp:368
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Directory"
 msgid "Directory merge"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #: kdiff3.cpp:373
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge"
 msgid "Merge info"
-msgstr ""
+msgstr "بىرىكتۈر"
 
 #: kdiff3.cpp:613
 #, kde-format
@@ -1327,18 +1364,20 @@ msgid ""
 msgstr ""
 
 #: kdiff3.cpp:809
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Line"
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr "قۇرغا يۆتكەل"
+msgstr "قۇر"
 
 #: kdiff3.cpp:809
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Line"
 msgctxt "Text used for toolbar button."
 msgid ""
 "Go\n"
 "Line"
-msgstr ""
+msgstr "قۇر"
 
 #: kdiff3.cpp:810
 #, kde-format
@@ -1395,12 +1434,13 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 
 #: kdiff3.cpp:814
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Autodetect"
 msgctxt "Auto goto next unsolved toolbar text."
 msgid ""
 "Auto\n"
 "Next"
-msgstr ""
+msgstr "ئۆزلۈكىدىن بايقا"
 
 #: kdiff3.cpp:816
 #, kde-format
@@ -1434,12 +1474,13 @@ msgid "Show Line Numbers"
 msgstr "قۇر نومۇرىنى كۆرسەت"
 
 #: kdiff3.cpp:819
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Show Line Numbers"
 msgctxt "Show line numbers toolbar text"
 msgid ""
 "Line\n"
 "Numbers"
-msgstr ""
+msgstr "قۇر نومۇرىنى كۆرسەت"
 
 #: kdiff3.cpp:821
 #, kde-format
@@ -1610,9 +1651,10 @@ msgid "Printing page %1 of %2"
 msgstr ""
 
 #: kdiff3.cpp:1185
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Selection"
 msgid " (Selection)"
-msgstr ""
+msgstr "تاللاش"
 
 #: kdiff3.cpp:1214
 #, kde-format
@@ -1672,9 +1714,10 @@ msgstr ""
 
 #. i18n: ectx: Menu (merge)
 #: kdiff3_shell.rc:73
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge"
 msgid "M&erge"
-msgstr ""
+msgstr "بىرىكتۈر"
 
 #. i18n: ectx: Menu (window)
 #: kdiff3_shell.rc:95
@@ -1745,9 +1788,10 @@ msgid "Ignore --auto and always show GUI."
 msgstr ""
 
 #: main.cpp:123 main.cpp:124
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Ignore"
 msgid "Ignored."
-msgstr ""
+msgstr "پەرۋا قىلما"
 
 #: main.cpp:126
 #, kde-format
@@ -1832,10 +1876,11 @@ msgid "Date & Size: "
 msgstr ""
 
 #: MergeFileInfos.cpp:481
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Saving file..."
 msgctxt "Status message"
 msgid "Comparing file..."
-msgstr ""
+msgstr "ھۆججەت ساقلاۋاتىدۇ…"
 
 #: mergeresultwindow.cpp:135
 #, kde-format
@@ -1953,10 +1998,11 @@ msgid ""
 msgstr ""
 
 #: mergeresultwindow.cpp:2647 mergeresultwindow.cpp:2656
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Conflicts"
 msgctxt "Dialog title"
 msgid "Conflicts Left"
-msgstr ""
+msgstr "توقۇنۇشلار"
 
 #: mergeresultwindow.cpp:2654
 #, kde-format
@@ -1991,9 +2037,10 @@ msgid "Error while writing."
 msgstr ""
 
 #: mergeresultwindow.cpp:2764
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Output"
 msgid "Output:"
-msgstr "چىقىرىش:"
+msgstr "چىقار"
 
 #: mergeresultwindow.cpp:2777 mergeresultwindow.cpp:2958
 #, kde-format
@@ -2001,9 +2048,10 @@ msgid "[Modified]"
 msgstr ""
 
 #: mergeresultwindow.cpp:2784
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgid "Encoding for saving:"
-msgstr ""
+msgstr "كودلاش:"
 
 #: mergeresultwindow.cpp:2792 optiondialog.cpp:787
 #, kde-format
@@ -2018,7 +2066,7 @@ msgstr ""
 #: mergeresultwindow.cpp:2838
 #, kde-format
 msgid "DOS"
-msgstr ""
+msgstr "DOS"
 
 #: mergeresultwindow.cpp:2884
 #, kde-format
@@ -2050,13 +2098,14 @@ msgstr ""
 #: opendialog.ui:24 progressdialog.ui:23
 #, kde-format
 msgid "Dialog"
-msgstr "سۆزلەشكۈ"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: opendialog.ui:47
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "B"
 msgid "B:"
-msgstr ""
+msgstr "B"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: opendialog.ui:54
@@ -2096,15 +2145,16 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, folderSelectA)
 #. i18n: ectx: property (text), widget (QPushButton, selectOutputFolder)
 #: opendialog.ui:213 opendialog.ui:224 opendialog.ui:235 opendialog.ui:290
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File"
 msgid "Folder..."
-msgstr "قىسقۇچ…"
+msgstr "ھۆججەت"
 
 #: optiondialog.cpp:105 optiondialog.cpp:117
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr "يوق"
+msgstr ""
 
 #: optiondialog.cpp:107 optiondialog.cpp:119
 #, kde-format
@@ -2118,7 +2168,7 @@ msgstr ""
 #: optiondialog.cpp:388
 #, kde-format
 msgid "Latin1"
-msgstr ""
+msgstr "Latin1"
 
 #: optiondialog.cpp:398
 #, kde-format
@@ -2152,7 +2202,8 @@ msgid "File view font"
 msgstr ""
 
 #: optiondialog.cpp:565
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Color"
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "رەڭ"
@@ -2308,13 +2359,15 @@ msgid "Unix"
 msgstr ""
 
 #: optiondialog.cpp:794
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "&Window"
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
-msgstr ""
+msgstr "كۆزنەك(&W)"
 
 #: optiondialog.cpp:795
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Autodetect"
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "ئۆزلۈكىدىن بايقا"
@@ -2330,12 +2383,12 @@ msgstr ""
 #: optiondialog.cpp:808
 #, kde-format
 msgid "Diff"
-msgstr "پەرق"
+msgstr "سېلىشتۇرۇش(Diff)"
 
 #: optiondialog.cpp:809
 #, kde-format
 msgid "Diff Settings"
-msgstr "پەرق تەڭشىكى"
+msgstr ""
 
 #: optiondialog.cpp:832
 #, kde-format
@@ -2425,10 +2478,11 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:892
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Merge"
 msgctxt "Settings page"
 msgid "Merge"
-msgstr "بىرلەشتۈر"
+msgstr "بىرىكتۈر"
 
 #: optiondialog.cpp:893
 #, kde-format
@@ -2593,10 +2647,11 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1083 optiondialog.cpp:1084
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File"
 msgctxt "Tab title label"
 msgid "Folder"
-msgstr "قىسقۇچ"
+msgstr "ھۆججەت"
 
 #: optiondialog.cpp:1104
 #, kde-format
@@ -2910,7 +2965,8 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Autodetect"
 msgid "Auto Detect"
 msgstr "ئۆزلۈكىدىن بايقا"
 
@@ -3038,16 +3094,18 @@ msgid "Disable Unsafe Options"
 msgstr ""
 
 #: pdiff.cpp:136
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "Status message"
 msgid "Loading A: %1"
-msgstr ""
+msgstr "كودلاش:"
 
 #: pdiff.cpp:146
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "Status message"
 msgid "Loading B: %1"
-msgstr ""
+msgstr "كودلاش:"
 
 #: pdiff.cpp:182 pdiff.cpp:222
 #, kde-format
@@ -3062,10 +3120,11 @@ msgid "Linediff: A <-> B"
 msgstr ""
 
 #: pdiff.cpp:207
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "Status message"
 msgid "Loading C: %1"
-msgstr ""
+msgstr "كودلاش:"
 
 #: pdiff.cpp:233
 #, kde-format
@@ -3167,7 +3226,7 @@ msgstr "تاللانغاننى كېسىۋاتىدۇ…"
 #: pdiff.cpp:924
 #, kde-format
 msgid "Copying selection to clipboard..."
-msgstr "تاللانغاننى چاپلاش تاختىسىغا كۆچۈرۈۋاتىدۇ…"
+msgstr "تاللانغاننى چاپلاش تاختىسىغا كۆچۈرۈۋاتىدۇ"
 
 #: pdiff.cpp:933
 #, kde-format
@@ -3177,12 +3236,12 @@ msgstr "چاپلاش تاختىسى مەزمۇنلىرىنى قىستۇرۇۋا�
 #: pdiff.cpp:1018
 #, kde-format
 msgid "Ok"
-msgstr "جەزملە"
+msgstr "Ok"
 
 #: pdiff.cpp:1034
 #, kde-format
 msgid "Go to Line"
-msgstr "قۇرغا يۆتكەل"
+msgstr ""
 
 #: pdiff.cpp:1301
 #, kde-format
@@ -3251,9 +3310,10 @@ msgid "Configure..."
 msgstr "سەپلە…"
 
 #: smalldialogs.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "File"
 msgid "Open Folder"
-msgstr "قىسقۇچ ئاچ"
+msgstr "ھۆججەت"
 
 #: smalldialogs.cpp:162
 #, kde-format
@@ -3268,7 +3328,7 @@ msgstr ""
 #: smalldialogs.cpp:316
 #, kde-format
 msgid "Case sensitive"
-msgstr "چوڭ كىچىك ھەرپنى پەرقلەندۈر"
+msgstr "چوڭ كىچىك يېزىلىشنى پەرقلەندۈر"
 
 #: smalldialogs.cpp:319
 #, kde-format
@@ -3447,7 +3507,7 @@ msgstr ""
 #: StandardMenus.cpp:31
 #, kde-format
 msgid "Quits the application"
-msgstr "پىروگراممىنى ئاخىرلاشتۇرىدۇ"
+msgstr "پروگراممىنى ئاخىرلاشتۇرىدۇ"
 
 #: StandardMenus.cpp:35
 #, kde-format
@@ -3494,14 +3554,10 @@ msgstr ""
 msgid "No program specified."
 msgstr ""
 
-#~| msgid "File"
-#~ msgctxt ""
-#~ msgid "Open File"
-#~ msgstr "ھۆججەت"
-
 #~ msgid "Unicode"
 #~ msgstr "يۇنىكود"
 
+#, fuzzy
 #~| msgid "KDiff3Part"
 #~ msgid "KDiff3 Part"
 #~ msgstr "KDiff3Part"
@@ -3515,6 +3571,7 @@ msgstr ""
 #~ msgid "C"
 #~ msgstr "C"
 
+#, fuzzy
 #~| msgid "Directory"
 #~ msgid "Open Directory"
 #~ msgstr "مۇندەرىجە"

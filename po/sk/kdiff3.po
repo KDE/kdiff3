@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
+"POT-Creation-Date: 2026-07-24 02:41+0000\n"
 "PO-Revision-Date: 2022-04-15 19:07+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -108,94 +108,101 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Závažná interná chyba"
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Súbor %1: Riadok %2"
 
-#: difftextwindow.cpp:642
+#: difftextwindow.cpp:643
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Súbor %1: Riadok nie je dostupný"
 
-#: difftextwindow.cpp:1966
-#, kde-format
+#: difftextwindow.cpp:1971
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Kódovanie:"
 
-#: difftextwindow.cpp:1970
-#, kde-format
+#: difftextwindow.cpp:1975
+#, fuzzy, kde-format
+#| msgid "Line end style:"
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Spôsob ukončenia riadka:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr "A (základ)"
 
-#: difftextwindow.cpp:1997
-#, kde-format
+#: difftextwindow.cpp:2002
+#, fuzzy, kde-format
+#| msgid "Encoding: %1"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Kódovanie: %1"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "Unix"
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "Line end style: %1"
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Spôsob ukončenia riadka: %1"
 
-#: difftextwindow.cpp:1999
-#, kde-format
+#: difftextwindow.cpp:2004
+#, fuzzy, kde-format
+#| msgid "Unknown"
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Vrchný riadok"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
 msgstr "Koniec"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Otvoriť súbor"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
-msgstr "Systém"
+msgstr "System"
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
 msgstr "Iné"
@@ -782,7 +789,8 @@ msgstr "Chyba počas vytvárania adresára."
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
 #: directorymergewindow.cpp:2838
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Dest: "
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Cieľ:"
@@ -1083,7 +1091,8 @@ msgid "Merge to A && B"
 msgstr "Zlúčiť do A && B"
 
 #: fileaccess.cpp:526
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to determine full url. No parent specified."
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr "Nemôžem určiť celé URL. Nebol učený predok."
@@ -1092,16 +1101,17 @@ msgstr "Nemôžem určiť celé URL. Nebol učený predok."
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr "Rodiča a potomka nebolo možné rozlíšiť."
+msgstr ""
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr "Vypočítaná URL je: "
+msgstr ""
 
 #: fileaccess.cpp:800
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Failed to read file: %1"
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Zlyhalo načítanie súboru: %1"
@@ -1110,34 +1120,41 @@ msgstr "Zlyhalo načítanie súboru: %1"
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "Používateľ zrušil operáciu čítania na %1"
+msgstr ""
 
 #: fileaccess.cpp:872
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
 msgctxt "@info:status"
 msgid "User cancelled write operation."
 msgstr "Toto ovplyvňuje všetky operácie zlúčenia."
 
 #: fileaccess.cpp:954
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Vytvorenie dočasnej kópie %1 zlyhalo."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Opening %1 failed. %2"
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Otvorenie %1 zlyhalo. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Error reading from %1. %2"
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Chyba pri čítaní z %1. %2"
 
 #: fileaccess.cpp:1128
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, deleting an older backup failed.\n"
+#| "Filename: %1"
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1147,7 +1164,10 @@ msgstr ""
 "Názov súboru: %1"
 
 #: fileaccess.cpp:1135
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, renaming failed.\n"
+#| "Filenames: %1 -> %2"
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -2088,7 +2108,6 @@ msgstr "Chyba ukladania súboru"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
-"Výstupný súbor môže obsahovať náhradné znaky pre nerozpoznané kódové body."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2148,7 +2167,7 @@ msgstr "Kodek z C: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr "Vybrať súbor (zatiaľ neukladať)"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3099,7 +3118,12 @@ msgid "File Encoding for A:"
 msgstr "Kódovanie súboru pre A:"
 
 #: optiondialog.cpp:1325
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then encoding will be automaticly detected.\n"
+#| "If the file's encoding can not be found automaticly then the selected "
+#| "encoding will be used as fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
@@ -3114,7 +3138,7 @@ msgstr ""
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
 msgid "Auto Detect"
-msgstr "Automatická detekcia"
+msgstr "Automatický výber"
 
 #: optiondialog.cpp:1334
 #, kde-format
@@ -3736,11 +3760,6 @@ msgstr "Neočakávaný apostrof v argumente."
 #, kde-format
 msgid "No program specified."
 msgstr "Neurčený žiadny program."
-
-#, fuzzy
-#~ msgctxt ""
-#~ msgid "Open File"
-#~ msgstr "Otvoriť súbor"
 
 #~ msgid "Dest"
 #~ msgstr "Cieľ"

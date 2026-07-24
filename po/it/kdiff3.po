@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-22 00:46+0000\n"
-"PO-Revision-Date: 2025-11-22 13:19+0100\n"
+"POT-Creation-Date: 2026-07-24 02:41+0000\n"
+"PO-Revision-Date: 2024-09-27 12:01+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -111,94 +111,101 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Grave errore interno"
 
-#: difftextwindow.cpp:640
+#: difftextwindow.cpp:641
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "File %1: riga %2"
 
-#: difftextwindow.cpp:642
+#: difftextwindow.cpp:643
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "File %1: riga non disponibile"
 
-#: difftextwindow.cpp:1966
-#, kde-format
+#: difftextwindow.cpp:1971
+#, fuzzy, kde-format
+#| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Codifica:"
 
-#: difftextwindow.cpp:1970
-#, kde-format
+#: difftextwindow.cpp:1975
+#, fuzzy, kde-format
+#| msgid "Line end style:"
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Tipo di fine riga:"
 
-#: difftextwindow.cpp:1995
+#: difftextwindow.cpp:2000
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Base)"
 
-#: difftextwindow.cpp:1997
-#, kde-format
+#: difftextwindow.cpp:2002
+#, fuzzy, kde-format
+#| msgid "Encoding: %1"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Codifica: %1"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "Unix"
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1998
-#, kde-format
+#: difftextwindow.cpp:2003
+#, fuzzy, kde-format
+#| msgid "Line end style: %1"
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Tipo di fine riga: %1"
 
-#: difftextwindow.cpp:1999
-#, kde-format
+#: difftextwindow.cpp:2004
+#, fuzzy, kde-format
+#| msgid "Unknown"
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: difftextwindow.cpp:2027 kdiff3.cpp:1056
+#: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Riga superiore"
 
-#: difftextwindow.cpp:2037
+#: difftextwindow.cpp:2042
 #, kde-format
 msgid "End"
 msgstr "Fine"
 
-#: difftextwindow.cpp:2093 smalldialogs.cpp:163
+#: difftextwindow.cpp:2098 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Apri file"
 
-#: difftextwindow.cpp:2139 optiondialog.cpp:387
+#: difftextwindow.cpp:2144 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2140
+#: difftextwindow.cpp:2145
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2141
+#: difftextwindow.cpp:2146
 #, kde-format
 msgid "System"
 msgstr "Sistema"
 
-#: difftextwindow.cpp:2153
+#: difftextwindow.cpp:2158
 #, kde-format
 msgid "Other"
 msgstr "Altro"
@@ -794,7 +801,8 @@ msgstr "Errore nella creazione di una cartella."
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
 #: directorymergewindow.cpp:2838
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Dest: "
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Destinazione: "
@@ -1095,7 +1103,8 @@ msgid "Merge to A && B"
 msgstr "Fondi con A e B"
 
 #: fileaccess.cpp:526
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to determine full url. No parent specified."
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
@@ -1105,16 +1114,17 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr "Non è stato possibile distinguere tra percorso genitore e figlio."
+msgstr ""
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr "L'URL del computer è:"
+msgstr ""
 
 #: fileaccess.cpp:800
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Failed to read file: %1"
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "Lettura del file non riuscita: %1"
@@ -1123,34 +1133,41 @@ msgstr "Lettura del file non riuscita: %1"
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "L'utente ha annullato l'operazione di lettura su %1"
+msgstr ""
 
 #: fileaccess.cpp:872
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This affects all merge operations."
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "L'utente ha annullato l'operazione di scrittura."
+msgstr "Questo riguarda tutte le operazioni di fusione."
 
 #: fileaccess.cpp:954
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Creating temp copy of %1 failed."
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "Creazione di una copia temporanea di %1 non riuscita."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Opening %1 failed. %2"
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "Apertura di %1 non riuscita. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Error reading from %1. %2"
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "Errore nella lettura di %1. %2"
 
 #: fileaccess.cpp:1128
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, deleting an older backup failed.\n"
+#| "Filename: %1"
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1161,7 +1178,10 @@ msgstr ""
 "Nome del file: %1"
 
 #: fileaccess.cpp:1135
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "While trying to make a backup, renaming failed.\n"
+#| "Filenames: %1 -> %2"
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -2110,8 +2130,6 @@ msgstr "Errore nel salvataggio del file"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
-"Il file del risultato può contenere caratteri di sostituzione per i punti di "
-"codice non riconosciuti."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2171,7 +2189,7 @@ msgstr "Codec da C: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr "Seleziona file (non salvare ancora)"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3127,7 +3145,12 @@ msgstr "Codifica per il file A:"
 
 # VM - automaticly should be "automatically"
 #: optiondialog.cpp:1325
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If enabled then encoding will be automaticly detected.\n"
+#| "If the file's encoding can not be found automaticly then the selected "
+#| "encoding will be used as fallback.\n"
+#| "(Unicode detection depends on the first bytes of a file.)"
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
@@ -3772,10 +3795,6 @@ msgstr "Carattere di virgoletta inatteso all'interno dell'argomento."
 #, kde-format
 msgid "No program specified."
 msgstr "Nessun programma specificato."
-
-#~ msgctxt ""
-#~ msgid "Open File"
-#~ msgstr "Apri file"
 
 #~ msgid "Dest"
 #~ msgstr "Destinazione"
