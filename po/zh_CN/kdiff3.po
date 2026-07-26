@@ -121,7 +121,7 @@ msgstr "文件 %1：行不可用"
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
-msgstr "编码："
+msgstr ""
 
 #: difftextwindow.cpp:1975
 #, kde-format
@@ -138,7 +138,7 @@ msgstr "A (被比较)"
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr "编码：%1"
+msgstr ""
 
 #: difftextwindow.cpp:2003
 #, kde-format
@@ -156,13 +156,13 @@ msgstr "Unix"
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "行尾格式：%1"
+msgstr ""
 
 #: difftextwindow.cpp:2004
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
-msgstr "未知"
+msgstr ""
 
 #: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
@@ -767,7 +767,7 @@ msgstr "创建文件夹时发生错误。"
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
-msgstr "目标: "
+msgstr ""
 
 #: directorymergewindow.cpp:2733 directorymergewindow.cpp:2761
 #, kde-format
@@ -1066,7 +1066,7 @@ msgstr "合并到 A 和 B"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
-msgstr "无法确定完整 URL。没有指定父目录。"
+msgstr ""
 
 #: fileaccess.cpp:538
 #, kde-format
@@ -1102,19 +1102,19 @@ msgstr "用户取消了写入操作。"
 #, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
-msgstr "创建 %1 的临时副本失败。"
+msgstr ""
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
 #, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
-msgstr "打开 %1 失败。%2"
+msgstr ""
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
 #, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
-msgstr "读取 %1 出错。%2"
+msgstr ""
 
 #: fileaccess.cpp:1128
 #, kde-format
@@ -1123,8 +1123,6 @@ msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"试图备份时，删除旧备份失败。\n"
-"文件名：%1"
 
 #: fileaccess.cpp:1135
 #, kde-format
@@ -1133,8 +1131,6 @@ msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"试图备份时，重命名失败。\n"
-"文件名：%1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
