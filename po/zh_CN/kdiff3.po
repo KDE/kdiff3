@@ -118,15 +118,13 @@ msgid "File %1: Line not available"
 msgstr "文件 %1：行不可用"
 
 #: difftextwindow.cpp:1971
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
-msgstr "编码："
+msgstr ""
 
 #: difftextwindow.cpp:1975
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "行尾格式："
@@ -137,39 +135,34 @@ msgid "A (Base)"
 msgstr "A (被比较)"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr "编码：%1"
+msgstr ""
 
 #: difftextwindow.cpp:2003
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:2003
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:2003
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "行尾格式：%1"
+msgstr ""
 
 #: difftextwindow.cpp:2004
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
-msgstr "未知"
+msgstr ""
 
 #: difftextwindow.cpp:2032 kdiff3.cpp:1056
 #, kde-format
@@ -771,11 +764,10 @@ msgstr "创建文件夹时发生错误。"
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
 #: directorymergewindow.cpp:2838
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
-msgstr "目标: "
+msgstr ""
 
 #: directorymergewindow.cpp:2733 directorymergewindow.cpp:2761
 #, kde-format
@@ -1071,90 +1063,74 @@ msgid "Merge to A && B"
 msgstr "合并到 A 和 B"
 
 #: fileaccess.cpp:526
-#, fuzzy, kde-format
-#| msgid "Unable to determine full url. No parent specified."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
-msgstr "无法确定完整 URL。没有指定父目录。"
+msgstr ""
 
 #: fileaccess.cpp:538
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "无法区分父项和子项。"
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "计算生成的URL是："
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
-msgstr "读取文件失败：%1"
+msgstr "读取文件失败 %1"
 
 #: fileaccess.cpp:808 fileaccess.cpp:836
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr ""
+msgstr "用户取消了 %1 的读取操作"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "这将影响所有合并操作。"
+msgstr "用户取消了写入操作。"
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
-msgstr "创建 %1 的临时副本失败。"
+msgstr ""
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
-msgstr "打开 %1 失败。%2"
+msgstr ""
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
-msgstr "读取 %1 出错。%2"
+msgstr ""
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed.\n"
-#| "Filename: %1"
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
 "Filename: %1"
 msgstr ""
-"试图备份时，删除旧备份失败。\n"
-"文件名：%1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed.\n"
-#| "Filenames: %1 -> %2"
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
 "Filenames: %1 -> %2"
 msgstr ""
-"试图备份时，重命名失败。\n"
-"文件名：%1 -> %2"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:23
@@ -2082,7 +2058,7 @@ msgstr "文件保存错误"
 #, kde-format
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
-msgstr ""
+msgstr "输出文件可能包含用于替换无法识别代码点的字符。"
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2142,7 +2118,7 @@ msgstr "解码 C：%1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr ""
+msgstr "选择文件 (尚未保存) "
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3046,21 +3022,13 @@ msgid "File Encoding for A:"
 msgstr "A 的文本编码："
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"如果启用，将自动检测编码。\n"
-"如果无法自动找到文件的编码，则选中上一次使用的编码。\n"
-" (Unicode 检测取决于文件的前几个字节。)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
@@ -3665,6 +3633,3 @@ msgstr "参数包含意外的引号字符。"
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
-
-#~ msgid "Dest"
-#~ msgstr "目标"
