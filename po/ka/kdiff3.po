@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-24 02:41+0000\n"
-"PO-Revision-Date: 2024-09-25 05:43+0200\n"
+"PO-Revision-Date: 2026-07-28 06:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -119,15 +119,13 @@ msgid "File %1: Line not available"
 msgstr "ფაილი %1: ხაზი მიუწდომელია"
 
 #: difftextwindow.cpp:1971
-#, fuzzy, kde-format
-#| msgid "Encoding:"
+#, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "კოდირება:"
 
 #: difftextwindow.cpp:1975
-#, fuzzy, kde-format
-#| msgid "Line end style:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "ხაზის დასრულების სტილი:"
@@ -138,36 +136,31 @@ msgid "A (Base)"
 msgstr "A (ბაზა)"
 
 #: difftextwindow.cpp:2002
-#, fuzzy, kde-format
-#| msgid "Encoding: %1"
+#, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "კოდირება: %1"
 
 #: difftextwindow.cpp:2003
-#, fuzzy, kde-format
-#| msgid "DOS"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
 #: difftextwindow.cpp:2003
-#, fuzzy, kde-format
-#| msgid "Unix"
+#, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
 #: difftextwindow.cpp:2003
-#, fuzzy, kde-format
-#| msgid "Line end style: %1"
+#, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "ხაზის დასრულების სტილი: %1"
 
 #: difftextwindow.cpp:2004
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "უცნობი"
@@ -791,8 +784,7 @@ msgstr "შეცდომა საქაღალდის შექმნი�
 
 #: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
 #: directorymergewindow.cpp:2838
-#, fuzzy, kde-format
-#| msgid "Dest: "
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "სამიზნე: "
@@ -1091,8 +1083,7 @@ msgid "Merge to A && B"
 msgstr "A-ის && B-ის შერწყმა"
 
 #: fileaccess.cpp:526
-#, fuzzy, kde-format
-#| msgid "Unable to determine full url. No parent specified."
+#, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
 msgstr "სრული ბმულის დადგენა შეუძლებელია. მშობელი მითითებული არაა."
@@ -1101,17 +1092,16 @@ msgstr "სრული ბმულის დადგენა შეუძლ
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr ""
+msgstr "მშობლის და შვილის გარჩევა შეუძლებელია."
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr ""
+msgstr "გამოთვლილი ბმულია: "
 
 #: fileaccess.cpp:800
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "@info %1 is a path"
 msgid "Failed to read file: %1"
 msgstr "ფაილის წაკითხვის შეცდომა: %1"
@@ -1120,41 +1110,34 @@ msgstr "ფაილის წაკითხვის შეცდომა: %1
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr ""
+msgstr "მომხმარებელმა გააუქმა წაკითხვის ოპერაცია %1-ზე"
 
 #: fileaccess.cpp:872
-#, fuzzy, kde-format
-#| msgid "This affects all merge operations."
+#, kde-format
 msgctxt "@info:status"
 msgid "User cancelled write operation."
-msgstr "ეს ყველა შერწყმის ოპერაციას შეეხება."
+msgstr "მომხმარებელმა გააუქმა ჩაწერის ოპერაცია."
 
 #: fileaccess.cpp:954
-#, fuzzy, kde-format
-#| msgid "Creating temp copy of %1 failed."
+#, kde-format
 msgctxt "@info:status %1 is the destination path"
 msgid "Creating temp copy of %1 failed."
 msgstr "%1-ის დროებითი ასლის შექმნა ჩავარდა."
 
 #: fileaccess.cpp:963 fileaccess.cpp:969
-#, fuzzy, kde-format
-#| msgid "Opening %1 failed. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Opening %1 failed. %2"
 msgstr "%1-ის გახსნა ჩავარდა. %2"
 
 #: fileaccess.cpp:989 fileaccess.cpp:997
-#, fuzzy, kde-format
-#| msgid "Error reading from %1. %2"
+#, kde-format
 msgctxt "@info:status %1 is the path, %2 is the error message"
 msgid "Error reading from %1. %2"
 msgstr "%1-დან წაკითხვის შეცდომა. %2"
 
 #: fileaccess.cpp:1128
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, deleting an older backup failed.\n"
-#| "Filename: %1"
+#, kde-format
 msgctxt "@info %1 is the path that failed"
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1164,10 +1147,7 @@ msgstr ""
 "ფაილის სახელი: %1"
 
 #: fileaccess.cpp:1135
-#, fuzzy, kde-format
-#| msgid ""
-#| "While trying to make a backup, renaming failed.\n"
-#| "Filenames: %1 -> %2"
+#, kde-format
 msgctxt "@info %1 is the current path, %2 is the failed path"
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -2118,6 +2098,8 @@ msgstr "ფაილის შენახვის შეცდომა"
 msgid ""
 "Output file may contain replacement characters for unrecognized code points."
 msgstr ""
+"გამოტანის ფაილი, შეიძლება, შეიცავდეს შემცვლელ სიმბოლოებს უცნობი კოდის "
+"წერტილებისთვის."
 
 #: mergeresultwindow.cpp:2684
 #, kde-format
@@ -2177,7 +2159,7 @@ msgstr "კოდეკი C-დან: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr ""
+msgstr "ფაილის არჩევა (ჯერ შენახვა არ მომხდარა)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3125,22 +3107,17 @@ msgid "File Encoding for A:"
 msgstr "ფაილის კოდირება A-სთვის:"
 
 #: optiondialog.cpp:1325
-#, fuzzy, kde-format
-#| msgid ""
-#| "If enabled then encoding will be automaticly detected.\n"
-#| "If the file's encoding can not be found automaticly then the selected "
-#| "encoding will be used as fallback.\n"
-#| "(Unicode detection depends on the first bytes of a file.)"
+#, kde-format
 msgid ""
 "If enabled then encoding will be automatically detected.\n"
 "If the file's encoding can not be found automatically then the selected "
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"თუ ჩართულია, კოდირებას ავტომატურად ამოვიცნობ.\n"
-"თუ ფაილის კოდირებას ავტომატურად ვერ ვიპოვი, ნაგულისხმევად არჩეული კოდირება "
-"იქნება გამოყენებული.\n"
-"(უნიკოდის ამოცნობა ფაილის პირველ ბაიტებაზეა დამოკიდებული.)"
+"თუ ჩართულია, კოდირების ამოცნობა ავტომატურად მოხდება.\n"
+"თუ ფაილის კოდირების ამოცნობა ავტომატურად ვერ მოხდება, გამოყენებული იქნება "
+"არჩეული კოდირება.\n"
+"(უნიკოდის ამოცნობა ფაილის პირველ ბაიტებზეა დამოკიდებული.)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
 #, kde-format
