@@ -84,9 +84,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2019-02-22</date>
+>2023-12-23</date>
 <releaseinfo
->1.08.70</releaseinfo>
+>1.11.0</releaseinfo>
 
 
 <abstract>
@@ -131,7 +131,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Dieses Dokument beschreibt &kdiff3; in der Version 1.9. </para>
+>Dieses Dokument beschreibt &kdiff3; in der Version 1.12. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -168,8 +168,6 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword
 >synchronisieren</keyword>
 <keyword
->kpart</keyword>
-<keyword
 >kio</keyword>
 <keyword
 >netzwerktransparent</keyword>
@@ -200,7 +198,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Die Zusammenführung war sehr kompliziert, weil einer der Beitragenden viele Änderungen vorgenommen und gleichzeitig an vielen Stellen die Einrückung korrigiert hatte. Ein weiterer Programmierer hatte in der gleichen Datei viel Text verändert. Das Ergebnis waren zahlreiche Konflikte beim Zusammenführen. </para
 ><para
->Das von mir benutzte Programm zeigte mir nur die geänderten Zeilen an, ich konnte aber nicht sehen, was genau sich innerhalb dieser Zeilen geändert hatte. Und es gab keinerlei Hinweise auf die Stellen, wo sich vielleicht nur die Einrückung geändert hatte. Das Zusammenführen dieser Änderungen war ein kleiner Albtraum. </para
+>Das von mir verwendete Programm zeigte mir nur die geänderten Zeilen an, ich konnte aber nicht sehen, was genau sich innerhalb dieser Zeilen geändert hatte. Und es gab keinerlei Hinweise auf die Stellen, wo sich vielleicht nur die Einrückung geändert hatte. Das Zusammenführen dieser Änderungen war ein kleiner Albtraum. </para
 ><para
 >Das war also der Beginn. Die erste Version von &kdiff3; konnte Unterschiede innerhalb einer Zeile und Änderungen an Leerräumen darstellen. Später wurden noch jede Menge weiterer nützlicher Funktionen hinzugefügt. </para
 ><para
@@ -555,7 +553,7 @@ Please at least include KDE, the KDE package it is in, the name
 Options:
   -m, --merge               Quellen zusammenführen.
   -b, --base file           Explizite Basisdatei. Für Kompatibilität mit anderen Programmen.
-  -o, --output datei        Ausgabe-Datei. Impliziert -m. Z. B.: -o neueDatei.txt
+  -o, --output datei        Ausgabe-Datei. Impliziert -m. z. B.: -o neueDatei.txt
   --out file                Ausgabe-Datei. (Für Kompatibilität mit anderen Programmen.)
   --noauto                  Ignoriert --auto und zeigt immer die grafische Oberfläche.
   --auto                    Keine grafische Oberfläche, wenn alle Konflikte automatisch aufgelöst werden können. (Benötigt -o datei)
@@ -564,7 +562,7 @@ Options:
   --L2 alias2               Sichtbarer Namensersatz für Quelldatei 2.
   --L3 alias3               Sichtbarer Namensersatz für Quelldatei 3.
   -L, --fname alias         Alternativer sichtbarer Namensersatz. Für jede Quelldatei einmal angeben.
-  --cs string               Eine Einstellung ändern. Je Einstellung verwendbar. z. B.: --cs „AutoAdvance=1“
+  --cs string               Eine Einstellung ändern. Je Einstellung verwendbar. z. B.: --cs „AutoAdvance=1“
   --confighelp             Liste aller Einstellungen und aktueller Werte anzeigen.
   --config file              Eine andere Einstellungsdatei verwenden.
 </screen>
@@ -577,7 +575,7 @@ Options:
 <para
 >Mit <option
 >--config</option
-> können Sie eine andere Einrichtungsdatei vorgeben. Benutzen Sie &kdiff3; häufig mit verschiedenen unterschiedlichen Einstellungen, können Sie mit dieser Option leicht zwischen ihnen wechseln.</para>
+> können Sie eine andere Einrichtungsdatei vorgeben. Verwenden Sie &kdiff3; häufig mit verschiedenen unterschiedlichen Einstellungen, können Sie mit dieser Option leicht zwischen ihnen wechseln.</para>
 </sect2>
 <sect2
 ><title
@@ -599,7 +597,7 @@ Options:
 ></term
 ><listitem
 ><para
->Eine Liste von Optionen, durch Semikolon ";" getrennt.  Wird eine dieser Optionen auf der Befehlszeile benutzt, ignoriert &kdiff3; sie und startet ohne Fehlermeldung. Die Voreinstellung ist „<literal
+>Eine Liste von Optionen, durch Semikolon ";" getrennt.  Wird eine dieser Optionen auf der Befehlszeile verwendet, ignoriert &kdiff3; sie und startet ohne Fehlermeldung. Die Voreinstellung ist „<literal
 >u;query;html;abort</literal
 >“.</para
 ></listitem
@@ -637,7 +635,7 @@ Options:
 >B</guilabel
 > und <guilabel
 >C</guilabel
-> jedoch ein Ordner, dann benutzt &kdiff3; den Dateinamen aus <guilabel
+> jedoch ein Ordner, dann verwendet &kdiff3; den Dateinamen aus <guilabel
 >A</guilabel
 > in den beiden anderen Ordnern. </para
 ><para
@@ -662,9 +660,9 @@ Options:
 ><para
 >Sie können auch <quote
 >Ziehen und Ablegen</quote
-> benutzen: Ziehen Sie einfach eine Datei aus einem Dateiverwaltungsprogramm oder ausgewählten Text aus einem Editor und lassen Sie ihn über einem Vergleichsfenster fallen. </para
+> verwenden: Ziehen Sie einfach eine Datei aus einem Dateiverwaltungsprogramm oder ausgewählten Text aus einem Editor und lassen Sie ihn über einem Vergleichsfenster fallen. </para
 ><para
->Welcher Gedanke steckt dahinter? Manchmal enthält eine Datei z. B. mehrere ähnliche Funktionen. Wenn Sie herausfinden möchten, wie ähnlich sich diese Funktionen sind, wäre das ein relativ großer Aufwand. Sie müssten erst zwei entsprechende Dateien erstellen, sie in &kdiff3; laden und diese dann vergleichen. Jetzt können Sie die relevanten Abschnitte einfach kopieren, einfügen und dann vergleichen. </para
+>Welcher Gedanke steckt dahinter? Manchmal enthält eine Datei z. B. mehrere ähnliche Funktionen. Wenn Sie herausfinden möchten, wie ähnlich sich diese Funktionen sind, wäre das ein relativ großer Aufwand. Sie müssten erst zwei entsprechende Dateien erstellen, sie in &kdiff3; laden und diese dann vergleichen. Jetzt können Sie die relevanten Abschnitte einfach kopieren, einfügen und dann vergleichen. </para
 ><note
 ><para
 >Zurzeit können Sie nichts aus &kdiff3; herausziehen. Nur das Fallenlassen von Text in ein Vergleichsfenster wird unterstützt. </para
@@ -732,7 +730,7 @@ Options:
 ><title
 >Zusammenfassungs-Spalte</title
 ><para
->Links neben dem Text befindet sich die Zusammenfassungs-Spalte. Wenn Unterschiede gefunden wurden, zeigt die Spalte die entsprechende Farbe an. Bei Unterschieden in Leerräumen wird die Farbe gerastert angezeigt. Bei einigen Programmiersprachen wo Leerräume nicht so wichtig sind, ist es nützlich, nur die relevanten Änderungen zu sehen. (Bei C/C++ z. B. sind Leerräume nur in Zeichenfolgen und Kommentaren, für die Vorverarbeitung und in wenigen, seltenen Einzelfällen relevant.) </para
+>Links neben dem Text befindet sich die Zusammenfassungs-Spalte. Wenn Unterschiede gefunden wurden, zeigt die Spalte die entsprechende Farbe an. Bei Unterschieden in Leerräumen wird die Farbe gerastert angezeigt. Bei einigen Programmiersprachen wo Leerräume nicht so wichtig sind, ist es nützlich, nur die relevanten Änderungen zu sehen. (Bei C/C++ z. B. sind Leerräume nur in Zeichenfolgen und Kommentaren, für die Vorverarbeitung und in wenigen, seltenen Einzelfällen relevant.) </para
 ><para
 >Die vertikale Linie, die die Zusammenfassungs-Spalte vom Text trennt, wird an den Stellen unterbrochen, wo die jeweilige Quelldatei keine Zeilen hat. Wenn der Zeilenumbruch aktiviert ist, wird die Linie an umgebrochenen Zeilen gepunktet dargestellt. </para
 ></sect2
@@ -805,7 +803,7 @@ Options:
 >[Geändert]</replaceable
 > wenn Sie das Ergebnis bearbeitet haben. Üblicherweise enthält es durch das automatische Zusammenführen bereits Text, aber oft enthält es auch Konflikte. </para
 ><para
->Bis alle Konflikte aufgelöst sind, ist das Speichern deaktiviert. Benutzen Sie die Knöpfe <guibutton
+>Bis alle Konflikte aufgelöst sind, ist das Speichern deaktiviert. Verwenden Sie die Knöpfe <guibutton
 >Zu vorherigem Konflikt springen</guibutton
 > und <guibutton
 >Zu vorherigem ungelösten Konflikt springen</guibutton
@@ -815,7 +813,7 @@ Options:
 >Zu nächstem ungelösten Konflikt springen</guibutton
 >, um die noch verbleibenden Konflikte zu finden. </para
 ><para
->Wenn nur zwei Vergleichsfenster benutzt werden, ist jeder Unterschied gleichzeitig auch ein Konflikt, der manuell gelöst werden muss. </para
+>Wenn nur zwei Vergleichsfenster verwendet werden, ist jeder Unterschied gleichzeitig auch ein Konflikt, der manuell gelöst werden muss. </para
 ><para
 >Bei drei Vergleichsfenstern wird die erste Datei als Basis verwendet, und die zweite und dritte Datei enthalten die Änderungen. Wenn eine Zeile nur in Datei <guilabel
 >B</guilabel
@@ -884,7 +882,7 @@ Options:
 ><para
 >Das normale Zusammenführen startet mit dem automatischen Lösen einfacher Konflikte. Das Menü <guimenu
 >Zusammenführen</guimenu
-> enthält einige häufig verwendete Funktionen. Wenn Sie bei den meisten Konflikten die gleiche Quelle auswählen müssen, können Sie z. B. überall <guilabel
+> enthält einige häufig verwendete Funktionen. Wenn Sie bei den meisten Konflikten die gleiche Quelle auswählen müssen, können Sie z. B. überall <guilabel
 >A</guilabel
 >, <guilabel
 >B</guilabel
@@ -1052,7 +1050,7 @@ Options:
 ><para
 >Da Monatsnamen nicht zur Sortierung geeignet sind, weil dabei „<literal
 >Apr</literal
->“ zuerst käme, ermittelt &kdiff3; die Reihenfolge der angegebenen Monatsnamen und benutzt dies dann. In diesem Fall wird  „<literal
+>“ zuerst käme, ermittelt &kdiff3; die Reihenfolge der angegebenen Monatsnamen und verwendet dies dann. In diesem Fall wird  „<literal
 >Apr</literal
 >“ die Zahl „<literal
 >04</literal
@@ -1071,13 +1069,13 @@ Options:
 ><title
 >Navigieren und Bearbeiten</title>
 <para
->Navigiert wird hauptsächlich mit den Bildlaufleisten und der Maus, aber Sie können dazu auch die Tastatur benutzen. Wenn Sie in eines der Fenster klicken, können Sie die Tasten &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;, &Home;, &End;, <keycombo
+>Navigiert wird hauptsächlich mit den Bildlaufleisten und der Maus, aber Sie können dazu auch die Tastatur verwenden. Wenn Sie in eines der Fenster klicken, können Sie die Tasten &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;, &Home;, &End;, <keycombo
 >&Ctrl;&Home;</keycombo
 > and <keycombo
 >&Ctrl;&End;</keycombo
-> benutzen, so wie Sie es auch von anderen Programmen gewohnt sind. Die Übersichts-Spalte neben der vertikalen Bildlaufleiste kann durch hineinklicken auch zum Navigieren benutzt werden. </para
+> verwenden, so wie Sie es auch von anderen Programmen gewohnt sind. Die Übersichts-Spalte neben der vertikalen Bildlaufleiste kann durch hineinklicken auch zum Navigieren verwendet werden. </para
 ><para
->Außerdem können Sie das Mausrad zum hoch- und runterblättern benutzen. </para
+>Außerdem können Sie das Mausrad zum hoch- und runterblättern verwenden. </para
 ><para
 >Im Ausgabefenster können Sie auch die anderen Tasten zum Bearbeiten verwenden. Mit der Taste &Ins; können Sie zwischen Einfüge- und Überschreibmodus wechseln. (Voreingestellt ist der Einfügemodus.) </para
 ><para
@@ -1100,11 +1098,11 @@ Options:
 <para
 >Es gibt auch einen Knopf <guibutton
 >Automatisch zum nächsten ungelösten Konflikt weiterspringen</guibutton
->. Wenn Sie dies aktivieren, wird &kdiff3; nach der ersten Auswahl der Quelle automatisch zum nächsten ungelösten Konflikt weiterspringen und ihn lösen. Das ist hilfreich, wenn Sie immer nur eine Quelle wählen möchten. Wenn Sie beide Quellen brauchen, oder das Ergebnis nach der Auswahl noch bearbeiten möchten, dann sollten Sie diese Funktion ausschalten. Bevor &kdiff3; zum nächsten ungelösten Konflikt weiterspringt, wird das Ergebnis der Auswahl für eine kurze Zeit angezeigt. Die Verzögerungszeit kann im Abschnitt <guilabel
+>. Wenn Sie dies aktivieren, wird &kdiff3; nach der ersten Auswahl der Quelle automatisch zum nächsten ungelösten Konflikt weiterspringen und ihn lösen. Das ist hilfreich, wenn Sie immer nur eine Quelle wählen möchten. Wenn Sie beide Quellen benötigen, oder das Ergebnis nach der Auswahl noch bearbeiten möchten, dann sollten Sie diese Funktion ausschalten. Bevor &kdiff3; zum nächsten ungelösten Konflikt weiterspringt, wird das Ergebnis der Auswahl für eine kurze Zeit angezeigt. Die Verzögerungszeit kann im Abschnitt <guilabel
 >Vergleich und Zusammenführung</guilabel
 > in den Einstellungen bestimmt werden: Geben Sie für <guilabel
 >Verzögerung für das automatische Weiterspringen (ms)</guilabel
-> einen Wert zwischen 0 und 2000 Millisekunden an. Tipp: Wenn Sie sich viele Mausklicks sparen möchten, dann benutzen Sie eine kurze Verzögerungszeit und die Tastenkürzel <keycombo
+> einen Wert zwischen 0 und 2000 Millisekunden an. Tipp: Wenn Sie sich viele Mausklicks sparen möchten, dann verwenden Sie eine kurze Verzögerungszeit und die Tastenkürzel <keycombo
 >&Ctrl;<keycap
 >1</keycap
 ></keycombo
@@ -1126,13 +1124,13 @@ Options:
 ><title
 >Markieren, Kopieren und Einfügen</title>
 <para
->In den Vergleichsfenstern wird kein Cursor angezeigt, daher müssen Markierungen mit der Maus gemacht werden. Drücken Sie am Beginn der Markierung die &RMB; und halten Sie sie gedrückt, ziehen Sie die Maus dann bis zum Ende der Markierung und lassen Sie hier die Maustaste wieder los. Ein einzelnes Wort kann auch einfach durch einen Doppelklick darauf markiert werden. Im Ergebnisfenster können Sie zum Markieren auch die Tastatur benutzen. Drücken Sie dazu die &Shift;-Taste und verändern Sie die Markierung mit den Pfeiltasten. </para
+>In den Vergleichsfenstern wird kein Cursor angezeigt, daher müssen Markierungen mit der Maus gemacht werden. Drücken Sie am Beginn der Markierung die &RMB; und halten Sie sie gedrückt, ziehen Sie die Maus dann bis zum Ende der Markierung und lassen Sie hier die Maustaste wieder los. Ein einzelnes Wort kann auch einfach durch einen Doppelklick darauf markiert werden. Im Ergebnisfenster können Sie zum Markieren auch die Tastatur verwenden. Drücken Sie dazu die &Shift;-Taste und verändern Sie die Markierung mit den Pfeiltasten. </para
 ><para
 >Wenn die Auswahl den auf dem Bildschirm angezeigten Bereich überschreitet, schieben Sie den Mauszeiger über den Rand des Fensters. Dann blättert &kdiff3; in dieser Richtung. </para
 ><para
->Für eine sehr große Auswahl können Sie auch die Navigationstasten zusammen mit gedrückter Maustaste verwenden. Benutzen Sie zum Beispiel die Tasten &PgDn; und &PgUp;, um schnell zu einer bestimmten Position zu gehen. Haben Sie die gewünschte Endposition erreicht, lassen Sie die Maustaste los. </para
+>Für eine sehr große Auswahl können Sie auch die Navigationstasten zusammen mit gedrückter Maustaste verwenden. Verwenden Sie zum Beispiel die Tasten &PgDn; und &PgUp;, um schnell zu einer bestimmten Position zu gehen. Haben Sie die gewünschte Endposition erreicht, lassen Sie die Maustaste los. </para
 ><para
->Um den gesamten Text im aktuellen Fenster auszuwählen, benutzen Sie im Menü <menuchoice
+>Um den gesamten Text im aktuellen Fenster auszuwählen, verwenden Sie im Menü <menuchoice
 ><guimenu
 >Bearbeiten</guimenu
 > <guimenuitem
@@ -1197,7 +1195,7 @@ Options:
 ><para
 >Zeilenenden werden entsprechend dem zugrunde liegenden Betriebssystem gespeichert. Unix-Varianten verwenden ein Zeilenvorschub-Zeichen <literal
 >\n</literal
->, und Win32-basierte Systeme benutzen Wagenrücklauf + Zeilenvorschub <literal
+>, und Win32-basierte Systeme verwenden Wagenrücklauf + Zeilenvorschub <literal
 >\r\n</literal
 >
 >. &kdiff3; behält die Zeilenenden der Quelldateien nicht bei, darum sollten Sie &kdiff3; auch nicht mit Binärdateien verwenden. </para>
@@ -1322,7 +1320,7 @@ Options:
 ><title
 >Schriftart</title>
 <para
->Wählen Sie eine Schrift mit fester Breite. (Auf einigen Systemen stellt der Dialog auch Schriften mit variabler Breite zur Auswahl, Sie sollten diese aber nicht benutzen.) </para>
+>Wählen Sie eine Schrift mit fester Breite. (Auf einigen Systemen stellt der Dialog auch Schriften mit variabler Breite zur Auswahl, Sie sollten diese aber nicht verwenden.) </para>
 </sect2>
 
 <sect2
@@ -1592,7 +1590,7 @@ Options:
 ></term
 ><listitem
 ><para
->In der Voreinstellung ist diese Option deaktiviert. Unterschiede in einzelnen Zeichen (wie z. B. 'A' und 'a') werden wie Unterschiede in Leerräumen behandelt. </para
+>In der Voreinstellung ist diese Option deaktiviert. Unterschiede in einzelnen Zeichen (wie z. B. 'A' und 'a') werden wie Unterschiede in Leerräumen behandelt. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1677,7 +1675,7 @@ Options:
 ></term
 ><listitem
 ><para
->Löst automatische alle Konflikte in Leerräumen, indem die gewählte Datei als Quelle benutzt wird. (Voreingestellt ist manuelle Auswahl.) Das ist nützlich, wenn Leerräume in vielen Dateien weniger wichtig sind. Wenn Sie dies nur von Zeit zu Zeit benötigen, dann nutzen Sie besser die Funktionen <guilabel
+>Löst automatische alle Konflikte in Leerräumen, indem die gewählte Datei als Quelle verwendet wird. (Voreingestellt ist manuelle Auswahl.) Das ist nützlich, wenn Leerräume in vielen Dateien weniger wichtig sind. Wenn Sie dies nur von Zeit zu Zeit benötigen, dann nutzen Sie besser die Funktionen <guilabel
 >Für alle ungelösten Leerraum-Konflikte A/B/C wählen</guilabel
 > aus dem Menü <guimenu
 >Zusammenführen</guimenu
@@ -1707,7 +1705,7 @@ Options:
 ></term
 ><listitem
 ><para
->Ist diese Einstellung aktiviert, benutzt &kdiff3; beim Zusammenführen einen <guilabel
+>Ist diese Einstellung aktiviert, verwendet &kdiff3; beim Zusammenführen einen <guilabel
 >Regulären Ausdruck für automatische Zusammenführung</guilabel
 >, wenn die Zusammenführung gestartet wird. </para
 ></listitem
@@ -1771,7 +1769,7 @@ Options:
 ></term
 ><listitem
 ><para
->Ist diese Einstellung aktiviert, benutzt &kdiff3; beim der automatischen Zusammenführung des Verlaufs die zuvor genannten Einstellungen, wenn die Zusammenführung gestartet wird. </para
+>Ist diese Einstellung aktiviert, verwendet &kdiff3; beim der automatischen Zusammenführung des Verlaufs die zuvor genannten Einstellungen, wenn die Zusammenführung gestartet wird. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1886,6 +1884,16 @@ Options:
     <varlistentry
 ><term
 ><guilabel
+>Automatisch erkennen</guilabel
+></term
+><listitem
+><para
+>Diese Option versucht, die Byte-Reihenfolge-Markierung (BOM) oder Metadaten von XML/HTML-Dokumenten zu verwenden, um die Kodierung zu erkennen. Gelingt dies nicht, wird geprüft, ob ein kurzes Stück vom Anfang der Datei als UTF-8 interpretiert werden kann. Wenn diese Prüfung erfolgreich ist, wird UTF-8 verwendet. Andernfalls wird auf die vom Benutzer ausgewählte Kodierung zurückgegriffen. Ohne BOM und Metadaten wird nur UTF-8 unterstützt. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
 >Datei-Kodierung für A/B/C:</guilabel
 ></term
 ><listitem
@@ -1978,7 +1986,7 @@ Options:
 ></term
 ><listitem
 ><para
->Manchmal möchte man den verfügbaren Platz auf dem Bildschirm lieber für lange Zeilen benutzen. Blenden Sie einfach die weniger wichtigen Fenster aus. Diese Option befindet sich im Menü Fenster.</para
+>Manchmal möchte man den verfügbaren Platz auf dem Bildschirm lieber für lange Zeilen verwenden. Blenden Sie einfach die weniger wichtigen Fenster aus. Diese Option befindet sich im Menü Fenster.</para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -2012,7 +2020,7 @@ Options:
 ></term
 ><listitem
 ><para
->Funktioniert auch dann, wenn Sie nur zwei Dateien vergleichen. Ein einfacher Klick startet die Zusammenführung und benutzt den Dateinamen der letzten Quelldatei als voreingestellten Namen für die Ausgabedatei. Wenn diese Funktion benutzt wird, um das Zusammenführen erneut zu starten, dann wird der Name der zuletzt benutzten Ausgabedatei beibehalten.</para
+>Funktioniert auch dann, wenn Sie nur zwei Dateien vergleichen. Ein einfacher Klick startet die Zusammenführung und verwendet den Dateinamen der letzten Quelldatei als voreingestellten Namen für die Ausgabedatei. Wenn diese Funktion verwendet wird, um das Zusammenführen erneut zu starten, dann wird der Name der zuletzt benutzten Ausgabedatei beibehalten.</para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -2080,7 +2088,7 @@ Options:
 ></term
 ><listitem
 ><para
->Beim Lesen einer Datei wird sie zuerst diesem externen Befehl übergeben. In &kdiff3; wird dann die Ausgabe des Befehls sichtbar, und nicht die Datei selbst. Sie können Ihren eigenen Vorverarbeitungsbefehle schreiben, die genau Ihre Ansprüchen erfüllen. Sie können diese Funktion z. B. zum Herausschneiden störender Teile oder zum Korrigieren der Einrückung verwenden. </para
+>Beim Lesen einer Datei wird sie zuerst diesem externen Befehl übergeben. In &kdiff3; wird dann die Ausgabe des Befehls sichtbar, und nicht die Datei selbst. Sie können Ihren eigenen Vorverarbeitungsbefehle schreiben, die genau Ihre Ansprüchen erfüllen. Sie können diese Funktion z. B. zum Herausschneiden störender Teile oder zum Korrigieren der Einrückung verwenden. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2178,7 +2186,7 @@ Options:
 <para
 >In diesem Kontext wird nur der <command
 >sed</command
->-Ersetzungs-Befehl benutzt: </para>
+>-Ersetzungs-Befehl verwendet: </para>
 <screen
 ><command
 >sed</command
@@ -2191,7 +2199,7 @@ Options:
 >'
 </screen>
 <para
->Bevor Sie in &kdiff3; einen neuen Befehl benutzen, sollten Sie ihn zuerst in der Konsole testen. Hier kann der <command
+>Bevor Sie in &kdiff3; einen neuen Befehl verwenden, sollten Sie ihn zuerst in der Konsole testen. Hier kann der <command
 >echo</command
 >-Befehl sehr hilfreich sein. Beispiel: </para>
 <screen
@@ -2211,7 +2219,7 @@ Options:
 >o</quote
 > ersetzt. Wenn Sie alle Vorkommen ersetzen möchten, müssen Sie den Schalter <quote
 >g</quote
-> benutzen: </para>
+> verwenden: </para>
 <screen
 ><command
 >echo</command
@@ -2229,7 +2237,7 @@ Options:
 >cat</command
 > und unter &Windows; <command
 >type</command
-> dazu benutzen. <command
+> dazu verwenden. <command
 >sed</command
 > wird die Ersetzung in jeder Zeile der Datei durchführen. <screen
 ><command
@@ -2412,7 +2420,7 @@ Options:
 <para
 >Manchmal möchten Sie vielleicht mehrere Ersetzungen auf einmal durchführen. Dann können Sie das Semikolon <literal
 >;</literal
-> benutzen, um die Ersetzungen voneinander zu trennen. Beispiel: </para>
+> verwenden, um die Ersetzungen voneinander zu trennen. Beispiel: </para>
 <screen
 ><command
 >echo</command
@@ -2429,11 +2437,11 @@ Options:
 >perl</command
 > statt <command
 >sed</command
-> benutzen</title>
+> verwenden</title>
 <para
 >Statt <command
 >sed</command
-> können Sie auch etwas anderes wie z. B. <command
+> können Sie auch etwas anderes wie z. B. <command
 >perl</command
 > verwenden. </para>
 <screen
@@ -2456,7 +2464,7 @@ Options:
 >\(</quote
 > und <quote
 >\)</quote
-> benötigt, braucht <command
+> benötigt, benötigt <command
 >perl</command
 > nur noch <quote
 >(</quote
@@ -2521,9 +2529,9 @@ Options:
 <para
 >Die Vorverarbeitungsbefehle sind sehr nützlich, aber wie bei jeder Funktion, die Text verändert oder Unterschiede ausblendet, können Sie versehentlich bestimmte Unterschiede nicht bemerken und im schlimmsten Fall wichtige Daten zerstören. </para
 ><para
->Beim Zusammenführen werden Sie daher von &kdiff3; gewarnt, falls ein Vorverarbeitungsbefehl benutzt wurde. Sie werden gefragt, ob dieser deaktiviert werden soll oder nicht. Sie werden allerdings nicht gewarnt, wenn ein <guilabel
+>Beim Zusammenführen werden Sie daher von &kdiff3; gewarnt, falls ein Vorverarbeitungsbefehl verwendet wurde. Sie werden gefragt, ob dieser deaktiviert werden soll oder nicht. Sie werden allerdings nicht gewarnt, wenn ein <guilabel
 >Vorverarbeitungsbefehl für den Zeilenabgleich</guilabel
-> benutzt wird. Das Zusammenführen ist nicht abgeschlossen bevor nicht alle Konflikte aufgelöst wurden. Falls Sie <menuchoice
+> verwendet wird. Das Zusammenführen ist nicht abgeschlossen bevor nicht alle Konflikte aufgelöst wurden. Falls Sie <menuchoice
 ><guimenu
 >Unterschiedsansicht</guimenu
 ><guimenuitem
@@ -2560,11 +2568,11 @@ Options:
 <para
 >Oftmals müssen Programmierer in einem Ordner viele Dateien bearbeiten. Aus diesem Grund können Sie mit &kdiff3; komplette Ordner rekursiv vergleichen und zusammenführen. </para
 ><para
->Auch wenn das Vergleichen und Zusammenführen von ganzen Ordnern recht naheliegend und einleuchtend erscheint, gibt es einige Details, die Sie wissen sollten. Der wichtigste Punkt ist natürlich, dass sich jeder Durchlauf dieser Funktion gleich auf viele Dateien auswirkt. Wenn Sie keine Sicherungskopie der Originaldaten haben, könnte es schwer oder gar unmöglich werden, den Originalstand wiederherzustellen. Bevor Sie das Zusammenführen starten, sollten Sie also sicherstellen, dass Ihre Daten gesichert sind und das Sie alles rückgängig machen können. Ob Sie ein Archiv erstellen oder ein System zur Versionskontrolle benutzen, ist Ihre Entscheidung; selbst erfahrene Programmierer und Integratoren benötigen hin und wieder die alten Quelltexte. Bitte beachten Sie auch, dass selbst ich (der Autor von &kdiff3;) keine Garantie geben kann, dass das Programm fehlerlos ist. Entsprechend der &GNU;-GPL gibt es für dieses Programm KEINE GARANTIE. Also denken Sie daran: </para>
+>Auch wenn das Vergleichen und Zusammenführen von ganzen Ordnern recht naheliegend und einleuchtend erscheint, gibt es einige Details, die Sie wissen sollten. Der wichtigste Punkt ist natürlich, dass sich jeder Durchlauf dieser Funktion gleich auf viele Dateien auswirkt. Wenn Sie keine Sicherungskopie der Originaldaten haben, könnte es schwer oder gar unmöglich werden, den Originalstand wiederherzustellen. Bevor Sie das Zusammenführen starten, sollten Sie also sicherstellen, dass Ihre Daten gesichert sind und das Sie alles rückgängig machen können. Ob Sie ein Archiv erstellen oder ein System zur Versionskontrolle verwenden, ist Ihre Entscheidung; selbst erfahrene Programmierer und Integratoren benötigen hin und wieder die alten Quelltexte. Bitte beachten Sie auch, dass selbst ich (der Autor von &kdiff3;) keine Garantie geben kann, dass das Programm fehlerlos ist. Entsprechend der &GNU;-GPL gibt es für dieses Programm KEINE GARANTIE. Also denken Sie daran: </para>
 <blockquote
 ><para>
    <emphasis
->Irren ist menschlich, aber um etwas wirklich durcheinander zu bringen braucht man schon einen Computer ;-)</emphasis>
+>Irren ist menschlich, aber um etwas wirklich durcheinander zu bringen benötigt man schon einen Computer ;-)</emphasis>
 </para
 ></blockquote>
 <para
@@ -2645,7 +2653,7 @@ Options:
 >
 </screen>
 <para
->Wenn kein Zielordner angegeben wurde, benutzt &kdiff3; <replaceable
+>Wenn kein Zielordner angegeben wurde, verwendet &kdiff3; <replaceable
 >Ordner2</replaceable
 >. </para>
 </sect2>
@@ -2669,7 +2677,7 @@ Options:
 <para
 >Wenn drei Ordner zusammengeführt werden, dann wird <replaceable
 >Ordner1</replaceable
-> als Basis benutzt. Wenn kein Zielordner angegeben wurde, verwendet &kdiff3; <replaceable
+> als Basis verwendet. Wenn kein Zielordner angegeben wurde, verwendet &kdiff3; <replaceable
 >Ordner3</replaceable
 > als Zielordner. </para>
 
@@ -2716,7 +2724,7 @@ Options:
 >+</quote
 >/<quote
 >-</quote
-> klicken, oder auf das Objekt doppelklicken oder indem Sie die Pfeiltasten &Left;/&Right; benutzen. Das Menü <guimenu
+> klicken, oder auf das Objekt doppelklicken oder indem Sie die Pfeiltasten &Left;/&Right; verwenden. Das Menü <guimenu
 >Ordner</guimenu
 > enthält zwei Funktionen <guimenuitem
 >Alle Unterordner einklappen</guimenuitem
@@ -3183,7 +3191,7 @@ Options:
 ><para
 >Beachten Sie bitte: Wenn Sie keinen Zielordner angegeben haben, dann wird im Modus Drei-Ordner-Zusammenführen <guilabel
 >C</guilabel
-> als Ziel benutzt, beim Zwei-Ordner-Zusammenführen wird <guilabel
+> als Ziel verwendet, beim Zwei-Ordner-Zusammenführen wird <guilabel
 >B</guilabel
 > als Ziel gewählt und beim Abgleichen wird <guilabel
 >A</guilabel
@@ -3252,7 +3260,7 @@ Options:
 >F6</keycap
 >. </para
 ><para
->Wenn durch widersprüchliche Dateitypen immer noch ungültige Zusammenführungsaktionen existieren, erscheint eine Meldung die auf die fehlerhaften Elemente hinweist. Sie können für sie dann eine gültige Aktion auswählen. </para
+>Wenn durch widersprüchliche Dateitypen immer noch ungültige Zusammenführungsaktionen existieren, erscheint eine Meldung, die auf die fehlerhaften Elemente hinweist. Sie können für sie dann eine gültige Aktion auswählen. </para
 ><para
 >Wenn Sie alle Einträge zusammenführen, erscheint ein Dialogfenster mit den Optionen <guilabel
 >Start</guilabel
@@ -3350,7 +3358,7 @@ Options:
 ></term
 ><listitem
 ><para
->Dateien und Ordner, die diesem Muster entsprechen, werden nicht im Elementbaum angezeigt. Es kann mehr als ein Muster eingegeben werden, benutzen Sie das Semikolon <quote
+>Dateien und Ordner, die diesem Muster entsprechen, werden nicht im Elementbaum angezeigt. Es kann mehr als ein Muster eingegeben werden, verwenden Sie das Semikolon <quote
 >;</quote
 > als Trennzeichen . Gültige Platzhalter sind:<quote
 >*</quote
@@ -3370,7 +3378,7 @@ Options:
 ></term
 ><listitem
 ><para
->Ordner, die diesem Muster entsprechen, werden nicht im Elementbaum angezeigt. Es kann mehr als ein Muster eingegeben werden, benutzen Sie das Semikolon <quote
+>Ordner, die diesem Muster entsprechen, werden nicht im Elementbaum angezeigt. Es kann mehr als ein Muster eingegeben werden, verwenden Sie das Semikolon <quote
 >;</quote
 > als Trennzeichen . Gültige Platzhalter sind:<quote
 >*</quote
@@ -3478,7 +3486,7 @@ Options:
 ></term
 ><listitem
 ><para
->Wenn Sie große Ordner über ein langsames Netzwerk vergleichen, geht es möglicherweise schneller, nur das Änderungsdatum und die Dateigröße zu vergleichen. Dieser Geschwindigkeitsvorteil kostet Sie allerdings ein gewisses Maß an Sicherheit. Bitte mit Vorsicht benutzen. Diese Option ist in der Voreinstellung abgeschaltet.</para
+>Wenn Sie große Ordner über ein langsames Netzwerk vergleichen, geht es möglicherweise schneller, nur das Änderungsdatum und die Dateigröße zu vergleichen. Dieser Geschwindigkeitsvorteil kostet Sie allerdings ein gewisses Maß an Sicherheit. Bitte mit Vorsicht verwenden. Diese Option ist in der Voreinstellung abgeschaltet.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -3490,7 +3498,7 @@ Options:
 ><para
 >Ähnlich wie <quote
 >Änderungsdatum vertrauen</quote
->. Es findet kein echter Vergleich statt. Die Dateien werden als identisch betrachtet, wenn sie gleich groß sind. Das kann z. B. nützlich sein, wenn beim Kopieren das Änderungsdatum verlorengegangen ist. Bitte mit Vorsicht benutzen. Diese Option ist in der Voreinstellung abgeschaltet.</para
+>. Es findet kein echter Vergleich statt. Die Dateien werden als identisch betrachtet, wenn sie gleich groß sind. Das kann z. B. nützlich sein, wenn beim Kopieren das Änderungsdatum verlorengegangen ist. Bitte mit Vorsicht verwenden. Diese Option ist in der Voreinstellung abgeschaltet.</para
 ></listitem
 ></varlistentry>
 </variablelist
@@ -3544,7 +3552,7 @@ Options:
 ><title
 >Ordner- &amp; Textansicht teilen sich Hauptfenster</title>
 <para
->Normalerweise bleibt die Ansicht der Ordner-Zusammenführen während der Zusammenführung einzelner Dateien sichtbar. Sie können den Fensterteiler mit der Maus verschieben. Wenn Sie das nicht wollen, können Sie die Option mit <menuchoice
+>Normalerweise bleibt die Ansicht der Ordner-Zusammenführen während der Zusammenführung einzelner Dateien sichtbar. Sie können den Fensterteiler mit der Maus verschieben. Wenn Sie das nicht möchten, können Sie die Option mit <menuchoice
 ><guimenu
 >Ordner</guimenu
 ><guimenuitem
@@ -3564,7 +3572,7 @@ Options:
 <para
 >Wahrscheinlich bevorzugen Sie, eine Datei einfach mittels Doppelklick zu vergleichen. Dennoch gibt es im Menü <guimenu
 >Ordner</guimenu
-> auch einen entsprechenden Menüeintrag. Sie können eine einzelne Datei auch direkt zusammenführen, ohne erst die Ordnerzusammenführen starten zu müssen. Dazu benutzen Sie die Funktion <menuchoice
+> auch einen entsprechenden Menüeintrag. Sie können eine einzelne Datei auch direkt zusammenführen, ohne erst die Ordnerzusammenführen starten zu müssen. Dazu verwenden Sie die Funktion <menuchoice
 ><guimenu
 >Zusammenführen</guimenu
 ><guimenuitem
@@ -3631,7 +3639,7 @@ Options:
 ><title
 >KIO-Ein-/Ausgabemodule</title>
 <para
->Die &frameworks;-Bibliothek KIO unterstützt Netzwerktransparenz mit Hilfe von KIO-Ein-/Ausgabemodulen. &kdiff3; benutzt dies zum Einlesen von Dateien und Ordnern. Auf diese Weise können Sie Dateien und Ordner zum Öffnen angeben, die sich auf lokalen oder entfernten Rechnern befinden. </para
+>Die &frameworks;-Bibliothek KIO unterstützt Netzwerktransparenz mit Hilfe von KIO-Ein-/Ausgabemodulen. &kdiff3; verwendet dies zum Einlesen von Dateien und Ordnern. Auf diese Weise können Sie Dateien und Ordner zum Öffnen angeben, die sich auf lokalen oder entfernten Rechnern befinden. </para
 ><para
 >Beispiel: </para
 ><para>
@@ -3758,34 +3766,9 @@ Options:
 </sect2>
 </sect1>
 
-<sect1 id="kpart">
-<title
->&kdiff3; als KPart-Komponente benutzen</title>
-<para
->&kdiff3; ist ein KPart-Komponente. Zurzeit ist die KParts::ReadOnlyPart-Schnittstelle eingebaut. </para
-><para
->Der hauptsächliche Verwendungszweck ist zurzeit als Unterschiede-Betrachter in &kdevelop;. &kdevelop; startet zuerst immer den eingebauten Unterschiede-Betrachter. Um &kdiff3; zu starten, drücken Sie die &RMB; über dem Unterschiede-Betrachter und wählen dann <guimenuitem
->In KDiff3Part anzeigen</guimenuitem
-> aus dem Kontextmenü. </para
-><para
->Normalerweise benötigt &kdiff3; zwei vollständige Eingabedateien. Wenn es allerdings als KPart-Komponente benutzt wird, nimmt &kdiff3; an, dass die Eingabedatei eine Patch-Datei im „Unified“-Format ist. Dann entnimmt &kdiff3; die Namen der Originaldateien aus der Patch-Datei. Mindestens eine der beiden Dateien muss existieren. Dann startet &kdiff3; das Programm <command
->patch</command
-> um die fehlende Datei wiederherzustellen. </para
-><para
->Im &dolphin; können Sie auf eine Patch-Datei klicken und aus dem Kontextmenü <menuchoice
-><guimenuitem
->Vorschau in</guimenuitem
-><guisubmenu
->KDiff3Part</guisubmenu
-></menuchoice
-> auswählen. Beachten Sie bitte, dass das nicht funktioniert, wenn keine der Originaldateien existiert. Außerdem ist dies unzuverlässig, wenn sich die Originaldateien seit Erzeugung der Patch-Datei verändert haben. </para
-><para
->Wenn &kdiff3; als KPart-Komponente ausgeführt wird, unterstützt es nur das Vergleichen von zwei Dateien, eine sehr kleine Werkzeugleiste und Menü. Das Zusammenführen oder das Vergleichen von Ordnern wird im KPart-Modus nicht unterstützt. </para>
-</sect1>
-
 <sect1 id="git">
 <title
->&kdiff3; für &git; Diff und Merge benutzen</title>
+>&kdiff3; für &git; Diff und Merge verwenden</title>
 <para
 >&kdiff3;  kann für <ulink url="https://git-scm.com/"
 >&git;</ulink
@@ -4005,26 +3988,30 @@ Options:
 ></question
 ><answer
 ><para
->&kdiff3; benutzt bereits viele Farben zum Hervorheben von Unterschieden. Noch mehr Hervorhebung wäre verwirrend und verfehlt den Zweck. Benutzen Sie dafür bitte einen anderen Editor. </para
+>&kdiff3; verwendet bereits viele Farben zum Hervorheben von Unterschieden. Noch mehr Hervorhebung wäre verwirrend und verfehlt den Zweck. Verwenden Sie dafür bitte einen anderen Editor. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Kann ich &kdiff3; benutzen, um Dateien von <trademark class="registered"
+>Kann ich &kdiff3; verwenden, um Dateien von <application
+>LibreOffice</application
+>/<trademark class="registered"
 >OpenOffice.Org</trademark
 >, <application
 >&Microsoft; Word</application
 >, <application
 >&Microsoft; Excel</application
->, &PDF;, &etc;  zu vergleichen? </para
+>, &PDF;, &etc; zu vergleichen? </para
 ></question
 ><answer
 ><para
 >Obwohl &kdiff3; jede beliebige Datei analysiert, wird das Ergebnis Sie wahrscheinlich nicht zufrieden stellen. </para
 ><para
->&kdiff3; wurde zum Vergleich von einfachen Textdateien entwickelt. <trademark class="registered"
+>&kdiff3; wurde zum Vergleich von einfachen Textdateien entwickelt. <application
+>LibreOffice</application
+>/<trademark class="registered"
 > OpenOffice.org</trademark
 >, <application
 >&Microsoft; Word</application
@@ -4080,7 +4067,7 @@ Options:
 ></question
 ><answer
 ><para
->Starten Sie die Auswahl wie üblich durch Klicken und Halten der &LMBn;. Benutzen Sie dann die Navigationstasten wie zum Beispiel &PgDn; oder &PgUp; und halten dabei die linke Maustaste gedrückt. Siehe auch <link linkend="selections"
+>Starten Sie die Auswahl wie üblich durch Klicken und Halten der &LMBn;. Verwenden Sie dann die Navigationstasten wie zum Beispiel &PgDn; oder &PgUp; und halten dabei die linke Maustaste gedrückt. Siehe auch <link linkend="selections"
 >Auswählen, Kopieren und Einfügen</link
 >. </para
 ></answer
