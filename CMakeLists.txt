@@ -149,17 +149,20 @@ if(ENABLE_AUTO)
 endif()
 
 add_definitions(
+    -DQT_NO_QEXCHANGE # Disable qExchange(), consistent with Qt strict mode through 6.12.
+    -DQT_NO_QASCONST # Disable qAsConst(), consistent with Qt strict mode through 6.12.
+    -DQT_NO_QSNPRINTF # Disable qsnprintf() and qvnprintf(), consistent with Qt strict mode through 6.12.
+    -DQT_NO_SINGLE_ARGUMENT_QHASH_OVERLOAD # Future proofing for Qt 7+.
     -DBOOST_NO_CXX98_FUNCTION_BASE # since we use the header only portion of boost we can hardcode this. This forces boost to avoid long depricated Cxx98 processing functions (i.e. std::unary_function and friends).
     -DQT_NO_CONTEXTLESS_CONNECT # Avoid this confusing unexpected static overload
-    -DQT_DEPRECATED_WARNINGS # Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII # casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
     -DQT_EXPLICIT_QFILE_CONSTRUCTION_FROM_PATH # preemptive for forward compatibility with Qt 6.9+
-    -DQT_DEPRECATED_WARNINGS_SINCE=0x060B00    # warn if deprecated at 6.11 or before. Qt default setting is not useful for kdiff3.
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x060900    # disable deprecated api for Qt<6.9.
+    -DQT_WARN_DEPRECATED_UP_TO=0x060B00       # warn for APIs deprecated in Qt 6.11 or earlier.
+    -DQT_DISABLE_DEPRECATED_UP_TO=0x060900    # disable APIs deprecated in Qt 6.9 or earlier.
     # Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     # the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
