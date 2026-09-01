@@ -712,7 +712,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
     else
     {
         ++nofFiles;
-        if(pMFI->isEqualAB() && (!bThreeDirs || pMFI->isEqualAC()))
+        if(pMFI->isEqual())
         {
             ++nofEqualFiles;
         }
@@ -2884,7 +2884,6 @@ void DirectoryMergeWindow::updateFileVisibilities()
     bool bShowOnlyInA = d->m_pDirShowFilesOnlyInA->isChecked();
     bool bShowOnlyInB = d->m_pDirShowFilesOnlyInB->isChecked();
     bool bShowOnlyInC = d->m_pDirShowFilesOnlyInC->isChecked();
-    bool bThreeDirs = d->isDirThreeWay();
     d->m_selection1Index = QModelIndex();
     d->m_selection2Index = QModelIndex();
     d->m_selection3Index = QModelIndex();
@@ -2905,8 +2904,8 @@ void DirectoryMergeWindow::updateFileVisibilities()
             }
 
             bool bVisible =
-                (bShowIdentical && pMFI->existsEveryWhere() && pMFI->isEqualAB() && (pMFI->isEqualAC() || !bThreeDirs)) ||
-                ((bShowDifferent || bDir) && pMFI->existsCount() >= 2 && (!pMFI->isEqualAB() || !(pMFI->isEqualAC() || !bThreeDirs))) ||
+                (bShowIdentical && pMFI->existsEveryWhere() && pMFI->isEqual()) ||
+                ((bShowDifferent || bDir) && pMFI->existsCount() >= 2 && !pMFI->isEqual()) ||
                 (bShowOnlyInA && pMFI->onlyInA()) || (bShowOnlyInB && pMFI->onlyInB()) || (bShowOnlyInC && pMFI->onlyInC());
 
             QString fileName = pMFI->fileName();
@@ -2915,8 +2914,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
             if(loop != 0)
                 setRowHidden(mi.row(), mi.parent(), !bVisible);
 
-            bool bEqual = bThreeDirs ? pMFI->isEqualAB() && pMFI->isEqualAC() : pMFI->isEqualAB();
-            if(!bEqual && bVisible && loop == 0) // Set all parents to "not equal"
+            if(!pMFI->isEqual() && bVisible && loop == 0) // Set all parents to "not equal"
             {
                 pMFI->updateParents();
             }

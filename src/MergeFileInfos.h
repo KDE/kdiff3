@@ -129,6 +129,8 @@ class MergeFileInfos
     [[nodiscard]] bool isEqualAB() const { return m_bEqualAB; }
     [[nodiscard]] bool isEqualAC() const { return m_bEqualAC; }
     [[nodiscard]] bool isEqualBC() const { return m_bEqualBC; }
+    // Equal content across all sides that take part in the comparison.
+    [[nodiscard]] bool isEqual() const { return isEqualAB() && (!isThreeWay() || isEqualAC()); }
     bool compareFilesAndCalcAges(QStringList& errors, DirectoryMergeWindow* pDMW);
 
     void updateAge();
