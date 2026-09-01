@@ -82,6 +82,7 @@ class ProgressDialog: public QDialog
   private:
     void setInformationImp(const QString& info);
     void initConnections();
+    void requestShow();
 
     //Treated as slot by direct call to QMetaObject::invokeMethod
   public Q_SLOTS:
@@ -106,6 +107,7 @@ class ProgressDialog: public QDialog
     std::list<ProgressLevelData> m_progressStack;
 
     qint32 m_progressDelayTimer = 0;
+    qint32 m_showDelayTimer = 0;
     qint32 m_delayedHideTimer = 0;
     qint32 m_delayedHideStatusBarWidgetTimer = 0;
     QPointer<QEventLoop> m_eventLoop;

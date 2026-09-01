@@ -33,6 +33,9 @@
 
 namespace placeholders = boost::placeholders;
 
+// Delay before the dialog appears, so quick operations don't make it flash.
+static constexpr int c_showDelayMs = 500;
+
 ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     : QDialog(pParent), m_pStatusBar(pStatusBar)
 {
@@ -142,7 +145,7 @@ void ProgressDialog::push()
         m_t2.restart();
 
         if(!m_bStayHidden)
-            show();
+            requestShow();
     }
 
     m_progressStack.push_back(pld);
@@ -157,7 +160,7 @@ void ProgressDialog::beginBackgroundTask()
     }
     backgroundTaskCount++;
     if(!m_bStayHidden)
-        show();
+        requestShow();
 }
 
 void ProgressDialog::endBackgroundTask()
@@ -374,7 +377,7 @@ void ProgressDialog::recalc(bool bUpdate)
                 }
 
                 if(!m_bStayHidden)
-                    show();
+                    requestShow();
                 qApp->processEvents();
                 m_t1.restart();
             }
@@ -386,13 +389,28 @@ void ProgressDialog::recalc(bool bUpdate)
     }
 }
 
+void ProgressDialog::requestShow()
+{
+    // DO not hide when already visible
+    if(isVisible())
+    {
+        show();
+        return;
+    }
+    if(m_showDelayTimer == 0)
+        m_showDelayTimer = startTimer(c_showDelayMs);
+}
+
 void ProgressDialog::show()
 {
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
+    if(m_showDelayTimer)
+        killTimer(m_showDelayTimer);
     if(m_delayedHideTimer)
         killTimer(m_delayedHideTimer);
     m_progressDelayTimer = 0;
+    m_showDelayTimer = 0;
     m_delayedHideTimer = 0;
     if(parentWidget() == nullptr || parentWidget()->isVisible())
     {
@@ -404,11 +422,16 @@ void ProgressDialog::hide()
 {
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
+    if(m_showDelayTimer)
+        killTimer(m_showDelayTimer);
     m_progressDelayTimer = 0;
+    m_showDelayTimer = 0;
     // Calling QDialog::hide() directly doesn't always work. (?)
     if(m_delayedHideTimer)
         killTimer(m_delayedHideTimer);
-    m_delayedHideTimer = startTimer(100);
+    m_delayedHideTimer = 0;
+    if(isVisible())
+        m_delayedHideTimer = startTimer(100);
 }
 
 void ProgressDialog::killJob()
@@ -509,6 +532,13 @@ void ProgressDialog::timerEvent(QTimerEvent* te)
             show();
         }
         dialogUi.slowJobInfo->setText(m_currentJobInfo);
+    }
+    else if(te->timerId() == m_showDelayTimer)
+    {
+        killTimer(m_showDelayTimer);
+        m_showDelayTimer = 0;
+        if(!m_bStayHidden && !m_bWasCancelled)
+            show();
     }
     else if(te->timerId() == m_delayedHideTimer)
     {
