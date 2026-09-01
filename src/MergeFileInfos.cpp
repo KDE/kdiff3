@@ -120,7 +120,12 @@ bool MergeFileInfos::conflictingFileTypes() const
            (existsInB() && !isLinkB()) ||
            (existsInC() && !isLinkC()))
         {
-            return true;
+            // Allow "git difftool --dir-diff" pairing a real file with a symlink to the work tree.
+            const bool bMismatchAgainstDir = (existsInA() && !isLinkA() && isDirA()) ||
+                                             (existsInB() && !isLinkB() && isDirB()) ||
+                                             (existsInC() && !isLinkC() && isDirC());
+            if(!gOptions->m_bDmFollowFileLinks || bMismatchAgainstDir)
+                return true;
         }
     }
 
@@ -408,7 +413,7 @@ bool MergeFileInfos::fastFileComparison(
             "git difftool --dir-diff"
             sets up directory comparisons with symlinks to the current work tree being compared with real files.
 
-            m_bAllowMismatch is a compatibility work around.
+            When "Follow file links" is on, conflictingFileTypes() allows the pair and the link is followed.
         */
         if(fi1.isSymLink() != fi2.isSymLink())
         {
