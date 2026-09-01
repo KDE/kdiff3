@@ -984,7 +984,13 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         // To hide unneeded already progress dialog
         pp.finishManually();
 
-        KMessageBox::information(mWindow, s);
+        const QString dontShowAgainName = QStringLiteral("DirectoryComparisonStatus");
+        KMessageBox::information(mWindow, s, QString(), dontShowAgainName);
+        if(!KMessageBox::shouldBeShownContinue(dontShowAgainName))
+        {
+            gOptions->m_bDmSkipDirStatus = true;
+            KMessageBox::enableMessage(dontShowAgainName);
+        }
         //
         //TODO
         //if ( topLevelItemCount()>0 )
