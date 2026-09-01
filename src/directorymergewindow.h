@@ -70,6 +70,7 @@ class DirectoryMergeWindow : public QTreeView
    void reload();
    void mergeCurrentFile();
    void compareCurrentFile();
+   void compareFirstFile();
    void slotRunOperationForAllItems();
    void slotRunOperationForCurrentItem();
    void mergeResultSaved(const QString& fileName);

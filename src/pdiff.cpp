@@ -1465,6 +1465,9 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
                 m_pDiffTextWindow3->init(m_sd3, nullptr, nullptr);
                 m_pDiffTextWindowFrame3->init();
             }
+
+            if(m_outputFilename.isEmpty())
+                QTimer::singleShot(0, m_pDirectoryMergeWindow, &DirectoryMergeWindow::compareFirstFile);
         }
         Q_EMIT updateAvailabilities();
         return bSuccess;

@@ -1870,6 +1870,41 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
     }
 }
 
+static QModelIndex firstDifferentFile(const QAbstractItemModel* model, const QModelIndex& parent)
+{
+    for(qint32 row = 0; row < model->rowCount(parent); ++row)
+    {
+        const QModelIndex mi = model->index(row, 0, parent);
+        const MergeFileInfos* pMFI = static_cast<const MergeFileInfos*>(mi.internalPointer());
+        if(pMFI == nullptr)
+            continue;
+
+        if(pMFI->hasDir())
+        {
+            const QModelIndex hit = firstDifferentFile(model, mi);
+            if(hit.isValid())
+                return hit;
+        }
+        else if(!pMFI->isEqual())
+        {
+            return mi;
+        }
+    }
+    return QModelIndex();
+}
+
+// Jump straight into the first differing file, so a plain folder comparison
+// (e.g. from "git difftool --dir-diff") lands on a diff, not just the tree.
+void DirectoryMergeWindow::compareFirstFile()
+{
+    const QModelIndex mi = firstDifferentFile(d.get(), QModelIndex());
+    if(mi.isValid())
+    {
+        setCurrentIndex(mi);
+        compareCurrentFile();
+    }
+}
+
 void DirectoryMergeWindow::compareCurrentFile()
 {
     if(!d->canContinue()) return;
