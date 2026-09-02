@@ -567,10 +567,14 @@ LineType DiffTextWindow::convertLineToDiff3LineIdx(const LineRef line) const
 
 LineRef DiffTextWindow::convertDiff3LineIdxToLine(const LineType d3lIdx) const
 {
-    assert(d3lIdx >= 0);
+    assert(d3lIdx >= 0 && !d->getDiff3WrapLineVector().empty());
 
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
-        return (*d->getDiff3LineVector())[std::min((size_t)d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
+    {
+        qint32 idx = (*d->getDiff3LineVector())[std::min((size_t)d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
+        assert(idx >= 0 && (size_t)idx < d->getDiff3WrapLineVector().size());
+        return std::min<size_t>(idx, d->getDiff3WrapLineVector().size() - 1);
+    }
     else
         return d3lIdx;
 }
