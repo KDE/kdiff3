@@ -2,10 +2,10 @@
 # SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-# Turn off policy change notices from CMake 3.30 and earlier
-cmake_minimum_required(VERSION 3.22...3.30)
+# Turn off policy change notices from CMake 4.4 and earlier
+cmake_minimum_required(VERSION 3.27...4.4)
 
-project(kdiff3 VERSION 1.13.70)
+project(kdiff3 VERSION 1.14.70)
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.2)
     message(WARNING "gcc < 9.2 is not recommended support is best effort-only.")
@@ -26,7 +26,7 @@ set(
 )
 
 set(QT_MAJOR_VERSION "6")
-set(QT_MIN_VERSION "6.7.0")
+set(QT_MIN_VERSION "6.8.0")
 
 set(KF_MAJOR_VERSION "6")
 
@@ -63,8 +63,8 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # 1.84+ drops problematic pre-c++11 support and is preferred on linux and required for OS X.
 # KDiff3 has hard coded BOOST_NO_CXX98_FUNCTION_BASE to compensate for a known issue.
-# While this allows compiling with older boost versions we can not use pre-built binaries from boost only the headers.
-find_package(Boost 1.83 REQUIRED)
+# While this allows compiling with older boost versions pre-built binaries from boost are not tested only the headers.
+find_package(Boost 1.84 REQUIRED)
 #needed on craft and possibly other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
 
