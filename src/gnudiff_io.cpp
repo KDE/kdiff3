@@ -410,7 +410,7 @@ void GnuDiff::find_identical_ends(file_data filevec[])
     GNULineRef alloc_lines0, alloc_lines1;
     GNULineRef buffered_prefix, prefix_count, prefix_mask;
     GNULineRef middle_guess, suffix_guess;
-    if(no_diff_means_no_output && context < (GNULineRef)(GNULINEREF_MAX / 4) && context < (GNULineRef)(n0))
+    if(no_diff_means_no_output && context < (GNULineRef)(GNULINEREF_MAX / 4) && context < (GNULineRef)n0)
     {
         middle_guess = guess_lines(0, 0, p0 - filevec[0].prefix_end);
         suffix_guess = guess_lines(0, 0, buffer0 + n0 - p0);
