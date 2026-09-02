@@ -145,6 +145,12 @@ class EncodedData: public QByteArray
         QStringDecoder decoder = QStringDecoder(mEncoding);
         qsizetype dis = std::distance(it, end());
         qsizetype len = std::min<qsizetype>(4, dis);
+
+        if(dis == 0)
+        {
+            s = QChar::Null;
+            return 0;
+        }
         /*
             This assumes EncodedDataStream is contiguous.
             This is true for KDiff3's usage as we use QByteArray::fromRawData to make a thin wrapper backed by a UTF-16 buffer.
