@@ -62,8 +62,6 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMA
 #
 # 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
 # 1.84+ drops problematic pre-c++11 support and is preferred on linux and required for OS X.
-# KDiff3 has hard coded BOOST_NO_CXX98_FUNCTION_BASE to compensate for a known issue.
-# While this allows compiling with older boost versions pre-built binaries from boost are not tested only the headers.
 find_package(Boost 1.84 REQUIRED)
 #needed on craft and possibly other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
@@ -153,7 +151,6 @@ add_definitions(
     -DQT_NO_QASCONST # Disable qAsConst(), consistent with Qt strict mode through 6.12.
     -DQT_NO_QSNPRINTF # Disable qsnprintf() and qvnprintf(), consistent with Qt strict mode through 6.12.
     -DQT_NO_SINGLE_ARGUMENT_QHASH_OVERLOAD # Future proofing for Qt 7+.
-    -DBOOST_NO_CXX98_FUNCTION_BASE # since we use the header only portion of boost we can hardcode this. This forces boost to avoid long depricated Cxx98 processing functions (i.e. std::unary_function and friends).
     -DQT_NO_CONTEXTLESS_CONNECT # Avoid this confusing unexpected static overload
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII # casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
