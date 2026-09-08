@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-23 00:46+0000\n"
+"POT-Creation-Date: 2026-09-08 00:48+0000\n"
 "PO-Revision-Date: 2025-11-22 13:19+0100\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -111,94 +111,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Grave errore interno"
 
-#: difftextwindow.cpp:641
+#: difftextwindow.cpp:645
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "File %1: riga %2"
 
-#: difftextwindow.cpp:643
+#: difftextwindow.cpp:647
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "File %1: riga non disponibile"
 
-#: difftextwindow.cpp:1971
+#: difftextwindow.cpp:1975
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Codifica:"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1979
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Tipo di fine riga:"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:2004
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Base)"
 
-#: difftextwindow.cpp:2002
+#: difftextwindow.cpp:2006
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Codifica: %1"
 
-#: difftextwindow.cpp:2003
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2003
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2003
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Tipo di fine riga: %1"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: difftextwindow.cpp:2032 kdiff3.cpp:1056
+#: difftextwindow.cpp:2036 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Riga superiore"
 
-#: difftextwindow.cpp:2042
+#: difftextwindow.cpp:2046
 #, kde-format
 msgid "End"
 msgstr "Fine"
 
-#: difftextwindow.cpp:2098 smalldialogs.cpp:163
+#: difftextwindow.cpp:2102 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Apri file"
 
-#: difftextwindow.cpp:2144 optiondialog.cpp:387
+#: difftextwindow.cpp:2148 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2145
+#: difftextwindow.cpp:2149
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit (BOM)"
 
-#: difftextwindow.cpp:2146
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "System"
 msgstr "Sistema"
 
-#: difftextwindow.cpp:2158
+#: difftextwindow.cpp:2162
 #, kde-format
 msgid "Other"
 msgstr "Altro"
@@ -375,7 +375,7 @@ msgstr ""
 "riesaminare la cartella?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -497,17 +497,17 @@ msgstr ""
 msgid "Number of manual merges: %1"
 msgstr "Numero di fusioni manuali: %1"
 
-#: directorymergewindow.cpp:1254
+#: directorymergewindow.cpp:1260
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "Questo riguarda tutte le operazioni di fusione."
 
-#: directorymergewindow.cpp:1255
+#: directorymergewindow.cpp:1261
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "Modifica di tutte le operazioni di fusione"
 
-#: directorymergewindow.cpp:1332
+#: directorymergewindow.cpp:1338
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -516,49 +516,49 @@ msgstr ""
 "Elaborazione di %1 / %2\n"
 "%3"
 
-#: directorymergewindow.cpp:1378 directorymergewindow.cpp:1382
+#: directorymergewindow.cpp:1384 directorymergewindow.cpp:1388
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "Non è stato possibile elaborare alcuni file."
 
-#: directorymergewindow.cpp:1385
+#: directorymergewindow.cpp:1391
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "Interruzione a causa di troppi errori."
 
-#: directorymergewindow.cpp:1873 directorymergewindow.cpp:1898
-#: directorymergewindow.cpp:1923
+#: directorymergewindow.cpp:1914 directorymergewindow.cpp:1939
+#: directorymergewindow.cpp:1964
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "Questa operazione non è attualmente possibile."
 
-#: directorymergewindow.cpp:1873 directorymergewindow.cpp:1898
-#: directorymergewindow.cpp:1923 directorymergewindow.cpp:2205
+#: directorymergewindow.cpp:1914 directorymergewindow.cpp:1939
+#: directorymergewindow.cpp:1964 directorymergewindow.cpp:2246
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "Operazione non possibile"
 
-#: directorymergewindow.cpp:1970
+#: directorymergewindow.cpp:2011
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "Si è verificato un errore durante la copia."
 
-#: directorymergewindow.cpp:1971 directorymergewindow.cpp:2411
+#: directorymergewindow.cpp:2012 directorymergewindow.cpp:2452
 #, kde-format
 msgid "Merge Error"
 msgstr "Errore di fusione"
 
-#: directorymergewindow.cpp:2049
+#: directorymergewindow.cpp:2090
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "Operazione di fusione sconosciuta (non deve mai succedere)."
 
-#: directorymergewindow.cpp:2094
+#: directorymergewindow.cpp:2135
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "Operazione di fusione sconosciuta."
 
-#: directorymergewindow.cpp:2107
+#: directorymergewindow.cpp:2148
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -580,25 +580,25 @@ msgstr ""
 "<b>nessuna garanzia</b> che funzioni! Fai una copia di sicurezza dei tuoi "
 "dati importanti!"
 
-#: directorymergewindow.cpp:2112
+#: directorymergewindow.cpp:2153
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Inizio della fusione"
 
-#: directorymergewindow.cpp:2113
+#: directorymergewindow.cpp:2154
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Procedi"
 
-#: directorymergewindow.cpp:2114
+#: directorymergewindow.cpp:2155
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Simula"
 
-#: directorymergewindow.cpp:2140
+#: directorymergewindow.cpp:2181
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
@@ -607,7 +607,7 @@ msgstr ""
 "L'elemento evidenziato è di diverso tipo nelle diverse cartelle. Scegli cosa "
 "fare."
 
-#: directorymergewindow.cpp:2144
+#: directorymergewindow.cpp:2185
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
@@ -616,7 +616,7 @@ msgstr ""
 "Le date di modifica dei file sono uguali ma i file sono diversi. Scegli cosa "
 "fare."
 
-#: directorymergewindow.cpp:2148
+#: directorymergewindow.cpp:2189
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
@@ -625,7 +625,7 @@ msgstr ""
 "L'elemento evidenziato è stato modificato in una cartella ed eliminato "
 "nell'altra. Scegli cosa fare."
 
-#: directorymergewindow.cpp:2205
+#: directorymergewindow.cpp:2246
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
@@ -634,7 +634,7 @@ msgstr ""
 "Attualmente non si può effettuare questa operazione perché è in corso una "
 "fusione tra cartelle."
 
-#: directorymergewindow.cpp:2262
+#: directorymergewindow.cpp:2303
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -644,35 +644,35 @@ msgstr ""
 "Si è verificato un errore nell'ultimo passaggio.\n"
 "Vuoi continuare con l'elemento che ha provocato l'errore o vuoi saltarlo?"
 
-#: directorymergewindow.cpp:2264
+#: directorymergewindow.cpp:2305
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Continua la fusione dopo un errore"
 
-#: directorymergewindow.cpp:2265
+#: directorymergewindow.cpp:2306
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Continua con l'ultimo"
 
-#: directorymergewindow.cpp:2266
+#: directorymergewindow.cpp:2307
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Saltalo"
 
-#: directorymergewindow.cpp:2360
+#: directorymergewindow.cpp:2401
 #, kde-format
 msgid "Merge operation complete."
 msgstr "Operazione di fusione completata."
 
-#: directorymergewindow.cpp:2360 directorymergewindow.cpp:2363
+#: directorymergewindow.cpp:2401 directorymergewindow.cpp:2404
 #, kde-format
 msgid "Merge Complete"
 msgstr "Fusione completata"
 
-#: directorymergewindow.cpp:2374
+#: directorymergewindow.cpp:2415
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
@@ -680,48 +680,48 @@ msgstr ""
 "Fusione simulata completata: controlla se ti vanno bene le operazioni "
 "proposte."
 
-#: directorymergewindow.cpp:2410
+#: directorymergewindow.cpp:2451
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "Si è verificato un errore. Premi OK per maggiori informazioni."
 
-#: directorymergewindow.cpp:2443
+#: directorymergewindow.cpp:2484
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "Errore: nell'eliminare %1: impossibile creare una copia di sicurezza."
 
-#: directorymergewindow.cpp:2450
+#: directorymergewindow.cpp:2491
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "elimina cartella ricorsivamente (%1)"
 
-#: directorymergewindow.cpp:2452
+#: directorymergewindow.cpp:2493
 #, kde-format
 msgid "delete( %1 )"
 msgstr "elimina (%1)"
 
-#: directorymergewindow.cpp:2468
+#: directorymergewindow.cpp:2509
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr ""
 "Errore: eliminazione della cartella non riuscita durante la sua lettura."
 
-#: directorymergewindow.cpp:2484
+#: directorymergewindow.cpp:2525
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "Errore: operazione di rimozione di una cartella (%1) non riuscita."
 
-#: directorymergewindow.cpp:2494
+#: directorymergewindow.cpp:2535
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "Errore: eliminazione non riuscita."
 
-#: directorymergewindow.cpp:2521
+#: directorymergewindow.cpp:2562
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "fusione manuale (%1, %2,%3 -> %4)"
 
-#: directorymergewindow.cpp:2524
+#: directorymergewindow.cpp:2565
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
@@ -729,192 +729,192 @@ msgstr ""
 "     Nota: dopo una fusione manuale l'utente dovrebbe premere F7 per "
 "continuare."
 
-#: directorymergewindow.cpp:2551
+#: directorymergewindow.cpp:2592
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "Errore: copia (%1 -> %2) non riuscita. Eliminazione della destinazione "
 "esistente non riuscita."
 
-#: directorymergewindow.cpp:2560
+#: directorymergewindow.cpp:2601
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "copia collegamento (%1 -> %2)"
 
-#: directorymergewindow.cpp:2569
+#: directorymergewindow.cpp:2610
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "Errore: copia di collegamento non riuscita: i collegamenti remoti non sono "
 "ancora supportati."
 
-#: directorymergewindow.cpp:2579
+#: directorymergewindow.cpp:2620
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "Errore: copia di collegamento non riuscita."
 
-#: directorymergewindow.cpp:2602
+#: directorymergewindow.cpp:2643
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "copia (%1 -> %2)"
 
-#: directorymergewindow.cpp:2628
+#: directorymergewindow.cpp:2669
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "Errore nella rinomina (%1 -> %2): impossibile eliminare la destinazione "
 "esistente."
 
-#: directorymergewindow.cpp:2635
+#: directorymergewindow.cpp:2676
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "rinomina (%1 -> %2)"
 
-#: directorymergewindow.cpp:2644
+#: directorymergewindow.cpp:2685
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "Errore: rinomina non riuscita."
 
-#: directorymergewindow.cpp:2662
+#: directorymergewindow.cpp:2703
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr ""
 "Errore durante la creazione della cartella %1. Impossibile eliminare un file "
 "esistente."
 
-#: directorymergewindow.cpp:2679
+#: directorymergewindow.cpp:2720
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "crea cartella (%1)"
 
-#: directorymergewindow.cpp:2689
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgid "Error while creating folder."
 msgstr "Errore nella creazione di una cartella."
 
-#: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
-#: directorymergewindow.cpp:2838
+#: directorymergewindow.cpp:2766 directorymergewindow.cpp:2848
+#: directorymergewindow.cpp:2879
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "Destinazione: "
 
-#: directorymergewindow.cpp:2733 directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2774 directorymergewindow.cpp:2802
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "Cartella"
 
-#: directorymergewindow.cpp:2733
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "Tipo"
 
-#: directorymergewindow.cpp:2733
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "Dimensione"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "Attributo"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "Ultima modifica"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "Destinazione del collegamento"
 
-#: directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2802
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "File"
 
-#: directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2802
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-Collegamento"
 
-#: directorymergewindow.cpp:2767
+#: directorymergewindow.cpp:2808
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "non disponibile"
 
-#: directorymergewindow.cpp:2781
+#: directorymergewindow.cpp:2822
 #, kde-format
 msgid "A (Dest): "
 msgstr "A (destinazione): "
 
-#: directorymergewindow.cpp:2785
+#: directorymergewindow.cpp:2826
 #, kde-format
 msgid "A:    "
 msgstr "A:    "
 
-#: directorymergewindow.cpp:2785
+#: directorymergewindow.cpp:2826
 #, kde-format
 msgid "A (Base): "
 msgstr "A (base): "
 
-#: directorymergewindow.cpp:2791
+#: directorymergewindow.cpp:2832
 #, kde-format
 msgid "B (Dest): "
 msgstr "B (destinazione): "
 
-#: directorymergewindow.cpp:2795
+#: directorymergewindow.cpp:2836
 #, kde-format
 msgid "B:    "
 msgstr "B:    "
 
-#: directorymergewindow.cpp:2800
+#: directorymergewindow.cpp:2841
 #, kde-format
 msgid "C (Dest): "
 msgstr "C (destinazione): "
 
-#: directorymergewindow.cpp:2804
+#: directorymergewindow.cpp:2845
 #, kde-format
 msgid "C:    "
 msgstr "C:    "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2848
+#: directorymergewindow.cpp:2889
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "Salva lo stato di fusione tra cartelle come..."
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "Avvia o continua fusione tra cartelle"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "Esegui operazione sull'elemento attuale"
 
-#: directorymergewindow.cpp:2957
+#: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Compare Selected File"
 msgstr "Confronta il file selezionato"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid "Merge Current File"
 msgstr "Fondi il file attuale"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid ""
 "Merge\n"
@@ -923,56 +923,56 @@ msgstr ""
 "Fondi\n"
 "file"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2998
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "Chiudi tutte le sottocartelle"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2999
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "Apri tutte le sottocartelle"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:3000
 #, kde-format
 msgid "Rescan"
 msgstr "Riesamina"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2964
+#: directorymergewindow.cpp:3003
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "Scegli A per tutti gli elementi"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:3004
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "Scegli B per tutti gli elementi"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:3005
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "Scegli C per tutti gli elementi"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:3006
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "Operazione di scelta automatica per tutti gli elementi"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:3007
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "Nessuna operazione per tutti gli elementi"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2973
+#: directorymergewindow.cpp:3012
 #, kde-format
 msgid "Show Identical Files"
 msgstr "Mostra file identici"
 
-#: directorymergewindow.cpp:2973
+#: directorymergewindow.cpp:3012
 #, kde-format
 msgid ""
 "Identical\n"
@@ -981,17 +981,17 @@ msgstr ""
 "File\n"
 "identici"
 
-#: directorymergewindow.cpp:2974
+#: directorymergewindow.cpp:3013
 #, kde-format
 msgid "Show Different Files"
 msgstr "Mostra file diversi"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:3014
 #, kde-format
 msgid "Show Files only in A"
 msgstr "Mostra file solo in A"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:3014
 #, kde-format
 msgid ""
 "Files\n"
@@ -1000,12 +1000,12 @@ msgstr ""
 "File\n"
 "solo in A"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:3015
 #, kde-format
 msgid "Show Files only in B"
 msgstr "Mostra file solo in B"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:3015
 #, kde-format
 msgid ""
 "Files\n"
@@ -1014,12 +1014,12 @@ msgstr ""
 "File\n"
 "solo in B"
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:3016
 #, kde-format
 msgid "Show Files only in C"
 msgstr "Mostra file solo in C"
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:3016
 #, kde-format
 msgid ""
 "Files\n"
@@ -1028,68 +1028,68 @@ msgstr ""
 "File\n"
 "solo in C"
 
-#: directorymergewindow.cpp:2981
+#: directorymergewindow.cpp:3020
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "Confronta file selezionati esplicitamente"
 
-#: directorymergewindow.cpp:2982
+#: directorymergewindow.cpp:3021
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "Fondi file selezionati esplicitamente"
 
-#: directorymergewindow.cpp:2984 directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:3023 directorymergewindow.cpp:3030
 #, kde-format
 msgid "Do Nothing"
 msgstr "Non fare nulla"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2988 opendialog.ui:68
+#: directorymergewindow.cpp:3027 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "Fondi"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:3028
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "Elimina (se esiste)"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:3031
 #, kde-format
 msgid "Copy A to B"
 msgstr "Copia A su B"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:3032
 #, kde-format
 msgid "Copy B to A"
 msgstr "Copia B su A"
 
-#: directorymergewindow.cpp:2994
+#: directorymergewindow.cpp:3033
 #, kde-format
 msgid "Delete A"
 msgstr "Elimina A"
 
-#: directorymergewindow.cpp:2995
+#: directorymergewindow.cpp:3034
 #, kde-format
 msgid "Delete B"
 msgstr "Elimina B"
 
-#: directorymergewindow.cpp:2996
+#: directorymergewindow.cpp:3035
 #, kde-format
 msgid "Delete A && B"
 msgstr "Elimina A e B"
 
-#: directorymergewindow.cpp:2997
+#: directorymergewindow.cpp:3036
 #, kde-format
 msgid "Merge to A"
 msgstr "Fondi con A"
 
-#: directorymergewindow.cpp:2998
+#: directorymergewindow.cpp:3037
 #, kde-format
 msgid "Merge to B"
 msgstr "Fondi con B"
 
-#: directorymergewindow.cpp:2999
+#: directorymergewindow.cpp:3038
 #, kde-format
 msgid "Merge to A && B"
 msgstr "Fondi con A e B"
@@ -1658,7 +1658,7 @@ msgstr "Cambia tra vista di testi e di cartelle"
 msgid "Ready."
 msgstr "Pronto."
 
-#: kdiff3.cpp:912 pdiff.cpp:1522
+#: kdiff3.cpp:912 pdiff.cpp:1525
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Il risultato della fusione non è stato salvato."
@@ -1673,7 +1673,7 @@ msgstr "Salva ed esci"
 msgid "Quit Without Saving"
 msgstr "Esci senza salvare"
 
-#: kdiff3.cpp:923 pdiff.cpp:1533
+#: kdiff3.cpp:923 pdiff.cpp:1536
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Il salvataggio della fusione non è riuscito."
@@ -1919,32 +1919,32 @@ msgstr "File3 da aprire"
 msgid "See kdiff3 --help for supported options."
 msgstr "Vedi kdiff3 --help per le opzioni supportate."
 
-#: MergeFileInfos.cpp:393
+#: MergeFileInfos.cpp:398
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
 msgstr "Impossibile confrontare un file non normale con un file normale."
 
-#: MergeFileInfos.cpp:416
+#: MergeFileInfos.cpp:421
 #, kde-format
 msgid "Mix of links and normal files."
 msgstr "Insieme di collegamenti e file normali."
 
-#: MergeFileInfos.cpp:424
+#: MergeFileInfos.cpp:429
 #, kde-format
 msgid "Link: "
 msgstr "Collegamento: "
 
-#: MergeFileInfos.cpp:434
+#: MergeFileInfos.cpp:439
 #, kde-format
 msgid "Size. "
 msgstr "Dimensione. "
 
-#: MergeFileInfos.cpp:450 MergeFileInfos.cpp:460
+#: MergeFileInfos.cpp:455 MergeFileInfos.cpp:465
 #, kde-format
 msgid "Date & Size: "
 msgstr "Data e dimensione: "
 
-#: MergeFileInfos.cpp:481
+#: MergeFileInfos.cpp:486
 #, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
@@ -3453,40 +3453,40 @@ msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "Calcolo della massima larghezza per la barra di scorrimento orizzontale"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1527
 #, kde-format
 msgid "Save && Continue"
 msgstr "Salva e continua"
 
-#: pdiff.cpp:1525
+#: pdiff.cpp:1528
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continua senza salvare"
 
-#: pdiff.cpp:1716
+#: pdiff.cpp:1719
 #, kde-format
 msgid "Search complete."
 msgstr "Ricerca completata."
 
-#: pdiff.cpp:1716
+#: pdiff.cpp:1719
 #, kde-format
 msgid "Search Complete"
 msgstr "Ricerca completata"
 
-#: pdiff.cpp:1897
+#: pdiff.cpp:1900
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 "Non è selezionato niente in nessuna delle finestre di ingresso delle "
 "differenze."
 
-#: pdiff.cpp:1897
+#: pdiff.cpp:1900
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Errore nell'aggiunta di intervalli di differenze manuali"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:54 progressdialog.ui:100
+#: progress.cpp:57 progressdialog.ui:100
 #, kde-format
 msgid "&Cancel"
 msgstr "&Annulla"

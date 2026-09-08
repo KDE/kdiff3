@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-23 00:46+0000\n"
+"POT-Creation-Date: 2026-09-08 00:48+0000\n"
 "PO-Revision-Date: 2026-08-10 18:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -107,94 +107,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "خطأ داخلي فادح"
 
-#: difftextwindow.cpp:641
+#: difftextwindow.cpp:645
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "الملف %1: السطر %2"
 
-#: difftextwindow.cpp:643
+#: difftextwindow.cpp:647
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "الملف %1: السطر غير موجود"
 
-#: difftextwindow.cpp:1971
+#: difftextwindow.cpp:1975
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "الترميز:"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1979
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "نمط نهاية السطر:"
 
-#: difftextwindow.cpp:2000
+#: difftextwindow.cpp:2004
 #, kde-format
 msgid "A (Base)"
 msgstr "أ (الأساس)"
 
-#: difftextwindow.cpp:2002
+#: difftextwindow.cpp:2006
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "الترميز: %1"
 
-#: difftextwindow.cpp:2003
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "دوس"
 
-#: difftextwindow.cpp:2003
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "يونكس"
 
-#: difftextwindow.cpp:2003
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "نمط نهاية السطر: %1"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: difftextwindow.cpp:2032 kdiff3.cpp:1056
+#: difftextwindow.cpp:2036 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "السطر الأعلى"
 
-#: difftextwindow.cpp:2042
+#: difftextwindow.cpp:2046
 #, kde-format
 msgid "End"
 msgstr "النهاية"
 
-#: difftextwindow.cpp:2098 smalldialogs.cpp:163
+#: difftextwindow.cpp:2102 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "افتح الملف"
 
-#: difftextwindow.cpp:2144 optiondialog.cpp:387
+#: difftextwindow.cpp:2148 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "يونيكود، 8 بت"
 
-#: difftextwindow.cpp:2145
+#: difftextwindow.cpp:2149
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "يونيكود، 8 بت (BOM)"
 
-#: difftextwindow.cpp:2146
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "System"
 msgstr "النظام"
 
-#: difftextwindow.cpp:2158
+#: difftextwindow.cpp:2162
 #, kde-format
 msgid "Other"
 msgstr "أخرى"
@@ -371,7 +371,7 @@ msgstr ""
 "المجلد؟"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1523 pdiff.cpp:1533
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -492,17 +492,17 @@ msgstr ""
 msgid "Number of manual merges: %1"
 msgstr "عدد عمليات الدمج اليدوية: %1"
 
-#: directorymergewindow.cpp:1254
+#: directorymergewindow.cpp:1260
 #, kde-format
 msgid "This affects all merge operations."
 msgstr "هذا يؤثر على كل عمليات الدمج."
 
-#: directorymergewindow.cpp:1255
+#: directorymergewindow.cpp:1261
 #, kde-format
 msgid "Changing All Merge Operations"
 msgstr "غيّر كل عمليات الدمج"
 
-#: directorymergewindow.cpp:1332
+#: directorymergewindow.cpp:1338
 #, kde-format
 msgid ""
 "Processing %1 / %2\n"
@@ -511,49 +511,49 @@ msgstr ""
 "يعالج %1 / %2\n"
 "%3"
 
-#: directorymergewindow.cpp:1378 directorymergewindow.cpp:1382
+#: directorymergewindow.cpp:1384 directorymergewindow.cpp:1388
 #, kde-format
 msgid "Some files could not be processed."
 msgstr "بعض الملفات تعذّر معالجتها."
 
-#: directorymergewindow.cpp:1385
+#: directorymergewindow.cpp:1391
 #, kde-format
 msgid "Aborting due to too many errors."
 msgstr "تُجهض بسبب كثرة الأخطاء."
 
-#: directorymergewindow.cpp:1873 directorymergewindow.cpp:1898
-#: directorymergewindow.cpp:1923
+#: directorymergewindow.cpp:1914 directorymergewindow.cpp:1939
+#: directorymergewindow.cpp:1964
 #, kde-format
 msgid "This operation is currently not possible."
 msgstr "هذه العملية ليست ممكنة حاليًا."
 
-#: directorymergewindow.cpp:1873 directorymergewindow.cpp:1898
-#: directorymergewindow.cpp:1923 directorymergewindow.cpp:2205
+#: directorymergewindow.cpp:1914 directorymergewindow.cpp:1939
+#: directorymergewindow.cpp:1964 directorymergewindow.cpp:2246
 #, kde-format
 msgid "Operation Not Possible"
 msgstr "العملية غير ممكنة"
 
-#: directorymergewindow.cpp:1970
+#: directorymergewindow.cpp:2011
 #, kde-format
 msgid "An error occurred while copying."
 msgstr "حدث خطأ أثناء النسخ."
 
-#: directorymergewindow.cpp:1971 directorymergewindow.cpp:2411
+#: directorymergewindow.cpp:2012 directorymergewindow.cpp:2452
 #, kde-format
 msgid "Merge Error"
 msgstr "خطأ في الدمج"
 
-#: directorymergewindow.cpp:2049
+#: directorymergewindow.cpp:2090
 #, kde-format
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "عملية دمج مجهولة. (هذا لا يجوز أن يحدث أبدًا!)"
 
-#: directorymergewindow.cpp:2094
+#: directorymergewindow.cpp:2135
 #, kde-format
 msgid "Unknown merge operation."
 msgstr "عملية دمج مجهولة."
 
-#: directorymergewindow.cpp:2107
+#: directorymergewindow.cpp:2148
 #, kde-format
 msgid ""
 "The merge is about to begin.\n"
@@ -573,53 +573,53 @@ msgstr ""
 "كن على علم أن هذا البرنامج ما يزال بحالة بيتا وليست هناك أي ضمانات على "
 "الإطلاق! نفّذ نسخ احتياطية لبياناتك المهمة!"
 
-#: directorymergewindow.cpp:2112
+#: directorymergewindow.cpp:2153
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "بدء الدمج"
 
-#: directorymergewindow.cpp:2113
+#: directorymergewindow.cpp:2154
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "قم بذلك"
 
-#: directorymergewindow.cpp:2114
+#: directorymergewindow.cpp:2155
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "حاكه"
 
-#: directorymergewindow.cpp:2140
+#: directorymergewindow.cpp:2181
 #, kde-format
 msgid ""
 "The highlighted item has a different type in the different folders. Select "
 "what to do."
 msgstr "العنصر المميز له نوع مختلف في المجلدات المختلفة. حدد ما يجب فعله."
 
-#: directorymergewindow.cpp:2144
+#: directorymergewindow.cpp:2185
 #, kde-format
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr "تواريخ تعديل الملف متساوية ولكن الملفات ليست كذلك. حدد ما يجب فعله."
 
-#: directorymergewindow.cpp:2148
+#: directorymergewindow.cpp:2189
 #, kde-format
 msgid ""
 "The highlighted item was changed in one folder and deleted in the other. "
 "Select what to do."
 msgstr "العنصر المميز غُيّر في مجلد وحُذف في الآخر. حدد ما يجب فعله."
 
-#: directorymergewindow.cpp:2205
+#: directorymergewindow.cpp:2246
 #, kde-format
 msgid ""
 "This operation is currently not possible because folder merge is currently "
 "running."
 msgstr "هذه العملية غير ممكنة حاليًا لأن دمج المجلدات قيد التشغيل حاليًا."
 
-#: directorymergewindow.cpp:2262
+#: directorymergewindow.cpp:2303
 #, kde-format
 msgid ""
 "There was an error in the last step.\n"
@@ -629,264 +629,264 @@ msgstr ""
 "حدث خطأ في الخطوة الأخيرة.\n"
 "هل تريد المتابعة مع العنصر الذي سبب الخطأ أم تريد تخطي هذا العنصر؟"
 
-#: directorymergewindow.cpp:2264
+#: directorymergewindow.cpp:2305
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "تابع الدمج بعد حدوث خطأ"
 
-#: directorymergewindow.cpp:2265
+#: directorymergewindow.cpp:2306
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "تابع مع العنصر الأخير"
 
-#: directorymergewindow.cpp:2266
+#: directorymergewindow.cpp:2307
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "تخطَّ العنصر"
 
-#: directorymergewindow.cpp:2360
+#: directorymergewindow.cpp:2401
 #, kde-format
 msgid "Merge operation complete."
 msgstr "اكتملت عملية الدمج."
 
-#: directorymergewindow.cpp:2360 directorymergewindow.cpp:2363
+#: directorymergewindow.cpp:2401 directorymergewindow.cpp:2404
 #, kde-format
 msgid "Merge Complete"
 msgstr "اكتمل الدمج"
 
-#: directorymergewindow.cpp:2374
+#: directorymergewindow.cpp:2415
 #, kde-format
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
 msgstr "اكتملت محاكاة الدمج: تحقّق مما إذا كنت موافقًا على العمليات المقترحة."
 
-#: directorymergewindow.cpp:2410
+#: directorymergewindow.cpp:2451
 #, kde-format
 msgid "An error occurred. Press OK to see detailed information."
 msgstr "حدث خطأ. اضغط على ”حسنًا“ لمشاهدة المعلومات التفصيلية."
 
-#: directorymergewindow.cpp:2443
+#: directorymergewindow.cpp:2484
 #, kde-format
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "خطأ: أثناء حذف %1: فشل إنشاء النسخة الاحتياطية."
 
-#: directorymergewindow.cpp:2450
+#: directorymergewindow.cpp:2491
 #, kde-format
 msgid "delete folder recursively( %1 )"
 msgstr "احذف المجلد تكراريًا (%1)"
 
-#: directorymergewindow.cpp:2452
+#: directorymergewindow.cpp:2493
 #, kde-format
 msgid "delete( %1 )"
 msgstr "احذف( %1 )"
 
-#: directorymergewindow.cpp:2468
+#: directorymergewindow.cpp:2509
 #, kde-format
 msgid "Error: delete folder operation failed while trying to read the folder."
 msgstr "خطأ: فشلت عملية حذف المجلد أثناء محاولة قراءة المجلد."
 
-#: directorymergewindow.cpp:2484
+#: directorymergewindow.cpp:2525
 #, kde-format
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "خطأ: فشلت عملية rmdir( %1 )."
 
-#: directorymergewindow.cpp:2494
+#: directorymergewindow.cpp:2535
 #, kde-format
 msgid "Error: delete operation failed."
 msgstr "خطأ: فشلت عملية الحذف."
 
-#: directorymergewindow.cpp:2521
+#: directorymergewindow.cpp:2562
 #, kde-format
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "دمج يدوي( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2524
+#: directorymergewindow.cpp:2565
 #, kde-format
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr "     ملاحظة: بعد دمج يدوي، يجب على المستخدم المتابعة بالضغط على F7."
 
-#: directorymergewindow.cpp:2551
+#: directorymergewindow.cpp:2592
 #, kde-format
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr "خطأ: فشلت النسخة ( %1 -> %2 ). فشل حذف الوجهة الحالية."
 
-#: directorymergewindow.cpp:2560
+#: directorymergewindow.cpp:2601
 #, kde-format
 msgid "copyLink( %1 -> %2 )"
 msgstr "انسخ الارتباط( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2569
+#: directorymergewindow.cpp:2610
 #, kde-format
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr "خطأ: فشل copyLink: الارتباطات البعيدة ليست مدعومة بعد."
 
-#: directorymergewindow.cpp:2579
+#: directorymergewindow.cpp:2620
 #, kde-format
 msgid "Error: copyLink failed."
 msgstr "خطأ: فشل copyLink."
 
-#: directorymergewindow.cpp:2602
+#: directorymergewindow.cpp:2643
 #, kde-format
 msgid "copy( %1 -> %2 )"
 msgstr "نسخ( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2628
+#: directorymergewindow.cpp:2669
 #, kde-format
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr "خطأ أثناء إعادة التسمية( %1 -> %2 ): لا يمكن حذف الوجهة الحالية."
 
-#: directorymergewindow.cpp:2635
+#: directorymergewindow.cpp:2676
 #, kde-format
 msgid "rename( %1 -> %2 )"
 msgstr "إعادة تسمية( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2644
+#: directorymergewindow.cpp:2685
 #, kde-format
 msgid "Error: Rename failed."
 msgstr "خطأ: فشلت إعادة التسمية."
 
-#: directorymergewindow.cpp:2662
+#: directorymergewindow.cpp:2703
 #, kde-format
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr "خطأ أثناء إنشاء الدليل %1. لا يمكن حذف الملف الحالي."
 
-#: directorymergewindow.cpp:2679
+#: directorymergewindow.cpp:2720
 #, kde-format
 msgid "makeDir( %1 )"
 msgstr "إنشاء دليل( %1 )"
 
-#: directorymergewindow.cpp:2689
+#: directorymergewindow.cpp:2730
 #, kde-format
 msgid "Error while creating folder."
 msgstr "خطأ أثناء إنشاء المجلّد."
 
-#: directorymergewindow.cpp:2725 directorymergewindow.cpp:2807
-#: directorymergewindow.cpp:2838
+#: directorymergewindow.cpp:2766 directorymergewindow.cpp:2848
+#: directorymergewindow.cpp:2879
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Dest: "
 msgstr "الوجهة: "
 
-#: directorymergewindow.cpp:2733 directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2774 directorymergewindow.cpp:2802
 #, kde-format
 msgctxt "Header label"
 msgid "Folder"
 msgstr "المجلد"
 
-#: directorymergewindow.cpp:2733
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgctxt "Header label"
 msgid "Type"
 msgstr "النوع"
 
-#: directorymergewindow.cpp:2733
+#: directorymergewindow.cpp:2774
 #, kde-format
 msgctxt "Header label"
 msgid "Size"
 msgstr "الحجم"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgctxt "Header label"
 msgid "Attr"
 msgstr "صفة"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgctxt "Header label"
 msgid "Last Modification"
 msgstr "التعديل الأخير"
 
-#: directorymergewindow.cpp:2734
+#: directorymergewindow.cpp:2775
 #, kde-format
 msgctxt "Header label"
 msgid "Link-Destination"
 msgstr "مقصد الرابط"
 
-#: directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2802
 #, kde-format
 msgctxt "Header label"
 msgid "File"
 msgstr "ملف"
 
-#: directorymergewindow.cpp:2761
+#: directorymergewindow.cpp:2802
 #, kde-format
 msgctxt "Header label ending"
 msgid "-Link"
 msgstr "-رابط"
 
-#: directorymergewindow.cpp:2767
+#: directorymergewindow.cpp:2808
 #, kde-format
 msgctxt "Header label"
 msgid "not available"
 msgstr "غير متوفّر"
 
-#: directorymergewindow.cpp:2781
+#: directorymergewindow.cpp:2822
 #, kde-format
 msgid "A (Dest): "
 msgstr "أ (الوجهة): "
 
-#: directorymergewindow.cpp:2785
+#: directorymergewindow.cpp:2826
 #, kde-format
 msgid "A:    "
 msgstr "أ:    "
 
-#: directorymergewindow.cpp:2785
+#: directorymergewindow.cpp:2826
 #, kde-format
 msgid "A (Base): "
 msgstr "أ (الأساس): "
 
-#: directorymergewindow.cpp:2791
+#: directorymergewindow.cpp:2832
 #, kde-format
 msgid "B (Dest): "
 msgstr "ب (الوجهة): "
 
-#: directorymergewindow.cpp:2795
+#: directorymergewindow.cpp:2836
 #, kde-format
 msgid "B:    "
 msgstr "ب:    "
 
-#: directorymergewindow.cpp:2800
+#: directorymergewindow.cpp:2841
 #, kde-format
 msgid "C (Dest): "
 msgstr "ج (الوجهة): "
 
-#: directorymergewindow.cpp:2804
+#: directorymergewindow.cpp:2845
 #, kde-format
 msgid "C:    "
 msgstr "ج:    "
 
 #. i18n("Saving Directory Merge State ..."));
-#: directorymergewindow.cpp:2848
+#: directorymergewindow.cpp:2889
 #, kde-format
 msgid "Save Folder Merge State As..."
 msgstr "احفظ حالة دمج المجلد كـ..."
 
-#: directorymergewindow.cpp:2955
+#: directorymergewindow.cpp:2994
 #, kde-format
 msgid "Start/Continue Folder Merge"
 msgstr "ابدأ/تابع دمج المجلد"
 
-#: directorymergewindow.cpp:2956
+#: directorymergewindow.cpp:2995
 #, kde-format
 msgid "Run Operation for Current Item"
 msgstr "نفّذ العملية للبند الحالي"
 
-#: directorymergewindow.cpp:2957
+#: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Compare Selected File"
 msgstr "قارن الملفات المختارة"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid "Merge Current File"
 msgstr "ادمج الملف الحالي"
 
-#: directorymergewindow.cpp:2958
+#: directorymergewindow.cpp:2997
 #, kde-format
 msgid ""
 "Merge\n"
@@ -895,56 +895,56 @@ msgstr ""
 "ادمج\n"
 "الملف"
 
-#: directorymergewindow.cpp:2959
+#: directorymergewindow.cpp:2998
 #, kde-format
 msgid "Fold All Subfolders"
 msgstr "اطوِ كل المجلدات الفرعية"
 
-#: directorymergewindow.cpp:2960
+#: directorymergewindow.cpp:2999
 #, kde-format
 msgid "Unfold All Subfolders"
 msgstr "افرد كل المجلدات الفرعية"
 
-#: directorymergewindow.cpp:2961
+#: directorymergewindow.cpp:3000
 #, kde-format
 msgid "Rescan"
 msgstr "أعد المسح"
 
 #. i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
 #. i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
-#: directorymergewindow.cpp:2964
+#: directorymergewindow.cpp:3003
 #, kde-format
 msgid "Choose A for All Items"
 msgstr "اختر أ لكل العناصر"
 
-#: directorymergewindow.cpp:2965
+#: directorymergewindow.cpp:3004
 #, kde-format
 msgid "Choose B for All Items"
 msgstr "اختر ب لكل العناصر"
 
-#: directorymergewindow.cpp:2966
+#: directorymergewindow.cpp:3005
 #, kde-format
 msgid "Choose C for All Items"
 msgstr "اختر ج لكل العناصر"
 
-#: directorymergewindow.cpp:2967
+#: directorymergewindow.cpp:3006
 #, kde-format
 msgid "Auto-Choose Operation for All Items"
 msgstr "عملية اختيار آليّة لكل البنود"
 
-#: directorymergewindow.cpp:2968
+#: directorymergewindow.cpp:3007
 #, kde-format
 msgid "No Operation for All Items"
 msgstr "لا عملية لكل البنود"
 
 #. i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
 #. d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
-#: directorymergewindow.cpp:2973
+#: directorymergewindow.cpp:3012
 #, kde-format
 msgid "Show Identical Files"
 msgstr "اعرض الملفات المتشابهة"
 
-#: directorymergewindow.cpp:2973
+#: directorymergewindow.cpp:3012
 #, kde-format
 msgid ""
 "Identical\n"
@@ -953,17 +953,17 @@ msgstr ""
 "ملفات\n"
 "متطابقة"
 
-#: directorymergewindow.cpp:2974
+#: directorymergewindow.cpp:3013
 #, kde-format
 msgid "Show Different Files"
 msgstr "اعرض الملفات المختلفة"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:3014
 #, kde-format
 msgid "Show Files only in A"
 msgstr "اعرض الملفات فقط في أ"
 
-#: directorymergewindow.cpp:2975
+#: directorymergewindow.cpp:3014
 #, kde-format
 msgid ""
 "Files\n"
@@ -972,12 +972,12 @@ msgstr ""
 "ملفات\n"
 "في أ فقط"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:3015
 #, kde-format
 msgid "Show Files only in B"
 msgstr "اعرض الملفات فقط في ب"
 
-#: directorymergewindow.cpp:2976
+#: directorymergewindow.cpp:3015
 #, kde-format
 msgid ""
 "Files\n"
@@ -986,12 +986,12 @@ msgstr ""
 "ملفات\n"
 "في ب فقط"
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:3016
 #, kde-format
 msgid "Show Files only in C"
 msgstr "اعرض الملفات فقط في ج"
 
-#: directorymergewindow.cpp:2977
+#: directorymergewindow.cpp:3016
 #, kde-format
 msgid ""
 "Files\n"
@@ -1000,68 +1000,68 @@ msgstr ""
 "ملفات\n"
 "في ج فقط"
 
-#: directorymergewindow.cpp:2981
+#: directorymergewindow.cpp:3020
 #, kde-format
 msgid "Compare Explicitly Selected Files"
 msgstr "قارن الملفات المحددة صراحة"
 
-#: directorymergewindow.cpp:2982
+#: directorymergewindow.cpp:3021
 #, kde-format
 msgid "Merge Explicitly Selected Files"
 msgstr "ادمج الملفات المحددة صراحة"
 
-#: directorymergewindow.cpp:2984 directorymergewindow.cpp:2991
+#: directorymergewindow.cpp:3023 directorymergewindow.cpp:3030
 #, kde-format
 msgid "Do Nothing"
 msgstr "لا تفعل أي شيئ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, mergeCheckBox)
-#: directorymergewindow.cpp:2988 opendialog.ui:68
+#: directorymergewindow.cpp:3027 opendialog.ui:68
 #, kde-format
 msgid "Merge"
 msgstr "ادمج"
 
-#: directorymergewindow.cpp:2989
+#: directorymergewindow.cpp:3028
 #, kde-format
 msgid "Delete (if exists)"
 msgstr "احذف ( إذا كان موجود )"
 
-#: directorymergewindow.cpp:2992
+#: directorymergewindow.cpp:3031
 #, kde-format
 msgid "Copy A to B"
 msgstr "انسخ أ إلى ب"
 
-#: directorymergewindow.cpp:2993
+#: directorymergewindow.cpp:3032
 #, kde-format
 msgid "Copy B to A"
 msgstr "انسخ ب إلى أ"
 
-#: directorymergewindow.cpp:2994
+#: directorymergewindow.cpp:3033
 #, kde-format
 msgid "Delete A"
 msgstr "احذف أ"
 
-#: directorymergewindow.cpp:2995
+#: directorymergewindow.cpp:3034
 #, kde-format
 msgid "Delete B"
 msgstr "احذف ب"
 
-#: directorymergewindow.cpp:2996
+#: directorymergewindow.cpp:3035
 #, kde-format
 msgid "Delete A && B"
 msgstr "احذف أ و ب"
 
-#: directorymergewindow.cpp:2997
+#: directorymergewindow.cpp:3036
 #, kde-format
 msgid "Merge to A"
 msgstr "ادمج إلى أ"
 
-#: directorymergewindow.cpp:2998
+#: directorymergewindow.cpp:3037
 #, kde-format
 msgid "Merge to B"
 msgstr "ادمج إلى ب"
 
-#: directorymergewindow.cpp:2999
+#: directorymergewindow.cpp:3038
 #, kde-format
 msgid "Merge to A && B"
 msgstr "ادمج إلى أ و ب"
@@ -1627,7 +1627,7 @@ msgstr "بدّل بين عرض المجلد وعرض النص"
 msgid "Ready."
 msgstr "جاهز."
 
-#: kdiff3.cpp:912 pdiff.cpp:1522
+#: kdiff3.cpp:912 pdiff.cpp:1525
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "لم يحفظ ناتج الدمج."
@@ -1642,7 +1642,7 @@ msgstr "احفظ واخرج"
 msgid "Quit Without Saving"
 msgstr "اخرج دون حفظ"
 
-#: kdiff3.cpp:923 pdiff.cpp:1533
+#: kdiff3.cpp:923 pdiff.cpp:1536
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "فشل حفظ ناتج الدمج."
@@ -1883,32 +1883,32 @@ msgstr "ملف3 المراد فتحه"
 msgid "See kdiff3 --help for supported options."
 msgstr "انظر المقارن --help للخيارات المدعومة."
 
-#: MergeFileInfos.cpp:393
+#: MergeFileInfos.cpp:398
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
 msgstr "تعذّر مقارنة ملف غير عادي بملف عادي."
 
-#: MergeFileInfos.cpp:416
+#: MergeFileInfos.cpp:421
 #, kde-format
 msgid "Mix of links and normal files."
 msgstr "مزج بين الارتباطات والملفات العادية."
 
-#: MergeFileInfos.cpp:424
+#: MergeFileInfos.cpp:429
 #, kde-format
 msgid "Link: "
 msgstr "الرابط: "
 
-#: MergeFileInfos.cpp:434
+#: MergeFileInfos.cpp:439
 #, kde-format
 msgid "Size. "
 msgstr "الحجم. "
 
-#: MergeFileInfos.cpp:450 MergeFileInfos.cpp:460
+#: MergeFileInfos.cpp:455 MergeFileInfos.cpp:465
 #, kde-format
 msgid "Date & Size: "
 msgstr "التاريخ و الحجم: "
 
-#: MergeFileInfos.cpp:481
+#: MergeFileInfos.cpp:486
 #, kde-format
 msgctxt "Status message"
 msgid "Comparing file..."
@@ -3384,38 +3384,38 @@ msgstr "لفّ الكلمات (الإلغاء يعطّل لفّ الكلمات)"
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "يحسب أقصى عرض لشريط التمرير الأفقي"
 
-#: pdiff.cpp:1524
+#: pdiff.cpp:1527
 #, kde-format
 msgid "Save && Continue"
 msgstr "احفظ وتابع"
 
-#: pdiff.cpp:1525
+#: pdiff.cpp:1528
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "تابع دون حفظ"
 
-#: pdiff.cpp:1716
+#: pdiff.cpp:1719
 #, kde-format
 msgid "Search complete."
 msgstr "اكتمل البحث."
 
-#: pdiff.cpp:1716
+#: pdiff.cpp:1719
 #, kde-format
 msgid "Search Complete"
 msgstr "اكتمل البحث"
 
-#: pdiff.cpp:1897
+#: pdiff.cpp:1900
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "لم يُحدد أي شيء في أي من نوافذ فروقات الإدخال."
 
-#: pdiff.cpp:1897
+#: pdiff.cpp:1900
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "خطأ أثناء إضافة نطاق فرق يدوي"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:54 progressdialog.ui:100
+#: progress.cpp:57 progressdialog.ui:100
 #, kde-format
 msgid "&Cancel"
 msgstr "أل&غِ"
