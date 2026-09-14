@@ -178,7 +178,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >El &kdiff3; va començar perquè vaig haver de fer una fusió difícil. La fusió és necessària quan diverses persones treballen en els mateixos fitxers en un projecte. Una fusió pot ser una cosa automatitzada, quan l'eina de fusió no només té fitxers nous (anomenats «branques»), sinó també el fitxer original (anomenat «base»). L'eina de fusió prendrà qualsevol modificació que només s'hagi realitzat en una branca. Quan diversos col·laboradors canvien les mateixes línies, l'eina de fusió detectarà els conflictes que s'han de resoldre manualment. </para
 ><para
->Llavors la fusió serà difícil perquè un col·laborador ha canviat moltes coses i ha corregit el sagnat en molts llocs. Un altre col·laborador també ha canviat molt text en el mateix fitxer, el qual ha resultat en diversos conflictes de fusió. </para
+>Llavors la fusió serà difícil perquè un col·laborador ha canviat moltes coses i ha corregit el sagnat en molts llocs. Un altre col·laborador també ha canviat molt text en el mateix fitxer, el qual ha provocat diversos conflictes de fusió. </para
 ><para
 >L'eina que vaig emprar llavors, només mostrava les línies canviades, però no el que s'havia canviat dins d'aquestes línies. I no hi havia informació només sobre on s'havia canviat el sagnat. La fusió va ser un petit malson. </para
 ><para
@@ -1478,7 +1478,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></varlistentry>
 </variablelist>
 <para
->Canviar els colors per a la comparació de carpetes serà efectiu només quan inicieu la propera comparació de carpetes. </para>
+>Canviar els colors per a la comparació de carpetes serà efectiu només quan inicieu la comparació de carpetes següent. </para>
 <para
 >En els sistemes amb només 16 o 256 colors, alguns colors no estaran disponibles en forma pura. En aquests sistemes, el botó <guibutton
 >Omissió</guibutton
@@ -2123,7 +2123,7 @@ Please at least include KDE, the KDE package it is in, the name
       fa
 </screen>
 <para
->Probablement això no serà desitjable perquè la primera lletra conté la informació realment interessant. Per a ajudar a l'algoritme de coincidència a ignorar la segona lletra, podem utilitzar una ordre de preprocessador per a la coincidència de les línies, que substitueixi «g» amb «a»: </para>
+>Probablement això no serà desitjable perquè la primera lletra conté la informació realment interessant. Per a ajudar l'algorisme de coincidència a ignorar la segona lletra, podem utilitzar una ordre de preprocessador per a la coincidència de les línies, que substitueixi «g» amb «a»: </para>
 <screen
 ><command
 >sed</command
