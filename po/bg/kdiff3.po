@@ -140,7 +140,7 @@ msgstr "A (Базов)"
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
-msgstr "Кодова таблица: %1"
+msgstr "Кодиране: %1"
 
 #: difftextwindow.cpp:2003
 #, kde-format
@@ -158,7 +158,7 @@ msgstr "Unix"
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
-msgstr "Край на ред: %1"
+msgstr "Стил на завършване на реда: %1"
 
 #: difftextwindow.cpp:2004
 #, kde-format
@@ -399,17 +399,17 @@ msgstr "Отварянето на папки не е успешно:"
 #: directorymergewindow.cpp:847
 #, kde-format
 msgid "Folder A \"%1\" does not exist or is not a folder.\n"
-msgstr "Папка A \"%1\" не съществува или не е папка.\n"
+msgstr "Папка A „%1“ не съществува или не е папка.\n"
 
 #: directorymergewindow.cpp:852
 #, kde-format
 msgid "Folder B \"%1\" does not exist or is not a folder.\n"
-msgstr "Папка B \"%1\" не съществува или не е папка.\n"
+msgstr "Папка B „%1“ не съществува или не е папка.\n"
 
 #: directorymergewindow.cpp:857
 #, kde-format
 msgid "Folder C \"%1\" does not exist or is not a folder.\n"
-msgstr "Папка C \"%1\" не съществува или не е папка.\n"
+msgstr "Папка C „%1“ не съществува или не е папка.\n"
 
 #: directorymergewindow.cpp:860
 #, kde-format
@@ -1097,20 +1097,19 @@ msgstr "Сливане в А и B"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Unable to determine full url. No parent specified."
-msgstr ""
-"Неуспешно определяне на пълния URL адрес. Не е посочен родителски елемент."
+msgstr "Невъзможно е да се определи пълният url адрес. Не е посочен родител."
 
 #: fileaccess.cpp:538
 #, kde-format
 msgctxt "@info:shell"
 msgid "Parent and child could not be distinguished."
-msgstr "Не могат да бъдат разграничени родителски и дъщерни елементи."
+msgstr "Не може да се разграничат родителския от дъщерния елемент."
 
 #: fileaccess.cpp:542
 #, kde-format
 msgctxt "@info:shell"
 msgid "Computed url is: "
-msgstr "Изграденият URL адрес е:"
+msgstr "Изчисленият адрес е:"
 
 #: fileaccess.cpp:800
 #, kde-format
@@ -1122,7 +1121,7 @@ msgstr "Неуспешно четене на файл: %1"
 #, kde-format
 msgctxt "@info %1 is a path"
 msgid "User cancelled read operation on %1"
-msgstr "Потребителя отмени операция за четене на %1"
+msgstr "Потребителят отмени операциите за четене на %1"
 
 #: fileaccess.cpp:872
 #, kde-format
@@ -2176,7 +2175,7 @@ msgstr "Кодек от C: %1"
 #: mergeresultwindow.cpp:2951
 #, kde-format
 msgid "Select file (not saving yet)"
-msgstr "Избиране на файл (без запазване за сега)"
+msgstr "Избиране на файл(без запазване за сега)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, OpenDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, ProgressDialog)
@@ -3121,7 +3120,7 @@ msgstr ""
 #: optiondialog.cpp:1314
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
-msgstr "Забележка: локалното кодиране е \"%1\""
+msgstr "Забележка: локалното кодиране е „%1“"
 
 #: optiondialog.cpp:1318
 #, kde-format
@@ -3136,9 +3135,9 @@ msgid ""
 "encoding will be used as fallback.\n"
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
-"Ако е разрешено, кодовата таблица ще се открива автоматично.\n"
-"Ако кодовата таблица на файла не може да бъде намерена автоматично, тогава "
-"избраната таблица ще бъде използвана като резервна.\n"
+"Ако е разрешено, кодирането ще се открива автоматично.\n"
+"Ако кодирането на файла не може да бъде намерено автоматично, тогава "
+"избраното кодиране ще бъде използвано като резервно.\n"
 "(Откриването на Unicode зависи от първите байтове на файла.)"
 
 #: optiondialog.cpp:1328 optiondialog.cpp:1339 optiondialog.cpp:1350
