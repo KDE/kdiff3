@@ -16,7 +16,7 @@ set(CMAKE_CXX_EXTENSIONS ON ) #Disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CXX_STANDARD_REQUIRED ON) #Force early fail if we can't get c++17.
 
-set(KF_MIN_VERSION "6.2.0")
+set(KF_MIN_VERSION "6.16.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -164,11 +164,11 @@ add_definitions(
     # the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     # KF5 5.64+ flags
-    # Don't warn for API deprecated after 6.15.0 (below as hex.hex.hex number)
-    -DKF_DISABLE_DEPRECATED_BEFORE=0x060400#disable deprecated api for KF 6.4.
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x060F00
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x060F00
-    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x060F00
+    # Don't warn for API deprecated after 6.25.0 (below as hex.hex.hex number)
+    -DKF_DISABLE_DEPRECATED_BEFORE=0x061000#disable deprecated api up to KF 6.16
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x061000
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x061A00
+    -DKXMLGUI_DEPRECATED_WARNINGS_SINCE=0x061A00
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
