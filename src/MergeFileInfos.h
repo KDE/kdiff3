@@ -220,10 +220,12 @@ class MfiCompare
     {
         mOrder = order;
     }
-    bool operator()(MergeFileInfos* pMFI1, MergeFileInfos* pMFI2)
+
+    bool operator()(const MergeFileInfos* pMFI1, const MergeFileInfos* pMFI2) const
     {
-        bool bDir1 = pMFI1->isDirA() || pMFI1->isDirB() || pMFI1->isDirC();
-        bool bDir2 = pMFI2->isDirA() || pMFI2->isDirB() || pMFI2->isDirC();
+        const bool bDir1 = pMFI1->isDirA() || pMFI1->isDirB() || pMFI1->isDirC();
+        const bool bDir2 = pMFI2->isDirA() || pMFI2->isDirB() || pMFI2->isDirC();
+
         if(bDir1 == bDir2)
         {
             if(mOrder == Qt::AscendingOrder)
