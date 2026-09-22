@@ -78,12 +78,16 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     //m_fileItemInfos = fileItemInfos;
     m_pParentWidget = pParentWidget;
 
+    // remember currently selected files
+    m_list = fileItemInfos.urlList();
+
+    // Display nothing when more than 3 items are selected, as actions are relevant for that many items
+    if(m_list.count() > 3)
+        return actions;
+
     QAction* pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18nc("Contexualmenu title", "KDiff3..."), this);
     QMenu* pActionMenu = new QMenu();
     pMenuAction->setMenu(pActionMenu);
-
-    // remember currently selected files
-    m_list = fileItemInfos.urlList();
 
     /* Menu structure:
       KDiff3 -> (1 File selected):  Save 'selection' for later comparison (push onto history stack)
