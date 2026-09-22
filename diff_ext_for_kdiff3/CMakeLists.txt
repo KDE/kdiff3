@@ -18,7 +18,7 @@ set(kdiff3ext_RCS
 add_library(kdiff3ext MODULE ${kdiff3ext_SRCS} ${kdiff3ext_RCS})
 
 target_link_libraries(kdiff3ext KF${KF_MAJOR_VERSION}::I18n uuid ole32)
-target_compile_definitions(kdiff3ext PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\" -DUNICODE=1 -Dkdiff3ext)
+target_compile_definitions(kdiff3ext PRIVATE -DTRANSLATION_DOMAIN=\"diff_ext\" -DUNICODE=1 -Dkdiff3ext)
 # Work around buggy windows sdk headers that prevent certain symbols from being exported the normal way
 # even though they are required exports for shell extensions.
 #
