@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Russian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Руководство пользователя KDiff3</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>Страница руководства KDiff3.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>22 февраля 2019 г.</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Инструмент для сравнения и объединения файлов и папок</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>файл</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>файл</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>файл</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>псевдоним1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>псевдоним2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>псевдоним3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>псевдоним</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>строка</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>файл</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Файл1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Файл2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Файл3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Описание</title>
+<para
+>Сравнивает два или три входных файла или папки.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Параметры</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Игнорируется. (Определено пользователем.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Игнорируется. (Определено пользователем.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Игнорируется. (Определено пользователем.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Игнорируется. (Определено пользователем.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Объединить ввод. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>файл</replaceable
+></term>
+<listitem
+><para
+>Явный базовый файл. Для совместимости с некоторыми программами. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>файл</replaceable
+></term>
+<listitem
+><para
+>Выходной файл. Подразумевает -m. &eg;: -o новый_файл.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>файл</replaceable
+></term>
+<listitem
+><para
+>Опять выходной файл. (Для совместимости с некоторыми программами.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>Не показывать графический интерфейс, если все конфликты разрешаются автоматически (требуется <option
+>-o</option
+> <replaceable
+>файл</replaceable
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>Игнорировать --auto и всегда показывать графический интерфейс. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>псевдоним1</replaceable
+></term>
+<listitem
+><para
+>Замена видимого названия для входного файла 1 (база). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>псевдоним2</replaceable
+></term>
+<listitem
+><para
+>Замена видимого названия для входного файла 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>псевдоним3</replaceable
+></term>
+<listitem
+><para
+>Замена видимого названия для входного файла 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>псевдоним</replaceable
+></term>
+<listitem
+><para
+>Альтернативная замена видимого названия. Указывается один раз для каждого входного файла. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>строка</replaceable
+></term>
+<listitem
+><para
+>Переопределить параметр конфигурации. Указывается один раз для каждого параметра. &eg;: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Вывести список параметров конфигурации с текущими значениями. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>файл</replaceable
+></term>
+<listitem
+><para
+>Использовать другой конфигурационный файл. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Файл1</replaceable
+></option
+></term>
+<listitem
+><para
+>Открываемый файл1 (базовый, если не указан через --<option
+>base</option
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Файл2</replaceable
+></option
+></term>
+<listitem
+><para
+>Открываемый файл2 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Файл3</replaceable
+></option
+></term>
+<listitem
+><para
+>Открываемый файл3 </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Смотрите также</title>
+<simplelist>
+<member
+>Более подробная пользовательская документация доступна по адресу <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (введите этот &URL; в &konqueror; или выполните <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>).</member>
+<member
+>kf6options(7)</member>
+<member
+>qt6options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Авторы</title>
+<para
+>Эта страница руководства написана &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>
