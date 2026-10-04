@@ -2,13 +2,13 @@
 #  SPDX-FileCopyrightText:  2018-2020 Michael Reeves reeves.87@gmail.com
 #  SPDX-License-Identifier: BSD-2-Clause
 
-# This does not work for our shell extension.
-remove_definitions(-DQT_USE_QSTRINGBUILDER)
+find_package(Intl REQUIRED)
 
 set(kdiff3ext_SRCS
     class_factory.cpp
     diff_ext.cpp
     server.cpp
+    translator.cpp
 )
 
 set(kdiff3ext_RCS
@@ -17,8 +17,9 @@ set(kdiff3ext_RCS
 
 add_library(kdiff3ext MODULE ${kdiff3ext_SRCS} ${kdiff3ext_RCS})
 
-target_link_libraries(kdiff3ext KF${KF_MAJOR_VERSION}::I18n uuid ole32)
-target_compile_definitions(kdiff3ext PRIVATE -DTRANSLATION_DOMAIN=\"diff_ext\" -DUNICODE=1 -Dkdiff3ext)
+target_include_directories(kdiff3ext PRIVATE ${Intl_INCLUDE_DIRS})
+target_link_libraries(kdiff3ext ${Intl_LIBRARIES} uuid ole32)
+target_compile_definitions(kdiff3ext PRIVATE -Dkdiff3ext)
 # Work around buggy windows sdk headers that prevent certain symbols from being exported the normal way
 # even though they are required exports for shell extensions.
 #

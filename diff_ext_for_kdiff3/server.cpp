@@ -4,13 +4,10 @@
   SPDX-License-Identifier: BSD-2-Clause
 */
 
-#define _CRT_NON_CONFORMING_SWPRINTFS
-
 #include "server.h"
 
 #include <stdio.h>
-
-#include <tchar.h>
+#include <wchar.h>
 
 #include <shlguid.h>
 #include <olectl.h>
@@ -19,17 +16,16 @@
 #include <objbase.h>
 #include <initguid.h>
 
-#include <KLocalizedString>
-
 #include "class_factory.h"
+#include "translator.h"
 
 #define DllExport   __declspec( dllexport )
 
 // registry key util struct
 struct REGSTRUCT {
-  LPCTSTR subkey;
-  LPCTSTR name;
-  LPCTSTR value;
+    const wchar_t* subkey;
+    const wchar_t* name;
+    const wchar_t* value;
 };
 
 SERVER* SERVER::_instance = nullptr;
@@ -37,46 +33,46 @@ static HINSTANCE server_instance; // Handle to this DLL itself.
 
 //DEFINE_GUID(CLSID_DIFF_EXT, 0xA0482097, 0xC69D, 0x4DEC, 0x8A, 0xB6, 0xD3, 0xA2, 0x59, 0xAC, 0xC1, 0x51);
 // New class id for DIFF_EXT for KDiff3
-#ifdef Q_OS_WIN64
+#if defined(_WIN64) || defined(_M_X64)
 // {34471FFB-4002-438b-8952-E4588D0C0FE9}
 DEFINE_GUID( CLSID_DIFF_EXT, 0x34471FFB, 0x4002, 0x438b, 0x89, 0x52, 0xE4, 0x58, 0x8D, 0x0C, 0x0F, 0xE9 );
 #else
-#error unsupported configuration
+#error [KDiff3] Unsupported configuration.
 #endif
 
-tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& value, bool isUserKey /*= true*/ )
+std::wstring SERVER::getRegistryKeyString( const std::wstring& subKey, const std::wstring& value, bool isUserKey /*= true*/ )
 {
-   tstring keyName = m_registryBaseName;
+    std::wstring keyName = m_registryBaseName;
    if (!subKey.empty())
-      keyName += TEXT("\\")+subKey;
+       keyName += L"\\" + subKey;
 
    HKEY key;
    HKEY baseKey = isUserKey ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE;
-   tstring result;
+    std::wstring result;
    for(;;)
    {
-      if( RegOpenKeyEx( baseKey, keyName.c_str(), 0, KEY_READ | KEY_WOW64_64KEY, &key ) == ERROR_SUCCESS )
-      {
-         DWORD neededSizeInBytes = 0;
-         if (RegQueryValueEx(key, value.c_str(), nullptr, nullptr, nullptr, &neededSizeInBytes) == ERROR_SUCCESS)
-         {
-            DWORD length = neededSizeInBytes / sizeof( TCHAR );
-            result.resize( length );
-            if ( RegQueryValueEx( key, value.c_str(), nullptr, nullptr, (LPBYTE)&result[0], &neededSizeInBytes ) == ERROR_SUCCESS)
-            {
-               //Everything is ok, but we want to cut off the terminating 0-character
-               result.resize( length - 1 );
-               RegCloseKey(key);
-               return result;
-            }
-            else
-            {
-               result.resize(0);
-            }
-         }
+       if(RegOpenKeyExW(baseKey, keyName.c_str(), 0, KEY_READ | KEY_WOW64_64KEY, &key) == ERROR_SUCCESS)
+       {
+           DWORD neededSizeInBytes = 0;
+           if(RegQueryValueExW(key, value.c_str(), nullptr, nullptr, nullptr, &neededSizeInBytes) == ERROR_SUCCESS)
+           {
+               DWORD length = neededSizeInBytes / sizeof(wchar_t);
+               result.resize(length);
+               if(RegQueryValueExW(key, value.c_str(), nullptr, nullptr, reinterpret_cast<LPBYTE>(&result[0]), &neededSizeInBytes) == ERROR_SUCCESS)
+               {
+                   //Everything is ok, but we want to cut off the terminating 0-character
+                   result.resize(length - 1);
+                   RegCloseKey(key);
+                   return result;
+               }
+               else
+               {
+                   result.resize(0);
+               }
+           }
 
-         RegCloseKey(key);
-      }
+           RegCloseKey(key);
+       }
       if (baseKey==HKEY_LOCAL_MACHINE)
          break;
       baseKey = HKEY_LOCAL_MACHINE;
@@ -84,11 +80,11 @@ tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& valu
 
    // Error
    {
-      LPTSTR message;
-      FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
-         GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &message, 0, nullptr);
-      ERRORLOG( (tstring(TEXT("RegOpenKeyEx: ")+keyName+TEXT("->")+value) + TEXT(": ")) + message );                                        \
-      LocalFree(message);
+       wchar_t* message;
+       FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
+                      GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&message), 0, nullptr);
+    ERRORLOG((std::wstring(L"RegOpenKeyEx: " + keyName + L"->" + value) + L": ") + message);
+       LocalFree(message);
    }
    return result;
 }
@@ -107,22 +103,23 @@ DllCanUnloadNow(void) {
 
 extern "C" int APIENTRY
 DllMain(HINSTANCE instance, DWORD reason, LPVOID /* reserved */) {
-//  char str[1024];
-//  char* reason_string[] = {"DLL_PROCESS_DETACH", "DLL_PROCESS_ATTACH", "DLL_THREAD_ATTACH", "DLL_THREAD_DETACH"};
-//  sprintf(str, "instance: %x; reason: '%s'", instance, reason_string[reason]);
-//  MessageBox(0, str, TEXT("Info"), MB_OK);
-  switch (reason) {
-    case DLL_PROCESS_ATTACH:
-      server_instance = instance;
-      SERVER::instance()->save_history();
-      MESSAGELOG(TEXT("DLL_PROCESS_ATTACH"));
-      break;
+    //  char str[1024];
+    //  char* reason_string[] = {"DLL_PROCESS_DETACH", "DLL_PROCESS_ATTACH", "DLL_THREAD_ATTACH", "DLL_THREAD_DETACH"};
+    //  sprintf(str, "instance: %x; reason: '%s'", instance, reason_string[reason]);
+    //  MessageBoxW(0, str, L"Info", MB_OK);
+    switch(reason)
+    {
+        case DLL_PROCESS_ATTACH:
+            server_instance = instance;
+            SERVER::instance()->save_history();
+            MESSAGELOG(L"DLL_PROCESS_ATTACH");
+            break;
 
-    case DLL_PROCESS_DETACH:
-      MESSAGELOG(TEXT("DLL_PROCESS_DETACH"));
-      SERVER::instance()->save_history();
-      break;
-  }
+        case DLL_PROCESS_DETACH:
+            MESSAGELOG(L"DLL_PROCESS_DETACH");
+            SERVER::instance()->save_history();
+            break;
+    }
 
   return 1;
 }
@@ -157,7 +154,8 @@ SERVER* SERVER::instance()
    {
       _instance = new SERVER();
       _instance->initLogging();
-      MESSAGELOG(TEXT("New Server instance"));
+      Translator::init();
+      MESSAGELOG(L"New Server instance");
    }
 
    return _instance;
@@ -165,30 +163,30 @@ SERVER* SERVER::instance()
 
 SERVER::SERVER()  : _reference_count(0)
 {
-   m_registryBaseName = TEXT("Software\\KDE e.V.\\KDiff3\\diff-ext");
-   m_pRecentFiles = nullptr;
-   m_pLogFile = nullptr;
+    m_registryBaseName = L"Software\\KDE e.V.\\KDiff3\\diff-ext";
+    m_pRecentFiles = nullptr;
+    m_pLogFile = nullptr;
 }
 
 void SERVER::initLogging()
 {
-   tstring logFileName = getRegistryKeyString( TEXT(""), TEXT("LogFile") );
-   if ( !logFileName.empty() )
-   {
-      m_pLogFile = _tfopen( logFileName.c_str(), TEXT("a+, ccs=UTF-8") );
-      if (m_pLogFile)
-      {
-         _ftprintf( m_pLogFile, TEXT("\nSERVER::SERVER()\n") );
-      }
-   }
+    std::wstring logFileName = getRegistryKeyString(L"", L"LogFile");
+    if(!logFileName.empty())
+    {
+        m_pLogFile = _wfopen(logFileName.c_str(), L"a+, ccs=UTF-8");
+        if(m_pLogFile)
+        {
+            fwprintf(m_pLogFile, L"\nSERVER::SERVER()\n");
+        }
+    }
 }
 
 SERVER::~SERVER()
 {
    if ( m_pLogFile )
    {
-      _ftprintf( m_pLogFile, TEXT("SERVER::~SERVER()\n\n") );
-      fclose( m_pLogFile );
+       fwprintf(m_pLogFile, L"SERVER::~SERVER()\n\n");
+       fclose(m_pLogFile);
    }
 
    delete m_pRecentFiles;
@@ -213,40 +211,40 @@ SERVER::release() {
   //   delete this;
 }
 
-void SERVER::logMessage( const char* function, const char* file, int line, const tstring& msg )
+void SERVER::logMessage( const char* function, const char* file, int line, const std::wstring& msg )
 {
    SERVER* pServer = SERVER::instance();
    if ( pServer && pServer->m_pLogFile )
    {
       SYSTEMTIME st;
       GetSystemTime( &st );
-      _ftprintf( pServer->m_pLogFile, TEXT("%04d/%02d/%02d %02d:%02d:%02d ")
-         TEXT("%S (%S:%d) %s\n"), // integrate char-string into wchar_t string
-         st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, function, file, line, msg.c_str() );
+      fwprintf(pServer->m_pLogFile, L"%04d/%02d/%02d %02d:%02d:%02d "
+                                    L"%hs (%hs:%d) %ls\n",
+               st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, function, file, line, msg.c_str());
       fflush(pServer->m_pLogFile);
    }
 }
 
-std::list<tstring>&
+std::list<std::wstring>&
 SERVER::recent_files()
 {
    LOG();
    if ( m_pRecentFiles==nullptr )
    {
-      m_pRecentFiles = new std::list<tstring>;
+    m_pRecentFiles = new std::list<std::wstring>;
    }
    else
    {
       m_pRecentFiles->clear();
    }
-   MESSAGELOG(TEXT("Reading history from registry..."));
+   MESSAGELOG(L"Reading history from registry...");
    for( int i=0; i<32; ++i )  // Max history size
    {
-      TCHAR numAsString[10];
-      _sntprintf( numAsString, 10, TEXT("%d"), i );
-      tstring historyItem = getRegistryKeyString( TEXT("history"), numAsString );
-      if ( ! historyItem.empty() )
-         m_pRecentFiles->push_back( historyItem );
+       wchar_t numAsString[10];
+       swprintf(numAsString, 10, L"%d", i);
+    std::wstring historyItem = getRegistryKeyString(L"history", numAsString);
+       if(!historyItem.empty())
+           m_pRecentFiles->push_back(historyItem);
    }
    return *m_pRecentFiles;
 }
@@ -257,42 +255,42 @@ SERVER::save_history() const
    if( m_pRecentFiles )
    {
       HKEY key;
-      if( RegCreateKeyEx(HKEY_CURRENT_USER, (m_registryBaseName + TEXT("\\history")).c_str(), 0, nullptr,
-                         REG_OPTION_NON_VOLATILE, KEY_WRITE | KEY_WOW64_64KEY, nullptr, &key, nullptr) == ERROR_SUCCESS )
+      if(RegCreateKeyExW(HKEY_CURRENT_USER, (m_registryBaseName + L"\\history").c_str(), 0, nullptr,
+                         REG_OPTION_NON_VOLATILE, KEY_WRITE | KEY_WOW64_64KEY, nullptr, &key, nullptr) == ERROR_SUCCESS)
       {
          LOG();
          //DWORD len = MAX_PATH;
          int n = 0;
 
-         std::list<tstring>::const_iterator i;
+         std::list<std::wstring>::const_iterator i;
 
          for(i = m_pRecentFiles->begin(); i!=m_pRecentFiles->end(); ++i, ++n )
          {
-            tstring str = *i;
-            TCHAR numAsString[10];
-            _sntprintf( numAsString, 10, TEXT("%d"), n );
-            if(RegSetValueEx(key, numAsString, 0, REG_SZ, (const BYTE*)str.c_str(), (DWORD)(str.size()+1)*sizeof(TCHAR) ) != ERROR_SUCCESS)
+            std::wstring str = *i;
+            wchar_t numAsString[10];
+            swprintf(numAsString, 10, L"%d", n);
+            if(RegSetValueExW(key, numAsString, 0, REG_SZ, reinterpret_cast<const BYTE*>(str.c_str()), (DWORD)(str.size() + 1) * sizeof(wchar_t)) != ERROR_SUCCESS)
             {
-               LPTSTR message;
-               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
-                  GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
-                  (LPTSTR) &message, 0, nullptr);
-               MessageBox(nullptr, message, TEXT("KDiff3-diff-ext: Save history failed"), MB_OK | MB_ICONINFORMATION);
-               LocalFree(message);
+                wchar_t* message;
+                FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,
+                               GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+                               reinterpret_cast<LPWSTR>(&message), 0, nullptr);
+                MessageBoxW(nullptr, message, L"KDiff3-diff-ext: Save history failed", MB_OK | MB_ICONINFORMATION);
+                LocalFree(message);
             }
          }
          for(; n<32; ++n )
          {
-            TCHAR numAsString[10];
-            _sntprintf( numAsString, 10, TEXT("%d"), n );
-            RegDeleteValue(key, numAsString );
+             wchar_t numAsString[10];
+             swprintf(numAsString, 10, L"%d", n);
+             RegDeleteValueW(key, numAsString);
          }
 
          RegCloseKey(key);
       }
       else
       {
-         SYSERRORLOG(TEXT("RegOpenKeyEx"));
+          SYSERRORLOG(L"RegOpenKeyEx");
       }
    }
 }
@@ -300,81 +298,88 @@ SERVER::save_history() const
 HRESULT
 SERVER::do_register() {
    LOG();
-  TCHAR   class_id[MAX_PATH];
-  LPWSTR  tmp_guid;
-  HRESULT ret = SELFREG_E_CLASS;
+   wchar_t class_id[MAX_PATH];
+   wchar_t* tmp_guid;
+   HRESULT ret = SELFREG_E_CLASS;
 
-  if (StringFromIID(CLSID_DIFF_EXT, &tmp_guid) == S_OK) {
-    _tcsncpy(class_id, tmp_guid, MAX_PATH);
+   if(StringFromIID(CLSID_DIFF_EXT, &tmp_guid) == S_OK)
+   {
+       wcsncpy(class_id, tmp_guid, MAX_PATH);
 
-    CoTaskMemFree((void*)tmp_guid);
+       CoTaskMemFree((void*)tmp_guid);
 
-    TCHAR    subkey[MAX_PATH];
-    TCHAR    server_path[MAX_PATH];
-    HKEY     key;
-    LRESULT  result = NOERROR;
-    DWORD    dwDisp;
+       wchar_t subkey[MAX_PATH];
+       wchar_t server_path[MAX_PATH];
+       HKEY key;
+       LRESULT result = NOERROR;
+       DWORD dwDisp;
 
-    GetModuleFileName(SERVER::instance()->handle(), server_path, MAX_PATH);
+       GetModuleFileNameW(SERVER::instance()->handle(), server_path, MAX_PATH);
 
-    REGSTRUCT entry[] = {
-      {TEXT("Software\\Classes\\CLSID\\%s"), nullptr, TEXT("kdiff3ext")},
-      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), nullptr, TEXT("%s")},
-      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), TEXT("ThreadingModel"), TEXT("Apartment")}
-    };
+       REGSTRUCT entry[] = {
+           {L"Software\\Classes\\CLSID\\%s", nullptr, L"kdiff3ext"},
+           {L"Software\\Classes\\CLSID\\%s\\InProcServer32", nullptr, L"%s"},
+           {L"Software\\Classes\\CLSID\\%s\\InProcServer32", L"ThreadingModel", L"Apartment"}};
 
-    for(unsigned int i = 0; (i < sizeof(entry)/sizeof(entry[0])) && (result == NOERROR); i++) {
-      _sntprintf(subkey, MAX_PATH, entry[i].subkey, class_id);
-      result = RegCreateKeyEx(HKEY_CURRENT_USER, subkey, 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
+       for(unsigned int i = 0; (i < sizeof(entry) / sizeof(entry[0])) && (result == NOERROR); i++)
+       {
+           swprintf(subkey, MAX_PATH, entry[i].subkey, class_id);
+           result = RegCreateKeyExW(HKEY_CURRENT_USER, subkey, 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
 
-      if(result == NOERROR) {
-        TCHAR szData[MAX_PATH];
+           if(result == NOERROR)
+           {
+               wchar_t szData[MAX_PATH];
 
-        _sntprintf(szData, MAX_PATH, entry[i].value, server_path);
-        szData[MAX_PATH-1]=0;
+               swprintf(szData, MAX_PATH, entry[i].value, server_path);
+               szData[MAX_PATH - 1] = 0;
 
-        result = RegSetValueEx(key, entry[i].name, 0, REG_SZ, (LPBYTE)szData, DWORD(_tcslen(szData)*sizeof(TCHAR)));
-      }
+               result = RegSetValueExW(key, entry[i].name, 0, REG_SZ, reinterpret_cast<LPBYTE>(szData), DWORD(wcslen(szData) * sizeof(wchar_t)));
+           }
 
-      RegCloseKey(key);
-    }
+           RegCloseKey(key);
+       }
 
-    if(result == NOERROR) {
-      result = RegCreateKeyEx(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext"), 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
+       if(result == NOERROR)
+       {
+           result = RegCreateKeyExW(HKEY_CURRENT_USER, L"Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext", 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
 
-      if(result == NOERROR) {
+           if(result == NOERROR)
+           {
 
-        result = RegSetValueEx(key, nullptr, 0, REG_SZ, (LPBYTE)class_id, DWORD(_tcslen(class_id)*sizeof(TCHAR)));
+               result = RegSetValueExW(key, nullptr, 0, REG_SZ, reinterpret_cast<LPBYTE>(class_id), DWORD(wcslen(class_id) * sizeof(wchar_t)));
 
-        RegCloseKey(key);
+               RegCloseKey(key);
 
-        // NT needs to have shell extensions "approved".
-         result = RegCreateKeyEx(HKEY_CURRENT_USER,
-            TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"),
-            0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
+               // NT needs to have shell extensions "approved".
+               result = RegCreateKeyExW(HKEY_CURRENT_USER,
+                                        L"Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved",
+                                        0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &key, &dwDisp);
 
-         if(result == NOERROR) {
-         TCHAR szData[MAX_PATH];
+               if(result == NOERROR)
+               {
+                   wchar_t szData[MAX_PATH];
 
-         lstrcpy(szData, TEXT("diff-ext"));
+                   wcscpy(szData, L"diff-ext");
 
-         result = RegSetValueEx(key, class_id, 0, REG_SZ, (LPBYTE)szData, DWORD(_tcslen(szData)*sizeof(TCHAR)));
+                   result = RegSetValueExW(key, class_id, 0, REG_SZ, reinterpret_cast<LPBYTE>(szData), DWORD(wcslen(szData) * sizeof(wchar_t)));
 
-         RegCloseKey(key);
+                   RegCloseKey(key);
 
-         ret = S_OK;
-         } else if (result == ERROR_ACCESS_DENIED) {
-      TCHAR msg[] = TEXT("Warning! You have unsufficient rights to write to a specific registry key.\n")
-         TEXT("The application may work anyway, but it is advised to register this module ")
-         TEXT("again while having administrator rights.");
+                   ret = S_OK;
+               }
+               else if(result == ERROR_ACCESS_DENIED)
+               {
+                   wchar_t msg[] = L"Warning! You have unsufficient rights to write to a specific registry key.\n"
+                                   L"The application may work anyway, but it is advised to register this module "
+                                   L"again while having administrator rights.";
 
-	    MessageBox(nullptr, msg, TEXT("Warning"), MB_ICONEXCLAMATION);
+                   MessageBoxW(nullptr, msg, L"Warning", MB_ICONEXCLAMATION);
 
-	    ret = S_OK;
-          }
-      }
-    }
-  }
+                   ret = S_OK;
+               }
+           }
+       }
+   }
 
   return ret;
 }
@@ -382,47 +387,51 @@ SERVER::do_register() {
 HRESULT
 SERVER::do_unregister() {
    LOG();
-  TCHAR class_id[MAX_PATH];
-  LPWSTR tmp_guid;
-  HRESULT ret = SELFREG_E_CLASS;
+   wchar_t class_id[MAX_PATH];
+   wchar_t* tmp_guid;
+   HRESULT ret = SELFREG_E_CLASS;
 
-  if (StringFromIID(CLSID_DIFF_EXT, &tmp_guid) == S_OK) {
-    _tcsncpy(class_id, tmp_guid, MAX_PATH);
+   if(StringFromIID(CLSID_DIFF_EXT, &tmp_guid) == S_OK)
+   {
+       wcsncpy(class_id, tmp_guid, MAX_PATH);
 
-    CoTaskMemFree((void*)tmp_guid);
+       CoTaskMemFree((void*)tmp_guid);
 
-    LRESULT result = NOERROR;
-    TCHAR subkey[MAX_PATH];
+       LRESULT result = NOERROR;
+       wchar_t subkey[MAX_PATH];
 
-    REGSTRUCT entry[] = {
-      {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), nullptr, nullptr},
-      {TEXT("Software\\Classes\\CLSID\\%s"), nullptr, nullptr}
-    };
+       REGSTRUCT entry[] = {
+           {L"Software\\Classes\\CLSID\\%s\\InProcServer32", nullptr, nullptr},
+           {L"Software\\Classes\\CLSID\\%s", nullptr, nullptr}};
 
-    for(unsigned int i = 0; (i < sizeof(entry)/sizeof(entry[0])) && (result == NOERROR); i++) {
-      _stprintf(subkey, entry[i].subkey, class_id);
-      result = RegDeleteKey(HKEY_CURRENT_USER, subkey);
-    }
+       for(unsigned int i = 0; (i < sizeof(entry) / sizeof(entry[0])) && (result == NOERROR); i++)
+       {
+           swprintf(subkey, MAX_PATH, entry[i].subkey, class_id);
+           result = RegDeleteKeyW(HKEY_CURRENT_USER, subkey);
+       }
 
-    if(result == NOERROR) {
-      result = RegDeleteKey(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext"));
+       if(result == NOERROR)
+       {
+           result = RegDeleteKeyW(HKEY_CURRENT_USER, L"Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext");
 
-      if(result == NOERROR) {
-        // NT needs to have shell extensions "approved".
-         HKEY key;
+           if(result == NOERROR)
+           {
+               // NT needs to have shell extensions "approved".
+               HKEY key;
 
-         RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"), 0, KEY_ALL_ACCESS, &key);
+               RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved", 0, KEY_ALL_ACCESS, &key);
 
-         result = RegDeleteValue(key, class_id);
+               result = RegDeleteValueW(key, class_id);
 
-         RegCloseKey(key);
+               RegCloseKey(key);
 
-         if(result == ERROR_SUCCESS) {
-         ret = S_OK;
-         }
-      }
-    }
-  }
+               if(result == ERROR_SUCCESS)
+               {
+                   ret = S_OK;
+               }
+           }
+       }
+   }
 
   return ret;
 }

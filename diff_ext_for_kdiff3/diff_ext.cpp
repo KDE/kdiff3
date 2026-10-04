@@ -6,13 +6,11 @@
 
 #include "diff_ext.h"
 
-#include <KLocalizedString>
-
-#include <QString>
+#include "translator.h"
 
 #include <assert.h>
 #include <stdio.h>
-#include <tchar.h>
+#include <wchar.h>
 
 #include <map>
 #include <vector>
@@ -99,24 +97,24 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
     if(data->GetData(&format, &medium) == S_OK)
     {
         HDROP drop = (HDROP)medium.hGlobal;
-        m_nrOfSelectedFiles = DragQueryFile(drop, 0xFFFFFFFF, nullptr, 0);
+        m_nrOfSelectedFiles = DragQueryFileW(drop, 0xFFFFFFFF, nullptr, 0);
 
-        TCHAR tmp[MAX_PATH];
+        wchar_t tmp[MAX_PATH];
 
         if(m_nrOfSelectedFiles >= 1 && m_nrOfSelectedFiles <= 3)
         {
-            DragQueryFile(drop, 0, tmp, MAX_PATH);
+            DragQueryFileW(drop, 0, tmp, MAX_PATH);
             _file_name1 = tmp;
 
             if(m_nrOfSelectedFiles >= 2)
             {
-                DragQueryFile(drop, 1, tmp, MAX_PATH);
+                DragQueryFileW(drop, 1, tmp, MAX_PATH);
                 _file_name2 = tmp;
             }
 
             if(m_nrOfSelectedFiles == 3)
             {
-                DragQueryFile(drop, 2, tmp, MAX_PATH);
+                DragQueryFileW(drop, 2, tmp, MAX_PATH);
                 _file_name3 = tmp;
             }
 
@@ -125,18 +123,18 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
     }
     else
     {
-        SYSERRORLOG(TEXT("GetData"));
+        SYSERRORLOG(L"GetData");
     }
 
     return ret;
 }
 
-static int insertMenuItemHelper(HMENU menu, UINT id, UINT position, const tstring& text,
+static int insertMenuItemHelper(HMENU menu, UINT id, UINT position, const std::wstring& text,
                                 UINT fState = MFS_ENABLED, HMENU hSubMenu = nullptr)
 {
-    MENUITEMINFO item_info;
+    MENUITEMINFOW item_info;
     ZeroMemory(&item_info, sizeof(item_info));
-    item_info.cbSize = sizeof(MENUITEMINFO);
+    item_info.cbSize = sizeof(MENUITEMINFOW);
     item_info.wID = id;
     if(text.empty())
     { // Separator
@@ -149,11 +147,11 @@ static int insertMenuItemHelper(HMENU menu, UINT id, UINT position, const tstrin
         item_info.fMask = MIIM_ID | MIIM_TYPE | MIIM_STATE | (hSubMenu != nullptr ? MIIM_SUBMENU : 0);
         item_info.fType = MFT_STRING;
         item_info.fState = fState;
-        item_info.dwTypeData = (LPTSTR)text.c_str();
+        item_info.dwTypeData = const_cast<wchar_t*>(text.c_str());
         item_info.hSubMenu = hSubMenu;
     }
-    if(0 == InsertMenuItem(menu, position, TRUE, &item_info))
-        SYSERRORLOG(TEXT("InsertMenuItem"));
+    if(0 == InsertMenuItemW(menu, position, TRUE, &item_info))
+        SYSERRORLOG(L"InsertMenuItem");
     return id;
 }
 
@@ -193,67 +191,67 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
         UINT id = first_cmd;
         m_id_FirstCmd = first_cmd;
 
-        insertMenuItemHelper(menu, id++, position++, TEXT("")); // begin separator
+        insertMenuItemHelper(menu, id++, position++, L""); // begin separator
 
-        tstring menuString;
+        std::wstring menuString;
         UINT pos2 = 0;
         if(m_nrOfSelectedFiles == 1)
         {
             size_t nrOfRecentFiles = m_recentFiles.size();
-            tstring menuStringCompare;
-            tstring menuStringMerge;
-            tstring firstFileName;
+            std::wstring menuStringCompare;
+            std::wstring menuStringMerge;
+            std::wstring firstFileName;
             if(nrOfRecentFiles >= 1)
             {
-                firstFileName = TEXT("'") + cut_to_length(m_recentFiles.front()) + TEXT("'");
+                firstFileName = L"'" + cut_to_length(m_recentFiles.front()) + L"'";
             }
 
-            menuStringCompare = fromQString(i18nc("Contexualmenu option", "Compare with %1", toQString(firstFileName)));
-            menuStringMerge = fromQString(i18nc("Contexualmenu option", "Merge with %1", toQString(firstFileName)));
+            menuStringCompare = Translator::arg(Translator::translateContext("Contexualmenu option", "Compare with %1"), firstFileName);
+            menuStringMerge = Translator::arg(Translator::translateContext("Contexualmenu option", "Merge with %1"), firstFileName);
 
             m_id_DiffWith = insertMenuItemHelper(subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
             m_id_MergeWith = insertMenuItemHelper(subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
 
-            m_id_Merge3 = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "3-way merge with base")),
+            m_id_Merge3 = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "3-way merge with base"),
                                                nrOfRecentFiles >= 2 ? MFS_ENABLED : MFS_DISABLED);
 
-            menuString = fromQString(i18nc("Contexualmenu option", "Save '%1' for later", toQString(_file_name1)));
+            menuString = Translator::arg(Translator::translateContext("Contexualmenu option", "Save '%1' for later"), _file_name1);
             m_id_DiffLater = insertMenuItemHelper(subMenu, id++, pos2++, menuString);
 
             HMENU file_list = CreateMenu();
-            std::list<tstring>::iterator i;
+            std::list<std::wstring>::iterator i;
             m_id_DiffWith_Base = id;
             int n = 0;
             for(i = m_recentFiles.begin(); i != m_recentFiles.end(); ++i)
             {
-                tstring s = cut_to_length(*i);
+                std::wstring s = cut_to_length(*i);
                 insertMenuItemHelper(file_list, id++, n, s);
                 ++n;
             }
 
-            insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "Compare with ...")),
+            insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "Compare with ..."),
                                  nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list);
 
-            m_id_ClearList = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "Clear list")), nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
+            m_id_ClearList = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "Clear list"), nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
         }
         else if(m_nrOfSelectedFiles == 2)
         {
             //= "Diff " + cut_to_length(_file_name1, 20)+" and "+cut_to_length(_file_name2, 20);
-            m_id_Diff = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "Compare")));
+            m_id_Diff = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "Compare"));
         }
         else if(m_nrOfSelectedFiles == 3)
         {
-            m_id_Diff3 = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "3 way comparison")));
+            m_id_Diff3 = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "3 way comparison"));
         }
         else
         {
             // More than 3 files selected?
         }
-        m_id_About = insertMenuItemHelper(subMenu, id++, pos2++, fromQString(i18nc("Contexualmenu option", "About Diff-Ext ...")));
+        m_id_About = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "About Diff-Ext ..."));
 
-        insertMenuItemHelper(menu, id++, position++, TEXT("KDiff3"), MFS_ENABLED, subMenu);
+        insertMenuItemHelper(menu, id++, position++, L"KDiff3", MFS_ENABLED, subMenu);
 
-        insertMenuItemHelper(menu, id++, position++, TEXT("")); // final separator
+        insertMenuItemHelper(menu, id++, position++, L""); // final separator
 
         ret = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_NULL, id - first_cmd);
     }
@@ -274,20 +272,20 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
         if(id == m_id_Diff)
         {
             LOG();
-            diff(TEXT("\"") + _file_name1 + TEXT("\" \"") + _file_name2 + TEXT("\""));
+            diff(L"\"" + _file_name1 + L"\" \"" + _file_name2 + L"\"");
         }
         else if(id == m_id_Diff3)
         {
             LOG();
-            diff(TEXT("\"") + _file_name1 + TEXT("\" \"") + _file_name2 + TEXT("\" \"") + _file_name3 + TEXT("\""));
+            diff(L"\"" + _file_name1 + L"\" \"" + _file_name2 + L"\" \"" + _file_name3 + L"\"");
         }
         else if(id == m_id_Merge3)
         {
             LOG();
-            std::list<tstring>::iterator iFrom = m_recentFiles.begin();
-            std::list<tstring>::iterator iBase = iFrom;
+            std::list<std::wstring>::iterator iFrom = m_recentFiles.begin();
+            std::list<std::wstring>::iterator iBase = iFrom;
             ++iBase;
-            diff(TEXT("-m \"") + *iBase + TEXT("\" \"") + *iFrom + TEXT("\" \"") + _file_name1 + TEXT("\""));
+            diff(L"-m \"" + *iBase + L"\" \"" + *iFrom + L"\" \"" + _file_name1 + L"\"");
         }
         else if(id == m_id_DiffWith)
         {
@@ -307,7 +305,7 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
         }
         else if(id == m_id_DiffLater)
         {
-            MESSAGELOG(TEXT("Diff Later: ") + _file_name1);
+            MESSAGELOG(L"Diff Later: " + _file_name1);
             m_recentFiles.remove(_file_name1);
             m_recentFiles.push_front(_file_name1);
             SERVER::instance()->save_history();
@@ -321,13 +319,17 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
         {
             LOG();
 
-            MessageBox(_hwnd, (fromQString(i18n(u8"Diff-Ext Copyright ©2003-2006, Sergey Zorin. All rights reserved.\n") + i18n("This software is distributable under the BSD-2-Clause license.\n") + i18n(u8"Some extensions for KDiff3 ©2006-2013 by Joachim Eibl.\n") + i18n("Ported to Qt5/Kf5 by Michael Reeves\n") + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"))).c_str(), fromQString(i18n("About Diff-Ext for KDiff3 (64 Bit)")).c_str(), MB_OK);
+            std::wstring aboutText = Translator::translate(u8"Diff-Ext Copyright \u00A92003-2006, Sergey Zorin. All rights reserved.\n") +
+                                Translator::translate("This software is distributable under the BSD-2-Clause license.\n") +
+                                Translator::translate(u8"Some extensions for KDiff3 \u00A92006-2013 by Joachim Eibl.\n") +
+                                Translator::translate("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n");
+            MessageBoxW(_hwnd, aboutText.c_str(), Translator::translate("About Diff-Ext for KDiff3 (64 Bit)").c_str(), MB_OK);
         }
         else
         {
             ret = E_INVALIDARG;
-            TCHAR verb[80];
-            _sntprintf(verb, 79, TEXT("Command id: %d"), LOWORD(ici->lpVerb));
+            wchar_t verb[80];
+            swprintf(verb, 80, L"Command id: %d", LOWORD(ici->lpVerb));
             verb[79] = 0;
             ERRORLOG(verb);
         }
@@ -345,40 +347,45 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 {
     HRESULT ret = NOERROR;
 
-    if(uFlags == GCS_HELPTEXT)
+    if(uFlags == GCS_HELPTEXTW)
     {
-        QString helpString;
+        std::wstring helpString;
         if(idCmd == m_id_Diff)
         {
-            helpString = i18nc("Contexualmenu option", "Compare selected files");
+            helpString = Translator::translateContext("Contexualmenu option", "Compare selected files");
         }
         else if(idCmd == m_id_DiffWith)
         {
             if(!m_recentFiles.empty())
             {
-                helpString = i18nc("Contexualmenu option", "Compare '%1' with '%2'", toQString(_file_name1), toQString(m_recentFiles.front()));
+                helpString = Translator::arg(Translator::translateContext("Contexualmenu option", "Compare '%1' with '%2'"), _file_name1, m_recentFiles.front());
             }
         }
         else if(idCmd == m_id_DiffLater)
         {
-            helpString = i18nc("Contexualmenu option", "Save '%1' for later operation", toQString(_file_name1));
+            helpString = Translator::arg(Translator::translateContext("Contexualmenu option", "Save '%1' for later operation"), _file_name1);
         }
         else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base + m_recentFiles.size()))
         {
             if(!m_recentFiles.empty())
             {
                 unsigned long long num = idCmd - m_id_DiffWith_Base;
-                std::list<tstring>::iterator i = m_recentFiles.begin();
+                std::list<std::wstring>::iterator i = m_recentFiles.begin();
                 for(unsigned long long j = 0; j < num && i != m_recentFiles.end(); j++)
                     i++;
 
                 if(i != m_recentFiles.end())
                 {
-                    helpString = i18nc("Contexualmenu option", "Compare '%1' with '%2'", toQString(_file_name1), toQString(*i));
+                    helpString = Translator::arg(Translator::translateContext("Contexualmenu option", "Compare '%1' with '%2'"), _file_name1, *i);
                 }
             }
         }
-        lstrcpyn((LPTSTR)pszName, fromQString(helpString).c_str(), cchMax);
+        if(cchMax > 0)
+        {
+            wchar_t* wideName = reinterpret_cast<wchar_t*>(pszName);
+            wcsncpy(wideName, helpString.c_str(), cchMax - 1);
+            wideName[cchMax - 1] = L'\0';
+        }
     }
     else
     {
@@ -388,22 +395,22 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
     return ret;
 }
 
-void DIFF_EXT::diff(const tstring& arguments)
+void DIFF_EXT::diff(const std::wstring& arguments)
 {
     LOG();
-    STARTUPINFO si;
+    STARTUPINFOW si;
     PROCESS_INFORMATION pi;
     bool bError = true;
-    tstring command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), true); //look in user registry first so it can be overridden
-    if(command.empty()) command = SERVER::instance()->getRegistryKeyString(TEXT(""), TEXT("diffcommand"), false);
-    tstring commandLine = TEXT("\"") + command + TEXT("\" ") + arguments;
+    std::wstring command = SERVER::instance()->getRegistryKeyString(L"", L"diffcommand", true); //look in user registry first so it can be overridden
+    if(command.empty()) command = SERVER::instance()->getRegistryKeyString(L"", L"diffcommand", false);
+    std::wstring commandLine = L"\"" + command + L"\" " + arguments;
     if(!command.empty())
     {
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);
-        if(CreateProcess(command.c_str(), (LPTSTR)commandLine.c_str(), nullptr, nullptr, FALSE, 0, nullptr, nullptr, &si, &pi) == 0)
+        if(CreateProcessW(command.c_str(), const_cast<wchar_t*>(commandLine.c_str()), nullptr, nullptr, FALSE, 0, nullptr, nullptr, &si, &pi) == 0)
         {
-            SYSERRORLOG(TEXT("CreateProcess") + command);
+            SYSERRORLOG(L"CreateProcess" + command);
         }
         else
         {
@@ -415,17 +422,17 @@ void DIFF_EXT::diff(const tstring& arguments)
 
     if(bError)
     {
-        tstring message = fromQString(i18n("Could not start KDiff3. Please rerun KDiff3 installation."));
-        message += TEXT("\n") + fromQString(i18n("Command")) + TEXT(": ") + command;
-        message += TEXT("\n") + fromQString(i18n("CommandLine")) + TEXT(": ") + commandLine;
-        MessageBox(_hwnd, message.c_str(), fromQString(i18n("Diff-Ext For KDiff3")).c_str(), MB_OK);
+        std::wstring message = Translator::translate("Could not start KDiff3. Please rerun KDiff3 installation.");
+        message += L"\n" + Translator::translate("Command") + L": " + command;
+        message += L"\n" + Translator::translate("CommandLine") + L": " + commandLine;
+        MessageBoxW(_hwnd, message.c_str(), Translator::translate("Diff-Ext For KDiff3").c_str(), MB_OK);
     }
 }
 
 void DIFF_EXT::diff_with(unsigned int num, bool bMerge)
 {
     LOG();
-    std::list<tstring>::iterator i = m_recentFiles.begin();
+    std::list<std::wstring>::iterator i = m_recentFiles.begin();
     for(unsigned int j = 0; j < num && i != m_recentFiles.end(); j++)
     {
         i++;
@@ -434,17 +441,17 @@ void DIFF_EXT::diff_with(unsigned int num, bool bMerge)
     if(i != m_recentFiles.end())
         _file_name2 = *i;
 
-    diff((bMerge ? TEXT("-m \"") : TEXT("\"")) + _file_name2 + TEXT("\" \"") + _file_name1 + TEXT("\""));
+    diff((bMerge ? L"-m \"" : L"\"") + _file_name2 + L"\" \"" + _file_name1 + L"\"");
 }
 
-tstring
-DIFF_EXT::cut_to_length(const tstring& in, size_t max_len)
+std::wstring
+DIFF_EXT::cut_to_length(const std::wstring& in, size_t max_len)
 {
-    tstring ret;
+    std::wstring ret;
     if(in.length() > max_len)
     {
         ret = in.substr(0, (max_len - 3) / 2);
-        ret += TEXT("...");
+        ret += L"...";
         ret += in.substr(in.length() - (max_len - 3) / 2);
     }
     else

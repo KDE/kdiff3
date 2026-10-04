@@ -14,31 +14,17 @@
 
 #include <string> // std::wstring
 
-#ifdef UNICODE
-
-typedef std::wstring tstring;
-
-#define toQString(s) QString::fromStdWString(s)
-#define fromQString(s) (s).toStdWString()
-
-#else
-
-#error  "Unsupported configuration"
-
-#endif
-
 #define MESSAGELOG( msg ) SERVER::logMessage( __FUNCTION__, __FILE__, __LINE__, msg )
-#define LOG()             MESSAGELOG( TEXT("") )
-#define ERRORLOG( msg )   MESSAGELOG( TEXT("Error: ")+tstring(msg) )
-#define SYSERRORLOG( msg )                                                                    \
-   {                                                                                          \
-      LPTSTR message;                                                                         \
-      FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,     \
-         GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &message, 0, nullptr); \
-      ERRORLOG( (tstring(msg) + TEXT(": ")) + message );                                        \
-      LocalFree(message);                                                                     \
-   }
-
+#define LOG() MESSAGELOG(L"")
+#define ERRORLOG(msg) MESSAGELOG(L"Error:" + std::wstring(msg))
+#define SYSERRORLOG(msg)                                                                                                           \
+    {                                                                                                                              \
+        wchar_t* message;                                                                                                          \
+        FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr,                                       \
+                       GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&message), 0, nullptr); \
+        ERRORLOG((std::wstring(msg) + L": ") + message);                                                                          \
+        LocalFree(message);                                                                                                        \
+    }
 
 class SERVER {
   public:
@@ -48,7 +34,7 @@ class SERVER {
   public:
     virtual ~SERVER();
 
-    tstring getRegistryKeyString( const tstring& subKey, const tstring& value, bool isUserKey = true );
+    std::wstring getRegistryKeyString( const std::wstring& subKey, const std::wstring& value, bool isUserKey = true );
 
     HINSTANCE handle() const;
 
@@ -62,11 +48,11 @@ class SERVER {
       return _reference_count;
     }
 
-    std::list< tstring >& recent_files();
+    std::list<std::wstring>& recent_files();
 
     void save_history() const;
 
-    static void logMessage( const char* function, const char* file, int line, const tstring& msg );
+    static void logMessage( const char* function, const char* file, int line, const std::wstring& msg );
 
   private:
     SERVER();
@@ -74,9 +60,9 @@ class SERVER {
 
   private:
     LONG _reference_count;
-    std::list<tstring>* m_pRecentFiles;
+    std::list<std::wstring>* m_pRecentFiles;
     static SERVER* _instance;
-    tstring m_registryBaseName;
+    std::wstring m_registryBaseName;
     FILE* m_pLogFile;
 };
 

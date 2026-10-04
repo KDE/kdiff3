@@ -15,6 +15,8 @@
 #include <windowsx.h>
 #include <shlobj.h>
 
+#include <string>
+
 #include "server.h"
 
 
@@ -38,21 +40,21 @@ class DIFF_EXT : public IContextMenu, IShellExtInit {
     STDMETHODIMP Initialize(LPCITEMIDLIST folder, IDataObject* subj, HKEY key);
 
   private:
-    void diff( const tstring& arguments );
+    void diff( const std::wstring& arguments );
     void diff_with(unsigned int num, bool bMerge);
-    tstring cut_to_length(const tstring&, size_t length = 64);
+    std::wstring cut_to_length(const std::wstring&, size_t length = 64);
 
   private:
     UINT m_nrOfSelectedFiles;
-    tstring _file_name1;
-    tstring _file_name2;
-    tstring _file_name3;
+    std::wstring _file_name1;
+    std::wstring _file_name2;
+    std::wstring _file_name3;
     HINSTANCE _resource;
     HWND _hwnd;
 
     ULONG  _ref_count;
 
-    std::list< tstring >& m_recentFiles;
+    std::list<std::wstring>& m_recentFiles;
     UINT m_id_FirstCmd;
     UINT m_id_Diff;
     UINT m_id_DiffWith;
