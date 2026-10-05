@@ -198,7 +198,8 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
 
         bucket = &buckets[h % nbuckets];
         length = p - ip;
-        ++p;
+        if(p < bufend)
+            ++p;
 
         for(i = *bucket;; i = eqs[i].next)
             if(!i)
@@ -369,7 +370,7 @@ void GnuDiff::find_identical_ends(file_data filevec[])
     /* Scan back until chars don't match or we reach that point.  */
     for(; p0 != beg0; p0--, p1--)
     {
-        if(*p0 != *p1)
+        if(p0 != end0 && *p0 != *p1)
         {
             /* Point at the first char of the matching suffix.  */
             beg0 = p0;
