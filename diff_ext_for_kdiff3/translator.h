@@ -23,4 +23,15 @@ namespace Translator
     std::wstring arg(const std::wstring& text, const std::wstring& a1, const std::wstring& a2);
 }
 
+// Wrapper functions for xgettext extraction (without namespace qualification)
+inline std::wstring tr(const char* msgid)
+{
+    return Translator::translate(msgid);
+}
+
+inline std::wstring trContext(const char* context, const char* msgid)
+{
+    return Translator::translateContext(context, msgid);
+}
+
 #endif

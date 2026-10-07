@@ -206,16 +206,16 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
                 firstFileName = L"'" + cut_to_length(m_recentFiles.front()) + L"'";
             }
 
-            menuStringCompare = Translator::arg(Translator::translateContext("Contexualmenu option", "Compare with %1"), firstFileName);
-            menuStringMerge = Translator::arg(Translator::translateContext("Contexualmenu option", "Merge with %1"), firstFileName);
+            menuStringCompare = Translator::arg(trContext("Contexualmenu option", "Compare with %1"), firstFileName);
+            menuStringMerge = Translator::arg(trContext("Contexualmenu option", "Merge with %1"), firstFileName);
 
             m_id_DiffWith = insertMenuItemHelper(subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
             m_id_MergeWith = insertMenuItemHelper(subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
 
-            m_id_Merge3 = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "3-way merge with base"),
+            m_id_Merge3 = insertMenuItemHelper(subMenu, id++, pos2++, trContext("Contexualmenu option", "3-way merge with base"),
                                                nrOfRecentFiles >= 2 ? MFS_ENABLED : MFS_DISABLED);
 
-            menuString = Translator::arg(Translator::translateContext("Contexualmenu option", "Save '%1' for later"), _file_name1);
+            menuString = Translator::arg(trContext("Contexualmenu option", "Save '%1' for later"), _file_name1);
             m_id_DiffLater = insertMenuItemHelper(subMenu, id++, pos2++, menuString);
 
             HMENU file_list = CreateMenu();
@@ -229,25 +229,25 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
                 ++n;
             }
 
-            insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "Compare with ..."),
+            insertMenuItemHelper(subMenu, id++, pos2++, trContext("Contexualmenu option", "Compare with ..."),
                                  nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list);
 
-            m_id_ClearList = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "Clear list"), nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
+            m_id_ClearList = insertMenuItemHelper(subMenu, id++, pos2++, trContext("Contexualmenu option", "Clear list"), nrOfRecentFiles >= 1 ? MFS_ENABLED : MFS_DISABLED);
         }
         else if(m_nrOfSelectedFiles == 2)
         {
             //= "Diff " + cut_to_length(_file_name1, 20)+" and "+cut_to_length(_file_name2, 20);
-            m_id_Diff = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "Compare"));
+            m_id_Diff = insertMenuItemHelper(subMenu, id++, pos2++, trContext("Contexualmenu option", "Compare"));
         }
         else if(m_nrOfSelectedFiles == 3)
         {
-            m_id_Diff3 = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "3 way comparison"));
+            m_id_Diff3 = insertMenuItemHelper(subMenu, id++, pos2++, trContext("Contexualmenu option", "3 way comparison"));
         }
         else
         {
             // More than 3 files selected?
         }
-        m_id_About = insertMenuItemHelper(subMenu, id++, pos2++, Translator::translateContext("Contexualmenu option", "About Diff-Ext ..."));
+        m_id_About = insertMenuItemHelper(subMenu, id++, pos2++, trContext("Contexualmenu option", "About Diff-Ext ..."));
 
         insertMenuItemHelper(menu, id++, position++, L"KDiff3", MFS_ENABLED, subMenu);
 
@@ -319,11 +319,11 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
         {
             LOG();
 
-            std::wstring aboutText = Translator::translate(u8"Diff-Ext Copyright \u00A92003-2006, Sergey Zorin. All rights reserved.\n") +
-                                Translator::translate("This software is distributable under the BSD-2-Clause license.\n") +
-                                Translator::translate(u8"Some extensions for KDiff3 \u00A92006-2013 by Joachim Eibl.\n") +
-                                Translator::translate("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n");
-            MessageBoxW(_hwnd, aboutText.c_str(), Translator::translate("About Diff-Ext for KDiff3 (64 Bit)").c_str(), MB_OK);
+            std::wstring aboutText = tr(u8"Diff-Ext Copyright \u00A92003-2006, Sergey Zorin. All rights reserved.\n") +
+                                     tr("This software is distributable under the BSD-2-Clause license.\n") +
+                                     tr(u8"Some extensions for KDiff3 \u00A92006-2013 by Joachim Eibl.\n") +
+                                     tr("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n");
+            MessageBoxW(_hwnd, aboutText.c_str(), tr("About Diff-Ext for KDiff3 (64 Bit)").c_str(), MB_OK);
         }
         else
         {
@@ -352,18 +352,18 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
         std::wstring helpString;
         if(idCmd == m_id_Diff)
         {
-            helpString = Translator::translateContext("Contexualmenu option", "Compare selected files");
+            helpString = trContext("Contexualmenu option", "Compare selected files");
         }
         else if(idCmd == m_id_DiffWith)
         {
             if(!m_recentFiles.empty())
             {
-                helpString = Translator::arg(Translator::translateContext("Contexualmenu option", "Compare '%1' with '%2'"), _file_name1, m_recentFiles.front());
+                helpString = Translator::arg(trContext("Contexualmenu option", "Compare '%1' with '%2'"), _file_name1, m_recentFiles.front());
             }
         }
         else if(idCmd == m_id_DiffLater)
         {
-            helpString = Translator::arg(Translator::translateContext("Contexualmenu option", "Save '%1' for later operation"), _file_name1);
+            helpString = Translator::arg(trContext("Contexualmenu option", "Save '%1' for later operation"), _file_name1);
         }
         else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base + m_recentFiles.size()))
         {
@@ -376,7 +376,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 
                 if(i != m_recentFiles.end())
                 {
-                    helpString = Translator::arg(Translator::translateContext("Contexualmenu option", "Compare '%1' with '%2'"), _file_name1, *i);
+                    helpString = Translator::arg(trContext("Contexualmenu option", "Compare '%1' with '%2'"), _file_name1, *i);
                 }
             }
         }
@@ -422,10 +422,10 @@ void DIFF_EXT::diff(const std::wstring& arguments)
 
     if(bError)
     {
-        std::wstring message = Translator::translate("Could not start KDiff3. Please rerun KDiff3 installation.");
-        message += L"\n" + Translator::translate("Command") + L": " + command;
-        message += L"\n" + Translator::translate("CommandLine") + L": " + commandLine;
-        MessageBoxW(_hwnd, message.c_str(), Translator::translate("Diff-Ext For KDiff3").c_str(), MB_OK);
+        std::wstring message = tr("Could not start KDiff3. Please rerun KDiff3 installation.");
+        message += L"\n" + tr("Command") + L": " + command;
+        message += L"\n" + tr("CommandLine") + L": " + commandLine;
+        MessageBoxW(_hwnd, message.c_str(), tr("Diff-Ext For KDiff3").c_str(), MB_OK);
     }
 }
 
