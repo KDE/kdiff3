@@ -567,9 +567,10 @@ LineType DiffTextWindow::convertLineToDiff3LineIdx(const LineRef line) const
 
 LineRef DiffTextWindow::convertDiff3LineIdxToLine(const LineType d3lIdx) const
 {
-    assert(d3lIdx >= 0 && !d->getDiff3WrapLineVector().empty());
+    assert(d3lIdx >= 0);
 
-    if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
+    // The wrap line vector is only populated while word wrap is on (see recalcWordWrap), so an empty vector is valid otherwise.
+    if(d->m_bWordWrap && !d->getDiff3WrapLineVector().empty() && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
     {
         qint32 idx = (*d->getDiff3LineVector())[std::min((size_t)d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
         assert(idx >= 0 && (size_t)idx < d->getDiff3WrapLineVector().size());
