@@ -445,6 +445,7 @@ public Q_SLOTS:
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
     bool m_bRecalcWordWrapPosted = false;
+    bool m_bRecalcWordWrapAgain = false; // Resize arrived while a word wrap pass was running; redo when it finishes.
 
     qint32 m_firstD3LIdx = 0; // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;

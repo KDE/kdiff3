@@ -1215,21 +1215,23 @@ void KDiff3App::mainWindowEnable(bool bEnable)
 
 void KDiff3App::postRecalcWordWrap()
 {
+    /*
+        The word wrap runnables execute synchronously on the GUI thread (see DiffTextWindow::startRunnables) and
+        pump the event loop while doing so. That means we can be re-entered here, e.g. from a resize event, while a
+        pass is still in progress further up the call stack. That pass can't finish until we return so waiting for it
+        would spin forever. Remember the request instead and replay it from slotFinishRecalcWordWrap.
+    */
+    if(DiffTextWindow::maxThreads() > 0)
+    {
+        m_bRecalcWordWrapAgain = true;
+        return;
+    }
+
     if(!m_bRecalcWordWrapPosted)
     {
-        while(DiffTextWindow::maxThreads() > 0) {} //Clear wordwrap threads.
         m_bRecalcWordWrapPosted = true;
         m_firstD3LIdx = -1;
         Q_EMIT sigRecalcWordWrap();
-    }
-    else
-    {
-        /*
-            Clear exiting wordwrap threads and prevent recall signals from completing.
-            This honors the intent of the old cancel call without the risk of aborting file I/O.
-        */
-        QSignalBlocker blocker(m_pDiffTextWindow1), blocker2(m_pDiffTextWindow2), blocker3(m_pDiffTextWindow3), blocker4(m_pMergeResultWindow);
-        while(DiffTextWindow::maxThreads() > 0) {} //Clear wordwrap threads.
     }
 }
 
@@ -1242,6 +1244,7 @@ void KDiff3App::slotRecalcWordWrap()
 void KDiff3App::recalcWordWrap(qint32 visibleTextWidthForPrinting)
 {
     m_bRecalcWordWrapPosted = true;
+    m_bRecalcWordWrapAgain = false; // This pass already uses the current window size.
     mainWindowEnable(false);
 
     if(m_firstD3LIdx < 0)
@@ -1312,6 +1315,11 @@ void KDiff3App::recalcWordWrap(qint32 visibleTextWidthForPrinting)
 void KDiff3App::slotFinishRecalcWordWrap(qint32 visibleTextWidthForPrinting)
 {
     assert(m_firstD3LIdx >= 0);
+    /*
+        Some of the calls below pump the event loop. A resize delivered meanwhile re-enters postRecalcWordWrap,
+        which resets m_firstD3LIdx for the next pass. Keep our own copy so this pass still uses the right value.
+    */
+    const qint32 firstD3LIdx = m_firstD3LIdx;
 
     if(mRunnablesStarted)
     {
@@ -1376,7 +1384,7 @@ void KDiff3App::slotFinishRecalcWordWrap(qint32 visibleTextWidthForPrinting)
         if(m_pDiffTextWindow1)
         {
             if(DiffTextWindow::mVScrollBar)
-                DiffTextWindow::mVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(m_firstD3LIdx));
+                DiffTextWindow::mVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(firstD3LIdx));
 
             setHScrollBarRange();
             m_pHScrollBar->setValue(0);
@@ -1391,6 +1399,14 @@ void KDiff3App::slotFinishRecalcWordWrap(qint32 visibleTextWidthForPrinting)
     }
     if(m_pEventLoopForPrinting)
         m_pEventLoopForPrinting->quit();
+
+    // The window was resized while the runnables were executing, so the result above is stale. Redo it.
+    if(m_bRecalcWordWrapAgain)
+    {
+        m_bRecalcWordWrapAgain = false;
+        if(!bPrinting)
+            postRecalcWordWrap();
+    }
 }
 
 void KDiff3App::slotShowWhiteSpaceToggled()
