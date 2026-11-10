@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2025-11-29 17:15+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -110,94 +110,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "嚴重內部錯誤"
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "檔案 %1：行 %2"
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "檔案 %1：無法取得行"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "編碼："
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "行尾樣式："
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, kde-format
 msgid "A (Base)"
 msgstr "A(基底)"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "編碼：%1"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "行尾樣式：%1"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "未知"
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "頂端行"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "結束"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 位元"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 位元 (BOM)"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr "系統"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "其他"
@@ -372,7 +372,7 @@ msgid ""
 msgstr "您正在進行資料夾合併。您確定要中止合併並重新掃描資料夾嗎？"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1623,7 +1623,7 @@ msgstr "在資料夾與文字檢視之間切換"
 msgid "Ready."
 msgstr "已就緒。"
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "合併結果尚未儲存。"
@@ -1638,7 +1638,7 @@ msgstr "儲存並離開"
 msgid "Quit Without Saving"
 msgstr "離開但不儲存"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "儲存合併結果時失敗。"
@@ -3360,42 +3360,42 @@ msgstr "確定"
 msgid "Go to Line"
 msgstr "跳至行數"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "文字折行（取消會停用文字折行）"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "正在計算水平捲軸列的最大寬度"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "儲存並繼續"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "不儲存但繼續"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "搜尋完成。"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "搜尋完成"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "雙方差異輸入視窗中都沒有選取任何東西。"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "新增手動比對範圍時發生錯誤"

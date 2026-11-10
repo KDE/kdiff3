@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2025-04-27 21:01+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -112,58 +112,58 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "கடுமையான உள்ளக சிக்கல்."
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "கோப்பு %1: வரி %2"
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "கோப்பு %1: வரி கிடைக்கவில்லை"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "குறியாக்கம்"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "வரிமுடிவுகளின் முறை:"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, kde-format
 msgid "A (Base)"
 msgstr "A (மூலம்)"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "குறியாக்கம் %1"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "டோஸ்"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "யுனிக்ஸ்"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "வரிமுடிவுகளின் முறை: %1"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, fuzzy, kde-format
 #| msgctxt "@item:intext line ending style not recongized"
 #| msgid "Unknown"
@@ -171,37 +171,37 @@ msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "தெரியாதது"
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "முதல் வரி"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "முடிவு"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "கோப்பை திற"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "8 பிட்டு யூனிகோடு"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "8 பிட்டு யூனிகோடு (BOM)"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr ""
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "வேறு"
@@ -378,7 +378,7 @@ msgstr ""
 "மறுபடியும் ஆராய வேண்டுமா?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1683,7 +1683,7 @@ msgstr "அடைவுக்கும் உரை பார்வைக்க�
 msgid "Ready."
 msgstr "தயார்."
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1699,7 +1699,7 @@ msgstr "சேகரித்து முடி"
 msgid "Quit Without Saving"
 msgstr "சேகரிக்காமல் மூடு"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "ஒன்றுசேர் முடிவை சேகரித்தல் தோல்வியடைந்தது."
@@ -3511,42 +3511,42 @@ msgstr "சரி"
 msgid "Go to Line"
 msgstr "கடைசி டெல்டாவிற்குச் செல்க"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "வரிமடிப்பு (ரத்துசெய்வது வரிமடிப்பை முடக்கும்)"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "கிடைமட்ட உருள்பட்டையின் அதிகபட்ச அகலம் கணக்கிடப்படுகிறது"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "சேமி தொடரு"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "சேமிக்காமல் தொடரு"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "தேடல் முடிவடைந்தது"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "தேடல் முடிவடைந்தது"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "வித்தியாசங்காண்வதற்கான எந்த உள்ளீட்டுப் பகுதியிலும் எதுவும் தேர்ந்தெடுக்கப்படவில்லை."
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "அடைவை உருவாக்கும் போது பிழை"

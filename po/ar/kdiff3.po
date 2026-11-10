@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2026-08-10 18:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -107,94 +107,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "خطأ داخلي فادح"
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "الملف %1: السطر %2"
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "الملف %1: السطر غير موجود"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "الترميز:"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "نمط نهاية السطر:"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, kde-format
 msgid "A (Base)"
 msgstr "أ (الأساس)"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "الترميز: %1"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "دوس"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "يونكس"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "نمط نهاية السطر: %1"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "السطر الأعلى"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "النهاية"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "افتح الملف"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "يونيكود، 8 بت"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "يونيكود، 8 بت (BOM)"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr "النظام"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "أخرى"
@@ -371,7 +371,7 @@ msgstr ""
 "المجلد؟"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1627,7 +1627,7 @@ msgstr "بدّل بين عرض المجلد وعرض النص"
 msgid "Ready."
 msgstr "جاهز."
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "لم يحفظ ناتج الدمج."
@@ -1642,7 +1642,7 @@ msgstr "احفظ واخرج"
 msgid "Quit Without Saving"
 msgstr "اخرج دون حفظ"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "فشل حفظ ناتج الدمج."
@@ -3374,42 +3374,42 @@ msgstr "حسنا"
 msgid "Go to Line"
 msgstr "اذهب إلى السطر"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "لفّ الكلمات (الإلغاء يعطّل لفّ الكلمات)"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "يحسب أقصى عرض لشريط التمرير الأفقي"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "احفظ وتابع"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "تابع دون حفظ"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "اكتمل البحث."
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "اكتمل البحث"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "لم يُحدد أي شيء في أي من نوافذ فروقات الإدخال."
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "خطأ أثناء إضافة نطاق فرق يدوي"

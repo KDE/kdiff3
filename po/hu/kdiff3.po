@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2026-06-18 21:49+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -114,104 +114,104 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Súlyos belső hiba történt"
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr ""
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, fuzzy, kde-format
 #| msgid "Line not available"
 msgid "File %1: Line not available"
 msgstr "A sor nem elérhető"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Kódolás:"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Sorvég stílus:"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, fuzzy, kde-format
 #| msgid "A (Base):"
 msgid "A (Base)"
 msgstr "A (alap):"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Kódolás:"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Unix"
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Sorvég stílus:"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Felső sor"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "Vég"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, fuzzy, kde-format
 #| msgid "Opening files..."
 msgid "Open File"
 msgstr "Fájlok megnyitása..."
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, fuzzy, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr ""
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr ""
@@ -418,7 +418,7 @@ msgstr ""
 "szakítani a műveletet és újra be szeretné olvasni a könyvtár tartalmát?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, fuzzy, kde-format
 #| msgid "Warning"
 msgctxt "Error dialog title"
@@ -1788,7 +1788,7 @@ msgstr "Váltás a könyvtár- és szöveges nézet között"
 msgid "Ready."
 msgstr "Kész."
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
@@ -1804,7 +1804,7 @@ msgstr "Mentés és kilépés"
 msgid "Quit Without Saving"
 msgstr "Kilépés mentés nélkül"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Az összeolvasztás eredményét nem sikerült elmenteni."
@@ -3617,42 +3617,42 @@ msgstr "OK"
 msgid "Go to Line"
 msgstr "Ugrás az utolsó deltára"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr ""
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "Mentés és folytatás"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Folytatás mentés nélkül"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "A keresés befejeződött."
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "A keresés befejeződött"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, fuzzy, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Hiba történt egy könyvtár létrehozása közben."

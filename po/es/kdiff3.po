@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2025-12-15 02:51+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -117,94 +117,94 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Error interno grave"
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Archivo %1: Línea %2"
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Archivo %1: Línea no disponible"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, kde-format
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Codificación:"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Estilo de fin de línea:"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, kde-format
 msgid "A (Base)"
 msgstr "A (Base)"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, kde-format
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Codificación: %1"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, kde-format
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Estilo de fin de línea: %1"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Línea superior"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "Fin"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Abrir archivo"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bits (BOM)"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr "Sistema"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "Otro"
@@ -381,7 +381,7 @@ msgstr ""
 "interrumpir la fusión y volver a explorar la carpeta?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1665,7 +1665,7 @@ msgstr "Conmutar entre vista de carpeta y de texto"
 msgid "Ready."
 msgstr "Preparado."
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultado de la fusión no se ha guardado."
@@ -1680,7 +1680,7 @@ msgstr "Guardar y salir"
 msgid "Quit Without Saving"
 msgstr "Salir sin guardar"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Falló al guardar el resultado de la fusión."
@@ -3467,45 +3467,45 @@ msgstr "Aceptar"
 msgid "Go to Line"
 msgstr "Ir a línea"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Ajuste de línea («Cancelar» desactiva el ajuste de línea)"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr ""
 "Calculando la anchura máxima para la barra de desplazamiento horizontal"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "Guardar y continuar"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Continuar sin guardar"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "Búsqueda completada."
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "Búsqueda completada"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 "No hay nada seleccionado en ninguna de las ventanas de entradas de "
 "diferencias."
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Error al añadir un intervalo de diferencia manual"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2024-12-25 19:45+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -109,101 +109,101 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "गम्भीर आन्तरिक त्रुटि"
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "सञ्चिका %1: रेखा %2"
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "सञ्चिका %1: रेखा उपलब्धा नास्ति"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "एन्कोडिंग् :"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "रेखासमाप्तशैली :"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, kde-format
 msgid "A (Base)"
 msgstr "क (आधारः)"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, fuzzy, kde-format
 #| msgid "Encoding: %1"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "एन्कोडिंग्: %1"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "OF THE"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Unix"
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "यूनिक्स"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Line end style: %1"
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "रेखासमाप्तशैली: %1"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr "अज्ञात"
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "शीर्ष रेखा"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "अंत"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "सञ्चिकां उद्घाटयन्तु"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "यूनिकोड, ८ बिट्"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, kde-format
 msgid "Unicode, 8 bit (BOM)"
 msgstr "यूनिकोड, ८ बिट् (BOM)"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr "व्यवस्था"
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "इतर"
@@ -380,7 +380,7 @@ msgstr ""
 "इच्छति तथा च पुटं पुनः स्कैन् कर्तुम् इच्छति?"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1638,7 +1638,7 @@ msgstr "Folder && Text View इत्यस्य मध्ये Toggle कु�
 msgid "Ready."
 msgstr "आत्त।"
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "विलयफलं न रक्षितम्।"
@@ -1653,7 +1653,7 @@ msgstr "रक्षतु && त्यजतु"
 msgid "Quit Without Saving"
 msgstr "रक्षणं विना त्यजतु"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "विलयपरिणामस्य रक्षणं विफलम् अभवत् ।"
@@ -3392,42 +3392,42 @@ msgstr "अस्तु"
 msgid "Go to Line"
 msgstr "Line इति गच्छन्तु"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Word wrap (Cancel इत्यनेन शब्दवेष्टनं निष्क्रियं भवति)"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "क्षैतिजस्क्रॉलबारस्य अधिकतमविस्तारस्य गणना"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "रक्षन्तु && निरन्तरं कुर्वन्तु"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "रक्षणं विना निरन्तरं कुर्वन्तु"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "अन्वेषणं सम्पन्नम्।"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "अन्वेषण सम्पूर्ण"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "द्वयोः अपि diff input विण्डो मध्ये किमपि न चयनितम् ।"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "मैनुअल् diff range योजयन् त्रुटिः"

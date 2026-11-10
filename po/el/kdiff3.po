@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 01:00+0000\n"
 "PO-Revision-Date: 2024-09-19 17:53+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -110,101 +110,101 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Σοβαρό εσωτερικό σφάλμα"
 
-#: difftextwindow.cpp:645
+#: difftextwindow.cpp:646
 #, kde-format
 msgid "File %1: Line %2"
 msgstr "Αρχείο %1: Γραμμή %2"
 
-#: difftextwindow.cpp:647
+#: difftextwindow.cpp:648
 #, kde-format
 msgid "File %1: Line not available"
 msgstr "Αρχείο %1: Μη διαθέσιμη γραμμή"
 
-#: difftextwindow.cpp:1975
+#: difftextwindow.cpp:1976
 #, fuzzy, kde-format
 #| msgid "Encoding:"
 msgctxt "@label:textbox Encoding for text"
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
-#: difftextwindow.cpp:1979
+#: difftextwindow.cpp:1980
 #, fuzzy, kde-format
 #| msgid "Line end style:"
 msgctxt "@label:textbox"
 msgid "Line end style:"
 msgstr "Στιλ τέλους γραμμής:"
 
-#: difftextwindow.cpp:2004
+#: difftextwindow.cpp:2005
 #, kde-format
 msgid "A (Base)"
 msgstr "Α (Βάση)"
 
-#: difftextwindow.cpp:2006
+#: difftextwindow.cpp:2007
 #, fuzzy, kde-format
 #| msgid "Encoding: %1"
 msgctxt "@label:textbox Encoding for text, %1 = encoding name"
 msgid "Encoding: %1"
 msgstr "Κωδικοποίηση %1"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "DOS"
 msgctxt "@item:intext line ending type"
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Unix"
 msgctxt "@item:intext line ending type"
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:2007
+#: difftextwindow.cpp:2008
 #, fuzzy, kde-format
 #| msgid "Line end style: %1"
 msgctxt "@label:textbox %1 = line ending style"
 msgid "Line end style: %1"
 msgstr "Στιλ τέλους γραμμής: %1"
 
-#: difftextwindow.cpp:2008
+#: difftextwindow.cpp:2009
 #, kde-format
 msgctxt "@item:intext line ending style not recognized"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:2036 kdiff3.cpp:1056
+#: difftextwindow.cpp:2037 kdiff3.cpp:1056
 #, kde-format
 msgid "Top line"
 msgstr "Πρώτη γραμμή"
 
-#: difftextwindow.cpp:2046
+#: difftextwindow.cpp:2047
 #, kde-format
 msgid "End"
 msgstr "Τέλος"
 
-#: difftextwindow.cpp:2102 smalldialogs.cpp:163
+#: difftextwindow.cpp:2103 smalldialogs.cpp:163
 #, kde-format
 msgid "Open File"
 msgstr "Άνοιγμα αρχείων"
 
-#: difftextwindow.cpp:2148 optiondialog.cpp:387
+#: difftextwindow.cpp:2149 optiondialog.cpp:387
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2149
+#: difftextwindow.cpp:2150
 #, fuzzy, kde-format
 #| msgid "Unicode, 8 bit"
 msgid "Unicode, 8 bit (BOM)"
 msgstr "Unicode, 8 bit"
 
-#: difftextwindow.cpp:2150
+#: difftextwindow.cpp:2151
 #, kde-format
 msgid "System"
 msgstr ""
 
-#: difftextwindow.cpp:2162
+#: difftextwindow.cpp:2163
 #, kde-format
 msgid "Other"
 msgstr "Άλλο"
@@ -381,7 +381,7 @@ msgstr ""
 "την εγκατάλειψη της συγχώνευσης και την επανασάρωση του φακέλου;"
 
 #: directorymergewindow.cpp:692 kdiff3.cpp:913 kdiff3.cpp:923 kdiff3.cpp:935
-#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1526 pdiff.cpp:1536
+#: mergeresultwindow.cpp:305 pdiff.cpp:730 pdiff.cpp:1542 pdiff.cpp:1552
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1675,7 +1675,7 @@ msgstr "Εναλλαγή μεταξύ προβολής φακέλου && κει�
 msgid "Ready."
 msgstr "Έτοιμο."
 
-#: kdiff3.cpp:912 pdiff.cpp:1525
+#: kdiff3.cpp:912 pdiff.cpp:1541
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "Το αποτέλεσμα της συγχώνευσης δεν έχει αποθηκευτεί."
@@ -1690,7 +1690,7 @@ msgstr "Αποθήκευση && έξοδος"
 msgid "Quit Without Saving"
 msgstr "Έξοδος χωρίς αποθήκευση"
 
-#: kdiff3.cpp:923 pdiff.cpp:1536
+#: kdiff3.cpp:923 pdiff.cpp:1552
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Αποτυχία αποθήκευσης του αποτελέσματος συγχώνευσης."
@@ -3477,42 +3477,42 @@ msgstr "Εντάξει"
 msgid "Go to Line"
 msgstr "Μετάβαση στην τελευταία διαφορά"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "Αναδίπλωση λέξεων (Η ακύρωση απενεργοποιεί την αναδίπλωση λέξεων)"
 
-#: pdiff.cpp:1301
+#: pdiff.cpp:1304
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "Υπολογισμός μέγιστου πλάτους για την οριζόντια γραμμή κύλισης"
 
-#: pdiff.cpp:1527
+#: pdiff.cpp:1543
 #, kde-format
 msgid "Save && Continue"
 msgstr "Αποθήκευση && συνέχεια"
 
-#: pdiff.cpp:1528
+#: pdiff.cpp:1544
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "Συνέχεια χωρίς αποθήκευση"
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search complete."
 msgstr "Η αναζήτηση ολοκληρώθηκε."
 
-#: pdiff.cpp:1719
+#: pdiff.cpp:1735
 #, kde-format
 msgid "Search Complete"
 msgstr "Η αναζήτηση ολοκληρώθηκε"
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "Δεν έχει επιλεγεί τίποτα σε κανένα παράθυρο εισαγωγής διαφορών."
 
-#: pdiff.cpp:1900
+#: pdiff.cpp:1916
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "Σφάλμα κατά την προσθήκη χειροκίνητου εύρους διαφορών"
