@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Arabic "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>دليل مستخدم المقارن</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>KDiff3 man page.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>2019-02-22</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>أداة لمقارنة ودمج الملفات والمجلدات</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>ملف</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>ملف</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>ملف</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>اسم_مستعار1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>اسم_مستعار2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>اسم_مستعار3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>اسم_مستعار</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>سلسلة</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>ملف</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>ملف1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>ملف2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>ملف3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>الوصف</title>
+<para
+>يقارن ملفين أو ثلاثة ملفات أو مجلدات مدخلة.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>الخيارات</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>مُتجاهل. (يحدده المستخدم.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>مُتجاهل. (يحدده المستخدم.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>مُتجاهل. (يحدده المستخدم.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>مُتجاهل. (يحدده المستخدم.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>ادمج المدخلات. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>ملف</replaceable
+></term>
+<listitem
+><para
+>ملف أساسي صريح. للتوافق مع أدوات معينة. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>ملف</replaceable
+></term>
+<listitem
+><para
+>ملف المخرجات. يتضمن -m. مثال: -o newfile.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>ملف</replaceable
+></term>
+<listitem
+><para
+>ملف المخرجات، مرة أخرى. (للتوافق مع أدوات معينة.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>لا تظهر واجهة رسومية إذا كانت جميع التعارضات قابلة للحل آليًا. (يتطلب <option
+>-o</option
+> <replaceable
+>ملف</replaceable
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>تجاهل --auto وأظهر الواجهة الرسومية دائمًا. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>اسم_مستعار1</replaceable
+></term>
+<listitem
+><para
+>بديل الاسم المرئي لملف الإدخال 1 (الأساس). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>اسم_مستعار2</replaceable
+></term>
+<listitem
+><para
+>بديل الاسم المرئي لملف الإدخال 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>اسم_مستعار3</replaceable
+></term>
+<listitem
+><para
+>بديل الاسم المرئي لملف الإدخال 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>اسم_مستعار</replaceable
+></term>
+<listitem
+><para
+>بديل الاسم المرئي البديل. زوّد هذا مرة واحدة لكل مدخل. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>سلسلة</replaceable
+></term>
+<listitem
+><para
+>تخطَّ إعداد ضبط. استخدمه مرة واحدة لكل إعداد. مثال: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>أظهر قائمة بإعدادات الضبط والقيم الحالية. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>ملف</replaceable
+></term>
+<listitem
+><para
+>استخدم ملف ضبط مختلفًا. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>ملف1</replaceable
+></option
+></term>
+<listitem
+><para
+>ملف1 لفتحه (الأساس، إذا لم يُحدد عبر --<option
+>base</option
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>ملف2</replaceable
+></option
+></term>
+<listitem
+><para
+>ملف2 لفتحه </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>ملف3</replaceable
+></option
+></term>
+<listitem
+><para
+>ملف3 لفتحه </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>انظر أيضًا</title>
+<simplelist>
+<member
+>يتوفر توثيق أكثر تفصيلًا للمستخدم من <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (إما بإدخال هذا العنوان في كينكورر، أو تشغيل <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>).</member>
+<member
+>kf6options(7)</member>
+<member
+>qt6options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>المؤلفون</title>
+<para
+>كُتبت صفحة الدليل هذه بواسطة &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>
