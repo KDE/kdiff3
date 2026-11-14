@@ -32,6 +32,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QSaveFile>
 #include <QTemporaryFile>
 #include <QtMath>
 
@@ -849,7 +850,8 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
     setStatusText("");
     if(isLocal())
     {
-        if(realFile->open(QIODevice::WriteOnly))
+        QSaveFile output(absoluteFilePath());
+        if(output.open(QIODevice::WriteOnly))
         {
             const qint64 maxChunkSize = 100000;
             ProgressProxy::setMaxNofSteps(length / maxChunkSize + 1);
@@ -857,10 +859,10 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
             while(i < length)
             {
                 qint64 nextLength = std::min(length - i, maxChunkSize);
-                qint64 reallyWritten = realFile->write((char*)pSrcBuffer + i, nextLength);
+                qint64 reallyWritten = output.write((const char*)pSrcBuffer + i, nextLength);
                 if(reallyWritten != nextLength)
                 {
-                    realFile->close();
+                    setStatusText(output.errorString());
                     return false;
                 }
                 i += reallyWritten;
@@ -868,22 +870,20 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
                 ProgressProxy::step();
                 if(ProgressProxy::wasCancelled())
                 {
-                    realFile->close();
                     setStatusText(i18nc("@info:status", "User cancelled write operation."));
                     return false;
                 }
             }
 
-            if(isExecutable()) // value is true if the old file was executable
+            if(!output.commit())
             {
-                // Preserve attributes
-                realFile->setPermissions(realFile->permissions() | QFile::ExeUser);
+                setStatusText(output.errorString());
+                return false;
             }
-
-            realFile->close();
             assert((realFile == nullptr || !realFile->isOpen()) && !tmpFile->isOpen());
             return true;
         }
+        setStatusText(output.errorString());
     }
     else
     {

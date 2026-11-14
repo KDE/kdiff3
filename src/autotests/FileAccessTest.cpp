@@ -12,7 +12,10 @@
 #include <QtGlobal>
 
 #include "../fileaccess.h"
+#include "../ProgressProxy.h"
 #include "FileAccessJobHandlerMoc.h"
+
+#include <QTemporaryDir>
 
 class FileAccessMoc: public FileAccess
 {
@@ -38,6 +41,98 @@ class FileAccessTest: public QObject
     Q_OBJECT;
 
   private Q_SLOTS:
+
+    void cancelledWritePreservesDestination_data()
+    {
+        QTest::addColumn<bool>("existingDestination");
+        QTest::newRow("existing-file") << true;
+        QTest::newRow("new-file") << false;
+    }
+
+    void cancelledWritePreservesDestination()
+    {
+        QFETCH(bool, existingDestination);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath("result.txt");
+        const QByteArray original("original contents");
+        if(existingDestination)
+        {
+            QFile file(path);
+            QVERIFY(file.open(QIODevice::WriteOnly));
+            QCOMPARE(file.write(original), original.size());
+        }
+
+        FileAccess destination(path);
+        const QByteArray replacement(200000, 'x');
+        signals2::scoped_connection cancel = ProgressProxy::wasCancelled.connect([] { return true; });
+        QVERIFY(!destination.writeFile(replacement.constData(), replacement.size()));
+        cancel.disconnect();
+
+        QCOMPARE(QFile::exists(path), existingDestination);
+        if(existingDestination)
+        {
+            QFile file(path);
+            QVERIFY(file.open(QIODevice::ReadOnly));
+            QCOMPARE(file.readAll(), original);
+        }
+        QCOMPARE(QDir(dir.path()).entryList(QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot).size(), existingDestination ? 1 : 0);
+    }
+
+    void successfulWritePreservesPermissions()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath("result.txt");
+        QFile file(path);
+        QVERIFY(file.open(QIODevice::WriteOnly));
+        QCOMPARE(file.write("old"), 3);
+        file.close();
+        QVERIFY(file.setPermissions(QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner));
+        const auto permissions = file.permissions();
+
+        FileAccess destination(path);
+        const QByteArray replacement("new contents");
+        QVERIFY(destination.writeFile(replacement.constData(), replacement.size()));
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        QCOMPARE(file.readAll(), replacement);
+        QCOMPARE(file.permissions(), permissions);
+    }
+
+    void successfulWriteThroughSymlink()
+    {
+#ifdef Q_OS_WIN
+        QSKIP("QFile::link creates shortcuts on Windows.");
+#else
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString target = dir.filePath("target.txt");
+        const QString link = dir.filePath("link.txt");
+        QFile file(target);
+        QVERIFY(file.open(QIODevice::WriteOnly));
+        QCOMPARE(file.write("old"), 3);
+        file.close();
+        QVERIFY(QFile::link(target, link));
+
+        FileAccess destination(link);
+        const QByteArray replacement("new contents");
+        QVERIFY(destination.writeFile(replacement.constData(), replacement.size()));
+        QVERIFY(QFileInfo(link).isSymLink());
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        QCOMPARE(file.readAll(), replacement);
+#endif
+    }
+
+    void writeEmptyFile()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath("empty.txt");
+        FileAccess destination(path);
+        QVERIFY(destination.writeFile("", 0));
+        QVERIFY(QFile::exists(path));
+        QCOMPARE(QFileInfo(path).size(), 0);
+    }
 
     void testFileRelPath()
     {
